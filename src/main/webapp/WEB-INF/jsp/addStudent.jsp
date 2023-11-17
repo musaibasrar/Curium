@@ -751,7 +751,7 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">SATS Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -982,8 +982,7 @@ $(document).ready(function() {
 
 							</label></td> -->
 
-							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
-								Certificate No.&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Student's Caste Cert. No.&nbsp;</td>
 							<td ><label> <input
 									name="studentscastecertno" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -999,7 +998,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Students Caste &nbsp;</td>
+							<td class="alignLeft">Student's Caste &nbsp;</td>
 							<td ><label> <input name="studentscaste"
 							style="text-transform:capitalize;"
 									type="text" class="myclass" id="studentscaste" size="36">

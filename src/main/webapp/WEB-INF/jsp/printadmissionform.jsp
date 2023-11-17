@@ -2,6 +2,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -57,10 +58,10 @@ input {
 	</div>
 
 <h2>GOVERNMENT OF KARNATAKA</h2>
-<h4>STUDENT ENROLLMENT FORM FOR YEAR 2021-22</h4>
+<h4>STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4>
 <div class="schoolname">
 <label for="schoolname">School Name and Location:</label>
- <input type="text" name="schoolname" style="width: 900px;">
+  ${branchname}&nbsp;&nbsp;${branchaddress}
  </div>
 <h3>Admission Detail For Higher Class</h3>
 <table>	
@@ -69,38 +70,20 @@ input {
     <td>Admission To Class</td> 
     <td style="width:70%">
     	<c:set var="classonly" value="${fn:split(parents.student.classstudying, '--')}" />
-    	1<input type="checkbox"
-		value="1" name="admissiontoclass" id="yes:1"
-		${classonly[0] == '1ST STD' ? 'checked' : ''} />&nbsp;
-		&nbsp;2<input type="checkbox" value="2" name="admissiontoclass"
-		id="no:2" onclick="noCheck(this.id);"
-		${classonly[0] == 'IIND STD' ? 'checked' : ''} />
-		3<input type="checkbox"
-		value="3" name="admissiontoclass" id="yes:3"
-		${classonly[0] == 'IIIRD STD' ? 'checked' : ''} />&nbsp;
-		&nbsp;4<input type="checkbox" value="4" name="admissiontoclass"
-		id="no:4" onclick="noCheck(this.id);"
-		${classonly[0] == 'IVTH STD' ? 'checked' : ''} />
-		5<input type="checkbox"
-		value="5" name="admissiontoclass" id="yes:5"
-		${classonly[0] == 'VTH STD' ? 'checked' : ''} />&nbsp;
-		&nbsp;6<input type="checkbox" value="6" name="admissiontoclass"
-		id="no:6" onclick="noCheck(this.id);"
-		${classonly[0] == 'VITH STD' ? 'checked' : ''} />
-		7<input type="checkbox"
-		value="7" name="admissiontoclass" id="yes:7"
-		${classonly[0] == 'VIITH STD' ? 'checked' : ''} />&nbsp;
-		&nbsp;8<input type="checkbox" value="8" name="admissiontoclass"
-		id="no:8" onclick="noCheck(this.id);"
-		${classonly[0] == 'VIII STD' ? 'checked' : ''} />
-		&nbsp;
-		&nbsp;9<input type="checkbox" value="9" name="admissiontoclass"
-		id="no:9" onclick="noCheck(this.id);"
-		${classonly[0] == 'IX STD' ? 'checked' : ''} />
-		&nbsp;
-		&nbsp;10<input type="checkbox" value="10" name="admissiontoclass"
-		id="no:10" onclick="noCheck(this.id);"
-		${classonly[0] == 'X STD' ? 'checked' : ''} /></td>
+    	<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+
+										<label class="labelClass" style="font-weight: bold;color:#325F6D">
+										${classdetailslist.classdetails}</label>
+
+										<input type="checkbox"
+		 name="classsearch" 
+		${classdetailslist.classdetails == classonly[0] ? 'checked' : ''} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+										</c:if>	
+							</c:forEach>
+
+   </td>
   </tr>
   <tr>
     <td>2</td>
@@ -175,7 +158,7 @@ input {
   <tr>
     <td>7</td>
     <td>SATS Child Number</td>
-    <td></td>
+    <td style="width:70%"><c:out default="" value="${parents.student.sts}" /></td>
   </tr>
   <tr>
     <td>8</td>
@@ -275,17 +258,19 @@ input {
   <tr>
     <td>21</td>
     <td>Student Adhaar No</td>
-    <td></td>
+    <td>
+    <c:out default="" value="${parents.student.disabilitychild}" />
+    </td>
   </tr>
   <tr>
     <td>22</td>
     <td>Mother's Adhaar No</td>
-    <td></td>
+    <td><c:out default="" value="${parents.motherscastecertno}" /></td>
   </tr>
   <tr>
     <td>23</td>
     <td>Father's Adhaar No</td>
-    <td></td>
+    <td><c:out default="" value="${parents.fatherscastecertno}" /></td>
   </tr>
   <tr>
     <td>24</td>
@@ -303,26 +288,36 @@ input {
 		id="no:ST" onclick="noCheck(this.id);"
 		${parents.student.socialcategory == 'ST' ? 'checked' : ''} /></td>
   </tr>
+  <tr>
+    <td>25</td>
+    <td>Sub Category</td>
+    <td><c:out default="" value="${parents.student.studentscaste}" /></td>
+  </tr>
+   <tr>
+    <td>26</td>
+    <td>Religion</td>
+    <td><c:out default="" value="${parents.student.religion}" /></td>
+  </tr>
   </table>
   <h3>TC not produced at the time of admission please fill the following information</h3>
   <table>
   <tr>
-    <td>25</td>
+    <td>27</td>
     <td>Student Caste Certificate No</td>
     <td style="width:70%"><c:out default="" value="${parents.student.studentscastecertno}" /></td>
   </tr>
   <tr>
-    <td>26</td>
+    <td>28</td>
     <td>Mother's Caste Certificate No</td>
     <td><c:out default="" value="${parents.motherscastecertno}" /></td>
   </tr>
    <tr>
-    <td>27</td>
+    <td>29</td>
     <td>Father's Caste Certificate No</td>
     <td><c:out value="${parents.fatherscastecertno}" /></td>
   </tr>
   <tr>
-    <td>28</td>
+    <td>30</td>
     <td>Belong To BPL</td>
     <td>&nbsp;Yes<input
 		type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -331,17 +326,17 @@ input {
 		onclick="noCheck(this.id);" ${parents.student.belongtobpl == '0' ? 'checked' : ''}/></td>
   </tr>
   <tr>
-    <td>29</td>
+    <td>31</td>
     <td>Bhagyalaxmi Bond No</td>
     <td><c:out default="" value="${parents.student.bhagyalakshmibondnumber}" /></td>
   </tr>
    <tr>
-    <td>30</td>
+    <td>32</td>
     <td>Child with special need</td>
     <td></td>
   </tr>
   <tr>
-    <td>31</td>
+    <td>33</td>
     <td>Special Category</td>
     <td>None<input type="checkbox"
 		value="None" name="specialcategory" id="yes:None"
@@ -360,22 +355,22 @@ input {
 		${parents.student.specialcategory == 'Others' ? 'checked' : ''} />&nbsp;</td>
   </tr>
   <tr>
-    <td>32</td>
+    <td>34</td>
     <td>Pin Code</td>
     <td></td>
   </tr>
    <tr>
-    <td>33</td>
+    <td>35</td>
     <td>City/Village/Town</td>
     <td></td>
   </tr>
   <tr>
-    <td>34</td>
+    <td>36</td>
     <td>Address</td>
     <td><c:out default="" value="${parents.addresspermanent}" /></td>
   </tr>
   <tr>
-    <td>35</td>
+    <td>37</td>
     <td>Mobile Number</td>
     <td><c:out default="" value="${parents.contactnumber}" /></td>
   </tr>
@@ -398,9 +393,9 @@ input {
         <label for="U-Dise">U-Dise Code:</label>
         <input type="text" name="U-Dise"></br>
         <label for="bankaccount">Student/Parent Bank Account Number:</label>
-        <input type="text" name="bankaccount" size="172"></br>
+        <input type="text" name="bankaccount" size="172" value="${parents.student.accno}"></br>
         <label for="IFSC">Bank IFSC Code:</label>
-        <input type="text" name="IFSC" size="172"></br>
+        <input type="text" name="IFSC" size="172"  value="${parents.student.bankifsc}"></br>
 
  <button onclick="window.print()">Print</button>
  </div>
