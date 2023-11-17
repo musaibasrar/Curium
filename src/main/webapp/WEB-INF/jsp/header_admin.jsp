@@ -189,7 +189,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/kwrs/UserProcess/dashBoard"><img
+								href="/kwrs/dashboardloader"><img
 									alt="Dash Board" src="/kwrs/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
