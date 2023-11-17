@@ -189,7 +189,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/shadaan/UserProcess/dashBoard"><img
+								href="/shadaan/dashboardloader"><img
 									alt="Dash Board" src="/shadaan/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
