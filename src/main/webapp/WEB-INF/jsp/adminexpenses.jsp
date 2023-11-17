@@ -427,6 +427,7 @@
 		$("#entrydate").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {

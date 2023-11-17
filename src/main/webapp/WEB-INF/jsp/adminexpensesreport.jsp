@@ -659,6 +659,7 @@ for(Cookie cookie : cookies){
 							<td ><label>
 									<select name="paymenttype" id="paymenttype" class="dropdownlist" style="font-size: 14px;">
 											<option value="cash">Cash</option>
+											<option>Bank Transfer</option>
 										<option value="cheque">Cheque</option>
 								</select>
 							
