@@ -189,7 +189,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/lilyrose/UserProcess/dashBoard"><img
+								href="/lilyrose/dashboardloader"><img
 									alt="Dash Board" src="/lilyrose/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
