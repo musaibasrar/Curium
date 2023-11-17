@@ -422,4 +422,13 @@ public class JspController {
 		return "student_details_other_feesstructure";
 	}
 	
+	@GetMapping("/feessummary")
+	public String getFeesSummary() {
+		return "feessummary";
+	}
+	
+	@GetMapping("/dashboardloader")
+	public String getDashboardLoader() {
+		return "dashboardloader";
+	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescategory.action.FeesAction;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
@@ -210,4 +211,11 @@ public class FeesCollectionAction {
 	        	new FeesCollectionService(request, response).exportDataForStudentsOtherFeesReport();
 	            return "feesreportexportsuccess";
 			}
+		 
+		 @PostMapping("/feesSummaryReport")
+	        private String feesSummaryReport() {
+	        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
+	            return "feessummaryreport";
+			}	 
+		 
 }
