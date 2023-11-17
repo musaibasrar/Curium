@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/madina/UserProcess/dashBoard"><img
+								href="/madina/dashboardloader"><img
 									alt="Dash Board" src="/madina/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
