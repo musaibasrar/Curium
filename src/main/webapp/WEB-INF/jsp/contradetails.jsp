@@ -371,6 +371,37 @@
 		$("#search").button().click(function() {
 			search();
 		});
+		$('#chckHead').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            if(length>0){
+                $('.chcktbl:checked').attr('checked', false);
+                this.checked=false;
+
+            }
+            else{
+                if (this.checked == false) {
+                    $('.chcktbl:checked').attr('checked', false);
+                }
+                else {
+                    $('.chcktbl:not(:checked)').attr('checked', true);
+                }
+
+            }
+
+        });
+        $('.chcktbl').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            alert(tdLength);
+            if (length > trLength) {
+
+                $('.chcktbl:not(:checked)').attr('disabled', true);
+            }
+            else {
+                $('.chcktbl:not(:checked)').attr('disabled', false);
+            }
+        });
 		
 
 	});
