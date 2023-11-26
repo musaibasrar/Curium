@@ -864,6 +864,7 @@ public class AccountService {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String todaysDate = formatter.format(now);
+        boolean result = false;
 		
 		
 		if (receiptIds != null || voucherType!=0) {
@@ -878,7 +879,7 @@ public class AccountService {
 
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result = new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}else if(voucherType==2) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
@@ -886,7 +887,7 @@ public class AccountService {
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result = new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}else if(voucherType==3) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
@@ -894,7 +895,8 @@ public class AccountService {
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result = new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					
 				}else if(voucherType==4) {
 					
 					// Dr
@@ -919,7 +921,8 @@ public class AccountService {
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result = new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					 
 				}
 
 				
@@ -928,7 +931,7 @@ public class AccountService {
 			
 		}
 		
-		return false;
+		return result;
 	}
 
 
@@ -1769,6 +1772,14 @@ public boolean getRPStatement() {
 		BigDecimal totalCrBank = BigDecimal.ZERO;
 		BigDecimal totalDrBank = BigDecimal.ZERO;
 		
+		BigDecimal totalCrCashContra = BigDecimal.ZERO;
+		BigDecimal totalDrCashContra = BigDecimal.ZERO;
+		
+		BigDecimal totalCrBankContra = BigDecimal.ZERO;
+		BigDecimal totalDrBankContra = BigDecimal.ZERO;
+		
+		
+		
 		
 		List<VoucherEntrytransactions> voucherTransactionsCash = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, cashLedgerid, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
@@ -1796,6 +1807,23 @@ public boolean getRPStatement() {
 			}
 		}
 		
+		
+		
+		List<VoucherEntrytransactions> voucherTransactionsCashContra = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, cashLedgerid, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsCashContra) {
+			int drAccount = voucherEntrytransactions.getDraccountid();
+			int crAccount = voucherEntrytransactions.getCraccountid();
+			
+			if(drAccount == cashLedgerid && crAccount == bankLedgerid) {
+				totalDrCashContra = totalDrCashContra.add(voucherEntrytransactions.getDramount());
+				totalCrBankContra = totalCrBankContra.add(voucherEntrytransactions.getDramount());
+			}else if(crAccount == cashLedgerid && drAccount == bankLedgerid) {
+				totalCrCashContra = totalCrCashContra.add(voucherEntrytransactions.getCramount());
+				totalDrBankContra = totalDrBankContra.add(voucherEntrytransactions.getCramount());
+			}
+		}
+		
 		List<Integer> accountids = new ArrayList<Integer>();
 		accountids.add(cashLedgerid);
 		accountids.add(bankLedgerid);
@@ -1820,12 +1848,18 @@ public boolean getRPStatement() {
 		bankBalance = bankBalance.add(totalCrBank);
 		openingBalanceBank = bankBalance.subtract(totalDrBank);
 
+		System.out.println("Total Cr Cash Contra "+totalCrCashContra);
+		System.out.println("Total Dr Cash Contra "+totalDrCashContra);
+		System.out.println("Total Cr Bank Contra "+totalCrBankContra);
+		System.out.println("Total Dr Bank Contra "+totalDrBankContra);
 		
-		BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalExpenseCash.add(totalHalqaSharePaidCash));
-		closingBalanceCash = openingBalanceCash.add(closingDrCrCash);
+		BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalExpenseCash.add(totalHalqaSharePaidCash)).subtract(totalCrCashContra);
+		//BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalHalqaSharePaidCash).subtract(totalCrCashContra);
+		closingBalanceCash = openingBalanceCash.add(closingDrCrCash).add(totalDrCashContra);
 		
-		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalExpenseBank.add(totalHalqaSharePaidBank));
-		closingBalanceBank = openingBalanceBank.add(closingDrCrBank);
+		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalExpenseBank.add(totalHalqaSharePaidBank)).subtract(totalCrBankContra);
+		//BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalHalqaSharePaidBank).subtract(totalCrBankContra);
+		closingBalanceBank = openingBalanceBank.add(closingDrCrBank).add(totalDrBankContra);
 		
 		BigDecimal grandReceiptTotal = totalIncomeCash.add(totalIncomeBank).add(openingBalanceCash).add(openingBalanceBank);
 		BigDecimal grandPaymentTotal = totalExpenseCash.add(totalExpenseBank).add(totalHalqaSharePaidCash).add(totalHalqaSharePaidBank).add(closingBalanceCash).add(closingBalanceBank);
@@ -2074,7 +2108,7 @@ public boolean getRPStatement() {
 				}
 		    
 	    		String ItemLedgerId = properties.getProperty(itemAccount);
-		    
+	    		System.out.println("Item Ledger Name "+itemAccount);
 		    if(ItemLedgerId!=null) {
 		    	result = ItemLedgerId;
 		    }else {
