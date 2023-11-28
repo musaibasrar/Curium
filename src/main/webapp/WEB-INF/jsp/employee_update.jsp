@@ -14,22 +14,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/shatabdi/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/children/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/children/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/shatabdi/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/children/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/children/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/children/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/children/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/children/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/children/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/children/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/children/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/children/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
+	src="/children/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/children/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -191,7 +191,7 @@
 }
 -->
 </style>
-<script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/children/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	document.getElementById("UpdateExecutive").style.display = 'none';
@@ -296,7 +296,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/children/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -309,7 +309,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/shatabdi/EmployeeProcess/viewAllEmployee"
+	<form action="/children/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -909,14 +909,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/shatabdi/PersonalProcess/viewAll";
+								form1.action = "/children/PersonalProcess/viewAll";
 								form1.submit();
 							}
 
 							function updateEmployee() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/shatabdi/EmployeeProcess/updateEmployee";
+								form1.action = "/children/EmployeeProcess/updateEmployee";
 								form1.submit();
 							}
 							

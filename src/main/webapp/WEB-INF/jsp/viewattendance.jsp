@@ -14,39 +14,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View Attendance</title>
-<script src="/shatabdi/js/Chart.js"></script>
-<link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
-<link rel="stylesheet" href="/shatabdi/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/shatabdi/css/graph/jquery.jqplot.min.css">
+<script src="/children/js/Chart.js"></script>
+<link rel="stylesheet" href="/children/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/children/css/datePicker/demos.css">
+<link rel="stylesheet" href="/children/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/children/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/children/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/shatabdi/js/jquery.jqplot.min.js" ></script>
-        <script src="/shatabdi/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/children/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/children/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/children/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/children/js/jquery.jqplot.min.js" ></script>
+        <script src="/children/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +328,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/shatabdi/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/children/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/children/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/children/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/shatabdi/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/children/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/children/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
+	src="/children/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/children/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/shatabdi/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/children/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/children/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/children/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/children/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/children/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/children/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -523,7 +523,7 @@
     	}
        
         </script>
-<script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/children/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -551,7 +551,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "/children/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -559,7 +559,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "/children/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -567,7 +567,7 @@
 	
 	function searchStudentAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/AttendanceProcess/searchStudentAttendanceDetails";
+		form1.action = "/children/AttendanceProcess/searchStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -727,7 +727,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/AttendanceProcess/updateStudentAttendanceDetails";
+		form1.action = "/children/AttendanceProcess/updateStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -741,7 +741,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/children/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -755,7 +755,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/shatabdi/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/children/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
