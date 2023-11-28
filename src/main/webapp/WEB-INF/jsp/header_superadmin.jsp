@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/shatabdi/css/bootstrap.min.css">
-        <script src="/shatabdi/js/jquery.min.js"></script>
-        <script src="/shatabdi/js/bootstrap.min.js"></script>
-        <script src="/shatabdi/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/littleangel/css/bootstrap.min.css">
+        <script src="/littleangel/js/jquery.min.js"></script>
+        <script src="/littleangel/js/bootstrap.min.js"></script>
+        <script src="/littleangel/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/shatabdi/UserProcess/logout";
+                form1.action="/littleangel/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/shatabdi/welcome" ><img src="/shatabdi/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/littleangel/welcome" ><img src="/littleangel/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/shatabdi/images/shatabdiheader.png"
+							<!-- <td align="left"><img src="/littleangel/images/littleangelheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/shatabdi/left_superadmin"> <img
-									src="/shatabdi/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/littleangel/left_superadmin"> <img
+									src="/littleangel/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/shatabdi/FeesProcess/feesCollect"> <img
-									src="/shatabdi/images/feescollect.svg" width="18" height="18"
+								href="/littleangel/FeesProcess/feesCollect"> <img
+									src="/littleangel/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/shatabdi/AccountProcess/createVoucher"> <img
-									src="/shatabdi/images/createvoucher.svg" width="18" height="18"
+								href="/littleangel/AccountProcess/createVoucher"> <img
+									src="/littleangel/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/shatabdi/feesCollectionDetails"><img  alt="Fees Details" src="/shatabdi/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/littleangel/feesCollectionDetails"><img  alt="Fees Details" src="/littleangel/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/shatabdi/StudentProcess/addNew"> <img
-									src="/shatabdi/images/student_header.svg" width="18" height="18"
+								href="/littleangel/StudentProcess/addNew"> <img
+									src="/littleangel/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/shatabdi/leftsettings">
-									<img alt="Settings" src="/shatabdi/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/littleangel/leftsettings">
+									<img alt="Settings" src="/littleangel/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/shatabdi/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/shatabdi/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/littleangel/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/littleangel/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/shatabdi/sendsms"><img
-									src="/shatabdi/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/littleangel/sendsms"><img
+									src="/littleangel/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/shatabdi/reports"><img
-									src="/shatabdi/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/littleangel/reports"><img
+									src="/littleangel/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/shatabdi/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/shatabdi/images/students.svg" width="18"
+								href="/littleangel/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/littleangel/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/shatabdi/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/shatabdi/images/dashboard.svg" width="18"
+								href="/littleangel/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/littleangel/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/shatabdi/UserProcess/logout"><img
-									src="/shatabdi/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/littleangel/UserProcess/logout"><img
+									src="/littleangel/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/shatabdi/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
+        <script language="JavaScript" src="/littleangel/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/littleangel/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/littleangel/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/shatabdi/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/shatabdi/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/littleangel/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/littleangel/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/littleangel/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/littleangel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/littleangel/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/littleangel/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/littleangel/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/littleangel/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/littleangel/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/shatabdi/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/littleangel/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/littleangel/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/shatabdi/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/shatabdi/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/shatabdi/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/littleangel/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/littleangel/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/littleangel/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/littleangel/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/shatabdi/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/littleangel/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/littleangel/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/littleangel/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/littleangel/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/littleangel/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/littleangel/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/shatabdi/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/shatabdi/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/littleangel/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/littleangel/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/shatabdi/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/shatabdi/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/shatabdi/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/shatabdi/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/littleangel/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/littleangel/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/littleangel/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/littleangel/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/shatabdi/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/littleangel/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

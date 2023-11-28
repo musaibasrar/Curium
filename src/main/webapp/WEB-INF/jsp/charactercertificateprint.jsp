@@ -94,15 +94,15 @@ span{
     font-weight: normal;
 }
 </style>
-	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/littleangel/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/littleangel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -121,7 +121,7 @@ for(Cookie cookie : cookies){
 		 <table style="padding-left:150px;">
                         		
 			<tr>
-				<td ><img src="/shatabdi/images/shatabdi.jpg" width="117" height="140"/></td>
+				<td ><img src="/littleangel/images/littleangel.jpg" width="117" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	A SENIOR SECONDARY SCHOOL</h4>
@@ -243,7 +243,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/littleangel/DocumentsProcess/printCharacterCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

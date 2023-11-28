@@ -179,7 +179,7 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
+				<td><img src="/littleangel/images/littleangel.jpg" width="67" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">A Senior Secondary School<br></label>
@@ -370,7 +370,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/shatabdi/images/shatabdipaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/littleangel/images/littleangelpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -381,7 +381,7 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
+				<td><img src="/littleangel/images/littleangel.jpg" width="67" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">A Senior Secondary School<br></label>
@@ -573,7 +573,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/shatabdi/images/shatabdipaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/littleangel/images/littleangelpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
