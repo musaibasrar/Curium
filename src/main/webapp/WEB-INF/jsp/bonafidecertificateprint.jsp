@@ -1,13 +1,8 @@
-<%-- 
-    Document   : bonafide certificate
-    Created on : Mar 17 2018, 12:32 PM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -91,11 +86,17 @@ span{
     padding-bottom:1px;
     width: 300px;
     font-weight: normal;
+    text-align:center;
+}
+</style>
+<style>
+.rightside{
+float:right;
 }
 </style>
 	<script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <title>Bonafide Certificate</title>
+        <title>Study Certificate</title>
 </head>
 <%
 //allow access only if session exists
@@ -117,7 +118,83 @@ for(Cookie cookie : cookies){
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
-		<table>
+		<table align="center">
+			
+			
+			<tr>
+				<td colspan="4" class="dataTextBoldCenter">
+					<br>
+					<h2>STUDY CERTIFICATE</h2>
+					<br>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
+					</h3>
+				</td>
+			</tr>
+			
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Mr./Ms. &nbsp;&nbsp;
+					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:540px;"> <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">Was a bonafide student of this institute/college during the year from &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to
+					<span class="rightside"style="font-weight: bold;text-transform: capitalize;width:130px;"> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">
+					studying from<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">During the period his character is found to be Good/Satisfactory. 
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His Date of Birth is &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+					and Religion is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:200px;"> <c:out value="${studentdetailsbonafide.student.religion}" /></span></h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;"> 
+					caste is <span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.caste}" /></span>
+					as per his/her admission Register No. <span style="font-weight: bold;text-transform: capitalize;width:190px;"></span></h3>
+				</td>
+			</tr>
+			
 			<tr>
 			<td class="dataTextBoldLeft">
 			<br><br>
@@ -126,113 +203,23 @@ for(Cookie cookie : cookies){
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
 			
 			</tr>
-			
-			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
-					<br>
-					<u>BONAFIDE CERTIFICATE</u>
-					<br><br>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; </span>
+					<span style="font-weight: bold;text-transform: capitalize;width:400px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
 					</h3>
 				</td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
-					</span>
-					
-					</h3>
-				</td>
 			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year <span style="font-weight: bold;width: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
 		</table>
 		
 
 		<TABLE id="dataTable" width="100%" border="0"
 			style="page-break-after: always; border-collapse: collapse;">
 
-			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
-		</tr>
-		
+			
 			<tr>
               <td align="center"><a id="print" href="/alfarooq/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
@@ -240,3 +227,4 @@ for(Cookie cookie : cookies){
 	</form>
 </body>
 </html>
+

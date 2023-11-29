@@ -595,7 +595,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alfarooq/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            				 <a target="mainFrame" href="/alfarooq/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Study Certificate</a>
             			</td>
             		</tr>
             		<tr>

@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/alfarooq/UserProcess/dashBoard"><img
+								href="/alfarooq/dashboardloader"><img
 									alt="Dash Board" src="/alfarooq/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
