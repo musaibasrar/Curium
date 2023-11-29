@@ -82,6 +82,29 @@ public class DocumentService {
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
+		String bookno = DataUtil.emptyString(request.getParameter("bookno"));
+		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
+		String caste = DataUtil.emptyString(request.getParameter("caste"));
+		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
+		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
+		String failpass = DataUtil.emptyString(request.getParameter("failpass"));
+		String firstsubject = DataUtil.emptyString(request.getParameter("firstsubject"));
+		String secondsubject = DataUtil.emptyString(request.getParameter("secondsubject"));
+		String thirdsubject = DataUtil.emptyString(request.getParameter("thirdsubject"));
+		String Fourthsubject = DataUtil.emptyString(request.getParameter("Fourthsubject"));
+		String Fifthsubject = DataUtil.emptyString(request.getParameter("Fifthsubject"));
+		String sixthsubject = DataUtil.emptyString(request.getParameter("sixthsubject"));
+		String pinfig = DataUtil.emptyString(request.getParameter("pinfig"));
+		String pinword = DataUtil.emptyString(request.getParameter("pinword"));
+		String dues = DataUtil.emptyString(request.getParameter("dues"));
+		String concession = DataUtil.emptyString(request.getParameter("concession"));
+		String workingdays = DataUtil.emptyString(request.getParameter("workingdays"));
+		String present = DataUtil.emptyString(request.getParameter("present"));
+		String ncc = DataUtil.emptyString(request.getParameter("ncc"));
+		String game = DataUtil.emptyString(request.getParameter("game"));
+		String conduct = DataUtil.emptyString(request.getParameter("conduct"));
+		String datecert = DataUtil.emptyString(request.getParameter("datecert"));
+		String Remarks = DataUtil.emptyString(request.getParameter("Remarks"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
 		student.setReasonleaving(leavingReason);
@@ -96,6 +119,39 @@ public class DocumentService {
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
+				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 request.setAttribute("leavingReason", leavingReason);
+					request.setAttribute("dateinword", dateinword);
+					request.setAttribute("leavingReason", leavingReason);
+					request.setAttribute("bookno", bookno);
+					request.setAttribute("tcno", tcno);
+					request.setAttribute("caste", caste);
+					request.setAttribute("classinword", classinword);
+					request.setAttribute("lastexam", lastexam);
+					request.setAttribute("failpass", failpass);
+					request.setAttribute("firstsubject", firstsubject);
+					request.setAttribute("secondsubject", secondsubject);
+					request.setAttribute("thirdsubject", thirdsubject);
+					request.setAttribute("Fourthsubject", Fourthsubject);
+					request.setAttribute("Fifthsubject", Fifthsubject);
+					request.setAttribute("sixthsubject", sixthsubject);
+					request.setAttribute("pinfig", pinfig);
+					request.setAttribute("pinword", pinword);
+					request.setAttribute("dues", dues);
+					request.setAttribute("concession",concession);
+					request.setAttribute("workingdays", workingdays);
+					request.setAttribute("present", present);
+					request.setAttribute("ncc", ncc);
+					request.setAttribute("game", game);
+					request.setAttribute("conduct", conduct);
+					request.setAttribute("datecert", datecert);
+					request.setAttribute("Remarks", Remarks);
+					
+				 request.setAttribute("dateinword", dateinword);
+				 request.setAttribute("studentdetails", parents);
+				 request.setAttribute("tcdetails", tc);
 				 return "studentexists";
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
@@ -106,7 +162,33 @@ public class DocumentService {
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-			 
+			 request.setAttribute("leavingReason", leavingReason);
+				request.setAttribute("dateinword", dateinword);
+				request.setAttribute("leavingReason", leavingReason);
+				request.setAttribute("bookno", bookno);
+				request.setAttribute("tcno", tcno);
+				request.setAttribute("caste", caste);
+				request.setAttribute("classinword", classinword);
+				request.setAttribute("lastexam", lastexam);
+				request.setAttribute("failpass", failpass);
+				request.setAttribute("firstsubject", firstsubject);
+				request.setAttribute("secondsubject", secondsubject);
+				request.setAttribute("thirdsubject", thirdsubject);
+				request.setAttribute("Fourthsubject", Fourthsubject);
+				request.setAttribute("Fifthsubject", Fifthsubject);
+				request.setAttribute("sixthsubject", sixthsubject);
+				request.setAttribute("pinfig", pinfig);
+				request.setAttribute("pinword", pinword);
+				request.setAttribute("dues", dues);
+				request.setAttribute("concession",concession);
+				request.setAttribute("workingdays", workingdays);
+				request.setAttribute("present", present);
+				request.setAttribute("ncc", ncc);
+				request.setAttribute("game", game);
+				request.setAttribute("conduct", conduct);
+				request.setAttribute("datecert", datecert);
+				request.setAttribute("Remarks", Remarks);
+				
 			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);

@@ -174,13 +174,13 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:set var="splt" value="${fn:split(studentdetailsbonafide.student.classstudying,'--')}"/>
-					<c:out value="${splt[0]}" />
-								
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
 					</span>
-					during the year <span style="font-weight: bold;width: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
+					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
 					</h3>
 					
 				</td>

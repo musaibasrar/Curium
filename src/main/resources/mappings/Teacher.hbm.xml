@@ -54,6 +54,9 @@
         <property name="leavingdate" type="date">
             <column name="leavingdate" length="10" />
         </property>
+        <property name="joiningdate" type="date">
+            <column name="joiningdate" length="10" />
+        </property>
         <property name="bankname" type="string">
             <column name="bankname" length="500" />
         </property>

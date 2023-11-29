@@ -110,7 +110,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatefail";
+        return "transfercertificatepreviewduplicate";
 		}
 		return error;
 	}
@@ -163,8 +163,9 @@ public class DocumentAction {
 		return "studentcharactersdetails";
 	}
 	
-	@GetMapping("/printCharacterCertificate")
+	@PostMapping("/printCharacterCertificate")
 	public String printCharacterCertificate() {
+		new DocumentService(request, response).printCharacterCertificate();
 		return "characterprint";
 	}
 }

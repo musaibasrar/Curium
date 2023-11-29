@@ -39,6 +39,7 @@ public class Teacher implements java.io.Serializable {
 	private String teacherexternalid;
 	private int branchid;
 	private Date leavingdate;
+	private Date joiningdate;
 	private String bankname;
 	private String bankbranch;
 	private String bankifsc;
@@ -68,7 +69,7 @@ public class Teacher implements java.io.Serializable {
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
 			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid,String employeephoto,
-			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5
+			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate
 ) {
 		this.teachername = teachername;
 		this.designation = designation;
@@ -98,6 +99,7 @@ public class Teacher implements java.io.Serializable {
 		this.employeedoc3 = employeedoc3;
 		this.employeedoc4 = employeedoc4;
 		this.employeedoc5 = employeedoc5;
+		this.joiningdate = joiningdate;
 	}
 
 	@Id
@@ -262,6 +264,14 @@ public class Teacher implements java.io.Serializable {
 
 	public void setLeavingdate(Date leavingdate) {
 		this.leavingdate = leavingdate;
+	}
+	
+	public Date getJoiningdate() {
+		return joiningdate;
+	}
+
+	public void setJoiningdate(Date joiningdate) {
+		this.joiningdate = joiningdate;
 	}
 
 	public String getBankname() {

@@ -92,8 +92,15 @@ span{
     padding-bottom:1px;
     width: 200px;
     font-weight: normal;
+    text-align:center;
 }
 </style>
+<style>
+ .rightside{
+        float:right;
+        }
+</style>
+
 	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
@@ -124,7 +131,7 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 		<br>
 		
-		 <table style="padding-left:150px;">
+		 <table align="center">
                         		
 			<tr>
 				<td ><img src="/shatabdi/images/shatabdi.jpg" width="117" height="140"/></td>
@@ -142,7 +149,7 @@ for(Cookie cookie : cookies){
 			</tr>
 		
 			</table>
-			<table>
+			<table align="center">
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
@@ -163,7 +170,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -174,15 +181,12 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
 					</h3></td></tr><tr>
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;
-					<c:set var="splt" value="${fn:split(studentdetailsbonafide.student.classstudying,'--')}"/>
-					<c:out value="${splt[0]}" />
-					</span>
-					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					bearing Roll Number<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
 					</h3>
 				</td>
 			
@@ -190,10 +194,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input name="dateofcr" type="text" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/>" >
-			</span>
+			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
 			</h3>
 			</td>
 			</tr>
@@ -207,7 +208,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character}" /></span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character}" /></span>character
 			</h3>
 			</td>
 			</tr>

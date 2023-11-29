@@ -73,7 +73,7 @@ public class EmployeeService {
 		                }
 		                
 		                if (fieldName.equalsIgnoreCase("dateofjoining")) {
-		                	employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter(fieldName)));
+		                	employee.setDateofjoining(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                
 		                if (fieldName.equalsIgnoreCase("totalexperience")) {
@@ -102,6 +102,10 @@ public class EmployeeService {
 		                
 		                if (fieldName.equalsIgnoreCase("currentemployee")) {
 		                	employee.setCurrentemployee(DataUtil.emptyString(request.getParameter(fieldName)));
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("joiningdate")) {
+		                	employee.setJoiningdate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                
 		                //Bank Details
@@ -298,7 +302,7 @@ public class EmployeeService {
 		                }
 		                
 		                if (fieldName.equalsIgnoreCase("dateofjoining")) {
-		                	employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter(fieldName)));
+		                	employee.setDateofjoining(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                
 		                if (fieldName.equalsIgnoreCase("totalexperience")) {
@@ -340,6 +344,12 @@ public class EmployeeService {
     	                if (fieldName.equalsIgnoreCase("leavingdate")) {
 
     	                	employee.setLeavingdate(DateUtil.indiandateParser(request.getParameter(fieldName)));
+
+    	                }
+    	                
+    	                if (fieldName.equalsIgnoreCase("joiningdate")) {
+
+    	                	employee.setJoiningdate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 
     	                }
 		                
@@ -604,7 +614,8 @@ public class EmployeeService {
 	               httpSession.setAttribute("designation" + i + "", teacherDetails.getDesignation());
 	               httpSession.setAttribute("Address" + i + "", teacherDetails.getAddress());
 	               httpSession.setAttribute("employeephoto" + i + "",teacherDetails.getEmployeephoto());
-	               
+	               httpSession.setAttribute("dateofjoining" + i + "", DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
+	               request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
 	               //result = true;
 	           } else {
 

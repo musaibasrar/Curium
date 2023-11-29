@@ -204,10 +204,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -233,7 +232,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -423,11 +422,11 @@ for(Cookie cookie : cookies){
 									id="email" size="30">
 
 							</label></td>
-							<td width="20%" class="alignRight">Date Of Joining &nbsp;</td>
+							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
 										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="yyyy-MM-dd"/>"
-									class="textField" id="datepicker" size="36"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
+									class="textField" id="datepicker" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 							
@@ -453,7 +452,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 
-							<td width="16%" class="alignRight">Total Eperience&nbsp;</td>
+							<td width="16%" class="alignRight">Total Experience&nbsp;</td>
 							<td align="left"><label> <input
 									name="totalexperience" type="text" class="textField"
 									value="<c:out default="" value="${employee.totalexperience}" />"
@@ -484,7 +483,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Department&nbsp;</td>
 
 							<td width="28%"><label> <select name="department"
-									id="department" style="width: 240px" onchange="dropdownclass()">
+									id="department" style="width: 210px" onchange="dropdownclass()">
 										<option selected>${employee.department}</option>
 
 										<c:forEach items="${listDepartment}" var="listDepartment">
@@ -505,7 +504,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Designation &nbsp;</td>
 
 							<td width="28%"><label> <select name="designation"
-									id="designation" style="width: 240px"">
+									id="designation" style="width: 210px;">
 										<option selected>
 											<c:out default="" value="${employee.designation}" />
 										</option>
@@ -538,6 +537,36 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
+							<td width="16%" class="alignRight">Father / Guardian Name&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
+							
+							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
+							<td width="16%"><label> 
+										<input name="joiningdate"
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
+									class="textField" id="datepickerCD" size="30"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+						<tr>
+
+							<td></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
 							<td width="16%" class="alignRight">Current Employee &nbsp;</td>
 
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -546,15 +575,6 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
-
-							<td width="16%" class="alignRight">Remarks&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
 						<tr>
 
 							<td></td>

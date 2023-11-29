@@ -38,6 +38,7 @@
 
 <style type="text/css">
 .myclass {
+	font-size: 1.3em;
 	border-top-style: solid;
 	border-right-style: solid;
 	border-bottom-style: solid;
@@ -51,10 +52,12 @@
 	border-bottom-width: 1px;
 	border-left-width: 1px;
 	width: auto;
-	height: auto;
+	height: 28px;
 	color: black;
 	text-transform: capitalize;
+	border-radius: 4px;
 }
+
 
 <!--
 .divCSS {
@@ -236,7 +239,7 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -258,7 +261,7 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -374,14 +377,6 @@
 <script type="text/javascript">
 	$(function() {
 
-		$("#set").button().click(function() {
-			addPatientWithAppointment();
-
-		});
-		$("#saveAndSetToday").button().click(function() {
-			addPatientWithTodaysAppointment();
-
-		});
 		$(".save").button().click(function() {
 			addEmployee();
 
@@ -595,12 +590,12 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Address &nbsp;</td>
 							<td><label> <input name="address"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="address" size="36">
+									type="text" class="myclass" id="address" size="36">
 							</label></td>
 
 							<td class="alignRight">Contact Number &nbsp;</td>
 							<td><label> <input
-									name="contactnumber" type="text" class="textField"
+									name="contactnumber" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="contactnumber" size="36" maxlength="10" minlength="10"/>
 							</label></td>
@@ -618,13 +613,13 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">email &nbsp;</td>
 							<td><label> <input name="email"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="email" class="textField" id="email" size="36">
+									type="email" class="myclass" id="email" size="36">
 							</label></td>
 
-							<td class="alignRight">Date Of Joining &nbsp;</td>
+							<td class="alignRight">Date Of Birth &nbsp;</td>
 							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
 										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="datepicker" size="36"
+									type="text" class="myclass" id="datepicker" size="36"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
@@ -649,7 +644,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Qualification &nbsp;</td>
 							<td><label> <input name="qualification"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="qualification" size="36"
+									type="text" class="myclass" id="qualification" size="36"
 									>
 							</label></td>
 
@@ -667,7 +662,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Department &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="department" id="department"
-									style="width: 300px">
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listDepartment}" var="listDepartment">
@@ -685,7 +680,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Designation &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="designation" id="designation"
-									style="width: 300px">
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listPosition}" var="listPosition">
@@ -710,6 +705,29 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 
+						<td class="alignRight">Father / Guardian Name &nbsp;</td>
+							<td align="left"><label> <input
+									name="remarks" type="text" class="myclass" id="remarks"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+							</label></td>
+							
+
+							<td class="alignRight">Date Of Joining &nbsp;</td>
+							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/YYYY"/>"
+										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="datepickerCD" size="36"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
 							<!-- <td width="30%" class="alignRight">Salary &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="salary" type="text" class="myclass"
@@ -724,12 +742,6 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id)" />
 							</td>
 
-							<td class="alignRight">Remarks &nbsp;</td>
-							<td align="left"><label> <input
-									name="remarks" type="text" class="myclass" id="remarks"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
-							</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>

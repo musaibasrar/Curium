@@ -750,7 +750,7 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Roll Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"

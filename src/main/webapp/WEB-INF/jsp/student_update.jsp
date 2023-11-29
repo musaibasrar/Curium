@@ -519,7 +519,7 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Roll Number &nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"

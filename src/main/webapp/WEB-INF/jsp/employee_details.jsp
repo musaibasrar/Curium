@@ -403,9 +403,9 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${employee.email}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Joining</td>
+                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
-                                <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.dateofjoining}"/>
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
                             </td>
                             
                         </tr>
@@ -440,6 +440,18 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
+                            <td width="25%" class="alignLeft" height="50" >Father / Guardian Name</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${employee.remarks}" />
+                            </td>
+                            
+                            <td width="25%" class="alignLeft" height="50" >Date Of Joining &nbsp;</td>
+                            <td width="25%" class="tablerows" >
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.joiningdate}"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
                             
@@ -451,12 +463,6 @@ for(Cookie cookie : cookies){
            						  <c:out default="" value="No" />
            						 </c:if>
                             </td>
-                        
-                            <td width="25%" class="alignLeft" height="50" >Remarks</td>
-                            <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${employee.remarks}" />
-                            </td>
-                            
                         </tr>
                         
                         

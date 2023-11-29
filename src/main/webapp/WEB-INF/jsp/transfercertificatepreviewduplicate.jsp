@@ -202,9 +202,9 @@ for(Cookie cookie : cookies){
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td  style="width: 100%">
+				<td class="dataTextBoldCenter" style="width: 100%">
 				
-			<h2 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL </h2></td>
+				SHATABDI PUBLIC SCHOOL </td>
 			</tr>
 			<tr>
 			<td class="addressLine">A SENIOR SECONDRY SCHOOL,AFFILIATED TO CBSE,DELHI,AFFILIATION No. 330113</td>
@@ -229,7 +229,7 @@ for(Cookie cookie : cookies){
                 </tr>
             </TABLE>
 
-		<table align="center" >
+		<table style="margin:40px;">
 		<tr>
 			
 			<td colspan="4">
@@ -239,11 +239,11 @@ for(Cookie cookie : cookies){
 			
 			</tr>
 			<tr>
-			<td style="text-align:right;">
-			
+			<td></td><td></td>
+			<td >
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="7" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
+									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
 			
 			</tr>
 			
@@ -345,11 +345,14 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">9.&nbsp;&nbsp;School/Board Annual Examination Last taken with Result:
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:500px;"><c:out value="${lastexam}" /> </span>
+					
 					</h3>
 				</td>
 				</tr>
-				
+				<tr><td class="dataTextBoldLeft">
+				<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:830px;"><c:out value="${lastexam}" /> </span>
+					</h3></td>
+				</tr>
 				<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;Whether failed if so Once/Twice in the same Class &nbsp;&nbsp;

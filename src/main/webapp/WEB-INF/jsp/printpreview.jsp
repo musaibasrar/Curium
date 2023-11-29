@@ -1,10 +1,3 @@
-<%-- 
-    Document   : Print Preview
-    Created on : Jan 4, 2013, 4:39:24 PM
-    Author     : Musaib
---%>
-
-
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -15,7 +8,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
+        <title>Student Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/shatabdi/js/motionpack.js"></script>
         <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -260,6 +253,23 @@
 
             }
             -->
+            .dataTextBoldCenter {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.addressLine{
+	font-weight: normal;
+	font-family: ariel;
+	color: black;
+	font-size: 9px;
+	letter-spacing: normal;
+	text-align: center;
+}
         </style>
         <script type="text/javascript">
 
@@ -320,8 +330,7 @@
                                 });
                             </script>
 
-    </head>
-      <%
+  <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -337,23 +346,9 @@ for(Cookie cookie : cookies){
 }
 }
 %>
+ 
 
-    <!-- <style type="text/css">
-         
-         @media print {
-     body { font-size: 25px }
-     .hide { visibility: hidden }
-       }
-       
-   @media screen {
-     body { font-size: 13px }
-   }
-   
-         
-         
-     </style> -->
-
-    <style type="text/css">
+   <style type="text/css">
 
         @media print {
             .fontsize { font-size: 15px ;
@@ -388,11 +383,19 @@ for(Cookie cookie : cookies){
                 margin-right: 0px;
             }
         }
-        .card {
+ /*        .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 5.5cm;
-    height: 8.5cm;
+    width: 8.5cm;
+    height: 13cm;
+    border-radius: 25px;
+    background: blue;
+} */
+
+       .card {
+    width: 11cm;
+    height: 7cm;
+    background: #FEE12B;
 }
 
 .card:hover {
@@ -400,104 +403,154 @@ for(Cookie cookie : cookies){
 }
 
 .container {
-    padding: 2px 16px;
+    padding: 1px 16px;
 }
+
+
+ .tableidcard {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        width: 310px;
+      }
+      .tdidcard {
+        font-size: 16px;
+      }
+      
+/* .containerschoolname {
+		padding: 2px 5px;
+} */
     </style>
 
+<style>
+    /* CSS to display tables side by side */
+   /* .table-container {
+      display: flex;
+      margin-bottom: 20px;  Add a gap between table sets 
+    }*/
+    
+   /* .table-container table {
+      margin-right: 20px;
+    }*/
+    
+    /* CSS for table styling */
+    
+    
+    
+    
+    .vertical-line {
+      border-left: 2px solid #350c76; /* Add a vertical line */
+    }
+  </style>
+    </head>
+     
 
     <body class="bodymargin">
        
         <form action="/shatabdi/" method="post" id="form1" class="bodymargin">
-
-           
-            <div>
-
-
-
-                <table cellpadding="2"  border="0">
-
-                        <c:set var="iInitial" value="${iInitial}"/>
-                        <c:set var="limit" value="1"/>
+			
+		 <c:set var="iInitial" value="${iInitial}"/>
+         <c:set var="limit" value="1"/>
                         
-                    <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${endValue}">
                         <%!                        
                             int i = 1;
                         %>
+			<c:if test="${limit < iInitial}">	
+	    
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+  <div class="table-container" style="margin-bottom: 5px;">
+  <table width="100%">
+  <tr align="center"><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">SHATABDI </p></td></tr><tr><td style="text-align:center;padding:0px;">
+       <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:13px;color:blue"> PUBLIC SCHOOL,GAYA</p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Senior Secondary School,Affiliated to CBSE Delhi</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Katari Hill Road,Gaya-823001,Mobile No.-8938846757</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">[Affiliation No.-3303113]</p>
+   </table>
+  </div>
 
-                        <tr>
-                            <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-                         <div class="card">
-  								<img src="/shatabdi/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
-                            
-                            </td>
-                            <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/shatabdi/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
-						 <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/shatabdi/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
-                            </c:if>
-                        </tr>
-                        <% i = i + 1;%>
+  <div class="table-container" style=" ">
+ <table style="margin-left:10px;">
+ <tr>
+ <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
+ </td>
+ <td>
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+ </td>
+ <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
+ SESSION ${currentacadmicyear}
+ </td>
+ <td>&nbsp;&nbsp;
+ <img src="/shatabdi/images/shatabdi.png" width="60" height="72"/>
+ </td>
+ </tr>
+ </table>
+   </div>
+   <div align="center">
+   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
+	</div>
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ROLL NO.</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
+    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+  </tr>
+</table>
+
+<div height="30" width="20%" style="text-align:right;float:right;">
+
+<img src="/shatabdi/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div>
+principal&nbsp;&nbsp;&nbsp;</div>
+</div>
+</div>
+ </c:if>
+   <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-                </table>
-
-                <table  width="70%"  id="table11" align="left">
+  
+                   <table  width="70%"  id="table11" align="left">
                     <tr>
                         <td width="30%"> 
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/shatabdi/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
                     </tr>
 
-                </table>
-
-            </div>
-
-
-
-
-
-
-
-
-
+                </table>     
         </form>
     </body>
 </html>

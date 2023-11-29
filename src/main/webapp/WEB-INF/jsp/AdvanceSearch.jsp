@@ -605,7 +605,7 @@ for(Cookie cookie : cookies){
 						
 						
 						 <tr>
-							<td width="30%" class="alignRight">STS Number&nbsp;</td>
+							<td width="30%" class="alignRight">Roll Number&nbsp;</td>
 							<td width="12%" align="left"><label>
 										<input
 											name="sts" type="text" class="textField"

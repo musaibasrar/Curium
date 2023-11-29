@@ -106,7 +106,10 @@ public class PrintIdsService {
                    httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
                    httpSession.setAttribute("address" + i + "", parentsDetails.getAddresspermanent());
                    httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
-                   
+                   httpSession.setAttribute("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
+                   request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
+                   httpSession.setAttribute("rollnumber" + i + "", parentsDetails.getStudent().getSts());
+                   httpSession.setAttribute("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
                    //result = true;
                } else {
 

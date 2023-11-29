@@ -256,8 +256,8 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 			<td class="dataTextBoldLeft">
-					<h4 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the pupil &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:700px;"> <c:out value="${studentdetails.student.name}" /></span>
+					<h4 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the Pupil &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.name}" /></span>
 					</h4>
 				</td>
 				
@@ -267,7 +267,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h4 style="font-weight: normal;">2.&nbsp;&nbsp;Mother's Name &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:740px;"> <c:out value="${studentdetails.mothersname}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:640px;"> <c:out value="${studentdetails.mothersname}" /></span>
 					</h4>
 				</td>
 				
