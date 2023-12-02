@@ -1824,6 +1824,16 @@ public boolean getRPStatement() {
 			}
 		}
 		
+		List<VoucherEntrytransactions> voucherTransactionsBankCreditEntries = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, bankLedgerid, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsBankCreditEntries) {
+			int crAccount = voucherEntrytransactions.getCraccountid();
+			
+			if(crAccount == bankLedgerid) {
+				totalCrBankContra = totalCrBankContra.add(voucherEntrytransactions.getDramount());
+			}
+		}
+		
 		List<Integer> accountids = new ArrayList<Integer>();
 		accountids.add(cashLedgerid);
 		accountids.add(bankLedgerid);
@@ -1848,17 +1858,12 @@ public boolean getRPStatement() {
 		bankBalance = bankBalance.add(totalCrBank);
 		openingBalanceBank = bankBalance.subtract(totalDrBank);
 
-		System.out.println("Total Cr Cash Contra "+totalCrCashContra);
-		System.out.println("Total Dr Cash Contra "+totalDrCashContra);
-		System.out.println("Total Cr Bank Contra "+totalCrBankContra);
-		System.out.println("Total Dr Bank Contra "+totalDrBankContra);
-		
 		BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalExpenseCash.add(totalHalqaSharePaidCash)).subtract(totalCrCashContra);
 		//BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalHalqaSharePaidCash).subtract(totalCrCashContra);
 		closingBalanceCash = openingBalanceCash.add(closingDrCrCash).add(totalDrCashContra);
 		
-		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalExpenseBank.add(totalHalqaSharePaidBank)).subtract(totalCrBankContra);
-		//BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalHalqaSharePaidBank).subtract(totalCrBankContra);
+		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalHalqaSharePaidBank).subtract(totalCrBankContra);
+		//BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalExpenseBank.add(totalHalqaSharePaidBank)).subtract(totalCrBankContra);
 		closingBalanceBank = openingBalanceBank.add(closingDrCrBank).add(totalDrBankContra);
 		
 		BigDecimal grandReceiptTotal = totalIncomeCash.add(totalIncomeBank).add(openingBalanceCash).add(openingBalanceBank);
