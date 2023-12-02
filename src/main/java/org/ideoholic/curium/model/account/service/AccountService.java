@@ -1817,7 +1817,7 @@ public boolean getRPStatement() {
 			
 			if(drAccount == cashLedgerid && crAccount == bankLedgerid) {
 				totalDrCashContra = totalDrCashContra.add(voucherEntrytransactions.getDramount());
-				totalCrBankContra = totalCrBankContra.add(voucherEntrytransactions.getDramount());
+				//totalCrBankContra = totalCrBankContra.add(voucherEntrytransactions.getDramount());
 			}else if(crAccount == cashLedgerid && drAccount == bankLedgerid) {
 				totalCrCashContra = totalCrCashContra.add(voucherEntrytransactions.getCramount());
 				totalDrBankContra = totalDrBankContra.add(voucherEntrytransactions.getCramount());
