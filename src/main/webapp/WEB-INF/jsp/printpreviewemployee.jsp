@@ -10,34 +10,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Id Card</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/shatabdi/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/shatabdi/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/alfalah/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/alfalah/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alfalah/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
-        <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/alfalah/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/alfalah/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -275,7 +275,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/shatabdi/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/alfalah/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -334,7 +334,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -448,7 +448,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/shatabdi/" method="post" id="form1" class="bodymargin">
+        <form action="/alfalah/" method="post" id="form1" class="bodymargin">
 			
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
@@ -463,11 +463,9 @@ for(Cookie cookie : cookies){
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">SHATABDI </p></td></tr><tr><td style="text-align:center;padding:0px;">
-       <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:13px;color:blue">PUBLIC SCHOOL,GAYA</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Senior Secondary School,Affiliated to CBSE Delhi</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Katari Hill Road,Gaya-823001,Mobile No.-8938846757</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">[Affiliation No.-3303113]</p>
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">Al Falah High School</p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Shanti Nagar, Lalapet, Secunderabad-500017</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Mobile No: 8143802598, Email: alfalahhighschool@gmail.com</p>
    </table>
   </div>
 
@@ -483,7 +481,7 @@ for(Cookie cookie : cookies){
  SESSION ${currentacadmicyear}
  </td>
  <td>&nbsp;&nbsp;
- <img src="/shatabdi/images/shatabdi.png" width="60" height="72"/>
+ <img src="/alfalah/images/alfalah.png" width="65" height="72"/>
  </td>
  </tr>
  </table>
@@ -524,7 +522,7 @@ for(Cookie cookie : cookies){
    
 <div height="30" width="20%" style="text-align:right;float:right;">
 
-<img src="/shatabdi/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="/alfalah/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
@@ -544,7 +542,7 @@ principal&nbsp;&nbsp;&nbsp;</div>
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/shatabdi/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/alfalah/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 

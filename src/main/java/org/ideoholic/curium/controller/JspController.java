@@ -21,9 +21,9 @@ public class JspController {
 		return "index_admin";
 	}
 
-	@GetMapping("/index_feescollector")
-	public String getIndexFeescollector() {
-		return "index_feescollector";
+	@GetMapping("/index_teacher")
+	public String getIndexTeacher() {
+		return "index_teacher";
 	}
 
 	@GetMapping("/index")
@@ -106,9 +106,9 @@ public class JspController {
 		return "sendsms_superadmin";
 	}
 
-	@GetMapping("/left_reception")
+	@GetMapping("/left_teacher")
 	public String getLeftReception() {
-		return "left_reception";
+		return "left_teacher";
 	}
 
 	@GetMapping("/header")
@@ -116,9 +116,9 @@ public class JspController {
 		return "header";
 	}
 
-	@GetMapping("/header_feescollector")
+	@GetMapping("/header_teacher")
 	public String getHeaderFeescollector() {
-		return "header_feescollector";
+		return "header_teacher";
 	}
 
 	@GetMapping("/header_admin")
@@ -430,5 +430,10 @@ public class JspController {
 	@GetMapping("/dashboardloader")
 	public String getDashboardLoader() {
 		return "dashboardloader";
+	}
+	
+	@GetMapping("/student_details_other_feesstructure_admin")
+	public String getStudentDetailsOtherFeesstructureAdmin() {
+		return "student_details_other_feesstructure_admin";
 	}
 }

@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +74,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/shatabdi/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/alfalah/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/shatabdi/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/shatabdi/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/alfalah/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/alfalah/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

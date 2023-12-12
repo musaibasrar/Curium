@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/shatabdi/UserProcess/logout";
+                form1.action="/alfalah/UserProcess/logout";
                 form1.submit();
             }
 
@@ -160,7 +160,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -179,8 +179,8 @@ for(Cookie cookie : cookies){
                     <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/shatabdi/images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="/shatabdi/images/SMS.png" width="391" height="50" /></div></td>
+                               <td width="234" ><div align="center"><img src="/alfalah/images/logo.png" width="200" height="64" /></div></td> 
+                                <td width="700" ><div align="center"><img src="/alfalah/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
                             <tr>
@@ -188,38 +188,38 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="/shatabdi/images/shatabdiheader.png" /></td>  
+                                          	<td align="left"><img src="/alfalah/images/alfalahheader.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/shatabdi/left"><img src="/shatabdi/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="/shatabdi/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/alfalah/left"><img src="/alfalah/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><a target="leftFrame" href="/alfalah/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect"><img   src="/shatabdi/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/alfalah/FeesProcess/feesCollect"><img   src="/alfalah/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                            				<td width="40"><a target="mainFrame" href="/shatabdi/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/shatabdi/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                            				<td width="40"><a target="mainFrame" href="/alfalah/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/alfalah/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Create <br>Voucher</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <!-- <td width="40"><a target="mainFrame" href="/shatabdi/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/shatabdi/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <!-- <td width="40"><a target="mainFrame" href="/alfalah/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/alfalah/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/shatabdi/StudentProcess/addNew"><img   src="/shatabdi/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/alfalah/StudentProcess/addNew"><img   src="/alfalah/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
-                           					<td width="40"><a target="leftFrame" href="/shatabdi/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/shatabdi/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                           					<td width="40"><a target="leftFrame" href="/alfalah/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/alfalah/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Master<br> Settings</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/shatabdi/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/shatabdi/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/alfalah/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/alfalah/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Admin<br> Expense</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/shatabdi/sendsms"><img   src="/shatabdi/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/alfalah/sendsms"><img   src="/alfalah/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                 			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/shatabdi/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/shatabdi/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/alfalah/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/alfalah/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/shatabdi/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/shatabdi/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/alfalah/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/alfalah/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/shatabdi/UserProcess/logout"><img   src="/shatabdi/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/alfalah/UserProcess/logout"><img   src="/alfalah/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>
                             <tr>

@@ -494,6 +494,7 @@ public class UserService {
 		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 		String fathersname= DataUtil.emptyString(request.getParameter("fathersname"));
 		String mothersname = DataUtil.emptyString(request.getParameter("mothersname"));
+		String contactnumber = DataUtil.emptyString(request.getParameter("contactnumber"));
 		
 		
 			String querySub = "";
@@ -506,6 +507,8 @@ public class UserService {
 				querySub = querySub + " AND parents.mothersname like '%"+mothersname+"%'";
 			}else if(!mothersname.equalsIgnoreCase("")){
 				querySub = querySub + " parents.mothersname like '%"+mothersname+"%'";
+			}else if(!contactnumber.equalsIgnoreCase("")){
+				querySub = querySub + " parents.contactnumber like '%"+contactnumber+"%'";
 			}
 			
 			
@@ -600,7 +603,7 @@ public class UserService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		user.setPassword(builder.toString());
-		user.setUsertype("staff");
+		user.setUsertype("teacher");
 		Branch branch = new Branch();
 		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		user.setBranch(branch);

@@ -101,8 +101,8 @@ span{
         }
 </style>
 
-	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -114,7 +114,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -134,17 +134,12 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/shatabdi/images/shatabdi.jpg" width="117" height="140"/></td>
+				<td ><img src="/alfalah/images/alfalah.jpg" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	A SENIOR SECONDARY SCHOOL</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	AFFILIATED TO CBSE,DELHI,AFF NO.330113</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARY HILL ROAD,GAYA - 823003(BIHAR)</h4>
-				
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.0631-2226652,2220344&nbsp;&nbsp;&nbsp;
-				Fax:031-2221386&nbsp;&nbsp;&nbsp;
-				Mobile No. 8936846757</h6>
-			    <h6 style="margin-top:0px;">	Email: shatabdipublic@gmail.com</h6>
+				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
+				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
+				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.8143802598&nbsp;&nbsp;&nbsp;</h6>
+			    <h6 style="margin-top:0px;">	Email: alfalahhighschool@gmail.com</h6>
 				</td>
 			</tr>
 		
@@ -186,7 +181,7 @@ for(Cookie cookie : cookies){
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
 					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing Roll Number<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+					bearing PEN<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
 					</h3>
 				</td>
 			
@@ -247,7 +242,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 		<!-- 	<tr>
-              <td align="center"><a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/alfalah/DocumentsProcess/printCharacterCertificate">Print</a></td>
             </tr>-->
 		</TABLE>
 	</form>

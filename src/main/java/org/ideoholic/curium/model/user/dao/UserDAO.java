@@ -179,6 +179,9 @@ public class UserDAO {
 		try {
             transaction = session.beginTransaction();
             session.save(user);
+            Query queryUpdate = session 
+					.createSQLQuery("update login set userid = (SELECT MAX(userid) + 1 FROM login) where username = '"+user.getUsername()+"'");
+			queryUpdate.executeUpdate();
             transaction.commit();
            return true;
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

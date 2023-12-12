@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Student Details Fees Structure
-    Created on : Jan 4, 2013, 4:39:24 PM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -11,9 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details Fees Structure</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Student Details Other Fees Structure</title>
 
         <script type="text/javascript" language="JavaScript" src="/alfalah/js/motionpack.js"></script>
         <link rel="stylesheet" href="/alfalah/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -53,7 +47,6 @@
                 letter-spacing: normal;
                 text-align: center;
                 background-color: #E3EFFF;
-
             }
             .dataTextFees {
                 border-radius:3px;
@@ -64,7 +57,6 @@
                 letter-spacing: normal;
                 text-align: center;
                 background-color: #E3EFFF;
-
             }
        		.dataTextDueFees{
 				                border-radius:3px;
@@ -75,7 +67,6 @@
                 letter-spacing: normal;
                 text-align: center;
                 background-color: #E3EFFF;
-
             }       		
        			 
             <!--
@@ -137,7 +128,6 @@
                 height: 100%;
                 width: 100%;
             }
-
             .fiedlSet {
                 border-top-width: 1px;
                 border-right-width: 1px;
@@ -289,7 +279,6 @@
                 font-family: Tahoma;
                 text-align: left;
                 font-weight: bold;
-
             }
             -->
             .mandatoryClass {
@@ -304,18 +293,17 @@
     font-weight: bold;
 }
         </style>
-        
-        
+
+
 
         <script type="text/javascript">
             $(function() {
-
                 $("#accordion").accordion();
                 
                 $("#search")
                 .button()
                 .click(function() {
-                	searchLeaveDetails();
+            searchFeesStructure();
 			        });
                 $( "#cancel" )
                 .button()
@@ -332,6 +320,43 @@
         	    	 return false;
         		});
                 
+                
+                $("#waiveoff").button({
+        	        icons: {
+        	            primary: "ui-icon-flag"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to waive off the fees?')) {
+        	    		waiveOff();
+        				}
+        	    	 return false;
+        		});
+                
+                $("#print").button({
+        	        icons: {
+        	            primary: "ui-icon-print"
+        	        }
+        	    });
+                
+                
+                $("#applyconcession").button({
+        	        icons: {
+        	            primary: "ui-icon-flag"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to apply the concession?')) {
+        	    		applyConcession();
+        				}
+        	    	 return false;
+        		});
+                
+                $(".concession").keypress(function (e) {
+       		     //if the letter is not digit then display error and don't type anything
+       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       		               return false;
+       		    }
+       		   });
+                
             });
             
             $(function(){
@@ -342,7 +367,6 @@
                     if(length>0){
                         $('.chcktb2:checked').attr('checked', false);
                         this.checked=false;
-
                     }
                     else{
                         if (this.checked == false) {
@@ -351,47 +375,64 @@
                         else {
                             $('.chcktb2:not(:checked)').attr('checked', true);
                         }
-
                     }
-
                 });
                 $('.chcktb2').click(function () {
                     var length = $('.chcktb2:checked').length;
                     var trLength=$('.trClass').length;
                     alert(tdLength);
                     if (length > trLength) {
-
                         $('.chcktb2:not(:checked)').attr('disabled', true);
                     }
                     else {
                         $('.chcktb2:not(:checked)').attr('disabled', false);
                     }
                 });
-
             });
-                       
+                      
             
-            function searchLeaveDetails() {
-
+            function searchFeesStructure() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/alfalah/HrProcess/leaveDetailsPerYear";
+                var id = document.getElementById("id").value;
+                
+                form1.action = "/alfalah/StudentProcess/feesStructurePerYear?id="+id;
                 form1.submit();
-
             }
             
             function deleteRecord() {
-
                 var form1 = document.getElementById("form1");
                 form1.action = "/alfalah/FeesProcess/deleteFeesCategory";
                 form1.submit();
-
             }
             
+            function waiveOff() {
+                var form1 = document.getElementById("form1");
+                form1.action = "/alfalah/FeesProcess/waiveOffFees";
+                form1.submit();
+            }
+            
+            function applyConcession() {
+                var form1 = document.getElementById("form1");
+                form1.action = "/alfalah/FeesProcess/applyotherConcession";
+                form1.submit();
+            }
+            
+            function checkConcession(dueAmount,concession,sfsid){
+            	var due = dueAmount;
+            	var con = concession;
+            	
+            	if(con>due){
+            		document.getElementById("concession:"+sfsid).value="";
+            		document.getElementById(sfsid).checked = false;
+            	}else if(con<=due){
+            		document.getElementById(sfsid).checked = true;
+            	}
+            }
            
         </script>
 
-    </head>
-      <%
+</head>
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -407,7 +448,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg">
+ <body background="/images/bg.jpg">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
@@ -415,8 +456,8 @@ for(Cookie cookie : cookies){
 
             <table width="100%">
                 <tr>
-                    <td  class="headerTD">NAME: &nbsp;<c:out value="${teachername}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      
+                    <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
                     </td>
                 </tr>
@@ -424,27 +465,45 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Staff Leave Details</a></h3>
-                
+                <h3><a href="#">Other Fees Structure</a></h3>
+
                 <div>
-                
+
                 <table width="100%" border="0" align="center"  id="table1">
+
+
 						<tr>
 		               <td width="26%"  class="alignRight" >
-                                    
+
+                                    Current Academic Year :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+
+                                <td width="28%"  >
+                                    <label style="font-weight: bold;color: #325F85">
+                                      ${currentAcademicYear}
+                                    </label>
+
+                                </td>
+
+
+                            </tr>
+
+						<tr>
+		               <td width="26%"  class="alignRight" >
+
                                     Academic Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
 
                                 <td width="28%"  >
                                     <label>
                                         <label> <select name="academicyear" id="academicyear" required
-									style="width: 140px">
-										<option selected value="${currentAcademicYear}"> ${currentAcademicYear}(Current Year)</option>
-										<option>2015/16</option>
-										<option>2016/17</option>
-										<option>2017/18</option>
-										<option>2018/19</option>
+									style="width: 120px">
+										<option selected></option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
 										<option>2019/20</option>
-										
 								</select>
 
 							</label> 
@@ -455,12 +514,12 @@ for(Cookie cookie : cookies){
 
                             </tr>
 
-                            
+
 						<td>
-						<input type="hidden" id="leavedetailsteachersid" name="leavedetailsteachersid" value="${leavedetailsteachersid}"  />
+						<input type="hidden" id="id" name="id" value="${student.sid}"  />
 						</td>
 
-              
+
                           </table>  
                                 <table width="100%" >
                                     <tr>
@@ -480,14 +539,14 @@ for(Cookie cookie : cookies){
                                         </td>
 
                                     </tr>
-                                    
+
                                          <tr>
 
                                         <td>
                                             <br/>
                                         </td>
                                     </tr>
-                                    
+
                                          <tr>
 
                                         <td>
@@ -497,45 +556,57 @@ for(Cookie cookie : cookies){
                                 </table>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				
+				<h class="dataTextFees">Total Fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees Due : </h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees Concession : Rs.  ${totalfeesconcession}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
                     <thead>
-                        <tr  >
-                            
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
+                        <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Leave Type Name</th>
-                            <th title="click to sort" class="headerText">Number Of Leaves&nbsp;</th>
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
-                             
-
-
+                            <th title="click to sort" class="headerText">Fees Category</th>
+                            <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Installments&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${leavedetailslist}" var="leavedetailslist">
+                        <c:forEach items="${feesstructure}" var="feesstructure">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                              	<td class="dataText"></td>
-                               	<td class="dataText"></td>
                                 <td class="dataText"><input type="checkbox"  class = "chcktb2"
-								id="<c:out value="${leavedetailslist.idleavedetails}"/>" 
-								name="idleavedetails" 
-								value="<c:out value="${leavedetailslist.idleavedetails}"/>"></td>
-                                <td class="dataText"><c:out value="${leavedetailslist.leaveTypeMaster.leavetypename}"/></td>
-                                <td class="dataText"><c:out value="${leavedetailslist.numberofleaves}"/></td>
+								id="<c:out value="${feesstructure.sfsid}"/>" 
+								name="sfsid" 
+								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.otherfeescategory.idfeescategory}"/>" /></td>
+                                <td class="dataText"><c:out value="${feesstructure.otherfeescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.otherfeescategory.amount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
+                                <td class="dataText"><input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="dueamount:${feesstructure.sfsid}" value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}" readonly></td>
+                                <td class="dataText">
+                                <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
+                                <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
+                                name="concession:${feesstructure.sfsid}" class="concession"
+                                value="${feesstructure.concession}"></td>
+                                <td class="dataText">
+
+                                <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
+                                <c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                   
+
                 </table>
-				
+
 				<table width="100%" >
                                     <tr>
 
@@ -551,18 +622,25 @@ for(Cookie cookie : cookies){
                                             Delete</button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="waiveoff">Waive Off</button>
+
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="applyconcession">Apply Concession</button> 
+
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="print" onclick="window.location.href='/alfalah/printstudentdetailsfeesstructure'">Print</button>
 
                                         </td>
 
                                     </tr>
-                                    
+
                                          <tr>
 
                                         <td>
                                             <br/>
                                         </td>
                                     </tr>
-                                    
+
                                          <tr>
 
                                         <td>
@@ -570,7 +648,7 @@ for(Cookie cookie : cookies){
                                         </td>
                                     </tr>
                                 </table>
-                    
+
 
                 </div>
 
@@ -580,16 +658,16 @@ for(Cookie cookie : cookies){
 
 
             </div>
-            
+
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"> 
 
                             </td>
                             <td>
-                                
+
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                
+
                             </td>
 
                         </tr>
@@ -608,5 +686,6 @@ for(Cookie cookie : cookies){
                 form1.submit();
             }
         </script>
-    </body>
+
+</body>
 </html>

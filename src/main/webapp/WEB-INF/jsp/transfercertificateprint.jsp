@@ -160,9 +160,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/shatabdi/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/alfalah/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
@@ -176,7 +176,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -194,18 +194,15 @@ for(Cookie cookie : cookies){
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
+				<td  style="width: 100%">
 				
-				SHATABDI PUBLIC SCHOOL </td>
+			<h2 style="margin-bottom:0px;">	Al Falah High School </h2></td>
 			</tr>
 			<tr>
-			<td class="addressLine">A SENIOR SECONDRY SCHOOL,AFFILIATED TO CBSE,DELHI,AFFILIATION No. 330113</td>
+			<td class="addressLine">Shanti Nagar, Lalapet, Secunderabad-500017</td>
 			</tr>
 			<tr>
-			<td class="addressLine">KATARI HILL ROAD, GAYA</td>
-			</tr>
-			<tr>
-			<td class="addressLine">Email: shatabdi.public@gmail.com</td>
+			<td class="addressLine">Mobile No.: 8143802598, Email: alfalahhighschool@gmail.com</td>
 			</tr>
 
 			<tr>
@@ -531,7 +528,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 		<!-- 	<tr>
-                        <td align="center"><a id="print" href="/shatabdi/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+                        <td align="center"><a id="print" href="/alfalah/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
                     </tr>-->
 		</TABLE>
 		

@@ -211,7 +211,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/shatabdi/images/logo.jpg" width="150" height="80"/>
+				<img src="/alfalah/images/logo.jpg" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				Curium<br><br>
@@ -235,7 +235,7 @@
 						<th class="datath">Issue Date</th>
 						<th class="datath">Status</th>
 						<th class="datath">Supplier Name</th>
-						<th class="datath">Cheque #</th>
+						<th class="datath">Transaction #</th>
 						<th class="datath">Amount</th>
  				 </tr>
  			 </thead>

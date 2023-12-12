@@ -199,8 +199,10 @@ public class FeesAction {
 	
 	private String studentotherFeePage(String studentId) {
 		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent(studentId)) {
-			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-				return "student_details_other_feesstructure";
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+				return "student_details_other_feesstructure_admin";
+			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_other_feesstructure";
 			} else {

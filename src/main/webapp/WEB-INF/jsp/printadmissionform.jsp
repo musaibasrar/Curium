@@ -250,7 +250,7 @@ input {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -273,11 +273,10 @@ for(Cookie cookie : cookies){
 				style="page-break-inside: avoid; border-collapse: collapse; margin-left: auto; margin-right: auto;">
 
 				<tr style="border: 0px solid black;">
-					<td style="text-align: center; border: 0px solid black;"><img src="/shatabdi/images/shatabdi.jpg" width="67"
+					<td style="text-align: center; border: 0px solid black;"><img src="/alfalah/images/alfalah.jpg" width="72"
 						height="80" /><br/><label>Regn. No.</label></td>
 					<td style="text-align: center;border: 0px solid black;"><label class="dataTextBoldCenter"
 						style="text-transform: uppercase;">${branchname}</label><br>
-						<label class="addressLine">A Senior Secondary School Affiliated to CBSE., Delhi,Affiliation No-330113<br></label>
 						 <label class="addressLine">${branchaddress}</label><br> 
 						 <label	class="addressLine">Contact: ${branchcontact}<br/></label>
 						 <label class="addressLine" style="font-weight: bold;">

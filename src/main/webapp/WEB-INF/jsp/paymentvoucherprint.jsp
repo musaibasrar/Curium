@@ -268,7 +268,7 @@
                                     By Cash
                                 </c:when>
                                 <c:otherwise>
-                                    By Cheque # <c:out value="${adminexpenses.chequeno}" />
+                                    By Bank Transfer # <c:out value="${adminexpenses.chequeno}" />
                                 </c:otherwise>
                             </c:choose>
 				
