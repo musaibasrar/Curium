@@ -766,6 +766,22 @@ public class StudentService {
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
 			
+			//code for otherfee
+			List<Otherreceiptinfo> orinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("otherreceiptinfo",orinfo);
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			long othertotalSum = 0l;
+			for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+				othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+			}
+			long othertotalFeesAmount = 0l;
+			long othertotalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				othertotalFeesAmount = othertotalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+				othertotalFeesConcession = othertotalFeesConcession+studentotherfeesstructureSingle.getConcession();
+			}
+			//code for otherfee
+			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
 			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
@@ -814,6 +830,14 @@ public class StudentService {
 				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
 				httpSession.setAttribute("totalfineamount", totalFineAmount);
 				httpSession.setAttribute("totalmiscamount", totalMiscAmount);
+				
+				//other fee
+				httpSession.setAttribute("otherfeesstructure", otherfeesstructure);
+				httpSession.setAttribute("othersumoffees", othertotalSum);
+				httpSession.setAttribute("otherdueamount", othertotalFeesAmount-othertotalSum);
+				httpSession.setAttribute("othertotalfees", othertotalFeesAmount);
+				httpSession.setAttribute("othertotalfeesconcession", othertotalFeesConcession);
+				//other fee
 				
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);

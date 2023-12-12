@@ -341,6 +341,16 @@
                     navigation: true,
                     active: false,
                     autoHeight: false});
+                $("#accordion4").accordion({
+                    collapsible: true,
+                    navigation: true,
+                    active: false,
+                    autoHeight: false});
+                $("#accordion5").accordion({
+                    collapsible: true,
+                    navigation: true,
+                    active: false,
+                    autoHeight: false});
                 /*$("#set")
                 .button()
                 .click(function() {
@@ -1141,6 +1151,128 @@ for(Cookie cookie : cookies){
                 </div>
 
 
+
+
+
+
+            </div>
+            <div id="accordion5" style="width: 100%;height: 100%">
+
+                <h3><a href="#">Other Fees Details</a></h3>
+                
+                <div>
+					<div align="center">
+					<h class="dataTextFees">Total fees : Rs.  ${othertotalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${othersumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Due Amount : </h>
+                <h class="dataTextDueFees"> Rs.  ${otherdueamount}</h>
+                </div>
+                    <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            
+                            <th title="click to sort" class="headerText">Date of fees</th>
+                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">View Details</th>
+                             
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${otherreceiptinfo}" var="otherreceiptinfo">
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                
+                                <td  class="dataText"><c:out value="${otherreceiptinfo.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${otherreceiptinfo.receiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${otherreceiptinfo.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/roshan/FeesCollection/viewOtherFeesDetails?id=<c:out value='${otherreceiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                 
+
+                            </tr>
+                        </c:forEach>
+                        
+                        
+                    </tbody>
+                   
+                </table>
+                </div>
+            </div>
+            
+            <div id="accordion4" style="width: 100%;height: 100%">
+
+                <h3><a href="#">Other Fees Structure</a></h3>
+                
+                <div>
+					<div align="center">
+				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total fees : Rs.  ${othertotalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${othersumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Due Amount : </h>
+                <h class="dataTextDueFees"> Rs.  ${otherdueamount}</h>
+                </div>
+                    <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            
+                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText">Fees Category</th>
+                            <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Installments&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Due Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession&nbsp;</th>
+                            <th title="click to sort" class="headerText">Waive Off&nbsp;</th>
+                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText"></th>
+                             
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${otherfeesstructure}" var="otherfeesstructure">
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                
+                              	<td class="dataText"></td>
+                               	<td class="dataText"></td>
+                                <td class="dataText"></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.otherfeescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.otherfeescategory.amount}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.totalinstallment}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.feespaid}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.feesamount-otherfeesstructure.feespaid-otherfeesstructure.concession-otherfeesstructure.waiveoff}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.concession}"/></td>
+                                <td class="dataText"><c:out value="${otherfeesstructure.waiveoff}"/></td>
+                            </tr>
+                        </c:forEach>
+                        
+                        
+                    </tbody>
+                   
+                </table>
+				
+                    
+
+                </div>
+
+
+
+
+
+                
 
 
 
