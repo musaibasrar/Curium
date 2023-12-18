@@ -1619,7 +1619,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
-											<option value="sbi">SBI Bank</option>
+											<option value="hdfc">HDFC Bank</option>
 								</select>
 							
 							</label>
@@ -1665,7 +1665,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
-											<option value="sbi">SBI Bank</option>
+											<option value="hdfc">HDFC Bank</option>
 								</select>
 							
 							</label>

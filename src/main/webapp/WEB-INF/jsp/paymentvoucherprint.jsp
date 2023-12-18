@@ -267,6 +267,9 @@
                                 <c:when test="${adminexpenses.paymenttype=='Cash'}">
                                     By Cash
                                 </c:when>
+                                <c:when test="${adminexpenses.paymenttype=='Bank Transfer'}">
+                                    By Bank Transfer, Transaction # <c:out value="${adminexpenses.chequeno}" />
+                                </c:when>
                                 <c:otherwise>
                                     By Cheque # <c:out value="${adminexpenses.chequeno}" />
                                 </c:otherwise>
