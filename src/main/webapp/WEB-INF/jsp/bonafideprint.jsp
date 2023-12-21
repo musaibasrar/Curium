@@ -252,7 +252,7 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					 He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+					 He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<c:set var="splt" value="${fn:split(studentdetailsbonafide.student.classstudying,'--')}"/>
 					<c:out value="${splt[0]}" />

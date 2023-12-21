@@ -431,4 +431,10 @@ public class JspController {
 	public String getDashboardLoader() {
 		return "dashboardloader";
 	}
+	
+	@GetMapping("/studentarticlecertificate")
+	public String getStudentArticleCertificate() {
+		return "studentarticlecertificate";
+	}
+	
 }
