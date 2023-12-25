@@ -82,7 +82,11 @@ public class DocumentService {
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
-		
+		String Scholarno = DataUtil.emptyString(request.getParameter("scholar"));
+		String Remarks = DataUtil.emptyString(request.getParameter("remarks"));
+		String Workingdays = DataUtil.emptyString(request.getParameter("Workingdays"));
+		String Workingdayspresent = DataUtil.emptyString(request.getParameter("Workingdayspresent"));
+		String withresult = DataUtil.emptyString(request.getParameter("withresult"));
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
@@ -95,6 +99,25 @@ public class DocumentService {
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
+				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				 String aadhar=parents.getStudent().getDisabilitychild();
+				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 char[] arr=aadhar.toCharArray();
+				 
+				 request.setAttribute("arr", arr);
+				 request.setAttribute("dateinword", dateinword);
+				 request.setAttribute("studentdetails", parents);
+				 request.setAttribute("tcdetails", tc);
+				 request.setAttribute("tcdate", DateUtil.dateParserddMMYYYY(tc.getDateofissues()));
+				 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
+				 request.setAttribute("dist", dist);
+				 request.setAttribute("medium", medium);
+				 request.setAttribute("Scholarno", Scholarno);
+				 request.setAttribute("Remarks", Remarks);
+				 request.setAttribute("Workingdays", Workingdays);
+				 request.setAttribute("Workingdayspresent", Workingdayspresent);
+				 request.setAttribute("withresult", withresult);
 				 return "studentexists";
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
@@ -116,6 +139,11 @@ public class DocumentService {
 			 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
 			 request.setAttribute("dist", dist);
 			 request.setAttribute("medium", medium);
+			 request.setAttribute("Scholarno", Scholarno);
+			 request.setAttribute("Remarks", Remarks);
+			 request.setAttribute("Workingdays", Workingdays);
+			 request.setAttribute("Workingdayspresent", Workingdayspresent);
+			 request.setAttribute("withresult", withresult);
 			 return "true";
 		 }
 		 return "false";
@@ -131,7 +159,8 @@ public class DocumentService {
 		String dist="Ratlam";
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
-		
+		String Scholarno = DataUtil.emptyString(request.getParameter("scholar"));
+		String Remarks = DataUtil.emptyString(request.getParameter("remarks"));
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
@@ -148,6 +177,8 @@ public class DocumentService {
 			 request.setAttribute("dist", dist);
 			 request.setAttribute("medium", medium);
 			 request.setAttribute("dateoftc", request.getParameter("tcdate"));
+			 request.setAttribute("Scholarno", Scholarno);
+			 request.setAttribute("Remarks", Remarks);
 			 return true;
 		 }
 		 return false;

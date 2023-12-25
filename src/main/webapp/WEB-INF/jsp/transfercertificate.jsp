@@ -511,7 +511,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td style="width: 45%">Student Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
+                   <!--  <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td> -->   
                         
                     </tr>
                     
@@ -578,6 +578,18 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td style="width: 45%">Reason For Leaving the school: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="reason" id="reason" style="width: 200px" /></td>
                     <td >Passed Examination Details:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="passedexam" id="passedexam" style="width: 200px" readonly/></td>    
+                    </tr>
+                    <tr>
+                    <td style="width: 45%">Scholar Number: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="scholar" id="scholar" style="width: 200px" /></td>
+                    <td >Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="remarks" id="remarks" style="width: 200px" /></td>    
+                    </tr>
+                     <tr>
+                    <td style="width: 45%">Total No. of Working days: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="Workingdays" id="Workingdays" style="width: 200px" /></td>
+                    <td >Total No. of Working days present:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="Workingdayspresent" id="Workingdayspresent" style="width: 200px" /></td>    
+                    </tr>
+                    <tr>
+                    <td style="width: 45%">School/Board Annual Examination<br> was taken with Result: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="withresult" id="withresult" style="width: 200px" /></td>
                     </tr>
                     <tr>
                     <td><br></td>
