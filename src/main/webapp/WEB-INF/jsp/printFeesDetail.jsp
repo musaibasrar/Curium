@@ -328,7 +328,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<%-- <tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -346,7 +346,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr> --%>
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -529,7 +529,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<%-- <tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -547,7 +547,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr> --%>
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>

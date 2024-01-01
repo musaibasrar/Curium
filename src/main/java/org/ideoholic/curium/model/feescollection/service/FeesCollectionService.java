@@ -379,8 +379,8 @@ public class FeesCollectionService {
 			if(createFeesCollection) {
 				getFeesDetails(sid,request.getParameter("academicyear"));
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
-				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), ""+studentName+"'s,totalling Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 12));
+				new SmsService(request, response).sendSMS(parent.getContactnumber(), ""+studentName+",totalling Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
