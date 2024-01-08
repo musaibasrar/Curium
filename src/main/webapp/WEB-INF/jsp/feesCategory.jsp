@@ -503,7 +503,16 @@ for(Cookie cookie : cookies){
 
 							<td width="8%">
 							 <label> 
-								<select name="fromclass" id="fromclass"
+							 
+							 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+							
+								<%-- <select name="fromclass" id="fromclass"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -513,7 +522,7 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:if>	
 										</c:forEach>
-								</select>
+								</select> --%>
 								
 							</label>
 							&nbsp;<label style="font-weight: bold;color:#325F85;display: none;">To Class &nbsp;</label>

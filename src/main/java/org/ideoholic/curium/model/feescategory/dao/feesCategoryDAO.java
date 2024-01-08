@@ -293,4 +293,24 @@ public class feesCategoryDAO {
         }
 	}
 
+	@SuppressWarnings("finally")
+	public boolean create(List<Feescategory> feesCategoryList) {
+		boolean result = false;
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            for (Feescategory feescategory : feesCategoryList) {
+            	session.save(feescategory);
+			}
+            transaction.commit();
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
+
 }
