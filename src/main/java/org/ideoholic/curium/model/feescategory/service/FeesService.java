@@ -71,11 +71,28 @@ public class FeesService {
 
         public void addFeesParticular() {
                 
-                Feescategory feescategory = new Feescategory();
-                
                 if(httpSession.getAttribute(BRANCHID)!=null){
-                        
-                        feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
+                	
+                	String[] classesFeesCat = request.getParameterValues("fromclass");
+                	List<Feescategory> feesCategoryList = new ArrayList<Feescategory>();
+                	
+                	for (String feeCat : classesFeesCat) {
+                		Feescategory feescategorynew = new Feescategory();
+                		feescategorynew.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
+                		feescategorynew.setParticularname(DataUtil.emptyString(feeCat)+"--");
+                		feescategorynew.setAmount(DataUtil.parseInt(request.getParameter("amount")));
+                		feescategorynew.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                		feescategorynew.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+                		feescategorynew.setAcademicyear(DataUtil.emptyString(request.getParameter("categoryyear")));
+                        if(!feescategorynew.getFeescategoryname().equalsIgnoreCase("") && !feescategorynew.getParticularname().equalsIgnoreCase("") && feescategorynew.getAmount() != 0 ){
+                        	feesCategoryList.add(feescategorynew);
+                        }
+                		}
+                	boolean result =  new feesCategoryDAO().create(feesCategoryList);
+                	
+                        /*
+                          Feescategory feescategory = new Feescategory();
+                          feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
                         if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
                                 feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"--");
                         }else{
@@ -88,7 +105,7 @@ public class FeesService {
                         feescategory.setAcademicyear(DataUtil.emptyString(request.getParameter("categoryyear")));
                         if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
                                 feescategory =  new feesCategoryDAO().create(feescategory);
-                        }
+                        }*/
                 }
         }
 
