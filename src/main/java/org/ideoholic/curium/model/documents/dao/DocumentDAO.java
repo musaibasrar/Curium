@@ -2,12 +2,11 @@ package org.ideoholic.curium.model.documents.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class DocumentDAO {
 	Session session = null;
