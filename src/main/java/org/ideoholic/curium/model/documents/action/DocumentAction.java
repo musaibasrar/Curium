@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -140,5 +142,32 @@ public class DocumentAction {
 	public String multiClassSearchPendingAdmissoinReport() {
 		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
 		return "studentspendingadmissionreports";
+	}
+	
+	@GetMapping("/printStudyCertificate")
+	public String printStudyCertificate() {
+		return "studycertprint";
+	}
+	
+	@GetMapping("/studentsDetailsStudyCertificate")
+	public String studentsDetailsStudyCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsdetailsstudycertificate";
+	}
+	
+	@PostMapping("/searchStudentsForStudyCertificate")
+	public String searchStudentsForStudyCertificate() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentsdetailsstudycertificate";
+	}
+
+	@PostMapping("/GenerateStudyCertificate")
+	public String generateStudyCertificate() {
+		String result = new DocumentService(request, response).generateStudyCertificate();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
 	}
 }
