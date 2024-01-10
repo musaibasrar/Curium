@@ -76,7 +76,7 @@ public class AppointmentAction {
 	}
 
 	private String appointmentReport() {
-		new StudentService(request, response).viewAllStudentsList();
+		//new StudentService(request, response).viewAllStudentsList();
 		return "appointmentsreport.jsp";
 	}
 

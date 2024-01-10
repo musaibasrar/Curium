@@ -129,7 +129,8 @@ public class QueryService {
 				List<ParentQuery> list = new QueryDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new QueryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				//int noOfRecords = new QueryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				int noOfRecords = 5000;
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("queryList", list);
 				request.setAttribute("noOfPages", noOfPages);

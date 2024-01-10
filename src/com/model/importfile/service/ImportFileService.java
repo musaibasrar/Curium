@@ -116,18 +116,25 @@ public class ImportFileService {
 							student.setName("");
 						}
 						
-						String classStudying = null;
 						Cell cell2 = row.getCell(2);
 						if(cell2!=null) {
-							classStudying = row.getCell(2).getStringCellValue();
+							student.setGender(row.getCell(2).getStringCellValue());
+						}else {
+							student.setGender("");
+						}
+						
+						String classStudying = null;
+						Cell cell3 = row.getCell(3);
+						if(cell3!=null) {
+							classStudying = row.getCell(3).getStringCellValue();
 						}else {
 							classStudying = "";
 						}
 						
-						Cell cell3 = row.getCell(3);
+						Cell cell4 = row.getCell(4);
 						String sec = null;
-						if(cell3!=null) {
-							sec = row.getCell(3).getStringCellValue();
+						if(cell4!=null) {
+							sec = row.getCell(4).getStringCellValue();
 						}
 						
 						
@@ -144,32 +151,32 @@ public class ImportFileService {
 						student.setStudentexternalid(DataUtil.generateString(5));
 						student.setLeftout(0);
 
-						Cell cell4 = row.getCell(4);
-						if(cell4!=null) {
-							parent.setFathersname(row.getCell(4).getStringCellValue());
+						Cell cell5 = row.getCell(5);
+						if(cell5!=null) {
+							parent.setFathersname(row.getCell(5).getStringCellValue());
 						}else {
 							parent.setFathersname("");
 						}
 						
-						Cell cell5 = row.getCell(5);
-						if(cell5!=null) {
-							parent.setMothersname(row.getCell(5).getStringCellValue());
+						Cell cell6 = row.getCell(6);
+						if(cell6!=null) {
+							parent.setMothersname(row.getCell(6).getStringCellValue());
 						}else {
 							parent.setMothersname("");
 						}
 						
 						
-						Cell cell6 = row.getCell(6);
-						if(cell6!=null) {
-							parent.setContactnumber(row.getCell(6).getStringCellValue());
+						Cell cell7 = row.getCell(7);
+						if(cell7!=null) {
+							parent.setContactnumber(row.getCell(7).getStringCellValue());
 						}else {
 							parent.setContactnumber("");
 						}
 						
 						
-						Cell cell7 = row.getCell(7);
-						if(cell7!=null) {
-							parent.setCocontactnumber(row.getCell(7).getStringCellValue());
+						Cell cell8 = row.getCell(8);
+						if(cell8!=null) {
+							parent.setCocontactnumber(row.getCell(8).getStringCellValue());
 						}else {
 							parent.setCocontactnumber("");
 						}

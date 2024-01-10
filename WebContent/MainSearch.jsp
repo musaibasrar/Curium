@@ -675,6 +675,24 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Gender &nbsp;</td>
+							<td ><label> <select name="gender" id="gender" class="dropdown" style="width: 240px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option >Male</option>
+										<option >Female</option>
+								</select>
+
+							</label></td>
+
+						</tr>
 
 
 						<tr>

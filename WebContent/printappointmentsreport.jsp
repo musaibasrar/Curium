@@ -249,6 +249,7 @@
                             <th class="datath">Appt. Date</th>
                             <th class="datath">Admn. No.</th>
                             <th class="datath">Student Name</th>
+                            <th class="datath">Gender</th>
                             <th class="datath">Class</th>
                             <th class="datath">Father Name</th>
                             <th class="datath">Status</th>
@@ -263,6 +264,7 @@
                                 <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><c:out value="${appointment.parent.student.admissionnumber}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><c:out value="${appointment.parent.student.name}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${appointment.parent.student.gender}"/></td>
                                 <td class="datatd" style="font-size: 9px;">
 		                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
 								    		${splt} 

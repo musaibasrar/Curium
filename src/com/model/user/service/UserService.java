@@ -733,6 +733,7 @@ public class UserService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 		String studentname= DataUtil.emptyString(request.getParameter("name"));
+		String gender= DataUtil.emptyString(request.getParameter("gender"));
 		
 		String addClass = request.getParameter("addclass");
 		String addSec = request.getParameter("addsec");
@@ -760,6 +761,10 @@ public class UserService {
 			
 			if(!studentname.equalsIgnoreCase("")){
 				querySub = " parents.Student.name like '%"+studentname+"%'" ;
+			}
+			
+			if(!gender.equalsIgnoreCase("")){
+				querySub = " parents.Student.gender like '%"+gender+"%'" ;
 			}
 			
 			if(!classStudying.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){

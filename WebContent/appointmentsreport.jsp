@@ -622,7 +622,7 @@ for(Cookie cookie : cookies){
 						
 							<td class="alignRight">Admission No.&nbsp;</td>
 							<td ><label>
-										<input  type="text" name="admnno" id="admnno"  class="myclass" style="width: 200px" /> 
+										<input  type="text" name="admnno" id="admnno"  class="myclass" style="width: 220px" /> 
 										<input name="studentId" type="hidden" id="studentId" value="" />
 										<input name="studentName" type="hidden" id="studentName" value="" />
 							</label></td>
@@ -634,6 +634,23 @@ for(Cookie cookie : cookies){
 										<option>Scheduled</option>
 										<option>Completed</option>
 										<option>Cancelled</option>
+								</select>
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						
+							<td class="alignRight">Gender&nbsp;</td>
+							<td ><label>
+										<select name="gender"
+									id="gender" class="dropdownlist" style="font-size: 14px;" required>
+										<option selected></option>
+										<option>Male</option>
+										<option>Female</option>
 								</select>
 							</label></td>
 							

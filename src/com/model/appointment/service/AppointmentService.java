@@ -127,12 +127,40 @@ public class AppointmentService {
 				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				//int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				int noOfRecords = 5000;
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("appointmentList", list);
 				request.setAttribute("noOfPages", noOfPages);
 				request.setAttribute("currentPage", page);
 				result = true;
+				
+				
+				/*
+				 * List<Object[]> listOfObjects = new
+				 * AppointmentDAO().readListOfAppointmentPagination((page - 1) * recordsPerPage,
+				 * recordsPerPage,
+				 * Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				 * 
+				 * List<Appointment> appointmentList = new ArrayList<Appointment>();
+				 * for(Object[] appointmentDetails: listOfObjects){ Appointment appointment =
+				 * new Appointment(); Parents parent = new Parents(); Student student = new
+				 * Student(); appointment.setId((Integer)appointmentDetails[0]);
+				 * appointment.setExternalid((String)appointmentDetails[1]);
+				 * appointment.setAppointmentdate((Date)appointmentDetails[2]);
+				 * appointment.setAppointmenttime((String)appointmentDetails[3]);
+				 * student.setName((String)appointmentDetails[4]);
+				 * student.setAdmissionnumber((String)appointmentDetails[5]);
+				 * student.setClassstudying((String)appointmentDetails[6]);
+				 * parent.setFathersname((String)appointmentDetails[7]);
+				 * parent.setMothersname((String)appointmentDetails[8]);
+				 * appointment.setStatus((String)appointmentDetails[9]);
+				 * 
+				 * parent.setStudent(student); appointment.setParent(parent);
+				 * appointmentList.add(appointment);
+				 * 
+				 * }
+				 */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -216,6 +244,7 @@ public class AppointmentService {
 		String studentId = request.getParameter("studentId");
 		String admnno = request.getParameter("admnno");
 		String studentName = request.getParameter("studentName");
+		String gender = request.getParameter("gender");
 		String queryMain = "from Appointment ap where ap.appointmentdate between '"+fromDate+"' and '"+toDate+"' ";
 		String subQuery = "";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
@@ -232,6 +261,13 @@ public class AppointmentService {
 			httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+studentName);
 		}else {
 			httpSession.setAttribute("studentselected", "");
+		}
+		
+		if(!gender.isEmpty()) {
+			subQuery = subQuery + " and ap.parent.Student.gender = '"+gender+"'";
+			httpSession.setAttribute("genderselected", "Gender:&nbsp;"+gender);
+		}else {
+		httpSession.setAttribute("genderselected", "");
 		}
 		
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
@@ -309,7 +345,7 @@ public class AppointmentService {
 				Map<String, Object[]> data = new HashMap<String, Object[]>();
 				Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 				headerData.put("Header",
-						new Object[] { "Appt. UID", "Appt. No.", "Appointment Date", "Admission Number", "Student Name",
+						new Object[] { "Appt. UID", "Appt. No.", "Appointment Date", "Admission Number", "Student Name", "Gender",
 								"Class", "Father Name", "Status"});
 				int i = 1;
 				for (Appointment appointmentDetails : apptList) {
@@ -318,6 +354,7 @@ public class AppointmentService {
 									 DataUtil.emptyString(DateUtil.getStringDate(appointmentDetails.getAppointmentdate())),
 									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getAdmissionnumber()),
 									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getName()),
+									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getGender()),
 									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getClassstudying().replace("--", " ")),
 									 DataUtil.emptyString(appointmentDetails.getParent().getFathersname()),
 									 DataUtil.emptyString(appointmentDetails.getStatus()) });

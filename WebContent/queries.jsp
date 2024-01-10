@@ -613,6 +613,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Department</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Student Name</th>
+                            <th title="click to sort" class="headerText">Gender</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Father Name</th>
                             <th title="click to sort" class="headerText">Mother Name</th>
@@ -632,6 +633,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${query.department.departmentname}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.admissionnumber}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.name}"/>
+                                <td class="dataText"><c:out value="${query.parent.student.gender}"/>
 	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
                                 </td>
                                 <td class="dataText">

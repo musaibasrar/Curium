@@ -107,7 +107,7 @@ public class AppointmentDAO {
 				// HibernateUtil.getSessionFactory().openCurrentSession();
 				transaction = session.beginTransaction();
 
-				results = (List<Appointment>) session.createQuery("From Appointment where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+				results = (List<Appointment>) session.createSQLQuery("select count(*) From Appointment where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
 				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
@@ -352,5 +352,31 @@ public class AppointmentDAO {
 	        }
 	        return results;
 }
+
+
+		public List<Object[]> readListOfAppointmentPagination(int offset,
+				int noOfRecords, int branchId) {
+			
+			List<Object[]> results = new ArrayList<Object[]>();
+
+			try {
+				
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("select a.id, a.externalid, a.appointmentdate, a.appointmenttime, s.name,s.admissionnumber, s.classstudying, f.fathersname, f.mothersname,a.status from Appointment a JOIN Student s ON a.parent.Student.sid = s.sid JOIN Parents f ON f.Student.sid = a.parent.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by a.id DESC").setCacheable(true).setCacheRegion("commonregion");
+				query.setFirstResult(offset);
+				query.setMaxResults(noOfRecords);
+				results = query.getResultList();
+				transaction.commit();
+				
+
+			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+		}
 
 }
