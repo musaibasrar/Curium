@@ -9,8 +9,11 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
+import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.marksdetails.dto.MarksGrade;
+import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.util.HibernateUtil;
 
 public class MarksDetailsDAO {
@@ -170,8 +173,121 @@ public class MarksDetailsDAO {
 			}
 			
 		}
+
+		public List<MarksGrade> readMarksGrade(int branchid) {
+			List<MarksGrade> results = new ArrayList<MarksGrade>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From MarksGrade where branchid = "+branchid+"");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+		}
 	
-	
-	
+		public boolean saveMarks(List<ExamRank> examRankList) {
+			boolean result = false;		
+			
+			try{
+				transaction = session.beginTransaction();
+				for (ExamRank examrank : examRankList) {
+					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear="+examrank.getAcademicyear()+" and branchid = "+examrank.getBranchid()+"");
+					ExamRank results = (ExamRank) query.uniqueResult();
+					if(results==null) {
+						session.save(examrank);	
+					}else {
+						Query queryUpdate = session.createSQLQuery("update ExamRank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
+						queryUpdate.executeUpdate();
+					}
+					
+				}
+	        	result = true;
+				transaction.commit();
+				
+			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} 
+			finally {
+					HibernateUtil.closeSession();
+				return result;
+			}
+		}
+
+		public ExamRank getExamRank(int sid, Integer exid, String currentAcademicYear, int branchid) {
+			ExamRank ex= new ExamRank();
+			try {
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From ExamRank where sid="+sid+" and examid="+exid+" and academicyear='"+currentAcademicYear+"' and branchid="+branchid+"");
+				ex = (ExamRank) query.uniqueResult(); 
+				transaction.commit();
+			} catch (Exception e) { transaction.rollback(); logger.error(e);
+				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+			return ex;
+		}
+		public List<SubjectGrade> readSubjectGrade(int branchid) {
+			List<SubjectGrade> results = new ArrayList<SubjectGrade>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From SubjectGrade where branchid = "+branchid+"");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+		}
+
+		public List<ExamRank> getListExamRank(List<Integer> studentsIds, Integer exid, String currentAcademicYear, int branchId) {
+			List<ExamRank> exmaRankList = new  ArrayList<ExamRank>();
+			try {
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From ExamRank where examid="+exid+" and academicyear='"+currentAcademicYear+"' and branchid="+branchId+" and sid IN (:ids)");
+				query.setParameterList("ids", studentsIds);
+				exmaRankList = query.getResultList();
+				transaction.commit();
+			} catch (Exception e) { transaction.rollback(); logger.error(e);
+				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+			return exmaRankList;
+			
+		}
+
+		public boolean updateExamRank(List<ExamRank> listExamRank) {
+			boolean result = false;		
+			
+			try{
+				transaction = session.beginTransaction();
+				for (ExamRank examrank : listExamRank) {
+						Query queryUpdate = session.createSQLQuery("update ExamRank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
+						queryUpdate.executeUpdate();
+				}
+	        	result = true;
+				transaction.commit();
+				
+			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} 
+			finally {
+					HibernateUtil.closeSession();
+				return result;
+			}
+		}
 	
 }

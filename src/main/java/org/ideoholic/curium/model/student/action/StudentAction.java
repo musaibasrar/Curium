@@ -75,13 +75,13 @@ public class StudentAction {
 			return "bonafidefailure";
 		}
 	}
-
+		
 	@PostMapping("/searchStudentsForBonafide")
 	public String searchStudentsForBonafide() {
 		new StampFeesService(request, response).advanceSearch();
 		return "studentsdetailsbonafide";
 	}
-
+	
 	@GetMapping("/searchForStudents")
 	public String searchForStudents() {
 		new StampFeesService(request, response).advanceSearch();

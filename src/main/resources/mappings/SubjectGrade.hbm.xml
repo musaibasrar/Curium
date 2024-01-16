@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="org.ideoholic.curium.model.marksdetails.dto.SubjectGrade" table="subjectgrade">
+ <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="minmarks" type="int">
+            <column name="minmarks" />
+        </property>
+        <property name="maxmarks" type="int">
+            <column name="maxmarks" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="status" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        </class>
+</hibernate-mapping>

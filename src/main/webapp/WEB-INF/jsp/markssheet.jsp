@@ -322,7 +322,7 @@ for(Cookie cookie : cookies){
 	                                	<tr style="border: 1px solid black;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}(${dateParts[1]})</td>
+	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-(${dateParts[2]})-(${dateParts[1]})</td>
 	                                	</tr>
 	                                </c:forEach>
 	                                		<tr style="border-top: 1px solid black;">
@@ -339,9 +339,17 @@ for(Cookie cookie : cookies){
                             					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
 	                                		</tr>	
 	                                		<tr style="border: 1px solid black;">
+                            					<td style="border: 1px solid black;text-align: left;">Grade</td>
+                            					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
+	                                		</tr>  
+	                                		<tr style="border: 1px solid black;">
+                            					<td style="border: 1px solid black;text-align: left;">Rank</td>
+                            					<td style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>
+	                                		</tr> 
+	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
                             					<td style="border: 1px solid black;text-align: left;"></td>
-	                                		</tr>                                	
+	                                		</tr>                                                           	
 	                                	</table>
                                 </td>
                                </c:forEach>
