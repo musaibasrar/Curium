@@ -10,8 +10,8 @@
             <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-	 	<property name="hibernate.connection.password">7764</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/lilyrose</property>
+	 	<property name="hibernate.connection.password">mysql</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/abc</property>
 		<property name="hibernate.connection.username">root</property> 
 		
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
