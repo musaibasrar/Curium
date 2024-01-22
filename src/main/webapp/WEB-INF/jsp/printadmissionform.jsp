@@ -250,7 +250,7 @@ input {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -273,7 +273,7 @@ for(Cookie cookie : cookies){
 				style="page-break-inside: avoid; border-collapse: collapse; margin-left: auto; margin-right: auto;">
 
 				<tr style="border: 0px solid black;">
-					<td style="text-align: center; border: 0px solid black;"><img src="/alfalah/images/alfalah.jpg" width="72"
+					<td style="text-align: center; border: 0px solid black;"><img src="/abc/images/abc.jpg" width="72"
 						height="80" /><br/><label>Regn. No.</label></td>
 					<td style="text-align: center;border: 0px solid black;"><label class="dataTextBoldCenter"
 						style="text-transform: uppercase;">${branchname}</label><br>

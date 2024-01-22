@@ -130,9 +130,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/alfalah/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/abc/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -141,7 +141,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "/alfalah/FeesProcess/feesCollect"; 
+            	 //document.location.href = "/abc/FeesProcess/feesCollect"; 
              }
         </script>
     </head>
@@ -149,7 +149,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="/alfalah/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/abc/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

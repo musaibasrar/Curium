@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/alfalah/UserProcess/logout";
+                form1.action="/abc/UserProcess/logout";
                 form1.submit();
             }
 
@@ -160,7 +160,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -179,8 +179,8 @@ for(Cookie cookie : cookies){
                     <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/alfalah/images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="/alfalah/images/SMS.png" width="391" height="50" /></div></td>
+                               <td width="234" ><div align="center"><img src="/abc/images/logo.png" width="200" height="64" /></div></td> 
+                                <td width="700" ><div align="center"><img src="/abc/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
                             <tr>
@@ -188,15 +188,15 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="/alfalah/images/alfalahheader.png" /></td>  
+                                          	<td align="left"><img src="/abc/images/abcheader.png" /></td>  
                             				                           				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/alfalah/FeesProcess/feesCollectAllBranches"><img   src="/alfalah/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/abc/FeesProcess/feesCollectAllBranches"><img   src="/abc/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                                            <td width="40"><a target="mainFrame" href="/alfalah/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="/alfalah/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/abc/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="/abc/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/alfalah/UserProcess/logout"><img   src="/alfalah/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/abc/UserProcess/logout"><img   src="/abc/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>

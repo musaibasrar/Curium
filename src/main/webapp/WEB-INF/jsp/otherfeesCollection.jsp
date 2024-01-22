@@ -7,30 +7,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Other feescollection</title>
-<link rel="stylesheet" href="/alfalah/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alfalah/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/alfalah/css/datePicker/demos.css">
-        <script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -740,7 +740,7 @@
             	}
             	
             	var form1 = document.getElementById("form1");
-        		form1.action="/alfalah/FeesCollection/feesAddother?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.action="/abc/FeesCollection/feesAddother?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
         		form1.method = "POST";
         		form1.submit();
         		
@@ -748,7 +748,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/alfalah/FeesCollection/otherStampFees";
+        		form1.action="/abc/FeesCollection/otherStampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -843,7 +843,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
