@@ -34,6 +34,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -797,7 +799,19 @@ public class DocumentService {
 		
 		return characterPage;
 	}
-
 	
-	
+	 public String generateStudyCertificate() {
+			
+			String[] studentIds = request.getParameterValues("studentIDs");
+			String bonafidePage = null;
+			
+			if(studentIds!=null){
+				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				httpSession.setAttribute("studentdetailsbonafide", parents);
+				bonafidePage = "studycertificateprint";
+			}
+			
+			return bonafidePage;
+		}
 }
