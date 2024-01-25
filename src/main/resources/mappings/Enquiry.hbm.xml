@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.enquiry.dto.Enquiry" table="enquiry">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        
+         <property name="fathername" type="java.lang.String">
+            <column name="fathername" />
+        </property>
+         <property name="mothername" type="java.lang.String">
+            <column name="mothername" />
+        </property> 
+         <property name="admissionclass" type="java.lang.String">
+            <column name="admissionclass" />
+        </property> 
+         <property name="address" type="java.lang.String">
+            <column name="address" />
+        </property> 
+         <property name="mobileno" type="java.lang.String">
+            <column name="mobileno" />
+        </property> 
+         <property name="siblingstudy" type="java.lang.String">
+            <column name="siblingstudy" />
+        </property> 
+         <property name="lastschool" type="java.lang.String">
+            <column name="lastschool" />
+        </property> 
+        <property name="dateofbirth" type="date">
+            <column name="dateofbirth" length="10" />
+        </property>
+        
+          
+    </class>
+</hibernate-mapping>
