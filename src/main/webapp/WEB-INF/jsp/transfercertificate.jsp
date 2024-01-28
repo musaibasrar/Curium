@@ -265,7 +265,7 @@
         <script type="text/javascript">
             var students = [
             <c:forEach varStatus="status" items="${studentListtc}" var="parents">{
-                value:'<c:out default="0" value="${parents.student.admissionnumber}" />',
+                value:'<c:out default="0" value="${parents.student.name}" />',
                 admissiondate:'<c:out default="0" value="${parents.student.admissiondate}" />',
                 name:'<c:out default="0" value="${parents.student.name}" />',
                 fathername:'<c:out default="0" value="${parents.fathersname}" />',
@@ -312,7 +312,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
+                .append( "<a><b> " + item.value +" / "+item.classandsec+" / "+item.fathername+"</b> </a>" )
                 .appendTo( ul );
             };
             var addFeesButtonID="#addFees";
@@ -508,8 +508,8 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
+                    <td style="width: 45%">Student Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <!-- <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td> -->    
                         
                     </tr>
                     

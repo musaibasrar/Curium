@@ -83,7 +83,6 @@ public class DocumentService {
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		String bookno = DataUtil.emptyString(request.getParameter("bookno"));
-		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
@@ -106,16 +105,20 @@ public class DocumentService {
 		String datecert = DataUtil.emptyString(request.getParameter("datecert"));
 		String Remarks = DataUtil.emptyString(request.getParameter("Remarks"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
-		
+		int tcno = 348;
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
-		 
+		 Transfercertificate tcLastRow = new DocumentDAO().getTCLastRow();
+		 if(tcLastRow != null) {
+			tcno = tcLastRow.getTcid()+1;
+		 }
 		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
+			 
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
@@ -152,8 +155,15 @@ public class DocumentService {
 				 request.setAttribute("dateinword", dateinword);
 				 request.setAttribute("studentdetails", parents);
 				 request.setAttribute("tcdetails", tc);
+				 student.setSid(studentId);
+					new studentDetailsDAO().updateStudentDuplicate(student);
 				 return "studentexists";
 			 }else {
+				 	student.setReasonleaving(leavingReason);
+					student.setSid(studentId);
+					student.setNotcissued(1);
+					//+student.setNooftc(1);
+					new studentDetailsDAO().updateStudent(student);
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
 		 }
@@ -797,6 +807,17 @@ public class DocumentService {
 		
 		return characterPage;
 	}
+
+
+	public void viewTcDetail() {
+		List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+		List<Integer> sid = new ArrayList<Integer>(); 
+		for (Transfercertificate transfercertificate : tc) {
+			sid.add(transfercertificate.getSid());
+		}
+		List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+		request.setAttribute("studenttcissued", listofParents);
+				}
 
 	
 	

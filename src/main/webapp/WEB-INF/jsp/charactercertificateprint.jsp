@@ -155,12 +155,11 @@ for(Cookie cookie : cookies){
 				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	A SENIOR SECONDARY SCHOOL</h4>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	AFFILIATED TO CBSE,DELHI,AFF NO.330113</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARY HILL ROAD,GAYA - 823003(BIHAR)</h4>
+				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARI HILL ROAD,GAYA - 823001(BIHAR)</h4>
 				
 				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.0631-2226652,2220344&nbsp;&nbsp;&nbsp;
-				Fax:031-2221386&nbsp;&nbsp;&nbsp;
 				Mobile No. 8936846757</h6>
-			    <h6 style="margin-top:0px;">	Email: shatabdipublic@gmail.com</h6>
+			    <h6 style="margin-top:0px;">	Email: shatabdi.public@gmail.com</h6>
 				</td>
 			</tr>
 		

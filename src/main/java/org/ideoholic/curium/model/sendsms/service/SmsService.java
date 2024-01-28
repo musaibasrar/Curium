@@ -297,7 +297,7 @@ public class SmsService {
 			in.close();
 
 			// print result
-			logger.info(response.toString());
+			System.out.println(response.toString());
 		} else {
 			logger.info("POST request not worked");
 		}}}
