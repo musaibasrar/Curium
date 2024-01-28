@@ -196,7 +196,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/genius/UserProcess/dashBoard"><img
+								href="/genius/dashboardloader"><img
 									alt="Dash Board" src="/genius/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
