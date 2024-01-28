@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.user.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -99,9 +102,10 @@ public class UserAction {
 		}
 	}
 	
-	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
+	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
 		this.request = request;
 		this.response = response;
+		this.httpSession = httpSession;
 	}
 
 }
