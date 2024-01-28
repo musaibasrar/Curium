@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/akshara/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/akshara/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/akshara/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/akshara/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/children/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/children/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/children/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/children/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/children/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -59,7 +59,7 @@
         <script type="text/javascript">
              function dashboard(){
                 var form1=document.getElementById("form1");
-                form1.action="/akshara/UserProcess/dashBoard";
+                form1.action="/children/UserProcess/dashBoard";
                 form1.submit();
             }
         </script>
@@ -68,7 +68,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
+	response.sendRedirect("/children/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -86,7 +86,7 @@ for(Cookie cookie : cookies){
       <tr>
           <td height="5" align="center" valign="middle"><p class="style1">
                   <div id="loading">
-                  <img alt="" src="/akshara/images/loading.gif">
+                  <img alt="" src="/children/images/loading.gif">
                   </div>
         </td>
       </tr>
