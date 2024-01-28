@@ -122,12 +122,20 @@ for(Cookie cookie : cookies){
 			
 			
 			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
+			<td>
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 88px;" alt="logo" src="/alfarooq/images/alfarooq.png">
+			</td>
+				<td >
 					<br>
-					<h2>STUDY CERTIFICATE</h2>
-					<br>
+					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h3 style="margin-top:0px;">${branchaddress}<br>Contact:${branchcontact}</h3>
+					
 				</td>
 			</tr>
+			<tr><td></td><td>
+					<h2><u>STUDY CERTIFICATE</u></h2></td></tr>
+			</table>
+			<table align="center">
 			<tr>
 			<td></td>
 			
@@ -156,17 +164,26 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">Was a bonafide student of this institute/college during the year from &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to
-					<span class="rightside"style="font-weight: bold;text-transform: capitalize;width:130px;"> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>
+					<h3 style="font-weight: normal;">Son/Daughter of &nbsp;&nbsp;
+					<span  style="font-weight: bold;text-transform: capitalize;width:540px;"> <c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					&nbsp;&nbsp;Was a bonafide
 					</h3>
 				</td>
 			</tr>
 			<tr>
 			
 				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;"> student of this institute/college during the year from &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:130px;"> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					studying</h3>
+				</td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">
-					studying from<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
+					 from<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
 					</h3>
 				</td>
@@ -207,7 +224,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; </span>
+					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; Aland</span>
 					<span style="font-weight: bold;text-transform: capitalize;width:400px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
 					</h3>
 				</td>
