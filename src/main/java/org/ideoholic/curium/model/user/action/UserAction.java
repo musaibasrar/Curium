@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.user.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,6 +23,8 @@ public class UserAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -29,8 +33,18 @@ public class UserAction {
 
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
+		
 		new UserService(request, response).searchByDate();
-		return "feesCollectionDetails";
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetails";
+		} else {
+			return "feesCollectionDetails";
+		}
 	}
 
 	@PostMapping("/advanceSearchByParents")
@@ -99,9 +113,10 @@ public class UserAction {
 		}
 	}
 	
-	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
+	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
 		this.request = request;
 		this.response = response;
+		this.httpSession = httpSession;
 	}
 
 }
