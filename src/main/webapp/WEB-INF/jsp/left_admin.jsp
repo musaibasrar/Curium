@@ -604,6 +604,16 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleangel/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleangel/DocumentsProcess/studentsDetailsConsellingCertificate" style="font-size: 12px;">Study Certificate (Counselling)</a>
+            			</td>
+            		</tr>
+            		<tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/littleangel/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
