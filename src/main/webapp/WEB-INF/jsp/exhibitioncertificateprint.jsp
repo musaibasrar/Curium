@@ -146,6 +146,9 @@ span{
 
 
 </style>
+<style type="text/css">
+
+</style>
 	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title> Certificate</title>
@@ -166,9 +169,9 @@ for(Cookie cookie : cookies){
 }
 }
 %> --%>
-<body style="text-align: center" class="bodymargin">
+<body style="text-align: center" class="bodymargin" onload="window.print();">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="get" action="/roshan/exhibitioncertificateprint" class="bodymargin">
+	<form method="post" class="bodymargin">
 		<br>
 		<div align="center" style="height:650px; width:700px; border:4px dotted red;">
 		
@@ -292,8 +295,7 @@ for(Cookie cookie : cookies){
 		</TABLE>
 		
 		</div>
-		<a>
-                            <button type="submit">Print</button>  </a>   
+                              
 	</form>
 </body>
 </html>

@@ -3,7 +3,6 @@ package org.ideoholic.curium.model.enquiry.dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;

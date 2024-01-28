@@ -4,12 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
 
 public class EnquiryService {
 	private HttpServletRequest request;
@@ -29,14 +25,14 @@ public class EnquiryService {
 	public void getCertificate() {
 		
 		
-	    String name= request.getParameter("subject");		
+	    String name= request.getParameter("name");		
 	    String place= request.getParameter("place");	
 	    String mobile= request.getParameter("mobile");	
 	    String date= request.getParameter("date");
-	    request.setAttribute("name", name);
-		 request.setAttribute("place", place);
-		 request.setAttribute("mobile", mobile);
-		 request.setAttribute("date", date);
+	    httpSession.setAttribute("name", name);
+	    httpSession.setAttribute("place", place);
+	    httpSession.setAttribute("mobile", mobile);
+	    httpSession.setAttribute("date", date);
 
 	    Enquiry enquiry = new Enquiry();
         

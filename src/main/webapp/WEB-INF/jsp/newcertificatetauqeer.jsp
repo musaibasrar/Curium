@@ -1,5 +1,5 @@
 <%-- 
-    Document   : sendemail
+    Document   : new certificate
 --%>
 
 
@@ -310,7 +310,7 @@
 	
 	</script>
 </head>
-  <%
+  <%-- <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -325,7 +325,7 @@ for(Cookie cookie : cookies){
 	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
 }
 }
-%>
+%> --%>
 <body>
 	<form method="post"  id="form1">
 	<%
@@ -355,7 +355,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<td style="font-weight: bold">Name &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="subject"
+							<td style="font-weight: bold"><label> <input  name="name"
 											type="text" class="textField" id="subject" 
 											/>
 							</label></td>
@@ -445,7 +445,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 						</tr>
-						 -->
+						 
 						<tr>
 						
 						<td style="font-weight: bold">Date &nbsp;</td>
@@ -454,7 +454,7 @@ for(Cookie cookie : cookies){
 											/>
 							</label></td>
 							
-						</tr>
+						</tr>-->
 						
 						<tr>
 							<td><br /></td>
@@ -503,5 +503,4 @@ for(Cookie cookie : cookies){
 						
 </body>
 </html>
-
 
