@@ -436,4 +436,9 @@ public class JspController {
 	public String getStudentDetailsOtherFeesstructureAdmin() {
 		return "student_details_other_feesstructure_admin";
 	}
+	
+	@GetMapping("/feesCollectionDetailsAdmin")
+	public String getFeesCollectionDetailsAdmin() {
+		return "feesCollectionDetailsAdmin";
+	}
 }

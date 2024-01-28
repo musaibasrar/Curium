@@ -327,7 +327,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alfalah/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/alfalah/feesCollectionDetailsAdmin" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
