@@ -50,5 +50,8 @@
 		<property name="voucherno" type="string">
  			<column name="voucherno" length="200"/>
 		</property>
+		<property name="fundsource" type="int">
+ 			<column name="fundsource" />
+		</property>
     </class>
 </hibernate-mapping>

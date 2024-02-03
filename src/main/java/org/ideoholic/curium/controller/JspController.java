@@ -422,4 +422,9 @@ public class JspController {
 		return "incomestatementprint";
 	}
 	
+	@GetMapping("/incomevsexpense")
+	public String incomevsExpense() {
+		return "incomevsexpense";
+	}
+	
 }

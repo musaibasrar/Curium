@@ -39,7 +39,7 @@ public class feesCollectionDAO {
 	@SuppressWarnings("finally")
 	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, List<VoucherEntrytransactions> transactionsList, List<String> updateDrAccountList,
 			List<String> updateCrAccountList, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
-				int[] transactionsId = new int[3];
+				int[] transactionsId = new int[transactionsList.size()];
 				int i = 0;
 		boolean result = false;
 		try {
@@ -65,7 +65,7 @@ public class feesCollectionDAO {
 			 	
 			 	receiptInfo.setReceiptvoucher(transactionsId[0]);
 			 	receiptInfo.setJournalvoucher(transactionsId[1]);
-			 	receiptInfo.setMisc(Integer.toUnsignedLong(transactionsId[2]));
+			 	receiptInfo.setMisc(Integer.toUnsignedLong(transactionsId[transactionsList.size()-1]));
 				session.save(receiptInfo);
 			 	
 			 	for (String updateCrAccount : updateCrAccountList) {
@@ -387,7 +387,7 @@ public class feesCollectionDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("SELECT s.sid,s.name,s.classstudying,MAX(fc.date) AS last_payment_date,DATEDIFF(CURRENT_DATE, MAX(fc.date)) AS days_since_last_payment FROM Student s LEFT JOIN Feescollection fc ON s.sid = fc.sid WHERE s.archive = 0 AND s.branchid = 2 GROUP BY s.sid, s.name, s.classstudying ORDER BY days_since_last_payment DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("SELECT s.sid,s.name,s.classstudying,MAX(fc.date) AS last_payment_date,DATEDIFF(CURRENT_DATE, MAX(fc.date)) AS days_since_last_payment FROM Student s LEFT JOIN Feescollection fc ON s.sid = fc.sid WHERE s.archive = 0 AND s.branchid = '"+branchId+"' GROUP BY s.sid, s.name, s.classstudying ORDER BY days_since_last_payment DESC").setCacheable(true).setCacheRegion("commonregion");
 			results = query.list();
 			transaction.commit();
 

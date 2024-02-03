@@ -598,7 +598,7 @@ for(Cookie cookie : cookies){
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
 						<td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                        		<input name="receiptvoucherno" type="text" class="textField" size="25"/> </td>			
+                        		<input name="receiptvoucherno" type="text" class="textField" size="25"/> </td>	
                     </tr>
                     <tr>
                     	<td>
@@ -785,6 +785,19 @@ for(Cookie cookie : cookies){
 									required/> </td>
                         <td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
                         		<input name="paymentvoucherno" type="text" class="textField" size="25"/> </td>
+                        		
+                        <td ><label style="font-weight: bold;">Fund Source:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label><select name="paymentfundsource"
+									id="paymentfundsource" style="width: 186px;border-radius: 4px;background: white;height: 22px;">
+										<option selected></option>
+										<c:forEach items="${feescategory}" var="feescategorylist">
+												<option value="${feescategorylist.idfeescategory}">
+													<c:out value="${feescategorylist.feescategoryname}" />
+												</option>
+										</c:forEach>
+								</select>
+
+							</label>
+						</td>	
                     </tr>
                     <tr>
                     	<td>

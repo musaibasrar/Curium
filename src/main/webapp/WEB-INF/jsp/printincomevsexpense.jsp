@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print General Ledger Report</title>
+<title>Print Income Expense Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -233,10 +233,9 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">General Ledger Report</label><br>
-				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
-				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Ledger Name: ${ledgername}</label>
+				<label class="addressLineTwo">${branchaddress}</label><br>
+				<label class="addressLineTwo">Income V/s Expense Report</label><br>
+				<label class="addressLineTwo">From: ${fromdate}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todate}</label><br>
 				</td>
 			</tr>
 	</table>
@@ -253,50 +252,35 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No</th>
-						<th class="datath">Vou #</th>
-						<th class="datath">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th class="datath">Account Description</th>
-						<th class="datath">Narration</th>
-						<th class="datath">Debits</th>
-						<th class="datath">Credits</th>
+						<th class="datath">Category</th>
+						<th class="datath">Income</th>
+						<th class="datath">Expense</th>
 				       	
  				 </tr>
  			 </thead>
  		 
 			<tbody>
-					<c:set var="crtotal" value="${0}" />
-					<c:set var="drtotal" value="${0}" />
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
-					
-					
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
+			<fmt:setLocale value="en_IN" scope="session"/>
+					<c:set var="income" value="${0}" />
+					<c:set var="expense" value="${0}" />
+					<c:forEach items="${incomeexpensescategorytotal}" var="incomeexpensescategorytotal" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${ledgertransactions.key.transactionsid}" />
-							</td>
-							<td class="datatd"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
+							<td class="datatd"><c:out value="${incomeexpensescategorytotal.key}" /></td>
+							<c:set var="values" value="${incomeexpensescategorytotal.value}" />	
 							<td class="datatd">
-							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
-							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							 <td class="datatd"><c:out	value="${ledgertransactions.key.narration}" /></td>
-							<c:if test="${ledgername[1] == 'Dr'}">
-								<td class="datatd"></td>
-								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
-								<td class="datatdright">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.cramount}" />
-								</td>
-							</c:if>
-							<c:if test="${ledgername[1] == 'Cr'}">
-								<td class="datatdright">
-								<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.dramount}" />
-								</td>
-								<td class="datatd"></td>
-							</c:if>
+							<c:set var="income" value="${income + values[0]}" />
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${values[0]}" />
+							</td>
+							<td class="datatd">
+							<c:set var="expense" value="${expense + values[1]}" />
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${values[1]}" />
+							</td>
+
 						</tr>
-						
 					</c:forEach>
 			</tbody>
 				</table>
@@ -310,13 +294,13 @@
 							<td class="dataText"></td>
 							<td align="right" class="dataTextRight" >
 							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${drtotal}" />
+							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${income}" />
 							</label>
 							</td>
 							
 							<td align="right" style="width: 90px;" class="dataTextRight" >
 							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${crtotal}" />
+							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${expense}" />
 							</label>
 							</td>
 						</tr>
@@ -335,11 +319,11 @@
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
 							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
+                                <c:when test="${expense > income}">
+									<fmt:formatNumber type="currency"  value="${expense-income}" />                                    
                                 </c:when>
                                 <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
+                                   <fmt:formatNumber type="currency"  value="${income-expense}" />
                                 </c:otherwise>
                             </c:choose>
 							</b>
