@@ -481,10 +481,23 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
+                             <td width="25%"  class="alignLeft" height="50" >Gender
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.gender}" />
+                            </td>
+                            
+                        </tr>
+                        
+                        <tr>
                             <td width="25%"  class="alignLeft" height="50" >Contact Number
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.classstudying}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50">Qualification</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${student.accno}" />
                             </td>
                         </tr>
                         
@@ -493,10 +506,38 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.remarks}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Email
+                            <td width="25%"  class="alignLeft" height="50" >Area
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.bloodgroup}" />
+                                <c:out default="" value="${student.nationality}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Skill</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${student.subsequentprogress}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Languages Known
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.languagesstudied}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                        
+                             <td  width="25%"  class="alignLeft" height="50">Birth Year
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.urbanrural}" />
+                            </td>
+   
+   							<td  width="25%"  class="alignLeft" height="50">Created Date
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.createddate}" />
+                                
                             </td>
                         </tr>
                         
