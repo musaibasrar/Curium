@@ -648,4 +648,19 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDatesForFundSource(String fromDate,
+			String toDate, int fundSource, int branchId) {
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and fundsource ='"+fundSource+"' and vouchertype = 2 and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}		
+		return voucherEntrytransactions;
+	}
+
 }

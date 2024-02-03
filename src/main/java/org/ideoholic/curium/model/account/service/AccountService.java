@@ -15,11 +15,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +37,15 @@ import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -404,6 +412,7 @@ public class AccountService {
 		String crAmountPayment = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
 		String paymentDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
 		String paymentVoucherNo = DataUtil.emptyString(request.getParameter("paymentvoucherno"));
+		String paymentFundSource = DataUtil.emptyString(request.getParameter("paymentfundsource"));
 		String paymentNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
 		String paymentNarrationCategory = DataUtil.emptyString(request.getParameter("paymentnarrationcategory"));
 		
@@ -416,6 +425,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(paymentDate));
 		transactions.setVoucherno(paymentVoucherNo);
+		transactions.setFundsource(Integer.parseInt(paymentFundSource));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(paymentNarrationCategory+":"+paymentNarration);
 		transactions.setCancelvoucher("no");
@@ -2206,4 +2216,187 @@ public boolean getRPStatement() {
 		return true;
 	}
 
+
+	public void getIncomeExpenseCategory() {
+		
+		
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		
+		List<Feescategory> feecategoryList = new feesCategoryDAO().getfeecategoryofstudent(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Map<String, BigDecimal[]> incomeExpenseCategoryMap = new HashMap<>();
+		for (Feescategory feescat : feecategoryList) {
+			BigDecimal categoryIncomeTotal = new BigDecimal(0);
+			BigDecimal categoryExpenseTotal = new BigDecimal(0);
+			String maqamiIncome = getLedgerAccountId(feescat.getFeescategoryname()+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<VoucherEntrytransactions> incomeTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, Integer.parseInt(maqamiIncome), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			for (VoucherEntrytransactions listofTransactions : incomeTransactions) {
+				categoryIncomeTotal = categoryIncomeTotal.add(listofTransactions.getCramount()); 
+			}
+			
+			List<VoucherEntrytransactions> expenseTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDatesForFundSource(fromDate, toDate, feescat.getIdfeescategory(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			for (VoucherEntrytransactions listofTransactions : expenseTransactions) {
+				categoryExpenseTotal = categoryExpenseTotal.add(listofTransactions.getDramount()); 
+			}
+			
+			incomeExpenseCategoryMap.put(feescat.getFeescategoryname(), new BigDecimal[]{categoryIncomeTotal, categoryExpenseTotal});
+		}
+		request.setAttribute("incomeexpensescategorytotal", incomeExpenseCategoryMap);
+		request.setAttribute("fromdate", request.getParameter("fromdate"));
+		request.setAttribute("todate", request.getParameter("todate"));
+		
+	  }
+
+
+	public boolean getIncomeExpenseCategoryExport() {
+		boolean result=false;
+		
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		
+		List<Feescategory> feecategoryList = new feesCategoryDAO().getfeecategoryofstudent(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Map<String, BigDecimal[]> incomeExpenseCategoryMap = new HashMap<>();
+		for (Feescategory feescat : feecategoryList) {
+			BigDecimal categoryIncomeTotal = new BigDecimal(0);
+			BigDecimal categoryExpenseTotal = new BigDecimal(0);
+			String maqamiIncome = getLedgerAccountId(feescat.getFeescategoryname()+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<VoucherEntrytransactions> incomeTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, Integer.parseInt(maqamiIncome), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			for (VoucherEntrytransactions listofTransactions : incomeTransactions) {
+				categoryIncomeTotal = categoryIncomeTotal.add(listofTransactions.getCramount()); 
+			}
+			
+			List<VoucherEntrytransactions> expenseTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDatesForFundSource(fromDate, toDate, feescat.getIdfeescategory(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			for (VoucherEntrytransactions listofTransactions : expenseTransactions) {
+				categoryExpenseTotal = categoryExpenseTotal.add(listofTransactions.getDramount()); 
+			}
+			
+			incomeExpenseCategoryMap.put(feescat.getFeescategoryname(), new BigDecimal[]{categoryIncomeTotal, categoryExpenseTotal});
+		}
+		request.setAttribute("incomeexpensescategorytotal", incomeExpenseCategoryMap);
+		request.setAttribute("fromdate", request.getParameter("fromdate"));
+		request.setAttribute("todate", request.getParameter("todate"));
+		
+		try {
+			result = exportDataToExcel(incomeExpenseCategoryMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+	private boolean exportDataToExcel(Map<String, BigDecimal[]> incomeExpenseCategoryMap) {
+
+		boolean writeSucees = false;
+
+		try {
+			// Start creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("Income vs Expense");
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "Sl.No","Category","Income","Expense"});
+			int i = 1;
+			int slno = 1;
+			for (Entry<String, BigDecimal[]> entry : incomeExpenseCategoryMap.entrySet()) {
+	            
+				BigDecimal[] valuesIncomeExpense = entry.getValue();
+				data.put(Integer.toString(i),new Object[] {
+						slno,
+						entry.getKey(), 
+						valuesIncomeExpense[0].doubleValue(),
+						valuesIncomeExpense[1].doubleValue()});
+				i++;
+				slno++;
+				}
+				
+			
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 0;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			Set<String> keyset = data.keySet();
+			int rownum = 1;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+					else if (obj instanceof Long)
+						cell.setCellValue((Long) obj);
+					else if (obj instanceof Integer)
+						cell.setCellValue((Integer) obj);
+				}
+			}
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/incomevsexpensedetails.xlsx"));
+				workbook.write(out);
+				out.close();
+				writeSucees = true;
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return writeSucees;
+		// getFile(name, path);
+	}
+
+
+	public boolean downlaodIncomevsExpense() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/incomevsexpensedetails.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"incomevsexpensedetails.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
+	}
 }

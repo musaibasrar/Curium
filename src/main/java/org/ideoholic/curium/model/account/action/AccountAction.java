@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -194,6 +196,7 @@ public class AccountAction {
 	public String createVoucher() {
 
 		if(new AccountService(request, response).createVoucher()){
+			new FeesService(request, response).viewFees();
 			return "createvoucher";
 		}
 		return ERRORPAGE;
@@ -319,4 +322,34 @@ public class AccountAction {
 		new AccountService(request, response).getIncomeStatementPrint();
 		return "incomestatementprint";
 	}
+	
+	@PostMapping("/searchIncomeExpense")
+	public String searchIncomeExpense() {
+		new AccountService(request, response).getIncomeExpenseCategory();
+		return "incomevsexpense";
+	}
+	
+	@PostMapping("/exportDataForIncomeVsExpense")
+	public String exportDataForIncomeVsExpense() {
+		if(new AccountService(request, response).getIncomeExpenseCategoryExport()){
+			return "incomevsexpenseexportsuccess";
+		}else{
+			return "exportfailure";
+		}
+	}
+	
+	@PostMapping("/download")
+    private String download() {
+    	if (new AccountService(request, response).downlaodIncomevsExpense()) {
+			return "incomevsexpenseexportsuccess";
+		}
+		return "exportfailure";
+	}
+    
+	@PostMapping("/printIncomevsExpense")
+	private String printIncomevsExpense() {
+		new AccountService(request, response).getIncomeExpenseCategory();
+		return "printincomevsexpense";
+	}
+	
 }
