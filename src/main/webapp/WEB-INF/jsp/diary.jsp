@@ -133,6 +133,17 @@
 	font-weight: bold;
 }
 
+.alignCenter {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: center;
+	//vertical-align: middle;
+	font-weight: bold;
+}
+
 .alignRightHead {
 	font-family: Tahoma;
 	font-size: 12px;
@@ -333,7 +344,7 @@ for(Cookie cookie : cookies){
 
 
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table  border="0" align="center" id="table1">
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -341,8 +352,8 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Class&nbsp;</td>
-							<td ><label> <select name="addclass"
+							<td style="font-weight: bold">Class&nbsp;</td>
+							<td style="font-weight: bold" ><label> <select name="addclass"
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -370,8 +381,8 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td width="30%" class="alignRight">Subject &nbsp;</td>
-							<td width="12%" align="left"><label> <input  name="subject"
+						<td style="font-weight: bold">Subject &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="subject"
 											type="text" class="textField" id="subject" 
 											/>
 							</label></td>
@@ -384,30 +395,30 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebody"
+							<td style="font-weight: bold">Message* &nbsp;</td>
+							<td style="font-weight: bold"><label> <textarea  name="messagebody"
 											type="text" class="textField" id="messagebody" rows="6" cols="55"
 											></textarea>
 							</label></td>
 							
 						</tr>
 						
-					<tr>	<td width="30%" class="alignRight">Start Date &nbsp;</td>
-							<td ><label> <input name="startdate"
+					<tr>	<td style="font-weight: bold">Start Date &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="startdate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepicker1" size="36"
 									data-validate="validate(required)">
 							</label></td></tr>
-					<tr>	<td width="30%" class="alignRight">End Date &nbsp;</td>
-							<td ><label> <input name="enddate"
+					<tr>	<td style="font-weight: bold">End Date &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="enddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepicker2" size="36"
 									data-validate="validate(required)">
 							</label></td></tr>
-						<tr>	<td width="30%" class="alignRight">Create Date &nbsp;</td>
-							<td ><label> <input name="createddate"
+						<tr>	<td style="font-weight: bold">Create Date &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepicker3" size="36"
