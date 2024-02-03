@@ -412,7 +412,13 @@ $(function(){
              }
          });
 });
-         
+function viewStudentDiary(sid){
+    var form1=document.getElementById("form1");
+   form1.action="/roshan/DiaryProcess/ViewDiaryDetails?id="+sid+"";
+   form1.submit();
+   
+   //window.location.reload();
+}         
 
 </script>
 
@@ -438,7 +444,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1">
+	<form id="form1" method="post">
 
 	
 
@@ -456,7 +462,6 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Subject&nbsp;</th>
-						<th title="click to sort" class="headerText">Message&nbsp;</th>
 						<th title="click to sort" class="headerText">Start Date</th>
 						<th title="click to sort" class="headerText">End Date</th>
 						<th title="click to sort" class="headerText">Created Date</th>
@@ -473,9 +478,8 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${diary.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${diary.id}"/>" /></td>
-							<td class="dataText"><c:out value="${diary.classsec}" /></td>
+							<td class="dataText"><a class="dataText" style="cursor: pointer;" onclick="viewStudentDiary(${diary.id})"><c:out value="${diary.classsec}" /></a></td>
 							<td class="dataText"><c:out value="${diary.subject}" /></td>
-							<td class="dataText"><c:out value="${diary.message}" /></td>
 							<td class="dataText"><c:out value="${diary.startdate}" /></td>
 							<td class="dataText"><c:out value="${diary.enddate}" /></td>
 							<td class="dataText"><c:out value="${diary.createddate}" /></td>
