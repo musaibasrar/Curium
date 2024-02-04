@@ -682,6 +682,8 @@ for(Cookie cookie : cookies){
             								<option value="holiday">Holiday</option>
             								<option value="exams">Exams</option>
             								<option value="festival">Festival</option>
+            								<option value="scienceexhibition">Science Exhibition</option>
+            								<option value="feesreminder">Fees Reminder</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
@@ -726,9 +728,20 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="festivalvar4" name="festivalvar4" maxlength="30">
 								</div>
 								
-    							<div class="feesreminder box">
-    								<span style="font-size: 16px;">Dear Parents This is a gentle reminder that fees payment is due. </span>
+								<div class="scienceexhibition box">
+    								<span style="font-size: 16px;">Dear parents, you are cordially invited to Science Exhibition on <span style="font-weight: bold;color: red">Date & Time</span></span>
 								<br><br>
+								<label style="color: red;">Date & Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="scienceexhibitionvar1" name="scienceexhibitionvar1" maxlength="30">
+								<br><br>
+								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
+								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
+								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+								
+    							<div class="feesreminder box">
+    								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">End Date</span>.Please ignore if already paid.</span>
+								<br><br>
+								<label style="color: red;">End Date:&nbsp;&nbsp;</label><input type="text" id="feesremindervar1" name="feesremindervar1" maxlength="9">
 								<input type="hidden" id="feesremindervar1" name="feesremindervar1" maxlength="30">
 								<br><br>
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
