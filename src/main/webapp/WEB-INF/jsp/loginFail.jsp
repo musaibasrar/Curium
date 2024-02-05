@@ -123,8 +123,8 @@ form{
         <script type="text/javascript">
             var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';
-            
-            if(flag1){
+
+			if(flag1){
             	
             	if(type=='superadmin'){
                     window.open('/index_superadmin','_self');
@@ -132,15 +132,20 @@ form{
                     window.open('/lilyrose/index_admin','_self');
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('/index_reception',screen.width,screen.height);
-                }
-                else if(type=='staff'){
+                }else if(type=='staff'){
                 	window.open('/index','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/index_officeadmin','_self');
+                    window.open('/shatabdi/index_admin','_self');
+                }else if(type=='officeadmin'){
+                	window.open('/shatabdi/index_officeadmin','_self');
+                }else if(type=='marksentry'){
+                	window.open('/shatabdi/index_marksentry','_self');
+                }else if(type=='accountant'){
+                	window.open('/shatabdi/index_accountant','_self');
+                }else if(type=='clerk'){
+                	window.open('/shatabdi/index_clerk','_self');
+                }else if(type=='principal'){
+                	window.open('/shatabdi/index_principal','_self');
                 }
             }
             else if(!flag1){

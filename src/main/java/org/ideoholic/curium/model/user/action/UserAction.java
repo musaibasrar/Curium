@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/UserProcess")
@@ -33,7 +32,20 @@ public class UserAction {
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
 		new UserService(request, response).searchByDate();
-		return "feesCollectionDetails";
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetails";
+		} else {
+			return "feesCollectionDetails";
+		}
 	}
 
 	@PostMapping("/advanceSearchByParents")
