@@ -207,8 +207,8 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;"> 
-					caste is <span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.caste}" /></span>
-					as per his/her admission Register No. <span style="font-weight: bold;text-transform: capitalize;width:190px;"></span></h3>
+					caste is <span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.studentscaste}" /></span>
+					as per his/her admission register no. <span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span></h3>
 				</td>
 			</tr>
 			
