@@ -132,4 +132,45 @@ public class diaryDAO {
 		}	
 	}
 
+	public Diary getMessage(long id) {
+		Diary diary = new Diary();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Diary as diary where diary.id="
+							+ id);
+			diary = (Diary) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return diary;
+	}
+	/*public Diary getMessage(String id) {
+		Diary diary = new Diary();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Diary as diary where diary.id="
+							+ id);
+			diary = (Diary) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return diary;
+	}*/
+
 }
