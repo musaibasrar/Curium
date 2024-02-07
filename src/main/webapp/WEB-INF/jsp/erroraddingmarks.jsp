@@ -14,8 +14,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
+            @import "/shatabdi/css/dataTable/css/demo_page.css";
+            @import "/shatabdi/css/dataTable/css/jquery.dataTables.css";
         </style>
         <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.17.custom.css">
         <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">

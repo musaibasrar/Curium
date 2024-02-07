@@ -26,7 +26,6 @@
 <script src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
 <script src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/shatabdi/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
 <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
@@ -193,10 +192,6 @@
 </style>
 <script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 
-<script type="text/javascript">
-	document.getElementById("UpdateExecutive").style.display = 'none';
-</script>
-
 
 <script>
 
@@ -204,9 +199,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -215,10 +210,9 @@
 		$("#datepickeradmn").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickeradmn" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickeradmn" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(
 				function() {
 					$("#datepickeradmn").datepicker("option", "showAnim",
@@ -229,10 +223,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -241,10 +234,9 @@
 		$("#datepickerleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
@@ -308,8 +300,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/shatabdi/EmployeeProcess/viewAllEmployee"
-		id="form1" method="POST" enctype="multipart/form-data">
+	<form id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
 				<ul>
@@ -425,10 +416,9 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
 										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+									onchange="CalculateAge(this)" data-validate="validate(required)">
 							
 						<%-- 	<input name="dateofjoining"
 									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd-MM-yyyy"/>" 
@@ -548,11 +538,10 @@ for(Cookie cookie : cookies){
 							
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
-										<input name="joiningdate"
-									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
-									class="textField" id="datepickerCD" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+							
+							<input name="joiningdate"
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
+									class="textField" id="datepickerCD" size="30"></label>
 						<tr>
 
 							<td></td>
@@ -701,7 +690,7 @@ for(Cookie cookie : cookies){
 								<button id="set2" class="set">Update</button>
 
 							</td>
-							<td><button type="submit" id="cancel" class="cancel">Cancel</button></td>
+							<td><button id="cancel" class="cancel">Cancel</button></td>
 						</tr>
 
 
@@ -770,7 +759,7 @@ for(Cookie cookie : cookies){
 								<button id="set3" class="set">Update</button>
 
 							</td>
-							<td><button type="submit" id="cancel3" class="cancel">Cancel</button></td>
+							<td><button id="cancel3" class="cancel">Cancel</button></td>
 						</tr>
 
 
@@ -880,7 +869,7 @@ for(Cookie cookie : cookies){
 								<button id="set3" class="set">Update</button>
 
 							</td>
-							<td><button type="submit" id="cancel3" class="cancel">Cancel</button></td>
+							<td><button id="cancel3" class="cancel">Cancel</button></td>
 						</tr>
 
 
@@ -928,8 +917,8 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function cancel() {
 
-								var form1 = document.getElementById(form1);
-								form1.action = "/shatabdi/PersonalProcess/viewAll";
+								var form1 = document.getElementById("form1");
+								form1.action = "/shatabdi/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 

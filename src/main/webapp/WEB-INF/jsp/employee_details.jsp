@@ -317,7 +317,7 @@
                                 
                                 function Cancel(){
                                     var form1=document.getElementById("form1");
-                                    form1.action="/shatabdi/EmployeeProcess/viewAllEmployee";
+                                    form1.action="/shatabdi/EmployeeProcess/ViewAllEmployee";
                                     form1.submit();
                                 }
                             </script>
@@ -339,7 +339,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg">
+    <body>
         <form  method="post" id="form1">
 
             <table width="100%">
