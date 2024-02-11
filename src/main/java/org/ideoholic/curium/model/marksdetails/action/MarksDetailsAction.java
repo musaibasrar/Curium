@@ -77,7 +77,7 @@ public class MarksDetailsAction {
 	@GetMapping("/generateReportParent")
 	public String generateReportParent() {
 		if (new MarksDetailsService(request, response).generateReportParent()) {
-			return "markssheet";
+			return "markssheetparent";
 			// return "reportcardsaved";
 		} else {
 			return "error";

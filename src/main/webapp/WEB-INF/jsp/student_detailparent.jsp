@@ -7,8 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/demov2/css/bootstrap.min.css">
+    <script src="/demov2/js/jquery.min.js"></script>
+    <script src="/demov2/js/bootstrap.min.js"></script>
+    <script src="/demov2/js/popper.min.js"></script>
+        
 <style>
  .headerText {
 		background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -33,27 +36,20 @@
                 background-color: #E3EFFF;
 
             }
+            
+.mb-0{
+	margin-bottom: 0!important;
+	font-size:38px;
+}
+.studenthr{
+		border:1px solid rgb(0 0 0);
+}
 </style>
 </head>
 <body>
-   <section style="background-color: #eee;">
-  <div class="container py-5">
-<!-- navbar start-->
-    <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">User</a></li>
-            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-<!-- navbar end-->
+   <section style="background-color: #ffff;padding-left: 10px;">
 
 <!-- profile pic start-->
-    <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
@@ -73,11 +69,11 @@
 
 <!--End Parent Detail-->
       </div>
-      <div class="col-lg-8">
-       <h6>Student Detail &nbsp;&nbsp;&nbsp;UID: &nbsp;<c:out value="${student.studentexternalid}" /></h6>
+      <div class="col-lg-15">
+       <h1 align="center" style="color: #FF914D;font-weight:bold;">Student Detail &nbsp;&nbsp;&nbsp;UID: &nbsp;<c:out value="${student.studentexternalid}" /></h1>
                 <hr class="mt-0 mb-4">
         <div class="card mb-4">
-          <div class="card-body">
+          <div class="card-body" style="border: 2px solid rgb(0 0 0);">
             <div class="row">
             	
               <div class="col-sm-3">
@@ -93,7 +89,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.gender}" /></p>
               </div>
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">DOB</p>
@@ -108,7 +104,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.age}" /></p>
               </div>  
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Place of birth</p>
@@ -123,7 +119,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Studying in class </p>
@@ -142,7 +138,7 @@
 									</c:forEach></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Blood Group </p>
@@ -157,7 +153,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.nationality}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Religion </p>
@@ -172,7 +168,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.studentscastecertno}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Student Caste </p>
@@ -187,7 +183,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.socialcategory}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Belong to BPL </p>
@@ -207,7 +203,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"> <c:out default="" value="${student.bplcardno}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Bhagyalakshmi Bond No. </p>
@@ -222,7 +218,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.disabilitychild}" /></p>
               </div> 
             </div>
-	     <hr>
+	     <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Special Category </p>
@@ -237,7 +233,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.mothertongue}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Created Date </p>
@@ -252,7 +248,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.yearofadmission}" /></p>
               </div> 
             </div>
-	     <hr>
+	     <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Class Of Leaving </p>
@@ -267,7 +263,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"> <fmt:formatDate value="${student.dateleaving}" pattern="dd/MM/yyyy"/></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">RTE </p>
@@ -287,7 +283,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.remarks}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Reason For Leaving</p>
@@ -307,11 +303,11 @@
 </div>
 <!-- end student detail-->
         
-       <h6>Parent Detail</h6>
+       <h1 align="center" style="color: #FF914D;font-weight:bold;">Parent Detail</h1>
                 <hr class="mt-0 mb-4">
 
         <div class="card mb-4">
-          <div class="card-body">
+          <div class="card-body" style="border: 2px solid rgb(0 0 0);">
             <div class="row">
             	
               <div class="col-sm-3">
@@ -327,7 +323,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.mothersname}" /></p>
               </div>
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Father's Qualification</p>
@@ -342,7 +338,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.mothersqualification}" /></p>
               </div>  
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Father's Caste Certificate No.</p>
@@ -357,7 +353,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.motherscastecertno}" /></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Guardian's Name & Address </p>
@@ -372,7 +368,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.parentsannualincome}" /></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Contact Number </p>
@@ -387,7 +383,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.cocontactnumber}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Email </p>
@@ -404,7 +400,7 @@
 								value="${parents.noofdependents}" /></p>
               </div> 
             </div>
-             <hr>
+             <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Permanent Address </p>
@@ -419,7 +415,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${parents.addresstemporary}" /></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Number of Dependents </p>
@@ -439,11 +435,10 @@
 
 <!-- end student detail -->
 <!--previous school detai-->
-<h6>Previous School Detail</h6>
+	<h1 align="center" style="color: #FF914D;font-weight:bold;">Previous School Detail</h1>
                 <hr class="mt-0 mb-4">
-
         <div class="card mb-4">
-          <div class="card-body">
+          <div class="card-body" style="border: 2px solid rgb(0 0 0);">
             <div class="row">
             	
               <div class="col-sm-3">
@@ -460,7 +455,7 @@
               </div>
             </div>
             
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Previous Class Studied</p>
@@ -475,7 +470,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.schoollastattended}" /></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Languages Studied </p>
@@ -490,7 +485,7 @@
                 <p class="text-muted mb-0"style="font-weight:bold;"><c:out default="" value="${student.subsequentprogress}" /></p>
               </div> 
             </div>
-            <hr>
+            <hr class="studenthr">
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0"style="font-weight:bold;">Previous School Medium Of Instruction </p>
@@ -509,26 +504,7 @@
             
           </div>
         </div>
-<!--end previous school detail--> 
-<!--Bank detail--> 
-
-<!--end Bank detail-->
-<!--fees detail-->
-
-         
-
-<!--End fees detail-->
-        
-
-       
       </div>
-    </div>
-  </div>
 </section>
-
-    <!-- Add Bootstrap JS and Popper.js script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
