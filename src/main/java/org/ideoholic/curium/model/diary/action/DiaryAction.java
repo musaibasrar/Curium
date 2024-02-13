@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.diary.service.Diaryservice;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/DiaryProcess")
@@ -30,17 +32,22 @@ public class DiaryAction {
 	}
 	
 	@PostMapping("/addDiary")
-	public void addDiary() {
+	public String addDiary() {
 		new Diaryservice(request, response).addDiary();
-		
+		return "diarySaved";
+
 	}
 	
-	@GetMapping("/viewdiarystudent")
+	
+	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewdiarystudent() {
 		new Diaryservice(request, response).viewDiary();
 		return "viewDiary";
 	}
-	@GetMapping("/viewDiaryStudentParent")
+	
+	
+	//@GetMapping("/viewDiaryStudentParent")
+	@RequestMapping(value = "/viewDiaryStudentParent", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewDiaryStudentParent() {
 		new Diaryservice(request, response).viewDiaryParent();
 		return "viewDiaryParent";
@@ -48,6 +55,25 @@ public class DiaryAction {
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
 		new Diaryservice(request, response).deleteRecord();
+		new Diaryservice(request, response).viewDiary();
 		return "viewDiary";
 	}
+	@PostMapping("/diarySaved")
+	public String diarySaved() {
+		return "viewDiary";
+	}
+	@PostMapping("/ViewDiaryDetails")
+	public String ViewDiaryDetails() {
+		if(new Diaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+
+		}
+		return "viewDiaryMessage";
+		}
+	@PostMapping("/ViewDiaryDetailsParent")
+	public String ViewDiaryDetailsParent() {
+		if(new Diaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+
+		}
+		return "viewDiaryMessageParent";
+		}
 }

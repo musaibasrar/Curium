@@ -177,6 +177,20 @@ public class Diaryservice {
        }
        new diaryDAO().deleteRecord(ids);
         }
+	}
+
+	public boolean viewDetailsOfDiaryMessage() {
+		return viewDetailsOfDiaryMessage(request.getParameter("id").toString());
+		
+	}
+	
+	public boolean viewDetailsOfDiaryMessage(String studentId) {
+		boolean result = false;
+		long id = Long.parseLong(studentId);
+		Diary diary = new diaryDAO().getMessage(id);
+		httpSession.setAttribute("diary", diary);
+		result = true;
+		return result;
 	}	
 	}
 
