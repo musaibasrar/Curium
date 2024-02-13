@@ -102,7 +102,7 @@ public class StandardService {
 	public void viewClassHierarchy() {
         if(httpSession.getAttribute(BRANCHID)!=null){
             List<Classhierarchy> classHierarchy = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            httpSession.setAttribute("classhierarchy", classHierarchy);
+            request.setAttribute("classhierarchy", classHierarchy);
         }
     }
 

@@ -57,7 +57,13 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).Search();
 		return "progressreport";
 	}
-
+	//progress report id
+	/*	@GetMapping("/progressReportid")
+		public String progressreportid() {
+			new MarksDetailsService(request, response).Searchid();
+			return "progressreport";
+		}*/
+		//end
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
@@ -67,7 +73,17 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
-
+//code for generateReportParent
+	@GetMapping("/generateReportParent")
+	public String generateReportParent() {
+		if (new MarksDetailsService(request, response).generateReportParent()) {
+			return "markssheet";
+			// return "reportcardsaved";
+		} else {
+			return "error";
+		}
+	}
+	//end generateReportParent
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		if (new MarksDetailsService(request, response).deleteMultiple()) {
