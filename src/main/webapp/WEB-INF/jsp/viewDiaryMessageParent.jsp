@@ -17,8 +17,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Diary Message</title>
-	<link rel="stylesheet" href="/roshan/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/roshan/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/meps/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/meps/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -110,7 +110,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/UserProcess/authenticate";
+                form1.action="/meps/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -122,25 +122,26 @@ form{
                 
         
        <!-- Main Content -->
-	<div class="container-fluid">
-		<div class="row main-content  text-center" style=" border:2px solid black; display:block" >
-			<div class="container-fluid">
-		<div class="row">
-						<h3>Student Diary</h3>
+       	<div class="row" align="center">
+						<h3>Diary</h3>
 					</div>
+	<div class="container-fluid">
+		<div class="row main-content  text-center" style=" border:2px solid black; width:100%;margin:0px;" >
+			<div class="container-fluid">
+	
 					<div class="row">
-								<label>Subject</label><input type="text"  class="form__input" value=" ${diary.subject}">
+								<label style="font-size:45px;">Subject</label><input type="text" style="font-size:45px;" class="form__input" value=" ${diary.subject}">
 							</div>
 							<div class="row">
 							<!-- <textarea class="form__input" > -->
-							 	<label>Message</label><p style="text-align:justify ;margin:0px 50px 0px 50px;">${diary.message}</p><br><br><br>
+							 	<label style="font-size:45px;">Message</label><p style="text-align:justify ;margin:0px 50px 0px 50px;font-size:45px;">${diary.message}</p><br><br><br>
 							</div>
 					</div>
 			</div>
 	</div>
 	<div class="container-fluid"  align="center">
 					
-						<form action="/roshan/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
+						<form action="/meps/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row">
 								<input type="submit" value="Back" class="btn">
 							</div>
