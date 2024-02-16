@@ -55,7 +55,7 @@ public class StudentDiaryDAO {
         try {
             
             transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.sid,s.name,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.createddate,d.userid from StudentDiary d JOIN Student s ON d.sid=s.sid where  d.branchid="+branchId);
+            Query query = session.createQuery("select d.id,d.sid,s.name,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.createddate,d.userid from StudentDiary d JOIN Student s ON d.sid=s.sid where  d.branchid="+branchId+" order by d.createddate DESC");
             query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
