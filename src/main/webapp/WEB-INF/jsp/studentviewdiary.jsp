@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>View Diary</title>
+<title>View Logbook</title>
 <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
 <style type="text/css">
@@ -372,7 +372,7 @@ $(function(){
     function deleteRecords(){
         
         var form1=document.getElementById("form1");
-        form1.action="/meps/DiaryProcess/deleteRecord";
+        form1.action="/meps/StudentDiaryProcess/deleteRecord";
         form1.method = "POST";
        form1.submit();
         
@@ -445,7 +445,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: hidden">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search diary</td>
+					<td class="headerTD">Logbook</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -454,11 +454,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Student Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Class&nbsp;</th>
 						<th title="click to sort" class="headerText">Subject&nbsp;</th>
 						<th title="click to sort" class="headerText">Message&nbsp;</th>
-						<th title="click to sort" class="headerText">Start Date</th>
-						<th title="click to sort" class="headerText">End Date</th>
 						<th title="click to sort" class="headerText">Created Date</th>
 					</tr>
 				</thead>
@@ -473,11 +472,10 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${diary.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${diary.id}"/>" /></td>
-							<td class="dataText"><c:out value="${diary.classsec}" /></td>
+								<td class="dataText"><c:out value="${diary.studentName}" /></td>
+								<td class="dataText"><c:out value="${diary.classsec}" /></td>
 							<td class="dataText"><c:out value="${diary.subject}" /></td>
 							<td class="dataText"><c:out value="${diary.message}" /></td>
-							<td class="dataText"><c:out value="${diary.startdate}" /></td>
-							<td class="dataText"><c:out value="${diary.enddate}" /></td>
 							<td class="dataText"><c:out value="${diary.createddate}" /></td>
 						</tr>
 					</c:forEach>
@@ -501,7 +499,7 @@ for(Cookie cookie : cookies){
  <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/meps/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/meps/StudentDiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -514,7 +512,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/meps/DiaryProcess/viewdiarystudent?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/meps/StudentDiaryProcess/viewdiarystudent?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -523,7 +521,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/meps/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/meps/StudentDiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
 	</form>

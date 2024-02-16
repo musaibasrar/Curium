@@ -92,9 +92,9 @@ for(Cookie cookie : cookies){
         <form id="form1" action="/meps/StudentDiaryProcess/viewdiarystudent"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Diary Saved successfully<c:out value="${reportcardpath}"></c:out></p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Log Saved successfully<c:out value="${reportcardpath}"></c:out></p>
         <p class="style1">
-            <input type="submit" id="view" value="View Diary" >
+            <input type="submit" id="view" value="View Logbook" >
             
         </p></td>
       </tr>
