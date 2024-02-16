@@ -839,30 +839,23 @@ public class StudentService {
 		return result;
 	}
 	//code for viewDetailsbySidOfStudent
-	public boolean viewDetailsbySidOfStudent() {
-		return viewDetailsbySidOfStudent(request.getParameter("id"));
+	public boolean viewDetailsbySidStudent() {
+		return viewDetailsbySidStudent(request.getParameter("id"));
 	}
 
-	public boolean viewDetailsbySidOfStudent(String studentId) {
+	public boolean viewDetailsbySidStudent(String studentId) {
 		boolean result = false;
 		try {
-			long id = Long.parseLong(studentId);
-			Student student = new studentDetailsDAO().readploginUniqueObject(id);
-			Parents parents = new parentsDetailsDAO().readploginUniqueObject(id);
+			Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
+			Parents parents = new parentsDetailsDAO().readploginUniqueObject(studentId);
 
-			/*httpSession.setAttribute("studentfromservice",student);
-			httpSession.setAttribute("parentsfromservice",parents);
-			httpSession.setAttribute("idofstudentfromservice",id);*/
 			
 			Currentacademicyear currentYear = new YearDAO().showYear();
 			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 			
-			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
-			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());
 			request.setAttribute("receiptinfo",rinfo);
-			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
-			String name = "tauqeer";
+			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
@@ -875,9 +868,6 @@ public class StudentService {
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
 			
-			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
-			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
-			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
 			if (student == null) {
 				result = false;
 			} else {
@@ -915,7 +905,6 @@ public class StudentService {
 				httpSession.setAttribute("parents", parents);
 				//httpSession.setAttribute("feesdetails", feesdetails);
 				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("name", name);
 				httpSession.setAttribute("sumoffees", totalSum);
 				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
 				httpSession.setAttribute("totalfees", totalFeesAmount);

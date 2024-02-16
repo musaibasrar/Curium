@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.diary.service;
+package org.ideoholic.curium.model.studentdiary.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -8,18 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
+import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
+import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryDTO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
-public class Diaryservice {
+public class StudentDiaryservice {
 	  private HttpServletRequest request;
       private HttpServletResponse response;
       private HttpSession httpSession;
@@ -29,30 +26,27 @@ public class Diaryservice {
        */
       private static final int BUFFER_SIZE = 4096;
   
-  public Diaryservice(HttpServletRequest request, HttpServletResponse response) {
+  public StudentDiaryservice(HttpServletRequest request, HttpServletResponse response) {
           this.request = request;
  this.response = response;
  this.httpSession = request.getSession();
   }
 
-	public void adddetail() {
-		// TODO Auto-generated method stub
-		Login login=new Login();
-		/*
-		 * String Id=login.getUsername(); Student student = new
-		 * studentDetailsDAO().readploginUniqueObject(Id);
-		 
-		String studentcls = student.getClassstudying();
-		request.setAttribute("studentcls", studentcls);
-		*/
-		
-	}
-
 	public void addDiary() {
 		// TODO Auto-generated method stub
-		 Diary diary = new Diary();
+		 StudentDiary diary = new StudentDiary();
          
          if(httpSession.getAttribute(BRANCHID)!=null){
+        	 
+        	 diary.setSid(Integer.parseInt(request.getParameter("studentId")));
+             diary.setClasssec(request.getParameter("classandsec"));
+             diary.setMessage(request.getParameter("messagebody"));
+             diary.setSubject(request.getParameter("subject"));
+             diary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+             diary.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+             diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+             diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
+             diary =  new StudentDiaryDAO().create(diary);
         	 
         	 		String secString = DataUtil.emptyString(request.getParameter("addsec"));
         	 		String classString = request.getParameter("addclass")+"--"+secString;
@@ -60,13 +54,11 @@ public class Diaryservice {
                  diary.setClasssec(DataUtil.emptyString(classString));
                  diary.setMessage(request.getParameter("messagebody"));
                  diary.setSubject(request.getParameter("subject"));
-                 diary.setBranchid(httpSession.getAttribute(BRANCHID).toString());
+                 diary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
                  diary.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
                  diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
                  diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
-                 diary.setEnddate(DateUtil.indiandateParser(request.getParameter("enddate")));
-                 diary.setStartdate(DateUtil.indiandateParser(request.getParameter("startdate")));
-                 diary =  new diaryDAO().create(diary);
+                 diary =  new StudentDiaryDAO().create(diary);
                  }
          }
 
@@ -81,27 +73,28 @@ public class Diaryservice {
      				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
-                        List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
+                        List<Object[]> list = new StudentDiaryDAO().readListOfObjects((page - 1) * recordsPerPage,
         						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
                         
-                        List<Diary> diaryDetails = new ArrayList<Diary>();
+                        List<StudentDiaryDTO> diaryDetails = new ArrayList<StudentDiaryDTO>();
         	            for(Object[] diaryObject: list){
-        	            	Diary diary = new Diary();
+        	            	StudentDiaryDTO diary = new StudentDiaryDTO();
         	            	
         	            	diary.setId((Integer)diaryObject[0]);
-        	                diary.setClasssec((String)diaryObject[1]);
-        	                diary.setAcademicyear((String)diaryObject[2]);
-        	                diary.setBranchid((String)diaryObject[3]);
-        	                diary.setSubject((String)diaryObject[4]);
-        	                diary.setMessage((String)diaryObject[5]);
-        	                diary.setStartdate((Date)diaryObject[6]);
-        	                diary.setEnddate((Date)diaryObject[7]);
+        	            	diary.setSid((Integer)diaryObject[1]);
+        	            	diary.setStudentName((String)diaryObject[2]);
+        	                diary.setClasssec((String)diaryObject[3]);
+        	                diary.setAcademicyear((String)diaryObject[4]);
+        	                diary.setBranchid((Integer)diaryObject[5]);
+        	                diary.setSubject((String)diaryObject[6]);
+        	                diary.setMessage((String)diaryObject[7]);
         	                diary.setCreateddate((Date)diaryObject[8]);
+        	                diary.setUserid((Integer)diaryObject[9]);
         	                diaryDetails.add(diary);
         	            }
                         
                         
-                    int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     				request.setAttribute("diary", diaryDetails);
     				request.setAttribute("noOfPages", noOfPages);
@@ -114,8 +107,9 @@ public class Diaryservice {
          }
                        return result;
 	}
+	
+	
 //viewDiaryparent
-
 	
 	  public boolean viewDiaryParent() {
 		return viewDiaryparent(request.getParameter("id"));
@@ -132,29 +126,31 @@ public class Diaryservice {
      				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
-                        List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-        						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),classsec);
+                        List<Object[]> list = new StudentDiaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
+        						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),student.getSid());
                         
-                        List<Diary> diaryDetails = new ArrayList<Diary>();
+                        List<StudentDiaryDTO> diaryDetails = new ArrayList<StudentDiaryDTO>();
         	            for(Object[] diaryObject: list){
-        	            	Diary diary = new Diary();
+        	            	StudentDiaryDTO diary = new StudentDiaryDTO();
         	            	
         	            	diary.setId((Integer)diaryObject[0]);
-        	                diary.setClasssec((String)diaryObject[1]);
-        	                diary.setAcademicyear((String)diaryObject[2]);
-        	                diary.setBranchid((String)diaryObject[3]);
-        	                diary.setSubject((String)diaryObject[4]);
-        	                diary.setMessage((String)diaryObject[5]);
-        	                diary.setStartdate((Date)diaryObject[6]);
-        	                diary.setEnddate((Date)diaryObject[7]);
+        	            	diary.setSid((Integer)diaryObject[1]);
+        	            	diary.setStudentName((String)diaryObject[2]);
+        	                diary.setClasssec((String)diaryObject[3]);
+        	                diary.setAcademicyear((String)diaryObject[4]);
+        	                diary.setBranchid((Integer)diaryObject[5]);
+        	                diary.setSubject((String)diaryObject[6]);
+        	                diary.setMessage((String)diaryObject[7]);
         	                diary.setCreateddate((Date)diaryObject[8]);
+        	                diary.setUserid((Integer)diaryObject[9]);
         	                diaryDetails.add(diary);
         	            }
                         
                         
-                    int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        
+                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),student.getSid());
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-    				request.setAttribute("diaryparents", diaryDetails);
+    				request.setAttribute("studentdiaryparents", diaryDetails);
     				request.setAttribute("noOfPages", noOfPages);
     				request.setAttribute("currentPage", page);
                     result = true;
@@ -174,7 +170,7 @@ public class Diaryservice {
            System.out.println("id" + id);
            ids.add(Integer.valueOf(id));
        }
-       new diaryDAO().deleteRecord(ids);
+       new StudentDiaryDAO().deleteRecord(ids);
         }
 	}
 
@@ -186,8 +182,8 @@ public class Diaryservice {
 	public boolean viewDetailsOfDiaryMessage(String studentId) {
 		boolean result = false;
 		long id = Long.parseLong(studentId);
-		Diary diary = new diaryDAO().getMessage(id);
-		httpSession.setAttribute("diary", diary);
+		StudentDiary diary = new StudentDiaryDAO().getMessage(id);
+		httpSession.setAttribute("studentdiary", diary);
 		result = true;
 		return result;
 	}	

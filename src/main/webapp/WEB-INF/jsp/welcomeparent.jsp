@@ -120,7 +120,7 @@ for(Cookie cookie : cookies){
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
 								href="/meps/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
 									src="/meps/images/diary.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Diary
+									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
         				</tr>
@@ -157,6 +157,24 @@ for(Cookie cookie : cookies){
 								href="/meps/MarksDetailsProcess/generateReportParent?id=${username}"> <img
 									src="/meps/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	<br>
+        	
+        	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#9D0176">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
+								href="/meps/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/meps/images/logbook.svg" width="50" height="50"
+									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>
         				</tr>
