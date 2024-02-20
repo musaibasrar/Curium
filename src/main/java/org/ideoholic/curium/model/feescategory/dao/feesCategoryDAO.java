@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
@@ -91,7 +92,7 @@ public class feesCategoryDAO {
 
 	}
 
-	public void deleteFeesCategory(List ids, List feesCatId, String sid) {
+	public void deleteFeesCategory(List ids, List feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {
 		
 		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
 		try {
@@ -104,6 +105,21 @@ public class feesCategoryDAO {
 				Query query = session.createQuery("delete from Studentfeesstructure as fees where fees.sid = "+sid+" and fees.Feescategory.idfeescategory IN (:feescat)");
 				query.setParameterList("feescat", feesCatId);
 				query.executeUpdate();
+				
+				for (VoucherEntrytransactions transactions : transactionsList) {
+					session.save(transactions);
+				}
+				
+				for (String updateDrAccount : debitEntries) {
+					Query queryAccounts = session.createQuery(updateDrAccount);
+					queryAccounts.executeUpdate();
+				}
+				
+				for (String updateCrAccount : creditEntries) {
+					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+					queryqueryAccounts1.executeUpdate();
+				}
+				
 			}
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

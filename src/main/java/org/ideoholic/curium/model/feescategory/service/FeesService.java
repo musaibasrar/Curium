@@ -3,13 +3,16 @@ package org.ideoholic.curium.model.feescategory.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
@@ -28,6 +33,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class FeesService {
         
@@ -35,6 +41,7 @@ public class FeesService {
             private HttpServletResponse response;
             private HttpSession httpSession;
             private String BRANCHID = "branchid";
+            private String USERID = "userloginid";
             /**
              * Size of a byte buffer to read/write file
              */
@@ -198,6 +205,9 @@ public class FeesService {
                  String[] idfeescategory = request.getParameterValues("sfsid");
                  List<Integer> sfsId = new ArrayList();
                  List<Integer> feesCatId = new ArrayList();
+                 List<VoucherEntrytransactions> transactionsList = new ArrayList<VoucherEntrytransactions>();
+                 List<String> debitEntries = new ArrayList<String>();
+                 List<String> creditEntries = new ArrayList<String>();
                  
                  String studentId = request.getParameter("id");
                  
@@ -207,8 +217,39 @@ public class FeesService {
                                  String[] test = string.split("_");
                                  sfsId.add(Integer.valueOf(test[0]));
                                  feesCatId.add(Integer.valueOf(test[1]));
+                                 
+                               //Accounts
+                          		//Pass J.V. : credit the Fees as income & debit the cash
+                                  List<Studentfeesstructure> sfs = new studentDetailsDAO().getStudentFeesStructureDetails(Integer.valueOf(test[0]));
+                                  
+                          		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+
+                          		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+
+                          		transactions.setDraccountid(drFees);
+                          		transactions.setCraccountid(crAccount);
+                          		transactions.setDramount(new BigDecimal(sfs.get(0).getFeesamount()));
+                          		transactions.setCramount(new BigDecimal(sfs.get(0).getFeesamount()));
+                          		transactions.setVouchertype(4);
+                          		transactions.setTransactiondate(DateUtil.todaysDate());
+                          		transactions.setEntrydate(DateUtil.todaysDate());
+                          		transactions.setNarration("Towards Reversal of Fees Stamp");
+                          		transactions.setCancelvoucher("no");
+                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+                          		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                          		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+
+                          		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+sfs.get(0).getFeesamount()+" where accountdetailsid="+crAccount;
+
+                          		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+sfs.get(0).getFeesamount()+" where accountdetailsid="+drFees;
+                          		transactionsList.add(transactions);
+                          		debitEntries.add(updateDrAccount);
+                          		creditEntries.add(updateCrAccount);
+                          		// End J.V
+                          		
                         }
-                new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId);
+                new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
                 
                 return studentId;
                  }
@@ -243,7 +284,7 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId; }
+	 * "/abc/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 
@@ -620,5 +661,30 @@ public class FeesService {
 
 	        throw new IllegalArgumentException("Fees category for the given student does not exist");
 
+		}
+	   
+		private int getLedgerAccountId(String itemAccount) {
+
+			int result = 0;
+
+		 	Properties properties = new Properties();
+			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+
+	        		try {
+						properties.load(inputStream);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+	        		String ItemLedgerId = properties.getProperty(itemAccount);
+
+			    if(ItemLedgerId!=null) {
+			    	result = Integer.parseInt(ItemLedgerId);
+			    }else {
+			    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+			    	result = Integer.parseInt(ItemLedger.toLowerCase());
+			    }
+
+			    return result;
 		}
 }
