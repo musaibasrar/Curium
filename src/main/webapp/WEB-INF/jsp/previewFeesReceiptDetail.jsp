@@ -141,7 +141,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "Controller?process=FeesProcess&action=feesCollect"; 
+            	 //document.location.href = "/abc/FeesProcess/feesCollect"; 
              }
         </script>
     </head>

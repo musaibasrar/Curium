@@ -179,8 +179,13 @@ public class UserDAO {
 		try {
             transaction = session.beginTransaction();
             session.save(user);
+            
+            Query query = session.createQuery("from Login order by userid DESC");
+            query.setMaxResults(1);
+            Login last = (Login) query.uniqueResult();
+            int userid = last.getUserid()+1;
             Query queryUpdate = session 
-					.createSQLQuery("update login set userid = (SELECT MAX(userid) + 1 FROM login) where username = '"+user.getUsername()+"'");
+					.createSQLQuery("update login set userid = "+userid+" where username = '"+user.getUsername()+"'");
 			queryUpdate.executeUpdate();
             transaction.commit();
            return true;

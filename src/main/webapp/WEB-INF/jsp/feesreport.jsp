@@ -746,9 +746,19 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 									<table>
 										<tr>
-											<td style="width: 160px;" align="right">
-												${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;	
-											</td>
+											<c:if test="${DueAmount > 0}">
+												<td style="width: 160px;background-color: red;" align="right" >
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+											
+											<c:if test="${DueAmount == 0}">
+												<td style="width: 160px;" align="right" >
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+													
+											
 										</tr>
 									</table>
 							</td>

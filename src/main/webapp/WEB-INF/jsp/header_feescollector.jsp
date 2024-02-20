@@ -1,5 +1,5 @@
 <%-- 
-    Document   : header
+    Document   : header_admin
     Created on : Feb 13, 2013, 11:10:08 AM
     Author     : Musaib
 --%>
@@ -10,81 +10,17 @@
 
 <html>
     <head>
-        <title>School Management</title>
+        <title>CURIUM</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <script type="text/javascript">
-            var getMember;
-            //var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                   // getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    //getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "StudentController",true);
-                getMember.send(null);
-
-                /* getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null); */
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        //setTimeout('getdata();', 6000);
-
-
-                    }
-                }
-
-            }
-          /*   function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            } */
-
-        </script>
-      <!--  <script  type="text/javascript">
-            function hidePatientPopup()
-            {
-                document.getElementById("n1").style.visibility='hidden';
-            }
-            function hideVisitPopup()
-            {
-
-                document.getElementById("n2").style.visibility='hidden';
-            }
-        </script> -->
+        <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
+        <script src="/abc/js/jquery.min.js"></script>
+        <script src="/abc/js/bootstrap.min.js"></script>
+        <script src="/abc/js/popper.min.js"></script>
+     
         <style type="text/css">
-            <!--
+            
             .style1 {font-family: Arial, Helvetica, sans-serif;
                      font-size: 12px;
                      color: #666666;
@@ -92,19 +28,18 @@
             .style50 {color: #FFFFFF}
             .style6 {font-size: 10; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; }
             a:link {
-                color: #FFFFFF;
+                color: #000000;
                 text-decoration: none;
+                font-family: arial;
+                font-size: 10px;
             }
             a:visited {
-                text-decoration: none;
-                color: #FFFFFF;
+                color: #383838;
             }
             a:hover {
-                text-decoration: none;
-                color: #CBE577;
+                text-decoration: underline;
             }
             a:active {
-                text-decoration: none;
                 color: #FFFFFF;
             }
             .style5 {font-family: Calibri; font-size: 14px; color: #FFFFFF; }
@@ -145,7 +80,14 @@
                 height: 16px;
 
             }
-            -->
+            a:visited {
+    color: #383838;
+    
+}
+a:hover {
+text-decoration: underline;
+}
+           
         </style>
         <script type="text/javascript">
             function logout(){
@@ -173,44 +115,107 @@ for(Cookie cookie : cookies){
 }
 %>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <form id="form1" method="post" >
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td valign="top" background="/images/h_bg.jpg">
-                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-                            <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/abc/images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="/abc/images/SMS.png" width="391" height="50" /></div></td>
-                               
-                            </tr> -->
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                            <tr>
-                            				<td width="10"></td>
-                                          	<td align="left"><img src="/abc/images/abcheader.png" /></td>  
-                            				                           				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/abc/FeesProcess/feesCollectAllBranches"><img   src="/abc/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				
-                                            <td width="40"><a target="mainFrame" href="/abc/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="/abc/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/abc/UserProcess/logout"><img   src="/abc/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            </tr>
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <script>
-                getdata();
-            </script>
-        </form>
+         <div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+        ">
+        
+                        <table width="100%" border="0" align="center"
+						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						<tr><td></td></tr>
+						<tr style="height: 45px;">
+							
+									<td style="padding-left: 20px;">
+								<a target="mainFrame" href="/abc/welcome" >
+								<img src="/abc/images/curiumheader.png" width="112" height="41"/>
+								</a>
+								</td>
+								
+							<!-- <td align="left"><img src="/abc/images/abcheader.png"
+								style="width: 200px; height: 20px;" /></td> -->
+							<td>
+							<a target="leftFrame" href="/abc/left_feescollector"><img
+									src="/abc/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Home		
+								</a>
+							</td>
+							
+							<td><a target="mainFrame"
+								href="/abc/FeesProcess/feesCollect"> <img
+									src="/abc/images/feescollect.svg" width="18" height="18"
+									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+							</a></td>
+							
+							<td>
+							<a target="leftFrame" href="/abc/reports_feescollector"><img
+									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+							</td>
+
+							<!-- <td>
+								<a target="mainFrame"
+								href="/abc/AccountProcess/createVoucher"> <img
+									src="/abc/images/createvoucher.svg" width="18" height="18"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Create Voucher
+								</a>
+							</td>
+
+							<td ><a target="mainFrame" href="/abc/feesCollectionDetails"><img  alt="Fees Details" src="/abc/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
+
+							<td><a target="mainFrame"
+								href="/abc/StudentProcess/addNew"> <img
+									src="/abc/images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+							</a></td>
+
+							<td ><a target="leftFrame" href="/abc/leftsettings_officeadmin">
+									<img alt="Settings" src="/abc/images/settings.svg" width="18"
+									height="18" style="vertical-align: bottom;" />Master Settings
+							</a></td>
+
+							<td ><a target="mainFrame"
+								href="/abc/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/abc/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Admin Expense
+							</a></td>
+
+							<td ><a target="mainFrame" href="/abc/sendsms"><img
+									src="/abc/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+									Send Message		
+							</a>
+								<a target="leftFrame" href="/abc/reports_officeadmin"><img
+									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+							
+							</td>
+
+							<td ><a target="mainFrame"
+								href="/abc/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/abc/images/students.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+								View Students
+							</a></td> -->
+							
+							<!-- <td ><a target="mainFrame"
+								href="/abc/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/abc/images/dashboard.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+									Dash Board
+									</a></td> -->
+								
+							<td ><a target="_parent"
+								href="/abc/UserProcess/logout"><img
+									src="/abc/images/logout.svg" width="18" height="18" alt="Log Out" 
+									style="vertical-align: bottom;"/>Logout</a></td>
+							<td width="60"></td>
+						</tr>
+
+					</table>
+            </div>
+       <!--  <hr style="border-top: 5px solid rgba(1,1,1,1);"> -->
     </body>
 
 </html>

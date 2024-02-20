@@ -117,6 +117,23 @@ for(Cookie cookie : cookies){
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
+		
+		<table align="center">
+			
+			
+			<tr>
+			<td>
+			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/abc/images/abc.png">
+			</td>
+				<td >
+					<br>
+					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					
+				</td>
+			</tr>
+			</table>
+			
 		<table>
 			<tr>
 			<td class="dataTextBoldLeft">

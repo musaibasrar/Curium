@@ -508,6 +508,7 @@ for(Cookie cookie : cookies){
 		
 		%>
 		<c:set var="itemTotal" value="${0}" />
+		<c:set var="itemTotalSales" value="${0}" />
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
 			<button id="add">Parameters</button>
@@ -647,8 +648,10 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Item Name</th>
 						<th title="click to sort" class="headerText">Quantity</th>
 						<th title="click to sort" class="headerText">Unit of Measure</th>
-						<th title="click to sort" class="headerText">Unit Price</th>
-						<th title="click to sort" class="headerText">Total Price</th>
+						<th title="click to sort" class="headerText">Purchase Price</th>
+						<th title="click to sort" class="headerText">Sales Price</th>
+						<th title="click to sort" class="headerText">Purchase Total Price</th>
+						<th title="click to sort" class="headerText">Sales Total Price</th>
 						
 					</tr>
 				</thead>
@@ -669,10 +672,17 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${stockissuancelist.quantity}" /></td>
 						  <td class="dataText"><c:out value="${stockissuancelist.unitofmeasure}" /></td>
 						  <td class="dataText"><c:out value="${stockissuancelist.itemunitprice}" /></td>
+						  <td class="dataText"><c:out value="${stockissuancelist.purpose}" /></td>
 						  <td class="dataText">
 						  <c:set var="itemTotal" value="${itemTotal + stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
 						  <fmt:setLocale value="en_IN" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
+						  </td>
+						  <td class="dataText">
+						  <c:set var="itemSalesPrice" value="${stockissuancelist.purpose}" />
+						  <c:set var="itemTotalSales" value="${itemTotalSales + itemSalesPrice * stockissuancelist.quantity}" />
+						  <fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemSalesPrice * stockissuancelist.quantity}" />
 						  </td>
 						</tr>
 					</c:forEach>
@@ -681,9 +691,21 @@ for(Cookie cookie : cookies){
 					<tfoot>
 						<tr>
 							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>Grand Total:
+								<label style="color: #eb6000"><b>Purchase Total:
 							<fmt:setLocale value="en_IN" scope="session"/>
-							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
+							<fmt:formatNumber type="currency"  value="${itemTotal}" />&nbsp;&nbsp;&nbsp;</b>
+							</label> 
+							<label style="color: #eb6000"><b>Sales Total:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalSales}" /></b>
+							</label> 
+							</td>
+						</tr>
+						<tr>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>Profit:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalSales-itemTotal}" /></b>
 							</label> 
 							</td>
 						</tr>

@@ -196,10 +196,26 @@ for(Cookie cookie : cookies){
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br><br>
+		<table align="center">
+			
+			
+			<tr>
+			<td>
+			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/abc/images/abc.png">
+			</td>
+				<td >
+					<br>
+					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					
+				</td>
+			</tr>
+			</table>
+			
 		<table align="center" style="padding-left: 30px;padding-right: 20px;">
 			<tr>
 			<td class="dataTextBoldLeft">
-			<br><br><br><br><br><br><br><br><br><br><br><br>
+			<br>
 				<%-- Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>

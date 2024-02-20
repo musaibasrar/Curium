@@ -603,7 +603,8 @@ public class MessStockMoveService {
 		BigDecimal crAmountReceipt = BigDecimal.valueOf(totalValue);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerIdExpense;
 		
-		new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
+		boolean result = new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
+		request.setAttribute("itemscancelled", result);
 		
 	}
 	

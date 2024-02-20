@@ -440,9 +440,9 @@ public class MessItemsService {
 					if(messStockMove.getStockentryid().equals(stockEntry.getId())) {
 						
 							for (MessItems messItems : messItemsList) {
-								
-								if(messItems.getId().equals(messStockMove.getItemid())) {
-									
+									int messItemId = messItems.getId();
+									int messStockMoveInteger = messStockMove.getItemid();
+								if(messItemId==messStockMoveInteger) {
 									stockIssuance.setItemname(messItems.getName());
 									stockIssuance.setQuantity(messStockMove.getQuantity());
 									stockIssuance.setUnitofmeasure(messItems.getUnitofmeasure());

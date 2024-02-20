@@ -492,7 +492,7 @@ for(Cookie cookie : cookies){
 								name="employeeIDs"
 								value="<c:out value="${employees.tid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out
+								href="/abc/EmployeeProcess/ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out
 										value="${employees.teachername}" /></a></td>
 							<td class="dataText"><c:out value="${employees.contactnumber}" /></td>
 						</tr>

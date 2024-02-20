@@ -10,9 +10,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.Cookie;
@@ -578,13 +580,18 @@ public class UserService {
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
+			Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
 				misc = misc + receiptinfo.getMisc();
+				Parents student = new Parents();
+				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				feesMap.put(student, receiptinfo);
 			}
 			
-			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
+			httpSession.setAttribute("searchfeesdetailslist", feesMap);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 			httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
 			httpSession.setAttribute("sumoffine", fine);

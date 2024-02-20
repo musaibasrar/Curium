@@ -15,20 +15,19 @@
 <head>
 <title>Stock Issuance Report</title>
 <style type="text/css">
+.datath {
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 12px;
+	color: black;
+	font-weight: normal;
+	width: auto;
+	height: 22px;
+	vertical-align: middle;
+	text-align: center;
+}
 <!--
-.headerText {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: center;
-}
-
-.headerTextLeft {
+.datathLeft {
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
@@ -40,7 +39,7 @@
 	text-align: left;
 }
 
-.dataTextBold {
+.datatdBold {
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
@@ -49,7 +48,7 @@
 	text-align: center;
 }
 
-.dataTextBoldLeft {
+.datatdBoldLeft {
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
@@ -58,7 +57,7 @@
 	text-align: left;
 }
 
-.dataTextBoldCenter {
+.datatdBoldCenter {
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
@@ -85,7 +84,7 @@
 	text-align: center;
 }
 
-.dataText {
+.datatd {
 	font-family: Tahoma;
 	color: black;
 	font-size: 12px;
@@ -102,7 +101,6 @@
 .datatd, .datath {
     border: 1px solid #000000;
     text-align: left;
-    padding: 8px;
 }
 
 .datatdright {
@@ -122,6 +120,15 @@
 
 }
 
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
 </style>
 
 <script>
@@ -223,8 +230,8 @@
 				<td align="center">
 				<img src="/abc/images/logo.jpg" width="150" height="80"/>
 				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				Curium<br><br>
+				<td class="datatdBoldCenter" style="width: 100%">
+				${branchname}<br><br>
 				<label class="addressLine">Stock Issuance Report</label><br>
 				<label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label>
@@ -243,41 +250,51 @@
             </TABLE>
 		
             <table class="datatable">
+            
             <thead>
-            	
- 				 <tr>
- 				 		<th class=datath>Sl.No</th>
- 				 		<th class="datath">Date</th>
-						<th class="datath">Issued To</th>
-						<th class="datath">Purpose</th>
-						<th class="datath">Item</th>
-						<th class="datath">Qty</th>
-						<th class="datath">UOM</th>
-						<th class="datath">Unit Price</th>
-						<th class="datath">Total Price</th>
+					<tr>
+						<th class="datath">Sl.No.</th>
+						<th class="datath">Date</th>
+						<th class="datath">Student Name</th>
+						<th class="datath">Class</th>
+						<th class="datath">Father Name</th>
+						<th class="datath">Item Name</th>
+						<th class="datath">Quantity</th>
+						<th class="datath">Unit of Measure</th>
+						<th class="datath">Purchase Price</th>
+						<th class="datath">Sales Price</th>
+						<th class="datath">Purchase Total Price</th>
+						<th class="datath">Sales Total Price</th>
 						
- 				 </tr>
- 			 </thead>
- 		 
+					</tr>
+				</thead>
 			<tbody>
-					<c:forEach items="${stockissuancelist}" var="stockissuancelist" varStatus="status">
-
-
+				<c:forEach items="${stockissuancelist}" var="stockissuancelist" varStatus="status">
 						<tr>
-								<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.transactiondate}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.issuedto}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.purpose}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.itemname}" /></td>
-								<td class="datatdright" style="font-size: 9px;"><c:out value="${stockissuancelist.quantity}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.unitofmeasure}" /></td>
-								<td class="datatdright" style="font-size: 9px;"><c:out value="${stockissuancelist.itemunitprice}" /></td>
-								<td class="datatdright" style="font-size: 9px;">
-								 <c:set var="itemTotal" value="${itemTotal + stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
-								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
-								</td>
-						</tr>	
-						
+							<td class="datatd"><c:out value="${status.index+1}" /></td>
+						  <td class="datatd"><input type="text"  style="border-style: none;color: #4B6A84;text-align: center;"  value="<fmt:formatDate value="${stockissuancelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						    <c:set var="nameparts" value="${fn:split(stockissuancelist.issuedto, '_')}" />
+						 	<td class="datatd"><c:out value="${nameparts[0]}" /></td>
+						 	<td class="datatd"><c:out value="${nameparts[1]}" /></td>
+						 	<td class="datatd"><c:out value="${nameparts[2]}" /></td>
+						  <%-- <td class="datatd"><c:out value="${stockissuancelist.purpose}" /></td> --%>
+						  <td class="datatd"><c:out value="${stockissuancelist.itemname}" /></td>
+						  <td class="datatd"><c:out value="${stockissuancelist.quantity}" /></td>
+						  <td class="datatd"><c:out value="${stockissuancelist.unitofmeasure}" /></td>
+						  <td class="datatd"><c:out value="${stockissuancelist.itemunitprice}" /></td>
+						  <td class="datatd"><c:out value="${stockissuancelist.purpose}" /></td>
+						  <td class="datatd">
+						  <c:set var="itemTotal" value="${itemTotal + stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
+						  <fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
+						  </td>
+						  <td class="datatd">
+						  <c:set var="itemSalesPrice" value="${stockissuancelist.purpose}" />
+						  <c:set var="itemTotalSales" value="${itemTotalSales + itemSalesPrice * stockissuancelist.quantity}" />
+						  <fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemSalesPrice * stockissuancelist.quantity}" />
+						  </td>
+						</tr>
 					</c:forEach>
 			</tbody>
 				</table>
@@ -286,11 +303,27 @@
 				<table align="right">
 						<tr>
 							<td align="right">
-							<label style="font-weight: bold;">
-							Grand Total: 
-							<fmt:setLocale value="en_IN" scope="request"/>
-							<fmt:formatNumber type="currency"  value="${itemTotal}" />
-							</label>
+							<label style="color: #eb6000"><b>Purchase Total:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotal}" />&nbsp;&nbsp;&nbsp;</b>
+							</label> 
+							<label style="color: #eb6000"><b>Sales Total:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalSales}" /></b>
+							</label> 
+							</td>
+						</tr>
+				</table>
+			</div>
+			<br>
+			<div style="page-break-inside: avoid;" align="center">
+				<table align="right">
+						<tr>
+							<td align="right" >
+								<label style="color: #eb6000"><b>Profit:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalSales-itemTotal}" /></b>
+							</label> 
 							</td>
 						</tr>
 				</table>

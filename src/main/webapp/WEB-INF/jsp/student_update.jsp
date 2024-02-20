@@ -435,7 +435,18 @@
 		 
 	});
 	
-	
+	   function Upload() {
+	        var fileUpload = document.getElementById("fileToUpload");
+	        if (typeof (fileUpload.files) != "undefined") {
+	            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+	            if(size>100){
+	            	alert("File size should not exceed 100KB");
+	            	document.getElementById("fileToUpload").value='';
+	            }
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }
 
 
 </script>
@@ -519,16 +530,13 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">PEN &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"
 											id="sts" size="30" value="${student.sts}">
 
 									</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -824,17 +832,15 @@ for(Cookie cookie : cookies){
 						
 						
 							<tr>
-								<td class="alignLeft">Weight
-								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
+								<td class="alignLeft">Belong to BPL &nbsp;</td>
+								<td height="30">&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Height
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
 								&nbsp;</td>
 							<td><label> <input
 									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
@@ -844,6 +850,30 @@ for(Cookie cookie : cookies){
 						
 						</tr>
 						
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Bag No.
+								&nbsp;</td>
+								<td>
+										<input
+									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
+									id="bhagyalakshmibondnumber" size="30">
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
+
+							</label></td>
+						</tr>
+												
 							<tr>
 							<td><br /></td>
 						</tr>
@@ -910,22 +940,15 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<%-- <td class="alignLeft">RTE &nbsp;</td>
+							<td class="alignLeft">RTE &nbsp;</td>
 							<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
-							</td> --%>
-							
-							<td class="alignLeft">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
+							</td>
 
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Mark of Identification&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
 
 							<td align="left"><label> <input name="remarks"
 									type="text" class="myclass"
@@ -957,7 +980,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
 							<td align="left">
-							<label> <select name="yearofadmission" id="yearofadmission"
+							<label> <select name="yearofadmission" id="yearofadmission" required
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
@@ -1060,7 +1083,7 @@ for(Cookie cookie : cookies){
                    			 </td>
                     
 							<td><br />
-							<input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="Upload()">
+							<input type="file" name="fileToUpload" id="fileToUpload" onchange="Upload()" accept="image/*" >
 							</td>
 						</tr>
 						
@@ -1072,7 +1095,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc1" accept="image/*" onchange="Upload()">
+                    <input type="file" name="fileToUpload" id="studentdoc1" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1084,7 +1107,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc2" accept="image/*" onchange="Upload()">
+                    <input type="file" name="fileToUpload" id="studentdoc2" onchange="Upload()" accept="image/*" >
                     </td>
                     
                     </tr>
@@ -1097,7 +1120,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                   <input type="file" name="fileToUpload" id="studentdoc3" accept="image/*" onchange="Upload()">
+                   <input type="file" name="fileToUpload" id="studentdoc3" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1109,7 +1132,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc4" accept="image/*" onchange="Upload()">
+                    <input type="file" name="fileToUpload" id="studentdoc4" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1121,7 +1144,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc5" accept="image/*" onchange="Upload()">
+                    <input type="file" name="fileToUpload" id="studentdoc5" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
 				</table>
@@ -1371,7 +1394,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Occupation</td>
+						<td class="alignLeft">Father's Caste <br> Certificate No</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1379,7 +1402,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Occupation</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
@@ -1645,7 +1668,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Percentage of Marks&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied&nbsp;</td>
 							<td><label> <input name="progress"
 									type="text" class="myclass" style="text-transform:capitalize;"
 									value="<c:out default="" value="${student.subsequentprogress}" />"
@@ -1902,4 +1925,3 @@ for(Cookie cookie : cookies){
 						</script>
 </body>
 </html>
-

@@ -648,22 +648,24 @@
         var rowCount = document.getElementById('dataTable').rows.length;    
         
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;' required/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /><input type='hidden' name='batchno' id=batchno_"+rowCount+" value='' /></td>";
- 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col5="<td class='dataTextInActive'><input type='text' value='0'  name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/><input type='hidden' name='purchaseprice' id=purchaseprice_"+rowCount+" value='' /></td>";
- 	    var col6="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col8="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
- 	    var col9="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	   	var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col12="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
+        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;' required/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /></td>";
+        /* <input type='hidden' name='batchno' id=batchno_"+rowCount+" value='' /> */
+        var col3="<td class='dataTextInActive'><input type='text' name='batchno' id=batchno_"+rowCount+" value=''  class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+        var col4="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	   	var col5="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col6="<td class='dataTextInActive'><input type='text' value='0'  name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/><input type='hidden' name='purchaseprice' id=purchaseprice_"+rowCount+" value='' /></td>";
+ 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col8="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col9="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
+ 	    var col10="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	   	var col12="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col13="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
         /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+col13+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -674,6 +676,7 @@
                 change:function(event,ui){
                 	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
                     $("#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#batchno_"+rowCount ).val( ui.item.batchno );
                     $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
                     $("#items_quantity_"+rowCount).val( ui.item.availablestock );
                     $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
@@ -685,6 +688,7 @@
                 	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
                     $( "#items_name_"+rowCount).val( ui.item.name );
                     $( "#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#batchno_"+rowCount ).val( ui.item.batchno );
                     $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
                     $("#items_quantity_"+rowCount).val( ui.item.availablestock );
                     $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
@@ -697,6 +701,7 @@
                 	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
                     $( "#items_name_"+rowCount).val( ui.item.value );
                     $( "#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#batchno_"+rowCount ).val( ui.item.batchno );
                     $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
                     $("#items_quantity_"+rowCount).val( ui.item.availablestock );
                     $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
@@ -1477,6 +1482,7 @@ for(Cookie cookie : cookies){
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /> </th>
 								<th class="headerText">Item Name</th>
+								<th class="headerText">Batch</th>
 								<th class="headerText">Available Quantity</th>
 								<th class="headerText">Unit of Measure</th>
 								<th class="headerText">Unit Price</th>
@@ -1619,7 +1625,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
-											<option value="canara">Canara Bank</option>
+											<option value="ICICI">ICICI Bank</option>
 								</select>
 							
 							</label>
@@ -1665,7 +1671,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
-											<option value="canara">Canara Bank</option>
+											<option value="ICICI">ICICI Bank</option>
 								</select>
 							
 							</label>

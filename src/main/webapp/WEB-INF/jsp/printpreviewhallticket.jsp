@@ -321,7 +321,7 @@ for(Cookie cookie : cookies){
                        
                    				 </tbody>
                             </table>
-                            
+                            <br>
                             
                             <TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">

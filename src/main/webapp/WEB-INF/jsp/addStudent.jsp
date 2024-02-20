@@ -552,8 +552,8 @@
 var xmlHttp;
     var count;
     function searchfeecategory() {
-		var addClass=document.getElementById('addclass').value;
-		var yoa=document.getElementById('yearofadmission').value;
+    	var addClass=document.getElementById('addclass').value;
+    	var yoa=document.getElementById('yearofadmission').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -672,7 +672,7 @@ $(document).ready(function() {
     });
 });
 </script>
- <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $('#myTable').dataTable( {
                     "sScrollY": "380px",
@@ -750,7 +750,7 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">PEN &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -998,28 +998,6 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-								<td class="alignLeft" >Weight&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Height
-								&nbsp;</td>
-							<td ><label> <input
-									name="bplcardno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
 							<td class="alignLeft">Students Caste &nbsp;</td>
 							<td ><label> <input name="studentscaste"
 							style="text-transform:capitalize;"
@@ -1033,13 +1011,57 @@ $(document).ready(function() {
 										<option selected></option>
 										<option>General</option>
 										<option>OBC</option>
-										<option>SC/ST</option>
-										<option>Minority</option>
+										<option>SC</option>
+										<option>ST</option>
 								</select>
 
 							</label></td>
 						</tr>
-							
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
+							<td>&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" />
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+								&nbsp;</td>
+							<td ><label> <input
+									name="bplcardno" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bplcardno" size="36">
+
+							</label></td>
+						</tr>	
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft" >Bag No.&nbsp;</td>
+								<td><input
+									name="bhagyalakshmibondnumber" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
+							</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td ><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="disabilitychild" size="36">
+
+							</label></td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1101,7 +1123,7 @@ $(document).ready(function() {
 
 						<tr>
 						
-						<!-- 	<td class="alignLeft"  >RTE
+							<td class="alignLeft"  >RTE
 										&nbsp;</td>
 
 									<td  >&nbsp;Yes<input
@@ -1110,15 +1132,8 @@ $(document).ready(function() {
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>
-										 -->
-							<td  class="alignLeft">Student's Aadhar Card No.&nbsp;</td>
-							<td ><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="disabilitychild" size="36">
-
-							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Mark of Identification &nbsp;</td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
 							<td ><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="36"
 									style="text-transform:capitalize;"
@@ -1146,7 +1161,7 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()" >
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
@@ -1551,7 +1566,7 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td class="alignLeft">Father's Occupation
+									<td class="alignLeft">Father's Aadhar No
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
@@ -1559,7 +1574,7 @@ $(document).ready(function() {
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Occupation
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
@@ -1826,7 +1841,7 @@ $(document).ready(function() {
 
 
 
-							<td class="alignLeft" style="padding-left: 20px;">Percentage of Marks &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:capitalize;"
@@ -2027,7 +2042,6 @@ $(document).ready(function() {
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
-							<br/>
 							</td>
 							
 						</tr>
@@ -2116,5 +2130,4 @@ $(document).ready(function() {
 						</script>
 </body>
 </html>
-
 

@@ -107,7 +107,7 @@ public class JspController {
 	}
 
 	@GetMapping("/left_teacher")
-	public String getLeftReception() {
+	public String getLeftTeacher() {
 		return "left_teacher";
 	}
 
@@ -117,7 +117,7 @@ public class JspController {
 	}
 
 	@GetMapping("/header_teacher")
-	public String getHeaderFeescollector() {
+	public String getHeaderTeacher() {
 		return "header_teacher";
 	}
 
@@ -435,5 +435,30 @@ public class JspController {
 	@GetMapping("/student_details_other_feesstructure_admin")
 	public String getStudentDetailsOtherFeesstructureAdmin() {
 		return "student_details_other_feesstructure_admin";
+	}
+	
+	@GetMapping("/reports_teacher")
+	public String getReportsTeacher() {
+		return "reports_teacher";
+	}
+	
+	@GetMapping("/index_feescollector")
+	public String getIndexFeescollector() {
+		return "index_feescollector";
+	}
+	
+	@GetMapping("/header_feescollector")
+	public String getHeaderFeescollector() {
+		return "header_feescollector";
+	}
+	
+	@GetMapping("/left_feescollector")
+	public String getLeftFeescollector() {
+		return "left_feescollector";
+	}
+	
+	@GetMapping("/reports_feescollector")
+	public String getReportsfeescollector() {
+		return "reports_feescollector";
 	}
 }

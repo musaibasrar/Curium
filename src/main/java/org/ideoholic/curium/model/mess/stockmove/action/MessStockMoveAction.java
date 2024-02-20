@@ -42,7 +42,7 @@ public class MessStockMoveAction {
 		 * response).viewStockEntryDetails();
 		 */
 		new MessStockMoveService(request, response).viewStockMoveDetails();
-		return "issuestock";
+		return "billsreport";
 	}
 
 	@RequestMapping(value = "/issueItems", method = { RequestMethod.GET, RequestMethod.POST })

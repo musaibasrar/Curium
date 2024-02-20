@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">PEN
+                        <td width="25%" class="alignLeft" height="50">STS Number
 								</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.sts}" />
@@ -567,20 +567,6 @@ for(Cookie cookie : cookies){
                             </td>
                          
                         </tr>
-                        
-                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Weight
-                            </td>
-                            <td width="25%" class="tablerows" >
-                               <c:out default="" value="${student.bhagyalakshmibondnumber}" />
-                            </td>
-                            <td  width="25%"  class="alignLeft" height="50" >height
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.bplcardno}" />
-                            </td>                        
-                        
-                        </tr>
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Students Caste
                             </td>
@@ -595,7 +581,40 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
+                        <tr>
+                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.belongtobpl ==0)}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                <c:if test="${(student.belongtobpl ==1)}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+           						 
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.bplcardno}" />
+                            </td>                        
                         
+                        </tr>
+                        
+                        <tr>
+                         <td  width="25%"  class="alignLeft" height="50" >Bag No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.bhagyalakshmibondnumber}" />
+                            </td>
+                            
+                            <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.disabilitychild}" />
+                            </td>                        
+                        </tr>
                         <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Special Category
                             </td>
@@ -611,7 +630,7 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                         <%-- <td  width="25%"  class="alignLeft" height="50" >RTE
+                         <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
                             <td width="25%" class="tablerows" >
                                
@@ -622,15 +641,9 @@ for(Cookie cookie : cookies){
            						  <c:out default="" value="No" />
            						 </c:if>
            						 
-                            </td> --%>
-                            
-                            <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.disabilitychild}" />
                             </td>
    
-                            <td  width="25%"  class="alignLeft" height="50">Mark of Identification
+                            <td  width="25%"  class="alignLeft" height="50">Remarks
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
@@ -802,7 +815,7 @@ for(Cookie cookie : cookies){
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Percentage of Marks</td>
+                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
@@ -918,12 +931,12 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Occupation</td>
+                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Occupation
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />

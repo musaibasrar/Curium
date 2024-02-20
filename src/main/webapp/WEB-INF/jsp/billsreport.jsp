@@ -508,7 +508,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessItemsMoveProcess&action=saveStockMove";
+			form1.action = "/abc/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -518,7 +518,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
+		form1.action = "/abc/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -526,21 +526,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.action = "/abc/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
+		form1.action = "/abc/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
+		form1.action = "/abc/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -586,7 +586,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=CustomerLastPrice&action=getCustomerLastPrice&customerName="+customerName+"&itemid="+itemId+"",true);
+			xmlHttp.open("GET", "/abc/CustomerLastPrice/getCustomerLastPrice&customerName="+customerName+"&itemid="+itemId+"",true);
 			xmlHttp.send(null);
 	}
 	
@@ -781,11 +781,11 @@
 		            
 		            if(itemscancelled == "true"){
 		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            	 });
 		            	 }else if(itemscancelled == "false"){
 		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            		 });
 		            	 }
 		            
@@ -806,7 +806,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -827,8 +827,8 @@ for(Cookie cookie : cookies){
 		
 		%>
 		
-		<div class="alert-box success" id="div1">Items has been cancelled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Items cancellation failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box success" id="div1">Items has been cancelled successfully!!!&nbsp;&nbsp;&nbsp;<!-- <button class="button" id="1" onclick="closediv(this.id);">OK</button> --></div>
+		<div class="alert-box failure" id="div2">Items cancellation failed, please try again!!!&nbsp;&nbsp;&nbsp;<!-- <button class="buttonred" id="2" onclick="closediv(this.id);">OK</button> --></div>
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">

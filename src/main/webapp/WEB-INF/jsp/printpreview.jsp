@@ -499,7 +499,7 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;PEN</td>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
   </tr>
   <tr>

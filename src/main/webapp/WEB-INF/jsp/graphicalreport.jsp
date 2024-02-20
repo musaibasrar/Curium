@@ -636,10 +636,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><c:out value="${Parents.student.admissionnumber}" /></td>
 							<%-- 					<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/abc/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
+								href="/abc//abc/StudentProcess/ViewDetails&id=<c:out value='${Parents.student.sid}'
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
-									Controller?process=MarksDetailsProcess/getStudentGraph--%>
+									/abc/MarksDetailsProcess/getStudentGraph--%>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							<input type="hidden" id="examclass" name="examclass"

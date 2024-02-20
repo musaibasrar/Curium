@@ -315,15 +315,15 @@ for(Cookie cookie : cookies){
             </div>
             
             
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/abc/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
@@ -358,7 +358,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
              <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
@@ -374,7 +374,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+             <!--  <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -384,7 +384,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
 
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
@@ -404,7 +404,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -442,7 +442,7 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
-            
+             -->
               <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
