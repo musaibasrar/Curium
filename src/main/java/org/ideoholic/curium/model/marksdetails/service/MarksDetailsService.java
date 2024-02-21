@@ -687,7 +687,7 @@ public boolean generateReportParent() {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			String studentUID = request.getParameter("id");
-			Student student = new studentDetailsDAO().readploginUniqueObject(Long.parseLong(studentUID));
+			Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");

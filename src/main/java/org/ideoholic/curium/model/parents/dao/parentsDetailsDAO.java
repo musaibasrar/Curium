@@ -80,13 +80,13 @@ public class parentsDetailsDAO {
         return parents;
 	}
 //code for readploginUniqueObject
-	public Parents readploginUniqueObject(long id) {
+	public Parents readploginUniqueObject(String id) {
 		Parents parents = new Parents();
         try {
             //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from Parents as parents where parents.Student.studentexternalid=" + id);
+            Query query = session.createQuery("from Parents as parents where parents.Student.studentexternalid='"+id+"'" );
             parents = (Parents) query.uniqueResult();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

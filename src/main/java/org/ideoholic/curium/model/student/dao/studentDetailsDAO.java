@@ -140,7 +140,7 @@ public class studentDetailsDAO {
 		return student;
 	}
 	//code for readploginUniqueObject
-	public Student readploginUniqueObject(long id) {
+	public Student readploginUniqueObject(String id) {
 		Student student = new Student();
 		try {
 			// this.session =
@@ -148,8 +148,7 @@ public class studentDetailsDAO {
 
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Student as student where student.studentexternalid="
-							+ id);
+					.createQuery("from Student as student where student.studentexternalid='"+id+"'");
 			student = (Student) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

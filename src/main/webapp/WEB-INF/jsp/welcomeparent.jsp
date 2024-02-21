@@ -118,9 +118,9 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/demov2/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/demov2/images/diary.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Diary
+								href="/meps/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/meps/images/diary.svg" width="50" height="50"
+									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
         				</tr>
@@ -157,6 +157,24 @@ for(Cookie cookie : cookies){
 								href="/demov2/MarksDetailsProcess/generateReportParent?id=${username}"> <img
 									src="/demov2/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	<br>
+        	
+        	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#9D0176">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
+								href="/meps/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/meps/images/logbook.svg" width="50" height="50"
+									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>
         				</tr>

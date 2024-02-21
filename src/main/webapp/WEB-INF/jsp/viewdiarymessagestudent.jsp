@@ -16,7 +16,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Diary Message</title>
+	 <title>Student Logbook</title>
 	<link rel="stylesheet" href="/meps/css/bootstrap3.min.css">
 	<script type="text/javascript" src="/meps/js/openWindow.js"></script>
 	
@@ -87,7 +87,7 @@ form{
 }
 .btn{
 	transition: all .5s ease;
-	width: 70%;
+	//width: 70%;
 	border-radius: 30px;
 	color:#1786b4;
 	font-weight: 600;
@@ -95,6 +95,7 @@ form{
 	border: 1px solid #1786b4;
 	margin-top: 1.5em;
 	margin-bottom: 1em;
+	
 }
 .btn:hover, .btn:focus{
 	background-color: #1786b4;
@@ -121,49 +122,31 @@ form{
                 
         
        <!-- Main Content -->
-	<div class="container-fluid">
-		<div class="row main-content  text-center" style=" border:2px solid black; display:block" >
-			<div class="container-fluid">
-		<div class="row">
-						<h3>Student Diary</h3>
+       	<div class="row" align="center">
+						<h3>Logbook</h3>
 					</div>
+	<div class="container-fluid">
+		<div class="row main-content  text-center" style=" border:2px solid black; width:100%;margin:0px;" >
+			<div class="container-fluid">
+	
 					<div class="row">
-								<label>Subject</label><input type="text"  class="form__input" value=" ${diary.subject}">
+								<label style="font-size:45px;">Subject</label><input type="text" style="font-size:45px;" class="form__input" value=" ${studentdiary.subject}">
 							</div>
 							<div class="row">
 							<!-- <textarea class="form__input" > -->
-							 	<label>Message</label><p style="text-align:justify ;margin:0px 50px 0px 50px;">${diary.message}</p><br><br><br>
+							 	<label style="font-size:45px;">Message</label><p style="text-align:justify ;margin:0px 50px 0px 50px;font-size:45px;">${studentdiary.message}</p><br><br><br>
 							</div>
 					</div>
-		<!-- 	<div class="col-md-4 text-center company__info">
-			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 100px;" alt="ideoholic" src="/meps/images/meps/.png"></h2>
-			<h2 style="font-weight: bold;">Roshan<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/meps/images/shaheenwhitelogo.png"> </h2></span>
 			</div>
-			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
-				<div class="container-fluid">
-					<div class="row">
-						<h3>Student Diary</h3>
-					</div>
-					<div class="row">
-						<form action="/meps/UserProcess/authenticateUser"  method="post" class="form-group">
+	</div>
+	<div class="container-fluid"  align="center">
+					
+						<form action="/meps/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row">
-								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="${diary.subject}">
-							</div>
-							<div class="row">
-								<input type="password" name="password" id="password" class="form__input" placeholder="${diary.message}">
-							</div>
-							
-							<div class="row">
-								<input type="submit" value="Login" class="btn">
+								<input type="submit" value="Back" class="btn">
 							</div>
 						</form>
-					</div>
 					
 				</div>
-			</div>-->
-		</div>
-	</div>
-	
     </body>
 </html>

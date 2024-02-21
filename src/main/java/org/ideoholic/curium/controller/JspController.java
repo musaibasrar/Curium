@@ -495,4 +495,24 @@ public class JspController {
 	public String getWelcomeparent() {
 		return "welcomeparent";
 	}
+	@GetMapping("/studentdiary")
+	public String getStudentDiary() {
+		return "studentdiary";
+	}
+	@GetMapping("/studentviewdiary")
+	public String getStudentViewDiary() {
+		return "studentviewdiary";
+	}
+	@GetMapping("/studentviewdiarymessage")
+	public String getStudentViewDiaryMessage() {
+		return "studentviewdiarymessage";
+	}
+	@GetMapping("/viewdiarymessagestudent")
+	public String getViewDiaryMessageStudent() {
+		return "viewdiarymessagestudent";
+	}
+	@GetMapping("/viewdiarystudent")
+	public String getViewDiaryStudent() {
+		return "viewdiarystudent";
+	}
 }

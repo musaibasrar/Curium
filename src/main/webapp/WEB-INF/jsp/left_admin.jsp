@@ -937,12 +937,29 @@ for(Cookie cookie : cookies){
             			
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/meps/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>
             			</td>
             			
             		</tr>
             		
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Student Diary</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/meps/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Student Diary</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/meps/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Student Diary</a>
+            			</td>
+            			
+            		</tr>
                 </table>
             </div>
             </div>

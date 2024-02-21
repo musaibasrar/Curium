@@ -121,7 +121,7 @@ for(Cookie cookie : cookies){
 								<a target="mainFrame" href="/meps/welcomeparent" ><img src="/meps/images/curiumheader.png" width="206" height="75"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/meps/images/demov2header.png"
+							<!-- <td align="left"><img src="/meps/images/meps/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="right"><a target="mainFrame" href="/meps/welcomeparent" style="font-size: 40px;"> <img
 									src="/meps/images/home.svg" width="80" height="60" 
