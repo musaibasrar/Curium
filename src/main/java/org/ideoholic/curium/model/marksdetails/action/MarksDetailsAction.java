@@ -64,12 +64,20 @@ public class MarksDetailsAction {
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
 			return "markssheet";
-			// return "reportcardsaved";
 		} else {
 			return "error";
 		}
 	}
-
+	
+	@GetMapping("/generateReportParent")
+	public String generateReportParent() {
+		if (new MarksDetailsService(request, response).generateReportParent()) {
+			return "markssheet";
+		} else {
+			return "error";
+		}
+	}
+	
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		if (new MarksDetailsService(request, response).deleteMultiple()) {
@@ -147,7 +155,6 @@ public class MarksDetailsAction {
 	public String generateRankReport() {
 		if (new MarksDetailsService(request, response).generateRankReport()) {
 			return "studentRankReport";
-			// return "reportcardsaved";
 		} else {
 			return "error";
 		}

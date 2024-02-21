@@ -522,15 +522,14 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">
 										<option selected></option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
 										<option>2022/23</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
 										<option>2019/20</option>
 										<option>2018/19</option>
 										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
 								</select>
 
 							</label> 
@@ -588,8 +587,6 @@ for(Cookie cookie : cookies){
                 <h class="dataTextFees">Total Fees Due : </h>
                 <h class="dataTextDueFees"> Rs.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Concession : Rs.  ${totalfeesconcession}</h>
-                <h class="dataTextFees">Total Fine : Rs.  ${totalfineamount}</h>
-                <h class="dataTextFees">Total Misc. : Rs.  ${totalmiscamount}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
@@ -597,6 +594,7 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
+                            <th title="click to sort" class="headerText">my name</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Installments&nbsp;</th>
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
@@ -616,6 +614,7 @@ for(Cookie cookie : cookies){
 								name="sfsid" 
 								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${name}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
