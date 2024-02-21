@@ -932,13 +932,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/meps/DiaryProcess/getdiarystudent" style="font-size: 12px;">diary</a>
+            				 <a target="mainFrame" href="/abc/DiaryProcess/getdiarystudent" style="font-size: 12px;">diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/meps/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>
+            				 <a target="mainFrame" href="/abc/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>
             			</td>
             			
             		</tr>
@@ -950,13 +950,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/meps/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            				 <a target="mainFrame" href="/abc/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/meps/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				 <a target="mainFrame" href="/abc/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>

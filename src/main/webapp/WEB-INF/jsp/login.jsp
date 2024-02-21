@@ -139,9 +139,9 @@ form{
                 }else if(type=='teacher'){
                 	window.open('/abc/index_teacher','_self');
                 }else if(type=='marksentry'){
-                	window.open('/meps/index_marksentry','_self');
+                	window.open('/abc/index_marksentry','_self');
                 }else if(type=='parents'){
-                	window.open('/meps/index_parents','_self');
+                	window.open('/abc/index_parents','_self');
                 }
             }
             else if(!flag1){
