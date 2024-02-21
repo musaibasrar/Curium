@@ -8,16 +8,10 @@
 <meta charset="UTF-8">
 <title>index_parents</title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <link 
-
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min
-
-.css" rel="stylesheet" integrity="sha384-
-
-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-
-crossorigin="anonymous">
- 
+<link rel="stylesheet" href="/meps/css/bootstrap.min.css">
+        <script src="/meps/js/jquery.min.js"></script>
+        <script src="/meps/js/bootstrap.min.js"></script>
+        <script src="/meps/js/popper.min.js"></script> 
  <style>
  .container{
 border: 0px solid red;
@@ -119,17 +113,6 @@ font-size:70px;
             setTimeout("init()",100)
 
         </script>
-        <link rel="stylesheet" 
-
-href="https://cdnjs.cloudflare.com/ajax/libs/font-
-
-awesome/6.4.2/css/all.min.css" integrity="sha512-
-
-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn
-
-+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
-
-crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <%
 //allow access only if session exists
@@ -147,7 +130,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
+    <frameset    rows="95,*"frameborder="0" border="0" framespacing="0"  >
     
     
 		   <c:if test="${(userType == 'parents')}">
