@@ -18,23 +18,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Exhibition Certificate</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
+<title>New Enquiry</title>
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 
 
 
@@ -42,6 +42,7 @@
 
 <style type="text/css">
 .myclass {
+	font-size: 1.3em;
 	border-top-style: solid;
 	border-right-style: solid;
 	border-bottom-style: solid;
@@ -55,11 +56,11 @@
 	border-bottom-width: 1px;
 	border-left-width: 1px;
 	width: auto;
-	height: auto;
+	height: 28px;
 	color: black;
 	text-transform: capitalize;
+	border-radius: 4px;
 }
-
 <!--
 .divCSS {
 	overflow: scroll;
@@ -243,10 +244,10 @@
 
 
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
 
-<script src="/roshan/JavaScript/actb.js"></script>
-<script src="/roshan/JavaScript/common.js"></script>
+<script src="/abc/JavaScript/actb.js"></script>
+<script src="/abc/JavaScript/common.js"></script>
 
 
 
@@ -291,9 +292,9 @@
 		});
 </script>
 <script type="text/javascript">
-	function addDiary() {
+	function saveEnquiry() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/EnquiryProcess/genarateNewCertificate";
+		form1.action = "/abc/EnquiryProcess/genarateNewCertificate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -301,8 +302,8 @@
 	$(function() {
 
 		$("#tabs").tabs();
-		$("#savediary").button().click(function() {
-			addDiary();
+		$("#saveenquiry").button().click(function() {
+			saveEnquiry();
 		});
 		//$("#effect").hide();
 
@@ -314,7 +315,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -336,7 +337,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Certificate</a></li>
+					<li><a href="#tabs-1">Enquiry</a></li>
 				<!-- 	<li><a href="#tabs-2">Staff</a></li>
 					<li><a href="#tabs-3">Selected Numbers</a></li>-->
 				</ul>
@@ -354,9 +355,9 @@ for(Cookie cookie : cookies){
 										
 						<tr>
 						
-						<td style="font-weight: bold">Name &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Name &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="subject"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
@@ -369,9 +370,9 @@ for(Cookie cookie : cookies){
 
 						<tr>
 						
-						<td style="font-weight: bold">Place &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Place &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="place"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
@@ -383,74 +384,72 @@ for(Cookie cookie : cookies){
 						
 					<tr>
 						
-						<td style="font-weight: bold">Mobile No. &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Mobile No. &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="mobile"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
 						</tr>
-						<!-- 
 						<tr>
 						
-						<td style="font-weight: bold">Father Name &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Father Name &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="fathername"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
 						</tr>
 						<tr>
 						
-						<td style="font-weight: bold">Mother Name &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Mother Name &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="mothername"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
 						</tr>
 						<tr>
 						
-						<td style="font-weight: bold">Admission Class &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Admission Class &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="admissionclass"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
 						</tr>
 						<tr>
 						
-						<td style="font-weight: bold">Date of Birth &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Date of Birth &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="dob"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
 						</tr>
 						<tr>
+						
+						<td style="font-weight: bold;font-size: 20px;">Place &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="place"
+											type="text" class="myclass" id="subject" 
+											/>
+							</label></td>
+							
+						</tr>
+						<!-- <tr>
 						
 						<td style="font-weight: bold">Place &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="place"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
-						</tr>
+						</tr> -->
 						<tr>
 						
-						<td style="font-weight: bold">Place &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="place"
-											type="text" class="textField" id="subject" 
-											/>
-							</label></td>
-							
-						</tr>
-						 -->
-						<tr>
-						
-						<td style="font-weight: bold">Date &nbsp;</td>
+						<td style="font-weight: bold;font-size: 20px;">Date &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="date"
-											type="text" class="textField" id="subject" 
+											type="text" class="myclass" id="subject" 
 											/>
 							</label></td>
 							
@@ -489,7 +488,7 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td align="center">
 
-										<button id="savediary">Generate Certificate</button>
+										<button id="saveenquiry">save</button>
 
 										
 									</td>
