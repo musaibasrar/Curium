@@ -321,7 +321,7 @@ for(Cookie cookie : cookies){
 	                                	<tr style="border: 1px solid black;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-(${dateParts[2]})-(${dateParts[1]})</td>
+	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
 	                                	</tr>
 	                                </c:forEach>
 	                                		<tr style="border-top: 1px solid black;">

@@ -136,10 +136,9 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td ><img src="/abc/images/abc.jpg" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.8143802598&nbsp;&nbsp;&nbsp;</h6>
-			    <h6 style="margin-top:0px;">	Email: alfalahhighschool@gmail.com</h6>
+				<h1 style="margin-bottom:0px;">	ABC English Medium School</h1>
+				<h4 style="margin-top:0px;margin-bottom:0px;">	Misbah Nagar, Ring Road, Shah Jeelani Cross, Gulbarga-585103</h4>
+				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.9886049555&nbsp;&nbsp;&nbsp;</h6>
 				</td>
 			</tr>
 		
