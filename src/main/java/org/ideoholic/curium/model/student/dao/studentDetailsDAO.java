@@ -788,4 +788,21 @@ public class studentDetailsDAO {
 			return results;
 		}
 	}
+
+	public List<Student> getListofsid(String classsec) {
+		List<Student> results = new ArrayList<Student>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Student where classstudying = "+classsec+"");
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 }
