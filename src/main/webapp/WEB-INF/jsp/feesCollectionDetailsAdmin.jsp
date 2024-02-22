@@ -12,9 +12,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Collecion Details</title>
-<link rel="stylesheet" href="/lilyrose/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/lilyrose/css/datePicker/demos.css">
-<link rel="stylesheet" href="/lilyrose/css/font-awesome.css">
+<link rel="stylesheet" href="/alfalah/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alfalah/css/datePicker/demos.css">
+<link rel="stylesheet" href="/alfalah/css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -306,42 +306,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/lilyrose/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/lilyrose/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/alfalah/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/alfalah/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/lilyrose/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/alfalah/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/lilyrose/js/datePicker/ui/sliderAccess.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/alfalah/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/alfalah/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/lilyrose/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/alfalah/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/alfalah/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/alfalah/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -403,11 +403,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/lilyrose/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/alfalah/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/lilyrose/UserProcess/searchByDate";
+		form1.action = "/alfalah/UserProcess/searchByDate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -571,7 +571,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalah/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -585,7 +585,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/lilyrose/FeesDetails/exportDataForFees" method="POST">
+		action="/alfalah/FeesDetails/exportDataForFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
@@ -703,6 +703,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Cancel Receipt</th>
+
+
                         </tr>
                     </thead>
 
@@ -720,7 +723,9 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/alfalah/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/alfalah/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+
                             </tr>
                         </c:forEach>
                     </tbody>
