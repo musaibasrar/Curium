@@ -23,10 +23,10 @@ public class EnquiryAction {
 	@Autowired
 	HttpSession httpSession;
 	
-	@GetMapping("/newCertificate")
-	public String NewCertificateDetail() {
+	@GetMapping("/newEnquiry")
+	public String NewEnquiryDetail() {
 		new StandardService(request, response).viewClasses(); 
-		return "newcertificate";
+		return "newenquiry";
 	}
 
 	@PostMapping("/genarateNewCertificate")
