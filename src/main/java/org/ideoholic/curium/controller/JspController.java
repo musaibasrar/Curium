@@ -515,4 +515,75 @@ public class JspController {
 	public String getViewDiaryStudent() {
 		return "viewdiarystudent";
 	}
+	
+	@GetMapping("/exportsuccessappointment")
+	public String getExportSuccessAppointment() {
+		return "exportsuccessappointment";
+	}
+
+	@GetMapping("/printappointmentsreport")
+	public String getPrintAppointmentsReport() {
+		return "printappointmentsreport";
+	}
+
+	@GetMapping("/appointmentsreport")
+	public String getAppointmentsReport() {
+		return "appointmentsreport";
+	}
+
+	@GetMapping("/appointments")
+	public String getAppointments() {
+		return "appointments";
+	}
+
+	@GetMapping("/appointmentsuccess")
+	public String getAppointmentsuccess() {
+		return "appointmentsuccess";
+	}
+
+	@GetMapping("/exportsuccessquery")
+	public String getExportsuccessquery() {
+		return "exportsuccessquery";
+	}
+
+	@GetMapping("/feedbackthankyou")
+	public String getFeedbackthankyou() {
+		return "feedbackthankyou";
+	}
+
+	@GetMapping("/feedbackthankyoufail")
+	public String getFeedbackthankyoufail() {
+		return "feedbackthankyoufail";
+	}
+
+	@GetMapping("/printqueriesreport")
+	public String getPrintqueriesreport() {
+		return "printqueriesreport";
+	}
+
+	@GetMapping("/queriesreport")
+	public String getQueriesreport() {
+		return "queriesreport";
+	}
+
+	@GetMapping("/queries")
+	public String getQueries() {
+		return "queries";
+	}
+
+	@GetMapping("/querysuccess")
+	public String getQuerysuccess() {
+		return "querysuccess";
+	}
+
+	@GetMapping("/index_staff")
+	public String getIndexstaff() {
+		return "index_staff";
+	}
+
+	@GetMapping("/header_staff")
+	public String getHeaderstaff() {
+		return "header_staff";
+	}
+
 }

@@ -639,4 +639,22 @@ public class EmployeeService {
 	    return result;
 
 }
+
+	public boolean viewDetailsEmployeeStaffLogin() {
+		 boolean result = false;
+	        try {
+	            Teacher employee = new EmployeeDAO().getEmployeeDetails(httpSession.getAttribute("username").toString());
+	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	           
+	            if (employee.getTid() != null) {
+	            	httpSession.setAttribute("employee", employee);
+	                request.setAttribute("stafflogin", employeeLogin);
+	                return true;
+	            } 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            result = false;
+	        }
+	        return result;
+	}
 }
