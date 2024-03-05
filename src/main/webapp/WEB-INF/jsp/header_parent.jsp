@@ -7,10 +7,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/futurestars/css/bootstrap.min.css">
+        <script src="/futurestars/js/jquery.min.js"></script>
+        <script src="/futurestars/js/bootstrap.min.js"></script>
+        <script src="/futurestars/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -85,7 +85,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/logout";
+                form1.action="/futurestars/UserProcess/logout";
                 form1.submit();
             }
 
@@ -95,7 +95,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -118,19 +118,19 @@ for(Cookie cookie : cookies){
 						<tr style="height: 85px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/abc/welcomeparent" ><img src="/abc/images/curiumheader.png" width="206" height="75"/></a>
+								<a target="mainFrame" href="/futurestars/welcomeparent" ><img src="/futurestars/images/curiumheader.png" width="206" height="75"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/abc/images/abc/header.png"
+							<!-- <td align="left"><img src="/futurestars/images/futurestars/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td align="right"><a target="mainFrame" href="/abc/welcomeparent" style="font-size: 40px;"> <img
-									src="/abc/images/home.svg" width="80" height="60" 
+							<td align="right"><a target="mainFrame" href="/futurestars/welcomeparent" style="font-size: 40px;"> <img
+									src="/futurestars/images/home.svg" width="80" height="60" 
 									alt="Home" style="vertical-align: center;" />Home
 							</a></td>
 
 							<td align="right" style="width: 242px;"><a target="_parent" style="font-size: 40px;"
-								href="/abc/UserProcess/logout"><img
-									src="/abc/images/logout.svg" width="80" height="57" alt="Log Out" 
+								href="/futurestars/UserProcess/logout"><img
+									src="/futurestars/images/logout.svg" width="80" height="57" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>
