@@ -14,28 +14,32 @@ public class Enquiry implements java.io.Serializable{
 	private String fathername;
 	private String mothername;
 	private String admissionclass;
-	private Date dateofbirth;
 	private String address;
 	private String mobileno;
-	private String siblingstudy;
-	private String lastschool;
+	private String siblings;
+	private String academicyear;
 	private Date createddate;
 	private String status;
+	private int branchid;
+	private int userid;
+	
 	
 	public Enquiry() {
 	}
-	public Enquiry(int id, String name, String fathername, String mothername, String admissionclass, Date dateofbirth,
-			String address, String mobileno, String siblingstudy, String lastschool) {
+	public Enquiry(int id, String name, String fathername, String mothername, String admissionclass, Date createddate,
+			String address, String mobileno, String siblings, String academicyear, String status,int branchid,int userid) {
 		this.id = id;
 		this.name = name;
 		this.fathername = fathername;
 		this.mothername = mothername;
 		this.admissionclass = admissionclass;
-		this.dateofbirth = dateofbirth;
 		this.address = address;
 		this.mobileno = mobileno;
-		this.siblingstudy = siblingstudy;
-		this.lastschool = lastschool;
+		this.siblings = siblings;
+		this.academicyear = academicyear;
+		this.status= status;
+		this.branchid = branchid;
+		this.userid = userid;
 	}
 	
 	@Column(name = "id")
@@ -47,7 +51,7 @@ public class Enquiry implements java.io.Serializable{
 		this.id = id;
 	}
 	
-	@Column(name = "name", length = 45)
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -56,7 +60,7 @@ public class Enquiry implements java.io.Serializable{
 		this.name = name;
 	}
 	
-	@Column(name = "fathername", length = 45)
+	@Column(name = "fathername")
 	public String getFathername() {
 		return fathername;
 	}
@@ -65,7 +69,7 @@ public class Enquiry implements java.io.Serializable{
 		this.fathername = fathername;
 	}
 	
-	@Column(name = "mothername", length = 45)
+	@Column(name = "mothername")
 	public String getMothername() {
 		return mothername;
 	}
@@ -74,7 +78,7 @@ public class Enquiry implements java.io.Serializable{
 		this.mothername = mothername;
 	}
 	
-	@Column(name = "admissionclass", length = 45)
+	@Column(name = "admissionclass")
 	public String getAdmissionclass() {
 		return admissionclass;
 	}
@@ -83,16 +87,7 @@ public class Enquiry implements java.io.Serializable{
 		this.admissionclass = admissionclass;
 	}
 	
-	@Column(name = "dateofbirth", length = 45)
-	public Date getDateofbirth() {
-		return dateofbirth;
-	}
-	
-	public void setDateofbirth(Date dateofbirth) {
-		this.dateofbirth = dateofbirth;
-	}
-	
-	@Column(name = "address", length = 45)
+	@Column(name = "address")
 	public String getAddress() {
 		return address;
 	}
@@ -101,7 +96,7 @@ public class Enquiry implements java.io.Serializable{
 		this.address = address;
 	}
 	
-	@Column(name = "mobileno", length = 45)
+	@Column(name = "mobileno")
 	public String getMobileno() {
 		return mobileno;
 	}
@@ -110,22 +105,47 @@ public class Enquiry implements java.io.Serializable{
 		this.mobileno = mobileno;
 	}
 	
-	@Column(name = "siblingstudy", length = 45)
-	public String getSiblingstudy() {
-		return siblingstudy;
+	@Column(name = "siblings")
+	public String getSiblings() {
+		return siblings;
 	}
 	
-	public void setSiblingstudy(String siblingstudy) {
-		this.siblingstudy = siblingstudy;
+	public void setSiblings(String siblings) {
+		this.siblings = siblings;
 	}
 	
-	@Column(name = "lastschool", length = 45)
-	public String getLastschool() {
-		return lastschool;
+	public String getAcademicyear() {
+		return academicyear;
+	}
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
 	}
 	
-	public void setLastschool(String lastschool) {
-		this.lastschool = lastschool;
+	public Date getCreateddate() {
+		return createddate;
 	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getBranchid() {
+		return branchid;
+	}
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	
     
 }
