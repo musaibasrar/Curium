@@ -358,6 +358,7 @@
 
 <script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
+
 	function searchStudentsForCharacterCertificate() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/shatabdi/DocumentsProcess/searchStudentsForCharacter";

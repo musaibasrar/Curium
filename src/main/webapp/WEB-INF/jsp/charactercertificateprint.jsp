@@ -90,7 +90,6 @@ span{
     display:inline-block;
     border-bottom:2px solid black;
     padding-bottom:1px;
-   // width: 200px;
     font-weight: normal;
     text-align:center;
 }
@@ -125,6 +124,8 @@ span{
         		form1.submit();
             }
         </script>
+	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
 </head>
 <%
@@ -155,15 +156,15 @@ for(Cookie cookie : cookies){
 				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	A SENIOR SECONDARY SCHOOL</h4>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	AFFILIATED TO CBSE,DELHI,AFF NO.330113</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARI HILL ROAD,GAYA - 823001(BIHAR)</h4>
-				
+				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARY HILL ROAD,GAYA - 823003(BIHAR)</h4>
 				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.0631-2226652,2220344&nbsp;&nbsp;&nbsp;
+				Fax:031-2221386&nbsp;&nbsp;&nbsp;
 				Mobile No. 8936846757</h6>
-			    <h6 style="margin-top:0px;">	Email: shatabdi.public@gmail.com</h6>
+			    <h6 style="margin-top:0px;">	Email: shatabdipublic@gmail.com</h6>
 				</td>
 			</tr>
 		
-			</table><table align="center">
+			</table><table>
 			
 			
 			<tr>
@@ -186,7 +187,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<span style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -197,12 +198,12 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
 					</h3></td></tr><tr>
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing Roll Number<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.sts}" /></span>
+					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					</h3>
 				</td>
 			
@@ -210,14 +211,14 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+			His/Her date of Birth as per our record is<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
 			</h3>
 			</td>
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="characterstudent" id="characterstudent" style="width: 200px" /></span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>character
 			</h3>
 			</td>
 			</tr>
@@ -264,8 +265,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td><button class="printtcstudent"  >Print</button></td>
-              <!-- <a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a> -->
+              <td align="center"><a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>
