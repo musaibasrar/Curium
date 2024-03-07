@@ -294,18 +294,18 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td>1</td>
 					<td>Pupil's Name</td>
-					<td style="width: 70%">&nbsp;<c:out
+					<td style="width: 70%;text-transform: capitalize;">&nbsp;<c:out
 							value="${parents.student.name}" /></td>
 				</tr>
 				<tr>
 					<td>2</td>
 					<td>Mother's Name</td>
-					<td><c:out value="${parents.mothersname}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.mothersname}" /></td>
 				</tr>
 				<tr>
 					<td>3</td>
 					<td>Father's Name</td>
-					<td><c:out value="${parents.fathersname}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></td>
 				</tr>
 				<tr>
 					<td>4</td>
@@ -357,12 +357,12 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td>10</td>
 					<td>Mark of Identification</td>
-					<td><c:out value="${parents.student.remarks}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.student.remarks}" /></td>
 				</tr>
 				<tr>
 					<td>11</td>
 					<td>Nationality</td>
-					<td><c:out value="${parents.student.nationality}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.student.nationality}" /></td>
 				</tr>
 				<tr>
 					<td>12</td>
@@ -372,7 +372,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td>13</td>
 					<td>Address</td>
-					<td><c:out value="${parents.addresspermanent}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.addresspermanent}" /></td>
 				</tr>
 				<tr>
 					<td>14</td>
@@ -395,22 +395,22 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td>17</td>
 					<td>Qualification of Father</td>
-					<td><c:out value="${parents.fathersqualification}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.fathersqualification}" /></td>
 				</tr>
 				<tr>
 					<td>18</td>
 					<td>Qualification of Mother</td>
-					<td><c:out value="${parents.mothersqualification}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.mothersqualification}" /></td>
 				</tr>
 				<tr>
 					<td>19</td>
 					<td>Occupation of Father</td>
-					<td><c:out value="${parents.fatherscastecertno}" /></td>
+					<td style="text-transform: capitalize;"><c:out value="${parents.fatherscastecertno}" /></td>
 				</tr>
 				<tr>
 					<td>20</td>
 					<td>Occupation of Mother</td>
-					<td><c:out default="" value="${parents.motherscastecertno}" /></td>
+					<td style="text-transform: capitalize;"><c:out default="" value="${parents.motherscastecertno}" /></td>
 				</tr>
 				<tr>
 					<td>21</td>
@@ -420,12 +420,12 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td>22</td>
 					<td>Local Guardian's Name(with Relation) & Address</td>
-					<td><c:out default="" value="${parents.student.guardiandetails}" /></td>
+					<td style="text-transform: capitalize;"><c:out default="" value="${parents.student.guardiandetails}" /></td>
 				</tr>
 				<tr>
 					<td>23</td>
 					<td>Name and Address of previous school</td>
-					<td><c:out default="" value="${parents.student.schoollastattended}" /></td>
+					<td style="text-transform: capitalize;"><c:out default="" value="${parents.student.schoollastattended}" /></td>
 				</tr>
 
 				<tr>

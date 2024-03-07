@@ -29,12 +29,13 @@ public class Transfercertificate implements java.io.Serializable {
 	private Integer sid;
 	private int branchid;
 	private int userid;
+	private Integer bookno;
 
 	public Transfercertificate() {
 	}
 
 	public Transfercertificate(String applicationstatus, Integer noofissues,
-			Date dateofissues, String generalconduct, String progress, Integer sid, int branchid, int userid) {
+			Date dateofissues, String generalconduct, String progress, Integer sid, int branchid, int userid, int bookno) {
 		this.applicationstatus = applicationstatus;
 		this.noofissues = noofissues;
 		this.dateofissues = dateofissues;
@@ -43,6 +44,7 @@ public class Transfercertificate implements java.io.Serializable {
 		this.sid = sid;
 		this.branchid = branchid;
 		this.userid = userid;
+		this.bookno = bookno;
 	}
 
 	@Id
@@ -126,6 +128,14 @@ public class Transfercertificate implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public Integer getBookno() {
+		return bookno;
+	}
+
+	public void setBookno(Integer bookno) {
+		this.bookno = bookno;
 	}
 
 }

@@ -33,6 +33,8 @@
  		<property name="userid" type="int">
  			<column name="userid" />
 		</property>
-		
+		<property name="bookno" type="java.lang.Integer">
+            <column name="bookno" />
+        </property>
     </class>
 </hibernate-mapping>

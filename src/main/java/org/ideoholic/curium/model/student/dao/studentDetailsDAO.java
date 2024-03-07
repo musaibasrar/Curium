@@ -774,7 +774,7 @@ public class studentDetailsDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query queryUpdate = session 
-					.createSQLQuery("update Student set notcissued = notcissued+1 where sid = '"+student.getSid()+"'");
+					.createSQLQuery("update student set notcissued = notcissued+1 where sid = '"+student.getSid()+"'");
 			queryUpdate.executeUpdate();
 			transaction.commit();
 			return true;

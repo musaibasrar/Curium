@@ -82,7 +82,7 @@ public class DocumentService {
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
-		String bookno = DataUtil.emptyString(request.getParameter("bookno"));
+		//String bookno = DataUtil.emptyString(request.getParameter("bookno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
@@ -106,25 +106,80 @@ public class DocumentService {
 		String Remarks = DataUtil.emptyString(request.getParameter("Remarks"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		int tcno = 348;
+		int bookno = 0;
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 Transfercertificate tcLastRow = new DocumentDAO().getTCLastRow();
 		 if(tcLastRow != null) {
 			tcno = tcLastRow.getTcid()+1;
+			bookno = tcLastRow.getBookno()+1;
 		 }
 		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
-			 
+			 tc.setBookno(bookno);
+			 tc.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 tc.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 String[] classStudying = parents.getStudent().getClassstudying().split("--");
+				 
+				 switch (classStudying[0]) {
+				case "Nursery":
+					classinword = "Class Nursery";
+					break;
+				case "L.K.G":
+					classinword = "Class Lower Kindergarten";
+					break;
+				case "U.K.G":
+					classinword = "Class Upper Kindergarten";
+					break;
+				case "I":
+					classinword = "Class First";
+					break;
+				case "II":
+					classinword = "Class Second";
+					break;
+				case "III":
+					classinword = "Class Third";
+					break;
+				case "IV":
+					classinword = "Class Fourth";
+					break;
+				case "V":
+					classinword = "Class Fifth";
+					break;
+				case "VI":
+					classinword = "Class Sixth";
+					break;
+				case "VII":
+					classinword = "Class Seventh";
+					break;
+				case "VIII":
+					classinword = "Class Eighth";
+					break;
+				case "IX":
+					classinword = "Class Nighth";
+					break;
+				case "X":
+					classinword = "Class Tenth";
+					break;
+				case "XI_SC":
+					classinword = "Class Eleventh";
+					break;
+				case "XII_SC":
+					classinword = "Class Twelfth";
+					break;
+				default:
+					break;
+				}
 				 request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
@@ -172,6 +227,59 @@ public class DocumentService {
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 
+			 String[] classStudying = parents.getStudent().getClassstudying().split("--");
+			 
+			 switch (classStudying[0]) {
+			case "Nursery":
+				classinword = "Class Nursery";
+				break;
+			case "L.K.G":
+				classinword = "Class Lower Kindergarten";
+				break;
+			case "U.K.G":
+				classinword = "Class Upper Kindergarten";
+				break;
+			case "I":
+				classinword = "Class First";
+				break;
+			case "II":
+				classinword = "Class Second";
+				break;
+			case "III":
+				classinword = "Class Third";
+				break;
+			case "IV":
+				classinword = "Class Fourth";
+				break;
+			case "V":
+				classinword = "Class Fifth";
+				break;
+			case "VI":
+				classinword = "Class Sixth";
+				break;
+			case "VII":
+				classinword = "Class Seventh";
+				break;
+			case "VIII":
+				classinword = "Class Eighth";
+				break;
+			case "IX":
+				classinword = "Class Nighth";
+				break;
+			case "X":
+				classinword = "Class Tenth";
+				break;
+			case "XI_SC":
+				classinword = "Class Eleventh";
+				break;
+			case "XII_SC":
+				classinword = "Class Twelfth";
+				break;
+			default:
+				break;
+			}
+			 
 			 request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);
