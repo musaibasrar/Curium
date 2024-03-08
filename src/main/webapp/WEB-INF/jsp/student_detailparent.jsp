@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/futurestars/css/bootstrap.min.css">
-    <script src="/futurestars/js/jquery.min.js"></script>
-    <script src="/futurestars/js/bootstrap.min.js"></script>
-    <script src="/futurestars/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/noblewisdom/css/bootstrap.min.css">
+    <script src="/noblewisdom/js/jquery.min.js"></script>
+    <script src="/noblewisdom/js/bootstrap.min.js"></script>
+    <script src="/noblewisdom/js/popper.min.js"></script>
         
 <style>
  .headerText {

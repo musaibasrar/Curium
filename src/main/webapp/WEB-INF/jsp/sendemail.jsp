@@ -18,22 +18,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Send Email</title>
-<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/futurestars/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/noblewisdom/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/futurestars/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/futurestars/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/futurestars/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/futurestars/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/noblewisdom/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/noblewisdom/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
 
 
 
@@ -286,10 +286,10 @@
 
 
 
-<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
 
-<script src="/futurestars/JavaScript/actb.js"></script>
-<script src="/futurestars/JavaScript/common.js"></script>
+<script src="/noblewisdom/JavaScript/actb.js"></script>
+<script src="/noblewisdom/JavaScript/common.js"></script>
 
 
 
@@ -555,7 +555,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -874,19 +874,19 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function sendEmailAll() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/futurestars/EmailProcess/sendAllEmail";
+								form1.action = "/noblewisdom/EmailProcess/sendAllEmail";
 								form1.submit();
 							}
 							
 							function sendSMSNumbers() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/futurestars/SMSProcess/sendNumbersSMS";
+								form1.action = "/noblewisdom/SMSProcess/sendNumbersSMS";
 								form1.submit();
 							}
 							
 							function sendSMSStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/futurestars/SMSProcess/sendStaffSMS";
+								form1.action = "/noblewisdom/SMSProcess/sendStaffSMS";
 								form1.submit();
 							}
 							

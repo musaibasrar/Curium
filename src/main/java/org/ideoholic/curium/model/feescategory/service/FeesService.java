@@ -284,7 +284,7 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "/futurestars/StudentProcess/ViewFeesStructure&id="+studentId; }
+	 * "/noblewisdom/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 

@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dash Board</title>
-        <script src="/futurestars/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/futurestars/css/bootstrap.min.css">
-        <script src="/futurestars/js/jquery.min.js"></script>
-        <script src="/futurestars/js/bootstrap.min.js"></script>
-        <script src="/futurestars/js/popper.min.js"></script>
+        <script src="/noblewisdom/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/noblewisdom/css/bootstrap.min.css">
+        <script src="/noblewisdom/js/jquery.min.js"></script>
+        <script src="/noblewisdom/js/bootstrap.min.js"></script>
+        <script src="/noblewisdom/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
 
 		@font-face {
 		  font-family: "IBMPlexSans";
-  		  src: url("/futurestars/fonts/IBMPlexSans-Regular.ttf");
+  		  src: url("/noblewisdom/fonts/IBMPlexSans-Regular.ttf");
 		}
 
 		#rcorners1 {
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -100,8 +100,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/futurestars/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/futurestars/images/studentprofile.svg" width="50" height="50"
+								href="/noblewisdom/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/noblewisdom/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
         					</td>
@@ -118,8 +118,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/futurestars/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/futurestars/images/diary.svg" width="50" height="50"
+								href="/noblewisdom/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/noblewisdom/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
@@ -136,8 +136,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/futurestars/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/futurestars/images/fees.svg" width="50" height="50"
+								href="/noblewisdom/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/noblewisdom/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
         					</td>
@@ -154,8 +154,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/futurestars/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/futurestars/images/progressreport.svg" width="50" height="50"
+								href="/noblewisdom/MarksDetailsProcess/generateReportParent?id=${username}"> <img
+									src="/noblewisdom/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
         					</td>
@@ -172,8 +172,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/futurestars/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/futurestars/images/logbook.svg" width="50" height="50"
+								href="/noblewisdom/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/noblewisdom/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>

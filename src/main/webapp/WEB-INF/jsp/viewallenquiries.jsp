@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Enquiries</title>
-<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -149,7 +149,7 @@
 	border-right-width: thin;
 	border-bottom-width: thin;
 	border-left-width: thin;
-	background-image: url(/futurestars/images/close.JPG);
+	background-image: url(/noblewisdom/images/close.JPG);
 	background-repeat: repeat-y;
 	background-attachment: scroll;
 	background-position: right;
@@ -206,7 +206,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("/futurestars/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/noblewisdom/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -257,7 +257,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("/futurestars/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/noblewisdom/images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -340,42 +340,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/futurestars/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/noblewisdom/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/futurestars/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/noblewisdom/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/futurestars/js/datePicker/ui/sliderAccess.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/futurestars/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/noblewisdom/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/noblewisdom/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -389,34 +389,34 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
 
 
 	<script type="text/javascript">
 		function approved() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/futurestars/EnquiryProcess/approved?display=viewall";
+			form1.action = "/noblewisdom/EnquiryProcess/approved?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function rejected() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/futurestars/EnquiryProcess/rejected?display=viewall";
+			form1.action = "/noblewisdom/EnquiryProcess/rejected?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function processing() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/futurestars/EnquiryProcess/processing?display=viewall";
+			form1.action = "/noblewisdom/EnquiryProcess/processing?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function onHold() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/futurestars/EnquiryProcess/onhold?display=viewall";
+			form1.action = "/noblewisdom/EnquiryProcess/onhold?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -447,7 +447,7 @@
 		        		  } else {
 		        		    x.style.display = "none";
 		        		    var form1 = document.getElementById("form1");
-		        			form1.action = "/futurestars/JobProcess/ViewTaskDetails?jobid="+jobId;
+		        			form1.action = "/noblewisdom/JobProcess/ViewTaskDetails?jobid="+jobId;
 		        			form1.method = "POST";
 		        			form1.submit();
 		        		  }
@@ -541,7 +541,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -652,7 +652,7 @@ for(Cookie cookie : cookies){
                 <div align="center">
 		             <%--For displaying Previous link except for the 1st page --%>
 		                <c:if test="${currentPage != 1}">
-		                    <td><a style="color: #4B6A84;font-size: 12px" href="/futurestars/EnquiryProcess/viewAllEnquiries&page=${currentPage - 1}">Previous</a></td>
+		                    <td><a style="color: #4B6A84;font-size: 12px" href="/noblewisdom/EnquiryProcess/viewAllEnquiries&page=${currentPage - 1}">Previous</a></td>
 		                </c:if>
 		
 		                <%--For displaying Page numbers.
@@ -668,7 +668,7 @@ for(Cookie cookie : cookies){
 		                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
 		                                </c:when>
 		                                <c:otherwise>
-		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/futurestars/EnquiryProcess/viewAllEnquiries&page=${i}">${i}</a></td>
+		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/noblewisdom/EnquiryProcess/viewAllEnquiries&page=${i}">${i}</a></td>
 		                                </c:otherwise>
 		                            </c:choose>
 		                            
@@ -681,7 +681,7 @@ for(Cookie cookie : cookies){
 		
 		                <%--For displaying Next link --%>
 		                <c:if test="${currentPage lt noOfPages}">
-		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/futurestars/EnquiryProcess/viewAllEnquiries&page=${currentPage + 1}">Next</a></td>
+		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/noblewisdom/EnquiryProcess/viewAllEnquiries&page=${currentPage + 1}">Next</a></td>
 		                </c:if>
                 </div>
                 

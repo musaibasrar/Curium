@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/futurestars/UserProcess/logout";
+                form1.action="/noblewisdom/UserProcess/logout";
                 form1.submit();
             }
 
@@ -160,7 +160,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -179,8 +179,8 @@ for(Cookie cookie : cookies){
                     <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/futurestars/images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="/futurestars/images/SMS.png" width="391" height="50" /></div></td>
+                               <td width="234" ><div align="center"><img src="/noblewisdom/images/logo.png" width="200" height="64" /></div></td> 
+                                <td width="700" ><div align="center"><img src="/noblewisdom/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
                             <tr>
@@ -188,38 +188,38 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="/futurestars/images/futurestarsheader.png" /></td>  
+                                          	<td align="left"><img src="/noblewisdom/images/noblewisdomheader.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/futurestars/left"><img src="/futurestars/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="/futurestars/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/noblewisdom/left"><img src="/noblewisdom/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><a target="leftFrame" href="/noblewisdom/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/futurestars/FeesProcess/feesCollect"><img   src="/futurestars/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/noblewisdom/FeesProcess/feesCollect"><img   src="/noblewisdom/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                            				<td width="40"><a target="mainFrame" href="/futurestars/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/futurestars/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                            				<td width="40"><a target="mainFrame" href="/noblewisdom/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/noblewisdom/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Create <br>Voucher</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <!-- <td width="40"><a target="mainFrame" href="/futurestars/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/futurestars/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <!-- <td width="40"><a target="mainFrame" href="/noblewisdom/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/noblewisdom/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/futurestars/StudentProcess/addNew"><img   src="/futurestars/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/noblewisdom/StudentProcess/addNew"><img   src="/noblewisdom/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
-                           					<td width="40"><a target="leftFrame" href="/futurestars/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/futurestars/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                           					<td width="40"><a target="leftFrame" href="/noblewisdom/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/noblewisdom/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Master<br> Settings</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/futurestars/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/futurestars/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/noblewisdom/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/noblewisdom/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Admin<br> Expense</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/futurestars/sendsms"><img   src="/futurestars/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/noblewisdom/sendsms"><img   src="/noblewisdom/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                 			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/futurestars/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/futurestars/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/noblewisdom/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/noblewisdom/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/futurestars/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/futurestars/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/noblewisdom/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/noblewisdom/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/futurestars/UserProcess/logout"><img   src="/futurestars/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/noblewisdom/UserProcess/logout"><img   src="/noblewisdom/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>
                             <tr>

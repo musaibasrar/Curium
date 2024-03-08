@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Current Stock</title>
-<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -391,17 +391,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/futurestars/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/noblewisdom/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -454,13 +454,13 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/futurestars/MessItemsProcess/printStockAvailability";
+		form1.action = "/noblewisdom/MessItemsProcess/printStockAvailability";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -496,7 +496,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
