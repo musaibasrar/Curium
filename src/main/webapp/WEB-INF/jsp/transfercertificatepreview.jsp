@@ -58,7 +58,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 35px;
+	font-size: 28px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -66,7 +66,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -201,7 +201,7 @@ for(Cookie cookie : cookies){
 		<table align="center">
 			<tr><td>
 			
-			<img  src="/bsr/images/bsr.png" alt="Brainy Stars" width="150" height="150"></td>
+			<img  src="/bsr/images/bsr.png" alt="Brainy Stars" width="120" height="120"></td>
 				<td >
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine"><u>A UNIT OF TAMIRE MILLAT EDUCATIONAL SOCIETY RATLAM</u></label><br>
