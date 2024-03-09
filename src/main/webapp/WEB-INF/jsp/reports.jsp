@@ -402,6 +402,12 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/bsr/MarksDetailsProcess/deenyatProgressReport" style="font-size: 12px;">Generate Deenyat Marks Card</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/bsr/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>

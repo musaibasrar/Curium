@@ -485,6 +485,8 @@ public class MarksDetailsService {
 					Map<String,String> subMarks = new HashMap<String, String>();
 					int totalObtainedMarks = 0;
 					int totalMarks = 0;
+					int marksObtainedSubjectAllExams = 0;
+					int totalMarksObtainedSubjectAllExams = 0;
 					
 					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
@@ -522,14 +524,17 @@ public class MarksDetailsService {
 										}
 										
 										totalMarks = totalMarks+sub.getMaxmarks();
-										
+										marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+										totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + sub.getMaxmarks();
 										
 									}
 								}
+								
 						}
 						
 					}
-					
+					subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+										
 					if(present) {
 						examMarks.setTotalMarks(totalMarks);
 						examMarks.setTotalMarksObtained(totalObtainedMarks);
@@ -684,6 +689,143 @@ public class MarksDetailsService {
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
+		return result;
+	}
+
+	public boolean generateDeenyaatReport() {
+		
+		boolean result = false;
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+			String[] studentIds = request.getParameterValues("studentIDs");
+			String examC = request.getParameter("examclass");
+			String[] examClass = examC.split("--");
+			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
+			
+			String[] examIds = new DataUtil().getPropertiesValue("deeniyatexamids"+httpSession.getAttribute(BRANCHID).toString()).split(",");
+			List<Integer> deeniyatExamIds = new ArrayList<Integer>();
+			for(int i=0;i<examIds.length;i++) {
+				deeniyatExamIds.add(Integer.parseInt(examIds[i]));
+			}
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(deeniyatExamIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+
+			for (int i = 0; i < studentIds.length; i++) {
+				MarksSheet markssheet = new MarksSheet();
+				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				markssheet.setParents(studentDetails);
+				
+				for (Exams exam : examsList) {
+						
+					ExamsMarks examMarks = new ExamsMarks();
+					examMarks.setExamName(exam.getExamname());
+					boolean present = false;
+					Map<String,String> subMarks = new HashMap<String, String>();
+					int totalObtainedMarks = 0;
+					int totalMarks = 0;
+					int marksObtainedSubjectAllExams = 0;
+					int totalMarksObtainedSubjectAllExams = 0;
+					
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
+					
+					
+					for (Marks marks : marksDetailsList) {
+							
+							int examId = exam.getExid();
+							int marksExamId = marks.getExamid();
+							
+						if( examId == marksExamId) {
+									present = true;
+									
+								for (Subject sub : subjectList) {
+									
+									int marksSubid = marks.getSubid();
+									int subjectId = sub.getSubjectid();
+									
+									if(marksSubid == subjectId) {
+										
+										int marksObtained = marks.getMarksobtained();
+										int minMarks = sub.getMinmarks();
+										int maxMarks = sub.getMaxmarks();
+										
+										if( marksObtained < minMarks) {
+											
+											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
+											
+											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
+											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+										}else if(marksObtained == 999) {
+											subMarks.put(sub.getSubjectname(), " _AB");
+										}
+										
+										totalMarks = totalMarks+sub.getMaxmarks();
+										marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+										totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + sub.getMaxmarks();
+										
+									}
+								}
+								
+						}
+						
+					}
+					//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+										
+					if(present) {
+						examMarks.setTotalMarks(totalMarks);
+						examMarks.setTotalMarksObtained(totalObtainedMarks);
+						double d = (totalObtainedMarks*100.0)/totalMarks;
+						examMarks.setPercentage(d);
+						examMarks.setSubMarks(subMarks);
+						examMarksList.add(examMarks);
+					}
+					
+				}
+				markssheet.setExammarks(examMarksList);
+				marksSheetList.add(markssheet);
+				result = true;
+				/*
+				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
+				 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
+				 * 
+				 * for (int m=0; m<marksDetailsList.size(); m++) { marksList[i][k] =
+				 * marksDetailsList.get(m).getMarksobtained().toString(); k++; }
+				 */
+			}
+			
+			int size = examsList.size();
+			int endLoop = size/5;
+			
+			request.setAttribute("endloop", endLoop+1);
+			request.setAttribute("markssheetlist", marksSheetList);
+			
+			/*for (MarksSheet marksSheet2 : marksSheetList) {
+				
+				for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {
+					System.out.println("Exam Name "+marksSheet3.getExamName());
+					System.out.println("Exam total "+marksSheet3.getTotalMarks());
+					
+					for (Map.Entry<String,String> entry : marksSheet3.getSubMarks().entrySet()) {
+						System.out.println("Key = " + entry.getKey() +
+	                             ", Value = " + entry.getValue());
+					}
+			            
+					
+				}
+		}*/
+
+			/*
+			 * try { if (writeToReportCard(marksList)) { result = true; } } catch (Exception
+			 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
+			 */
+		}
+
 		return result;
 	}
 

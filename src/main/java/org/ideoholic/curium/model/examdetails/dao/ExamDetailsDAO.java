@@ -182,4 +182,27 @@ public class ExamDetailsDAO {
 			return exam;
 		}
 	}
+
+
+
+	public List<Exams> readListOfExams(List<Integer> deeniyatExamIds, int branchId) {
+		
+		List<Exams> results = new ArrayList<Exams>();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Exams where exid IN (:ids) and branchid="+branchId);
+			query.setParameterList("ids", deeniyatExamIds);
+			results = (List<Exams>) query.getResultList();
+			transaction.commit();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+			return results;
+		}
+
+	}
 }
