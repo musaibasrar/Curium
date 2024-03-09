@@ -38,7 +38,8 @@ public class MarksDetailsAction {
 		new StandardService(request, response).viewClasses();
 		return "progressreport";
 	}
-
+	
+	
 	@PostMapping("/getStudentGraph")
 	public String getStudentGraph() {
 		new MarksDetailsService(request, response).getStudentGraph();
@@ -67,6 +68,8 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
+	
+	
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
@@ -127,6 +130,28 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).Search();
 		new MarksDetailsService(request, response).getStudentList();
 		return "graphicalreport";
+	}
+	
+	@GetMapping("/deenyatProgressReport")
+	public String deenyatProgressReport() {
+		new StandardService(request, response).viewClasses();
+		return "deenyatprogressreport";
+	}
+
+	@PostMapping("/searchForDeenyaatReport")
+	public String searchForDeenyaatReport() {
+		new MarksDetailsService(request, response).Search();
+		return "deenyatprogressreport";
+	}
+	
+	@PostMapping("/generateDeenyaatReport")
+	public String generateDeenyaatReport() {
+		if (new MarksDetailsService(request, response).generateDeenyaatReport()) {
+			return "deenyaatmarkssheet";
+			// return "reportcardsaved";
+		} else {
+			return "error";
+		}
 	}
 
 }
