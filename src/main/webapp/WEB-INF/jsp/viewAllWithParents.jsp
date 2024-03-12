@@ -411,10 +411,12 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Gender</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
-                            <th title="click to sort" class="headerText">Address&nbsp;</th>
-                            <th title="click to sort" class="headerText">Email&nbsp;</th>
+                            <th title="click to sort" class="headerText">Area&nbsp;</th>
+                            <th title="click to sort" class="headerText">Skills&nbsp;</th>
+                            <th title="click to sort" class="headerText">Languages Known&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -425,13 +427,15 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.name}"/></a></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.gender}"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
                                  <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
                                 </td>
-                               <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.remarks}"/></td>
-                               <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.bloodgroup}"/></td>
+                               <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.nationality}"/></td>
+                               <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.subsequentprogress}"/></td>
+                               <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.languagesstudied}"/></td>
                                <%--  <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td> --%>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->

@@ -119,20 +119,19 @@ public class FeesDetailsService {
 		try {
 			// Start creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("Fees Details");
+			XSSFSheet sheet = workbook.createSheet("Collection Details");
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID","Receipt No.","Name","Contact Number", "Date", "Total"});
+					new Object[] { "Sl.No","Name","Contact No.","Book Receipt No.", "Date", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
 	            
-				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getValue().getBranchreceiptnumber(),
+				data.put(Integer.toString(i),new Object[] {i, 
 						entry.getKey().getStudent().getName(),
 						entry.getKey().getStudent().getClassstudying(),
+						entry.getValue().getBookreceiptno(),
 						entry.getValue().getDate().toString(),
 						entry.getValue().getTotalamount() });
 				i++;
@@ -166,6 +165,8 @@ public class FeesDetailsService {
 						cell.setCellValue((Double) obj);
 					else if (obj instanceof Long)
 						cell.setCellValue((Long) obj);
+					else if (obj instanceof Integer)
+						cell.setCellValue((Integer) obj);
 				}
 			}
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/contributiondetails.xlsx"));

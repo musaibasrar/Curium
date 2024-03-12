@@ -1698,19 +1698,24 @@ public class StudentService {
 
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("ListOfStudents");
+			XSSFSheet sheet = workbook.createSheet("ListOfDonors");
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID", "Name", "Contact Number", "Address", "Email"});
+					new Object[] { "Sl.No.", "Name", "Gender", "Contact Number", "Qualification", "Skill", "Languages", "Area", "Address", "Year of Birth"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
-								 DataUtil.emptyString(studentDetails.getStudent().getName()),  
+						new Object[] { i,
+								 DataUtil.emptyString(studentDetails.getStudent().getName()),
+								 DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getStudent().getAccno()),
+								 DataUtil.emptyString(studentDetails.getStudent().getSubsequentprogress()),
+								 DataUtil.emptyString(studentDetails.getStudent().getLanguagesstudied()),
+								 DataUtil.emptyString(studentDetails.getStudent().getNationality()),
 								 DataUtil.emptyString(studentDetails.getStudent().getRemarks()),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup())});
+								 DataUtil.emptyString(studentDetails.getStudent().getUrbanrural())});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
@@ -1737,6 +1742,8 @@ public class StudentService {
 						cell.setCellValue((String) obj);
 					else if (obj instanceof Double)
 						cell.setCellValue((Double) obj);
+					else if (obj instanceof Integer)
+						cell.setCellValue((Integer) obj);
 				}
 			}
 				

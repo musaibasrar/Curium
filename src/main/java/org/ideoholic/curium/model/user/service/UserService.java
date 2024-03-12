@@ -579,11 +579,11 @@ public class UserService {
 			
 	}
 			long sumOfFees = 0l;
-			Parents student = new Parents();
 			Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
 			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+				Parents student = new Parents();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
 				feesMap.put(student, receiptinfo);
 			}

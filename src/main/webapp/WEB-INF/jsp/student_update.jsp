@@ -620,7 +620,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td class="alignLeft" style="padding-left: 20px;">Birth Year&nbsp;</td>
 						<td align="left">
-							<label> <select name="urbanrural" id="urbanrural" required
+							<label> <select name="urbanrural" id="urbanrural"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.urbanrural}</option>
 										<option value="1940">1940</option>

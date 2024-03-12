@@ -425,7 +425,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(paymentDate));
 		transactions.setVoucherno(paymentVoucherNo);
-		transactions.setFundsource(Integer.parseInt(paymentFundSource));
+		transactions.setFundsource(DataUtil.parseInt(paymentFundSource));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(paymentNarrationCategory+":"+paymentNarration);
 		transactions.setCancelvoucher("no");

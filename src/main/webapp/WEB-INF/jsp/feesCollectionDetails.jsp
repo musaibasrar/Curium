@@ -679,6 +679,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Date</th>
                             <th title="click to sort" class="headerText">Receipt Number</th>
                             <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Contact No.</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
@@ -698,6 +699,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.date}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.bookreceiptno}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.student.classstudying}"/></td>
                                 <td class="dataText" style="text-align:right;"><fmt:formatNumber type="currency" pattern="#,##0.00;" value="${feesdetails.value.totalamount}" /></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/jih/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/jih/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>

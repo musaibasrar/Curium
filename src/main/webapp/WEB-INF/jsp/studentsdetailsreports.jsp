@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -661,17 +662,13 @@ for(Cookie cookie : cookies){
 						<th class="headerText">Sl.No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<!-- <th title="click to sort" class="headerText">Father Name</th> -->
+						<th title="click to sort" class="headerText">Gender</th>
 						<th title="click to sort" class="headerText">Contact Number</th>
-						<!-- <th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th> -->
-							<th title="click to sort" class="headerText">Address</th>
-							<th title="click to sort" class="headerText">Email</th>
-						<!-- <th title="click to sort" class="headerText">Admission Date</th> -->
-						
-
-
-
+						<th title="click to sort" class="headerText">Area</th>
+						<th title="click to sort" class="headerText">Skills</th>
+						<th title="click to sort" class="headerText">Languages Known</th>
+						<th title="click to sort" class="headerText">Year of Birth</th>						
+						<th title="click to sort" class="headerText">Address</th>
 					</tr>
 				</thead>
 
@@ -689,15 +686,19 @@ for(Cookie cookie : cookies){
 								href="/jih/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-									<td class="dataText"><c:out
-									value="${Parents.student.remarks}" /></td>
-									<td class="dataText"><c:out
-									value="${Parents.student.bloodgroup}" /></td>
-
-
+							<td class="dataText"><c:out value="${Parents.student.gender}" /></td>
+							<td class="dataText">
+                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+                                </td>
+							<td class="dataText"><c:out	value="${Parents.student.nationality}" /></td>
+							<td class="dataText"><c:out	value="${Parents.student.subsequentprogress}" /></td>
+							<td class="dataText"><c:out	value="${Parents.student.languagesstudied}" /></td>
+							<td class="dataText"><c:out	value="${Parents.student.urbanrural}" /></td>
+							<td class="dataText"><c:out	value="${Parents.student.remarks}" /></td>
 						</tr>
+						
 					</c:forEach>
 				</tbody>
 				<tfoot>

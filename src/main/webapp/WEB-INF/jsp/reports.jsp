@@ -299,7 +299,9 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/DocumentsProcess/donorDetailsReports" style="font-size: 12px;">Detail Report</a>
             			</td>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/jih/FeesCollection/lastPaymentReport" style="font-size: 12px;">Last Payment Report</a>
             			</td>
             		</tr>
@@ -443,7 +445,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/jihtel/incomevsexpense" style="font-size: 12px;">Income v/s Expense</a>
+            				<a target="mainFrame" href="/jih/incomevsexpense" style="font-size: 12px;">Income v/s Expense</a>
             			</td>
             		</tr>
                 </table>

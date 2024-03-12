@@ -1215,7 +1215,7 @@ $(document).ready(function() {
 						<tr>
 							<td class="alignLeft">Year of Birth &nbsp;</td>
 
-							<td><label> <select name="urbanrural" id="urbanrural" required
+							<td><label> <select name="urbanrural" id="urbanrural"
 									style="width: 250px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<option value="1940">1940</option>
