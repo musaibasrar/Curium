@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyeardto;
 import org.ideoholic.curium.model.academicyear.dto.Yearmapper;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentMapper;
@@ -43,7 +43,7 @@ public class YearService {
 	}
 
 
-	public boolean saveYear(Currentacademicyeardto current) {
+	public CurrentAcademicYearDto saveYear(CurrentAcademicYearDto current) {
 		boolean result=false;
 		String errorService=null;
 		Currentacademicyear currentacademicyear = Yearmapper.INSTANCE.mapCurrentacademicyear(current);
@@ -51,15 +51,10 @@ public class YearService {
 		//currentacademicyear.setCurrentacademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
 		errorService=new YearDAO().create(currentacademicyear);
 		
-		if(currentacademicyear!=null){
-			result=true;
-			
-		}
-		httpSession.setAttribute("errorMessage", errorService);
-            return result;
 		
-	}
-	
+            return Yearmapper.INSTANCE.mapCurrentAcademicYearDto(currentacademicyear);
+		
+	}	
 
 	public boolean updateYear() {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();

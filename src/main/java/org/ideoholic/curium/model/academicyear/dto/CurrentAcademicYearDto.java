@@ -4,16 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-
-public class Currentacademicyeardto {
+public class CurrentAcademicYearDto {
 
 	private Integer currentayid;
 	private String currentacademicyear;
-
 }
