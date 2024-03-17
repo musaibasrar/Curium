@@ -8,6 +8,7 @@ public class MarksSheet  implements java.io.Serializable {
     
     Parents parents;
     List<ExamsMarks> exammarks;
+    List<FinalTermMarks> finaltermmarks;
     
     
     public MarksSheet() {
@@ -35,5 +36,13 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setExammarks(List<ExamsMarks> exammarks) {
 		this.exammarks = exammarks;
+	}
+
+	public List<FinalTermMarks> getFinaltermmarks() {
+		return finaltermmarks;
+	}
+
+	public void setFinaltermmarks(List<FinalTermMarks> finaltermmarks) {
+		this.finaltermmarks = finaltermmarks;
 	}
   }

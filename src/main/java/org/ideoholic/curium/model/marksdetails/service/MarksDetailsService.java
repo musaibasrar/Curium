@@ -34,9 +34,11 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
+import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
 
 public class MarksDetailsService {
@@ -533,7 +535,7 @@ public class MarksDetailsService {
 						}
 						
 					}
-					subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+					//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
 										
 					if(present) {
 						examMarks.setTotalMarks(totalMarks);
@@ -545,6 +547,178 @@ public class MarksDetailsService {
 					}
 					
 				}
+				
+				//Read all the  subjects of term one and query their marks subject wise
+				String[] examTermOneIds = new DataUtil().getPropertiesValue("TermOneExams"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
+				List<Integer> examTermOneIdsList = new ArrayList<Integer>();	
+				for (String id : examTermOneIds) {
+					examTermOneIdsList.add(Integer.parseInt(id));
+					}
+					FinalTermMarks finalExamMarks = new FinalTermMarks();
+					List<FinalTermMarks> finalExamMarksList = new ArrayList<FinalTermMarks>();
+					finalExamMarks.setExamName("Term 1");
+					boolean present = false;
+					Map<String,String> subMarks = new HashMap<String, String>();
+					int totalObtainedMarks = 0;
+					int totalMarks = 0;
+					int totalMarksObtainedSubjectAllExams = 0;
+					String grade;
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermOneIdsList);
+					List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					for (Subjectmaster subFinal : subjectList) {
+						
+						int marksObtainedSubjectAllExams = 0;
+						
+						for (Marks marks : marksDetailsList) {
+							
+							//int examId = examTermOneIds;
+							int marksExamId = marks.getExamid();
+							
+									int marksSubid = marks.getSubid();
+									int subjectId = subFinal.getSubjectid();
+									
+									if(marksSubid == subjectId) {
+										present = true;
+										
+										int marksObtained = marks.getMarksobtained();
+										
+										marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+										totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + marksObtained;
+										
+									}
+								}
+						
+						
+						if(marksObtainedSubjectAllExams!=0) {
+							
+							switch(marksObtainedSubjectAllExams/10) {
+							
+							 case 10:
+							    case 9:
+							        grade = "A1";
+							        break;
+							    case 8:
+							        grade = "A2";
+							        break;
+							    case 7:
+							        grade = "B1";
+							        break;
+							    case 6:
+							        grade = "B2";
+							        break;
+							    case 5:
+							        grade = "C1";
+							        break;
+							    case 4:
+							        grade = "C2";
+							        break;
+							    default:
+							        grade = "F"; 
+							
+							}
+							subMarks.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExams)+"_"+grade);
+						}
+						
+						
+					}
+					
+					//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+										
+					if(present) {
+						finalExamMarks.setTotalMarks(totalMarks);
+						finalExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExams);
+						double d = (totalObtainedMarks*100.0)/totalMarks;
+						finalExamMarks.setPercentage(d);
+						finalExamMarks.setSubMarks(subMarks);
+						finalExamMarksList.add(finalExamMarks);
+					}
+					
+					
+					String[] examTermTwoIds = new DataUtil().getPropertiesValue("TermTwoExams"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
+					List<Integer> examTermTwoIdsList = new ArrayList<Integer>();	
+					
+						for (String id : examTermTwoIds) {
+							examTermTwoIdsList.add(Integer.parseInt(id));
+						}
+						
+						FinalTermMarks finalTermTwoExamMarks = new FinalTermMarks();
+						finalTermTwoExamMarks.setExamName("Term 2");
+						boolean presentTermTwo = false;
+						Map<String,String> subMarksfinalTermTwo = new HashMap<String, String>();
+						int totalMarksObtainedSubjectAllExamsFinalTermTwo = 0;
+						
+						List<Marks> marksDetailsListFinalTermTwo = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermTwoIdsList);
+						
+						for (Subjectmaster subFinal : subjectList) {
+						
+							int marksObtainedSubjectAllExamsfinalTermTwo = 0;
+							
+							for (Marks marks : marksDetailsListFinalTermTwo) {
+								
+								//int examId = examTermOneIds;
+								int marksExamId = marks.getExamid();
+								
+										int marksSubid = marks.getSubid();
+										int subjectId = subFinal.getSubjectid();
+										
+										if(marksSubid == subjectId) {
+											presentTermTwo = true;
+											
+											int marksObtained = marks.getMarksobtained();
+											
+											marksObtainedSubjectAllExamsfinalTermTwo = marksObtainedSubjectAllExamsfinalTermTwo + marksObtained;
+											totalMarksObtainedSubjectAllExamsFinalTermTwo = totalMarksObtainedSubjectAllExamsFinalTermTwo + marksObtained;
+											
+										}
+									}
+							
+							if(marksObtainedSubjectAllExamsfinalTermTwo!=0) {
+								
+								switch(marksObtainedSubjectAllExamsfinalTermTwo/10) {
+								
+								 case 10:
+								    case 9:
+								        grade = "A1";
+								        break;
+								    case 8:
+								        grade = "A2";
+								        break;
+								    case 7:
+								        grade = "B1";
+								        break;
+								    case 6:
+								        grade = "B2";
+								        break;
+								    case 5:
+								        grade = "C1";
+								        break;
+								    case 4:
+								        grade = "C2";
+								        break;
+								    default:
+								        grade = "F"; 
+								
+								}
+								subMarksfinalTermTwo.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExamsfinalTermTwo)+"_"+grade);
+							}
+							
+							
+						}
+						
+						//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+											
+						if(presentTermTwo) {
+							finalTermTwoExamMarks.setTotalMarks(totalMarks);
+							finalTermTwoExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExamsFinalTermTwo);
+							double d = (totalObtainedMarks*100.0)/totalMarks;
+							finalTermTwoExamMarks.setPercentage(d);
+							finalTermTwoExamMarks.setSubMarks(subMarksfinalTermTwo);
+							finalExamMarksList.add(finalTermTwoExamMarks);
+						}
+			//end
+						
+			    markssheet.setFinaltermmarks(finalExamMarksList);
 				markssheet.setExammarks(examMarksList);
 				marksSheetList.add(markssheet);
 				result = true;

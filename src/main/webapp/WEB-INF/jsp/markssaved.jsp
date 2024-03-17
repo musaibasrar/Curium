@@ -94,7 +94,7 @@ for(Cookie cookie : cookies){
         <td height="250" align="center" valign="middle"><p class="style1"> Marks Added/Updated/Deleted Successfully</p>
         <p class="style1">
           
-          	<input type="button" value="Enter Marks" id="addnew" onClick="JavaScript:window.location='/marksentry';">
+          	<input type="button" value="Enter Marks" id="addnew" onClick="JavaScript:window.location='/bsr/marksentry';">
             <input type="button" id="view" value="View All Students" onClick="ViewAll()">
             
         </p></td>
