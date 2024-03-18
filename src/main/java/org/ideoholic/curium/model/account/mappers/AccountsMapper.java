@@ -5,7 +5,6 @@ import org.ideoholic.curium.util.DataUtil;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValueCheckStrategy= NullValueCheckStrategy.ALWAYS, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DataUtil.class)
 public interface AccountsMapper {
     AccountsMapper INSTANCE = Mappers.getMapper(AccountsMapper.class);
@@ -13,7 +12,23 @@ public interface AccountsMapper {
     @Mapping(target = "accountname", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountName()))")
     @Mapping(target = "accountcode", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountCode()))")
     Accountdetails mapAccountdetails(AccountDetailsDto accountDetailsDto);
+
     AccountDetailsDto mapAccountDetailsDto(Accountdetails accountdetails);
 
 
+/*  @Mapping(target = "accountgroupid", expression = "java(DataUtil.emptyString(accountGroupMasterDto.getAccountGroupId()))")*/
+    @Mapping(target = "accountgroupname", expression = "java(DataUtil.emptyString(accountGroupMasterDto.getAccountGroupName()))")
+    Accountgroupmaster mapAccountgroupmaster(AccountGroupMasterDto  accountGroupMasterDto);
+
+    AccountGroupMasterDto mapAccountGroupMasterDto(Accountgroupmaster accountgroupmaster);
+
+    @Mapping(target = "accountsubgroupname", expression = "java(DataUtil.emptyString(accountSubGroupMasterDto.getAccountSubGroupName()))")
+    Accountsubgroupmaster mapAccountsubgroupmaster(AccountSubGroupMasterDto accountSubGroupMasterDto);
+
+    AccountSubGroupMasterDto mapAccountSubGroupMasterDto(Accountsubgroupmaster accountsubgroupmaster);
+
+    @Mapping(target = "ssgroupname", expression = "java(DataUtil.emptyString(accountSsGroupMasterDto.getSsGroupName()))")
+    Accountssgroupmaster mapAccountssgroupmaster(AccountSsGroupMasterDto accountSsGroupMasterDto);
+
+    AccountSsGroupMasterDto mapAccountSsGroupMasterDto(Accountssgroupmaster accountssgroupmaster);
 }
