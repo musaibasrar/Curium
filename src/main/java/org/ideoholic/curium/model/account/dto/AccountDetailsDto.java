@@ -11,15 +11,15 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @Entity
 public class AccountDetailsDto implements java.io.Serializable{
-    private Integer AccountDetailsId;
-    private int AccountSubgroupMasterId;
+    private Integer accountDetailsId;
+    private int accountSubgroupMasterId;
     private int ssGroupMasterId;
-    private int AccountGroupId;
-    private String AccountName;
-    private String AccountCode;
+    private int accountGroupId;
+    private String accountName;
+    private String accountCode;
     private Accountssgroupmaster accountSSGroupMaster;
     private Accountsubgroupmaster accountSubGroupMaster;
     private Accountgroupmaster accountGroupMaster;
-    private int BranchId;
-    private int UserId;
+    private int branchId;
+    private int userId;
 }
