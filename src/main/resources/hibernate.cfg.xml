@@ -10,8 +10,8 @@
             <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-	 	<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/curium</property>
+	 	<property name="hibernate.connection.password">mysql</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/meps</property>
 		<property name="hibernate.connection.username">root</property> 
 		
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -113,5 +113,6 @@
 		<mapping resource="mappings/Otherfeescollection.hbm.xml"></mapping>
 		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
 		<mapping resource="mappings/Diary.hbm.xml"></mapping>
+		<mapping resource="mappings/StudentDiary.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

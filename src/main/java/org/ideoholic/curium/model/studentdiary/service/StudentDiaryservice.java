@@ -47,18 +47,6 @@ public class StudentDiaryservice {
              diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
              diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
              diary =  new StudentDiaryDAO().create(diary);
-        	 
-        	 		String secString = DataUtil.emptyString(request.getParameter("addsec"));
-        	 		String classString = request.getParameter("addclass")+"--"+secString;
-                 
-                 diary.setClasssec(DataUtil.emptyString(classString));
-                 diary.setMessage(request.getParameter("messagebody"));
-                 diary.setSubject(request.getParameter("subject"));
-                 diary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                 diary.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-                 diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-                 diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
-                 diary =  new StudentDiaryDAO().create(diary);
                  }
          }
 
