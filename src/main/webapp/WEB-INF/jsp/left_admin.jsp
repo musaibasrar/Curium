@@ -600,7 +600,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            				 <a target="mainFrame" href="/meps/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
             			</td>
             		</tr>
             		<tr>
