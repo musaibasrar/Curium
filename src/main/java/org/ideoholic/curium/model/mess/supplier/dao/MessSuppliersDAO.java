@@ -14,7 +14,6 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -69,7 +68,7 @@ public class MessSuppliersDAO {
 				query.executeUpdate();
 				session.save(accountDetails);
 				session.save(accountDetailsBalance);
-				Query queryLedgerLink = session.createQuery("update MessSuppliers set linkedledgerid= '"+accountDetails.getAccountdetailsid()+"' where id="+messSuppliers.getId());
+				Query queryLedgerLink = session.createQuery("update MessSuppliers set linkedledgerid= '"+accountDetails.getAccountDetailsId()+"' where id="+messSuppliers.getId());
 				queryLedgerLink.executeUpdate();
 				transaction.commit();
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
