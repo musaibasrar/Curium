@@ -13,8 +13,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValueCheckStrategy= NullValueCheckStrategy.ALWAYS, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DataUtil.class)
 public interface AccountsMapper {
 
-    @Mapping(target = "accountname", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountName()))")
-    @Mapping(target = "accountcode", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountCode()))")
+    @Mapping(target = "accountName", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountName()))")
+    @Mapping(target = "accountCode", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountCode()))")
+    @Mapping(target = "branchid", source = "branchId")
+    @Mapping(target = "userid", source = "userId")
     Accountdetails mapAccountdetails(AccountDetailsDto accountDetailsDto);
     
     AccountDetailsDto mapAccountDetailsDto(Accountdetails accountdetails);
