@@ -9,8 +9,10 @@ import org.mapstruct.factory.Mappers;
 public interface AccountsMapper {
     AccountsMapper INSTANCE = Mappers.getMapper(AccountsMapper.class);
 
-    @Mapping(target = "accountname", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountName()))")
-    @Mapping(target = "accountcode", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountCode()))")
+    @Mapping(target = "accountName", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountName()))")
+    @Mapping(target = "accountCode", expression = "java(DataUtil.emptyString(accountDetailsDto.getAccountCode()))")
+    @Mapping(target = "branchid", source = "branchId")
+    @Mapping(target = "userid", source = "userId")
     Accountdetails mapAccountdetails(AccountDetailsDto accountDetailsDto);
 
     AccountDetailsDto mapAccountDetailsDto(Accountdetails accountdetails);

@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.account.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -370,7 +369,7 @@ public class AccountDAO {
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
-			accountName = accountDetails.getAccountname();
+			accountName = accountDetails.getAccountName();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {

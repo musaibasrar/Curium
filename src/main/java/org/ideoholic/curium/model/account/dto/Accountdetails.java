@@ -28,22 +28,22 @@ public class Accountdetails implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "accountdetailsid", unique = true, nullable = false)
-	private Integer accountdetailsid;
+	private Integer accountDetailsId;
 
 	@Column(name = "accountsubgroupmasterid", nullable = false)
-	private int accountsubgroupmasterid;
+	private int accountSubGroupMasterId;
 
 	@Column(name = "ssgroupmasterid", nullable = false)
-	private int ssgroupmasterid;
+	private int ssGroupMasterId;
 
 	@Column(name = "accountgroupid")
-	private int accountgroupid;
+	private int accountGroupId;
 
 	@Column(name = "accountname", nullable = false, length = 100)
-	private String accountname;
+	private String accountName;
 
 	@Column(name = "accountcode", length = 100, nullable = false)
-	private String accountcode;
+	private String accountCode;
 
 	@ManyToOne
 	@JoinColumn(name = "ssgroupmasterid")

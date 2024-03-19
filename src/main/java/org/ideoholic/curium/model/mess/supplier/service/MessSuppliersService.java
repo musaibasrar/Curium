@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,12 +23,9 @@ import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -173,8 +169,8 @@ public class MessSuppliersService {
         
         
 	        Accountdetails accountDetails = new Accountdetails();
-			accountDetails.setAccountname(messSuppliers.getName());
-			accountDetails.setAccountcode(accountCode);
+			accountDetails.setAccountName(messSuppliers.getName());
+			accountDetails.setAccountCode(accountCode);
 		
 			Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
 			accountSubGroupMaster.setAccountsubgroupmasterid(Integer.parseInt(subGroupCode));
