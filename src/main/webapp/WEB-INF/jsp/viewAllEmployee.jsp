@@ -317,6 +317,11 @@
                     return false;
 
                 });
+                $(".querybutton").button({
+                    icons:{
+                        primary: "ui-icon-pencil"
+                    }
+                })
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -369,6 +374,11 @@
                 
                 //window.location.reload();
             } 
+            function createQuery(tid,branchid){
+                var form1=document.getElementById("form1");
+               form1.action="/abc/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
+               form1.submit();
+            }
         </script>
     </head>
       <%
@@ -407,7 +417,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Department&nbsp;</th>
-                            
+                            <th title="click to sort" class="headerText">Assignment</th>
                              
 
 
@@ -422,9 +432,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/meps/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
-                                
-                                 
-
+                                <td class="dataText"><button id="query_${employee.tid}" class="querybutton" onclick="createQuery(${employee.tid},${employee.branchid})">Create Assignment</button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
