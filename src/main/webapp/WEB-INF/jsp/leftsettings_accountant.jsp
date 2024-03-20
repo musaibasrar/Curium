@@ -338,7 +338,7 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 style="font-size: 12px"><a href="#">General</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="/meps/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
                 <a target="mainFrame" href="/meps/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
@@ -386,14 +386,14 @@ for(Cookie cookie : cookies){
                 
                 <a target="mainFrame" href="/meps/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
                 <a target="mainFrame" href="/meps/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
-            </div>
+            </div> -->
 
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/meps/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+            <!--  <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/meps/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
                 <a target="mainFrame" href="/meps/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
@@ -403,7 +403,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/meps/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="/meps/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="/meps/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
+            </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>

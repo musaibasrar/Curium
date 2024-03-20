@@ -126,7 +126,7 @@ form{
             var type='<c:out default="" value="${userType}"/>';
 
 
-            if(flag1){
+			if(flag1){
             	
             	if(type=='superadmin'){
                     window.open('/meps/index_superadmin','_self');
@@ -138,6 +138,12 @@ form{
                 	window.open('/meps/index_officeadmin','_self');
                 }else if(type=='marksentry'){
                 	window.open('/meps/index_marksentry','_self');
+                }else if(type=='accountant'){
+                	window.open('/meps/index_accountant','_self');
+                }else if(type=='clerk'){
+                	window.open('/meps/index_clerk','_self');
+                }else if(type=='principal'){
+                	window.open('/meps/index_principal','_self');
                 }
             }
             else if(!flag1){

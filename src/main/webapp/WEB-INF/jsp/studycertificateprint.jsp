@@ -123,7 +123,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/lilyrose/images/lilyrose.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/meps/images/meps.png">
 			</td>
 				<td >
 					<br>
@@ -238,7 +238,7 @@ for(Cookie cookie : cookies){
 
 			
 			<tr>
-              <td align="center"><a id="print" href="/lilyrose/DocumentsProcess/printStudyCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/meps/DocumentsProcess/printStudyCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

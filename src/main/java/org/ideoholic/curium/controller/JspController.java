@@ -441,48 +441,135 @@ public class JspController {
 	public String getIndexParents() {
 		return "index_parents";
 	}
+	
 	@GetMapping("/header_parent")
 	public String getHeaderParents() {
 		return "header_parent";
 	}
+	
 	@GetMapping("/left_parent")
 	public String getLeftParents() {
 		return "left_parent";
 	}
+	
 	@GetMapping("/Views_student_detail")
 	public String getViewsstudentdetail() {
 		return "Views_student_detail";
 	}
+	
 	@GetMapping("/diary")
 	public String getDiary() {
 		return "diary";
 	}
+	
 	@GetMapping("/viewDiary")
 	public String getViewDiary() {
 		return "viewDiary";
 	}
+	
 	@GetMapping("/welcomeparent")
 	public String getWelcomeparent() {
 		return "welcomeparent";
 	}
+	
 	@GetMapping("/studentdiary")
 	public String getStudentDiary() {
 		return "studentdiary";
 	}
+	
 	@GetMapping("/studentviewdiary")
 	public String getStudentViewDiary() {
 		return "studentviewdiary";
 	}
+	
 	@GetMapping("/studentviewdiarymessage")
 	public String getStudentViewDiaryMessage() {
 		return "studentviewdiarymessage";
 	}
+	
 	@GetMapping("/viewdiarymessagestudent")
 	public String getViewDiaryMessageStudent() {
 		return "viewdiarymessagestudent";
 	}
+	
 	@GetMapping("/viewdiarystudent")
 	public String getViewDiaryStudent() {
 		return "viewdiarystudent";
 	}
+	
+	@GetMapping("/index_accountant")
+	public String getIndexAccountant() {
+		return "index_accountant";
+	}
+	
+	@GetMapping("/header_accountant")
+	public String getHeaderAccountant() {
+		return "header_accountant";
+	}
+	
+	@GetMapping("/left_accountant")
+	public String getLeftAccountant() {
+		return "left_accountant";
+	}
+	
+	@GetMapping("/leftsettings_accountant")
+	public String getLeftSettingsAccountant() {
+		return "leftsettings_accountant";
+	}
+	
+	@GetMapping("/reports_accountant")
+	public String getReportsAccountant() {
+		return "reports_accountant";
+	}
+	
+	@GetMapping("/index_clerk")
+	public String getIndexClerk() {
+		return "index_clerk";
+	}
+	
+	@GetMapping("/header_clerk")
+	public String getHeaderClerk() {
+		return "header_clerk";
+	}
+	
+	@GetMapping("/left_clerk")
+	public String getLeftClerk() {
+		return "left_clerk";
+	}
+	
+	@GetMapping("/leftsettings_clerk")
+	public String getLeftSettingsClerk() {
+		return "leftsettings_clerk";
+	}
+	
+	@GetMapping("/reports_clerk")
+	public String getReportsClerk() {
+		return "reports_clerk";
+	}
+	
+	@GetMapping("/index_principal")
+	public String getIndexPrincipal() {
+		return "index_principal";
+	}
+	
+	@GetMapping("/header_principal")
+	public String getHeaderPrincipal() {
+		return "header_principal";
+	}
+	
+	@GetMapping("/left_principal")
+	public String getLeftPrincipal() {
+		return "left_principal";
+	}
+	
+	@GetMapping("/leftsettings_principal")
+	public String getLeftSettingsprincipal() {
+		return "leftsettings_principal";
+	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsPrincipal() {
+		return "reports_principal";
+	}
+	
 }

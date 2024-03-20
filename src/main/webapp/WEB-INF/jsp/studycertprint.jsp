@@ -94,8 +94,8 @@ span{
 float:right;
 }
 </style>
-	<script type="text/javascript" src="/lilyrose/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Study Certificate</title>
          <script type="text/javascript">
              window.onload = function(){
@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/lilyrose/images/lilyrose.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/meps/images/meps.png">
 			</td>
 				<td >
 					<br>

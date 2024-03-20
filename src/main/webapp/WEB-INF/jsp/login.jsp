@@ -140,6 +140,12 @@ form{
                 	window.open('/meps/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/meps/index_parents','_self');
+                }else if(type=='accountant'){
+                	window.open('/meps/index_accountant','_self');
+                }else if(type=='clerk'){
+                	window.open('/meps/index_clerk','_self');
+                }else if(type=='principal'){
+                	window.open('/meps/index_principal','_self');
                 }
             }
             else if(!flag1){

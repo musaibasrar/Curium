@@ -408,7 +408,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
+            				 <a target="mainFrame" href="/meps/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
             			</td>
             		</tr>
                 </table>
