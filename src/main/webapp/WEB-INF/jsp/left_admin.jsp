@@ -951,12 +951,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
+            				 <a target="mainFrame" href="/meps/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            				 <a target="mainFrame" href="/meps/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
             			</td>
             		</tr>
                 </table>
@@ -967,13 +967,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/meps/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/EnquiryProcess/viewAllEnquiries" style="font-size: 12px;">View Enquiries</a>
+            				 <a target="mainFrame" href="/meps/EnquiryProcess/viewAllEnquiries" style="font-size: 12px;">View Enquiries</a>
             			</td>
             			
             		</tr>
@@ -986,7 +986,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/abc/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/meps/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>
@@ -997,7 +997,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            				 <a target="mainFrame" href="/meps/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
             			</td>
             		</tr>
                 </table>
@@ -1008,12 +1008,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
+            				 <a target="mainFrame" href="/meps/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
+            				 <a target="mainFrame" href="/meps/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
             			</td>
             		</tr>
                 </table>
@@ -1024,12 +1024,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
+            				 <a target="mainFrame" href="/meps/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
+            				 <a target="mainFrame" href="/meps/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
             			</td>
             		</tr>
                 </table>

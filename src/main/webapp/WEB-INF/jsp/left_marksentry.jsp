@@ -759,18 +759,18 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllQueriesDepartmentWise" style="font-size: 12px;">View Assignment</a>
+            				 <a target="mainFrame" href="/meps/JobProcess/viewAllQueriesDepartmentWise" style="font-size: 12px;">View Assignment</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/JobProcess/CreateQuery" style="font-size: 12px;">Create Assignment</a>
+            				 <a target="mainFrame" href="/meps/JobProcess/CreateQuery" style="font-size: 12px;">Create Assignment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            				 <a target="mainFrame" href="/meps/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
             			</td>
             		</tr>
                 </table>

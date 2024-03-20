@@ -505,7 +505,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
+            				 <a target="mainFrame" href="/meps/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
             			</td>
             		</tr>
             		
@@ -521,7 +521,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/abc/JobProcess/queryReport"
+						href="/meps/JobProcess/queryReport"
 						style="font-size: 12px;">Assignment Report</a>
 					</td>
 				</tr>
@@ -538,7 +538,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/abc/JobProcess/taskReport"
+						href="/meps/JobProcess/taskReport"
 						style="font-size: 12px;">Tasks Report</a>
 					</td>
 				</tr>
@@ -554,7 +554,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/abc/AppointmentProcess/appointmentReport"
+						href="/meps/AppointmentProcess/appointmentReport"
 						style="font-size: 12px;">Appointments Report</a>
 					</td>
 				</tr>

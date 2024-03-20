@@ -376,7 +376,7 @@
             } 
             function createQuery(tid,branchid){
                 var form1=document.getElementById("form1");
-               form1.action="/abc/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
+               form1.action="/meps/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
                form1.submit();
             }
         </script>
