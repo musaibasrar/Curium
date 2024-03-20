@@ -294,7 +294,7 @@
 <script type="text/javascript">
 	function saveEnquiry() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/EnquiryProcess/genarateNewCertificate";
+		form1.action = "/abc/EnquiryProcess/saveEnquiry";
 		form1.method = "POST";
 		form1.submit();
 
@@ -356,8 +356,8 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<td style="font-weight: bold;font-size: 20px;">Name &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="subject"
-											type="text" class="myclass" id="subject" 
+							<td style="font-weight: bold"><label> <input  name="name"
+											type="text" class="myclass" id="name" 
 											/>
 							</label></td>
 							
@@ -386,71 +386,111 @@ for(Cookie cookie : cookies){
 						
 						<td style="font-weight: bold;font-size: 20px;">Mobile No. &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="mobile"
-											type="text" class="myclass" id="subject" 
+											type="text" class="myclass" id="mobile" 
 											/>
 							</label></td>
 							
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 						
 						<td style="font-weight: bold;font-size: 20px;">Father Name &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="fathername"
-											type="text" class="myclass" id="subject" 
+											type="text" class="myclass" id="fathername" 
 											/>
 							</label></td>
 							
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 						
 						<td style="font-weight: bold;font-size: 20px;">Mother Name &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="mothername"
-											type="text" class="myclass" id="subject" 
+											type="text" class="myclass" id="mothername" 
 											/>
 							</label></td>
 							
 						</tr>
 						<tr>
-						
-						<td style="font-weight: bold;font-size: 20px;">Admission Class &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="admissionclass"
-											type="text" class="myclass" id="subject" 
-											/>
-							</label></td>
-							
+							<td><br /></td>
 						</tr>
 						<tr>
-						
-						<td style="font-weight: bold;font-size: 20px;">Date of Birth &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="dob"
-											type="text" class="myclass" id="subject" 
-											/>
-							</label></td>
-							
+						<td  style="font-weight: bold;font-size: 20px;">Admission Class &nbsp;
+							</td>
+
+							<td>
+								<label> <select name="admissionclass"
+									id="admissionclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+									</select>
+								</label> 
+							</td>
 						</tr>
 						<tr>
-						
-						<td style="font-weight: bold;font-size: 20px;">Place &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="place"
-											type="text" class="myclass" id="subject" 
-											/>
-							</label></td>
-							
+							<td><br /></td>
 						</tr>
 						<!-- <tr>
 						
-						<td style="font-weight: bold">Place &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="place"
-											type="text" class="myclass" id="subject" 
+						<td style="font-weight: bold;font-size: 20px;">Date of Birth &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="dob"
+											type="text" class="myclass" id="dob" 
 											/>
 							</label></td>
 							
 						</tr> -->
+						
 						<tr>
 						
-						<td style="font-weight: bold;font-size: 20px;">Date &nbsp;</td>
-							<td style="font-weight: bold"><label> <input  name="date"
-											type="text" class="myclass" id="subject" 
+						<td style="font-weight: bold;font-size: 20px;">Siblings Details &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="siblings"
+											type="text" class="myclass" id="siblings" 
 											/>
+							</label></td>
+							
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						
+						<td style="font-weight: bold;font-size: 20px;">Academic Year &nbsp;</td>
+							<td style="font-weight: bold"><label> <select name="yearofadmission" id="yearofadmission" required
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+										<option selected>${currentAcademicYear}</option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+								</select>
+
+							</label></td>
+							
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						
+						<td style="font-weight: bold;font-size: 20px;">Created Date &nbsp;</td>
+							<td ><label> <input name="createddate"
+									type="text"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepickerCD" size="36"
+									data-validate="validate(required)">
 							</label></td>
 							
 						</tr>

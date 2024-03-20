@@ -27,16 +27,20 @@
          <property name="mobileno" type="java.lang.String">
             <column name="mobileno" />
         </property> 
-         <property name="siblingstudy" type="java.lang.String">
-            <column name="siblingstudy" />
+         <property name="siblings" type="java.lang.String">
+            <column name="siblings" />
         </property> 
-         <property name="lastschool" type="java.lang.String">
-            <column name="lastschool" />
+        <property name="status" type="java.lang.String">
+            <column name="status" />
         </property> 
-        <property name="dateofbirth" type="date">
-            <column name="dateofbirth" length="10" />
+         <property name="academicyear" type="java.lang.String">
+            <column name="academicyear" />
+        </property> 
+         <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
         </property>
-        
-          
+         <property name="userid" type="java.lang.Integer">
+            <column name="userid" />
+        </property>
     </class>
 </hibernate-mapping>
