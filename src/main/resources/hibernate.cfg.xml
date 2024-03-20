@@ -114,5 +114,8 @@
 		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
 		<mapping resource="mappings/Diary.hbm.xml"></mapping>
 		<mapping resource="mappings/StudentDiary.hbm.xml"></mapping>
+		<mapping resource="mappings/Marksgrade.hbm.xml"></mapping>
+		<mapping resource="mappings/ExamRank.hbm.xml"></mapping>
+		<mapping resource="mappings/SubjectGrade.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

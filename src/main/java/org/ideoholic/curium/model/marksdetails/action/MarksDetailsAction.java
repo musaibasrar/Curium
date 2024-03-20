@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/MarksDetailsProcess")
@@ -33,7 +34,8 @@ public class MarksDetailsAction {
 
 	}
 
-	@GetMapping("/progressReport")
+	//@GetMapping("/progressReport")
+	@RequestMapping(value = "/progressReport", method = { RequestMethod.GET, RequestMethod.POST })
 	public String progressreport() {
 		new StandardService(request, response).viewClasses();
 		return "progressreport";
@@ -57,13 +59,7 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).Search();
 		return "progressreport";
 	}
-	//progress report id
-	/*	@GetMapping("/progressReportid")
-		public String progressreportid() {
-			new MarksDetailsService(request, response).Searchid();
-			return "progressreport";
-		}*/
-		//end
+
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
@@ -73,7 +69,7 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
-//code for generateReportParent
+
 	@GetMapping("/generateReportParent")
 	public String generateReportParent() {
 		if (new MarksDetailsService(request, response).generateReportParent()) {
@@ -83,7 +79,7 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
-	//end generateReportParent
+
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		if (new MarksDetailsService(request, response).deleteMultiple()) {
@@ -144,5 +140,26 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).getStudentList();
 		return "graphicalreport";
 	}
+	
+	@GetMapping("/rankReport")
+	public String rankreport() {
+		new StandardService(request, response).viewClasses();
+		return "rankreport";
+	}
+	
+	@PostMapping("/searchForRank")
+	public String searchForRank() {
+		new MarksDetailsService(request, response).rankSearch();
+		return "rankreport";
+	}
 
+	@PostMapping("/generateRankReport")
+	public String generateRankReport() {
+		if (new MarksDetailsService(request, response).generateRankReport()) {
+			return "studentRankReport";
+			// return "reportcardsaved";
+		} else {
+			return "error";
+		}
+	}
 }
