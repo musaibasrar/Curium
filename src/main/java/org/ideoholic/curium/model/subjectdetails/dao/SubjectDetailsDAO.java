@@ -212,5 +212,23 @@ public class SubjectDetailsDAO {
 			return results;
 		}
 	}
+	
+	public Subject readSubjectByExam(int branchId, String examClass, String examName, int subId) {
+		
+		Subject results = new Subject();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Subject where examclass='"+examClass+"' and subjectid='"+subId+"' and examname='"+examName+"' and branchid="+branchId);
+			results = (Subject) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 
 }

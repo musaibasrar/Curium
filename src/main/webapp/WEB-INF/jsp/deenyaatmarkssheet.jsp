@@ -232,9 +232,20 @@ for(Cookie cookie : cookies){
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
                         <c:forEach items="${markssheetlist}" var="Parents">
-                        
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;background-color:lightpink">   
-                        	<table style="page-break-inside: avoid;border-collapse: collapse;">
+                        	<%-- <table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr><td></td>
 <td style="text-align:center;"><span style="width: 200px;font-weight: bold;border-bottom:none;background-color:lightgreen;border-radius:30px;"><i> Deenyat</i></span></td>
 </tr>
@@ -249,7 +260,7 @@ for(Cookie cookie : cookies){
 			<td></td></tr>
 			<tr></tr>
 </table>
-
+ --%>
 			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
 
@@ -324,7 +335,7 @@ for(Cookie cookie : cookies){
 	                                	<tr style="border: 1px solid black;background-color:lightyellow;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-(${dateParts[2]})-(${dateParts[1]})</td>
+	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
 	                                	</tr>
 	                                </c:forEach>
 	                                		<tr style="border-top: 1px solid black;background-color:darkred;color:white;">
@@ -340,10 +351,10 @@ for(Cookie cookie : cookies){
                             					<td style="border: 1px solid black;text-align: left;">
                             					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
 	                                		</tr>	
-	                                		<tr style="border: 1px solid black;background-color:darkred;color:white;">
+	                                		<%-- <tr style="border: 1px solid black;background-color:darkred;color:white;">
                             					<td style="border: 1px solid black;text-align: left;">Grade</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
-	                                		</tr>  
+	                                		</tr>   --%>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
                             					<td style="border: 1px solid black;text-align: left;"></td>
@@ -430,3 +441,4 @@ for(Cookie cookie : cookies){
 	
 </body>
 </html>
+
