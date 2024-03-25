@@ -84,7 +84,7 @@ public class AccountAction {
 	public String cancelVoucher() {
 
 		if(new AccountService(request, response).cancelVoucher()){
-			return viewVoucherReceipt();
+			return "vouchercancelsuccess";
 		}
 			return ERRORPAGE;
 		
@@ -107,25 +107,30 @@ public class AccountAction {
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			
 			if(new AccountService(request, response).viewVouchers(1)){
-				return "receiptdetails";
+				request.setAttribute("vouchertype", nextVoucher);
+				return "vouchersearch";
+				//receiptdetails
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
 			if(new AccountService(request, response).viewVouchers(2)){
-				return "paymentdetails";
+				request.setAttribute("vouchertype", nextVoucher);
+				return "vouchersearch";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
 			
 			if(new AccountService(request, response).viewVouchers(3)){
-				return "contradetails";
+				request.setAttribute("vouchertype", nextVoucher);
+				return "vouchersearch";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
 			
 			if(new AccountService(request, response).viewVouchers(4)){
-				return "journaldetails";
+				request.setAttribute("vouchertype", nextVoucher);
+				return "vouchersearch";
 			}
 		}
 		return ERRORPAGE;
@@ -351,5 +356,42 @@ public class AccountAction {
 		new AccountService(request, response).getIncomeExpenseCategory();
 		return "printincomevsexpense";
 	}
+	
+	@PostMapping("/voucherPrint")
+	private String voucherPrint() {
+		String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
+		
+		if(nextVoucher.equalsIgnoreCase("Receipt")){
+			
+			if(new AccountService(request, response).viewVouchersPrint(1)){
+				request.setAttribute("vouchertype", nextVoucher);
+				return "printvoucher";
+				//receiptdetails
+			}
+			
+		}else if(nextVoucher.equalsIgnoreCase("Payment")){
+			
+			if(new AccountService(request, response).viewVouchersPrint(2)){
+				request.setAttribute("vouchertype", nextVoucher);
+				return "printvoucher";
+			}
+			
+		}else if(nextVoucher.equalsIgnoreCase("Contra")){
+			
+			if(new AccountService(request, response).viewVouchersPrint(3)){
+				request.setAttribute("vouchertype", nextVoucher);
+				return "printvoucher";
+			}
+			
+		}else if(nextVoucher.equalsIgnoreCase("Journal")){
+			
+			if(new AccountService(request, response).viewVouchersPrint(4)){
+				request.setAttribute("vouchertype", nextVoucher);
+				return "printvoucher";
+			}
+		}
+		return ERRORPAGE;
+	}
+	
 	
 }
