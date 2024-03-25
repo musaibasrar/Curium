@@ -55,7 +55,7 @@
 	border-right-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
-	width: auto;
+	width: 218px;
 	height: 28px;
 	color: black;
 	text-transform: capitalize;
@@ -424,7 +424,7 @@ for(Cookie cookie : cookies){
 
 							<td>
 								<label> <select name="admissionclass"
-									id="admissionclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+									id="admissionclass" style="width: 220px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
 						
 						<td style="font-weight: bold;font-size: 20px;">Academic Year &nbsp;</td>
 							<td style="font-weight: bold"><label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+									style="width: 220px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2024/25</option>
 										<option>2025/26</option>
@@ -489,7 +489,7 @@ for(Cookie cookie : cookies){
 							<td ><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
-									class="myclass" id="datepickerCD" size="36"
+									class="myclass" id="datepickerCD" size="31"
 									data-validate="validate(required)">
 							</label></td>
 							

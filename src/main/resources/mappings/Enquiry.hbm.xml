@@ -39,6 +39,9 @@
          <property name="branchid" type="java.lang.Integer">
             <column name="branchid" />
         </property>
+        <property name="createddate" type="date">
+            <column name="createddate" />
+        </property>
          <property name="userid" type="java.lang.Integer">
             <column name="userid" />
         </property>

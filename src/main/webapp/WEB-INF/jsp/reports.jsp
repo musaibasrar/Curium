@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
             </div>
             
             <h5 class="sideaccordian">
-			<a href="#">Jobs</a>
+			<a href="#">Assignments</a>
 		</h5>
 		<div style="padding-left: 0px; padding-right: 0px;">
 			<table style="border-collapse: collapse; width: 100%">
