@@ -737,6 +737,8 @@ public class AccountService {
 	public boolean viewVouchers(int voucherType) {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
@@ -744,7 +746,7 @@ public class AccountService {
 		
 		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
 		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
-		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
 		
 		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
@@ -752,6 +754,8 @@ public class AccountService {
 		}
 		
 		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdate"));
+		request.setAttribute("todateselected", request.getParameter("todate"));
 		
 		return true;
 		
@@ -869,13 +873,31 @@ public class AccountService {
 	public boolean cancelVoucher() {
 		
 		String[] receiptIds = request.getParameterValues("transactionids");
-		int voucherType = DataUtil.parseInt(request.getParameter("voucherType"));
+		String voucher = request.getParameter("voucher");
+		int voucherType = 0;
 		Date now = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String todaysDate = formatter.format(now);
         boolean result = false;
 		
+        
+        switch (voucher) {
+		case "Receipt":
+			voucherType = 1;
+			break;
+		case "Payment":
+			voucherType = 2;
+			break;
+		case "Contra":
+			voucherType = 3;
+			break;
+		case "Journal":
+			voucherType = 4;
+			break;
+		default:
+			break;
+		}
 		
 		if (receiptIds != null || voucherType!=0) {
 			
@@ -2399,5 +2421,34 @@ public boolean getRPStatement() {
 			System.out.println("" + e);
 		}
 		return result;
+	}
+	
+	public boolean viewVouchersPrint(int voucherType) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
+		request.setAttribute("todateselected", request.getParameter("todateselected"));
+		
+		return true;
+		
+		}
+		return false;
 	}
 }
