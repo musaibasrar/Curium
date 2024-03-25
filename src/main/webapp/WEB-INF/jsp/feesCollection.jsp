@@ -1186,7 +1186,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 							
-								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)" checked>
 								<label for="cashpayment">Cash</label>
 									
 								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">

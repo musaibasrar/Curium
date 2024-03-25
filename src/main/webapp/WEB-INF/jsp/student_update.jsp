@@ -858,7 +858,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Bhagyalakshmi Bond No.
 								&nbsp;</td>
 								<td>
 										<input

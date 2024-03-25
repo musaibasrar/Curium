@@ -70,7 +70,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 24px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
