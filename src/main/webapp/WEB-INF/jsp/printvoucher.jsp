@@ -101,7 +101,7 @@
 
 .datatd, .datath {
     border: 1px solid #000000;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
@@ -229,7 +229,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/jih/images/jih.png" width="150" height="80"/>
+				<img src="/abc/images/abc.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br>
@@ -251,9 +251,9 @@
             <table class="datatable">
             <thead>
  				 <tr>
- 				 		<th class=datath>Sl.No</th>
+ 				 		<th class="datath">Sl.No</th>
 						<th class="datath">Voucher No.</th>
-						<th class="datath">Date</th>
+						<th class="datath">Date&nbsp;&nbsp;</th>
 						<th class="datath">Dr Account -- Cr Account</th>
 						<th class="datath">Narration</th>
 						<th class="datath">Amount</th>
