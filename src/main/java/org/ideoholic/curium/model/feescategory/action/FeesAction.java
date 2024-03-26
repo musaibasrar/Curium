@@ -212,5 +212,19 @@ public class FeesAction {
 			return "viewAll";
 		}
 	}
+	
+	@GetMapping("/defaulterReport")
+	public String defaulterReport() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
+		return "defaultersreport";
+	}
+	
+	@GetMapping("/dndReport")
+	public String dndReport() {
+		new FeesService(request, response).getDndReport();
+		return "dndreport";
+	}
 
+	
 }

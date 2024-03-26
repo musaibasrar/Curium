@@ -320,6 +320,18 @@
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
 	});
+	
+	$(function() {
+		$("#datepickerDND").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-5:+4"
+		});
+		$("#anim").change(function() {
+			$("#datepickerDND").datepicker("option", "showAnim", $(this).val());
+		});
+	});
 </script>
 
 
@@ -1018,6 +1030,21 @@ for(Cookie cookie : cookies){
 							</tr>
 							
 						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">DND Date &nbsp;</td>
+							<td><label> <input name="crecorddate"
+									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
+									id="datepickerDND" size="30" data-validate="validate(required)">
+							</label></td>
+						</tr>
+							
+						<tr>
 
 							<td></td>
 
@@ -1033,16 +1060,13 @@ for(Cookie cookie : cookies){
 							<td></td>
 
 						</tr>
-
-
-
 					</table>
 
 
 
 
 					<table id="table2" width="30%" border="0" align="center">
-<tr>
+						<tr>
 
 									<td><br /></td>
 								</tr>

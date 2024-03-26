@@ -373,6 +373,18 @@
 		});
 	});
 	
+	$(function() {
+		$("#datepickerDND").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-5:+4"
+		});
+		$("#anim").change(function() {
+			$("#datepickerDND").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
 	
 </script>
 
@@ -627,7 +639,8 @@ function calculate(value2) {
      	
      	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
      	//feesConcession (direct amount)
-         final1.value=feesCat*feesCount;
+        // final1.value=feesCat/feesCount;
+     	final1.value=feesCat;
      	
          calculateGrandTotal();
    
@@ -1195,6 +1208,21 @@ $(document).ready(function() {
                         
                         </td>
 							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+										
+							<td class="alignLeft">DND Date &nbsp;</td>
+							<td ><label> <input name="crecorddate"
+									type="text"
+									class="myclass" id="datepickerDND" size="36"
+									data-validate="validate(required)">
+							</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>

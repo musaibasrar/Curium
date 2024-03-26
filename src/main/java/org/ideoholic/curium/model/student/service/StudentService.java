@@ -278,6 +278,9 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 		                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
+		                if (fieldName.equalsIgnoreCase("crecorddate")) {
+		                	student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
+		                }
 		                // PU Details
 		                if (fieldName.equalsIgnoreCase("pep")) {
                                     puDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
@@ -1301,6 +1304,9 @@ public class StudentService {
 	                }
 	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
+	                }
+	                if (fieldName.equalsIgnoreCase("crecorddate")) {
+	                	student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 	                // Updating paretns information
 	                
