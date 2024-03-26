@@ -585,5 +585,14 @@ public class JspController {
 	public String getHeaderstaff() {
 		return "header_staff";
 	}
-
+	
+	@GetMapping("/vouchersearch")
+	public String voucherSearch() {
+		return "vouchersearch";
+	}
+	
+	@GetMapping("/vouchercancelsuccess")
+	public String voucherCancelSuccess() {
+		return "vouchercancelsuccess";
+	}
 }

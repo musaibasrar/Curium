@@ -318,12 +318,12 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public List<VoucherEntrytransactions> getVoucherEntryTransactions(Integer financialYear, int branchId, int voucherType) {
+	public List<VoucherEntrytransactions> getVoucherEntryTransactions(String fromDate, String toDate, Integer financialYear, int branchId, int voucherType) {
 		
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
 			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and financialyear='"+financialYear+"'and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
