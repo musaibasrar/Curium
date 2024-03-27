@@ -364,7 +364,6 @@
 		form1.action = "/futurestars/AccountProcess/viewNextVoucher";
 		form1.method = "POST";
 		form1.submit();
-
 	}
 
 	$(function() {
