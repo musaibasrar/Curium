@@ -142,6 +142,8 @@ form{
                 	window.open('/shatabdi/index_clerk','_self');
                 }else if(type=='principal'){
                 	window.open('/shatabdi/index_principal','_self');
+                }else if(type=='teacher'){
+                	window.open('/shatabdi/index_teacher','_self');
                 }
             }
             else if(!flag1){

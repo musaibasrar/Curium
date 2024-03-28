@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
+import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -46,6 +48,8 @@ public class DocumentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
+	
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -122,7 +126,7 @@ public class DocumentService {
 			 tc.setNoofissues(1);
 			 tc.setBookno(bookno);
 			 tc.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 tc.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			 tc.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
@@ -905,11 +909,30 @@ public class DocumentService {
 	public String GenerateCharacterCertificate() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String characterPage = null;
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		String todaysDate = df.format(newdate);
 		
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			StudyCertificate stcLastRow = new DocumentDAO().getSTLastRow();
+			int slno = 2787;
+			
+			if(stcLastRow!=null) {
+				slno = stcLastRow.getBookno();
+			}
+			StudyCertificate studyCert = new StudyCertificate();
+			studyCert.setSid(parents.getStudent().getSid());
+			studyCert.setBookno(slno+1);
+			studyCert.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			studyCert.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			studyCert.setDateofissues(newdate);
+			String result = new DocumentDAO().saveStudyCertificate(studyCert);
+					
 			httpSession.setAttribute("studentdetailsbonafide", parents);
+			httpSession.setAttribute("todaysdate", todaysDate);
+			httpSession.setAttribute("slno", slno+1);
 			characterPage = "charactercertificateprint";
 		}
 		

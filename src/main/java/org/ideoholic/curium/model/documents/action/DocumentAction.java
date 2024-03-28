@@ -167,12 +167,6 @@ public class DocumentAction {
 		return "studentcharactersdetails";
 	}
 	
-	@PostMapping("/printCharacterCertificate")
-	public String printCharacterCertificate() {
-		new DocumentService(request, response).printCharacterCertificate();
-		return "characterprint";
-	}
-	
 	@GetMapping("/getTcDetail")
 	public String getTcDetail() {
 		return "generatetcdetail";

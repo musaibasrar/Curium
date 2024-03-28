@@ -600,7 +600,7 @@ public class UserService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		user.setPassword(builder.toString());
-		user.setUsertype("staff");
+		user.setUsertype("teacher");
 		Branch branch = new Branch();
 		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		user.setBranch(branch);

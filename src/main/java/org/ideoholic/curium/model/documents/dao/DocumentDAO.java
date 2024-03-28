@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -127,6 +128,43 @@ public class DocumentDAO {
 			HibernateUtil.closeSession();
 		}
 		return last;
+	}
+
+
+
+	public StudyCertificate getSTLastRow() {
+		StudyCertificate last = new StudyCertificate();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from StudyCertificate order by stid DESC");
+			query.setMaxResults(1);
+			last = (StudyCertificate) query.uniqueResult();
+			
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return last;
+	}
+
+
+
+	public String saveStudyCertificate(StudyCertificate studyCert) {
+		String status = "false";
+		try {
+			transaction = session.beginTransaction();
+			session.save(studyCert);
+			transaction.commit();
+			status = "true";
+		} catch (Exception e) { 
+			transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return status;
 	}
 	
 }
