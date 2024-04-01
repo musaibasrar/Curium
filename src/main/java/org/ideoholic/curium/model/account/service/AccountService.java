@@ -2450,4 +2450,181 @@ public boolean getRPStatement() {
 		}
 		return false;
 	}
+
+
+	public boolean exportVoucher(int voucherType) {
+
+		boolean writeSucees = false;
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		BigDecimal total = BigDecimal.ZERO;	
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		try {
+
+			// Creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("vouchertransactions");
+			Map<String, Object[]> data = new LinkedHashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "Voucher Transactions"});
+			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
+			headerData1.put("Header",
+					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
+			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
+			headerData2.put("Header",
+					new Object[] { "Sl No.","Voucher No","Dr Account -- Cr Account","Narration","Amount"});
+			//"Sl.No", "Voucher No", 
+			int i = 1;
+			
+			for (Entry<VoucherEntrytransactions, String> accBal : voucherMap.entrySet()) {
+				
+				//Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),
+				data.put(Integer.toString(i),
+						new Object[] { Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),accBal.getValue().toString(),
+								accBal.getKey().getNarration(), df.format(accBal.getKey().getDramount())});
+				i++;
+				total = total.add(accBal.getKey().getDramount());
+			}
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 1;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow1 = sheet.createRow(1);
+			Object[] objArrHeader1 = headerData1.get("Header");
+			int cellnum11 = 1;
+			for (Object obj : objArrHeader1) {
+				Cell cell = headerRow1.createCell(cellnum11++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow2 = sheet.createRow(2);
+			Object[] objArrHeader2 = headerData2.get("Header");
+			int cellnum12 = 0;
+			for (Object obj : objArrHeader2) {
+				Cell cell = headerRow2.createCell(cellnum12++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Set<String> keyset = data.keySet();
+			int rownum = 3;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+			rownum++;
+			
+			data.clear();
+			data.put(Integer.toString(1),
+					new Object[] { "","","","Total",  df.format(total)});
+			
+			Set<String> keyset2 = data.keySet();
+			for (String key : keyset2) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/vouchertransactions.xlsx"));
+				workbook.write(out);
+				out.close();
+				workbook.close();
+				writeSucees = true;
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
+		return writeSucees;
+		// getFile(name, path);
+	}
+
+
+	public boolean downloadVoucherTransactions() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/vouchertransactions.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"vouchertransactions.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println(""+e);
+		}
+		return result;
+	}
 }
