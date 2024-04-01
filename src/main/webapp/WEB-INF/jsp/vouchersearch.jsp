@@ -471,6 +471,15 @@
 			});
 	         
 	     });
+		 
+			$("#export").button({
+				icons : {
+					primary : "ui-icon-arrowthickstop-1-s"
+				}
+			}).click(function() {
+				exportVoucher();
+				return false;
+			});
 	});
 	
 	$(function() {
@@ -479,6 +488,13 @@
 
 		$("#effect").hide();
 	});
+	
+	function exportVoucher(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/abc/AccountProcess/exportVoucher";
+		form1.method = "POST";
+		form1.submit();
+	}
 	
 	function cancelVoucher(){
 		
@@ -749,7 +765,7 @@ for(Cookie cookie : cookies){
 						<td class="footerTD" colspan="2"> &nbsp;
 						<button id="cancel">Cancel Voucher</button>
 						<%-- <a id="print" href="/abc/AccountProcess/voucherPrint?fromdate=<c:out value="${fromdate}"/>&todate=<c:out value="${todate}"/>&vouchertype=<c:out value="${vouchertype}"/>">Print</a> --%>
-						&nbsp;&nbsp;&nbsp;<button id="print">Print</button>
+						&nbsp;&nbsp;&nbsp;<button id="print">Print</button>&nbsp;&nbsp;&nbsp;<button id="export">Export</button>
 						
 						</td>
 						
