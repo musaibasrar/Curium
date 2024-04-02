@@ -2,9 +2,11 @@ package org.ideoholic.curium.model.stampfees.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -453,6 +456,67 @@ public class StampFeesService {
 	}
 		request.setAttribute("searchStudentList", searchStudentList);
 
+	}
+
+	public void advanceSearchForStampFees(){
+		
+
+
+        if(httpSession.getAttribute(BRANCHID)!=null){
+        	String className = request.getParameter("classsearch");
+        	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+        	
+            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+            httpSession.setAttribute("feescategory", feecategoryList);
+  		
+    		
+    		
+    		// Get Student Details
+    		
+    		List<Parents> searchStudentList = new ArrayList<Parents>();
+    		
+    		if(httpSession.getAttribute(BRANCHID)!=null){
+    		
+    		String queryMain = "From Parents as parents where";
+    		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+    		String addClass = request.getParameter("classsearch");
+    		String addSec = request.getParameter("secsearch");
+    		String conClassStudying = "";
+
+    		if (!addClass.equalsIgnoreCase("")) {
+    			conClassStudying = addClass+"--"+"%";
+    		}
+    		if (!addSec.equalsIgnoreCase("")) {
+    			conClassStudying = addClass;
+    			conClassStudying = conClassStudying+"--"+addSec+"%";
+    		}
+
+    		String classStudying = DataUtil.emptyString(conClassStudying);
+    		String querySub = "";
+
+    		if (!studentname.equalsIgnoreCase("")) {
+    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+    		}
+
+    		if (!classStudying.equalsIgnoreCase("")
+    				&& !querySub.equalsIgnoreCase("")) {
+    			querySub = querySub + " AND parents.Student.classstudying like '"
+    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+    		} else if (!classStudying.equalsIgnoreCase("")) {
+    			querySub = querySub + " parents.Student.classstudying like '"
+    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+    		}
+
+    		if(!"".equalsIgnoreCase(querySub)) {
+    			queryMain = queryMain + querySub;
+    			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+    		}
+    		
+    	}
+    		request.setAttribute("searchStudentList", searchStudentList);
+
+
+        }
 	}
 
 }
