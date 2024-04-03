@@ -325,11 +325,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shatabdi/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">

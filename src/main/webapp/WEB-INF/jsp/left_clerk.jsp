@@ -485,11 +485,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shatabdi/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shatabdi/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>

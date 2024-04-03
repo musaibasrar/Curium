@@ -127,9 +127,9 @@ public class FeesAction {
 		if (new StudentService(request, response).viewDetailsOfStudent(studentId)) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure_admin";
-			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-				return "student_details_feesstructure";
-			} else {
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("clerk")) {
+				return "student_details_feesstructure_admin";
+			}else {
 				return "student_details_feesstructure";
 			}
 		} else {

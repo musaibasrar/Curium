@@ -348,7 +348,7 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="/shatabdi/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
-            
+            -->
             <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
                 <a target="mainFrame" href="/shatabdi/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
@@ -361,7 +361,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/shatabdi/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
 
             </div>
-             -->
+            <!--
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
                 <a target="mainFrame" href="/shatabdi/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>

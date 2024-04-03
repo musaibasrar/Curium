@@ -477,19 +477,21 @@ for(Cookie cookie : cookies){
             
             
 			
-              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+               <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shatabdi/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
+            		
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            			</td>
+            		</tr>
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shatabdi/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
@@ -515,9 +517,9 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shatabdi/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
-            		</tr>
+            		</tr> -->
                 </table>
-            </div> -->
+            </div>
             
             <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
