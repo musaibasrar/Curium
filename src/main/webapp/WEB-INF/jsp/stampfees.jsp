@@ -671,6 +671,20 @@
             alert(e);
         }
     }
+    
+    
+    function updateFeesCount(rowvalue){
+    	
+    	var checkbox = document.getElementById("feesIDS_"+rowvalue);
+        var textField = document.getElementById("feesCount_"+rowvalue);
+
+        // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
+        if (checkbox.checked) {
+        	textField.value = "1";
+        } else {
+            textField.value = "0";
+        }
+    }
         </script>
         
 
@@ -815,7 +829,7 @@ for(Cookie cookie : cookies){
    			        			
    			        			<tr>
    			        				<td><label class="labelClass" style="font-weight: bold;color:#325F6D"> 
-   			        				<input type="checkbox" name="feesIDS" class="chcktbl" value="${feescategory.idfeescategory}"
+   			        				<input type="checkbox" name="feesIDS" id="feesIDS_${status.index+1}" class="chcktbl" value="${feescategory.idfeescategory}" onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
 									size="18"> ${feescategory.feescategoryname} : </label>
 									<input type="hidden" class="feesStatus" name="feesStatuses" id="fees_status_${status.index+1}" value="not set" />
 									<input	name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear">
