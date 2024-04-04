@@ -795,7 +795,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<!-- <tr>
 							<td style="font-weight: bold;color:#325F6D">Fee Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
@@ -807,7 +807,7 @@ for(Cookie cookie : cookies){
 											
 						 <tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 
 					</table>
 					
@@ -835,7 +835,7 @@ for(Cookie cookie : cookies){
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
 													id="feesIDS_${status.index+1}" class="chcktbl"
-													value="${feescategory.idfeescategory}"
+													value="${feescategory.idfeescategory}_${status.index}"
 													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
 													size="18"> ${feescategory.feescategoryname} :
 											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
@@ -852,7 +852,7 @@ for(Cookie cookie : cookies){
    			        				
    			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="fessFullCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
    			        				<td> <input	type="text" value="0" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
-   			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
+   			        				<td> <input class="feesFullAmount" type="text" value="0" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
    			        				</td>
    			        				
 										</c:when>
@@ -861,7 +861,7 @@ for(Cookie cookie : cookies){
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
 													id="feesIDS_${status.index+1}" class="chcktbl" checked="checked"
-													value="${feescategory.idfeescategory}"
+													value="${feescategory.idfeescategory}_${status.index}"
 													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
 													size="18"> ${feescategory.feescategoryname} :
 											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
