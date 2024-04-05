@@ -426,12 +426,12 @@
 		    }
 		   });
 		 
-		 $("#sts").keypress(function (e) {
+		/*  $("#sts").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
 		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
 		               return false;
 		    }
-		   });
+		   }); */
 		 
 		 $("#noofdependents").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
@@ -750,7 +750,7 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Roll Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -1133,7 +1133,7 @@ $(document).ready(function() {
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Attendance &nbsp;</td>
 							<td ><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="36"
 									style="text-transform:capitalize;"

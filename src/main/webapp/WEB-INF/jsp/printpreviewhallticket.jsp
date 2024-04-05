@@ -263,7 +263,9 @@ for(Cookie cookie : cookies){
             <table width="100%" style="border-collapse: collapse;">
 					
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>
+						  <c:set var="examParts" value="${fn:split(examname,'/')}" />
+					      <c:out value="${examParts[0]}"/>
 					</td>
 				</tr>
 				<tr>

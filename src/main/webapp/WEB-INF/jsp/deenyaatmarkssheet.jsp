@@ -184,11 +184,20 @@ span{
         	border: 0px solid #dddddd;
     		text-align: left;
    		    padding: 4px;
+   		    font-size: 12px;
+   		    width: 100px;
+        }
+        .namedetailssecond{
+        border: 0px solid #dddddd;
+    		text-align: left;
+   		    padding: 4px;
+   		    font-size: 12px;
         }
          .namedetailscenter{
         	border: 0px solid #dddddd;
     		text-align: right;
    		    padding: 8px;
+   		    
         }
         
         .datatable {
@@ -232,35 +241,23 @@ for(Cookie cookie : cookies){
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
                         <c:forEach items="${markssheetlist}" var="Parents">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;background-color:lightpink">   
-                        	<%-- <table style="page-break-inside: avoid;border-collapse: collapse;">
+                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;background-color:white">   
+                        	 <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;
+  margin-right: auto;">
 			<tr><td></td>
-<td style="text-align:center;"><span style="width: 200px;font-weight: bold;border-bottom:none;background-color:lightgreen;border-radius:30px;"><i> Deenyat</i></span></td>
+<td style="text-align:center;"><span style="width: 200px;font-weight: bold;border-bottom:none;background-color:white;border-radius:30px;"><i> Deeniyat</i></span></td>
 </tr>
-			<tr>
+			<%--<tr>
 				<td style="padding-left: 200px;"><img src="/bsr/images/bsr.jpg" width="100" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr>
 			<td></td></tr>
 			<tr></tr>
 </table>
- --%>
 			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
 
@@ -271,37 +268,33 @@ for(Cookie cookie : cookies){
 
 			
 
-			<table style="border-collapse: collapse;width: 70%;float: left">
+			<table style="border-collapse: collapse;width: 80%;float: left">
 											
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <c:forEach var="splt" items="${fn:split(Parents.parents.student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach>
-                                </td>
-                                
-                             </tr>
-                             
-                             
-                             <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.parents.student.admissionnumber}"/></td>
-                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
-                            </tr>
-                            
-                           <!-- <tr>
-                            <td><br></td>
-                            </tr> -->
+                                <td class="namedetails"><label>Student Name:&nbsp;</label></td>
+                                <td class="namedetailssecond"><label style="font-weight: bold;text-transform: capitalize;">${Parents.parents.student.name}</label></td>
+                                </tr>
+                                <tr><td class="namedetails"><label>Class:</label></td>
+                                	<td class="namedetailssecond" style="font-weight: bold;text-transform: capitalize;"><c:forEach var="splt" items="${fn:split(Parents.parents.student.classstudying,'--')}">
+						    				${splt} 
+										</c:forEach>
+                                	</td>
+                                 </tr>
+                                 <tr>
+                                	<td class="namedetails"><label>Father's Name:&nbsp;</label></td>
+                                	<td class="namedetailssecond"><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.fathersname}"/></label></td>	
+                                 </tr>
+                                 <tr>
+                                <td class="namedetails"><label>Exam Reg. No.:&nbsp;</label></td>
+                                <td class="namedetailssecond" style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.admissionnumber}"/></td>
+                                 </tr>
                             
                             </table>
                             
-                            <table style=" border-collapse: collapse;width: 30%;float: left">
+                            <table style=" border-collapse: collapse;width: 20%;float: left">
                             	<tr>
                             		<td>
-                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
+                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 80px;height: 80px;">
                             		</td>
                             	</tr>
                             
@@ -318,9 +311,9 @@ for(Cookie cookie : cookies){
            					 		
            					 			<table style=" border-collapse: collapse;width: 100%;">
                             	<thead>
-                            	<tr style="border: 1px solid black;text-align: center;background-color:purple;">
+                            	<tr style="border: 1px solid black;text-align: center;background-color:white;">
                             	<c:forEach items="${Parents.exammarks}" var="exammarks" begin="${beginloop}" end= "${endloop}" step="1">
-                            		<th style="color:white;"><c:out value="${exammarks.examName}"/></th>
+                            		<th style="color:black;"><c:out value="${exammarks.examName}"/></th>
                             	</c:forEach>
                             	</tr>
                             	</thead>
@@ -331,25 +324,33 @@ for(Cookie cookie : cookies){
                              	<c:forEach items="${Parents.exammarks}" var="exammarks" begin="${beginloop}" end= "${endloop}" step="1">
                                 <td>
                                 	<table style=" border-collapse: collapse;width: 100%;border: 1px solid black;">
+                                	<tr style="border: 1px solid black;background-color:white;">
+	                                		<td style="border: 1px solid black;text-align: center;font-weight: bold;">Subject</td>
+	                                		<td style="border: 1px solid black;text-align: center;font-weight: bold;">Marks<br>Obtained</td>
+	                                		<td style="border: 1px solid black;text-align: center;font-weight: bold;">Total</td>
+	                                	</tr>
 											<c:forEach items="${exammarks.subMarks}" var="submarks" >
-	                                	<tr style="border: 1px solid black;background-color:lightyellow;">
+	                                	<tr style="border: 1px solid black;background-color:white;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+	                                		<c:set var="marksParts" value="${fn:split(dateParts[0],'/')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
+	                                		<td style="border: 1px solid black;text-align: left;">${marksParts[0]}</td>
+	                                		<td style="border: 1px solid black;text-align: left;">${marksParts[1]}</td>
 	                                	</tr>
 	                                </c:forEach>
-	                                		<tr style="border-top: 1px solid black;background-color:darkred;color:white;">
-	                                			<td style="border: 1px solid black;text-align: left;">Total Marks Obtained</td>
+	                                		<tr style="border-top: 1px solid black;background-color:white;color:black;">
+	                                			<td style="border: 1px solid black;text-align: left;">Total</td>
 	                                			<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
+	                                			<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
 	                                		</tr>
-	                                		<tr style="border: 1px solid black;background-color:darkred;color:white;">
+	                                		<%-- <tr style="border: 1px solid black;background-color:white;color:black;">
                             					<td style="border: 1px solid black;text-align: left;">Total Marks</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-	                                		</tr>
-	                                		<tr style="border: 1px solid black;background-color:darkred;color:white;">
+	                                		</tr> --%>
+	                                		<tr style="border: 1px solid black;background-color:white;color:black;">
                             					<td style="border: 1px solid black;text-align: left;">Percentage</td>
                             					<td style="border: 1px solid black;text-align: left;">
-                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
+                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" />%</td>
 	                                		</tr>	
 	                                		<%-- <tr style="border: 1px solid black;background-color:darkred;color:white;">
                             					<td style="border: 1px solid black;text-align: left;">Grade</td>
@@ -357,7 +358,7 @@ for(Cookie cookie : cookies){
 	                                		</tr>   --%>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;"></td>
+                            					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
 	                                		</tr>                              	
 	                                	</table>
                                 </td>
@@ -421,13 +422,13 @@ for(Cookie cookie : cookies){
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 						<tr>
-							<td><br></td>
+							<td><br><br><br><br></td>
 						</tr>
 				<tr>
 					<td></td>
-					<td align="left">Teacher Signature</td>	
-					<td align="centre">Parent Sinature</td>
-					<td align="centre">Zimmedar Signature</td>
+					<td align="left">Teacher</td>	
+					<td align="centre">Parent</td>
+					<td align="centre">Principal</td>
 				</tr>
                     
 		</TABLE>

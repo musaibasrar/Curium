@@ -10,16 +10,18 @@ public class MarksSheet  implements java.io.Serializable {
     List<ExamsMarks> exammarks;
     List<FinalTermMarks> finaltermmarks;
     List<ExamsMarks> otherexammarks;
+    String overallresult;
     
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
         this.otherexammarks = otherexammarks;
+        this.overallresult = overallresult;
     }
 
 
@@ -55,6 +57,14 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setOtherexammarks(List<ExamsMarks> otherexammarks) {
 		this.otherexammarks = otherexammarks;
+	}
+
+	public String getOverallresult() {
+		return overallresult;
+	}
+
+	public void setOverallresult(String overallresult) {
+		this.overallresult = overallresult;
 	}
 	
   }

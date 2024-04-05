@@ -413,12 +413,12 @@
 			Cancel();
 
 		});
-		 $("#sts").keypress(function (e) {
+		 /* $("#sts").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
 		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
 		               return false;
 		    }
-		   });
+		   }); */
 		 
 	});
 	
@@ -517,7 +517,8 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Roll Number &nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"
@@ -526,6 +527,19 @@ for(Cookie cookie : cookies){
 									</label></td>
 						</tr>
 						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td class="alignLeft">Attendance&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
+							</tr>
+							<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -935,7 +949,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
 							</td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Attendance&nbsp;</td>
 
 							<td align="left"><label> <input name="remarks"
 									type="text" class="myclass"
