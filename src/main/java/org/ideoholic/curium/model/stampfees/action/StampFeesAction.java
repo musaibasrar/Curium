@@ -85,4 +85,10 @@ public class StampFeesAction {
 		new StampFeesService(request, response).otheradvanceSearch();
 		return "otherstampfees";
 	}
+	
+	@PostMapping("/advanceSearchForStampFees")
+	public String advanceSearchForStampFees() {
+		new StampFeesService(request, response).advanceSearchForStampFees();
+		return "stampfees";
+	}
 }
