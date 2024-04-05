@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -224,19 +225,21 @@ public class StampFeesService {
 
 			for(int i=0; i < feesCategoryIds.length ; i++){
 			
+			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
+			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
 			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 			Feescategory feescategory = new Feescategory();
 			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setFeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(feesYears[i]);
+			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+			studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
 			
@@ -453,6 +456,68 @@ public class StampFeesService {
 	}
 		request.setAttribute("searchStudentList", searchStudentList);
 
+	}
+	
+	
+	public void advanceSearchForStampFees(){
+
+
+
+        if(httpSession.getAttribute(BRANCHID)!=null){
+        	String className = request.getParameter("classsearch");
+        	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+
+            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+            httpSession.setAttribute("feescategory", feecategoryList);
+
+
+
+    		// Get Student Details
+
+    		List<Parents> searchStudentList = new ArrayList<Parents>();
+
+    		if(httpSession.getAttribute(BRANCHID)!=null){
+
+    		String queryMain = "From Parents as parents where";
+    		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+    		String addClass = request.getParameter("classsearch");
+    		String addSec = request.getParameter("secsearch");
+    		String conClassStudying = "";
+
+    		if (!addClass.equalsIgnoreCase("")) {
+    			conClassStudying = addClass+"--"+"%";
+    		}
+    		if (!addSec.equalsIgnoreCase("")) {
+    			conClassStudying = addClass;
+    			conClassStudying = conClassStudying+"--"+addSec+"%";
+    		}
+
+    		String classStudying = DataUtil.emptyString(conClassStudying);
+    		String querySub = "";
+
+    		if (!studentname.equalsIgnoreCase("")) {
+    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+    		}
+
+    		if (!classStudying.equalsIgnoreCase("")
+    				&& !querySub.equalsIgnoreCase("")) {
+    			querySub = querySub + " AND parents.Student.classstudying like '"
+    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+    		} else if (!classStudying.equalsIgnoreCase("")) {
+    			querySub = querySub + " parents.Student.classstudying like '"
+    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+    		}
+
+    		if(!"".equalsIgnoreCase(querySub)) {
+    			queryMain = queryMain + querySub;
+    			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+    		}
+
+    	}
+    		request.setAttribute("searchStudentList", searchStudentList);
+
+
+        }
 	}
 
 }
