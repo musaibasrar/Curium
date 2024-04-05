@@ -70,9 +70,10 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 24px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 .addressLine{
@@ -175,24 +176,24 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		
+		<table style="border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 80px;">
-				<img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" >${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 95px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/></td>
+				<td>
+				<label class="dataTextBoldCenter">${branchname} </label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
-</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+		</table>
+		
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
                     <td colspan="4" ></td>
                 </tr>
-            </TABLE>
+        </TABLE>
 
 		<table style="padding-left: 5px;">
 		
@@ -371,20 +372,19 @@
 		</tr>
 		</TABLE>
 		</div>
-		<br>
+		<br><br><br><br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 80px;">
-				<img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" >${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 95px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/></td>
+				<td>
+				<label class="dataTextBoldCenter">${branchname} </label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>

@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/shadaan/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/shadaan/welcome" ><img src="/shadaan/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/shadaan/images/shadaanheader.png"

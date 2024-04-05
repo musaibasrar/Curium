@@ -62,9 +62,10 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 15px;
 	letter-spacing: normal;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 .addressLine{
@@ -239,13 +240,13 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/shadaan/images/shadaanfees.jpg" width="140" height="70"/></td>
+				<td><img src="/shadaan/images/shadaanfees.jpg" width="100" height="70"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname} </label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="100" height="70"/></td>
 			</tr>
 		</table>
 
