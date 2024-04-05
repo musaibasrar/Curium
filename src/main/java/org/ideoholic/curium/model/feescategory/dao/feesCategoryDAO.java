@@ -179,7 +179,7 @@ public class feesCategoryDAO {
 		try {
 			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
-				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionby='"+concession.getConcessionby()+"' where fees.sfsid='"+concession.getSfsid()+"'");
 				query.executeUpdate();
 				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
 				queryAcademicFees.executeUpdate();

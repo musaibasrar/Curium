@@ -24,16 +24,25 @@ public class Concession implements java.io.Serializable {
 	private int feescatid;
 	private String concession;
 	private String concessionOld;
+	private String concessionby;
 	
-	
+	public String getConcessionby() {
+		return concessionby;
+	}
+
+	public void setConcessionby(String concessionby) {
+		this.concessionby = concessionby;
+	}
+
 	public Concession() {
 	}
 
-	public Concession(int sfsid, int feescatid, String concession, String concessionold) {
+	public Concession(int sfsid, int feescatid, String concession, String concessionold, String concessionby) {
 		this.sfsid = sfsid;
 		this.feescatid = feescatid;
 		this.concession = concession;
 		this.concessionOld = concessionold;
+		this.concessionby = concessionby;
 	}
 
 	public int getSfsid() {

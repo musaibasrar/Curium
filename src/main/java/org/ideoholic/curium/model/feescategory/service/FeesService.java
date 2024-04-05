@@ -420,6 +420,7 @@ public class FeesService {
 	public String applyConcession() {
         
         String[] idfeescategory = request.getParameterValues("sfsid");
+        String[] concessionBy = request.getParameterValues("concessionby");
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
@@ -432,17 +433,18 @@ public class FeesService {
                 for (String string : idfeescategory) {
                 	
                 		Concession con = new Concession();
-                		String[] test = string.split("_");
-                        sfsId.add(Integer.valueOf(test[0]));
-                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
-                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+                		String[] sfsIdConcession = string.split("_");
+                        sfsId.add(Integer.valueOf(sfsIdConcession[0]));
+                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(sfsIdConcession[0]));
+                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(sfsIdConcession[0]));
                         
                         if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
-                        	feesCatId.add(Integer.valueOf(test[1]));
-                            con.setSfsid(Integer.valueOf(test[0]));
-                            con.setFeescatid(Integer.valueOf(test[1]));
-                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
-                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+                        	feesCatId.add(Integer.valueOf(sfsIdConcession[1]));
+                            con.setSfsid(Integer.valueOf(sfsIdConcession[0]));
+                            con.setFeescatid(Integer.valueOf(sfsIdConcession[1]));
+                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(sfsIdConcession[0])));
+                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(sfsIdConcession[0])));
+                            con.setConcessionby(request.getParameter("concessionby:"+Integer.valueOf(sfsIdConcession[0])));
                             concessionList.add(con);
                         }
                         
