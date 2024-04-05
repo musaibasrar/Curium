@@ -227,11 +227,23 @@ public class UserService {
 		Calendar end1 = Calendar.getInstance();
 		end1.setTime(dateAfter);
 		
+		String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+		int startYear = Integer.parseInt(currentAcademicYear[0]);
+		int endYear = Integer.parseInt("20"+currentAcademicYear[1]);
+		
+		start1.set(Calendar.YEAR, startYear);
 		start1.set(Calendar.MONTH, Calendar.JUNE);
+		start1.set(Calendar.DAY_OF_MONTH, 1);
+
+		end1.set(Calendar.YEAR, endYear);
+		end1.set(Calendar.MONTH, Calendar.MAY);
+		end1.set(Calendar.DAY_OF_MONTH, 31);
+		
+		/*start1.set(Calendar.MONTH, Calendar.JUNE);
 		start1.set(Calendar.DAY_OF_MONTH, 1);
 		end1.set(Calendar.YEAR, start1.get(Calendar.YEAR) + 1);
 		end1.set(Calendar.MONTH, Calendar.MAY);
-		end1.add(Calendar.DAY_OF_MONTH, end1.getActualMaximum(Calendar.DAY_OF_MONTH));
+		end1.add(Calendar.DAY_OF_MONTH, end1.getActualMaximum(Calendar.DAY_OF_MONTH));*/
 		
 		for (Date date = start1.getTime(); start1.before(end1); start1.add(Calendar.MONTH,+1), date = start1.getTime()) {
 			fromDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
