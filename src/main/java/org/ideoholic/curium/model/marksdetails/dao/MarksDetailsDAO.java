@@ -289,5 +289,27 @@ public class MarksDetailsDAO {
 				return result;
 			}
 		}
+		
+		public List<Marks> readListOfMarksPerSubject(List<Integer> ids, int subjectId,int exid) {
+			List<Marks> results = new ArrayList<Marks>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("From Marks where subid="+subjectId+" and examid="+exid+" and sid IN (:ids)");
+				query.setParameterList("ids", ids);
+				/*query.setParameter("subject", subject);
+				query.setParameter("exam", exam);*/
+				//query.executeUpdate();
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+		}
 	
 }
