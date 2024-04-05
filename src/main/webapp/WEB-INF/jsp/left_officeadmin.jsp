@@ -497,13 +497,13 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            				 <a target="mainFrame" href="/lilyrose/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/lilyrose/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            				 <a target="mainFrame" href="/shatabdi/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/lilyrose/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		
@@ -612,23 +612,23 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shatabdi/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            				 <a target="mainFrame" href="/lilyrose/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shatabdi/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            				<a target="mainFrame" href="/lilyrose/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            				 <a target="mainFrame" href="/lilyrose/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>
                 </table>
@@ -705,7 +705,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            				 <a target="mainFrame" href="/lilyrose/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
             			</td>
             		</tr>
                 </table>
@@ -795,17 +795,17 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
             			</td>
             		</tr>
             		<tr>

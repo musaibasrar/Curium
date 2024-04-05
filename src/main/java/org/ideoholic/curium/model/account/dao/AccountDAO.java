@@ -371,6 +371,7 @@ public class AccountDAO {
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 			accountName = accountDetails.getAccountname();
+			System.out.println("Account Name "+accountName);
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {

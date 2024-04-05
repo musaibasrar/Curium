@@ -51,6 +51,7 @@ public class EmployeeAction {
 	@PostMapping("/updateEmployeeDetails")
 	public String updateEmployeeDetails() {
 		if (new EmployeeService(request, response).viewDetailsEmployee()) {
+			new EmployeeService(request, response).viewAllRelations();
 			// return "patientDetails_1";
 			return "employee_update";
 		} else {

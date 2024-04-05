@@ -724,7 +724,9 @@ public class AccountService {
 		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
 		
 		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			String drAccountName = new AccountDAO().getAccountName(voucherEntry.getDraccountid());
+			String crAccountName = new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			twoAccounts = drAccountName+"--"+crAccountName;
 			voucherMap.put(voucherEntry, twoAccounts);
 		}
 		

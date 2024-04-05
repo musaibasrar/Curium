@@ -321,13 +321,13 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/feessummary" style="font-size: 12px;">Fees Summary</a>
+            				 <a target="mainFrame" href="/lilyrose/feessummary" style="font-size: 12px;">Fees Summary</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/lilyrose/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
@@ -365,7 +365,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
+            				 <a target="mainFrame" href="/lilyrose/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
                 </table>
@@ -460,13 +460,13 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
             			</td>
             		</tr>
                 </table>
@@ -507,7 +507,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shatabdi/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
+            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
             			</td>
             		</tr>
             		

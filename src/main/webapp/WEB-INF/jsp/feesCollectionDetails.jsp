@@ -720,7 +720,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/lilyrose/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

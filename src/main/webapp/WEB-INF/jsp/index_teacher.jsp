@@ -76,12 +76,10 @@ for(Cookie cookie : cookies){
 %>
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
-		   <c:if test="${(userType == 'accountant')}">
-			    <frame   src="/lilyrose/header_accountant"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
+			    <frame   src="/lilyrose/header_teacher"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/lilyrose/left_accountant" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame  src="/lilyrose/left_teacher" name="leftFrame" scrolling="yes"  frameborder="1"   />
                 <frame src="/lilyrose/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 

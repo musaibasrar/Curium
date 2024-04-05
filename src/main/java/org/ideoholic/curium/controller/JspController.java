@@ -507,5 +507,23 @@ public class JspController {
 		return "reports_principal";
 	}
 	
+	@GetMapping("/index_teacher")
+	public String getIndexTeacher() {
+		return "index_teacher";
+	}
 	
+	@GetMapping("/left_teacher")
+	public String getLeftTeacher() {
+		return "left_teacher";
+	}
+	
+	@GetMapping("/header_teacher")
+	public String getHeaderTeacher() {
+		return "header_teacher";
+	}
+	
+	@GetMapping("/reports_teacher")
+	public String getReportsTeacher() {
+		return "reports_teacher";
+	}
 }

@@ -340,8 +340,8 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/shatabdi/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/lilyrose/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
+                <a target="mainFrame" href="/lilyrose/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
@@ -357,8 +357,8 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
             <div>
-                <a target="mainFrame" href="/shatabdi/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
-                <a target="mainFrame" href="/shatabdi/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
+                <a target="mainFrame" href="/lilyrose/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+                <a target="mainFrame" href="/lilyrose/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
 
             </div>
             
@@ -378,7 +378,7 @@ for(Cookie cookie : cookies){
             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/shatabdi/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="/lilyrose/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>

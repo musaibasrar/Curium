@@ -446,13 +446,13 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+	<div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
 
-        <div id="container" style="width: 95%" >
+         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+            		<!--<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
@@ -461,7 +461,7 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/lilyrose/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
-            		</tr>
+            		</tr>-->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
@@ -474,10 +474,10 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
-            
+             
             
 			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+             <!--  <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -492,16 +492,15 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
-            		</tr> -->
-            		
-            		<!-- <tr>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/lilyrose/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
@@ -515,11 +514,11 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
-            </div>
+            </div> -->
             
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -528,11 +527,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
             
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -556,7 +555,7 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/lilyrose/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
@@ -575,82 +574,11 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/lilyrose/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
-            		</tr> -->
-                </table>
-            </div>
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr> -->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/lilyrose/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -677,7 +605,72 @@ for(Cookie cookie : cookies){
             </div>
             
             
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+           <!--  <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/lilyrose/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/lilyrose/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/lilyrose/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/lilyrose/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/lilyrose/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+             -->
+            
+            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+             -->
+            
+            
+                 <!--  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -686,27 +679,22 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
-             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
+             <!-- <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/lilyrose/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            				 <a target="mainFrame" href="/lilyrose/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
                
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+            <!--   <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -729,39 +717,39 @@ for(Cookie cookie : cookies){
 								<a target="mainFrame" href="/lilyrose/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
-            
+             -->
             
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/lilyrose/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/lilyrose/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
-            		</tr>
-            		<tr>
+            		</tr> -->
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/lilyrose/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
-            		</tr>
+            		</tr> -->
                 </table>
             </div>
             
@@ -780,25 +768,19 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/lilyrose/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
         	<div style="padding-left: 0px;padding-right: 0px;">
             
             	<table style=" border-collapse: collapse;width: 100%">
-            	
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/lilyrose/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/lilyrose/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            				 <a target="mainFrame" href="/lilyrose/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
             			</td>
             		</tr>
             		<tr>
@@ -807,7 +789,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
             
            <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
@@ -838,7 +820,7 @@ for(Cookie cookie : cookies){
             	</table>
             </div> -->
             
-            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+            <!-- <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
               <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -864,7 +846,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
            <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             
@@ -884,7 +866,7 @@ for(Cookie cookie : cookies){
             	</table>
             </div> -->
             
-            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -898,9 +880,9 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
-               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
+              <!--  <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -909,10 +891,10 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
-            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -922,7 +904,7 @@ for(Cookie cookie : cookies){
 				     </tr>
 				 </table>
             </div>
-            
+             -->
             </div>
                    
             

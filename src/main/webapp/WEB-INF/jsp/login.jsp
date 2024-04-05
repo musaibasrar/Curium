@@ -131,17 +131,19 @@ form{
             	if(type=='superadmin'){
                     window.open('/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/shatabdi/index_admin','_self');
+                    window.open('/lilyrose/index_admin','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/shatabdi/index_officeadmin','_self');
+                	window.open('/lilyrose/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/shatabdi/index_marksentry','_self');
+                	window.open('/lilyrose/index_marksentry','_self');
                 }else if(type=='accountant'){
-                	window.open('/shatabdi/index_accountant','_self');
+                	window.open('/lilyrose/index_accountant','_self');
                 }else if(type=='clerk'){
-                	window.open('/shatabdi/index_clerk','_self');
+                	window.open('/lilyrose/index_clerk','_self');
                 }else if(type=='principal'){
-                	window.open('/shatabdi/index_principal','_self');
+                	window.open('/lilyrose/index_principal','_self');
+                }else if(type=='teacher'){
+                	window.open('/lilyrose/index_teacher','_self');
                 }
             }
             else if(!flag1){

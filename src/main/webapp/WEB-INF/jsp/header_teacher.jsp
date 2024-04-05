@@ -132,16 +132,25 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/lilyrose/images/lilyroseheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/lilyrose/left_accountant"> <img
-									src="/lilyrose/images/home.svg" width="18" height="18" 
-									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
-							</a></td>
+							<td>
+							<a target="leftFrame" href="/lilyrose/left_teacher"><img
+									src="/lilyrose/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Home		
+								</a>
+							</td>
+							
+							<td>
+							<a target="leftFrame" href="/lilyrose/reports_teacher"><img
+									src="/lilyrose/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+							</td>
 
 							<!-- <td><a target="mainFrame"
 								href="/lilyrose/FeesProcess/feesCollect"> <img
 									src="/lilyrose/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
-							</a></td> -->
+							</a></td>
 
 							<td>
 								<a target="mainFrame"
@@ -152,16 +161,16 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/lilyrose/feesCollectionDetails"><img  alt="Fees Details" src="/lilyrose/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
-<!-- 
+							<td ><a target="mainFrame" href="/lilyrose/feesCollectionDetails"><img  alt="Fees Details" src="/lilyrose/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
+
 							<td><a target="mainFrame"
 								href="/lilyrose/StudentProcess/addNew"> <img
 									src="/lilyrose/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td> -->
+							</a></td>
 
-							<td ><a target="leftFrame" href="/lilyrose/leftsettings_accountant">
+							<td ><a target="leftFrame" href="/lilyrose/leftsettings_officeadmin">
 									<img alt="Settings" src="/lilyrose/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
@@ -172,31 +181,26 @@ for(Cookie cookie : cookies){
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/lilyrose/sendsms"><img
+							<td ><a target="mainFrame" href="/lilyrose/sendsms"><img
 									src="/lilyrose/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
-							</a> -->
-								<a target="leftFrame" href="/lilyrose/reports_accountant"><img
+							</a>
+								<a target="leftFrame" href="/lilyrose/reports_officeadmin"><img
 									src="/lilyrose/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
-								
-								<!-- <a target="leftFrame" href="/lilyrose/reports_officeadmin"><img
-									src="/lilyrose/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a> -->
 							
 							</td>
 
-							<!-- <td ><a target="mainFrame"
+							<td ><a target="mainFrame"
 								href="/lilyrose/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/lilyrose/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
-							</a></td>
+							</a></td> -->
 							
-							<td ><a target="mainFrame"
-								href="/lilyrose/dashboardloader"><img
+							<!-- <td ><a target="mainFrame"
+								href="/lilyrose/UserProcess/dashBoard"><img
 									alt="Dash Board" src="/lilyrose/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
