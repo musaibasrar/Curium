@@ -839,11 +839,13 @@ public class FeesCollectionService {
 		cStart.setTime(monthOf);
 		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
 		monthOf = cStart.getTime();
-		Timestamp TimestampFrom = new Timestamp(monthOf.getTime());
+		Timestamp dateFrom = new Timestamp(monthOf.getTime());
+		String TimestampFrom = new SimpleDateFormat("YYYY-MM-dd").format(dateFrom);
 		
 		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMaximum(Calendar.DAY_OF_MONTH));
 		Date lastDayOfMonth = cStart.getTime();
-		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
+		Timestamp dateto = new Timestamp(lastDayOfMonth.getTime());
+		String Timestampto = new SimpleDateFormat("YYYY-MM-dd").format(dateto);
 		
 		Currentmonth = cStart.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
 		
