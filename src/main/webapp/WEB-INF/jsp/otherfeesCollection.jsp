@@ -980,7 +980,7 @@ for(Cookie cookie : cookies){
 				<thead>
                     <tr >
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                        <td class="headerText">otherFees Category</td>
+                        <td class="headerText">Other Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
                         <td class="headerText">Amount Due to be paid</td>
                         <!-- <td class="headerText">Fine</td> -->

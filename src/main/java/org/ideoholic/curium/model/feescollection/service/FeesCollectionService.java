@@ -469,6 +469,7 @@ public class FeesCollectionService {
 			request.setAttribute("feescatmap", feeCatMap);
 			request.setAttribute("duplicate", dp);
 			request.setAttribute("user", userLogin);
+			request.setAttribute("feestype", "fees");
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
@@ -1443,6 +1444,7 @@ public class FeesCollectionService {
 			request.setAttribute("feescatmap", feeCatMap);
 			request.setAttribute("duplicate", dp);
 			request.setAttribute("user", userLogin);
+			request.setAttribute("feestype", "otherfees");
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");

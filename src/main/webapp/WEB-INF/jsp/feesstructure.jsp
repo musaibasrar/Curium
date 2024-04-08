@@ -516,7 +516,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
-
+						<th title="click to sort" class="headerText">Promoted Year</th>
 
 
 					</tr>
@@ -542,6 +542,8 @@ for(Cookie cookie : cookies){
 									value="${Parents.student.classstudying}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
+									<td class="dataText"><c:out
+									value="${Parents.student.promotedyear}" /></td>
 
 
 						</tr>

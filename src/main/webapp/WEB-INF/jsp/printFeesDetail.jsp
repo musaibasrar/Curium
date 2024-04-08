@@ -181,7 +181,14 @@
 			<tr>
 				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+							<c:choose>
+                                <c:when test="${feestype=='fees'}">
+                                    <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+                                </c:when>
+                                <c:otherwise>
+                                    <label class="dataTextBoldCenter" style="text-transform: uppercase;">Shatabdi Bus Service</label><br>
+                                </c:otherwise>
+                            </c:choose>
 				<label class="addressLine">A Senior Secondary School<br></label>
 				<label class="addressLine">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -382,6 +389,14 @@
 			<tr>
 				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
 				<td>
+					<c:choose>
+                        <c:when test="${feestype=='fees'}">
+                            <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+                        </c:when>
+                        <c:otherwise>
+                            <label class="dataTextBoldCenter" style="text-transform: uppercase;">Shatabdi Bus Service</label><br>
+                        </c:otherwise>
+                     </c:choose>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">A Senior Secondary School<br></label>
 				<label class="addressLine">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
