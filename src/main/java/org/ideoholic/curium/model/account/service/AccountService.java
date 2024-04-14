@@ -27,6 +27,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.AccountDto;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
 import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
@@ -36,6 +37,7 @@ import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class AccountService {
 	
@@ -147,16 +149,16 @@ public class AccountService {
 		
 	}
 
-	public String saveAccount() {
+	public ResultResponse saveAccount(AccountDto accountDto) {
 
-		String result = "false";
-		String newSubGroup = DataUtil.emptyString(request.getParameter("newsubgroup"));
-		String newSSGroup = DataUtil.emptyString(request.getParameter("newssgroup"));
-		String subGroupName = DataUtil.emptyString(request.getParameter("subgroupname"));
-		String ssGroupName = DataUtil.emptyString(request.getParameter("ssgroupname"));
-		String groupName = DataUtil.emptyString(request.getParameter("groupname"));
-		String accountName = DataUtil.emptyString(request.getParameter("accountname"));
-		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
+	    ResultResponse result = null;
+		String newSubGroup = accountDto.getNewSubGroup();
+		String newSSGroup = accountDto.getNewSSGroup();
+		String subGroupName = accountDto.getSubGroupName();
+		String ssGroupName = accountDto.getSsGroupName();
+		String groupName = accountDto.getGroupName();
+		String accountName = accountDto.getAccountName();
+		String accountCode = accountDto.getAccountCode();
 		
 		
 		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -213,7 +215,9 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
+					result = ResultResponse.builder()
+						.message(new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance))
+						.success(true).build();
 					
 		}else if("New Group".equalsIgnoreCase(subGroupName)){
 
@@ -269,15 +273,20 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
+					result = ResultResponse.builder()
+						.message(new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance))
+						.success(true).build();
 		}}else {
 				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountname())) {
-					result = "Error-Account Name already exists";
+					result = ResultResponse.builder()
+						.message("Error-Account Name already exists")
+						.success(false).build();
 				}else if(accountCode.equalsIgnoreCase(accountDetailsCheck.getAccountcode())) {
-					result = "Error-Account Code already exists";
+					result = ResultResponse.builder()
+						.message("Error-Account Code already exists")
+						.success(false).build();
 				}
 		}
-		request.setAttribute("createaccountalert", result);
 		return result;
 	}
 

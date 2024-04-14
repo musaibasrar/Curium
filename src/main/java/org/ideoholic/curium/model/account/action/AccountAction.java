@@ -29,13 +29,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AccountAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
+	
+	@Autowired
+	private AccountActionAdapter accountActionAdapter;
 	
 	public String ERRORPAGE = "error";
 
@@ -208,13 +211,11 @@ public class AccountAction {
 
 	@PostMapping("/saveAccount")
 	public String saveAccount() {
-		
-		if(!"false".equalsIgnoreCase(new AccountService(request, response).saveAccount())){
-			return createAccount();
-		} 
-		return ERRORPAGE;
-		
-		
+	    if (accountActionAdapter.saveAccount()) {
+		return createAccount();
+	    }
+
+	    return ERRORPAGE;
 	}
 
 	@GetMapping("/getSubGroupNames")
