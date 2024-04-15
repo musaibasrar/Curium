@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>view/edit Basic Pay</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -349,41 +349,41 @@
 
 </style>
 
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/scholar/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/scholar/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/scholar/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -410,12 +410,12 @@
 </script>
   
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/scholar/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/HrProcess/searchEmployeesForbasicpay?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/scholar/HrProcess/searchEmployeesForbasicpay?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -476,7 +476,7 @@
 	
 	function updateBasicPay() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/HrProcess/updateBasicPay";
+		form1.action = "/scholar/HrProcess/updateBasicPay";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -514,7 +514,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -551,7 +551,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/images/sort_both.png" /></th>
+							src="/scholar/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 							<th title="click to sort" class="headerText">Designation&nbsp;</th>
 							<th title="click to sort" class="headerText">Basic Pay&nbsp;</th>
@@ -565,7 +565,7 @@ for(Cookie cookie : cookies){
 					   <c:forEach items="${vieweditbasicpay}" var="employee" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.teacher.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.teacher.tid}:${status.index}:${employee.idpaybasic}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/abc/HrProcess/viewLeavesDetails?id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/scholar/HrProcess/viewLeavesDetails?id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.teacher.department}"/></td>
                                 <td class="dataText"><c:out value="${employee.teacher.designation}"/></td>
                                 <td class="dataText"><input type="text"	id="basicpay" name="basicpay" value="${employee.basicpay}"
