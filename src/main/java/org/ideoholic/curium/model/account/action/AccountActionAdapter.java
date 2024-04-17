@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
 import org.ideoholic.curium.model.account.dto.AccountDto;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DataUtil;
@@ -41,5 +42,14 @@ public class AccountActionAdapter {
 
 	return response.isSuccess();
     }
+
+	public boolean deleteAccount(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountDeleteDto accountDeleteDto = new AccountDeleteDto();
+		accountDeleteDto.setAccountIds(request.getParameterValues("accountids"));
+
+		return accountService.deleteAccount(accountDeleteDto);
+	}
 
 }

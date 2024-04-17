@@ -27,14 +27,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.AccountDto;
-import org.ideoholic.curium.model.account.dto.Accountdetails;
-import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
-import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
-import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
-import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -312,7 +305,7 @@ public class AccountService {
 	}
 
 
-	public boolean deleteAccount() {
+	public boolean deleteAccount(AccountDeleteDto accountDeleteDto) {
 		String[] accountIds = request.getParameterValues("accountids");
 		if (accountIds != null) {
 			List<Integer> balanceIds = new ArrayList<Integer>();

@@ -202,7 +202,7 @@ public class AccountAction {
 	@PostMapping("/deleteAccount")
 	public String deleteAccount() {
 		
-		if(new AccountService(request, response).deleteAccount()){
+		if(accountActionAdapter.deleteAccount()){
 			return createAccount();
 		}
 		return ERRORPAGE;
