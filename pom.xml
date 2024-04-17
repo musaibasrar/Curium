@@ -19,8 +19,8 @@
 	<properties>
 		<start-class>org.ideoholic.curium.CuriumApplication</start-class>
 		<java.version>1.8</java.version>
-		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-		<lombok.version>1.18.22</lombok.version>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<lombok.version>1.18.32</lombok.version>
 		<jaxb.version>2.2.11</jaxb.version>
 		<apache.poi.version>4.0.0</apache.poi.version>
 		<jfreechart.version>1.5.0</jfreechart.version>
