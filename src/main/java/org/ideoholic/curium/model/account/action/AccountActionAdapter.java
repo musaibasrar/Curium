@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.account.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
 import org.ideoholic.curium.model.account.dto.AccountDto;

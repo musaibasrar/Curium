@@ -306,7 +306,7 @@ public class AccountService {
 
 
 	public boolean deleteAccount(AccountDeleteDto accountDeleteDto) {
-		String[] accountIds = request.getParameterValues("accountids");
+		String[] accountIds = accountDeleteDto.getAccountIds();
 		if (accountIds != null) {
 			List<Integer> balanceIds = new ArrayList<Integer>();
 			List<Integer> accountdetailsIds = new ArrayList<Integer>();
