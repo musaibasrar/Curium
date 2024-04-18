@@ -103,6 +103,7 @@ public class DocumentService {
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String aadhar=parents.getStudent().getDisabilitychild();
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 String leavingDate = DateUtil.dateParserddMMYYYY(parents.getStudent().getDateleaving());
 				 char[] arr=aadhar.toCharArray();
 				 
 				 request.setAttribute("arr", arr);
@@ -118,6 +119,8 @@ public class DocumentService {
 				 request.setAttribute("Workingdays", Workingdays);
 				 request.setAttribute("Workingdayspresent", Workingdayspresent);
 				 request.setAttribute("withresult", withresult);
+				 request.setAttribute("leavingdate", leavingDate);
+				 request.setAttribute("remarkstc", request.getParameter("remarkstc"));
 				 return "studentexists";
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
@@ -129,6 +132,7 @@ public class DocumentService {
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String aadhar=parents.getStudent().getDisabilitychild();
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 String leavingDate = DateUtil.dateParserddMMYYYY(parents.getStudent().getDateleaving());
 			 char[] arr=aadhar.toCharArray();
 			 
 			 request.setAttribute("arr", arr);
@@ -144,6 +148,8 @@ public class DocumentService {
 			 request.setAttribute("Workingdays", Workingdays);
 			 request.setAttribute("Workingdayspresent", Workingdayspresent);
 			 request.setAttribute("withresult", withresult);
+			 request.setAttribute("leavingdate", leavingDate);
+			 request.setAttribute("remarkstc", request.getParameter("remarkstc"));
 			 return "true";
 		 }
 		 return "false";
@@ -168,7 +174,7 @@ public class DocumentService {
 			 String aadhar=parents.getStudent().getDisabilitychild();
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 			 char[] arr=aadhar.toCharArray();
-			 
+			 String leavingDate = DateUtil.dateParserddMMYYYY(parents.getStudent().getDateleaving());
 			 request.setAttribute("arr", arr);
 			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
@@ -176,7 +182,8 @@ public class DocumentService {
 			 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
 			 request.setAttribute("dist", dist);
 			 request.setAttribute("medium", medium);
-			 request.setAttribute("dateoftc", request.getParameter("tcdate"));
+			 request.setAttribute("dateoftc", DateUtil.indiandateParser(request.getParameter("tcdate")));
+			 request.setAttribute("leavingdate", leavingDate);
 			 request.setAttribute("Scholarno", Scholarno);
 			 request.setAttribute("Remarks", Remarks);
 			 return true;

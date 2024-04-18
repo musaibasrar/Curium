@@ -265,20 +265,20 @@
         <script type="text/javascript">
             var students = [
             <c:forEach varStatus="status" items="${studentListtc}" var="parents">{
-                value:'<c:out default="0" value="${parents.student.name}" />',
-                admissiondate:'<c:out default="0" value="${parents.student.admissiondate}" />',
-                name:'<c:out default="0" value="${parents.student.name}" />',
-                fathername:'<c:out default="0" value="${parents.fathersname}" />',
-                mothername:'<c:out default="0" value="${parents.mothersname}" />',
-                nationality:'<c:out default="0" value="${parents.student.nationality}" />',
-                gender:'<c:out default="0" value="${parents.student.gender}" />',
-                religion:'<c:out default="0" value="${parents.student.religion}" />',
-                caste:'<c:out default="0" value="${parents.student.caste}" />',
-                dateofbirth:'<c:out default="0" value="${parents.student.dateofbirth}" />',
-                classandsec:'<c:out default="0" value="${parents.student.classstudying}" />',
-                classadmittedin:'<c:out default="0" value="${parents.student.classadmittedin}" />',
-                id:'<c:out default="0" value="${parents.student.sid}" />',
-                reason:'<c:out default="0" value="${parents.student.reasonleaving}" />',
+                value:'<c:out value="${parents.student.name}" />',
+                admissiondate:'<c:out value="${parents.student.admissiondate}" />',
+                name:'<c:out value="${parents.student.name}" />',
+                fathername:'<c:out value="${parents.fathersname}" />',
+                mothername:'<c:out value="${parents.mothersname}" />',
+                nationality:'<c:out value="${parents.student.nationality}" />',
+                gender:'<c:out value="${parents.student.gender}" />',
+                religion:'<c:out value="${parents.student.religion}" />',
+                caste:'<c:out value="${parents.student.caste}" />',
+                dateofbirth:'<c:out value="${parents.student.dateofbirth}" />',
+                classandsec:'<c:out value="${parents.student.classstudying}" />',
+                classadmittedin:'<c:out value="${parents.student.classadmittedin}" />',
+                id:'<c:out value="${parents.student.sid}" />',
+                reason:'<c:out value="${parents.student.reasonleaving}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
@@ -552,14 +552,14 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td >Religion:&nbsp;&nbsp;</td><td> <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
-                    <td >Caste:&nbsp;&nbsp;</td><td> <input  type="text" name="caste" id="caste" style="width: 200px" readonly/></td>    
+                    <td >Caste:&nbsp;&nbsp;</td><td> <input  type="text" name="caste" id="caste" style="width: 200px"/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
                     <td>Date of Birth: &nbsp;</td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
-                    <td >Date of Birth (words):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" readonly/></td>    
+                    <td >Date of Birth (words):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px"/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
@@ -580,7 +580,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td>Reason For Leaving the school: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="reason" id="reason" style="width: 200px" /></td>
-                    <td >Passed Examination Details:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="passedexam" id="passedexam" style="width: 200px" readonly/></td>    
+                    <td >Passed Examination Details:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="passedexam" id="passedexam" style="width: 200px"/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
@@ -602,6 +602,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td>School/Board Annual Examination<br> was taken with Result: &nbsp; </td><td><input  type="text" name="withresult" id="withresult" style="width: 200px" /></td>
+                    <td >Remarks&nbsp; </td><td><input  type="text" name="remarkstc" id="remarkstc" style="width: 200px" /></td>
                     </tr>
                     </table>
                     <table><tbody>

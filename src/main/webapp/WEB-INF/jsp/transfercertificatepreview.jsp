@@ -238,13 +238,12 @@ for(Cookie cookie : cookies){
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10"value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" ></td>
+									 size="10"value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
 
 			</tr>
 			<tr>
 
 				<td class="dataTextBoldLeft">
-				&nbsp;&nbsp;
 					<h3 style="font-weight: normal;">This is to certify that Ms. &nbsp;&nbsp;
 					</h3>
 				</td>
@@ -256,7 +255,6 @@ for(Cookie cookie : cookies){
 				</td> -->
 
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;&nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 					Mother's name </h3>
 				</td>
@@ -276,7 +274,6 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"> <c:out value="${studentdetails.fathersname}" /></span>
 				</td>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;&nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					Religion</h3>
@@ -288,7 +285,6 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					Nationality &nbsp;&nbsp;</h3>
@@ -297,7 +293,6 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"><c:out value="${studentdetails.student.nationality}" /></span>
 				</td>
 				<td class="dataTextBoldLeft">
-				&nbsp;&nbsp;&nbsp;&nbsp;
 					<h3 style="font-weight: normal;">Block
 					</h3>
 				</td>
@@ -307,7 +302,6 @@ for(Cookie cookie : cookies){
 				</tr>
 				<tr>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					District &nbsp;&nbsp;</h3>
@@ -316,7 +310,6 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"><c:out value="${dist}" /></span>
 				</td>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;&nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					City</h3>
@@ -337,12 +330,18 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"><c:out value="${studentdetails.student.yearofadmission}" /></span>
 				</td>
 				<td class="dataTextBoldLeft"  >
-				&nbsp;&nbsp;&nbsp;&nbsp;
 				<h3 style="font-weight: normal;" >
 					to</h3>
 				</td>
 				<td class="dataTextBoldLeft"  >
-					<span style="font-weight: bold;"><c:out value="${studentdetails.student.promotedyear}" /></span>
+					<c:choose>
+                                <c:when test="${empty studentdetails.student.promotedyear}">
+                                    <span style="font-weight: bold;"><c:out value="${studentdetails.student.yearofadmission}" /></span>
+                                </c:when>
+                                <c:otherwise>
+                                   <span style="font-weight: bold;"><c:out value="${studentdetails.student.promotedyear}" /></span>
+                                </c:otherwise>
+                            </c:choose>
 				</td>
 				<tr>
 				<td class="dataTextBoldLeft"  >
@@ -350,13 +349,12 @@ for(Cookie cookie : cookies){
 					He/She leaving School on &nbsp;&nbsp;</h3>
 				</td>
 				<td class="dataTextBoldLeft"  >
-					<span style="font-weight: bold;"><c:out value="${studentdetails.student.dateleaving}" /></span>
+					<span style="font-weight: bold;"><c:out value="${leavingdate}" /></span>
 				</td>
 
 			</tr>
             <tr>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					Total No. of Working days &nbsp;&nbsp;</h3>
@@ -365,7 +363,6 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"><c:out value="${Workingdays}" /></span>
 				</td>
 				<td class="dataTextBoldLeft">
-				&nbsp;&nbsp;&nbsp;&nbsp;
 					<h3 style="font-weight: normal;">Total No. of Working<br> days present
 					</h3>
 				</td>
@@ -376,17 +373,17 @@ for(Cookie cookie : cookies){
 			<tr>
 
 				<td class="dataTextBoldLeft">
-				&nbsp;&nbsp;
 					<h3 style="font-weight: normal;">DATE OF BIRTH(in numbers) &nbsp;&nbsp;
 					</h3>
 				</td>
 				
 				<td class="dataTextBoldLeft">
-					<span style="font-weight: bold;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
+					<span style="font-weight: bold;">
+						 <fmt:formatDate value="${studentdetails.student.dateofbirth}" pattern="dd/MM/yyyy"/>
+					</span>
 				</td>
 
 				<td class="dataTextBoldLeft">
-					 &nbsp;&nbsp; &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					DATE OF <br>BIRTH(in words)</h3>
@@ -401,7 +398,6 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					Class in which the student <br>last studied &nbsp;&nbsp;</h3>
@@ -417,8 +413,7 @@ for(Cookie cookie : cookies){
 				</td>
 
 				<td class="dataTextBoldLeft">
-					  &nbsp;&nbsp;&nbsp;&nbsp;
-					<h3 style="font-weight: normal;" >
+					<h3 style="nbspfont-weight: normal;" >
 					Medium </h3>
 				</td>
 				
@@ -428,7 +423,6 @@ for(Cookie cookie : cookies){
 				</tr>
 				<tr>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					School/Board Annual<br> Examination was<br> taken with Result &nbsp;&nbsp;</h3>
@@ -437,13 +431,12 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;"><c:out value="${withresult}" /></span>
 				</td>
 				<td class="dataTextBoldLeft" >
-					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 
 					Remarks &nbsp;&nbsp;</h3>
 				</td>
 				<td class="dataTextBoldLeft" >
-					<span style="font-weight: bold;"><c:out value="${Remarks}" /></span>
+					<span style="font-weight: bold;"><c:out value="${remarkstc}" /></span>
 				</td>
 			</tr>
 			

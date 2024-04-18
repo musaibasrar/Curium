@@ -340,7 +340,7 @@ for(Cookie cookie : cookies){
 					was present in school from &nbsp;&nbsp;</h3>
 				</td>
 				<td class="dataTextBoldLeft"  >
-					<span style="font-weight: bold;"><c:out value="${studentdetails.student.admissiondate}" /></span>
+					<span style="font-weight: bold;"><c:out value="${studentdetails.student.yearofadmission}" /></span>
 				</td>
 				<td class="dataTextBoldLeft"  >
 				&nbsp;&nbsp;&nbsp;&nbsp;
@@ -348,7 +348,14 @@ for(Cookie cookie : cookies){
 					to</h3>
 				</td>
 				<td class="dataTextBoldLeft"  >
-					<span style="font-weight: bold;"><c:out value="${studentdetails.student.dateleaving}" /></span>
+					<c:choose>
+                                <c:when test="${empty studentdetails.student.promotedyear}">
+                                    <span style="font-weight: bold;"><c:out value="${studentdetails.student.yearofadmission}" /></span>
+                                </c:when>
+                                <c:otherwise>
+                                   <span style="font-weight: bold;"><c:out value="${studentdetails.student.promotedyear}" /></span>
+                                </c:otherwise>
+                            </c:choose>
 				</td>
 				<tr>
 				<td class="dataTextBoldLeft"  >
@@ -356,7 +363,7 @@ for(Cookie cookie : cookies){
 					He/She leaving School on &nbsp;&nbsp;</h3>
 				</td>
 				<td class="dataTextBoldLeft"  >
-					<span style="font-weight: bold;"><c:out value="${studentdetails.student.dateleaving}" /></span>
+					<span style="font-weight: bold;"><c:out value="${leavingdate}" /></span>
 				</td>
 
 			</tr>
