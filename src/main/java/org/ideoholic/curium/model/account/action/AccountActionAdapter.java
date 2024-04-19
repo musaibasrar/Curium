@@ -53,7 +53,7 @@ public class AccountActionAdapter {
 	}
 
 	public boolean saveReceipt(){
-		AccountService accountService = new AccountService(request, response);
+		AccountService accountService  = new AccountService(request, response);
 
 		AccountReceiptDto accountReceiptDto = new AccountReceiptDto();
 		accountReceiptDto.setDraccountName(request.getParameter("accountname"));
@@ -61,7 +61,7 @@ public class AccountActionAdapter {
 		accountReceiptDto.setReceiptVoucher(request.getParameter("receiptvoucher"));
 		accountReceiptDto.setDrAmount(request.getParameter("dramount"));
 		accountReceiptDto.setCrAmount(request.getParameter("cramountsecond"));
-		accountReceiptDto.setReceiptDate(request.getParameter("dateofreceipt"));
+		accountReceiptDto.setCrAmount(request.getParameter("dateofreceipt"));
 		accountReceiptDto.setReceiptNarration(request.getParameter("receiptnarration"));
 
 		return accountService.saveReceipt(accountReceiptDto);
