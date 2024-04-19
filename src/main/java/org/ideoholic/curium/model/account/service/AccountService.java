@@ -355,15 +355,15 @@ public class AccountService {
 	}
 
 
-	public boolean saveReceipt() {
+	public boolean saveReceipt(AccountReceiptDto accountReceiptDto) {
 		
-		String draccountName = DataUtil.emptyString(request.getParameter("accountname"));
-		String craccountName = DataUtil.emptyString(request.getParameter("accountnamesecond"));
-		String receiptVoucher = DataUtil.emptyString(request.getParameter("receiptvoucher"));
-		String drAmount = DataUtil.emptyString(request.getParameter("dramount"));
-		String crAmount = DataUtil.emptyString(request.getParameter("cramountsecond"));
-		String receiptDate = DataUtil.emptyString(request.getParameter("dateofreceipt"));
-		String receiptNarration = DataUtil.emptyString(request.getParameter("receiptnarration"));
+		String draccountName = DataUtil.emptyString(accountReceiptDto.getDraccountName());
+		String craccountName = DataUtil.emptyString(accountReceiptDto.getCraccountName());
+		String receiptVoucher = DataUtil.emptyString(accountReceiptDto.getReceiptVoucher());
+		String drAmount = DataUtil.emptyString(accountReceiptDto.getDrAmount());
+		String crAmount = DataUtil.emptyString(accountReceiptDto.getCrAmount());
+		String receiptDate = DataUtil.emptyString(accountReceiptDto.getReceiptDate());
+		String receiptNarration = DataUtil.emptyString(accountReceiptDto.getReceiptNarration());
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
