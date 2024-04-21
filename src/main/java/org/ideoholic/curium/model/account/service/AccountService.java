@@ -161,8 +161,8 @@ public class AccountService {
 		if(!"New Group".equalsIgnoreCase(subGroupName)){
 			
 				Accountdetails accountDetails = new Accountdetails();
-				accountDetails.setAccountname(accountName);
-				accountDetails.setAccountcode(accountCode);
+				accountDetails.setAccountName(accountName);
+				accountDetails.setAccountCode(accountCode);
 				
 				
 				if(getInt(subGroupName)!=null){
@@ -246,11 +246,11 @@ public class AccountService {
 				accountSSGroup.setSsgroupmasterid(accountSSGroupMaster.getSsgroupmasterid());
 				accountDetails.setAccountSSGroupMaster(accountSSGroup);
 				//Account Details
-				accountDetails.setAccountname(accountName);
-				accountDetails.setAccountcode(accountCode);
+				accountDetails.setAccountName(accountName);
+				accountDetails.setAccountCode(accountCode);
 				accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
 				accountDetails.setAccountGroupMaster(accountGroupMaster);
-				accountDetails.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
+				accountDetails.setAccountSubGroupMasterId(accountSubGroupMaster.getAccountsubgroupmasterid());
 				accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				
 					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -270,11 +270,11 @@ public class AccountService {
 						.message(new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance))
 						.success(true).build();
 		}}else {
-				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountname())) {
+				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountName())) {
 					result = ResultResponse.builder()
 						.message("Error-Account Name already exists")
 						.success(false).build();
-				}else if(accountCode.equalsIgnoreCase(accountDetailsCheck.getAccountcode())) {
+				}else if(accountCode.equalsIgnoreCase(accountDetailsCheck.getAccountCode())) {
 					result = ResultResponse.builder()
 						.message("Error-Account Code already exists")
 						.success(false).build();
@@ -539,20 +539,20 @@ public class AccountService {
 					case 1: 
 							assets = assets.add(accountdetails.getCurrentbalance());
 							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
-								assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+								assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountName(), accountdetails.getCurrentbalance());
 							}
 							break;
 					case 2: 
 							liabilities = liabilities.add(accountdetails.getCurrentbalance());
 							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
-								liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+								liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountName(), accountdetails.getCurrentbalance());
 							}	
 							break;
 							
 					case 3:
 							reserves = reserves.add(accountdetails.getCurrentbalance());
 							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
-								reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+								reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountName(), accountdetails.getCurrentbalance());
 							}
 							break;
 
@@ -765,7 +765,7 @@ public class AccountService {
 				
 				for (Accountdetails accountDetails : accountsDetails) {
 					
-					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountDetailsId(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					
 					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
@@ -825,7 +825,7 @@ public class AccountService {
 		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
 			int drAccountid = voucherTransaction.getDraccountid();
 			int crAccountid = voucherTransaction.getCraccountid();
-			int acccountId = accountDetails.getAccountdetailsid(); 
+			int acccountId = accountDetails.getAccountDetailsId();
 			if(drAccountid == acccountId) {
 				debitAcc = debitAcc.add(voucherTransaction.getDramount());
 			}else if(crAccountid == acccountId) {
@@ -1097,7 +1097,7 @@ public class AccountService {
 				
 				for (Accountdetails accountDetails : accountsDetails) {
 					
-					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountDetailsId(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					
 					if(!voucherTransactions.isEmpty()) {
 					
@@ -1254,7 +1254,7 @@ public class AccountService {
 				}
 				
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
+						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountName()),  dr ,
 								 cr });
 				i++;
 			}
