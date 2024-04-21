@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -202,45 +201,34 @@ for(Cookie cookie : cookies){
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				SHATABDI PUBLIC SCHOOL </td>
-			</tr>
-			<tr>
-			<td class="addressLine">A SENIOR SECONDRY SCHOOL,AFFILIATED TO CBSE,DELHI,AFFILIATION No. 330113</td>
-			</tr>
-			<tr>
-			<td class="addressLine">KATARI HILL ROAD, GAYA</td>
-			</tr>
-			<tr>
-			<td class="addressLine">Email: shatabdi.public@gmail.com</td>
-			</tr>
+		<td>
+		<br>
+		<br>
+		<br>
+		</td>
+		</tr>
 
-			<tr>
-			<td></td></tr>
-			<tr></tr>
 </table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
+<!--                 <tr>
 
                     <td colspan="4" ></td>
 
                 </tr>
-            </TABLE>
+ -->            </TABLE>
 
 		<table style="margin:40px;">
 		<tr>
 			
 			<td colspan="4">
 			
-			<h3><u>TRANSFER CERTIFICATE </u><br>(DUPLICATE)</h3>
+			<h1><u>TRANSFER CERTIFICATE </u><br>(DUPLICATE)</h1>
 			</td>
 			
 			</tr>
 			<tr>
-			<td></td><td></td>
-			<td >
+			<td align="right">
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
@@ -364,37 +352,32 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Subject studied: &nbsp;&nbsp;
+					(i). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${firstsubject}" /></span>
+					(ii). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${secondsubject}" /></span>
+					(iii). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${thirdsubject}" /> </span>
+					
+					</h3>
+				</td>
+				</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+					(iv). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${Fourthsubject}" /></span>
+					(v). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${Fifthsubject}" /></span>
+					(vi). &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${sixthsubject}" /> </span>
+					
 					</h3>
 				</td>
 				</tr>
 			
-			<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">1. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${firstsubject}" /></span>
-					2. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${secondsubject}" /></span>
-					</h3>
-				</td>
-				</tr>
-				<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">3. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${thirdsubject}" /> </span>
-					4. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${Fourthsubject}" /></span>
-					</h3>
-				</td>
-				</tr>
-				<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">5. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${Fifthsubject}" /> </span>
-					6. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${sixthsubject}" /> </span>
-					</h3>
-				</td>
-			</tr>
+				
 			<tr>
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;Whether qualified for Promotion to the higher Class
@@ -495,28 +478,26 @@ for(Cookie cookie : cookies){
 					</h3>
 				</td>
 			</tr>
-		</table>
 		
-
-		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
-
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br><br><br><br></td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
+			
 		<tr>
-		<td></td>
-		<td align="left">Checked By</td>	
-			<td align="centre">School Seal</td>
-			<td align="centre">Principal</td>
+		<td align="left">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Checked By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		School Seal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;Principal</td>
 			</tr>
 			
 			<tr>

@@ -526,4 +526,10 @@ public class JspController {
 	public String getReportsTeacher() {
 		return "reports_teacher";
 	}
+	
+	@GetMapping("/feescollectiondetailscategory")
+	public String getFeescollectionDetailsCategory() {
+		return "feescollectiondetailscategory";
+	}
+	
 }

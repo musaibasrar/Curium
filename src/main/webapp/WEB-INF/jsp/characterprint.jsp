@@ -131,34 +131,32 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 		<br>
 		
-		 <table style="padding-left:150px;">
-                        		
-			<tr>
-				<td ><img src="/shatabdi/images/shatabdi.jpg" width="117" height="140"/></td>
-				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	A SENIOR SECONDARY SCHOOL</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	AFFILIATED TO CBSE,DELHI,AFF NO.330113</h4>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	KATARI HILL ROAD,GAYA - 823001(BIHAR)</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.0631-2226652,2220344&nbsp;&nbsp;&nbsp;
-				Mobile No. 8936846757</h6>
-			    <h6 style="margin-top:0px;">	Email: shatabdi.public@gmail.com</h6>
-				</td>
-			</tr>
-		
+		 <table ><tr><td>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 <br>
+		 </td><td></td>
+          </tr>  
+                      		
+				
 			</table>
 			<table>
+			
 			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
-					<br>
-					<u>CHARACTER CERTIFICATE</u>
-					<br><br>
-				</td>
-			</tr>
-			<tr>
-			<td>
-			Sl.No: ${slno}
-			</td>
+			<td></td>
+			
 			</tr>
 			<tr>
 			<td></td>
@@ -180,12 +178,12 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:550px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
 					</h3></td></tr><tr>
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;width:150px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:150px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					</h3>
 				</td>
 			
@@ -227,7 +225,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br></td>
 			</tr>
 			<tr>
 			<td></td>
@@ -241,8 +239,6 @@ for(Cookie cookie : cookies){
 				Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
-			<td align="center">Accountant</td>
-			<td align="center">Principal</td>
 		</tr>
 		
 		<!-- 	<tr>

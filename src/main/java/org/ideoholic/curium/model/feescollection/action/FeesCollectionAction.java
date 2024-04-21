@@ -218,4 +218,17 @@ public class FeesCollectionAction {
 	            return "feessummaryreport";
 			}	 
 		 
+		 
+		 @PostMapping("/searchByDateFeesCollectionCategory")
+	        private String searchByDateFeesCollectionCategory() {
+	        	new FeesCollectionService(request, response).getFeesCollectionCategory();
+	            return "feescollectiondetailscategory";
+			}
+		 
+		 @PostMapping("/searchByDateFeesCollectionCategoryPrint")
+	        private String searchByDateFeesCollectionCategoryPrint() {
+	        	new FeesCollectionService(request, response).getFeesCollectionCategory();
+	            return "printfeescollectiondetailscategory";
+			}
+		 
 }

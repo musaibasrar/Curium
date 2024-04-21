@@ -150,7 +150,7 @@ for(Cookie cookie : cookies){
 		<br>
 		 <table align="center">
                         		
-			<tr>
+			<!-- <tr>
 				<td ><img src="/shatabdi/images/shatabdi.jpg" width="117" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	SHATABDI PUBLIC SCHOOL</h1>
@@ -162,7 +162,7 @@ for(Cookie cookie : cookies){
 				Mobile No. 8936846757</h6>
 			    <h6 style="margin-top:0px;">	Email: shatabdipublic@gmail.com</h6>
 				</td>
-			</tr>
+			</tr> -->
 		
 			</table><table>
 			
@@ -170,14 +170,12 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
-					<u>CHARACTER CERTIFICATE</u>
 					<br><br>
 				</td>
 			</tr>
 			<tr>
-			<td>
-			Sl.No: ${slno}
-			</td>
+			<td></td>
+			
 			</tr>
 			<tr>
 			<td></td>
@@ -247,7 +245,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br></td>
 			</tr>
 			<tr>
 			<td></td>
@@ -261,8 +259,6 @@ for(Cookie cookie : cookies){
 				Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
-			<td align="center">Accountant</td>
-			<td align="center">Principal</td>
 		</tr>
 		
 			<tr>

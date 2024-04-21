@@ -902,7 +902,9 @@ public class DocumentService {
 	
 	public void printCharacterCertificate() {
 		String character= request.getParameter("characterstudent");
+		String slno= request.getParameter("slno");
 		request.setAttribute("character", character);
+		request.setAttribute("slno", slno);
 	}
 
 
