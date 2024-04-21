@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.task.dto.Task" table="h_task">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tasks" type="string">
+            <column name="tasks" length="500" />
+        </property>
+         <property name="description" type="string">
+            <column name="description" length="1000" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="remarks" length="500" />
+        </property>
+        <property name="updateduserid" type="java.lang.Integer">
+            <column name="updateduserid"  />
+        </property>
+        <property name="updateddate" type="date">
+            <column name="updateddate" />
+        </property>
+        <property name="expecteddeliverydate" type="date">
+            <column name="expecteddeliverydate" />
+        </property>        
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
+            column="assignto" lazy="false" /> 
+        <many-to-one name="jobquery" class="org.ideoholic.curium.model.job.dto.JobQuery"
+            column="jobid" lazy="false" />
+    </class>
+</hibernate-mapping>

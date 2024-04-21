@@ -113,5 +113,13 @@
 		<mapping resource="mappings/Otherfeescollection.hbm.xml"></mapping>
 		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
 		<mapping resource="mappings/Enquiry.hbm.xml"></mapping>
+		<mapping resource="mappings/Marksgrade.hbm.xml"></mapping>
+		<mapping resource="mappings/ExamRank.hbm.xml"></mapping>
+		<mapping resource="mappings/SubjectGrade.hbm.xml"></mapping>
+		<mapping resource="mappings/Diary.hbm.xml"></mapping>
+		<mapping resource="mappings/StudentDiary.hbm.xml"></mapping>
+		<mapping resource="mappings/Appointment.hbm.xml"/>
+		<mapping resource="mappings/JobQuery.hbm.xml"/>
+		<mapping resource="mappings/Task.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

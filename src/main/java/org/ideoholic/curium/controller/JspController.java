@@ -580,4 +580,5 @@ public class JspController {
 	public String voucherCancelSuccess() {
 		return "vouchercancelsuccess";
 	}
+
 }
