@@ -458,26 +458,27 @@ public class StampFeesService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}
-
+	
+	
 	public void advanceSearchForStampFees(){
-		
+
 
 
         if(httpSession.getAttribute(BRANCHID)!=null){
         	String className = request.getParameter("classsearch");
         	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
-        	
+
             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
             httpSession.setAttribute("feescategory", feecategoryList);
-  		
-    		
-    		
+
+
+
     		// Get Student Details
-    		
+
     		List<Parents> searchStudentList = new ArrayList<Parents>();
-    		
+
     		if(httpSession.getAttribute(BRANCHID)!=null){
-    		
+
     		String queryMain = "From Parents as parents where";
     		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
     		String addClass = request.getParameter("classsearch");
@@ -512,12 +513,11 @@ public class StampFeesService {
     			queryMain = queryMain + querySub;
     			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
     		}
-    		
+
     	}
     		request.setAttribute("searchStudentList", searchStudentList);
 
 
         }
 	}
-
 }
