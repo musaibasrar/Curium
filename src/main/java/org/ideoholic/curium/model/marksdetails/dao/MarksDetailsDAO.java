@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import org.hibernate.query.Query;
+import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
+import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
+import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
-import org.ideoholic.curium.util.HibernateUtil;
 
 public class MarksDetailsDAO {
 
