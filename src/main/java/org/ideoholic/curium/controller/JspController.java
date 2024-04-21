@@ -437,4 +437,147 @@ public class JspController {
 		return "exhibitioncertificateprint";
 	}
 	
+	@GetMapping("/reports_teacher")
+	public String getReportsTeacher() {
+		return "reports_teacher";
+	}
+	
+	@GetMapping("/left_feescollector")
+	public String getLeftFeescollector() {
+		return "left_feescollector";
+	}
+	
+	@GetMapping("/reports_feescollector")
+	public String getReportsfeescollector() {
+		return "reports_feescollector";
+	}
+	
+	@GetMapping("/index_parents")
+	public String getIndexParents() {
+		return "index_parents";
+	}
+	@GetMapping("/header_parent")
+	public String getHeaderParents() {
+		return "header_parent";
+	}
+	@GetMapping("/left_parent")
+	public String getLeftParents() {
+		return "left_parent";
+	}
+	@GetMapping("/Views_student_detail")
+	public String getViewsstudentdetail() {
+		return "Views_student_detail";
+	}
+	@GetMapping("/diary")
+	public String getDiary() {
+		return "diary";
+	}
+	@GetMapping("/viewDiary")
+	public String getViewDiary() {
+		return "viewDiary";
+	}
+	@GetMapping("/welcomeparent")
+	public String getWelcomeparent() {
+		return "welcomeparent";
+	}
+	@GetMapping("/studentdiary")
+	public String getStudentDiary() {
+		return "studentdiary";
+	}
+	@GetMapping("/studentviewdiary")
+	public String getStudentViewDiary() {
+		return "studentviewdiary";
+	}
+	@GetMapping("/studentviewdiarymessage")
+	public String getStudentViewDiaryMessage() {
+		return "studentviewdiarymessage";
+	}
+	@GetMapping("/viewdiarymessagestudent")
+	public String getViewDiaryMessageStudent() {
+		return "viewdiarymessagestudent";
+	}
+	@GetMapping("/viewdiarystudent")
+	public String getViewDiaryStudent() {
+		return "viewdiarystudent";
+	}
+	
+	@GetMapping("/exportsuccessappointment")
+	public String getExportSuccessAppointment() {
+		return "exportsuccessappointment";
+	}
+
+	@GetMapping("/printappointmentsreport")
+	public String getPrintAppointmentsReport() {
+		return "printappointmentsreport";
+	}
+
+	@GetMapping("/appointmentsreport")
+	public String getAppointmentsReport() {
+		return "appointmentsreport";
+	}
+
+	@GetMapping("/appointments")
+	public String getAppointments() {
+		return "appointments";
+	}
+
+	@GetMapping("/appointmentsuccess")
+	public String getAppointmentsuccess() {
+		return "appointmentsuccess";
+	}
+
+	@GetMapping("/exportsuccessquery")
+	public String getExportsuccessquery() {
+		return "exportsuccessquery";
+	}
+
+	@GetMapping("/feedbackthankyou")
+	public String getFeedbackthankyou() {
+		return "feedbackthankyou";
+	}
+
+	@GetMapping("/feedbackthankyoufail")
+	public String getFeedbackthankyoufail() {
+		return "feedbackthankyoufail";
+	}
+
+	@GetMapping("/printqueriesreport")
+	public String getPrintqueriesreport() {
+		return "printqueriesreport";
+	}
+
+	@GetMapping("/queriesreport")
+	public String getQueriesreport() {
+		return "queriesreport";
+	}
+
+	@GetMapping("/queries")
+	public String getQueries() {
+		return "queries";
+	}
+
+	@GetMapping("/querysuccess")
+	public String getQuerysuccess() {
+		return "querysuccess";
+	}
+
+	@GetMapping("/index_staff")
+	public String getIndexstaff() {
+		return "index_staff";
+	}
+
+	@GetMapping("/header_staff")
+	public String getHeaderstaff() {
+		return "header_staff";
+	}
+	
+	@GetMapping("/vouchersearch")
+	public String voucherSearch() {
+		return "vouchersearch";
+	}
+	
+	@GetMapping("/vouchercancelsuccess")
+	public String voucherCancelSuccess() {
+		return "vouchercancelsuccess";
+	}
 }
