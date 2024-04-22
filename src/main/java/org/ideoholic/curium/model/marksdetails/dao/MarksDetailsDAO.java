@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.marksdetails.dto.MarksGrade;
 import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -169,6 +170,23 @@ public class MarksDetailsDAO {
 				return results;
 			}
 			
+		}
+
+		public List<MarksGrade> readMarksGrade(int branchid) {
+			List<MarksGrade> results = new ArrayList<MarksGrade>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From MarksGrade where branchid = "+branchid+"");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
 		}
 	
 		public boolean saveMarks(List<ExamRank> examRankList) {
