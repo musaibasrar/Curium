@@ -581,4 +581,8 @@ public class JspController {
 		return "vouchercancelsuccess";
 	}
 
+	@GetMapping("/studentarticlecertificate")
+	public String getStudentArticleCertificate() {
+		return "studentarticlecertificate";
+	}
 }

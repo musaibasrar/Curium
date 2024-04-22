@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -141,4 +142,82 @@ public class DocumentAction {
 		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
 		return "studentspendingadmissionreports";
 	}
+	
+	@PostMapping("/GenerateCharacterCertificate")
+	public String generateCharacterCertificate() {
+		String result = new DocumentService(request, response).generateCharacterCertificate();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	@PostMapping("/searchStudentsForCharacter")
+	public String searchStudentsForCharacter() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentcharactersdetails";
+	}
+	
+	@PostMapping("/printCharacterCertificate")
+	public String printCharacterCertificate() {
+		return "characterprint";
+	}
+	
+	@GetMapping("/studentsDetailsConsellingCertificate")
+	public String studentsDetailsConsellingCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "counsellingdetailscertificate";
+	}
+	
+	@PostMapping("/GenerateStudyCertificateforCounselling")
+	public String GenerateStudyCertificateforCounselling() {
+		String result = new DocumentService(request, response).studyCertificateforCounselling();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	@GetMapping("/studentsArticleCertificate")
+	public String studentsArticleCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentarticlecertificate";
+	}
+	
+	
+	@PostMapping("/GenerateArticle")
+	public String generateArticle() {
+		String result = new DocumentService(request, response).generateArticle();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	
+	@GetMapping("/printArticleCertificate")
+	public String printArticleCertificate() {
+		return "articlecertificateprint";
+	}
+	
+	@PostMapping("/searchStudentsForArticle")
+	public String searchStudentsForArticle() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentarticlecertificate";
+	}
+	
+	@PostMapping("/searchStudentsForCounselling")
+	public String searchStudentsForCounselling() {
+		new StampFeesService(request, response).advanceSearch();
+		return "counsellingdetailscertificate";
+	}
+	
+	@GetMapping("/printStudyCertificateCounselling")
+	public String printStudyCertificateCounselling() {
+		return "counsellingstudycertificateprint";
+	}
+	
 }

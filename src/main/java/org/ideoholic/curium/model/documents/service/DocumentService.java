@@ -603,6 +603,48 @@ public class DocumentService {
 	
 	}
 
+	public String studyCertificateforCounselling() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String bonafidePage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			bonafidePage = "studycertificateforcounsellingprint";
+		}
+		
+		return bonafidePage;
+	}
+
+
+	public String generateArticle() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String bonafidePage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			bonafidePage = "articleprint";
+		}
+		
+		return bonafidePage;
+	}
+	
+	public String generateCharacterCertificate() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String characterPage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			characterPage = "charactercertificateprint";
+		}
+		
+		return characterPage;
+	}
 	
 	
 }
