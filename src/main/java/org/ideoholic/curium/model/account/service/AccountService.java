@@ -461,15 +461,15 @@ public class AccountService {
 	}
 
 
-	public boolean saveJournal() {
+	public boolean saveJournal(AccountJournalDto accountJournalDto) {
 		
-		String draccountNameJournal = DataUtil.emptyString(request.getParameter("accountnamejournal"));
-		String craccountNameJournal = DataUtil.emptyString(request.getParameter("accountnamejournalsecond"));
-		String journalVoucher = DataUtil.emptyString(request.getParameter("journalvoucher"));
-		String drAmountJournal = DataUtil.emptyString(request.getParameter("dramountjournal"));
-		String crAmountJournal = DataUtil.emptyString(request.getParameter("cramountjournalsecond"));
-		String journalDate = DataUtil.emptyString(request.getParameter("dateofjournal"));
-		String journalNarration = DataUtil.emptyString(request.getParameter("journalnarration"));
+		String draccountNameJournal = DataUtil.emptyString(accountJournalDto.getDraccountNameJournal());
+		String craccountNameJournal = DataUtil.emptyString(accountJournalDto.getCraccountNameJournal());
+		String journalVoucher = DataUtil.emptyString(accountJournalDto.getJournalVoucher());
+		String drAmountJournal = DataUtil.emptyString(accountJournalDto.getDrAmountJournal());
+		String crAmountJournal = DataUtil.emptyString(accountJournalDto.getCrAmountJournal());
+		String journalDate = DataUtil.emptyString(accountJournalDto.getJournalDate());
+		String journalNarration = DataUtil.emptyString(accountJournalDto.getJournalNarration());
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
