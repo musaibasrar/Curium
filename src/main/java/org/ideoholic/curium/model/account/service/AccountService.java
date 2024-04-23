@@ -426,15 +426,15 @@ public class AccountService {
 	}
 
 
-	public boolean saveContra() {
+	public boolean saveContra(AccountContraDto accountContraDto) {
 		
-		String draccountNameContra = DataUtil.emptyString(request.getParameter("accountnamecontra"));
-		String craccountNameContra = DataUtil.emptyString(request.getParameter("accountnamecontrasecond"));
-		String contraVoucher = DataUtil.emptyString(request.getParameter("contravoucher"));
-		String drAmountContra = DataUtil.emptyString(request.getParameter("dramountcontra"));
-		String crAmountContra = DataUtil.emptyString(request.getParameter("cramountcontrasecond"));
-		String contraDate = DataUtil.emptyString(request.getParameter("dateofcontra"));
-		String contraNarration = DataUtil.emptyString(request.getParameter("contranarration"));
+		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
+		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String contraVoucher = DataUtil.emptyString(accountContraDto.getContraVoucher());
+		String drAmountContra = DataUtil.emptyString(accountContraDto.getDrAmountContra());
+		String crAmountContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String contraDate = DataUtil.emptyString(accountContraDto.getContraDate());
+		String contraNarration = DataUtil.emptyString(accountContraDto.getContraNarration());
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		

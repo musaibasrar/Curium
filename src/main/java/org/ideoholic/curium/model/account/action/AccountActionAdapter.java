@@ -89,4 +89,19 @@ public class AccountActionAdapter {
 
 		return accountService.saveJournal(accountJournalDto);
 	}
+
+	public boolean saveContra(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountContraDto accountContraDto = new AccountContraDto();
+		accountContraDto.setDraccountName(request.getParameter("accountnamecontra"));
+		accountContraDto.setCraccountName(request.getParameter("accountnamecontrasecond"));
+		accountContraDto.setContraVoucher(request.getParameter("contravoucher"));
+		accountContraDto.setDrAmountContra(request.getParameter("dramountcontra"));
+		accountContraDto.setCrAmountContra(request.getParameter("cramountcontrasecond"));
+		accountContraDto.setContraDate(request.getParameter("dateofcontra"));
+		accountContraDto.setContraNarration(request.getParameter("contranarration"));
+
+		return accountService.saveContra(accountContraDto);
+	}
 }
