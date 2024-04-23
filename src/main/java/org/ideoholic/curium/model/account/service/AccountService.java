@@ -844,10 +844,10 @@ public class AccountService {
 	}
 
 
-	public boolean cancelVoucher() {
-		
-		String[] receiptIds = request.getParameterValues("transactionids");
-		String voucher = request.getParameter("voucher");
+	public boolean cancelVoucher(CancelVoucherDto cancelVoucherDto) {
+
+		String[] receiptIds = cancelVoucherDto.getReceiptIds();
+		String voucher = cancelVoucherDto.getVoucher();
 		int voucherType = 0;
 		Date now = new Date();
         String pattern = "yyyy-MM-dd";

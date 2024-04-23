@@ -84,7 +84,7 @@ public class AccountAction {
 	@PostMapping("/cancelVoucher")
 	public String cancelVoucher() {
 
-		if(new AccountService(request, response).cancelVoucher()){
+		if(accountActionAdapter.cancelVoucher()){
 			return "vouchercancelsuccess";
 		}
 			return ERRORPAGE;

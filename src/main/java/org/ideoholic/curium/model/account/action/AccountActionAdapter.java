@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
 import org.ideoholic.curium.model.account.dto.AccountDto;
 import org.ideoholic.curium.model.account.dto.AccountReceiptDto;
+import org.ideoholic.curium.model.account.dto.CancelVoucherDto;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -67,4 +68,13 @@ public class AccountActionAdapter {
 		return accountService.saveReceipt(accountReceiptDto);
 	}
 
+	public boolean cancelVoucher(){
+		AccountService accountService = new AccountService(request, response);
+
+		CancelVoucherDto cancelVoucherDto = new CancelVoucherDto();
+		cancelVoucherDto.setReceiptIds(request.getParameterValues("transactionids"));
+		cancelVoucherDto.setVoucher(request.getParameter("voucher"));
+
+		return accountService.cancelVoucher(cancelVoucherDto);
+	}
 }
