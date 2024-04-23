@@ -182,7 +182,7 @@ public class AccountAction {
 
 	@PostMapping("/saveReceipt")
 	public String saveReceipt() {
-		if(new AccountService(request, response).saveReceipt()){
+		if(accountActionAdapter.saveReceipt()){
 			return createVoucher();
 		}
 		return ERRORPAGE;

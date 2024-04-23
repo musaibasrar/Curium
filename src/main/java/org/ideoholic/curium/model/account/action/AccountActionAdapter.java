@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
 import org.ideoholic.curium.model.account.dto.AccountDto;
+import org.ideoholic.curium.model.account.dto.AccountReceiptDto;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -49,6 +50,21 @@ public class AccountActionAdapter {
 		accountDeleteDto.setAccountIds(request.getParameterValues("accountids"));
 
 		return accountService.deleteAccount(accountDeleteDto);
+	}
+
+	public boolean saveReceipt(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountReceiptDto accountReceiptDto = new AccountReceiptDto();
+		accountReceiptDto.setDraccountName(request.getParameter("accountname"));
+		accountReceiptDto.setCraccountName(request.getParameter("accountnamesecond"));
+		accountReceiptDto.setReceiptVoucher(request.getParameter("receiptvoucher"));
+		accountReceiptDto.setDrAmount(request.getParameter("dramount"));
+		accountReceiptDto.setCrAmount(request.getParameter("cramountsecond"));
+		accountReceiptDto.setReceiptDate(request.getParameter("dateofreceipt"));
+		accountReceiptDto.setReceiptNarration(request.getParameter("receiptnarration"));
+
+		return accountService.saveReceipt(accountReceiptDto);
 	}
 
 }
