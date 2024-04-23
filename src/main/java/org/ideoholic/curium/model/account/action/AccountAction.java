@@ -154,7 +154,7 @@ public class AccountAction {
 
 	@PostMapping("/saveJournal")
 	public String saveJournal() {
-		if(new AccountService(request, response).saveJournal()){
+		if(accountActionAdapter.saveJournal()){
 			return createVoucher();
 		}
 		return ERRORPAGE;

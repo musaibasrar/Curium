@@ -3,10 +3,7 @@ package org.ideoholic.curium.model.account.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
-import org.ideoholic.curium.model.account.dto.AccountDto;
-import org.ideoholic.curium.model.account.dto.AccountReceiptDto;
-import org.ideoholic.curium.model.account.dto.CancelVoucherDto;
+import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -76,5 +73,20 @@ public class AccountActionAdapter {
 		cancelVoucherDto.setVoucher(request.getParameter("voucher"));
 
 		return accountService.cancelVoucher(cancelVoucherDto);
+	}
+
+	public boolean saveJournal(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountJournalDto accountJournalDto = new AccountJournalDto();
+		accountJournalDto.setDraccountNameJournal(request.getParameter("accountnamejournal"));
+		accountJournalDto.setCraccountNameJournal(request.getParameter("accountnamejournalsecond"));
+		accountJournalDto.setJournalVoucher(request.getParameter("journalvoucher"));
+		accountJournalDto.setDrAmountJournal(request.getParameter("dramountjournal"));
+		accountJournalDto.setCrAmountJournal(request.getParameter("cramountjournalsecond"));
+		accountJournalDto.setJournalDate(request.getParameter("dateofjournal"));
+		accountJournalDto.setJournalNarration(request.getParameter("journalnarration"));
+
+		return accountService.saveJournal(accountJournalDto);
 	}
 }
