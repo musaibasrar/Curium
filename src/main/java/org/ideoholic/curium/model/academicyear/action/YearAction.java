@@ -31,13 +31,7 @@ public class YearAction {
 	@Autowired
 	private YearActionAdapter yearActionAdapter;
 
-	/*
-	 * @PostMapping("/saveYear") public String saveYear() {
-	 * System.out.println("Action is viewAllExpenses"); if (new YearService(request,
-	 * response).saveYear()) { return "yearsaved"; } else { return "error"; }
-	 * 
-	 * }
-	 */
+	
 	
 	@PostMapping("/saveYear")
 	public String saveYear() {

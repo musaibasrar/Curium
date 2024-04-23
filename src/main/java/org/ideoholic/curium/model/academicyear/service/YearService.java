@@ -28,45 +28,22 @@ public class YearService {
 	}
 
 
-	public boolean saveYear() {
-		boolean result=false;
-		String errorService=null;
-		Currentacademicyear currentacademicyear = new Currentacademicyear();
-		currentacademicyear.setCurrentacademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
-		errorService=new YearDAO().create(currentacademicyear);
-		
-		if(currentacademicyear!=null){
-			result=true;
-			
-		}
-		httpSession.setAttribute("errorMessage", errorService);
-            return result;
-		
-	}
-
 	public ResultResponse saveYear(CurrentAcademicYearDto currentAcademicYearDto) {
-		 ResultResponse result = null;
-		 String currentacademicyear = currentAcademicYearDto.getCurrentacademicyear();
-		
-		return result;	
+		ResultResponse result = ResultResponse.builder().build();
+		String errorService = null;
+		Currentacademicyear currentacademicyear = new Currentacademicyear();
+		currentacademicyear.setCurrentacademicyear(currentAcademicYearDto.getCurrentacademicyear());
+		errorService = new YearDAO().create(currentacademicyear);
+
+		if (currentacademicyear != null) {
+			result.setSuccess(true);
+
+		}
+		return result;
+
 	}
 
-	/*
-	 * public CurrentAcademicYearDto saveYear(CurrentAcademicYearDto current) {
-	 * boolean result=false; String errorService=null; Currentacademicyear
-	 * currentacademicyear = Yearmapper.INSTANCE.mapCurrentacademicyear(current);
-	 * //Currentacademicyear currentacademicyear = new Currentacademicyear();
-	 * //currentacademicyear.setCurrentacademicyear(DataUtil.emptyString(request.
-	 * getParameter("academicyear"))); errorService=new
-	 * YearDAO().create(currentacademicyear);
-	 * 
-	 * 
-	 * return Yearmapper.INSTANCE.mapCurrentAcademicYearDto(currentacademicyear);
-	 * 
-	 * }
-	 */
-
-	public boolean updateYear() {
+		public boolean updateYear() {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		
 		currentacademicyear = new YearDAO().showYear();
