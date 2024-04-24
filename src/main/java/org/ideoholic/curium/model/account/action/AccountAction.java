@@ -163,7 +163,7 @@ public class AccountAction {
 
 	@PostMapping("/saveContra")
 	public String saveContra() {
-		if(new AccountService(request, response).saveContra()){
+		if(accountActionAdapter.saveContra()){
 			return createVoucher();
 		}
 		return ERRORPAGE;

@@ -145,13 +145,13 @@ public class AccountService {
 	public ResultResponse saveAccount(AccountDto accountDto) {
 
 	    ResultResponse result = null;
-		String newSubGroup = accountDto.getNewSubGroup();
-		String newSSGroup = accountDto.getNewSSGroup();
-		String subGroupName = accountDto.getSubGroupName();
-		String ssGroupName = accountDto.getSsGroupName();
-		String groupName = accountDto.getGroupName();
-		String accountName = accountDto.getAccountName();
-		String accountCode = accountDto.getAccountCode();
+		String newSubGroup =  DataUtil.emptyString(accountDto.getNewSubGroup());
+		String newSSGroup =  DataUtil.emptyString(accountDto.getNewSSGroup());
+		String subGroupName =  DataUtil.emptyString(accountDto.getSubGroupName());
+		String ssGroupName =  DataUtil.emptyString(accountDto.getSsGroupName());
+		String groupName =  DataUtil.emptyString(accountDto.getGroupName());
+		String accountName =  DataUtil.emptyString(accountDto.getAccountName());
+		String accountCode =  DataUtil.emptyString(accountDto.getAccountCode());
 		
 		
 		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -426,15 +426,15 @@ public class AccountService {
 	}
 
 
-	public boolean saveContra() {
+	public boolean saveContra(AccountContraDto accountContraDto) {
 		
-		String draccountNameContra = DataUtil.emptyString(request.getParameter("accountnamecontra"));
-		String craccountNameContra = DataUtil.emptyString(request.getParameter("accountnamecontrasecond"));
-		String contraVoucher = DataUtil.emptyString(request.getParameter("contravoucher"));
-		String drAmountContra = DataUtil.emptyString(request.getParameter("dramountcontra"));
-		String crAmountContra = DataUtil.emptyString(request.getParameter("cramountcontrasecond"));
-		String contraDate = DataUtil.emptyString(request.getParameter("dateofcontra"));
-		String contraNarration = DataUtil.emptyString(request.getParameter("contranarration"));
+		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
+		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String contraVoucher = DataUtil.emptyString(accountContraDto.getContraVoucher());
+		String drAmountContra = DataUtil.emptyString(accountContraDto.getDrAmountContra());
+		String crAmountContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String contraDate = DataUtil.emptyString(accountContraDto.getContraDate());
+		String contraNarration = DataUtil.emptyString(accountContraDto.getContraNarration());
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
