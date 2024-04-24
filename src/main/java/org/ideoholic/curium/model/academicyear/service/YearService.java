@@ -33,6 +33,7 @@ public class YearService {
 		String errorService = null;
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		currentacademicyear.setCurrentacademicyear(currentAcademicYearDto.getCurrentacademicyear());
+		currentAcademicYearDto.setCurrentacademicyear((request.getParameter("academicyear")));
 		errorService = new YearDAO().create(currentacademicyear);
 
 		if (currentacademicyear != null) {

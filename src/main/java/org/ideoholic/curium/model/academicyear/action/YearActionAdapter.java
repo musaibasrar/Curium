@@ -29,7 +29,6 @@ public class YearActionAdapter {
 		YearService yearService = new YearService(request, response);
 
 		CurrentAcademicYearDto currentacademicyeardto = new CurrentAcademicYearDto();
-		currentacademicyeardto.setCurrentacademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
 		ResultResponse response = yearService.saveYear(currentacademicyeardto);
 		if (response == null) {
 			return false;
