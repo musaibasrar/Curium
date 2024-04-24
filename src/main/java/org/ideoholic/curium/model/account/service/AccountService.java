@@ -145,13 +145,13 @@ public class AccountService {
 	public ResultResponse saveAccount(AccountDto accountDto) {
 
 	    ResultResponse result = null;
-		String newSubGroup = accountDto.getNewSubGroup();
-		String newSSGroup = accountDto.getNewSSGroup();
-		String subGroupName = accountDto.getSubGroupName();
-		String ssGroupName = accountDto.getSsGroupName();
-		String groupName = accountDto.getGroupName();
-		String accountName = accountDto.getAccountName();
-		String accountCode = accountDto.getAccountCode();
+		String newSubGroup =  DataUtil.emptyString(accountDto.getNewSubGroup());
+		String newSSGroup =  DataUtil.emptyString(accountDto.getNewSSGroup());
+		String subGroupName =  DataUtil.emptyString(accountDto.getSubGroupName());
+		String ssGroupName =  DataUtil.emptyString(accountDto.getSsGroupName());
+		String groupName =  DataUtil.emptyString(accountDto.getGroupName());
+		String accountName =  DataUtil.emptyString(accountDto.getAccountName());
+		String accountCode =  DataUtil.emptyString(accountDto.getAccountCode());
 		
 		
 		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

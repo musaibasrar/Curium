@@ -23,13 +23,13 @@ public class AccountActionAdapter {
 	AccountService accountService = new AccountService(request, response);
 
 	AccountDto accountDto = new AccountDto();
-	accountDto.setNewSubGroup(DataUtil.emptyString(request.getParameter("newsubgroup")));
-	accountDto.setNewSSGroup(DataUtil.emptyString(request.getParameter("newssgroup")));
-	accountDto.setSubGroupName(DataUtil.emptyString(request.getParameter("subgroupname")));
-	accountDto.setSsGroupName(DataUtil.emptyString(request.getParameter("ssgroupname")));
-	accountDto.setGroupName(DataUtil.emptyString(request.getParameter("groupname")));
-	accountDto.setAccountName(DataUtil.emptyString(request.getParameter("accountname")));
-	accountDto.setAccountCode(DataUtil.emptyString(request.getParameter("accountcode")));
+	accountDto.setNewSubGroup(request.getParameter("newsubgroup"));
+	accountDto.setNewSSGroup(request.getParameter("newssgroup"));
+	accountDto.setSubGroupName(request.getParameter("subgroupname"));
+	accountDto.setSsGroupName(request.getParameter("ssgroupname"));
+	accountDto.setGroupName(request.getParameter("groupname"));
+	accountDto.setAccountName(request.getParameter("accountname"));
+	accountDto.setAccountCode(request.getParameter("accountcode"));
 
 	ResultResponse response = accountService.saveAccount(accountDto);
 	if (response == null) {
