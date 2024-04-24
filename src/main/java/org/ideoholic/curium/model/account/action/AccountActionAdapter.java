@@ -104,4 +104,20 @@ public class AccountActionAdapter {
 
 		return accountService.saveContra(accountContraDto);
 	}
+
+	public boolean savePayment(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountPaymentDto accountPaymentDto = new AccountPaymentDto();
+		accountPaymentDto.setDraccountName(request.getParameter("accountnamepayment"));
+		accountPaymentDto.setCraccountName(request.getParameter("accountnamepaymentsecond"));
+		accountPaymentDto.setPaymentVoucher(request.getParameter("paymentavoucher"));
+		accountPaymentDto.setDrAmountPayment(request.getParameter("dramountpayment"));
+		accountPaymentDto.setCrAmountPayment(request.getParameter("cramountpaymentsecond"));
+		accountPaymentDto.setPaymentDate(request.getParameter("dateofpayment"));
+		accountPaymentDto.setPaymentNarration(request.getParameter("paymentnarration"));
+
+		return accountService.savePayment(accountPaymentDto);
+
+	}
 }
