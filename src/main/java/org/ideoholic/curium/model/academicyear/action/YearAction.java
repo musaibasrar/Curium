@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class YearAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
 	private YearActionAdapter yearActionAdapter;

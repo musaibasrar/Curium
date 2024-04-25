@@ -32,14 +32,15 @@ public class YearService {
 		ResultResponse result = ResultResponse.builder().build();
 		String errorService = null;
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
-		currentacademicyear.setCurrentacademicyear(currentAcademicYearDto.getCurrentacademicyear());
-		currentAcademicYearDto.setCurrentacademicyear((request.getParameter("academicyear")));
+		currentacademicyear.setCurrentacademicyear(DataUtil.emptyString(currentAcademicYearDto.getCurrentacademicyear()));
+	
 		errorService = new YearDAO().create(currentacademicyear);
 
 		if (currentacademicyear != null) {
 			result.setSuccess(true);
 
 		}
+		result.setMessage(errorService);
 		return result;
 
 	}
