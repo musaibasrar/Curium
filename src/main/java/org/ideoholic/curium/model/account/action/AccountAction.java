@@ -251,7 +251,7 @@ public class AccountAction {
 	@PostMapping("/saveFinancialYear")
 	public String saveFinancialYear() { 
 		
-		if(new AccountService(request, response).saveFinancialYear()){
+		if(accountActionAdapter.saveFinancialYear()){
 			return "financialyearsaved";
 		}
 		return ERRORPAGE;

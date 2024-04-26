@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.account.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
@@ -18,6 +19,9 @@ public class AccountActionAdapter {
 
     @Autowired
     private HttpServletResponse response;
+
+	@Autowired
+	private HttpSession httpSession;
 
     public boolean saveAccount() {
 	AccountService accountService = new AccountService(request, response);
@@ -119,5 +123,18 @@ public class AccountActionAdapter {
 
 		return accountService.savePayment(accountPaymentDto);
 
+	}
+
+	public boolean saveFinancialYear(){
+		AccountService accountService = new AccountService(request, response);
+
+		AccountFinancialYearDto financialYearDto = new AccountFinancialYearDto();
+		financialYearDto.setFromDate(request.getParameter("fromdate"));
+		financialYearDto.setToDate(request.getParameter("todate"));
+		financialYearDto.setActive(request.getParameter("active"));
+		financialYearDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+
+		return accountService.saveFinancialYear(financialYearDto);
 	}
 }
