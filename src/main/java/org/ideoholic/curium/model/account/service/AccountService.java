@@ -391,15 +391,15 @@ public class AccountService {
 	}
 
 
-	public boolean savePayment() {
+	public boolean savePayment(AccountPaymentDto accountPaymentDto) {
 		
-		String draccountNamePayment = DataUtil.emptyString(request.getParameter("accountnamepayment"));
-		String craccountNamePayment = DataUtil.emptyString(request.getParameter("accountnamepaymentsecond"));
-		String paymentVoucher = DataUtil.emptyString(request.getParameter("paymentvoucher"));
-		String drAmountPayment = DataUtil.emptyString(request.getParameter("dramountpayment"));
-		String crAmountPayment = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
-		String paymentDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
-		String paymentNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
+		String draccountNamePayment = DataUtil.emptyString(accountPaymentDto.getDraccountName());
+		String craccountNamePayment = DataUtil.emptyString(accountPaymentDto.getCraccountName());
+		String paymentVoucher = DataUtil.emptyString(accountPaymentDto.getPaymentVoucher());
+		String drAmountPayment = DataUtil.emptyString(accountPaymentDto.getDrAmountPayment());
+		String crAmountPayment = DataUtil.emptyString(accountPaymentDto.getCrAmountPayment());
+		String paymentDate = DataUtil.emptyString(accountPaymentDto.getPaymentDate());
+		String paymentNarration = DataUtil.emptyString(accountPaymentDto.getPaymentNarration());
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		

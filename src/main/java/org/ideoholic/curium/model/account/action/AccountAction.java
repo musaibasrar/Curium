@@ -173,7 +173,7 @@ public class AccountAction {
 	@PostMapping("/savePayment")
 	public String savePayment() {
 		
-		if(new AccountService(request, response).savePayment()){
+		if(accountActionAdapter.savePayment()){
 			return createVoucher();
 		}
 		return ERRORPAGE;
