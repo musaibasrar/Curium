@@ -44,7 +44,7 @@ public class AccountAction {
 
 	@PostMapping("/incomeStatement")
 	public String incomeStatement() {
-		new AccountService(request, response).getIncomeStatement();
+		accountActionAdapter.getIncomeStatement();
 		return "incomestatement";
 	}
 
