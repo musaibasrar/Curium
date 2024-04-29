@@ -89,7 +89,7 @@ public class AdminAction {
 		 if (new AdminService(request, response).viewExpensesBetweenDates()) {
 	            return "adminexpensesreport";
 	        } else {
-	            return "notSavedExpenses";
+	            return "error";
 	        }
 		
 	}

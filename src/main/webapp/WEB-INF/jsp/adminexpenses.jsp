@@ -400,7 +400,7 @@
         var distlistitem = document.getElementById("paymenttype");
         var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
 
-        if (distlistitemtext == "Cheque") {
+        if (distlistitemtext == "Bank") {
             document.getElementById("chequediv").style.display = '';
         }else {
         	document.getElementById("chequediv").style.display = "none";
@@ -427,7 +427,8 @@
 		$("#entrydate").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-10:+0"
 		});
 		$("#anim").change(function() {
 			$("#entrydate").datepicker("option", "showAnim", $(this).val());
@@ -619,6 +620,7 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
 			<button id="add">Add Expenses</button>
 			<br />
@@ -641,7 +643,7 @@ for(Cookie cookie : cookies){
 							<td ><label> <input id="price"
 									name="price" type="text" class="textField" 
 									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26" onkeyup="numberWithCommas(this);">
+									required size="26">
 							</label></td>
 							
 						</tr>
@@ -676,7 +678,7 @@ for(Cookie cookie : cookies){
 							<td ><label> <select name="paymenttype" onchange="getChequeDetails()"
 									id="paymenttype" style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
 										<option selected>Cash</option>
-										<option>Cheque</option>
+										<option>Bank</option>
 								</select>
 							</label></td>
 							
@@ -707,7 +709,7 @@ for(Cookie cookie : cookies){
 							<td><br><br></td>
 						</tr>
 						<tr>
-							<td  class="alignRight">Cheque # &nbsp;</td>
+							<td  class="alignRight">Reference # &nbsp;</td>
 							<td ><label> <input id="chequeno"
 									name="chequeno" type="text" class="textField" 
 									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
@@ -720,10 +722,10 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Cheque Date&nbsp;</td>
+							<td class="alignRight">Date&nbsp;</td>
 							<td><label> <input name="chequedate"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
-									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									type="text"
 									class="textField" id="chequedate" size="24"
 									data-validate="validate(required)">
 							</label></td>
