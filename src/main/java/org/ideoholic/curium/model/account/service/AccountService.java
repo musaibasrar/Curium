@@ -48,14 +48,14 @@ public class AccountService {
 	}
 
 
-	public boolean saveFinancialYear() {
+	public boolean saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto) {
 
 		Financialaccountingyear financialaccountingyear = new Financialaccountingyear();
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			financialaccountingyear.setFinancialstartdate(DateUtil.dateParserUpdateStd(request.getParameter("fromdate")));
-			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
-			financialaccountingyear.setActive(DataUtil.emptyString(request.getParameter("active")));
+			financialaccountingyear.setFinancialstartdate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getToDate()));
+			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getToDate()));
+			financialaccountingyear.setActive(DataUtil.emptyString(accountFinancialYearDto.getActive()));
 			financialaccountingyear.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			return new AccountDAO().create(financialaccountingyear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		}
