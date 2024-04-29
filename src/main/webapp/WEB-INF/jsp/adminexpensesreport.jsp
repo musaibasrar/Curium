@@ -648,9 +648,11 @@ for(Cookie cookie : cookies){
 							<td ><label>
 									<select name="voucherstatus"
 									id="voucherstatus" class="dropdownlist" style="font-size: 14px;" >
+										<option value=""></option>
 										<option value="pending">Pending</option>
 										<option value="approved">Approved</option>
 										<option value="cancelled">Cancelled</option>
+										<option value="cancelled">Rejected</option>
 								</select>
 							
 							</label></td>
@@ -658,8 +660,9 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft">&nbsp;&nbsp; &nbsp;&nbsp;Payment Type: </td>
 							<td ><label>
 									<select name="paymenttype" id="paymenttype" class="dropdownlist" style="font-size: 14px;">
-											<option value="cash">Cash</option>
-										<option value="Bank Transfer">Bank Transfer</option>
+										<option value=""></option>
+										<option value="cash">Cash</option>
+										<option value="bank">Bank</option>
 								</select>
 							
 							</label></td>
@@ -696,8 +699,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Party Name</th>
 						<th title="click to sort" class="headerText">Being</th>
 						<th title="click to sort" class="headerText">Payment Type</th>
-						<th title="click to sort" class="headerText">Transaction #</th>
-						<th title="click to sort" class="headerText">Date</th>
+						<th title="click to sort" class="headerText">Reference #</th>
+						<th title="click to sort" class="headerText">Transaction Date</th>
 						<th title="click to sort" class="headerText">Bank Name</th>
 						<th title="click to sort" class="headerText">Status</th>	
 						<th title="click to sort" class="headerText">Amount (Rs.)</th>
