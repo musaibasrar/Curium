@@ -137,4 +137,15 @@ public class AccountActionAdapter {
 
 		return accountService.saveFinancialYear(financialYearDto);
 	}
+
+	public boolean getIncomeStatement(){
+		AccountService accountService = new AccountService(request, response);
+
+		IncomeStatementDto incomeStatementDto = new IncomeStatementDto();
+		incomeStatementDto.setFromDate(request.getParameter("fromdate"));
+		incomeStatementDto.setToDate(request.getParameter("todate"));
+		incomeStatementDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		return accountService.getIncomeStatement(incomeStatementDto);
+	}
 }
