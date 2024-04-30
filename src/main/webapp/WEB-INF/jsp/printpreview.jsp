@@ -491,7 +491,7 @@ for(Cookie cookie : cookies){
    <div align="center">
    <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px;font-size:9px;">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
@@ -513,12 +513,12 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
+    <td style="padding: 0;">&nbsp;&nbsp;MOBILE</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
   </tr>
 </table>
 

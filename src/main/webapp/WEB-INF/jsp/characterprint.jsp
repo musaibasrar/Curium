@@ -205,7 +205,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character}" /></span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentcharacter}" /></span>character
 			</h3>
 			</td>
 			</tr>

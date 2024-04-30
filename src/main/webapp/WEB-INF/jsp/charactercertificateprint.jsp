@@ -108,16 +108,18 @@ span{
         <script>
         $(function() {
 
-    		
-    		$(".printtcstudent").button().click(function() {
-    			printtc();
+        	 $(".printdoc").button({
+                 icons:{
+                     primary: "ui-icon-print"
+                 }
+             }).click(function(){
+            	 printdoc();
+                 return false;
 
-    		});
-
-    		
-    					
+             });
+        	 
     	});
-        function printtc(){
+        function printdoc(){
             	var form1 = document.getElementById("form1");
         		form1.action = "/shatabdi/DocumentsProcess/printCharacterCertificate";
         		form1.method = "POST";
@@ -217,7 +219,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="characterstudent" id="characterstudent" style="width: 200px" /></span>character
 			</h3>
 			</td>
 			</tr>
@@ -262,7 +264,9 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a></td>
+              <td align="center">
+              <td><button class="printdoc">Print</button></td>
+              <!-- <a id="print" href="/shatabdi/DocumentsProcess/printCharacterCertificate">Print</a> --></td>
             </tr>
 		</TABLE>
 	</form>

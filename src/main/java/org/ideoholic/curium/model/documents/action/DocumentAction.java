@@ -77,8 +77,9 @@ public class DocumentAction {
 		return "bonafideprint";
 	}
 	
-	@GetMapping("/printCharacterCertificate")
+	@PostMapping("/printCharacterCertificate")
 	public String printCharacterCertificate() {
+		new DocumentService(request, response).printCharacterCertificate();
 		return "characterprint";
 	}
 
