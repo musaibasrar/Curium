@@ -1152,27 +1152,36 @@ public class AccountService {
 	}
 		return true;
 	}
+
+	//This method is placed here for MessSuppliersAction. Please delete this method after migrating MessSuppliersAction.
+	public ResultResponse printSearchJournalEntries(){
+		PrintSearchJournalEntriesDto printSearchJournalEntriesDto = new PrintSearchJournalEntriesDto();
+		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
+		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
+		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
+
+		return printSearchJournalEntries(printSearchJournalEntriesDto);
+	}
 	
-	
-	public boolean printSearchJournalEntries() {
+	public ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto) {
 
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
+		String accountDetails = DataUtil.emptyString(printSearchJournalEntriesDto.getAccountDetails());
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
-		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getFromDate()));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getToDate()));
 		
-		if (httpSession.getAttribute(BRANCHID) != null) {
+		if (printSearchJournalEntriesDto.getBranchId() != null) {
 
 			String twoAccounts = null;
 
 			Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
 			int financialYearId = new AccountDAO()
-					.getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()))
+					.getCurrentFinancialYear(Integer.parseInt(printSearchJournalEntriesDto.getBranchId().toString()))
 					.getFinancialid();
 			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
-					Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					Integer.parseInt(printSearchJournalEntriesDto.getBranchId().toString()));
 
 			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 
@@ -1187,15 +1196,16 @@ public class AccountService {
 				voucherMap.put(voucherEntry, twoAccounts);
 			}
 
-			request.setAttribute("ledgertransactions", voucherMap);
-			request.setAttribute("ledgername", accountIdName[1]);
-			request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
-			request.setAttribute("todateselected", request.getParameter("todateselected"));
-
-			return true;
+			return ResultResponse.builder()
+					.resultMap(voucherMap)
+					.message(accountIdName[1])
+					.success(true)
+					.build();
 
 		}
-		return false;
+		return ResultResponse.builder()
+				.success(false)
+				.build();
 	}
 	
 	
