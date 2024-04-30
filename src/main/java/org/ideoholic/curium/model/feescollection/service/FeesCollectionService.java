@@ -1935,7 +1935,7 @@ public class FeesCollectionService {
 		String[] feesIds = request.getParameterValues("feesIDs");
 		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
+		Map<Parents,Otherreceiptinfo> feesMap = new LinkedHashMap<Parents,Otherreceiptinfo>();
 		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
 		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));

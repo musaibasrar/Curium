@@ -1,13 +1,10 @@
 package org.ideoholic.curium.model.feesdetails.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -28,8 +23,6 @@ import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 
 public class FeesDetailsService {
@@ -307,7 +300,7 @@ public class FeesDetailsService {
 		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Parents,Receiptinfo> feesMap = new LinkedHashMap<Parents,Receiptinfo>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
