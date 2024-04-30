@@ -7,5 +7,5 @@ import lombok.Data;
 public class IncomeStatementDto {
     private String fromDate;
     private String toDate;
-    private int branchId;
+    private Integer branchId;
 }
