@@ -277,7 +277,7 @@ public class AccountAction {
 
 	@PostMapping("/exportTrialBalance")
 	private String exportTrialBalance() {
-    	new AccountService(request, response).exportTrialBalance();
+    	accountActionAdapter.exportTrialBalance();
         return "trialbalanceexportsuccess";
 	}
 
