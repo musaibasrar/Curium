@@ -512,6 +512,7 @@ for(Cookie cookie : cookies){
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">View Fees</th>
 						<th title="click to sort" class="headerText">View Other Fees</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
@@ -537,6 +538,7 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/shatabdi/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.student.studentexternalid}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>

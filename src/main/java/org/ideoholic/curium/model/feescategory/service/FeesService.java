@@ -689,4 +689,73 @@ public class FeesService {
 
 			    return result;
 		}
+
+
+		public void getFeeCategoryHeadWise() throws IOException {
+
+	        if(httpSession.getAttribute(BRANCHID)!=null){
+	        	String classname = request.getParameter("classstudying");
+	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
+	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+	        	String searchYear = null;
+	        	int yoa = Integer.parseInt(yearofAdmission[0]);
+	        	int ca = Integer.parseInt(currentAcademicYear[0]);
+	        	
+	        	if(yoa == ca || yoa < ca) {
+	        		searchYear = httpSession.getAttribute("currentAcademicYear").toString();
+	        	}else if (yoa > ca) {
+	        		searchYear = request.getParameter("yearofadmission");
+	        	}
+	        	
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            httpSession.setAttribute("feescategory", feecategoryList);
+
+	            Locale indiaLocale = new Locale("en", "IN");
+	    		PrintWriter out = response.getWriter(); 
+	    		response.setContentType("text/xml");
+	            response.setHeader("Cache-Control", "no-cache");
+
+	    		if(feecategoryList.size() > 0) {
+
+	    		        try {
+	    		        	String buffer = "<div style='overflow:scroll;width:350px; height: 250px;'><table id='dataTable'><thead><tr>"
+	    		        			+ "   			        				                            <td style='padding-right: 30px;font-weight: bold;color:#eb6000'>Fees Category</td>"
+	    		        			+ "																	</tr>"
+	    		        			+ "   			        										</thead>";
+	   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
+	   		        		buffer = buffer +  "<option></option>";*/
+	   			        	for(int i =0; i<feecategoryList.size();i++){
+	   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
+	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+""
+	   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" </label><input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td>"
+	   			        						+ "</tr>";
+	   			        	}
+	   			        	buffer = buffer + "</table></div>";
+
+	    			        	response.getWriter().println(buffer);
+
+	    		        } catch (Exception e) {
+	    		            out.write("<input name='feescategoryempty'  type='text' class='textfieldvalues' id='feescategoryempty'  style='font-size: 14px;' readonly>");
+	    		        } finally {
+	    		            out.flush();
+	    		            out.close();
+	    		        }
+	    		}else {
+
+	    		        try {
+	    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
+	    			        	response.getWriter().println(buffer);
+
+	    		        } catch (Exception e) {
+	    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+	    		        } finally {
+	    		            out.flush();
+	    		            out.close();
+	    		        }
+	    		}
+
+
+	        }
+	    }
 }

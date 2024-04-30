@@ -56,4 +56,15 @@ public class FeesDetailsAction {
 		
 	}
 	
+	@PostMapping("/printDataForFees")
+	public String printFeesData() {
+		
+		if(new FeesDetailsService(request, response).printDataForFees()){
+			return "printfeescollectiondetails";
+		}else{
+			return "error";
+		}
+		
+	}
+	
 }

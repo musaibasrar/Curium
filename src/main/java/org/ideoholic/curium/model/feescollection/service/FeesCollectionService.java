@@ -1905,6 +1905,65 @@ public class FeesCollectionService {
 			httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMap);
 	}
 
+	public void printFeesDueHeadWiseReport() {
+
+		boolean writeSucees = false;
+		
+			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			
+			// Creating an excel file
+			int i = 1;
+			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+				
+				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
+				String feesDetails = "";
+				Long dueAmount = 0l;
+				Long totalAmount = 0l;
+				
+				for (Studentfeesstructure studentFee : sfs) {
+					Long feesDue = studentFee.getFeesamount()-studentFee.getFeespaid() - studentFee.getConcession() - studentFee.getWaiveoff();
+					Long feesTotal = studentFee.getFeesamount() - studentFee.getConcession() - studentFee.getWaiveoff();
+					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
+					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
+					feesDetails=feesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+				}
+			}
+	}
+
+	public boolean printOtherDataForFees() {
+		
+		String[] feesIds = request.getParameterValues("feesIDs");
+		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
+		Parents student = new Parents();
+		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
+		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
+		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
+		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));
+		
+		long sumOfFees = 0l;
+		
+		if (feesIds != null) {
+			for (String id : feesIds) {
+				if (id != null || id != "") {
+					
+					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					feesMap.put(student, receiptInfo);
+					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
+				}
+
+			}
+		}
+		request.setAttribute("feesmap", feesMap);
+		request.setAttribute("sumofdetailsfees", sumOfFees);
+		if(oneDay.equalsIgnoreCase("")) {
+			httpSession.setAttribute("daterangefeescollection", "From Date: "+fromDate+"              To Date: "+toDate+"");
+		}else {
+			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
+		}
+		return true;
+	}
+
 }
 
 

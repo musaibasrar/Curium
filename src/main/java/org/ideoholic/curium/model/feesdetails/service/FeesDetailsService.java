@@ -297,4 +297,53 @@ public class FeesDetailsService {
 
 
 
+	public boolean printDataForFees() {
+		
+		String[] feesIds = request.getParameterValues("feesIDs");
+		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
+		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
+		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));
+		
+		boolean successResult = false;
+		Receiptinfo receiptInfo = new Receiptinfo();
+		Parents student = new Parents();
+		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		long sumOfFees = 0l;
+		long fine = 0l;
+		long misc = 0l;
+
+		if (feesIds != null) {
+			for (String id : feesIds) {
+				if (id != null || id != "") {
+					
+					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					feesMap.put(student, receiptInfo);
+					
+					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
+					fine = fine + receiptInfo.getFine();
+					misc = misc + receiptInfo.getMisc();
+				}
+
+			}
+		}
+		
+		httpSession.setAttribute("sumofdetailsfees", sumOfFees);
+		httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
+		httpSession.setAttribute("sumoffine", fine);
+		httpSession.setAttribute("sumofmisc", misc);
+		
+		if(oneDay.equalsIgnoreCase("")) {
+			httpSession.setAttribute("daterangefeescollection", "From Date: "+fromDate+"             To Date: "+toDate+"");
+		}else {
+			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
+		}
+		
+		
+		request.setAttribute("feesmap", feesMap);
+		return true;
+	}
+
+
+
 }

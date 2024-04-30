@@ -412,6 +412,15 @@
 		form1.submit();
 
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/shatabdi/FeesDetails/printDataForFees";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -435,6 +444,17 @@
              return false;
 
          });
+         
+ 		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+ 		
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -713,7 +733,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox"
+                                <td class="dataText"><input type="checkbox" checked="checked"
 								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
@@ -739,6 +759,8 @@ for(Cookie cookie : cookies){
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
 							</label> -->
+							<input value="Print" style="width: 35px;"
+							id="print"/>
 						<input value="Export"
 							type="submit" id="export"/></td>
 							
