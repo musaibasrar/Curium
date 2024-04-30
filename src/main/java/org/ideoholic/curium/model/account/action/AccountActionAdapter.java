@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,5 +147,17 @@ public class AccountActionAdapter {
 
 		return accountService.getIncomeStatement(incomeStatementDto);
 
+	}
+
+	public boolean exportTrialBalance(){
+		AccountService accountService = new AccountService(request, response);
+
+		ExportTrialBalanceDto exportTrialBalanceDto = new ExportTrialBalanceDto();
+		exportTrialBalanceDto.setCreditAllAcc(httpSession.getAttribute("credittotal").toString());
+		exportTrialBalanceDto.setDebitAllAcc(httpSession.getAttribute("debittotal").toString());
+		exportTrialBalanceDto.setFromDate((String) httpSession.getAttribute("fromdatetb"));
+		exportTrialBalanceDto.setToDate((String) httpSession.getAttribute("todatetb"));
+
+		return accountService.exportTrialBalance(exportTrialBalanceDto);
 	}
 }

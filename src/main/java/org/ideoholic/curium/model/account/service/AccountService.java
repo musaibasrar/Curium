@@ -1199,7 +1199,7 @@ public class AccountService {
 	}
 	
 	
-	public boolean exportTrialBalance() {
+	public boolean exportTrialBalance(ExportTrialBalanceDto exportTrialBalanceDto) {
 
 		boolean writeSucees = false;
 		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
@@ -1207,10 +1207,10 @@ public class AccountService {
 		DecimalFormat df = new DecimalFormat("###.##");
 		
 		accountBalanceMap = (Map<Accountdetails, BigDecimal>) httpSession.getAttribute("accountdetailsbalanceMap");
-		String creditAllAcc = httpSession.getAttribute("credittotal").toString();
-		String debitAllAcc = httpSession.getAttribute("debittotal").toString();
-		String fromDate = (String) httpSession.getAttribute("fromdatetb");
-		String toDate = (String) httpSession.getAttribute("todatetb");
+		String creditAllAcc = exportTrialBalanceDto.getCreditAllAcc();
+		String debitAllAcc = exportTrialBalanceDto.getDebitAllAcc();
+		String fromDate = exportTrialBalanceDto.getFromDate();
+		String toDate = exportTrialBalanceDto.getToDate();
 		
 		try {
 
