@@ -1072,14 +1072,14 @@ public class AccountService {
 	}
 
 
-	public boolean getIncomeStatement() {
+	public boolean getIncomeStatement(IncomeStatementDto incomeStatementDto) {
 		
-		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getFromDate()));
+		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getToDate()));
 		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+		if(incomeStatementDto.getBranchId()!=null) {
 			
-					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+					int branchId = incomeStatementDto.getBranchId();
 
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
 				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
@@ -1097,7 +1097,7 @@ public class AccountService {
 				
 				for (Accountdetails accountDetails : accountsDetails) {
 					
-					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), incomeStatementDto.getBranchId());
 					
 					if(!voucherTransactions.isEmpty()) {
 					
