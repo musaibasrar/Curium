@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
-import org.ideoholic.curium.model.feescategory.action.FeesAction;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
@@ -218,4 +216,38 @@ public class FeesCollectionAction {
 	            return "feessummaryreport";
 			}	 
 		 
+		 @PostMapping("/searchByDateFeesCollectionCategory")
+	        private String searchByDateFeesCollectionCategory() {
+	        	new FeesCollectionService(request, response).getFeesCollectionCategory();
+	            return "feescollectiondetailscategory";
+			}
+		 
+		 @PostMapping("/searchByDateFeesCollectionCategoryPrint")
+	        private String searchByDateFeesCollectionCategoryPrint() {
+	        	new FeesCollectionService(request, response).getFeesCollectionCategory();
+	            return "printfeescollectiondetailscategory";
+			}
+		 
+		 @PostMapping("/searchFeesDueHeadWiseReport")
+	        public String searchFeesDueHeadWiseReport() {
+	            new FeesCollectionService(request, response).getFeesReport();
+	            return "feesdueheadwisereport";
+	        }
+		 
+		 @PostMapping("/printFeesDueHeadWiseReport")
+	        private String printFeesDueHeadWiseReport() {
+	        	new FeesCollectionService(request, response).printFeesDueHeadWiseReport();
+	            return "printfeesdueheadwisereport";
+			}
+		 
+		 @PostMapping("/printOtherDataForFees")
+			public String printOtherFeesData() {
+				
+				if(new FeesCollectionService(request, response).printOtherDataForFees()){
+					return "printotherfeescollectiondetails";
+				}else{
+					return "error";
+				}
+				
+			}
 }

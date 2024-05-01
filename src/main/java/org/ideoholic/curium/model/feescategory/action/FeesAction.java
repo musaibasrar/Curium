@@ -212,5 +212,21 @@ public class FeesAction {
 			return "viewAll";
 		}
 	}
+	
+	@GetMapping("/feesDueReportHeadWise")
+	public String feesDueReportHeadWise() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
+		return "feesdueheadwisereport";
+	}
+	
+	@GetMapping("/searchfeecategoryheadwise")
+	public void searchFeeCategoryHeadWise() {
+			try {
+				new FeesService(request, response).getFeeCategoryHeadWise();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 
 }

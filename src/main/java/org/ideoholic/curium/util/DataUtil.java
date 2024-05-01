@@ -140,6 +140,16 @@ public class DataUtil {
 	   return date;
    }
    
+   public static String dateFromatConversionDashToSlash(String ddmmyyyy) {
+	   String date = "";
+	   
+	   if(!ddmmyyyy.equalsIgnoreCase("")) {
+		   String[] dateToConvert = ddmmyyyy.split("-");
+		   date = dateToConvert[2]+"/"+dateToConvert[1]+"/"+dateToConvert[0];
+	   }
+	   
+	   return date;
+   }
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )

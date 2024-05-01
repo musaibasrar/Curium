@@ -1,5 +1,5 @@
 <%--
-    Document   : Other Fees Collecion Details
+    Document   : Fees Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Other Fees Collection Details</title>
+<title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 <link rel="stylesheet" href="/abc/css/font-awesome.css">
@@ -407,7 +407,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/searchOtherFeesCollection";
+		form1.action = "/abc/UserProcess/searchByDate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -415,11 +415,11 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/printOtherDataForFees";
+		form1.action = "/abc/FeesDetails/printDataForFees";
 		form1.method = "POST";
 		form1.submit();
-}
-
+	}
+	
 	
 	$(function() {
 
@@ -428,17 +428,6 @@
 			searchByDate();
 		});
 		$("#effect").hide();
-		
-
-		$("#print").button({
-            icons:{
-                primary: "ui-icon-print"
-            }
-        }).click(function(){
-            printRecords();
-            return false;
-
-        });
 
 	});
 	
@@ -455,6 +444,17 @@
              return false;
 
          });
+         
+ 		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+ 		
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -605,14 +605,14 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/abc/FeesDetails/exportDataForOtherFees" method="POST">
+		action="/abc/FeesDetails/exportDataForFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Other Fees Collection Details</button>
+			<button id="add">Search Fees Collection Details</button>
 			<br />
 		</div>
 
@@ -703,7 +703,11 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Other fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
+					
+					</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -714,7 +718,10 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">Fee</th>
+                            <th title="click to sort" class="headerText">Fine</th>
+                            <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
 
@@ -723,7 +730,7 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchotherfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
@@ -732,9 +739,12 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${feesdetails.totalamount-feesdetails.fine-feesdetails.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelOtherFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>
