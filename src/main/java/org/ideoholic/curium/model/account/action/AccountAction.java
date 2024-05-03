@@ -295,7 +295,7 @@ public class AccountAction {
 	
 	@PostMapping("/printSearchLedgerEntries")
 	private String printSearchLedgerEntries() {
-		new AccountService(request, response).printSearchJournalEntries();
+		accountActionAdapter.printSearchJournalEntries();
 		return "printgeneralledgerreport";
 	}
 

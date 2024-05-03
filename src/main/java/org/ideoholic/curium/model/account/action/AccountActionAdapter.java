@@ -10,6 +10,8 @@ import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class AccountActionAdapter {
 
@@ -159,5 +161,26 @@ public class AccountActionAdapter {
 		exportTrialBalanceDto.setToDate((String) httpSession.getAttribute("todatetb"));
 
 		return accountService.exportTrialBalance(exportTrialBalanceDto);
+	}
+
+	public boolean printSearchJournalEntries() {
+		AccountService accountService = new AccountService(request, response);
+
+		PrintSearchJournalEntriesDto printSearchJournalEntriesDto = new PrintSearchJournalEntriesDto();
+		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
+		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
+		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
+		printSearchJournalEntriesDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		ResultResponse resultResponse = accountService.printSearchJournalEntries(printSearchJournalEntriesDto);
+		if (resultResponse.isSuccess()){
+			Map resultMap = resultResponse.getResultMap();
+			request.setAttribute("ledgertransactions", resultResponse.getResultMap());
+			request.setAttribute("ledgername", resultResponse.getMessage());
+			request.setAttribute("fromdateselected", printSearchJournalEntriesDto.getFromDate());
+			request.setAttribute("todateselected", printSearchJournalEntriesDto.getToDate());
+		}
+
+		return resultResponse.isSuccess();
 	}
 }
