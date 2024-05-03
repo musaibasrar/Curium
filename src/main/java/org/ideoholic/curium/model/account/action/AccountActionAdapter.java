@@ -170,6 +170,7 @@ public class AccountActionAdapter {
 		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
 		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
 		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
+		printSearchJournalEntriesDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
 		ResultResponse resultResponse = accountService.printSearchJournalEntries(printSearchJournalEntriesDto);
 		if (resultResponse.isSuccess()){

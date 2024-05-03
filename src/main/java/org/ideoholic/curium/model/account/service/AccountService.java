@@ -1178,10 +1178,10 @@ public class AccountService {
 
 			Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
 			int financialYearId = new AccountDAO()
-					.getCurrentFinancialYear(Integer.parseInt(printSearchJournalEntriesDto.getBranchId().toString()))
+					.getCurrentFinancialYear((printSearchJournalEntriesDto.getBranchId()))
 					.getFinancialid();
 			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
-					Integer.parseInt(printSearchJournalEntriesDto.getBranchId().toString()));
+					printSearchJournalEntriesDto.getBranchId());
 
 			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 
