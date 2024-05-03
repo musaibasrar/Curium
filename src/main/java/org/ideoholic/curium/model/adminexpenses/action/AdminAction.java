@@ -22,14 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/AdminProcess")
 public class AdminAction {
 
+
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
+	
+	@Autowired
+	private AdminActionAdapter adminActionAdapter;
 
 	
 	@PostMapping("/rejectVoucher")
@@ -68,7 +72,7 @@ public class AdminAction {
 
 	@PostMapping("/addExpenses")
 	public String addExpenses() {
-		 if (new AdminService(request, response).addExpenses()) {
+		 if ( adminActionAdapter.addExpenses()) {
 	            return viewAllExpenses();
 	        } else {
 	            return "notSavedExpenses";
