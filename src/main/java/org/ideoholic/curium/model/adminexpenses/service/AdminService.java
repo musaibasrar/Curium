@@ -44,10 +44,10 @@ public class AdminService {
 
 	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto) {
 
-		ResultResponse result = ResultResponse.builder().build();
+		
 		Adminexpenses adminexpenses = new Adminexpenses();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(adminexpensesdto.getBranchid()!=null){
 			adminexpenses.setItemdescription(DataUtil.emptyString(adminexpensesdto.getItemdescription()));
 			adminexpenses.setPriceofitem(DataUtil.emptyString(adminexpensesdto.getPriceofitem()));
 			adminexpenses.setPaidto(DataUtil.emptyString(adminexpensesdto.getPaidto()));
@@ -66,8 +66,9 @@ public class AdminService {
 					return ResultResponse.builder().success(true).build();
 				}
 		}
-
-			return result;
+         
+		return ResultResponse.builder().success(false).build();
+			
 		
 	}	
 	
