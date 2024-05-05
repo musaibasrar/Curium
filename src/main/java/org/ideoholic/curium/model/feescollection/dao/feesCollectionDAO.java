@@ -76,14 +76,16 @@ public class feesCollectionDAO {
 				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
 				session.save(receiptInfo);
 				
-			for (Feescollection singleFeescollection :  feescollectionList) {
-				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
-				Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
-				query.executeUpdate();
-				 session.save(singleFeescollection);
-			}
-			
-			
+				if(feescollectionList!=null) {
+					
+					for (Feescollection singleFeescollection :  feescollectionList) {
+						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						query.executeUpdate();
+						 session.save(singleFeescollection);
+					}
+				}
+				
 	            transaction.commit();
 	            result = true;
 			 
