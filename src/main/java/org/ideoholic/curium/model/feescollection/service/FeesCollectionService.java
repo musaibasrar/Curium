@@ -275,7 +275,7 @@ public class FeesCollectionService {
 				
 		//End Payment Details
 		
-		if(studentSfsIds!=null){
+		if(studentSfsIds!=null || miscAmount!=0 || fineAmount!=0){
 			
 			// create receipt information
 			receiptInfo.setAcademicyear(request.getParameter("academicyear"));
@@ -285,16 +285,9 @@ public class FeesCollectionService {
 			receiptInfo.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			receiptInfo.setClasssec(request.getParameter("classandsecDetails"));
 			Long grantTotal = 0l;
-			for (int i = 0; i < studentSfsIds.length; i++) {
-				String[] totalAmount = studentSfsIds[i].split("_");
-				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
-			}
-			receiptInfo.setPaymenttype(paymentType);
-			receiptInfo.setFine(fineAmount);
-			receiptInfo.setMisc(miscAmount);
-			receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
+			
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */
-			 
+			if(studentSfsIds!=null) {
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
@@ -308,7 +301,15 @@ public class FeesCollectionService {
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					feesCollect.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					feescollection.add(feesCollect);
+					
+					String[] totalAmount = studentSfsIds[i].split("_");
+					grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 				}
+			}
+				receiptInfo.setPaymenttype(paymentType);
+				receiptInfo.setFine(fineAmount);
+				receiptInfo.setMisc(miscAmount);
+				receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
@@ -400,7 +401,7 @@ public class FeesCollectionService {
 			
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
-				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+				totalSum = totalSum + receiptInfoSingle.getTotalamount()-receiptInfoSingle.getMisc()-receiptInfoSingle.getFine();
 			}
 			
 			long totalFeesAmount = 0l;
