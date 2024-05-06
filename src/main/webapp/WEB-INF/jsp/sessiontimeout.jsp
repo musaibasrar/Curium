@@ -17,15 +17,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/noman/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/noman/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/noman/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/noman/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/noman/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/noman/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/noman/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/noman/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/noman/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -71,7 +71,7 @@
         <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
         <p class="style1">
           	<!-- <input type="button" value="Login" id="login" > -->
-          	<a href="/abc/UserProcess/logout" target="_parent" id="login">Login</a>
+          	<a href="/noman/UserProcess/logout" target="_parent" id="login">Login</a>
         </p></td>
       </tr>
     </table>

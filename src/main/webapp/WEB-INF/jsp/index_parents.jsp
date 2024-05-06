@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>index_parents</title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script> 
+<link rel="stylesheet" href="/noman/css/bootstrap.min.css">
+        <script src="/noman/js/jquery.min.js"></script>
+        <script src="/noman/js/bootstrap.min.js"></script>
+        <script src="/noman/js/popper.min.js"></script> 
  <style>
  .container{
 border: 0px solid red;
@@ -118,7 +118,7 @@ font-size:70px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noman/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -134,12 +134,12 @@ for(Cookie cookie : cookies){
     
     
 		   <c:if test="${(userType == 'parents')}">
-			    <frame   src="/abc/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/noman/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
-			<frame src="/abc/welcomeparent" name="mainFrame" scrolling="yes" />
+			<frame src="/noman/welcomeparent" name="mainFrame" scrolling="yes" />
            <!--  <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/abc/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/abc/welcomeparent" name="mainFrame" scrolling="yes" />
+                <frame  src="/noman/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/noman/welcomeparent" name="mainFrame" scrolling="yes" />
             </frameset> -->
 
    </frameset>
@@ -156,14 +156,14 @@ for(Cookie cookie : cookies){
     
     <div class="col-6" id="f1">
      <i class="fa-solid fa-graduation-cap"></i>
-     <a target="mainFrame" href="/abc/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
+     <a target="mainFrame" href="/noman/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
      
     </div> 
     
      
     <div class="col-6" id="f3">
     <i class="fa-solid fa-book"></i>
-     <a target="mainFrame" href="/abc/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
+     <a target="mainFrame" href="/noman/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
     </div>
     
   </div> 
