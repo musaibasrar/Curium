@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
+import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -24,6 +25,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class AdminService {
 	
@@ -39,35 +41,37 @@ public class AdminService {
 	}
 
 
-	public boolean addExpenses() {
 
+	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto) {
+
+		
 		Adminexpenses adminexpenses = new Adminexpenses();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			adminexpenses.setItemdescription(DataUtil.emptyString(request.getParameter("item")));
-			adminexpenses.setPriceofitem(DataUtil.emptyString(request.getParameter("price")));
-			adminexpenses.setPaidto(DataUtil.emptyString(request.getParameter("paidto")));
-			adminexpenses.setPaymenttype(DataUtil.emptyString(request.getParameter("paymenttype")));
-			adminexpenses.setChequeno(DataUtil.emptyString(request.getParameter("chequeno")));
-			adminexpenses.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
-			adminexpenses.setChequedate(DateUtil.indiandateParser(request.getParameter("chequedate")));
-			adminexpenses.setEntrydate(DateUtil.indiandateParser(request.getParameter("entrydate")));
+		if(adminexpensesdto.getBranchid()!=null){
+			adminexpenses.setItemdescription(DataUtil.emptyString(adminexpensesdto.getItemdescription()));
+			adminexpenses.setPriceofitem(DataUtil.emptyString(adminexpensesdto.getPriceofitem()));
+			adminexpenses.setPaidto(DataUtil.emptyString(adminexpensesdto.getPaidto()));
+			adminexpenses.setPaymenttype(DataUtil.emptyString(adminexpensesdto.getPaymenttype()));
+			adminexpenses.setChequeno(DataUtil.emptyString(adminexpensesdto.getChequeno()));
+			adminexpenses.setBankname(DataUtil.emptyString(adminexpensesdto.getBankname()));
+			adminexpenses.setChequedate(DateUtil.indiandateParser(adminexpensesdto.getChequedate()));
+			adminexpenses.setEntrydate(DateUtil.indiandateParser(adminexpensesdto.getEntrydate()));
 			adminexpenses.setVoucherstatus("pending");
-			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			adminexpenses.setUserid(adminexpensesdto.getUserid());
+			adminexpenses.setBranchid(adminexpensesdto.getBranchid());
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
 				{
 					adminexpenses = new AdminDetailsDAO().create(adminexpenses);
-					return true;
+					return ResultResponse.builder().success(true).build();
 				}
 		}
-
-			return false;
+         
+		return ResultResponse.builder().success(false).build();
+			
 		
-	}
-
-
+	}	
+	
 	public boolean viewAllExpenses() {
 		boolean result = false;
         try {
