@@ -41,7 +41,6 @@ public class AdminActionAdapter {
 			return false;
 		}
 
-		httpSession.setAttribute("errorMessage", response.getMessage());
 
 		return response.isSuccess();
 	}
