@@ -65,6 +65,8 @@ public class StudentDto {
 	private String bankbranch;
 	private String languagesstudied;
 	private String mediumofinstructionlastschool;
+	private String yearofadmission;
+	private String promotedyear;
 
 	/* Parents Data */
 	private String fathersname;
