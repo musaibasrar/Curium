@@ -724,9 +724,6 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
-
-
                         </tr>
                     </thead>
 
@@ -747,8 +744,6 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.value.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.value.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/dolphin/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/dolphin/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
-
                             </tr>
                         </c:forEach>
                     </tbody>
