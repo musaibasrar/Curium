@@ -219,7 +219,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/gnyanganga/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -241,7 +241,7 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td><img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="72" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>

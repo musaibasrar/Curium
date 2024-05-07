@@ -17,8 +17,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Diary Message</title>
-	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/gnyanganga/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/gnyanganga/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -109,7 +109,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/authenticate";
+                form1.action="/gnyanganga/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -137,8 +137,8 @@ form{
 					</div>
 		<!-- 	<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 100px;" alt="ideoholic" src="/abc/images/abc/.png"></h2>
-			<h2 style="font-weight: bold;">Roshan<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/abc/images/shaheenwhitelogo.png"> </h2></span>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 100px;" alt="ideoholic" src="/gnyanganga/images/gnyanganga/.png"></h2>
+			<h2 style="font-weight: bold;">Roshan<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/gnyanganga/images/shaheenwhitegnyanganga${branchid}.png"> </h2></span>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
@@ -146,7 +146,7 @@ form{
 						<h3>Student Diary</h3>
 					</div>
 					<div class="row">
-						<form action="/abc/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/gnyanganga/UserProcess/authenticateUser"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="${diary.subject}">
 							</div>
