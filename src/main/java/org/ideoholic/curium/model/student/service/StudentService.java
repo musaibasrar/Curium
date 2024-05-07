@@ -101,7 +101,7 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(DataUtil.generateString(5));
+		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
@@ -114,6 +114,20 @@ public class StudentService {
 		parents = new parentsDetailsDAO().create(parents);
 
 		if (parents != null) {
+			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
+			String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+			String setYear = null;
+			int yoa = Integer.parseInt(yearofAdmission[0]);
+			int ca = Integer.parseInt(currentAcademicYear[0]);
+
+			if(yoa == ca || yoa < ca) {
+				setYear = httpSession.getAttribute("currentAcademicYear").toString();
+			}else if (yoa > ca) {
+				setYear = request.getParameter("yearofadmission");
+			}
+
+			stampFees(parents.getStudent().getSid(),setYear);
+			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			return true;
 		}
 
@@ -643,7 +657,7 @@ public class StudentService {
 	private void stampFees(Integer stdIds, String setYear) {
 
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			String[] feesCategoryIds = request.getParameterValues("feesIDS");
+			String[] feesCategoryIds = request.getParameterValues("feescategory");
 			if(feesCategoryIds!=null) {
 
 				String[] studentIds = {stdIds.toString()};
