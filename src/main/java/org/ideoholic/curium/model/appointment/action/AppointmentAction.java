@@ -27,13 +27,16 @@ public class AppointmentAction {
 
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
+
+	@Autowired
+	private AppointmentActionAdapter appointmentActionAdapter;
 
 	@PostMapping("/download")
 	private String download() {
@@ -56,8 +59,8 @@ public class AppointmentAction {
 
 	@PostMapping("/generateAppointmentsReport")
 	private String generateAppointmentsReport() {
-		new AppointmentService(request, response).generateAppointmentsReport();
-		return appointmentReport();
+		appointmentActionAdapter.generateAppointmentsReport();
+		return generateAppointmentsReport();
 	}
 
 	@GetMapping("/appointmentReport")

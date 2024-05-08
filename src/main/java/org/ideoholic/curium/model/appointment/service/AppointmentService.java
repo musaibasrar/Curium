@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
-import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
@@ -47,9 +47,9 @@ public class AppointmentService {
 	}
 
 	public boolean addAppointment() {
-		
+
 		boolean result = false;
-		
+
 		String[] studentId = request.getParameterValues("studentIDs");
 		String appointmentDate = request.getParameter("appointmentdate");
 		String appointmentTime = request.getParameter("appointmenttime");
@@ -57,62 +57,62 @@ public class AppointmentService {
 		String[] apptDate = appointmentDate.split("-");
 		String appointmentDateParent = apptDate[2]+"/"+apptDate[1]+"/"+apptDate[0];
 		System.out.println("Date "+appointmentDateParent);
-		
+
 		if(httpSession.getAttribute("branchid")!=null){
-	
-					Appointment appointment = new Appointment();
-					appointment.setAcademicyear(DataUtil.emptyString(httpSession.getAttribute("currentAcademicYear").toString()));
-					appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
-					appointment.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-					appointment.setCreateddate(new Date());
-					appointment.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-					appointment.setStatus("Scheduled");
-					//appointment.setStdid(1);
-					Parents parent = new Parents();
-					parent.setPid(Integer.parseInt(pidContact[0]));
-					appointment.setParent(parent);
-					
-					String[] starttimeSplit = appointmentTime.split(":");
-					String hours = starttimeSplit[0];
-					String meridian = null;
-					String outputStartTime = null;
-						  if (Integer.parseInt(hours) < 12) {
-							  outputStartTime = appointmentTime;
-						    meridian = "AM";
-						  } else if (Integer.parseInt(hours) >= 12) {
-							  
-							  DateFormat df = new SimpleDateFormat("HH:mm");
-						       //Date/time pattern of desired output date
-						       DateFormat outputformat = new SimpleDateFormat("hh:mm");
-						       Date date1 = null;
-						       try{
-						          //Conversion of input String to date
-						    	  date1= df.parse(appointmentTime);
-						          //old date format to new date format
-						    	  outputStartTime = outputformat.format(date1);
-						    	}catch(ParseException pe){
-						    	    pe.printStackTrace();
-						    	 }
-						    meridian = "PM";
-						  }
-				appointment.setAppointmenttime(outputStartTime+" "+meridian);		  
-				String resultQuery = new AppointmentDAO().addAppointment(appointment);
-				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
-				
-				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
-					 String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
-					 //new SmsService(request, response).sendSMS("91"+pidContact[1], message);
-				}else if(resultQuery!=null && "no".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
+
+			Appointment appointment = new Appointment();
+			appointment.setAcademicyear(DataUtil.emptyString(httpSession.getAttribute("currentAcademicYear").toString()));
+			appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
+			appointment.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			appointment.setCreateddate(new Date());
+			appointment.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			appointment.setStatus("Scheduled");
+			//appointment.setStdid(1);
+			Parents parent = new Parents();
+			parent.setPid(Integer.parseInt(pidContact[0]));
+			appointment.setParent(parent);
+
+			String[] starttimeSplit = appointmentTime.split(":");
+			String hours = starttimeSplit[0];
+			String meridian = null;
+			String outputStartTime = null;
+			if (Integer.parseInt(hours) < 12) {
+				outputStartTime = appointmentTime;
+				meridian = "AM";
+			} else if (Integer.parseInt(hours) >= 12) {
+
+				DateFormat df = new SimpleDateFormat("HH:mm");
+				//Date/time pattern of desired output date
+				DateFormat outputformat = new SimpleDateFormat("hh:mm");
+				Date date1 = null;
+				try{
+					//Conversion of input String to date
+					date1= df.parse(appointmentTime);
+					//old date format to new date format
+					outputStartTime = outputformat.format(date1);
+				}catch(ParseException pe){
+					pe.printStackTrace();
 				}
-				
-				}
-			request.setAttribute("appointmentresult", result);
+				meridian = "PM";
+			}
+			appointment.setAppointmenttime(outputStartTime+" "+meridian);
+			String resultQuery = new AppointmentDAO().addAppointment(appointment);
+			String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
+
+			if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
+				result = true;
+				String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
+				//new SmsService(request, response).sendSMS("91"+pidContact[1], message);
+			}else if(resultQuery!=null && "no".equalsIgnoreCase(sendAppointmentSMS)) {
+				result = true;
+			}
+
+		}
+		request.setAttribute("appointmentresult", result);
 		return result;
 	}
 
-	
+
 	public boolean viewAllAppointments() {
 
 		boolean result = false;
@@ -143,16 +143,16 @@ public class AppointmentService {
 	}
 
 	public void completeAppointments() {
-		
+
 		String[] appointmentIds = request.getParameterValues("appointmentids");
 		List<Integer> appointmentIdsList = new ArrayList<Integer>();
 		boolean result = false;
-		
+
 		if(appointmentIds!=null) {
 			for (String ids : appointmentIds) {
 				appointmentIdsList.add(Integer.parseInt(ids));
 			}
-			
+
 			result = new AppointmentDAO().completeAppointments(appointmentIdsList);
 			request.setAttribute("appointmentstatus",result);
 		}
@@ -206,40 +206,44 @@ public class AppointmentService {
 	    String toDate = new SimpleDateFormat("yyyy-MM-dd").format(dateTo);
 	    
 	    
+
 	    return new AppointmentDAO().getNoOfRecordsMonthly(fromDate, toDate);
 }
 
-	public void generateAppointmentsReport() {
-		
-		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
-		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-		String status = request.getParameter("status");
-		String studentId = request.getParameter("studentId");
-		String admnno = request.getParameter("clientname");
-		String studentName = request.getParameter("studentName");
+	public AppointmentResponseDto generateAppointmentsReport(GenerateAppointmentsReportDto generateAppointmentsReportDto) {
+        AppointmentResponseDto appointmentResponseDto =new AppointmentResponseDto();
+		String fromDate = DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getFromDate());
+		String toDate = DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getToDate());
+		String status = generateAppointmentsReportDto.getStatus();
+		String studentId = generateAppointmentsReportDto.getStudentId();
+		String admnno = generateAppointmentsReportDto.getAdmnno();
+		String studentName = generateAppointmentsReportDto.getStudentName();
 		String queryMain = "from Appointment ap where ap.appointmentdate between '"+fromDate+"' and '"+toDate+"' ";
 		String subQuery = "";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 				
 		if(!status.isEmpty()) {
 			subQuery = subQuery + " and status = '"+status+"'";
-			httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+			appointmentResponseDto.setStatusselected(status);
 		}else {
-		httpSession.setAttribute("statusselected", "");
+			appointmentResponseDto.setStatusselected("");
+
 		}
 		
 		if(!studentId.isEmpty()) {
 			subQuery = subQuery + "and ap.parent.Student.sid = '"+studentId+"'";
-			httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+studentName);
+            appointmentResponseDto.setStudentselected(studentName);
 		}else {
-			httpSession.setAttribute("studentselected", "");
+			appointmentResponseDto.setStudentselected("");
 		}
-		
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
-		
-		httpSession.setAttribute("appointmentList", appointmentList);
-		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
-		httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+		appointmentResponseDto.setAppointmentList(appointmentList);
+
+		appointmentResponseDto.setTransactionfromdateselected(DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getFromDate()));
+
+		appointmentResponseDto.setTransactiontodateselected(DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getToDate()));
+
+            return appointmentResponseDto;//issue resolved.
 	}
 
 	public void getMonthlyAppointments() {
