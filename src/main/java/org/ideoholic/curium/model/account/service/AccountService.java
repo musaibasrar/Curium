@@ -1453,14 +1453,14 @@ public boolean searchSingleLedgerEntries() {
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
 			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 3);
 			if(resultResponse.isSuccess()){
-				request.setAttribute("vouchertype", nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
 			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 3);
 			if(resultResponse.isSuccess()){
-				request.setAttribute("vouchertype", nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 		}
