@@ -1433,7 +1433,7 @@ public boolean searchSingleLedgerEntries() {
 
 	public ResultResponse viewVouchersPrint(VoucherPrintDto voucherPrintDto){
 
-		String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
+		String nextVoucher = DataUtil.emptyString(voucherPrintDto.getNextVoucher());
 
 		 if(nextVoucher.equalsIgnoreCase("Receipt")){
 			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 1);
