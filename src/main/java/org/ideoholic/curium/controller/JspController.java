@@ -531,5 +531,14 @@ public class JspController {
 	public String getFeescollectionDetailsCategory() {
 		return "feescollectiondetailscategory";
 	}
+
+	@GetMapping("/vouchersearch")
+	public String voucherSearch() {
+		return "vouchersearch";
+	}
 	
+	@GetMapping("/vouchercancelsuccess")
+	public String voucherCancelSuccess() {
+		return "vouchercancelsuccess";
+	}
 }
