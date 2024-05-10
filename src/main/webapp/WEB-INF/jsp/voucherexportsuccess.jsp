@@ -1,5 +1,5 @@
 <%-- 
-    Document   : notSaved
+    Document   : Trial balance export success
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
@@ -11,10 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Trial balance export success</title>
         <style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
+            @import "/shatabdi/css/dataTable/css/demo_page.css";
+            @import "/shatabdi/css/dataTable/css/jquery.dataTables.css";
         </style>
         <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.17.custom.css">
         <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
@@ -58,15 +58,15 @@
 
         <script type="text/javascript">
             $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
+                $("#download").button().click(function() {
+        			downloadFile();
 
+        		});
                 });
 
-            function ViewAll(){
+            function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/shatabdi/PersonalProcess/viewAll";
+                form1.action="/shatabdi/AccountProcess/downloadVoucherTransactions";
                 form1.submit();
             }
         </script>
@@ -87,21 +87,21 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" >
+    <body background="/shatabdi/images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Voucher Cancelled Successfully</p>
-          <td width="26%"  class="alignRightYear">
-                            
-                             
-                            </td>
-                            
-        <p class="style1">
-          
-            
-            <!-- <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
-        </p></td>
+        <td height="50" align="center" valign="middle"><p class="style1"> Voucher Transactions Has Been Exported Successfully</p>
+        </td>
+        
+      </tr>
+      <tr>
+          <td height="5" align="center" valign="middle"><p class="style1">
+                  
+                  <button id="download">Download</button>
+                                   
+              </p>
+        </td>
       </tr>
     </table>
             </form>
