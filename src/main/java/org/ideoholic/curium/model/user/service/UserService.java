@@ -548,7 +548,7 @@ public class UserService {
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
-		
+		String modeOfPayment = DataUtil.emptyString(request.getParameter("modeofpayment"));
 		
 			String querySub = "";
 			
@@ -569,6 +569,13 @@ public class UserService {
 			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
 					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
 				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
+			}
+			
+			if(!modeOfPayment.equalsIgnoreCase("")){
+				querySub = " feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				 httpSession.setAttribute("modeofpayment", modeOfPayment);
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("modeofpayment")))) {
+				querySub = " feesdetails.paymenttype = '"+(String) httpSession.getAttribute("modeofpayment")+"'" ;
 			}
 			
 			queryMain = queryMain+querySub;
