@@ -233,7 +233,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Fees Report</label><br>
+				<label class="addressLine">General Ledger Report</label><br>
 				</td>
 			</tr>
 	</table>

@@ -707,12 +707,21 @@ public class FeesCollectionService {
 				for (String feescat : feesCat) {
 					feesCatList.add(Integer.parseInt(feescat));
 				}
-				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesstructureMain = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
 				
-				if (feesstructure.size() > 0) {
+				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
+					Long dueAmount =0l;
+					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
+					if(dueAmount>0) {
+						feesStructure.add(studentFeesStructure);
+					}
+				}
+				
+				if (feesStructure.size() > 0) {
 					
 					studentFeesReport.setParents(parents);
-					studentFeesReport.setStudentFeesStructure(feesstructure);
+					studentFeesReport.setStudentFeesStructure(feesStructure);
 					
 					studentFeesReportList.add(studentFeesReport);
 					

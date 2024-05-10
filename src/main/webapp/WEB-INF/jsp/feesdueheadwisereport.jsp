@@ -830,10 +830,10 @@ for(Cookie cookie : cookies){
 							type="submit" id="export"/></td>
 													
 						<td class="footerTD" colspan="7" >
-						 
+						 <%-- 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
-						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
+						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp;  --%>Total Due Amount: ${TotalDueAmount }
 						 
 						</td>
 							
