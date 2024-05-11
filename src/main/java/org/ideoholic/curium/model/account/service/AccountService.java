@@ -1895,8 +1895,8 @@ public boolean getRPStatement() {
 		//BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalHalqaSharePaidCash).subtract(totalCrCashContra);
 		closingBalanceCash = openingBalanceCash.add(closingDrCrCash).add(totalDrCashContra);
 		
-		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalHalqaSharePaidBank).subtract(totalCrBankContra);
-		//BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalExpenseBank.add(totalHalqaSharePaidBank)).subtract(totalCrBankContra);
+		//BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalHalqaSharePaidBank).subtract(totalCrBankContra);
+		BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalCrBankContra);
 		closingBalanceBank = openingBalanceBank.add(closingDrCrBank).add(totalDrBankContra);
 		
 		BigDecimal grandReceiptTotal = totalIncomeCash.add(totalIncomeBank).add(openingBalanceCash).add(openingBalanceBank);

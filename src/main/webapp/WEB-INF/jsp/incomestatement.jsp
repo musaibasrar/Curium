@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -537,9 +538,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${expensesledgersaccount.value}" /></td>
+							<td class="dataText" style="text-align: left" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${expensesledgersaccount.value}" /></td>
 
 						</tr>
 					</c:forEach>
@@ -557,7 +559,8 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
 							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${expensetotallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${expensetotal}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${expensetotal}" /></td>
 
 						</tr>
 						
@@ -565,7 +568,8 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
 							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${profitlabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${totalprofit}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${totalprofit}" /></td>
 
 						</tr>
 						
@@ -611,9 +615,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${incomeledgersaccount.value}" /></td>
+							<td class="dataText" style="text-align: left" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${incomeledgersaccount.value}" /></td>
 
 						</tr>
 					</c:forEach>
@@ -630,7 +635,8 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
 							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${incometotallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${incometotal}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${incometotal}" /></td>
 
 						</tr>
 						
@@ -638,7 +644,8 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
 							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${losslabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${totalloss}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+							<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${totalloss}" /></td>
 
 						</tr>
 						

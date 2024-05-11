@@ -423,11 +423,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/jih/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/jih/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/jih/trialbalance" style="font-size: 12px;">Trial Balance</a>
