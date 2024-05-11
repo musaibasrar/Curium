@@ -123,14 +123,14 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID","Receipt No.","Name","Contact Number", "Date", "Total"});
+					new Object[] { "UID","Book Receipt No.","Name","Contact Number", "Date", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
 						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getValue().getBranchreceiptnumber(),
+						entry.getValue().getBookreceiptno(),
 						entry.getKey().getStudent().getName(),
 						entry.getKey().getStudent().getClassstudying(),
 						entry.getValue().getDate().toString(),

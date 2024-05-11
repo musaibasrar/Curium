@@ -14,7 +14,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Hisabaat</title>
+	 <title>CURIUM</title>
 	<link rel="stylesheet" href="/jihtel/css/bootstrap3.min.css">
 	<script type="text/javascript" src="/jihtel/js/openWindow.js"></script>
 	

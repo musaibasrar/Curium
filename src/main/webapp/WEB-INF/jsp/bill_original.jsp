@@ -136,7 +136,7 @@ table, tbody {
 				
 				<p class="s1"
 					style="padding-left: 31pt; text-indent: 0pt; line-height: 16pt; text-align: center;">
-					<span class="s4">Hisabaat</span>
+					<span class="s4">CURIUM</span>
 				</p></td>
 		</tr>
 		<tr style="height: 19pt">
