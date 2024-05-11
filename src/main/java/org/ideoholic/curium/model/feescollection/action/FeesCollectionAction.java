@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -222,4 +224,16 @@ public class FeesCollectionAction {
 	        	new FeesCollectionService(request, response).lastPaymentReport();
 	            return "lastpaymentreport";
 			} 
+		 
+		 
+		 @GetMapping("/checkDuplicate")
+	        private void checkDuplicate() {
+	        	try {
+					new FeesCollectionService(request, response).checkDuplicate();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} 
+		 
 }
