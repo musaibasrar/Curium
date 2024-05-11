@@ -401,4 +401,24 @@ public class feesCollectionDAO {
 		}
 	}
 
+	public Receiptinfo getReceiptInfoDetails(String bookReceiptNo) {
+		
+		Receiptinfo receiptDetails = new Receiptinfo();
+		
+		try {
+			 
+			 transaction = session.beginTransaction();
+			 Query query = session.createQuery("from Receiptinfo where bookreceiptno = '"+bookReceiptNo+"' ");
+			 receiptDetails = (Receiptinfo) query.uniqueResult();
+			 transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return receiptDetails;
+		
+	}
+
 }

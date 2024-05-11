@@ -936,6 +936,49 @@
             }
             
         </script>
+        
+        <script type="text/javascript">
+
+    var xmlHttp;
+    var count;
+    function checkDuplicate() {
+
+		var selected=document.getElementById('bookreceiptno').value;
+			
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/jihtel/FeesCollection/checkDuplicate?bookreceiptno="+selected,true);
+			xmlHttp.send(null);
+	}
+    
+	function stateChanged() {
+
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("bookreceiptnodiv").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+	
+
+</script>
     </head>
     <%
 //allow access only if session exists
@@ -1034,7 +1077,9 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" >Donor Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
-                        <td class="alignLeft" >Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="bookreceiptno" id="bookreceiptno" class="myclass"/></td>
+                        <td class="alignLeft" >Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="bookreceiptno" id="bookreceiptno" class="myclass" onblur="checkDuplicate()"/>
+                        <div id="bookreceiptnodiv"></div>
+                        </td>
                         <td class="alignLeft" style="display: none;">Class & SEC : &nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
@@ -1222,7 +1267,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="bank">SBI Bank</option>
+											<option value="bank">Bank</option>
 								</select>
 							
 							</label>
@@ -1264,7 +1309,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="bank">SBI Bank</option>
+											<option value="bank">Bank</option>
 								</select>
 							
 							</label>

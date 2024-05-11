@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
@@ -1860,6 +1862,38 @@ public class FeesCollectionService {
 		}
 		
 		return result;
+	}
+
+	public void checkDuplicate() throws IOException {
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			PrintWriter out = response.getWriter(); 
+			response.setContentType("text/xml");
+		    response.setHeader("Cache-Control", "no-cache");
+		        
+			if(!"".equalsIgnoreCase(request.getParameter("bookreceiptno").toString())) {
+			String bookReceiptNo = request.getParameter("bookreceiptno");
+			Receiptinfo receiptInfo = new feesCollectionDAO().getReceiptInfoDetails(bookReceiptNo);
+		        try {
+		        	
+		        	if(receiptInfo!=null){
+		        		String buffer = "<label style='color:red;'>Alert: Duplicate Receipt No.</label>";
+			        	response.getWriter().println(buffer);
+		        	}else{
+		        		String buffer = "";
+			        	response.getWriter().println(buffer);
+		        	}
+		        	
+		        } catch (Exception e) {
+		            out.write("<subgroup>0</subgroup>");
+		        } finally {
+		            out.flush();
+		            out.close();
+		        }
+		}
+		}
+		
+		
 	}
 }
 
