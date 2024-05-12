@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/alirfan/css/bootstrap.min.css">
+        <script src="/alirfan/js/jquery.min.js"></script>
+        <script src="/alirfan/js/bootstrap.min.js"></script>
+        <script src="/alirfan/js/popper.min.js"></script>
 <style>
  .headerText {
 		background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -155,7 +155,7 @@
                                 <td class="dataText"><c:out value="${receiptinfo.date}"/></td>
                                 <td class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td class="dataText"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td class="dataText"><a class="dataTextInActive" target="_blank" href="/alirfan/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>

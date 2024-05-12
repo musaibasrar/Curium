@@ -94,8 +94,8 @@ span{
 float:right;
 }
 </style>
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Study Certificate</title>
          <script type="text/javascript">
              window.onload = function(){
@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/abc/images/abc.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/alirfan/images/alirfan.png">
 			</td>
 				<td >
 					<br>
