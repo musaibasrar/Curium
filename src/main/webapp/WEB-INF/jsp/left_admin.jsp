@@ -714,7 +714,31 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            
+             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/abc/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/abc/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/abc/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/abc/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
                
               <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
