@@ -1668,6 +1668,35 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 								<tr>
+
+									<td class="alignLeft">Pin Code &nbsp;</td>
+									<td ><label> <input name="fatherscaste"
+											type="text" class="myclass" id="fatherscaste" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">District &nbsp;</td>
+
+									<td ><label> <input
+											name="motherscaste" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="motherscaste" size="36"
+											onkeyup="numberWithCommas(this);">
+
+									</label></td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
 								<td class="alignLeft">Permanent Address &nbsp;</td>
 
 								<td ><label> <textarea

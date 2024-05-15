@@ -381,9 +381,11 @@ public class StudentService {
 		                if(fieldName.equalsIgnoreCase("motherscastecertno")){
 		                	parents.setMotherscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
+		              //@UI 'pincode'
 		                if(fieldName.equalsIgnoreCase("fatherscaste")){
 		                	parents.setFatherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
+		              //@UI 'District'
 		                if(fieldName.equalsIgnoreCase("motherscaste")){
 		                	parents.setMotherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
