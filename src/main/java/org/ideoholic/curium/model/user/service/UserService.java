@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,13 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
@@ -35,6 +39,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
@@ -585,8 +590,39 @@ public class UserService {
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				
+				
+				Set<Feescollection> setFeesCollection = receiptinfo.getFeesCollectionRecords();
+				List<String> feeCatList = new ArrayList<String>();
+
+				for (Feescollection feescollectionSingle : setFeesCollection) {
+					List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+					feeCatList.add(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
+				}
+				
+				List<Integer> voucherIds = new ArrayList<Integer>();
+				voucherIds.add(receiptinfo.getReceiptvoucher());
+				voucherIds.add(receiptinfo.getJournalvoucher());
+				voucherIds.add(receiptinfo.getMisc().intValue());
+
+				List<VoucherEntrytransactions> voucherList = new AccountDAO().getVoucherEntryTransactions(voucherIds);
+				String division = "";
+				for (VoucherEntrytransactions voucher : voucherList) {
+					
+					if(!division.equalsIgnoreCase("")) {
+						division = division+"--"+voucher.getDramount().toString();
+					}else {
+						division = voucher.getDramount().toString();
+					}
+					
+				}
+				receiptinfo.setContributiondivision(division);
+				receiptinfo.setFeesCategory(feeCatList);
+				
 				feesMap.put(student, receiptinfo);
 			}
+			
+			
 			
 			request.setAttribute("feesdetailslistmap", feesMap);
 			request.setAttribute("searchfeesdetailslist", feesDetailsList);

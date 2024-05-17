@@ -663,4 +663,21 @@ public class AccountDAO {
 		return voucherEntrytransactions;
 	}
 
+	public List<VoucherEntrytransactions> getVoucherEntryTransactions(List<Integer> voucherIds) {
+		
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();												  	
+			Query query = session.createQuery("from VoucherEntrytransactions where transactionsid IN (:voucherIds) order by transactionsid ASC");
+			query.setParameterList("voucherIds", voucherIds);
+			voucherEntrytransactions = query.getResultList();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherEntrytransactions;
+	}
+
 }

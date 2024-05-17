@@ -5,6 +5,7 @@ package org.ideoholic.curium.model.feescollection.dto;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -46,6 +47,8 @@ public class Receiptinfo implements java.io.Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Feescollection> feesCollectionRecords =
 			new HashSet<Feescollection>(0);
+	private List<String> feesCategory;
+	private String contributiondivision;
 	
 	public Receiptinfo() {
 	}
@@ -56,7 +59,7 @@ public class Receiptinfo implements java.io.Serializable {
 
 	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear,  Long fine, Long misc, String bookreceiptno,
 			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec,
-			Integer receiptvoucher, Integer journalvoucher) {
+			Integer receiptvoucher, Integer journalvoucher, List<String> feesCategory, String contributiondivision) {
 		this.sid = sid;
 		this.date = date;
 		this.totalamount = totalamount;
@@ -73,6 +76,8 @@ public class Receiptinfo implements java.io.Serializable {
 		this.fine = fine;
 		this.misc = misc;
 		this.bookreceiptno = bookreceiptno;
+		this.feesCategory = feesCategory;
+		this.contributiondivision = contributiondivision;
 	}
 
 	@Id
@@ -219,5 +224,21 @@ public class Receiptinfo implements java.io.Serializable {
 
 	public void setBookreceiptno(String bookreceiptno) {
 		this.bookreceiptno = bookreceiptno;
+	}
+
+	public List<String> getFeesCategory() {
+		return feesCategory;
+	}
+
+	public void setFeesCategory(List<String> feesCategory) {
+		this.feesCategory = feesCategory;
+	}
+
+	public String getContributiondivision() {
+		return contributiondivision;
+	}
+
+	public void setContributiondivision(String contributiondivision) {
+		this.contributiondivision = contributiondivision;
 	}
 }

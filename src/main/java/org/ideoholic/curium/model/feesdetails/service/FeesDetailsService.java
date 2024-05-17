@@ -22,6 +22,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
@@ -29,6 +32,7 @@ import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 
@@ -91,6 +95,34 @@ public class FeesDetailsService {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					
+					Set<Feescollection> setFeesCollection = receiptInfo.getFeesCollectionRecords();
+					List<String> feeCatList = new ArrayList<String>();
+
+					for (Feescollection feescollectionSingle : setFeesCollection) {
+						List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+						feeCatList.add(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
+					}
+					
+					List<Integer> voucherIds = new ArrayList<Integer>();
+					voucherIds.add(receiptInfo.getReceiptvoucher());
+					voucherIds.add(receiptInfo.getJournalvoucher());
+					voucherIds.add(receiptInfo.getMisc().intValue());
+
+					List<VoucherEntrytransactions> voucherList = new AccountDAO().getVoucherEntryTransactions(voucherIds);
+					String division = "";
+					for (VoucherEntrytransactions voucher : voucherList) {
+						
+						if(!division.equalsIgnoreCase("")) {
+							division = division+"--"+voucher.getDramount().toString();
+						}else {
+							division = voucher.getDramount().toString();
+						}
+						
+					}
+					receiptInfo.setContributiondivision(division);
+					receiptInfo.setFeesCategory(feeCatList);
+					
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -123,10 +155,20 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID","Book Receipt No.","Name","Contact Number", "Date", "Total"});
+					new Object[] { "UID","Book Receipt No.","Name","Contact Number", "Date", "Total", "Collection Head", "Distribution"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
+				
+                String feesCat = "";
+                for (String feeCat : entry.getValue().getFeesCategory()) {
+
+					if(!feesCat.equalsIgnoreCase("")) {
+						feesCat = feesCat+"--"+feeCat;
+					}else {
+						feesCat = feeCat;
+					}
+				}
 	            
 				data.put(Integer.toString(i),new Object[] { 
 						entry.getKey().getStudent().getStudentexternalid(), 
@@ -134,7 +176,8 @@ public class FeesDetailsService {
 						entry.getKey().getStudent().getName(),
 						entry.getKey().getStudent().getClassstudying(),
 						entry.getValue().getDate().toString(),
-						entry.getValue().getTotalamount() });
+						entry.getValue().getTotalamount(),feesCat,
+						entry.getValue().getContributiondivision()});
 				i++;
 				}
 				
