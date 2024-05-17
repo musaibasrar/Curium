@@ -953,7 +953,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/jihtel/FeesCollection/checkDuplicate?bookreceiptno="+selected,true);
+			xmlHttp.open("GET", "/jih/FeesCollection/checkDuplicate?bookreceiptno="+selected,true);
 			xmlHttp.send(null);
 	}
     
