@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
+import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -313,11 +314,10 @@ public class AdminService {
 	}
 
 
-	public void rejectVoucher() {
-		 String[] expensesIds = request.getParameterValues("expensesIDs");
-		 if(expensesIds!=null){
+	public void rejectVoucher(ExpensesIdDto expenseiddto) {
+		 if(expenseiddto.getExpensesIds()!=null){
 	        List<Integer> ids = new ArrayList();
-	        for (String id : expensesIds) {
+	        for (String id : expenseiddto.getExpensesIds()) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 	        }

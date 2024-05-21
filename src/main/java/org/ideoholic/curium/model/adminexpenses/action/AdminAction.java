@@ -39,7 +39,7 @@ public class AdminAction {
 	@PostMapping("/rejectVoucher")
 	public String rejectVoucher() {
 		
-			new AdminService(request, response).rejectVoucher();
+			 adminActionAdapter.rejectVoucher();
             return viewAllExpenses();
 	}
 

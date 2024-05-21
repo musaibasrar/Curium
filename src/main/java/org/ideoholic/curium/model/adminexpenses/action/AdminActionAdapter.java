@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
+import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,12 @@ public class AdminActionAdapter {
 
 
 		return response.isSuccess();
+	}
+	
+	public void rejectVoucher() {
+		AdminService adminService = new AdminService(request, response);
+		ExpensesIdDto expenseiddto = new ExpensesIdDto() ;
+		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
+		 adminService.rejectVoucher(expenseiddto);
 	}
 }
