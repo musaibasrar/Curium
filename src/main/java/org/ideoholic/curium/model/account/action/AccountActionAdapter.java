@@ -193,15 +193,12 @@ public class AccountActionAdapter {
 		voucherPrintDto.setNextVoucher(request.getParameter("voucher"));
 		voucherPrintDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-		ResultResponse resultResponse = accountService.viewVouchersPrint(voucherPrintDto);
-		if (resultResponse.isSuccess()){
-			Map resultMap = resultResponse.getResultMap();
-			request.setAttribute("vouchertransactions", resultResponse.getResultMap());
-			request.setAttribute("vouchertype", resultResponse.getMessage());
-			request.setAttribute("fromdateselected", voucherPrintDto.getFromDate());
-			request.setAttribute("todateselected",voucherPrintDto.getToDate());
-		}
+		VoucherPrintResponseDto voucherPrintResponseDto = accountService.viewVouchersPrint(voucherPrintDto);
+		request.setAttribute("vouchertransactions", voucherPrintResponseDto.getVoucherTransactions());
+		request.setAttribute("vouchertype", voucherPrintResponseDto.getVoucherType());
+		request.setAttribute("fromdateselected", voucherPrintResponseDto.getFromDateSelected());
+		request.setAttribute("todateselected", voucherPrintResponseDto.getToDateSelected());
 
-		return resultResponse.isSuccess();
+		return accountService.viewVouchersPrint(voucherPrintDto).isSuccess();
 	}
 }

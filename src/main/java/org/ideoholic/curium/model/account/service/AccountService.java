@@ -1431,43 +1431,43 @@ public boolean searchSingleLedgerEntries() {
 		return false;
 	}
 
-	public ResultResponse viewVouchersPrint(VoucherPrintDto voucherPrintDto){
+	public VoucherPrintResponseDto viewVouchersPrint(VoucherPrintDto voucherPrintDto){
 
 		String nextVoucher = DataUtil.emptyString(voucherPrintDto.getNextVoucher());
 
 		 if(nextVoucher.equalsIgnoreCase("Receipt")){
-			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 1);
-			if(resultResponse.isSuccess()){
-				resultResponse.setMessage(nextVoucher);
-				return resultResponse;
+			 VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 1);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
 				//receiptdetails
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
-			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 2);
-			if(resultResponse.isSuccess()){
-				resultResponse.setMessage(nextVoucher);
-				return resultResponse;
+			 VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 2);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
-			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 3);
-			if(resultResponse.isSuccess()){
-				resultResponse.setMessage(nextVoucher);
-				return resultResponse;
+			 VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 3);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
-			 ResultResponse resultResponse = viewVouchersPrint(voucherPrintDto, 3);
-			if(resultResponse.isSuccess()){
-				resultResponse.setMessage(nextVoucher);
-				return resultResponse;
+			 VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 3);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
 			}
 		}
-		return ResultResponse.builder().build();
+		return VoucherPrintResponseDto.builder().build();
 	}
 
-	public ResultResponse viewVouchersPrint(VoucherPrintDto voucherPrintDto, int voucherType) {
+	public VoucherPrintResponseDto viewVouchersPrint(VoucherPrintDto voucherPrintDto, int voucherType) {
 
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(voucherPrintDto.getFromDate()));
@@ -1486,15 +1486,17 @@ public boolean searchSingleLedgerEntries() {
 			voucherMap.put(voucherEntry, twoAccounts);
 		}
 
-			return ResultResponse
+			return VoucherPrintResponseDto
 					.builder()
-					.resultMap(voucherMap)
+					.voucherTransactions(voucherMap)
+					.fromDateSelected(voucherPrintDto.getFromDate())
+					.toDateSelected(voucherPrintDto.getToDate())
 					.success(true)
 					.build();
 		
 		}
 
-		return ResultResponse
+		return VoucherPrintResponseDto
 				.builder()
 				.success(false)
 				.build();
