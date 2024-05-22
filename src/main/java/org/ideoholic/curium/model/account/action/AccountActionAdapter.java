@@ -183,4 +183,22 @@ public class AccountActionAdapter {
 
 		return resultResponse.isSuccess();
 	}
+
+	public boolean viewVouchersPrint(){
+		AccountService accountService = new AccountService(request, response);
+
+		VoucherPrintDto voucherPrintDto = new VoucherPrintDto();
+		voucherPrintDto.setFromDate(request.getParameter("fromdateselected"));
+		voucherPrintDto.setToDate(request.getParameter("todateselected"));
+		voucherPrintDto.setNextVoucher(request.getParameter("voucher"));
+		voucherPrintDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		VoucherPrintResponseDto voucherPrintResponseDto = accountService.viewVouchersPrint(voucherPrintDto);
+		request.setAttribute("vouchertransactions", voucherPrintResponseDto.getVoucherTransactions());
+		request.setAttribute("vouchertype", voucherPrintResponseDto.getVoucherType());
+		request.setAttribute("fromdateselected", voucherPrintResponseDto.getFromDateSelected());
+		request.setAttribute("todateselected", voucherPrintResponseDto.getToDateSelected());
+
+		return accountService.viewVouchersPrint(voucherPrintDto).isSuccess();
+	}
 }

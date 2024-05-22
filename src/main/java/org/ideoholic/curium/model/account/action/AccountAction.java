@@ -301,36 +301,9 @@ public class AccountAction {
 
 	@PostMapping("/voucherPrint")
 	private String voucherPrint() {
-		String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
-		
-		if(nextVoucher.equalsIgnoreCase("Receipt")){
-			
-			if(new AccountService(request, response).viewVouchersPrint(1)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "printvoucher";
-				//receiptdetails
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Payment")){
-			
-			if(new AccountService(request, response).viewVouchersPrint(2)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "printvoucher";
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Contra")){
-			
-			if(new AccountService(request, response).viewVouchersPrint(3)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "printvoucher";
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Journal")){
-			
-			if(new AccountService(request, response).viewVouchersPrint(4)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "printvoucher";
-			}
+
+		if(accountActionAdapter.viewVouchersPrint()){
+			return "printvoucher";
 		}
 		return ERRORPAGE;
 	}
