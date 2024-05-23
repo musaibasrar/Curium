@@ -49,12 +49,7 @@ public class AdminAction {
         return viewAllExpenses();
 	}
 	
-	/*
-	 * @PostMapping("/approveVoucher") public String approveVoucher() { new
-	 * AdminService(request, response).approveVoucher(); return viewAllExpenses(); }
-	 */
-
-	@PostMapping("/printVoucher")
+		@PostMapping("/printVoucher")
 	public String printVoucher() {
 		 new AdminService(request, response).printVoucher();
 	        return "paymentvoucherprint";
