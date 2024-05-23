@@ -240,11 +240,11 @@ public class AppointmentService {
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
 		appointmentResponseDto.setAppointmentList(appointmentList);
 
-		appointmentResponseDto.setTransactionfromdateselected(DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getFromDate()));
+		appointmentResponseDto.setTransactionfromdateselected(generateAppointmentsReportDto.getFromDate());
 
-		appointmentResponseDto.setTransactiontodateselected(DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getToDate()));
+		appointmentResponseDto.setTransactiontodateselected(generateAppointmentsReportDto.getToDate());
 
-		return appointmentResponseDto;//issue resolved.
+		return appointmentResponseDto;
 	}
 	public void getMonthlyAppointments() {
 		
