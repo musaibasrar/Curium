@@ -52,4 +52,11 @@ public class AdminActionAdapter {
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		 adminService.rejectVoucher(expenseiddto);
 	}
+	
+	public void approveVoucher() {
+		AdminService adminService = new AdminService(request, response);
+		ExpensesIdDto expenseiddto = new ExpensesIdDto() ;
+		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
+		 adminService.approveVoucher(expenseiddto);
+	}
 }
