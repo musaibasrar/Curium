@@ -1431,33 +1431,75 @@ public boolean searchSingleLedgerEntries() {
 		return false;
 	}
 
-	public boolean viewVouchersPrint(int voucherType) {
-		
-		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
-		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+	public VoucherPrintResponseDto viewVouchersPrint(VoucherPrintDto voucherPrintDto){
 
-		String twoAccounts = null;
-		
-		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
-		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
-		
-		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
-			voucherMap.put(voucherEntry, twoAccounts);
+		String nextVoucher = DataUtil.emptyString(voucherPrintDto.getNextVoucher());
+
+		if(nextVoucher.equalsIgnoreCase("Receipt")){
+			VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 1);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
+				//receiptdetails
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Payment")){
+			VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 2);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Contra")){
+			VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 3);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Journal")){
+			VoucherPrintResponseDto voucherPrintResponseDto = viewVouchersPrint(voucherPrintDto, 3);
+			if(voucherPrintResponseDto.isSuccess()){
+				voucherPrintResponseDto.setVoucherType(nextVoucher);
+				return voucherPrintResponseDto;
+			}
 		}
-		
-		request.setAttribute("vouchertransactions", voucherMap);
-		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
-		request.setAttribute("todateselected", request.getParameter("todateselected"));
-		
-		return true;
-		
+		return VoucherPrintResponseDto.builder().build();
+	}
+
+	public VoucherPrintResponseDto viewVouchersPrint(VoucherPrintDto voucherPrintDto, int voucherType) {
+
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(voucherPrintDto.getFromDate()));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(voucherPrintDto.getToDate()));
+
+		if(voucherPrintDto.getBranchId()!=null) {
+
+			String twoAccounts = null;
+
+			Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+			int financialYearId = new AccountDAO().getCurrentFinancialYear(voucherPrintDto.getBranchId()).getFinancialid();
+			voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId,voucherPrintDto.getBranchId(), voucherType);
+
+			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+				voucherMap.put(voucherEntry, twoAccounts);
+			}
+
+			return VoucherPrintResponseDto
+					.builder()
+					.voucherTransactions(voucherMap)
+					.fromDateSelected(voucherPrintDto.getFromDate())
+					.toDateSelected(voucherPrintDto.getToDate())
+					.success(true)
+					.build();
+
 		}
-		return false;
+
+		return VoucherPrintResponseDto
+				.builder()
+				.success(false)
+				.build();
 	}
 
 
