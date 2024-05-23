@@ -28,6 +28,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
+import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
@@ -209,39 +211,41 @@ public class AppointmentService {
 	    return new AppointmentDAO().getNoOfRecordsMonthly(fromDate, toDate);
 }
 
-	public void generateAppointmentsReport() {
-		
-		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
-		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-		String status = request.getParameter("status");
-		String studentId = request.getParameter("studentId");
-		String admnno = request.getParameter("clientname");
-		String studentName = request.getParameter("studentName");
+	public AppointmentResponseDto generateAppointmentsReport(GenerateAppointmentsReportDto generateAppointmentsReportDto) {
+		AppointmentResponseDto appointmentResponseDto =new AppointmentResponseDto();
+		String fromDate = DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getFromDate());
+		String toDate = DateUtil.dateFromatConversionSlash(generateAppointmentsReportDto.getToDate());
+		String status = generateAppointmentsReportDto.getStatus();
+		String studentId = generateAppointmentsReportDto.getStudentId();
+		String admnno = generateAppointmentsReportDto.getAdmnno();
+		String studentName = generateAppointmentsReportDto.getStudentName();
 		String queryMain = "from Appointment ap where ap.appointmentdate between '"+fromDate+"' and '"+toDate+"' ";
 		String subQuery = "";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
-				
+
 		if(!status.isEmpty()) {
 			subQuery = subQuery + " and status = '"+status+"'";
-			httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+			appointmentResponseDto.setStatusselected(status);
 		}else {
-		httpSession.setAttribute("statusselected", "");
+			appointmentResponseDto.setStatusselected("");
+
 		}
-		
+
 		if(!studentId.isEmpty()) {
 			subQuery = subQuery + "and ap.parent.Student.sid = '"+studentId+"'";
-			httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+studentName);
+			appointmentResponseDto.setStudentselected(studentName);
 		}else {
-			httpSession.setAttribute("studentselected", "");
+			appointmentResponseDto.setStudentselected("");
 		}
-		
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
-		
-		httpSession.setAttribute("appointmentList", appointmentList);
-		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
-		httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
-	}
+		appointmentResponseDto.setAppointmentList(appointmentList);
 
+		appointmentResponseDto.setTransactionfromdateselected(generateAppointmentsReportDto.getFromDate());
+
+		appointmentResponseDto.setTransactiontodateselected(generateAppointmentsReportDto.getToDate());
+
+		return appointmentResponseDto;
+	}
 	public void getMonthlyAppointments() {
 		
 		List<String> monthList = new LinkedList<String>();
