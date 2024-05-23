@@ -201,4 +201,23 @@ public class AccountActionAdapter {
 
 		return accountService.viewVouchersPrint(voucherPrintDto).isSuccess();
 	}
+
+	public boolean viewVouchers(){
+		AccountService accountService = new AccountService(request, response);
+
+		ViewNextVoucherDto viewNextVoucherDto = new ViewNextVoucherDto();
+		viewNextVoucherDto.setFromDate(request.getParameter("fromdate"));
+		viewNextVoucherDto.setToDate(request.getParameter("todate"));
+		viewNextVoucherDto.setNextVoucher(request.getParameter("voucher"));
+		viewNextVoucherDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		ViewNextVoucherResponseDto viewNextVoucherResponseDto = accountService.viewVouchers(viewNextVoucherDto);
+		request.setAttribute("vouchertransactions", viewNextVoucherResponseDto.getVoucherTransactions());
+		request.setAttribute("vouchertype", viewNextVoucherResponseDto.getVoucherType());
+		request.setAttribute("fromdateselected", viewNextVoucherResponseDto.getFromDateSelected());
+		request.setAttribute("todateselected", viewNextVoucherResponseDto.getToDateSelected());
+
+		return accountService.viewVouchers(viewNextVoucherDto).isSuccess();
+
+	}
 }
