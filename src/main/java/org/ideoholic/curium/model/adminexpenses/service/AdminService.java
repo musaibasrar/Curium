@@ -316,7 +316,7 @@ public class AdminService {
 
 	public void rejectVoucher(ExpensesIdDto expenseiddto) {
 		 if(expenseiddto.getExpensesIds()!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : expenseiddto.getExpensesIds()) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
