@@ -1,7 +1,4 @@
 package org.ideoholic.curium.model.appointment.action;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
 import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
@@ -9,15 +6,18 @@ import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 @Service
-
 public class AppointmentActionAdapter {
     @Autowired
     private HttpServletRequest request;
     @Autowired
     private HttpServletResponse response;
-    @Autowired
+   @Autowired
     private HttpSession httpSession;
+
 
     public void generateAppointmentsReport() {
 
@@ -38,5 +38,8 @@ public class AppointmentActionAdapter {
         httpSession.setAttribute("transactionfromdateselected", "From:"+ appointmentResponseDto.getTransactionfromdateselected());
         httpSession.setAttribute("transactiontodateselected", "To:"+appointmentResponseDto.getTransactiontodateselected());
 
+
+
     }
+
 }
