@@ -117,13 +117,11 @@ for(Cookie cookie : cookies){
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
-		<table>
+		<table align="center">
 			<tr>
 			<td class="dataTextBoldLeft">
 			<br><br>
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
+				
 			
 			</tr>
 			
@@ -146,8 +144,8 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Mr./Ms. &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width:400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -158,8 +156,19 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
+					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:550px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+					</span>
+					
+					</h3>
+				</td>
+				
+				<tr>
+				
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;" >R/O
+					<span style="font-weight: bold;text-transform: capitalize;width:650px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.addresspermanent}" /></span>
+					
 					</span>
 					
 					</h3>
@@ -174,13 +183,13 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+					 a student of this School/College.He/She is/was studied/passed/failed in&nbsp;&nbsp; <span style="font-weight: bold;width: 100px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					during the year &nbsp;&nbsp;&nbsp;&nbsp;
 					</h3>
 					
 				</td>
@@ -196,7 +205,8 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
+				<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>
+					 His/ her date of birth as per School/College record is
 					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					</h3>
 					
@@ -204,6 +214,20 @@ for(Cookie cookie : cookies){
 				
 
 			</tr>
+			
+			<tr>
+			
+				<td align="center"  >
+				
+				<h3 style="font-weight: normal;" >
+                   He bears good moral character.
+					</h3>
+					
+				</td>
+				
+
+			</tr>
+			
 			<td></td>
 			</tr>
 			<tr>
@@ -227,10 +251,10 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td style="padding-left: 10px;">Date&nbsp;
+			<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
+			<td align="right" style="padding-right: 70px;">Principal</td>
 		</tr>
 		
 			<tr>
