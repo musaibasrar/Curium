@@ -204,7 +204,7 @@ for(Cookie cookie : cookies){
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
 					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="rollnumber" id="rollnumber" style="width: 200px" /></span>
 					</h3>
 				</td>
 			

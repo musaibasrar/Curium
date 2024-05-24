@@ -243,7 +243,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h4 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Addmission no. &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissionnumber}" /></span>
-					Book no. &nbsp;&nbsp;
+					Sl.No. &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> </span>
 					TC no. &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"></span>

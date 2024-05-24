@@ -594,6 +594,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
+                            <th title="click to sort" class="headerText">Sl.No.</th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Installments&nbsp;</th>
@@ -607,13 +608,14 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${feesstructure}" var="feesstructure">
+                        <c:forEach items="${feesstructure}" var="feesstructure" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${feesstructure.sfsid}"/>" 
 								name="sfsid" 
 								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
+								<td class="dataText"><c:out value="${status.index+1}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>

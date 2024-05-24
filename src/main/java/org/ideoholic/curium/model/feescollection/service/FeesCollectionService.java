@@ -1438,9 +1438,13 @@ public class FeesCollectionService {
 			Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(Integer.parseInt(receiptNumber));
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
-
+			String feeType = "otherfees";
+			String feeCategory = "TC Charges";
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				if(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname().contains(feeCategory)) {
+					feeType="fees";
+				}
 				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
@@ -1455,7 +1459,7 @@ public class FeesCollectionService {
 			request.setAttribute("feescatmap", feeCatMap);
 			request.setAttribute("duplicate", dp);
 			request.setAttribute("user", userLogin);
-			request.setAttribute("feestype", "otherfees");
+			request.setAttribute("feestype", feeType);
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");

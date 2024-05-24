@@ -166,7 +166,7 @@ public class FeesAction {
 	@GetMapping("/otherfeesCollect")
 	public String otherfeesCollect() {
 		new FeesService(request, response).viewOtherFees();
-		new FeesService(request, response).viewAllStudentsList();
+		new FeesService(request, response).viewAllStudentsListOtherFees();
 		return "otherfeesCollection";
 	}
 	

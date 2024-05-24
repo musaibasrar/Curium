@@ -240,7 +240,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Addmission no. &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissionnumber}" /></span>
-					Book no. &nbsp;&nbsp;
+					Sl.No. &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${bookno}" /></span>
 					TC no. &nbsp;&nbsp;
 					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:250px;"><c:out value="${tcno}" /> </span>
@@ -280,7 +280,9 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">4.&nbsp;&nbsp;Nationality &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:790px;"> <c:out value="${studentdetails.student.nationality}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.nationality}" /></span>
+					&nbsp;&nbsp;Gender &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.gender}" /></span>
 					</h3>
 				</td>
 			</tr><tr><td class="dataTextBoldLeft">
@@ -294,7 +296,8 @@ for(Cookie cookie : cookies){
 					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of first Admission in the School &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissiondate}" /></span>
 					&nbsp;&nbsp;in Class &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.classadmittedin}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:set var="splt" value="${fn:split(studentdetails.student.classadmittedin,'--')}"/>
+					<c:out value="${splt[0]}" /></span>
 					</h3>
 				</td>
 				</tr>
@@ -451,14 +454,14 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">20.&nbsp;&nbsp;Date of application for Certificate &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:630px;"><c:out value="${datecert}" /> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:420px;"><c:out value="${datecert}" /> </span>
 					</h3>
 				</td>
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">21.&nbsp;&nbsp;Date of issue for Certificate &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:700px;padding:1px;"><input
+					<span style="font-weight: bold;border-bottom-style: dotted;width:450px;padding:1px;"><input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" > </span>
 					</h3>
@@ -467,14 +470,14 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">22.&nbsp;&nbsp;Reason for leaving the school &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:660px;"><c:out value="${leavingReason}" /> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:440px;"><c:out value="${leavingReason}" /> </span>
 					</h3>
 				</td>
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">23.&nbsp;&nbsp;Any other Remarks &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:720px;"> <c:out value="${Remarks}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:493px;"> <c:out value="${Remarks}" /></span>
 					</h3>
 				</td>
 			</tr>

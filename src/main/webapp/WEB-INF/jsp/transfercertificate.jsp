@@ -305,7 +305,7 @@
        			$( "#caste").val( ui.item.caste );
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
-       			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#classadmitted").val( ui.item.classadmittedin );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -577,7 +577,7 @@ for(Cookie cookie : cookies){
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >Book no.:</td><td> <input  type="text" name="bookno" id="bookno" style="width: 200px" /></td>
+                    <td >Sl.No.:</td><td> <input  type="text" name="bookno" id="bookno" style="width: 200px" /></td>
                     <td >TC no.:</td><td> <input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>    
                     </tr>
                     <tr>

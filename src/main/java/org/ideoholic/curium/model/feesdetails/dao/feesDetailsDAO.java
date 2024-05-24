@@ -410,5 +410,32 @@ public class feesDetailsDAO {
             return result;
 			
 		}
+		
+		public List<Object[]> readListOfStudentsOtherFees(int branchId) {
+            List<Object[]> results = new ArrayList<Object[]>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+
+					/*
+					 * results = (List<Parents>) session.
+					 * createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
+					 * +branchId+")") .list();
+					 */
+                    Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentotherfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                    results= (List<Object[]>)q.list();
+                    transaction.commit();
+
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            } finally {
+        			HibernateUtil.closeSession();
+                    return results;
+            }
+    }
 
 }

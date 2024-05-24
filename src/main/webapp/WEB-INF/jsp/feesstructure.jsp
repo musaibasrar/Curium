@@ -510,6 +510,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th title="click to sort" class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">View Fees</th>
 						<th title="click to sort" class="headerText">View Other Fees</th>
 						<th title="click to sort" class="headerText">UID</th>
@@ -524,7 +525,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${searchStudentList}" var="Parents" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -532,6 +533,8 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
+								<td class="dataText"><c:out
+									value="${status.index+1}" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/shatabdi/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
