@@ -326,11 +326,10 @@ public class AdminService {
 	}
 
 
-	public void approveVoucher() {
-		 String[] expensesIds = request.getParameterValues("expensesIDs");
-		 if(expensesIds!=null){
-	        List<Integer> ids = new ArrayList();
-	        for (String id : expensesIds) {
+	public void approveVoucher(ExpensesIdDto expenseiddto) {
+		 if(expenseiddto.getExpensesIds()!=null){
+	        List<Integer> ids = new ArrayList<>();
+	        for (String id : expenseiddto.getExpensesIds()) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 	        }
