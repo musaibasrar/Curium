@@ -712,7 +712,7 @@ public class AccountService {
 		return true; */
 	}
 
-	//This method is placed here for viewVoucherReceipt. Please delete this method after migrating viewVoucherReceipt.
+	//TODO: This method is placed here for viewVoucherReceipt. Please delete this method after migrating viewVoucherReceipt.
 	public ViewNextVoucherResponseDto viewVouchers(int voucherType) {
 		return null;
 	}
@@ -749,7 +749,7 @@ public class AccountService {
 				return viewNextVoucherResponseDto;
 			}
 		}
-		return ViewNextVoucherResponseDto.builder().build();
+		return ViewNextVoucherResponseDto.builder().success(false).build();
 	}
 
 	public ViewNextVoucherResponseDto viewVouchers(ViewNextVoucherDto viewNextVoucherDto, int voucherType) {
