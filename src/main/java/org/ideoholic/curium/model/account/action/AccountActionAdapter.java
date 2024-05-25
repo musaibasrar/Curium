@@ -220,4 +220,23 @@ public class AccountActionAdapter {
 		return accountService.viewVouchers(viewNextVoucherDto).isSuccess();
 
 	}
+
+	public boolean searchJournalEntries(){
+		AccountService accountService = new AccountService(request, response);
+
+		SearchLedgerEntriesDto searchLedgerEntriesDto = new SearchLedgerEntriesDto();
+		searchLedgerEntriesDto.setAccountDetails(request.getParameter("accountid"));
+		searchLedgerEntriesDto.setFromDate(request.getParameter("fromdate"));
+		searchLedgerEntriesDto.setToDate(request.getParameter("todate"));
+		searchLedgerEntriesDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto);
+		request.setAttribute("ledgertransactions", searchLedgerEntriesResponseDto.getLedgerTransaction());
+		request.setAttribute("ledgername", searchLedgerEntriesResponseDto.getLedgerName());
+		request.setAttribute("accountid", searchLedgerEntriesResponseDto.getAccountId());
+		request.setAttribute("fromdate", searchLedgerEntriesResponseDto.getFromDate());
+		request.setAttribute("todate", searchLedgerEntriesResponseDto.getToDate());
+
+		return accountService.searchJournalEntries(searchLedgerEntriesDto).isSuccess();
+	}
 }
