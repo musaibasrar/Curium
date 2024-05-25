@@ -303,17 +303,18 @@ public class AdminService {
 	}
 
 
-	public void printVoucher() {
-		 String[] expensesIds = request.getParameterValues("expensesIDs");
+	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto) {
         try {
-        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expensesIds[0]),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            httpSession.setAttribute("adminexpenses", adminExpense);
+        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),expenseiddto.getBranchId());
+           return adminExpense; 
         } catch (Exception e) {
             e.printStackTrace();
         }
+      return null;  
 	}
 
-
+	
+	
 	public void rejectVoucher(ExpensesIdDto expenseiddto) {
 		 if(expenseiddto.getExpensesIds()!=null){
 	        List<Integer> ids = new ArrayList<>();
