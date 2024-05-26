@@ -27,11 +27,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
+import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
 import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -49,25 +49,25 @@ public class AppointmentService {
 	}
 
 	public boolean addAppointment() {
-		
+		AddAppointmentDto addAppointmentDto = new AddAppointmentDto();
 		boolean result = false;
 		
-		String[] studentId = request.getParameterValues("studentIDs");
-		String appointmentDate = request.getParameter("appointmentdate");
-		String appointmentTime = request.getParameter("appointmenttime");
+		String[] studentId = addAppointmentDto.getStudentId();
+		String appointmentDate = addAppointmentDto.getAppointmentDate();
+		String appointmentTime = addAppointmentDto.getAppointmentTime();
 		String[] pidContact = studentId[0].split(":");
 		String[] apptDate = appointmentDate.split("-");
 		String appointmentDateParent = apptDate[2]+"/"+apptDate[1]+"/"+apptDate[0];
 		System.out.println("Date "+appointmentDateParent);
 		
-		if(httpSession.getAttribute("branchid")!=null){
-	
+
+		if(addAppointmentDto.getBranchid()!=null){
 					Appointment appointment = new Appointment();
-					appointment.setAcademicyear(DataUtil.emptyString(httpSession.getAttribute("currentAcademicYear").toString()));
+					appointment.setAcademicyear(DataUtil.emptyString(addAppointmentDto.getCurrentAcademicYear().toString()));
 					appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
-					appointment.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+					appointment.setBranchid(Integer.parseInt(addAppointmentDto.getBranchid().toString()));
 					appointment.setCreateddate(new Date());
-					appointment.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+					appointment.setCreateduserid(Integer.parseInt(addAppointmentDto.getUserloginid().toString()));
 					appointment.setStatus("Scheduled");
 					//appointment.setStdid(1);
 					Parents parent = new Parents();
