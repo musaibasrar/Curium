@@ -237,6 +237,6 @@ public class AccountActionAdapter {
 		request.setAttribute("fromdate", searchLedgerEntriesResponseDto.getFromDate());
 		request.setAttribute("todate", searchLedgerEntriesResponseDto.getToDate());
 
-		return accountService.searchJournalEntries(searchLedgerEntriesDto).isSuccess();
+		return searchLedgerEntriesResponseDto.isSuccess();
 	}
 }
