@@ -9,7 +9,7 @@ public class AddAppointmentDto {
     private String[] studentId;
     private String appointmentDate;
     private String appointmentTime;
-    private String branchId;
+    private Integer branchId;
     private String currentAcademicYear;
     private String userloginid;
 

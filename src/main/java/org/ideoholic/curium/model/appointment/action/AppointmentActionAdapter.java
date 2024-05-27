@@ -46,16 +46,15 @@ public class AppointmentActionAdapter {
 
     public boolean addAppointment() {
         AppointmentService appointmentService = new AppointmentService(request, response);
-        AddAppointmentDto addAppointmentDto = new AddAppointmentDto();
 
+        AddAppointmentDto addAppointmentDto = new AddAppointmentDto();
         addAppointmentDto.setStudentId(request.getParameterValues("studentIDs"));
         addAppointmentDto.setAppointmentDate(request.getParameter("appointmentdate"));
         addAppointmentDto.setAppointmentTime(request.getParameter("appointmenttime"));
 
-        addAppointmentDto.setBranchId((httpSession.getAttribute("branchid").toString()));
+        addAppointmentDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
         addAppointmentDto.setCurrentAcademicYear(httpSession.getAttribute("currentAcademicYear").toString());
         addAppointmentDto.setUserloginid(httpSession.getAttribute("userloginid").toString());
-        // return appointmentService.addAppointment(addAppointmentDto);
         ResultResponse resultResponse = appointmentService.addAppointment(addAppointmentDto);
         request.setAttribute("appointmentresult", resultResponse.isSuccess());
         return resultResponse.isSuccess();
