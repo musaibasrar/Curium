@@ -3,6 +3,7 @@ package org.ideoholic.curium.util;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -14,4 +15,5 @@ public class ResultResponse {
     private String message;
     private Map resultMap;
     private int resultValue;
+    private List resultList;
 }

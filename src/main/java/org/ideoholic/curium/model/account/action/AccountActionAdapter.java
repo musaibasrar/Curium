@@ -239,4 +239,17 @@ public class AccountActionAdapter {
 
 		return searchLedgerEntriesResponseDto.isSuccess();
 	}
+
+	public boolean getAllLedgers() {
+		AccountService accountService = new AccountService(request, response);
+		Integer branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
+		ResultResponse resultResponse = accountService.getAllLedgers(branchId);
+
+		if (resultResponse.isSuccess()){
+			request.setAttribute("ledgeraccountdetails", resultResponse.getResultList());
+		}
+
+		return resultResponse.isSuccess();
+	}
+
 }

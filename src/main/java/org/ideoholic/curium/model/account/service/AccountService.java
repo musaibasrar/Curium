@@ -1122,12 +1122,14 @@ public class AccountService {
 	}
 
 
-	public void getAllLedgers() {
-		
-	List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
-	accountDetails = new AccountDAO().getLedgerAccountdetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	request.setAttribute("ledgeraccountdetails", accountDetails);
-	
+	public ResultResponse getAllLedgers(Integer branchid) {
+
+		List<Accountdetails> accountDetails = new AccountDAO().getLedgerAccountdetails(branchid);
+
+		return ResultResponse.builder()
+				.success(true)
+				.resultList(accountDetails)
+				.build();
 	}
 
 
