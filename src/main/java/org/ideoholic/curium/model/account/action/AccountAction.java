@@ -51,13 +51,13 @@ public class AccountAction {
 	@PostMapping("/searchLedgerEntries")
 	public String searchLedgerEntries() {
 		accountActionAdapter.searchJournalEntries();
-		new AccountService(request, response).getAllLedgers();
+		accountActionAdapter.getAllLedgers();
 		return "generalledgerreport";
 	}
 
 	@GetMapping("/generalLedgerReport")
 	public String generalLedgerReport() {
-		new AccountService(request, response).getAllLedgers();
+		accountActionAdapter.getAllLedgers();
 		return "generalledgerreport";
 }
 
@@ -261,7 +261,7 @@ public class AccountAction {
 	@GetMapping("/searchSingleLedgerEntries")
 	private String searchSingleLedgerEntries() {
 		new AccountService(request, response).searchSingleLedgerEntries();
-		new AccountService(request, response).getAllLedgers();
+		accountActionAdapter.getAllLedgers();
 		return "generalledgerreport";
 	}
 	
