@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class ExpensesIdDto {
 
 	private String[] expensesIds;
+	private int branchId;
 }

@@ -51,10 +51,12 @@ public class AdminAction {
 	
 		@PostMapping("/printVoucher")
 	public String printVoucher() {
-		 new AdminService(request, response).printVoucher();
+			adminActionAdapter.printVoucher();
 	        return "paymentvoucherprint";
 	}
-
+		
+		
+	
 	@PostMapping("/searchExpenses")
 	public String searchExpensesbydate() {
 		

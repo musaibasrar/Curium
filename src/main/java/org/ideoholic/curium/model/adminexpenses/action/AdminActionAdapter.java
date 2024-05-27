@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
+import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -21,7 +23,7 @@ public class AdminActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
-	
+
 	public boolean addExpenses() {
 		AdminService adminService = new AdminService(request, response);
 
@@ -42,21 +44,33 @@ public class AdminActionAdapter {
 			return false;
 		}
 
-
 		return response.isSuccess();
 	}
-	
+
 	public void rejectVoucher() {
 		AdminService adminService = new AdminService(request, response);
-		ExpensesIdDto expenseiddto = new ExpensesIdDto() ;
+		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
-		 adminService.rejectVoucher(expenseiddto);
+		adminService.rejectVoucher(expenseiddto);
 	}
-	
+
 	public void approveVoucher() {
 		AdminService adminService = new AdminService(request, response);
-		ExpensesIdDto expenseiddto = new ExpensesIdDto() ;
+		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
-		 adminService.approveVoucher(expenseiddto);
+		adminService.approveVoucher(expenseiddto);
+	}
+
+	public void printVoucher() {
+		AdminService adminService = new AdminService(request, response);
+		ExpensesIdDto expenseiddto = new ExpensesIdDto();
+		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
+		expenseiddto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto);
+
+		if (adminExpense != null) {
+			httpSession.setAttribute("adminexpenses", adminExpense);
+		}
 	}
 }
