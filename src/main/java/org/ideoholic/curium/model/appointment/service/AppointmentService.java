@@ -34,6 +34,7 @@ import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class AppointmentService {
 
@@ -48,9 +49,9 @@ public class AppointmentService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean addAppointment() {
-		AddAppointmentDto addAppointmentDto = new AddAppointmentDto();
-		boolean result = false;
+	public ResultResponse addAppointment(AddAppointmentDto addAppointmentDto) {
+
+
 		
 		String[] studentId = addAppointmentDto.getStudentId();
 		String appointmentDate = addAppointmentDto.getAppointmentDate();
@@ -61,11 +62,11 @@ public class AppointmentService {
 		System.out.println("Date "+appointmentDateParent);
 		
 
-		if(addAppointmentDto.getBranchid()!=null){
+		if(addAppointmentDto.getBranchId()!=null){
 					Appointment appointment = new Appointment();
 					appointment.setAcademicyear(DataUtil.emptyString(addAppointmentDto.getCurrentAcademicYear().toString()));
 					appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
-					appointment.setBranchid(Integer.parseInt(addAppointmentDto.getBranchid().toString()));
+			        appointment.setBranchid(Integer.parseInt(addAppointmentDto.getBranchId().toString()));
 					appointment.setCreateddate(new Date());
 					appointment.setCreateduserid(Integer.parseInt(addAppointmentDto.getUserloginid().toString()));
 					appointment.setStatus("Scheduled");
@@ -102,16 +103,18 @@ public class AppointmentService {
 				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
 				
 				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
+
 					 String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
+
 					 //new SmsService(request, response).sendSMS("91"+pidContact[1], message);
+					return ResultResponse.builder().success(true).build();
 				}else if(resultQuery!=null && "no".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
+					return ResultResponse.builder().success(true).build();
 				}
 				
 				}
-			request.setAttribute("appointmentresult", result);
-		return result;
+
+		return ResultResponse.builder().build();
 	}
 
 	

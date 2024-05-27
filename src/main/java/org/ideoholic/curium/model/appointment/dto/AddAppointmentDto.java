@@ -9,8 +9,8 @@ public class AddAppointmentDto {
     private String[] studentId;
     private String appointmentDate;
     private String appointmentTime;
-    private Integer branchid;
-    private Date currentAcademicYear;
-    private Integer userloginid;
+    private String branchId;
+    private String currentAcademicYear;
+    private String userloginid;
 
 }

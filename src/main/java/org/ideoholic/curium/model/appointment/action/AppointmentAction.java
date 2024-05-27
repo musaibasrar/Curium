@@ -94,7 +94,8 @@ public class AppointmentAction {
 	@PostMapping("/addAppointment")
 	private String addAppointment() {
 		
-		if(new AppointmentService(request, response).addAppointment()){
+		if(appointmentActionAdapter.addAppointment()){
+
 			new StudentService(request, response).viewAllStudentsParents();
 			new EmployeeService(request, response).ViewAllEmployee();
 			return "viewAllWithParents";

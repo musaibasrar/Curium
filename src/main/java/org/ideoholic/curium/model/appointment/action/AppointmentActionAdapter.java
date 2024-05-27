@@ -4,6 +4,7 @@ import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
 import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
 import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,18 +44,21 @@ public class AppointmentActionAdapter {
 
     }
 
-    public void addAppointment() {
+    public boolean addAppointment() {
         AppointmentService appointmentService = new AppointmentService(request, response);
         AddAppointmentDto addAppointmentDto = new AddAppointmentDto();
+
         addAppointmentDto.setStudentId(request.getParameterValues("studentIDs"));
         addAppointmentDto.setAppointmentDate(request.getParameter("appointmentdate"));
         addAppointmentDto.setAppointmentTime(request.getParameter("appointmenttime"));
 
-        httpSession.getAttribute("branchid");
-        httpSession.getAttribute("currentAcademicYear");
-        httpSession.getAttribute("userloginid");
+        addAppointmentDto.setBranchId((httpSession.getAttribute("branchid").toString()));
+        addAppointmentDto.setCurrentAcademicYear(httpSession.getAttribute("currentAcademicYear").toString());
+        addAppointmentDto.setUserloginid(httpSession.getAttribute("userloginid").toString());
         // return appointmentService.addAppointment(addAppointmentDto);
-
+        ResultResponse resultResponse = appointmentService.addAppointment(addAppointmentDto);
+        request.setAttribute("appointmentresult", resultResponse.isSuccess());
+        return resultResponse.isSuccess();
     }
 
 
