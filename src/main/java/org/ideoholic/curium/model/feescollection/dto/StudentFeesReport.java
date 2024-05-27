@@ -10,15 +10,17 @@ public class StudentFeesReport {
 	
 	private Parents parent;
 	private List<Studentfeesstructure> studentFeesStructure;
+	private Long dueAmount;
 	private int userid;
 	
 	public StudentFeesReport() {
 	}
 
 
-	public StudentFeesReport(Parents parents, List<Studentfeesstructure> studentFeesStructure) {
+	public StudentFeesReport(Parents parents, List<Studentfeesstructure> studentFeesStructure, Long dueAmount) {
 		this.parent = parents;
 		this.studentFeesStructure = studentFeesStructure;
+		this.dueAmount = dueAmount;
 	}
 	
 
@@ -46,6 +48,15 @@ public class StudentFeesReport {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	
+	public Long getDueAmount() {
+		return dueAmount;
+	}
+
+
+	public void setDueAmount(Long dueAmount) {
+		this.dueAmount = dueAmount;
 	}
 
 	

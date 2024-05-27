@@ -701,6 +701,14 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50">DND Date
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
+                            </td>
+                        </tr>
+                        
            
 
                         <tr>

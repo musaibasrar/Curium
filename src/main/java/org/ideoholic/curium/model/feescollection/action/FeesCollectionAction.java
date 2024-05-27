@@ -250,4 +250,10 @@ public class FeesCollectionAction {
 				}
 				
 			}
+		 
+		 @PostMapping("/searchDefaultersReport")
+	        public String searchDefaultersReport() {
+	            new FeesCollectionService(request, response).getDefaultersReport();
+	            return "defaultersreport";
+	        }
 }

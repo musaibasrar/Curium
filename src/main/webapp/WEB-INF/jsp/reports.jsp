@@ -378,6 +378,16 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/noble/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/abc/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/abc/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
