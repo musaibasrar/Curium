@@ -50,7 +50,7 @@ public class AccountAction {
 
 	@PostMapping("/searchLedgerEntries")
 	public String searchLedgerEntries() {
-		new AccountService(request, response).searchJournalEntries();
+		accountActionAdapter.searchJournalEntries();
 		new AccountService(request, response).getAllLedgers();
 		return "generalledgerreport";
 	}
