@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1962,6 +1964,130 @@ public class FeesCollectionService {
 		}
 		return true;
 	}
+	
+	public void getDefaultersReport() {
+
+
+		String academicYear = request.getParameter("academicyear");
+		String[] feesCat = request.getParameterValues("feescategory");
+
+		//Get Students
+
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+
+		if(httpSession.getAttribute(BRANCHID)!=null){
+
+		String queryMain = "From Parents as parents where";
+		String[] addClass = request.getParameterValues("classsearch");
+		StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (String classOne : addClass) {
+
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+
+				i++;
+			}
+
+		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String querySub = "";
+
+		if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+
+	}
+		//End Students
+
+
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+
+			for (Parents parents : searchStudentList) {
+
+				Date dateNow = new Date();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		        String formattedDate = dateFormat.format(dateNow);
+		        Date cDate = new Date();
+		        try {
+					cDate = dateFormat.parse(formattedDate);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Date DNDDate = parents.getStudent().getCrecorddate();
+
+				if (DNDDate == null || cDate.compareTo(DNDDate) > 0) {
+
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+
+				long id = parents.getStudent().getSid();
+
+				List<Integer> feesCatList = new ArrayList<>(); 
+				for (String feescat : feesCat) {
+					feesCatList.add(Integer.parseInt(feescat));
+				}
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> defaulterFeesstructure = new ArrayList<Studentfeesstructure>();
+				Long totalDue = 0l;
+
+				for (Studentfeesstructure studentFeesStructure : feesstructure) {
+
+					String[] feesStartMonth = new DataUtil().getPropertiesValue("feesstartmonth").split("/");
+					 LocalDate currentDate = LocalDate.now();
+				     LocalDate startDate = LocalDate.of(Integer.parseInt(feesStartMonth[2]), Integer.parseInt(feesStartMonth[1]), Integer.parseInt(feesStartMonth[0]));
+				     LocalDate endDate = LocalDate.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()); // Change this to your desired end date
+
+				        // Calculate the period between the start date and end date
+				        Period period = Period.between(startDate, endDate);
+
+				        // Calculate the total number of months between the dates
+				        int totalMonths = period.getYears() * 12 + period.getMonths();
+
+				        // Add one month if the end date has not passed the start date's day
+				        if (endDate.getDayOfMonth() < startDate.getDayOfMonth()) {
+				            totalMonths--;
+				        }
+
+				        int totalFeesInstallments = studentFeesStructure.getTotalinstallment();
+				        int value = 12/totalFeesInstallments;
+				        int quotient = totalMonths/value;
+				        Long feesPerInstallment = studentFeesStructure.getFeesamount()/totalFeesInstallments;
+				        int installmentTillDate = quotient+1;
+						Long ActualFeesToBePaid = feesPerInstallment*installmentTillDate;
+						Long feesPaid = studentFeesStructure.getFeespaid();
+						Long committedFees = studentFeesStructure.getFeesamount()/totalFeesInstallments;
+
+						if(feesPaid < ActualFeesToBePaid) {
+							totalDue = totalDue + (ActualFeesToBePaid-feesPaid);
+							//studentFeesStructure.setFeespaid(ActualFeesToBePaid-feesPaid); //Using Fees paid as fees due amount as it is not being used elsewhere
+							defaulterFeesstructure.add(studentFeesStructure);
+						}
+				}
+				if(defaulterFeesstructure.size()>0) {
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(defaulterFeesstructure);
+					studentFeesReport.setDueAmount(totalDue);
+					studentFeesReportList.add(studentFeesReport);
+				}
+			}
+
+			}
+			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+		}
+
+	  }
 
 }
 

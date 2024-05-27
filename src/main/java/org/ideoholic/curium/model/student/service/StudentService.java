@@ -248,7 +248,7 @@ public class StudentService {
 				if (fieldName.equalsIgnoreCase("crecord")) {
 					student.setCrecord(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
-				if (fieldName.equalsIgnoreCase("dateofcr")) {
+				if (fieldName.equalsIgnoreCase("crecorddate")) {
 					student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 				}
 				if (fieldName.equalsIgnoreCase("place")) {
@@ -1320,7 +1320,7 @@ public class StudentService {
 				if (fieldName.equalsIgnoreCase("crecord")) {
 					student.setCrecord(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
-				if (fieldName.equalsIgnoreCase("dateofcr")) {
+				if (fieldName.equalsIgnoreCase("crecorddate")) {
 					student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 				}
 				if (fieldName.equalsIgnoreCase("place")) {

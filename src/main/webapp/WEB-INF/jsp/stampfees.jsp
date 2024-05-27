@@ -553,7 +553,8 @@
             	
             	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
             	//feesConcession (direct amount)
-                final1.value=(feesCat*feesCount)-feesConcession;
+                //final1.value=(feesCat*feesCount)-feesConcession;
+          		  final1.value = feesCat;
            
         }
        

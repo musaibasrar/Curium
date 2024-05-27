@@ -594,7 +594,7 @@ public class FeesService {
 	   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
 	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" size='18'/></td><td> <input"
 	   			        						+ "   			     type='text' value='0' name='feesCount' id='feesCount_"+i+"'"
-	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18'><br></td>"
+	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18' required><br></td>"
 	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
 	   			        	}
 	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
@@ -756,4 +756,14 @@ public class FeesService {
 
 	        }
 	    }
+		
+		public void getDndReport() {
+
+			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+			String querySub = " parents.Student.archive = 0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND crecorddate is not null order by parents.Student.crecorddate DESC";
+			queryMain = queryMain + querySub;
+
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			request.setAttribute("dndStudentList", searchStudentList);
+		}
 }

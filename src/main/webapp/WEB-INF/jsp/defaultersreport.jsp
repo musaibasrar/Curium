@@ -368,7 +368,7 @@
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/searchFeesReport";
+		form1.action = "/abc/FeesCollection/searchDefaultersReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -599,7 +599,7 @@ for(Cookie cookie : cookies){
                         	   <label>
                                          <select name="academicyear" id="academicyear" onchange="getFeesCategory()" required
 									style="width: 120px">
-										<option selected>Current & Next Year</option>
+										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
@@ -698,6 +698,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
 						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Due As of Today</th>
 					</tr>
 				</thead>
 
@@ -705,9 +706,9 @@ for(Cookie cookie : cookies){
 					<c:set var="TotalPaidAmount" value="0" />
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
-					
+					<c:set var="TotalDueAsonToday" value="0" />
 					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
-
+						
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<%-- <td class="dataText"><input type="checkbox"
@@ -732,6 +733,7 @@ for(Cookie cookie : cookies){
 											</td>
 											<td align="left">
 												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
+												(Total Installments: ${studentfeescatagorydetails.totalinstallment})
 											</td>
 										</tr>
 									</table>
@@ -748,7 +750,7 @@ for(Cookie cookie : cookies){
 										<tr>
 											<c:if test="${DueAmount > 0}">
 												<td style="width: 160px;" align="right" >
-													<label style="color: red;">${DueAmount}/${TotalAmount}</label>&nbsp;&nbsp;&nbsp;
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
 												</td>
 											</c:if>
 											
@@ -762,6 +764,9 @@ for(Cookie cookie : cookies){
 										</tr>
 									</table>
 							</td>
+							<td class="dataText"><label style="color: red;"><c:out value="${studentfeesreportlist.dueAmount}" /></label>
+							<c:set var="TotalDueAsonToday" value="${TotalDueAsonToday+studentfeesreportlist.dueAmount}" />
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -773,9 +778,9 @@ for(Cookie cookie : cookies){
 													
 						<td class="footerTD" colspan="7" >
 						 
-						 Total Amount: ${TotalSum}
+					<%-- 	 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
-						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
+						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; --%> Total Due Amount: ${TotalDueAsonToday}
 						 
 						</td>
 							
