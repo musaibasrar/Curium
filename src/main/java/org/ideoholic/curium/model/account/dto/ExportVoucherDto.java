@@ -10,5 +10,4 @@ public class ExportVoucherDto {
     private Integer branchId;
     private int voucherType;
     private String nextVoucher;
-    private boolean success;
 }

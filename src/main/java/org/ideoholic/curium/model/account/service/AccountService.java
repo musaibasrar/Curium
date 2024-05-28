@@ -1574,7 +1574,6 @@ public boolean searchSingleLedgerEntries() {
 			if(resultResponse.isSuccess()){
 				exportVoucherDto.setNextVoucher(nextVoucher);
 				return resultResponse;
-				//receiptdetails
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
@@ -1583,7 +1582,6 @@ public boolean searchSingleLedgerEntries() {
 			if(resultResponse.isSuccess()){
 				exportVoucherDto.setNextVoucher(nextVoucher);
 				return resultResponse;
-				//receiptdetails
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
@@ -1592,7 +1590,6 @@ public boolean searchSingleLedgerEntries() {
 			if(resultResponse.isSuccess()){
 				exportVoucherDto.setNextVoucher(nextVoucher);
 				return resultResponse;
-				//receiptdetails
 			}
 
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
@@ -1601,7 +1598,6 @@ public boolean searchSingleLedgerEntries() {
 			if(resultResponse.isSuccess()){
 				exportVoucherDto.setNextVoucher(nextVoucher);
 				return resultResponse;
-				//receiptdetails
 			}
 		}
 		return ResultResponse
