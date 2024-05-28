@@ -249,4 +249,18 @@ public class AccountActionAdapter {
 		return resultResponse.isSuccess();
 	}
 
+	public boolean exportVoucher(){
+		AccountService accountService = new AccountService(request, response);
+
+		ExportVoucherDto exportVoucherDto = new ExportVoucherDto();
+		exportVoucherDto.setNextVoucher(request.getParameter("voucher"));
+		exportVoucherDto.setFromDate(request.getParameter("fromdateselected"));
+		exportVoucherDto.setToDate(request.getParameter("todateselected"));
+		exportVoucherDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+		/*ResultResponse resultResponse = accountService.exportVoucher(exportVoucherDto);
+		 * return resultResponse.isSuccess()*/
+
+		return accountService.exportVoucher(exportVoucherDto).isSuccess();
+	}
 }
