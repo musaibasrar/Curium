@@ -595,4 +595,9 @@ public class JspController {
 	public String voucherCancelSuccess() {
 		return "vouchercancelsuccess";
 	}
+	
+	@GetMapping("/otherfeescancelledreceipts")
+	public String otherFeesCancelledReceipts() {
+		return "otherfeescancelledreceipts";
+	}
 }

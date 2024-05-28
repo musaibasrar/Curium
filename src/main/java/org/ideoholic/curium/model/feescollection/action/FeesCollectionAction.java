@@ -256,4 +256,11 @@ public class FeesCollectionAction {
 	            new FeesCollectionService(request, response).getDefaultersReport();
 	            return "defaultersreport";
 	        }
+		 
+		 @PostMapping("/viewCancelledOtherFeesReceipts")
+			public String viewCancelledOtherFeesReceipts() {
+	        	new FeesCollectionService(request, response).viewCancelledOtherFeesReceipts();
+				return "otherfeescancelledreceipts";
+			}
+		 
 }
