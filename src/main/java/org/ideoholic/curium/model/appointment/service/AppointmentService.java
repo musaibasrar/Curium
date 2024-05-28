@@ -27,13 +27,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
+import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
 import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class AppointmentService {
 
@@ -48,26 +49,26 @@ public class AppointmentService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean addAppointment() {
+	public ResultResponse addAppointment(AddAppointmentDto addAppointmentDto) {
+
+
 		
-		boolean result = false;
-		
-		String[] studentId = request.getParameterValues("studentIDs");
-		String appointmentDate = request.getParameter("appointmentdate");
-		String appointmentTime = request.getParameter("appointmenttime");
+		String[] studentId = addAppointmentDto.getStudentId();
+		String appointmentDate = addAppointmentDto.getAppointmentDate();
+		String appointmentTime = addAppointmentDto.getAppointmentTime();
 		String[] pidContact = studentId[0].split(":");
 		String[] apptDate = appointmentDate.split("-");
 		String appointmentDateParent = apptDate[2]+"/"+apptDate[1]+"/"+apptDate[0];
 		System.out.println("Date "+appointmentDateParent);
 		
-		if(httpSession.getAttribute("branchid")!=null){
-	
+
+		if(addAppointmentDto.getBranchId()!=null){
 					Appointment appointment = new Appointment();
-					appointment.setAcademicyear(DataUtil.emptyString(httpSession.getAttribute("currentAcademicYear").toString()));
+					appointment.setAcademicyear(DataUtil.emptyString(addAppointmentDto.getCurrentAcademicYear().toString()));
 					appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
-					appointment.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			        appointment.setBranchid(Integer.parseInt(addAppointmentDto.getBranchId().toString()));
 					appointment.setCreateddate(new Date());
-					appointment.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+					appointment.setCreateduserid(Integer.parseInt(addAppointmentDto.getUserloginid().toString()));
 					appointment.setStatus("Scheduled");
 					//appointment.setStdid(1);
 					Parents parent = new Parents();
@@ -102,16 +103,18 @@ public class AppointmentService {
 				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
 				
 				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
+
 					 String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
+
 					 //new SmsService(request, response).sendSMS("91"+pidContact[1], message);
+					return ResultResponse.builder().success(true).build();
 				}else if(resultQuery!=null && "no".equalsIgnoreCase(sendAppointmentSMS)) {
-					result = true;
+					return ResultResponse.builder().success(true).build();
 				}
 				
 				}
-			request.setAttribute("appointmentresult", result);
-		return result;
+
+		return ResultResponse.builder().build();
 	}
 
 	
