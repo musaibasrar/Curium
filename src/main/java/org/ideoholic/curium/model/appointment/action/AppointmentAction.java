@@ -83,8 +83,7 @@ public class AppointmentAction {
 
 	@RequestMapping(value = "/viewAllAppointments", method = { RequestMethod.GET, RequestMethod.POST })
 	private String viewAllAppointments() {
-		
-		if(new AppointmentService(request, response).viewAllAppointments()){
+		if(appointmentActionAdapter.viewAllAppointments()){
 			return "appointments";
 		}else{
 			return "error";
