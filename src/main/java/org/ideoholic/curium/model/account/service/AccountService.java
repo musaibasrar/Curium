@@ -1564,138 +1564,186 @@ public boolean searchSingleLedgerEntries() {
 	}
 
 
-	public boolean exportVoucher(int voucherType) {
+
+
+	public ResultResponse exportVoucher(ExportVoucherDto exportVoucherDto){
+		String nextVoucher = DataUtil.emptyString(exportVoucherDto.getNextVoucher());
+
+		if(nextVoucher.equalsIgnoreCase("Receipt")){
+			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 1);
+			if(resultResponse.isSuccess()){
+				exportVoucherDto.setNextVoucher(nextVoucher);
+				return resultResponse;
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Payment")){
+
+			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 2);
+			if(resultResponse.isSuccess()){
+				exportVoucherDto.setNextVoucher(nextVoucher);
+				return resultResponse;
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Contra")){
+
+			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 3);
+			if(resultResponse.isSuccess()){
+				exportVoucherDto.setNextVoucher(nextVoucher);
+				return resultResponse;
+			}
+
+		}else if(nextVoucher.equalsIgnoreCase("Journal")){
+
+			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 4);
+			if(resultResponse.isSuccess()){
+				exportVoucherDto.setNextVoucher(nextVoucher);
+				return resultResponse;
+			}
+		}
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
+	}
+
+	public ResultResponse exportVoucher(ExportVoucherDto exportVoucherDto, int voucherType) {
 
 		boolean writeSucees = false;
 		DecimalFormat df = new DecimalFormat("###.##");
-		
+
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
-		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(exportVoucherDto.getFromDate()));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(exportVoucherDto.getToDate()));
 
-		BigDecimal total = BigDecimal.ZERO;	
-		String twoAccounts = null;
-		
-		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
-		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
-		
-		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
-			voucherMap.put(voucherEntry, twoAccounts);
-		}
-		
-		try {
+		if(exportVoucherDto.getBranchId()!=null) {
 
-			// Creating an excel file
-			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("vouchertransactions");
-			Map<String, Object[]> data = new LinkedHashMap<String, Object[]>();
-			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
-			headerData.put("Header",
-					new Object[] { "Voucher Transactions"});
-			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
-			headerData1.put("Header",
-					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
-			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
-			headerData2.put("Header",
-					new Object[] { "Sl No.","Voucher No","Dr Account -- Cr Account","Narration","Amount"});
-			//"Sl.No", "Voucher No", 
-			int i = 1;
-			
-			for (Entry<VoucherEntrytransactions, String> accBal : voucherMap.entrySet()) {
-				
-				//Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),
-				data.put(Integer.toString(i),
-						new Object[] { Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),accBal.getValue().toString(),
-								accBal.getKey().getNarration(), df.format(accBal.getKey().getDramount())});
-				i++;
-				total = total.add(accBal.getKey().getDramount());
+			BigDecimal total = BigDecimal.ZERO;
+			String twoAccounts = null;
+
+			Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+			int financialYearId = new AccountDAO().getCurrentFinancialYear(exportVoucherDto.getBranchId()).getFinancialid();
+			voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, exportVoucherDto.getBranchId(), voucherType);
+
+			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+				voucherMap.put(voucherEntry, twoAccounts);
 			}
-			
-			Row headerRow = sheet.createRow(0);
-			Object[] objArrHeader = headerData.get("Header");
-			int cellnum1 = 1;
-			for (Object obj : objArrHeader) {
-				Cell cell = headerRow.createCell(cellnum1++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Row headerRow1 = sheet.createRow(1);
-			Object[] objArrHeader1 = headerData1.get("Header");
-			int cellnum11 = 1;
-			for (Object obj : objArrHeader1) {
-				Cell cell = headerRow1.createCell(cellnum11++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Row headerRow2 = sheet.createRow(2);
-			Object[] objArrHeader2 = headerData2.get("Header");
-			int cellnum12 = 0;
-			for (Object obj : objArrHeader2) {
-				Cell cell = headerRow2.createCell(cellnum12++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Set<String> keyset = data.keySet();
-			int rownum = 3;
-			for (String key : keyset) {
-				Row row = sheet.createRow(rownum++);
-				Object[] objArr = data.get(key);
-				int cellnum = 0;
-				for (Object obj : objArr) {
-					Cell cell = row.createCell(cellnum++);
-					if (obj instanceof Date)
-						cell.setCellValue((Date) obj);
-					else if (obj instanceof Boolean)
-						cell.setCellValue((Boolean) obj);
-					else if (obj instanceof String)
-						cell.setCellValue((String) obj);
-					else if (obj instanceof Double)
-						cell.setCellValue((Double) obj);
+
+			try {
+
+				// Creating an excel file
+				XSSFWorkbook workbook = new XSSFWorkbook();
+				XSSFSheet sheet = workbook.createSheet("vouchertransactions");
+				Map<String, Object[]> data = new LinkedHashMap<String, Object[]>();
+				Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+				headerData.put("Header",
+						new Object[] { "Voucher Transactions"});
+				Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
+				headerData1.put("Header",
+						new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
+				Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
+				headerData2.put("Header",
+						new Object[] { "Sl No.","Voucher No","Dr Account -- Cr Account","Narration","Amount"});
+				//"Sl.No", "Voucher No",
+				int i = 1;
+
+				for (Entry<VoucherEntrytransactions, String> accBal : voucherMap.entrySet()) {
+
+					//Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),
+					data.put(Integer.toString(i),
+							new Object[] { Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),accBal.getValue().toString(),
+									accBal.getKey().getNarration(), df.format(accBal.getKey().getDramount())});
+					i++;
+					total = total.add(accBal.getKey().getDramount());
 				}
-			}
-			
-			rownum++;
-			
-			data.clear();
-			data.put(Integer.toString(1),
-					new Object[] { "","","","Total",  df.format(total)});
-			
-			Set<String> keyset2 = data.keySet();
-			for (String key : keyset2) {
-				Row row = sheet.createRow(rownum++);
-				Object[] objArr = data.get(key);
-				int cellnum = 0;
-				for (Object obj : objArr) {
-					Cell cell = row.createCell(cellnum++);
-					if (obj instanceof Date)
-						cell.setCellValue((Date) obj);
-					else if (obj instanceof Boolean)
-						cell.setCellValue((Boolean) obj);
-					else if (obj instanceof String)
+
+				Row headerRow = sheet.createRow(0);
+				Object[] objArrHeader = headerData.get("Header");
+				int cellnum1 = 1;
+				for (Object obj : objArrHeader) {
+					Cell cell = headerRow.createCell(cellnum1++);
+					if (obj instanceof String)
 						cell.setCellValue((String) obj);
-					else if (obj instanceof Double)
-						cell.setCellValue((Double) obj);
 				}
-			}
-			
+
+				Row headerRow1 = sheet.createRow(1);
+				Object[] objArrHeader1 = headerData1.get("Header");
+				int cellnum11 = 1;
+				for (Object obj : objArrHeader1) {
+					Cell cell = headerRow1.createCell(cellnum11++);
+					if (obj instanceof String)
+						cell.setCellValue((String) obj);
+				}
+
+				Row headerRow2 = sheet.createRow(2);
+				Object[] objArrHeader2 = headerData2.get("Header");
+				int cellnum12 = 0;
+				for (Object obj : objArrHeader2) {
+					Cell cell = headerRow2.createCell(cellnum12++);
+					if (obj instanceof String)
+						cell.setCellValue((String) obj);
+				}
+
+				Set<String> keyset = data.keySet();
+				int rownum = 3;
+				for (String key : keyset) {
+					Row row = sheet.createRow(rownum++);
+					Object[] objArr = data.get(key);
+					int cellnum = 0;
+					for (Object obj : objArr) {
+						Cell cell = row.createCell(cellnum++);
+						if (obj instanceof Date)
+							cell.setCellValue((Date) obj);
+						else if (obj instanceof Boolean)
+							cell.setCellValue((Boolean) obj);
+						else if (obj instanceof String)
+							cell.setCellValue((String) obj);
+						else if (obj instanceof Double)
+							cell.setCellValue((Double) obj);
+					}
+				}
+
+				rownum++;
+
+				data.clear();
+				data.put(Integer.toString(1),
+						new Object[] { "","","","Total",  df.format(total)});
+
+				Set<String> keyset2 = data.keySet();
+				for (String key : keyset2) {
+					Row row = sheet.createRow(rownum++);
+					Object[] objArr = data.get(key);
+					int cellnum = 0;
+					for (Object obj : objArr) {
+						Cell cell = row.createCell(cellnum++);
+						if (obj instanceof Date)
+							cell.setCellValue((Date) obj);
+						else if (obj instanceof Boolean)
+							cell.setCellValue((Boolean) obj);
+						else if (obj instanceof String)
+							cell.setCellValue((String) obj);
+						else if (obj instanceof Double)
+							cell.setCellValue((Double) obj);
+					}
+				}
+
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/vouchertransactions.xlsx"));
 				workbook.write(out);
 				out.close();
 				workbook.close();
-				writeSucees = true;
-				
-		} catch (Exception e) {
-			e.printStackTrace();
+				ResultResponse
+						.builder()
+						.success(true)
+						.build();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		}
-		return writeSucees;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 		// getFile(name, path);
 	}
 

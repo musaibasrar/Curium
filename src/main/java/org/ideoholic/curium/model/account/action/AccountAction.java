@@ -282,37 +282,8 @@ public class AccountAction {
 	
 	@PostMapping("/exportVoucher")
 	private String exportVoucher() {
-		
-	String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
-		
-		if(nextVoucher.equalsIgnoreCase("Receipt")){
-			
-			if(new AccountService(request, response).exportVoucher(1)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "voucherexportsuccess";
-				//receiptdetails
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Payment")){
-			
-			if(new AccountService(request, response).exportVoucher(2)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "voucherexportsuccess";
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Contra")){
-			
-			if(new AccountService(request, response).exportVoucher(3)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "voucherexportsuccess";
-			}
-			
-		}else if(nextVoucher.equalsIgnoreCase("Journal")){
-			
-			if(new AccountService(request, response).exportVoucher(4)){
-				request.setAttribute("vouchertype", nextVoucher);
-				return "voucherexportsuccess";
-			}
+		if(accountActionAdapter.exportVoucher()){
+			return "voucherexportsuccess";
 		}
 		return ERRORPAGE;
 	}
