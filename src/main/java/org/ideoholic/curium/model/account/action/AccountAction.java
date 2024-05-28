@@ -283,7 +283,7 @@ public class AccountAction {
 	@PostMapping("/exportVoucher")
 	private String exportVoucher() {
 		if(accountActionAdapter.exportVoucher()){
-			return"voucherexportsuccess";
+			return "voucherexportsuccess";
 		}
 		return ERRORPAGE;
 	}
