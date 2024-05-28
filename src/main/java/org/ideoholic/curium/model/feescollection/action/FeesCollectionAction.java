@@ -252,4 +252,10 @@ public class FeesCollectionAction {
 				
 			}
 		 
+		 @PostMapping("/viewCancelledOtherFeesReceipts")
+			public String viewCancelledOtherFeesReceipts() {
+	        	new FeesCollectionService(request, response).viewCancelledOtherFeesReceipts();
+				return "otherfeescancelledreceipts";
+			}
+		 
 }

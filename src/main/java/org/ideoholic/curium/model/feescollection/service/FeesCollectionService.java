@@ -1678,7 +1678,10 @@ public class FeesCollectionService {
 	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 			String todaysDate = formatter.format(now);
 			
-			if(rid !=null && jid !=null ) {
+			result = new feesDetailsDAO().cancelOtherFeesReceipt(feesReceiptId, feesCollection, null, null, null,
+					null, null, null);
+			
+			/*if(rid !=null && jid !=null ) {
 				
 				int receiptId = DataUtil.parseInt(rid);
 				int journalId = DataUtil.parseInt(jid);
@@ -1725,7 +1728,7 @@ public class FeesCollectionService {
 		}else {
 			result = new feesDetailsDAO().cancelOtherFeesReceipt(feesReceiptId, feesCollection, null, null, null,
 					null, null, null);
-		}
+		}*/
 		
 			request.setAttribute("cancelreceiptresult", result);
 				
@@ -1975,6 +1978,66 @@ public class FeesCollectionService {
 			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
 		}
 		return true;
+	}
+
+	public void viewCancelledOtherFeesReceipts() {
+		 
+		List<Otherreceiptinfo> feesDetailsList = new ArrayList<Otherreceiptinfo>();
+		String branchId = request.getParameter("selectedbranchid");
+		int idBranch = 0;
+              
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+
+	        if(branchId!=null) {
+	        	String[] branchIdName = branchId.split(":");
+	        	idBranch = Integer.parseInt(branchIdName[0]);
+	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
+	        	httpSession.setAttribute("branchname", "Branch Name:");
+	        }else {
+	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        }
+	        
+		String queryMain ="From Otherreceiptinfo as feesdetails where cancelreceipt=1 and feesdetails.branchid="+idBranch+" AND";
+		String toDate= DataUtil.emptyString(request.getParameter("todate"));
+		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
+		
+		
+			String querySub = "";
+			
+			if(!oneDay.equalsIgnoreCase("")){
+				querySub = " feesdetails.date = '"+oneDay+"'" ;
+				 httpSession.setAttribute("dayonecancel", oneDay);
+				 httpSession.setAttribute("datefromcancel", "");
+				 httpSession.setAttribute("datetocancel", "");
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
+				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayonecancel")+"'" ;
+			}
+			
+			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
+				httpSession.setAttribute("datefromcancel", fromDate);
+				httpSession.setAttribute("datetocancel", toDate);
+				 httpSession.setAttribute("dayonecancel", "");
+				
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefromcancel"))) && 
+					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datetocancel"))) ) {
+				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefromcancel")+"' AND '"+(String) httpSession.getAttribute("datetocancel")+"'";
+			}
+			
+			queryMain = queryMain+querySub;
+			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
+			
+	}
+			long sumOfFees = 0l;
+			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
+				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+			}
+			
+			httpSession.setAttribute("searchfeesdetailslistcancelled", feesDetailsList);
+			httpSession.setAttribute("sumofdetailsfeescancelled", sumOfFees);
 	}
 
 }

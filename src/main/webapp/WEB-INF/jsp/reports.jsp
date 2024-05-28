@@ -380,6 +380,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/shatabdi/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/shatabdi/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
