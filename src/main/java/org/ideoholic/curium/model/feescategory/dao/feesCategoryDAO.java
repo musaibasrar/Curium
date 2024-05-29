@@ -328,5 +328,27 @@ public class feesCategoryDAO {
             return result;
         }
 	}
+	
+	public void deleteOtherFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid) {
+		
+		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
+		try {
+			transaction = session.beginTransaction();
+			Query queryOne = session.createQuery("from Otherfeescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
+			queryOne.setParameterList("ids", ids);
+			feesCollection = queryOne.list();
+			
+			if(feesCollection.isEmpty()){
+				Query query = session.createQuery("delete from Studentotherfeesstructure as fees where fees.sid = "+sid+" and fees.otherfeescategory.idfeescategory IN (:feescat)");
+				query.setParameterList("feescat", feesCatId);
+				query.executeUpdate();
+			}
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+	}
 
 }

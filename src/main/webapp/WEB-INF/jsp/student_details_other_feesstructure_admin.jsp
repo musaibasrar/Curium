@@ -401,7 +401,7 @@
             
             function deleteRecord() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/deleteFeesCategory";
+                form1.action = "/abc/FeesProcess/deleteOtherFeesCategory";
                 form1.submit();
             }
             

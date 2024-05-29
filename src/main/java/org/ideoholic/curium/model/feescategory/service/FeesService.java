@@ -687,4 +687,27 @@ public class FeesService {
 
 			    return result;
 		}
+		
+		public String deleteOtherFeesCategory() {
+            
+            String[] idfeescategory = request.getParameterValues("sfsid");
+            List<Integer> sfsId = new ArrayList();
+            List<Integer> feesCatId = new ArrayList();
+            
+            String studentId = request.getParameter("id");
+            
+            if(idfeescategory!=null){
+                    
+                    for (String string : idfeescategory) {
+                            String[] test = string.split("_");
+                            sfsId.add(Integer.valueOf(test[0]));
+                            feesCatId.add(Integer.valueOf(test[1]));
+                   }
+           new feesCategoryDAO().deleteOtherFeesCategory(sfsId,feesCatId,studentId);
+           
+           return studentId;
+            }
+           throw new IllegalArgumentException("Fees category for the given student does not exist");
+           
+   }
 }

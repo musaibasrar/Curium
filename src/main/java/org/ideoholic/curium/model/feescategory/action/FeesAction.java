@@ -212,5 +212,11 @@ public class FeesAction {
 			return "viewAll";
 		}
 	}
+	
+	@PostMapping("/deleteOtherFeesCategory")
+	public String deleteOtherFeesCategory() {
+		String studentId = new FeesService(request, response).deleteOtherFeesCategory();
+		return studentotherFeePage(studentId);
+	}
 
 }
