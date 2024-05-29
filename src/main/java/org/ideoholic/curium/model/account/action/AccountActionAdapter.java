@@ -269,4 +269,10 @@ public class AccountActionAdapter {
 
 		return accountService.downloadTrialBalance();
 	}
+
+	public boolean downloadVoucherTransactions() {
+		AccountService accountService = new AccountService(request, response);
+
+		return accountService.downloadVoucherTransactions();
+	}
 }
