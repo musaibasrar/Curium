@@ -381,33 +381,7 @@ public class StampFeesService {
 
 		}
 
-		//Accounts
-		//Pass J.V. : credit the Fees as income & debit the cash
-
-		int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
-
-		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
-
-		transactions.setDraccountid(drAccount);
-		transactions.setCraccountid(crFees);
-		transactions.setDramount(new BigDecimal(grandTotal));
-		transactions.setCramount(new BigDecimal(grandTotal));
-		transactions.setVouchertype(4);
-		transactions.setTransactiondate(DateUtil.todaysDate());
-		transactions.setEntrydate(DateUtil.todaysDate());
-		transactions.setNarration("Towards Fees Stamp");
-		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-
-		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
-
-		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
-
-		// End J.V
-		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure);
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}

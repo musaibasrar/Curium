@@ -217,7 +217,7 @@ public class StampFeesDAO {
 	}
 	
 	public void addotherStampFees(
-			java.util.List<Academicotherfeesstructure> listOfacademicfessstructure, String currentYear, List<Studentotherfeesstructure> listOfstudentfeesstructure, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
+			java.util.List<Academicotherfeesstructure> listOfacademicfessstructure, String currentYear, List<Studentotherfeesstructure> listOfstudentfeesstructure) {
 		try {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
@@ -247,7 +247,7 @@ public class StampFeesDAO {
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();
@@ -255,15 +255,6 @@ public class StampFeesDAO {
 					session.save(studentfeesstructure);
 				}
 		}
-			
-			//accounts
-			
-			session.save(transactions);
-			Query queryAccounts = session.createQuery(updateDrAccount);
-			queryAccounts.executeUpdate();
-			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-			queryqueryAccounts1.executeUpdate();
-			
 
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

@@ -27,10 +27,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
-import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
-import org.ideoholic.curium.model.appointment.dto.Appointment;
-import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
-import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
+import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -117,34 +114,29 @@ public class AppointmentService {
 		return ResultResponse.builder().build();
 	}
 
-	
-	public boolean viewAllAppointments() {
-
-		boolean result = false;
+	public ViewAllAppoinmentsResponseDto viewAllAppointments(ViewAllAppointmentsDto viewAllAppointmentsDto) {
+           ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto = new ViewAllAppoinmentsResponseDto();
 		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
+		if(viewAllAppointmentsDto.getBranchId()!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
-					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-						page = Integer.parseInt(request.getParameter("page"));
+					if (!"".equalsIgnoreCase(DataUtil.emptyString(String.valueOf(viewAllAppointmentsDto.getPage())))) {
+						page = viewAllAppointmentsDto.getPage();
 					}
-
 				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-				request.setAttribute("studentList", list);
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+						recordsPerPage, viewAllAppointmentsDto.getBranchId());
+					viewAllAppoinmentsResponseDto.setStudentList(list);
+				int noOfRecords = new AppointmentDAO().getNoOfRecords(viewAllAppointmentsDto.getBranchId());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("appointmentList", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				    viewAllAppoinmentsResponseDto.setAppointmentList(list);
+				    viewAllAppoinmentsResponseDto.setNoOfPages(noOfPages);
+				    viewAllAppoinmentsResponseDto.setCurrentPage(page);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+		return viewAllAppoinmentsResponseDto;
 	}
 
 	public void completeAppointments() {
