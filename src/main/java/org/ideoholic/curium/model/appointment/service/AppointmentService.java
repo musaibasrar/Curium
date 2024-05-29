@@ -125,9 +125,13 @@ public class AppointmentService {
 						page = viewAllAppointmentsDto.getPage();
 					}
 				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(viewAllAppointmentsDto.getBranchId().toString()));
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(viewAllAppointmentsDto.getBranchId().toString()));
+						recordsPerPage, viewAllAppointmentsDto.getBranchId());
+					viewAllAppoinmentsResponseDto.setStudentList(list);
+				int noOfRecords = new AppointmentDAO().getNoOfRecords(viewAllAppointmentsDto.getBranchId());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+				    viewAllAppoinmentsResponseDto.setAppointmentList(list);
+				    viewAllAppoinmentsResponseDto.setNoOfPages(noOfPages);
+				    viewAllAppoinmentsResponseDto.setCurrentPage(page);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
