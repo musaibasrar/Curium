@@ -114,34 +114,25 @@ public class AppointmentService {
 		return ResultResponse.builder().build();
 	}
 
-	//*********** Currently working on it **************//
-	public ResultResponse viewAllAppointments(ViewAllAppointmentsDto viewAllAppointmentsDto) {
-
-
+	public ViewAllAppoinmentsResponseDto viewAllAppointments(ViewAllAppointmentsDto viewAllAppointmentsDto) {
+           ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto = new ViewAllAppoinmentsResponseDto();
 		//String pages = "1";
-		if(viewAllAppointmentsDto.getBranchid()!=null){
+		if(viewAllAppointmentsDto.getBranchId()!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
 					if (!"".equalsIgnoreCase(DataUtil.emptyString(String.valueOf(viewAllAppointmentsDto.getPage())))) {
 						page = viewAllAppointmentsDto.getPage();
 					}
-
 				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(viewAllAppointmentsDto.getBranchid().toString()));
-//				request.setAttribute("studentList", list);
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(viewAllAppointmentsDto.getBranchid().toString()));
+						recordsPerPage, Integer.parseInt(viewAllAppointmentsDto.getBranchId().toString()));
+				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(viewAllAppointmentsDto.getBranchId().toString()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-//     			request.setAttribute("appointmentList", list);
-//				request.setAttribute("noOfPages", noOfPages);
-//				request.setAttribute("currentPage", page);
-				return ResultResponse.builder().success(true).build();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return ResultResponse.builder().build();
+		return viewAllAppoinmentsResponseDto;
 	}
 
 	public void completeAppointments() {
