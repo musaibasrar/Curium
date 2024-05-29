@@ -275,4 +275,20 @@ public class AccountActionAdapter {
 
 		return accountService.downloadVoucherTransactions();
 	}
+
+	public boolean searchSingleLedgerEntries() {
+		AccountService accountService = new AccountService(request, response);
+
+		String accountIds = request.getParameter("accountid");
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntriesResponseDto = accountService.searchSingleLedgerEntries(accountIds, branchId);
+		request.setAttribute("ledgertransactions", searchSingleLedgerEntriesResponseDto.getLedgerTransaction());
+		request.setAttribute("ledgername", searchSingleLedgerEntriesResponseDto.getLedgerName());
+		request.setAttribute("accountid", searchSingleLedgerEntriesResponseDto.getAccountId());
+		request.setAttribute("fromdate", searchSingleLedgerEntriesResponseDto.getFromDate());
+		request.setAttribute("todate", searchSingleLedgerEntriesResponseDto.getToDate());
+
+		return searchSingleLedgerEntriesResponseDto.isSuccess();
+	}
 }

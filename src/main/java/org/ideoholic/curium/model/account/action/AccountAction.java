@@ -260,7 +260,7 @@ public class AccountAction {
 
 	@GetMapping("/searchSingleLedgerEntries")
 	private String searchSingleLedgerEntries() {
-		new AccountService(request, response).searchSingleLedgerEntries();
+		accountActionAdapter.searchSingleLedgerEntries();
 		accountActionAdapter.getAllLedgers();
 		return "generalledgerreport";
 	}
