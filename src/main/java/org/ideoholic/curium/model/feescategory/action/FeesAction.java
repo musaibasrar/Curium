@@ -241,4 +241,10 @@ public class FeesAction {
 		new FeesService(request, response).getDndReport();
 		return "dndreport";
 	}
+	
+	@PostMapping("/deleteOtherFeesCategory")
+	public String deleteOtherFeesCategory() {
+		String studentId = new FeesService(request, response).deleteOtherFeesCategory();
+		return studentotherFeePage(studentId);
+	}
 }
