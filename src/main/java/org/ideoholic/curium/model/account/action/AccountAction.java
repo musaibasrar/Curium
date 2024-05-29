@@ -290,7 +290,7 @@ public class AccountAction {
 	
 	@PostMapping("/downloadVoucherTransactions")
 	private String downloadVoucherTransactions() {
-		if (new AccountService(request, response).downloadVoucherTransactions()) {
+		if (accountActionAdapter.downloadVoucherTransactions()) {
 			return "voucherexportsuccess";
 		}
 		return "exportfailure";
