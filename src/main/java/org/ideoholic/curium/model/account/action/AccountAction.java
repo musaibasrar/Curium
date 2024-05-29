@@ -240,7 +240,7 @@ public class AccountAction {
 	
 	@PostMapping("/downloadTrialBalance")
 	private String downloadTrialBalance() {
-		if (new AccountService(request, response).downloadTrialBalance()) {
+		if (accountActionAdapter.downloadTrialBalance()) {
 			return "trialbalanceexportsuccess";
 		}
 		return "exportfailure";
