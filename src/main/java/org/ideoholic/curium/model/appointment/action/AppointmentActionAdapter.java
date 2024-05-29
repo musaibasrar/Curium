@@ -1,8 +1,6 @@
 package org.ideoholic.curium.model.appointment.action;
 
-import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
-import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
-import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
+import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +56,21 @@ public class AppointmentActionAdapter {
         ResultResponse resultResponse = appointmentService.addAppointment(addAppointmentDto);
         request.setAttribute("appointmentresult", resultResponse.isSuccess());
         return resultResponse.isSuccess();
+    }
+
+    public boolean viewAllAppointments() {
+        AppointmentService appointmentService= new AppointmentService(request,response);
+        ViewAllAppointmentsDto viewAllAppointmentsDto =new ViewAllAppointmentsDto();
+        viewAllAppointmentsDto.setPage(Integer.parseInt(request.getParameter("page")));
+
+        viewAllAppointmentsDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+
+        ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto =appointmentService.viewAllAppointments(viewAllAppointmentsDto);
+        request.setAttribute("studentList", viewAllAppoinmentsResponseDto.getStudentList());
+        request.setAttribute("appointmentList", viewAllAppoinmentsResponseDto.getAppointmentList());
+        request.setAttribute("noOfPages", viewAllAppoinmentsResponseDto.getNoOfPages());
+        request.setAttribute("currentPage",viewAllAppoinmentsResponseDto.getCurrentPage());
+        return true;
     }
 
 
