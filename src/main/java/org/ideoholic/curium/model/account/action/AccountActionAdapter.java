@@ -263,4 +263,10 @@ public class AccountActionAdapter {
 
 		return resultResponse.isSuccess();
 	}
+
+	public boolean downloadTrialBalance() {
+		AccountService accountService = new AccountService(request, response);
+
+		return accountService.downloadTrialBalance();
+	}
 }
