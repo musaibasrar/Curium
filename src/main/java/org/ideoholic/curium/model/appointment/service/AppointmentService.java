@@ -150,6 +150,7 @@ public class AppointmentService {
 			}
 			
 			result = new AppointmentDAO().completeAppointments(appointmentIdsList);
+			request.setAttribute("appointmentstatus",ResultResponse.builder().success(true).build());
 		}
         return ResultResponse.builder().build();
 	}
