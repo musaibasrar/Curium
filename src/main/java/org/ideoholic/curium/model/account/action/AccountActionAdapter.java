@@ -281,8 +281,9 @@ public class AccountActionAdapter {
 
 		String accountIds = request.getParameter("accountid");
 		String branchId = httpSession.getAttribute("branchid").toString();
+		String ledgerName = request.getParameter("ledgername");
 
-		SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntriesResponseDto = accountService.searchSingleLedgerEntries(accountIds, branchId);
+		SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntriesResponseDto = accountService.searchSingleLedgerEntries(accountIds, branchId, ledgerName);
 		request.setAttribute("ledgertransactions", searchSingleLedgerEntriesResponseDto.getLedgerTransaction());
 		request.setAttribute("ledgername", searchSingleLedgerEntriesResponseDto.getLedgerName());
 		request.setAttribute("accountid", searchSingleLedgerEntriesResponseDto.getAccountId());

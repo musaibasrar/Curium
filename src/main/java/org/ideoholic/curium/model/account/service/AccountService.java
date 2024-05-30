@@ -1455,7 +1455,7 @@ public class AccountService {
 		return result;
 	}
 	
-public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String accountIds, String branchId, String ledgername) {
+public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String accountIds, String branchId, String ledgerName) {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		int accountId = DataUtil.parseInt(accountIds);
@@ -1483,7 +1483,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				.builder()
 				.ledgerTransaction(voucherMap)
 				.accountId(accountIds)
-				.ledgerName(ledgername)
+				.ledgerName(ledgerName)
 				.fromDate(DateUtil.dateParserddMMYYYY(finYear.getFinancialstartdate()))
 				.toDate(DateUtil.dateParserddMMYYYY(finYear.getFinancialstartdate()))
 				.success(true)
