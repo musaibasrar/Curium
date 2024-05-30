@@ -75,7 +75,7 @@ public class AccountAction {
 
 	@GetMapping("/viewCancelledVouchers")
 	public String viewCancelledVouchers() {
-		if(new AccountService(request, response).viewCancelledVouchers()) {
+		if(accountActionAdapter.viewCancelledVouchers()) {
 			return "cancelledvoucher";
 		}
 		return ERRORPAGE;

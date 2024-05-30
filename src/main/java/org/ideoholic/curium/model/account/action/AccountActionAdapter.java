@@ -292,4 +292,15 @@ public class AccountActionAdapter {
 
 		return searchSingleLedgerEntriesResponseDto.isSuccess();
 	}
+
+	public boolean viewCancelledVouchers() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		ResultResponse resultResponse = accountService.viewCancelledVouchers(branchId);
+		request.setAttribute("cancelledvouchertransactions", resultResponse.getResultMap());
+
+		return resultResponse.isSuccess();
+	}
 }
