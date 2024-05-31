@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class CompleteAppointmentsDto {
     private String[] appointmentIds;
-    private boolean appointmentstatus;
 }
