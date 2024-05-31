@@ -77,7 +77,7 @@ public class AppointmentAction {
 
 	@PostMapping("/completeAppointments")
 	private String completeAppointments() {
-		new AppointmentService(request, response).completeAppointments();
+		appointmentActionAdapter.completeAppointments();
 		return viewAllAppointments();
 	}
 
