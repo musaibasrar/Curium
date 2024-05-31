@@ -26,4 +26,9 @@ public class AdminExpensesDto {
 	private String bankname;
 	private String chequedate;
 	private Integer userid;
+	private String selectedbranchid;
+	private String branchId;
+	private String todate;
+	private String fromdate;
+	private String oneday;
 }

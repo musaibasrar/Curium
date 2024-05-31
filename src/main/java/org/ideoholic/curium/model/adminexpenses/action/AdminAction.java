@@ -60,10 +60,10 @@ public class AdminAction {
 	@PostMapping("/searchExpenses")
 	public String searchExpensesbydate() {
 		
-		new AdminService(request, response).searchExpensesbydate();
+		adminActionAdapter.searchExpensesbydate();
 		return "adminexpenses";
 	}
-
+		
 	@GetMapping("/viewAllExpenses")
 	public String viewAllExpenses() { 
 		
