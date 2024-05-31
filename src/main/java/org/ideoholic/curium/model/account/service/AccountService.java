@@ -982,29 +982,34 @@ public class AccountService {
 	}
 
 
-	public boolean viewCancelledVouchers() {
+	public ResultResponse viewCancelledVouchers(String branchId) {
 		
 		List<VoucherEntrytransactions> cancelledVoucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+		if(branchId!=null) {
 
 		String twoAccounts = null;
 		
 		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
-		cancelledVoucherTransactions = new AccountDAO().getCancelledVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid();
+		cancelledVoucherTransactions = new AccountDAO().getCancelledVoucherEntryTransactions(financialYearId, Integer.parseInt(branchId));
 		
 		for (VoucherEntrytransactions voucherEntry : cancelledVoucherTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
 			voucherMap.put(voucherEntry, twoAccounts);
 		}
-		
-		request.setAttribute("cancelledvouchertransactions", voucherMap);
-		
-		return true;
+
+		return ResultResponse
+				.builder()
+				.resultMap(voucherMap)
+				.success(true)
+				.build();
 		
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 
