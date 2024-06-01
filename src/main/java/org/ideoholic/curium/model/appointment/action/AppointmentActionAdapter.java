@@ -72,6 +72,14 @@ public class AppointmentActionAdapter {
         request.setAttribute("currentPage",viewAllAppoinmentsResponseDto.getCurrentPage());
         return true;
     }
+   public boolean completeAppointments(){
+        AppointmentService appointmentService = new AppointmentService(request,response);
+        CompleteAppointmentsDto completeAppointmentsDto = new CompleteAppointmentsDto();
+       completeAppointmentsDto.setAppointmentIds(request.getParameterValues("appointmentids"));
 
+       ResultResponse resultResponse = appointmentService.completeAppointments(completeAppointmentsDto);
+       request.setAttribute("appointmentstatus",resultResponse.isSuccess());
+       return resultResponse.isSuccess();
+   }
 
 }

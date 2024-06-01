@@ -139,9 +139,8 @@ public class AppointmentService {
 		return viewAllAppoinmentsResponseDto;
 	}
 
-	public void completeAppointments() {
-		
-		String[] appointmentIds = request.getParameterValues("appointmentids");
+	public ResultResponse completeAppointments(CompleteAppointmentsDto completeAppointmentsDto) {
+		String[] appointmentIds = completeAppointmentsDto.getAppointmentIds();
 		List<Integer> appointmentIdsList = new ArrayList<Integer>();
 		boolean result = false;
 		
@@ -151,8 +150,10 @@ public class AppointmentService {
 			}
 			
 			result = new AppointmentDAO().completeAppointments(appointmentIdsList);
-			request.setAttribute("appointmentstatus",result);
+			 return ResultResponse.builder().success(result).build();
+
 		}
+        return ResultResponse.builder().build();
 	}
 
 	public void cancelAppointments() {
