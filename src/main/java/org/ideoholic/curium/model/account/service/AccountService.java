@@ -713,8 +713,9 @@ public class AccountService {
 	}
 
 	//TODO: This method is placed here for viewVoucherReceipt. Please delete this method after migrating viewVoucherReceipt.
-	public ViewNextVoucherResponseDto viewVouchers(int voucherType) {
-		return null;
+	public ViewNextVoucherResponseDto viewVouchers(int voucherType, String fromDate, String toDate, String branchId) {
+		ViewNextVoucherDto viewNextVoucherDto;
+		return viewVouchers(voucherType, fromDate, toDate, branchId);
 	}
 
 	public ViewNextVoucherResponseDto viewVouchers(ViewNextVoucherDto viewNextVoucherDto){
@@ -1014,20 +1015,20 @@ public class AccountService {
 
 
 	public void getSSGroupNames() throws IOException {
-		
+
 		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
-		
+
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			PrintWriter out = response.getWriter(); 
+			PrintWriter out = response.getWriter();
 			response.setContentType("text/xml");
 		    response.setHeader("Cache-Control", "no-cache");
-		        
+
 			if(!"New Group".equalsIgnoreCase(request.getParameter("subgroupname").toString())) {
 			int accountSubGroupMasterId = DataUtil.parseInt(request.getParameter("subgroupname"));
 			accountSSGroupMaster = new AccountDAO().getListAccountSSGroupMaster(accountSubGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("accountssgroupmaster", accountSSGroupMaster);
 		        try {
-		        	
+
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
 		        		buffer = buffer+"<option></option>";
@@ -1043,7 +1044,7 @@ public class AccountService {
 			        	buffer = buffer+"</select>";
 			        	response.getWriter().println(buffer);
 		        	}
-		        	
+
 		        } catch (Exception e) {
 		            out.write("<subgroup>0</subgroup>");
 		        } finally {
@@ -1057,7 +1058,7 @@ public class AccountService {
 		        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
 		        	buffer = buffer+"</select>";
 		        	response.getWriter().println(buffer);
-	        	
+
 	        } catch (Exception e) {
 	            out.write("<subgroup>0</subgroup>");
 	        } finally {

@@ -111,7 +111,7 @@ public class AccountAction {
 
 	@GetMapping("/viewVoucherReceipt")
 	public String viewVoucherReceipt() {
-		new AccountService(request, response).viewVouchers(1);
+		accountActionAdapter.viewVouchers(1);
 			return "receiptdetails";
 	}
 
