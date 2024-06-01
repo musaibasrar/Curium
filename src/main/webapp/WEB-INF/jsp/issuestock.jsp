@@ -628,93 +628,6 @@
         }
     }
 	
-	var itemlist=[
-        <c:forEach varStatus="status" items="${messstockitemdetailslist}" var="itemlist">{
-        		availablestock:'<c:out default="0" value="${itemlist.availablequantity}" />',
-        		unitprice:'<c:out default="0" value="${itemlist.itemunitprice}" />',
-        		sgst:'<c:out default="0" value="${itemlist.sgst}" />',
-        		cgst:'<c:out default="0" value="${itemlist.cgst}" />',
-                value:'<c:out default="0" value="${itemlist.itemname}" />',
-                batchno:'<c:out default="0" value="${itemlist.batchno}" />',
-                particularname:'<c:out default="Kilogram" value="${itemlist.unitofmeasure}" />',
-                itemid:'<c:out default="0" value="${itemlist.itemid}" />',
-                salesprice:'<c:out default="0" value="${itemlist.stockentryexternalid}" />',
-                id:'<c:out default="0" value="${itemlist.stockentryid}" />'
-                }<c:if test="${!status.last}">,</c:if>
-        </c:forEach>
-        ];
-	
-	function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;' required/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /><input type='hidden' name='batchno' id=batchno_"+rowCount+" value='' /></td>";
- 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col5="<td class='dataTextInActive'><input type='text' value='0'  name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/><input type='hidden' name='purchaseprice' id=purchaseprice_"+rowCount+" value='' /></td>";
- 	    var col6="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col8="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
- 	    var col9="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	   	var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col12="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
-        /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#items_name_"+rowCount).autocomplete({
-                source: itemlist,
-                minLength: 1,
-                change:function(event,ui){
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $("#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
-                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
-                    $("#sgst_"+rowCount).val( ui.item.sgst );
-                    $("#cgst_"+rowCount).val( ui.item.cgst );
-                },
-                focus: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.name );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
-                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
-                    $("#sgst_"+rowCount).val( ui.item.sgst );
-                    $("#cgst_"+rowCount).val( ui.item.cgst );
-                    return true;
-                },
-                select: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.value );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
-                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
-                    $("#sgst_"+rowCount).val( ui.item.sgst );
-                    $("#cgst_"+rowCount).val( ui.item.cgst );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +"&nbsp;/&nbsp;</b> <b> "+item.batchno +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
-    }
-	
 	function calculate(value2) {
 
  	    	var availableQuantity=document.getElementById("items_quantity_"+value2).value;
@@ -756,8 +669,30 @@
 	 	           
 	 	        }else{
 	 	        	$( "#dialog" ).dialog( "open" );
-	 	        	document.getElementById("issuequantity_"+value2).value='';
+	 	        	document.getElementById("issuequantity_"+value2).value='0';
 	 	      	  document.getElementById("ids_"+value2).checked = false;
+	 	      	  
+	 	      	  var unitprice = document.getElementById("itemunitprice_"+value2).value;
+	 	       	  var sgst=document.getElementById("sgst_"+value2).value;
+	 	       	  var cgst=document.getElementById("cgst_"+value2).value;
+	 	       	
+	 	       	  
+	 	       	  var sgstpercentage = (sgst / 100) * unitprice;
+	 	       	  var cgstpercentage = (cgst / 100) * unitprice;
+	 	       	
+	 	           var final1 = document.getElementById("linetotal_"+value2);
+	 	           var priceonlygst = document.getElementById("priceonlygst_"+value2);
+	 	           var totalpricewithoutgst = document.getElementById("totalpricewithoutgst_"+value2);
+	 	           
+	 	           var quantity = document.getElementById("issuequantity_"+value2).value;
+	 	           var gstprice = parseFloat(unitprice)+parseFloat(sgstpercentage)+parseFloat(cgstpercentage);
+	 	           var onlygstprice = parseFloat(sgst)+parseFloat(cgst);
+	 	           var totalpricewithoutgstvalue = parseFloat(unitprice)*quantity;
+	 	           var totalgstprice = parseFloat(gstprice)*quantity;
+	 	           
+	 	          priceonlygst.value= parseFloat(onlygstprice).toFixed(1);
+   			  	  totalpricewithoutgst.value = parseFloat(totalpricewithoutgstvalue).toFixed(2);
+	 	          final1.value= parseFloat(totalgstprice).toFixed(2);
 	 	        }
  	        
  	        }
@@ -1256,6 +1191,8 @@
 		                
 		                $('#itemsTotalAmount').val(sum);
 		                $('#itemsGrandTotalAmount').val(sum);
+		                $('#totalcashamount').val(sum);
+		                
 		            }
 		        	
 		        	$(document).ready(function() {
@@ -1279,6 +1216,7 @@
 		                    
 		                    $('#itemsTotalAmount').val(sum);
 		                    $('#itemsGrandTotalAmount').val(sum);
+		                    $('#totalcashamount').val(sum);
 		                    
 		                });
 		                $("#dataTable").click(function(){
@@ -1298,6 +1236,7 @@
 		                    $('#itemsGrandTotalAmountWithoutGST').val(sum2);
 		                    $('#itemsTotalAmount').val(sum);
 		                    $('#itemsGrandTotalAmount').val(sum);
+		                    $('#totalcashamount').val(sum);
 		                });
 						$("#dataTable").focus(function(){
 		                    
@@ -1316,6 +1255,7 @@
 		                    $('#itemsGrandTotalAmountWithoutGST').val(sum2);
 		                    $('#itemsTotalAmount').val(sum);
 		                    $('#itemsGrandTotalAmount').val(sum);
+		                    $('#totalcashamount').val(sum);
 		                });
 
 
@@ -1357,6 +1297,7 @@
 		                    
 		                    $('#itemsTotalAmount').val(totalSum);
 		                    $('#itemsGrandTotalAmount').val(totalSum);
+		                    $('#totalcashamount').val(sum);
 		                    	calculateGrandTotal();
 		                    //$('#grandTotalAmount').val(0);
 		                }catch(e) {
@@ -1462,13 +1403,6 @@ for(Cookie cookie : cookies){
 						</tr>
 					</table>
 					
-					
-						<div align="center">
-						<p>
-						<h2 style="text-decoration: underline;color: #eb6000">Items Details</h2>	
-						<label><button id="addnewitem1">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
-					</div>
-					
 					<br>
 					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
 						<thead>
@@ -1486,11 +1420,44 @@ for(Cookie cookie : cookies){
 								<th class="headerText">Total GST</th>
 								<th class="headerText">Total (Excl. GST)</th>
 								<th class="headerText">Total (Incl. GST)</th>
-								<th class="headerText">Add</th>
 							</tr>
 						</thead>
 
-						<tbody>						
+						<tbody>
+							<c:forEach items="${messstockitemdetailslist}" var="itemlist" varStatus="status">
+							<tr>
+							<td class="dataTextInActive">
+							<%-- <input type="checkbox" name="ids" class = "chcktbl" id="ids_${status.index}" value="${itemlist.stockentryid}"/> --%>
+							<input type="checkbox" id = "ids_${status.index}" class = "chcktbl"  name="idsselected"  value="<c:out value="${itemlist.stockentryid}"/>"/>
+							<input type="hidden" name="ids" id="stockmove_ids__${status.index}" value="${itemlist.stockentryid}" /></td>
+							<td class="dataTextInActive">
+								<input type='text' value="${itemlist.itemname}" name="itemsname_${itemlist.stockentryid}" id="items_name_${status.index}" class="textfieldvalues" style="font-size: 14px;" />
+							<input type="hidden" name="itemsids_${itemlist.stockentryid}" id="items_ids_${status.index}" value="${itemlist.itemid}" /><input type="hidden" name="batchno" id="batchno_${status.index}" value="${itemlist.batchno}" /></td>
+							<td class="dataTextInActive">
+									<input type="text" value="${itemlist.availablequantity}"   name="itemsquantity_${itemlist.stockentryid}"  id="items_quantity_${status.index}" class="textfieldvaluesshorts" style="font-size: 14px;" readonly/>
+							</td>
+							<td class="dataTextInActive">
+								<input type="text" value="${itemlist.unitofmeasure}"   name="itemsunitofmeasure_${itemlist.stockentryid}"  id="itemsunitofmeasure_${status.index}" class="textfieldvaluesshorts" style="font-size: 14px;" readonly/>
+							</td>
+							<td class="dataTextInActive">
+							<input type="text" value="${itemlist.stockentryexternalid}"  name="itemunitprice_${itemlist.stockentryid}" id="itemunitprice_${status.index}" class="textfieldvaluesshorts" style="font-size: 14px;"/><input type="hidden" name="purchaseprice_${itemlist.stockentryid}" id="purchaseprice_${status.index}" value="${itemlist.itemunitprice}" />
+							</td>
+							<td class="dataTextInActive">
+								<input type="text" value="${itemlist.sgst}"   name="sgst_${itemlist.stockentryid}"  id="sgst_${status.index}" class="textfieldvaluesshorts" style="font-size: 14px;" readonly/>
+							</td>
+							<td class="dataTextInActive">
+								<input type="text" value="${itemlist.cgst}"   name="cgst_${itemlist.stockentryid}"  id="cgst_${status.index}" class="textfieldvaluesshorts" style="font-size: 14px;" readonly/>
+							</td>
+							<td class="dataTextInActive"><input type="number" name="issuequantity_${itemlist.stockentryid}" id="issuequantity_${status.index}" value="0" onchange="calculate(${status.index})" onkeypress="calculate(${status.index})" required /></td>
+							<td class="dataTextInActive">
+							<input type="text"  value="0"  name="priceonlygst_${itemlist.stockentryid}" id="priceonlygst_${status.index}" style="font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;" readonly/>
+							</td>
+							<td class="dataTextInActive">
+							<input type="text" class="linetotalAmountwithoutgst" value="0"  name="totalpricewithoutgst_${itemlist.stockentryid}" id="totalpricewithoutgst_${status.index}" style="font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;" readonly/>
+							</td>
+							<td class="dataTextInActive"><input type="text" class="linetotalAmount" value="0"  name="linetotal_${itemlist.stockentryid}" id="linetotal_${status.index}" style="font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;" readonly/></td>
+							</tr>
+							</c:forEach>						
 						</tbody>
 						<tfoot>
 							<tr>
@@ -1553,7 +1520,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 							
-								<input type="checkbox" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<input type="checkbox" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)" checked="checked">
 								<label for="cashpayment">Cash</label>
 									
 								<input type="checkbox" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">
@@ -1568,7 +1535,7 @@ for(Cookie cookie : cookies){
 						</tr>	
 							
 						</tr>
-						<tr id="cashamount" style="display: none;">
+						<tr id="cashamount" style="display: '';">
 							<td></td>
 						
 							<td>

@@ -55,18 +55,8 @@ public class MessStockMoveService {
 	if(httpSession.getAttribute(BRANCHID)!=null){
 		
 		
-			String[] StockEntryIds = request.getParameterValues("ids");
-			String[] itemsName = request.getParameterValues("itemsname");
-			String[] itemsIds = request.getParameterValues("itemsids");
-			String[] issuequantity = request.getParameterValues("issuequantity");
-			String[] itemunitprice = request.getParameterValues("itemunitprice");
-			String[] purchaseprice = request.getParameterValues("purchaseprice");
+			String[] StockEntryIds = request.getParameterValues("idsselected");
 			String[] custDetails = request.getParameter("issuedto").split("_");
-			String[] sgst = request.getParameterValues("sgst");
-			String[] cgst = request.getParameterValues("cgst");
-			String[] uom = request.getParameterValues("itemsunitofmeasure");
-			String[] batchno = request.getParameterValues("batchno");
-			String[] singleItemTotal = request.getParameterValues("linetotal");
 			BigDecimal totalValue = BigDecimal.ZERO;
 			BigDecimal PurchasePricetotalValue = BigDecimal.ZERO;
 			
@@ -132,25 +122,37 @@ public class MessStockMoveService {
 
 					Bill bill = new Bill();
 					
-					Float sgstpercentage = (Float.parseFloat(sgst[i]) / 100) * Float.parseFloat(itemunitprice[i]);
-					Float cgstpercentage = (Float.parseFloat(cgst[i]) / 100) * Float.parseFloat(itemunitprice[i]);
+					String itemsName = request.getParameter("itemsname_"+StockEntryIds[i]);
+					String itemsIds = request.getParameter("itemsids_"+StockEntryIds[i]);
+					String issuequantity = request.getParameter("issuequantity_"+StockEntryIds[i]);
+					String itemunitprice = request.getParameter("itemunitprice_"+StockEntryIds[i]);
+					String purchaseprice = request.getParameter("purchaseprice_"+StockEntryIds[i]);
+					String sgst = request.getParameter("sgst_"+StockEntryIds[i]);
+					String cgst = request.getParameter("cgst_"+StockEntryIds[i]);
+					String uom = request.getParameter("itemsunitofmeasure_"+StockEntryIds[i]);
+					String batchno = request.getParameter("batchno_"+StockEntryIds[i]);
+					String singleItemTotal = request.getParameter("linetotal_"+StockEntryIds[i]);
 					
-					bill.setItemname(itemsName[i]);
-					bill.setBatchno(batchno[i]);
-					bill.setQuantity(Float.parseFloat(issuequantity[i]));
-					bill.setUom(uom[i]);
-					bill.setSalesprice(Float.parseFloat(itemunitprice[i]));
-					bill.setSgst(Float.parseFloat(sgst[i]));
-					bill.setCgst(Float.parseFloat(cgst[i]));
 					
-					sgsttotal = sgsttotal.add(new BigDecimal(sgst[i]));
-					cgsttotal = cgsttotal.add(new BigDecimal(cgst[i]));
-					totalwithoutgst = totalwithoutgst.add(new BigDecimal(issuequantity[i]).multiply(new BigDecimal(itemunitprice[i])));
-					Float totalGST = Float.parseFloat(sgst[i])+Float.parseFloat(cgst[i]);
+					Float sgstpercentage = (Float.parseFloat(sgst) / 100) * Float.parseFloat(itemunitprice);
+					Float cgstpercentage = (Float.parseFloat(cgst) / 100) * Float.parseFloat(itemunitprice);
+					
+					bill.setItemname(itemsName);
+					bill.setBatchno(batchno);
+					bill.setQuantity(Float.parseFloat(issuequantity));
+					bill.setUom(uom);
+					bill.setSalesprice(Float.parseFloat(itemunitprice));
+					bill.setSgst(Float.parseFloat(sgst));
+					bill.setCgst(Float.parseFloat(cgst));
+					
+					sgsttotal = sgsttotal.add(new BigDecimal(sgst));
+					cgsttotal = cgsttotal.add(new BigDecimal(cgst));
+					totalwithoutgst = totalwithoutgst.add(new BigDecimal(issuequantity).multiply(new BigDecimal(itemunitprice)));
+					Float totalGST = Float.parseFloat(sgst)+Float.parseFloat(cgst);
 					
 					totalwithgst = totalwithoutgst.add(new BigDecimal(totalGST*100/100));
-					bill.setTotalbillinctax(Float.parseFloat(singleItemTotal[i]));
-					grandTotal = grandTotal.add(new BigDecimal(Float.parseFloat(singleItemTotal[i])));
+					bill.setTotalbillinctax(Float.parseFloat(singleItemTotal));
+					grandTotal = grandTotal.add(new BigDecimal(Float.parseFloat(singleItemTotal)));
 					billList.add(bill);
 				
 			}
@@ -164,18 +166,29 @@ public class MessStockMoveService {
 
 					MessStockMove messStockMove = new MessStockMove();
 					
+					String itemsName = request.getParameter("itemsname_"+StockEntryIds[i]);
+					String itemsIds = request.getParameter("itemsids_"+StockEntryIds[i]);
+					String issuequantity = request.getParameter("issuequantity_"+StockEntryIds[i]);
+					String itemunitprice = request.getParameter("itemunitprice_"+StockEntryIds[i]);
+					String purchaseprice = request.getParameter("purchaseprice_"+StockEntryIds[i]);
+					String sgst = request.getParameter("sgst_"+StockEntryIds[i]);
+					String cgst = request.getParameter("cgst_"+StockEntryIds[i]);
+					String uom = request.getParameter("itemsunitofmeasure_"+StockEntryIds[i]);
+					String batchno = request.getParameter("batchno_"+StockEntryIds[i]);
+					String singleItemTotal = request.getParameter("linetotal_"+StockEntryIds[i]);
+					
 					messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
-					messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
+					messStockMove.setItemid(Integer.parseInt(itemsIds));
 					messStockMove.setExternalid(custDetails[3]);
-					messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
-					messStockMove.setPurpose(itemunitprice[i]);
+					messStockMove.setQuantity(Float.parseFloat(issuequantity));
+					messStockMove.setPurpose(itemunitprice);
 					messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
 					messStockMove.setIssuedto(custDetails[0]+"_"+custDetails[1]+"_"+custDetails[2]);
 					messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					messStockMove.setStatus("ACTIVE");
 					
 					//totalValue = totalValue.add(new BigDecimal(issuequantity[i]).multiply(new BigDecimal(itemunitprice[i])));
-					PurchasePricetotalValue = PurchasePricetotalValue.add(new BigDecimal(issuequantity[i]).multiply(new BigDecimal(purchaseprice[i])));
+					PurchasePricetotalValue = PurchasePricetotalValue.add(new BigDecimal(issuequantity).multiply(new BigDecimal(purchaseprice)));
 					messStockMovesList.add(messStockMove);
 				
 			}

@@ -47,13 +47,14 @@ public class MessStockEntryService {
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
-			//List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
-			String labourCharge = "100";
+			List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
+			String labourCharge = "";
 			
-			/*
-			 * if(!vet.isEmpty()) {
-			 * labourCharge=vet.get(0).getDramount().toBigInteger().toString(); }
-			 */
+			
+			 if(!vet.isEmpty()) {
+				 labourCharge=vet.get(0).getDramount().toBigInteger().toString();
+				 }
+			 
 			
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
