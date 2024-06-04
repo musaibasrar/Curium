@@ -513,7 +513,7 @@ public class AccountService {
 	}
 
 
-	public boolean balanceSheet() {
+	public BalanceSheetResponseDto balanceSheet(String branchId) {
 		
 		
 		//Group 1
@@ -562,21 +562,19 @@ public class AccountService {
 				}
 				
 				//group 1
-				request.setAttribute("liabilities", liabilities);
-				request.setAttribute("liabilitiesLedgeraccount", liabilitiesLedgerAccount);
-				request.setAttribute("reserves", reserves);
-				request.setAttribute("reservesLedgeraccount", reservesLedgerAccount);
-					
-				//group 2
-				request.setAttribute("assets", assets);
-				request.setAttribute("assetsLedgeraccount", assetsLedgerAccount);
-
-				
-				request.setAttribute("grouponetotal", liabilities);
-				request.setAttribute("grouponetotalreserves", reserves);
-				request.setAttribute("grouptwototal", assets);
-				
-				return true;
+			return BalanceSheetResponseDto
+					.builder()
+					.Liabilities(liabilities)
+					.liabilitiesLedgerAccount(liabilitiesLedgerAccount)
+					.Reserves(reserves)
+					.reservesLedgerAccount(reservesLedgerAccount)
+					.Assets(assets)
+					.assetsLedgerAccount(assetsLedgerAccount)
+					.Liabilities(liabilities)
+					.Reserves(reserves)
+					.Assets(assets)
+					.success(true)
+					.build();
 		/*
 		//Group 1 
 		BigDecimal capital = BigDecimal.ZERO;
