@@ -1,7 +1,4 @@
 package org.ideoholic.curium.model.adminexpenses.dto;
-import java.util.Date;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,9 +18,13 @@ public class AdminExpensesDto {
 	private String paidto;
 	private String chequeno;
 	private String voucherstatus;
-	private Integer branchid;
 	private String paymenttype;
 	private String bankname;
 	private String chequedate;
 	private Integer userid;
+	private String selectedbranchid;
+	private Integer branchId;
+	private String todate;
+	private String fromdate;
+	private String oneday;
 }

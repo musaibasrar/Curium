@@ -71,7 +71,7 @@ public class AppointmentAction {
 
 	@PostMapping("/cancelAppointments")
 	private String cancelAppointments() {
-		new AppointmentService(request, response).cancelAppointments();
+		appointmentActionAdapter.cancelAppointments();
 		return viewAllAppointments();
 	}
 

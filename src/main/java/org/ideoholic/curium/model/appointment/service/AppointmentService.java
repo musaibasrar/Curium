@@ -156,9 +156,9 @@ public class AppointmentService {
         return ResultResponse.builder().build();
 	}
 
-	public void cancelAppointments() {
+	public ResultResponse cancelAppointments(CancelAppointmentsDto cancelAppointmentsDto) {
 		
-		String[] appointmentIds = request.getParameterValues("appointmentids");
+		String[] appointmentIds =cancelAppointmentsDto.getAppointmentIds();
 		List<Integer> appointmentIdsList = new ArrayList<Integer>();
 		List<Appointment> result = new ArrayList<Appointment>();
 		
@@ -174,11 +174,10 @@ public class AppointmentService {
 					 String message = "Your appointment with appt. no. "+appointment.getExternalid()+" has been cancelled.";
 					 //new SmsService(request, response).sendSMS("91"+appointment.getParent().getContactnumber(), message);
 				}
-				request.setAttribute("appointmentstatus",true);
+				return ResultResponse.builder().success(true).build();
 			}
-			
 		}
-		
+	return ResultResponse.builder().build();
 	}
 
 	public int getNoOfRecordsMonthly() {

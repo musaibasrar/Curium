@@ -82,4 +82,14 @@ public class AppointmentActionAdapter {
        return resultResponse.isSuccess();
    }
 
+   public boolean cancelAppointments(){
+        AppointmentService appointmentService = new AppointmentService(request,response);
+        CancelAppointmentsDto cancelAppointmentsDto = new CancelAppointmentsDto();
+        cancelAppointmentsDto.setAppointmentIds(request.getParameterValues("appointmentids"));
+
+        ResultResponse resultResponse =appointmentService.cancelAppointments(cancelAppointmentsDto);
+        request.setAttribute("appointmentstatus",resultResponse.isSuccess());
+        return resultResponse.isSuccess();
+   }
+
 }

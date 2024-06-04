@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
+import org.ideoholic.curium.model.adminexpenses.dto.AdminExpenseResponseDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
@@ -48,7 +49,7 @@ public class AdminService {
 		
 		Adminexpenses adminexpenses = new Adminexpenses();
 		
-		if(adminexpensesdto.getBranchid()!=null){
+		if(adminexpensesdto.getBranchId()!=null){
 			adminexpenses.setItemdescription(DataUtil.emptyString(adminexpensesdto.getItemdescription()));
 			adminexpenses.setPriceofitem(DataUtil.emptyString(adminexpensesdto.getPriceofitem()));
 			adminexpenses.setPaidto(DataUtil.emptyString(adminexpensesdto.getPaidto()));
@@ -59,7 +60,7 @@ public class AdminService {
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(adminexpensesdto.getEntrydate()));
 			adminexpenses.setVoucherstatus("pending");
 			adminexpenses.setUserid(adminexpensesdto.getUserid());
-			adminexpenses.setBranchid(adminexpensesdto.getBranchid());
+			adminexpenses.setBranchid(adminexpensesdto.getBranchId());
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
 				{
@@ -105,68 +106,69 @@ public class AdminService {
 	}
 
 
-	public void searchExpensesbydate() {
-		 
+	public AdminExpenseResponseDto searchExpensesbydate(AdminExpensesDto adminexpensesdto) {
+		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
 		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
-		String branchId = request.getParameter("selectedbranchid");
+		String branchId = adminexpensesdto.getSelectedbranchid();
 		int idBranch = 0;
-               
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		
 
-	        if(branchId!=null) {
-	        	String[] branchIdName = branchId.split(":");
-	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("expensesdatebranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
-	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-	        }
-	        
-		String queryMain ="From Adminexpenses as adminexpenses where adminexpenses.voucherstatus='approved' AND adminexpenses.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
-		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
-		
-		
+		if (adminexpensesdto.getBranchId() != null) {
+
+			if (branchId != null) {
+				String[] branchIdName = branchId.split(":");
+				idBranch = Integer.parseInt(branchIdName[0]);
+				adminExpenseResponseDto.setExpensesdatebranchname(branchIdName[1]);
+				adminExpenseResponseDto.setBranchname("Branch Name:");
+			} else {
+				idBranch = adminexpensesdto.getBranchId();
+			}
+
+			String queryMain = "From Adminexpenses as adminexpenses where adminexpenses.voucherstatus='approved' AND adminexpenses.branchid="
+					+ idBranch + " AND";
+			String toDate = DataUtil.emptyString(adminexpensesdto.getTodate());
+			String fromDate = DataUtil.emptyString(adminexpensesdto.getFromdate());
+			String oneDay = DataUtil.emptyString(adminexpensesdto.getOneday());
+
 			String querySub = "";
-			
-			if(!oneDay.equalsIgnoreCase("")){
+
+			if (!oneDay.equalsIgnoreCase("")) {
 				Date dateOne = DateUtil.indiandateParser(oneDay);
 				String ondate = DateUtil.dateParseryyyymmdd(dateOne);
-				querySub = " adminexpenses.entrydate = '"+ondate+"'" ;
-				request.setAttribute("dayone", oneDay);
-				request.setAttribute("datefrom", "");
-				request.setAttribute("dateto", "");
+				querySub = " adminexpenses.entrydate = '" + ondate + "'";
+				adminExpenseResponseDto.setDayone(oneDay);
+				adminExpenseResponseDto.setDatefrom("");
+				adminExpenseResponseDto.setDateto("");
 			}
-			
-			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+
+			if (!fromDate.equalsIgnoreCase("") && !toDate.equalsIgnoreCase("")) {
 				Date dateFrom = DateUtil.indiandateParser(fromDate);
 				String fromDateString = DateUtil.dateParseryyyymmdd(dateFrom);
 				Date dateToDate = DateUtil.indiandateParser(toDate);
 				String toDateString = DateUtil.dateParseryyyymmdd(dateToDate);
-				querySub = " adminexpenses.entrydate between '"+fromDateString+"' AND '"+toDateString+"'";
-				request.setAttribute("datefrom", fromDate);
-				request.setAttribute("dateto", toDate);
-				request.setAttribute("dayone", "");
+				querySub = " adminexpenses.entrydate between '" + fromDateString + "' AND '" + toDateString + "'";
+				adminExpenseResponseDto.setDatefrom(fromDate);
+				adminExpenseResponseDto.setDateto(toDate);
+				adminExpenseResponseDto.setDayone("");
 			}
-			
-			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+
+			queryMain = queryMain + querySub;
+			/*
+			 * queryMain =
+			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'";
+			 */
 			adminExpensesList = new AdminDetailsDAO().searchExpensesbydate(queryMain);
-			
+
+		}
+		long sumOfExpenses = 0l;
+		for (Adminexpenses adminexp : adminExpensesList) {
+			String bigNumber = adminexp.getPriceofitem();
+			long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+			sumOfExpenses = sumOfExpenses + expadmin;
+		}
+		adminExpenseResponseDto.setAdminexpenses(adminExpensesList);
+		adminExpenseResponseDto.setSumofexpenses("Total: " + sumOfExpenses);
+		return adminExpenseResponseDto;
 	}
-			long sumOfExpenses = 0l;
-			for (Adminexpenses adminexp : adminExpensesList) {
-				String bigNumber = adminexp.getPriceofitem();
-				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
-				sumOfExpenses = sumOfExpenses + expadmin;
-			}
-			
-			request.setAttribute("adminexpenses", adminExpensesList);
-			request.setAttribute("sumofexpenses", "Total: "+sumOfExpenses);
-	}
-	
 	
 	public void dailyExpenses() {
 
