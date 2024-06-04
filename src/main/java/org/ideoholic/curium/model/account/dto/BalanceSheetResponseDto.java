@@ -10,11 +10,11 @@ import java.util.Map;
 @Data
 @Builder
 public class BalanceSheetResponseDto {
-    private BigDecimal Liabilities;
+    private BigDecimal liabilities;
     private Map liabilitiesLedgerAccount;
-    private BigDecimal Reserves;
+    private BigDecimal reserves;
     private Map reservesLedgerAccount;
-    private BigDecimal Assets;
+    private BigDecimal assets;
     private Map assetsLedgerAccount;
     private boolean success;
 }
