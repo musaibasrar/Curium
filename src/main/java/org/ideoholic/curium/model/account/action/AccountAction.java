@@ -117,7 +117,7 @@ public class AccountAction {
 
 	@GetMapping("/balanceSheet")
 	public String balanceSheet() {
-		if(new AccountService(request, response).balanceSheet()){
+		if(accountActionAdapter.balanceSheet()){
 			return "balancesheet";
 		}
 		return ERRORPAGE;

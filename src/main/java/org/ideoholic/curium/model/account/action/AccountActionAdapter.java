@@ -321,4 +321,22 @@ public class AccountActionAdapter {
 
 	}
 
+	public boolean balanceSheet() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		BalanceSheetResponseDto balanceSheetResponseDto = accountService.balanceSheet(branchId);
+		request.setAttribute("liabilities", balanceSheetResponseDto.getLiabilities());
+		request.setAttribute("liabilitiesLedgeraccount", balanceSheetResponseDto.getLiabilitiesLedgerAccount());
+		request.setAttribute("reserves", balanceSheetResponseDto.getReserves());
+		request.setAttribute("reservesLedgeraccount", balanceSheetResponseDto.getReservesLedgerAccount());
+		request.setAttribute("assets", balanceSheetResponseDto.getAssets());
+		request.setAttribute("assetsLedgeraccount", balanceSheetResponseDto.getAssetsLedgerAccount());
+		request.setAttribute("grouponetotal", balanceSheetResponseDto.getLiabilities());
+		request.setAttribute("grouponetotalreserves", balanceSheetResponseDto.getReserves());
+		request.setAttribute("grouptwototal", balanceSheetResponseDto.getAssets());
+
+		return balanceSheetResponseDto.isSuccess();
+	}
 }
