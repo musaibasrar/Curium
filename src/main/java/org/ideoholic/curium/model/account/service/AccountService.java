@@ -712,10 +712,14 @@ public class AccountService {
 		return true; */
 	}
 
-	//TODO: This method is placed here for viewVoucherReceipt. Please delete this method after migrating viewVoucherReceipt.
-	public ViewNextVoucherResponseDto viewVouchers(int voucherType, String fromDate, String toDate, String branchId) {
-		ViewNextVoucherDto viewNextVoucherDto;
-		return viewVouchers(voucherType, fromDate, toDate, branchId);
+	public ViewNextVoucherResponseDto viewVouchers(int voucherType, Integer branchId, String fromDate, String toDate, String nextVoucher) {
+		ViewNextVoucherDto viewNextVoucherDto = ViewNextVoucherDto.builder()
+				.fromDate(fromDate)
+				.toDate(toDate)
+				.branchId(branchId)
+				.nextVoucher(nextVoucher)
+				.build();
+		return viewVouchers(viewNextVoucherDto, voucherType);
 	}
 
 	public ViewNextVoucherResponseDto viewVouchers(ViewNextVoucherDto viewNextVoucherDto){

@@ -10,7 +10,6 @@ import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Service
@@ -307,19 +306,18 @@ public class AccountActionAdapter {
 	public boolean viewVouchers(int voucherType){
 		AccountService accountService = new AccountService(request, response);
 
-		ViewNextVoucherDto viewNextVoucherDto = new ViewNextVoucherDto();
-		viewNextVoucherDto.setFromDate(request.getParameter("fromdate"));
-		viewNextVoucherDto.setToDate(request.getParameter("todate"));
-		viewNextVoucherDto.setNextVoucher(request.getParameter("voucher"));
-		viewNextVoucherDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+		String fromDate = request.getParameter("fromdate");
+		String toDate = request.getParameter("todate");
+		Integer branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
+		String nextVoucher = request.getParameter("voucher");
 
-		ViewNextVoucherResponseDto viewNextVoucherResponseDto = accountService.viewVouchers(viewNextVoucherDto);
+		ViewNextVoucherResponseDto viewNextVoucherResponseDto = accountService.viewVouchers(voucherType, branchId, fromDate, toDate, nextVoucher);
 		request.setAttribute("vouchertransactions", viewNextVoucherResponseDto.getVoucherTransactions());
 		request.setAttribute("vouchertype", viewNextVoucherResponseDto.getVoucherType());
 		request.setAttribute("fromdateselected", viewNextVoucherResponseDto.getFromDateSelected());
 		request.setAttribute("todateselected", viewNextVoucherResponseDto.getToDateSelected());
 
-		return accountService.viewVouchers(viewNextVoucherDto).isSuccess();
+		return viewNextVoucherResponseDto.isSuccess();
 
 	}
 
