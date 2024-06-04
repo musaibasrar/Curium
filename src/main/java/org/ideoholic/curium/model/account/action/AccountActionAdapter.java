@@ -339,4 +339,20 @@ public class AccountActionAdapter {
 
 		return balanceSheetResponseDto.isSuccess();
 	}
+
+	public boolean createVoucher() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		CreateVoucherResponseDto createVoucherResponseDto = accountService.createVoucher(branchId);
+		request.setAttribute("accountdetailsbalanceexbc", createVoucherResponseDto.getAccountDetailsBalance());
+		request.setAttribute("accountdetailsbalanceexpacc", createVoucherResponseDto.getAccountDetailsBalance());
+		request.setAttribute("accountdetailsbalancecontra",createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancereceipt", createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancepayment", createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancejournal", createVoucherResponseDto.getAccountDetailsJournalEntry());
+
+		return createVoucherResponseDto.isSuccess();
+	}
 }

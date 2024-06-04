@@ -325,33 +325,49 @@ public class AccountService {
 	}
 
 
-	public boolean createVoucher() {
-		
+	public CreateVoucherResponseDto createVoucher(String branchId) {
+
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+		if(branchId!=null) {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(2);
 			accountIds.add(3);
 			accountIds.add(4);
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("accountdetailsbalanceexbc", accountDetailsBalance);
+			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
+			CreateVoucherResponseDto
+					.builder()
+					.accountDetailsBalance(accountDetailsBalance)
+					.build();
 			accountIds.clear();
 			accountIds.add(5);
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("accountdetailsbalanceexpacc", accountDetailsBalance);
-		
-		List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("accountdetailsbalancecontra", accountDetailsBalanceBankCash);
-		request.setAttribute("accountdetailsbalancereceipt", accountDetailsBalanceBankCash);
-		request.setAttribute("accountdetailsbalancepayment", accountDetailsBalanceBankCash);
-		
-		List<Accountdetailsbalance> accountDetailsJournalEntry = new ArrayList<Accountdetailsbalance>();
-		accountDetailsJournalEntry = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("accountdetailsbalancejournal", accountDetailsJournalEntry);
-		return true;
+			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
+			CreateVoucherResponseDto
+					.builder()
+					.accountDetailsJournalEntry(accountDetailsBalance)
+					.build();
+
+			List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
+			accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(branchId));
+			CreateVoucherResponseDto
+					.builder()
+					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
+					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
+					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
+					.build();
+
+			List<Accountdetailsbalance> accountDetailsJournalEntry = new ArrayList<Accountdetailsbalance>();
+			accountDetailsJournalEntry = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
+
+			return CreateVoucherResponseDto
+					.builder()
+					.accountDetailsJournalEntry(accountDetailsJournalEntry)
+					.success(true)
+					.build();
 		}
-		return false;
+		return CreateVoucherResponseDto
+				.builder()
+				.success(false)
+				.build();
 	}
 
 
@@ -564,15 +580,15 @@ public class AccountService {
 				//group 1
 			return BalanceSheetResponseDto
 					.builder()
-					.Liabilities(liabilities)
+					.liabilities(liabilities)
 					.liabilitiesLedgerAccount(liabilitiesLedgerAccount)
-					.Reserves(reserves)
+					.reserves(reserves)
 					.reservesLedgerAccount(reservesLedgerAccount)
-					.Assets(assets)
+					.assets(assets)
 					.assetsLedgerAccount(assetsLedgerAccount)
-					.Liabilities(liabilities)
-					.Reserves(reserves)
-					.Assets(assets)
+					.liabilities(liabilities)
+					.reserves(reserves)
+					.assets(assets)
 					.success(true)
 					.build();
 		/*

@@ -164,7 +164,7 @@ public class AccountAction {
 	@GetMapping("/createVoucher")
 	public String createVoucher() {
 
-		if(new AccountService(request, response).createVoucher()){
+		if(accountActionAdapter.createVoucher()){
 			return "createvoucher";
 		}
 		return ERRORPAGE;
