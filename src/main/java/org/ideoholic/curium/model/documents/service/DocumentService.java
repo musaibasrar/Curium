@@ -84,7 +84,7 @@ public class DocumentService {
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
-		String bookno = DataUtil.emptyString(request.getParameter("bookno"));
+		String grno = DataUtil.emptyString(request.getParameter("grno"));
 		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
@@ -100,13 +100,16 @@ public class DocumentService {
 		String pinword = DataUtil.emptyString(request.getParameter("pinword"));
 		String dues = DataUtil.emptyString(request.getParameter("dues"));
 		String concession = DataUtil.emptyString(request.getParameter("concession"));
-		String workingdays = DataUtil.emptyString(request.getParameter("workingdays"));
-		String present = DataUtil.emptyString(request.getParameter("present"));
+		String progress = DataUtil.emptyString(request.getParameter("progress"));
+		String conduct = DataUtil.emptyString(request.getParameter("conduct"));
 		String ncc = DataUtil.emptyString(request.getParameter("ncc"));
 		String game = DataUtil.emptyString(request.getParameter("game"));
-		String conduct = DataUtil.emptyString(request.getParameter("conduct"));
+		String leavingdate = DataUtil.emptyString(request.getParameter("leavingdate"));
 		String datecert = DataUtil.emptyString(request.getParameter("datecert"));
 		String Remarks = DataUtil.emptyString(request.getParameter("Remarks"));
+		String afflno = DataUtil.emptyString(request.getParameter("afflno"));
+		String code = DataUtil.emptyString(request.getParameter("code"));
+		String proof = DataUtil.emptyString(request.getParameter("proof"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
 		student.setReasonleaving(leavingReason);
@@ -127,7 +130,7 @@ public class DocumentService {
 				 request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
-					request.setAttribute("bookno", bookno);
+					request.setAttribute("grno", grno);
 					request.setAttribute("tcno", tcno);
 					request.setAttribute("caste", caste);
 					request.setAttribute("classinword", classinword);
@@ -143,14 +146,16 @@ public class DocumentService {
 					request.setAttribute("pinword", pinword);
 					request.setAttribute("dues", dues);
 					request.setAttribute("concession",concession);
-					request.setAttribute("workingdays", workingdays);
-					request.setAttribute("present", present);
+					request.setAttribute("progress", progress);
+					request.setAttribute("conduct", conduct);
 					request.setAttribute("ncc", ncc);
 					request.setAttribute("game", game);
-					request.setAttribute("conduct", conduct);
+					request.setAttribute("leavingdate", leavingdate);
 					request.setAttribute("datecert", datecert);
 					request.setAttribute("Remarks", Remarks);
-					
+					request.setAttribute("afflno", afflno);
+					request.setAttribute("code", code);
+					request.setAttribute("proof", proof);
 				 request.setAttribute("dateinword", dateinword);
 				 request.setAttribute("studentdetails", parents);
 				 request.setAttribute("tcdetails", tc);
@@ -167,7 +172,7 @@ public class DocumentService {
 			 request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);
-				request.setAttribute("bookno", bookno);
+				request.setAttribute("grno", grno);
 				request.setAttribute("tcno", tcno);
 				request.setAttribute("caste", caste);
 				request.setAttribute("classinword", classinword);
@@ -183,14 +188,16 @@ public class DocumentService {
 				request.setAttribute("pinword", pinword);
 				request.setAttribute("dues", dues);
 				request.setAttribute("concession",concession);
-				request.setAttribute("workingdays", workingdays);
-				request.setAttribute("present", present);
+				request.setAttribute("progress", progress);
+				request.setAttribute("conduct", conduct);
 				request.setAttribute("ncc", ncc);
 				request.setAttribute("game", game);
-				request.setAttribute("conduct", conduct);
+				request.setAttribute("leavingdate", leavingdate);
 				request.setAttribute("datecert", datecert);
 				request.setAttribute("Remarks", Remarks);
-				
+				request.setAttribute("afflno", afflno);
+				request.setAttribute("code", code);
+				request.setAttribute("proof", proof);
 			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);
