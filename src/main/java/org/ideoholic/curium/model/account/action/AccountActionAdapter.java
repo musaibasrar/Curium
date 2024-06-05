@@ -303,7 +303,7 @@ public class AccountActionAdapter {
 
 		return resultResponse.isSuccess();
 	}
-	public boolean viewVouchers(int voucherType){
+	public void viewVouchers(int voucherType){
 		AccountService accountService = new AccountService(request, response);
 
 		String fromDate = request.getParameter("fromdate");
@@ -317,7 +317,6 @@ public class AccountActionAdapter {
 		request.setAttribute("fromdateselected", viewNextVoucherResponseDto.getFromDateSelected());
 		request.setAttribute("todateselected", viewNextVoucherResponseDto.getToDateSelected());
 
-		return viewNextVoucherResponseDto.isSuccess();
 
 	}
 
@@ -338,5 +337,21 @@ public class AccountActionAdapter {
 		request.setAttribute("grouptwototal", balanceSheetResponseDto.getAssets());
 
 		return balanceSheetResponseDto.isSuccess();
+	}
+
+	public boolean createVoucher() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		CreateVoucherResponseDto createVoucherResponseDto = accountService.createVoucher(branchId);
+		request.setAttribute("accountdetailsbalanceexbc", createVoucherResponseDto.getAccountDetailsBalance());
+		request.setAttribute("accountdetailsbalanceexpacc", createVoucherResponseDto.getAccountDetailsBalance());
+		request.setAttribute("accountdetailsbalancecontra",createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancereceipt", createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancepayment", createVoucherResponseDto.getAccountDetailsBalanceBankCash());
+		request.setAttribute("accountdetailsbalancejournal", createVoucherResponseDto.getAccountDetailsJournalEntry());
+
+		return createVoucherResponseDto.isSuccess();
 	}
 }
