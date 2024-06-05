@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">STS Number
+                        <td width="25%" class="alignLeft" height="50">GR.No.
 								</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.sts}" />
@@ -581,7 +581,7 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
-                        <tr>
+                        <%-- <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
                             </td>
                             <td width="25%" class="tablerows" >
@@ -600,10 +600,10 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.bplcardno}" />
                             </td>                        
                         
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Bag No.
+                         <td  width="25%"  class="alignLeft" height="50" >Student Type
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />

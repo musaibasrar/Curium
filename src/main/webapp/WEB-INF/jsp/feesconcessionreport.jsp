@@ -568,7 +568,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Gr.No.</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Category</th>
@@ -592,7 +592,7 @@ for(Cookie cookie : cookies){
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 									href="/alirfan/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
-											value="${students.key.student.admissionnumber}" /></a></td>
+											value="${students.key.student.sts}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>
 								<td class="dataText"><c:out value="${fees.feescategory.feescategoryname}"/></td>

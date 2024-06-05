@@ -252,7 +252,7 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No.</th>
- 				 		<th class=datath>Admission Number</th>
+ 				 		<th class=datath>Gr.No.</th>
 						<th class="datath">UID</th>
 						<th class="datath">Receipt No.</th>
 						<th class="datath">Student Name</th>
@@ -268,7 +268,7 @@
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.admissionnumber}" />
+							<td class="datatd"><c:out value="${feesmap.key.student.sts}" />
 							</td>
 							<td class="datatd"><c:out value="${feesmap.key.student.studentexternalid}" />
 							</td>

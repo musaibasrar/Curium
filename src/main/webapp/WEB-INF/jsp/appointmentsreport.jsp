@@ -676,7 +676,7 @@ for(Cookie cookie : cookies){
                         	<th title="click to sort" class="headerText">Appt. UID</th>
                         	<th title="click to sort" class="headerText">Appt. No.</th>
                             <th title="click to sort" class="headerText">Appointment Date</th>
-                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Gr.No.</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Father Name</th>
@@ -690,7 +690,7 @@ for(Cookie cookie : cookies){
                             	<td class="dataText"><c:out value="${appointment.id}"/></td>
                             	<td class="dataText"><c:out value="${appointment.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
-                                <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td>
+                                <td class="dataText"><c:out value="${appointment.parent.student.sts}"/></td>
                                 <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
                                 <td class="dataText">
 		                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">

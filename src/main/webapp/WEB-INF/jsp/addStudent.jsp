@@ -508,6 +508,15 @@
 
 	}
 	
+	function ensureSingleSelection(checkbox) {
+        var checkboxes = document.getElementsByName("bhagyalakshmibondnumber");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+	
 	 function enterOtherSpecialCategory() {
 	        var distlistitem = document.getElementById("specialcategory");
 	        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
@@ -744,13 +753,13 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
+							<td class="alignLeft" style="color:red;">Admission Number* &nbsp;</td>
 							<td ><label> <input name="admnno" required
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">GR. No. &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -766,7 +775,7 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
+							<td class="alignLeft" style="color:red;">Student Name* &nbsp;</td>
 							<td ><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" required
 									style="text-transform:capitalize;"
@@ -842,7 +851,7 @@ $(document).ready(function() {
 						<tr>
 
 
-							<td class="alignLeft">Studying in Class&nbsp;</td>
+							<td class="alignLeft" style="color:red;">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
@@ -1023,7 +1032,7 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
 							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -1046,13 +1055,13 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
+							<td class="alignLeft" >Student Type&nbsp;</td>
+							<td>
+								<input type="checkbox" name="bhagyalakshmibondnumber" value="Residential" onclick="ensureSingleSelection(this)">Residential
+        						<input type="checkbox" name="bhagyalakshmibondnumber" value="Day Boarder" onclick="ensureSingleSelection(this)">Day Boarder<br>
+        					    <input type="checkbox" name="bhagyalakshmibondnumber" value="R-30" onclick="ensureSingleSelection(this)">R-30<br>
 							</td>
 							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
@@ -1160,7 +1169,7 @@ $(document).ready(function() {
 							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
-                                        <label> <select name="yearofadmission" id="yearofadmission" required
+                                        <label> <select name="yearofadmission" id="yearofadmission" 
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
@@ -1511,7 +1520,7 @@ $(document).ready(function() {
 								</tr>
 
 								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td class="alignLeft" style="color:red;">Father's Name* &nbsp;</td>
 									<td ><label> <input
 											name="fathersname" type="text" class="myclass" required
 											style="text-transform:capitalize;"
@@ -1519,7 +1528,7 @@ $(document).ready(function() {
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;color:red;">Mother's Name* &nbsp;</td>
 									<td><label> <input
 											name="mothersname" type="text" class="myclass" id="name" required
 											style="text-transform:capitalize;"
@@ -1623,7 +1632,7 @@ $(document).ready(function() {
 
 								<tr>
 
-									<td class="alignLeft">Contact Number* &nbsp;</td>
+									<td class="alignLeft" style="color:red;">Contact Number* &nbsp;</td>
 
 									<td><label> <input
 											name="contactnumber" type="text" class="myclass" required

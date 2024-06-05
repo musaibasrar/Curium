@@ -659,7 +659,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th class="headerText">Sl.No</th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Gr.No.</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Contact Number</th>
@@ -687,7 +687,7 @@ for(Cookie cookie : cookies){
 								<td class="dataText">${status.index+1}</td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/alirfan/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.sts}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out value="${Parents.contactnumber}" /></td>

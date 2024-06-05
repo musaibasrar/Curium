@@ -213,6 +213,15 @@
 
 	}
 	
+	function ensureSingleSelection(checkbox) {
+        var checkboxes = document.getElementsByName("bhagyalakshmibondnumber");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+	
 	 function enterOtherSpecialCategory() {
 	        var distlistitem = document.getElementById("specialcategory");
 	        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
@@ -530,7 +539,7 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">GR.No. &nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"
@@ -813,6 +822,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>
@@ -831,7 +841,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-							<tr>
+							<%-- <tr>
 								<td class="alignLeft">Belong to BPL &nbsp;</td>
 								<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -852,20 +862,24 @@ for(Cookie cookie : cookies){
 						
 							<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Student Type
 								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
-
-							</td>
+								<td height="30"><input type="checkbox" name="bhagyalakshmibondnumber" value="Residential" onclick="ensureSingleSelection(this)"  ${student.bhagyalakshmibondnumber == 'Residential' ? 'checked' : ''}>Residential
+        						<input type="checkbox" name="bhagyalakshmibondnumber" value="Day Boarder" onclick="ensureSingleSelection(this)"  ${student.bhagyalakshmibondnumber == 'Day Boarder' ? 'checked' : ''}>Day Boarder<br>
+        					    <input type="checkbox" name="bhagyalakshmibondnumber" value="R-30" onclick="ensureSingleSelection(this)"  ${student.bhagyalakshmibondnumber == 'R-30' ? 'checked' : ''}>R-30<br>
+        					    </td> 
+								<%-- <td height="30">&nbsp;Residential<input
+								type="checkbox" value="Residential" name="bhagyalakshmibondnumber" id="yes:rte"
+								onclick="yesCheck(this.id);" ${student.bhagyalakshmibondnumber == 'Residential' ? 'checked' : ''}/>&nbsp; &nbsp;Day Scholar<input
+								type="checkbox" value="Day Scholar" name="bhagyalakshmibondnumber" id="no:rte"
+								onclick="noCheck(this.id);" ${student.bhagyalakshmibondnumber == 'Day Scholar' ? 'checked' : ''}/>
+							</td> --%>
 							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td><label> <input
 									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"

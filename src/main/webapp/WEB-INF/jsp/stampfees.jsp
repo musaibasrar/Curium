@@ -828,34 +828,6 @@ for(Cookie cookie : cookies){
    			        			<c:forEach items="${feescategory}" var="feescategory" varStatus="status">
    			        			
    			        			<tr>
-									<c:choose>
-										<c:when test="${feescategory.feescategoryname == 'Previous Year 2023-24 Due'}">
-											<td><label class="labelClass"
-												style="font-weight: bold; color: #325F6D"> <input
-													type="checkbox" name="feesIDS"
-													id="feesIDS_${status.index+1}" class="chcktbl"
-													value="${feescategory.idfeescategory}_${status.index}"
-													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
-													size="18"> ${feescategory.feescategoryname} :
-											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
-												id="fees_status_${status.index+1}" value="not set" /> <input
-												name="currentyear" type="hidden" value="${currentYear}"
-												class="myclass" id="currentyear"> <input
-												class="feesYear" type="hidden"
-												value="${feescategory.academicyear}" name="feesYears"
-												id="fees_year_${status.index+1}" readonly /></td>
-												
-												<td> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}
-   			        				</label> <input type="hidden" value="0" name="feesConcession" id="feesConcession_${status.index+1}" />
-   			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
-   			        				
-   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="fessFullCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
-   			        				<td> <input	type="text" value="0" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
-   			        				<td> <input class="feesFullAmount" type="text" value="0" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
-   			        				</td>
-   			        				
-										</c:when>
-										<c:otherwise>
 											<td><label class="labelClass"
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
@@ -905,12 +877,13 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Gr.No.</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
 						<th title="click to sort" class="headerText">Admission Type</th>
+						<th title="click to sort" class="headerText">Student Type</th>
 					</tr>
 				</thead>
 
@@ -925,7 +898,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/alirfan/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.sts}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
@@ -945,7 +918,8 @@ for(Cookie cookie : cookies){
                                 </c:otherwise>
                             </c:choose>
 						 	</td>
-
+							<td class="dataText"><c:out
+									value="${Parents.student.bhagyalakshmibondnumber}" /></td>
 
 						</tr>
 					</c:forEach>
