@@ -104,9 +104,11 @@ public class AdminActionAdapter {
 		adminExpensesDateDto.setVoucherstatus(request.getParameter("voucherstatus"));
 		adminExpensesDateDto.setPaymenttype(request.getParameter("paymenttype"));
 		adminExpensesDateDto.setBranchId(httpSession.getAttribute("branchid").toString());
+		
 		AdminExpenseResponseDto adminExpenseResponseDto = adminService.viewExpensesBetweenDates(adminExpensesDateDto);
-		adminExpenseResponseDto.getAdminexpenses();
-		adminExpenseResponseDto.getSumofexpenses();
+		
+		httpSession.setAttribute("adminexpenses", adminExpenseResponseDto.getAdminexpenses());
+		httpSession.setAttribute("sumofexpenses", adminExpenseResponseDto.getSumofexpenses());
 		return adminExpenseResponseDto.isSuccess();
 	}
 
