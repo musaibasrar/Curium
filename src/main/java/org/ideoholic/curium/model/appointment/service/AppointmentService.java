@@ -408,15 +408,16 @@ public class AppointmentService {
 		return result;
 	}
 
-	public void generateAppointmentsReportForClient() {
-		
+	public GenerateAppointmentsReportForClientResponseDto generateAppointmentsReportForClient() {
+		GenerateAppointmentsReportForClientResponseDto generateAppointmentsReportForClientResponseDto = new GenerateAppointmentsReportForClientResponseDto();
 		String studentId = request.getParameter("id");
 		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 				
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain);
-		
-		httpSession.setAttribute("appointmentList", appointmentList);
+		generateAppointmentsReportForClientResponseDto.setAppointmentList(appointmentList);
+		return generateAppointmentsReportForClientResponseDto;
+
 	}
 
 	public ResultResponse updateAppointment(UpdateAppointmentDto updateAppointmentDto) {
