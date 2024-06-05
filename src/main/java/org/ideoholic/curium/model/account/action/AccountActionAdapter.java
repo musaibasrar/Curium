@@ -356,7 +356,7 @@ public class AccountActionAdapter {
 		return createVoucherResponseDto.isSuccess();
 	}
 
-	public boolean getSSGroupNames() throws IOException {
+	public void getSSGroupNames() throws IOException {
 		AccountService accountService = new AccountService(request, response);
 
 		String branchId = httpSession.getAttribute("branchid").toString();
@@ -365,6 +365,5 @@ public class AccountActionAdapter {
 		ResultResponse resultResponse = accountService.getSSGroupNames(branchId, strAccountSubGroupMasterId);
 		request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
 
-		return resultResponse.isSuccess();
 	}
 }
