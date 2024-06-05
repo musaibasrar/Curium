@@ -241,8 +241,8 @@ public class AppointmentService {
 
 		return appointmentResponseDto;
 	}
-	public void getMonthlyAppointments() {
-		
+	public MonthlyAppointmentsResponseDto getMonthlyAppointments() {
+		MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = new MonthlyAppointmentsResponseDto();
 		List<String> monthList = new LinkedList<String>();
 		List<String> totalAppointments = new LinkedList<String>();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -289,9 +289,10 @@ public class AppointmentService {
 			
 			monthList.add("\"" + monthYear + "\"");
 		}
-		
-		request.setAttribute("monthlytotalappointments", totalAppointments);
-		request.setAttribute("monthlistappointment", monthList);
+		monthlyAppointmentsResponseDto.setMonthlistappointment(totalAppointments);
+		monthlyAppointmentsResponseDto.setMonthlytotalappointments(monthList);
+		return monthlyAppointmentsResponseDto;
+
 	}
 
 	public boolean exportAppointmentsReport() {

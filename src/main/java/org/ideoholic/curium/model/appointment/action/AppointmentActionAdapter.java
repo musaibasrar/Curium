@@ -91,5 +91,10 @@ public class AppointmentActionAdapter {
         request.setAttribute("appointmentstatus",resultResponse.isSuccess());
         return resultResponse.isSuccess();
    }
-
+public void getMonthlyAppointmnents(){
+        AppointmentService appointmentService = new AppointmentService(request,response);
+        MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = appointmentService.getMonthlyAppointments();
+    request.setAttribute("monthlytotalappointments", monthlyAppointmentsResponseDto.getMonthlytotalappointments());
+    request.setAttribute("monthlistappointment", monthlyAppointmentsResponseDto.getMonthlistappointment());
+}
 }
