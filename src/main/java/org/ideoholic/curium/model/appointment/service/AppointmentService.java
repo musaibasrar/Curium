@@ -429,7 +429,7 @@ public class AppointmentService {
 			for (String ids : appointmentIds) {
 				Appointment appt = new Appointment();
 				appt.setId(Integer.parseInt(ids));
-				appt.setAppointmentstarttime(updateAppointmentDto.getStarttime_());
+				appt.setAppointmentstarttime(updateAppointmentDto.getStarttime());
 				appt.setAppointmentendtime(updateAppointmentDto.getEndtime());
 				
 				 SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
@@ -440,7 +440,7 @@ public class AppointmentService {
 					 
 				 
 				try {
-					d1 = (java.util.Date)format.parse(updateAppointmentDto.getStarttime_());
+					d1 = (java.util.Date)format.parse(updateAppointmentDto.getStarttime());
 					d2 = (java.util.Date)format.parse(updateAppointmentDto.getEndtime());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
