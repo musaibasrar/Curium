@@ -419,9 +419,8 @@ public class AppointmentService {
 		httpSession.setAttribute("appointmentList", appointmentList);
 	}
 
-	public boolean updateAppointment() {
-		
-		String[] appointmentIds = request.getParameterValues("appointmentids");
+	public ResultResponse updateAppointment(UpdateAppointmentDto updateAppointmentDto) {
+		String[] appointmentIds = updateAppointmentDto.getAppointmentIds();
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 		boolean result = false;
 		
@@ -430,8 +429,8 @@ public class AppointmentService {
 			for (String ids : appointmentIds) {
 				Appointment appt = new Appointment();
 				appt.setId(Integer.parseInt(ids));
-				appt.setAppointmentstarttime(request.getParameter("starttime_"+ids));
-				appt.setAppointmentendtime(request.getParameter("endtime_"+ids));
+				appt.setAppointmentstarttime(updateAppointmentDto.getStarttime_());
+				appt.setAppointmentendtime(updateAppointmentDto.getEndtime());
 				
 				 SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
 				 java.util.Date d1 = null;
@@ -441,8 +440,8 @@ public class AppointmentService {
 					 
 				 
 				try {
-					d1 = (java.util.Date)format.parse(request.getParameter("starttime_"+ids).toString());
-					d2 = (java.util.Date)format.parse(request.getParameter("endtime_"+ids).toString());
+					d1 = (java.util.Date)format.parse(updateAppointmentDto.getStarttime_());
+					d2 = (java.util.Date)format.parse(updateAppointmentDto.getEndtime());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -462,9 +461,10 @@ public class AppointmentService {
 				 appointmentList.add(appt);
 			}
 			result = new AppointmentDAO().updateAppointments(appointmentList);
+			return ResultResponse.builder().success(result).build();
 		}
-		request.setAttribute("appointmentstatus",result);
-		return result;
+
+		return ResultResponse.builder().build();
 	}
 	
 }
