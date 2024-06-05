@@ -1033,11 +1033,10 @@ public class AccountService {
 
 
 	public ResultResponse getSSGroupNames(String branchId, String strAccountSubGroupMasterId) throws IOException {
-		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
 		ResultResponse resultResponse = ResultResponse
 				.builder()
-				.resultList(accountSSGroupMaster)
 				.build();
+		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
 
 		if(branchId!=null){
 			PrintWriter out = response.getWriter();
@@ -1047,6 +1046,10 @@ public class AccountService {
 			if(!"New Group".equalsIgnoreCase(strAccountSubGroupMasterId)) {
 				int accountSubGroupMasterId = DataUtil.parseInt(strAccountSubGroupMasterId);
 				accountSSGroupMaster = new AccountDAO().getListAccountSSGroupMaster(accountSubGroupMasterId,Integer.parseInt(branchId));
+				resultResponse = ResultResponse
+						.builder()
+						.resultList(accountSSGroupMaster)
+						.build();
                 try {
 
 					if(!accountSSGroupMaster.isEmpty()){
