@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpenseResponseDto;
+import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDateDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
@@ -341,43 +342,44 @@ public class AdminService {
 	}
 
 
-	public boolean viewExpensesBetweenDates() {
-		
-		boolean result = false;
-		
-        try {
-        	String toDate=  DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
-    		String fromDate=  DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
-    		String voucherStatus =  DataUtil.emptyString(request.getParameter("voucherstatus"));
-    		String paymentType=  DataUtil.emptyString(request.getParameter("paymenttype"));
-        	String queryMain ="From Adminexpenses as adminexpenses where adminexpenses.branchid="+httpSession.getAttribute(BRANCHID).toString()+" AND";
-    		
-    		String querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
-    		
-    		if(voucherStatus!="") {
-    			querySub = querySub +" and adminexpenses.voucherstatus='"+voucherStatus+"'";
-    		}
-    		
-    		if(paymentType!="") {
-    			querySub = querySub +" and adminexpenses.paymenttype='"+paymentType+"'";
-    		}
-    		
-    		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
-    		
+	public AdminExpenseResponseDto viewExpensesBetweenDates(AdminExpensesDateDto adminExpensesDateDto) {
+		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
+
+		try {
+			String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(adminExpensesDateDto.getTodate()));
+			String fromDate = DateUtil
+					.dateFromatConversionSlash(DataUtil.emptyString(adminExpensesDateDto.getFromdate()));
+			String voucherStatus = DataUtil.emptyString(adminExpensesDateDto.getVoucherstatus());
+			String paymentType = DataUtil.emptyString(adminExpensesDateDto.getPaymenttype());
+			String queryMain = "From Adminexpenses as adminexpenses where adminexpenses.branchid="
+					+ adminExpensesDateDto.getBranchId() + " AND";
+
+			String querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
+
+			if (voucherStatus != "") {
+				querySub = querySub + " and adminexpenses.voucherstatus='" + voucherStatus + "'";
+			}
+
+			if (paymentType != "") {
+				querySub = querySub + " and adminexpenses.paymenttype='" + paymentType + "'";
+			}
+
+			List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
+
 			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
 			BigDecimal sumOfExpenses = BigDecimal.ZERO;
 			for (Adminexpenses expenseAdmin : adminExpenseList) {
 				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
 				sumOfExpenses = sumOfExpenses.add(fee);
 			}
-			
-            httpSession.setAttribute("adminexpenses", adminExpenseList);
-            httpSession.setAttribute("sumofexpenses", sumOfExpenses);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = false;
-        }
-        return result;
+			adminExpenseResponseDto.setAdminexpenses(adminExpenseList);
+			adminExpenseResponseDto.setSumofexpenses(sumOfExpenses.toPlainString());
+			adminExpenseResponseDto.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			adminExpenseResponseDto.setSuccess(false);
+		}
+
+		return adminExpenseResponseDto;
 	}
 }

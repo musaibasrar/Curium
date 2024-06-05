@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpenseResponseDto;
+import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDateDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
@@ -93,6 +94,20 @@ public class AdminActionAdapter {
 		request.setAttribute("adminexpenses", adminExpenseResponseDto.getAdminexpenses());
 		request.setAttribute("sumofexpenses", adminExpenseResponseDto.getSumofexpenses());
 		
+	}
+
+	public boolean viewExpensesBetweenDates() {
+		AdminService adminService = new AdminService(request, response);
+		AdminExpensesDateDto adminExpensesDateDto = new AdminExpensesDateDto();
+		adminExpensesDateDto.setTodate(request.getParameter("todate"));
+		adminExpensesDateDto.setFromdate(request.getParameter("fromdate"));
+		adminExpensesDateDto.setVoucherstatus(request.getParameter("voucherstatus"));
+		adminExpensesDateDto.setPaymenttype(request.getParameter("paymenttype"));
+		adminExpensesDateDto.setBranchId(httpSession.getAttribute("branchid").toString());
+		AdminExpenseResponseDto adminExpenseResponseDto = adminService.viewExpensesBetweenDates(adminExpensesDateDto);
+		adminExpenseResponseDto.getAdminexpenses();
+		adminExpenseResponseDto.getSumofexpenses();
+		return adminExpenseResponseDto.isSuccess();
 	}
 
 }
