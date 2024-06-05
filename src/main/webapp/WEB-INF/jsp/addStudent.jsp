@@ -1712,8 +1712,15 @@ $(document).ready(function() {
 
 
 								<tr>
+								
+									<td class="alignLeft">Place &nbsp;</td>
+									<td ><label> <input name="profession"
+											type="text" class="myclass" id="profession" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
 
-									<td class="alignLeft">Notes &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
 											type="text" class="myclass" id="remarksadditional" size="36"
 											style="text-transform:capitalize;"

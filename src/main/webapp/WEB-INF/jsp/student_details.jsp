@@ -991,9 +991,9 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         <tr>
-                            <td width="25%"   class="alignLeft" height="50" >Number Of Dependents</td>
+                            <td width="25%"   class="alignLeft" height="50" >Place</td>
                             <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${parents.noofdependents}" />
+                                 <c:out default="" value="${parents.profession}" />
                                 
                             </td>
                             <td  width="25%"  class="alignLeft" height="50">Notes

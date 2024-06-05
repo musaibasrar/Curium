@@ -1526,6 +1526,14 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
+						
+						<td class="alignLeft">Place</td>
+
+							<td><label> <input name="profession"
+									type="text" class="myclass" id="profession" size="30" style="text-transform:capitalize;"
+									value="<c:out default="" value="${parents.profession}" />">
+
+							</label></td>
 							
 							<td class="alignLeft">Notes</td>
 							<td><label> <input name="remarksadditional"
