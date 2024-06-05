@@ -93,8 +93,8 @@ public class AppointmentActionAdapter {
    }
 public void getMonthlyAppointmnents(){
         AppointmentService appointmentService = new AppointmentService(request,response);
-        GetMonthlyAppointmentsResponseDto getMonthlyAppointmentsResponseDto = appointmentService.getMonthlyAppointments();
-    request.setAttribute("monthlytotalappointments",getMonthlyAppointmentsResponseDto.getMonthlytotalappointments());
-    request.setAttribute("monthlistappointment", getMonthlyAppointmentsResponseDto.getMonthlistappointment());
+        MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = appointmentService.getMonthlyAppointments();
+    request.setAttribute("monthlytotalappointments", monthlyAppointmentsResponseDto.getMonthlytotalappointments());
+    request.setAttribute("monthlistappointment", monthlyAppointmentsResponseDto.getMonthlistappointment());
 }
 }
