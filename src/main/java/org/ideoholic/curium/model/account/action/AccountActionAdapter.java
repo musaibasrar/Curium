@@ -303,7 +303,7 @@ public class AccountActionAdapter {
 
 		return resultResponse.isSuccess();
 	}
-	public boolean viewVouchers(int voucherType){
+	public void viewVouchers(int voucherType){
 		AccountService accountService = new AccountService(request, response);
 
 		String fromDate = request.getParameter("fromdate");
@@ -317,7 +317,6 @@ public class AccountActionAdapter {
 		request.setAttribute("fromdateselected", viewNextVoucherResponseDto.getFromDateSelected());
 		request.setAttribute("todateselected", viewNextVoucherResponseDto.getToDateSelected());
 
-		return viewNextVoucherResponseDto.isSuccess();
 
 	}
 
