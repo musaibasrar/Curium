@@ -213,7 +213,7 @@ public class AccountAction {
 
 	@GetMapping("/getCurrentFinancialYear")
 	public String getCurrentFinancialYear() {
-		if(new AccountService(request, response).getCurrentFinancialYear()){
+		if(accountActionAdapter.getCurrentFinancialYear()){
 			return "financialyear";
 		}
 		return ERRORPAGE;

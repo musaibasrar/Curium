@@ -391,4 +391,16 @@ public class AccountActionAdapter {
 
 		return createAccountResponseDto.isSuccess();
 	}
+
+	public boolean getCurrentFinancialYear() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		GetCurrentFinancialYearResponseDto getCurrentFinancialYearResponseDto = accountService.getCurrentFinancialYear(branchId);
+		request.setAttribute("currentfinancialaccountingyearfrom", getCurrentFinancialYearResponseDto.getFinancialStartDate());
+		request.setAttribute("currentfinancialaccountingyearto", getCurrentFinancialYearResponseDto.getFinancialEndDate());
+
+		return getCurrentFinancialYearResponseDto.isSuccess();
+	}
 }
