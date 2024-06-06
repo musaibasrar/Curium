@@ -385,10 +385,10 @@ public class AccountActionAdapter {
 
 		String branchId = httpSession.getAttribute("branchid").toString();
 
-		ResultResponse resultResponse = accountService.createAccount(branchId);
-		request.setAttribute("accountgroupmaster", resultResponse.getResultList());
-		request.setAttribute("accountdetailsbalance", resultResponse.getResultList());
+		CreateAccountResponseDto createAccountResponseDto = accountService.createAccount(branchId);
+		request.setAttribute("accountgroupmaster", createAccountResponseDto.getAccountGroupMaster());
+		request.setAttribute("accountdetailsbalance", createAccountResponseDto.getAccountDetailsBalance());
 
-		return resultResponse.isSuccess();
+		return createAccountResponseDto.isSuccess();
 	}
 }

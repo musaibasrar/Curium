@@ -78,7 +78,7 @@ public class AccountService {
 	}
 
 
-	public ResultResponse createAccount(String branchId) {
+	public CreateAccountResponseDto createAccount(String branchId) {
 
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
@@ -87,21 +87,21 @@ public class AccountService {
 			
 			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(branchId));
 			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
-			ResultResponse
+			CreateAccountResponseDto
 					.builder()
-					.resultList(accountGroupMaster)
-					.resultList(accountDetailsBalance)
+					.accountGroupMaster(accountGroupMaster)
+					.accountDetailsBalance(accountDetailsBalance)
 					.build();
 		}
 		
 		
 		if(!accountGroupMaster.isEmpty()){
-			return ResultResponse
+			return CreateAccountResponseDto
 					.builder()
 					.success(true)
 					.build();
 		}
-		return ResultResponse
+		return CreateAccountResponseDto
 				.builder()
 				.success(false)
 				.build();
