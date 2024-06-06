@@ -414,9 +414,7 @@ public class AppointmentService {
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain);
-		ResultResponse.builder().resultList(appointmentList).build();
-		return ResultResponse.builder().build();
-
+		return ResultResponse.builder().resultList(appointmentList).build();
 	}
 
 	public ResultResponse updateAppointment(UpdateAppointmentDto updateAppointmentDto) {
