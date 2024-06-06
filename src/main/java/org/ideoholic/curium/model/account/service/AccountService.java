@@ -84,20 +84,17 @@ public class AccountService {
 		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
 		
 		if(branchId!=null){
-			
+
 			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(branchId));
 			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
-			CreateAccountResponseDto
-					.builder()
-					.accountGroupMaster(accountGroupMaster)
-					.accountDetailsBalance(accountDetailsBalance)
-					.build();
 		}
 		
 		
 		if(!accountGroupMaster.isEmpty()){
 			return CreateAccountResponseDto
 					.builder()
+					.accountDetailsBalance(accountDetailsBalance)
+					.accountGroupMaster(accountGroupMaster)
 					.success(true)
 					.build();
 		}
