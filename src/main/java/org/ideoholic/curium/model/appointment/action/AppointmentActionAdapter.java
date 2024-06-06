@@ -108,10 +108,10 @@ public boolean updateAppointment(){
         request.setAttribute("appointmentstatus",resultResponse.isSuccess());
         return resultResponse.isSuccess();
    }
-
-   public void generateAppointmentsReportForClient(){
+    public void generateAppointmentsReportForClient(){
         AppointmentService appointmentService= new AppointmentService(request,response);
-        GenerateAppointmentsReportForClientResponseDto generateAppointmentsReportForClientResponseDto = appointmentService.generateAppointmentsReportForClient();
-        httpSession.setAttribute("appointmentList", generateAppointmentsReportForClientResponseDto.getAppointmentList());
-   }
+        ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient();
+        httpSession.setAttribute("appointmentList",resultResponse.getResultList());
+    }
+
 }
