@@ -100,14 +100,17 @@ public class AccountService {
 	}
 
 
-	public void getSubGroupNames() throws IOException {
-		
+	public ResultResponse getSubGroupNames(String branchId, String strAccountGroupMasterId) throws IOException {
+		ResultResponse resultResponse = null;
 		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			int accountGroupMasterId = Integer.parseInt(request.getParameter("groupname"));
-			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("accountsubgroupmaster", accountSubGroupMaster);
+		if(branchId!=null){
+			int accountGroupMasterId = Integer.parseInt(strAccountGroupMasterId);
+			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(branchId));
+			resultResponse = ResultResponse
+					.builder()
+					.resultList(accountSubGroupMaster)
+					.build();
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
 		        response.setHeader("Cache-Control", "no-cache");
@@ -139,7 +142,7 @@ public class AccountService {
 		        }
 		}
 		
-		
+		return resultResponse;
 	}
 
 	public ResultResponse saveAccount(AccountDto accountDto) {

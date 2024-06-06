@@ -194,7 +194,7 @@ public class AccountAction {
 	public void getSubGroupNames() {
 		
 			try {
-				new AccountService(request, response).getSubGroupNames();
+				accountActionAdapter.getSubGroupNames();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
