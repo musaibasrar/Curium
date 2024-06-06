@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/sneha/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/sneha/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/sneha/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/abc/css/font-awesome.css">
+        <script type="text/javascript" src="/sneha/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/sneha/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/sneha/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/sneha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/sneha/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/sneha/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/sneha/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/sneha/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/sneha/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/sneha/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sneha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,120 +436,120 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/abc/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="/sneha/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/sneha/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/abc/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/abc/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/sneha/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/sneha/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/sneha/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/abc/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/abc/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/abc/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/abc/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/sneha/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/sneha/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/sneha/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/sneha/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/sneha/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/abc/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/abc/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/abc/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+                <a target="mainFrame" href="/sneha/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="/sneha/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/sneha/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="/abc/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/abc/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/abc/progressreport" style="font-size: 12px;">Generate Report</a><br/>
-           		<a target="mainFrame" href="/abc/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/sneha/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/sneha/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/sneha/progressreport" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="/sneha/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/sneha/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/sneha/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/Promotion" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/sneha/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/sneha/StudentProcess/archiveViewAll" >Archive Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/abc/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/abc/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/sneha/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/sneha/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/sneha/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/generateids" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/sneha/generateids" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/abc/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/abc/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/abc/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/abc/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/abc/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/sneha/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/sneha/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/sneha/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/sneha/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/sneha/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/sneha/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/sendsms" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/abc/sendemail" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/sneha/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/sneha/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/abc/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/abc/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
-                <a target="mainFrame" href="/abc/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/abc/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/sneha/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/sneha/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/sneha/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="/sneha/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/sneha/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/sneha/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             </div>
