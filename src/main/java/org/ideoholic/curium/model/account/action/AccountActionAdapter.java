@@ -379,4 +379,16 @@ public class AccountActionAdapter {
 			request.setAttribute("accountsubgroupmaster", resultResponse.getResultList());
 		}
 	}
+
+	public boolean createAccount() {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+
+		CreateAccountResponseDto createAccountResponseDto = accountService.createAccount(branchId);
+		request.setAttribute("accountgroupmaster", createAccountResponseDto.getAccountGroupMaster());
+		request.setAttribute("accountdetailsbalance", createAccountResponseDto.getAccountDetailsBalance());
+
+		return createAccountResponseDto.isSuccess();
+	}
 }
