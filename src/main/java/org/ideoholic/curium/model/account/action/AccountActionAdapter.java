@@ -363,7 +363,8 @@ public class AccountActionAdapter {
 		String strAccountSubGroupMasterId = request.getParameter("subgroupname");
 
 		ResultResponse resultResponse = accountService.getSSGroupNames(branchId, strAccountSubGroupMasterId);
-		request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
-
+		if(resultResponse != null && resultResponse.getResultList() != null){
+			request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
+		}
 	}
 }

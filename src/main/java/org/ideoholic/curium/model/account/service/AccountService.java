@@ -1033,9 +1033,7 @@ public class AccountService {
 
 
 	public ResultResponse getSSGroupNames(String branchId, String strAccountSubGroupMasterId) throws IOException {
-		ResultResponse resultResponse = ResultResponse
-				.builder()
-				.build();
+		ResultResponse resultResponse = null;
 		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
 
 		if(branchId!=null){
