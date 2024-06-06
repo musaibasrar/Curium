@@ -65,7 +65,7 @@ public class AccountAction {
 	public void getSSGroupName() {
 		
 		try {
-			new AccountService(request, response).getSSGroupNames();
+			accountActionAdapter.getSSGroupNames();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -194,7 +194,7 @@ public class AccountAction {
 	public void getSubGroupNames() {
 		
 			try {
-				new AccountService(request, response).getSubGroupNames();
+				accountActionAdapter.getSubGroupNames();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

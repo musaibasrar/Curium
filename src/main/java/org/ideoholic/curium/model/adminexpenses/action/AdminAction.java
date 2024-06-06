@@ -92,7 +92,7 @@ public class AdminAction {
 
 	@PostMapping("/viewExpensesBetweenDates")
 	public String viewExpensesBetweenDates() {
-		 if (new AdminService(request, response).viewExpensesBetweenDates()) {
+		 if (adminActionAdapter.viewExpensesBetweenDates()) {
 	            return "adminexpensesreport";
 	        } else {
 	            return "error";

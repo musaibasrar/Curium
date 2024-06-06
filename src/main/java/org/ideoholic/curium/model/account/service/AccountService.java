@@ -100,14 +100,17 @@ public class AccountService {
 	}
 
 
-	public void getSubGroupNames() throws IOException {
-		
+	public ResultResponse getSubGroupNames(String branchId, String strAccountGroupMasterId) throws IOException {
+		ResultResponse resultResponse = null;
 		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			int accountGroupMasterId = Integer.parseInt(request.getParameter("groupname"));
-			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("accountsubgroupmaster", accountSubGroupMaster);
+		if(branchId!=null){
+			int accountGroupMasterId = Integer.parseInt(strAccountGroupMasterId);
+			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(branchId));
+			resultResponse = ResultResponse
+					.builder()
+					.resultList(accountSubGroupMaster)
+					.build();
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
 		        response.setHeader("Cache-Control", "no-cache");
@@ -139,7 +142,7 @@ public class AccountService {
 		        }
 		}
 		
-		
+		return resultResponse;
 	}
 
 	public ResultResponse saveAccount(AccountDto accountDto) {
@@ -1032,61 +1035,65 @@ public class AccountService {
 	}
 
 
-	public void getSSGroupNames() throws IOException {
-
+	public ResultResponse getSSGroupNames(String branchId, String strAccountSubGroupMasterId) throws IOException {
+		ResultResponse resultResponse = null;
 		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/xml");
-		    response.setHeader("Cache-Control", "no-cache");
+			response.setHeader("Cache-Control", "no-cache");
 
-			if(!"New Group".equalsIgnoreCase(request.getParameter("subgroupname").toString())) {
-			int accountSubGroupMasterId = DataUtil.parseInt(request.getParameter("subgroupname"));
-			accountSSGroupMaster = new AccountDAO().getListAccountSSGroupMaster(accountSubGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("accountssgroupmaster", accountSSGroupMaster);
-		        try {
+			if(!"New Group".equalsIgnoreCase(strAccountSubGroupMasterId)) {
+				int accountSubGroupMasterId = DataUtil.parseInt(strAccountSubGroupMasterId);
+				accountSSGroupMaster = new AccountDAO().getListAccountSSGroupMaster(accountSubGroupMasterId,Integer.parseInt(branchId));
+				resultResponse = ResultResponse
+						.builder()
+						.resultList(accountSSGroupMaster)
+						.build();
+                try {
 
-		        	if(!accountSSGroupMaster.isEmpty()){
-		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
-		        		buffer = buffer+"<option></option>";
-			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
-			        	}
-			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
-			        	response.getWriter().println(buffer);
-		        	}else{
-		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
-		        		buffer = buffer+"<option></option>";
-			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
-			        	buffer = buffer+"</select>";
-			        	response.getWriter().println(buffer);
-		        	}
+					if(!accountSSGroupMaster.isEmpty()){
+						String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+						buffer = buffer+"<option></option>";
+						for(int i =0; i<accountSSGroupMaster.size();i++){
+							buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
+						}
+						buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
+						response.getWriter().println(buffer);
+					}else{
+						String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+						buffer = buffer+"<option></option>";
+						buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
+						buffer = buffer+"</select>";
+						response.getWriter().println(buffer);
+					}
 
-		        } catch (Exception e) {
-		            out.write("<subgroup>0</subgroup>");
-		        } finally {
-		            out.flush();
-		            out.close();
-		        }
-		}else {
-			try {
-	        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
-	        		buffer = buffer+"<option></option>";
-		        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
-		        	buffer = buffer+"</select>";
-		        	response.getWriter().println(buffer);
+				} catch (Exception e) {
+					out.write("<subgroup>0</subgroup>");
+				} finally {
+					out.flush();
+					out.close();
+				}
+			}else {
+				try {
+					String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+					buffer = buffer+"<option></option>";
+					buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
+					buffer = buffer+"</select>";
+					response.getWriter().println(buffer);
 
-	        } catch (Exception e) {
-	            out.write("<subgroup>0</subgroup>");
-	        } finally {
-	            out.flush();
-	            out.close();
-	        }
+				} catch (Exception e) {
+					out.write("<subgroup>0</subgroup>");
+				} finally {
+					out.flush();
+					out.close();
+				}
+			}
 		}
-		}
-		
-		
+
+
+		return resultResponse;
 	}
 
 

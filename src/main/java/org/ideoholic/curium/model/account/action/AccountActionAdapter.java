@@ -10,6 +10,7 @@ import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Service
@@ -353,5 +354,29 @@ public class AccountActionAdapter {
 		request.setAttribute("accountdetailsbalancejournal", createVoucherResponseDto.getAccountDetailsJournalEntry());
 
 		return createVoucherResponseDto.isSuccess();
+	}
+
+	public void getSSGroupNames() throws IOException {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+		String strAccountSubGroupMasterId = request.getParameter("subgroupname");
+
+		ResultResponse resultResponse = accountService.getSSGroupNames(branchId, strAccountSubGroupMasterId);
+		if(resultResponse != null && resultResponse.getResultList() != null){
+			request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
+		}
+	}
+
+	public void getSubGroupNames() throws IOException {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+		String strAccountGroupMasterId = request.getParameter("groupname");
+
+		ResultResponse resultResponse = accountService.getSubGroupNames(branchId, strAccountGroupMasterId);
+		if(resultResponse != null && resultResponse.getResultList() != null){
+			request.setAttribute("accountsubgroupmaster", resultResponse.getResultList());
+		}
 	}
 }
