@@ -78,24 +78,30 @@ public class AccountService {
 	}
 
 
-	public boolean createAccount() {
-		
+	public CreateAccountResponseDto createAccount(String branchId) {
+
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("accountgroupmaster", accountGroupMaster);
-			
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("accountdetailsbalance", accountDetailsBalance);
+		if(branchId!=null){
+
+			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(branchId));
+			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
 		}
 		
 		
 		if(!accountGroupMaster.isEmpty()){
-			return true;
-		} return false;
+			return CreateAccountResponseDto
+					.builder()
+					.accountDetailsBalance(accountDetailsBalance)
+					.accountGroupMaster(accountGroupMaster)
+					.success(true)
+					.build();
+		}
+		return CreateAccountResponseDto
+				.builder()
+				.success(false)
+				.build();
 		
 	}
 
