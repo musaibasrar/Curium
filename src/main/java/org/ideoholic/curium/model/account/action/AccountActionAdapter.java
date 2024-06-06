@@ -367,4 +367,16 @@ public class AccountActionAdapter {
 			request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
 		}
 	}
+
+	public void getSubGroupNames() throws IOException {
+		AccountService accountService = new AccountService(request, response);
+
+		String branchId = httpSession.getAttribute("branchid").toString();
+		String strAccountGroupMasterId = request.getParameter("groupname");
+
+		ResultResponse resultResponse = accountService.getSubGroupNames(branchId, strAccountGroupMasterId);
+		if(resultResponse != null && resultResponse.getResultList() != null){
+			request.setAttribute("accountsubgroupmaster", resultResponse.getResultList());
+		}
+	}
 }
