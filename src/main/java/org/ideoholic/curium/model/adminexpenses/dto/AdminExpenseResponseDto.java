@@ -20,5 +20,8 @@ public class AdminExpenseResponseDto {
 	private String dateto;
 	private List<Adminexpenses> adminexpenses;
 	private String sumofexpenses;
+	private String voucherstatus;
+	private String paymenttype;
+	private boolean success;
 	
 }
