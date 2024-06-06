@@ -241,8 +241,8 @@ public class AppointmentService {
 
 		return appointmentResponseDto;
 	}
-	public void getMonthlyAppointments() {
-		
+	public MonthlyAppointmentsResponseDto getMonthlyAppointments() {
+		MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = new MonthlyAppointmentsResponseDto();
 		List<String> monthList = new LinkedList<String>();
 		List<String> totalAppointments = new LinkedList<String>();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -289,9 +289,10 @@ public class AppointmentService {
 			
 			monthList.add("\"" + monthYear + "\"");
 		}
-		
-		request.setAttribute("monthlytotalappointments", totalAppointments);
-		request.setAttribute("monthlistappointment", monthList);
+		monthlyAppointmentsResponseDto.setMonthlistappointment(totalAppointments);
+		monthlyAppointmentsResponseDto.setMonthlytotalappointments(monthList);
+		return monthlyAppointmentsResponseDto;
+
 	}
 
 	public boolean exportAppointmentsReport() {
@@ -418,9 +419,8 @@ public class AppointmentService {
 		httpSession.setAttribute("appointmentList", appointmentList);
 	}
 
-	public boolean updateAppointment() {
-		
-		String[] appointmentIds = request.getParameterValues("appointmentids");
+	public ResultResponse updateAppointment(UpdateAppointmentDto updateAppointmentDto) {
+		String[] appointmentIds = updateAppointmentDto.getAppointmentIds();
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 		boolean result = false;
 		
@@ -429,8 +429,8 @@ public class AppointmentService {
 			for (String ids : appointmentIds) {
 				Appointment appt = new Appointment();
 				appt.setId(Integer.parseInt(ids));
-				appt.setAppointmentstarttime(request.getParameter("starttime_"+ids));
-				appt.setAppointmentendtime(request.getParameter("endtime_"+ids));
+				appt.setAppointmentstarttime(updateAppointmentDto.getStarttime());
+				appt.setAppointmentendtime(updateAppointmentDto.getEndtime());
 				
 				 SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
 				 java.util.Date d1 = null;
@@ -440,8 +440,8 @@ public class AppointmentService {
 					 
 				 
 				try {
-					d1 = (java.util.Date)format.parse(request.getParameter("starttime_"+ids).toString());
-					d2 = (java.util.Date)format.parse(request.getParameter("endtime_"+ids).toString());
+					d1 = (java.util.Date)format.parse(updateAppointmentDto.getStarttime());
+					d2 = (java.util.Date)format.parse(updateAppointmentDto.getEndtime());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -461,9 +461,10 @@ public class AppointmentService {
 				 appointmentList.add(appt);
 			}
 			result = new AppointmentDAO().updateAppointments(appointmentList);
+			return ResultResponse.builder().success(result).build();
 		}
-		request.setAttribute("appointmentstatus",result);
-		return result;
+
+		return ResultResponse.builder().build();
 	}
 	
 }

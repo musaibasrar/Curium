@@ -91,5 +91,21 @@ public class AppointmentActionAdapter {
         request.setAttribute("appointmentstatus",resultResponse.isSuccess());
         return resultResponse.isSuccess();
    }
+public void getMonthlyAppointmnents(){
+        AppointmentService appointmentService = new AppointmentService(request,response);
+        MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = appointmentService.getMonthlyAppointments();
+    request.setAttribute("monthlytotalappointments", monthlyAppointmentsResponseDto.getMonthlytotalappointments());
+    request.setAttribute("monthlistappointment", monthlyAppointmentsResponseDto.getMonthlistappointment());
+}
+public boolean updateAppointment(){
+        AppointmentService appointmentService =new AppointmentService(request,response);
+        UpdateAppointmentDto updateAppointmentDto = new UpdateAppointmentDto();
+        updateAppointmentDto.setAppointmentIds(request.getParameterValues("appointmentids"));
+        updateAppointmentDto.setStarttime(request.getParameter("starttime_"));
+        updateAppointmentDto.setEndtime(request.getParameter("endtime_"));
 
+        ResultResponse resultResponse = appointmentService.updateAppointment(updateAppointmentDto);
+        request.setAttribute("appointmentstatus",resultResponse.isSuccess());
+        return resultResponse.isSuccess();
+   }
 }

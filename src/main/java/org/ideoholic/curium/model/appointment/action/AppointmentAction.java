@@ -103,8 +103,8 @@ public class AppointmentAction {
 	
 	@PostMapping("/updateAppointment")
 	private String updateAppointment() {
-		
-		if(new AppointmentService(request, response).updateAppointment()){
+
+		if(appointmentActionAdapter.updateAppointment()){
 			return viewAllAppointments();
 			//return "appointmentsuccess";
 		}else{
