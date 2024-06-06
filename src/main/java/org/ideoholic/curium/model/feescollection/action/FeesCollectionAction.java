@@ -59,7 +59,7 @@ public class FeesCollectionAction {
 		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response).cancelFeesReceipt();
 			UserAction userAction = new UserAction();
-			userAction.setHttpobjects(request, response);
+			userAction.setHttpobjects(request, response, httpSession);
 			return userAction.searchByDate();
 		}
 

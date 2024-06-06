@@ -717,7 +717,9 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Student Name</th>
+                            <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Receipt No.</th>
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
                             <th title="click to sort" class="headerText">Misc</th>
@@ -734,17 +736,19 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.value.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount-feesdetails.fine-feesdetails.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+								value="<c:out value="${feesdetails.value.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.date}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.student.classstudying}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.branchreceiptnumber}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.value.totalamount-feesdetails.value.fine-feesdetails.value.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.value.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.value.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.value.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>
