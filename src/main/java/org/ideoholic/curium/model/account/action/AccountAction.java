@@ -204,7 +204,7 @@ public class AccountAction {
 	@GetMapping("/createAccount")
 	public String createAccount() {
 		
-		if(new AccountService(request, response).createAccount()){
+		if(accountActionAdapter.createAccount()){
 			return "createaccount";
 		}
 		return ERRORPAGE;
