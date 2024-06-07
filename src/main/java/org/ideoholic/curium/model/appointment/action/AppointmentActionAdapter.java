@@ -118,9 +118,10 @@ public boolean updateAppointment(){
     public boolean exportAppointmentsReport() {
         AppointmentService appointmentService =new AppointmentService(request,response);
         ExportAppointmentsReportDto exportAppointmentsReportDto = new ExportAppointmentsReportDto();
+        exportAppointmentsReportDto.setAppoitmentList((List<Appointment>) httpSession.getAttribute("appointmentList"));
+
         ResultResponse resultResponse = appointmentService.exportAppointmentsReport(exportAppointmentsReportDto);
-        List<Appointment> apptList =(List<Appointment>) httpSession.getAttribute("appointmentList");
-        exportAppointmentsReportDto.setAppoitmentList(apptList);
+
         return resultResponse.isSuccess();
     }
 }
