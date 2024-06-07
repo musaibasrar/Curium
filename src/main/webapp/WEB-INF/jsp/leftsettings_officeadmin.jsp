@@ -349,7 +349,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/scholar/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
                 <a target="mainFrame" href="/scholar/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/scholar/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>

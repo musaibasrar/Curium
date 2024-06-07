@@ -412,6 +412,15 @@
 		form1.submit();
 
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/scholar/FeesDetails/printDataForFees";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -435,6 +444,17 @@
              return false;
 
          });
+         
+ 		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+ 		
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -705,11 +725,13 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Cancel Receipt</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                    
+                    	<c:forEach items="${searchfeesdetailslist}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
@@ -725,8 +747,10 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.value.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.value.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholar/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholar/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
+                        
                     </tbody>
                     
                     <tfoot>
@@ -738,6 +762,8 @@ for(Cookie cookie : cookies){
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
 							</label> -->
+							<input value="Print" style="width: 35px;"
+							id="print"/>
 						<input value="Export"
 							type="submit" id="export"/></td>
 							

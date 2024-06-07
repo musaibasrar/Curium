@@ -446,7 +446,8 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+	<div class="headerTD" style="width: 95%;height: 40px;" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label><br>
+	<label style="font-size: 14px;">&nbsp;${subbranchname}</label></div>
 
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
@@ -922,16 +923,6 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/scholar/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
-            </div>
              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -1001,6 +992,16 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="/scholar/importfile" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				 </table>
+            </div>
             
              <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">

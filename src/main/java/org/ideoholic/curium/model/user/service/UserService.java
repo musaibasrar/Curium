@@ -56,6 +56,7 @@ public class UserService {
         boolean result;
        String userName = request.getParameter("loginName");
        String password = request.getParameter("password");
+       String subBranchName = null;
 
        login = new UserDAO().readUniqueObject(userName, password);
 
@@ -73,6 +74,21 @@ public class UserService {
             httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+            
+            switch (login.getBranch().getIdbranch()) {
+			case 2:
+				subBranchName = "SES Pre and Primary";
+				break;
+			case 3:
+				subBranchName = "SES High School";
+				break;
+			case 4:
+				subBranchName = "SES Beed Bypass";
+				break;
+			default:
+				break;
+			}
+            httpSession.setAttribute("subbranchname",subBranchName);
             
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
@@ -640,6 +656,8 @@ public class UserService {
 
        if (login != null) {
     	   
+    	   String subBranchName = request.getParameter("subbranchname").toString();
+    	   
     	   Enumeration em = httpSession.getAttributeNames();
     	   while (em.hasMoreElements()) {
     		    String element = (String)em.nextElement();
@@ -660,6 +678,7 @@ public class UserService {
             httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+            httpSession.setAttribute("subbranchname",subBranchName);
             
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
