@@ -400,6 +400,17 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/sneha/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
+             <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="/sneha/importfile" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				 </table>
+            </div>
+            
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/sneha/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>

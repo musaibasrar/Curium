@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -117,7 +118,7 @@ public class parentsDetailsDAO {
 	}
 
 		@SuppressWarnings("finally")
-	public boolean createMultiple(List<Parents> parents) {
+	public boolean createMultiple(List<Parents> parents, List<Login> listParentLogin) {
 		
 			boolean result = false;
 		 try {
@@ -127,6 +128,17 @@ public class parentsDetailsDAO {
 	            for (Parents parent : parents) {
 	            	session.save(parent);	
 				}
+	            
+	            Query query = session.createQuery("from Login order by userid DESC");
+                query.setMaxResults(1);
+                Login last = (Login) query.uniqueResult();
+                int userid = last.getUserid()+1;
+                
+	            for (Login login : listParentLogin) {
+	            	login.setUserid(userid);
+	            	session.save(login);
+	            	userid++;
+	            }
 
 	            transaction.commit();
 	           result = true;

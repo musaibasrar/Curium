@@ -150,7 +150,7 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/sneha/images/sneha.jpg" width="126" height="140"/></td>
+				<td ><img src="/sneha/images/sneha.jpg" width="150" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
