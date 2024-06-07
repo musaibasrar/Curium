@@ -75,20 +75,17 @@ public class AdminService {
 		
 	}	
 	
-	public boolean viewAllExpenses() {
-		boolean result = false;
-        try {
-        	List<Adminexpenses> list = new AdminDetailsDAO().readListOfExpenses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            httpSession.setAttribute("adminexpenses", list);
+	public ResultResponse viewAllExpenses(Integer branchid) {
+		List<Adminexpenses> list;
+		try {
+			list = new AdminDetailsDAO().readListOfExpenses(branchid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResultResponse.builder().success(false).build();
+		}
 
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = false;
-        }
-        return result;
+		return ResultResponse.builder().success(true).resultList(list).build();
 	}
-
 	
 	
 
