@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trial balance export success</title>
         <style type="text/css" title="currentStyle">
-            @import "/abc/css/dataTable/css/demo_page.css";
-            @import "/abc/css/dataTable/css/jquery.dataTables.css";
+            @import "/noblewisdom/css/dataTable/css/demo_page.css";
+            @import "/noblewisdom/css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/noblewisdom/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/noblewisdom/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/AccountProcess/downloadVoucherTransactions";
+                form1.action="/noblewisdom/AccountProcess/downloadVoucherTransactions";
                 form1.submit();
             }
         </script>
@@ -75,7 +75,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/abc/images/bg.jpg" >
+    <body background="/noblewisdom/images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
