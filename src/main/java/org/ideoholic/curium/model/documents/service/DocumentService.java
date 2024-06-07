@@ -83,10 +83,10 @@ public class DocumentService {
 		String transferCertificateString = null;
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
-		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
+		//String leavingReason = DataUtil.emptyString(request.getParameter("reasonleaving"));
 		String grno = DataUtil.emptyString(request.getParameter("grno"));
 		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
-		String caste = DataUtil.emptyString(request.getParameter("caste"));
+		//String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
 		String failpass = DataUtil.emptyString(request.getParameter("failpass"));
@@ -112,11 +112,10 @@ public class DocumentService {
 		String proof = DataUtil.emptyString(request.getParameter("proof"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
-		student.setReasonleaving(leavingReason);
+		//student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
+		 //boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 
-		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
@@ -127,12 +126,11 @@ public class DocumentService {
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-				 request.setAttribute("leavingReason", leavingReason);
+				 //request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
-					request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("grno", grno);
 					request.setAttribute("tcno", tcno);
-					request.setAttribute("caste", caste);
+					//request.setAttribute("caste", caste);
 					request.setAttribute("classinword", classinword);
 					request.setAttribute("lastexam", lastexam);
 					request.setAttribute("failpass", failpass);
@@ -150,7 +148,7 @@ public class DocumentService {
 					request.setAttribute("conduct", conduct);
 					request.setAttribute("ncc", ncc);
 					request.setAttribute("game", game);
-					request.setAttribute("leavingdate", leavingdate);
+					//request.setAttribute("leavingdate", leavingdate);
 					request.setAttribute("datecert", datecert);
 					request.setAttribute("Remarks", Remarks);
 					request.setAttribute("afflno", afflno);
@@ -163,18 +161,16 @@ public class DocumentService {
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
-		 }
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-			 request.setAttribute("leavingReason", leavingReason);
+			 	//request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
-				request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("grno", grno);
 				request.setAttribute("tcno", tcno);
-				request.setAttribute("caste", caste);
+				//request.setAttribute("caste", caste);
 				request.setAttribute("classinword", classinword);
 				request.setAttribute("lastexam", lastexam);
 				request.setAttribute("failpass", failpass);
@@ -192,7 +188,6 @@ public class DocumentService {
 				request.setAttribute("conduct", conduct);
 				request.setAttribute("ncc", ncc);
 				request.setAttribute("game", game);
-				request.setAttribute("leavingdate", leavingdate);
 				request.setAttribute("datecert", datecert);
 				request.setAttribute("Remarks", Remarks);
 				request.setAttribute("afflno", afflno);

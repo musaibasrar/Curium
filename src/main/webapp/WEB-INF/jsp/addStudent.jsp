@@ -1007,24 +1007,21 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Students Caste &nbsp;</td>
+							<td class="alignLeft">Student Caste &nbsp;</td>
 							<td ><label> <input name="studentscaste"
 							style="text-transform:capitalize;"
 									type="text" class="myclass" id="studentscaste" size="36">
 
 							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student Sub-Caste&nbsp;</td>
+							<td ><label> <input
+									name="crecord" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="crecord" size="36">
 
 							</label></td>
+
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1132,15 +1129,17 @@ $(document).ready(function() {
 
 						<tr>
 						
-							<td class="alignLeft"  >RTE
-										&nbsp;</td>
+							<td  class="alignLeft">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
 
-									<td  >&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" />
-										</td>
+							</label></td>
 										
 							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
 							<td ><label> <input name="remarks"

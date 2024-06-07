@@ -797,7 +797,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
  --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+ 							<td class="alignLeft" style="padding-left: 20px;">Student Caste Cert.</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
 									id="studentscastecertno" size="30">
@@ -813,21 +813,16 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-								<td class="alignLeft">Students Caste &nbsp;</td>
+								<td class="alignLeft">Student Caste &nbsp;</td>
 								<td><label> <input name="studentscaste"
 									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
 
 							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option>${student.socialcategory}</option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student Sub-Caste</td>
+							<td><label> <input
+									name="crecord" type="text" class="myclass" value="${student.crecord}"
+									id="crecord" size="30">
 
 							</label></td>
 
@@ -954,13 +949,17 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
-							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
+
+							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
 

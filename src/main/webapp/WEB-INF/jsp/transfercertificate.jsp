@@ -272,13 +272,14 @@
                 mothername:'<c:out default="0" value="${parents.mothersname}" />',
                 nationality:'<c:out default="0" value="${parents.student.nationality}" />',
                 gender:'<c:out default="0" value="${parents.student.gender}" />',
-                religion:'<c:out default="0" value="${parents.student.religion}" />',
-                caste:'<c:out default="0" value="${parents.student.caste}" />',
+                religion:'<c:out value="${parents.student.religion}" />',
+                caste:'<c:out value="${parents.student.studentscaste}" />',
                 dateofbirth:'<c:out default="0" value="${parents.student.dateofbirth}" />',
                 classandsec:'<c:out default="0" value="${parents.student.classstudying}" />',
                 classadmittedin:'<c:out default="0" value="${parents.student.classadmittedin}" />',
                 id:'<c:out default="0" value="${parents.student.sid}" />',
-                
+                reasonleaving:'<c:out default="0" value="${parents.student.reasonleaving}" />',
+                dateleaving:'<c:out default="0" value="${parents.student.dateleaving}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
@@ -295,17 +296,19 @@
                 },
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
-                    $( "#dateofadmission").val( ui.item.admissiondate );
+                    $( "#admissiondate").val( ui.item.admissiondate );
        			  $( "#studentName").val( ui.item.name );
        			$( "#fathername").val( ui.item.fathername );
        			$( "#mothername").val( ui.item.mothername );
        			$( "#nationality").val( ui.item.nationality );
        			$( "#gender").val( ui.item.gender );
        			$( "#religion").val( ui.item.religion );
-       			$( "#caste").val( ui.item.caste );
+       			$( "#caste").val( ui.item.studentscaste );
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
-       			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#classadmittedin").val( ui.item.classandsec );
+       			$( "#reasonleaving").val( ui.item.reasonleaving );
+       			$( "#dateleaving").val( ui.item.dateleaving );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -562,8 +565,8 @@ for(Cookie cookie : cookies){
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >Date of Admission:</td><td> <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
-                    <td >Class Admitted In:</td><td> <input  type="text" name="classadmitted" id="classadmitted" style="width: 200px" readonly/></td>    
+                    <td >Date of Admission:</td><td> <input  type="text" name="admissiondate" id="admissiondate" style="width: 200px" /></td>
+                    <td >Class Admitted In:</td><td> <input  type="text" name="classadmittedin" id="classadmittedin" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
@@ -580,18 +583,25 @@ for(Cookie cookie : cookies){
                     <td >Student ID:</td><td> <input  type="text" name="grno" id="grno" style="width: 200px" /></td>
                     </tr>
                     
-                  
+                   <tr>
+                    <td><br></td>
+                    </tr>
                     <tr>
                     <td>Progress: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="progress" id="progress" style="width: 200px" /></td>
                     <td>Conduct:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>    
                     </tr>
-                   
                     <tr>
-                    <td >Date of leaving: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="leavingdate" id="leavingdate" style="width: 200px" /></td>
-                    <td >Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px" /></td>    
+                    <td><br></td>
                     </tr>
                     <tr>
-                    <td >Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
+                    <td >Date of leaving: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="dateleaving" id="dateleaving" style="width: 200px" /></td>
+                    <td >Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px" /></td>    
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td >Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reasonleaving" id="reasonleaving" style="width: 200px" /></td>    
                     <td>Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
                     </tr>
                      

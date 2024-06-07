@@ -568,16 +568,17 @@ for(Cookie cookie : cookies){
                          
                         </tr>
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Students Caste
+                         <td  width="25%"  class="alignLeft" height="50" >Student Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.studentscaste}" />
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >Social Category
+                            
+                            <td  width="25%"  class="alignLeft" height="50" >Student Sub-Caste
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.socialcategory}" />
-                            </td>                        
+                                <c:out default="" value="${student.crecord}" />
+                            </td>
                         
                         </tr>
                         
@@ -630,18 +631,11 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                         <td  width="25%"  class="alignLeft" height="50" >RTE
+                        <td  width="25%"  class="alignLeft" height="50" >Social Category
                             </td>
                             <td width="25%" class="tablerows" >
-                               
-                                <c:if test="${(student.rte ==1)}">    
-           						  <c:out default="" value="Yes" />
-           						 </c:if>
-                                <c:if test="${(student.rte == 0)}">    
-           						  <c:out default="" value="No" />
-           						 </c:if>
-           						 
-                            </td>
+                                <c:out default="" value="${student.socialcategory}" />
+                            </td> 
    
                             <td  width="25%"  class="alignLeft" height="50">Remarks
                             </td>
