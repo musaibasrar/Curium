@@ -813,6 +813,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>
@@ -980,7 +981,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
 							<td align="left">
-							<label> <select name="yearofadmission" id="yearofadmission" required
+							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
