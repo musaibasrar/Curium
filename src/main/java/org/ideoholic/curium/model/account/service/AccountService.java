@@ -71,10 +71,17 @@ public class AccountService {
 		}
 
 		if (financialYear != null) {
-			currentFinancialYearResponseDto = CurrentFinancialYearResponseDto.builder()
+			currentFinancialYearResponseDto = CurrentFinancialYearResponseDto
+					.builder()
 					.financialStartDate(financialYear.getFinancialstartdate())
 					.financialEndDate(financialYear.getFinancialenddate())
 					.success(true)
+					.build();
+		}
+		else {
+			currentFinancialYearResponseDto = CurrentFinancialYearResponseDto
+					.builder()
+					.success(false)
 					.build();
 		}
 		
