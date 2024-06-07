@@ -111,5 +111,12 @@ public class AdminActionAdapter {
 		httpSession.setAttribute("sumofexpenses", adminExpenseResponseDto.getSumofexpenses());
 		return adminExpenseResponseDto.isSuccess();
 	}
+	
+	public void deleteMultiple() {
+		AdminService adminService = new AdminService(request, response);
+		ExpensesIdDto expenseiddto = new ExpensesIdDto();
+		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
+		adminService.deleteMultiple(expenseiddto);
+	}
 
 }

@@ -89,21 +89,20 @@ public class AdminService {
         return result;
 	}
 
-
+	
 	
 
-	public void deleteMultiple() {
-		 String[] expensesIds = request.getParameterValues("expensesIDs");
-		 if(expensesIds!=null){
-	        List<Integer> ids = new ArrayList<>();
-	        for (String id : expensesIds) {
-	            System.out.println("id" + id);
-	            ids.add(Integer.valueOf(id));
+	public void deleteMultiple(ExpensesIdDto expenseiddto) {
+		if (expenseiddto.getExpensesIds() != null) {
+			List<Integer> ids = new ArrayList<>();
+			for (String id : expenseiddto.getExpensesIds()) {
+				System.out.println("id" + id);
+				ids.add(Integer.valueOf(id));
 
-	        }
-	        System.out.println("id length" + expensesIds.length);
-	        new AdminDetailsDAO().deleteMultiple(ids);
-	}
+			}
+			System.out.println("id length" + expenseiddto.getExpensesIds().length);
+			new AdminDetailsDAO().deleteMultiple(ids);
+		}
 	}
 
 
