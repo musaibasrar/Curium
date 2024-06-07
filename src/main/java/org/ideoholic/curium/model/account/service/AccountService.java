@@ -63,18 +63,29 @@ public class AccountService {
 		return false;
 	}
 
-	public boolean getCurrentFinancialYear() {
+	public CurrentFinancialYearResponseDto getCurrentFinancialYear(String branchId) {
+		CurrentFinancialYearResponseDto currentFinancialYearResponseDto = null;
 		Financialaccountingyear financialYear = new Financialaccountingyear();
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			financialYear =  new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+			financialYear =  new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId));
+		}
+
+		if (financialYear != null) {
+			currentFinancialYearResponseDto = CurrentFinancialYearResponseDto
+					.builder()
+					.financialStartDate(financialYear.getFinancialstartdate())
+					.financialEndDate(financialYear.getFinancialenddate())
+					.success(true)
+					.build();
+		}
+		else {
+			currentFinancialYearResponseDto = CurrentFinancialYearResponseDto
+					.builder()
+					.success(false)
+					.build();
 		}
 		
-		if(financialYear!=null){
-	                  request.setAttribute("currentfinancialaccountingyearfrom", financialYear.getFinancialstartdate());
-	                  request.setAttribute("currentfinancialaccountingyearto", financialYear.getFinancialenddate());
-		}
-		
-		return true;
+		return currentFinancialYearResponseDto;
 	}
 
 
