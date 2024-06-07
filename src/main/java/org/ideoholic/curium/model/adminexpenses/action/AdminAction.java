@@ -84,7 +84,7 @@ public class AdminAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		 new AdminService(request, response).deleteMultiple();
+		adminActionAdapter.deleteMultiple();
 	        return viewAllExpenses();
 	}
 
