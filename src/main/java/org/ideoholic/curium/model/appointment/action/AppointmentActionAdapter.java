@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Service
 public class AppointmentActionAdapter {
     @Autowired
@@ -113,5 +115,12 @@ public boolean updateAppointment(){
         ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient();
         httpSession.setAttribute("appointmentList",resultResponse.getResultList());
     }
-
+    public boolean exportAppointmentsReport() {
+        AppointmentService appointmentService =new AppointmentService(request,response);
+        ExportAppointmentsReportDto exportAppointmentsReportDto = new ExportAppointmentsReportDto();
+        ResultResponse resultResponse = appointmentService.exportAppointmentsReport(exportAppointmentsReportDto);
+        List<Appointment> apptList =(List<Appointment>) httpSession.getAttribute("appointmentList");
+        exportAppointmentsReportDto.setAppoitmentList(apptList);
+        return resultResponse.isSuccess();
+    }
 }
