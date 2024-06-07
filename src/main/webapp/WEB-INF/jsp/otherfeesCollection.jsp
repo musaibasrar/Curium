@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Other feescollection</title>
+<title>Other Fees Collection</title>
 <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
 
@@ -334,6 +334,60 @@
                     totalSum=sum;
                     $('#grandTotalAmount').val(totalSum);
                 });
+               
+                 $(document).ready(function(){
+                    var consultation=parseFloat($("#balanceamount").val());
+                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                    var sum = 0.0;
+                    var totalSum=0.0;
+                    var column2 = $('.feesAmount')
+                    jQuery.each(column2,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum+miscellanous+consultation;
+                    $('#grandTotalAmount').val(totalSum);
+                });
+                $(document).ready(function(){
+                    var consultation=parseFloat($("#balanceamount").val());
+                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                    var sum = 0.0;
+                    var totalSum=0.0;
+                    var column2 = $('.feesAmount')
+                    jQuery.each(column2,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum+miscellanous+consultation;
+                    $('#grandTotalAmount').val(totalSum);
+                });
+                $(document).ready(function(){
+                    var consultation=parseFloat($("#balanceamount").val());
+                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                    var sum = 0.0;
+                    var totalSum=0.0;
+                    var column2 = $('.feesAmount')
+                    jQuery.each(column2,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum+miscellanous+consultation;
+                    $('#feesTotalAmount').val(sum.toPrecision(6));
+                    $('#grandTotalAmount').val();
+                });
+                $(document).ready(function(){
+                   
+                    var sum = 0.0;
+                    var totalSum=0.0;
+                    var amountp = $('.amountpaying');
+                    jQuery.each(amountp,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    var finep = $('.fine');
+                    jQuery.each(finep,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum;
+                    $('#grandTotalAmount').val(totalSum);
+                });
+                
                 $("#dataTable").click(function(){
                     var consultation=parseFloat($("#balanceamount").val());
                     var miscellanous=parseFloat($("#miscellanousamount").val());
@@ -835,6 +889,42 @@
             	}
             	
             }
+ 
+		 function toggleAmount(checkbox, index) {
+			 	var ind = index;
+			    const amountPayingInput = document.getElementById("amountpaying_"+ind);
+			    const dueAmountHiddenInput = document.getElementById("dueamount_"+ind);
+			    
+			    if (checkbox.checked) {
+			        amountPayingInput.value = dueAmountHiddenInput.value;
+			        var sum = 0.0;
+                    var totalSum=0.0;
+                    var amountp = $('.amountpaying');
+                    jQuery.each(amountp,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    var finep = $('.fine');
+                    jQuery.each(finep,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum;
+                    $('#grandTotalAmount').val(totalSum);
+			    } else {
+			        amountPayingInput.value = 0;
+			        var sum = 0.0;
+                    var totalSum=0.0;
+                    var amountp = $('.amountpaying');
+                    jQuery.each(amountp,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    var finep = $('.fine');
+                    jQuery.each(finep,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum;
+                    $('#grandTotalAmount').val(totalSum);
+			    }
+			}
             
         </script>
 
@@ -903,6 +993,10 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
 										<option>2019/20</option>
@@ -980,30 +1074,33 @@ for(Cookie cookie : cookies){
 				<thead>
                     <tr >
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                        <td class="headerText">otherFees Category</td>
+                        <td class="headerText">Other Fees Category</td>
+                        <td class="headerText">Qty.</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
                         <td class="headerText">Amount Due to be paid</td>
                         <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
                 </thead>
-
+			
 				<tbody>
 					<c:forEach items="${studentotherfeesdetails}" var="studentfeesdetails" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2" checked="checked" 
+								onchange="toggleAmount(this, ${status.index})"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.otherfeescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.totalinstallment}" /></a></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<!-- <td class="dataText" align="center">
@@ -1016,11 +1113,21 @@ for(Cookie cookie : cookies){
 
                     <tr>
 
-                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>
 			</table>
+			<table>
+					<tr>
+						<td align="right"><b>Balance Books&nbsp;&nbsp;</b></td>
+                        <td align="left"><label><textarea  name="balancebooks"
+											type="text" class="textField" id="balancebooks" rows="2" cols="40"
+											
+											onkeypress="return validateContactNum(this);"></textarea></label></td>
+                    </tr>
+                    
+                    </table>
             <!-- <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
@@ -1110,7 +1217,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
+											<option value="bank">Bank</option>
 								</select>
 
 							</label>
@@ -1152,7 +1259,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
+											<option value="bank">Bank</option>
 								</select>
 
 							</label>

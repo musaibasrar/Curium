@@ -178,15 +178,15 @@ for(Cookie cookie : cookies){
             <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
-                        <td class="headerText">Fees Category</td>
-                        <td class="headerText">Fees Amount</td>
+                        <td class="headerText">Particular</td>
+                        <!-- <td class="headerText">Fees Amount</td> -->
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${feescatmap}" var="feescatmap">
                         <tr>
                             <td align="center"><c:out value="${feescatmap.key}" /></td>
-                            <td align="center"><c:out value="${feescatmap.value}" /></td>
+                            <%-- <td align="center"><c:out value="${feescatmap.value}" /></td> --%>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -643,7 +643,7 @@ for(Cookie cookie : cookies){
            						 
                             </td>
    
-                            <td  width="25%"  class="alignLeft" height="50">Remarks
+                            <td  width="25%"  class="alignLeft" height="50">Balance Books
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />

@@ -1133,7 +1133,7 @@ $(document).ready(function() {
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Balance Books &nbsp;</td>
 							<td ><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="36"
 									style="text-transform:capitalize;"

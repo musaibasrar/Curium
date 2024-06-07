@@ -948,7 +948,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
 							</td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Balance Books&nbsp;</td>
 
 							<td align="left"><label> <input name="remarks"
 									type="text" class="myclass"

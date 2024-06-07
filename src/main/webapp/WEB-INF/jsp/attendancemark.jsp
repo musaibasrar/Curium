@@ -671,6 +671,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
@@ -682,6 +683,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
+							<td class="dataText"><c:out value="${status.index+1}" /></td>
 							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
 								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"

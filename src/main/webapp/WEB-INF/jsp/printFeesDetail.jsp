@@ -232,12 +232,23 @@
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
-
+				
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
+			</tr>
+
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr style="font-size: 20px;">
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Admission No.:&nbsp;<c:out
+						value="${student.admissionnumber}" />
+				</td>
 			</tr>
 
 			<tr>
@@ -437,6 +448,17 @@
 				</td>
 				
 				<td></td>
+			</tr>
+			
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr style="font-size: 20px;">
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Admission No.:&nbsp;<c:out
+						value="${student.admissionnumber}" />
+				</td>
 			</tr>
 
 			<tr>

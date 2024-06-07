@@ -227,7 +227,7 @@ public class feesCollectionDAO {
 	
 	@SuppressWarnings("finally")
 	public boolean createother(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
-			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome, String balanceBooks) {
 
 		boolean result = false;
 		try {
@@ -242,7 +242,7 @@ public class feesCollectionDAO {
 			 	}else {
 			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
 			 	}
-
+				/*
 			 	//Receipts
 			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
 				session.save(transactions);
@@ -260,10 +260,14 @@ public class feesCollectionDAO {
 				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
 				queryqueryAccountsIncome1.executeUpdate();
 				//
+				*/
 
-				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
-				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				receiptInfo.setReceiptvoucher(0);
+				receiptInfo.setJournalvoucher(0);
 				session.save(receiptInfo);
+				
+				Query queryBalanceBooksUpdate = session.createQuery("update Student set Remarks='"+balanceBooks+"' where sid="+receiptInfo.getSid());
+				queryBalanceBooksUpdate.executeUpdate();
 
 			for (Otherfeescollection singleFeescollection :  feescollectionList) {
 				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());

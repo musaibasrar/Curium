@@ -110,15 +110,15 @@ span{
         $(function() {
 
     		
-    		$(".printtcstudent").button().click(function() {
-    			printtc();
+    		$(".printdoc").button().click(function() {
+    			printdoc();
 
     		});
 
     		
     					
     	});
-        function printtc(){
+        function printdoc(){
             	var form1 = document.getElementById("form1");
         		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
         		form1.method = "POST";
@@ -152,10 +152,9 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td ><img src="/abc/images/abc.jpg" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.8143802598&nbsp;&nbsp;&nbsp;</h6>
-			    <h6 style="margin-top:0px;">	Email: alfalahhighschool@gmail.com</h6>
+				<h1 style="margin-bottom:0px;">	${branchname}</h1>
+				<h4 style="margin-top:0px;margin-bottom:0px;">	${branchaddress}</h4>
+				<h6 style="margin-top:0px; margin-bottom:0px;">${branchcontact}&nbsp;&nbsp;&nbsp;</h6>
 				</td>
 			</tr>
 		
@@ -260,7 +259,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td><button class="printtcstudent"  >Print</button></td>
+              <td><button class="printdoc"  >Print</button></td>
               <!-- <a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a> -->
             </tr>
 		</TABLE>

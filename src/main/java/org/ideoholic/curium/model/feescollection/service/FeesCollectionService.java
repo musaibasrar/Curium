@@ -1260,6 +1260,7 @@ public class FeesCollectionService {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 
 		String sid = request.getParameter("studentIdDetails");
+		String balanceBooks = request.getParameter("balancebooks");
 		String[] amountPaying = request.getParameterValues("amountpaying");
 		String[] fine = request.getParameterValues("fine");
 		String[] studentSfsIds = request.getParameterValues("studentsfsids");
@@ -1381,7 +1382,7 @@ public class FeesCollectionService {
 
 			// End J.V
 
-			createFeesCollection = new feesCollectionDAO().createother(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			createFeesCollection = new feesCollectionDAO().createother(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome,balanceBooks);
 
 			if(createFeesCollection) {
 				getFeesDetails(sid,request.getParameter("academicyear"));
@@ -1406,7 +1407,7 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname()+"--"+studentfeesstructure.get(0).getTotalinstallment(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1431,7 +1432,7 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname()+"--"+studentfeesstructure.get(0).getTotalinstallment(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1602,7 +1603,7 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname()+"--"+studentfeesstructure.get(0).getTotalinstallment(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);

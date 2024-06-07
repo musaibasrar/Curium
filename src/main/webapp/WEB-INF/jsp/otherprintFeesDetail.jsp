@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>DUPLICATE FEES RECEIPT</title>
+<title>FEES RECIEPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -184,7 +184,6 @@
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
@@ -233,13 +232,14 @@
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
-
+				
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
 			</tr>
+
 			<tr>
 			<td></td>
 			
@@ -276,9 +276,6 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
-				
-
 			</tr>
 			
 			<tr>
@@ -293,13 +290,13 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${feescatmap.value}" /></td>
+					<%-- <td class="dataText">Rs. <c:out
+							value="${feescatmap.value}" /></td> --%>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<c:if test="${recieptinfo.fine > 0}">
+				<c:if test="${recieptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
@@ -332,12 +329,21 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+			<TABLE width="100%" border="0">
+			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
+			
+		<%-- <TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -363,7 +369,7 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
@@ -377,15 +383,15 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/abc/images/abcpaytm.jpeg" width="70" height="65"/></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
+		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
@@ -394,10 +400,10 @@
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
+		
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -449,6 +455,7 @@
 				
 				<td></td>
 			</tr>
+			
 			<tr>
 			<td></td>
 			
@@ -485,7 +492,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<!-- <td class="headerText">Fees Amount</td> -->
 				
 
 			</tr>
@@ -502,8 +509,8 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${feescatmap.value}" /></td>
+					<%-- <td class="dataText">Rs. <c:out
+							value="${feescatmap.value}" /></td> --%>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
@@ -526,7 +533,6 @@
 							value="${recieptinfo.misc}" /></td>
 				</tr>
 			</c:if>
-			
 			</table>
 			
 			
@@ -543,13 +549,21 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+			<TABLE width="100%" border="0">
 			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
+		<%-- <TABLE width="100%" border="0">
+			 <tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -567,14 +581,14 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr>
+			</tr> 
 			
 			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
@@ -588,8 +602,9 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/abc/images/abcpaytm.jpeg" width="70" height="65"/></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
+		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
