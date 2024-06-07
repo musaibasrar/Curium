@@ -567,18 +567,26 @@ public class FeesService {
 	        		searchYear = request.getParameter("yearofadmission");
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
-	            httpSession.setAttribute("feescategory", feecategoryList);
+	            List<Feescategory> feecategoryListMain = new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryListSub = new ArrayList<Feescategory>();
+	            String prefix = "New Admission";
+	            for (Feescategory feescategory : feecategoryListMain) {
+					String feesCatName = feescategory.getFeescategoryname();
+					if(feesCatName.startsWith(prefix)) {
+						feecategoryListSub.add(feescategory);
+					}
+				}
+	            httpSession.setAttribute("feescategory", feecategoryListSub);
 
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
 	            response.setHeader("Cache-Control", "no-cache");
 
-	    		if(feecategoryList.size() > 0) {
+	    		if(feecategoryListSub.size() > 0) {
 
 	    		        try {
-	    		        	String buffer = "<div style='overflow:scroll;width:750px; height: 250px;'><table id='dataTable'><thead><tr>"
+	    		        	String buffer = "<div style='overflow:scroll;width:900px; height: 250px;'><table id='dataTable'><thead><tr>"
 	    		        			+ "   			        				                            <td style='padding-right: 30px;font-weight: bold;color:#eb6000'>Fees Category</td>"
 	    		        			+ "   			        											<td style='padding-right: 20px;font-weight: bold;color:#eb6000'>class</td>	"
 	    		        			+ "																	<td style='padding-right: 100px;font-weight: bold;color:#eb6000'>Fees Amount</td>"
@@ -587,12 +595,12 @@ public class FeesService {
 	    		        			+ "   			        										</thead>";
 	   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
 	   		        		buffer = buffer +  "<option></option>";*/
-	   			        	for(int i =0; i<feecategoryList.size();i++){
+	   			        	for(int i =0; i<feecategoryListSub.size();i++){
 	   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 	   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
-	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+""
-	   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
-	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" size='18'/></td><td> <input"
+	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryListSub.get(i).getIdfeescategory()+""
+	   			        				+ "									size='18'> "+feecategoryListSub.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryListSub.get(i).getParticularname()+""
+	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryListSub.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryListSub.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" size='18'/></td><td> <input"
 	   			        						+ "   			     type='text' value='0' name='feesCount' id='feesCount_"+i+"'"
 	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18'><br></td>"
 	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";

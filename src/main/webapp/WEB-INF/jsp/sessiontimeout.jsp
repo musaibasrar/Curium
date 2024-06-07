@@ -68,7 +68,7 @@
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
+        <td height="250" align="left" valign="middle"><p class="style1">Session time out, Please login again</p>
         <p class="style1">
           	<!-- <input type="button" value="Login" id="login" > -->
           	<a href="/bright/UserProcess/logout" target="_parent" id="login">Login</a>

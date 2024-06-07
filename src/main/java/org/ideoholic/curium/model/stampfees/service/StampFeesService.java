@@ -467,8 +467,16 @@ public class StampFeesService {
         	String className = request.getParameter("classsearch");
         	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
         	
-            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
-            httpSession.setAttribute("feescategory", feecategoryList);
+            List<Feescategory> feecategoryListMain= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+            List<Feescategory> feecategoryListSub = new ArrayList<Feescategory>();
+            String prefix = "New Admission";
+            for (Feescategory feescategory : feecategoryListMain) {
+				String feesCatName = feescategory.getFeescategoryname();
+				if(!feesCatName.startsWith(prefix)) {
+					feecategoryListSub.add(feescategory);
+				}
+			}
+            httpSession.setAttribute("feescategory", feecategoryListSub);
   		
     		
     		

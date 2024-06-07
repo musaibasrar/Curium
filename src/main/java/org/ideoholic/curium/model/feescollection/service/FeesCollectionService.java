@@ -430,7 +430,12 @@ public class FeesCollectionService {
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getFeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -455,7 +460,12 @@ public class FeesCollectionService {
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getFeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -490,7 +500,12 @@ public class FeesCollectionService {
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getFeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
@@ -1406,7 +1421,12 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1431,7 +1451,12 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1602,7 +1627,13 @@ public class FeesCollectionService {
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				
+				String prefix = "New Admission";
+				String feesCategoryName = studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname();
+				if (feesCategoryName.startsWith(prefix)) {
+					feesCategoryName=feesCategoryName.substring(prefix.length() + 1); // Remove prefix and the following space and hyphen
+                }
+				feeCatMap.put(feesCategoryName, feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);

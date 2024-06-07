@@ -138,8 +138,12 @@ function viewStudentDiary(sid){
 
 #myTable {
   border : 2px solid;
+  font-size : 12px;
 }
-
+.container{
+margin-left:0px;
+margin-right:0px;
+}
 </style>
 
 
@@ -163,7 +167,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <form id="form1" method="post">
-<div class="container mt-5" style="max-width:100%;">
+<div class="container" style="max-width:42%;">
 
 <h2 align="center" style="color:#FF914D">Diary</h2>
 <table class="table table-striped table-bordered table-hover" id="myTable">
@@ -197,7 +201,7 @@ for(Cookie cookie : cookies){
 
 
 </div>
-<div class="container" style="max-width:100%;">
+<div class="container" style="max-width:42%;">
  <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
                     <td><a style="color: #4B6A84;font-size: 12px" href="/bright/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a></td>
