@@ -412,9 +412,9 @@ public class AccountActionAdapter {
 		String strBranchId = httpSession.getAttribute("branchid").toString();
 
 		TrialBalanceResponseDto trialBalanceResponseDto = accountService.trialBalance(strFromDate, strToDate, strBranchId);
-		httpSession.setAttribute("accountdetailsbalanceMap", trialBalanceResponseDto.getAccountBalanceMap());
-		httpSession.setAttribute("credittotal", trialBalanceResponseDto.getCreditAllAcc());
-		httpSession.setAttribute("debittotal", trialBalanceResponseDto.getDebitAllAcc());
+		httpSession.setAttribute("accountdetailsbalanceMap", trialBalanceResponseDto.getAccountDetailsBalanceMap());
+		httpSession.setAttribute("credittotal", trialBalanceResponseDto.getCreditTotal());
+		httpSession.setAttribute("debittotal", trialBalanceResponseDto.getDebitTotal());
 		httpSession.setAttribute("fromdatetb", trialBalanceResponseDto.getFromDate());
 		httpSession.setAttribute("todatetb", trialBalanceResponseDto.getToDate());
 
