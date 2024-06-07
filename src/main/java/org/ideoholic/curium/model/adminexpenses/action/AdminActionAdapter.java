@@ -1,9 +1,12 @@
 package org.ideoholic.curium.model.adminexpenses.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpenseResponseDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDateDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
@@ -60,6 +63,7 @@ public class AdminActionAdapter {
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		adminService.approveVoucher(expenseiddto);
+		
 	}
 
 	public void printVoucher() {
@@ -118,5 +122,15 @@ public class AdminActionAdapter {
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		adminService.deleteMultiple(expenseiddto);
 	}
+	
+	
+	public boolean viewAllExpenses() {
+		AdminService adminService = new AdminService(request, response);
+		Integer branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
+		ResultResponse resultResponse = adminService.viewAllExpenses(branchId);
+		httpSession.setAttribute("adminexpenses", resultResponse.getResultList());
+		return resultResponse.isSuccess();
+	}
+
 
 }
