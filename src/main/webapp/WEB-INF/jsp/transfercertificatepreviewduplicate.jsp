@@ -80,7 +80,7 @@
 
   td{
 	font-style:italic;
-	font-size: 20px;
+	font-size: 22px;
 	margin-top:5px;
 	margin-bottom: 5px;
 	
@@ -220,7 +220,7 @@ for(Cookie cookie : cookies){
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
-				<label class="addressLine">(Senior and Secondary Residential and day Boarding)</label><br>
+				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
 				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
 				<td>&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
@@ -250,7 +250,7 @@ for(Cookie cookie : cookies){
 
 				<td align="center">
 
-			<h3><u>SCHOOL LEAVING CERTIFICATE</u><br>DUPLICATE</h3>
+			<h3><u>SCHOOL LEAVING CERTIFICATE</u><br>${type}</h3>
 			</td>
 			</tr>
 			
@@ -262,58 +262,58 @@ for(Cookie cookie : cookies){
 			</table>
 			<table width="100%" style="border:1px solid black"></table>
 
-		<table align="center">
+		<table align="center" >
 		<br>
 		<br>
-		<tr><td>Sr No.:&nbsp;<span style="font-weight: bold;width: 120px;"> <c:out value="${studentdetails.student.studentexternalid}" /> </span></td>
-             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;G.R. No.:&nbsp;<span style="font-weight: bold;width: 200px;"><c:out value="${studentdetails.student.sts}" /> </span></td>
+		<tr><td>Sr No.:&nbsp; <c:out value="${studentdetails.student.studentexternalid}" /> </td>
+             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;G.R. No.:&nbsp;<c:out value="${studentdetails.student.sts}" /> </td>
 			</tr>
 			
-			<tr><td>Student ID:&nbsp;<span style="font-weight: bold;width: 120px;">${grno}</span></td>
-             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;UID No.:&nbsp;<span style="font-weight: bold;width: 200px;"><c:out value="${studentdetails.student.disabilitychild}" /></span></td>
+			<tr><td>Student ID:&nbsp;${grno}</td>
+             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;UID No.:&nbsp;<c:out value="${studentdetails.student.disabilitychild}" /></td>
 			</tr>
 			
 			<tr>
 
 				<td >
 					1.&nbsp;&nbsp;&nbsp;Name of pupil in full </td><td>
-				<span style="font-weight: bold;width: 500px;"><c:out value="${studentdetails.student.name}" /></span>	
+				<c:out value="${studentdetails.student.name}" />
 				</td>
 				</tr>
 				   
 				    <tr>
 				    <td>
 					2.&nbsp;&nbsp;&nbsp;Mother's name </td>
-				    <td><span style="font-weight: bold;width: 500px;"><c:out value="${studentdetails.mothersname}" /></span>
+				    <td><c:out value="${studentdetails.mothersname}" />
 				    </td>
 			        </tr>
 			        
 			        <tr>
 				    <td>
-					3.&nbsp;&nbsp;&nbsp;Father's/Guardian's Name </td><td>
-				   <span style="font-weight: bold;width: 500px;"> <c:out value="${studentdetails.fathersname}" /></span>
+					3.&nbsp;&nbsp;&nbsp;Father's/Guardian's Name&emsp;&emsp;&emsp; </td><td>
+				    <c:out value="${studentdetails.fathersname}" />
 				   </td>
 				   </tr>
 				
 				    <tr>
 				    <td >
 				    4.&nbsp;&nbsp;&nbsp;Nationality </td><td>
-					<span style="font-weight: bold;width: 200px;"><c:out value="${studentdetails.student.nationality}" /></span>
+					<c:out value="${studentdetails.student.nationality}" />
 					</td>
 					</tr>
 					
 					<tr>
 					<td>
 					5.&nbsp;&nbsp;&nbsp;Mother Tongue </td><td>
-									<span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.mothertongue}" /></span>
-					 6.&nbsp;&nbsp;&nbsp;Religion <span style="font-weight: bold;width: 120px;float:none;"><c:out value="${studentdetails.student.religion}" /></span>
+									<c:out value="${studentdetails.student.mothertongue}" />
+					 6.&nbsp;&nbsp;&nbsp;Religion&nbsp;&nbsp;&nbsp; <c:out value="${studentdetails.student.religion}" />
 					 </td></tr>
 				
 					<tr>
 					<td>
 					7.&nbsp;&nbsp;&nbsp;Caste </td><td>
-					<span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.caste}" /></span>
-					 8.&nbsp;&nbsp;&nbsp;Sub-caste: <span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.socialcategory}" /></span>
+					<c:out value="${studentdetails.student.caste}" />
+					 8.&nbsp;&nbsp;&nbsp;Sub-caste: <c:out value="${studentdetails.student.socialcategory}" />
 					 </td>
 					 </tr>
 					
@@ -322,41 +322,42 @@ for(Cookie cookie : cookies){
 				    <td >
 					9.&nbsp;&nbsp;&nbsp;Place of the birth
 					<td>
-					<span style="font-weight: bold;width: 500px;"><c:out value="${studentdetails.student.placeofbirth}" /></span>
+					<c:out value="${studentdetails.student.placeofbirth}" />
 				    </td></tr>
 				
 				
 				    <tr>
 					<td >
 					10.&nbsp;&nbsp;&nbsp;Date of Birth <td>
-				    <span style="font-weight: bold;width: 500px;"><fmt:formatDate value="${studentdetails.student.dateofbirth}" pattern="dd/MM/yyyy" /></span>
+				    <fmt:formatDate value="${studentdetails.student.dateofbirth}" pattern="dd/MM/yyyy" />
 				    </td></tr>
 				
 				
 				    <tr>
 				    <td >
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth in words <td>
-				     <span style="font-weight: bold;width: 500px;"><c:out value="${dateinword}" /></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth in words <td >
+				     <c:out value="${dateinword}" />
 				    </td></tr>
 					
 				   <tr>
 				   <td >
-					11.&nbsp;&nbsp;&nbsp;Last school and class attended</td> <td>
-					 <span style="font-weight: bold;width: 500px;">${branchname}
-					  </span>
+					11.&nbsp;&nbsp;&nbsp;Last school and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class attended</td> <td >
+					 ${branchname}
 				   </td></tr>	
 				
 				   <tr><td></td>
 				   <td>
-				   <span style="font-weight: bold;width: 500px;"><c:out value="${studentdetails.student.classstudying}" /></span>
+				   <c:set var="itemparts" value="${fn:split(studentdetails.student.classstudying, '--')}" />
+						  <c:out value="${itemparts[0]}" />
 				   </td>
 				   </tr>
 				
 				   <tr>
 				   <td>
 					12.&nbsp;&nbsp;&nbsp;Date of admission </td><td>
-					<span style="font-weight: bold;width: 120px;"><fmt:formatDate value="${studentdetails.student.admissiondate}" pattern="dd/MM/yyyy" /></span>
-					 Admission standard <span style="font-weight: bold;width: 120px;float:none;"><c:out value="${studentdetails.student.classadmittedin}" /></span>
+					<fmt:formatDate value="${studentdetails.student.admissiondate}" pattern="dd/MM/yyyy" />
+					  &emsp;&emsp;Admission standard &nbsp;&nbsp;&nbsp;<c:set var="itemparts" value="${fn:split(studentdetails.student.classadmittedin, '--')}" />
+						  <c:out value="${itemparts[0]}" />
 					 </td>
 					 </tr>
 				
@@ -364,34 +365,34 @@ for(Cookie cookie : cookies){
 				    <tr>
 				    <td>
 					13.&nbsp;&nbsp;&nbsp;Progress </td><td>
-					<span style="font-weight: bold;width: 120px;float:none;">${progress} </span>
-					 14.&nbsp;&nbsp;&nbsp;Conduct <span style="font-weight: bold;width: 120px;float:none;">${conduct} </span>
+				      ${progress} &nbsp;&nbsp;&nbsp;
+					 14.&nbsp;&nbsp;&nbsp;Conduct &nbsp;&nbsp;&nbsp;${conduct} 
 					 </td></tr>
 				
 				    <tr>
  				    <td>
-					15.&nbsp;&nbsp;&nbsp;Date of Leaving</td><td>
-					<span style="font-weight: bold;width: 500px;">${leavingdate}</span>
+					15.&nbsp;&nbsp;&nbsp;Date of Leaving</td><td >
+					${leavingdate}
 				    </td></tr>	
 				
 				
 				    <tr>
 				    <td >
 					16.&nbsp;&nbsp;&nbsp;Standard in which studying  </td><td>
-				    <span style="font-weight: bold;width: 500px;"><c:out value="${studentdetails.student.classstudying}" />&emsp;<c:out value="${studentdetails.student.yearofadmission}" /></span>	
+				    <c:out value="${studentdetails.student.classstudying}" />&emsp;<c:out value="${studentdetails.student.yearofadmission}" />	
 				     </td></tr>	
 				
 				
 				   <tr>
 				  <td >
 					17.&nbsp;&nbsp;&nbsp;Reason of Leaving school </td><td>
-					<span style="font-weight: bold;width: 500px;">${leavingReason}</span>
+					${leavingReason}
 				    </td></tr>	
 					
 				    <tr>
 				    <td >
 					18.&nbsp;&nbsp;&nbsp;Remarks</td><td>
-					<span style="font-weight: bold;width: 500px;">${Remarks}</span>
+					${Remarks}
 				     </td></tr>	
 				
 				<tr>
@@ -403,8 +404,8 @@ for(Cookie cookie : cookies){
 				<tr>
 				<td >
 					19.&nbsp;&nbsp;&nbsp;Date of issue </td><td>
-					<span style="font-weight: bold;width: 120px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></span>
+					<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
 				</td></tr>	
 		</table>
 		
