@@ -84,6 +84,7 @@ public class DocumentService {
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
+		String type = DataUtil.emptyString(request.getParameter("type"));
 		String grno = DataUtil.emptyString(request.getParameter("grno"));
 		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
@@ -130,6 +131,7 @@ public class DocumentService {
 				 request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
+					request.setAttribute("type", type);
 					request.setAttribute("grno", grno);
 					request.setAttribute("tcno", tcno);
 					request.setAttribute("caste", caste);
@@ -172,6 +174,7 @@ public class DocumentService {
 			 request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);
+				request.setAttribute("type", type);
 				request.setAttribute("grno", grno);
 				request.setAttribute("tcno", tcno);
 				request.setAttribute("caste", caste);
