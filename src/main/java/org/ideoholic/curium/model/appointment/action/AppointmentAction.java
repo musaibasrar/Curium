@@ -48,7 +48,7 @@ public class AppointmentAction {
 
 	@PostMapping("/exportAppointmentsReport")
 	private String exportAppointmentsReport() {
-		new AppointmentService(request, response).exportAppointmentsReport();
+		appointmentActionAdapter.exportAppointmentsReport();
 		return "exportsuccessappointment";
 	}
 

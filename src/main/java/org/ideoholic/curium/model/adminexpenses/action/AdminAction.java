@@ -67,10 +67,11 @@ public class AdminAction {
 	@GetMapping("/viewAllExpenses")
 	public String viewAllExpenses() { 
 		
-		new AdminService(request, response).viewAllExpenses();
+		adminActionAdapter.viewAllExpenses();
 		return "adminexpenses";
 		
     }
+	
 
 	@PostMapping("/addExpenses")
 	public String addExpenses() {

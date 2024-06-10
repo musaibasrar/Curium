@@ -294,11 +294,9 @@ public class AppointmentService {
 		return monthlyAppointmentsResponseDto;
 
 	}
+	public ResultResponse exportAppointmentsReport(ExportAppointmentsReportDto exportAppointmentsReportDto) {
 
-	public boolean exportAppointmentsReport() {
-		
-		
-		List<Appointment> apptList = (List<Appointment>) httpSession.getAttribute("appointmentList");
+		List<Appointment> apptList =exportAppointmentsReportDto.getAppoitmentList();
 	
 			boolean writeSucees = false;
 			
@@ -360,10 +358,11 @@ public class AppointmentService {
 					workbook.write(out);
 					out.close();
 					writeSucees = true;
+                    return ResultResponse.builder().success(writeSucees).build();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return writeSucees;
+			return ResultResponse.builder().build();
 			// getFile(name, path);
 		
 	}
