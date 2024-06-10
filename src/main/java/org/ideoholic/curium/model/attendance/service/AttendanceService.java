@@ -54,9 +54,9 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class AttendanceService {
 	
@@ -1172,8 +1172,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 	}
 
-	public boolean markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
-		boolean result = false;
+	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
+		ResultResponse result = null;
 		if(markStaffAttendanceDto.getCurrentAcademicYear()!=null){
 			String[] attendanceIds = markStaffAttendanceDto.getAttendanceIds();
 			String[] staffAttendanceStatus = markStaffAttendanceDto.getStaffAttendanceStatus();
@@ -1205,7 +1205,11 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				staffDailyAttendance.setBranchid(markStaffAttendanceDto.getBranchId());
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
-			result = new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList);
+			result = ResultResponse
+					.builder()
+					.message((new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList)))
+					.success(true)
+					.build();
 		}
 		return result;
 	}

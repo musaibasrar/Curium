@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.attendance.action;
 
 import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,8 @@ public class AttendanceActionAdapter {
         markStaffAttendanceDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         markStaffAttendanceDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
-        return attendanceService.markStaffAttendance(markStaffAttendanceDto);
+        ResultResponse resultResponse = attendanceService.markStaffAttendance(markStaffAttendanceDto);
+
+        return resultResponse.isSuccess();
     }
 }
