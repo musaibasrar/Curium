@@ -1103,11 +1103,11 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 	}
 
-	public boolean updateStaffAttendanceDetails() {
+	public boolean updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-			String[] attendanceIds = request.getParameterValues("attandanceIDs");
-			String[] studentAttendanceStatus = request.getParameterValues("staffAttendanceStatus");
+		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
+			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
+			String[] studentAttendanceStatus = updateStaffAttendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
 			List<String> staffAttendanceStatusList = new ArrayList<String>();
 			for (String attid : attendanceIds) {
