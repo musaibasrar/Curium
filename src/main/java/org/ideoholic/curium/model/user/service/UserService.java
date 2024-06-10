@@ -25,6 +25,8 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
+import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -37,6 +39,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class UserService {
 	
@@ -137,14 +140,22 @@ public class UserService {
         	//End Fees Details
         	
         	//Daily Expenses
-        		new AdminService(request, response).dailyExpenses();
+        	DailyExpensesResponseDto dailyResponse = new AdminService(request, response).dailyExpenses(request.getParameter("selectedbranchid"));
+        	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
+        	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
+			request.setAttribute("dayone", dailyResponse.getDayOne());
+			
+			request.setAttribute("dailyadminexpenses", dailyResponse.getDailyAdminExpenses());
+			request.setAttribute("dailyexpenses", dailyResponse.getDailyExpenses());
         		
         	//Monthly Expenses
-        		new AdminService(request, response).getMonthlyExpenses();
+			MonthlyExpensesResponseDto monthlyExpense = new AdminService(request, response).getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
+			request.setAttribute("monthlyexpenses", monthlyExpense.getMonthlyExpenses());
+			request.setAttribute("monthlistexpenses", monthlyExpense.getMonthListExpenses());
         		
         	//Get Boys & Girls
-        		new AdminService(request, response).getTotalBoysGirls();
-        		
+			ResultResponse result = new AdminService(request, response).getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
+			request.setAttribute("totalboysgirls", result.getResultList());
         	
         request.setAttribute("studentxaxis", xaxisList);
         request.setAttribute("studentyaxis", yaxisList);

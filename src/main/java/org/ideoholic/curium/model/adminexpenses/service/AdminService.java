@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.adminexpenses.service;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,10 +21,10 @@ import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDateDto;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpensesDto;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
+import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -167,23 +166,22 @@ public class AdminService {
 		return adminExpenseResponseDto;
 	}
 	
-	public void dailyExpenses() {
+	
+	public DailyExpensesResponseDto dailyExpenses(String branchId) {
 
-		 
+		DailyExpensesResponseDto dailyExpenses = DailyExpensesResponseDto.builder().build();
 		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
-		String branchId = request.getParameter("selectedbranchid");
 		int idBranch = 0;
                
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
-
-	        if(branchId!=null) {
+	        if(branchId.contains(":")) {
 	        	String[] branchIdName = branchId.split(":");
 	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("expensesdatebranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
+	        	dailyExpenses.setExpensesDateBranchName(branchIdName[1]);
+	        	dailyExpenses.setBranchName("Branch Name:");
 	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        	idBranch = Integer.parseInt(branchId);
 	        }
 	        
 		String queryMain ="From Adminexpenses as adminexpenses where branchid="+idBranch+" AND";
@@ -195,7 +193,7 @@ public class AdminService {
 			
 			if(!oneDay.equalsIgnoreCase("")){
 				querySub = " adminexpenses.entrydate = '"+oneDay+"'" ;
-				request.setAttribute("dayone", oneDay);
+				dailyExpenses.setDayOne(oneDay);
 			}
 			
 						
@@ -210,16 +208,14 @@ public class AdminService {
 				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
 				sumOfExpenses = sumOfExpenses + expadmin;
 			}
-			
-			request.setAttribute("dailyadminexpenses", adminExpensesList);
-			request.setAttribute("dailyexpenses", sumOfExpenses);
-	
+			dailyExpenses.setDailyAdminExpenses(adminExpensesList);
+			dailyExpenses.setDailyExpenses(sumOfExpenses);
+			return dailyExpenses;
 	}
 	
 	
-	public void getMonthlyExpenses() {
+	public MonthlyExpensesResponseDto getMonthlyExpenses(String branchId, String toDate, String fromDate) {
 
-		
 		List<String> monthList = new LinkedList<String>();
 		List<String> totalExpensesSum = new LinkedList<String>();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -228,9 +224,7 @@ public class AdminService {
 		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Adminexpenses as adminexpenses where branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND ";
-		String toDate = DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		String queryMain = "From Adminexpenses as adminexpenses where branchid="+Integer.parseInt(branchId)+" AND ";
 		
 		try {
 			dateBefore = df.parse(todaysDate);
@@ -273,15 +267,16 @@ public class AdminService {
 			monthList.add("\"" + monthYear + "\"");
 		}
 		
-		request.setAttribute("monthlyexpenses", totalExpensesSum);
-		request.setAttribute("monthlistexpenses", monthList);
-	
+		return MonthlyExpensesResponseDto.builder()
+				.monthlyExpenses(totalExpensesSum)
+				.monthListExpenses(monthList)
+				.build();
 	}
 	
 	
-	public void getTotalBoysGirls() {
+	public ResultResponse getTotalBoysGirls(String strBranchId) {
 		List<Student> studentsList = new ArrayList<Student>();
-		int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+		int branchId = Integer.parseInt(strBranchId);
 		int totalBoys = 0, totalGirls = 0;
 		List<String> boysGirls = new ArrayList<String>();
 		
@@ -298,9 +293,11 @@ public class AdminService {
 		System.out.println("girls "+totalGirls);
 		boysGirls.add("\"" + totalBoys + "\""); 
 		boysGirls.add("\"" + totalGirls + "\"");
-		request.setAttribute("totalboysgirls", boysGirls);
+		
+		return ResultResponse.builder()
+				.resultList(boysGirls)
+				.build();
 	}
-
 
 	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto) {
         try {
