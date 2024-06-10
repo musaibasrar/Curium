@@ -32,6 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
+import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -41,6 +42,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class DocumentService {
 
@@ -386,17 +388,16 @@ public class DocumentService {
 	}
 
 
-	public boolean exportAdmissionAbstract() {
-
-		String[] studentIds = request.getParameterValues("studentIDs");
-		boolean successResult = false;
+	public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto) {
+		
+		ResultResponse resultResponse = null;
 		
 		List<Parents> listOfStudentRecords = new LinkedList<Parents>();
 
-		if (studentIds != null) {
-			for (String id : studentIds) {
+		if (studentIdDto.getStudentIds() != null) {
+			for (String id : studentIdDto.getStudentIds()) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
+					String queryMain = "From Parents as parents where parents.branchid="+studentIdDto.getBranchId()+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
@@ -405,7 +406,8 @@ public class DocumentService {
 			}
 			try {
 				if (exportDataToExcel(listOfStudentRecords)) {
-					successResult = true;
+					//successResult = true;
+					return ResultResponse.builder().success(true).build();
 				} 
 
 			} catch (Exception e) {
@@ -413,11 +415,40 @@ public class DocumentService {
 			}
 		}
 
-		return successResult;
+		return resultResponse;
 
 	}
 
 
+	/*
+	 * public boolean exportAdmissionAbstract() {
+	 * 
+	 * String[] studentIds = request.getParameterValues("studentIDs"); boolean
+	 * successResult = false;
+	 * 
+	 * List<Parents> listOfStudentRecords = new LinkedList<Parents>();
+	 * 
+	 * if (studentIds != null) { for (String id : studentIds) { if (id != null || id
+	 * != "") { String queryMain =
+	 * "From Parents as parents where parents.branchid="+Integer.parseInt(
+	 * httpSession.getAttribute(BRANCHID).toString())+" AND parents.Student.id = "
+	 * +id+" order by parents.Student.admissionnumber ASC";
+	 * 
+	 * Parents searchStudentRecords = new
+	 * studentDetailsDAO().getStudentRecords(queryMain);
+	 * listOfStudentRecords.add(searchStudentRecords); }
+	 * 
+	 * } try { if (exportDataToExcel(listOfStudentRecords)) { successResult = true;
+	 * }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * return successResult;
+	 * 
+	 * }
+	 * 
+	 */
+	
 	private boolean exportDataToExcel(List<Parents> listOfStudentRecords) {
 
 		boolean writeSucees = false;
