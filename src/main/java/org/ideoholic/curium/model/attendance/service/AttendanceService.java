@@ -1207,8 +1207,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			}
 			result = ResultResponse
 					.builder()
-					.message((new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList)))
-					.success(true)
+					.success((new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList)))
 					.build();
 		}
 		return result;

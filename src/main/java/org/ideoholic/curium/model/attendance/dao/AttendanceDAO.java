@@ -513,9 +513,9 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		return staffDailyAttendance;
 	}
 
-	public String checkStaffAttendance(List<Staffdailyattendance> staffDailyAttendanceList) {
+	public boolean checkStaffAttendance(List<Staffdailyattendance> staffDailyAttendanceList) {
 
-		String result = "false";
+		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
 			
@@ -532,7 +532,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			}
 			
 			transaction.commit();
-			result = "true";
+			result = true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
 		}finally {
