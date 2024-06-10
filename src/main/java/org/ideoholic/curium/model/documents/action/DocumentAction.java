@@ -60,16 +60,7 @@ public class DocumentAction {
         
 	}
 	
-	/*
-	 * @PostMapping("/generateAdmissionAbstract") public String
-	 * generateAdmissionAbstract() {
-	 * 
-	 * if(new DocumentService(request, response).exportAdmissionAbstract()){ return
-	 * "exportsuccessaa"; }else{ return "exportfailure"; }
-	 * 
-	 * }
-	 */
-
+	
 	@PostMapping("/searchForStudents")
 	public String searchForStudents() {
 		if(new DocumentService(request, response).searchForStudents()){
