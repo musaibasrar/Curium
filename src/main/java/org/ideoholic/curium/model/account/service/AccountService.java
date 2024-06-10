@@ -883,8 +883,8 @@ public class AccountService {
 						.accountDetailsBalanceMap(accountBalanceMap)
 						.creditTotal(creditAllAcc)
 						.debitTotal(debitAllAcc)
-						.fromDate(fromDate = DataUtil.dateFromatConversionSlash(fromDate))
-						.toDate(toDate = DataUtil.dateFromatConversionSlash(toDate))
+						.fromDate(DataUtil.dateFromatConversionSlash(fromDate))
+						.toDate(DataUtil.dateFromatConversionSlash(toDate))
 						.success(true)
 						.build();
 				
