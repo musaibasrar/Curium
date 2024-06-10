@@ -35,6 +35,9 @@ public class AttendanceAction {
 	@Autowired
 	HttpSession httpSession;
 
+	@Autowired
+	AttendanceActionAdapter attendanceActionAdapter;
+
 	String errorPage = "error";
 
 	@GetMapping("/attendanceExport")
@@ -80,7 +83,7 @@ public class AttendanceAction {
 	@PostMapping("/markStaffAttendance")
 	public String markStaffAttendance() {
 
-		if (new AttendanceService(request, response).markStaffAttendance()) {
+		if (attendanceActionAdapter.markStaffAttendance()) {
 			return "attendancemarkstaffsuccess";
 		}
 		return errorPage;

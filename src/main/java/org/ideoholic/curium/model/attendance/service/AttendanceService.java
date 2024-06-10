@@ -45,11 +45,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
-import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
-import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -1176,13 +1172,13 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 	}
 
-	public boolean markStaffAttendance() {
+	public boolean markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
 		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-			String[] attendanceIds = request.getParameterValues("externalIDs");
-			String[] staffAttendanceStatus = request.getParameterValues("staffAttendanceStatus");
-			String[] inTime = request.getParameterValues("intime");
-			String[] outTime = request.getParameterValues("outtime");
+		if(markStaffAttendanceDto.getCurrentAcademicYear()!=null){
+			String[] attendanceIds = markStaffAttendanceDto.getAttendanceIds();
+			String[] staffAttendanceStatus = markStaffAttendanceDto.getStaffAttendanceStatus();
+			String[] inTime = markStaffAttendanceDto.getInTime();
+			String[] outTime = markStaffAttendanceDto.getOutTime();
 			List<String> attendanceIdsList = new ArrayList<String>();
 			List<String> staffAttendanceStatusList = new ArrayList<String>();
 			List<String> inTimeList = new ArrayList<String>();
@@ -1205,8 +1201,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				staffDailyAttendance.setIntime(inTimeList.get(i));
 				staffDailyAttendance.setOuttime(outTimeList.get(i));
 				staffDailyAttendance.setDate(new Date());
-				staffDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-				staffDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				staffDailyAttendance.setAcademicyear(markStaffAttendanceDto.getCurrentAcademicYear());
+				staffDailyAttendance.setBranchid(markStaffAttendanceDto.getBranchId());
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
 			result = new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList);
