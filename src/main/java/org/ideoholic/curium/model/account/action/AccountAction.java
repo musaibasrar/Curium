@@ -94,7 +94,7 @@ public class AccountAction {
 	@RequestMapping( value = "/trialBalance", method = { RequestMethod.GET, RequestMethod.POST } )
 	public String trialBalance() {
 		
-		if(new AccountService(request, response).trialBalance()){
+		if(accountActionAdapter.trialBalance()){
 			return "trialbalance";
 		}
 		return ERRORPAGE;

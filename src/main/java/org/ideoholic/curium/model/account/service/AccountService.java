@@ -826,16 +826,16 @@ public class AccountService {
 	}
 
 
-	public boolean trialBalance() {
+	public TrialBalanceResponseDto trialBalance(String strFromDate, String strToDate, String strBranchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(strFromDate));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(strToDate));
 		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
+		if(strBranchId!=null) {
 			
-			int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			int branchId = Integer.parseInt(strBranchId);
 
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
 				accountsDetails = new AccountDAO().getAccountdetails(branchId);
@@ -848,7 +848,7 @@ public class AccountService {
 				
 				for (Accountdetails accountDetails : accountsDetails) {
 					
-					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(strBranchId));
 					
 					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
@@ -875,13 +875,20 @@ public class AccountService {
 				}
 					
 				}
-				httpSession.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
-				httpSession.setAttribute("credittotal", creditAllAcc);
-				httpSession.setAttribute("debittotal", debitAllAcc);
-				httpSession.setAttribute("fromdatetb", fromDate = DataUtil.dateFromatConversionSlash(fromDate));
-				httpSession.setAttribute("todatetb", toDate = DataUtil.dateFromatConversionSlash(toDate));
-				
+
 				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
+
+				return TrialBalanceResponseDto
+						.builder()
+						.accountDetailsBalanceMap(accountBalanceMap)
+						.creditTotal(creditAllAcc)
+						.debitTotal(debitAllAcc)
+						.fromDate(DataUtil.dateFromatConversionSlash(fromDate))
+						.toDate(DataUtil.dateFromatConversionSlash(toDate))
+						.success(true)
+						.build();
+				
+
 				
 				/*if(totalBalanceAllAccDiff.signum() == 1){
 					request.setAttribute("differencetotal", "Difference in Balances");
@@ -892,10 +899,12 @@ public class AccountService {
 					request.setAttribute("creditdifference", totalBalanceAllAccDiff.abs());
 					request.setAttribute("credittotal", creditAllAcc.add(totalBalanceAllAccDiff.abs()));
 				}*/
-				return true;
 		}
 		
-		return false;
+		return TrialBalanceResponseDto
+				.builder()
+				.success(false)
+				.build();
 	}
 
 

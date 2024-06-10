@@ -403,4 +403,21 @@ public class AccountActionAdapter {
 
 		return currentFinancialYearResponseDto.isSuccess();
 	}
+
+	public boolean trialBalance() {
+		AccountService accountService = new AccountService(request, response);
+
+		String strFromDate = request.getParameter("fromdate");
+		String strToDate = request.getParameter("todate");
+		String strBranchId = httpSession.getAttribute("branchid").toString();
+
+		TrialBalanceResponseDto trialBalanceResponseDto = accountService.trialBalance(strFromDate, strToDate, strBranchId);
+		httpSession.setAttribute("accountdetailsbalanceMap", trialBalanceResponseDto.getAccountDetailsBalanceMap());
+		httpSession.setAttribute("credittotal", trialBalanceResponseDto.getCreditTotal());
+		httpSession.setAttribute("debittotal", trialBalanceResponseDto.getDebitTotal());
+		httpSession.setAttribute("fromdatetb", trialBalanceResponseDto.getFromDate());
+		httpSession.setAttribute("todatetb", trialBalanceResponseDto.getToDate());
+
+		return trialBalanceResponseDto.isSuccess();
+	}
 }
