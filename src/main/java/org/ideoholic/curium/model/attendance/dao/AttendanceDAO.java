@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -515,8 +514,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 	}
 
 	public boolean checkStaffAttendance(List<Staffdailyattendance> staffDailyAttendanceList) {
-		
 
+		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
 			
@@ -533,13 +532,13 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			}
 			
 			transaction.commit();
-			return true;
+			result = true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
 		}finally {
 			HibernateUtil.closeSession();
 		}
-		return false;
+		return result;
 	}
 
 	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(
