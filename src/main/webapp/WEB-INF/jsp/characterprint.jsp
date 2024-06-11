@@ -47,9 +47,9 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 14px;
+	//font-size: 14px;
 	letter-spacing: normal;
-	text-align: left;
+	text-align: justify;
 }
 .dataTextBoldRight {
 	font-weight: normal;
@@ -63,7 +63,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	//font-size: 18px;
+	font-size: 40px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -72,7 +72,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 12px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -90,7 +90,7 @@ span{
     display:inline-block;
     border-bottom:2px solid black;
     padding-bottom:1px;
-    width: 200px;
+   // width: 200px;
     font-weight: normal;
     text-align:center;
 }
@@ -99,10 +99,32 @@ span{
  .rightside{
         float:right;
         }
+/* .save{
+ height:15px;
+ width:40px;
+ } */      
 </style>
-
 	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script>
+        $(function() {
+
+    		
+    		$(".printtcstudent").button().click(function() {
+    			printtc();
+
+    		});
+
+    		
+    					
+    	});
+        function printtc(){
+            	var form1 = document.getElementById("form1");
+        		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
+        		form1.method = "POST";
+        		form1.submit();
+            }
+        </script>
         <title>Character Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -128,22 +150,25 @@ for(Cookie cookie : cookies){
 %>
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
+	<form id="form1" method="post" class="bodymargin">
 		<br>
-		
 		 <table align="center">
                         		
-			<tr>
-				<td ><img src="/abc/images/abc.jpg" width="126" height="140"/></td>
-				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	ABC English Medium School</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	Misbah Nagar, Ring Road, Shah Jeelani Cross, Gulbarga-585103</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.9886049555&nbsp;&nbsp;&nbsp;</h6>
+			<tr><td>
+			
+			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140"></td>
+				<td style="font-style:normal;text-align:center;" >
+				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
+				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
+				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-			</tr>
+				<td><img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				</tr>
 		
-			</table>
-			<table align="center">
+			</table><table align="center" >
+			
+			
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
@@ -152,71 +177,31 @@ for(Cookie cookie : cookies){
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			<td><label style="font-size:30px;">TO WHOM IT MAY CONCERN</label></td>
 			
 			</tr>
 			<tr>
 			<td></td>
-			
-			</tr>
-			
 			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					</h3></td></tr><tr>
-					<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
-			</h3>
+			<td><p style="font-size:40px;line-height:50px;margin-left:150px;margin-right:150px;text-align:justify;">			
+			&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Master &nbsp;&nbsp;
+			<b><c:out value="${studentdetailsbonafide.student.name}" /></b>
+			Son/Daughter of &nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.fathersname}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Class&nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.classstudying}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;year
+			of passing &nbsp;&nbsp;&nbsp;&nbsp;<b> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></b>
+			&nbsp;&nbsp; was a Bonafide student of
+			this school. As per school record his Date of Birth is
+			&nbsp;&nbsp;<b><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></b>
+			and G.R. No. is &nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.sts}" /></b>.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To the best of my knowledge, he bears a 
+			good moral character. I wish all success and
+			prosperity in his life.</p>
 			</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			We wish him/her all the best for bright and prosperous future.
-			</h3>
-			</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character}" /></span>character
-			</h3>
-			</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
 			</tr>
 		</table>
 		
 
-		<TABLE id="dataTable" width="100%" border="0"
+		<TABLE id="dataTable"  border="0" align="center"
 			style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
@@ -232,17 +217,14 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-			<td align="left">
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
-			<td align="center">Accountant</td>
-			<td align="center">Principal</td>
+			<td align="left"><label style="font-size:30px">
+				Date:&nbsp;&nbsp;</label>
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;font-size:30px"
+					size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
+			<td align="center"><label style="font-size:30px">Principal</label></td>
 		</tr>
 		
-		<!-- 	<tr>
-              <td align="center"><a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a></td>
-            </tr>-->
+			
 		</TABLE>
 	</form>
 </body>
