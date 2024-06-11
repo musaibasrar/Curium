@@ -1125,21 +1125,25 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				.build();
 	}
 
-	public boolean viewStaffAttendanceDetailsMonthly() {
-		
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+	public ViewStaffAttendanceResponseDto viewStaffAttendanceDetailsMonthly(ViewStaffAttendanceDto attendanceDto, String branchId, String currentAcademicYear) {
+
+		if(currentAcademicYear!=null){
 			
-			String staffExternalId = DataUtil.emptyString(request.getParameter("staffexternalid"));
-			Date fromDate = DateUtil.dateParserUpdateStd(request.getParameter("fromdateofattendance"));
-			Date toDate = DateUtil.dateParserUpdateStd(request.getParameter("todateofattendance"));
+			String staffExternalId = DataUtil.emptyString(attendanceDto.getStaffExternalId());
+			Date fromDate = DateUtil.dateParserUpdateStd(attendanceDto.getFromDate());
+			Date toDate = DateUtil.dateParserUpdateStd(attendanceDto.getToDate());
 			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
 			Timestamp toTimestamp = new Timestamp(toDate.getTime());
 			
 			List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
-			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("staffDailyAttendance", staffDailyAttendance);
-			request.setAttribute("staffname", request.getParameter("nameofstaff"));
+			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
+
+			ViewStaffAttendanceResponseDto
+					.builder()
+					.staffDailyAttendance(staffDailyAttendance)
+					.staffName(attendanceDto.getNameOfStaff())
+					.build();
+
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
 			Calendar end = Calendar.getInstance();
@@ -1162,16 +1166,22 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			if(!staffDailyAttendance.isEmpty()){
 				totalPresent = totalDays - absentDays;
 			}
-			
-			request.setAttribute("totalpresent", totalPresent);
-			request.setAttribute("totalabsent", absentDays);
-			result = true;
+
+			ViewStaffAttendanceResponseDto
+					.builder()
+					.totalPresent(totalPresent)
+					.totalAbsent(absentDays)
+					.success(true)
+					.build();
 		}
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("staffList", staffList);
-		
-		return result;
+		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+
+		return ViewStaffAttendanceResponseDto
+				.builder()
+				.staffList(staffList)
+				.success(false)
+				.build();
 	}
 
 	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {

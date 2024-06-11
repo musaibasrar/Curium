@@ -1,8 +1,6 @@
 package org.ideoholic.curium.model.attendance.action;
 
-import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
-import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
-import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -68,5 +66,24 @@ public class AttendanceActionAdapter {
         ResultResponse resultResponse = attendanceService.exportMonthlyData(exportMonthlyDataDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         return resultResponse.isSuccess();
+    }
+
+    public boolean viewStaffAttendanceDetailsMonthly() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ViewStaffAttendanceDto attendanceDto = new ViewStaffAttendanceDto();
+        attendanceDto.setStaffExternalId(request.getParameter("staffexternalid"));
+        attendanceDto.setFromDate(request.getParameter("fromdateofattendance"));
+        attendanceDto.setToDate(request.getParameter("todateofattendance"));
+        attendanceDto.setNameOfStaff(request.getParameter("nameofstaff"));
+
+        ViewStaffAttendanceResponseDto attendanceResponseDto = attendanceService.viewStaffAttendanceDetailsMonthly(attendanceDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("staffDailyAttendance", attendanceResponseDto.getStaffDailyAttendance());
+        request.setAttribute("staffname", attendanceResponseDto.getStaffName());
+        request.setAttribute("totalpresent", attendanceResponseDto.getTotalPresent());
+        request.setAttribute("totalabsent", attendanceResponseDto.getTotalAbsent());
+        request.setAttribute("staffList", attendanceResponseDto.getStaffList());
+
+        return attendanceResponseDto.isSuccess();
     }
 }

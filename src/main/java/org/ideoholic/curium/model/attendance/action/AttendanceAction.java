@@ -100,7 +100,7 @@ public class AttendanceAction {
 
 	@PostMapping("/searchStaffAttendanceDetailsMonthly")
 	public String searchStaffAttendanceDetailsMonthly() {
-		if (new AttendanceService(request, response).viewStaffAttendanceDetailsMonthly()) {
+		if (attendanceActionAdapter.viewStaffAttendanceDetailsMonthly()) {
 			return "attendanceviewmonthlystaff";
 		}
 		return errorPage;
