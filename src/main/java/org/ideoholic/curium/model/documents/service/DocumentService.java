@@ -390,7 +390,6 @@ public class DocumentService {
 
 	public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto) {
 		
-		ResultResponse resultResponse = null;
 		
 		List<Parents> listOfStudentRecords = new LinkedList<Parents>();
 
@@ -406,7 +405,6 @@ public class DocumentService {
 			}
 			try {
 				if (exportDataToExcel(listOfStudentRecords)) {
-					//successResult = true;
 					return ResultResponse.builder().success(true).build();
 				} 
 
@@ -415,40 +413,12 @@ public class DocumentService {
 			}
 		}
 
-		return resultResponse;
+		 return ResultResponse.builder().success(false).build();
 
 	}
 
 
-	/*
-	 * public boolean exportAdmissionAbstract() {
-	 * 
-	 * String[] studentIds = request.getParameterValues("studentIDs"); boolean
-	 * successResult = false;
-	 * 
-	 * List<Parents> listOfStudentRecords = new LinkedList<Parents>();
-	 * 
-	 * if (studentIds != null) { for (String id : studentIds) { if (id != null || id
-	 * != "") { String queryMain =
-	 * "From Parents as parents where parents.branchid="+Integer.parseInt(
-	 * httpSession.getAttribute(BRANCHID).toString())+" AND parents.Student.id = "
-	 * +id+" order by parents.Student.admissionnumber ASC";
-	 * 
-	 * Parents searchStudentRecords = new
-	 * studentDetailsDAO().getStudentRecords(queryMain);
-	 * listOfStudentRecords.add(searchStudentRecords); }
-	 * 
-	 * } try { if (exportDataToExcel(listOfStudentRecords)) { successResult = true;
-	 * }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } }
-	 * 
-	 * return successResult;
-	 * 
-	 * }
-	 * 
-	 */
-	
+		
 	private boolean exportDataToExcel(List<Parents> listOfStudentRecords) {
 
 		boolean writeSucees = false;

@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class StudentIdDto {
 
 	private String[] studentIds;
-	private int branchId;
+	private String branchId;
 
 }

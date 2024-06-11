@@ -27,7 +27,7 @@ public class DocumentActionAdapter {
 		DocumentService documentService = new DocumentService(request, response);
 		StudentIdDto studentIdDto = new StudentIdDto();
 		studentIdDto.setStudentIds(request.getParameterValues("studentIDs"));
-		studentIdDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		studentIdDto.setBranchId(httpSession.getAttribute(BRANCHID).toString());
 		ResultResponse response = documentService.exportAdmissionAbstract(studentIdDto);
 		return response.isSuccess();
 	}
