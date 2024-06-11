@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.attendance.action;
 
 import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,19 @@ public class AttendanceActionAdapter {
         markStaffAttendanceDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         ResultResponse resultResponse = attendanceService.markStaffAttendance(markStaffAttendanceDto);
+
+        return resultResponse.isSuccess();
+    }
+
+    public boolean updateStaffAttendanceDetails() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto = new UpdateStaffAttendanceDetailsDto();
+        updateStaffAttendanceDetailsDto.setAttendanceIds(request.getParameterValues("attandanceIDs"));
+        updateStaffAttendanceDetailsDto.setStudentAttendanceStatus(request.getParameterValues("staffAttendanceStatus"));
+        updateStaffAttendanceDetailsDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        ResultResponse resultResponse = attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto);
 
         return resultResponse.isSuccess();
     }

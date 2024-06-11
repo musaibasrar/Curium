@@ -1103,11 +1103,11 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 	}
 
-	public boolean updateStaffAttendanceDetails() {
+	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-			String[] attendanceIds = request.getParameterValues("attandanceIDs");
-			String[] studentAttendanceStatus = request.getParameterValues("staffAttendanceStatus");
+		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
+			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
+			String[] studentAttendanceStatus = updateStaffAttendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
 			List<String> staffAttendanceStatusList = new ArrayList<String>();
 			for (String attid : attendanceIds) {
@@ -1118,9 +1118,15 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				}
 				
 			}
-			return new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList);
+			return ResultResponse
+					.builder()
+					.success(new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList))
+					.build();
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	public boolean viewStaffAttendanceDetailsMonthly() {
