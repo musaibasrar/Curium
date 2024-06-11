@@ -864,9 +864,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	}
 
 	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto) {
-		
+
 		ResultResponse result = null;
-		
+
 		if(exportMonthlyDataDto.getCurrentAcademicYear()!=null) {
 
 		String queryMain = "From Student as student where";
@@ -892,9 +892,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " student.classstudying like '" + classStudying
 					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(exportMonthlyDataDto.getBranchId());
+		} else if (classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(exportMonthlyDataDto.getBranchId());
 		}
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
@@ -912,7 +912,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 
-		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(exportMonthlyDataDto.getCurrentAcademicYear(), TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(exportMonthlyDataDto.getBranchId()));
 
 		try {
 			result = ResultResponse
