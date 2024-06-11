@@ -17,7 +17,7 @@ public class AppointmentActionAdapter {
     private HttpServletRequest request;
     @Autowired
     private HttpServletResponse response;
-   @Autowired
+    @Autowired
     private HttpSession httpSession;
 
 
@@ -33,13 +33,12 @@ public class AppointmentActionAdapter {
         generateAppointmentsReportDto.setAdmnno(request.getParameter("clientname"));
         generateAppointmentsReportDto.setStudentName(request.getParameter("studentName"));
 
-        AppointmentResponseDto appointmentResponseDto= appointmentService.generateAppointmentsReport(generateAppointmentsReportDto);
-        httpSession.setAttribute("statusselected", "Status:&nbsp;"+appointmentResponseDto.getStatusselected());
-        httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+appointmentResponseDto.getStudentselected());
-        httpSession.setAttribute("appointmentList",appointmentResponseDto.getAppointmentList());
-        httpSession.setAttribute("transactionfromdateselected", "From:"+ appointmentResponseDto.getTransactionfromdateselected());
-        httpSession.setAttribute("transactiontodateselected", "To:"+appointmentResponseDto.getTransactiontodateselected());
-
+        AppointmentResponseDto appointmentResponseDto = appointmentService.generateAppointmentsReport(generateAppointmentsReportDto);
+        httpSession.setAttribute("statusselected", "Status:&nbsp;" + appointmentResponseDto.getStatusselected());
+        httpSession.setAttribute("studentselected", "Student Name:&nbsp;" + appointmentResponseDto.getStudentselected());
+        httpSession.setAttribute("appointmentList", appointmentResponseDto.getAppointmentList());
+        httpSession.setAttribute("transactionfromdateselected", "From:" + appointmentResponseDto.getTransactionfromdateselected());
+        httpSession.setAttribute("transactiontodateselected", "To:" + appointmentResponseDto.getTransactiontodateselected());
 
 
     }
@@ -61,65 +60,70 @@ public class AppointmentActionAdapter {
     }
 
     public boolean viewAllAppointments() {
-        AppointmentService appointmentService= new AppointmentService(request,response);
-        ViewAllAppointmentsDto viewAllAppointmentsDto =new ViewAllAppointmentsDto();
+        AppointmentService appointmentService = new AppointmentService(request, response);
+        ViewAllAppointmentsDto viewAllAppointmentsDto = new ViewAllAppointmentsDto();
         viewAllAppointmentsDto.setPage(Integer.parseInt(request.getParameter("page")));
 
         viewAllAppointmentsDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-        ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto =appointmentService.viewAllAppointments(viewAllAppointmentsDto);
+        ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto = appointmentService.viewAllAppointments(viewAllAppointmentsDto);
         request.setAttribute("studentList", viewAllAppoinmentsResponseDto.getStudentList());
         request.setAttribute("appointmentList", viewAllAppoinmentsResponseDto.getAppointmentList());
         request.setAttribute("noOfPages", viewAllAppoinmentsResponseDto.getNoOfPages());
-        request.setAttribute("currentPage",viewAllAppoinmentsResponseDto.getCurrentPage());
+        request.setAttribute("currentPage", viewAllAppoinmentsResponseDto.getCurrentPage());
         return true;
     }
-   public boolean completeAppointments(){
-        AppointmentService appointmentService = new AppointmentService(request,response);
+
+    public boolean completeAppointments() {
+        AppointmentService appointmentService = new AppointmentService(request, response);
         CompleteAppointmentsDto completeAppointmentsDto = new CompleteAppointmentsDto();
-       completeAppointmentsDto.setAppointmentIds(request.getParameterValues("appointmentids"));
+        completeAppointmentsDto.setAppointmentIds(request.getParameterValues("appointmentids"));
 
-       ResultResponse resultResponse = appointmentService.completeAppointments(completeAppointmentsDto);
-       request.setAttribute("appointmentstatus",resultResponse.isSuccess());
-       return resultResponse.isSuccess();
-   }
+        ResultResponse resultResponse = appointmentService.completeAppointments(completeAppointmentsDto);
+        request.setAttribute("appointmentstatus", resultResponse.isSuccess());
+        return resultResponse.isSuccess();
+    }
 
-   public boolean cancelAppointments(){
-        AppointmentService appointmentService = new AppointmentService(request,response);
+    public boolean cancelAppointments() {
+        AppointmentService appointmentService = new AppointmentService(request, response);
         CancelAppointmentsDto cancelAppointmentsDto = new CancelAppointmentsDto();
         cancelAppointmentsDto.setAppointmentIds(request.getParameterValues("appointmentids"));
 
-        ResultResponse resultResponse =appointmentService.cancelAppointments(cancelAppointmentsDto);
-        request.setAttribute("appointmentstatus",resultResponse.isSuccess());
+        ResultResponse resultResponse = appointmentService.cancelAppointments(cancelAppointmentsDto);
+        request.setAttribute("appointmentstatus", resultResponse.isSuccess());
         return resultResponse.isSuccess();
-   }
-public void getMonthlyAppointmnents(){
-        AppointmentService appointmentService = new AppointmentService(request,response);
+    }
+
+    public void getMonthlyAppointmnents() {
+        AppointmentService appointmentService = new AppointmentService(request, response);
         MonthlyAppointmentsResponseDto monthlyAppointmentsResponseDto = appointmentService.getMonthlyAppointments();
-    request.setAttribute("monthlytotalappointments", monthlyAppointmentsResponseDto.getMonthlytotalappointments());
-    request.setAttribute("monthlistappointment", monthlyAppointmentsResponseDto.getMonthlistappointment());
-}
-public boolean updateAppointment(){
-        AppointmentService appointmentService =new AppointmentService(request,response);
+        request.setAttribute("monthlytotalappointments", monthlyAppointmentsResponseDto.getMonthlytotalappointments());
+        request.setAttribute("monthlistappointment", monthlyAppointmentsResponseDto.getMonthlistappointment());
+    }
+
+    public boolean updateAppointment() {
+        AppointmentService appointmentService = new AppointmentService(request, response);
         UpdateAppointmentDto updateAppointmentDto = new UpdateAppointmentDto();
         updateAppointmentDto.setAppointmentIds(request.getParameterValues("appointmentids"));
         updateAppointmentDto.setStarttime(request.getParameter("starttime_"));
         updateAppointmentDto.setEndtime(request.getParameter("endtime_"));
 
         ResultResponse resultResponse = appointmentService.updateAppointment(updateAppointmentDto);
-        request.setAttribute("appointmentstatus",resultResponse.isSuccess());
+        request.setAttribute("appointmentstatus", resultResponse.isSuccess());
         return resultResponse.isSuccess();
-   }
-    public void generateAppointmentsReportForClient(){
-        AppointmentService appointmentService= new AppointmentService(request,response);
+    }
+
+    public void generateAppointmentsReportForClient() {
+        AppointmentService appointmentService = new AppointmentService(request, response);
         GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto = new GenerateAppointmentsReportForClientDto();
         generateAppointmentsReportForClientDto.setStudentId(request.getParameter("id"));
 
         ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient(generateAppointmentsReportForClientDto);
-        httpSession.setAttribute("appointmentList",resultResponse.getResultList());
+        httpSession.setAttribute("appointmentList", resultResponse.getResultList());
     }
+
     public boolean exportAppointmentsReport() {
-        AppointmentService appointmentService =new AppointmentService(request,response);
+        AppointmentService appointmentService = new AppointmentService(request, response);
         ExportAppointmentsReportDto exportAppointmentsReportDto = new ExportAppointmentsReportDto();
         exportAppointmentsReportDto.setAppoitmentList((List<Appointment>) httpSession.getAttribute("appointmentList"));
 
