@@ -112,7 +112,10 @@ public boolean updateAppointment(){
    }
     public void generateAppointmentsReportForClient(){
         AppointmentService appointmentService= new AppointmentService(request,response);
-        ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient();
+        GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto = new GenerateAppointmentsReportForClientDto();
+        generateAppointmentsReportForClientDto.setStudentId(request.getParameter("id"));
+
+        ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient(generateAppointmentsReportForClientDto);
         httpSession.setAttribute("appointmentList",resultResponse.getResultList());
     }
     public boolean exportAppointmentsReport() {
