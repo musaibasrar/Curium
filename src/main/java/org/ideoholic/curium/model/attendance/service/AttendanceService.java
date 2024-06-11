@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +29,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -48,8 +42,6 @@ import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -863,9 +855,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			new AttendanceDAO().markDailyAttendanceJob(listStudentAttendance);
 	}
 
-	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto) {
+	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto, String branchId, String currentAcademicYear) {
 
-		if(exportMonthlyDataDto.getCurrentAcademicYear()!=null) {
+		if(currentAcademicYear!=null) {
 
 		String queryMain = "From Student as student where";
 
@@ -890,9 +882,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " student.classstudying like '" + classStudying
 					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(exportMonthlyDataDto.getBranchId());
+					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(branchId);
 		} else if (classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(exportMonthlyDataDto.getBranchId());
+			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(branchId);
 		}
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
@@ -910,7 +902,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 
-		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(exportMonthlyDataDto.getCurrentAcademicYear(), TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(exportMonthlyDataDto.getBranchId()));
+		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(branchId));
 
 		try {
 			ResultResponse
