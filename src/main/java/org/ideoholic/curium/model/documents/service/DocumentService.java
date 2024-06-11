@@ -388,7 +388,7 @@ public class DocumentService {
 	}
 
 
-	public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto) {
+	public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto,String branchid) {
 		
 		
 		List<Parents> listOfStudentRecords = new LinkedList<Parents>();
@@ -396,7 +396,7 @@ public class DocumentService {
 		if (studentIdDto.getStudentIds() != null) {
 			for (String id : studentIdDto.getStudentIds()) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+studentIdDto.getBranchId()+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
+					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
