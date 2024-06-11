@@ -49,6 +49,8 @@ public class AttendanceActionAdapter {
         updateStaffAttendanceDetailsDto.setStudentAttendanceStatus(request.getParameterValues("staffAttendanceStatus"));
         updateStaffAttendanceDetailsDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
-        return attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto);
+        ResultResponse resultResponse = attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto);
+
+        return resultResponse.isSuccess();
     }
 }

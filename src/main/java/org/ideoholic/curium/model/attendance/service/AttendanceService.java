@@ -1103,7 +1103,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 	}
 
-	public boolean updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
+	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
 		
 		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
 			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
@@ -1118,9 +1118,15 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				}
 				
 			}
-			return new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList);
+			return ResultResponse
+					.builder()
+					.success(new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList))
+					.build();
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	public boolean viewStaffAttendanceDetailsMonthly() {
