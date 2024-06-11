@@ -45,11 +45,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
-import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
-import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -91,23 +87,23 @@ public class AttendanceService {
 		}
 	}
 
-	public boolean addHolidays() {
+	public boolean addHolidays(AddHolidaysDto addHolidaysDto) {
 
 		Holidaysmaster holidayMaster = new Holidaysmaster();
-		String[] fromDate = request.getParameterValues("fromdate");
-		String[] toDate = request.getParameterValues("todate");
-		String[] holidayName = request.getParameterValues("holidayname");
+		String[] fromDate =addHolidaysDto.getFromDate();
+		String[] toDate = addHolidaysDto.getToDate();
+		String[] holidayName = addHolidaysDto.getHolidayName();
 		boolean result = false;
 
-		if(fromDate!=null && toDate!=null && holidayName!=null && httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(fromDate!=null && toDate!=null && holidayName!=null && addHolidaysDto.getCurrentAcademicYear()!=null){
 			try{
 		for (int i = 0; i < fromDate.length; i++) {
 			
 			holidayMaster.setFromdate(DateUtil.datePars(fromDate[i]));
 			holidayMaster.setTodate(DateUtil.datePars(toDate[i]));
 			holidayMaster.setHolidayname(holidayName[i]);
-			holidayMaster.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-			holidayMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			holidayMaster.setAcademicyear(addHolidaysDto.getCurrentAcademicYear());
+			holidayMaster.setBranchid(Integer.parseInt(addHolidaysDto.getBranchId()));
 			result = new AttendanceDAO().saveHolidays(holidayMaster);
 		}
 			}catch(Exception e){
