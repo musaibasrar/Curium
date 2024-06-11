@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.adminexpenses.action.AdminActionAdapter;
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -26,13 +27,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DocumentAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
+	
+	@Autowired
+	private DocumentActionAdapter documentActionAdapter;
 	
 	public String error ="error";
 
@@ -48,14 +52,15 @@ public class DocumentAction {
 	@PostMapping("/generateAdmissionAbstract")
 	public String generateAdmissionAbstract() {
 		
-        if(new DocumentService(request, response).exportAdmissionAbstract()){
+        if(documentActionAdapter.exportAdmissionAbstract()){
                 return "exportsuccessaa";
         }else{
                 return "exportfailure";
         }
         
 	}
-
+	
+	
 	@PostMapping("/searchForStudents")
 	public String searchForStudents() {
 		if(new DocumentService(request, response).searchForStudents()){
