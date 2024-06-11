@@ -865,8 +865,6 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto) {
 
-		ResultResponse result = null;
-
 		if(exportMonthlyDataDto.getCurrentAcademicYear()!=null) {
 
 		String queryMain = "From Student as student where";
@@ -900,7 +898,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 
 
-		Date monthOf = exportMonthlyDataDto.getMonthOf();
+		Date monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
 
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
@@ -915,16 +913,19 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(exportMonthlyDataDto.getCurrentAcademicYear(), TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(exportMonthlyDataDto.getBranchId()));
 
 		try {
-			result = ResultResponse
-						.builder()
-						.success(exportDataToExcel(studentsAttendance, monthOf))
-						.build();
+			ResultResponse
+					.builder()
+					.success(exportDataToExcel(studentsAttendance, monthOf))
+					.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
-		return result;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 	
 	

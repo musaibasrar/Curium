@@ -8,7 +8,7 @@ import java.util.Date;
 public class ExportMonthlyDataDto {
     private String addClass;
     private String addSec;
-    private Date monthOf;
+    private String monthOf;
     private String branchId;
     private String currentAcademicYear;
 }
