@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.department.action;
 
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.service.DepartmentService;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,9 @@ public class DepartmentActionAdapter {
     public void addDepartment() {
         DepartmentService departmentService = new DepartmentService(request, response);
         AddDepartmentDto addDepartmentDto = new AddDepartmentDto();
-        addDepartmentDto.setDepartment(request.getParameter("department"));
 
-        httpSession.getAttribute(BRANCHID);
+        addDepartmentDto.setDepartment(request.getParameter("department"));
+        ResultResponse resultResponse = departmentService.addDepartment(addDepartmentDto, httpSession.getAttribute(BRANCHID).toString());
+
     }
 }

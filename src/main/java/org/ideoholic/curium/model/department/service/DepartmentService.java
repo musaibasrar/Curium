@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class DepartmentService {
 
@@ -29,7 +30,7 @@ public class DepartmentService {
 
     }
 
-    public void addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
+    public ResultResponse addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
 
         Department department = new Department();
         if (branchId != null) {
@@ -42,6 +43,7 @@ public class DepartmentService {
             }
 
         }
+         return ResultResponse.builder().build();
     }
 
     public boolean viewDepartment() {
