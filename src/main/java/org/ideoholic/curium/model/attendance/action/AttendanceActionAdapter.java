@@ -1,8 +1,10 @@
 package org.ideoholic.curium.model.attendance.action;
 
+import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
 import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
 import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,21 @@ public class AttendanceActionAdapter {
         updateStaffAttendanceDetailsDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         ResultResponse resultResponse = attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto);
+
+        return resultResponse.isSuccess();
+    }
+
+    public boolean exportMonthlyData() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ExportMonthlyDataDto exportMonthlyDataDto = new ExportMonthlyDataDto();
+        exportMonthlyDataDto.setAddClass( request.getParameter("classsearch"));
+        exportMonthlyDataDto.setAddSec(request.getParameter("secsearch"));
+        exportMonthlyDataDto.setMonthOf(DateUtil.dateParserddmmyyyy(request.getParameter("monthof")));
+        exportMonthlyDataDto.setBranchId((httpSession.getAttribute(BRANCHID).toString()));
+        exportMonthlyDataDto.setCurrentAcademicYear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        ResultResponse resultResponse = attendanceService.exportMonthlyData(exportMonthlyDataDto);
 
         return resultResponse.isSuccess();
     }

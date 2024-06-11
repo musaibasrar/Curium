@@ -863,59 +863,62 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			new AttendanceDAO().markDailyAttendanceJob(listStudentAttendance);
 	}
 
-	public boolean exportMonthlyData() {
+	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto) {
 		
-		boolean result = false;
+		ResultResponse result = null;
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-		
+		if(exportMonthlyDataDto.getCurrentAcademicYear()!=null) {
+
 		String queryMain = "From Student as student where";
 
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String addClass = exportMonthlyDataDto.getAddClass();
+		String addSec = exportMonthlyDataDto.getAddSec();
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
 
 		if (!addClass.equalsIgnoreCase("")) {
 
-			conClassStudying = addClass+"--" +"%";
+			conClassStudying = addClass + "--" + "%";
 
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
+			conClassStudying = conClassStudying + "--" + addSec + "%";
 		}
-		
+
 		String classStudying = DataUtil.emptyString(conClassStudying);
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " student.classstudying like '" + classStudying
 					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
-		
-		
-		Date monthOf = DateUtil.dateParserddmmyyyy(request.getParameter("monthof"));
-		 
+
+
+		Date monthOf = exportMonthlyDataDto.getMonthOf();
+
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
 		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
 		monthOf = cStart.getTime();
 		Timestamp TimestampFrom = new Timestamp(monthOf.getTime());
-		
+
 		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMaximum(Calendar.DAY_OF_MONTH));
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
-		
-		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), TimestampFrom, Timestampto,searchStudentList, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
+
+		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
 		try {
-			result = exportDataToExcel(studentsAttendance,monthOf);
+			result = ResultResponse
+						.builder()
+						.success(exportDataToExcel(studentsAttendance, monthOf))
+						.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
