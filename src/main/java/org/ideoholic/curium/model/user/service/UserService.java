@@ -140,7 +140,7 @@ public class UserService {
         	//End Fees Details
         	
         	//Daily Expenses
-        	DailyExpensesResponseDto dailyResponse = new AdminService(request, response).dailyExpenses(request.getParameter("selectedbranchid"));
+        	DailyExpensesResponseDto dailyResponse = new AdminService(request, response).dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
         	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
         	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
 			request.setAttribute("dayone", dailyResponse.getDayOne());
