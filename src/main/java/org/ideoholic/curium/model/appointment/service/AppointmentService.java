@@ -407,8 +407,8 @@ public class AppointmentService {
 		return result;
 	}
 
-	public ResultResponse generateAppointmentsReportForClient() {
-		String studentId = request.getParameter("id");
+	public ResultResponse generateAppointmentsReportForClient(GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto) {
+		String studentId = generateAppointmentsReportForClientDto.getStudentId();
 		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 
