@@ -29,13 +29,13 @@ public class DepartmentService {
 
     }
 
-    public void addDepartment(AddDepartmentDto addDepartmentDto) {
+    public void addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
 
         Department department = new Department();
-        if (addDepartmentDto.getBranchId() != null) {
+        if (branchId != null) {
 
             department.setDepartmentname(DataUtil.emptyString(addDepartmentDto.getDepartment()));
-            department.setBranchid(Integer.parseInt(addDepartmentDto.getBranchId()));
+            department.setBranchid(Integer.parseInt(branchId));
 
             if (!department.getDepartmentname().equalsIgnoreCase("")) {
                 department = new departmentDAO().create(department);

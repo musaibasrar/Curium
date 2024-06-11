@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class AddDepartmentDto {
     private String department;
-    private String branchId;
+
 }
