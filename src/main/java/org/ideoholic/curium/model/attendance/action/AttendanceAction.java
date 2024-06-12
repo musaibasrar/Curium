@@ -116,7 +116,7 @@ public class AttendanceAction {
 
 	@PostMapping("/searchStaffAttendanceDetails")
 	public String searchStaffAttendanceDetails() {
-		if (new AttendanceService(request, response).searchStaffAttendanceDetails()) {
+		if (attendanceActionAdapter.searchStaffAttendanceDetails()) {
 			return "attendanceviewstaff";
 		}
 		return errorPage;

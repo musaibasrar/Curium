@@ -1065,21 +1065,22 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			return false;
 	}
 
-	public boolean searchStaffAttendanceDetails() {
+	public SearchStaffAttendanceDetailsResponseDto searchStaffAttendanceDetails(SearchStaffAttendanceDetailsDto attendanceDetailsDto, String branchId, String currentAcademicYear) {
 		
-		boolean result = false;
+		/*boolean result = false;*/
+		SearchStaffAttendanceDetailsResponseDto result = SearchStaffAttendanceDetailsResponseDto.builder().build();
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		List<Teacher> searchStaffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(currentAcademicYear!=null){
+		List<Teacher> searchStaffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
 		
 		List<Teacher> newStaffList = new ArrayList<Teacher>();
 		List<Staffdailyattendance> newStaffDailyAttendance = new ArrayList<Staffdailyattendance>();
 		
-		Date searchdate = DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance"));
+		Date searchdate = DateUtil.dateParserUpdateStd(attendanceDetailsDto.getSearchDate());
 		Timestamp timestamp = new Timestamp(searchdate.getTime());
 		for (Teacher teacher : searchStaffList) {
 
-			List<Staffdailyattendance> staffAttendance = new AttendanceDAO().readListOfStaffAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,teacher.getTeacherexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Staffdailyattendance> staffAttendance = new AttendanceDAO().readListOfStaffAttendance(currentAcademicYear, timestamp,teacher.getTeacherexternalid(), Integer.parseInt(branchId));
 			for (Staffdailyattendance staffDailyAttendance : staffAttendance) {
 					newStaffList.add(teacher);
 					newStaffDailyAttendance.add(staffDailyAttendance);
@@ -1087,13 +1088,14 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			}
 		}
 
-		request.setAttribute("StaffListAttendance", newStaffList);
-		request.setAttribute("StaffDailyAttendanceDate", newStaffDailyAttendance);
-		request.setAttribute("searchedDate", DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance")));
+		result.setStaffListAttendance(newStaffList);
+		result.setStaffDailyAttendanceDate(newStaffDailyAttendance);
+		result.setSearchedDate(attendanceDetailsDto.getSearchDate());
 		
-			List<Teacher> staffDetailsList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("staffList", staffDetailsList);
-			result = true;
+			List<Teacher> staffDetailsList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+
+			result.setStaffList(staffDetailsList);
+			result.setSuccess(true);
 		}
 		
 		return result;
