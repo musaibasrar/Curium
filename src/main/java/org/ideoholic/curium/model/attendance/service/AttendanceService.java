@@ -585,6 +585,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setYAxis(yAxis);
 			result.setStudentNameGraph(attendanceGraphDto.getStudentNameGraph());
 			result.setAdmNoGraph(attendanceGraphDto.getAdmNoGraph());
+			result.setSuccess(true);
 						
 		}
 		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
