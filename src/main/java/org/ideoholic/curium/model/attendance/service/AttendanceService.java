@@ -1166,6 +1166,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			result.setTotalPresent(totalPresent);
 			result.setTotalAbsent(absentDays);
+			result.setSuccess(true);
 		}
 		
 		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
