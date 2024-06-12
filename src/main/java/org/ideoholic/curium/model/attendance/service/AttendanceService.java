@@ -1126,7 +1126,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	}
 
 	public ViewStaffAttendanceResponseDto viewStaffAttendanceDetailsMonthly(ViewStaffAttendanceDto attendanceDto, String branchId, String currentAcademicYear) {
-
+		ViewStaffAttendanceResponseDto result = ViewStaffAttendanceResponseDto.builder().build();
 		if(currentAcademicYear!=null){
 			
 			String staffExternalId = DataUtil.emptyString(attendanceDto.getStaffExternalId());
@@ -1138,11 +1138,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
 			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
 
-			ViewStaffAttendanceResponseDto
-					.builder()
-					.staffDailyAttendance(staffDailyAttendance)
-					.staffName(attendanceDto.getNameOfStaff())
-					.build();
+			result.setStaffDailyAttendance(staffDailyAttendance);
+			result.setStaffName(attendanceDto.getNameOfStaff());
 
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
@@ -1167,21 +1164,14 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				totalPresent = totalDays - absentDays;
 			}
 
-			ViewStaffAttendanceResponseDto
-					.builder()
-					.totalPresent(totalPresent)
-					.totalAbsent(absentDays)
-					.success(true)
-					.build();
+			result.setTotalPresent(totalPresent);
+			result.setTotalAbsent(absentDays);
 		}
 		
 		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
 
-		return ViewStaffAttendanceResponseDto
-				.builder()
-				.staffList(staffList)
-				.success(false)
-				.build();
+		result.setStaffList(staffList);
+		return result;
 	}
 
 	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
