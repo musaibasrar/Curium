@@ -101,4 +101,20 @@ public class AttendanceActionAdapter {
 
         return staffAttendanceDetailsResponseDto.isSuccess();
     }
+
+    public boolean viewStudentAttendanceDetailsMark() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ViewStudentAttendanceDetailsMarkDto attendanceDetailsMarkDto = new ViewStudentAttendanceDetailsMarkDto();
+        attendanceDetailsMarkDto.setStudentName(request.getParameter("namesearch"));
+        attendanceDetailsMarkDto.setAddClass(request.getParameter("classsearch"));
+        attendanceDetailsMarkDto.setAddSec(request.getParameter("secsearch"));
+
+        ViewStudentAttendanceDetailsMarkResponseDto attendanceDetailsMarkResponseDto = attendanceService.viewStudentAttendanceDetailsMark(attendanceDetailsMarkDto,  httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
+        request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
+        request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
+
+        return attendanceDetailsMarkResponseDto.isSuccess();
+    }
 }

@@ -662,16 +662,16 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return true;
 	}
 
-	public boolean viewStudentAttendanceDetailsMark() {
+	public ViewStudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(ViewStudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
 		
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		ViewStudentAttendanceDetailsMarkResponseDto result = ViewStudentAttendanceDetailsMarkResponseDto.builder().build();
+		if(currentAcademicYear!=null){
 			
 			String queryMain = "From Student as student where";
-			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+			String studentname = DataUtil.emptyString(attendanceDetailsMarkDto.getStudentName());
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			String addClass = attendanceDetailsMarkDto.getAddClass();
+			String addSec = attendanceDetailsMarkDto.getAddSec();
 			String conClassStudying = "";
 			String conClassStudyingEquals = "";
 
@@ -694,19 +694,18 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
 			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 
-			request.setAttribute("StudentListAttendance", searchStudentList);
-			request.setAttribute("attendanceclass", conClassStudying.replace("--"," ").replace("%", ""));
-			request.setAttribute("attendanceclasssearch", addClass);
-			
-		        result = true;
+			result.setStudentListAttendance(searchStudentList);
+			result.setAttendanceClass(conClassStudying.replace("--"," ").replace("%", ""));
+			result.setAttendanceClassSearch(attendanceDetailsMarkDto.getAddClass());
+			result.setSuccess(true);
 			}
 		return result;
 	}
@@ -1061,7 +1060,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 					return true;
 				}
 		}
-		
+
 			return false;
 	}
 
