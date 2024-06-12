@@ -116,4 +116,24 @@ public class AttendanceActionAdapter {
 
         return attendanceDetailsMarkResponseDto.isSuccess();
     }
+
+    public boolean viewStudentAttendanceDetailsMonthlyGraph() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        StudentAttendanceGraphDto monthlyGraphDto = new StudentAttendanceGraphDto();
+        monthlyGraphDto.setStudentExternalIdGraph(request.getParameter("studentexternalidgraph"));
+        monthlyGraphDto.setFromDate((request.getParameter("frommonthlyattendance")));
+        monthlyGraphDto.setToDate((request.getParameter("tomonthlyattendance")));
+        monthlyGraphDto.setStudentNameGraph(request.getParameter("studentnamegraph"));
+        monthlyGraphDto.setAdmNoGraph(request.getParameter("admnograph"));
+
+        StudentAttendanceGraphResponseDto graphResponseDto = attendanceService.viewStudentAttendanceDetailsMonthlyGraph(monthlyGraphDto,  httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("xAxis", graphResponseDto.getXAxis());
+        request.setAttribute("yAxis", graphResponseDto.getYAxis());
+        request.setAttribute("studentnamegraph", graphResponseDto.getStudentNameGraph());
+        request.setAttribute("admnograph", graphResponseDto.getAdmNoGraph());
+        request.setAttribute("studentList", graphResponseDto.getStudentList());
+
+        return graphResponseDto.isSuccess();
+    }
 }

@@ -518,17 +518,17 @@ public class AttendanceService {
 	}
 
 	
-public boolean viewStudentAttendanceDetailsMonthlyGraph() {
+public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGraph(StudentAttendanceGraphDto attendanceGraphDto, String branchId, String currentAcademicYear) {
 				
-		boolean result = false;
+		StudentAttendanceGraphResponseDto result = StudentAttendanceGraphResponseDto.builder().build();
 				
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+		if(currentAcademicYear!=null){
 			
 			List<String> xAxis = new ArrayList<String>();
 			List<Integer> yAxis = new ArrayList<Integer>();
-			String studentExternalIdGraph = DataUtil.emptyString(request.getParameter("studentexternalidgraph"));
-			Date fromDate = DateUtil.dateParserUpdateStd(request.getParameter("frommonthlyattendance"));
-			Date toDate = DateUtil.dateParserUpdateStd(request.getParameter("tomonthlyattendance"));
+			String studentExternalIdGraph = DataUtil.emptyString(attendanceGraphDto.getStudentExternalIdGraph());
+			Date fromDate = DateUtil.dateParserUpdateStd(attendanceGraphDto.getFromDate());
+			Date toDate = DateUtil.dateParserUpdateStd(attendanceGraphDto.getToDate());
 			 
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
@@ -558,7 +558,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				Timestamp timestampTo = new Timestamp(lastDayOfMonth.getTime());
 				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendanceGraph(studentExternalIdGraph, timestampFrom, timestampTo, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendanceGraph(studentExternalIdGraph, timestampFrom, timestampTo, currentAcademicYear, Integer.parseInt(branchId));
 				
 				int absentDays = 0;
 				
@@ -580,17 +580,17 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				start.set(Calendar.DAY_OF_MONTH, start.getActualMinimum(Calendar.DAY_OF_MONTH));
 				dateTemp = start.getTime();
 			}
-			
-			request.setAttribute("xaxis", xAxis);
-			request.setAttribute("yaxis", yAxis);
-			request.setAttribute("studentnamegraph", request.getParameter("studentnamegraph"));
-			request.setAttribute("admnograph", request.getParameter("admnograph"));
-			result = true;
+
+			result.setXAxis(xAxis);
+			result.setYAxis(yAxis);
+			result.setStudentNameGraph(attendanceGraphDto.getStudentNameGraph());
+			result.setAdmNoGraph(attendanceGraphDto.getAdmNoGraph());
 						
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("studentList", studentList);
-		
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+
+		result.setStudentList(studentList);
+
 		return result;
 	}
 
