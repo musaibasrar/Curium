@@ -30,7 +30,7 @@ public class DepartmentService {
 
     }
 
-    public ResultResponse addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
+    public void addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
 
         Department department = new Department();
         if (branchId != null) {
@@ -43,7 +43,6 @@ public class DepartmentService {
             }
 
         }
-         return ResultResponse.builder().build();
     }
 
     public boolean viewDepartment() {

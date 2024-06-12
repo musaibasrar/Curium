@@ -25,7 +25,6 @@ public class DepartmentActionAdapter {
         AddDepartmentDto addDepartmentDto = new AddDepartmentDto();
 
         addDepartmentDto.setDepartment(request.getParameter("department"));
-        ResultResponse resultResponse = departmentService.addDepartment(addDepartmentDto, httpSession.getAttribute(BRANCHID).toString());
-
+        departmentService.addDepartment(addDepartmentDto, httpSession.getAttribute(BRANCHID).toString());
     }
 }
