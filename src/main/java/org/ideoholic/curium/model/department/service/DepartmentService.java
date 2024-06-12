@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.dto.Department;
-import org.ideoholic.curium.model.department.dto.ViewDepartmentResponseDto;
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
 
@@ -45,18 +45,19 @@ public class DepartmentService {
         }
     }
 
-    public boolean viewDepartment(ViewDepartmentResponseDto viewDepartmentResponseDto, String branchId) {
+    public DepartmentResponseDto viewDepartment(String branchId) {
+        DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
         boolean result = false;
         try {
             List<Department> list = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
-            viewDepartmentResponseDto.setDepartmentList(list);
+            departmentResponseDto.setDepartmentList(list);
 
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
             result = false;
         }
-        return true;
+        return departmentResponseDto;
     }
 
     public void deleteMultiple() {

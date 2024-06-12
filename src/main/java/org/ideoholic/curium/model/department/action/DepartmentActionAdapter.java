@@ -1,9 +1,8 @@
 package org.ideoholic.curium.model.department.action;
 
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
-import org.ideoholic.curium.model.department.dto.ViewDepartmentResponseDto;
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.department.service.DepartmentService;
-import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +29,10 @@ public class DepartmentActionAdapter {
     }
     public boolean viewDepartment(){
         DepartmentService departmentService = new DepartmentService(request, response);
-        ViewDepartmentResponseDto viewDepartmentResponseDto = new ViewDepartmentResponseDto();
-        departmentService.viewDepartment(viewDepartmentResponseDto,httpSession.getAttribute(BRANCHID).toString());
+        DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
+        departmentService.viewDepartment(httpSession.getAttribute(BRANCHID).toString());
 
-        httpSession.setAttribute("departmentList", viewDepartmentResponseDto.getDepartmentList());
+        httpSession.setAttribute("departmentList", departmentResponseDto.getDepartmentList());
 
         return true;
     }
