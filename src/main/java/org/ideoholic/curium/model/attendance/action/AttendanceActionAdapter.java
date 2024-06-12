@@ -86,4 +86,19 @@ public class AttendanceActionAdapter {
 
         return attendanceResponseDto.isSuccess();
     }
+
+    public boolean searchStaffAttendanceDetails() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        SearchStaffAttendanceDetailsDto staffAttendanceDetailsDto = new SearchStaffAttendanceDetailsDto();
+        staffAttendanceDetailsDto.setSearchDate(request.getParameter("dateofattendance"));
+
+        SearchStaffAttendanceDetailsResponseDto staffAttendanceDetailsResponseDto = attendanceService.searchStaffAttendanceDetails(staffAttendanceDetailsDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("StaffListAttendance", staffAttendanceDetailsResponseDto.getStaffListAttendance());
+        request.setAttribute("StaffDailyAttendanceDate", staffAttendanceDetailsResponseDto.getStaffDailyAttendanceDate());
+        request.setAttribute("searchedDate", staffAttendanceDetailsResponseDto.getSearchedDate());
+        request.setAttribute("staffList", staffAttendanceDetailsResponseDto.getStaffList());
+
+        return staffAttendanceDetailsResponseDto.isSuccess();
+    }
 }
