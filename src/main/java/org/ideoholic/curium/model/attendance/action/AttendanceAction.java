@@ -160,7 +160,7 @@ public class AttendanceAction {
 	@PostMapping("/searchStudentAttendanceDetailsMark")
 	public String searchStudentAttendanceDetailsMark() {
 
-		if (new AttendanceService(request, response).viewStudentAttendanceDetailsMark()) {
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMark()) {
 			return "attendancemark";
 		}
 		return errorPage;

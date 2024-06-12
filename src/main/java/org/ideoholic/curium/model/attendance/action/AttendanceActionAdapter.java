@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.attendance.action;
 
 import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
-import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,15 +89,31 @@ public class AttendanceActionAdapter {
     public boolean searchStaffAttendanceDetails() {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
-        SearchStaffAttendanceDetailsDto staffAttendanceDetailsDto = new SearchStaffAttendanceDetailsDto();
+        StaffAttendanceDetailsDto staffAttendanceDetailsDto = new StaffAttendanceDetailsDto();
         staffAttendanceDetailsDto.setSearchDate(request.getParameter("dateofattendance"));
 
-        SearchStaffAttendanceDetailsResponseDto staffAttendanceDetailsResponseDto = attendanceService.searchStaffAttendanceDetails(staffAttendanceDetailsDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        StaffAttendanceDetailsResponseDto staffAttendanceDetailsResponseDto = attendanceService.searchStaffAttendanceDetails(staffAttendanceDetailsDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("StaffListAttendance", staffAttendanceDetailsResponseDto.getStaffListAttendance());
         request.setAttribute("StaffDailyAttendanceDate", staffAttendanceDetailsResponseDto.getStaffDailyAttendanceDate());
         request.setAttribute("searchedDate", staffAttendanceDetailsResponseDto.getSearchedDate());
         request.setAttribute("staffList", staffAttendanceDetailsResponseDto.getStaffList());
 
         return staffAttendanceDetailsResponseDto.isSuccess();
+    }
+
+    public boolean viewStudentAttendanceDetailsMark() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto = new StudentAttendanceDetailsMarkDto();
+        attendanceDetailsMarkDto.setStudentName(request.getParameter("namesearch"));
+        attendanceDetailsMarkDto.setAddClass(request.getParameter("classsearch"));
+        attendanceDetailsMarkDto.setAddSec(request.getParameter("secsearch"));
+
+        StudentAttendanceDetailsMarkResponseDto attendanceDetailsMarkResponseDto = attendanceService.viewStudentAttendanceDetailsMark(attendanceDetailsMarkDto,  httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
+        request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
+        request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
+
+        return attendanceDetailsMarkResponseDto.isSuccess();
     }
 }

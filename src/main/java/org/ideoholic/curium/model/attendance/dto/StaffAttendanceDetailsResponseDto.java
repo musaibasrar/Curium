@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class SearchStaffAttendanceDetailsResponseDto {
+public class StaffAttendanceDetailsResponseDto {
     private List<Teacher> staffListAttendance;
     private List<Staffdailyattendance> staffDailyAttendanceDate;
     private List<Teacher> staffList;
