@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ViewStudentAttendanceDetailsMarkResponseDto {
+public class StudentAttendanceDetailsMarkResponseDto {
     private List<Student> studentListAttendance;
     private String attendanceClass;
     private String attendanceClassSearch;

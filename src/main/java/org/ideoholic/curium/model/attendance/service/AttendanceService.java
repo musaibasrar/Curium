@@ -662,9 +662,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return true;
 	}
 
-	public ViewStudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(ViewStudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
+	public StudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
 		
-		ViewStudentAttendanceDetailsMarkResponseDto result = ViewStudentAttendanceDetailsMarkResponseDto.builder().build();
+		StudentAttendanceDetailsMarkResponseDto result = StudentAttendanceDetailsMarkResponseDto.builder().build();
 		if(currentAcademicYear!=null){
 			
 			String queryMain = "From Student as student where";
@@ -1064,10 +1064,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			return false;
 	}
 
-	public SearchStaffAttendanceDetailsResponseDto searchStaffAttendanceDetails(SearchStaffAttendanceDetailsDto attendanceDetailsDto, String branchId, String currentAcademicYear) {
-		
-		/*boolean result = false;*/
-		SearchStaffAttendanceDetailsResponseDto result = SearchStaffAttendanceDetailsResponseDto.builder().build();
+	public StaffAttendanceDetailsResponseDto searchStaffAttendanceDetails(StaffAttendanceDetailsDto attendanceDetailsDto, String branchId, String currentAcademicYear) {
+
+		StaffAttendanceDetailsResponseDto result = StaffAttendanceDetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
 		List<Teacher> searchStaffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
