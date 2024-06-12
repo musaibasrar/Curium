@@ -63,7 +63,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	//font-size: 18px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -72,7 +72,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 12px;
+	font-size: 17px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -104,8 +104,8 @@ span{
  width:40px;
  } */      
 </style>
-	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script>
         $(function() {
 
@@ -120,7 +120,7 @@ span{
     	});
         function printtc(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/alirfan/DocumentsProcess/printCharacterCertificate";
+        		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -131,7 +131,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -149,17 +149,19 @@ for(Cookie cookie : cookies){
 		<br>
 		 <table align="center">
                         		
-			<tr>
-				<td ><img src="/alirfan/images/alirfan.jpg" width="126" height="140"/></td>
-				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.8143802598&nbsp;&nbsp;&nbsp;</h6>
-			    <h6 style="margin-top:0px;">	Email: alfalahhighschool@gmail.com</h6>
+			<tr><td>
+			
+			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140">&emsp;&emsp;</td>
+				<td style="font-style:normal;text-align:center;" >
+				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
+				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
+				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-			</tr>
+				<td>&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				</tr>
 		
-			</table><table align="center">
+			</table><table align="center" >
 			
 			
 			<tr>
@@ -170,73 +172,31 @@ for(Cookie cookie : cookies){
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			<td><label class="addressLine">TO WHOM IT MAY CONCERN</label></td>
 			
 			</tr>
 			<tr>
 			<td></td>
-			
-			</tr>
-			
 			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					</h3></td></tr><tr>
-					<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.sts}" /></span>
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
-			</h3>
+			<td><p style="font-size:20px;line-height:20px;margin-left:250px;margin-right:250px;text-align:justify;">			
+			&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Master &nbsp;&nbsp;
+			<b><c:out value="${studentdetailsbonafide.student.name}" /></b>
+			Son/Daughter of &nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.fathersname}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Class&nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.classstudying}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;year
+			of passing &nbsp;&nbsp;&nbsp;&nbsp;<b> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></b>
+			&nbsp;&nbsp;&nbsp;&nbsp; was a Bonafide student of
+			this school. As per school record his Date of Birth is
+			&nbsp;&nbsp;&nbsp;&nbsp;<b><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></b>
+			and G.R. No. is &nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.sts}" /></b>.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To the best of my knowledge, he bears a 
+			good moral character. I wish all success and
+			prosperity in his life.</p>
 			</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="characterstudent" id="characterstudent" style="width: 200px" /></span>character
-			</h3>
-			</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<h3 style="font-weight: normal;" >
-			We wish him/her all the best for bright and prosperous future.
-			</h3>
-			</td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
 			</tr>
 		</table>
 		
-
 		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="page-break-after: always; border-collapse: collapse;margin-left:250px;margin-right:250px;">
 
 			<tr>
 			<td>
@@ -251,17 +211,16 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-			<td align="left">
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
-			<td align="center">Accountant</td>
-			<td align="center">Principal</td>
+			<td align="left"><label class="addressLine">
+				Date:&nbsp;&nbsp;</label>
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;font-size:20px"
+					size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >	
+			&emsp;&emsp;&emsp;<label class="addressLine">Principal</label></td>
 		</tr>
 		
 			<tr>
               <td><button class="printtcstudent"  >Print</button></td>
-              <!-- <a id="print" href="/alirfan/DocumentsProcess/printCharacterCertificate">Print</a> -->
+              <!-- <a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a> -->
             </tr>
 		</TABLE>
 	</form>
