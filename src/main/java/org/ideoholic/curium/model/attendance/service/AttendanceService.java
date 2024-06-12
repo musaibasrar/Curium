@@ -1125,21 +1125,22 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				.build();
 	}
 
-	public boolean viewStaffAttendanceDetailsMonthly() {
-		
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+	public ViewStaffAttendanceResponseDto viewStaffAttendanceDetailsMonthly(ViewStaffAttendanceDto attendanceDto, String branchId, String currentAcademicYear) {
+		ViewStaffAttendanceResponseDto result = ViewStaffAttendanceResponseDto.builder().build();
+		if(currentAcademicYear!=null){
 			
-			String staffExternalId = DataUtil.emptyString(request.getParameter("staffexternalid"));
-			Date fromDate = DateUtil.dateParserUpdateStd(request.getParameter("fromdateofattendance"));
-			Date toDate = DateUtil.dateParserUpdateStd(request.getParameter("todateofattendance"));
+			String staffExternalId = DataUtil.emptyString(attendanceDto.getStaffExternalId());
+			Date fromDate = DateUtil.dateParserUpdateStd(attendanceDto.getFromDate());
+			Date toDate = DateUtil.dateParserUpdateStd(attendanceDto.getToDate());
 			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
 			Timestamp toTimestamp = new Timestamp(toDate.getTime());
 			
 			List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
-			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("staffDailyAttendance", staffDailyAttendance);
-			request.setAttribute("staffname", request.getParameter("nameofstaff"));
+			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
+
+			result.setStaffDailyAttendance(staffDailyAttendance);
+			result.setStaffName(attendanceDto.getNameOfStaff());
+
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
 			Calendar end = Calendar.getInstance();
@@ -1162,15 +1163,15 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			if(!staffDailyAttendance.isEmpty()){
 				totalPresent = totalDays - absentDays;
 			}
-			
-			request.setAttribute("totalpresent", totalPresent);
-			request.setAttribute("totalabsent", absentDays);
-			result = true;
+
+			result.setTotalPresent(totalPresent);
+			result.setTotalAbsent(absentDays);
+			result.setSuccess(true);
 		}
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("staffList", staffList);
-		
+		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+
+		result.setStaffList(staffList);
 		return result;
 	}
 
