@@ -36,10 +36,10 @@ public class DocumentActionAdapter {
 	public boolean searchForStudents() {
 		DocumentService documentService = new DocumentService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
-		searchStudentDto.setNamesearch(request.getParameter("namesearch"));
-		searchStudentDto.setAdmno(request.getParameter("admno"));
-		searchStudentDto.setClasssearch(request.getParameter("classsearch"));
-		searchStudentDto.setSecsearch(request.getParameter("secsearch"));
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setAdmNo(request.getParameter("admno"));
+		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
+		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = documentService.searchForStudents(searchStudentDto,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 		
