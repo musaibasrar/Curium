@@ -448,52 +448,53 @@ public class AttendanceService {
 			return false;
 	}
 
-	public boolean viewStudentAttendanceDetailsMonthly() {
-		
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-			
-			String studentExternalId = DataUtil.emptyString(request.getParameter("studentexternalid"));
-			Date fromDate = DateUtil.dateParserUpdateStd(request.getParameter("fromdateofattendance"));
-			Date toDate = DateUtil.dateParserUpdateStd(request.getParameter("todateofattendance"));
+	public StudentAttendanceMonthlyResponseDto viewStudentAttendanceDetailsMonthly(StudentAttendanceMonthlyDto attendanceDetailsMonthlyDto, String branchId, String currentAcademicYear) {
+		StudentAttendanceMonthlyResponseDto result = StudentAttendanceMonthlyResponseDto.builder().build();
+		if(currentAcademicYear!=null){
+
+			String studentExternalId = DataUtil.emptyString(attendanceDetailsMonthlyDto.getStudentExternalId());
+			Date fromDate = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getFromDate());
+			Date toDate = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getToDate());
 			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
 			Timestamp toTimestamp = new Timestamp(toDate.getTime());
-			
+
 			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalId, fromTimestamp, toTimestamp, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("studentDailyAttendance", studentDailyAttendance);
-			request.setAttribute("studentname", request.getParameter("studentname"));
-			request.setAttribute("admno", request.getParameter("admno"));
+			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
+
+			result.setStudentDailyAttendance(studentDailyAttendance);
+			result.setStudentName(attendanceDetailsMonthlyDto.getStudentName());
+			result.setAdmNo(attendanceDetailsMonthlyDto.getAdmNo());
+
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
 			Calendar end = Calendar.getInstance();
 			end.setTime(toDate);
 			end.add(Calendar.DATE, 1);
-			
+
 			int absentDays = 0;
 			int totalDays = 0;
 			int totalPresent = 0;
-			
+
 			for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
-				
+
 				totalDays++;
 				if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
 					absentDays++;
 				}
-				
+
 			}
-			
+
 			if(!studentDailyAttendance.isEmpty()){
 				totalPresent = totalDays - absentDays;
 			}
-			
-			request.setAttribute("totalpresent", totalPresent);
-			request.setAttribute("totalabsent", absentDays);
-			result = true;
+
+			result.setTotalPresent(totalPresent);
+			result.setTotalAbsent(absentDays);
+			result.setSuccess(true);
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("studentList", studentList);
-		
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		result.setStudentList(studentList);
+
 		return result;
 	}
 

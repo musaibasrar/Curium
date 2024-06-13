@@ -136,4 +136,25 @@ public class AttendanceActionAdapter {
 
         return graphResponseDto.isSuccess();
     }
+
+    public boolean viewStudentAttendanceDetailsMonthly() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        StudentAttendanceMonthlyDto attendanceMonthlyDto = new StudentAttendanceMonthlyDto();
+        attendanceMonthlyDto.setStudentExternalId(request.getParameter("studentexternalid"));
+        attendanceMonthlyDto.setFromDate(request.getParameter("fromdateofattendance"));
+        attendanceMonthlyDto.setToDate(request.getParameter("todateofattendance"));
+        attendanceMonthlyDto.setStudentName(request.getParameter("studentname"));
+        attendanceMonthlyDto.setAdmNo(request.getParameter("admno"));
+
+        StudentAttendanceMonthlyResponseDto attendanceMonthlyResponseDto = attendanceService.viewStudentAttendanceDetailsMonthly(attendanceMonthlyDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("studentDailyAttendance", attendanceMonthlyResponseDto.getStudentDailyAttendance());
+        request.setAttribute("studentname", attendanceMonthlyResponseDto.getStudentName());
+        request.setAttribute("admno", attendanceMonthlyResponseDto.getAdmNo());
+        request.setAttribute("totalpresent", attendanceMonthlyResponseDto.getTotalPresent());
+        request.setAttribute("totalabsent", attendanceMonthlyResponseDto.getTotalAbsent());
+        request.setAttribute("studentList", attendanceMonthlyResponseDto.getStudentList());
+
+        return attendanceMonthlyResponseDto.isSuccess();
+    }
 }

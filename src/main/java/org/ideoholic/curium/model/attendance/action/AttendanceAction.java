@@ -186,7 +186,7 @@ public class AttendanceAction {
 	@PostMapping("/searchStudentAttendanceDetailsMonthly")
 	public String searchStudentAttendanceDetailsMonthly() {
 
-		if (new AttendanceService(request, response).viewStudentAttendanceDetailsMonthly()) {
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMonthly()) {
 			return "viewattendancemonthly";
 		}
 		return errorPage;
