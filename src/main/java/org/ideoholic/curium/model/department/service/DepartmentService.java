@@ -47,15 +47,15 @@ public class DepartmentService {
 
     public DepartmentResponseDto viewDepartment(String branchId) {
         DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
-        boolean result = false;
         try {
             List<Department> list = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
             departmentResponseDto.setDepartmentList(list);
 
-            result = true;
+            departmentResponseDto.setSuccess(true);
+
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            departmentResponseDto.setSuccess(false);
         }
         return departmentResponseDto;
     }

@@ -34,6 +34,6 @@ public class DepartmentActionAdapter {
 
         httpSession.setAttribute("departmentList", departmentResponseDto.getDepartmentList());
 
-        return true;
+        return departmentResponseDto.isSuccess();
     }
 }
