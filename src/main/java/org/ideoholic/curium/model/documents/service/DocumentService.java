@@ -340,10 +340,10 @@ public class DocumentService {
 		if (branchid != null) {
 
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(searchStudentDto.getNamesearch());
-			String admissionNumber = DataUtil.emptyString(searchStudentDto.getAdmno());
-			String addClass = searchStudentDto.getClasssearch();
-			String addSec = searchStudentDto.getSecsearch();
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+			String admissionNumber = DataUtil.emptyString(searchStudentDto.getAdmNo());
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
 			String conClassStudying = "";
 
 			if (!addClass.equalsIgnoreCase("")) {

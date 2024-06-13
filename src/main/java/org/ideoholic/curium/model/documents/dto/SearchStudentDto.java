@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchStudentDto {
 		
-	private String namesearch;
-	private String admno;
-	private String classsearch;
-	private String secsearch;
+	private String nameSearch;
+	private String admNo;
+	private String classSearch;
+	private String secSearch;
 }
