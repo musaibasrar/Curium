@@ -63,13 +63,13 @@ public class DocumentAction {
 	
 	@PostMapping("/searchForStudents")
 	public String searchForStudents() {
-		if(new DocumentService(request, response).searchForStudents()){
+		if(documentActionAdapter.searchForStudents()){
 			new DocumentService(request, response).admissionAbstract();
 			return "admissionabstract";
 		}
         return error;
 	}
-
+	
 	@GetMapping("/admissionAbstract")
 	public String admissionAbstract() {
 		if(new DocumentService(request, response).admissionAbstract()){

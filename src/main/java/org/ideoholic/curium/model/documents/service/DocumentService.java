@@ -32,6 +32,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -332,63 +334,64 @@ public class DocumentService {
 	}
 
 
-	public boolean searchForStudents() {
+	public SearchStudentResponseDto searchForStudents(SearchStudentDto searchStudentDto, String branchid) {
+		SearchStudentResponseDto searchStudentResponseDto = SearchStudentResponseDto.builder().build();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
-		boolean result = false;
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		
-		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String admissionNumber = DataUtil.emptyString(request.getParameter("admno"));
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
-		String conClassStudying = "";
-		
-		if (!addClass.equalsIgnoreCase("")) {
+		if (branchid != null) {
 
-			conClassStudying = addClass+"--" +"%";
+			String queryMain = "From Parents as parents where";
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+			String admissionNumber = DataUtil.emptyString(searchStudentDto.getAdmNo());
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
+			String conClassStudying = "";
 
-		}
-		if (!addSec.equalsIgnoreCase("")) {
-			conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
-		}
+			if (!addClass.equalsIgnoreCase("")) {
 
-		String classStudying = DataUtil.emptyString(conClassStudying);
-		String querySub = "";
+				conClassStudying = addClass + "--" + "%";
 
-		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%'";
-		}
+			}
+			if (!addSec.equalsIgnoreCase("")) {
+				conClassStudying = addClass;
+				conClassStudying = conClassStudying + "--" + addSec + "%";
+			}
 
-		if (!classStudying.equalsIgnoreCase("")	&& !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.classstudying like '"
-					+ classStudying + "'";
-		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "'";
-		}
+			String classStudying = DataUtil.emptyString(conClassStudying);
+			String querySub = "";
 
-		if (!admissionNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.admissionnumber = '"+admissionNumber+"'";
-		}else if(!admissionNumber.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.Student.admissionnumber = '"+admissionNumber+"'";
+			if (!studentname.equalsIgnoreCase("")) {
+				querySub = " parents.Student.name like '%" + studentname + "%'";
+			}
+
+			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+				querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
+			} else if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "'";
+			}
+
+			if (!admissionNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+				querySub = querySub + " AND parents.Student.admissionnumber = '" + admissionNumber + "'";
+			} else if (!admissionNumber.equalsIgnoreCase("")) {
+				querySub = querySub + " parents.Student.admissionnumber = '" + admissionNumber + "'";
+			}
+
+			if (!"".equalsIgnoreCase(querySub)) {
+				queryMain = queryMain + querySub
+						+ " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+						+ Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+						+ " order by parents.Student.admissionnumber ASC";
+				System.out.println("QUERY*********** " + queryMain);
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+			searchStudentResponseDto.setSuccess(true);
 		}
-		
-		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
-			System.out.println("QUERY*********** "+queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-		}
-		result = true;
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
+		return searchStudentResponseDto;
+
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
-		return result;
 
-	}
-
-
-	public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto,String branchid) {
+	
+		public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto,String branchid) {
 		
 		
 		List<Parents> listOfStudentRecords = new LinkedList<Parents>();
