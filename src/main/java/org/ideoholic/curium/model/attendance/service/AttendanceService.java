@@ -373,18 +373,18 @@ public class AttendanceService {
 		return false;
 	}
 
-	public boolean searchStudentAttendanceDetails() {
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			
-			String queryMain = "From Student as student where";
-			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+	public StudentAttendanceDetailsResponseDto searchStudentAttendanceDetails(StudentAttendanceDetailsDto attendanceDetailsDto, String branchId, String currentAcademicYear) {
+		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().build();
+		if(currentAcademicYear!=null){
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			String queryMain = "From Student as student where";
+			String studentname = DataUtil.emptyString(attendanceDetailsDto.getStudentName());
+
+			String addClass = attendanceDetailsDto.getAddClass();
+			String addSec = attendanceDetailsDto.getAddSec();
 			String conClassStudying = "";
 			String conClassStudyingEquals = "";
-			
+
 			if (!addClass.equalsIgnoreCase("")) {
 
 				conClassStudying = addClass+"--" +"%";
@@ -405,37 +405,39 @@ public class AttendanceService {
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
 						+ "' OR student.classstudying = '" + conClassStudyingEquals
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
 			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
-			
+
 			List<Student> newStudentList = new ArrayList<Student>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
-			
-			Date searchdate = DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance"));
+
+			Date searchdate = DateUtil.dateParserUpdateStd(attendanceDetailsDto.getSearchDate());
 			Timestamp timestamp = new Timestamp(searchdate.getTime());
 			for (Student student : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,student.getStudentexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, timestamp,student.getStudentexternalid(), Integer.parseInt(branchId));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
-						newStudentList.add(student);
-						newStudentDailyAttendance.add(studentDailyAttendance);
-					
+					newStudentList.add(student);
+					newStudentDailyAttendance.add(studentDailyAttendance);
+
 				}
 			}
 
-			request.setAttribute("StudentListAttendance", newStudentList);
-			request.setAttribute("StudentDailyAttendanceDate", newStudentDailyAttendance);
-			request.setAttribute("searchedDate", DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance")));
-			
-		        result = true;
-			}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("studentList", studentList);
+			result.setStudentListAttendance(newStudentList);
+			result.setStudentDailyAttendanceDate(newStudentDailyAttendance);
+			result.setSearchDate(searchdate);
+			result.setSuccess(true);
+
+		}
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+
+		result.setStudentList(studentList);
+
 		return result;
 	}
 
