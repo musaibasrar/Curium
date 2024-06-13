@@ -28,7 +28,7 @@ public class DepartmentAction {
 
     @PostMapping("/deleteMultiple")
     public String deleteMultiple() {
-        new DepartmentService(request, response).deleteMultiple();
+        departmentActionAdapter.deleteMultiple();
         return departmentView();
     }
 

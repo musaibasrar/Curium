@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.department.action;
 
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
+import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,12 @@ public class DepartmentActionAdapter {
 
         return departmentResponseDto.isSuccess();
     }
+    public void deleteMultiple() {
+        DepartmentService departmentService = new DepartmentService(request,response);
+        DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
+        deleteMultipleDto.setDepartmentIds(request.getParameterValues("departmentIDs"));
+        departmentService.deleteMultiple(deleteMultipleDto);
+
+    }
+
 }
