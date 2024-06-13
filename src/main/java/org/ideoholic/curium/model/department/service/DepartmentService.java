@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
+import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.util.DataUtil;
@@ -60,8 +61,8 @@ public class DepartmentService {
         return departmentResponseDto;
     }
 
-    public void deleteMultiple() {
-        String[] departmentIds = request.getParameterValues("departmentIDs");
+    public void deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
+        String[] departmentIds = deleteMultipleDto.getDepartmentIds();
         if (departmentIds != null) {
 
 
