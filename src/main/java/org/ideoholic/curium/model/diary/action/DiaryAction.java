@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/DiaryProcess")
 public class DiaryAction {
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
+	@Autowired
+	private DiaryActionAdapter diaryActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
@@ -33,7 +35,7 @@ public class DiaryAction {
 	
 	@PostMapping("/addDiary")
 	public String addDiary() {
-		new Diaryservice(request, response).addDiary();
+		diaryActionAdapter.addDiary();
 		return "diarySaved";
 
 	}
