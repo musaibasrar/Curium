@@ -18,31 +18,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class DepartmentAction {
 
-	@Autowired
-	HttpServletRequest request;
-	@Autowired
-	HttpServletResponse response;
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
+    @Autowired
+    private DepartmentActionAdapter departmentActionAdapter;
 
-	
-	@PostMapping("/deleteMultiple")
-	public String deleteMultiple() {
-		new DepartmentService(request, response).deleteMultiple();
-       return departmentView();
-	}
 
-	@GetMapping("/departmentView")
-	public String departmentView() {
-		new DepartmentService(request, response).viewDepartment();
+    @PostMapping("/deleteMultiple")
+    public String deleteMultiple() {
+        new DepartmentService(request, response).deleteMultiple();
+        return departmentView();
+    }
+
+    @GetMapping("/departmentView")
+    public String departmentView() {
+        new DepartmentService(request, response).viewDepartment();
         System.out.println("IN action's department view");
         return "department";
-	}
+    }
 
-	@PostMapping("/addDepartment")
-	public String addDepartment() {
+    @PostMapping("/addDepartment")
+    public String addDepartment() {
 
-		new DepartmentService(request, response).addDepartment();
-		System.out.println("IN action's add department");
-		return departmentView();
-	}
+        departmentActionAdapter.addDepartment();
+        System.out.println("IN action's add department");
+        return departmentView();
+    }
 
 }
