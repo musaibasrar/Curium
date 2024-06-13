@@ -40,8 +40,8 @@ public class DepartmentActionAdapter {
     public void deleteMultiple() {
         DepartmentService departmentService = new DepartmentService(request,response);
         DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
-        departmentService.deleteMultiple(deleteMultipleDto);
         deleteMultipleDto.setDepartmentIds(request.getParameterValues("departmentIDs"));
+        departmentService.deleteMultiple(deleteMultipleDto);
 
     }
 
