@@ -177,7 +177,7 @@ public class AttendanceAction {
 
 	@PostMapping("/updateStudentAttendanceDetails")
 	public String updateStudentAttendanceDetails() {
-		if (new AttendanceService(request, response).updateStudentAttendanceDetails()) {
+		if (attendanceActionAdapter.updateStudentAttendanceDetails()) {
 			return "viewattendance";
 		}
 		return errorPage;

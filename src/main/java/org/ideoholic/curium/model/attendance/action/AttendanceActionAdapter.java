@@ -175,4 +175,16 @@ public class AttendanceActionAdapter {
 
         return attendanceDetailsResponseDto.isSuccess();
     }
+
+    public boolean updateStudentAttendanceDetails() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        AttendanceDetailsDto attendanceDetailsDto = new AttendanceDetailsDto();
+        attendanceDetailsDto.setAttendanceIds(request.getParameterValues("attandanceIDs"));
+        attendanceDetailsDto.setStudentAttendanceStatus(request.getParameterValues("studentAttendanceStatus"));
+
+        ResultResponse resultResponse = attendanceService.updateStudentAttendanceDetails(attendanceDetailsDto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        return resultResponse.isSuccess();
+    }
 }
