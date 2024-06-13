@@ -34,7 +34,7 @@ public class DepartmentAction {
 
     @GetMapping("/departmentView")
     public String departmentView() {
-        new DepartmentService(request, response).viewDepartment();
+        departmentActionAdapter.viewDepartment();
         System.out.println("IN action's department view");
         return "department";
     }
