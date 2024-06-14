@@ -30,11 +30,11 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -45,6 +45,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DocumentService {
 
@@ -52,6 +53,7 @@ public class DocumentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -316,23 +318,24 @@ public class DocumentService {
 	}
 
 
-	public boolean admissionAbstract() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+	public StudentListAaResponseDto admissionAbstract(String branchid) {
+		StudentListAaResponseDto studentListAaResponseDto = StudentListAaResponseDto.builder().build();
+		if(branchid!=null){
 			try {
-				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentListaa", list);
+				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
+				studentListAaResponseDto.setList(list);
+				//TODO  change after migrating standard service
 				new StandardService(request, response).viewClasses();
-				return true;
+				studentListAaResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return false;
-		
+		studentListAaResponseDto.setSuccess(false);
+		return studentListAaResponseDto;
+	
 	}
-
+	
 
 	public SearchStudentResponseDto searchForStudents(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = SearchStudentResponseDto.builder().build();

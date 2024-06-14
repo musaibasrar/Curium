@@ -64,7 +64,7 @@ public class DocumentAction {
 	@PostMapping("/searchForStudents")
 	public String searchForStudents() {
 		if(documentActionAdapter.searchForStudents()){
-			new DocumentService(request, response).admissionAbstract();
+			documentActionAdapter.admissionAbstract();
 			return "admissionabstract";
 		}
         return error;
@@ -72,7 +72,7 @@ public class DocumentAction {
 	
 	@GetMapping("/admissionAbstract")
 	public String admissionAbstract() {
-		if(new DocumentService(request, response).admissionAbstract()){
+		if(documentActionAdapter.admissionAbstract()){
 			return "admissionabstract";
 		}
         return error;
