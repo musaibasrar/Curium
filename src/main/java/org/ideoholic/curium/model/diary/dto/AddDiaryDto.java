@@ -8,8 +8,6 @@ public class AddDiaryDto {
     private String addClass;
     private String messageBody;
     private String subject;
-    private String userLoginId;
-    private String currentAcademicYear;
     private String createdDate;
     private String endDate;
     private String startDate;

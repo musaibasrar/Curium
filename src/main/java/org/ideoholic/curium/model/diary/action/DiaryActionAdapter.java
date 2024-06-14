@@ -30,9 +30,10 @@ public class DiaryActionAdapter {
         addDiaryDto.setEndDate(request.getParameter("enddate"));
         addDiaryDto.setStartDate(request.getParameter("startdate"));
 
-        addDiaryDto.setUserLoginId(httpSession.getAttribute("userloginid").toString());
-        addDiaryDto.setCurrentAcademicYear(httpSession.getAttribute("currentAcademicYear").toString());
-        diaryservice.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString());
+
+        diaryservice.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
+                                           httpSession.getAttribute("userloginid").toString(),
+                                           httpSession.getAttribute("currentAcademicYear").toString());
 
     }
 }

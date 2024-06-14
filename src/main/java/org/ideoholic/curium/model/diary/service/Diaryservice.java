@@ -49,7 +49,7 @@ public class Diaryservice {
 		
 	}
 
-	public void addDiary(AddDiaryDto addDiaryDto,String branchId) {
+	public void addDiary(AddDiaryDto addDiaryDto,String branchId, String userLoginId, String currentAcademicYear) {
 		// TODO Auto-generated method stub
 		 Diary diary = new Diary();
          
@@ -62,8 +62,8 @@ public class Diaryservice {
                  diary.setMessage(addDiaryDto.getMessageBody());
                  diary.setSubject(addDiaryDto.getSubject());
                  diary.setBranchid(branchId);
-                 diary.setUserid(Integer.parseInt(addDiaryDto.getUserLoginId()));
-                 diary.setAcademicyear(addDiaryDto.getCurrentAcademicYear());
+                 diary.setUserid(Integer.parseInt(userLoginId));
+                 diary.setAcademicyear(currentAcademicYear);
                  diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
                  diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
                  diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
