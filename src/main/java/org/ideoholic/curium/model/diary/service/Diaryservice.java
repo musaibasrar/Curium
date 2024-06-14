@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
+import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
@@ -48,24 +49,24 @@ public class Diaryservice {
 		
 	}
 
-	public void addDiary() {
+	public void addDiary(AddDiaryDto addDiaryDto,String branchId, String userLoginId, String currentAcademicYear) {
 		// TODO Auto-generated method stub
 		 Diary diary = new Diary();
          
-         if(httpSession.getAttribute(BRANCHID)!=null){
+         if(branchId!=null){
         	 
-        	 		String secString = DataUtil.emptyString(request.getParameter("addsec"));
-        	 		String classString = request.getParameter("addclass")+"--"+secString;
+        	 		String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
+        	 		String classString = addDiaryDto.getAddClass()+"--"+secString;
                  
                  diary.setClasssec(DataUtil.emptyString(classString));
-                 diary.setMessage(request.getParameter("messagebody"));
-                 diary.setSubject(request.getParameter("subject"));
-                 diary.setBranchid(httpSession.getAttribute(BRANCHID).toString());
-                 diary.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-                 diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-                 diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
-                 diary.setEnddate(DateUtil.indiandateParser(request.getParameter("enddate")));
-                 diary.setStartdate(DateUtil.indiandateParser(request.getParameter("startdate")));
+                 diary.setMessage(addDiaryDto.getMessageBody());
+                 diary.setSubject(addDiaryDto.getSubject());
+                 diary.setBranchid(branchId);
+                 diary.setUserid(Integer.parseInt(userLoginId));
+                 diary.setAcademicyear(currentAcademicYear);
+                 diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
+                 diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
+                 diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
                  diary =  new diaryDAO().create(diary);
                  }
          }
