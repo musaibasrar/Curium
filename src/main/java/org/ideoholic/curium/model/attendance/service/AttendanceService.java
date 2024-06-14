@@ -720,13 +720,13 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public boolean markStudentsAttendance() {
-		boolean result = false;
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+	public ResultResponse markStudentsAttendance(StudentsAttendanceDto attendanceDto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		if(currentAcademicYear!=null){
 			
-			String[] attendanceIds = request.getParameterValues("externalIDs");
-			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
+			String[] attendanceIds = attendanceDto.getAttendanceIds();
+			String[] studentAttendanceStatus = attendanceDto.getStudentAttendanceStatus();
 						
 			if(attendanceIds!=null) {
 			
@@ -740,16 +740,16 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[i]);
 				studentDailyAttendance.setIntime("00:00");
 				studentDailyAttendance.setDate(new Date());
-				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance.setAcademicyear(currentAcademicYear);
+				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList); 
-			request.setAttribute("attedanceresult", res);
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			result.setMessage(res);
 			
 				if(res!=null) {
-					result = true;
+					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
 						sendSMSAbsentees(studentDailyAttendanceList);

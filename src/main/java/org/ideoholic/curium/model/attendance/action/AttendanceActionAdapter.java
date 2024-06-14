@@ -187,4 +187,17 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean markStudentsAttendance(){//Doing 14-6-24
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
+        attendanceDto.setAttendanceIds(request.getParameterValues("externalIDs"));
+        attendanceDto.setStudentAttendanceStatus(request.getParameterValues("studentAttendanceStatus"));
+
+        ResultResponse resultResponse = attendanceService.markStudentsAttendance(attendanceDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("attendanceresult", resultResponse.getMessage());
+
+        return resultResponse.isSuccess();
+    }
 }
