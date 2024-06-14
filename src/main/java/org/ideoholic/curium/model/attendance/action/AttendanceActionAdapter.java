@@ -188,7 +188,7 @@ public class AttendanceActionAdapter {
         return resultResponse.isSuccess();
     }
 
-    public boolean markStudentsAttendance(){//Doing 14-6-24
+    public boolean markStudentsAttendance(){
         AttendanceService attendanceService = new AttendanceService(request, response);
 
         StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
