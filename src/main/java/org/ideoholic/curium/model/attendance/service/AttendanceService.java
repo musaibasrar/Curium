@@ -222,14 +222,15 @@ public class AttendanceService {
 				.build();
 	}
 
-	public boolean uploadAttendanceFile() throws IOException {
-			
-		boolean result = false;
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+	public ResultResponse uploadAttendanceFile(String branchId, String currentAcademicYear) throws IOException {
+
+		ResultResponse result = ResultResponse.builder().build();
+
+		if(currentAcademicYear!=null){
 		
 		Date todaysDate = new Date();
 		List<String> staffExternalId = new EmployeeDAO().getEmployeeExternalId();
-		List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011", Integer.parseInt(branchId));
 		String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 		List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
 		boolean studentWeeklyOff = false;
@@ -237,7 +238,7 @@ public class AttendanceService {
 		for (String weekOffS : weeklyOffString) {
 			studentWeeklyOffList.add(Integer.parseInt(weekOffS));
 		}
-		List<Weeklyoff> studentWeekOff = new AttendanceDAO().readListOfWeeklyOff(studentWeeklyOffList, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Weeklyoff> studentWeekOff = new AttendanceDAO().readListOfWeeklyOff(studentWeeklyOffList, currentAcademicYear, Integer.parseInt(branchId));
 		
 		String today = new SimpleDateFormat("EEEE").format(todaysDate);
 		for (Weeklyoff weeklyoff : studentWeekOff) {
@@ -251,7 +252,7 @@ public class AttendanceService {
 		for (String singleHoliday : holidayString) {
 			studentHolidayList.add(Integer.parseInt(singleHoliday));
 		}
-		List<Holidaysmaster> studentHolidays = new AttendanceDAO().readListOfholidays(studentHolidayList, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Holidaysmaster> studentHolidays = new AttendanceDAO().readListOfholidays(studentHolidayList, currentAcademicYear, Integer.parseInt(branchId));
 		for (Holidaysmaster holidaysmaster : studentHolidays) {
 			Date fromDate = holidaysmaster.getFromdate();
 			Date toDate = holidaysmaster.getTodate();
@@ -313,9 +314,9 @@ public class AttendanceService {
 			       		              	 if(studentWeeklyOff || studentHoliday){
 			       		              		 studentAttendance.setAttendancestatus("H");
 			       		              	 }
-			       		              	 studentAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			       		              	 studentAttendance.setAcademicyear(currentAcademicYear);
 			       		              	 studentAttendance.setDate(new Date());
-			       		              	 studentAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			       		              	 studentAttendance.setBranchid(Integer.parseInt(branchId));
 			       		              	 listStudentAttendance.add(studentAttendance);
 			       		              	 
 		       		                }else if(staffExternalId.contains(formatter.formatCellValue(row.getCell(0)))){
@@ -334,9 +335,9 @@ public class AttendanceService {
 			       		              	 if(studentWeeklyOff || studentHoliday){
 			       		              		staffAttendance.setAttendancestatus("H");
 			       		              	 }
-			       		              	 	staffAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			       		              	 	staffAttendance.setAcademicyear(currentAcademicYear);
 			       		              		staffAttendance.setDate(new Date());
-			       		              		staffAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			       		              		staffAttendance.setBranchid(Integer.parseInt(branchId));
 			       		           			listStaffAttendance.add(staffAttendance);
 		       		                }
 		       		                	
@@ -349,11 +350,11 @@ public class AttendanceService {
 		        }
 		
 			if(!listStudentAttendance.isEmpty()){
-				result = new AttendanceDAO().saveStudentAttendance(listStudentAttendance);
+				result.setSuccess(new AttendanceDAO().saveStudentAttendance(listStudentAttendance));
 			}
 			
 			if(!listStaffAttendance.isEmpty()){
-				result = new AttendanceDAO().saveStaffAttendance(listStaffAttendance);
+				result.setSuccess(new AttendanceDAO().saveStaffAttendance(listStaffAttendance));
 			}
 		}
 		return result;

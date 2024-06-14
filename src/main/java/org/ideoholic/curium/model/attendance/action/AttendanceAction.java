@@ -213,7 +213,7 @@ public class AttendanceAction {
 	@PostMapping("/uploadAttendanceFile")
 	public String uploadAttendanceFile() {
 		try {
-			if (new AttendanceService(request, response).uploadAttendanceFile()) {
+			if (attendanceActionAdapter.uploadAttendanceFile()) {
 				return "studentdailyattendancesuccess";
 			}
 		} catch (IOException e) {
