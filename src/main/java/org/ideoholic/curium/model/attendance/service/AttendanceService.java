@@ -500,24 +500,30 @@ public class AttendanceService {
 		return result;
 	}
 
-	public boolean updateStudentAttendanceDetails() {
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
-			String[] attendanceIds = request.getParameterValues("attandanceIDs");
-			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
+	public ResultResponse updateStudentAttendanceDetails(AttendanceDetailsDto attendanceDetailsDto, String currentAcademicYear) {
+
+		if(currentAcademicYear!=null){
+			String[] attendanceIds = attendanceDetailsDto.getAttendanceIds();
+			String[] studentAttendanceStatus = attendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
 			List<String> studentAttendanceStatusList = new ArrayList<String>();
 			for (String attid : attendanceIds) {
 				String[] attidString = attid.split(",");
 				if(attidString[0]!=null && attidString[1]!=null){
 					attendanceIdsList.add(Integer.parseInt(attidString[0]));
-					studentAttendanceStatusList.add(studentAttendanceStatus[Integer.parseInt(attidString[1])]);	
+					studentAttendanceStatusList.add(studentAttendanceStatus[Integer.parseInt(attidString[1])]);
 				}
-				
+
 			}
-			return new AttendanceDAO().updateStudentAttendanceDetails(attendanceIdsList,studentAttendanceStatusList,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			return ResultResponse
+					.builder()
+					.success(new AttendanceDAO().updateStudentAttendanceDetails(attendanceIdsList,studentAttendanceStatusList,currentAcademicYear))
+					.build();
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	
