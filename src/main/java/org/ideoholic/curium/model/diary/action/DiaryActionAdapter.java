@@ -1,7 +1,10 @@
 package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
+import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
+import org.ideoholic.curium.model.diary.dto.ViewDiaryResponseDto;
 import org.ideoholic.curium.model.diary.service.Diaryservice;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +38,18 @@ public class DiaryActionAdapter {
                                            httpSession.getAttribute("userloginid").toString(),
                                            httpSession.getAttribute("currentAcademicYear").toString());
 
+    }
+    public boolean viewDiary() {
+        Diaryservice diaryservice = new Diaryservice(request,response);
+        ViewDiaryDto viewDiaryDto = new ViewDiaryDto();
+        viewDiaryDto.setPage(request.getParameter("page"));
+
+        ViewDiaryResponseDto viewDiaryResponseDto = diaryservice.viewDiary(viewDiaryDto, httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("diary", viewDiaryResponseDto.getDiary());
+        request.setAttribute("noOfPages", viewDiaryResponseDto.getNoOfPages());
+        request.setAttribute("currentPage", viewDiaryResponseDto.getCurrentPage());
+
+        return viewDiaryResponseDto.isSuccess();
     }
 }

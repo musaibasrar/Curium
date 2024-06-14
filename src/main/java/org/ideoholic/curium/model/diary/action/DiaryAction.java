@@ -43,7 +43,7 @@ public class DiaryAction {
 	
 	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewdiarystudent() {
-		new Diaryservice(request, response).viewDiary();
+		diaryActionAdapter.viewDiary();
 		return "viewDiary";
 	}
 	
@@ -57,7 +57,7 @@ public class DiaryAction {
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
 		new Diaryservice(request, response).deleteRecord();
-		new Diaryservice(request, response).viewDiary();
+		diaryActionAdapter.viewDiary();
 		return "viewDiary";
 	}
 	@PostMapping("/diarySaved")
