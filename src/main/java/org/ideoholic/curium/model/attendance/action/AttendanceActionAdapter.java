@@ -200,4 +200,19 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean addStaffAttendanceMaster() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        StaffAttendanceMasterDto attendanceDto = new StaffAttendanceMasterDto();
+        attendanceDto.setStaffId(request.getParameterValues("employeeIDs"));
+        attendanceDto.setWeeklyOff(request.getParameterValues("weekoffstaff"));
+        attendanceDto.setHolidays(request.getParameterValues("holidaysstaff"));
+        attendanceDto.setInTime(request.getParameter("intime"));
+        attendanceDto.setOutTime(request.getParameter("outtime"));
+
+        ResultResponse resultResponse = attendanceService.addStaffAttendanceMaster(attendanceDto, httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
 }

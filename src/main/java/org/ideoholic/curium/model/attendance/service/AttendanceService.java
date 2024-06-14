@@ -184,18 +184,18 @@ public class AttendanceService {
 	
 	}
 
-	public boolean addStaffAttendanceMaster() {
+	public ResultResponse addStaffAttendanceMaster(StaffAttendanceMasterDto attendanceDto, String branchId) {
 		
-		String[] staffId = request.getParameterValues("employeeIDs");
-		String[] weeklyOff = request.getParameterValues("weekoffstaff");
-		String[] holidays = request.getParameterValues("holidaysstaff");
+		String[] staffId = attendanceDto.getStaffId();
+		String[] weeklyOff = attendanceDto.getWeeklyOff();
+		String[] holidays = attendanceDto.getHolidays();
 		StringBuilder sbWeek = new StringBuilder();
 		StringBuilder sbHoliday = new StringBuilder();
 		for (String weekoff : weeklyOff) {
 			if (sbWeek.length() > 0) 
-			sbWeek.append(",");
-			
-			sbWeek.append(weekoff);
+				sbWeek.append(",");
+
+				sbWeek.append(weekoff);
 		}
 		for (String holidaysString : holidays) {
 			
@@ -209,14 +209,17 @@ public class AttendanceService {
 		for (String idStaff : staffId) {
 			Attendancemaster attendanceMaster = new Attendancemaster();
 			attendanceMaster.setAttendeeid(idStaff);
-			attendanceMaster.setIntime(request.getParameter("intime"));
-			attendanceMaster.setOuttime(request.getParameter("outtime"));
+			attendanceMaster.setIntime(attendanceDto.getInTime());
+			attendanceMaster.setOuttime(attendanceDto.getOutTime());
 			attendanceMaster.setWeeklyoff(sbWeek.toString());
 			attendanceMaster.setHolidayname(sbHoliday.toString());
-			attendanceMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			attendanceMaster.setBranchid(Integer.parseInt(branchId));
 			attendanceMasterList.add(attendanceMaster);
 		}
-		return new AttendanceDAO().addAttendanceMaster(attendanceMasterList);
+		return ResultResponse
+				.builder()
+				.success(new AttendanceDAO().addAttendanceMaster(attendanceMasterList))
+				.build();
 	}
 
 	public boolean uploadAttendanceFile() throws IOException {
