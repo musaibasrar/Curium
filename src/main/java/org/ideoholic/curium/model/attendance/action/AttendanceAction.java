@@ -151,7 +151,7 @@ public class AttendanceAction {
 	@PostMapping("/markStudentsAttendance")
 	public String markStudentsAttendance() {
 
-		if (new AttendanceService(request, response).markStudentsAttendance()) {
+		if (attendanceActionAdapter.markStudentsAttendance()) {
 			return "attendancemark";
 		}
 		return errorPage;
