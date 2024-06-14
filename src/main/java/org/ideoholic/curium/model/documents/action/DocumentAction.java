@@ -143,10 +143,11 @@ public class DocumentAction {
 	
 	@PostMapping("/multiClassSearchAdmissoinReport")
 	public String multiClassSearchAdmissoinReport() {
-		new DocumentService(request, response).multiClassSearchAdmissoinReport(); 
+		documentActionAdapter.multiClassSearchAdmissoinReport(); 
 		return "studentsadmissionreports";
 	}
 	
+		
 	@PostMapping("/multiClassSearchPendingAdmissoinReport")
 	public String multiClassSearchPendingAdmissoinReport() {
 		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
