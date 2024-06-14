@@ -224,4 +224,17 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean addStudentAttendanceMaster() {
+        AttendanceService attendanceService = new AttendanceService();
+
+        StudentAttendanceMasterDto attendanceDto = new StudentAttendanceMasterDto();
+        attendanceDto.setWeeklyOff(request.getParameterValues("weekoff"));
+        attendanceDto.setHolidays(request.getParameterValues("holidays"));
+        attendanceDto.setInTime(request.getParameter("cutoff"));
+
+        ResultResponse resultResponse = attendanceService.addStudentAttendanceMaster(attendanceDto, httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
 }

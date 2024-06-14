@@ -233,7 +233,7 @@ public class AttendanceAction {
 
 	@PostMapping("/addStudentAttendanceMaster")
 	public String addStudentAttendanceMaster() {
-		if (new AttendanceService(request, response).addStudentAttendanceMaster()) {
+		if (attendanceActionAdapter.addStudentAttendanceMaster()) {
 			return "studentattendancesuccess";
 		}
 		return errorPage;

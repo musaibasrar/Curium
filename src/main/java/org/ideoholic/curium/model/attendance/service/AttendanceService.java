@@ -140,12 +140,12 @@ public class AttendanceService {
 	}
 
 	@SuppressWarnings("null")
-	public boolean addStudentAttendanceMaster() {
+	public ResultResponse addStudentAttendanceMaster(StudentAttendanceMasterDto attendanceDto, String branchId) {
 
 		Attendancemaster attendanceMaster = new Attendancemaster();
 		
-		String[] weeklyOff = request.getParameterValues("weekoff");
-		String[] holidays = request.getParameterValues("holidays");
+		String[] weeklyOff = attendanceDto.getWeeklyOff();
+		String[] holidays = attendanceDto.getHolidays();
 		StringBuilder sbWeek = new StringBuilder();
 		StringBuilder sbHoliday = new StringBuilder();
 		for (String weekoff : weeklyOff) {
@@ -164,11 +164,14 @@ public class AttendanceService {
 		}
 	
 		attendanceMaster.setAttendeeid("00011");
-		attendanceMaster.setIntime(request.getParameter("cutoff"));
+		attendanceMaster.setIntime(attendanceDto.getInTime());
 		attendanceMaster.setWeeklyoff(sbWeek.toString());
 		attendanceMaster.setHolidayname(sbHoliday.toString());
-		attendanceMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		return new AttendanceDAO().addAttendanceMaster(attendanceMaster);
+		attendanceMaster.setBranchid(Integer.parseInt(branchId));
+		return ResultResponse
+				.builder()
+				.success(new AttendanceDAO().addAttendanceMaster(attendanceMaster))
+				.build();
 		
 		/*List<Integer> weeklyOffList = new ArrayList<Integer>();
 		for (String weekoff : weeklyOff) {
