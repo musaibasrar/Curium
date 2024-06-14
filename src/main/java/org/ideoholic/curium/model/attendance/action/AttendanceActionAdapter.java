@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Service
 public class AttendanceActionAdapter {
@@ -212,6 +213,14 @@ public class AttendanceActionAdapter {
         attendanceDto.setOutTime(request.getParameter("outtime"));
 
         ResultResponse resultResponse = attendanceService.addStaffAttendanceMaster(attendanceDto, httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
+
+    public boolean uploadAttendanceFile() throws IOException {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ResultResponse resultResponse = attendanceService.uploadAttendanceFile(httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         return resultResponse.isSuccess();
     }
