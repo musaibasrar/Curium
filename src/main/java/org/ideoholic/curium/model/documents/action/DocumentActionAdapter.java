@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,13 @@ public class DocumentActionAdapter {
 		
 		return searchStudentResponseDto.isSuccess();
 	}
+
+	public boolean admissionAbstract() {
+		DocumentService documentService = new DocumentService(request, response);
+		StudentListAaResponseDto studentListAaResponseDto = documentService.admissionAbstract(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("studentListaa", studentListAaResponseDto.getList());
+		return studentListAaResponseDto.isSuccess();
+	}
+
+	
 }
