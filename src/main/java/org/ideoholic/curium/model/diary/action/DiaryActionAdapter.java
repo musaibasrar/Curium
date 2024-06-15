@@ -2,9 +2,8 @@ package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
-import org.ideoholic.curium.model.diary.dto.ViewDiaryResponseDto;
-import org.ideoholic.curium.model.diary.service.Diaryservice;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class DiaryActionAdapter {
     private String BRANCHID = "branchid";
 
     public void addDiary() {
-        Diaryservice diaryservice = new Diaryservice(request, response);
+        DiaryService diaryService = new DiaryService(request, response);
         AddDiaryDto addDiaryDto = new AddDiaryDto();
         addDiaryDto.setAddSec(request.getParameter("addsec"));
         addDiaryDto.setAddClass(request.getParameter("addclass"));
@@ -34,22 +33,22 @@ public class DiaryActionAdapter {
         addDiaryDto.setStartDate(request.getParameter("startdate"));
 
 
-        diaryservice.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
+        diaryService.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
                                            httpSession.getAttribute("userloginid").toString(),
                                            httpSession.getAttribute("currentAcademicYear").toString());
 
     }
     public boolean viewDiary() {
-        Diaryservice diaryservice = new Diaryservice(request,response);
+        DiaryService diaryService = new DiaryService(request,response);
         ViewDiaryDto viewDiaryDto = new ViewDiaryDto();
         viewDiaryDto.setPage(request.getParameter("page"));
 
-        ViewDiaryResponseDto viewDiaryResponseDto = diaryservice.viewDiary(viewDiaryDto, httpSession.getAttribute(BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(viewDiaryDto, httpSession.getAttribute(BRANCHID).toString());
 
-        request.setAttribute("diary", viewDiaryResponseDto.getDiary());
-        request.setAttribute("noOfPages", viewDiaryResponseDto.getNoOfPages());
-        request.setAttribute("currentPage", viewDiaryResponseDto.getCurrentPage());
+        request.setAttribute("diary", diaryResponseDto.getDiary());
+        request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
+        request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
 
-        return viewDiaryResponseDto.isSuccess();
+        return diaryResponseDto.isSuccess();
     }
 }

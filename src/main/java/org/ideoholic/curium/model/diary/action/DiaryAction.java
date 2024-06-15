@@ -4,10 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.diary.service.Diaryservice;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,12 +49,12 @@ public class DiaryAction {
 	//@GetMapping("/viewDiaryStudentParent")
 	@RequestMapping(value = "/viewDiaryStudentParent", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewDiaryStudentParent() {
-		new Diaryservice(request, response).viewDiaryParent();
+		new DiaryService(request, response).viewDiaryParent();
 		return "viewDiaryParent";
 	}
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
-		new Diaryservice(request, response).deleteRecord();
+		new DiaryService(request, response).deleteRecord();
 		diaryActionAdapter.viewDiary();
 		return "viewDiary";
 	}
@@ -66,14 +64,14 @@ public class DiaryAction {
 	}
 	@PostMapping("/ViewDiaryDetails")
 	public String ViewDiaryDetails() {
-		if(new Diaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessage";
 		}
 	@PostMapping("/ViewDiaryDetailsParent")
 	public String ViewDiaryDetailsParent() {
-		if(new Diaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessageParent";

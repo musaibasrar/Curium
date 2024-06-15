@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.diary.service.Diaryservice;
+import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.studentdiary.service.StudentDiaryservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +61,7 @@ public class StudentDiaryAction {
 	}
 	@PostMapping("/ViewDiaryDetails")
 	public String ViewDiaryDetails() {
-		if(new Diaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessage";

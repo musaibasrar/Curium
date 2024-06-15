@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ViewDiaryDto {
     private String page;
-    private boolean success;
+
 }

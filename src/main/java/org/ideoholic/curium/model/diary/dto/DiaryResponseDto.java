@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ViewDiaryResponseDto {
+public class DiaryResponseDto {
     private List<Diary> diary;
     private int noOfPages;
     private int currentPage;

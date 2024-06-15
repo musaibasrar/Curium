@@ -12,18 +12,14 @@ import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
-import org.ideoholic.curium.model.diary.dto.ViewDiaryResponseDto;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
-import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
 
-public class Diaryservice {
+public class DiaryService {
 	  private HttpServletRequest request;
       private HttpServletResponse response;
       private HttpSession httpSession;
@@ -33,7 +29,7 @@ public class Diaryservice {
        */
       private static final int BUFFER_SIZE = 4096;
   
-  public Diaryservice(HttpServletRequest request, HttpServletResponse response) {
+  public DiaryService(HttpServletRequest request, HttpServletResponse response) {
           this.request = request;
  this.response = response;
  this.httpSession = request.getSession();
@@ -74,8 +70,8 @@ public class Diaryservice {
                  }
          }
 
-	public ViewDiaryResponseDto viewDiary(ViewDiaryDto viewDiaryDto, String branchId) {
-	     ViewDiaryResponseDto viewDiaryResponseDto = new ViewDiaryResponseDto();
+	public DiaryResponseDto viewDiary(ViewDiaryDto viewDiaryDto, String branchId) {
+	     DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		// TODO Auto-generated method stub
 		 boolean result = false;
          
@@ -108,18 +104,18 @@ public class Diaryservice {
                         
                     int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-					 viewDiaryResponseDto.setDiary(diaryDetails);
-					 viewDiaryResponseDto.setNoOfPages(noOfPages);
-					 viewDiaryResponseDto.setCurrentPage(page);
+					 diaryResponseDto.setDiary(diaryDetails);
+					 diaryResponseDto.setNoOfPages(noOfPages);
+					 diaryResponseDto.setCurrentPage(page);
 
 
-					viewDiaryResponseDto.setSuccess(true);
+					diaryResponseDto.setSuccess(true);
                 } catch (Exception e) {
                     e.printStackTrace();
-					viewDiaryResponseDto.setSuccess(false);
+					diaryResponseDto.setSuccess(false);
                 }
          }
-                       return viewDiaryResponseDto;
+                       return diaryResponseDto;
 	}
 //viewDiaryparent
 
