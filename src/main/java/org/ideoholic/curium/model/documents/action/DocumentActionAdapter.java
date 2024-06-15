@@ -65,5 +65,13 @@ public class DocumentActionAdapter {
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
+	public void multiClassSearchPendingAdmissoinReport() {
+		DocumentService documentService = new DocumentService(request, response);
+		StudentNameSearchDto studentNameSearchDto = new StudentNameSearchDto();
+		studentNameSearchDto.setNameSearch(request.getParameter("namesearch"));
+		studentNameSearchDto.setClassSearch(request.getParameterValues("classsearch"));
+		SearchStudentResponseDto searchStudentResponseDto=documentService.multiClassSearchPendingAdmissoinReport(studentNameSearchDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute("currentAcademicYear").toString());
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
+	}
 	
 }
