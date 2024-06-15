@@ -243,8 +243,8 @@ public class AttendanceAction {
 	public String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
-		new AttendanceService(request, response).viewAllHolidays();
-		new AttendanceService(request, response).viewAllWeekOffs();
+		attendanceActionAdapter.viewAllHolidays();
+		attendanceActionAdapter.viewAllWeekOffs();
 		return "attendancemaster";
 	}
 
@@ -274,7 +274,7 @@ public class AttendanceAction {
 
 	@GetMapping("/viewAllHolidays")
 	public String viewAllHolidays() {
-		new AttendanceService(request, response).viewAllHolidays();
+		attendanceActionAdapter.viewAllHolidays();
 		return "holiday";
 
 	}
@@ -282,8 +282,8 @@ public class AttendanceAction {
 	@GetMapping("/attendanceConfiguration")
 	public String attendanceConfiguration() {
 		new EmployeeService(request, response).viewAllRelations();
-		new AttendanceService(request, response).viewAllHolidays();
-		new AttendanceService(request, response).viewAllWeekOffs();
+		attendanceActionAdapter.viewAllHolidays();
+		attendanceActionAdapter.viewAllWeekOffs();
 		new EmployeeService(request, response).ViewAllEmployee();
 		return "attendancemaster";
 	}

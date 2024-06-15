@@ -237,4 +237,22 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public void viewAllHolidays() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ResultResponse resultResponse = attendanceService.viewAllHolidays(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        if(resultResponse != null && resultResponse.getResultList() != null){
+            request.setAttribute("holidaysList", resultResponse.getResultList());
+        }
+    }
+
+    public void viewAllWeekOffs() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ResultResponse resultResponse = attendanceService.viewAllWeekOffs(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        if(resultResponse != null && resultResponse.getResultList() != null){
+            request.setAttribute("weekOffList", resultResponse.getResultList());
+        }
+    }
 }

@@ -70,13 +70,16 @@ public class AttendanceService {
         this.httpSession = request.getSession();
 	}
 
-	public void viewAllHolidays() {
+	public ResultResponse viewAllHolidays(String branchId, String currentAcademicYear) {
 		//remove it after testing
 		//httpSession.setAttribute("currentAcademicYear", "2017/18");
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		List<Holidaysmaster> list = new AttendanceDAO().readListOfHolidays(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        request.setAttribute("holidaysList", list);
+		ResultResponse result = ResultResponse.builder().build();
+		if(currentAcademicYear!=null){
+		List<Holidaysmaster> list = new AttendanceDAO().readListOfHolidays(currentAcademicYear, Integer.parseInt(branchId));
+			result.setResultList(list);
+			result.setSuccess(true);
 		}
+		return result;
 	}
 
 	public boolean addHolidays() {
@@ -131,12 +134,14 @@ public class AttendanceService {
 		return false;
 	}
 
-	public void viewAllWeekOffs() {
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			List<Weeklyoff> weekOffList = new AttendanceDAO().readListOfWeekOff(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		        httpSession.setAttribute("weekOffList", weekOffList);
+	public ResultResponse viewAllWeekOffs(String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+		if(currentAcademicYear!=null){
+			List<Weeklyoff> weekOffList = new AttendanceDAO().readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
+				result.setResultList(weekOffList);
+				result.setSuccess(true);
 			}
-		
+		return result;
 	}
 
 	@SuppressWarnings("null")
