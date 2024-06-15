@@ -255,4 +255,15 @@ public class AttendanceActionAdapter {
             request.setAttribute("weekOffList", resultResponse.getResultList());
         }
     }
+
+    public boolean deleteMultiple() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
+        deleteMultipleDto.setIds(request.getParameterValues("holidayid"));
+
+        ResultResponse resultResponse = attendanceService.deleteMultiple(deleteMultipleDto);
+
+        return resultResponse.isSuccess();
+    }
 }
