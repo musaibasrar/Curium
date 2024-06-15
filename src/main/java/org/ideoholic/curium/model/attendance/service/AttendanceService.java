@@ -122,16 +122,22 @@ public class AttendanceService {
 		return false;
 	}
 
-	public boolean deleteMultiple() {
-		String ids[] = request.getParameterValues("holidayid");
+	public ResultResponse deleteMultiple(HolidayIdsDto holidayIdsDto) {
+		String[] ids = holidayIdsDto.getIds();
 		if(ids!=null){
 		List<Integer> holidayIds = new ArrayList<Integer>();
 		for (String id : ids) {
 			holidayIds.add(Integer.valueOf(id));
 		}
-		return new AttendanceDAO().deleteMultiple(holidayIds);	
+		return ResultResponse
+				.builder()
+				.success(new AttendanceDAO().deleteMultiple(holidayIds))
+				.build() ;
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	public ResultResponse viewAllWeekOffs(String branchId, String currentAcademicYear) {

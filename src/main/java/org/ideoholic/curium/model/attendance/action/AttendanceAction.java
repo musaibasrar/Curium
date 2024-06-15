@@ -250,7 +250,7 @@ public class AttendanceAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		if (new AttendanceService(request, response).deleteMultiple()) {
+		if (attendanceActionAdapter.deleteMultiple()) {
 			return viewAllHolidays();
 		}
 		return errorPage;
