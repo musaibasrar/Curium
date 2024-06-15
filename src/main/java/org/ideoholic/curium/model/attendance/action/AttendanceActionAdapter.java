@@ -277,4 +277,17 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean addHolidays() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        HolidaysDto holidaysDto = new HolidaysDto();
+        holidaysDto.setFromDate(request.getParameterValues("fromdate"));
+        holidaysDto.setToDate(request.getParameterValues("todate"));
+        holidaysDto.setHolidayName(request.getParameterValues("holidayname"));
+
+        ResultResponse resultResponse = attendanceService.addHolidays(holidaysDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        return resultResponse.isSuccess();
+    }
 }
