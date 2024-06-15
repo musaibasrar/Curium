@@ -273,7 +273,7 @@ public class AttendanceActionAdapter {
         WeekOffDto weekOffDto = new WeekOffDto();
         weekOffDto.setWeekOff(request.getParameterValues("weekoff"));
 
-        ResultResponse resultResponse = attendanceService.addWeekOff(weekOffDto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = attendanceService.addWeekOff(weekOffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         return resultResponse.isSuccess();
     }
