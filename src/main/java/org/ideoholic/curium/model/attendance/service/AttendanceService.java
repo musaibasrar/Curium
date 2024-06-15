@@ -122,8 +122,8 @@ public class AttendanceService {
 		return false;
 	}
 
-	public ResultResponse deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
-		String[] ids = deleteMultipleDto.getIds();
+	public ResultResponse deleteMultiple(HolidayIdsDto holidayIdsDto) {
+		String[] ids = holidayIdsDto.getIds();
 		if(ids!=null){
 		List<Integer> holidayIds = new ArrayList<Integer>();
 		for (String id : ids) {

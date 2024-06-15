@@ -259,10 +259,10 @@ public class AttendanceActionAdapter {
     public boolean deleteMultiple() {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
-        DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
-        deleteMultipleDto.setIds(request.getParameterValues("holidayid"));
+        HolidayIdsDto holidayIdsDto = new HolidayIdsDto();
+        holidayIdsDto.setIds(request.getParameterValues("holidayid"));
 
-        ResultResponse resultResponse = attendanceService.deleteMultiple(deleteMultipleDto);
+        ResultResponse resultResponse = attendanceService.deleteMultiple(holidayIdsDto);
 
         return resultResponse.isSuccess();
     }
