@@ -266,4 +266,15 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean addWeekOff() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        WeekOffDto weekOffDto = new WeekOffDto();
+        weekOffDto.setWeekOff(request.getParameterValues("weekoff"));
+
+        ResultResponse resultResponse = attendanceService.addWeekOff(weekOffDto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
 }

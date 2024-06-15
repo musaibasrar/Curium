@@ -108,18 +108,24 @@ public class AttendanceService {
 		return result;
 	}
 
-	public boolean addWeekOff() {
+	public ResultResponse addWeekOff(WeekOffDto weekOffDto, String branchId, String currentAcademicYear) {
 		Weeklyoff weeklyOff = new Weeklyoff();
-		String[] weekOff = request.getParameterValues("weekoff");
+		String[] weekOff = weekOffDto.getWeekOff();
 		if(weekOff!=null){
 		for(int i=0; i<weekOff.length;i++){
 			weeklyOff.setWeeklyoffday(weekOff[i]);
-			weeklyOff.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-			weeklyOff.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			return new AttendanceDAO().saveWeeklyOff(weeklyOff);
+			weeklyOff.setAcademicyear(currentAcademicYear);
+			weeklyOff.setBranchid(Integer.parseInt(branchId));
+			return ResultResponse
+					.builder()
+					.success(new AttendanceDAO().saveWeeklyOff(weeklyOff))
+					.build();
 		}
 		}
-		return false;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	public ResultResponse deleteMultiple(HolidayIdsDto holidayIdsDto) {
