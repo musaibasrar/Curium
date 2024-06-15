@@ -258,7 +258,7 @@ public class AttendanceAction {
 
 	@PostMapping("/addWeekOff")
 	public String addWeekOff() {
-		if (new AttendanceService(request, response).addWeekOff()) {
+		if (attendanceActionAdapter.addWeekOff()) {
 			return viewAllHolidays();
 		}
 		return errorPage;
