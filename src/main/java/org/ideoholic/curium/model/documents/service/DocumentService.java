@@ -738,7 +738,7 @@ public class DocumentService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
-		String queryMain = "From Parents as parents where parents.Student.promotedyear != '"+httpSession.getAttribute("currentAcademicYear")+"' AND ";
+		String queryMain = "From Parents as parents where parents.Student.promotedyear != '"+httpSession.getAttribute("currentAcademicYear").toString()+"' AND ";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 		String[] addClass = request.getParameterValues("classsearch");
 		//String addSec = request.getParameter("secsearch");
