@@ -167,9 +167,9 @@ public class DiaryService {
 		return result;
 	}
 
-	public void deleteRecord(DeleteRecordDto deleteRecordDto) {
+	public void deleteRecord(DairyIdsDto dairyIdsDto) {
 		// TODO Auto-generated method stub
-		String[] idDiary = deleteRecordDto.getIdDiary();
+		String[] idDiary = dairyIdsDto.getIdDiary();
 		if (idDiary != null) {
 			List<Integer> ids = new ArrayList();
 			for (String id : idDiary) {

@@ -1,7 +1,7 @@
 package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
-import org.ideoholic.curium.model.diary.dto.DeleteRecordDto;
+import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.service.DiaryService;
@@ -56,8 +56,8 @@ public class DiaryActionAdapter {
 
     public void deleteRecord() {
         DiaryService diaryService = new DiaryService(request, response);
-        DeleteRecordDto deleteRecordDto = new DeleteRecordDto();
-        deleteRecordDto.setIdDiary(request.getParameterValues("id"));
-        diaryService.deleteRecord(deleteRecordDto);
+        DairyIdsDto dairyIdsDto = new DairyIdsDto();
+        dairyIdsDto.setIdDiary(request.getParameterValues("id"));
+        diaryService.deleteRecord(dairyIdsDto);
     }
 }
