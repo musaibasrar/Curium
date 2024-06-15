@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
-import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
@@ -20,24 +17,24 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
 public class DiaryService {
-	  private HttpServletRequest request;
-      private HttpServletResponse response;
-      private HttpSession httpSession;
-      private String BRANCHID = "branchid";
-      /**
-       * Size of a byte buffer to read/write file
-       */
-      private static final int BUFFER_SIZE = 4096;
-  
-  public DiaryService(HttpServletRequest request, HttpServletResponse response) {
-          this.request = request;
- this.response = response;
- this.httpSession = request.getSession();
-  }
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
+	/**
+	 * Size of a byte buffer to read/write file
+	 */
+	private static final int BUFFER_SIZE = 4096;
+
+	public DiaryService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+		this.httpSession = request.getSession();
+	}
 
 	public void adddetail() {
 		// TODO Auto-generated method stub
-		Login login=new Login();
+		Login login = new Login();
 		/*
 		 * String Id=login.getUsername(); Student student = new
 		 * studentDetailsDAO().readploginUniqueObject(Id);
@@ -45,140 +42,142 @@ public class DiaryService {
 		String studentcls = student.getClassstudying();
 		request.setAttribute("studentcls", studentcls);
 		*/
-		
+
 	}
 
-	public void addDiary(AddDiaryDto addDiaryDto,String branchId, String userLoginId, String currentAcademicYear) {
+	public void addDiary(AddDiaryDto addDiaryDto, String branchId, String userLoginId, String currentAcademicYear) {
 		// TODO Auto-generated method stub
-		 Diary diary = new Diary();
-         
-         if(branchId!=null){
-        	 
-        	 		String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
-        	 		String classString = addDiaryDto.getAddClass()+"--"+secString;
-                 
-                 diary.setClasssec(DataUtil.emptyString(classString));
-                 diary.setMessage(addDiaryDto.getMessageBody());
-                 diary.setSubject(addDiaryDto.getSubject());
-                 diary.setBranchid(branchId);
-                 diary.setUserid(Integer.parseInt(userLoginId));
-                 diary.setAcademicyear(currentAcademicYear);
-                 diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
-                 diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
-                 diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
-                 diary =  new diaryDAO().create(diary);
-                 }
-         }
+		Diary diary = new Diary();
+
+		if (branchId != null) {
+
+			String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
+			String classString = addDiaryDto.getAddClass() + "--" + secString;
+
+			diary.setClasssec(DataUtil.emptyString(classString));
+			diary.setMessage(addDiaryDto.getMessageBody());
+			diary.setSubject(addDiaryDto.getSubject());
+			diary.setBranchid(branchId);
+			diary.setUserid(Integer.parseInt(userLoginId));
+			diary.setAcademicyear(currentAcademicYear);
+			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
+			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
+			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
+			diary = new diaryDAO().create(diary);
+		}
+	}
 
 	public DiaryResponseDto viewDiary(ViewDiaryDto viewDiaryDto, String branchId) {
-	     DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		// TODO Auto-generated method stub
-		 boolean result = false;
-         
-         if(branchId!=null){
-                 try {
-                	 int page = 1;
-     				int recordsPerPage = 100;
-     				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryDto.getPage()))) {
-						page = Integer.parseInt(viewDiaryDto.getPage());
-					}
-                        List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
-        						recordsPerPage, Integer.parseInt(branchId));
-                        
-                        List<Diary> diaryDetails = new ArrayList<Diary>();
-        	            for(Object[] diaryObject: list){
-        	            	Diary diary = new Diary();
-        	            	
-        	            	diary.setId((Integer)diaryObject[0]);
-        	                diary.setClasssec((String)diaryObject[1]);
-        	                diary.setAcademicyear((String)diaryObject[2]);
-        	                diary.setBranchid((String)diaryObject[3]);
-        	                diary.setSubject((String)diaryObject[4]);
-        	                diary.setMessage((String)diaryObject[5]);
-        	                diary.setStartdate((Date)diaryObject[6]);
-        	                diary.setEnddate((Date)diaryObject[7]);
-        	                diary.setCreateddate((Date)diaryObject[8]);
-        	                diaryDetails.add(diary);
-        	            }
-                        
-                        
-                    int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
-    				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-					 diaryResponseDto.setDiary(diaryDetails);
-					 diaryResponseDto.setNoOfPages(noOfPages);
-					 diaryResponseDto.setCurrentPage(page);
+		boolean result = false;
+
+		if (branchId != null) {
+			try {
+				int page = 1;
+				int recordsPerPage = 100;
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryDto.getPage()))) {
+					page = Integer.parseInt(viewDiaryDto.getPage());
+				}
+				List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
+						recordsPerPage, Integer.parseInt(branchId));
+
+				List<Diary> diaryDetails = new ArrayList<Diary>();
+				for (Object[] diaryObject : list) {
+					Diary diary = new Diary();
+
+					diary.setId((Integer) diaryObject[0]);
+					diary.setClasssec((String) diaryObject[1]);
+					diary.setAcademicyear((String) diaryObject[2]);
+					diary.setBranchid((String) diaryObject[3]);
+					diary.setSubject((String) diaryObject[4]);
+					diary.setMessage((String) diaryObject[5]);
+					diary.setStartdate((Date) diaryObject[6]);
+					diary.setEnddate((Date) diaryObject[7]);
+					diary.setCreateddate((Date) diaryObject[8]);
+					diaryDetails.add(diary);
+				}
 
 
-					diaryResponseDto.setSuccess(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-					diaryResponseDto.setSuccess(false);
-                }
-         }
-                       return diaryResponseDto;
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+				diaryResponseDto.setDiary(diaryDetails);
+				diaryResponseDto.setNoOfPages(noOfPages);
+				diaryResponseDto.setCurrentPage(page);
+
+
+				diaryResponseDto.setSuccess(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				diaryResponseDto.setSuccess(false);
+			}
+		}
+		return diaryResponseDto;
 	}
 //viewDiaryparent
 
-	
-	  public boolean viewDiaryParent() {
+
+	public boolean viewDiaryParent() {
 		return viewDiaryparent(request.getParameter("id"));
 	}
-	  public boolean viewDiaryparent(String studentId) {
-		 boolean result = false;
-         
-         if(httpSession.getAttribute(BRANCHID)!=null){
-                 try {
-			         Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
-			         String classsec = student.getClassstudying();
-                	 int page = 1;
-     				int recordsPerPage = 100;
-     				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-						page = Integer.parseInt(request.getParameter("page"));
-					}
-                        List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-        						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),classsec);
-                        
-                        List<Diary> diaryDetails = new ArrayList<Diary>();
-        	            for(Object[] diaryObject: list){
-        	            	Diary diary = new Diary();
-        	            	
-        	            	diary.setId((Integer)diaryObject[0]);
-        	                diary.setClasssec((String)diaryObject[1]);
-        	                diary.setAcademicyear((String)diaryObject[2]);
-        	                diary.setBranchid((String)diaryObject[3]);
-        	                diary.setSubject((String)diaryObject[4]);
-        	                diary.setMessage((String)diaryObject[5]);
-        	                diary.setStartdate((Date)diaryObject[6]);
-        	                diary.setEnddate((Date)diaryObject[7]);
-        	                diary.setCreateddate((Date)diaryObject[8]);
-        	                diaryDetails.add(diary);
-        	            }
-                        
-                        
-                    int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-    				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-    				request.setAttribute("diaryparents", diaryDetails);
-    				request.setAttribute("noOfPages", noOfPages);
-    				request.setAttribute("currentPage", page);
-                    result = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result = false;
-                }
-         }
-                       return result;
+
+	public boolean viewDiaryparent(String studentId) {
+		boolean result = false;
+
+		if (httpSession.getAttribute(BRANCHID) != null) {
+			try {
+				Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
+				String classsec = student.getClassstudying();
+				int page = 1;
+				int recordsPerPage = 100;
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
+						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), classsec);
+
+				List<Diary> diaryDetails = new ArrayList<Diary>();
+				for (Object[] diaryObject : list) {
+					Diary diary = new Diary();
+
+					diary.setId((Integer) diaryObject[0]);
+					diary.setClasssec((String) diaryObject[1]);
+					diary.setAcademicyear((String) diaryObject[2]);
+					diary.setBranchid((String) diaryObject[3]);
+					diary.setSubject((String) diaryObject[4]);
+					diary.setMessage((String) diaryObject[5]);
+					diary.setStartdate((Date) diaryObject[6]);
+					diary.setEnddate((Date) diaryObject[7]);
+					diary.setCreateddate((Date) diaryObject[8]);
+					diaryDetails.add(diary);
+				}
+
+
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+				request.setAttribute("diaryparents", diaryDetails);
+				request.setAttribute("noOfPages", noOfPages);
+				request.setAttribute("currentPage", page);
+				result = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				result = false;
+			}
+		}
+		return result;
 	}
-	public void deleteRecord() {
+
+	public void deleteRecord(DeleteRecordDto deleteRecordDto) {
 		// TODO Auto-generated method stub
-		String[] iddiary = request.getParameterValues("id");
-        if(iddiary!=null){
-       List<Integer> ids = new ArrayList();
-       for (String id : iddiary) {
-           System.out.println("id" + id);
-           ids.add(Integer.valueOf(id));
-       }
-       new diaryDAO().deleteRecord(ids);
-        }
+		String[] idDiary = deleteRecordDto.getIdDiary();
+		if (idDiary != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : idDiary) {
+				System.out.println("id" + id);
+				ids.add(Integer.valueOf(id));
+			}
+			new diaryDAO().deleteRecord(ids);
+		}
 	}
 
 	public boolean viewDetailsOfDiaryMessage() {
