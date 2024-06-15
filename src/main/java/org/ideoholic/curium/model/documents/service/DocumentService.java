@@ -708,16 +708,16 @@ public class DocumentService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid.toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid.toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid.toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -738,7 +738,7 @@ public class DocumentService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
-		String queryMain = "From Parents as parents where parents.Student.promotedyear != '"+httpSession.getAttribute("currentAcademicYear").toString()+"' AND ";
+		String queryMain = "From Parents as parents where parents.Student.promotedyear != '"+httpSession.getAttribute("currentAcademicYear")+"' AND ";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 		String[] addClass = request.getParameterValues("classsearch");
 		//String addSec = request.getParameter("secsearch");
