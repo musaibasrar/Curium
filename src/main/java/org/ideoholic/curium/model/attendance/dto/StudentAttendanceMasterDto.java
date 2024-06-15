@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class StudentAttendanceMasterDto {
     private String[] weeklyOff;
-    private String[] Holidays;
+    private String[] holidays;
     private String inTime;
 }
