@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
+import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.service.DiaryService;
@@ -34,12 +35,13 @@ public class DiaryActionAdapter {
 
 
         diaryService.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
-                                           httpSession.getAttribute("userloginid").toString(),
-                                           httpSession.getAttribute("currentAcademicYear").toString());
+                httpSession.getAttribute("userloginid").toString(),
+                httpSession.getAttribute("currentAcademicYear").toString());
 
     }
+
     public boolean viewDiary() {
-        DiaryService diaryService = new DiaryService(request,response);
+        DiaryService diaryService = new DiaryService(request, response);
         ViewDiaryDto viewDiaryDto = new ViewDiaryDto();
         viewDiaryDto.setPage(request.getParameter("page"));
 
@@ -50,5 +52,12 @@ public class DiaryActionAdapter {
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
 
         return diaryResponseDto.isSuccess();
+    }
+
+    public void deleteRecord() {
+        DiaryService diaryService = new DiaryService(request, response);
+        DairyIdsDto dairyIdsDto = new DairyIdsDto();
+        dairyIdsDto.setIdDiary(request.getParameterValues("id"));
+        diaryService.deleteRecord(dairyIdsDto);
     }
 }
