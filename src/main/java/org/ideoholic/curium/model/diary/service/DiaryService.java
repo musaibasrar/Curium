@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class DiaryService {
 	private HttpServletRequest request;
@@ -117,24 +118,27 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public boolean viewDiaryParent() {
-		return viewDiaryparent(request.getParameter("id"));
+	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto) {
+		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+		viewDiaryParentDto.getId();
+	return diaryResponseDto;
 	}
 
-	public boolean viewDiaryparent(String studentId) {
+	public ResultResponse viewDiaryparent(String studentId,ViewDiaryParentDto viewDiaryParentDto, String branchId) {
+		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
-		if (httpSession.getAttribute(BRANCHID) != null) {
+		if (branchId != null) {
 			try {
 				Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryParentDto.getPage()))) {
+					page = Integer.parseInt(viewDiaryParentDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), classsec);
+						recordsPerPage, Integer.parseInt(branchId), classsec);
 
 				List<Diary> diaryDetails = new ArrayList<Diary>();
 				for (Object[] diaryObject : list) {
@@ -153,18 +157,20 @@ public class DiaryService {
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("diaryparents", diaryDetails);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
+				diaryResponseDto.setDiaryparents(diaryDetails);
+				diaryResponseDto.setNoOfPages(noOfPages);
+				diaryResponseDto.setCurrentPage(page);
 				result = true;
+				return ResultResponse.builder().success(true).build();
 			} catch (Exception e) {
 				e.printStackTrace();
 				result = false;
+				return ResultResponse.builder().success(false).build();
 			}
 		}
-		return result;
+		return ResultResponse.builder().build();
 	}
 
 	public void deleteRecord(DairyIdsDto dairyIdsDto) {

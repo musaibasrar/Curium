@@ -1,10 +1,8 @@
 package org.ideoholic.curium.model.diary.action;
 
-import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
-import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
-import org.ideoholic.curium.model.diary.dto.ViewDiaryDto;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.diary.service.DiaryService;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +57,24 @@ public class DiaryActionAdapter {
         DairyIdsDto dairyIdsDto = new DairyIdsDto();
         dairyIdsDto.setIdDiary(request.getParameterValues("id"));
         diaryService.deleteRecord(dairyIdsDto);
+    }
+    public boolean viewDiaryParent() {
+        DiaryService diaryService = new DiaryService(request,response);
+        ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
+        viewDiaryParentDto.setId(request.getParameter("id"));
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(viewDiaryParentDto);
+        return diaryResponseDto.isSuccess();
+    }
+    public boolean viewDiaryparent(String studentId) {
+        DiaryService diaryService = new DiaryService(request,response);
+        ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
+        viewDiaryParentDto.setId(request.getParameter("page"));
+
+        DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+        request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
+        request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
+        request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
+        ResultResponse resultResponse = diaryService.viewDiaryparent(studentId,viewDiaryParentDto,httpSession.getAttribute(BRANCHID).toString());
+        return resultResponse.isSuccess();
     }
 }
