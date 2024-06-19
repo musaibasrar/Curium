@@ -1085,17 +1085,18 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 		}
 
-	public boolean viewAttendanceStaff() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("staffList", staffList);
+	public ResultResponse viewAttendanceStaff(String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
+		if(branchId!=null){
+			List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+			result.setResultList(staffList);
 				if(!staffList.isEmpty()){
-					return true;
+					result.setSuccess(true);
+					return result;
 				}
 		}
 
-			return false;
+			return result;
 	}
 
 	public StaffAttendanceDetailsResponseDto searchStaffAttendanceDetails(StaffAttendanceDetailsDto attendanceDetailsDto, String branchId, String currentAcademicYear) {

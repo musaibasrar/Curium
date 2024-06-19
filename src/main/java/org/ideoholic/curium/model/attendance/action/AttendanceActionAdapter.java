@@ -300,4 +300,13 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean viewAttendanceStaff() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ResultResponse resultResponse = attendanceService.viewAttendanceStaff(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("staffList", resultResponse.getResultList());
+
+        return resultResponse.isSuccess();
+    }
 }

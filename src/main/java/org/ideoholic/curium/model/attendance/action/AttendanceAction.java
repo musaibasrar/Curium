@@ -74,7 +74,7 @@ public class AttendanceAction {
 	@GetMapping("/attendanceExportViewStaff")
 	public String attendanceExportViewStaff() {
 
-		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+		if (attendanceActionAdapter.viewAttendanceStaff()) {
 			return "attendanceexportstaff";
 		}
 		return errorPage;
@@ -92,7 +92,7 @@ public class AttendanceAction {
 	@GetMapping("/attendanceMarkStaff")
 	public String attendanceMarkStaff() {
 
-		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+		if (attendanceActionAdapter.viewAttendanceStaff()) {
 			return "attendancemarkstaff";
 		}
 		return errorPage;
@@ -125,7 +125,7 @@ public class AttendanceAction {
 	@GetMapping("/viewAttendanceStaff")
 	public String viewAttendanceStaff() {
 
-		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+		if (attendanceActionAdapter.viewAttendanceStaff()) {
 			return "attendanceviewstaff";
 		}
 		return errorPage;
