@@ -65,7 +65,7 @@ public class AttendanceAction {
 	@PostMapping("/exportMonthlyDataStaff")
 	public String exportMonthlyAttendanceStaff() {
 
-		if (new AttendanceService(request, response).exportMonthlyDataStaff()) {
+		if (attendanceActionAdapter.exportMonthlyDataStaff()) {
 			return "attendanceexportsuccessstaff";
 		}
 		return errorPage;

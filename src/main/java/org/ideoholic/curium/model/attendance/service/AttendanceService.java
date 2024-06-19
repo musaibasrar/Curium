@@ -1250,12 +1250,11 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public boolean exportMonthlyDataStaff() {
-		boolean result = false;
+	public ResultResponse exportMonthlyDataStaff(MonthlyDataStaffDto monthlyDataStaffDto, String branchId, String currentAcademicYear) {
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+		if(currentAcademicYear!=null){
 			
-		Date monthOf = DateUtil.dateParserUpdateStd(request.getParameter("monthof"));
+		Date monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
 		
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
@@ -1267,18 +1266,24 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
 		
-		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), TimestampFrom, Timestampto,staffList, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
-			result = exportDataToExcelStaff(staffsAttendance,monthOf);
+			ResultResponse
+					.builder()
+					.success(exportDataToExcelStaff(staffsAttendance,monthOf))
+					.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
-		return result;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
 	private boolean exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
