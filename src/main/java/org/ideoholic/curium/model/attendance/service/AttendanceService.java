@@ -82,24 +82,24 @@ public class AttendanceService {
 		return result;
 	}
 
-	public boolean addHolidays() {
+	public ResultResponse addHolidays(HolidaysDto holidaysDto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		Holidaysmaster holidayMaster = new Holidaysmaster();
-		String[] fromDate = request.getParameterValues("fromdate");
-		String[] toDate = request.getParameterValues("todate");
-		String[] holidayName = request.getParameterValues("holidayname");
-		boolean result = false;
+		String[] fromDate = holidaysDto.getFromDate();
+		String[] toDate = holidaysDto.getToDate();
+		String[] holidayName = holidaysDto.getHolidayName();
 
-		if(fromDate!=null && toDate!=null && holidayName!=null && httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(fromDate!=null && toDate!=null && holidayName!=null && currentAcademicYear!=null){
 			try{
 		for (int i = 0; i < fromDate.length; i++) {
 			
 			holidayMaster.setFromdate(DateUtil.datePars(fromDate[i]));
 			holidayMaster.setTodate(DateUtil.datePars(toDate[i]));
 			holidayMaster.setHolidayname(holidayName[i]);
-			holidayMaster.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-			holidayMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			result = new AttendanceDAO().saveHolidays(holidayMaster);
+			holidayMaster.setAcademicyear(currentAcademicYear);
+			holidayMaster.setBranchid(Integer.parseInt(branchId));
+			result.setSuccess(new AttendanceDAO().saveHolidays(holidayMaster));
 		}
 			}catch(Exception e){
 			e.printStackTrace();	

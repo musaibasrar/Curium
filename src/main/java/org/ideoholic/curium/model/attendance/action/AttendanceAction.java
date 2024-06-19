@@ -266,7 +266,7 @@ public class AttendanceAction {
 
 	@PostMapping("/addHolidays")
 	public String addHolidays() {
-		if (new AttendanceService(request, response).addHolidays()) {
+		if (attendanceActionAdapter.addHolidays()) {
 			return viewAllHolidays();
 		}
 		return errorPage;
