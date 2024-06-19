@@ -54,7 +54,7 @@ public class DiaryAction {
 	}
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
-		new DiaryService(request, response).deleteRecord();
+		diaryActionAdapter.deleteRecord();
 		diaryActionAdapter.viewDiary();
 		return "viewDiary";
 	}

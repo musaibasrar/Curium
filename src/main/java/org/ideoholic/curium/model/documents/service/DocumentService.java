@@ -35,6 +35,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
+import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -672,15 +673,16 @@ public class DocumentService {
 	}
 
 
-	public void multiClassSearchAdmissoinReport() {
+	public SearchStudentResponseDto multiClassSearchAdmissoinReport(StudentNameSearchDto studentNameSearchDto,String branchid) {
 
+		SearchStudentResponseDto searchStudentResponseDto= new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 		
-		String queryMain = "From Parents as parents where parents.Student.yearofadmission = '"+request.getParameter("yearofadmission")+"' AND ";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String[] addClass = request.getParameterValues("classsearch");
+		String queryMain = "From Parents as parents where parents.Student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND ";
+		String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
+		String[] addClass = studentNameSearchDto.getClassSearch();
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
 
@@ -706,16 +708,16 @@ public class DocumentService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -724,68 +726,73 @@ public class DocumentService {
 		}
 		
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
-
-	
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
+        
+		return searchStudentResponseDto;
 	}
 
 
-	public void multiClassSearchPendingAdmissoinReport() {
+	public SearchStudentResponseDto multiClassSearchPendingAdmissoinReport(StudentNameSearchDto studentNameSearchDto,
+			String branchid, String currentAcademicYear) {
 
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		
-		String queryMain = "From Parents as parents where parents.Student.promotedyear != '"+httpSession.getAttribute("currentAcademicYear").toString()+"' AND ";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String[] addClass = request.getParameterValues("classsearch");
-		//String addSec = request.getParameter("secsearch");
-		StringBuffer conClassStudying = new StringBuffer();
+
+		if (branchid != null) {
+
+			String queryMain = "From Parents as parents where parents.Student.promotedyear != '" + currentAcademicYear
+					+ "' AND ";
+			String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
+			String[] addClass = studentNameSearchDto.getClassSearch();
+			// String addSec = request.getParameter("secsearch");
+			StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
 			for (String classOne : addClass) {
-				
-				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
-				}else {
-					conClassStudying.append(classOne+"--"+"%");
+
+				if (i > 0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne + "--" + "%");
+				} else {
+					conClassStudying.append(classOne + "--" + "%");
 				}
-				
+
 				i++;
 			}
-			
-		
-		/*if (!addSec.equalsIgnoreCase("")) {
-			//conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
-		}*/
 
-		String classStudying = DataUtil.emptyString(conClassStudying.toString());
-		String querySub = "";
+			/*
+			 * if (!addSec.equalsIgnoreCase("")) { //conClassStudying = addClass;
+			 * conClassStudying = conClassStudying+"--"+addSec+"%"; }
+			 */
 
-		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());
+			String querySub = "";
+
+			if (!studentname.equalsIgnoreCase("")) {
+				querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="
+						+ Integer.parseInt(branchid);
+			}
+
+			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+				querySub = querySub + " AND (parents.Student.classstudying like '" + classStudying
+						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.Student.admissionnumber ASC";
+			} else if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '" + classStudying
+						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.Student.admissionnumber ASC";
+			}
+
+			if (!"".equalsIgnoreCase(querySub)) {
+				queryMain = queryMain + querySub;
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+
 		}
 
-		if (!classStudying.equalsIgnoreCase("")
-				&& !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
-		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
-		}
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
+		return searchStudentResponseDto;
 
-		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub;
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-		}
-		
-	}
-		request.setAttribute("searchStudentList", searchStudentList);
-
-	
-	}
+	}	
 	
 	public void printCharacterCertificate() {
 		String character= request.getParameter("characterstudent");
