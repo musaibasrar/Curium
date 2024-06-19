@@ -18,9 +18,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,21 +30,18 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AppointmentService {
 
-	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private static final int BUFFER_SIZE = 4096;
+	
+	 private static final int BUFFER_SIZE = 4096;
 
-	public AppointmentService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public ResultResponse addAppointment(AddAppointmentDto addAppointmentDto) {
+	public ResultResponse addAppointment(AddAppointmentDto addAppointmentDto, String branchId, String currentAcademicYear, String userLoginId) {
 
 
 		
@@ -59,13 +54,13 @@ public class AppointmentService {
 		System.out.println("Date "+appointmentDateParent);
 		
 
-		if(addAppointmentDto.getBranchId()!=null){
+		if(branchId != null){
 					Appointment appointment = new Appointment();
-					appointment.setAcademicyear(DataUtil.emptyString(addAppointmentDto.getCurrentAcademicYear().toString()));
+					appointment.setAcademicyear(DataUtil.emptyString(currentAcademicYear));
 					appointment.setAppointmentdate(DateUtil.dateParserdd(appointmentDate));
-			        appointment.setBranchid(Integer.parseInt(addAppointmentDto.getBranchId().toString()));
+			        appointment.setBranchid(Integer.parseInt(branchId));
 					appointment.setCreateddate(new Date());
-					appointment.setCreateduserid(Integer.parseInt(addAppointmentDto.getUserloginid().toString()));
+					appointment.setCreateduserid(Integer.parseInt(userLoginId));
 					appointment.setStatus("Scheduled");
 					//appointment.setStdid(1);
 					Parents parent = new Parents();
@@ -114,10 +109,10 @@ public class AppointmentService {
 		return ResultResponse.builder().build();
 	}
 
-	public ViewAllAppoinmentsResponseDto viewAllAppointments(ViewAllAppointmentsDto viewAllAppointmentsDto) {
+	public ViewAllAppoinmentsResponseDto viewAllAppointments(ViewAllAppointmentsDto viewAllAppointmentsDto, String branchId) {
            ViewAllAppoinmentsResponseDto viewAllAppoinmentsResponseDto = new ViewAllAppoinmentsResponseDto();
 		//String pages = "1";
-		if(viewAllAppointmentsDto.getBranchId()!=null){
+		if(branchId!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
@@ -125,15 +120,17 @@ public class AppointmentService {
 						page = viewAllAppointmentsDto.getPage();
 					}
 				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-						recordsPerPage, viewAllAppointmentsDto.getBranchId());
+						recordsPerPage, Integer.parseInt(branchId));
 					viewAllAppoinmentsResponseDto.setStudentList(list);
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(viewAllAppointmentsDto.getBranchId());
+				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				    viewAllAppoinmentsResponseDto.setAppointmentList(list);
 				    viewAllAppoinmentsResponseDto.setNoOfPages(noOfPages);
 				    viewAllAppoinmentsResponseDto.setCurrentPage(page);
+				    viewAllAppoinmentsResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
+				viewAllAppoinmentsResponseDto.setSuccess(false);
 			}
 		}
 		return viewAllAppoinmentsResponseDto;
@@ -367,8 +364,8 @@ public class AppointmentService {
 		
 	}
 
-	public boolean download() {
-		boolean result = false;
+	public ResultResponse download() {
+		
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/appointmentreport.xlsx");
@@ -400,11 +397,12 @@ public class AppointmentService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			
 		} catch (Exception e) {
 			System.out.println("" + e);
+			return ResultResponse.builder().success(false).build();
 		}
-		return result;
+		return ResultResponse.builder().success(true).build();
 	}
 
 	public ResultResponse generateAppointmentsReportForClient(GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto) {

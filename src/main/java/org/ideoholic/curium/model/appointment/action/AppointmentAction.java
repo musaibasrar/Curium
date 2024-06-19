@@ -5,9 +5,7 @@ package org.ideoholic.curium.model.appointment.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +29,13 @@ public class AppointmentAction {
 	
 	@Autowired
 	private HttpServletResponse response;
-	
-	@Autowired
-	private HttpSession httpSession;
 
 	@Autowired
 	private AppointmentActionAdapter appointmentActionAdapter;
 
 	@PostMapping("/download")
 	private String download() {
-		if(new AppointmentService(request, response).download()) {
+		if(appointmentActionAdapter.download()) {
 			return "exportsuccessappointment";
 		}
 		return "exportfailure";
@@ -60,7 +55,7 @@ public class AppointmentAction {
 	@PostMapping("/generateAppointmentsReport")
 	private String generateAppointmentsReport() {
 		appointmentActionAdapter.generateAppointmentsReport();
-		return generateAppointmentsReport();
+		return appointmentReport();
 	}
 
 	@GetMapping("/appointmentReport")
