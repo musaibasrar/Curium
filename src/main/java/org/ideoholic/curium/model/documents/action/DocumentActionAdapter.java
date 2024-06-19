@@ -93,4 +93,16 @@ public class DocumentActionAdapter {
 		return null;
 	}
 
+	public String generateStudyCertificate() {
+		DocumentService documentService = new DocumentService(request, response);
+		StudentIdDto studentIdDto = new StudentIdDto();
+		studentIdDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdDto);
+		if (parentDto != null) {
+			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			return "studycertificateprint";
+		}
+		return null;
+	}
+
 }
