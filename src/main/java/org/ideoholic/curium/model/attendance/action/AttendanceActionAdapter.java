@@ -290,4 +290,14 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean exportMonthlyDataStaff() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        MonthlyDataStaffDto monthlyDataStaffDto = new MonthlyDataStaffDto();
+
+        ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        return resultResponse.isSuccess();
+    }
 }
