@@ -156,7 +156,7 @@ public class DocumentAction {
 	
 	@PostMapping("/GenerateCharacterCertificate")
 	public String generateCharacterCertificate() {
-		String result = new DocumentService(request, response).GenerateCharacterCertificate();
+		String result = documentActionAdapter.GenerateCharacterCertificate();
 		if (result != null) {
 			return result;
 		} else {
