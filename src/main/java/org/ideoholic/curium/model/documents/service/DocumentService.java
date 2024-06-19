@@ -817,18 +817,19 @@ public class DocumentService {
 		return parentDto;
 	}
 	
-		 public String generateStudyCertificate() {
-			
-			String[] studentIds = request.getParameterValues("studentIDs");
+		 public ParentDto generateStudyCertificate(StudentIdDto studentIdDto) {
+			 ParentDto parentDto = null;
+			String[] studentIds = studentIdDto.getStudentIds();
 			String bonafidePage = null;
 			
 			if(studentIds!=null){
 				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-				httpSession.setAttribute("studentdetailsbonafide", parents);
+				parentDto = new ParentDto();
+				parentDto.setParents(parents);
 				bonafidePage = "studycertificateprint";
 			}
 			
-			return bonafidePage;
+			return parentDto;
 		}
 }

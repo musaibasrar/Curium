@@ -183,7 +183,7 @@ public class DocumentAction {
 
 	@PostMapping("/GenerateStudyCertificate")
 	public String generateStudyCertificate() {
-		String result = new DocumentService(request, response).generateStudyCertificate();
+		String result = documentActionAdapter.generateStudyCertificate();
 		if (result != null) {
 			return result;
 		} else {
