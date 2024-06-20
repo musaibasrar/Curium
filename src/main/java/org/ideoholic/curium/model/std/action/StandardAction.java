@@ -26,13 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StandardAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 		
 	
 		@PostMapping("/restoreMultipleLeftout")
