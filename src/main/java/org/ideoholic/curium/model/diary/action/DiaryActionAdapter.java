@@ -60,21 +60,16 @@ public class DiaryActionAdapter {
     }
     public boolean viewDiaryParent() {
         DiaryService diaryService = new DiaryService(request,response);
+
         ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
         viewDiaryParentDto.setId(request.getParameter("id"));
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(viewDiaryParentDto);
-        return diaryResponseDto.isSuccess();
-    }
-    public boolean viewDiaryparent(String studentId) {
-        DiaryService diaryService = new DiaryService(request,response);
-        ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
         viewDiaryParentDto.setId(request.getParameter("page"));
 
-        DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(viewDiaryParentDto);
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
-        ResultResponse resultResponse = diaryService.viewDiaryparent(studentId,viewDiaryParentDto,httpSession.getAttribute(BRANCHID).toString());
-        return resultResponse.isSuccess();
+        return diaryResponseDto.isSuccess();
     }
+
 }

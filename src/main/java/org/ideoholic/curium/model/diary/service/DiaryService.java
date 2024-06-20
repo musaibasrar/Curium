@@ -119,18 +119,16 @@ public class DiaryService {
 
 
 	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto) {
-		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
-		viewDiaryParentDto.getId();
-	return diaryResponseDto;
+		return viewDiaryparent(viewDiaryParentDto,viewDiaryParentDto.getId());
 	}
 
-	public ResultResponse viewDiaryparent(String studentId,ViewDiaryParentDto viewDiaryParentDto, String branchId) {
+	public DiaryResponseDto viewDiaryparent(ViewDiaryParentDto viewDiaryParentDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
 		if (branchId != null) {
 			try {
-				Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
+				Student student = new studentDetailsDAO().readploginUniqueObject(viewDiaryParentDto.getId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
@@ -162,15 +160,15 @@ public class DiaryService {
 				diaryResponseDto.setDiaryparents(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
 				diaryResponseDto.setCurrentPage(page);
-				result = true;
-				return ResultResponse.builder().success(true).build();
+				diaryResponseDto.setSuccess(true);
+
 			} catch (Exception e) {
 				e.printStackTrace();
-				result = false;
-				return ResultResponse.builder().success(false).build();
+				diaryResponseDto.setSuccess(false);
+
 			}
 		}
-		return ResultResponse.builder().build();
+		return diaryResponseDto;
 	}
 
 	public void deleteRecord(DairyIdsDto dairyIdsDto) {
