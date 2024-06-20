@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.department.dto.MultipleLeftOutDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
@@ -251,8 +252,8 @@ public class StandardService {
         return result;
 	}
 
-	public void restoreMultipleLeftout() {
-        String[] studentIds = request.getParameterValues("studentIDs");
+	public ResultResponse restoreMultipleLeftout(MultipleLeftOutDto dto) {
+        String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
@@ -261,6 +262,9 @@ public class StandardService {
                 }
                 new StandardDetailsDAO().restoreMultipleLeftout(ids);
         }
+        return ResultResponse
+                .builder()
+                .build();
     }
     
 }

@@ -40,12 +40,14 @@ public class AttendanceAction {
 
 	String errorPage = "error";
 
+	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/attendanceExport")
 	public String attendanceExport() {
 		new StandardService(request, response).viewClasses();
 		return "attendanceexport";
 	}
 
+	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/markAttendance")
 	public String markAttendance() {
 		new StandardService(request, response).viewClasses();
@@ -192,6 +194,7 @@ public class AttendanceAction {
 		return errorPage;
 	}
 
+	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/viewAttendance")
 	public String viewAttendance() {
 

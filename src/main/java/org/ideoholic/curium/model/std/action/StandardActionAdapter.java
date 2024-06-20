@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.std.action;
 
+import org.ideoholic.curium.model.department.dto.MultipleLeftOutDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,11 @@ public class StandardActionAdapter {
         ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
         return resultResponse.isSuccess();
+    }
+
+    public void restoreMultipleLeftout() {
+        MultipleLeftOutDto dto = new MultipleLeftOutDto();
+
+        ResultResponse resultResponse = standardService.restoreMultipleLeftout(dto);
     }
 }
