@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class StandardService {
 
@@ -41,7 +42,7 @@ public class StandardService {
             classsec.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             classsec.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().create(classsec);
-            viewClasses();
+            viewClasses(httpSession.getAttribute(BRANCHID).toString());
             return true;
             }
             
@@ -49,14 +50,21 @@ public class StandardService {
     
     }
 
-    public boolean viewClasses() {
-        if(httpSession.getAttribute(BRANCHID)!=null){
-            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            httpSession.setAttribute("classdetailslist", classsecList);
-            return true;
+    public ResultResponse viewClasses(String branchId) {
+
+        if(branchId!=null){
+            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+            return ResultResponse
+                    .builder()
+                    .resultList(classsecList)
+                    .success(true)
+                    .build();
         }
         
-        return false;
+        return ResultResponse
+                .builder()
+                .success(false)
+                .build();
     }
 
     public boolean deleteClasses() {
@@ -68,7 +76,7 @@ public class StandardService {
                         ids.add(Integer.valueOf(id));
                 }
                 new StandardDetailsDAO().deleteMultiple(ids);
-                return viewClasses();
+                return viewClasses(httpSession.getAttribute(BRANCHID).toString()).isSuccess();
         }
         return false;
     }
@@ -82,7 +90,7 @@ public class StandardService {
             classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             classHierarchy.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().createClassHierarchy(classHierarchy);
-            viewClasses();
+            viewClasses(httpSession.getAttribute(BRANCHID).toString());
             }
     }
 
@@ -95,7 +103,7 @@ public class StandardService {
                         ids.add(Integer.valueOf(id));
                 }
                 new StandardDetailsDAO().deleteClassHierarchy(ids);
-                viewClasses();
+                viewClasses(httpSession.getAttribute(BRANCHID).toString());
         }
     }
 

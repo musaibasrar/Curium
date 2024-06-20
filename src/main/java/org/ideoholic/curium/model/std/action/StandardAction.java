@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.attendance.action.AttendanceActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +30,9 @@ public class StandardAction {
 	
 	@Autowired
 	HttpServletResponse response;
-	
+
 	@Autowired
-	HttpSession httpSession;
+	StandardActionAdapter standardActionAdapter;
 		
 	
 		@PostMapping("/restoreMultipleLeftout")
@@ -115,14 +116,14 @@ public class StandardAction {
 
 	@GetMapping("/classHierarchy")
 	public String classHierarchy() {
-		  new StandardService(request, response).viewClasses();
+		  standardActionAdapter.viewClasses();
 		  new StandardService(request, response).viewClassHierarchy();
 			return "classhierarchy";
 	}
 
 	@GetMapping("/promoteClass")
 	public String promoteClass() {
-		  new StandardService(request, response).viewClasses();
+		  standardActionAdapter.viewClasses();
 		return "Promotion";
 	}
 
@@ -137,7 +138,7 @@ public class StandardAction {
 
 	@GetMapping("/viewClasses")
     public String viewClasses() {
-	        if(new StandardService(request, response).viewClasses()) {
+	        if(standardActionAdapter.viewClasses()) {
 	            return "addclass";
 	        }
 	        return "error";
