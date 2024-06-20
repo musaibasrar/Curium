@@ -465,13 +465,15 @@ public class AttendanceService {
 		return result;
 	}
 
-	public boolean viewAttendance() {
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("studentList", studentList);
+	public ResultResponse viewAttendance(String branchId) {
+			ResultResponse result = ResultResponse.builder().build();
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		result.setResultList(studentList);
 			if(!studentList.isEmpty()){
-				return true;
+				result.setSuccess(true);
+				return result;
 			}
-			return false;
+			return result;
 	}
 
 	public StudentAttendanceMonthlyResponseDto viewStudentAttendanceDetailsMonthly(StudentAttendanceMonthlyDto attendanceDetailsMonthlyDto, String branchId, String currentAcademicYear) {
