@@ -295,6 +295,7 @@ public class AttendanceActionAdapter {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
         MonthlyDataStaffDto monthlyDataStaffDto = new MonthlyDataStaffDto();
+        monthlyDataStaffDto.setMonthOf(request.getParameter("monthof"));
 
         ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
