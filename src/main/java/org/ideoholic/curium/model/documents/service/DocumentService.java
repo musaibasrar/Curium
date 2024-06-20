@@ -37,6 +37,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
+import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -298,28 +299,27 @@ public class DocumentService {
 	    }
 
 
-	public boolean printTransferCertificate() {
-		
-		Parents parents = new Parents();
-		Transfercertificate tc = new Transfercertificate();
-		
-		int studentId = DataUtil.parseInt(request.getParameter("id"));
-		 
+		public TcResponseDto printTransferCertificate(int studentId) {
+			TcResponseDto tcResponseDto = new TcResponseDto();
+			Parents parents = new Parents();
+			Transfercertificate tc = new Transfercertificate();
+
 			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
-		 
-			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
-			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-			 request.setAttribute("studentdetails", parents);
-			 request.setAttribute("tcdetails", tc);
-			 
-			 if(tc.getTcid() != null){
-				 return true;
-			 }else{
-				 return false;
-			 }
-	}
 
+			String getStudentInfo = "from Parents as parents where parents.Student.sid=" + studentId;
+			parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			tcResponseDto.setParents(parents);
+			tcResponseDto.setTc(tc);
 
+			if (tc.getTcid() != null) {
+				tcResponseDto.setSuccess(true);
+			} else {
+				tcResponseDto.setSuccess(false);
+			}
+			return tcResponseDto;
+		}
+
+		
 	public StudentListAaResponseDto admissionAbstract(String branchid) {
 		StudentListAaResponseDto studentListAaResponseDto = StudentListAaResponseDto.builder().build();
 		if(branchid!=null){
