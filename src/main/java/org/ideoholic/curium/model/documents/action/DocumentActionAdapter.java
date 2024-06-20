@@ -116,4 +116,11 @@ public class DocumentActionAdapter {
 		return tcResponseDto.isSuccess();
 	}
 
+	public boolean transferCertificate() {
+		DocumentService documentService = new DocumentService(request, response);
+		ResultResponse resultResponse = documentService.transferCertificate(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("studentListtc", resultResponse.getResultList());
+		return resultResponse.isSuccess();
+	}
+
 }

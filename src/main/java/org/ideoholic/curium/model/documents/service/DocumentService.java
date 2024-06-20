@@ -69,20 +69,20 @@ public class DocumentService {
 	}
 	
 	
-	public boolean transferCertificate(){
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+	public ResultResponse transferCertificate(String branchid) {
+		List<Parents> list = new ArrayList<Parents>();
+		if (branchid != null) {
 			try {
-				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentListtc", list);
-				return true;
+				list = new studentDetailsDAO()
+						.getStudentsList("from Parents where branchid = " + Integer.parseInt(branchid));
+				return ResultResponse.builder().success(true).build();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return false;
-		
+
+		return ResultResponse.builder().success(true).resultList(list).build();
+
 	}
 
 	public String generateTransferCertificate() {

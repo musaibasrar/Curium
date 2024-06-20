@@ -123,7 +123,7 @@ public class DocumentAction {
 
 	@GetMapping("/transferCertificate")
 	public String transferCertificate() {
-		if(new DocumentService(request, response).transferCertificate()){
+		if(documentActionAdapter.transferCertificate()){
 			return "transfercertificate";
 		}
         return error;
