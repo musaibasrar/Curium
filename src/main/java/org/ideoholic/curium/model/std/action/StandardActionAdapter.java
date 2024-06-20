@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.std.action;
 
-import org.ideoholic.curium.model.department.dto.MultipleLeftOutDto;
+import org.ideoholic.curium.model.std.dto.MultipleLeftOutDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;

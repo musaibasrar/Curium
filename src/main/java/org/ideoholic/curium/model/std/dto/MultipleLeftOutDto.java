@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.department.dto;
+package org.ideoholic.curium.model.std.dto;
 
 import lombok.Data;
 
