@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StandardAction {
 
 	@Autowired
-	private HttpServletRequest request;
+	HttpServletRequest request;
 	
 	@Autowired
 	private HttpServletResponse response;
