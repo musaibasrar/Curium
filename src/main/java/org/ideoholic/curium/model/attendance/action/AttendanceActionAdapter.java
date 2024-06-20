@@ -309,4 +309,13 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean viewAttendance() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        ResultResponse resultResponse = attendanceService.viewAttendance(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", resultResponse.getResultList());
+
+        return resultResponse.isSuccess();
+    }
 }

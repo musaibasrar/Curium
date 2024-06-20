@@ -195,7 +195,7 @@ public class AttendanceAction {
 	@GetMapping("/viewAttendance")
 	public String viewAttendance() {
 
-		if (new AttendanceService(request, response).viewAttendance()) {
+		if (attendanceActionAdapter.viewAttendance()) {
 			new StandardService(request, response).viewClasses();
 			return "viewattendance";
 		}
