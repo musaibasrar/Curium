@@ -118,17 +118,13 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto) {
-		return viewDiaryparent(viewDiaryParentDto,viewDiaryParentDto.getId());
-	}
-
-	public DiaryResponseDto viewDiaryparent(ViewDiaryParentDto viewDiaryParentDto, String branchId) {
+	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
 		if (branchId != null) {
 			try {
-				Student student = new studentDetailsDAO().readploginUniqueObject(viewDiaryParentDto.getId());
+				Student student = new studentDetailsDAO().readploginUniqueObject(viewDiaryParentDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;

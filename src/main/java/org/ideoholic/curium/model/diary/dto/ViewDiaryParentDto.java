@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ViewDiaryParentDto {
-    private String id;
+    private String studentId;
     private String page;
 }
