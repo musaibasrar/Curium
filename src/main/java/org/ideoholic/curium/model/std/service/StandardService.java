@@ -42,12 +42,17 @@ public class StandardService {
             classsec.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             classsec.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().create(classsec);
-            viewClasses(httpSession.getAttribute(BRANCHID).toString());
+            viewClasses();
             return true;
             }
             
         return false;
     
+    }
+
+    //TODO:TODO:This method is placed here for PeriodService. Please delete this method after migrating PeriodAction.
+    public boolean viewClasses(){
+        return false;
     }
 
     public ResultResponse viewClasses(String branchId) {
@@ -76,7 +81,7 @@ public class StandardService {
                         ids.add(Integer.valueOf(id));
                 }
                 new StandardDetailsDAO().deleteMultiple(ids);
-                return viewClasses(httpSession.getAttribute(BRANCHID).toString()).isSuccess();
+                return viewClasses();
         }
         return false;
     }
@@ -90,7 +95,7 @@ public class StandardService {
             classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             classHierarchy.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().createClassHierarchy(classHierarchy);
-            viewClasses(httpSession.getAttribute(BRANCHID).toString());
+            viewClasses();
             }
     }
 
@@ -103,7 +108,7 @@ public class StandardService {
                         ids.add(Integer.valueOf(id));
                 }
                 new StandardDetailsDAO().deleteClassHierarchy(ids);
-                viewClasses(httpSession.getAttribute(BRANCHID).toString());
+                viewClasses();
         }
     }
 
