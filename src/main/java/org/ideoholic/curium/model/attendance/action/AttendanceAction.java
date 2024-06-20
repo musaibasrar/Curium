@@ -55,7 +55,7 @@ public class AttendanceAction {
 	@PostMapping("/downloadStaffAttendance")
 	public String downloadStaffAttendance() {
 
-		if (new AttendanceService(request, response).downloadFileStaff()) {
+		if (attendanceActionAdapter.downloadFileStaff()) {
 			return "attendanceexportsuccessstaff";
 		}
 		return "exportfailure";
@@ -133,7 +133,7 @@ public class AttendanceAction {
 
 	@PostMapping("/download")
 	public String download() {
-		if (new AttendanceService(request, response).downloadFile()) {
+		if (attendanceActionAdapter.downloadFile()) {
 			return "attendanceexportsuccess";
 		}
 		return "exportfailure";
