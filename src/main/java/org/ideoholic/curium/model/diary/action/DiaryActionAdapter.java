@@ -63,7 +63,7 @@ public class DiaryActionAdapter {
 
         ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
         viewDiaryParentDto.setStudentId(request.getParameter("id"));
-        viewDiaryParentDto.setStudentId(request.getParameter("page"));
+        viewDiaryParentDto.setPage(request.getParameter("page"));
 
         DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(viewDiaryParentDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
@@ -71,5 +71,7 @@ public class DiaryActionAdapter {
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
         return diaryResponseDto.isSuccess();
     }
-
+//    ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
+//viewDiaryParentDto.setStudentId(request.getParameter("id"));
+//viewDiaryParentDto.setPage(request.getParameter("page"));
 }
