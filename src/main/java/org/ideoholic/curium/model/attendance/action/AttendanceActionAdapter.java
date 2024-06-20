@@ -318,4 +318,16 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean downloadFileStaff() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        return attendanceService.downloadFileStaff();
+    }
+
+    public boolean downloadFile() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+
+        return attendanceService.downloadFile();
+    }
 }
