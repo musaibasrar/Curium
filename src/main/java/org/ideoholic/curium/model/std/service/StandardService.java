@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class StandardService {
 
@@ -49,14 +50,26 @@ public class StandardService {
     
     }
 
-    public boolean viewClasses() {
-        if(httpSession.getAttribute(BRANCHID)!=null){
-            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            httpSession.setAttribute("classdetailslist", classsecList);
-            return true;
+    //TODO:TODO:This method is placed here for PeriodService. Please delete this method after migrating PeriodAction.
+    public boolean viewClasses(){
+        return false;
+    }
+
+    public ResultResponse viewClasses(String branchId) {
+
+        if(branchId!=null){
+            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+            return ResultResponse
+                    .builder()
+                    .resultList(classsecList)
+                    .success(true)
+                    .build();
         }
         
-        return false;
+        return ResultResponse
+                .builder()
+                .success(false)
+                .build();
     }
 
     public boolean deleteClasses() {
