@@ -71,4 +71,24 @@ public class StandardActionAdapter {
         ResultResponse resultResponse = standardService.viewDropped();
         request.setAttribute("studentListDropped", resultResponse.getResultList());
     }
+
+    public boolean graduateMultiple() {
+        StandardService standardService = new StandardService(request, response);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        ResultResponse resultResponse = standardService.graduateMultiple(dto);
+        return resultResponse.isSuccess();
+    }
+
+    public boolean droppedoutMultiple() {
+        StandardService standardService = new StandardService(request, response);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        ResultResponse resultResponse = standardService.droppedoutMultiple(dto);
+        return resultResponse.isSuccess();
+    }
 }
