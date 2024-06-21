@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.std.action;
 
-import org.ideoholic.curium.model.std.dto.MultipleLeftOutDto;
+import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,7 @@ public class StandardActionAdapter {
     }
 
     public void restoreMultipleLeftout() {
-        MultipleLeftOutDto dto = new MultipleLeftOutDto();
-
-        ResultResponse resultResponse = standardService.restoreMultipleLeftout(dto);
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
     }
 }
