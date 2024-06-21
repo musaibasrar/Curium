@@ -37,7 +37,7 @@ public class StandardAction {
 	
 		@PostMapping("/restoreMultipleLeftout")
 		 public String restoreMultipleLeftout() { 
-		        new StandardService(request, response).restoreMultipleLeftout();
+		        standardActionAdapter.restoreMultipleLeftout();
 		        return viewLeftOut();
 		    }
 		 

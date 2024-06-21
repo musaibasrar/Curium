@@ -2,17 +2,16 @@ package org.ideoholic.curium.model.std.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -251,8 +250,8 @@ public class StandardService {
         return result;
 	}
 
-	public void restoreMultipleLeftout() {
-        String[] studentIds = request.getParameterValues("studentIDs");
+	public void restoreMultipleLeftout(StudentIdDto dto) {
+        String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
