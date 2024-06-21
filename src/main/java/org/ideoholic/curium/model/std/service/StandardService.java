@@ -190,8 +190,8 @@ public class StandardService {
         return result;
 	}
 	
-    public void restoreMultipleGraduate() {
-        String[] studentIds = request.getParameterValues("studentIDs");
+    public void restoreMultipleGraduate(StudentIdDto dto) {
+        String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
@@ -202,8 +202,8 @@ public class StandardService {
         }
 }
 
-    public void restoreMultipleDroppedout() {
-        String[] studentIds = request.getParameterValues("studentIDs");
+    public void restoreMultipleDroppedout(StudentIdDto dto) {
+        String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {

@@ -36,4 +36,16 @@ public class StandardActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleLeftout(dto);
     }
+
+    public void restoreMultipleGraduate() {
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        standardService.restoreMultipleGraduate(dto);
+    }
+
+    public void restoreMultipleDroppedout() {
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        standardService.restoreMultipleDroppedout(dto);
+    }
 }
