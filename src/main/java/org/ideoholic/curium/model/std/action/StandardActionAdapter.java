@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Service
@@ -16,24 +17,44 @@ public class StandardActionAdapter {
     private HttpServletRequest request;
 
     @Autowired
-    private HttpSession httpSession;
+    private HttpServletResponse response;
 
     @Autowired
-    private StandardService standardService;
+    private HttpSession httpSession;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
 
     public boolean viewClasses() {
+        StandardService standardService = new StandardService(request, response);
+
         ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
         return resultResponse.isSuccess();
     }
 
     public void restoreMultipleLeftout() {
+        StandardService standardService = new StandardService(request, response);
+
         StudentIdDto dto = new StudentIdDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleLeftout(dto);
+    }
+
+    public void restoreMultipleGraduate() {
+        StandardService standardService = new StandardService(request, response);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        standardService.restoreMultipleGraduate(dto);
+    }
+
+    public void restoreMultipleDroppedout() {
+        StandardService standardService = new StandardService(request, response);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        standardService.restoreMultipleDroppedout(dto);
     }
 }

@@ -55,13 +55,13 @@ public class StandardAction {
 
 		@PostMapping("/restoreMultipleDroppedout")
 		public String restoreMultipleDroppedout() { 
-	        new StandardService(request, response).restoreMultipleDroppedout();
+	        standardActionAdapter.restoreMultipleDroppedout();
 	        return viewDropped();
 	    }
 
 		@PostMapping("/restoreMultipleGraduate")
 	    public String restoreMultipleGraduate() {
-	        new StandardService(request, response).restoreMultipleGraduate();
+	        standardActionAdapter.restoreMultipleGraduate();
 	        return viewGraduated();
 	    }
 	    
