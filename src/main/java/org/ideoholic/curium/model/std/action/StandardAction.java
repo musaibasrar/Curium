@@ -67,13 +67,13 @@ public class StandardAction {
 	    
 	    @GetMapping("/viewDropped")
 	    public String viewDropped() {
-	        new StandardService(request, response).viewDropped();
+	        standardActionAdapter.viewDropped();
 	        return "droppedout";
 	    }
 
 	    @GetMapping("/viewGraduated")
 		public String viewGraduated() {
-	        new StandardService(request, response).viewGraduated();
+	        standardActionAdapter.viewGraduated();
 	        return "graduated";
 		}
 
