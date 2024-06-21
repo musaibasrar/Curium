@@ -10,7 +10,9 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
+import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,6 +105,15 @@ public class DocumentActionAdapter {
 			return "studycertificateprint";
 		}
 		return null;
+	}
+
+	public boolean printTransferCertificate() {
+		DocumentService documentService = new DocumentService(request, response);
+		int studentId = DataUtil.parseInt(request.getParameter("id"));
+		TcResponseDto tcResponseDto = documentService.printTransferCertificate(studentId);
+		request.setAttribute("studentdetails", tcResponseDto.getParents());
+		request.setAttribute("tcdetails", tcResponseDto.getTc());
+		return tcResponseDto.isSuccess();
 	}
 
 }

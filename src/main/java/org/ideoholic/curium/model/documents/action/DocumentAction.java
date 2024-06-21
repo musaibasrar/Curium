@@ -102,7 +102,7 @@ public class DocumentAction {
 	@GetMapping("/PrintTransferCertificate")
 	public String printTransferCertificate() {
 		
-		if(new DocumentService(request, response).printTransferCertificate()){
+		if(documentActionAdapter.printTransferCertificate()){
 			return "transfercertificateprint";
 		}
         return error;
