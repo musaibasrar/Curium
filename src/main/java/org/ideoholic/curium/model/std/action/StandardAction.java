@@ -87,7 +87,7 @@ public class StandardAction {
 
 	  @PostMapping("/dropoutMultiple")
 	public String droppedoutMultiple() {
-		  if(new StandardService(request, response).droppedoutMultiple()) { 
+		  if(standardActionAdapter.droppedoutMultiple()) {
 			  return "successdroppedout";
 		  }
 		  return "failuredroppedout"; 
@@ -95,7 +95,7 @@ public class StandardAction {
 
 	@PostMapping("/graduateMultiple")
 	public String graduateMultiple() {
-		  if(new StandardService(request, response).graduateMultiple()) { 
+		  if(standardActionAdapter.graduateMultiple()) {
 			     return "successgraduate";
 		  }
 		  return "failuregraduate"; 

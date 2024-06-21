@@ -118,34 +118,34 @@ public class StandardService {
         }
     }
 
-	public boolean graduateMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
-		boolean result = false;
-			List<Integer> ids = new ArrayList();
-			for (String id : studentIds) {
-				System.out.println("id" + id);
-				ids.add(Integer.valueOf(id));
-		}
-		if (new StandardDetailsDAO().graduateMultiple(ids)) {
-			result = true;
-		}
-		return result;
+	public ResultResponse graduateMultiple(StudentIdDto dto) {
+        String[] studentIds = dto.getStudentIds();
+        ResultResponse result = ResultResponse.builder().build();
+            List<Integer> ids = new ArrayList();
+            for (String id : studentIds) {
+                System.out.println("id" + id);
+                ids.add(Integer.valueOf(id));
+        }
+        if (new StandardDetailsDAO().graduateMultiple(ids)) {
+            result.setSuccess(true);
+        }
+        return result;
 
 	}
 	
-	public boolean droppedoutMultiple() {
-	String[] studentIds = request.getParameterValues("studentIDs");
-	boolean result = false;
-		List<Integer> ids = new ArrayList();
-		for (String id : studentIds) {
-			System.out.println("id" + id);
-			ids.add(Integer.valueOf(id));
-		}
-		if(new StandardDetailsDAO().droppedoutMultiple(ids)){
-			result = true;
-		}
-		return result;
-	}
+	public ResultResponse droppedoutMultiple(StudentIdDto dto) {
+        String[] studentIds = dto.getStudentIds();
+        ResultResponse result = ResultResponse.builder().build();
+            List<Integer> ids = new ArrayList();
+            for (String id : studentIds) {
+                System.out.println("id" + id);
+                ids.add(Integer.valueOf(id));
+        }
+        if(new StandardDetailsDAO().droppedoutMultiple(ids)){
+            result.setSuccess(true);
+        }
+        return result;
+    }
 
 	public boolean leftoutMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
