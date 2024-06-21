@@ -162,28 +162,28 @@ public class StandardService {
 		return result;
 	}
 	
-	public boolean viewGraduated() {
+	public ResultResponse viewGraduated() {
 
-        boolean result = false;
+        ResultResponse result = ResultResponse.builder().build();
 
         try {
                 List<Student> list = new StandardDetailsDAO().readListOfStudentsGraduated();
-                request.setAttribute("studentListGraduated", list);
-                result = true;
+                result.setResultList(list);
+                result.setSuccess(true);
         } catch (Exception e) {
                 e.printStackTrace();
         }
         return result;
 }
 
-	public boolean viewDropped() {
+	public ResultResponse viewDropped() {
 
-        boolean result = false;
+        ResultResponse result = ResultResponse.builder().build();
 
         try {
                 List<Student> list = new StandardDetailsDAO().readListOfStudentsDropped();
-                request.setAttribute("studentListDropped", list);
-                result = true;
+                result.setResultList(list);
+                result.setSuccess(true);
         } catch (Exception e) {
                 e.printStackTrace();
         }

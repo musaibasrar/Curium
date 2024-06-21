@@ -57,4 +57,18 @@ public class StandardActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleDroppedout(dto);
     }
+
+    public void viewGraduated() {
+        StandardService standardService = new StandardService(request, response);
+
+        ResultResponse resultResponse = standardService.viewGraduated();
+        request.setAttribute("studentListGraduated", resultResponse.getResultList());
+    }
+
+    public void viewDropped() {
+        StandardService standardService = new StandardService(request, response);
+
+        ResultResponse resultResponse = standardService.viewDropped();
+        request.setAttribute("studentListDropped", resultResponse.getResultList());
+    }
 }
