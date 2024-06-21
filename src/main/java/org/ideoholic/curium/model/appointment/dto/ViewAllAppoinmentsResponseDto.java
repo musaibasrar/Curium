@@ -10,4 +10,5 @@ public class ViewAllAppoinmentsResponseDto {
     private List<Appointment> appointmentList;
     private int noOfPages;
     private int currentPage;
+    private boolean success;
 }
