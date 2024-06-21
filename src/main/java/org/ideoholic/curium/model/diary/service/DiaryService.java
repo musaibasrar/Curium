@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 
 public class DiaryService {
 	private HttpServletRequest request;
@@ -117,24 +118,21 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public boolean viewDiaryParent() {
-		return viewDiaryparent(request.getParameter("id"));
-	}
-
-	public boolean viewDiaryparent(String studentId) {
+	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto, String branchId) {
+		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
-		if (httpSession.getAttribute(BRANCHID) != null) {
+		if (branchId != null) {
 			try {
-				Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
+				Student student = new studentDetailsDAO().readploginUniqueObject(viewDiaryParentDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryParentDto.getPage()))) {
+					page = Integer.parseInt(viewDiaryParentDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), classsec);
+						recordsPerPage, Integer.parseInt(branchId), classsec);
 
 				List<Diary> diaryDetails = new ArrayList<Diary>();
 				for (Object[] diaryObject : list) {
@@ -153,18 +151,20 @@ public class DiaryService {
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("diaryparents", diaryDetails);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				diaryResponseDto.setDiaryparents(diaryDetails);
+				diaryResponseDto.setNoOfPages(noOfPages);
+				diaryResponseDto.setCurrentPage(page);
+				diaryResponseDto.setSuccess(true);
+
 			} catch (Exception e) {
 				e.printStackTrace();
-				result = false;
+				diaryResponseDto.setSuccess(false);
+
 			}
 		}
-		return result;
+		return diaryResponseDto;
 	}
 
 	public void deleteRecord(DairyIdsDto dairyIdsDto) {
