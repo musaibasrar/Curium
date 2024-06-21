@@ -34,5 +34,6 @@ public class StandardActionAdapter {
     public void restoreMultipleLeftout() {
         StudentIdDto dto = new StudentIdDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
+        standardService.restoreMultipleLeftout(dto);
     }
 }
