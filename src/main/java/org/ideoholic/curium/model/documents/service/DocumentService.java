@@ -70,19 +70,17 @@ public class DocumentService {
 	
 	
 	public ResultResponse transferCertificate(String branchid) {
-		List<Parents> list = new ArrayList<Parents>();
 		if (branchid != null) {
 			try {
-				list = new studentDetailsDAO()
+				List<Parents> list = new studentDetailsDAO()
 						.getStudentsList("from Parents where branchid = " + Integer.parseInt(branchid));
-				return ResultResponse.builder().success(true).build();
+				return ResultResponse.builder().success(true).resultList(list).build();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		return ResultResponse.builder().success(true).resultList(list).build();
-
+		return ResultResponse.builder().success(false).build();
 	}
 
 	public String generateTransferCertificate() {
