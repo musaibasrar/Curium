@@ -104,13 +104,13 @@ public class StandardAction {
 	
 	@PostMapping("/deleteClassHierarchy")
 	public String deleteClassHierarchy() {
-		  new StandardService(request, response).deleteClassHierarchy();
+		  standardActionAdapter.deleteClassHierarchy();
 		  return classHierarchy();
 	}
 
 	@PostMapping("/addClassHierarchy")
 	public String addClassHierarchy() {
-		  	new StandardService(request, response).addClassHierarchy();
+		  	standardActionAdapter.addClassHierarchy();
 		  	return classHierarchy();
 	}
 

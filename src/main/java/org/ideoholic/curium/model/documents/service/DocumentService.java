@@ -67,8 +67,13 @@ public class DocumentService {
 		this.response = response;
 		this.httpSession = request.getSession();
 	}
-	
-	
+
+	//TODO:Delete this after migrating the PeriodService class.
+	public boolean transferCertificate(){
+		return transferCertificate(httpSession.getAttribute(BRANCHID).toString()).isSuccess();
+
+	}
+
 	public ResultResponse transferCertificate(String branchid) {
 		if (branchid != null) {
 			try {

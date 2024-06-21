@@ -1,6 +1,8 @@
 package org.ideoholic.curium.model.std.action;
 
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
+import org.ideoholic.curium.model.std.dto.ClassIdsDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +92,24 @@ public class StandardActionAdapter {
 
         ResultResponse resultResponse = standardService.droppedoutMultiple(dto);
         return resultResponse.isSuccess();
+    }
+
+    public void addClassHierarchy() {
+        StandardService standardService = new StandardService(request, response);
+
+        UpperLowerClassDto dto = new UpperLowerClassDto();
+        dto.setLowerClass(request.getParameter("lowerclass"));
+        dto.setUpperClass(request.getParameter("upperclass"));
+
+        standardService.addClassHierarchy(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+    }
+
+    public void deleteClassHierarchy() {
+        StandardService standardService = new StandardService(request, response);
+
+        ClassIdsDto dto = new ClassIdsDto();
+        dto.setClassIds(request.getParameterValues("idclasshierarchy"));
+
+        standardService.deleteClassHierarchy(dto);
     }
 }
