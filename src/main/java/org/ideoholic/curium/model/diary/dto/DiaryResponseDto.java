@@ -10,4 +10,5 @@ public class DiaryResponseDto {
     private int noOfPages;
     private int currentPage;
     private boolean success;
+    private List<Diary> diaryparents;
 }
