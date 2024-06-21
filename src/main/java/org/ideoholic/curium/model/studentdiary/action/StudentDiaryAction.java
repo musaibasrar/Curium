@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.diary.action.DiaryActionAdapter;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.studentdiary.service.StudentDiaryservice;
@@ -23,6 +24,8 @@ public class StudentDiaryAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	private DiaryActionAdapter diaryActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
@@ -61,7 +64,7 @@ public class StudentDiaryAction {
 	}
 	@PostMapping("/ViewDiaryDetails")
 	public String ViewDiaryDetails() {
-		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
+		if(diaryActionAdapter.viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessage";

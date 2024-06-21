@@ -12,10 +12,11 @@ import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
 
 public class DiaryService {
 	private HttpServletRequest request;
@@ -118,18 +119,18 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public DiaryResponseDto viewDiaryParent(ViewDiaryParentDto viewDiaryParentDto, String branchId) {
+	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
 		if (branchId != null) {
 			try {
-				Student student = new studentDetailsDAO().readploginUniqueObject(viewDiaryParentDto.getStudentId());
+				Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryParentDto.getPage()))) {
-					page = Integer.parseInt(viewDiaryParentDto.getPage());
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(studentIdPageDto.getPage()))) {
+					page = Integer.parseInt(studentIdPageDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId), classsec);
@@ -179,20 +180,17 @@ public class DiaryService {
 			new diaryDAO().deleteRecord(ids);
 		}
 	}
-
-	public boolean viewDetailsOfDiaryMessage() {
-		return viewDetailsOfDiaryMessage(request.getParameter("id").toString());
-		
-	}
 	
-	public boolean viewDetailsOfDiaryMessage(String studentId) {
+	public ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
+		ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new ViewDetailsOfDiaryMessageResponseDto();
 		boolean result = false;
-		long id = Long.parseLong(studentId);
+		long id = Long.parseLong(studentIdDto.getStudentId());
 		Diary diary = new diaryDAO().getMessage(id);
-		httpSession.setAttribute("diary", diary);
-		result = true;
-		return result;
-	}	
+		viewDetailsOfDiaryMessageResponseDto.setDiary(diary);
+		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
+
+		return viewDetailsOfDiaryMessageResponseDto;
+	  }
 	}
 
 

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
@@ -120,7 +120,7 @@ public class StandardService {
         }
     }
 
-	public ResultResponse graduateMultiple(StudentIdDto dto) {
+	public ResultResponse graduateMultiple(StudentIdsDto dto) {
         String[] studentIds = dto.getStudentIds();
         ResultResponse result = ResultResponse.builder().build();
             List<Integer> ids = new ArrayList();
@@ -135,7 +135,7 @@ public class StandardService {
 
 	}
 	
-	public ResultResponse droppedoutMultiple(StudentIdDto dto) {
+	public ResultResponse droppedoutMultiple(StudentIdsDto dto) {
         String[] studentIds = dto.getStudentIds();
         ResultResponse result = ResultResponse.builder().build();
             List<Integer> ids = new ArrayList();
@@ -192,7 +192,7 @@ public class StandardService {
         return result;
 	}
 	
-    public void restoreMultipleGraduate(StudentIdDto dto) {
+    public void restoreMultipleGraduate(StudentIdsDto dto) {
         String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
@@ -204,7 +204,7 @@ public class StandardService {
         }
 }
 
-    public void restoreMultipleDroppedout(StudentIdDto dto) {
+    public void restoreMultipleDroppedout(StudentIdsDto dto) {
         String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();
@@ -252,7 +252,7 @@ public class StandardService {
         return result;
 	}
 
-	public void restoreMultipleLeftout(StudentIdDto dto) {
+	public void restoreMultipleLeftout(StudentIdsDto dto) {
         String[] studentIds = dto.getStudentIds();
         if (studentIds != null) {
                 List<Integer> ids = new ArrayList();

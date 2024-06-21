@@ -1,6 +1,4 @@
-package org.ideoholic.curium.model.documents.dto;
-
-import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
+package org.ideoholic.curium.model.student.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentIdDto {
+public class StudentIdsDto {
 
 	private String[] studentIds;
 

@@ -1,9 +1,9 @@
-package org.ideoholic.curium.model.diary.dto;
+package org.ideoholic.curium.model.student.dto;
 
 import lombok.Data;
 
 @Data
-public class ViewDiaryParentDto {
+public class StudentIdPageDto {
     private String studentId;
     private String page;
 }

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
@@ -32,9 +32,9 @@ public class DocumentActionAdapter {
 
 	public boolean exportAdmissionAbstract() {
 		DocumentService documentService = new DocumentService(request, response);
-		StudentIdDto studentIdDto = new StudentIdDto();
-		studentIdDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ResultResponse response = documentService.exportAdmissionAbstract(studentIdDto,
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ResultResponse response = documentService.exportAdmissionAbstract(studentIdsDto,
 				httpSession.getAttribute(BRANCHID).toString());
 		return response.isSuccess();
 	}
@@ -85,9 +85,9 @@ public class DocumentActionAdapter {
 
 	public String GenerateCharacterCertificate() {
 		DocumentService documentService = new DocumentService(request, response);
-		StudentIdDto studentIdDto = new StudentIdDto();
-		studentIdDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdDto);
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
 			return "charactercertificateprint";
@@ -97,9 +97,9 @@ public class DocumentActionAdapter {
 
 	public String generateStudyCertificate() {
 		DocumentService documentService = new DocumentService(request, response);
-		StudentIdDto studentIdDto = new StudentIdDto();
-		studentIdDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.generateStudyCertificate(studentIdDto);
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto);
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
 			return "studycertificateprint";
