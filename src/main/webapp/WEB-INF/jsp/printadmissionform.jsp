@@ -54,16 +54,26 @@ input {
 <form method="post"  enctype="multipart/form-data">
 
 	<div align="center">
-		<img alt="Govt Of Karnataka" src="/roshan/images/Karnatakalogo.png">
+		<img alt="Govt Of Karnataka" src="/roshan/images/roshan.png">
 	</div>
-
-<h2>GOVERNMENT OF KARNATAKA</h2>
-<h4>STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4>
-<div class="schoolname">
+<div align="center" style= "width:70%;float:left;">
+<h2>ROSHAN EDUCATIONAL TRUST</h2>
+<h2>  ${branchname}</h2>
+<%-- <h4>STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4> --%>
+<%-- <div class="schoolname">
 <label for="schoolname">School Name and Location:</label>
   ${branchname}&nbsp;&nbsp;${branchaddress}
- </div>
+ </div> --%>
 <h3>Admission Detail For Higher Class</h3>
+</div>
+<div align="right" style= "width:30%;float:right;">
+<img src="data:image;base64,<c:out value="${parents.student.studentpic}"/>" alt="Student's Photo" style="width: 100px;height: 100px;margin-right:50px;">
+</div>
+<table width="100%" align="center">
+<tr><td style="border:none;font-size:24px;font-weight:bold;text-align:center;padding:0px;">
+ STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}
+</td></tr>
+</table>
 <table>	
   <tr>
     <td>1</td>
@@ -291,33 +301,33 @@ input {
   <tr>
     <td>25</td>
     <td>Sub Category</td>
-    <td><c:out default="" value="${parents.student.studentscaste}" /></td>
+    <td><c:out default="" value="${parents.student.studentscaste}" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Caste Certificate No.:&nbsp;&nbsp;<c:out default="" value="${parents.student.studentscastecertno}" /></td>
   </tr>
    <tr>
     <td>26</td>
     <td>Religion</td>
-    <td><c:out default="" value="${parents.student.religion}" /></td>
+    <td><c:out default="" value="${parents.student.religion}" />&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Income Certificate No.:&nbsp;&nbsp;<c:out value="${parents.fatherscaste}" /></td>
   </tr>
   </table>
   <h3>TC not produced at the time of admission please fill the following information</h3>
   <table>
-  <tr>
+  <%-- <tr>
     <td>27</td>
     <td>Student Caste Certificate No</td>
     <td style="width:70%"><c:out default="" value="${parents.student.studentscastecertno}" /></td>
-  </tr>
+  </tr> --%>
   <tr>
-    <td>28</td>
+    <td>27</td>
     <td>Mother's Caste Certificate No</td>
     <td><c:out default="" value="${parents.motherscastecertno}" /></td>
   </tr>
    <tr>
-    <td>29</td>
+    <td>28</td>
     <td>Father's Caste Certificate No</td>
     <td><c:out value="${parents.fatherscastecertno}" /></td>
   </tr>
   <tr>
-    <td>30</td>
+    <td>29</td>
     <td>Belong To BPL</td>
     <td>&nbsp;Yes<input
 		type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -326,17 +336,17 @@ input {
 		onclick="noCheck(this.id);" ${parents.student.belongtobpl == '0' ? 'checked' : ''}/></td>
   </tr>
   <tr>
-    <td>31</td>
+    <td>30</td>
     <td>Bhagyalaxmi Bond No</td>
     <td><c:out default="" value="${parents.student.bhagyalakshmibondnumber}" /></td>
   </tr>
    <tr>
-    <td>32</td>
+    <td>31</td>
     <td>Child with special need</td>
     <td></td>
   </tr>
   <tr>
-    <td>33</td>
+    <td>32</td>
     <td>Special Category</td>
     <td>None<input type="checkbox"
 		value="None" name="specialcategory" id="yes:None"
@@ -355,29 +365,35 @@ input {
 		${parents.student.specialcategory == 'Others' ? 'checked' : ''} />&nbsp;</td>
   </tr>
   <tr>
-    <td>34</td>
+    <td>33</td>
     <td>Pin Code</td>
     <td></td>
   </tr>
    <tr>
-    <td>35</td>
+    <td>34</td>
     <td>City/Village/Town</td>
     <td></td>
   </tr>
   <tr>
-    <td>36</td>
+    <td>35</td>
     <td>Address</td>
     <td><c:out default="" value="${parents.addresspermanent}" /></td>
   </tr>
   <tr>
-    <td>37</td>
+    <td>36</td>
     <td>Mobile Number</td>
     <td><c:out default="" value="${parents.contactnumber}" /></td>
   </tr>
    <tr>
-    <td>36</td>
+    <td>37</td>
     <td>BMTC Bus pass</td>
     <td></td>
+  </tr>
+   
+    <tr>
+    <td style="border:none"></td>
+    <td style="border:none"><br>Student Signature</td>
+    <td style="border:none;text-align:right"><br>Principal signature</td>
   </tr>
    
 </table>
@@ -389,7 +405,7 @@ input {
 		<label for="enrollmentno">Student Enrollment Number:</label>
         <input type="text" name="enrollmentno">
         <label for="admissiondate">Admission Date:</label>
-        <input type="date" name="admissiondate">
+        <input type="text" name="admissiondate" value="<fmt:formatDate value="${parents.student.admissiondate}" pattern="dd/MM/yyyy"/>">
         <label for="U-Dise">U-Dise Code:</label>
         <input type="text" name="U-Dise"></br>
         <label for="bankaccount">Student/Parent Bank Account Number:</label>
