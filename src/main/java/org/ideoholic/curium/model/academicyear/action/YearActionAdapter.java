@@ -5,10 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.service.YearService;
-import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +36,12 @@ public class YearActionAdapter {
 		httpSession.setAttribute("errorMessage", response.getMessage());
 
 		return response.isSuccess();
+	}
+
+	public void updateYear() {
+		YearService yearService = new YearService(request, response);
+		CurrentAcademicYearResponseDto currentacademicyear = yearService.updateYear();
+		request.setAttribute("currentyear", currentacademicyear.getCurrentacademicyear());
 	}
 
 }

@@ -47,7 +47,7 @@ public class YearAction {
 	@GetMapping("/updateYear")
 	public String updateYear() {
 		System.out.println("Action is addExpenses");
-		new YearService(request, response).updateYear();
+		yearActionAdapter.updateYear();
 		return "academicyear";
 	}
 
