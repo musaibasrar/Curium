@@ -6,6 +6,7 @@ package org.ideoholic.curium.model.examdetails.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -26,12 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ExamDetailsAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
-	String error = "error";
+	@Autowired
+	private YearActionAdapter yearActionAdapter;
+	
+	private String error = "error";
 	
 
 	@PostMapping("/printPreviewHallTicket")
@@ -65,7 +69,7 @@ public class ExamDetailsAction {
 		result = new SubjectDetailsService(request, response).readListOfSubjects();
 		if (!result) 
 			return error;
-		result = new YearService(request, response).getYear();
+		result = yearActionAdapter.getYear();
 		if (!result) 
 			return error;
 		result = new StudentService(request, response).viewAllStudentsList();
@@ -110,7 +114,7 @@ public class ExamDetailsAction {
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		if (!result) 
 			return error;
-		result = new YearService(request, response).getYear();
+		result = yearActionAdapter.getYear();
 		if (!result) 
 			return error;
 		result = new ExamDetailsService(request, response).getExamSchedule();
