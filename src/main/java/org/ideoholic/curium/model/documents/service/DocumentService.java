@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,12 +19,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -34,21 +30,18 @@ import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class DocumentService {
 
@@ -399,13 +392,13 @@ public class DocumentService {
 	}
 
 	
-		public ResultResponse exportAdmissionAbstract(StudentIdDto studentIdDto,String branchid) {
+		public ResultResponse exportAdmissionAbstract(StudentIdsDto studentIdsDto, String branchid) {
 		
 		
 		List<Parents> listOfStudentRecords = new LinkedList<Parents>();
 
-		if (studentIdDto.getStudentIds() != null) {
-			for (String id : studentIdDto.getStudentIds()) {
+		if (studentIdsDto.getStudentIds() != null) {
+			for (String id : studentIdsDto.getStudentIds()) {
 				if (id != null || id != "") {
 					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 
@@ -804,9 +797,9 @@ public class DocumentService {
 	}
 
 
-	public ParentDto GenerateCharacterCertificate(StudentIdDto studentIdDto) {
+	public ParentDto GenerateCharacterCertificate(StudentIdsDto studentIdsDto) {
 		ParentDto parentDto = null;
-		String[] studentIds = studentIdDto.getStudentIds();
+		String[] studentIds = studentIdsDto.getStudentIds();
 		String characterPage = null;
 		
 		if(studentIds!=null){
@@ -820,9 +813,9 @@ public class DocumentService {
 		return parentDto;
 	}
 	
-		 public ParentDto generateStudyCertificate(StudentIdDto studentIdDto) {
+		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto) {
 			 ParentDto parentDto = null;
-			String[] studentIds = studentIdDto.getStudentIds();
+			String[] studentIds = studentIdsDto.getStudentIds();
 			String bonafidePage = null;
 			
 			if(studentIds!=null){

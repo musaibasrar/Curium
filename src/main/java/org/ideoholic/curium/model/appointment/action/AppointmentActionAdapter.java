@@ -12,12 +12,12 @@ import org.ideoholic.curium.model.appointment.dto.CancelAppointmentsDto;
 import org.ideoholic.curium.model.appointment.dto.CompleteAppointmentsDto;
 import org.ideoholic.curium.model.appointment.dto.ExportAppointmentsReportDto;
 import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
-import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportForClientDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyAppointmentsResponseDto;
 import org.ideoholic.curium.model.appointment.dto.UpdateAppointmentDto;
 import org.ideoholic.curium.model.appointment.dto.ViewAllAppoinmentsResponseDto;
 import org.ideoholic.curium.model.appointment.dto.ViewAllAppointmentsDto;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,10 +127,10 @@ public class AppointmentActionAdapter {
     }
 
     public void generateAppointmentsReportForClient() {
-        GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto = new GenerateAppointmentsReportForClientDto();
-        generateAppointmentsReportForClientDto.setStudentId(request.getParameter("id"));
+        StudentIdDto studentIdDto = new StudentIdDto();
+        studentIdDto.setStudentId(request.getParameter("id"));
 
-        ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient(generateAppointmentsReportForClientDto);
+        ResultResponse resultResponse = appointmentService.generateAppointmentsReportForClient(studentIdDto);
         
         httpSession.setAttribute("appointmentList", resultResponse.getResultList());
     }

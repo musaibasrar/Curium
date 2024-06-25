@@ -27,6 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
 import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -405,8 +406,8 @@ public class AppointmentService {
 		return ResultResponse.builder().success(true).build();
 	}
 
-	public ResultResponse generateAppointmentsReportForClient(GenerateAppointmentsReportForClientDto generateAppointmentsReportForClientDto) {
-		String studentId = generateAppointmentsReportForClientDto.getStudentId();
+	public ResultResponse generateAppointmentsReportForClient(StudentIdDto studentIdDto) {
+		String studentId = studentIdDto.getStudentId();
 		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 

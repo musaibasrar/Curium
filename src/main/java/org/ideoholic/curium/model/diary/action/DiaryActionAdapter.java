@@ -2,7 +2,8 @@ package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.diary.service.DiaryService;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,14 +62,22 @@ public class DiaryActionAdapter {
     public boolean viewDiaryParent() {
         DiaryService diaryService = new DiaryService(request,response);
 
-        ViewDiaryParentDto viewDiaryParentDto = new ViewDiaryParentDto();
-        viewDiaryParentDto.setStudentId(request.getParameter("id"));
-        viewDiaryParentDto.setPage(request.getParameter("page"));
+        StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
+        studentIdPageDto.setStudentId(request.getParameter("id"));
+        studentIdPageDto.setPage(request.getParameter("page"));
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(viewDiaryParentDto, httpSession.getAttribute(BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
         return diaryResponseDto.isSuccess();
+    }
+    public boolean viewDetailsOfDiaryMessage() {
+        DiaryService diaryService = new DiaryService(request,response);
+        StudentIdDto studentIdDto =new StudentIdDto();
+        studentIdDto.setStudentId(request.getParameter("id").toString());
+        ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
+        httpSession.setAttribute("diary", viewDetailsOfDiaryMessageResponseDto.getDiary());
+        return viewDetailsOfDiaryMessageResponseDto.isSuccess();
     }
 }

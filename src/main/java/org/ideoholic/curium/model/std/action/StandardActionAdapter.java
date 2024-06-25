@@ -1,9 +1,9 @@
 package org.ideoholic.curium.model.std.action;
 
-import org.ideoholic.curium.model.documents.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.dto.ClassIdsDto;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class StandardActionAdapter {
     public void restoreMultipleLeftout() {
         StandardService standardService = new StandardService(request, response);
 
-        StudentIdDto dto = new StudentIdDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleLeftout(dto);
     }
@@ -47,7 +47,7 @@ public class StandardActionAdapter {
     public void restoreMultipleGraduate() {
         StandardService standardService = new StandardService(request, response);
 
-        StudentIdDto dto = new StudentIdDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleGraduate(dto);
     }
@@ -55,7 +55,7 @@ public class StandardActionAdapter {
     public void restoreMultipleDroppedout() {
         StandardService standardService = new StandardService(request, response);
 
-        StudentIdDto dto = new StudentIdDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         standardService.restoreMultipleDroppedout(dto);
     }
@@ -77,7 +77,7 @@ public class StandardActionAdapter {
     public boolean graduateMultiple() {
         StandardService standardService = new StandardService(request, response);
 
-        StudentIdDto dto = new StudentIdDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
         ResultResponse resultResponse = standardService.graduateMultiple(dto);
@@ -87,7 +87,7 @@ public class StandardActionAdapter {
     public boolean droppedoutMultiple() {
         StandardService standardService = new StandardService(request, response);
 
-        StudentIdDto dto = new StudentIdDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
         ResultResponse resultResponse = standardService.droppedoutMultiple(dto);

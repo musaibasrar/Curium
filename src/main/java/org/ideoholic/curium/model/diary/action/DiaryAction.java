@@ -64,14 +64,14 @@ public class DiaryAction {
 	}
 	@PostMapping("/ViewDiaryDetails")
 	public String ViewDiaryDetails() {
-		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
+		if(diaryActionAdapter.viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessage";
 		}
 	@PostMapping("/ViewDiaryDetailsParent")
 	public String ViewDiaryDetailsParent() {
-		if(new DiaryService(request, response).viewDetailsOfDiaryMessage()) {
+		if(diaryActionAdapter.viewDetailsOfDiaryMessage()) {
 
 		}
 		return "viewDiaryMessageParent";
