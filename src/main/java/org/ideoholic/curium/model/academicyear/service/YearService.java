@@ -58,19 +58,13 @@ public class YearService {
 		return result;
 	}
 
-	public boolean getYear() {
-		boolean result = false;
+	public Currentacademicyear getYear() {
 		try {
-			Currentacademicyear currentYear = new YearDAO().showYear();
-			httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
-
-			result = true;
+			return new YearDAO().showYear();
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
 		}
-		return result;
-
+		return null;
 	}
 
 }

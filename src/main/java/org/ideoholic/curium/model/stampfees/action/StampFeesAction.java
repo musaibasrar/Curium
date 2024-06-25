@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
@@ -23,6 +24,8 @@ public class StampFeesAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	private YearActionAdapter yearActionAdapter;
 
 	@PostMapping("/searchForFees")
 	public String searchForFees() {
@@ -45,7 +48,7 @@ public class StampFeesAction {
 	@GetMapping("/showFeesDetails")
 	public String showFeesDetails() {
 		new FeesService(request, response).viewFees();
-		new YearService(request, response).getYear();
+		yearActionAdapter.getYear();
 		new StandardService(request, response).viewClasses();
 		return "stampfees";
 	}
@@ -75,7 +78,7 @@ public class StampFeesAction {
 	@GetMapping("/showOtherFeesDetails")
 	public String showOtherFeesDetails() {
 		new FeesService(request, response).viewOtherFees();
-		new YearService(request, response).getYear();
+		yearActionAdapter.getYear();
 		new StandardService(request, response).viewClasses();
 		return "otherstampfees";
 	}
