@@ -7,13 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.std.dto.*;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
-import org.ideoholic.curium.model.std.dto.Classhierarchy;
-import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.dto.ClassIdsDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -34,20 +31,21 @@ public class StandardService {
 		this.httpSession = request.getSession();
 	}
 
-    public boolean createClass() {
-        
-        if(httpSession.getAttribute(BRANCHID)!=null){
+    public ResultResponse createClass(ClassDto classDto, String branchId, String userId) {
+        ResultResponse result = ResultResponse.builder().build();
+        if(branchId!=null){
             Classsec classsec = new Classsec();
-            classsec.setClassdetails(DataUtil.emptyString(request.getParameter("classdetails")));
-            classsec.setSection(DataUtil.emptyString(request.getParameter("section")));
-            classsec.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            classsec.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+            classsec.setClassdetails(DataUtil.emptyString(classDto.getClassDetails()));
+            classsec.setSection(DataUtil.emptyString(classDto.getSection()));
+            classsec.setBranchid(Integer.parseInt(branchId));
+            classsec.setUserid(Integer.parseInt(userId));
             new StandardDetailsDAO().create(classsec);
             viewClasses();
-            return true;
+            result.setSuccess(true);
+            return result;
             }
             
-        return false;
+        return result;
     
     }
 
@@ -73,18 +71,20 @@ public class StandardService {
                 .build();
     }
 
-    public boolean deleteClasses() {
-        
-        String[] classIds = request.getParameterValues("classids");
+    // TODO: Migrate the return type of this method once viewClasses() is fully migrated
+    public ResultResponse deleteClasses(ClassIdsDto dto) {
+        ResultResponse result = ResultResponse.builder().build();
+        String[] classIds = dto.getClassIds();
         if (classIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : classIds) {
                         ids.add(Integer.valueOf(id));
                 }
                 new StandardDetailsDAO().deleteMultiple(ids);
-                return viewClasses();
+                result.setSuccess(viewClasses());
+                return result;
         }
-        return false;
+        return result;
     }
 
 	public void addClassHierarchy(UpperLowerClassDto dto, String branchId, String userId) {

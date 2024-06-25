@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.std.action;
 
+import org.ideoholic.curium.model.std.dto.ClassDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
@@ -111,5 +112,25 @@ public class StandardActionAdapter {
         dto.setClassIds(request.getParameterValues("idclasshierarchy"));
 
         standardService.deleteClassHierarchy(dto);
+    }
+
+    public boolean createClass() {
+        StandardService standardService = new StandardService(request, response);
+
+        ClassDto classDto = new ClassDto();
+        classDto.setClassDetails(request.getParameter("classdetails"));
+        classDto.setSection(request.getParameter("section"));
+
+        ResultResponse resultResponse = standardService.createClass(classDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        return resultResponse.isSuccess();
+    }
+
+    public boolean deleteClasses() {
+        StandardService standardService = new StandardService(request, response);
+        ClassIdsDto dto = new ClassIdsDto();
+        dto.setClassIds(request.getParameterValues("classids"));
+
+        ResultResponse resultResponse = standardService.deleteClasses(dto);
+        return resultResponse.isSuccess();
     }
 }
