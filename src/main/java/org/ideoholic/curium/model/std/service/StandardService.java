@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.documents.dto.StudentIdDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.std.dto.ClassIdsDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -85,22 +87,22 @@ public class StandardService {
         return false;
     }
 
-	public void addClassHierarchy() {
+	public void addClassHierarchy(UpperLowerClassDto dto, String branchId, String userId) {
         
-        if(httpSession.getAttribute(BRANCHID)!=null){
+        if(branchId!=null){
             Classhierarchy classHierarchy = new Classhierarchy();
-            classHierarchy.setLowerclass(DataUtil.emptyString(request.getParameter("lowerclass")));
-            classHierarchy.setUpperclass(DataUtil.emptyString(request.getParameter("upperclass")));
-            classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            classHierarchy.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+            classHierarchy.setLowerclass(DataUtil.emptyString(dto.getLowerClass()));
+            classHierarchy.setUpperclass(DataUtil.emptyString(dto.getUpperClass()));
+            classHierarchy.setBranchid(Integer.parseInt(branchId));
+            classHierarchy.setUserid(Integer.parseInt(userId));
             new StandardDetailsDAO().createClassHierarchy(classHierarchy);
             viewClasses();
             }
     }
 
-	public void deleteClassHierarchy() {
+	public void deleteClassHierarchy(ClassIdsDto dto) {
         
-        String[] classIds = request.getParameterValues("idclasshierarchy");
+        String[] classIds = dto.getClassIds();
         if (classIds != null) {
                 List<Integer> ids = new ArrayList();
                 for (String id : classIds) {
