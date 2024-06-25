@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.std.action;
 
 import org.ideoholic.curium.model.std.dto.ClassDto;
+import org.ideoholic.curium.model.std.dto.StdOfClassDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
@@ -27,6 +28,7 @@ public class StandardActionAdapter {
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
+    private String CURRENTACADEMICYEAR = "currentacademicyear";
 
 
     public boolean viewClasses() {
@@ -131,6 +133,26 @@ public class StandardActionAdapter {
         dto.setClassIds(request.getParameterValues("classids"));
 
         ResultResponse resultResponse = standardService.deleteClasses(dto);
+        return resultResponse.isSuccess();
+    }
+
+    public void searchByClass() {
+        StandardService standardService = new StandardService(request, response);
+
+        StdOfClassDto dto = new StdOfClassDto();
+        dto.setClassOfStd(request.getParameter("classofstd"));
+
+        ResultResponse resultResponse = standardService.searchByClass(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("studentList", resultResponse.getResultList());
+    }
+
+    public boolean leftoutMultiple() {
+        StandardService standardService = new StandardService(request, response);
+
+        StudentIdsDto dto = new StudentIdsDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        ResultResponse resultResponse = standardService.leftoutMultiple(dto);
         return resultResponse.isSuccess();
     }
 }

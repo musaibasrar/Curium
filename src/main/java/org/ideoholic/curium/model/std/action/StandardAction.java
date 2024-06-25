@@ -49,7 +49,7 @@ public class StandardAction {
 
 		@PostMapping("/searchByClass")
 		public String searchByClass() {
-	         new StandardService(request, response).searchByClass();
+	         standardActionAdapter.searchByClass();
 	         return "Promotion";
 		 	}
 
@@ -79,7 +79,7 @@ public class StandardAction {
 
 		@PostMapping("/leftoutMultiple")
 	  public String leftoutMultiple() {
-		  if(new StandardService(request, response).leftoutMultiple()) {  
+		  if(standardActionAdapter.leftoutMultiple()) {
 			  return "successleftout";
 		  }
 		  return "failureleftout"; 

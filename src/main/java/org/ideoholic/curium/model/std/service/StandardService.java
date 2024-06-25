@@ -149,9 +149,9 @@ public class StandardService {
         return result;
     }
 
-	public boolean leftoutMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
-		boolean result = false;
+	public ResultResponse leftoutMultiple(StudentIdsDto dto) {
+		String[] studentIds = dto.getStudentIds();
+		ResultResponse result = ResultResponse.builder().build();
 		List<Integer> ids = new ArrayList();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
@@ -159,7 +159,7 @@ public class StandardService {
 
 		}
 		if(new StandardDetailsDAO().leftoutMultiple(ids)) {
-			result = true;
+			result.setSuccess(true);
 		}
 		return result;
 	}
@@ -217,21 +217,21 @@ public class StandardService {
     }
 
     @SuppressWarnings("finally")
-	public boolean searchByClass() {
+	public ResultResponse searchByClass(StdOfClassDto dto, String branchId, String currentAcademicYear) {
 		
-		String classofStd = request.getParameter("classofstd");
-		boolean result = false;
+		String classofStd = dto.getClassOfStd();
+		ResultResponse result = ResultResponse.builder().build();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			try {
 				if(classofStd!=null) {
 					classofStd=classofStd+"--";
 				}
-				List<Parents> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("currentAcademicYear").toString());
-				request.setAttribute("studentList", studentList);
-				result = true;
+				List<Parents> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(branchId), currentAcademicYear);
+                result.setResultList(studentList);
+                result.setSuccess(true);
 			} catch (Exception e) {
-				result = false;
+                result.setSuccess(false);
 			} 
 		}
 		return result;
