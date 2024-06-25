@@ -130,7 +130,7 @@ public class StandardAction {
 	@PostMapping("/deleteClass")
 	public String deleteClass() {
 	      
-	      if( new StandardService(request, response).deleteClasses()) {
+	      if(standardActionAdapter.deleteClasses()) {
 	          return "addclass";
 	      }
 	      return "error";
@@ -146,7 +146,7 @@ public class StandardAction {
 
     @PostMapping("/createClass")
     public String createClass() {
-        if(new StandardService(request, response).createClass()) {
+        if(standardActionAdapter.createClass()) {
             return "addclass";
         }
         return "error";
