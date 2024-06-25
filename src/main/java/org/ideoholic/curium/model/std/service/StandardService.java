@@ -113,11 +113,14 @@ public class StandardService {
         }
     }
 
-	public void viewClassHierarchy() {
-        if(httpSession.getAttribute(BRANCHID)!=null){
-            List<Classhierarchy> classHierarchy = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            request.setAttribute("classhierarchy", classHierarchy);
+	public ResultResponse viewClassHierarchy(String branchId) {
+        ResultResponse result = ResultResponse.builder().build();
+        if(branchId!=null){
+            List<Classhierarchy> classHierarchy = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(branchId));
+            result.setResultList(classHierarchy);
         }
+        result.setSuccess(true);
+        return result;
     }
 
 	public ResultResponse graduateMultiple(StudentIdsDto dto) {
@@ -238,14 +241,14 @@ public class StandardService {
 
 	}
 
-	public boolean viewleft() {
+	public ResultResponse viewleft() {
 
-        boolean result = false;
+        ResultResponse result = ResultResponse.builder().build();
 
         try {
                 List<Student> list = new StandardDetailsDAO().readListOfStudentsLeft();
-                request.setAttribute("studentListLeft", list);
-                result = true;
+                result.setResultList(list);
+                result.setSuccess(true);
         } catch (Exception e) {
                 e.printStackTrace();
         }
