@@ -200,6 +200,23 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	 </div>
+        	 
+        	 <div class="col" style="padding-bottom: 10px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 130px;"> 0000 </label><br>
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 130px;"> Stock </label><br>
+        						<a target="_parent" style="padding-left: 120px;"
+        						 href="/roshan/UserProcess/multiUser?branchid=8"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	 </div>
+        	 
         </div>
 </body>    
 </html>

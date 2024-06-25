@@ -585,4 +585,25 @@ public class JspController {
 	public String getStudentArticleCertificate() {
 		return "studentarticlecertificate";
 	}
+	
+	@GetMapping("/index_stock")
+	public String getIndexStock() {
+		return "index_stock";
+	}
+	
+	@GetMapping("/left_stock")
+	public String getLeftStock() {
+		return "left_stock";
+	}
+
+	@GetMapping("/header_stock")
+	public String getHeaderStock() {
+		return "header_stock";
+	}
+	
+	@GetMapping("/reports_stock")
+	public String getReportsStock() {
+		return "reports_stock";
+	}
+
 }

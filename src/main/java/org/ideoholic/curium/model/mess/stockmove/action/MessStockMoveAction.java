@@ -56,10 +56,13 @@ public class MessStockMoveAction {
 		//Batch stock issue 
     	new MessStockMoveService(request, response).viewStockEntryDetails();
     	
-    	//Get Customers
-    	new StudentService(request, response).viewStudentsParentsPerBranch();
+		/*
+		 * //Get Customers new StudentService(request,
+		 * response).viewStudentsParentsPerBranch();
+		 */
 		
-		
+    	//Get Students All Branches
+    	new StudentService(request, response).viewStudentsParentsAllBranches();
 		
 		new MessStockMoveService(request, response).viewStockMoveDetails();
 		return "issuestock";
