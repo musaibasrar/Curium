@@ -155,4 +155,18 @@ public class StandardActionAdapter {
         ResultResponse resultResponse = standardService.leftoutMultiple(dto);
         return resultResponse.isSuccess();
     }
+
+    public void viewClassHierarchy() {
+        StandardService standardService = new StandardService(request, response);
+
+        ResultResponse resultResponse = standardService.viewClassHierarchy(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("classhierarchy", resultResponse.getResultList());
+    }
+
+    public void viewleft() {
+        StandardService standardService = new StandardService(request, response);
+
+        ResultResponse resultResponse = standardService.viewleft();
+        request.setAttribute("studentListLeft", resultResponse.getResultList());
+    }
 }

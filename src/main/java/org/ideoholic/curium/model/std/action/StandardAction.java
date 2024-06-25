@@ -43,7 +43,7 @@ public class StandardAction {
 		 
 		 @GetMapping("/viewLeftOut")
 		public String viewLeftOut() {
-		        new StandardService(request, response).viewleft();
+		        standardActionAdapter.viewleft();
 		        return "leftout";
 		    }
 
@@ -117,7 +117,7 @@ public class StandardAction {
 	@GetMapping("/classHierarchy")
 	public String classHierarchy() {
 		  standardActionAdapter.viewClasses();
-		  new StandardService(request, response).viewClassHierarchy();
+		  standardActionAdapter.viewClassHierarchy();
 			return "classhierarchy";
 	}
 
