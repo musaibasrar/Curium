@@ -33,6 +33,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -42,6 +43,8 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
 
 public class UserService {
+
+	private StandardActionAdapter standardActionAdapter;
 	
 	 HttpServletRequest request;
 	    HttpServletResponse response;
@@ -49,10 +52,11 @@ public class UserService {
 	    private Login login;
 	    private String BRANCHID = "branchid";
 
-	public UserService(HttpServletRequest request, HttpServletResponse response) {
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
 		this.request = request;
         this.response = response;
         this.httpSession = request.getSession();
+		this.standardActionAdapter = standardActionAdapter;
 	}
 
 	public boolean authenticateUser() {
@@ -136,7 +140,7 @@ public class UserService {
         	// End Total Teachers
         	
         	//Fees Details
-        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
+        	new FeesCollectionService(request, response, standardActionAdapter).getFeesDetailsDashBoard();
         	//End Fees Details
         	
         	//Daily Expenses

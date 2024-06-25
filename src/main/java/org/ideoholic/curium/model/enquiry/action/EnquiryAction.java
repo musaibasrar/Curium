@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.enquiry.service.EnquiryService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,12 @@ public class EnquiryAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 	
 	@GetMapping("/newEnquiry")
 	public String NewEnquiryDetail() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "newenquiry";
 	}
 

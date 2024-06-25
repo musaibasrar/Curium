@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
@@ -34,6 +35,9 @@ public class ExamDetailsAction {
 	
 	@Autowired
 	private YearActionAdapter yearActionAdapter;
+
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 	
 	private String error = "error";
 	
@@ -63,7 +67,7 @@ public class ExamDetailsAction {
 		result = new ExamDetailsService(request, response).readListOfExams();
 		if (!result) 
 			return error;
-		result = new StandardService(request, response).viewClasses();
+		result = standardActionAdapter.viewClasses();
 		if (!result) 
 			return error;
 		result = new SubjectDetailsService(request, response).readListOfSubjects();
@@ -108,7 +112,7 @@ public class ExamDetailsAction {
 		result = new ExamDetailsService(request, response).readListOfExams();
 		if (!result) 
 			return error;
-		result = new StandardService(request, response).viewClasses();
+		result = standardActionAdapter.viewClasses();
 		if (!result) 
 			return error;
 		new SubjectDetailsService(request, response).readListOfSubjectNames();

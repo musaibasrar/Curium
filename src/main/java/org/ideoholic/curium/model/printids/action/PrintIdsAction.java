@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class PrintIdsAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
@@ -45,13 +48,13 @@ public class PrintIdsAction {
 
 	@GetMapping("/cardValidity")
 	public String cardValidity() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "cardvalidity";
 	}
 
 	@GetMapping("/generateIds")
 	public String generateIds() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "generateids";
 	}
 

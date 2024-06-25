@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class PeriodAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 	String url;
 	private String error ="error";
 
@@ -107,7 +110,7 @@ public class PeriodAction {
 
 	@GetMapping("/transferCertificate")
 	public String transferCertificate() {
-		if(new DocumentService(request, response).transferCertificate()){
+		if(new DocumentService(request, response, standardActionAdapter).transferCertificate()){
 			return "transfercertificate";
 		}
         return error;

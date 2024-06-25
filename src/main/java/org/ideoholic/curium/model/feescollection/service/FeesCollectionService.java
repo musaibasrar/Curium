@@ -45,6 +45,7 @@ import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -56,8 +57,11 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FeesCollectionService {
+
+	private StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -68,12 +72,13 @@ public class FeesCollectionService {
 	private String username = "username";
 	
 	private static final int BUFFER_SIZE = 4096;
-	
+
 	public FeesCollectionService(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
+		this.standardActionAdapter = standardActionAdapter;
 	}
 
 	public Feescollection add(Feesdetails feesdetails) {
@@ -742,7 +747,7 @@ public class FeesCollectionService {
 		if (httpSession.getAttribute(BRANCHID) != null) {
 
 			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND ";
-			new StandardService(request, response).viewClasses();
+			standardActionAdapter.viewClasses();
 			List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
 			
 			

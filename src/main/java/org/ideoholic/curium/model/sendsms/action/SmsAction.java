@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +30,12 @@ public class SmsAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@GetMapping("/sendSMS")
 	public String sendSMS() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new EmployeeService(request, response).viewDepartments();
 		return "sendsms";
 	}

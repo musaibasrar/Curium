@@ -30,6 +30,7 @@ import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
@@ -42,8 +43,11 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ResultResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DocumentService {
+
+	private StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -55,10 +59,11 @@ public class DocumentService {
     */
    private static final int BUFFER_SIZE = 4096;
 	
-	public DocumentService(HttpServletRequest request, HttpServletResponse response) {
+	public DocumentService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
+		this.standardActionAdapter = standardActionAdapter;
 	}
 
 	//TODO:Delete this after migrating the PeriodService class.
@@ -322,8 +327,7 @@ public class DocumentService {
 			try {
 				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
 				studentListAaResponseDto.setList(list);
-				//TODO  change after migrating standard service
-				new StandardService(request, response).viewClasses();
+				standardActionAdapter.viewClasses();
 				studentListAaResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();

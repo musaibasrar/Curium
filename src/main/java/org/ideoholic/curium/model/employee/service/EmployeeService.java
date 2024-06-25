@@ -199,7 +199,7 @@ public class EmployeeService {
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response).addUser(employee)){
+			if(new UserService(request, response, null).addUser(employee)){
 				return true;
 			}else{
 				new EmployeeDAO().delete(employee);
@@ -568,7 +568,7 @@ public class EmployeeService {
 		
 		request.setAttribute("searchedemployeeList", employeeList);
 		
-		new EmployeeService(request, response).ViewAllEmployee();
+		ViewAllEmployee();
 	}
 
 	public void basicpayEmployees() {

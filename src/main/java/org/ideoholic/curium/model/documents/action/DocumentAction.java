@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.adminexpenses.action.AdminActionAdapter;
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,16 @@ public class DocumentAction {
 	
 	@Autowired
 	private DocumentActionAdapter documentActionAdapter;
+
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 	
 	public String error ="error";
 
 	
 	@PostMapping("/download")
 	public String downloadAdmissionAbstract() {
-		if(new DocumentService(request, response).downlaodFile()){
+		if(new DocumentService(request, response, standardActionAdapter).downlaodFile()){
             return "exportsuccessaa";
     }
 		return "exportfailure";
@@ -85,17 +89,17 @@ public class DocumentAction {
 
 	@GetMapping("/studentsDetailsBonafide")
 	public String studentsDetailsBonafide() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentsdetailsbonafide";
 	}
 	@GetMapping("/characterCertificate")
 	public String characterCertificate() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentcharactersdetails";
 	}
 	@GetMapping("/studentsDetailsReports")
 	public String studentsDetailsReports() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentsdetailsreports";
 	}
 
@@ -111,7 +115,7 @@ public class DocumentAction {
 	@PostMapping("/generateTransferCertificate")
 	public String generateTransferCertificate() {
 		
-		String result = new DocumentService(request, response).generateTransferCertificate();
+		String result = new DocumentService(request, response, standardActionAdapter).generateTransferCertificate();
 		
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
@@ -131,13 +135,13 @@ public class DocumentAction {
 	
 	@GetMapping("/studentsAdmissionReports")
 	public String studentsAdmissionReports() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentsadmissionreports";
 	}
 	
 	@GetMapping("/studentsPendingAdmissionReports")
 	public String studentsPendingAdmissionReports() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentspendingadmissionreports";
 	}
 	
@@ -171,7 +175,7 @@ public class DocumentAction {
 	
 	@GetMapping("/studentsDetailsStudyCertificate")
 	public String studentsDetailsStudyCertificate() {
-		new StandardService(request, response).viewClasses(); 
+		standardActionAdapter.viewClasses();
 		return "studentsdetailsstudycertificate";
 	}
 	
@@ -199,7 +203,7 @@ public class DocumentAction {
 	
 	@PostMapping("/printCharacterCertificate")
 	public String printCharacterCertificate() {
-		new DocumentService(request, response).printCharacterCertificate();
+		new DocumentService(request, response, standardActionAdapter).printCharacterCertificate();
 		return "characterprint";
 	}
 }
