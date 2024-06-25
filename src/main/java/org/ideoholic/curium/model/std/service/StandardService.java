@@ -3,10 +3,6 @@ package org.ideoholic.curium.model.std.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.std.dto.*;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -14,22 +10,14 @@ import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StandardService {
 
-	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
-
-	public StandardService(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
 
     public ResultResponse createClass(ClassDto classDto, String branchId, String userId) {
         ResultResponse result = ResultResponse.builder().build();
