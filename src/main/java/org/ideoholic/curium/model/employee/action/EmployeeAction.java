@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class EmployeeAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
+	@Autowired
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	@PostMapping("/searchEmployee")
 	public String searchEmployee() {
@@ -73,7 +75,7 @@ public class EmployeeAction {
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String addEmployee(MultipartHttpServletRequest request,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		if (new EmployeeService(request, response).addEmployee(uploadedFiles)) {
+		if (employeeActionAdapter.addEmployee(uploadedFiles)) {
 			return "Employeesaved";
 		} else {
 			return "EmployeenotSaved";
