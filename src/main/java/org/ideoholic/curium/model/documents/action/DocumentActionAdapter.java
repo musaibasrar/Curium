@@ -12,6 +12,8 @@ import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
+import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
+import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ResultResponse;
@@ -125,6 +127,77 @@ public class DocumentActionAdapter {
 		ResultResponse resultResponse = documentService.transferCertificate(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListtc", resultResponse.getResultList());
 		return resultResponse.isSuccess();
+	}
+
+	public String generateTransferCertificate() {
+		DocumentService documentService = new DocumentService(request, response);
+		TransferCertificateDto transferCertificateDto = new TransferCertificateDto();
+		transferCertificateDto.setStudentId(request.getParameter("studentId"));
+		transferCertificateDto.setReason(request.getParameter("reason"));
+		transferCertificateDto.setBookNo(request.getParameter("bookno"));
+		transferCertificateDto.setTcNo(request.getParameter("tcno"));
+		transferCertificateDto.setCaste(request.getParameter("caste"));
+		transferCertificateDto.setClassInWord(request.getParameter("classinword"));
+		transferCertificateDto.setLastExam(request.getParameter("lastexam"));
+		transferCertificateDto.setFailPass(request.getParameter("failpass"));
+		transferCertificateDto.setFirstSubject(request.getParameter("firstsubject"));
+		transferCertificateDto.setSecondSubject(request.getParameter("secondsubject"));
+		transferCertificateDto.setThirdSubject(request.getParameter("thirdsubject"));
+		transferCertificateDto.setFourthSubject(request.getParameter("Fourthsubject"));
+		transferCertificateDto.setFifthSubject(request.getParameter("Fifthsubject"));
+		transferCertificateDto.setSixthSubject(request.getParameter("sixthsubject"));
+		transferCertificateDto.setPinFig(request.getParameter("pinfig"));
+		transferCertificateDto.setPinWord(request.getParameter("pinword"));
+		transferCertificateDto.setDues(request.getParameter("dues"));
+		transferCertificateDto.setConcession(request.getParameter("concession"));
+		transferCertificateDto.setWorkingDays(request.getParameter("workingdays"));
+		transferCertificateDto.setPresent(request.getParameter("present"));
+		transferCertificateDto.setNcc(request.getParameter("ncc"));
+		transferCertificateDto.setGame(request.getParameter("game"));
+		transferCertificateDto.setConduct(request.getParameter("conduct"));
+		transferCertificateDto.setDateCert(request.getParameter("datecert"));
+		transferCertificateDto.setRemarks(request.getParameter("Remarks"));
+		transferCertificateDto.setDateOfTc(request.getParameter("dateoftc"));
+		TransferCertificateResponseDto transferCertificateResponseDto = documentService.generateTransferCertificate(transferCertificateDto);
+		
+		request.setAttribute("leavingReason", transferCertificateResponseDto.getReason());
+		request.setAttribute("bookno", transferCertificateResponseDto.getBookNo());
+		 request.setAttribute("tcno", transferCertificateResponseDto.getTcNo());
+		request.setAttribute("caste", transferCertificateResponseDto.getCaste());
+		request.setAttribute("classinword", transferCertificateResponseDto.getClassInWord());
+		request.setAttribute("lastexam", transferCertificateResponseDto.getLastExam());
+		request.setAttribute("failpass", transferCertificateResponseDto.getFailPass());
+		request.setAttribute("firstsubject", transferCertificateResponseDto.getFirstSubject());
+		request.setAttribute("secondsubject", transferCertificateResponseDto.getSecondSubject());
+		request.setAttribute("thirdsubject", transferCertificateResponseDto.getThirdSubject());
+		request.setAttribute("Fourthsubject",transferCertificateResponseDto.getFourthSubject());
+		request.setAttribute("Fifthsubject", transferCertificateResponseDto.getFifthSubject());
+		request.setAttribute("sixthsubject", transferCertificateResponseDto.getSixthSubject());
+		request.setAttribute("pinfig", transferCertificateResponseDto.getPinFig());
+		request.setAttribute("pinword", transferCertificateResponseDto.getPinWord());
+		request.setAttribute("dues", transferCertificateResponseDto.getDues());
+		request.setAttribute("concession",transferCertificateResponseDto.getConcession());
+		request.setAttribute("workingdays",transferCertificateResponseDto.getWorkingDays());
+		request.setAttribute("present", transferCertificateResponseDto.getPresent());
+		request.setAttribute("ncc",transferCertificateResponseDto.getNcc());
+		request.setAttribute("game", transferCertificateResponseDto.getGame());
+		request.setAttribute("conduct", transferCertificateResponseDto.getConduct());
+		request.setAttribute("datecert", transferCertificateResponseDto.getDateCert());
+		request.setAttribute("Remarks", transferCertificateResponseDto.getRemarks());
+	    request.setAttribute("studentdetails", transferCertificateResponseDto.getParents());
+		request.setAttribute("tcdetails",transferCertificateResponseDto.getTc());
+		request.setAttribute("dateinword",transferCertificateResponseDto.getDateInWord());
+	    switch(transferCertificateResponseDto.getStatus())
+	    {
+	    case TCEXISTS:
+	    	return "studentexists";
+	    case TCNEW:
+	    	return "true";
+	    case TCFAILED:
+	    	default:
+	    	return "false";
+	    }
+	    
 	}
 
 }
