@@ -1,9 +1,3 @@
-<%-- 
-    Document   : bonafide certificate
-    Created on : Mar 17 2018, 12:32 PM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
 <head>
 
 <style type="text/css">
@@ -53,16 +47,23 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	//font-size: 14px;
 	letter-spacing: normal;
-	text-align: left;
+	text-align: justify;
 }
-
+.dataTextBoldRight {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: right;
+}
 .dataTextBoldCenter {
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 40px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +72,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 12px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -89,98 +90,53 @@ span{
     display:inline-block;
     border-bottom:2px solid black;
     padding-bottom:1px;
-    width: 250px;
+   // width: 200px;
     font-weight: normal;
+    text-align:center;
 }
 </style>
-
-
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
+<style>
+ .rightside{
+        float:right;
         }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
+/* .save{
+ height:15px;
+ width:40px;
+ } */      
+</style>
+	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script>
+        $(function() {
 
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
-    
-    <style type="text/css">
+    		
+    		$(".printtcstudent").button().click(function() {
+    			printtc();
 
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-             size: auto;
-        }
+    		});
 
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
+    		
+    					
+    	});
+        function printtc(){
+            	var form1 = document.getElementById("form1");
+        		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
+        		form1.method = "POST";
+        		form1.submit();
             }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style>
-        <title>Bonafide Print</title>
+        </script>
+        <title>Character Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
             	 window.print();
              }
         </script>
-
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -193,34 +149,25 @@ for(Cookie cookie : cookies){
 }
 %>
 <body style="text-align: center" class="bodymargin">
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
-		<br><br>
-		<table align="center">
+	<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<form id="form1" method="post" class="bodymargin">
+		<br>
+		 <table align="center">
+                        		
+			<tr><td>
 			
-			
-			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/alirfan/images/alirfan.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
+			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140"></td>
+				<td style="font-style:normal;text-align:center;" >
+				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
+				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
+				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-			</tr>
-			</table>
+				<td><img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				</tr>
+		
+			</table><table align="center" >
 			
-		<table align="center" style="padding-left: 30px;padding-right: 20px;">
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br>
-				<%-- Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
-			
-			</tr>
 			
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
@@ -229,94 +176,27 @@ for(Cookie cookie : cookies){
 					<br><br>
 				</td>
 			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
 			
 			<tr>
+			<td></td>
+			<tr>
+			<td><p style="font-size:40px;line-height:50px;margin-left:150px;margin-right:150px;text-align:justify;">			
+			&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Master &nbsp;&nbsp;
+			<b><c:out value="${studentdetailsbonafide.student.name}" /></b>
+			Son/Daughter of &nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.fathersname}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			is a Bonafide student of this school is studying  in Class&nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.classstudying}" /></b>
+			Academic Year <b>${currentAcademicYear}</b> as per school record his date of birth is <b><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></b>
+			Place of birth&nbsp;&nbsp;<b> <c:out value="${studentdetailsbonafide.student.placeofbirth}" /> </b>&nbsp;&nbsp;Religion: <b><c:out value="${studentdetailsbonafide.student.religion}" /></b>
+			Caste <b><c:out value="${studentdetailsbonafide.student.studentscaste}" /></b> Subcaste<b><c:out value="${studentdetailsbonafide.student.socialcategory}" /></b> and G.R. <b><c:out value="${studentdetailsbonafide.student.sts}" /></b>
 			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
-					is/ was a student of this School/College.
-					 
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
-				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
-					</h3>
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
+			</p>
+			</td>
 			</tr>
 		</table>
 		
 
-		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
+		<TABLE id="dataTable"  border="0" align="center"
+			style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
 			<td>
@@ -330,12 +210,16 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
+		<td></td>
+			<td align="left"><label style="font-size:30px">
+				Date:&nbsp;&nbsp;</label>
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;font-size:30px"
+					size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
+			<td align="center"><label style="font-size:30px">Principal</label></td>
 		</tr>
+		
+			
 		</TABLE>
 	</form>
-	
-	
 </body>
 </html>
