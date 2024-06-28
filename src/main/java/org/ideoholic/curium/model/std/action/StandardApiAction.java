@@ -5,13 +5,23 @@ package org.ideoholic.curium.model.std.action;
 
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
-import org.ideoholic.curium.model.std.dto.*;
+import org.ideoholic.curium.model.std.dto.ClassDto;
+import org.ideoholic.curium.model.std.dto.ClassIdsDto;
+import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
+import org.ideoholic.curium.model.std.dto.StdOfClassDto;
+import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -94,7 +104,7 @@ public class StandardApiAction {
 
     @PostMapping("/deleteClassHierarchy")
     public ResponseEntity<ClassesHierarchyDto> deleteClassHierarchy(@RequestBody ClassIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
-        standardService.deleteClassHierarchy(dto);
+        standardService.deleteClassHierarchy(dto, branchId);
         return classHierarchy(branchId);
     }
 
@@ -124,8 +134,8 @@ public class StandardApiAction {
     }
 
     @PostMapping("/deleteClass")
-    public ResponseEntity<ResultResponse> deleteClass(@RequestBody ClassIdsDto dto) {
-        ResultResponse result = standardService.deleteClasses(dto);
+    public ResponseEntity<ResultResponse> deleteClass(@RequestBody ClassIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+        ResultResponse result = standardService.deleteClasses(dto, branchId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

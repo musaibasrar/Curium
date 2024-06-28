@@ -1,18 +1,17 @@
 package org.ideoholic.curium.model.std.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.std.dto.ClassDto;
-import org.ideoholic.curium.model.std.dto.StdOfClassDto;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.dto.ClassIdsDto;
+import org.ideoholic.curium.model.std.dto.StdOfClassDto;
+import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class StandardActionAdapter {
@@ -103,7 +102,7 @@ public class StandardActionAdapter {
         ClassIdsDto dto = new ClassIdsDto();
         dto.setClassIds(request.getParameterValues("idclasshierarchy"));
 
-        standardService.deleteClassHierarchy(dto);
+        standardService.deleteClassHierarchy(dto, httpSession.getAttribute(BRANCHID).toString());
     }
 
     public boolean createClass() {
@@ -120,7 +119,7 @@ public class StandardActionAdapter {
                 ClassIdsDto dto = new ClassIdsDto();
         dto.setClassIds(request.getParameterValues("classids"));
 
-        ResultResponse resultResponse = standardService.deleteClasses(dto);
+        ResultResponse resultResponse = standardService.deleteClasses(dto, httpSession.getAttribute(BRANCHID).toString());
         return resultResponse.isSuccess();
     }
 
