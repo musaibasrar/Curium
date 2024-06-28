@@ -14,30 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Transfer Certificate</title>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alirfan/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -278,7 +278,7 @@
                 classandsec:'<c:out default="0" value="${parents.student.classstudying}" />',
                 classadmittedin:'<c:out default="0" value="${parents.student.classadmittedin}" />',
                 id:'<c:out default="0" value="${parents.student.sid}" />',
-                
+                bplcardno:'<c:out default="0" value="${parents.student.bplcardno}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
@@ -306,6 +306,7 @@
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#bplcardno").val( ui.item.bplcardno );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -431,7 +432,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/abc/FeesCollection/StampFees";
+        		form1.action = "/alirfan/FeesCollection/StampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -475,7 +476,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -489,7 +490,7 @@ for(Cookie cookie : cookies){
 %>
     <body>
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
-        <form id="form1" action="/abc/DocumentsProcess/generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
+        <form id="form1" action="/alirfan/DocumentsProcess/generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
             <table  width="100%">
                 <thead>
                     <tr>
@@ -577,7 +578,7 @@ for(Cookie cookie : cookies){
                     </tr>
                    
                     <tr>
-                    <td >Student ID:</td><td> <input  type="text" name="grno" id="grno" style="width: 200px" /></td>
+                    <td >Student ID:</td><td> <input  type="text" name="bplcardno" id="bplcardno" style="width: 200px" /></td>
                     <td style="font-weight: bold;color: #325F6D;">Transfer Certificate Type &nbsp;</td>
 							<td style="font-weight: bold"> <label> <select name="type" class="myclass" style="width:185px;height:32px;"
 									id="status" >

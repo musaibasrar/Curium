@@ -104,8 +104,8 @@ span{
  width:40px;
  } */      
 </style>
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script>
         $(function() {
 
@@ -120,7 +120,7 @@ span{
     	});
         function printtc(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
+        		form1.action = "/alirfan/DocumentsProcess/printCharacterCertificate";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -131,7 +131,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -151,14 +151,14 @@ for(Cookie cookie : cookies){
                         		
 			<tr><td>
 			
-			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140">&emsp;&emsp;</td>
+			<img  src="/alirfan/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140">&emsp;&emsp;</td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
 				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
 				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-				<td>&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				<td>&emsp;&emsp;<img  src="/alirfan/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
 				</tr>
 		
 			</table><table align="center" >
@@ -220,7 +220,7 @@ for(Cookie cookie : cookies){
 		
 			<tr>
               <td><button class="printtcstudent"  >Print</button></td>
-              <!-- <a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a> -->
+              <!-- <a id="print" href="/alirfan/DocumentsProcess/printCharacterCertificate">Print</a> -->
             </tr>
 		</TABLE>
 	</form>
