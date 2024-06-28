@@ -83,7 +83,7 @@ public class DocumentService {
 		String transferCertificateString = null;
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
-		//String leavingReason = DataUtil.emptyString(request.getParameter("reasonleaving"));
+		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		String grno = DataUtil.emptyString(request.getParameter("grno"));
 		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
 		//String caste = DataUtil.emptyString(request.getParameter("caste"));
@@ -128,6 +128,7 @@ public class DocumentService {
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 //request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
+					request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("grno", grno);
 					request.setAttribute("tcno", tcno);
 					//request.setAttribute("caste", caste);
@@ -148,7 +149,7 @@ public class DocumentService {
 					request.setAttribute("conduct", conduct);
 					request.setAttribute("ncc", ncc);
 					request.setAttribute("game", game);
-					//request.setAttribute("leavingdate", leavingdate);
+					request.setAttribute("leavingdate", leavingdate);
 					request.setAttribute("datecert", datecert);
 					request.setAttribute("Remarks", Remarks);
 					request.setAttribute("afflno", afflno);
@@ -168,6 +169,7 @@ public class DocumentService {
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 			 	//request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
+				request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("grno", grno);
 				request.setAttribute("tcno", tcno);
 				//request.setAttribute("caste", caste);
@@ -188,6 +190,7 @@ public class DocumentService {
 				request.setAttribute("conduct", conduct);
 				request.setAttribute("ncc", ncc);
 				request.setAttribute("game", game);
+				request.setAttribute("leavingdate", leavingdate);
 				request.setAttribute("datecert", datecert);
 				request.setAttribute("Remarks", Remarks);
 				request.setAttribute("afflno", afflno);

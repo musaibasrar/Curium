@@ -177,9 +177,9 @@ margin-top:0px;
         text-align:center;
         }
     </style>
-	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/alirfan/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/abc/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
           <!--    <script type="text/javascript">
              window.onload = function(){
@@ -193,7 +193,7 @@ margin-top:0px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -216,14 +216,14 @@ for(Cookie cookie : cookies){
 		</tr>
 			<tr><td>
 			
-			<img  src="/alirfan/images/alirfan.jpg" alt="Al-Irfan" width="120" height="140">&emsp;&emsp;</td>
+			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140">&emsp;&emsp;</td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
 				<label class="addressLine">(Senior and Secondary Residential and day Boarding)</label><br>
 				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-				<td>&emsp;&emsp;<img  src="/alirfan/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				<td>&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
 				</tr>
 </table>
 
@@ -312,8 +312,8 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td>
 					7.&nbsp;&nbsp;&nbsp;Caste </td><td>
-					<span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.studentscaste}" /></span>
-					 8.&nbsp;&nbsp;&nbsp;Sub-caste: <span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.crecord}" /></span>
+					<span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.caste}" /></span>
+					 8.&nbsp;&nbsp;&nbsp;Sub-caste: <span style="font-weight: bold;width: 120px;"><c:out value="${studentdetails.student.socialcategory}" /></span>
 					 </td>
 					 </tr>
 					
@@ -371,7 +371,7 @@ for(Cookie cookie : cookies){
 				    <tr>
  				    <td>
 					15.&nbsp;&nbsp;&nbsp;Date of Leaving</td><td>
-					<span style="font-weight: bold;width: 500px;"><fmt:formatDate type="date" value="${studentdetails.student.dateleaving}" pattern="dd/MM/yyyy"/></span>
+					<span style="font-weight: bold;width: 500px;">${leavingdate}</span>
 				    </td></tr>	
 				
 				
@@ -385,7 +385,7 @@ for(Cookie cookie : cookies){
 				   <tr>
 				  <td >
 					17.&nbsp;&nbsp;&nbsp;Reason of Leaving school </td><td>
-					<span style="font-weight: bold;width: 500px;">${studentdetails.student.reasonleaving}</span>
+					<span style="font-weight: bold;width: 500px;">${leavingReason}</span>
 				    </td></tr>	
 					
 				    <tr>
@@ -430,16 +430,16 @@ for(Cookie cookie : cookies){
 			</tr>
         <tr>
          <td>
-                            <button id="print" type="button" style="background-image: url(/alirfan/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/abc/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
         </tr>
 			<%-- <tr>
-               <td align="center"><a id="print" href="/alirfan/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+               <td align="center"><a id="print" href="/abc/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
              </tr> --%>
 		</TABLE>
 
-		<%-- <a id="print" href="/alirfan/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/abc/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 
 
