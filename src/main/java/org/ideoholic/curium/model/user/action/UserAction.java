@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class UserAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -32,20 +35,20 @@ public class UserAction {
 
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
-		new UserService(request, response).searchByDate();
+		new UserService(request, response, standardActionAdapter).searchByDate();
 		return "feesCollectionDetails";
 	}
 
 	@PostMapping("/advanceSearchByParents")
 	public String advanceSearchByParents() {
-		new UserService(request, response).advanceSearchByParents();
+		new UserService(request, response, standardActionAdapter).advanceSearchByParents();
 		return "viewAllWithParents";
 	}
 
 	@PostMapping("/backup")
 	public String backup() {
 		String fileName = request.getParameter("filename");
-		if (new UserService(request, response).backupData(fileName)) {
+		if (new UserService(request, response, standardActionAdapter).backupData(fileName)) {
 			return "BackupSuccess";
 		} else {
 			return "BackupFailed";
@@ -54,20 +57,20 @@ public class UserAction {
 
 	@PostMapping("/advanceSearch")
 	public String advanceSearch() {
-		new UserService(request, response).advanceSearch();
+		new UserService(request, response, standardActionAdapter).advanceSearch();
 		return "advanceSearchResult";
 	}
 
 	@PostMapping("/dashBoard")
 	public String dashBoard() {
-		new UserService(request, response).dashBoard();
+		new UserService(request, response, standardActionAdapter).dashBoard();
 		return "jspbarchart";
 	}
 
 	@PostMapping("/authenticateUser")
 	public String authenticateUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response).authenticateUser()) {
+		if (new UserService(request, response, standardActionAdapter).authenticateUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -78,7 +81,7 @@ public class UserAction {
 	@GetMapping("/multiUser")
 	public String authenticateMultiUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response).authenticateMultiUser()) {
+		if (new UserService(request, response, standardActionAdapter).authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -88,14 +91,14 @@ public class UserAction {
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logOutUser(Model model) {
-		new UserService(request, response).logOutUser();
+		new UserService(request, response, standardActionAdapter).logOutUser();
 		model.addAttribute("logout", true);
 		return "login";
 	}
 
 	@PostMapping("/changePassword")
 	public String changePassword() {
-		if (new UserService(request, response).ChangePassword()) {
+		if (new UserService(request, response, standardActionAdapter).ChangePassword()) {
 			return "passwordSuccess";
 		} else {
 			return "passwordFail";

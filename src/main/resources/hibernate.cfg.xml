@@ -8,6 +8,7 @@
 		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
          	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
             <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
+
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">mysql</property>

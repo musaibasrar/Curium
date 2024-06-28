@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class FeesAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/applyConcession")
 	public String applyConcession() {
@@ -44,7 +47,7 @@ public class FeesAction {
 
 	@GetMapping("/feesWaiveoffReport")
 	public String feesWaiveoffReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "feeswaiveoffreport";
 	}
 
@@ -61,7 +64,7 @@ public class FeesAction {
 
 	@GetMapping("/feesConcessionReport")
 	public String feesConcessionReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "feesconcessionreport";
 	}
 
@@ -73,14 +76,14 @@ public class FeesAction {
 
 	@GetMapping("/feesReport")
 	public String feesReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new FeesService(request, response).viewFees();
 		return "feesreport";
 	}
 
 	@GetMapping("/feesStructure")
 	public String feesStructure() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "feesstructure";
 	}
 
@@ -119,7 +122,7 @@ public class FeesAction {
 	@GetMapping("/feesView")
 	public String viewFees() {
 		new FeesService(request, response).viewFees();
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "feesCategory";
 	}
 
@@ -140,7 +143,7 @@ public class FeesAction {
 	
 	@GetMapping("/feesDueStampFees")
 	public String feesDueStampFees() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "feesstampdue";
 	}
 	
@@ -159,7 +162,7 @@ public class FeesAction {
 	@GetMapping("/otherFeesView")
 	public String otherviewFees() {
 		new FeesService(request, response).viewOtherFees();
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "otherfeecategory";
 	}
 	
@@ -172,7 +175,7 @@ public class FeesAction {
 	
 	@GetMapping("/otherfeesReport")
 	public String otherfeesReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new FeesService(request, response).viewOtherFees();
 		return "otherfeesreport";
 	}
@@ -215,7 +218,7 @@ public class FeesAction {
 	
 	@GetMapping("/feesDueReportHeadWise")
 	public String feesDueReportHeadWise() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new FeesService(request, response).viewFees();
 		return "feesdueheadwisereport";
 	}
@@ -231,7 +234,7 @@ public class FeesAction {
 
 	@GetMapping("/defaulterReport")
 	public String defaulterReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new FeesService(request, response).viewFees();
 		return "defaultersreport";
 	}

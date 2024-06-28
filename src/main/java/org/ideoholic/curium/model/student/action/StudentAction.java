@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -30,6 +31,8 @@ public class StudentAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/multiClassSearch")
 	public String multiClassSearch() {
@@ -39,7 +42,7 @@ public class StudentAction {
 
 	@GetMapping("/advanceSearchStudents")
 	public String advanceSearchStudents() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "AdvanceSearch";
 	}
 
@@ -51,7 +54,7 @@ public class StudentAction {
 
 	@GetMapping("/addNew")
 	public String addNew() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return new StudentService(request, response).addNew();
 	}
 

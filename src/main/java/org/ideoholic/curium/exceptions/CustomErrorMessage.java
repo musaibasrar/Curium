@@ -6,7 +6,10 @@ import lombok.Getter;
 public enum CustomErrorMessage {
 
 	ERROR(100, "error"),
-	EXPORTFAILURE(101, "exportfailure");
+	EXPORTFAILURE(101, "exportfailure"),
+	FAILURELEFTOUT(102, "failureleftout"),
+	FAILUREDROPPEDOUT(103, "failuredroppedout"),
+	FAILUREGRADUATE(104, "failuregraduate");
 
 	private final int code;
 	private final String message;

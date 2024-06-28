@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.std.action.StandardAction;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,19 +40,22 @@ public class AttendanceAction {
 	@Autowired
 	AttendanceActionAdapter attendanceActionAdapter;
 
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
+
 	String errorPage = "error";
 
 	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/attendanceExport")
 	public String attendanceExport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "attendanceexport";
 	}
 
 	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/markAttendance")
 	public String markAttendance() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "attendancemark";
 	}
 
@@ -199,7 +204,7 @@ public class AttendanceAction {
 	public String viewAttendance() {
 
 		if (attendanceActionAdapter.viewAttendance()) {
-			new StandardService(request, response).viewClasses();
+			standardActionAdapter.viewClasses();
 			return "viewattendance";
 		}
 		return errorPage;

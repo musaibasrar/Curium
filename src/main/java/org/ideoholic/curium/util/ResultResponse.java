@@ -1,5 +1,6 @@
 package org.ideoholic.curium.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,12 +9,13 @@ import java.util.Map;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class ResultResponse {
 
     @Builder.Default
     private boolean success = false;
     private String message;
     private Map resultMap;
-    private int resultValue;
+    private Integer resultValue;
     private List resultList;
 }

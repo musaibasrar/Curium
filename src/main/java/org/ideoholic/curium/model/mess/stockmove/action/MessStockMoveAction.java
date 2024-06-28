@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class MessStockMoveAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/cancelStockMove")
 	public String cancelStockMove() {
@@ -104,7 +107,7 @@ public class MessStockMoveAction {
 	@GetMapping("/getDueReport")
 	public String getDueReport() {
 		    	
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
     	
     	return "duereport";
     }

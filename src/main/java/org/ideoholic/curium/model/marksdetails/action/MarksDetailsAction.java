@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,12 @@ public class MarksDetailsAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "marksentry";
 	}
 
@@ -37,7 +40,7 @@ public class MarksDetailsAction {
 	//@GetMapping("/progressReport")
 	@RequestMapping(value = "/progressReport", method = { RequestMethod.GET, RequestMethod.POST })
 	public String progressreport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "progressreport";
 	}
 
@@ -50,7 +53,7 @@ public class MarksDetailsAction {
 	@GetMapping("/getGraphicalReportData")
 	public String getGraphicalReportData() {
 		new MarksDetailsService(request, response).getStudentList();
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "graphicalreport";
 	}
 
@@ -99,7 +102,7 @@ public class MarksDetailsAction {
 	@GetMapping("/getSubjectsExams")
 	public String getSubjectsExams() {
 		new MarksDetailsService(request, response).getSubjectExams();
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "markssearch";
 	}
 
@@ -141,7 +144,7 @@ public class MarksDetailsAction {
 	
 	@GetMapping("/rankReport")
 	public String rankreport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "rankreport";
 	}
 	

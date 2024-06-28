@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.service.DiaryService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,12 @@ public class DiaryAction {
 	private HttpSession httpSession;
 	@Autowired
 	private DiaryActionAdapter diaryActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "diary";
 	}
 	

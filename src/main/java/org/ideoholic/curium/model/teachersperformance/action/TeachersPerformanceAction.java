@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.model.teachersperformance.service.TeacherPerformanceService;
@@ -27,9 +28,12 @@ public class TeachersPerformanceAction {
 	@Autowired
 	HttpSession httpSession;
 
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
+
 	@GetMapping("/SearchTeachers")
 	public String SearchTeachers() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		new ExamDetailsService(request, response).readListOfExams();
 		return "teachersPerormance";

@@ -18,11 +18,16 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
 import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PeriodService {
+
+	@Autowired
+	StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -52,7 +57,7 @@ public class PeriodService {
 	                new SubjectDetailsService(request, response).readListOfSubjects();
 	                
 	                new EmployeeService(request, response).ViewAllEmployee();
-	                new StandardService(request, response).viewClasses();
+	                standardActionAdapter.viewClasses();
 	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	                request.setAttribute("periodmasterlist", periodMaster);
 		    
