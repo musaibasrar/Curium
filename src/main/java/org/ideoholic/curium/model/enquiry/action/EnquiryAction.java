@@ -25,6 +25,8 @@ public class EnquiryAction {
 	HttpSession httpSession;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+	@Autowired
+	EnquiryActionAdapter enquiryActionAdapter;
 	
 	@GetMapping("/newEnquiry")
 	public String NewEnquiryDetail() {
@@ -34,7 +36,7 @@ public class EnquiryAction {
 
 	@PostMapping("/genarateNewCertificate")
 	public String genarateNewCertificate() {
-		new EnquiryService(request, response).getCertificate(); 
+		enquiryActionAdapter.getCertificate();
 		return "newcertificatepreview";
 	}
 	}

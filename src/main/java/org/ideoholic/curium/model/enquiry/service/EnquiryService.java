@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
+import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
+import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -26,17 +28,17 @@ public class EnquiryService {
 
 
 
-	public void getCertificate() {
+	public CertificateResponseDto getCertificate(CertificateDto dto) {
+		CertificateResponseDto result = CertificateResponseDto.builder().build();
 		
-		
-	    String name= request.getParameter("subject");		
-	    String place= request.getParameter("place");	
-	    String mobile= request.getParameter("mobile");	
-	    String date= request.getParameter("date");
-	    request.setAttribute("name", name);
-		 request.setAttribute("place", place);
-		 request.setAttribute("mobile", mobile);
-		 request.setAttribute("date", date);
+	    String name= dto.getName();
+	    String place= dto.getPlace();
+	    String mobile= dto.getMobile();
+	    String date= dto.getDate();;
+		result.setName(name);
+		result.setPlace(place);
+		result.setMobile(mobile);
+		result.setDate(date);
 
 	    Enquiry enquiry = new Enquiry();
         
@@ -47,7 +49,9 @@ public class EnquiryService {
 	    enquiry.setMobileno(mobile);
 	          
                 enquiry =  new enquiryDAO().create(enquiry);
+				result.setSuccess(true);
+				return result;
                 }
-	   
+
 		}
 
