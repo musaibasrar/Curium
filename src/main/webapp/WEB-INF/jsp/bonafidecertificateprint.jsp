@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 12px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -119,30 +119,21 @@ for(Cookie cookie : cookies){
 		<br>
 		
 		<table align="center">
+                        		
+			<tr><td>
 			
-			
-			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/abc/images/abc.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
+			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140"></td>
+				<td style="font-style:normal;text-align:center;" >
+				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
+				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
+				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-			</tr>
-			</table>
+				<td><img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				</tr>
+		
+			</table><table align="center" >
 			
-		<table>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
-			
-			</tr>
 			
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
@@ -151,85 +142,26 @@ for(Cookie cookie : cookies){
 					<br><br>
 				</td>
 			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
 			
 			<tr>
+			<td></td>
+			<tr>
+			<td><p style="font-size:20px;line-height:50px;margin-left:200px;margin-right:200px;text-align:justify;">			
+			&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Master &nbsp;&nbsp;
+			<b><c:out value="${studentdetailsbonafide.student.name}" /></b>
+			Son/Daughter of &nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.fathersname}" /></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			is a Bonafide student of this school is studying  in Class&nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.classstudying}" /></b>
+			Academic Year <b>${currentAcademicYear}</b> as per school record his date of birth is <b><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></b>
+			Place of birth&nbsp;&nbsp;<b> <c:out value="${studentdetailsbonafide.student.placeofbirth}" /> </b>&nbsp;&nbsp;Religion: <b><c:out value="${studentdetailsbonafide.student.religion}" /></b>
+			Caste <b><c:out value="${studentdetailsbonafide.student.studentscaste}" /></b> Subcaste<b><c:out value="${studentdetailsbonafide.student.socialcategory}" /></b> and G.R. <b><c:out value="${studentdetailsbonafide.student.sts}" /></b>
 			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
-					</span>
-					
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
+			</p>
+			</td>
 			</tr>
 		</table>
 		
 
-		<TABLE id="dataTable" width="100%" border="0"
+		<TABLE id="dataTable"  border="0" align="center"
 			style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
@@ -245,11 +177,16 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td align="left"><label style="font-size:20px">
+				Date:&nbsp;&nbsp;</label>
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;font-size:20px"
+					size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
+			<td align="center"><label style="font-size:20px">Principal</label></td>
 		</tr>
 		
+			
+		</TABLE>
+		<TABLE>
 			<tr>
               <td align="center"><a id="print" href="/abc/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
