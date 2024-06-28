@@ -208,7 +208,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Gr.No.:&nbsp;<c:out value="${student.sts}" />
 				</td>
 				
 
@@ -226,7 +226,7 @@
 			<td></td>
 			</tr>
 			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Father
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
@@ -407,7 +407,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Gr. No.:&nbsp;<c:out value="${student.sts}" />
 				</td>
 				
 
@@ -425,7 +425,7 @@
 			<td></td>
 			</tr>
 			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Father
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			

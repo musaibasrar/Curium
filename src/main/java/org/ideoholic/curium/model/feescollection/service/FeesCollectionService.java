@@ -1746,7 +1746,7 @@ public class FeesCollectionService {
 					Long feesTotal = studentFee.getFeesamount() - studentFee.getConcession() - studentFee.getWaiveoff();
 					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
 					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
-					feesDetails=feesDetails+studentFee.getOtherfeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+					feesDetails=feesDetails+studentFee.getOtherfeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"[Total Installments"+studentFee.getTotalinstallment()+"]\n";
 				}
 				
 				data.put(Integer.toString(i),

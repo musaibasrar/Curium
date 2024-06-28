@@ -534,7 +534,7 @@ for(Cookie cookie : cookies){
 
 							<td class="alignLeft">Admission Number&nbsp;</td>
 							<td ><label> <input name="admnno"
-									type="text" class="myclass" required
+									type="text" class="myclass" 
 									value="<c:out default="" value="${student.admissionnumber}" />"
 									id="admnno" size="30" data-validate="validate(required)">
 
@@ -738,14 +738,15 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Student Id &nbsp;</td>
 
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>${student.nationality }</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
+							<td>						
+								<input
+									name="bplcardno" 
+									type="text" class="myclass"
+									style="text-transform:capitalize;"
+									value="<c:out default="" value="${student.bplcardno}" />"
+									id="bplcardno" size="36">
 
 							</label></td>
 						</tr>
@@ -989,8 +990,69 @@ for(Cookie cookie : cookies){
 									id="datepickerCD" size="30" data-validate="validate(required)">
 							</label></td>
 							
+							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+
+							<td><label> <select name="nationality"
+									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
+										<option selected>${student.nationality }</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select>
+
+							</label></td>
 							
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
+
+							<td align="left">
+							<label> <select name="yearofadmission" id="yearofadmission" required
+									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.yearofadmission}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
+										<option>2014/15</option>
+										<option>2013/14</option>
+										<option>2012/13</option>
+										<option>2011/12</option>
+										<option>2010/11</option>
+										<option>2009/10</option>
+										<option>2008/09</option>
+										<option>2007/08</option>
+										<option>2006/07</option>
+										<option>2005/06</option>
+										<option>2004/05</option>
+										<option>2003/04</option>
+										<option>2002/03</option>
+										<option>2001/02</option>
+										<option>2000/01</option>										
+								</select>
+
+							</label> 
+							
+							</td>
+
+							</tr>
+							
+						<tr>
+
+							<td></td>
+
+						</tr>
+						<tr>
+
+							<td></td>
+
+						</tr>
+						<tr>
+							<td class="alignLeft">Admission Year&nbsp;</td>
 
 							<td align="left">
 							<label> <select name="yearofadmission" id="yearofadmission" required

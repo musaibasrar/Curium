@@ -1002,6 +1002,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Gr.No.</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
@@ -1018,6 +1019,9 @@ for(Cookie cookie : cookies){
 								name="attandanceIDs"
 								value="<c:out value="${attendanceList.attendanceid},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
+								><c:out
+										value="${StudentListAttendance[status.index].sts}" /></a></td>
+										<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${StudentListAttendance[status.index].admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${StudentListAttendance[status.index].name}" /></td>

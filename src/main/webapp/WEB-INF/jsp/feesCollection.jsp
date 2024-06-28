@@ -298,7 +298,7 @@
                 //$("#dateoffees").datepicker();
                 
                 
-                $("#fineamount").keyup(function(){
+                $("#dataTable").keyup(function(){
                     var fineamount=parseFloat($("#fineamount").val());
                     var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
@@ -311,7 +311,7 @@
                     $('#grandTotalAmount').val(totalSum);
 
                 });
-                $("#miscamount").keyup(function(){
+                $("#dataTable").keyup(function(){
                     var fineamount=parseFloat($("#fineamount").val());
                     var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
@@ -336,7 +336,7 @@
                     $('#feesTotalAmount').val(sum.toPrecision(6));
                     $('#grandTotalAmount').val();
                 });
-                $("#myTable").keyup(function(){
+                $("#dataTable").keyup(function(){
                 	var fineamount=parseFloat($("#fineamount").val());
                     var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
@@ -472,7 +472,7 @@
                 classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
                 id:'<c:out default="0" value="${parent.student.sid}" />',
                 fathername:'<c:out default="0" value="${parent.fathersname}" />',
-                
+                sts:'<c:out default="0" value="${parent.student.sts}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
@@ -494,6 +494,7 @@
        			  $( "#studentName").val( ui.item.name );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#admissionno").val( ui.item.admissionno );
+       			$( "#sts").val( ui.item.sts );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -902,6 +903,36 @@
             	
             }
             
+ 
+		 function calculate(value2) {
+		 	
+		     var feescatamount=document.getElementById("amountpaying_"+value2).value;
+		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
+		     var final1=document.getElementById("grandTotalAmount");
+		     var grandAmount = parseInt(grandtotalamount, 10);
+		     var feeAmount = parseInt(feescatamount, 10);
+		         final1.value=grandAmount+feeAmount;
+		 }
+		 
+		 function calculateFineAmount() {
+			 	
+		     var feescatamount=document.getElementById("fineamount").value;
+		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
+		     var final1=document.getElementById("grandTotalAmount");
+		     var grandAmount = parseInt(grandtotalamount, 10);
+		     var feeAmount = parseInt(feescatamount, 10);
+		         final1.value=grandAmount+feeAmount;
+		 }
+		 
+		 function calculateMiscAmount() {
+			 	
+		     var feescatamount=document.getElementById("miscamount").value;
+		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
+		     var final1=document.getElementById("grandTotalAmount");
+		     var grandAmount = parseInt(grandtotalamount, 10);
+		     var feeAmount = parseInt(feescatamount, 10);
+		         final1.value=grandAmount+feeAmount;
+		 }
         </script>
     </head>
     <%
@@ -952,7 +983,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     
-                        <td class="alignLeft" style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
+                        <td class="alignLeft" style="width: 45%">Gr. No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="sts" id="sts" class="myclass" readonly/></td>
                         <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
                         
                     </tr>
@@ -1065,6 +1096,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
+								onclick="calculate(${status.index})"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
@@ -1072,7 +1104,7 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<!-- <input type="hidden" id="fine" value="0" class="fine" name="fine" > -->
 							</td>
 							<!-- <td class="dataText" align="center">
@@ -1091,7 +1123,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine')"/>
+							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine');calculateFineAmount()"/>
 							</td>
 						</tr>
 						
@@ -1106,7 +1138,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc')"/>
+							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc');calculateMiscAmount()"/>
 							</td>
 						</tr>
 						<c:forEach items="${studentfeesdetailspreviousyear}" var="studentfeesdetails" varStatus="status">
@@ -1234,7 +1266,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
+											<option value="sbi">SBI Bank</option>
 								</select>
 							
 							</label>
@@ -1276,7 +1308,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
+											<option value="sbi">SBI Bank</option>
 								</select>
 							
 							</label>

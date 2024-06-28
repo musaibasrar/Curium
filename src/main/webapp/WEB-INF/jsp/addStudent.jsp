@@ -753,8 +753,8 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft" style="color:red;">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" required
+							<td class="alignLeft">Admission Number &nbsp;</td>
+							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
@@ -932,19 +932,15 @@ $(document).ready(function() {
 								</select>
 
 							</label></td>
-
-
-							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>Indian</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student Id
+								&nbsp;</td>
+							<td ><label> <input
+									name="bplcardno" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bplcardno" size="36">
 
 							</label></td>
-
 
 						</tr>
 
@@ -1165,7 +1161,25 @@ $(document).ready(function() {
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+
+							<td><label> <select name="nationality"
+									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
+										<option selected>Indian</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select>
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission" 

@@ -250,8 +250,8 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No.</th>
- 				 		<th class=datath>UID</th>
 						<th class="datath">Gr.No.</th>
+						<th class=datath>UID</th>
 						<th class="datath">Name</th>
 						<th class="datath">Class & Sec.</th>
 						<th class="datath">Father Name</th>
@@ -282,9 +282,9 @@
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
+							<td class="datatd"><c:out value="${studentFeesReport.parents.student.sts}" /></td>
 							<td class="datatd"><c:out value="${studentFeesReport.parents.student.studentexternalid}" />
 							</td>
-							<td class="datatd"><c:out value="${studentFeesReport.parents.student.sts}" /></td>
 							<td class="datatd"><c:out value="${studentFeesReport.parents.student.name}" /></td>
 							<td class="datatd"><c:out value="${studentFeesReport.parents.student.classstudying}" /></td>
 						    <td class="datatd"><c:out value="${studentFeesReport.parents.fathersname}" /></td>

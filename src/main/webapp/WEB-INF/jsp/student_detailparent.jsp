@@ -70,7 +70,7 @@
 <!--End Parent Detail-->
       </div>
       <div class="col-lg-15">
-       <h1 align="center" style="color: #FF914D;font-weight:bold;">Student Detail &nbsp;&nbsp;&nbsp;UID: &nbsp;<c:out value="${student.studentexternalid}" /></h1>
+       <h1 align="center" style="color: #FF914D;font-weight:bold;">Student Detail &nbsp;&nbsp;&nbsp;Gr. No.: &nbsp;<c:out value="${student.sts}" /></h1>
                 <hr class="mt-0 mb-4">
         <div class="card mb-4">
           <div class="card-body" style="border: 2px solid rgb(0 0 0);">

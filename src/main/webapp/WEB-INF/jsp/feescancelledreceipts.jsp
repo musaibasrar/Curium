@@ -709,7 +709,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox"
 								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
+								value="<c:out value="${feesdetails.branchreceiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>

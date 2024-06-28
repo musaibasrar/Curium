@@ -538,12 +538,11 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.bloodgroup}" />
                             </td>
-                                                        
-                            <td  width="25%"  class="alignLeft" height="50" >Nationality
+                           <td  width="25%"  class="alignLeft" height="50" >Student Id
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.nationality}" />
-                            </td>
+                                <c:out default="" value="${student.bplcardno}" />
+                            </td>                      
                         </tr>
                         
                         <tr>
@@ -653,12 +652,11 @@ for(Cookie cookie : cookies){
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
-   
-   							<td  width="25%"  class="alignLeft" height="50">Admission Year
+                            
+                            <td  width="25%"  class="alignLeft" height="50" >Nationality
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.yearofadmission}" />
-                                
+                                <c:out default="" value="${student.nationality}" />
                             </td>
                         </tr>
                                                 
@@ -693,6 +691,15 @@ for(Cookie cookie : cookies){
                             </td>
                           
                            
+                        </tr>
+                        <tr>
+                        
+                             <td  width="25%"  class="alignLeft" height="50">Created Date
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <%-- <c:out default="" value="${student.createddate}" /> --%>
+                                <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
+                            </td>
                         </tr>
                         
            
@@ -1058,7 +1065,7 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/alirfan/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  

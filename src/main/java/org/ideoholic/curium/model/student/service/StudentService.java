@@ -1902,8 +1902,10 @@ public class StudentService {
 					student.setAdmissionnumber((String)parentdetails[2]);
 					student.setName((String)parentdetails[3]);
 					student.setClassstudying((String)parentdetails[4]);
-					parent.setFathersname((String)parentdetails[5]);
-					parent.setMothersname((String)parentdetails[6]);
+					student.setSts((String)parentdetails[5]);
+					student.setBranchid((Integer)parentdetails[6]);
+					parent.setFathersname((String)parentdetails[7]);
+					parent.setMothersname((String)parentdetails[8]);
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}
