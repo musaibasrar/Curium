@@ -18,13 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/EnquiryProcess")
 public class EnquiryAction {
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private EnquiryActionAdapter enquiryActionAdapter;
 	
 	@GetMapping("/newEnquiry")
 	public String NewEnquiryDetail() {
@@ -34,7 +36,7 @@ public class EnquiryAction {
 
 	@PostMapping("/genarateNewCertificate")
 	public String genarateNewCertificate() {
-		new EnquiryService(request, response).getCertificate(); 
+		enquiryActionAdapter.getCertificate();
 		return "newcertificatepreview";
 	}
 	}

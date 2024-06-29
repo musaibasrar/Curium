@@ -130,7 +130,7 @@ public class DocumentActionAdapter {
 	}
 
 	public String generateTransferCertificate() {
-		DocumentService documentService = new DocumentService(request, response);
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
 		TransferCertificateDto transferCertificateDto = new TransferCertificateDto();
 		transferCertificateDto.setStudentId(request.getParameter("studentId"));
 		transferCertificateDto.setReason(request.getParameter("reason"));
