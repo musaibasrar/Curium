@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
 			is a Bonafide student of this school is studying  in Class&nbsp;&nbsp;&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.classstudying}" /></b>
 			Academic Year <b>${currentAcademicYear}</b> as per school record his date of birth is <b><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></b>
 			Place of birth&nbsp;&nbsp;<b> <c:out value="${studentdetailsbonafide.student.placeofbirth}" /> </b>&nbsp;&nbsp;Religion: <b><c:out value="${studentdetailsbonafide.student.religion}" /></b>
-			Caste <b><c:out value="${studentdetailsbonafide.student.studentscaste}" /></b> Subcaste<b><c:out value="${studentdetailsbonafide.student.socialcategory}" /></b> and G.R. <b><c:out value="${studentdetailsbonafide.student.sts}" /></b>
+			Caste <b><c:out value="${studentdetailsbonafide.student.studentscaste}" /></b> Subcaste&nbsp;&nbsp;<b><c:out value="${studentdetailsbonafide.student.socialcategory}" /></b> and G.R. <b><c:out value="${studentdetailsbonafide.student.sts}" /></b>
 			
 			</p>
 			</td>
