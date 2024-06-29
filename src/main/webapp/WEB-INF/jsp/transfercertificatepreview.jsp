@@ -216,7 +216,7 @@ for(Cookie cookie : cookies){
 		</tr>
 			<tr><td>
 			
-			<img  src="/abc/images/alirfan.jpg" alt="Brainy Stars" width="120" height="140">&emsp;&emsp;</td>
+			<img  src="/abc/images/alirfan.jpg" alt="alirfan logo" width="120" height="140">&emsp;&emsp;</td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
