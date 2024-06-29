@@ -115,12 +115,12 @@ public class DocumentAction {
 	@PostMapping("/generateTransferCertificate")
 	public String generateTransferCertificate() {
 		
-		String result = new DocumentService(request, response, standardActionAdapter).generateTransferCertificate();
+		String result = documentActionAdapter.generateTransferCertificate();
 		
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatepreviewduplicate";
+			return "transfercertificatepreviewduplicate";
 		}
 		return error;
 	}
