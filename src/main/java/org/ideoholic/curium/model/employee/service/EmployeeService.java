@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.EmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
@@ -168,7 +169,8 @@ public class EmployeeService {
     return result;
 }
 
-	public boolean viewDetailsEmployee() {
+	public ViewDetailsEmployeeResponseDto viewDetailsEmployee() {
+		ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = new ViewDetailsEmployeeResponseDto();
 		 boolean result = false;
 	        try {
 	            long id = Long.parseLong(request.getParameter("id"));
@@ -176,15 +178,16 @@ public class EmployeeService {
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
-	            	httpSession.setAttribute("employee", employee);
-	                request.setAttribute("stafflogin", employeeLogin);
-	                return true;
+	            	viewDetailsEmployeeResponseDto.setEmployee(employee);
+	                viewDetailsEmployeeResponseDto.setEmployeeLogin(employeeLogin);
+
+	                viewDetailsEmployeeResponseDto.setSuccess(true);
 	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            result = false;
+	            viewDetailsEmployeeResponseDto.setSuccess(false);
 	        }
-	        return result;
+	        return viewDetailsEmployeeResponseDto;
 	}
 
 	public String updateEmployee(MultipartFile[] listOfFiles) {

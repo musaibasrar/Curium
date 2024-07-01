@@ -52,7 +52,7 @@ public class EmployeeAction {
 
 	@PostMapping("/updateEmployeeDetails")
 	public String updateEmployeeDetails() {
-		if (new EmployeeService(request, response).viewDetailsEmployee()) {
+		if (employeeActionAdapter.viewDetailsEmployee()) {
 			new EmployeeService(request, response).viewAllRelations();
 			return "employee_update";
 		} else {
