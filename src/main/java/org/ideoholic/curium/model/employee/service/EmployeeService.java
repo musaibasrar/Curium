@@ -13,6 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.EmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
@@ -23,6 +24,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public class EmployeeService {
@@ -39,87 +41,30 @@ public class EmployeeService {
         this.httpSession = request.getSession();
 	}
 
-	public boolean addEmployee(MultipartFile[] listOfFiles) {
+	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId) {
 		Teacher employee = new Teacher();
 		
 		try {
-			Enumeration<String> enumeration = request.getParameterNames();
-		
-			 while (enumeration.hasMoreElements()) {
-		                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-		                String fieldName = enumeration.nextElement();
 
-		                if (fieldName.equalsIgnoreCase("name")) {
-		                	employee.setTeachername(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-
-		                
-		                if (fieldName.equalsIgnoreCase("gender")) {
-		                	employee.setGender(DataUtil.emptyString(request.getParameter(fieldName)));
-
-		                }
-
-		                if (fieldName.equalsIgnoreCase("address")) {
-		            		employee.setAddress(DataUtil.emptyString(request.getParameter(fieldName)));
-
-		                }
-
-		                if (fieldName.equalsIgnoreCase("contactnumber")) {
-		            		employee.setContactnumber(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("email")) {
-		                	employee.setEmail(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("dateofjoining")) {
-		                	employee.setDateofjoining(DateUtil.indiandateParser(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("totalexperience")) {
-		                	employee.setTotalexperience(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("qualification")) {
-		                	employee.setQualification(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("department")) {
-		                	employee.setDepartment(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("designation")) {
-		                	employee.setDesignation(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("salary")) {
-		                	employee.setSalary(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("remarks")) {
-		                	employee.setRemarks(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("currentemployee")) {
-		                	employee.setCurrentemployee(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("joiningdate")) {
-		                	employee.setJoiningdate(DateUtil.indiandateParser(request.getParameter(fieldName)));
-		                }
-		                
-		                //Bank Details
-		                if (fieldName.equalsIgnoreCase("bankname")) {
-		                	employee.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                if (fieldName.equalsIgnoreCase("bankifsc")) {
-		                	employee.setBankifsc(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
-		                if (fieldName.equalsIgnoreCase("accno")) {
-		                	employee.setAccno(DataUtil.emptyString(request.getParameter(fieldName)));
-		                }
+		                	employee.setTeachername(DataUtil.emptyString(employeeDto.getName()));
+		                	employee.setGender(DataUtil.emptyString(employeeDto.getGender()));
+							employee.setAddress(DataUtil.emptyString(employeeDto.getAddress()));
+		            		employee.setContactnumber(DataUtil.emptyString(employeeDto.getContactNumber()));
+		                	employee.setEmail(DataUtil.emptyString(employeeDto.getEmail()));
+		                	employee.setDateofjoining(DateUtil.indiandateParser(employeeDto.getDateOfJoining()));
+		                	employee.setTotalexperience(DataUtil.emptyString(employeeDto.getTotalExperience()));
+		                	employee.setQualification(DataUtil.emptyString(employeeDto.getQualification()));
+		                	employee.setDepartment(DataUtil.emptyString(employeeDto.getDepartment()));
+		                	employee.setDesignation(DataUtil.emptyString(employeeDto.getDesignation()));
+		                	employee.setSalary(DataUtil.emptyString(employeeDto.getSalary()));
+		                	employee.setRemarks(DataUtil.emptyString(employeeDto.getRemarks()));
+		                	employee.setCurrentemployee(DataUtil.emptyString(employeeDto.getCurrentEmployee()));
+		                	employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
+		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
+							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
 		                //End Bank Details
-		            }
+
 			// Process form file field (input type="file")
 			 if(listOfFiles != null && listOfFiles.length != 0) 
 				 {
@@ -195,18 +140,18 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
-		employee.setTeacherexternalid(httpSession.getAttribute("branchcode").toString());
-		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		employee.setTeacherexternalid(employeeDto.getBranchCode());
+		employee.setBranchid(Integer.parseInt(branchId));
 		
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response, null).addUser(employee)){
-				return true;
+			if(new UserService(request, response,null).addUser(employee)){
+				return ResultResponse.builder().success(true).build();
 			}else{
 				new EmployeeDAO().delete(employee);
 			}
 		}
 		
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean ViewAllEmployee() {
