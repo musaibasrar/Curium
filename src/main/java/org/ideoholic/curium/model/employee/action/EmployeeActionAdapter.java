@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.employee.action;
 
 import org.ideoholic.curium.model.employee.dto.EmployeeDto;
+import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,16 @@ public class EmployeeActionAdapter {
         employeeDto.setBranchCode(httpSession.getAttribute("branchcode").toString());
         ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString());
         return resultResponse.isSuccess();
+    }
+    public boolean viewDetailsEmployee() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+        ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = employeeService.viewDetailsEmployee();
+
+        request.setAttribute("stafflogin", viewDetailsEmployeeResponseDto.getEmployeeLogin());
+
+        httpSession.setAttribute("employee", viewDetailsEmployeeResponseDto.getEmployee());
+
+        return viewDetailsEmployeeResponseDto.isSuccess();
     }
 
 }
