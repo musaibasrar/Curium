@@ -46,7 +46,7 @@ public class EmployeeAction {
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String updateEmployee(MultipartHttpServletRequest request,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		request.setAttribute("id", new EmployeeService(request, response).updateEmployee(uploadedFiles));
+		request.setAttribute("id", employeeActionAdapter.updateEmployee(uploadedFiles));
 		return viewDetails();
 	}
 

@@ -22,4 +22,21 @@ public class EmployeeDto {
     private String bankIFSC;
     private String accNo;
     private String branchCode;
+    private String id;
+    private String teacherExternalId;
+    private String leavingdate;
+    private String employeephotoupdate;
+    private String employeedoc1update;
+    private String employeedoc2update;
+    private String employeedoc3update;
+    private String employeedoc4update;
+    private String employeedoc5update;
+    private String employeedoc1delete;
+    private String employeedoc2delete;
+    private String employeedoc3delete;
+    private String employeedoc4delete;
+    private String employeedoc5delete;
+    private String branchId;
+
+
 }
