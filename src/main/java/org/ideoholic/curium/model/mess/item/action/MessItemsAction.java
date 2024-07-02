@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MessItemsAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
+	@Autowired
+	private MessItemActionAdapter messItemActionAdapter;
 
 	@PostMapping("/printStockReceivedReport")
 	public String printStockReceivedReport() {
@@ -35,13 +37,13 @@ public class MessItemsAction {
 
 	@PostMapping("/generateStockReceivedReport")
 	public String generateStockReceivedReport() {
-		new MessItemsService(request, response).generateStockReceivedReport();
+		messItemActionAdapter.generateStockReceivedReport();
 		return "stockreceivedreport";
 	}
 
 	@GetMapping("/receiveStock")
 	public String receiveStockReport() {
-		new MessItemsService(request, response).receiveStockReport();
+		messItemActionAdapter.receiveStockReport();
 		return "stockreceivedreport";
 	}
 
