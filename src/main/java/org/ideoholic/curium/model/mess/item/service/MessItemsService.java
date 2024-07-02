@@ -19,6 +19,8 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.StockReportDto;
+import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
@@ -29,6 +31,7 @@ import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 import org.ideoholic.curium.util.StockIssuance;
 
 public class MessItemsService {
@@ -516,25 +519,27 @@ public class MessItemsService {
 		}
 
 
-		public void receiveStockReport() {
-			
+		public ResultResponse receiveStockReport() {
+			ResultResponse result = ResultResponse.builder().build();
+
 			new MessSuppliersService(request, response).viewSuppliersDetails();
 			
 			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
-			request.setAttribute("itemslist", messItemsList);
-		
-		
-		
+			result.setResultList(messItemsList);
+			result.setSuccess(true);
+
+			return result;
 		}
 
 
-		public void generateStockReceivedReport() {
-			
-			String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
-			String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-			String supplierid = request.getParameter("supplier");
+		public StockReportResponseDto generateStockReceivedReport(StockReportDto dto) {
+			StockReportResponseDto responseDto = StockReportResponseDto.builder().build();
+
+			String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+			String toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+			String supplierid = dto.getSupplierId();
 			String[] suppNameId = supplierid.split(":");
-			String item = request.getParameter("itemname");
+			String item = dto.getItem();
 			String[] itemNameId = item.split(":");
 			String queryMain = "From MessStockEntry ms where ms.status != 'CANCELLED' and ms.messinvoicedetails.entrydate between '"+fromDate+"' and '"+toDate+"' ";
 			String subQuery = "";
@@ -542,26 +547,30 @@ public class MessItemsService {
 					
 			if(!"ALL".equalsIgnoreCase(suppNameId[0])) {
 				subQuery = "and ms.messinvoicedetails.suppliersid = '"+Integer.parseInt(suppNameId[0])+"'";
-				httpSession.setAttribute("supplierselected", "Supplier :&nbsp;"+suppNameId[1]);
+				responseDto.setSupplierSelected("Supplier :&nbsp;"+suppNameId[1]);
+
 			}else {
-				httpSession.setAttribute("supplierselected", "");
+				responseDto.setSupplierSelected("");
 			}
 			
 			if(!itemNameId[0].isEmpty()) {
 				subQuery = subQuery + "and ms.itemid = '"+itemNameId[0]+"'";
-				httpSession.setAttribute("itemselected", "Item:&nbsp;"+itemNameId[1]);
+				responseDto.setItemSelected("Item:&nbsp;"+itemNameId[1]);
 			}else {
-				httpSession.setAttribute("itemselected", "");
+				responseDto.setItemSelected("");
 			}
 			
 			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getStockReceivedDetailsReport(queryMain+subQuery);
-			
-			httpSession.setAttribute("messstockentrylist", messStockEntryList);
-			httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
-			httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+
+			responseDto.setMessStockEntryList(messStockEntryList);
+			responseDto.setTransactionFromDateSelected("From:"+dto.getFromDate());
+			responseDto.setTransactionToDateSelected("To:"+dto.getToDate());
 			
 			receiveStockReport();
-			
+
+			responseDto.setSuccess(true);
+
+			return responseDto;
 		}
 
 
