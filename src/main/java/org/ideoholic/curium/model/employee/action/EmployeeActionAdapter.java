@@ -97,8 +97,6 @@ public class EmployeeActionAdapter {
         employeeDto.setEmployeedoc4delete(request.getParameter("employeedoc4delete"));
         employeeDto.setEmployeedoc5delete(request.getParameter("employeedoc5delete"));
 
-        employee = new EmployeeDAO().update(employee);
-
         String empId = employee.getTid().toString();
         return empId;
 
