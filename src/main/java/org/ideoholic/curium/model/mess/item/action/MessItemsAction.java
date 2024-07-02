@@ -61,32 +61,32 @@ public class MessItemsAction {
 
 	@GetMapping("/issuanceStock")
 	public String issuanceStock() {
-		new MessItemsService(request, response).getIssuanceStock();
+		messItemActionAdapter.getIssuanceStock();
 		new StudentService(request, response).viewAllStudentsParents();
 		return "stockissuancereport";
 	}
 
 	@PostMapping("/printBatchStockAvailability")
 	public String printBatchStockAvailability() {
-		new MessItemsService(request, response).getBatchStock();
+		messItemActionAdapter.getBatchStock();
 		return "printbatchstock";
 	}
 
 	@GetMapping("/batchStock")
 	public String batchStock() {
-		new MessItemsService(request, response).getBatchStock();
+		messItemActionAdapter.getBatchStock();
 		return "batchstock";
 	}
 
 	@PostMapping("/printStockAvailability")
 	public String printStockAvailability() {
-		new MessItemsService(request, response).getCurrentStock();
+		messItemActionAdapter.getCurrentStock();
 		return "printcurrentstock";
 	}
 
 	@GetMapping("/currentStock")
 	public String currentStock() {
-		new MessItemsService(request, response).getCurrentStock();
+		messItemActionAdapter.getCurrentStock();
 		return "currentstock";
 	}
 

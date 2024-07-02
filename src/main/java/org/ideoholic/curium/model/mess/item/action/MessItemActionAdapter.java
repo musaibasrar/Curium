@@ -50,4 +50,25 @@ public class MessItemActionAdapter {
         ResultResponse resultResponse = messItemsService.receiveStockReport();
         request.setAttribute("itemslist", resultResponse.getResultList());
     }
+
+    public void getIssuanceStock() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ResultResponse resultResponse = messItemsService.getIssuanceStock();
+        request.setAttribute("itemslist", resultResponse.getResultList());
+    }
+
+    public void getBatchStock() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ResultResponse resultResponse = messItemsService.getBatchStock();
+        request.setAttribute("messstockentrylist", resultResponse.getResultList());
+    }
+
+    public void getCurrentStock() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ResultResponse resultResponse = messItemsService.getCurrentStock();
+        request.setAttribute("currentstocklist", resultResponse.getResultList());
+    }
 }

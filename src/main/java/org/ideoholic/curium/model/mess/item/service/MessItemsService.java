@@ -367,25 +367,36 @@ public class MessItemsService {
 		}
 
 
-		public void getCurrentStock() {
+		public ResultResponse getCurrentStock() {
+			ResultResponse result = ResultResponse.builder().build();
+
 			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStockAvailability();
-			
-			request.setAttribute("currentstocklist", messStockAvailability);
+			result.setResultList(messStockAvailability);
+			result.setSuccess(true);
+
+			return result;
 		}
 
 
-		public void getBatchStock() {
+		public ResultResponse getBatchStock() {
+			ResultResponse result = ResultResponse.builder().build();
+
 			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getItemsStockEntry();
-			request.setAttribute("messstockentrylist", messStockEntryList);
-			
+			result.setResultList(messStockEntryList);
+			result.setSuccess(true);
+
+			return result;
 		}
 
 
-		public void getIssuanceStock() {
+		public ResultResponse getIssuanceStock() {
+			ResultResponse result = ResultResponse.builder().build();
 			
 			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
-			request.setAttribute("itemslist", messItemsList);
-			
+			result.setResultList(messItemsList);
+			result.setSuccess(true);
+
+			return result;
 		}
 
 
