@@ -27,6 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
+import org.ideoholic.curium.model.documents.dto.CharacterDto;
+import org.ideoholic.curium.model.documents.dto.CharacterResponseDto;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
@@ -794,9 +796,11 @@ public class DocumentService {
 
 	}	
 	
-	public void printCharacterCertificate() {
-		String character= request.getParameter("characterstudent");
-		request.setAttribute("character", character);
+	public CharacterResponseDto printCharacterCertificate(CharacterDto characterDto) {
+		CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+		String character= characterDto.getCharacterStudent();
+		characterResponseDto.setCharacter(character);
+		return characterResponseDto;
 	}
 
 

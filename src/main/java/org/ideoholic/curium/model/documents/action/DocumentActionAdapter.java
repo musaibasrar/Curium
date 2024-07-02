@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.documents.dto.CharacterDto;
+import org.ideoholic.curium.model.documents.dto.CharacterResponseDto;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
@@ -198,6 +200,14 @@ public class DocumentActionAdapter {
 	    	return "false";
 	    }
 	    
+	}
+
+	public void printCharacterCertificate() {
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
+		CharacterDto characterDto = new CharacterDto();
+		characterDto.setCharacterStudent(request.getParameter("characterstudent"));
+		CharacterResponseDto characterResponseDto = documentService.printCharacterCertificate(characterDto);
+		request.setAttribute("character", characterResponseDto.getCharacter());
 	}
 
 }
