@@ -203,7 +203,7 @@ public class DocumentAction {
 	
 	@PostMapping("/printCharacterCertificate")
 	public String printCharacterCertificate() {
-		new DocumentService(request, response, standardActionAdapter).printCharacterCertificate();
+		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
 }
