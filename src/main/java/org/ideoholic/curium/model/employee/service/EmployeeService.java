@@ -190,7 +190,7 @@ public class EmployeeService {
 	        return viewDetailsEmployeeResponseDto;
 	}
 
-	public String updateEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto) {
+	public Teacher updateEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto) {
 		Teacher employee = new Teacher();
 		String id = "";
 		int employeeId = 0;
@@ -355,9 +355,8 @@ public class EmployeeService {
 		}
 		
 		employee = new EmployeeDAO().update(employee);
-				
-        String empId = employee.getTid().toString();
-        return empId;
+
+        return employee;
 	}
 
 	public void deleteMultiple() {

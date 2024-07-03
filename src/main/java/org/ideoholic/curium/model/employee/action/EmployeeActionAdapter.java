@@ -62,7 +62,6 @@ public class EmployeeActionAdapter {
     }
     public String updateEmployee(MultipartFile[] listOfFiles) {
         EmployeeService employeeService = new EmployeeService(request,response);
-        Teacher employee = new Teacher();
 
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(request.getParameter("id"));
@@ -97,8 +96,9 @@ public class EmployeeActionAdapter {
         employeeDto.setEmployeedoc4delete(request.getParameter("employeedoc4delete"));
         employeeDto.setEmployeedoc5delete(request.getParameter("employeedoc5delete"));
 
-        String empId = employee.getTid().toString();
-        return empId;
+        Teacher employee = employeeService.updateEmployee(listOfFiles,employeeDto);
+
+        return employee.getTid().toString();
 
     }
 
