@@ -68,7 +68,7 @@ public class EmployeeAction {
 
 	@RequestMapping(value = "/ViewAllEmployee", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewEmployee() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "viewAllEmployee";
 	}
 
