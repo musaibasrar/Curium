@@ -23,9 +23,12 @@ public class YearActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private YearService yearService;
 
 	public boolean saveYear() {
-		YearService yearService = new YearService(request, response);
+		//YearService yearService = new YearService(request, response);
 
 		CurrentAcademicYearDto currentacademicyeardto = new CurrentAcademicYearDto();
 		currentacademicyeardto.setCurrentacademicyear(request.getParameter("academicyear"));
@@ -40,13 +43,13 @@ public class YearActionAdapter {
 	}
 
 	public void updateYear() {
-		YearService yearService = new YearService(request, response);
+		//YearService yearService = new YearService(request, response);
 		CurrentAcademicYearResponseDto currentacademicyear = yearService.updateYear();
 		request.setAttribute("currentyear", currentacademicyear.getCurrentacademicyear());
 	}
 	
 	public boolean getYear() {
-		YearService yearService = new YearService(request, response);
+		//YearService yearService = new YearService(request, response);
 		Currentacademicyear currentYear = yearService.getYear();
 		if(currentYear == null) {
 			return false;

@@ -17,12 +17,6 @@ public class YearService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 
-	public YearService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
 	public ResultResponse saveYear(CurrentAcademicYearDto currentAcademicYearDto) {
 		ResultResponse result = ResultResponse.builder().build();
 		String errorService = null;
