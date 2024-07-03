@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.mess.item.action;
 
+import org.ideoholic.curium.model.mess.item.dto.ItemDetailsDto;
+import org.ideoholic.curium.model.mess.item.dto.ItemDetailsResponseDto;
 import org.ideoholic.curium.model.mess.item.dto.StockReportDto;
 import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
@@ -70,5 +72,31 @@ public class MessItemActionAdapter {
 
         ResultResponse resultResponse = messItemsService.getCurrentStock();
         request.setAttribute("currentstocklist", resultResponse.getResultList());
+    }
+
+    public void addItemDetails() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ItemDetailsDto dto = new ItemDetailsDto();
+        dto.setItemName(request.getParameter("itemname"));
+        dto.setUnitOfMeasure(request.getParameter("unitofmeasure"));
+        dto.setMinStock(request.getParameter("minstock"));
+
+        ItemDetailsResponseDto responseDto = messItemsService.addItemDetails(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsave", responseDto.isItemSave());
+        request.setAttribute("itemname", responseDto.getItemName());
+
+    }
+
+    public String viewItemDetails() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ResultResponse resultResponse = messItemsService.viewItemDetails(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("messstockavailabilitylist", resultResponse.getResultList());
+
+        if(resultResponse.isSuccess()){
+            return "additems";
+        }
+        else return "error";
     }
 }

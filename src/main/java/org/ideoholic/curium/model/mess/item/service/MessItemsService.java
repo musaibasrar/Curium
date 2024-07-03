@@ -18,9 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
-import org.ideoholic.curium.model.mess.item.dto.MessItems;
-import org.ideoholic.curium.model.mess.item.dto.StockReportDto;
-import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
+import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
@@ -49,48 +47,51 @@ public class MessItemsService {
 	}
 
 
-	public String viewItemDetails() {
-		
+	public ResultResponse viewItemDetails(String branchId) {
+
+		ResultResponse result = ResultResponse.builder().success(false).build();
+
 		List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
 			 	messStockAvailabilityList = new MessItemsDAO().getItemsStockAvailability(); 
 		 }
-		 
-		 request.setAttribute("messstockavailabilitylist", messStockAvailabilityList);
-		 
-		return "additems";
+		 result.setResultList(messStockAvailabilityList);
+		 result.setSuccess(true);
+		return result;
 	}
 
 
-	public String addItemDetails() {
+	public ItemDetailsResponseDto addItemDetails(ItemDetailsDto dto, String branchId, String userId) {
 		
 		MessItems messItems = new MessItems();
 		MessStockAvailability messStockAvailability = new MessStockAvailability();
-		String result = "false";
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+
+		ItemDetailsResponseDto result = ItemDetailsResponseDto.builder().build();
+
+		 if(branchId!=null){
              
-			 messItems.setName(DataUtil.emptyString(request.getParameter("itemname")));
-			 messItems.setExternalid(DataUtil.emptyString(request.getParameter("itemname")));
-			 messItems.setUnitofmeasure(DataUtil.emptyString(request.getParameter("unitofmeasure")));
-			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
-			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
-			 messItems.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			 messItems.setName(DataUtil.emptyString(dto.getItemName()));
+			 messItems.setExternalid(DataUtil.emptyString(dto.getItemName()));
+			 messItems.setUnitofmeasure(DataUtil.emptyString(dto.getUnitOfMeasure()));
+			 messItems.setBranchid(Integer.parseInt(branchId));
+			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId)));
+			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(branchId)));
+			 messItems.setUserid(Integer.parseInt(userId));
 			 
 			 messStockAvailability.setAvailablestock(0.0f);
-			 messStockAvailability.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 messStockAvailability.setMinstock(DataUtil.parseInt(request.getParameter("minstock")));
-			 messStockAvailability.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			 messStockAvailability.setBranchid(Integer.parseInt(branchId));
+			 messStockAvailability.setMinstock(DataUtil.parseInt(dto.getMinStock()));
+			 messStockAvailability.setUserid(Integer.parseInt(userId));
 			 
 			 messStockAvailability.setMessitems(messItems);
 			 
 			 messItems= new MessItemsDAO().addNewItem(messStockAvailability);
 			 
 			 if(messItems.getId()!=null) {
-				 request.setAttribute("itemsave", true);
-				 request.setAttribute("itemname", messItems.getName());
-				 result = "true";
+				 result.setItemSave(true);
+				 result.setItemName(messItems.getName());
+				 result.setSuccess(true);
 			 }
 		 }
 		return result;

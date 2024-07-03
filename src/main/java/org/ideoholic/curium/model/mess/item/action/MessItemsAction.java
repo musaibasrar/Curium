@@ -95,7 +95,7 @@ public class MessItemsAction {
 
 		new MessItemsService(request, response).cancelPurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
-		new MessItemsService(request, response).viewItemDetails();
+		messItemActionAdapter.viewItemDetails();
 		new MessItemsService(request, response).getInvoiceDetails();
 		return "purchase";
 	}
@@ -104,7 +104,7 @@ public class MessItemsAction {
 	public String savePurchase() {
 		new MessItemsService(request, response).savePurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
-		new MessItemsService(request, response).viewItemDetails();
+		messItemActionAdapter.viewItemDetails();
 		new MessItemsService(request, response).getInvoiceDetails();
 		return "purchase";
 	}
@@ -124,19 +124,19 @@ public class MessItemsAction {
 
 	@GetMapping("/viewItems")
 	public String viewItems() {
-		return new MessItemsService(request, response).viewItemDetails();
+		return messItemActionAdapter.viewItemDetails();
 	}
 
 	@PostMapping("/addItems")
 	public String addItems() {
-		new MessItemsService(request, response).addItemDetails();
+		messItemActionAdapter.addItemDetails();
 		return viewItems();
 	}
 
 	@GetMapping("/purchaseItems")
 	public String purchaseItems() {
 		new MessSuppliersService(request, response).viewSuppliersDetails();
-		new MessItemsService(request, response).viewItemDetails();
+		messItemActionAdapter.viewItemDetails();
 		new MessItemsService(request, response).getInvoiceDetails();
 		return "purchase";
 	}

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
@@ -34,6 +35,8 @@ public class MessStockEntryAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	private MessItemActionAdapter messItemActionAdapter;
 
 	@GetMapping("/mrvDetails")
 	public void mrvDetails() {
@@ -65,19 +68,19 @@ public class MessStockEntryAction {
 
 	@GetMapping("/viewItems")
 	public String viewItems() {
-		return new MessItemsService(request, response).viewItemDetails();
+		return messItemActionAdapter.viewItemDetails();
 	}
 
 	@PostMapping("/addItems")
 	public String addItems() {
-		new MessItemsService(request, response).addItemDetails();
+		messItemActionAdapter.addItemDetails();
 		return viewItems();
 	}
 
 	@GetMapping("/purchaseItems")
 	public String purchaseItems() {
 		new MessSuppliersService(request, response).viewSuppliersDetails();
-		new MessItemsService(request, response).viewItemDetails();
+		messItemActionAdapter.viewItemDetails();
 		return "purchase";
 	}
 
