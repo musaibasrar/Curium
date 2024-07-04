@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.employee.action;
 
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -111,9 +110,9 @@ public class EmployeeActionAdapter {
     }
     public void deleteMultiple() {
         EmployeeService employeeService = new EmployeeService(request,response);
-        DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
-        deleteMultipleDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
-        employeeService.deleteMultiple(deleteMultipleDto);
+        EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+        employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+        employeeService.deleteMultiple(employeeIdsDto);
     }
 
 }

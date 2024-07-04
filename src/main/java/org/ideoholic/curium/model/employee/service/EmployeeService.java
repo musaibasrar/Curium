@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.employee.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -358,8 +357,8 @@ public class EmployeeService {
         return employee;
 	}
 
-	public void deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
-		 String[] employeeIds =deleteMultipleDto.getEmployeeIds();
+	public void deleteMultiple(EmployeeIdsDto employeeIdsDto) {
+		 String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		 if(employeeIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : employeeIds) {

@@ -3,6 +3,6 @@ package org.ideoholic.curium.model.employee.dto;
 import lombok.Data;
 
 @Data
-public class DeleteMultipleDto {
+public class EmployeeIdsDto {
 private String[] employeeIds;
 }
