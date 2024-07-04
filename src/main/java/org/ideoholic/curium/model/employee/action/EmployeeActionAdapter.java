@@ -1,10 +1,6 @@
 package org.ideoholic.curium.model.employee.action;
 
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.EmployeeDto;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
-import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +107,12 @@ public class EmployeeActionAdapter {
 
 
         return viewAllEmployeeResponseDto.isSuccess();
+    }
+    public void deleteMultiple() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+        EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+        employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+        employeeService.deleteMultiple(employeeIdsDto);
     }
 
 }
