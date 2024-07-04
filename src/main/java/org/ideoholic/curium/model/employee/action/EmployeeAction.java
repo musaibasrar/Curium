@@ -23,7 +23,7 @@ public class EmployeeAction {
 	@Autowired
 	private HttpServletResponse response;
 	@Autowired
-	 EmployeeActionAdapter employeeActionAdapter;
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	@PostMapping("/searchEmployee")
 	public String searchEmployee() {

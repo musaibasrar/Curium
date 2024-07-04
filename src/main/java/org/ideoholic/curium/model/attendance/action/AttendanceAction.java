@@ -39,12 +39,12 @@ public class AttendanceAction {
 	HttpSession httpSession;
 
 	@Autowired
-	AttendanceActionAdapter attendanceActionAdapter;
+	private AttendanceActionAdapter attendanceActionAdapter;
 
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 	@Autowired
-	EmployeeActionAdapter employeeActionAdapter;
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	String errorPage = "error";
 

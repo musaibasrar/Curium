@@ -29,7 +29,7 @@ public class HrAction {
 	@Autowired
 	HttpSession httpSession;
 	@Autowired
-	EmployeeActionAdapter employeeActionAdapter;
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	String error = "error";
 	
