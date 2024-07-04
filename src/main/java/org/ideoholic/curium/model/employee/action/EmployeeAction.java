@@ -33,7 +33,7 @@ public class EmployeeAction {
 
 	@GetMapping("/addEmployeePage")
 	public String addEmployeePage() {
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		return "addEmployee";
 	}
 
@@ -53,7 +53,7 @@ public class EmployeeAction {
 	@PostMapping("/updateEmployeeDetails")
 	public String updateEmployeeDetails() {
 		if (employeeActionAdapter.viewDetailsEmployee()) {
-			new EmployeeService(request, response).viewAllRelations();
+			employeeActionAdapter.viewAllRelations();
 			return "employee_update";
 		} else {
 			return "viewAll";

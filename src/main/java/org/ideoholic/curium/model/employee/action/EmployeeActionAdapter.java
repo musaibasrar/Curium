@@ -114,5 +114,12 @@ public class EmployeeActionAdapter {
         employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
         employeeService.deleteMultiple(employeeIdsDto);
     }
+    public void viewAllRelations() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+        ViewAllRelationsResponseDto viewAllRelationsResponseDto = employeeService.viewAllRelations(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("listDepartment", viewAllRelationsResponseDto.getListDepartment());
+        httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
+
+    }
 
 }

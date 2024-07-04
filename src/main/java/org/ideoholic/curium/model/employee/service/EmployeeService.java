@@ -371,14 +371,15 @@ public class EmployeeService {
 		 }
 	}
 
-	public void viewAllRelations() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listDepartment", listDepartment);
-	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listPosition", listPosition);
+	public ViewAllRelationsResponseDto viewAllRelations(String branchId) {
+		ViewAllRelationsResponseDto viewAllRelationsResponseDto = new ViewAllRelationsResponseDto();
+		if(branchId!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
+	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListPosition(listPosition);
 		}
+		return viewAllRelationsResponseDto;
 	}
 
 	public void searchEmployee() {
