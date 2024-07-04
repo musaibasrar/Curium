@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.std.action.StandardAction;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -42,6 +43,8 @@ public class AttendanceAction {
 
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	String errorPage = "error";
 
@@ -250,7 +253,7 @@ public class AttendanceAction {
 	@PostMapping("/searchEmployees")
 	public String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		attendanceActionAdapter.viewAllHolidays();
 		attendanceActionAdapter.viewAllWeekOffs();
 		return "attendancemaster";
@@ -289,10 +292,10 @@ public class AttendanceAction {
 
 	@GetMapping("/attendanceConfiguration")
 	public String attendanceConfiguration() {
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		attendanceActionAdapter.viewAllHolidays();
 		attendanceActionAdapter.viewAllWeekOffs();
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "attendancemaster";
 	}
 }

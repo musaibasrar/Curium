@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class HrAction {
 	
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	String error = "error";
 	
@@ -77,7 +80,7 @@ public class HrAction {
 
 	@RequestMapping(value= "/deletePayHead", method= { RequestMethod.GET, RequestMethod.POST })
 	public String deletePayHead() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "deletepayhead";
 	}
 	
@@ -120,14 +123,14 @@ public class HrAction {
 	@PostMapping("/searchEmployeesForProcessSalary")
 	public String searchEmployeesForProcessSalary() {
 		new EmployeeService(request, response).searchEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		return "processsalary";
 	}
 
 	@GetMapping("/processSalary")
 	public String processSalary() {
-		new EmployeeService(request, response).viewAllRelations();
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.viewAllRelations();
+		employeeActionAdapter.ViewAllEmployee();
 		return "processsalary";
 	}
 
@@ -216,7 +219,7 @@ public class HrAction {
 
 	@GetMapping("/advanceSalary")
 	public String advanceSalary() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "advancesalary";
 	}
 
@@ -249,14 +252,14 @@ public class HrAction {
 	@PostMapping("/searchEmployeesForbasicpay")
 	public String searchEmployeesForbasicpay() {
 		new EmployeeService(request, response).searchEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		return "basicpaysettings";
 	}
 
 	@GetMapping("/basicPaySettings")
 	public String basicPaySettings() {
-		new EmployeeService(request, response).ViewAllEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.ViewAllEmployee();
+		employeeActionAdapter.viewAllRelations();
 		return "basicpaysettings";
 	}
 
@@ -272,14 +275,14 @@ public class HrAction {
 	@PostMapping("/searchEmployeesForPayHead")
 	public String searchEmployeesForPayHead() {
 		new EmployeeService(request, response).searchEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		return "addpayhead";
 	}
 
 	@RequestMapping(value="/addPayHead", method= { RequestMethod.GET, RequestMethod.POST })
 	public String addPayHeadStaff() {
-		new EmployeeService(request, response).ViewAllEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.ViewAllEmployee();
+		employeeActionAdapter.viewAllRelations();
 		new HrService(request, response).payHead();
 		return "addpayhead";
 	}
@@ -327,15 +330,15 @@ public class HrAction {
 	@GetMapping("/searchEmployees")
 	public String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		new HrService(request, response).leaveType();
 		return "assignleave";
 	}
 
 	@GetMapping("/assignLeave")
 	public String assignLeave() {
-		new EmployeeService(request, response).viewAllRelations();
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.viewAllRelations();
+		employeeActionAdapter.ViewAllEmployee();
 		new HrService(request, response).leaveType();
 		return "assignleave";
 	}
