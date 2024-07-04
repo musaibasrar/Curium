@@ -1,8 +1,5 @@
 package org.ideoholic.curium.model.academicyear.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
@@ -23,13 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/v1/yearProcess")
 public class YearApiAction {
-
 		
 	@Autowired
 	private YearService yearService;
 
-	
-	
 	@PostMapping("/saveYear")
 	public ResponseEntity<ResultResponse> saveYear(@RequestBody CurrentAcademicYearDto currentAcademicYearDto) {
 		log.debug("Action is viewAllExpenses");
@@ -47,6 +41,4 @@ public class YearApiAction {
 		log.debug("Action is addExpenses");
 		return ResponseEntity.ok(yearService.updateYear());
 	}
-
-	
 }
