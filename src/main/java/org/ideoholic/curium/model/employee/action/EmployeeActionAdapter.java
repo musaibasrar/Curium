@@ -121,5 +121,15 @@ public class EmployeeActionAdapter {
         httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
 
     }
+    public void searchEmployee() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        SearchEmployeeDto searchEmployeeDto = new SearchEmployeeDto();
+        searchEmployeeDto.setStaffName(request.getParameter("staffName"));
+        searchEmployeeDto.setStaffDepartment(request.getParameter("staffDepartment"));
+        SearchEmployeeResponseDto searchEmployeeResponseDto = employeeService.searchEmployee(searchEmployeeDto,httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("searchedemployeeList", searchEmployeeResponseDto.getSearchedEmployeeList());
+    }
 
 }

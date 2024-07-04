@@ -27,7 +27,7 @@ public class EmployeeAction {
 
 	@PostMapping("/searchEmployee")
 	public String searchEmployee() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		return "";
 	}
 

@@ -252,7 +252,7 @@ public class AttendanceAction {
 
 	@PostMapping("/searchEmployees")
 	public String searchEmployees() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
 		attendanceActionAdapter.viewAllHolidays();
 		attendanceActionAdapter.viewAllWeekOffs();
