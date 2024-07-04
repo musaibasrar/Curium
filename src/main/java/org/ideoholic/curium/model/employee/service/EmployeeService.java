@@ -13,10 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.EmployeeDto;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
-import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
@@ -361,8 +358,8 @@ public class EmployeeService {
         return employee;
 	}
 
-	public void deleteMultiple() {
-		 String[] employeeIds = request.getParameterValues("employeeIDs");
+	public void deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
+		 String[] employeeIds =deleteMultipleDto.getEmployeeIds();
 		 if(employeeIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : employeeIds) {
