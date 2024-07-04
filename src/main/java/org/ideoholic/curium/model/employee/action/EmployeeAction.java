@@ -39,7 +39,7 @@ public class EmployeeAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new EmployeeService(request, response).deleteMultiple();
+		employeeActionAdapter.deleteMultiple();
 		return viewEmployee();
 	}
 
