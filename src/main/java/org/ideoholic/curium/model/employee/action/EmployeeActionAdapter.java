@@ -105,11 +105,11 @@ public class EmployeeActionAdapter {
     public boolean ViewAllEmployee() {
         EmployeeService employeeService = new EmployeeService(request,response);
 
-        ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = new ViewAllEmployeeResponseDto();
+        ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("employeeList", viewAllEmployeeResponseDto.getEmployeeList());
         httpSession.setAttribute("employeeListProcessSalary", viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
 
-        employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
+
         return viewAllEmployeeResponseDto.isSuccess();
     }
 
