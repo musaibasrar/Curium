@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.EmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
@@ -154,19 +155,20 @@ public class EmployeeService {
 		
 		return ResultResponse.builder().build();
 	}
-
-	public boolean ViewAllEmployee() {
+//TODO: Naming Convention error in this method, method name should start from small alphabet.
+	public ViewAllEmployeeResponseDto ViewAllEmployee(String branchId) {
+		ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = new ViewAllEmployeeResponseDto();
 		
 		boolean result = false;
     try {
-    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        httpSession.setAttribute("employeeList", list);
-        httpSession.setAttribute("employeeListProcessSalary", list);
-        result = true;
+    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+        viewAllEmployeeResponseDto.setEmployeeList(list);
+        viewAllEmployeeResponseDto.setEmployeeListProcessSalary(list);
+        viewAllEmployeeResponseDto.setSuccess(true);
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return result;
+    return viewAllEmployeeResponseDto;
 }
 
 	public ViewDetailsEmployeeResponseDto viewDetailsEmployee() {
@@ -400,7 +402,7 @@ public class EmployeeService {
 		
 		request.setAttribute("searchedemployeeList", employeeList);
 		
-		ViewAllEmployee();
+		ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
 	}
 
 	public void basicpayEmployees() {

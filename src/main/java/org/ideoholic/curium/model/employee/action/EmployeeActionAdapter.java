@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.employee.action;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.EmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -100,6 +101,16 @@ public class EmployeeActionAdapter {
 
         return employee.getTid().toString();
 
+    }
+    public boolean ViewAllEmployee() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("employeeList", viewAllEmployeeResponseDto.getEmployeeList());
+        httpSession.setAttribute("employeeListProcessSalary", viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
+
+
+        return viewAllEmployeeResponseDto.isSuccess();
     }
 
 }
