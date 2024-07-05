@@ -776,6 +776,23 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Student Type &nbsp;</td>
+							<td width="90%"><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 120px;">
+										<option selected>Active</option>
+										<option>InActive</option>
+								</select>
+
+							</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 
 						<tr>
 

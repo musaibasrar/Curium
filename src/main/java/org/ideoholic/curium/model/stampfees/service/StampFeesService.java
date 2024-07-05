@@ -466,7 +466,7 @@ public class StampFeesService {
         if(httpSession.getAttribute(BRANCHID)!=null){
         	String className = request.getParameter("classsearch");
         	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
-
+        	String studentType = request.getParameter("studenttype");
             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
             httpSession.setAttribute("feescategory", feecategoryList);
 
@@ -476,7 +476,7 @@ public class StampFeesService {
 
     		List<Parents> searchStudentList = new ArrayList<Parents>();
 
-    		if(httpSession.getAttribute(BRANCHID)!=null){
+    		if(httpSession.getAttribute(BRANCHID)!=null && studentType.equalsIgnoreCase("Active")){
 
     		String queryMain = "From Parents as parents where";
     		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
@@ -514,6 +514,45 @@ public class StampFeesService {
     		}
 
     	}
+    		
+    		if(httpSession.getAttribute(BRANCHID)!=null && studentType.equalsIgnoreCase("InActive")){
+
+        		String queryMain = "From Parents as parents where";
+        		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+        		String addClass = request.getParameter("classsearch");
+        		String addSec = request.getParameter("secsearch");
+        		String conClassStudying = "";
+
+        		if (!addClass.equalsIgnoreCase("")) {
+        			conClassStudying = addClass+"--"+"%";
+        		}
+        		if (!addSec.equalsIgnoreCase("")) {
+        			conClassStudying = addClass;
+        			conClassStudying = conClassStudying+"--"+addSec+"%";
+        		}
+
+        		String classStudying = DataUtil.emptyString(conClassStudying);
+        		String querySub = "";
+
+        		if (!studentname.equalsIgnoreCase("")) {
+        			querySub = " parents.Student.name like '%" + studentname + "%' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+        		}
+
+        		if (!classStudying.equalsIgnoreCase("")
+        				&& !querySub.equalsIgnoreCase("")) {
+        			querySub = querySub + " AND parents.Student.classstudying like '"
+        					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1)";
+        		} else if (!classStudying.equalsIgnoreCase("")) {
+        			querySub = querySub + " parents.Student.classstudying like '"
+        					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+        		}
+
+        		if(!"".equalsIgnoreCase(querySub)) {
+        			queryMain = queryMain + querySub;
+        			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+        		}
+
+        	}
     		request.setAttribute("searchStudentList", searchStudentList);
 
 
