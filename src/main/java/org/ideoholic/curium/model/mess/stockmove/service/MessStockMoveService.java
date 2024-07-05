@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
@@ -30,6 +31,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MessStockMoveService {
 
@@ -38,6 +40,9 @@ public class MessStockMoveService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+
+	@Autowired
+	private MessItemActionAdapter messItemActionAdapter;
 	
 	public MessStockMoveService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -347,7 +352,7 @@ public class MessStockMoveService {
 					request.setAttribute("itemsissued", result);
 				}
 	
-					new MessItemsService(request, response).viewItemDetails();
+					messItemActionAdapter.viewItemDetails();
 					
 					
 					return result;
@@ -452,7 +457,7 @@ public class MessStockMoveService {
 						//important result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
 					}
 		
-						new MessItemsService(request, response).viewItemDetails();
+						messItemActionAdapter.viewItemDetails();
 						request.setAttribute("itemsissued", result);
 				}	
 						return result;
