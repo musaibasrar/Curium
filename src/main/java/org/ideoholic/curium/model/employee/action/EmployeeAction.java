@@ -33,27 +33,27 @@ public class EmployeeAction {
 
 	@GetMapping("/addEmployeePage")
 	public String addEmployeePage() {
-		new EmployeeService(request, response).viewAllRelations();
+		employeeActionAdapter.viewAllRelations();
 		return "addEmployee";
 	}
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new EmployeeService(request, response).deleteMultiple();
+		employeeActionAdapter.deleteMultiple();
 		return viewEmployee();
 	}
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String updateEmployee(MultipartHttpServletRequest request,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		request.setAttribute("id", new EmployeeService(request, response).updateEmployee(uploadedFiles));
+		request.setAttribute("id", employeeActionAdapter.updateEmployee(uploadedFiles));
 		return viewDetails();
 	}
 
 	@PostMapping("/updateEmployeeDetails")
 	public String updateEmployeeDetails() {
 		if (employeeActionAdapter.viewDetailsEmployee()) {
-			new EmployeeService(request, response).viewAllRelations();
+			employeeActionAdapter.viewAllRelations();
 			return "employee_update";
 		} else {
 			return "viewAll";
@@ -68,7 +68,7 @@ public class EmployeeAction {
 
 	@RequestMapping(value = "/ViewAllEmployee", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewEmployee() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "viewAllEmployee";
 	}
 

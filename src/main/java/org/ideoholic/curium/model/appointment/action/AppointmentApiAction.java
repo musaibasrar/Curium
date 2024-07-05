@@ -17,6 +17,7 @@ import org.ideoholic.curium.model.appointment.dto.UpdateAppointmentDto;
 import org.ideoholic.curium.model.appointment.dto.ViewAllAppoinmentsResponseDto;
 import org.ideoholic.curium.model.appointment.dto.ViewAllAppointmentsDto;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -42,6 +43,8 @@ public class AppointmentApiAction {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	@PostMapping("/download")
 	private ResponseEntity<ResultResponse> download() {
@@ -109,7 +112,7 @@ public class AppointmentApiAction {
 		if (result.isSuccess()) {
 			// TODO: Need to fix this after migrating StudentService and EmployeeService
 			new StudentService(request, response).viewAllStudentsParents();
-			new EmployeeService(request, response).ViewAllEmployee();
+			employeeActionAdapter.ViewAllEmployee();
 			return ResponseEntity.ok(result);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);
