@@ -382,8 +382,8 @@ public class EmployeeService {
 		return viewAllRelationsResponseDto;
 	}
 
-	public SearchEmployeeResponseDto searchEmployee(SearchEmployeeDto searchEmployeeDto, String branchId) {
-		SearchEmployeeResponseDto searchEmployeeResponseDto = new SearchEmployeeResponseDto();
+	public EmployeeListDto searchEmployee(SearchEmployeeDto searchEmployeeDto, String branchId) {
+		EmployeeListDto employeeListDto = new EmployeeListDto();
 		String staffName = searchEmployeeDto.getStaffName();
 		String staffDepartment = searchEmployeeDto.getStaffDepartment();
 		List<Teacher> employeeList = new ArrayList<Teacher>();
@@ -398,11 +398,11 @@ public class EmployeeService {
 			}
 		}
 		
-		searchEmployeeResponseDto.setSearchedEmployeeList(employeeList);
+		employeeListDto.setEmployeeList(employeeList);
 		
 		ViewAllEmployee(branchId);
 
-		return searchEmployeeResponseDto;
+		return employeeListDto;
 	}
 
 	public void basicpayEmployees() {

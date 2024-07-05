@@ -5,7 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SearchEmployeeResponseDto {
-    private List<Teacher> searchedEmployeeList;
-
+public class EmployeeListDto {
+    private List<Teacher> employeeList;
 }
