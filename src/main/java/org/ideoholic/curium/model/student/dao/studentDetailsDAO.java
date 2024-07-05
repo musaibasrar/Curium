@@ -326,7 +326,7 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"' and branchid="+branchid+"");
+			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'  and branchid="+branchid+"");
 			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 			
 			if(ch!=null) {
@@ -340,13 +340,33 @@ public class studentDetailsDAO {
 						  sect = tempstudent[1];
 					 }
 					 
-					String hql = "UPDATE Student set classstudying = '"+ch.getUpperclass()+"--"+sect+"', promotedyear='"+promotedYear+"' WHERE sid = "+student.getSid()+"";
+					String hql = "UPDATE Student set classstudying = '"+ch.getUpperclass()+"--"+sect+"', promotedyear='"+promotedYear+"', branchid='"+ch.getBranchid()+"' WHERE sid = "+student.getSid()+"";
 					Query query = session.createQuery(hql);
 					query.executeUpdate();
 				}
 				
+			}else if(ch==null) {
+				
+				Query queryUpdateBranchClassHierarchy = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+				Classhierarchy chUpdateBranch = (Classhierarchy) queryUpdateBranchClassHierarchy.uniqueResult();
+				if(chUpdateBranch!=null) {
+				for (Student student : students) {
+					
+					 String[] tempstudent = student.getClassstudying().split(delimiter);
+					 String sect = "";
+					 
+					 if(tempstudent.length>=2){
+						  sect = tempstudent[1];
+					 }
+					 
+					String hqlUpdateBranch = "UPDATE Student set classstudying = '"+chUpdateBranch.getUpperclass()+"--"+sect+"', promotedyear='"+promotedYear+"', branchid='"+chUpdateBranch.getBranchid()+"' WHERE sid = "+student.getSid()+"";
+					Query queryUpdateBranch = session.createQuery(hqlUpdateBranch);
+					queryUpdateBranch.executeUpdate();
+				}
+				
+			
 			}
-	
+			}
 			transaction.commit();
 			result = true;
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
