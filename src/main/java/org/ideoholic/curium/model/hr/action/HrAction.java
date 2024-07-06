@@ -122,7 +122,7 @@ public class HrAction {
 
 	@PostMapping("/searchEmployeesForProcessSalary")
 	public String searchEmployeesForProcessSalary() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
 		return "processsalary";
 	}
@@ -251,7 +251,7 @@ public class HrAction {
 
 	@PostMapping("/searchEmployeesForbasicpay")
 	public String searchEmployeesForbasicpay() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
 		return "basicpaysettings";
 	}
@@ -274,7 +274,7 @@ public class HrAction {
 
 	@PostMapping("/searchEmployeesForPayHead")
 	public String searchEmployeesForPayHead() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
 		return "addpayhead";
 	}
@@ -329,7 +329,7 @@ public class HrAction {
 
 	@GetMapping("/searchEmployees")
 	public String searchEmployees() {
-		new EmployeeService(request, response).searchEmployee();
+		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
 		new HrService(request, response).leaveType();
 		return "assignleave";
