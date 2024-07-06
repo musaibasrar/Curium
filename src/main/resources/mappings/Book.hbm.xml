@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Feb, 2018 12:41:26 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.library.dto.Book" table="book">
+        <id name="bid" type="java.lang.Integer">
+            <column name="bid" />
+            <generator class="identity" />
+        </id>
+        <property name="bookname" type="string">
+            <column name="bookname" length="200" />
+        </property>
+         <property name="subject" type="string">
+            <column name="subject" length="200" />
+        </property>
+         <property name="author" type="string">
+            <column name="author" length="200" />
+        </property>
+        <property name="publisher" type="string">
+            <column name="publisher" length="200" />
+        </property>
+       
+        <property name="isbn" type="string">
+            <column name="isbn" length="200" />
+        </property>
+                <property name="status" type="string">
+            <column name="status" length="200" />
+        </property>
+        <property name="bookHolder" type="string">
+            <column name="bookHolder" length="100" />
+        </property>
+        <property name="shelf" type="string">
+            <column name="shelf" length="100"/>
+        </property>
+        <property name="startdate" type="date">
+            <column name="startdate"  />
+        </property>
+        <property name="enddate" type="date">
+            <column name="enddate"  />
+        </property>
+        <property name="noofdays" type="string">
+            <column name="noofdays" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>
