@@ -405,13 +405,15 @@ public class EmployeeService {
 		return employeeListDto;
 	}
 
-	public void basicpayEmployees() {
+	public BasicPayEmployeesDto basicpayEmployees(String branchId) {
+		BasicPayEmployeesDto basicPayEmployeesDto = new BasicPayEmployeesDto();
 		List<Paybasic> employeeList = new ArrayList<Paybasic>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId));
 		}
-		request.setAttribute("vieweditbasicpay", employeeList);
+		basicPayEmployeesDto.setVieweditbasicpay(employeeList);
+		return basicPayEmployeesDto;
 	}
 
 	public void viewDepartments() {

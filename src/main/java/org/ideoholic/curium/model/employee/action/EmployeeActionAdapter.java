@@ -131,5 +131,12 @@ public class EmployeeActionAdapter {
 
         request.setAttribute("searchedemployeeList", employeeListDto.getEmployeeList());
     }
+    public void basicpayEmployees() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        BasicPayEmployeesDto basicPayEmployeesDto = employeeService.basicpayEmployees(httpSession.getAttribute(BRANCHID).toString());
+        
+        request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getVieweditbasicpay());
+    }
 
 }
