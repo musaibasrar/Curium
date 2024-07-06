@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
@@ -28,6 +29,9 @@ public class PeriodService {
 
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -56,7 +60,7 @@ public class PeriodService {
 	                
 	                new SubjectDetailsService(request, response).readListOfSubjects();
 	                
-	                new EmployeeService(request, response).ViewAllEmployee();
+	                employeeActionAdapter.ViewAllEmployee();
 	                standardActionAdapter.viewClasses();
 	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	                request.setAttribute("periodmasterlist", periodMaster);

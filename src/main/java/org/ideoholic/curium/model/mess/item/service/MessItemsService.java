@@ -120,49 +120,53 @@ public class MessItemsService {
 	}
 
 
-	public void deleteMultipleItems() {
-        
-        String[] messIds = request.getParameterValues("messitemsids");
+	public ResultResponse deleteMultipleItems(MessIdsDto dto) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
+
+        String[] messIds = dto.getMessIds();
         if(messIds!=null){
-        
+
        List<Integer> ids = new ArrayList<Integer>();
        for (String id : messIds) {
            String[] messId = id.split(":");
            ids.add(Integer.valueOf(messId[0]));
-       		}
+       }
        boolean result = new MessItemsDAO().deleteItems(ids);
-       request.setAttribute("itemsdelete", result);
-        
+			resultResponse.setSuccess(result);
+
         }
+		resultResponse.setSuccess(true);
+		return resultResponse;
 	}
 
 
-	public void updateItems() {
-		
+	public ResultResponse updateItems(ItemsDto dto) {
+	ResultResponse resultResponse = ResultResponse.builder().build();
 
-		String[] messIds = request.getParameterValues("messitemsids");
-        
+		String[] messIds = dto.getMessIds();
+
         if(messIds!=null){
-            
-            List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
-            
+
+            List<MessStockAvailability> messStockAvailabilityList = new ArrayList<>();
+
             for(int i=0; i<messIds.length;i++) {
-            	
+
             	MessStockAvailability messStockAvailability = new MessStockAvailability();
             	MessItems messItems = new MessItems();
-            	
+
                 String itemId = messIds[i];
-                messItems.setName(request.getParameter("updateitemname_"+itemId));
-                messItems.setUnitofmeasure(request.getParameter("updateunitofmeasure_"+itemId));
+                messItems.setName(dto.getRequestParams().get("updateitemname_"+itemId));
+                messItems.setUnitofmeasure(dto.getRequestParams().get("updateunitofmeasure_"+itemId));
                 messItems.setId(DataUtil.parseInt(itemId));
                 messStockAvailability.setMessitems(messItems);
-                messStockAvailability.setMinstock(Integer.parseInt(request.getParameter("updateminstock_"+itemId)));
+                messStockAvailability.setMinstock(Integer.parseInt(dto.getRequestParams().get("updateminstock_"+itemId)));
                 messStockAvailabilityList.add(messStockAvailability);
             }
             boolean result = new MessItemsDAO().updateMultipleItems(messStockAvailabilityList);
-            request.setAttribute("itemsupdate", result);
+			resultResponse.setSuccess(result);
         }
-		
+		resultResponse.setSuccess(true);
+		return resultResponse;
 	}
 
 

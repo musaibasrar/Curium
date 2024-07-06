@@ -1,9 +1,6 @@
 package org.ideoholic.curium.model.mess.item.action;
 
-import org.ideoholic.curium.model.mess.item.dto.ItemDetailsDto;
-import org.ideoholic.curium.model.mess.item.dto.ItemDetailsResponseDto;
-import org.ideoholic.curium.model.mess.item.dto.StockReportDto;
-import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
+import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,9 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class MessItemActionAdapter {
@@ -98,5 +98,36 @@ public class MessItemActionAdapter {
             return "additems";
         }
         else return "error";
+    }
+
+    public void deleteMultipleItems() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        MessIdsDto dto = new MessIdsDto();
+        dto.setMessIds(request.getParameterValues("messitemsids"));
+
+        ResultResponse resultResponse = messItemsService.deleteMultipleItems(dto);
+        request.setAttribute("itemsdelete", resultResponse.isSuccess());
+    }
+
+    public void updateItems() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ItemsDto dto = new ItemsDto();
+        dto.setMessIds(request.getParameterValues("messitemidsz"));
+
+
+        Map<String, String> allRequestParameters = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String fieldName = enumeration.nextElement();
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameters.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameters);
+
+
+        ResultResponse resultResponse = messItemsService.updateItems(dto);
+        request.setAttribute("itemsupdate", resultResponse.isSuccess());
     }
 }

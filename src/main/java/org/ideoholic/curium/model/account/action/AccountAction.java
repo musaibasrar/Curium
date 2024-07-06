@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DataUtil;
@@ -39,6 +40,9 @@ public class AccountAction {
 	
 	@Autowired
 	private AccountActionAdapter accountActionAdapter;
+
+	@Autowired
+	private YearActionAdapter yearActionAdapter;
 	
 	public String ERRORPAGE = "error";
 
@@ -232,7 +236,7 @@ public class AccountAction {
     }
 
 	public String updateYear() {
-		 new YearService(request, response).updateYear();
+		 yearActionAdapter.updateYear();
 	            return "academicyear";
 	       
 		

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.periods.service.PeriodService;
@@ -37,6 +38,8 @@ public class PeriodAction {
 	HttpSession httpSession;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 	String url;
 	private String error ="error";
 
@@ -55,7 +58,7 @@ public class PeriodAction {
 	@GetMapping("/generateTeacherTimeTable")
 	public String generateTeacherTimeTable() {
 		
-		if(new EmployeeService(request, response).ViewAllEmployee()){
+		if(employeeActionAdapter.ViewAllEmployee()){
 			return "teachertimetable";
 		}
 		return error;
