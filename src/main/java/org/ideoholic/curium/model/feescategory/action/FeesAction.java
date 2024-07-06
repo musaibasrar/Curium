@@ -20,17 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/FeesProcess")
 public class FeesAction {
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private FeesActionAdapter feesActionAdapter;
 
 	@PostMapping("/applyConcession")
 	public String applyConcession() {
-		String studentId = new FeesService(request, response).applyConcession();
+		String studentId = feesActionAdapter.applyConcession();
 		return studentFeePage(studentId);
 	}
 
