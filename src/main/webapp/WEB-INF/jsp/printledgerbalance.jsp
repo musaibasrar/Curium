@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Print Voucher
+    Document   : Print General Ledger Report
     Created on : JAN 13 2021, 9:38 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Voucher</title>
+<title>Print Ledger Balances</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 22px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -233,9 +233,8 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br>
-				<label class="addressLineTwo">${branchaddress}</label><br>
-				<label class="addressLineTwo">${vouchertype} Report</label><br>
-				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Ledger Balances</label><br>
 				</td>
 			</tr>
 	</table>
@@ -252,68 +251,68 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No</th>
-						<th class="datath">Voucher No.</th>
-						<th class="datath">Date</th>
-						<th class="datath">Dr Account -- Cr Account</th>
-						<th class="datath">Narration</th>
-						<th class="datath">Amount</th>
-						
+						<th class="datath">Ledger</th>
+						<th class="datath">Debits</th>
+						<th class="datath">Credits</th>
 				       	
  				 </tr>
  			 </thead>
  		 
 			<tbody>
-			<fmt:setLocale value="en_IN" scope="session"/>
-                    	<c:set var="vouchertotal" value="${0}" />
-					<c:forEach items="${vouchertransactions}" var="vouchertransactions" varStatus="status">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
+					<c:forEach items="${ledgerbalances}" var="ledgerbalances" varStatus="status">
+					
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
+							<td class="datatd"><c:out value="${status.index+1}" />
+							</td>
+							<td class="datatd"><c:out	value="${ledgerbalances.accountDetails.accountname}" /></td>
+							<c:if test="${ledgerbalances.crdr == 'Dr'}">
 							
-							<td class="datatd">
-								<c:out value="${status.index+1}" />
-							</td>
-							<td class="datatd"><c:out value="${vouchertransactions.key.transactionsid}" />
-							</td>
-							<td class="datatd"><c:out
-									value="${vouchertransactions.key.transactiondate}" /></td>
-							<td class="datatd"><c:out value="${vouchertransactions.value}" /></td>
-							<td class="datatd"><c:out
-									value="${vouchertransactions.key.narration}" /></td>
-							<td class="datatd" style="text-align: right;">
-								<c:set var="vouchertotal" value="${vouchertotal + vouchertransactions.key.dramount}" />
-								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.dramount}"/>
-								<%-- <c:out value=" -- " />
-								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.cramount}"/> --%>
-							</td>
+								<td class="datatd">
+									<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${ledgerbalances.currentbalance}" />
+								</td>
+								<td class="datatd"></td>
+							</c:if>
+							<c:if test="${ledgerbalances.crdr == 'Cr'}">
+								<td class="datatd"></td>
+								<td class="datatd">
+									<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${ledgerbalances.currentbalance}" />
+								</td>
+							</c:if>
 						</tr>
+						
 					</c:forEach>
-					
-					
 			</tbody>
 				</table>
 			<br>
-			<table width="13%" border="0" style="border-color: #4b6a84;float: right;padding-right: 15px;"
-				id="myTable">
-
-				<tbody>
-					<tr align="right">
-					
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total</b>
-							</label> 
+			<table class="datatable">
+						<tr>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td align="right" class="dataTextRight" >
+							<label style="font-weight: bold;">
+							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${drtotal}" />
+							</label>
 							</td>
 							
-							<td class="dataTextRight">
-								<label style="color: #eb6000"><b>
-									<fmt:formatNumber type="currency"  value="${vouchertotal}" />
-								</b>
-								</label>
+							<td align="right" style="width: 90px;" class="dataTextRight" >
+							<label style="font-weight: bold;">
+							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${crtotal}" />
+							</label>
 							</td>
+						</tr>
+						<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
 					</tr>
-				</tbody>
-			</table>
+				</table>
 				
 			<div style="page-break-inside: avoid;" align="center">
 				<table>

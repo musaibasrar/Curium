@@ -45,6 +45,9 @@
                 font-size: 11px;
                 font-weight: bold;
             }
+            .dataText{
+            	width: 100px;
+            }
             .dataTextInActive {
                 border-radius:1px;
                 font-family: Tahoma;
@@ -824,7 +827,7 @@
             	
             }
             
-	function checkAmount(duePayment,sfsid){
+	function checkAmount(duePayment,sfsid,feesCat){
             	
             	var str = duePayment.id;
             	var res = str.split("_");
@@ -832,19 +835,35 @@
             	var payment = parseInt(dueAmount,10);
             	document.getElementById(sfsid).checked = true; 
             	
-            	if(payment>=1){
+            	if (feesCat === "Markaz Spl Income") {
+            		document.getElementById("muqami_"+res[1]).readOnly = true;
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		document.getElementById("city_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
             		duePayment.value = payment;
-            		document.getElementById("muqami_"+res[1]).value = (payment*35)/100;
-            		document.getElementById("halqa_"+res[1]).value = payment/2;
-            		document.getElementById("city_"+res[1]).value = (payment*15)/100;
-            	}else if(payment<1 || isNaN(payment)){
-            		duePayment.value = 0;
-            		document.getElementById("muqami_"+res[1]).value = 0;
-            		document.getElementById("halqa_"+res[1]).value = 0;
-            		document.getElementById("city_"+res[1]).value = 0;
-            		document.getElementById(sfsid).checked = false; 
-            	}
+            		document.getElementById("markaz_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("markaz_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else{
             	
+	            	if(payment>=1){
+	            		duePayment.value = payment;
+	            		document.getElementById("muqami_"+res[1]).value = (payment*35)/100;
+	            		document.getElementById("halqa_"+res[1]).value = payment/2;
+	            		document.getElementById("city_"+res[1]).value = (payment*15)/100;
+	            	}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById("halqa_"+res[1]).value = 0;
+	            		document.getElementById("city_"+res[1]).value = 0;
+	            		document.getElementById("markaz_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}
              	var x=duePayment.value;
         	 	x = x.replace (/,/g, "");
         	 	
@@ -867,21 +886,23 @@
        	var muqamiAmount = parseInt(document.getElementById("muqami_"+res[1]).value);
        	var halqaAmount = parseInt(document.getElementById("halqa_"+res[1]).value);
        	var cityAmount = parseInt(document.getElementById("city_"+res[1]).value);
+       	var markazAmount = parseInt(document.getElementById("markaz_"+res[1]).value);
        	var amountPayingString = document.getElementById("amountpaying_"+res[1]).value;
        	var dueAmount = amountPayingString.replace(/,/g, '');
     	var amountPaying = parseInt(dueAmount,10);
-       	var totalDividedValue = muqamiAmount+cityAmount+halqaAmount;
+       	var totalDividedValue = muqamiAmount+cityAmount+halqaAmount+markazAmount;
 
        	document.getElementById(sfsid).checked = true; 
        	
        	if(totalDividedValue>amountPaying || totalDividedValue<amountPaying){
        		document.getElementById(sfsid).checked = false; 
-       		alert('WARNING!!!!!!!!!!!!! Halqa share, Maqami Share & City Share Should be equal to Total Paying Amount');
+       		alert('WARNING!!! Halqa share, Maqami Share & City Share Should be equal to Total Paying Amount');
        		document.getElementById("muqami_"+res[1]).value = muqamiAmount;
        		document.getElementById("halqa_"+res[1]).value = halqaAmount;
     		document.getElementById("city_"+res[1]).value = cityAmount;
-       	}
-       	
+    		document.getElementById("markaz_"+res[1]).value = markazAmount;
+       	}else if(totalDividedValue==0)
+       		alert('Halqa share, Maqami Share & City Share Amount Can not be 0');
        }
             
  function selectPayment(id){
@@ -1108,19 +1129,18 @@ for(Cookie cookie : cookies){
                     </tr>
                 </tbody>
             </table>
-            <table width="50%" border="1" style="border-color: #4b6a84;font-size: 18px;"
+            <table width="100%" border="1" style="border-color: #4b6a84;font-size: 18px;"
 				id="myTable">
 
 				<thead>
                     <tr >
-                    	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                    	<th class="headerText" style="width: 35px;"><input type="checkbox" id="chckHead" /></th>
                         <td class="headerText">Contribution Category</td>
-                        <!-- <td class="headerText">Total Amount/Due Amount</td>  -->                      
                         <td class="headerText">Total Amount</td>
                         <td class="headerText">Maqami Share</td>
                         <td class="headerText">City Share</td>
                         <td class="headerText">Halqa Share</td>
-                        <!-- <td class="headerText">Fine</td> -->
+                        <td class="headerText">Markaz Share</td>
 
                     </tr>
                 </thead>
@@ -1130,7 +1150,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+							<td align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
@@ -1141,23 +1161,25 @@ for(Cookie cookie : cookies){
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td> --%>
-							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
-							<%-- <input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})"> --%>
-								<input type="hidden" id="fine" value="0" class="fine" name="fine" >
+							<td class="dataText" >
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkAmount(this,${studentfeesdetails.key.sfsid},'${studentfeesdetails.key.feescategory.feescategoryname}')" style="border: none;width: 100px;">
 							</td>
-							<td class="dataText" align="center">
-								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							<td class="dataText" >
+								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
 							</td>
-							<td class="dataText" align="center">
-								<input type="text"  value="0" id="city_${status.index}" name="cityamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							<td class="dataText" >
+								<input type="text"  value="0" id="city_${status.index}" name="cityamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
 							</td>
-							<td class="dataText" align="center">
-								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							<td class="dataText" >
+								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
+							</td>
+							<td class="dataText" >
+								<input type="text"  value="0" id="markaz_${status.index}" name="markazamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
 							</td>
 							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
 							</td> -->
+							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -1166,7 +1188,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
                         <td colspan="2" align="right"><b>Total&nbsp;&nbsp;</b></td>
-                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
+                        <td align="left"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" style="width: 100px;border: none;" readonly  /></b></td>
                     </tr>
                 </tfoot>
 			</table>

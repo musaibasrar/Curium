@@ -114,9 +114,9 @@ public class AccountAction {
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
-			if(new AccountService(request, response).viewVouchers(2)){
+			if(new AccountService(request, response).viewVouchersPayment(2)){
 				request.setAttribute("vouchertype", nextVoucher);
-				return "vouchersearch";
+				return "vouchersearchpayment";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
@@ -371,9 +371,9 @@ public class AccountAction {
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
-			if(new AccountService(request, response).viewVouchersPrint(2)){
+			if(new AccountService(request, response).viewVouchersPrintPayment(2)){
 				request.setAttribute("vouchertype", nextVoucher);
-				return "printvoucher";
+				return "printvoucherpayment";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
@@ -437,5 +437,20 @@ public class AccountAction {
 		}
 		return "exportfailure";
 		}
+	
+	@GetMapping("/ledgerBalance")
+	public String getledgerBalance() {
+		if(new AccountService(request, response).getLedgerBalance()){
+			return "ledgerbalance";
+		}
+		return ERRORPAGE;
+		
+	}
+	
+	@PostMapping("/printLedgerBalances")
+	private String printLedgerBalances() {
+		new AccountService(request, response).getLedgerBalance();
+		return "printledgerbalance";
+	}
 	
 }

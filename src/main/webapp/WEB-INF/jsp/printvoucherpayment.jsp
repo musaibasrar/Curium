@@ -254,7 +254,9 @@
  				 		<th class=datath>Sl.No</th>
 						<th class="datath">Voucher No.</th>
 						<th class="datath">Date</th>
-						<th class="datath">Dr Account -- Cr Account</th>
+						<th class="datath">Dr Account</th>
+						<th class="datath">Cr Account</th>
+						<th class="datath">Fund Source</th>
 						<th class="datath">Narration</th>
 						<th class="datath">Amount</th>
 						
@@ -273,11 +275,21 @@
 							<td class="datatd">
 								<c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${vouchertransactions.key.transactionsid}" />
+							<td class="datatd"><c:out value="${vouchertransactions.key.voucherno}" />
 							</td>
 							<td class="datatd"><c:out
 									value="${vouchertransactions.key.transactiondate}" /></td>
-							<td class="datatd"><c:out value="${vouchertransactions.value}" /></td>
+									
+							<td class="datatd">
+								<c:set var="itemparts" value="${fn:split(vouchertransactions.value, '--')}" />
+									<c:out
+									value="${itemparts[0]}" /></td>		
+							<td class="datatd">
+						  			<c:out value="${itemparts[1]}" />
+							</td>
+							
+							<td class="datatd"><c:out
+									value="${itemparts[2]}" /></td>	
 							<td class="datatd"><c:out
 									value="${vouchertransactions.key.narration}" /></td>
 							<td class="datatd" style="text-align: right;">

@@ -223,6 +223,7 @@ public class FeesCollectionService {
 		String[] maqamiPaying = request.getParameterValues("maqamiamount");
 		String[] halqaPaying = request.getParameterValues("halqaamount");
 		String[] cityPaying = request.getParameterValues("cityamount");
+		String[] markazPaying = request.getParameterValues("markazamount");
 		//Get Payment Details
 		String paymentMethod = request.getParameter("paymentmethod");
 		String ackNo = request.getParameter("ackno");
@@ -379,6 +380,42 @@ public class FeesCollectionService {
 							
 							String updateCrAccountCity="update Accountdetailsbalance set currentbalance=currentbalance+"+cityShare+" where accountdetailsid="+crFeesCity;
 							updateCrAccountList.add(updateCrAccountCity);
+					    }
+					    
+					    
+					    //Markaz
+						
+					    if(markazPaying != null) {
+					    	
+							double markazShare = DataUtil.parseDouble(markazPaying[Integer.parseInt(studentSfsIdamount[1])]);
+							
+							if(markazShare>0) {
+								
+							int crFeesMarkaz = getLedgerAccountId("markaz"+feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							
+							VoucherEntrytransactions transactionsMarkaz = new VoucherEntrytransactions();
+							
+							transactionsMarkaz.setDraccountid(drAccount);
+							transactionsMarkaz.setCraccountid(crFeesMarkaz);
+							transactionsMarkaz.setDramount(new BigDecimal(markazShare));
+							transactionsMarkaz.setCramount(new BigDecimal(markazShare));
+							transactionsMarkaz.setVouchertype(1);
+							transactionsMarkaz.setTransactiondate(receiptInfo.getDate());
+							transactionsMarkaz.setEntrydate(DateUtil.todaysDate());
+							transactionsMarkaz.setNarration(Receiptnarration+" Details: Towards Collection:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+							transactionsMarkaz.setCancelvoucher("no");
+							transactionsMarkaz.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+							transactionsMarkaz.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							transactionsMarkaz.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+							transactionsList.add(transactionsMarkaz);			
+							
+							String updateDrAccountMarkaz ="update Accountdetailsbalance set currentbalance=currentbalance+"+markazShare+" where accountdetailsid="+drAccount;
+							updateDrAccountList.add(updateDrAccountMarkaz);
+							
+							String updateCrAccountMarkaz="update Accountdetailsbalance set currentbalance=currentbalance+"+markazShare+" where accountdetailsid="+crFeesMarkaz;
+							updateCrAccountList.add(updateCrAccountMarkaz);
+							
+					    }
 					    }
 				}
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
@@ -942,9 +979,6 @@ public class FeesCollectionService {
 		    
 		    if(ItemLedgerId!=null) {
 		    	result = Integer.parseInt(ItemLedgerId);
-		    }else {
-		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
-		    	result = Integer.parseInt(ItemLedger.toLowerCase());
 		    }
 		    
 		    return result;

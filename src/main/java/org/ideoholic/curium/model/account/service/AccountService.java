@@ -2628,4 +2628,80 @@ public boolean getRPStatement() {
 		}
 		return result;
 	}
-}
+
+
+	public boolean viewVouchersPayment(int voucherType) {
+
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			String collectionCategory = new feesCategoryDAO().getFeesCategoryName(voucherEntry.getFundsource());
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid())+"--"+DataUtil.emptyString(collectionCategory);
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdate"));
+		request.setAttribute("todateselected", request.getParameter("todate"));
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public boolean viewVouchersPrintPayment(int voucherType) {
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			String collectionCategory = new feesCategoryDAO().getFeesCategoryName(voucherEntry.getFundsource());
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid())+"--"+DataUtil.emptyString(collectionCategory);
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
+		request.setAttribute("todateselected", request.getParameter("todateselected"));
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public boolean getLedgerBalance() {
+		
+		try {
+		List<Accountdetailsbalance> accountDetailsBalances = new ArrayList<Accountdetailsbalance>();
+		accountDetailsBalances = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("ledgerbalances", accountDetailsBalances);
+		return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+}	
+	

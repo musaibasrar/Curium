@@ -824,7 +824,7 @@
             	
             }
             
-	function checkAmount(duePayment,sfsid){
+	function checkAmount(duePayment,sfsid,feesCat){
             	
             	var str = duePayment.id;
             	var res = str.split("_");
@@ -832,17 +832,31 @@
             	var payment = parseInt(duePayment.value,10);
             	document.getElementById(sfsid).checked = true; 
             	
+            	if (feesCat === "Markaz Spl Income") {
+            		document.getElementById("muqami_"+res[1]).readOnly = true;
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("markaz_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("markaz_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else{
+            		
             	if(payment>=1){
             		duePayment.value = payment;
             		document.getElementById("muqami_"+res[1]).value = payment/2;
             		document.getElementById("halqa_"+res[1]).value = payment/2;
             	}else if(payment<1 || isNaN(payment)){
             		duePayment.value = 0;
-            		ocument.getElementById("muqami_"+res[1]).value = 0;
+            		document.getElementById("muqami_"+res[1]).value = 0;
             		document.getElementById("halqa_"+res[1]).value = 0;
             		document.getElementById(sfsid).checked = false; 
             	}
-            	
+			}
             	var x=duePayment.value;
 				x = x.replace (/,/g, "");
 				var lastThree = x.substring(x.length-3);
@@ -862,18 +876,20 @@
        	
        	var muqamiAmount = parseInt(document.getElementById("muqami_"+res[1]).value);
        	var halqaAmount = parseInt(document.getElementById("halqa_"+res[1]).value);
+       	var markazAmount = parseInt(document.getElementById("markaz_"+res[1]).value);
        	var amountPayingString = document.getElementById("amountpaying_"+res[1]).value;
 		var dueAmount = amountPayingString.replace(/,/g, '');
 		var amountPaying = parseInt(dueAmount,10);
-       	var totalDividedValue = muqamiAmount+halqaAmount;
+       	var totalDividedValue = muqamiAmount+halqaAmount+markazAmount;
 
        	document.getElementById(sfsid).checked = true; 
        	
        	if(totalDividedValue>amountPaying){
        		document.getElementById(sfsid).checked = false; 
-    		alert('WARNING!!!!!!!!!!!!! Halqa share & Maqami Share Should be equal to Total Paying Amount');
+    		alert('WARNING!!! Halqa share & Maqami Share Should be equal to Total Paying Amount');
     		document.getElementById("muqami_"+res[1]).value = muqamiAmount;
     		document.getElementById("halqa_"+res[1]).value = halqaAmount;
+    		document.getElementById("markaz_"+res[1]).value = markazAmount;
        	}
        	
        	
@@ -1116,6 +1132,7 @@ for(Cookie cookie : cookies){
                         <td class="headerText">Total Amount</td>
                         <td class="headerText">Maqami Share</td>
                         <td class="headerText">Halqa Share</td>
+                        <td class="headerText">Markaz Share</td>
                         <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
@@ -1138,9 +1155,8 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td> --%>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkAmount(this,${studentfeesdetails.key.sfsid},'${studentfeesdetails.key.feescategory.feescategoryname}')" style="border: none;">
 							<%-- <input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})"> --%>
-								<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<td class="dataText" align="center">
 								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
@@ -1148,6 +1164,10 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center">
 								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
 							</td>
+							<td class="dataText" >
+								<input type="text"  value="0" id="markaz_${status.index}" name="markazamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
+							</td>
+							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
 							</td> -->

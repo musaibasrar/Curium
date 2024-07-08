@@ -256,4 +256,27 @@ public class feesCategoryDAO {
 		}
 	}
 
+	public String getFeesCategoryName(int fundsource) {
+
+		String feeCategoryName = null;
+		Feescategory fc = new Feescategory();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Feescategory fc where fc.idfeescategory = "+fundsource);
+			fc=(Feescategory) query.getSingleResult();
+			feeCategoryName=fc.getFeescategoryname();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return feeCategoryName;
+
+		}
+	}
+
 }

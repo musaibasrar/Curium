@@ -57,9 +57,13 @@ public class feesCollectionDAO {
 			 	
 			 	//Receipts
 			 	for (VoucherEntrytransactions transactions : transactionsList) {
-			 		transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
-					session.save(transactions);
-					transactionsId[i]=transactions.getTransactionsid().intValue();
+			 		int crAccountId = transactions.getCraccountid();
+			 		if(crAccountId!=0) {
+			 			transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+						session.save(transactions);
+						transactionsId[i]=transactions.getTransactionsid().intValue();
+			 		}
+			 		
 					i++;
 				}
 			 	

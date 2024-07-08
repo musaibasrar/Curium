@@ -441,11 +441,16 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/jihtel/receiptpayment" style="font-size: 12px;">R & P Statement</a>
+            				<a target="mainFrame" href="/jihtel/AccountProcess/ledgerBalance" style="font-size: 12px;">Ledger Balance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/jihtel/receiptpayment" style="font-size: 12px;">R & P Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/jihtel/incomevsexpense" style="font-size: 12px;">Income v/s Expense</a>
             			</td>
             		</tr>
