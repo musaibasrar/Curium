@@ -416,12 +416,14 @@ public class EmployeeService {
 		return basicPayEmployeesDto;
 	}
 
-	public void viewDepartments() {
+	public ViewDepartmentsResponseDto viewDepartments(String branchId) {
+		ViewDepartmentsResponseDto viewDepartmentsResponseDto = new ViewDepartmentsResponseDto();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listDepartment", listDepartment);
+		if(branchId!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+	        viewDepartmentsResponseDto.setListDepartment(listDepartment);
 		}
+		return viewDepartmentsResponseDto;
 	}
 
 	public boolean printMultipleEmployees() {

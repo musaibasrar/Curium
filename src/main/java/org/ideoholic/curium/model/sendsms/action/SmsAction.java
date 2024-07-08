@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -35,11 +36,13 @@ public class SmsAction {
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
 	YearActionAdapter yearActionAdapter;
+	@Autowired
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	@GetMapping("/sendSMS")
 	public String sendSMS() {
 		standardActionAdapter.viewClasses();
-		new EmployeeService(request, response).viewDepartments();
+		employeeActionAdapter.viewDepartments();
 		return "sendsms";
 	}
 
