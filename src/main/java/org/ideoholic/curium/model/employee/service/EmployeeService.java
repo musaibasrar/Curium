@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
@@ -416,14 +417,14 @@ public class EmployeeService {
 		return basicPayEmployeesDto;
 	}
 
-	public ViewDepartmentsResponseDto viewDepartments(String branchId) {
-		ViewDepartmentsResponseDto viewDepartmentsResponseDto = new ViewDepartmentsResponseDto();
+	public DepartmentResponseDto viewDepartments(String branchId) {
+		DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
 		
 		if(branchId!=null) {
 			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
-	        viewDepartmentsResponseDto.setListDepartment(listDepartment);
+	        departmentResponseDto.setDepartmentList(listDepartment);
 		}
-		return viewDepartmentsResponseDto;
+		return departmentResponseDto;
 	}
 
 	public boolean printMultipleEmployees() {

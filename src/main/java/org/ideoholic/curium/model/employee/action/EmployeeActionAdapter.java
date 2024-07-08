@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.employee.action;
 
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -141,9 +142,9 @@ public class EmployeeActionAdapter {
     public void viewDepartments() {
         EmployeeService employeeService = new EmployeeService(request,response);
 
-        ViewDepartmentsResponseDto viewAllRelationsResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
+        DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
 
-        httpSession.setAttribute("listDepartment", viewAllRelationsResponseDto.getListDepartment());
+        httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
     }
 
 }
