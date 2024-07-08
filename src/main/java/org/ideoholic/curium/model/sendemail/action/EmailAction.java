@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.sendemail.service.EmailService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
@@ -29,6 +30,8 @@ public class EmailAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	YearActionAdapter yearActionAdapter;
 
 	@PostMapping("/sendStaffSMS")
 	public String sendStaffSMS() {
@@ -58,7 +61,7 @@ public class EmailAction {
 
 	@GetMapping("/updateYear")
 	public String updateYear() {
-		new YearService(request, response).updateYear();
+		yearActionAdapter.updateYear();
 		return "academicyear";
 
 	}

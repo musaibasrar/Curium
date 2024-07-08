@@ -6,6 +6,7 @@ package org.ideoholic.curium.model.printids.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -30,6 +31,8 @@ public class PrintIdsAction {
 	HttpServletResponse response;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
@@ -74,7 +77,7 @@ public class PrintIdsAction {
 	
 	@GetMapping("/generateIdsEmployees")
 	public String generateIdsEmployees() {
-		 new EmployeeService(request, response).ViewAllEmployee();
+		 employeeActionAdapter.ViewAllEmployee();
 		return "generateidsemployee";
 	}
 	

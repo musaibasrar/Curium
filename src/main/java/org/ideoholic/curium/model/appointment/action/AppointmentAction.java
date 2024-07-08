@@ -6,6 +6,7 @@ package org.ideoholic.curium.model.appointment.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class AppointmentAction {
 
 	@Autowired
 	private AppointmentActionAdapter appointmentActionAdapter;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	@PostMapping("/download")
 	private String download() {
@@ -89,7 +92,7 @@ public class AppointmentAction {
 	private String addAppointment() {
 		if(appointmentActionAdapter.addAppointment()){
 			new StudentService(request, response).viewAllStudentsParents();
-			new EmployeeService(request, response).ViewAllEmployee();
+			employeeActionAdapter.ViewAllEmployee();
 			return "viewAllWithParents";
 		}else{
 			return "error";

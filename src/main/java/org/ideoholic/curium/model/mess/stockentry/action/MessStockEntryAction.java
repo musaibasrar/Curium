@@ -56,13 +56,13 @@ public class MessStockEntryAction {
 
 	@PostMapping("/deleteItems")
 	public String deleteItems() {
-		new MessItemsService(request, response).deleteMultipleItems();
+		messItemActionAdapter.deleteMultipleItems();
 		return viewItems();
 	}
 
 	@PostMapping("/updateItems")
 	public String updateItems() {
-		new MessItemsService(request, response).updateItems();
+		messItemActionAdapter.updateItems();
 		return viewItems();
 	}
 

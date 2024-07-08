@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -33,6 +34,8 @@ public class JobAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	EmployeeActionAdapter employeeActionAdapter;
 
 	
 	@PostMapping("/download")
@@ -72,7 +75,7 @@ public class JobAction {
 
 	@GetMapping("/queryReport")
 	private String queryReport() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		return "queriesreport";
 	}
 
@@ -139,7 +142,7 @@ public class JobAction {
 		
 		 if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 			new EmployeeService(request, response).viewDetailsEmployee();
-			new EmployeeService(request, response).ViewAllEmployee();
+			employeeActionAdapter.ViewAllEmployee();
 			result = "createquery"; 
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
        	 new EmployeeService(request, response).viewDetailsEmployeeStaffLogin();        	 
@@ -294,7 +297,7 @@ public class JobAction {
 		String result = "error";
 		
 		 if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-			 	new EmployeeService(request, response).ViewAllEmployee();
+			 	employeeActionAdapter.ViewAllEmployee();
 				new JobService(request, response).createTask();
 				result = "createtask"; 
          }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
@@ -318,7 +321,7 @@ public class JobAction {
 	
 	@GetMapping("/taskReport")
 	private String taskReport() {
-		new EmployeeService(request, response).ViewAllEmployee();
+		employeeActionAdapter.ViewAllEmployee();
 		new StudentService(request, response).viewAllStudentsList();
 		return "tasksreport";
 	}
