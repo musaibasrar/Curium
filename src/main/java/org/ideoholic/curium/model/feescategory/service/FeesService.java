@@ -25,7 +25,6 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
-import org.ideoholic.curium.model.feescategory.dto.ConcessionResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
