@@ -130,4 +130,37 @@ public class MessItemActionAdapter {
         ResultResponse resultResponse = messItemsService.updateItems(dto);
         request.setAttribute("itemsupdate", resultResponse.isSuccess());
     }
+
+
+    public void savePurchase() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        PurchaseDto dto = new PurchaseDto();
+        dto.setItemsTotal(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+        dto.setItemIds(request.getParameterValues("itemids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setItemsQuantity(request.getParameterValues("itemsquantity"));
+        dto.setSalesPrice(request.getParameterValues("price"));
+        dto.setBatchNo(request.getParameterValues("batchno"));
+        dto.setLineTotal(request.getParameterValues("linetotal"));
+        dto.setSupplierId(request.getParameter("supplierid"));
+        dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
+        dto.setSGst(request.getParameterValues("sgst"));
+        dto.setCGst(request.getParameterValues("cgst"));
+        dto.setItemEntryDate(request.getParameter("itementrydate"));
+        dto.setInvoiceDate(request.getParameter("invoicedate"));
+        dto.setSupplierReferenceNo(request.getParameter("supplierreferenceno"));
+
+        ResultResponse resultResponse = messItemsService.savePurchase(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsreceived", resultResponse.isSuccess());
+    }
+
+    public void cancelPurchase() {
+        MessItemsService messItemsService= new MessItemsService(request, response);
+
+        InvoiceIdsDto dto = new InvoiceIdsDto();
+        dto.setInvoiceId(request.getParameterValues("invoiceid"));
+
+        ResultResponse resultResponse = messItemsService.cancelPurchase(dto);
+    }
 }
