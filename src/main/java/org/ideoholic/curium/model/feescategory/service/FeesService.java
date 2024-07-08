@@ -24,6 +24,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
+import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -31,13 +32,14 @@ import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
 public class FeesService {
         
-                private HttpServletRequest request;
+            private HttpServletRequest request;
             private HttpServletResponse response;
             private HttpSession httpSession;
             private String BRANCHID = "branchid";
@@ -417,15 +419,16 @@ public class FeesService {
 	}
 
 
-	public String applyConcession() {
-        
-        String[] idfeescategory = request.getParameterValues("sfsid");
+	public StudentIdDto applyConcession(ConcessionDto concessionDto) {
+		
+		StudentIdDto studentIdDto = new StudentIdDto();
+        String[] idfeescategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
         
-        String studentId = request.getParameter("id");
+        String studentId = concessionDto.getId();
         
         if(idfeescategory!=null){
                 
@@ -434,21 +437,22 @@ public class FeesService {
                 		Concession con = new Concession();
                 		String[] test = string.split("_");
                         sfsId.add(Integer.valueOf(test[0]));
-                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
-                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+                        String dueAmount = concessionDto.getRequestParams().get("dueamount:"+Integer.valueOf(test[0]));
+                        String concessionAmount = concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0]));
                         
                         if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
                         	feesCatId.add(Integer.valueOf(test[1]));
                             con.setSfsid(Integer.valueOf(test[0]));
                             con.setFeescatid(Integer.valueOf(test[1]));
-                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
-                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+                            con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
+                            con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
                             concessionList.add(con);
                         }
                         
                }
            new feesCategoryDAO().applyConcession(concessionList,studentId);
-           return studentId;
+           studentIdDto.setStudentId(studentId);
+           return studentIdDto;
         }
         
         throw new IllegalArgumentException("Fees category for the given student does not exist");
