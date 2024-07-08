@@ -412,7 +412,7 @@ public class EmployeeService {
 		if(branchId!=null){
 				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId));
 		}
-		basicPayEmployeesDto.setVieweditbasicpay(employeeList);
+		basicPayEmployeesDto.setBasicPay(employeeList);
 		return basicPayEmployeesDto;
 	}
 

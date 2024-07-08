@@ -7,5 +7,5 @@ import java.util.List;
 
 @Data
 public class BasicPayEmployeesDto {
-    private List<Paybasic> vieweditbasicpay;
+    private List<Paybasic> basicPay;
 }

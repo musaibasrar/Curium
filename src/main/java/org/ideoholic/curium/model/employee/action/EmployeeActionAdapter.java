@@ -135,8 +135,8 @@ public class EmployeeActionAdapter {
         EmployeeService employeeService = new EmployeeService(request,response);
 
         BasicPayEmployeesDto basicPayEmployeesDto = employeeService.basicpayEmployees(httpSession.getAttribute(BRANCHID).toString());
-        
-        request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getVieweditbasicpay());
+
+        request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getBasicPay());
     }
 
 }
