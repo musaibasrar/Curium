@@ -41,7 +41,7 @@ public class HrAction {
 
 	@GetMapping("/viewEditbasicPay")
 	public String viewEditbasicPay() {
-		new EmployeeService(request, response).basicpayEmployees();
+		employeeActionAdapter.basicpayEmployees();
 		return "vieweditbasicpay";
 	}
 

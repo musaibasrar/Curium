@@ -24,6 +24,7 @@ import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
@@ -48,6 +49,7 @@ public class HrService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private EmployeeActionAdapter employeeActionAdapter;
 
 	public HrService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -819,7 +821,7 @@ public void updateBasicpayEmployees() {
 		 boolean result = new HrDAO().updatePayBasic(payBasicList);
 			 request.setAttribute("basicpayupdate", result);
 		}
-		new EmployeeService(request, response).basicpayEmployees();
+		employeeActionAdapter.basicpayEmployees();
 	}
 	
 }
