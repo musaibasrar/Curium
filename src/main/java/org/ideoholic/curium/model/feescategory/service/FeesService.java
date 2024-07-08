@@ -33,6 +33,7 @@ import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -419,9 +420,9 @@ public class FeesService {
 	}
 
 
-	public ConcessionResponseDto applyConcession(ConcessionDto concessionDto) {
+	public StudentIdDto applyConcession(ConcessionDto concessionDto) {
 		
-		ConcessionResponseDto concessionResponseDto = new ConcessionResponseDto();
+		StudentIdDto studentIdDto = new StudentIdDto();
         String[] idfeescategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
@@ -451,8 +452,8 @@ public class FeesService {
                         
                }
            new feesCategoryDAO().applyConcession(concessionList,studentId);
-           concessionResponseDto.setStudentId(studentId);
-           return concessionResponseDto;
+           studentIdDto.setStudentId(studentId);
+           return studentIdDto;
         }
         
         throw new IllegalArgumentException("Fees category for the given student does not exist");
