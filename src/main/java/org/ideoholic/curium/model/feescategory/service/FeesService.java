@@ -22,11 +22,13 @@ import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
+import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -330,18 +332,18 @@ public class FeesService {
 	}
 
 
-	public void searchFeesWaiveofforConcessionReport(String searchCriteria) {
+	public SearchFeesResponseDto searchFeesWaiveofforConcessionReport(SearchStudentDto searchStudentDto,String searchCriteria,String branchid) {
 		
+		SearchFeesResponseDto searchFeesResponseDto = new SearchFeesResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		Map<Parents,List<Studentfeesstructure>> parentsStudentFeesStructure = new HashMap<Parents,List<Studentfeesstructure>>();
 		
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchid!=null){
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(request
-					.getParameter("namesearch"));
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
 			String conClassStudying = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
@@ -358,16 +360,16 @@ public class FeesService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
 				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
 				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -384,7 +386,7 @@ public class FeesService {
 				studentids.add(parents.getStudent().getSid());
 			}
 			Currentacademicyear currentYear = new YearDAO().showYear();
-			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			searchFeesResponseDto.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 			
 			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, currentYear.getCurrentacademicyear(), searchCriteria);
 			
@@ -408,14 +410,14 @@ public class FeesService {
 			
 		}
 		if("waiveoff".equalsIgnoreCase(searchCriteria)) {
-			httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", parentsStudentFeesStructure);
-			httpSession.setAttribute("studentsfeesstructuredetailsconcession", null);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsWaiveoff(parentsStudentFeesStructure);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsConcession(null);
 		}else if("concession".equalsIgnoreCase(searchCriteria)) {
-			httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", null);
-			httpSession.setAttribute("studentsfeesstructuredetailsconcession", parentsStudentFeesStructure);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsWaiveoff(null);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsConcession(parentsStudentFeesStructure);
 		}
 		
-		
+		return searchFeesResponseDto;
 	}
 
 

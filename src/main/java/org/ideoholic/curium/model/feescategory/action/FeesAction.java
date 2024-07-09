@@ -43,7 +43,7 @@ public class FeesAction {
 
 	@PostMapping("/searchFeesWaiveoffReport")
 	public String searchFeesWaiveoffReport() {
-		new FeesService(request, response).searchFeesWaiveofforConcessionReport("waiveoff");
+		feesActionAdapter.searchFeesWaiveofforConcessionReport("waiveoff");
 		return "feeswaiveoffreport";
 	}
 
@@ -60,7 +60,7 @@ public class FeesAction {
 
 	@PostMapping("/searchFeesConcessionReport")
 	public String searchFeesConcessionReport() {
-		new FeesService(request, response).searchFeesWaiveofforConcessionReport("concession");
+		feesActionAdapter.searchFeesWaiveofforConcessionReport("concession");
 		return "feesconcessionreport";
 	}
 
