@@ -61,5 +61,26 @@ public class FeesActionAdapter {
 		httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", searchFeesResponseDto.getStudentsFeesStructureDetailsWaiveoff());
 		httpSession.setAttribute("studentsfeesstructuredetailsconcession", searchFeesResponseDto.getStudentsFeesStructureDetailsConcession());
 	}
+
+	public String waiveOffFees() {
+		FeesService feesService = new FeesService(request, response);
+		ConcessionDto concessionDto = new ConcessionDto();
+		concessionDto.setSfsid(request.getParameterValues("sfsid"));
+		concessionDto.setId(request.getParameter("id"));
+		Map<String, String> allRequestParameters = new HashMap<>();
+			Enumeration<String> enumeration = request.getParameterNames();
+			while (enumeration.hasMoreElements()) {
+				String fieldName = enumeration.nextElement();
+				String fieldValue = request.getParameter(fieldName);
+				allRequestParameters.put(fieldName, fieldValue);
+			}
+			concessionDto.setRequestParams(allRequestParameters);
+
+		
+			StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto);
+			 String studentId = studentIdDto.getStudentId();
+			 return studentId;
+
+	}
 	
 }
