@@ -93,7 +93,7 @@ public class MessItemsAction {
 	@PostMapping("/cancelPurchase")
 	public String cancelPurchase() {
 
-		new MessItemsService(request, response).cancelPurchase();
+		messItemActionAdapter.cancelPurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		new MessItemsService(request, response).getInvoiceDetails();
@@ -102,7 +102,7 @@ public class MessItemsAction {
 
 	@PostMapping("/savePurchase")
 	public String savePurchase() {
-		new MessItemsService(request, response).savePurchase();
+		messItemActionAdapter.savePurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		new MessItemsService(request, response).getInvoiceDetails();
