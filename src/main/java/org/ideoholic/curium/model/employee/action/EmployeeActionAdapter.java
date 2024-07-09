@@ -1,9 +1,11 @@
 package org.ideoholic.curium.model.employee.action;
 
-import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -145,6 +147,25 @@ public class EmployeeActionAdapter {
         DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
 
         httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
+    }
+    public boolean printMultipleEmployees() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        StudentIdsDto studentIdsDto = new StudentIdsDto();
+        studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
+
+        EmployeeDto employeeDto = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+        httpSession.setAttribute("staffid",employeeDto.getStaffId());
+        httpSession.setAttribute("teachername", employeeDto.getTeacherName());
+        httpSession.setAttribute("guardian",employeeDto.getGuardian());
+        httpSession.setAttribute("contactnumber",employeeDto.getContactNumber() );
+        httpSession.setAttribute("designation",employeeDto.getDesignation());
+        httpSession.setAttribute("Address",employeeDto.getAddress());
+        httpSession.setAttribute("employeephoto",employeeDto.getEmployeePhoto());
+        httpSession.setAttribute("dateofjoining",employeeDto.getDateOfJoining());
+        request.setAttribute("currentacadmicyear",employeeDto.getCurrentAcademicYear());
+
+        return employeeDto.isSuccess();
     }
 
 }

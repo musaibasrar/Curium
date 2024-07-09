@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.employee.dto;
 
+import com.mysql.cj.jdbc.Blob;
 import lombok.Data;
 
 @Data
@@ -37,6 +38,14 @@ public class EmployeeDto {
     private String employeedoc4delete;
     private String employeedoc5delete;
     private String branchId;
+    private String staffId;
+    private String teacherName;
+    private String guardian;
+    private String employeePhoto;
+    private String currentAcademicYear;
+    private boolean success;
+    private int iInitial;
+    private int endValue;
 
 
 }
