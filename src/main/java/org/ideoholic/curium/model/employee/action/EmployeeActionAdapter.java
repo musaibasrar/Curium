@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.employee.action;
 
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -137,6 +138,13 @@ public class EmployeeActionAdapter {
         BasicPayEmployeesDto basicPayEmployeesDto = employeeService.basicpayEmployees(httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getBasicPay());
+    }
+    public void viewDepartments() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
+
+        httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
     }
 
 }
