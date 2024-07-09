@@ -264,6 +264,7 @@
  			 </thead>
  		 
 			<tbody>
+					<c:set var="TotalDueAmount" value="0" />
 					<c:forEach items="${studentfeesreportlist}" var="studentFeesReport" varStatus="status">
 					
 					<c:set var="feesDetails" value="" />
@@ -275,6 +276,7 @@
 							<c:set var="feesDue" value="${studentFee.feesamount - studentFee.feespaid - studentFee.concession - studentFee.waiveoff}" />
 							<c:set var="feesTotal" value="${studentFee.feesamount - studentFee.concession - studentFee.waiveoff}" />
 							<c:set var="dueAmount" value="${dueAmount + studentFee.feesamount - studentFee.feespaid - studentFee.concession - studentFee.waiveoff}" />
+							<c:set var="TotalDueAmount" value="${TotalDueAmount+feesDue}" />
 							<c:set var="totalAmount" value="${totalAmount + studentFee.feesamount - studentFee.concession - studentFee.waiveoff}" />
 							<c:set var="feesDetails" value="${feesDetails} ${studentFee.feescategory.feescategoryname} : ${feesDue} /  ${feesTotal}" />
 						</c:forEach>					
@@ -347,6 +349,12 @@
 				
 			<div style="page-break-inside: avoid;" align="center">
 				<table>
+						<tr>
+							<td colspan="3" style="font-weight: bold;">
+								Total Due Amount:${TotalDueAmount}
+							</td>
+						</tr>
+						
 						<tr>
 							<td>
 								<p><h4>------------- End of The Report ----------</h4></p>

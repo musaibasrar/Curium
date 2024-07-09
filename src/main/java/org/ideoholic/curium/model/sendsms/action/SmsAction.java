@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class SmsAction {
 	public String sendSMS() {
 		new StandardService(request, response).viewClasses();
 		new EmployeeService(request, response).viewDepartments();
+		new StudentService(request, response).viewStudentsParentsPerBranch();
 		return "sendsms";
 	}
 

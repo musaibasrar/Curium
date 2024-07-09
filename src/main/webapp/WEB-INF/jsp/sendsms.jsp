@@ -7,9 +7,6 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession"%>
-
-<%@page import="java.util.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -20,6 +17,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SEND SMS</title>
+	<style type="text/css" title="currentStyle">
+            @import "/shatabdi/css/dataTable/css/demo_page.css";
+            @import "/shatabdi/css/dataTable/css/jquery.dataTables.css";
+        </style>
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/shatabdi/css/validation/jquery.ketchup.css">
 
@@ -37,10 +40,102 @@
 	src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
 <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 
+        <script type="text/javascript" language="javascript" src="/shatabdi/js/dataTable/jquery.dataTables.js"></script>
+ 	
+        
+<style type="text/css" >
+            <!--
+            .header {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                background-color: #4b6a84;
+            }
+            .table {
+                background-color: #3399CC;
+                text-align: center;
+                width: auto;
 
 
+            }
+            .headerText {
+                border-radius:3px;
+                width: 10px;
+                font-family: Tahoma;
+                font-size: 12px;
+                background-color: #4b6a84;
+                color: #FFFFFF;
+                font-weight: normal;
+                width: auto ;
+                height: 22px;
+                vertical-align: middle;
+                text-align: center;
+
+            }
+            .dataText {
+                border-radius:3px;
+                font-family: Tahoma;
+                color: #4b6a84;
+                font-size: 13px;
+                letter-spacing: normal;
+                text-align: center;
+                background-color: #E3EFFF;
+
+            }
+            .dataTextInActive {
+                border-radius:3px;
+                font-family: Tahoma;
+                color: #4b6a84;
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: normal;
+                text-align: center;
+                background-color: #E3EFFF;
+                text-decoration:none;
+            }
+            .dataTextActive {
+                border-radius:3px;
+                font-family: Tahoma;
+                color: #4b6a84;
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: normal;
+                text-align: center;
+                background-color: #E3EFFF;
+                text-decoration: underline;
+            }
+            .dataTextHidden {
+                font-family: Tahoma;
+                color: #4b6a84;
+                font-size: 13px;
+                letter-spacing: normal;
+                text-align: center;
+                background-color: #E3EFFF;
+
+            }
+            .headerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                color: #FFFFFF;
+                font-family: Tahoma;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: bold;
+                height: 22px;
+            }
+            .footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
 
 
+                text-align: left;
+
+
+            }
+            -->
+        </style>
+        
 <style type="text/css">
 .myclass {
 	border-top-style: solid;
@@ -229,145 +324,6 @@
 -->
 </style>
 
-<script type="text/javascript">
-	function dropdown() {
-		var listitem = document.getElementById("city");
-		var listitemtext = listitem.options[listitem.selectedIndex].text;
-
-		if (listitemtext == "Add New") {
-			document.getElementById("city").style.display = "none";
-			document.getElementById("addcity").style.display = '';
-		}
-	}
-
-	
-
-	function dropdownadmclass() {
-
-		var classlistitem = document.getElementById("admclass");
-		var classlistitemtext = classlistitem.options[classlistitem.selectedIndex].text;
-
-		if (classlistitemtext == "Add New") {
-			document.getElementById("admclass").style.display = "none";
-			document.getElementById("admclassE").style.display = '';
-			document.getElementById("addsecE").style.display = '';
-		}
-
-	}
-
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("noofissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("noofissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("noofissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("noofissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("noofissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("noofissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
-</script>
-
-
-
-
-<script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
-
-<script src="/shatabdi/JavaScript/actb.js"></script>
-<script src="/shatabdi/JavaScript/common.js"></script>
-
-
-
-
-<script>
-	$(function() {
-		$("#datepicker").datepicker({
-			changeYear : true,
-			changeMonth : true
-		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		$("#anim").change(function() {
-			$("#datepicker").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepicker1").datepicker({
-			changeYear : true,
-			changeMonth : true
-		});
-		$( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		$("#anim").change(function() {
-			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepickerCD").datepicker({
-			changeYear : true,
-			changeMonth : true
-		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		$("#anim").change(function() {
-			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-</script>
-
-
-
-<script>
-	
-
-	function validateFormNum(obj) {
-		document.getElementById("formNo").style.background = 'white';
-
-		reg = /[^0-9]/g;
-		obj.value = obj.value.replace(reg, "");
-	}
-
-	
-
-	function validateNameAlpha(obj) {
-
-		document.getElementById("name").style.background = 'white';
-
-		reg = /[^a-z]/g;
-		obj.value = obj.value.replace(reg, "");
-	}
-
-	
-
-	
-
-	function validateContactNum(obj) {
-
-		document.getElementById("contactNO").style.background = 'white';
-
-		reg = /[^0-9]/g;
-		obj.value = obj.value.replace(reg, "");
-
-	}
-
-	
-</script>
-
-
 
 <script type="text/javascript">
 	$(function() {
@@ -471,130 +427,39 @@
 	
 </script>
 
-
 <script type="text/javascript">
-	function check(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "/check";
-		url = url + "?name=" + value;
-		xmlHttp.onreadystatechange = stateChanged
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChanged() {
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydiv").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-
-	function maleCheck() {
-
-		if (document.getElementById('male').checked == true) {
-			document.getElementById('female').checked = false;
-
-		}
-
-	}
-
-	function femaleCheck() {
-
-		if (document.getElementById('female').checked == true) {
-			document.getElementById('male').checked = false;
-
-		}
-
-	}
-
-	function CalculateAge(value) {
-		var test = document.getElementById('datepicker').value;
-		var today = new Date();
-		var birthDate = new Date(test);
-		var age = today.getFullYear() - birthDate.getFullYear();
-		var m = today.getMonth() - birthDate.getMonth();
-		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			age--;
-		}
-		//return age;
-		document.getElementById('age').value = age;
-	}
-</script>
-
-<script type="text/javascript">
-	function checkmobile(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "/mobilecheck";
-		url = url + "?contactNO=" + value;
-		xmlHttp.onreadystatechange = stateChangedmobile
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChangedmobile() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydivmobile").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-
-	function watermark(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
-	function watermark2(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
 	
-	$(document).ready(function(){
-	    $("select").change(function(){
-	        $(this).find("option:selected").each(function(){
-	            var optionValue = $(this).attr("value");
-	            if(optionValue){
-	                $(".box").not("." + optionValue).hide();
-	                $("." + optionValue).show();
-	            } else{
-	                $(".box").hide();
-	            }
-	        });
-	    }).change();
-	});
+$(document).ready(function() {
+    // Select change event
+    $("select").change(function() {
+        var selectedOption = $(this).find("option:selected").attr("value");
+        if (selectedOption) {
+            $(".box").hide();
+            $("." + selectedOption).show();
+        } else {
+            $(".box").hide();
+        }
+    }).change();
+
+    // Initialize DataTable
+    $('#myTable').dataTable({
+        scrollY: "380px",
+        paging: true,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        stateSave: false,
+        processing: false,
+        serverSide: false,
+        autoWidth: false,
+        pageLength: 20000,
+        columnDefs: [
+            { orderable: false, targets: [0] }
+        ]
+    });
+});
+
 	
 </script>
 </head>
@@ -621,8 +486,8 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Students</a></li>
-					<!-- <li><a href="#tabs-2">Staff</a></li>
-					<li><a href="#tabs-3">Selected Numbers</a></li> -->
+					<!-- <li><a href="#tabs-2">Staff</a></li> -->
+					<li><a href="#tabs-3">Selected Numbers</a></li>
 				</ul>
 
 
@@ -679,10 +544,10 @@ for(Cookie cookie : cookies){
 								<select name="messagebody" id="messagebody"
 									style="width: 120px">
 											<option selected></option>
-            								<!-- <option value="holiday">Holiday</option>
+            								<option value="holiday">Holiday</option>
             								<option value="exams">Exams</option> -->
             								<option value="festival">Festival</option>
-            								<!-- <option value="feesreminder">Fees Reminder</option> -->
+            								<option value="feesreminder">Fees Reminder</option>
 								</select>
 							
 							</label></td>
@@ -727,9 +592,9 @@ for(Cookie cookie : cookies){
 								</div>
 								
     							<div class="feesreminder box">
-    								<span style="font-size: 16px;">Dear Parents This is a gentle reminder that fees payment is due. </span>
+    								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">Date</span>.Please ignore if already paid.</span>
 								<br><br>
-								<input type="hidden" id="feesremindervar1" name="feesremindervar1" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="feesremindervar1" name="feesremindervar1" maxlength="30">
 								<br><br>
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
@@ -868,14 +733,54 @@ for(Cookie cookie : cookies){
 
 						</div> --%>
 						
-					<!-- <div id="tabs-3">
+					<div id="tabs-3">
 					
-					<br><br>
-					<div align="center">
-					<label style="font-weight: bold;color: black;font-family:monospace;color:#EB6000;font-size: 14px;">Note: Enter mobile numbers seperated
-													by commas. Ex: 9986XXXXXX,9738XXXXXX
-										</label>
-						</div>									
+						<table width="100%">
+                    <tr>
+                        <td  class="headerTD">View All Students</td>
+                    </tr>
+
+                    
+
+                </table>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr>
+                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Contact Number&nbsp;</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${studentList}" var="Parents">
+											
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="numbers"  value="<c:out value="${Parents.contactnumber}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.contactnumber}"/></td>
+                                <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
+                                <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
+                                 
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                						
 					<table width="100%" border="0" align="center" id="table1">
 						<tr>
 							<td><br /></td>
@@ -885,60 +790,75 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile">
-										</div></font></td>
-						</tr>
-
-					
-
-						<tr>
-										
-							<td width="40%" class="alignRight">Numbers* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="numbers"
-											type="text" class="textField" id="numbers" rows="6" cols="55"
-											></textarea>
-							</label></td>
-							<td><span id="errmsg" style="color:red;font-weight: bold;"></span></td>
-						</tr>
-
-						<tr>
 							<td><br /></td>
 						</tr>
 
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebodynumbers"
-											type="text" class="textField" id="messagebodynumbers" rows="6" cols="55"
-											></textarea>
+							<td class="alignRight">SMS Template &nbsp;</td>
+							<td><label>
+								<select name="messagebodynumber" id="messagebodynumber"
+									style="width: 120px">
+											<option selected></option>
+            								<option value="holidaynumber">Holiday</option>
+            								<option value="examsnumber">Exams</option> -->
+            								<option value="festivalnumber">Festival</option>
+            								<option value="feesremindernumber">Fees Reminder</option>
+								</select>
+							
 							</label></td>
 							
 						</tr>
 						<tr>
-						<tr>
 							<td><br /></td>
 						</tr>
-						<td width="30%" class="alignRight">Count: &nbsp;</td>
-							<td width="12%" align="left"><label name="countnumbers" id="countnumbers" style="color: #325F6D;font-weight: bold;">
-							</label></td>
+											
+						<tr>
+							<td class="alignRight">Message&nbsp;</td>
+							<td >
+								<div class="holidaynumber box">
+								 								
+								<span style="font-size: 16px;">Dear parents, school will be closed on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">due to</span> <span style="font-weight: bold;color: red">Reason</span>
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidaynumbervar1" name="holidaynumbervar1" maxlength="30">
+								<br><br>
+								<label style="color: red;">Reason:&nbsp;&nbsp;</label><input type="text" id="holidaynumbervar2" name="holidaynumbervar2" maxlength="30">
+								<input type="hidden" id="holidaynumbervar3" name="holidaynumbervar3" maxlength="30">
+								<input type="hidden" id="holidaynumbervar4" name="holidaynumbervar4" maxlength="30">
+								</div>
+									
+    							<div class="examsnumber box">
+    								<span style="font-size: 16px;">Dear Parents,We would like to inform you that the </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
+								<br><br>
+								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsnumbervar1" name="examsnumbervar1" maxlength="30" value="Exams">
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsnumbervar2" name="examsnumbervar2" maxlength="30">
+								<input type="hidden" id="examsnumbervar3" name="examsnumbervar3" maxlength="30">
+								<input type="hidden" id="examsnumbervar4" name="examsnumbervar4" maxlength="30">
+    							</div>
+    							
+    							<div class="festivalnumber box">
+    							<span style="font-size: 16px;">Dear Parents,We would like to wish you, a </span> <span style="font-weight: bold;color: red">Festival Name</span>
+								<br><br>
+								<label style="color: red;">Festival Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="festivalnumbervar1" name="festivalnumbervar1" maxlength="30">
+								<br><br>
+								<input type="hidden" id="festivalnumbervar2" name="festivalnumbervar2" maxlength="30">
+								<input type="hidden" id="festivalnumbervar3" name="festivalnumbervar3" maxlength="30">
+								<input type="hidden" id="festivalnumbervar4" name="festivalnumbervar4" maxlength="30">
+								</div>
+								
+    							<div class="feesremindernumber box">
+    								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">Date</span>.Please ignore if already paid.</span>
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="feesremindernumbervar1" name="feesremindernumbervar1" maxlength="30">
+								<br><br>
+								<input type="hidden" id="feesremindernumbervar2" name="feesremindernumbervar2" maxlength="30">
+								<input type="hidden" id="feesremindernumbervar3" name="feesremindernumbervar3" maxlength="30">
+								<input type="hidden" id="feesremindernumbervar4" name="feesremindernumbervar4" maxlength="30">
+    							</div>
+							
+							</td>
 							
 						</tr>
-
-						<tr>
-							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
-							<td width="12%" align="left"><label name="messagecountnumbers" id="messagecountnumbers" style="color: #325F6D;font-weight: bold;">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
- -->
 
 						<div>
 							<table width="100%">

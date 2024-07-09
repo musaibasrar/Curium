@@ -133,8 +133,34 @@ public class SmsService {
 	public boolean sendNumbersSMS() {
 		
 		boolean result=false;
-		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")),"all");
+		String smsvia="number";
+		String[] numbersArray = request.getParameterValues("numbers");
+		String numbers = "";
+		//int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")),"all");
+		
+		logger.info("Numbers are *** "+numbersArray);
+		StringBuilder sbN = new StringBuilder();
+
+			for (String singleContact : numbersArray) {
+				
+				if(singleContact!=null && !singleContact.isEmpty()) {
+					char[] contactNo = singleContact.toCharArray();
+					
+					if(contactNo.length == 10) {
+						sbN.append(singleContact);
+						sbN.append(",");
+					}
+				}
+			}
+			numbers=sbN.toString();
+			numbers = numbers.substring(0, numbers.length()-1);
+			
+		
+		String SMSTempType = request.getParameter("messagebodynumber");
+		String message = request.getParameter(SMSTempType+"var1")+":"+request.getParameter(SMSTempType+"var2")+":"+request.getParameter(SMSTempType+"var3")+":"+request.getParameter(SMSTempType+"var4");
+		
+		int resultSMS = sendSMS(numbers,message,SMSTempType.replace(smsvia,""));
+		
 		if(resultSMS==200){
 			result = true;
 		}

@@ -1911,6 +1911,7 @@ public class StudentService {
 	                student.setClassstudying((String)parentdetails[4]);
 	                parent.setFathersname((String)parentdetails[5]);
 	                parent.setMothersname((String)parentdetails[6]);
+	                parent.setContactnumber((String)parentdetails[7]);
 	                parent.setStudent(student);
 	                parentDetails.add(parent);
 	            }

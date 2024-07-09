@@ -679,6 +679,9 @@ for(Cookie cookie : cookies){
 											<td align="left">
 												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
 											</td>
+											<td style="width: 160px;" align="right">
+												[Total Installments${studentfeescatagorydetails.totalinstallment}]&nbsp;&nbsp;&nbsp;	
+											</td>
 										</tr>
 									</table>
 									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />

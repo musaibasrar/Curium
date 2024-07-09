@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -713,9 +714,7 @@ public class FeesCollectionService {
 				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
 					Long dueAmount =0l;
 					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
-					if(dueAmount>0) {
 						feesStructure.add(studentFeesStructure);
-					}
 				}
 				
 				if (feesStructure.size() > 0) {
@@ -1763,7 +1762,7 @@ public class FeesCollectionService {
 					Long feesTotal = studentFee.getFeesamount() - studentFee.getConcession() - studentFee.getWaiveoff();
 					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
 					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
-					feesDetails=feesDetails+studentFee.getOtherfeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+					feesDetails=feesDetails+studentFee.getOtherfeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"[Total Installments"+studentFee.getTotalinstallment()+"]\n";
 				}
 				
 				data.put(Integer.toString(i),
@@ -1820,6 +1819,16 @@ public class FeesCollectionService {
 	public void getFeesCollectionCategory() {
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		List<Otherreceiptinfo> otherFeesDetailsList = new ArrayList<Otherreceiptinfo>();
+		long tutionFees = 0l;
+		long otherFees = 0l;
+		long transportationFees = 0l;
+		long compartmentalExamFee = 0l;
+		long tcCharges = 0l;
+		long libraryFees = 0l;
+		
+		Map<String, Long> feeCategoryCollectionMapReport = new LinkedHashMap<String, Long>();
+		
 		String branchId = request.getParameter("selectedbranchid");
 		int idBranch = 0;
                
@@ -1866,6 +1875,43 @@ public class FeesCollectionService {
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			
+			
+			//Other Fees Details
+			
+			String queryMainOtherFees ="From Otherreceiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+			String toDateOtherFees = DataUtil.emptyString(request.getParameter("todate"));
+			String fromDateOtherFees = DataUtil.emptyString(request.getParameter("fromdate"));
+			String oneDayOtherFees = DataUtil.emptyString(request.getParameter("oneday"));
+			
+			
+				String querySubOtherFees = "";
+				
+				if(!oneDayOtherFees.equalsIgnoreCase("")){
+					querySub = " feesdetails.date = '"+oneDayOtherFees+"'" ;
+					 httpSession.setAttribute("dayone", oneDayOtherFees);
+					 httpSession.setAttribute("datefrom", "");
+					 httpSession.setAttribute("dateto", "");
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
+					querySubOtherFees = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
+				}
+				
+				if(!fromDateOtherFees.equalsIgnoreCase("")  && !toDateOtherFees.equalsIgnoreCase("")){
+					querySubOtherFees = " feesdetails.date between '"+fromDateOtherFees+"' AND '"+toDateOtherFees+"'";
+					httpSession.setAttribute("datefrom", fromDateOtherFees);
+					httpSession.setAttribute("dateto", toDateOtherFees);
+					httpSession.setAttribute("dayone", "");
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
+						!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
+					querySubOtherFees = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
+				}
+				
+				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				System.out.println("SEARCH QUERY ***** "+queryMainOtherFees);
+				otherFeesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMainOtherFees);
+				
+			//End Other Fees Details
 			
 	}
 			long sumOfFees = 0l;
@@ -1918,7 +1964,68 @@ public class FeesCollectionService {
 	            }
 			}
 		}
-			httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMap);
+		
+		for (Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {  
+			
+           if(entry.getKey().contains("Tuition Fee")) {
+        	   tutionFees = tutionFees+entry.getValue();
+           }else {
+        	   feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
+           }
+		}
+		
+		feeCategoryCollectionMapReport.put("Tuition Fee", tutionFees);
+		
+		//Other Fees 
+		
+		long sumOfFeesOtherFees = 0l;
+		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
+			sumOfFeesOtherFees = sumOfFeesOtherFees + receiptinfo.getTotalamount();
+		}
+		
+		Map<String, Long> otherFeeCategoryCollectionMap = new LinkedHashMap<String, Long>();
+		
+		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
+			
+			Set<Otherfeescollection> setFeesCollectionOtherFees = receiptinfo.getFeesCollectionRecords();
+
+			for (Otherfeescollection feescollectionSingle : setFeesCollectionOtherFees) {
+				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
+				//feeCategoryFeeCollectionMap.get(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
+				//feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				
+				for (Studentotherfeesstructure studentfeesSingle : studentfeesstructure) {
+		            if (otherFeeCategoryCollectionMap.containsKey(studentfeesSingle.getOtherfeescategory().getFeescategoryname())) {
+		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), otherFeeCategoryCollectionMap.get(studentfeesSingle.getOtherfeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
+		            } else {
+		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+		            }
+		        }
+			}
+		}
+		
+		for (Entry<String, Long> entry : otherFeeCategoryCollectionMap.entrySet()) {  
+					String key = entry.getKey();
+	           if(key.contains("TC Charges")) {
+	        	   tcCharges = tcCharges+entry.getValue();
+	           }else if(key.contains("Library")) {
+	        	   libraryFees = libraryFees+entry.getValue();
+	           }else if(key.contains("Compartmental Exam Fee")) {
+	        	   compartmentalExamFee = compartmentalExamFee+entry.getValue();
+	           }else {
+	        	   transportationFees = transportationFees + entry.getValue();
+	           }
+			}
+		
+		feeCategoryCollectionMapReport.put("Transportation Fee", transportationFees);
+		feeCategoryCollectionMapReport.put("TC Charges", tcCharges);
+		feeCategoryCollectionMapReport.put("Library Fees", libraryFees);
+		feeCategoryCollectionMapReport.put("Compartmental Exam Fee", compartmentalExamFee);
+		//feeCategoryCollectionMapReport.put("Other Fee", otherFees);
+		
+		//End Other Fees
+		
+		httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMapReport);
 	}
 
 	public void printFeesDueHeadWiseReport() {
