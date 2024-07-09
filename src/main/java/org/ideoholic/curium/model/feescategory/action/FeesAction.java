@@ -72,7 +72,7 @@ public class FeesAction {
 
 	@PostMapping("/waiveOffFees")
 	public String waiveOffFees() {
-		String studentId = new FeesService(request, response).waiveOffFees();
+		String studentId = feesActionAdapter.waiveOffFees();
 		return studentFeePage(studentId);
 	}
 

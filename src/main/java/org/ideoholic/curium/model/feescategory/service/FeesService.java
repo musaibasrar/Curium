@@ -295,15 +295,16 @@ public class FeesService {
 	 * }
 	 */
     
-    public String waiveOffFees() {
+    public StudentIdDto waiveOffFees(ConcessionDto concessionDto) {
         
-        String[] idfeescategory = request.getParameterValues("sfsid");
+    	StudentIdDto studentIdDto = new StudentIdDto();
+        String[] idfeescategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
         
-        String studentId = request.getParameter("id");
+        String studentId = concessionDto.getId();
         
         if(idfeescategory!=null){
                 
@@ -312,19 +313,20 @@ public class FeesService {
                 		Concession con = new Concession();
                 		String[] test = string.split("_");
                         sfsId.add(Integer.valueOf(test[0]));
-                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+                        String dueAmount = concessionDto.getRequestParams().get("dueamount:"+Integer.valueOf(test[0]));
                         //String concessionAmount = request.getParameter("waiveoff:"+Integer.valueOf(test[0]));
                         
                         	feesCatId.add(Integer.valueOf(test[1]));
                             con.setSfsid(Integer.valueOf(test[0]));
                             con.setFeescatid(Integer.valueOf(test[1]));
-                            con.setConcessionOld(request.getParameter("waiveoff:"+Integer.valueOf(test[0])));
+                            con.setConcessionOld(concessionDto.getRequestParams().get("waiveoff:"+Integer.valueOf(test[0])));
                             con.setConcession(dueAmount);
                             concessionList.add(con);
                         
                }
            new feesCategoryDAO().waiveOffFees(concessionList,studentId);
-           return studentId;
+           studentIdDto.setStudentId(studentId);
+           return studentIdDto;
         }
         
         throw new IllegalArgumentException("Fees category for the given student does not exist");
