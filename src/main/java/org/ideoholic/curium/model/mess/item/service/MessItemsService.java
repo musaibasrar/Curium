@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.diary.dto.RequestPageDto;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
@@ -301,20 +302,20 @@ public class MessItemsService {
 		}
 
 
-		public boolean getInvoiceDetails() {
+		public InvoiceDetailsResponseDto getInvoiceDetails(String strPage, String branchId) {
+		InvoiceDetailsResponseDto result = InvoiceDetailsResponseDto.builder().success(false).build();
 
-			boolean result = false;
 			//String pages = "1";
-			if(httpSession.getAttribute(BRANCHID)!=null){
+			if(branchId!=null){
 				try {
 					int page = 1;
 					int recordsPerPage = 50;
-						if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-							page = Integer.parseInt(request.getParameter("page"));
+						if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+							page = Integer.parseInt(strPage);
 						}
 
 					List<MessInvoiceDetails> invoicelist = new MessItemsDAO().getInvoiceDetailsPagination((page - 1) * recordsPerPage,
-							recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							recordsPerPage, Integer.parseInt(branchId));
 					
 					Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
 					
@@ -323,14 +324,13 @@ public class MessItemsService {
 						messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
 						invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers);
 					}
+					result.setInvoiceSuppliersMap(invoiceSuppliersMap);
 					
-					request.setAttribute("invoicelist", invoiceSuppliersMap);
-					
-					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(branchId));
 					int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-					request.setAttribute("noOfPages", noOfPages);
-					request.setAttribute("currentPage", page);
-					result = true;
+					result.setNoOfPages(noOfPages);
+					result.setCurrentPage(page);
+					result.setSuccess(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -410,22 +410,23 @@ public class MessItemsService {
 		}
 
 
-		public void generateStockIssuanceReport() {
+		public IssuanceReportResponseDto generateStockIssuanceReport(IssuanceReportDto dto) {
+		IssuanceReportResponseDto responseDto = IssuanceReportResponseDto.builder().build();
 			
-			String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
-			String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-			String issueTo = request.getParameter("issuedto");
-			String purpose = request.getParameter("purpose");
-			String item = request.getParameter("itemname");
+			String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+			String toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+			String issueTo = dto.getIssueTo();
+			String purpose = dto.getPurpose();
+			String item = dto.getItem();
 			String queryMain = "from MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' ";
 			String subQuery = "";
 			List<StockIssuance> stockIssuanceList = new ArrayList<StockIssuance>();
 					
 			if(!issueTo.isEmpty()) {
 				subQuery = "and issuedto = '"+issueTo+"'";
-				httpSession.setAttribute("issuedtoselected", "Issued To:&nbsp;"+issueTo);
+				responseDto.setIssuedToSelected("Issued To:&nbsp;"+issueTo);
 			}else {
-				httpSession.setAttribute("issuedtoselected", "");
+				responseDto.setIssuedToSelected("");
 			}
 			
 			/*
@@ -436,9 +437,9 @@ public class MessItemsService {
 			
 			if(!item.isEmpty()) {
 				subQuery = subQuery + "and itemid = '"+item+"'";
-				httpSession.setAttribute("itemselected", "Items:&nbsp;"+item);
+				responseDto.setItemSelected("Items:&nbsp;"+item);
 			}else {
-				httpSession.setAttribute("itemselected", "");
+				responseDto.setItemSelected("");
 			}
 			
 			List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain+subQuery);
@@ -532,11 +533,14 @@ public class MessItemsService {
 			}*/
 			
 			}
-			httpSession.setAttribute("stockissuancelist", stockIssuanceList);
-			httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
-			httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+			responseDto.setStockIssuanceList(stockIssuanceList);
+			responseDto.setTransactionFromDateSelected("From:"+ dto.getFromDate());
+			responseDto.setTransactionToDateSelected("To:"+dto.getToDate());
 			
 			getIssuanceStock();
+
+			responseDto.setSuccess(true);
+			return responseDto;
 		}
 
 

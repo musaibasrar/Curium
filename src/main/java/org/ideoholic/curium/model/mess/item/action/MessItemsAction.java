@@ -54,7 +54,7 @@ public class MessItemsAction {
 
 	@PostMapping("/generateStockIssuanceReport")
 	public String generateStockIssuanceReport() {
-		new MessItemsService(request, response).generateStockIssuanceReport();
+		messItemActionAdapter.generateStockIssuanceReport();
 		new StudentService(request, response).viewAllStudentsParents();
 		return "stockissuancereport";
 	}
@@ -96,7 +96,7 @@ public class MessItemsAction {
 		messItemActionAdapter.cancelPurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
-		new MessItemsService(request, response).getInvoiceDetails();
+		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
 
@@ -105,7 +105,7 @@ public class MessItemsAction {
 		messItemActionAdapter.savePurchase();
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
-		new MessItemsService(request, response).getInvoiceDetails();
+		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
 
@@ -137,7 +137,7 @@ public class MessItemsAction {
 	public String purchaseItems() {
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
-		new MessItemsService(request, response).getInvoiceDetails();
+		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
 

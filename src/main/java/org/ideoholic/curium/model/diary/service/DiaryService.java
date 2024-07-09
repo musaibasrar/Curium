@@ -69,7 +69,7 @@ public class DiaryService {
 		}
 	}
 
-	public DiaryResponseDto viewDiary(ViewDiaryDto viewDiaryDto, String branchId) {
+	public DiaryResponseDto viewDiary(RequestPageDto requestPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		// TODO Auto-generated method stub
 		boolean result = false;
@@ -78,8 +78,8 @@ public class DiaryService {
 			try {
 				int page = 1;
 				int recordsPerPage = 100;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(viewDiaryDto.getPage()))) {
-					page = Integer.parseInt(viewDiaryDto.getPage());
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(requestPageDto.getPage()))) {
+					page = Integer.parseInt(requestPageDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId));
