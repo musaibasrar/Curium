@@ -1,9 +1,11 @@
 package org.ideoholic.curium.model.employee.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mysql.cj.jdbc.Blob;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class EmployeeDto {
     private String name;
     private String gender;
@@ -43,9 +45,7 @@ public class EmployeeDto {
     private String guardian;
     private String employeePhoto;
     private String currentAcademicYear;
-    private boolean success;
-    private int iInitial;
-    private int endValue;
+
 
 
 }

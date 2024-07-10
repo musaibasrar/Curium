@@ -428,9 +428,12 @@ public class EmployeeService {
 		return departmentResponseDto;
 	}
 
-	public EmployeeDto printMultipleEmployees(StudentIdsDto studentIdsDto,String currentAcademicYear) {
-		EmployeeDto result = new EmployeeDto();
-		
+	public PrintMultipleEmployeesResponseDto printMultipleEmployees(StudentIdsDto studentIdsDto, String currentAcademicYear) {
+
+		//EmployeeDto result = new EmployeeDto();
+		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = new PrintMultipleEmployeesResponseDto();
+
+
 	    String[] studentIDs = studentIdsDto.getStudentIds();
 	    List<Long> ids = new ArrayList<Long>();
 	    Teacher teacherDetails = new Teacher();
@@ -448,15 +451,17 @@ public class EmployeeService {
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
 	           if (teacherDetails != null) {
-	        	   result.setStaffId("staffId"+ i + teacherDetails.getTeacherexternalid());
-	        	   result.setTeacherName("teachername" + i + "" + teacherDetails.getTeachername());
-	        	   result.setGuardian("guardian" + i + "" + teacherDetails.getRemarks());
-	               result.setContactNumber("contactnumber" + i + "" + teacherDetails.getContactnumber());
-	               result.setDesignation("designation" + i + "" + teacherDetails.getDesignation());
-	               result.setAddress("Address" + i + "" +  teacherDetails.getAddress());
-	               result.setEmployeePhoto("employeephoto" + i + "" + teacherDetails.getEmployeephoto());
-	               result.setDateOfJoining("dateofjoining" + i + "" +  DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
-	               result.setCurrentAcademicYear("currentAcademicYear" + currentAcademicYear);
+				   printMultipleEmployeesResponseDto.getResultParams().put("staffId"+ i,  teacherDetails.getTeacherexternalid());;
+	        	   printMultipleEmployeesResponseDto.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
+	        	   printMultipleEmployeesResponseDto.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
+				   printMultipleEmployeesResponseDto.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());
+				   printMultipleEmployeesResponseDto.getResultParams().put("contactnumber" + i  , teacherDetails.getContactnumber());
+				   printMultipleEmployeesResponseDto.getResultParams().put("designation" + i , teacherDetails.getDesignation());
+				   printMultipleEmployeesResponseDto.getResultParams().put("Address" + i , teacherDetails.getAddress());
+				   printMultipleEmployeesResponseDto.getResultParams().put("employeephoto" + i , teacherDetails.getEmployeephoto());
+				   printMultipleEmployeesResponseDto.getResultParams().put("dateofjoining" + i , DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
+	        	   printMultipleEmployeesResponseDto.getResultParams().put("currentAcademicYear" , currentAcademicYear);
+
 	               //result = true;
 	           } else {
 
@@ -467,17 +472,17 @@ public class EmployeeService {
 	           i++;
 	       }
 	   
-	   result.setIInitial(i);
+	   printMultipleEmployeesResponseDto.setInitialValue(i);
 	   i = (int) (Math.ceil((float) (i) / 3));
-	   result.setEndValue(i);
+	   printMultipleEmployeesResponseDto.setEndValue(i);
 	   
 	   
 	    if (teacherDetails == null) {
-			result.setSuccess(false);
+			printMultipleEmployeesResponseDto.setSuccess(false);
 	    } else {
-			result.setSuccess(true);
+			printMultipleEmployeesResponseDto.setSuccess(true);
 	    }
-	    return result;
+	    return printMultipleEmployeesResponseDto;
 
 }
 

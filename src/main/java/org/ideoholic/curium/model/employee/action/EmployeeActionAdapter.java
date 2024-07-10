@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
+
+import static org.apache.commons.net.imap.IMAPReply.isSuccess;
 
 @Service
 public class EmployeeActionAdapter {
@@ -152,9 +155,11 @@ public class EmployeeActionAdapter {
         EmployeeService employeeService = new EmployeeService(request,response);
 
         StudentIdsDto studentIdsDto = new StudentIdsDto();
+
         studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
 
-        EmployeeDto employeeDto = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+        EmployeeDto employeeDto = new EmployeeDto();
+
         httpSession.setAttribute("staffid",employeeDto.getStaffId());
         httpSession.setAttribute("teachername", employeeDto.getTeacherName());
         httpSession.setAttribute("guardian",employeeDto.getGuardian());
@@ -165,7 +170,15 @@ public class EmployeeActionAdapter {
         httpSession.setAttribute("dateofjoining",employeeDto.getDateOfJoining());
         request.setAttribute("currentacadmicyear",employeeDto.getCurrentAcademicYear());
 
-        return employeeDto.isSuccess();
+        PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+
+        httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
+        request.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
+        for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
+            httpSession.setAttribute(entry.getKey(), entry.getValue());
+        }
+
+        return printMultipleEmployeesResponseDto.isSuccess();
     }
 
 }
