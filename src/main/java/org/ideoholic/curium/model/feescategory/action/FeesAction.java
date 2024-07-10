@@ -79,7 +79,7 @@ public class FeesAction {
 	@GetMapping("/feesReport")
 	public String feesReport() {
 		standardActionAdapter.viewClasses();
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		return "feesreport";
 	}
 
@@ -103,14 +103,14 @@ public class FeesAction {
 
 	@GetMapping("/feesCollect")
 	public String feesCollect() {
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		new FeesService(request, response).viewAllStudentsList();
 		return "feesCollection";
 	}
 
 	@GetMapping("/feesCollectAllBranches")
 	public String feesCollectAllBranches() {
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		new FeesService(request, response).viewAllBranchStudents();
 		return "feesCollection";
 	}
@@ -123,7 +123,7 @@ public class FeesAction {
 
 	@GetMapping("/feesView")
 	public String viewFees() {
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		standardActionAdapter.viewClasses();
 		return "feesCategory";
 	}
@@ -221,7 +221,7 @@ public class FeesAction {
 	@GetMapping("/feesDueReportHeadWise")
 	public String feesDueReportHeadWise() {
 		standardActionAdapter.viewClasses();
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		return "feesdueheadwisereport";
 	}
 	
@@ -237,7 +237,7 @@ public class FeesAction {
 	@GetMapping("/defaulterReport")
 	public String defaulterReport() {
 		standardActionAdapter.viewClasses();
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		return "defaultersreport";
 	}
 
