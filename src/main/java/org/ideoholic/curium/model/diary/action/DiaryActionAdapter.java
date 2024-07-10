@@ -41,10 +41,10 @@ public class DiaryActionAdapter {
 
     public boolean viewDiary() {
         DiaryService diaryService = new DiaryService(request, response);
-        ViewDiaryDto viewDiaryDto = new ViewDiaryDto();
-        viewDiaryDto.setPage(request.getParameter("page"));
+        RequestPageDto requestPageDto = new RequestPageDto();
+        requestPageDto.setPage(request.getParameter("page"));
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(viewDiaryDto, httpSession.getAttribute(BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(requestPageDto, httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("diary", diaryResponseDto.getDiary());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());

@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.mess.item.action;
 
+import org.ideoholic.curium.model.diary.dto.RequestPageDto;
 import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.util.ResultResponse;
@@ -162,5 +163,34 @@ public class MessItemActionAdapter {
         dto.setInvoiceId(request.getParameterValues("invoiceid"));
 
         ResultResponse resultResponse = messItemsService.cancelPurchase(dto);
+    }
+
+    public void getInvoiceDetails() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        String page = request.getParameter("page");
+
+        InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceDetails(page, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("invoicelist", responseDto.getInvoiceSuppliersMap());
+        request.setAttribute("noOfPages", responseDto.getNoOfPages());
+        request.setAttribute("currentPage", responseDto.getCurrentPage());
+    }
+
+    public void generateStockIssuanceReport() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        IssuanceReportDto dto = new IssuanceReportDto();
+        dto.setFromDate(request.getParameter("transactiondatefrom"));
+        dto.setToDate(request.getParameter("transactiondateto"));
+        dto.setIssueTo(request.getParameter("issuedto"));
+        dto.setPurpose(request.getParameter("purpose"));
+        dto.setItem(request.getParameter("itemname"));
+
+        IssuanceReportResponseDto responseDto = messItemsService.generateStockIssuanceReport(dto);
+        httpSession.setAttribute("issuedtoselected", responseDto.getIssuedToSelected());
+        httpSession.setAttribute("itemselected", responseDto.getItemSelected());
+        httpSession.setAttribute("stockissuancelist", responseDto.getStockIssuanceList());
+        httpSession.setAttribute("transactionfromdateselected", responseDto.getTransactionFromDateSelected());
+        httpSession.setAttribute("transactiontodateselected", responseDto.getTransactionToDateSelected());
     }
 }
