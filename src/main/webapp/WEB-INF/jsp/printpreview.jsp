@@ -459,30 +459,38 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;padding:0px;">
+   <div class="table-container" style="margin-bottom: 5px;background-color: #2d9182;"> 
   <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">Al Falah High School </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Shanti Nagar, Lalapet, Secunderabad-500017</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Mobile No.:8143802598, Email:alfalahhighschool@gmail.com</p>
+  <tr align="center">
+  <td colspan="2" style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:white;text-shadow: 2px 2px 2px black;font-family:serif;">FUTURE STAR ENGLISH </p></td>
+    </tr>
+    <tr>
+    <td colspan="2" style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:white;text-shadow: 2px 2px 2px black;font-family:serif;">MEDIUM SCHOOL </p></td>
+    </tr>
+    <tr><td width="40px" height="39px"  style="margin:0px;padding:0px;"> <img src="/futurestars/images/futurestars.png" width="40" height="39"/></td>
+    <td style="text-align:left;padding:0px;">
+       <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:white;text-shadow: 2px 2px 2px black;font-family:serif;">&nbsp;&nbsp;&nbsp;&nbsp;CHITGUPPA </p>
+      
+   <p style="font-size:12px;font-weight: 900;margin-bottom:0px;margin-top:0px;padding:0px;text-shadow: 1px 1px 1px white;font-family:serif;">&nbsp;&nbsp;&nbsp;&nbsp;Dist-Bidar-585412</p>
+  </td>
+  </tr>
    </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table align="center" >
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
+
  <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 4px;" alt="Photo" />
  </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
+ 
+ <!-- <td>&nbsp;&nbsp;
  <img src="/futurestars/images/futurestars.png" width="65" height="72"/>
- </td>
+ </td> -->
  </tr>
  </table>
    </div>
@@ -491,41 +499,35 @@ for(Cookie cookie : cookies){
 	</div>
     <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <td style="padding: 0;white-space: nowrap;font-family:serif;font-weight: 900;font-size:12px;">&nbsp;&nbsp;CLASS</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
+    <td style="padding: 0;white-space: nowrap;font-family:serif;font-weight: 900;font-size:12px;">&nbsp;&nbsp;STS</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
+  </tr>
+    <tr>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">&nbsp;&nbsp;D.O.B.</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">&nbsp;&nbsp;CONTACT NO.</td>
+    <td style="padding: 0;font-family:serif;font-weight: 900;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
 </table>
 
-<div height="30" width="20%" style="text-align:right;float:right;">
+<div height="30" width="100%" style="text-align:right;float:right;margin:1px;border-radius:0px 0px 5px 5px;">
 
-<img src="/futurestars/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="/futurestars/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;
 <div>
+
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
+ <table  width="100%" style="background-color: #2d9182;color: #2d9182;"><tr><td style="margin-bottom:0px;">g</td></tr></table> 
 </div>
  </c:if>
    <% i = i + 1;%>
