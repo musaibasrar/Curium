@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

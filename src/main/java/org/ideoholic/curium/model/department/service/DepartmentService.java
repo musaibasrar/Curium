@@ -13,7 +13,6 @@ import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.ResultResponse;
 
 public class DepartmentService {
 

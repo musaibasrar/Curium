@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dao.RequestPageDto;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -69,7 +70,7 @@ public class DiaryService {
 		}
 	}
 
-	public DiaryResponseDto viewDiary(RequestPageDto requestPageDto, String branchId) {
+	public DiaryResponseDto viewDiary(String strPage, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		// TODO Auto-generated method stub
 		boolean result = false;
@@ -78,8 +79,8 @@ public class DiaryService {
 			try {
 				int page = 1;
 				int recordsPerPage = 100;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(requestPageDto.getPage()))) {
-					page = Integer.parseInt(requestPageDto.getPage());
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+					page = Integer.parseInt(strPage);
 				}
 				List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId));
