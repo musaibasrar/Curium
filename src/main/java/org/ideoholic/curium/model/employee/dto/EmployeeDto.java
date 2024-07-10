@@ -40,12 +40,5 @@ public class EmployeeDto {
     private String employeedoc4delete;
     private String employeedoc5delete;
     private String branchId;
-    private String staffId;
-    private String teacherName;
-    private String guardian;
-    private String employeePhoto;
-    private String currentAcademicYear;
-
-
 
 }

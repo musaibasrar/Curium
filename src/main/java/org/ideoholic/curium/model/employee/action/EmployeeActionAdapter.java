@@ -155,30 +155,16 @@ public class EmployeeActionAdapter {
         EmployeeService employeeService = new EmployeeService(request,response);
 
         StudentIdsDto studentIdsDto = new StudentIdsDto();
-
         studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
 
-        EmployeeDto employeeDto = new EmployeeDto();
-
-        httpSession.setAttribute("staffid",employeeDto.getStaffId());
-        httpSession.setAttribute("teachername", employeeDto.getTeacherName());
-        httpSession.setAttribute("guardian",employeeDto.getGuardian());
-        httpSession.setAttribute("contactnumber",employeeDto.getContactNumber() );
-        httpSession.setAttribute("designation",employeeDto.getDesignation());
-        httpSession.setAttribute("Address",employeeDto.getAddress());
-        httpSession.setAttribute("employeephoto",employeeDto.getEmployeePhoto());
-        httpSession.setAttribute("dateofjoining",employeeDto.getDateOfJoining());
-        request.setAttribute("currentacadmicyear",employeeDto.getCurrentAcademicYear());
-
-        PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
-
-        httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
-        request.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
-        for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
+        PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+        httpSession.setAttribute("iInitial", result.getInitialValue());
+        httpSession.setAttribute("endValue", result.getEndValue());
+        for (Map.Entry<String, String> entry : result.getResultParams().entrySet()) {
             httpSession.setAttribute(entry.getKey(), entry.getValue());
         }
 
-        return printMultipleEmployeesResponseDto.isSuccess();
+        return result.isSuccess();
     }
 
 }
