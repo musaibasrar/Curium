@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/abc/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <script src="/madina/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/madina/css/bootstrap.min.css">
+        <script src="/madina/js/jquery.min.js"></script>
+        <script src="/madina/js/bootstrap.min.js"></script>
+        <script src="/madina/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/madina/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -94,15 +94,15 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/abc/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/madina/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/abc/images/feespaid.svg" height="20" width="20"/>	
+        						<img src="/madina/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/abc/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/madina/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label><br/>
-        						<img src="/abc/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/madina/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label><br/>
-        						<img src="/abc/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/madina/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>
         					</td>
@@ -132,9 +132,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/abc/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/madina/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/abc/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/madina/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -160,7 +160,7 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/abc/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/madina/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
         						<label id="labelname">Today's Expenses</label>	
