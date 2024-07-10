@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.diary.action;
 
+import org.ideoholic.curium.dao.RequestPageDto;
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -41,10 +42,10 @@ public class DiaryActionAdapter {
 
     public boolean viewDiary() {
         DiaryService diaryService = new DiaryService(request, response);
-        RequestPageDto requestPageDto = new RequestPageDto();
-        requestPageDto.setPage(request.getParameter("page"));
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(requestPageDto, httpSession.getAttribute(BRANCHID).toString());
+        String page = request.getParameter("page");
+
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(page, httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("diary", diaryResponseDto.getDiary());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());

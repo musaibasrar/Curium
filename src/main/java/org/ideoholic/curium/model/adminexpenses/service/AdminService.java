@@ -27,7 +27,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.dao.ResultResponse;
 
 public class AdminService {
 	

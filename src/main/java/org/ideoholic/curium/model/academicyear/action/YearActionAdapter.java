@@ -8,7 +8,7 @@ import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.academicyear.service.YearService;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

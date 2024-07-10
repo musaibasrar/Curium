@@ -42,13 +42,11 @@ import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferStatus;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.dao.ResultResponse;
 
 public class DocumentService {
 

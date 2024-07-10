@@ -23,7 +23,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public class EmployeeService {

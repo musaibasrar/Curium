@@ -1,4 +1,4 @@
-package org.ideoholic.curium.util;
+package org.ideoholic.curium.dao;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

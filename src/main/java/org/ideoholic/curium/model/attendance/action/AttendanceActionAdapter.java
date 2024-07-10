@@ -2,7 +2,7 @@ package org.ideoholic.curium.model.attendance.action;
 
 import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
-import org.ideoholic.curium.util.ResultResponse;
+import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

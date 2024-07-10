@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.diary.dto;
+package org.ideoholic.curium.dao;
 
 import lombok.Data;
 
