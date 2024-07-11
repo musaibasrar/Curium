@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,7 +96,7 @@ public class FeesAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new FeesService(request, response).deleteMultiple();
+		 feesActionAdapter.deleteMultiple();
 		return viewFees();
 	}
 
