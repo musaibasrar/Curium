@@ -37,11 +37,13 @@ public class MessStockEntryAction {
 	HttpSession httpSession;
 	@Autowired
 	private MessItemActionAdapter messItemActionAdapter;
+	@Autowired
+	private MessStockEntryActionAdapter messStockEntryActionAdapter;
 
 	@GetMapping("/mrvDetails")
 	public void mrvDetails() {
 		try {
-			new MessStockEntryService(request, response).getMRVDetails();
+			messStockEntryActionAdapter.getMRVDetails();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
