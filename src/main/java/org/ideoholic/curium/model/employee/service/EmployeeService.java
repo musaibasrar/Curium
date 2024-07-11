@@ -19,6 +19,7 @@ import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
@@ -427,9 +428,10 @@ public class EmployeeService {
 		return departmentResponseDto;
 	}
 
-	public boolean printMultipleEmployees() {
-		boolean result = false;
-	    String[] studentIDs = request.getParameterValues("employeeIDs");
+	public PrintMultipleEmployeesResponseDto printMultipleEmployees(StudentIdsDto studentIdsDto, String currentAcademicYear) {
+		PrintMultipleEmployeesResponseDto result = new PrintMultipleEmployeesResponseDto();
+
+	    String[] studentIDs = studentIdsDto.getStudentIds();
 	    List<Long> ids = new ArrayList<Long>();
 	    Teacher teacherDetails = new Teacher();
 	 
@@ -446,34 +448,33 @@ public class EmployeeService {
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
 	           if (teacherDetails != null) {
-	        	   httpSession.setAttribute("staffid" + i + "", teacherDetails.getTeacherexternalid());
-	        	   httpSession.setAttribute("teachername" + i + "", teacherDetails.getTeachername());
-	        	   httpSession.setAttribute("guardian" + i + "", teacherDetails.getRemarks());
-	               httpSession.setAttribute("contactnumber" + i + "", teacherDetails.getContactnumber());
-	               httpSession.setAttribute("designation" + i + "", teacherDetails.getDesignation());
-	               httpSession.setAttribute("Address" + i + "", teacherDetails.getAddress());
-	               httpSession.setAttribute("employeephoto" + i + "",teacherDetails.getEmployeephoto());
-	               httpSession.setAttribute("dateofjoining" + i + "", DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
-	               request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
-	               //result = true;
+				   result.getResultParams().put("staffId"+ i,  teacherDetails.getTeacherexternalid());;
+				   result.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
+				   result.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
+				   result.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());
+				   result.getResultParams().put("contactnumber" + i  , teacherDetails.getContactnumber());
+				   result.getResultParams().put("designation" + i , teacherDetails.getDesignation());
+				   result.getResultParams().put("Address" + i , teacherDetails.getAddress());
+				   result.getResultParams().put("employeephoto" + i , teacherDetails.getEmployeephoto());
+				   result.getResultParams().put("dateofjoining" + i , DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
+				   result.getResultParams().put("currentAcademicYear" , currentAcademicYear);
+
 	           } else {
 
-	              
-	               //result = false;
 	           }
 
 	           i++;
 	       }
-	   
-	   httpSession.setAttribute("iInitial", i);
+
+		result.setInitialValue(i);
 	   i = (int) (Math.ceil((float) (i) / 3));
-	   httpSession.setAttribute("endValue", i);
+		result.setEndValue(i);
 	   
 	   
 	    if (teacherDetails == null) {
-	        result = false;
+			result.setSuccess(false);
 	    } else {
-	        result = true;
+			result.setSuccess(true);
 	    }
 	    return result;
 

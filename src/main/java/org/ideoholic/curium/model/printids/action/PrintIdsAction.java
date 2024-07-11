@@ -83,7 +83,7 @@ public class PrintIdsAction {
 	
 	@PostMapping("/printpreviewemployee")
 	public String printpreviewemployee() {
-		 new EmployeeService(request, response).printMultipleEmployees();
+		 employeeActionAdapter.printMultipleEmployees();
 		 return "printpreviewemployee";
 	}
 	

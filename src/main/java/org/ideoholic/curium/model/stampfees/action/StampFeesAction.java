@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -22,13 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StampFeesAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
 	private YearActionAdapter yearActionAdapter;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private FeesActionAdapter feesActionAdapter;
 
 	@PostMapping("/searchForFees")
 	public String searchForFees() {
@@ -50,7 +53,7 @@ public class StampFeesAction {
 
 	@GetMapping("/showFeesDetails")
 	public String showFeesDetails() {
-		new FeesService(request, response).viewFees();
+		feesActionAdapter.viewFees();
 		yearActionAdapter.getYear();
 		standardActionAdapter.viewClasses();
 		return "stampfees";
