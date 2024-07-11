@@ -90,5 +90,15 @@ public class FeesActionAdapter {
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		return feescategoryResponseDto.isSuccess();
 	}
+
+	public String deleteFeesCategory() {
+		FeesService feesService = new FeesService(request, response);
+		ConcessionDto concessionDto = new ConcessionDto();
+		concessionDto.setSfsid(request.getParameterValues("sfsid"));
+		concessionDto.setId(request.getParameter("id"));
+		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,httpSession.getAttribute("branchid").toString());
+		String studentId  = studentIdDto.getStudentId();
+		return studentId;
+	}
 	
 }

@@ -91,7 +91,7 @@ public class FeesAction {
 
 	@PostMapping("/deleteFeesCategory")
 	public String deleteFeesCategory() {
-		String studentId = new FeesService(request, response).deleteFeesCategory();
+		String studentId = feesActionAdapter.deleteFeesCategory();
 		return studentFeePage(studentId);
 	}
 
