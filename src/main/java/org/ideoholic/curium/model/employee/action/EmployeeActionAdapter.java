@@ -1,11 +1,10 @@
 package org.ideoholic.curium.model.employee.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-
-import static org.apache.commons.net.imap.IMAPReply.isSuccess;
 
 @Service
 public class EmployeeActionAdapter {
@@ -151,20 +148,21 @@ public class EmployeeActionAdapter {
 
         httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
     }
-    public boolean printMultipleEmployees() {
+    public void printMultipleEmployees() {
         EmployeeService employeeService = new EmployeeService(request,response);
 
         StudentIdsDto studentIdsDto = new StudentIdsDto();
         studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
 
         PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
-        httpSession.setAttribute("iInitial", result.getInitialValue());
-        httpSession.setAttribute("endValue", result.getEndValue());
-        for (Map.Entry<String, String> entry : result.getResultParams().entrySet()) {
-            httpSession.setAttribute(entry.getKey(), entry.getValue());
+        if(result.isSuccess()) {
+            httpSession.setAttribute("iInitial", result.getInitialValue());
+            httpSession.setAttribute("endValue", result.getEndValue());
+            for (Map.Entry<String, String> entry : result.getResultParams().entrySet()) {
+                httpSession.setAttribute(entry.getKey(), entry.getValue());
+            }
         }
 
-        return result.isSuccess();
     }
 
 }
