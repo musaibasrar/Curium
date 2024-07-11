@@ -1,4 +1,4 @@
-package org.ideoholic.curium.dao;
+package org.ideoholic.curium.dto;
 
 import lombok.Data;
 

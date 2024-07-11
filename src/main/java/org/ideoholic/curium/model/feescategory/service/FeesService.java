@@ -27,6 +27,7 @@ import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -58,25 +59,25 @@ public class FeesService {
         }
 
 
-        public boolean viewFees() {
-                
-                 boolean result = false;
+        public FeescategoryResponseDto viewFees(String branchid,String currentAcademicYear ) {
+        
+        	FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
                  
-                 if(httpSession.getAttribute(BRANCHID)!=null){
-                	 String[] currentYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+                 if(branchid!=null){
+                	 String[] currentYear = currentAcademicYear.split("/");
               	   int cYear = Integer.parseInt(currentYear[0])+1;
               	   int cYear2 = Integer.parseInt(currentYear[1])+1;
               	   String nextYear = ""+cYear+"/"+cYear2+"";
                          try {
-                                List<Feescategory> list = new feesCategoryDAO().readListOfFeeCategory(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("currentAcademicYear").toString(),nextYear);
-                            httpSession.setAttribute("feescategory", list);
-                            result = true;
+                                List<Feescategory> list = new feesCategoryDAO().readListOfFeeCategory(Integer.parseInt(branchid),currentAcademicYear,nextYear);
+                                feescategoryResponseDto.setFeescategory(list);
+                                feescategoryResponseDto.setSuccess(true);    
                         } catch (Exception e) {
                             e.printStackTrace();
-                            result = false;
+                            feescategoryResponseDto.setSuccess(false);
                         }
                  }
-                return result;
+                return feescategoryResponseDto;
         }
 
 
@@ -204,16 +205,17 @@ public class FeesService {
         }
 
 
-        public String deleteFeesCategory() {
+        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid) {
                 
-                 String[] idfeescategory = request.getParameterValues("sfsid");
+        	     StudentIdDto studentIdDto = new StudentIdDto();
+                 String[] idfeescategory = concessionDto.getSfsid();
                  List<Integer> sfsId = new ArrayList();
                  List<Integer> feesCatId = new ArrayList();
                  List<VoucherEntrytransactions> transactionsList = new ArrayList<VoucherEntrytransactions>();
                  List<String> debitEntries = new ArrayList<String>();
                  List<String> creditEntries = new ArrayList<String>();
                  
-                 String studentId = request.getParameter("id");
+                 String studentId = concessionDto.getId();
                  
                  if(idfeescategory!=null){
                          
@@ -226,8 +228,8 @@ public class FeesService {
                           		//Pass J.V. : credit the Fees as income & debit the cash
                                   List<Studentfeesstructure> sfs = new studentDetailsDAO().getStudentFeesStructureDetails(Integer.valueOf(test[0]));
                                   
-                          		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+                          		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchid));
+                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));;
 
                           		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -255,7 +257,8 @@ public class FeesService {
                         }
                 new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
                 
-                return studentId;
+                studentIdDto.getStudentId();
+                return studentIdDto;
                  }
                 throw new IllegalArgumentException("Fees category for the given student does not exist");
                 

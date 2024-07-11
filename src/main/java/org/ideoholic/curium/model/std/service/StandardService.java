@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.std.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.ClassDto;
@@ -14,7 +15,6 @@ import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.stereotype.Service;
 
 @Service

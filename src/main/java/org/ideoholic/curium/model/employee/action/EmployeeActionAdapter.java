@@ -1,9 +1,10 @@
 package org.ideoholic.curium.model.employee.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.dao.ResultResponse;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Service
 public class EmployeeActionAdapter {
@@ -145,6 +147,22 @@ public class EmployeeActionAdapter {
         DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
 
         httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
+    }
+    public void printMultipleEmployees() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        StudentIdsDto studentIdsDto = new StudentIdsDto();
+        studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
+
+        PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+        if(result.isSuccess()) {
+            httpSession.setAttribute("iInitial", result.getInitialValue());
+            httpSession.setAttribute("endValue", result.getEndValue());
+            for (Map.Entry<String, String> entry : result.getResultParams().entrySet()) {
+                httpSession.setAttribute(entry.getKey(), entry.getValue());
+            }
+        }
+
     }
 
 }
