@@ -3,6 +3,7 @@
  */
 package org.ideoholic.curium.model.std.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.std.dto.ClassDto;
@@ -12,7 +13,6 @@ import org.ideoholic.curium.model.std.dto.StdOfClassDto;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

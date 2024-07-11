@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.dao.RequestPageDto;
+import org.ideoholic.curium.dto.RequestPageDto;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;

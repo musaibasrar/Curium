@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
@@ -23,7 +24,6 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public class EmployeeService {

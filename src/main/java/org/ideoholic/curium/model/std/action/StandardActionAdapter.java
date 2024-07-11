@@ -3,13 +3,13 @@ package org.ideoholic.curium.model.std.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.std.dto.ClassDto;
 import org.ideoholic.curium.model.std.dto.ClassIdsDto;
 import org.ideoholic.curium.model.std.dto.StdOfClassDto;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
