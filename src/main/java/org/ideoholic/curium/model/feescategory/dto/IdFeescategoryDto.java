@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class IdFeescategoryDto {
 
-	private String[] idfeescategory;
+	private String[] idFeesCategory;
 }

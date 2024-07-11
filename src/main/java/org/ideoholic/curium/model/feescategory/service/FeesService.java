@@ -124,7 +124,7 @@ public class FeesService {
 
 
         public void deleteMultiple(IdFeescategoryDto idFeescategoryDto) {
-                 String[] idfeescategory = idFeescategoryDto.getIdfeescategory();
+                 String[] idfeescategory = idFeescategoryDto.getIdFeesCategory(); 
                  if(idfeescategory!=null){
                 List<Integer> ids = new ArrayList();
                 for (String id : idfeescategory) {

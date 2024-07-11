@@ -105,7 +105,7 @@ public class FeesActionAdapter {
 	public void deleteMultiple() {
 		FeesService feesService = new FeesService(request, response);
 		IdFeescategoryDto idFeescategoryDto = new IdFeescategoryDto();
-		idFeescategoryDto.setIdfeescategory(request.getParameterValues("idfeescategory"));
+		idFeescategoryDto.setIdFeesCategory(request.getParameterValues("idfeescategory"));
 		feesService.deleteMultiple(idFeescategoryDto);
 		
 	}
