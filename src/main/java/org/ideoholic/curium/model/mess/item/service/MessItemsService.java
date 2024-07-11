@@ -37,8 +37,6 @@ public class MessItemsService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
 	
 	public MessItemsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
