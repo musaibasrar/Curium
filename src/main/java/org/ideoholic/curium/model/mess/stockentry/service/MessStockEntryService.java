@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntryResponseDto;
 
 public class MessStockEntryService {
 
@@ -30,20 +31,17 @@ public class MessStockEntryService {
 	}
 
 
-	public void getMRVDetails()  throws IOException {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+	public MessStockEntryResponseDto getMRVDetails(String strInvoiceDetailsId, String supplierRefNo, String invoiceTotal, String supplierName, String invoiceDate, String branchId)  throws IOException {
+		MessStockEntryResponseDto responseDto = MessStockEntryResponseDto.builder().build();
+
+		if(branchId!=null){
 			
-			int invoiceDetailsId = Integer.parseInt(request.getParameter("invoicedetailsid"));
-			String supplierRefNo = request.getParameter("supplierreferenceno");
-			String invoicetotal = request.getParameter("invoicetotal");
-			String supplierName = request.getParameter("suppliername");
-			String invoiceDate = request.getParameter("entrydate");
-			
-			request.setAttribute("supplierreferenceno", supplierRefNo);
-			request.setAttribute("invoicetotal", invoicetotal);
-			request.setAttribute("suppliername", supplierName);
-			request.setAttribute("entrydate", invoiceDate);
+			int invoiceDetailsId = Integer.parseInt(strInvoiceDetailsId);
+
+			responseDto.setSupplierRefNo(supplierRefNo);
+			responseDto.setInvoiceTotal(invoiceTotal);
+			responseDto.setSupplierName(supplierName);
+			responseDto.setInvoiceDate(invoiceDate);
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
@@ -72,7 +70,7 @@ public class MessStockEntryService {
 		        				"							" + 
 		        				"							<td class='alignRight'>Reference/Invoice No.&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'>"
-		        				+ "									"+supplierRefNo+"</td>" + 
+		        				+ "									"+supplierRefNo+"</td>" +
 		        				"							" + 
 		        				"						</tr>" + 
 		        				"						<tr>" + 
@@ -82,7 +80,7 @@ public class MessStockEntryService {
 		        				"						<td class='alignRight'>Invoice Date&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'> "+invoiceDate+"</td>" + 
 		        				"						<td class='alignRight'>Grand Total&nbsp;</td>" + 
-		        				"							<td class='alignRightInvoice'> "+invoicetotal+"</td>" + 
+		        				"							<td class='alignRightInvoice'> "+invoiceTotal+"</td>" +
 		        				"							</tr>" + 
 		        				"							<tr>" + 
 		        				"							<td><br /></td>" + 
@@ -159,7 +157,8 @@ public class MessStockEntryService {
 		            out.close();
 		        }
 		}
-		
+		responseDto.setSuccess(true);
+		return responseDto;
 		
 	}
 	
