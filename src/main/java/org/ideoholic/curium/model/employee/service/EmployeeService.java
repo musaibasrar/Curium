@@ -480,20 +480,22 @@ public class EmployeeService {
 
 }
 
-	public boolean viewDetailsEmployeeStaffLogin() {
-		 boolean result = false;
+	public ViewDetailsEmployeeResponseDto viewDetailsEmployeeStaffLogin(String userName) {
+		ViewDetailsEmployeeResponseDto result = new ViewDetailsEmployeeResponseDto();
+
 	        try {
-	            Teacher employee = new EmployeeDAO().getEmployeeDetails(httpSession.getAttribute("username").toString());
+	            Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
-	            	httpSession.setAttribute("employee", employee);
-	                request.setAttribute("stafflogin", employeeLogin);
-	                return true;
+					result.setEmployee(employee);
+					result.setEmployeeLogin(employeeLogin);
+					result.setSuccess(true);
+
 	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            result = false;
+				result.setSuccess(false);
 	        }
 	        return result;
 	}

@@ -164,5 +164,14 @@ public class EmployeeActionAdapter {
         }
 
     }
+    public boolean viewDetailsEmployeeStaffLogin() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        ViewDetailsEmployeeResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        httpSession.setAttribute("employee", result.getEmployee());
+        request.setAttribute("stafflogin", result.getEmployeeLogin());
+
+        return result.isSuccess();
+    }
 
 }
