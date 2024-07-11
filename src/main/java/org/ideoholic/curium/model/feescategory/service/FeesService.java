@@ -205,16 +205,17 @@ public class FeesService {
         }
 
 
-        public String deleteFeesCategory() {
+        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid) {
                 
-                 String[] idfeescategory = request.getParameterValues("sfsid");
+        	     StudentIdDto studentIdDto = new StudentIdDto();
+                 String[] idfeescategory = concessionDto.getSfsid();
                  List<Integer> sfsId = new ArrayList();
                  List<Integer> feesCatId = new ArrayList();
                  List<VoucherEntrytransactions> transactionsList = new ArrayList<VoucherEntrytransactions>();
                  List<String> debitEntries = new ArrayList<String>();
                  List<String> creditEntries = new ArrayList<String>();
                  
-                 String studentId = request.getParameter("id");
+                 String studentId = concessionDto.getId();
                  
                  if(idfeescategory!=null){
                          
@@ -227,8 +228,8 @@ public class FeesService {
                           		//Pass J.V. : credit the Fees as income & debit the cash
                                   List<Studentfeesstructure> sfs = new studentDetailsDAO().getStudentFeesStructureDetails(Integer.valueOf(test[0]));
                                   
-                          		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+                          		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchid));
+                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));;
 
                           		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -256,7 +257,8 @@ public class FeesService {
                         }
                 new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
                 
-                return studentId;
+                studentIdDto.getStudentId();
+                return studentIdDto;
                  }
                 throw new IllegalArgumentException("Fees category for the given student does not exist");
                 
