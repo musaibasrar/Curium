@@ -1,8 +1,8 @@
 package org.ideoholic.curium.model.mess.item.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

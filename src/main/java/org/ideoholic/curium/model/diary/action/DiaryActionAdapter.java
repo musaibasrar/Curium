@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.diary.action;
 
-import org.ideoholic.curium.dao.RequestPageDto;
+import org.ideoholic.curium.dto.RequestPageDto;
 import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;

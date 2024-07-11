@@ -6,6 +6,7 @@ package org.ideoholic.curium.model.appointment.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
@@ -19,7 +20,6 @@ import org.ideoholic.curium.model.appointment.dto.ViewAllAppointmentsDto;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
-import org.ideoholic.curium.dao.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
