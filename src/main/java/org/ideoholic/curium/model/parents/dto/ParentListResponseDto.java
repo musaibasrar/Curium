@@ -1,8 +1,8 @@
-package org.ideoholic.curium.model.documents.dto;
+package org.ideoholic.curium.model.parents.dto;
 
 import java.util.List;
 
-import org.ideoholic.curium.model.parents.dto.Parents;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentListAaResponseDto {
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
+public class ParentListResponseDto {
 		private List<Parents> list;
 		private boolean success;
 }

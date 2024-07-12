@@ -34,6 +34,7 @@ import org.ideoholic.curium.model.feescategory.dto.ParentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -137,8 +138,8 @@ public class FeesService {
         }
 
 
-		public ParentResponseDto viewAllStudentsList(String branchid) {
-			ParentResponseDto parentResponseDto = new ParentResponseDto();
+		public ParentListResponseDto viewAllStudentsList(String branchid) {
+			ParentListResponseDto parentResponseDto = new ParentListResponseDto();
 			try {
 				List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(branchid));
 
@@ -155,7 +156,7 @@ public class FeesService {
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}
-				parentResponseDto.setStudentListFeesCollection(parentDetails);
+				parentResponseDto.setList(parentDetails);
 				parentResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				parentResponseDto.setSuccess(false);

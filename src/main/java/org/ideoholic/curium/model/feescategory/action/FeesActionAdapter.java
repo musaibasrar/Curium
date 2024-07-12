@@ -17,6 +17,7 @@ import org.ideoholic.curium.model.feescategory.dto.ParentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,9 +114,9 @@ public class FeesActionAdapter {
 
 	public boolean viewAllStudentsList() {
 		FeesService feesService = new FeesService(request, response);
-		ParentResponseDto parentResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute("branchid").toString());
-		request.setAttribute("studentListFeesCollection", parentResponseDto.getStudentListFeesCollection());
-		return parentResponseDto.isSuccess();
+		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute("branchid").toString());
+		request.setAttribute("studentListFeesCollection", parentListResponseDto.getList());
+		return parentListResponseDto.isSuccess();
 	}
 	
 }
