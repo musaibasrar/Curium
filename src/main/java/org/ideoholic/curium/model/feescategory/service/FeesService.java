@@ -30,6 +30,7 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
+import org.ideoholic.curium.model.feescategory.dto.ParentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
@@ -136,33 +137,31 @@ public class FeesService {
         }
 
 
-        public boolean viewAllStudentsList() {
+		public ParentResponseDto viewAllStudentsList(String branchid) {
+			ParentResponseDto parentResponseDto = new ParentResponseDto();
+			try {
+				List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(branchid));
 
-                boolean result = false;
-                try {
-                        List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                        
-                        List<Parents> parentDetails = new ArrayList<Parents>();
-                        for(Object[] parentdetails: list){
-                        	Parents parent = new Parents();
-                        	Student student = new Student();
-                            student.setSid((Integer)parentdetails[0]);
-                            student.setName((String)parentdetails[1]);
-                            student.setClassstudying((String)parentdetails[2]);
-                            student.setStudentexternalid((String)parentdetails[3]);
-                            student.setAdmissionnumber((String)parentdetails[4]);
-                            parent.setFathersname((String)parentdetails[5]);
-                            parent.setStudent(student);
-                            parentDetails.add(parent);
-                        }
-                        
-                        request.setAttribute("studentListFeesCollection", parentDetails);
-                        result = true;
-                } catch (Exception e) {
-                        result = false;
-                }
-                return result;
-        }
+				List<Parents> parentDetails = new ArrayList<Parents>();
+				for (Object[] parentdetails : list) {
+					Parents parent = new Parents();
+					Student student = new Student();
+					student.setSid((Integer) parentdetails[0]);
+					student.setName((String) parentdetails[1]);
+					student.setClassstudying((String) parentdetails[2]);
+					student.setStudentexternalid((String) parentdetails[3]);
+					student.setAdmissionnumber((String) parentdetails[4]);
+					parent.setFathersname((String) parentdetails[5]);
+					parent.setStudent(student);
+					parentDetails.add(parent);
+				}
+				parentResponseDto.setStudentListFeesCollection(parentDetails);
+				parentResponseDto.setSuccess(true);
+			} catch (Exception e) {
+				parentResponseDto.setSuccess(false);
+			}
+			return parentResponseDto;
+		}
 
 
         public boolean downlaodFile() {
