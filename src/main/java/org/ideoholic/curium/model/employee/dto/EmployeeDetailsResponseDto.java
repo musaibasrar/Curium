@@ -4,7 +4,7 @@ import lombok.Data;
 import org.ideoholic.curium.model.user.dto.Login;
 
 @Data
-public class ViewDetailsEmployeeResponseDto {
+public class EmployeeDetailsResponseDto {
     private Teacher employee;
     private Login employeeLogin;
     private boolean success;

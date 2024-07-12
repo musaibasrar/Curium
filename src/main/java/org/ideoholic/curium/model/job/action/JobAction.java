@@ -145,7 +145,7 @@ public class JobAction {
 			employeeActionAdapter.ViewAllEmployee();
 			result = "createquery"; 
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
-       	 new EmployeeService(request, response).viewDetailsEmployeeStaffLogin();        	 
+       	 employeeActionAdapter.viewDetailsEmployeeStaffLogin();
        	 result = "createqueryteacher";
         }
 		 
@@ -301,7 +301,7 @@ public class JobAction {
 				new JobService(request, response).createTask();
 				result = "createtask"; 
          }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
-        	 new EmployeeService(request, response).viewDetailsEmployeeStaffLogin();        	 
+        	 employeeActionAdapter.viewDetailsEmployeeStaffLogin();
         	 result = "createtaskteacher";
          }
 		 

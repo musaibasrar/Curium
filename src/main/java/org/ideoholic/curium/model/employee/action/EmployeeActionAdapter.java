@@ -52,13 +52,13 @@ public class EmployeeActionAdapter {
     }
     public boolean viewDetailsEmployee() {
         EmployeeService employeeService = new EmployeeService(request,response);
-        ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = employeeService.viewDetailsEmployee();
+        EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee();
 
-        request.setAttribute("stafflogin", viewDetailsEmployeeResponseDto.getEmployeeLogin());
+        request.setAttribute("stafflogin", employeeDetailsResponseDto.getEmployeeLogin());
 
-        httpSession.setAttribute("employee", viewDetailsEmployeeResponseDto.getEmployee());
+        httpSession.setAttribute("employee", employeeDetailsResponseDto.getEmployee());
 
-        return viewDetailsEmployeeResponseDto.isSuccess();
+        return employeeDetailsResponseDto.isSuccess();
     }
     public String updateEmployee(MultipartFile[] listOfFiles) {
         EmployeeService employeeService = new EmployeeService(request,response);
@@ -163,6 +163,15 @@ public class EmployeeActionAdapter {
             }
         }
 
+    }
+    public boolean viewDetailsEmployeeStaffLogin() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        httpSession.setAttribute("employee", result.getEmployee());
+        request.setAttribute("stafflogin", result.getEmployeeLogin());
+
+        return result.isSuccess();
     }
 
 }

@@ -28,6 +28,7 @@ import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -122,8 +123,8 @@ public class FeesService {
         }
 
 
-        public void deleteMultiple() {
-                 String[] idfeescategory = request.getParameterValues("idfeescategory");
+        public void deleteMultiple(IdFeescategoryDto idFeescategoryDto) {
+                 String[] idfeescategory = idFeescategoryDto.getIdFeesCategory(); 
                  if(idfeescategory!=null){
                 List<Integer> ids = new ArrayList();
                 for (String id : idfeescategory) {

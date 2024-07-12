@@ -169,8 +169,8 @@ public class EmployeeService {
     return viewAllEmployeeResponseDto;
 }
 
-	public ViewDetailsEmployeeResponseDto viewDetailsEmployee() {
-		ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = new ViewDetailsEmployeeResponseDto();
+	public EmployeeDetailsResponseDto viewDetailsEmployee() {
+		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
 		 boolean result = false;
 	        try {
 	            long id = Long.parseLong(request.getParameter("id"));
@@ -178,16 +178,16 @@ public class EmployeeService {
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
-	            	viewDetailsEmployeeResponseDto.setEmployee(employee);
-	                viewDetailsEmployeeResponseDto.setEmployeeLogin(employeeLogin);
+	            	employeeDetailsResponseDto.setEmployee(employee);
+	                employeeDetailsResponseDto.setEmployeeLogin(employeeLogin);
 
-	                viewDetailsEmployeeResponseDto.setSuccess(true);
+	                employeeDetailsResponseDto.setSuccess(true);
 	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            viewDetailsEmployeeResponseDto.setSuccess(false);
+	            employeeDetailsResponseDto.setSuccess(false);
 	        }
-	        return viewDetailsEmployeeResponseDto;
+	        return employeeDetailsResponseDto;
 	}
 
 	public Teacher updateEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto) {
@@ -480,20 +480,22 @@ public class EmployeeService {
 
 }
 
-	public boolean viewDetailsEmployeeStaffLogin() {
-		 boolean result = false;
+	public EmployeeDetailsResponseDto viewDetailsEmployeeStaffLogin(String userName) {
+		EmployeeDetailsResponseDto result = new EmployeeDetailsResponseDto();
+
 	        try {
-	            Teacher employee = new EmployeeDAO().getEmployeeDetails(httpSession.getAttribute("username").toString());
+	            Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
-	            	httpSession.setAttribute("employee", employee);
-	                request.setAttribute("stafflogin", employeeLogin);
-	                return true;
+					result.setEmployee(employee);
+					result.setEmployeeLogin(employeeLogin);
+					result.setSuccess(true);
+
 	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            result = false;
+				result.setSuccess(false);
 	        }
 	        return result;
 	}
