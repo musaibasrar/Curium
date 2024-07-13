@@ -17,8 +17,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Diary Message</title>
-	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/cambridge/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/cambridge/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -110,7 +110,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/authenticate";
+                form1.action="/cambridge/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -141,7 +141,7 @@ form{
 	</div>
 	<div class="container-fluid"  align="center">
 					
-						<form action="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
+						<form action="/cambridge/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row">
 								<input type="submit" value="Back" class="btn">
 							</div>

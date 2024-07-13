@@ -104,8 +104,8 @@ span{
  width:40px;
  } */      
 </style>
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script>
         $(function() {
 
@@ -120,7 +120,7 @@ span{
     	});
         function printtc(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/abc/DocumentsProcess/printCharacterCertificate";
+        		form1.action = "/cambridge/DocumentsProcess/printCharacterCertificate";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -131,7 +131,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -150,7 +150,7 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/abc/images/abc.jpg" width="126" height="140"/></td>
+				<td ><img src="/cambridge/images/cambridge.jpg" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	Al Falah High School (EM)</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	Shanti Nagar, Lalapet, Secunderabad-500017</h4>
@@ -261,7 +261,7 @@ for(Cookie cookie : cookies){
 		
 			<tr>
               <td><button class="printtcstudent"  >Print</button></td>
-              <!-- <a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a> -->
+              <!-- <a id="print" href="/cambridge/DocumentsProcess/printCharacterCertificate">Print</a> -->
             </tr>
 		</TABLE>
 	</form>
