@@ -103,7 +103,7 @@ public class FeesAction {
 	@GetMapping("/feesCollect")
 	public String feesCollect() {
 		feesActionAdapter.viewFees();
-		new FeesService(request, response).viewAllStudentsList();
+		feesActionAdapter.viewAllStudentsList();
 		return "feesCollection";
 	}
 
@@ -170,7 +170,7 @@ public class FeesAction {
 	@GetMapping("/otherfeesCollect")
 	public String otherfeesCollect() {
 		new FeesService(request, response).viewOtherFees();
-		new FeesService(request, response).viewAllStudentsList();
+		feesActionAdapter.viewAllStudentsList();
 		return "otherfeesCollection";
 	}
 	

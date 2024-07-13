@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
@@ -40,6 +41,9 @@ public class FeesCollectionAction {
 
 		@Autowired
 		StandardActionAdapter standardActionAdapter;
+		
+		@Autowired
+		private FeesActionAdapter feesActionAdapter;
 
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
@@ -72,7 +76,7 @@ public class FeesCollectionAction {
                 new FeesCollectionService(request, response, standardActionAdapter).getStampFees();
                 new FeesCollectionService(request, response, standardActionAdapter).getFeesDetails();
                 standardActionAdapter.viewClasses();
-                new FeesService(request, response).viewAllStudentsList();
+                feesActionAdapter.viewAllStudentsList();
                 return "feesCollection";
         }
 
@@ -147,7 +151,7 @@ public class FeesCollectionAction {
                 new FeesCollectionService(request, response, standardActionAdapter).getotherStampFees();
                 new FeesCollectionService(request, response, standardActionAdapter).getotherFeesDetails();
                 standardActionAdapter.viewClasses();
-                new FeesService(request, response).viewAllStudentsList();
+                feesActionAdapter.viewAllStudentsList();
                 return "otherfeesCollection";
         }
 		

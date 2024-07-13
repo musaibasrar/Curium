@@ -35,7 +35,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
@@ -320,8 +320,8 @@ public class DocumentService {
 		}
 
 		
-	public StudentListAaResponseDto admissionAbstract(String branchid) {
-		StudentListAaResponseDto studentListAaResponseDto = StudentListAaResponseDto.builder().build();
+	public ParentListResponseDto admissionAbstract(String branchid) {
+		ParentListResponseDto studentListAaResponseDto = ParentListResponseDto.builder().build();
 		if(branchid!=null){
 			try {
 				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
