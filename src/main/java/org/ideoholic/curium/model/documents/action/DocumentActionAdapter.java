@@ -12,7 +12,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.model.documents.dto.StudentListAaResponseDto;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
@@ -63,7 +63,7 @@ public class DocumentActionAdapter {
 
 	public boolean admissionAbstract() {
 		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
-		StudentListAaResponseDto studentListAaResponseDto = documentService
+		ParentListResponseDto studentListAaResponseDto = documentService
 				.admissionAbstract(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListaa", studentListAaResponseDto.getList());
 		return studentListAaResponseDto.isSuccess();

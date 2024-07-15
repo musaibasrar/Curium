@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.feescategory.action;
 
-import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +13,9 @@ import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
-import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -108,6 +108,13 @@ public class FeesActionAdapter {
 		idFeescategoryDto.setIdFeesCategory(request.getParameterValues("idfeescategory"));
 		feesService.deleteMultiple(idFeescategoryDto);
 		
+	}
+
+	public boolean viewAllStudentsList() {
+		FeesService feesService = new FeesService(request, response);
+		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute("branchid").toString());
+		request.setAttribute("studentListFeesCollection", parentListResponseDto.getList());
+		return parentListResponseDto.isSuccess();
 	}
 	
 }
