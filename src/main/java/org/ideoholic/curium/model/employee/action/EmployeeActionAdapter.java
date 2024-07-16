@@ -52,7 +52,8 @@ public class EmployeeActionAdapter {
     }
     public boolean viewDetailsEmployee() {
         EmployeeService employeeService = new EmployeeService(request,response);
-        EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee();
+
+        EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee(request.getParameter("id"));
 
         request.setAttribute("stafflogin", employeeDetailsResponseDto.getEmployeeLogin());
 

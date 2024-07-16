@@ -169,11 +169,11 @@ public class EmployeeService {
     return viewAllEmployeeResponseDto;
 }
 
-	public EmployeeDetailsResponseDto viewDetailsEmployee() {
+	public EmployeeDetailsResponseDto viewDetailsEmployee(String empId) {
 		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
 		 boolean result = false;
 	        try {
-	            long id = Long.parseLong(request.getParameter("id"));
+	            long id = Long.parseLong(empId);
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
