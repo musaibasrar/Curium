@@ -45,7 +45,7 @@ public class StandardApiAction {
     }
 
     @PostMapping("/searchByClass")
-    public ResponseEntity<ResultResponse> searchByClass(@RequestBody StdOfClassDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentacademicyear") String currentAcademicYear) {
+    public ResponseEntity<ResultResponse> searchByClass(@RequestBody StdOfClassDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
         ResultResponse result = standardService.searchByClass(dto, branchId, currentAcademicYear);
         return ResponseEntity.ok(result);
     }
@@ -152,7 +152,7 @@ public class StandardApiAction {
     }
 
     @PostMapping("/createClass")
-    public ResponseEntity<ResultResponse> createClass(@RequestBody ClassDto classDto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity<ResultResponse> createClass(@RequestBody ClassDto classDto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId) {
         ResultResponse result = standardService.createClass(classDto, branchId, userId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
