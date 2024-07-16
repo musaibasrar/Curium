@@ -45,6 +45,8 @@ import org.ideoholic.curium.util.DataUtil;
 public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
+
+	private AdminService adminService;
 	
 	 HttpServletRequest request;
 	    HttpServletResponse response;
@@ -144,7 +146,7 @@ public class UserService {
         	//End Fees Details
         	
         	//Daily Expenses
-        	DailyExpensesResponseDto dailyResponse = new AdminService(request, response).dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
+        	DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
         	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
         	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
 			request.setAttribute("dayone", dailyResponse.getDayOne());
@@ -153,12 +155,12 @@ public class UserService {
 			request.setAttribute("dailyexpenses", dailyResponse.getDailyExpenses());
         		
         	//Monthly Expenses
-			MonthlyExpensesResponseDto monthlyExpense = new AdminService(request, response).getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
+			MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
 			request.setAttribute("monthlyexpenses", monthlyExpense.getMonthlyExpenses());
 			request.setAttribute("monthlistexpenses", monthlyExpense.getMonthListExpenses());
         		
         	//Get Boys & Girls
-			ResultResponse result = new AdminService(request, response).getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
+			ResultResponse result = adminService.getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
 			request.setAttribute("totalboysgirls", result.getResultList());
         	
         request.setAttribute("studentxaxis", xaxisList);

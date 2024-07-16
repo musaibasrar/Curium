@@ -28,21 +28,10 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminService {
-	
-	 private HttpServletRequest request;
-	    private HttpServletResponse response;
-	    private HttpSession httpSession;
-	    private String BRANCHID = "branchid";
-	
-	public AdminService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
-
-
 
 	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto, String userId, String branchId) {
 
