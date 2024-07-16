@@ -12,6 +12,6 @@ import java.util.List;
 public class StockMoveResponseDto {
     private int currentPage;
     private int noOfPages;
-    List<Bill> messStockMoveList;
+    private List<Bill> messStockMoveList;
     private boolean success;
 }

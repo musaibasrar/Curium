@@ -41,5 +41,6 @@ public class MessStockMoveActionAdapter {
         StockMoveResponseDto responseDto = messStockMoveService.viewStockMoveDetails(page, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", page);
+        request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
     }
 }
