@@ -35,7 +35,7 @@ public class AppointmentActionAdapter {
     private AppointmentService appointmentService;
     
     private String BRANCHID = "branchid";
-    private String CURRENTACADEMICYEAR = "currentacadamicyear";
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 
     public void generateAppointmentsReport() {
