@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -115,6 +116,12 @@ public class FeesActionAdapter {
 		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute("branchid").toString());
 		request.setAttribute("studentListFeesCollection", parentListResponseDto.getList());
 		return parentListResponseDto.isSuccess();
+	}
+
+	public void viewAllBranchStudents() {
+		FeesService feesService = new FeesService(request, response);
+		StudentListResponseDto studentListResponseDto = feesService.viewAllBranchStudents();
+		request.setAttribute("studentListFeesCollection", studentListResponseDto.getStudentListFeesCollection());
 	}
 	
 }

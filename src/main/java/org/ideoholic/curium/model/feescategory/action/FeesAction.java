@@ -110,7 +110,7 @@ public class FeesAction {
 	@GetMapping("/feesCollectAllBranches")
 	public String feesCollectAllBranches() {
 		feesActionAdapter.viewFees();
-		new FeesService(request, response).viewAllBranchStudents();
+		feesActionAdapter.viewAllBranchStudents();
 		return "feesCollection";
 	}
 

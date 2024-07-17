@@ -31,6 +31,7 @@ import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
@@ -265,14 +266,15 @@ public class FeesService {
         }
 
 
-    public void viewAllBranchStudents() {
+    public StudentListResponseDto viewAllBranchStudents() {
         
+    	StudentListResponseDto studentListResponseDto = new StudentListResponseDto();
         try {
                 List<Student> list = new feesDetailsDAO().readListOfAllBranchStudents();
-                request.setAttribute("studentListFeesCollection", list);
+                studentListResponseDto.setStudentListFeesCollection(list);
         } catch (Exception e) {
         }
-        
+        return studentListResponseDto;
     }
 
 
