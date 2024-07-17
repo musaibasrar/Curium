@@ -192,4 +192,11 @@ public class MessItemActionAdapter {
         httpSession.setAttribute("transactionfromdateselected", responseDto.getTransactionFromDateSelected());
         httpSession.setAttribute("transactiontodateselected", responseDto.getTransactionToDateSelected());
     }
+
+    public void getCurrentStockToIssue() {
+        MessItemsService messItemsService = new MessItemsService(request, response);
+
+        ResultResponse resultResponse = messItemsService.getCurrentStockToIssue();
+        request.setAttribute("stocklist", resultResponse.getResultList());
+    }
 }

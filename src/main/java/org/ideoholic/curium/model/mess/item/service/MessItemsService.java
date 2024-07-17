@@ -598,10 +598,14 @@ public class MessItemsService {
 		}
 
 
-		public void getCurrentStockToIssue() {
+		public ResultResponse getCurrentStockToIssue() {
 			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStock();
-			
-			request.setAttribute("stocklist", messStockAvailability);
+
+			return ResultResponse
+					.builder()
+					.resultList(messStockAvailability)
+					.success(true)
+					.build();
 		}
 
 }

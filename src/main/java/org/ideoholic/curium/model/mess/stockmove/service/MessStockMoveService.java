@@ -1,5 +1,28 @@
 package org.ideoholic.curium.model.mess.stockmove.service;
 
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
+import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.NumberToWord;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -8,30 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
-import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
-import org.ideoholic.curium.model.mess.item.dto.MessItems;
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
-import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
-import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
-import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
-import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
-import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.NumberToWord;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class MessStockMoveService {
 
@@ -464,13 +463,13 @@ public class MessStockMoveService {
 		}
 
 
-	public void viewStockEntryDetails() {
+	public ResultResponse viewStockEntryDetails(String branchId) {
 		
 		List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 		List<MessStockItemDetails> messStockItemDetailsList = new ArrayList<MessStockItemDetails>();
 		List<Integer> itemIds = new ArrayList<Integer>();
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
 			 
 			 messStockEntryList = new MessItemsDAO().getItemsStockEntry();
 			 
@@ -511,7 +510,11 @@ public class MessStockMoveService {
 			 
 		 }
 		 }
-		 request.setAttribute("messstockitemdetailslist", messStockItemDetailsList);
+		 return ResultResponse
+				 .builder()
+				 .resultList(messStockItemDetailsList)
+				 .success(true)
+				 .build();
 	}
 	
 	private Integer getLedgerAccountId(String itemAccount) {
@@ -536,36 +539,36 @@ public class MessStockMoveService {
 	}
 
 
-	public boolean viewStockMoveDetails() {
+	public StockMoveResponseDto viewStockMoveDetails(String strPage, String branchId) {
 		
 		List<Bill> messStockMoveList = new ArrayList<Bill>();
-		boolean result = false;
+		StockMoveResponseDto result = StockMoveResponseDto.builder().build();
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
 			 
 					try {
 						int page = 1;
 						int recordsPerPage = 50;
-							if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-								page = Integer.parseInt(request.getParameter("page"));
+							if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+								page = Integer.parseInt(strPage);
 							}
 
 						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails((page - 1) * recordsPerPage,
-									recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())); 	
-						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+									recordsPerPage, Integer.parseInt(branchId));
+						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(branchId));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-						request.setAttribute("noOfPages", noOfPages);
-						request.setAttribute("currentPage", page);
+						result.setNoOfPages(noOfRecords);
+						result.setCurrentPage(page);
 						
-						result = true;
+						result.setSuccess(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				
 			 
 		 }
-		 
-		 request.setAttribute("messstockmovelist", messStockMoveList);
+
+		 result.setMessStockMoveList(messStockMoveList);
 			
 		 return result;
 	}
