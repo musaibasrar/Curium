@@ -116,7 +116,7 @@ public class FeesAction {
 
 	@PostMapping("/addFeesParticular")
 	public String addFeesParticular() {
-		new FeesService(request, response).addFeesParticular();
+		feesActionAdapter.addFeesParticular();
 		return viewFees();
 	}
 
