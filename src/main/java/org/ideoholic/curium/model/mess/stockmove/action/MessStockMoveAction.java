@@ -4,7 +4,6 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -32,7 +31,7 @@ public class MessStockMoveAction {
 	@Autowired
 	HttpServletResponse response;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private MessStockMoveActionAdapter messStockMoveActionAdapter;
 	@Autowired
@@ -63,7 +62,7 @@ public class MessStockMoveAction {
     	messStockMoveActionAdapter.viewStockEntryDetails();
     	
     	//Get Customers
-    	new StudentService(request, response).viewStudentsParentsPerBranch();
+    	new StudentService(request, response, standardActionAdapter).viewStudentsParentsPerBranch();
 		
 		
 		
@@ -85,7 +84,7 @@ public class MessStockMoveAction {
     	
     	messStockMoveActionAdapter.viewStockMoveDetails();
     	//Get Student
-    	new StudentService(request, response).viewAllStudentsParents();
+    	new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
     	return "bill";
     	//return "issuestock";
 

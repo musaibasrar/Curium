@@ -48,19 +48,19 @@ public class StudentAction {
 
 	@RequestMapping(value = "/viewAllSuperAdmin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewAllSuperAdmin() {
-		new StudentService(request, response).viewAllStudentsSuperAdmin();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsSuperAdmin();
 		return "viewAllWithParents";
 	}
 
 	@GetMapping("/addNew")
 	public String addNew() {
 		standardActionAdapter.viewClasses();
-		return new StudentService(request, response).addNew();
+		return new StudentService(request, response, standardActionAdapter).addNew();
 	}
 
 	@PostMapping("/download")
 	public String downlaodFile() {
-		if (new StudentService(request, response).downlaodFile()) {
+		if (new StudentService(request, response, standardActionAdapter).downlaodFile()) {
 			return "exportsuccess";
 		}
 		return "exportfailure";
@@ -68,7 +68,7 @@ public class StudentAction {
 
 	@PostMapping("/GenerateBonafide")
 	public String generateBonafide() {
-		String result = new StudentService(request, response).generateBonafide();
+		String result = new StudentService(request, response, standardActionAdapter).generateBonafide();
 		if (result != null) {
 			return result;
 		} else {
@@ -90,13 +90,13 @@ public class StudentAction {
 
 	@PostMapping("/feesStructurePerYear")
 	public String feesStructurePerYear() {
-		new StudentService(request, response).viewfeesStructurePerYear();
+		new StudentService(request, response, standardActionAdapter).viewfeesStructurePerYear();
 		return "student_details_feesstructure";
 	}
 
 	@GetMapping("/ViewFeesStructure")
 	public String ViewFeesStructure() {
-		if (new StudentService(request, response).viewDetailsOfStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
@@ -113,13 +113,13 @@ public class StudentAction {
 
 	@GetMapping("/viewAllStudentsWithParents")
 	public String viewAllStudentsWithParents() {
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 
 	@GetMapping("/viewAllStudents")
 	public String viewAllStudents() {
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 	//student detail
@@ -132,7 +132,7 @@ public class StudentAction {
 
 	@PostMapping("/promoteClass")
 	public String promoteClass() {
-		if (new StudentService(request, response).promoteMultiple()) {
+		if (new StudentService(request, response, standardActionAdapter).promoteMultiple()) {
 			return "successpromote";
 		}
 		return "failurepromote";
@@ -140,39 +140,39 @@ public class StudentAction {
 
 	@PostMapping("/restoreMultiple")
 	public String restoreMultiple() {
-		new StudentService(request, response).restoreMultiple();
+		new StudentService(request, response, standardActionAdapter).restoreMultiple();
 		return viewAll();
 	}
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new StudentService(request, response).deleteMultiple();
+		new StudentService(request, response, standardActionAdapter).deleteMultiple();
 		return archiveViewAll();
 	}
 
 	@GetMapping("/archiveViewAll")
 	public String archiveViewAll() {
-		new StudentService(request, response).viewAllStudentsArchive();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsArchive();
 		System.out.println("IN action's view all Archive");
 		return "ArchiveviewAll";
 	}
 
 	@PostMapping("/archiveMultiple")
 	public String archiveMultiple() {
-		new StudentService(request, response).archiveMultiple();
+		new StudentService(request, response, standardActionAdapter).archiveMultiple();
 		return viewAll();
 	}
 
 	@RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String updateStudent(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		String idbranchid = new StudentService(request, response).updateStudent(uploadedFiles);
+		String idbranchid = new StudentService(request, response, standardActionAdapter).updateStudent(uploadedFiles);
 		String id[] = idbranchid.split("_");
 		return viewStudent(id[0], id[1]);
 	}
 
 	@PostMapping("/updateStudentDetails")
 	public String updateStudentDetails(HttpServletRequest request, HttpServletResponse response) {
-		if (new StudentService(request, response).viewDetailsOfStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
 			String urlBranchId = request.getParameter("urlbranchid");
 			if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
 					|| "3".equalsIgnoreCase(urlBranchId)) {
@@ -190,7 +190,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewDetails", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewStudent() {
 		String branchId;
-		if (new StudentService(request, response).viewDetailsOfStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
@@ -215,7 +215,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ViewDetailsbyexternalid() {
 		String branchId;
-		if (new StudentService(request, response).viewDetailsbySidStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
@@ -240,7 +240,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewFeesDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ViewFeesDetailsbyexternalid() {
 		String branchId;
-		if (new StudentService(request, response).viewDetailsbySidStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
@@ -264,7 +264,7 @@ public class StudentAction {
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String addStudent(@ModelAttribute("student") StudentDto student,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		if (new StudentService(request, response).addStudent(student, uploadedFiles)) {
+		if (new StudentService(request, response, standardActionAdapter).addStudent(student, uploadedFiles)) {
 			return "saved";
 		} else {
 			return "notSaved";
@@ -273,13 +273,13 @@ public class StudentAction {
 
 	@RequestMapping(value = "/viewAll", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewAll() {
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 
 	@PostMapping("/exportDataForStudents")
 	public String exportDataForStudents() {
-		if (new StudentService(request, response).exportDataForStudents()) {
+		if (new StudentService(request, response, standardActionAdapter).exportDataForStudents()) {
 			return "exportsuccess";
 		} else {
 			return "exportfailure";
@@ -299,7 +299,7 @@ public class StudentAction {
 	
 	@GetMapping("/ViewotherFeesStructure")
 	public String ViewotherFeesStructure() {
-		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent()) {
+		if (new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_other_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

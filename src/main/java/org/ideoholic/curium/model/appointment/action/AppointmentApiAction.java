@@ -3,32 +3,21 @@
  */
 package org.ideoholic.curium.model.appointment.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
-import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
-import org.ideoholic.curium.model.appointment.dto.CancelAppointmentsDto;
-import org.ideoholic.curium.model.appointment.dto.CompleteAppointmentsDto;
-import org.ideoholic.curium.model.appointment.dto.ExportAppointmentsReportDto;
-import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
-import org.ideoholic.curium.model.appointment.dto.UpdateAppointmentDto;
-import org.ideoholic.curium.model.appointment.dto.ViewAllAppoinmentsResponseDto;
-import org.ideoholic.curium.model.appointment.dto.ViewAllAppointmentsDto;
+import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/api/v1/appointmentProcess")
@@ -44,6 +33,8 @@ public class AppointmentApiAction {
 	private AppointmentService appointmentService;
 	@Autowired
 	private EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/download")
 	private ResponseEntity<ResultResponse> download() {
@@ -79,7 +70,7 @@ public class AppointmentApiAction {
 	@GetMapping("/appointmentReport")
 	private String appointmentReport() {
 		// TODO: Need to fix this after migrating StudentService
-		new StudentService(request, response).viewAllStudentsList();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
 		return "appointmentsreport";
 	}
 
@@ -110,7 +101,7 @@ public class AppointmentApiAction {
 		ResultResponse result = appointmentService.addAppointment(addAppointmentDto, branchId, currentAcademicYear, userLoginId);
 		if (result.isSuccess()) {
 			// TODO: Need to fix this after migrating StudentService and EmployeeService
-			new StudentService(request, response).viewAllStudentsParents();
+			new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 			employeeActionAdapter.ViewAllEmployee();
 			return ResponseEntity.ok(result);
 		} else {

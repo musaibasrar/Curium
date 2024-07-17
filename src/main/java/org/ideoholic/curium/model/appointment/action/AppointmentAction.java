@@ -3,11 +3,8 @@
  */
 package org.ideoholic.curium.model.appointment.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Musaib_2
@@ -35,6 +35,8 @@ public class AppointmentAction {
 	private AppointmentActionAdapter appointmentActionAdapter;
 	@Autowired
 	EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/download")
 	private String download() {
@@ -63,7 +65,7 @@ public class AppointmentAction {
 
 	@GetMapping("/appointmentReport")
 	private String appointmentReport() {
-		new StudentService(request, response).viewAllStudentsList();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
 		return "appointmentsreport";
 	}
 
@@ -91,7 +93,7 @@ public class AppointmentAction {
 	@PostMapping("/addAppointment")
 	private String addAppointment() {
 		if(appointmentActionAdapter.addAppointment()){
-			new StudentService(request, response).viewAllStudentsParents();
+			new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 			employeeActionAdapter.ViewAllEmployee();
 			return "viewAllWithParents";
 		}else{

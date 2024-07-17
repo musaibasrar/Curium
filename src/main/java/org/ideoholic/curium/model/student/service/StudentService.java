@@ -54,8 +54,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StudentService {
 
-	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -71,10 +70,11 @@ public class StudentService {
 	 */
 	private static final int BUFFER_SIZE = 4096;
 
-	public StudentService(HttpServletRequest request, HttpServletResponse response) {
+	public StudentService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
+		this.standardActionAdapter=standardActionAdapter;
 	}
 
 	public boolean addStudent(StudentDto studentDto, MultipartFile[] listOfFiles) {
