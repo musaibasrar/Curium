@@ -27,7 +27,7 @@ public class StandardActionAdapter {
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
-    private String CURRENTACADEMICYEAR = "currentacademicyear";
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 
     public boolean viewClasses() {

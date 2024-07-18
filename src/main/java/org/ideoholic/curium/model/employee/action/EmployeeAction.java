@@ -62,7 +62,7 @@ public class EmployeeAction {
 
 	@GetMapping("/ViewDetails")
 	public String viewDetails() {
-		new EmployeeService(request, response).viewDetailsEmployee();
+		employeeActionAdapter.viewDetailsEmployee();
 		return "employee_details";
 	}
 

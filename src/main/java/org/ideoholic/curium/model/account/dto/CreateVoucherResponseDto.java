@@ -8,8 +8,9 @@ import java.util.List;
 @Data
 @Builder
 public class CreateVoucherResponseDto {
-    private List accountDetailsBalance;
-    private List accountDetailsBalanceBankCash;
-    private List accountDetailsJournalEntry;
+    private List<Accountdetailsbalance> accountDetailsBalance;
+    private List<Accountdetailsbalance> accountDetailsBalanceExpenses;
+    private List<Accountdetailsbalance> accountDetailsBalanceBankCash;
+    private List<Accountdetailsbalance> accountDetailsJournalEntry;
     private boolean success;
 }

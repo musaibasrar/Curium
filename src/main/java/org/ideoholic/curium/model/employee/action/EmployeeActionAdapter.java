@@ -1,18 +1,24 @@
 package org.ideoholic.curium.model.employee.action;
 
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
+import org.ideoholic.curium.model.employee.dto.BasicPayEmployeesDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeListDto;
+import org.ideoholic.curium.model.employee.dto.SearchEmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.ViewAllRelationsResponseDto;
 import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class EmployeeActionAdapter {
@@ -52,7 +58,7 @@ public class EmployeeActionAdapter {
     }
     public boolean viewDetailsEmployee() {
         EmployeeService employeeService = new EmployeeService(request,response);
-        ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = employeeService.viewDetailsEmployee();
+        ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = employeeService.viewDetailsEmployee(request.getParameter("id"));
 
         request.setAttribute("stafflogin", viewDetailsEmployeeResponseDto.getEmployeeLogin());
 
@@ -100,6 +106,53 @@ public class EmployeeActionAdapter {
 
         return employee.getTid().toString();
 
+    }
+    public boolean ViewAllEmployee() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("employeeList", viewAllEmployeeResponseDto.getEmployeeList());
+        httpSession.setAttribute("employeeListProcessSalary", viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
+
+
+        return viewAllEmployeeResponseDto.isSuccess();
+    }
+    public void deleteMultiple() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+        EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+        employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+        employeeService.deleteMultiple(employeeIdsDto);
+    }
+    public void viewAllRelations() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+        ViewAllRelationsResponseDto viewAllRelationsResponseDto = employeeService.viewAllRelations(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("listDepartment", viewAllRelationsResponseDto.getListDepartment());
+        httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
+
+    }
+    public void searchEmployee() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        SearchEmployeeDto searchEmployeeDto = new SearchEmployeeDto();
+        searchEmployeeDto.setStaffName(request.getParameter("staffName"));
+        searchEmployeeDto.setStaffDepartment(request.getParameter("staffDepartment"));
+        EmployeeListDto employeeListDto = employeeService.searchEmployee(searchEmployeeDto,httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("searchedemployeeList", employeeListDto.getEmployeeList());
+    }
+    public void basicpayEmployees() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        BasicPayEmployeesDto basicPayEmployeesDto = employeeService.basicpayEmployees(httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getBasicPay());
+    }
+    public void viewDepartments() {
+        EmployeeService employeeService = new EmployeeService(request,response);
+
+        DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
+
+        httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
     }
 
 }

@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.employee.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.EmployeeDto;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.dto.ViewDetailsEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
@@ -154,26 +152,27 @@ public class EmployeeService {
 		
 		return ResultResponse.builder().build();
 	}
-
-	public boolean ViewAllEmployee() {
+//TODO: Naming Convention error in this method, method name should start from small alphabet.
+	public ViewAllEmployeeResponseDto ViewAllEmployee(String branchId) {
+		ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = new ViewAllEmployeeResponseDto();
 		
 		boolean result = false;
     try {
-    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        httpSession.setAttribute("employeeList", list);
-        httpSession.setAttribute("employeeListProcessSalary", list);
-        result = true;
+    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+        viewAllEmployeeResponseDto.setEmployeeList(list);
+        viewAllEmployeeResponseDto.setEmployeeListProcessSalary(list);
+        viewAllEmployeeResponseDto.setSuccess(true);
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return result;
+    return viewAllEmployeeResponseDto;
 }
 
-	public ViewDetailsEmployeeResponseDto viewDetailsEmployee() {
+	public ViewDetailsEmployeeResponseDto viewDetailsEmployee(String strid) {
 		ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = new ViewDetailsEmployeeResponseDto();
 		 boolean result = false;
 	        try {
-	            long id = Long.parseLong(request.getParameter("id"));
+	            long id = Long.parseLong(strid);
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
@@ -359,8 +358,8 @@ public class EmployeeService {
         return employee;
 	}
 
-	public void deleteMultiple() {
-		 String[] employeeIds = request.getParameterValues("employeeIDs");
+	public void deleteMultiple(EmployeeIdsDto employeeIdsDto) {
+		 String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		 if(employeeIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : employeeIds) {
@@ -373,51 +372,59 @@ public class EmployeeService {
 		 }
 	}
 
-	public void viewAllRelations() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listDepartment", listDepartment);
-	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listPosition", listPosition);
+	public ViewAllRelationsResponseDto viewAllRelations(String branchId) {
+		ViewAllRelationsResponseDto viewAllRelationsResponseDto = new ViewAllRelationsResponseDto();
+		if(branchId!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
+	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListPosition(listPosition);
 		}
+		return viewAllRelationsResponseDto;
 	}
 
-	public void searchEmployee() {
-		String staffName = request.getParameter("staffName");
-		String staffDepartment = request.getParameter("staffDepartment");
+	public EmployeeListDto searchEmployee(SearchEmployeeDto searchEmployeeDto, String branchId) {
+		EmployeeListDto employeeListDto = new EmployeeListDto();
+		String staffName = searchEmployeeDto.getStaffName();
+		String staffDepartment = searchEmployeeDto.getStaffDepartment();
 		List<Teacher> employeeList = new ArrayList<Teacher>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			if(staffName!=""){
-				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
 			}else if(staffDepartment!=""){
-				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
 			}else {
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPay(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				employeeList = new EmployeeDAO().readListOfEmployeesBasicPay(Integer.parseInt(branchId));
 			}
 		}
 		
-		request.setAttribute("searchedemployeeList", employeeList);
+		employeeListDto.setEmployeeList(employeeList);
 		
-		ViewAllEmployee();
+		ViewAllEmployee(branchId);
+
+		return employeeListDto;
 	}
 
-	public void basicpayEmployees() {
+	public BasicPayEmployeesDto basicpayEmployees(String branchId) {
+		BasicPayEmployeesDto basicPayEmployeesDto = new BasicPayEmployeesDto();
 		List<Paybasic> employeeList = new ArrayList<Paybasic>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId));
 		}
-		request.setAttribute("vieweditbasicpay", employeeList);
+		basicPayEmployeesDto.setBasicPay(employeeList);
+		return basicPayEmployeesDto;
 	}
 
-	public void viewDepartments() {
+	public DepartmentResponseDto viewDepartments(String branchId) {
+		DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("listDepartment", listDepartment);
+		if(branchId!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+	        departmentResponseDto.setDepartmentList(listDepartment);
 		}
+		return departmentResponseDto;
 	}
 
 	public boolean printMultipleEmployees() {

@@ -23,7 +23,7 @@ public class AttendanceActionAdapter {
     private HttpSession httpSession;
 
     private String BRANCHID = "branchid";
-    private String CURRENTACADEMICYEAR = "currentacadamicyear";
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
     public boolean markStaffAttendance() {
         AttendanceService attendanceService = new AttendanceService(request, response);
