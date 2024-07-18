@@ -44,12 +44,12 @@ public class AdminService {
 
 
 
-	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto) {
+	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto, String userId, String branchId) {
 
 		
 		Adminexpenses adminexpenses = new Adminexpenses();
 		
-		if(adminexpensesdto.getBranchId()!=null){
+		if(branchId!=null){
 			adminexpenses.setItemdescription(DataUtil.emptyString(adminexpensesdto.getItemdescription()));
 			adminexpenses.setPriceofitem(DataUtil.emptyString(adminexpensesdto.getPriceofitem()));
 			adminexpenses.setPaidto(DataUtil.emptyString(adminexpensesdto.getPaidto()));
@@ -59,8 +59,8 @@ public class AdminService {
 			adminexpenses.setChequedate(DateUtil.indiandateParser(adminexpensesdto.getChequedate()));
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(adminexpensesdto.getEntrydate()));
 			adminexpenses.setVoucherstatus("pending");
-			adminexpenses.setUserid(adminexpensesdto.getUserid());
-			adminexpenses.setBranchid(adminexpensesdto.getBranchId());
+			adminexpenses.setUserid(Integer.parseInt(userId));
+			adminexpenses.setBranchid(Integer.parseInt(branchId));
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
 				{
@@ -74,10 +74,10 @@ public class AdminService {
 		
 	}	
 	
-	public ResultResponse viewAllExpenses(Integer branchid) {
+	public ResultResponse viewAllExpenses(String branchId) {
 		List<Adminexpenses> list;
 		try {
-			list = new AdminDetailsDAO().readListOfExpenses(branchid);
+			list = new AdminDetailsDAO().readListOfExpenses(Integer.parseInt(branchId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResultResponse.builder().success(false).build();
@@ -102,13 +102,13 @@ public class AdminService {
 	}
 
 
-	public AdminExpenseResponseDto searchExpensesbydate(AdminExpensesDto adminexpensesdto) {
+	public AdminExpenseResponseDto searchExpensesbydate(AdminExpensesDto adminexpensesdto, String strBranchId) {
 		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
 		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
 		String branchId = adminexpensesdto.getSelectedbranchid();
 		int idBranch = 0;
 
-		if (adminexpensesdto.getBranchId() != null) {
+		if (strBranchId != null) {
 
 			if (branchId != null) {
 				String[] branchIdName = branchId.split(":");
@@ -116,7 +116,7 @@ public class AdminService {
 				adminExpenseResponseDto.setExpensesdatebranchname(branchIdName[1]);
 				adminExpenseResponseDto.setBranchname("Branch Name:");
 			} else {
-				idBranch = adminexpensesdto.getBranchId();
+				idBranch = Integer.parseInt(strBranchId);
 			}
 
 			String queryMain = "From Adminexpenses as adminexpenses where adminexpenses.voucherstatus='approved' AND adminexpenses.branchid="
@@ -298,9 +298,9 @@ public class AdminService {
 		return ResultResponse.builder().resultList(boysGirls).build();
 	}
 
-	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto) {
+	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto, String branchId) {
         try {
-        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),expenseiddto.getBranchId());
+        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),Integer.parseInt(branchId));
            return adminExpense; 
         } catch (Exception e) {
             e.printStackTrace();
@@ -334,7 +334,7 @@ public class AdminService {
 	}
 
 
-	public AdminExpenseResponseDto viewExpensesBetweenDates(AdminExpensesDateDto adminExpensesDateDto) {
+	public AdminExpenseResponseDto viewExpensesBetweenDates(AdminExpensesDateDto adminExpensesDateDto, String branchId) {
 		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
 
 		try {
@@ -344,7 +344,7 @@ public class AdminService {
 			String voucherStatus = DataUtil.emptyString(adminExpensesDateDto.getVoucherstatus());
 			String paymentType = DataUtil.emptyString(adminExpensesDateDto.getPaymenttype());
 			String queryMain = "From Adminexpenses as adminexpenses where adminexpenses.branchid="
-					+ adminExpensesDateDto.getBranchId() + " AND";
+					+ branchId + " AND";
 
 			String querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
 
