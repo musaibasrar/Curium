@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.job.service.JobService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,8 @@ public class JobAction {
 	HttpSession httpSession;
 	@Autowired
 	EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 
 	
 	@PostMapping("/download")
@@ -322,7 +325,7 @@ public class JobAction {
 	@GetMapping("/taskReport")
 	private String taskReport() {
 		employeeActionAdapter.ViewAllEmployee();
-		new StudentService(request, response).viewAllStudentsList();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
 		return "tasksreport";
 	}
 	

@@ -3,17 +3,17 @@
  */
 package org.ideoholic.curium.model.mess.item.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Musaib_2
@@ -29,6 +29,8 @@ public class MessItemsAction {
 	private HttpServletResponse response;
 	@Autowired
 	private MessItemActionAdapter messItemActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 
 	@PostMapping("/printStockReceivedReport")
 	public String printStockReceivedReport() {
@@ -55,14 +57,14 @@ public class MessItemsAction {
 	@PostMapping("/generateStockIssuanceReport")
 	public String generateStockIssuanceReport() {
 		messItemActionAdapter.generateStockIssuanceReport();
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "stockissuancereport";
 	}
 
 	@GetMapping("/issuanceStock")
 	public String issuanceStock() {
 		messItemActionAdapter.getIssuanceStock();
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "stockissuancereport";
 	}
 

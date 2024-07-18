@@ -128,7 +128,7 @@ public class FeesAction {
 	}
 
 	private String studentFeePage(String studentId) {
-		if (new StudentService(request, response).viewDetailsOfStudent(studentId)) {
+		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent(studentId)) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
@@ -202,7 +202,7 @@ public class FeesAction {
 	}
 	
 	private String studentotherFeePage(String studentId) {
-		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent(studentId)) {
+		if (new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent(studentId)) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_other_feesstructure_admin";
 			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

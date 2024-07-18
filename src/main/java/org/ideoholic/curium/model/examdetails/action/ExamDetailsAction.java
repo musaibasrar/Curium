@@ -3,14 +3,9 @@
  */
 package org.ideoholic.curium.model.examdetails.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
-import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Musaib_2
@@ -37,7 +35,7 @@ public class ExamDetailsAction {
 	private YearActionAdapter yearActionAdapter;
 
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 	
 	private String error = "error";
 	
@@ -76,7 +74,7 @@ public class ExamDetailsAction {
 		result = yearActionAdapter.getYear();
 		if (!result) 
 			return error;
-		result = new StudentService(request, response).viewAllStudentsList();
+		result = new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
 		if (!result) 
 			return error;
 		

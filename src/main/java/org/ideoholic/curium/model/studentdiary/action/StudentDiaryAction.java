@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.action.DiaryActionAdapter;
 import org.ideoholic.curium.model.diary.service.DiaryService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.studentdiary.service.StudentDiaryservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,12 @@ public class StudentDiaryAction {
 	HttpSession httpSession;
 	@Autowired
 	private DiaryActionAdapter diaryActionAdapter;
+	@Autowired
+	private StandardActionAdapter standardActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
-		new StudentService(request, response).viewAllStudentsParents();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
 		return "studentdiary";
 	}
 	
