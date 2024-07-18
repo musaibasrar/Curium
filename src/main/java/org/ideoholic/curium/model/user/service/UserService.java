@@ -41,24 +41,25 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
 
 public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
-
 	private AdminService adminService;
-	
+
 	 HttpServletRequest request;
 	    HttpServletResponse response;
 	    HttpSession httpSession;
 	    private Login login;
 	    private String BRANCHID = "branchid";
 
-	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService) {
 		this.request = request;
         this.response = response;
         this.httpSession = request.getSession();
 		this.standardActionAdapter = standardActionAdapter;
+		this.adminService = adminService;
 	}
 
 	public boolean authenticateUser() {

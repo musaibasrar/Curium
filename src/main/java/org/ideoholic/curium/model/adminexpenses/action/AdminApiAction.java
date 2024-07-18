@@ -17,20 +17,20 @@ public class AdminApiAction {
 
 
     @PostMapping("/rejectVoucher")
-    public ResponseEntity<ResultResponse> rejectVoucher(@RequestBody ExpensesIdDto dto) {
+    public ResponseEntity<ResultResponse> rejectVoucher(@RequestBody ExpensesIdDto dto, @RequestHeader(value = "branchid") String branchId) {
        adminService.rejectVoucher(dto);
-        return viewAllExpenses(dto.getBranchId());
+        return viewAllExpenses(branchId);
     }
 
     @PostMapping("/approveVoucher")
-    public ResponseEntity<ResultResponse> approveVoucher(@RequestBody ExpensesIdDto dto) {
+    public ResponseEntity<ResultResponse> approveVoucher(@RequestBody ExpensesIdDto dto,@RequestHeader(value = "branchid") String branchId) {
         adminService.approveVoucher(dto);
-        return viewAllExpenses(dto.getBranchId());
+        return viewAllExpenses(branchId);
     }
 
     @PostMapping("/printVoucher")
-    public ResponseEntity<Adminexpenses> printVoucher(@RequestBody ExpensesIdDto dto) {
-        Adminexpenses result = adminService.printVoucher(dto);
+    public ResponseEntity<Adminexpenses> printVoucher(@RequestBody ExpensesIdDto dto, @RequestHeader(value = "branchid") String branchId) {
+        Adminexpenses result = adminService.printVoucher(dto,branchId);
         return ResponseEntity.ok(result);
     }
 
@@ -43,7 +43,7 @@ public class AdminApiAction {
     }
 
     @GetMapping("/viewAllExpenses")
-    public ResponseEntity<ResultResponse> viewAllExpenses(@RequestBody Integer branchId) {
+    public ResponseEntity<ResultResponse> viewAllExpenses(@RequestHeader(value = "branchid") String branchId) {
         ResultResponse result = adminService.viewAllExpenses(branchId);
         return ResponseEntity.ok(result);
 
@@ -51,10 +51,10 @@ public class AdminApiAction {
 
 
     @PostMapping("/addExpenses")
-    public ResponseEntity<ResultResponse> addExpenses(@RequestBody AdminExpensesDto dto) {
+    public ResponseEntity<ResultResponse> addExpenses(@RequestBody AdminExpensesDto dto, @RequestHeader(value = "branchid") String branchId) {
           ResultResponse result = adminService.addExpenses(dto);
         if ( result.isSuccess()) {
-            return viewAllExpenses(dto.getBranchId());
+            return viewAllExpenses(branchId);
         } else {
             throw new CustomResponseException(CustomErrorMessage.NOTSAVEDEXPENSES);
         }
@@ -62,9 +62,9 @@ public class AdminApiAction {
     }
 
     @PostMapping("/deleteMultiple")
-    public ResponseEntity<ResultResponse> deleteMultiple(ExpensesIdDto dto) {
+    public ResponseEntity<ResultResponse> deleteMultiple(ExpensesIdDto dto, @RequestHeader(value = "branchid") String branchId) {
         adminService.deleteMultiple(dto);
-        return viewAllExpenses(dto.getBranchId());
+        return viewAllExpenses(branchId);
     }
 
     @PostMapping("/viewExpensesBetweenDates")

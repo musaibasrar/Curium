@@ -66,7 +66,7 @@ public class AdminActionAdapter {
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 
-		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto);
+		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto,httpSession.getAttribute("branchid").toString());
 
 		if (adminExpense != null) {
 			httpSession.setAttribute("adminexpenses", adminExpense);

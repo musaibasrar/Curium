@@ -144,7 +144,7 @@ public class EmployeeService {
 		employee.setBranchid(Integer.parseInt(branchId));
 		
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response,null).addUser(employee)){
+			if(new UserService(request, response,null,null).addUser(employee)){
 				return ResultResponse.builder().success(true).build();
 			}else{
 				new EmployeeDAO().delete(employee);
