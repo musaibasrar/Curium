@@ -73,7 +73,7 @@ public class MessStockMoveAction {
 	@PostMapping("/saveStockMove")
 	public String saveStockMove() {
 
-		new MessStockMoveService(request, response).saveStockMove();
+		messStockMoveActionAdapter.saveStockMove();
 		messItemActionAdapter.getCurrentStockToIssue();
 		/*
 		 * Batch stock issue new MessStockMoveService(request,
