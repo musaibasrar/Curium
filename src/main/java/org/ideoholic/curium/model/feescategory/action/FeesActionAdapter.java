@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
+import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
@@ -122,6 +123,16 @@ public class FeesActionAdapter {
 		FeesService feesService = new FeesService(request, response);
 		StudentListResponseDto studentListResponseDto = feesService.viewAllBranchStudents();
 		request.setAttribute("studentListFeesCollection", studentListResponseDto.getStudentListFeesCollection());
+	}
+
+	public void addFeesParticular() {
+		FeesService feesService = new FeesService(request, response);
+		FeesCategoryDto feesCategoryDto = new FeesCategoryDto();
+		feesCategoryDto.setFromClass(request.getParameterValues("fromclass"));
+		feesCategoryDto.setFeesCategory(request.getParameter("feescategory"));
+		feesCategoryDto.setAmount(request.getParameter("amount"));
+		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
+		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
 	}
 	
 }

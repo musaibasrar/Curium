@@ -26,6 +26,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
+import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
@@ -84,21 +85,21 @@ public class FeesService {
         }
 
 
-        public void addFeesParticular() {
+        public void addFeesParticular(FeesCategoryDto feesCategoryDto,String branchid,String userlogin) {
                 
-                if(httpSession.getAttribute(BRANCHID)!=null){
+                if(branchid!=null){
                 	
-                	String[] classesFeesCat = request.getParameterValues("fromclass");
+                	String[] classesFeesCat = feesCategoryDto.getFromClass();
                 	List<Feescategory> feesCategoryList = new ArrayList<Feescategory>();
                 	
                 	for (String feeCat : classesFeesCat) {
                 		Feescategory feescategorynew = new Feescategory();
-                		feescategorynew.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
+                		feescategorynew.setFeescategoryname(DataUtil.emptyString(feesCategoryDto.getFeesCategory()));
                 		feescategorynew.setParticularname(DataUtil.emptyString(feeCat)+"--");
-                		feescategorynew.setAmount(DataUtil.parseInt(request.getParameter("amount")));
-                		feescategorynew.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                		feescategorynew.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-                		feescategorynew.setAcademicyear(DataUtil.emptyString(request.getParameter("categoryyear")));
+                		feescategorynew.setAmount(DataUtil.parseInt(feesCategoryDto.getAmount()));
+                		feescategorynew.setBranchid(Integer.parseInt(branchid));
+                		feescategorynew.setUserid(Integer.parseInt(userlogin));
+                		feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
                         if(!feescategorynew.getFeescategoryname().equalsIgnoreCase("") && !feescategorynew.getParticularname().equalsIgnoreCase("") && feescategorynew.getAmount() != 0 ){
                         	feesCategoryList.add(feescategorynew);
                         }
