@@ -141,7 +141,7 @@ public class JobAction {
 		String result = "error";
 		
 		 if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-			new EmployeeService(request, response).viewDetailsEmployee();
+			employeeActionAdapter.viewDetailsEmployee();
 			employeeActionAdapter.ViewAllEmployee();
 			result = "createquery"; 
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {

@@ -40,22 +40,22 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.*;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentDto;
+import org.ideoholic.curium.model.student.dto.StudentMapper;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudentService {
-
-	@Autowired
-	StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -897,7 +897,9 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			//TODO : Change this to adaptor call while migration
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -980,7 +982,9 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			//TODO : Change this to adaptor call while migration
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -1050,7 +1054,9 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			//TODO : Change this to adaptor call while migration
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -2300,7 +2306,9 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			//TODO : Change this to adaptor call while migration
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;

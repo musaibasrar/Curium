@@ -150,6 +150,7 @@ public class MessItemActionAdapter {
         dto.setItemEntryDate(request.getParameter("itementrydate"));
         dto.setInvoiceDate(request.getParameter("invoicedate"));
         dto.setSupplierReferenceNo(request.getParameter("supplierreferenceno"));
+        dto.setTransportationCharges(request.getParameter("transportationcharges"));
 
         ResultResponse resultResponse = messItemsService.savePurchase(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("itemsreceived", resultResponse.isSuccess());

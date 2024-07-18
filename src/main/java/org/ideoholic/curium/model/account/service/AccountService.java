@@ -347,42 +347,33 @@ public class AccountService {
 
 	public CreateVoucherResponseDto createVoucher(String branchId) {
 
-		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+		List<Accountdetailsbalance> accountDetailsBalanceOthers = new ArrayList<Accountdetailsbalance>();
+		List<Accountdetailsbalance> accountDetailsBalanceExpenses = new ArrayList<Accountdetailsbalance>();
 		if(branchId!=null) {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(2);
 			accountIds.add(3);
 			accountIds.add(4);
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsBalance(accountDetailsBalance)
-					.build();
+			accountDetailsBalanceOthers = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
+			
 			accountIds.clear();
 			accountIds.add(5);
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsJournalEntry(accountDetailsBalance)
-					.build();
+			accountDetailsBalanceExpenses = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
 
 			List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
 			accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.build();
 
 			List<Accountdetailsbalance> accountDetailsJournalEntry = new ArrayList<Accountdetailsbalance>();
 			accountDetailsJournalEntry = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
 
-			return CreateVoucherResponseDto
-					.builder()
-					.accountDetailsJournalEntry(accountDetailsJournalEntry)
-					.success(true)
-					.build();
+			 return CreateVoucherResponseDto
+						.builder()
+						.accountDetailsBalance(accountDetailsBalanceOthers)
+						.accountDetailsBalanceExpenses(accountDetailsBalanceExpenses)
+						.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
+						.accountDetailsJournalEntry(accountDetailsJournalEntry)
+						.success(true)
+						.build();
 		}
 		return CreateVoucherResponseDto
 				.builder()
@@ -1792,7 +1783,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				workbook.write(out);
 				out.close();
 				workbook.close();
-				ResultResponse
+				return ResultResponse
 						.builder()
 						.success(true)
 						.build();
