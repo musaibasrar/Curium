@@ -15,6 +15,5 @@ public class AdminExpensesDateDto {
 	private String fromdate;
 	private String voucherstatus;
 	private String paymenttype;
-	private String branchId;
 
 }
