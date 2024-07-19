@@ -54,7 +54,7 @@ public class AdminDetailsDAO {
 
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Adminexpenses> readListOfExpenses(int branchId) {
+	public List<Adminexpenses> readListOfExpenses(String branchId) {
 		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
 
 		try {
@@ -133,7 +133,7 @@ public class AdminDetailsDAO {
         return adminExpenses;
 	}
 
-	public Adminexpenses readExpenses(int expensesIds, int branchId) {
+	public Adminexpenses readExpenses(int expensesIds, String  branchId) {
 		
 
 			Adminexpenses results = new Adminexpenses();

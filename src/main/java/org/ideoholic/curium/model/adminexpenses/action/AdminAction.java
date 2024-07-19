@@ -22,20 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/AdminProcess")
 public class AdminAction {
 
-
-	@Autowired
-	private HttpServletRequest request;
-	
-	@Autowired
-	private HttpServletResponse response;
-	
-	@Autowired
-	private HttpSession httpSession;
-	
 	@Autowired
 	private AdminActionAdapter adminActionAdapter;
 
-	
 	@PostMapping("/rejectVoucher")
 	public String rejectVoucher() {
 		

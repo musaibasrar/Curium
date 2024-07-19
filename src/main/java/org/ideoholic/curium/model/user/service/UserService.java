@@ -41,22 +41,25 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
 
 public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
-	
+	private AdminService adminService;
+
 	 HttpServletRequest request;
 	    HttpServletResponse response;
 	    HttpSession httpSession;
 	    private Login login;
 	    private String BRANCHID = "branchid";
 
-	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService) {
 		this.request = request;
         this.response = response;
         this.httpSession = request.getSession();
 		this.standardActionAdapter = standardActionAdapter;
+		this.adminService = adminService;
 	}
 
 	public boolean authenticateUser() {
@@ -144,7 +147,7 @@ public class UserService {
         	//End Fees Details
         	
         	//Daily Expenses
-        	DailyExpensesResponseDto dailyResponse = new AdminService(request, response).dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
+        	DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
         	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
         	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
 			request.setAttribute("dayone", dailyResponse.getDayOne());
@@ -153,12 +156,12 @@ public class UserService {
 			request.setAttribute("dailyexpenses", dailyResponse.getDailyExpenses());
         		
         	//Monthly Expenses
-			MonthlyExpensesResponseDto monthlyExpense = new AdminService(request, response).getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
+			MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
 			request.setAttribute("monthlyexpenses", monthlyExpense.getMonthlyExpenses());
 			request.setAttribute("monthlistexpenses", monthlyExpense.getMonthListExpenses());
         		
         	//Get Boys & Girls
-			ResultResponse result = new AdminService(request, response).getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
+			ResultResponse result = adminService.getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
 			request.setAttribute("totalboysgirls", result.getResultList());
         	
         request.setAttribute("studentxaxis", xaxisList);

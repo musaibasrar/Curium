@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private AdminService adminService;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -35,20 +38,20 @@ public class UserAction {
 
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
-		new UserService(request, response, standardActionAdapter).searchByDate();
+		new UserService(request, response, standardActionAdapter,adminService).searchByDate();
 		return "feesCollectionDetails";
 	}
 
 	@PostMapping("/advanceSearchByParents")
 	public String advanceSearchByParents() {
-		new UserService(request, response, standardActionAdapter).advanceSearchByParents();
+		new UserService(request, response, standardActionAdapter,adminService).advanceSearchByParents();
 		return "viewAllWithParents";
 	}
 
 	@PostMapping("/backup")
 	public String backup() {
 		String fileName = request.getParameter("filename");
-		if (new UserService(request, response, standardActionAdapter).backupData(fileName)) {
+		if (new UserService(request, response, standardActionAdapter,adminService).backupData(fileName)) {
 			return "BackupSuccess";
 		} else {
 			return "BackupFailed";
@@ -57,20 +60,20 @@ public class UserAction {
 
 	@PostMapping("/advanceSearch")
 	public String advanceSearch() {
-		new UserService(request, response, standardActionAdapter).advanceSearch();
+		new UserService(request, response, standardActionAdapter,adminService).advanceSearch();
 		return "advanceSearchResult";
 	}
 
 	@PostMapping("/dashBoard")
 	public String dashBoard() {
-		new UserService(request, response, standardActionAdapter).dashBoard();
+		new UserService(request, response, standardActionAdapter,adminService).dashBoard();
 		return "jspbarchart";
 	}
 
 	@PostMapping("/authenticateUser")
 	public String authenticateUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter).authenticateUser()) {
+		if (new UserService(request, response, standardActionAdapter,adminService).authenticateUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -81,7 +84,7 @@ public class UserAction {
 	@GetMapping("/multiUser")
 	public String authenticateMultiUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter).authenticateMultiUser()) {
+		if (new UserService(request, response, standardActionAdapter,adminService).authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -91,14 +94,14 @@ public class UserAction {
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logOutUser(Model model) {
-		new UserService(request, response, standardActionAdapter).logOutUser();
+		new UserService(request, response, standardActionAdapter,adminService).logOutUser();
 		model.addAttribute("logout", true);
 		return "login";
 	}
 
 	@PostMapping("/changePassword")
 	public String changePassword() {
-		if (new UserService(request, response, standardActionAdapter).ChangePassword()) {
+		if (new UserService(request, response, standardActionAdapter,adminService).ChangePassword()) {
 			return "passwordSuccess";
 		} else {
 			return "passwordFail";

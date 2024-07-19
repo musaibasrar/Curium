@@ -20,13 +20,13 @@ public class AdminActionAdapter {
 	private HttpServletRequest request;
 
 	@Autowired
-	private HttpServletResponse response;
-
-	@Autowired
 	private HttpSession httpSession;
 
+	@Autowired
+	private AdminService adminService;
+
 	public boolean addExpenses() {
-		AdminService adminService = new AdminService(request, response);
+
 
 		AdminExpensesDto adminexpensesdto = new AdminExpensesDto();
 		adminexpensesdto.setItemdescription(request.getParameter("item"));
@@ -47,14 +47,14 @@ public class AdminActionAdapter {
 	}
 
 	public void rejectVoucher() {
-		AdminService adminService = new AdminService(request, response);
+
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		adminService.rejectVoucher(expenseiddto);
 	}
 
 	public void approveVoucher() {
-		AdminService adminService = new AdminService(request, response);
+
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		adminService.approveVoucher(expenseiddto);
@@ -62,11 +62,11 @@ public class AdminActionAdapter {
 	}
 
 	public void printVoucher() {
-		AdminService adminService = new AdminService(request, response);
+
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 
-		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto, httpSession.getAttribute("branchid").toString());
+		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto,httpSession.getAttribute("branchid").toString());
 
 		if (adminExpense != null) {
 			httpSession.setAttribute("adminexpenses", adminExpense);
@@ -75,7 +75,6 @@ public class AdminActionAdapter {
 
 	public void searchExpensesbydate() {
 
-		AdminService adminService = new AdminService(request, response);
 		AdminExpensesDto adminexpensesdto = new AdminExpensesDto();
 		adminexpensesdto.setSelectedbranchid(request.getParameter("selectedbranchid"));
 		adminexpensesdto.setTodate(request.getParameter("todate"));
@@ -94,7 +93,7 @@ public class AdminActionAdapter {
 	}
 
 	public boolean viewExpensesBetweenDates() {
-		AdminService adminService = new AdminService(request, response);
+
 		AdminExpensesDateDto adminExpensesDateDto = new AdminExpensesDateDto();
 		adminExpensesDateDto.setTodate(request.getParameter("todate"));
 		adminExpensesDateDto.setFromdate(request.getParameter("fromdate"));
@@ -109,7 +108,7 @@ public class AdminActionAdapter {
 	}
 	
 	public void deleteMultiple() {
-		AdminService adminService = new AdminService(request, response);
+
 		ExpensesIdDto expenseiddto = new ExpensesIdDto();
 		expenseiddto.setExpensesIds(request.getParameterValues("expensesIDs"));
 		adminService.deleteMultiple(expenseiddto);
@@ -117,7 +116,6 @@ public class AdminActionAdapter {
 	
 	
 	public boolean viewAllExpenses() {
-		AdminService adminService = new AdminService(request, response);
 		ResultResponse resultResponse = adminService.viewAllExpenses(httpSession.getAttribute("branchid").toString());
 		httpSession.setAttribute("adminexpenses", resultResponse.getResultList());
 		return resultResponse.isSuccess();
