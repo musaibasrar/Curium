@@ -150,13 +150,13 @@ public class FeesAction {
 	
 	@PostMapping("/odeleteMultiple")
 	public String odeleteMultiple() {
-		new FeesService(request, response).odeleteMultiple();
+		feesActionAdapter.odeleteMultiple();
 		return otherviewFees();
 	}
 	
 	@PostMapping("/addotherFeesParticular")
 	public String addotherFeesParticular() {
-		new FeesService(request, response).addOtherFeesParticular();
+		feesActionAdapter.addOtherFeesParticular();
 		return otherviewFees();
 	}
 	

@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
@@ -133,6 +134,25 @@ public class FeesActionAdapter {
 		feesCategoryDto.setAmount(request.getParameter("amount"));
 		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
 		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
+	}
+
+	public void odeleteMultiple() {
+		FeesService feesService = new FeesService(request, response);	
+		IdFeescategoryDto idFeescategoryDto = new IdFeescategoryDto();
+		idFeescategoryDto.setIdFeesCategory(request.getParameterValues("idfeescategory"));
+		feesService.odeleteMultiple(idFeescategoryDto);
+	}
+
+	public void addOtherFeesParticular() {
+		FeesService feesService = new FeesService(request, response);
+		OtherFeecategoryDto otherFeecategoryDto = new OtherFeecategoryDto();
+		otherFeecategoryDto.setFeesCategory(request.getParameter("feescategory"));
+		otherFeecategoryDto.setFromClass(request.getParameter("fromclass"));
+		otherFeecategoryDto.setToClass(request.getParameter("toclass"));
+		otherFeecategoryDto.setAmount(request.getParameter("amount"));
+		otherFeecategoryDto.setCategoryYearOf(request.getParameter("categoryyearof"));
+		feesService.addOtherFeesParticular(otherFeecategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
+		
 	}
 	
 }

@@ -31,6 +31,7 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -530,31 +531,31 @@ public class FeesService {
           return result;
   }
 	   
-	   public void addOtherFeesParticular() {
+	   public void addOtherFeesParticular(OtherFeecategoryDto otherFeecategoryDto,String branchid,String userloginid) {
 
            OtherFeecategory ofeescategory = new OtherFeecategory();
 
-           if(httpSession.getAttribute(BRANCHID)!=null){
+           if(branchid!=null){
 
-                   ofeescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
-                   if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
-                           ofeescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
+                   ofeescategory.setFeescategoryname(DataUtil.emptyString(otherFeecategoryDto.getFeesCategory()));
+                   if(!DataUtil.emptyString(otherFeecategoryDto.getFromClass()).equalsIgnoreCase("ALL") && !DataUtil.emptyString(otherFeecategoryDto.getToClass()).equalsIgnoreCase("ALL")){
+                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass())+"-"+DataUtil.emptyString(otherFeecategoryDto.getToClass()));
                    }else{
-                           ofeescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
+                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass()));
                    }
 
-                   ofeescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
-                   ofeescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                   ofeescategory.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-                   ofeescategory.setAcademicyear(request.getParameter("categoryyearof"));
+                   ofeescategory.setAmount(DataUtil.parseInt(otherFeecategoryDto.getAmount()));
+                   ofeescategory.setBranchid(Integer.parseInt(branchid));
+                   ofeescategory.setUserid(Integer.parseInt(userloginid));
+                   ofeescategory.setAcademicyear(otherFeecategoryDto.getCategoryYearOf());
                    if(!ofeescategory.getFeescategoryname().equalsIgnoreCase("") && !ofeescategory.getParticularname().equalsIgnoreCase("") && ofeescategory.getAmount() != 0 ){
                            ofeescategory =  new feesCategoryDAO().createOtherFeeCategory(ofeescategory);
                    }
            }
    }
 	   
-	   public void odeleteMultiple() {
-           String[] idfeescategory = request.getParameterValues("idfeescategory");
+	   public void odeleteMultiple(IdFeescategoryDto idFeescategoryDto) {
+           String[] idfeescategory = idFeescategoryDto.getIdFeesCategory();
            if(idfeescategory!=null){
           List<Integer> ids = new ArrayList();
           for (String id : idfeescategory) {
