@@ -66,7 +66,7 @@ public class AdminService {
 	public ResultResponse viewAllExpenses(String branchId) {
 		List<Adminexpenses> list;
 		try {
-			list = new AdminDetailsDAO().readListOfExpenses(Integer.parseInt(branchId));
+			list = new AdminDetailsDAO().readListOfExpenses(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResultResponse.builder().success(false).build();
@@ -289,7 +289,7 @@ public class AdminService {
 
 	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto, String branchId) {
         try {
-        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),Integer.parseInt(branchId));
+        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),branchId);
            return adminExpense; 
         } catch (Exception e) {
             e.printStackTrace();

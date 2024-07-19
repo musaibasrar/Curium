@@ -37,8 +37,8 @@ public class AdminApiAction {
 
 
     @PostMapping("/searchExpenses")
-    public ResponseEntity<AdminExpenseResponseDto> searchExpensesbydate(@RequestBody AdminExpensesDto dto) {
-        AdminExpenseResponseDto result = adminService.searchExpensesbydate(dto);
+    public ResponseEntity<AdminExpenseResponseDto> searchExpensesbydate(@RequestBody AdminExpensesDto dto,@RequestHeader(value = "branchid") String branchId) {
+        AdminExpenseResponseDto result = adminService.searchExpensesbydate(dto,branchId);
         return ResponseEntity.ok(result);
     }
 
@@ -51,8 +51,8 @@ public class AdminApiAction {
 
 
     @PostMapping("/addExpenses")
-    public ResponseEntity<ResultResponse> addExpenses(@RequestBody AdminExpensesDto dto, @RequestHeader(value = "branchid") String branchId) {
-          ResultResponse result = adminService.addExpenses(dto);
+    public ResponseEntity<ResultResponse> addExpenses(@RequestBody AdminExpensesDto dto,@RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "branchid") String branchId) {
+          ResultResponse result = adminService.addExpenses(dto,userId, branchId);
         if ( result.isSuccess()) {
             return viewAllExpenses(branchId);
         } else {
@@ -68,8 +68,8 @@ public class AdminApiAction {
     }
 
     @PostMapping("/viewExpensesBetweenDates")
-    public ResponseEntity<AdminExpenseResponseDto> viewExpensesBetweenDates(AdminExpensesDateDto dto) {
-        AdminExpenseResponseDto result = adminService.viewExpensesBetweenDates(dto);
+    public ResponseEntity<AdminExpenseResponseDto> viewExpensesBetweenDates(AdminExpensesDateDto dto, @RequestHeader(value = "branchid") String branchId) {
+        AdminExpenseResponseDto result = adminService.viewExpensesBetweenDates(dto,branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         } else {
