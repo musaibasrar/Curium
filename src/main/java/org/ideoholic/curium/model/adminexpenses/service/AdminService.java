@@ -11,10 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.adminexpenses.dto.AdminExpenseResponseDto;
@@ -93,9 +89,9 @@ public class AdminService {
 
 	public AdminExpenseResponseDto searchExpensesbydate(AdminExpensesDto adminexpensesdto, String strBranchId) {
 		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
-		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
+		List<Adminexpenses> adminExpensesList = new ArrayList<>();
 		String branchId = adminexpensesdto.getSelectedbranchid();
-		int idBranch = 0;
+		int idBranch;
 
 		if (strBranchId != null) {
 
@@ -144,10 +140,10 @@ public class AdminService {
 			adminExpensesList = new AdminDetailsDAO().searchExpensesbydate(queryMain);
 
 		}
-		long sumOfExpenses = 0l;
+		long sumOfExpenses = 0L;
 		for (Adminexpenses adminexp : adminExpensesList) {
 			String bigNumber = adminexp.getPriceofitem();
-			long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+			long expadmin = Long.valueOf(bigNumber.replaceAll(",", ""));
 			sumOfExpenses = sumOfExpenses + expadmin;
 		}
 		adminExpenseResponseDto.setAdminexpenses(adminExpensesList);
@@ -159,8 +155,8 @@ public class AdminService {
 	public DailyExpensesResponseDto dailyExpenses(String selectedBranchId, String branchId) {
 
 		DailyExpensesResponseDto dailyExpenses = DailyExpensesResponseDto.builder().build();
-		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
-		int idBranch = 0;
+		List<Adminexpenses> adminExpensesList = new ArrayList<>();
+		int idBranch;
 
 		if (selectedBranchId != null) {
 
@@ -189,10 +185,10 @@ public class AdminService {
 			adminExpensesList = new AdminDetailsDAO().searchExpensesbydate(queryMain);
 
 		}
-		long sumOfExpenses = 0l;
+		long sumOfExpenses = 0L;
 		for (Adminexpenses adminexp : adminExpensesList) {
 			String bigNumber = adminexp.getPriceofitem();
-			long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+			long expadmin = Long.valueOf(bigNumber.replaceAll(",", ""));
 			sumOfExpenses = sumOfExpenses + expadmin;
 		}
 		dailyExpenses.setDailyAdminExpenses(adminExpensesList);
@@ -203,12 +199,11 @@ public class AdminService {
 	
 	public MonthlyExpensesResponseDto getMonthlyExpenses(String branchId, String toDate, String fromDate) {
 
-		List<String> monthList = new LinkedList<String>();
-		List<String> totalExpensesSum = new LinkedList<String>();
+		List<String> monthList = new LinkedList<>();
+		List<String> totalExpensesSum = new LinkedList<>();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date newdate = new Date();
 		String todaysDate = df.format(newdate);
-		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
 		Date dateBefore = null;
 		Date dateAfter = null;
 		String queryMain = "From Adminexpenses as adminexpenses where branchid=" + Integer.parseInt(branchId) + " AND ";
@@ -239,9 +234,9 @@ public class AdminService {
 			endday.set(Calendar.DAY_OF_MONTH, start1.getActualMaximum(Calendar.DAY_OF_MONTH));
 			Date enddayofmonth = endday.getTime();
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
-			String querySub = "";
+			String querySub;
 			querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
-			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
+			List<Adminexpenses> adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
 			BigDecimal sumOfExpenses = BigDecimal.ZERO;
 			for (Adminexpenses expenseAdmin : adminExpenseList) {
 				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
@@ -263,12 +258,11 @@ public class AdminService {
 	
 	
 	public ResultResponse getTotalBoysGirls(String strBranchId) {
-		List<Student> studentsList = new ArrayList<Student>();
 		int branchId = Integer.parseInt(strBranchId);
 		int totalBoys = 0, totalGirls = 0;
-		List<String> boysGirls = new ArrayList<String>();
+		List<String> boysGirls = new ArrayList<>();
 
-		studentsList = new studentDetailsDAO().getListStudents(
+		List<Student> studentsList = new studentDetailsDAO().getListStudents(
 				"From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid = "
 						+ branchId + " order by name ASC");
 
@@ -337,17 +331,15 @@ public class AdminService {
 
 			String querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
 
-			if (voucherStatus != "") {
+			if (!voucherStatus.equals("")) {
 				querySub = querySub + " and adminexpenses.voucherstatus='" + voucherStatus + "'";
 			}
 
-			if (paymentType != "") {
+			if (!paymentType.equals("")) {
 				querySub = querySub + " and adminexpenses.paymenttype='" + paymentType + "'";
 			}
 
-			List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
-
-			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
+			List<Adminexpenses>  adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
 			BigDecimal sumOfExpenses = BigDecimal.ZERO;
 			for (Adminexpenses expenseAdmin : adminExpenseList) {
 				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
