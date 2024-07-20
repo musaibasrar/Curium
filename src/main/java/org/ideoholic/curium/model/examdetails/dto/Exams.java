@@ -40,4 +40,7 @@ public class Exams implements java.io.Serializable {
 	@Column(name = "branchid")
 	private int userid;
 
+	@Column(name="success")
+	private boolean success;
+
 }

@@ -45,22 +45,21 @@ public class ExamDetailsService {
 	}
 
 
-	public Boolean addExam() {
+	public Exams addExam( String branchId) {
 		// TODO Auto-generated method stub
 		Exams exams = new Exams();
-		boolean result = true;
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
-		exams.setExamname(DataUtil.emptyString(request.getParameter("examname")));
-		exams.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		exams.setExamname(DataUtil.emptyString(exams.getExamname()));
+		exams.setBranchid(Integer.parseInt(branchId));
 		exams = new ExamDetailsDAO().addExams(exams);
 
 		}
 		if(exams == null){
-			result=false;
+			exams.setSuccess(false);
 		}
-		return result;
+		return exams;
 	}
 
 

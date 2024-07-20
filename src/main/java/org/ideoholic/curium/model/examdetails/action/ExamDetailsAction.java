@@ -36,6 +36,9 @@ public class ExamDetailsAction {
 
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+
+	@Autowired
+	private ExamDetailsActionAdapter examDetailsActionAdapter;
 	
 	private String error = "error";
 	
@@ -148,7 +151,7 @@ public class ExamDetailsAction {
 	@PostMapping("/addExam")
 	public String addExam() {
 		
-		if(new ExamDetailsService(request, response).addExam()){
+		if(examDetailsActionAdapter.addExam()){
 			return readListOfExams();
 		}else{
 			return "error";
@@ -157,3 +160,4 @@ public class ExamDetailsAction {
 	}
 
 }
+//Make Adpater of it
