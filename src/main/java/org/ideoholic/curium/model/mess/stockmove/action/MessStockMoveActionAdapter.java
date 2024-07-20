@@ -1,6 +1,8 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.mess.stockmove.dto.MoveStockResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveDto;
 import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,50 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", page);
         request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
+    }
+
+    public void saveStockMove() {MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
+
+        StockMoveDto dto = new StockMoveDto();
+        dto.setStockEntryIds(request.getParameterValues("ids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setItemsIds(request.getParameterValues("itemsids"));
+        dto.setIssueQuantity(request.getParameterValues("issuequantity"));
+        dto.setItemUintPrice(request.getParameterValues("itemunitprice"));
+        dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
+        dto.setCustDetails(request.getParameter("issuedto"));
+        dto.setSgst(request.getParameterValues("sgst"));
+        dto.setCgst(request.getParameterValues("cgst"));
+        dto.setUom(request.getParameterValues("itemsunitofmeasure"));
+        dto.setBatchNo(request.getParameterValues("batchno"));
+        dto.setSingleItemTotal(request.getParameterValues("linetotal"));
+        dto.setPaymentMethodBankTransfer(request.getParameter("paymentmethodbanktransfer"));
+        dto.setPaymentMethodChequeTransfer(request.getParameter("paymentmethodchequetransfer"));
+        dto.setPaymentMethodCash(request.getParameter("paymentmethodcash"));
+        dto.setAckNo(request.getParameter("ackno"));
+        dto.setTransferDate(request.getParameter("transferdate"));
+        dto.setTransferBankName(request.getParameter("transferbankname"));
+        dto.setChequeNo(request.getParameter("chequeno"));
+        dto.setChequeDate(request.getParameter("chequedate"));
+        dto.setChequeBankName(request.getParameter("chequebankname"));
+        dto.setTotalCashAmount(request.getParameter("totalcashamount"));
+        dto.setTotalBankTransferAmount(request.getParameter("totalbanktransferamount"));
+        dto.setTotalChequeTransferAmount(request.getParameter("totalchequetransferamount"));
+        dto.setItemsGrandTotalAmountWOGST(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+        dto.setTransactionDate(request.getParameter("transactiondate"));
+
+        MoveStockResponseDto responseDto = messStockMoveService.saveStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+        request.setAttribute("billdetails", responseDto.getBillDetails());
+        request.setAttribute("billdetailstransactiondate", dto.getTransactionDate());
+        request.setAttribute("billdetailsstudentname", responseDto.getBillDetailsStudentName());
+        request.setAttribute("billdetailsclassstudying", responseDto.getBillDetailsClassStudying());
+        request.setAttribute("billdetailsfathername", responseDto.getBillDetailsFatherName());
+        request.setAttribute("billdetailstotaltotal", responseDto.getBillDetailsTotalTotal());
+        request.setAttribute("billgrandtotal", responseDto.getBillGrandTotal());
+        request.setAttribute("billno", responseDto.getBillNo());
+        request.setAttribute("billdetails", responseDto.getBillDetails());
+        request.setAttribute("billdetailstransactiondate", responseDto.getBillDetailsTransactionDate());
+        request.setAttribute("billdetailscustomername", responseDto.getBillDetailsCustomerName());
+        request.setAttribute("itemissued", responseDto.isItemsIssued());
     }
 }
