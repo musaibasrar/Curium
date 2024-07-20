@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.mess.stockmove.dto.ClassSearchDto;
 import org.ideoholic.curium.model.mess.stockmove.dto.MoveStockResponseDto;
 import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveDto;
 import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Service
 public class MessStockMoveActionAdapter {
@@ -89,5 +91,25 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("billdetailstransactiondate", responseDto.getBillDetailsTransactionDate());
         request.setAttribute("billdetailscustomername", responseDto.getBillDetailsCustomerName());
         request.setAttribute("itemissued", responseDto.isItemsIssued());
+    }
+
+    public void viewStockDueDetails() {
+        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
+
+        ClassSearchDto dto = new ClassSearchDto();
+        dto.setClassSearch(request.getParameter("classsearch"));
+
+        ResultResponse resultResponse = messStockMoveService.viewStockDueDetails(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentsduelist", resultResponse.getResultList());
+    }
+
+    public void getCustomerLastPrice() throws IOException {
+        MessStockMoveService messStockMoveService = new MessStockMoveService(request,response);
+
+        String customerName = request.getParameter("customerName");
+        String custDetails = request.getParameter("customerName");
+        String itemId = request.getParameter("itemid");
+
+        messStockMoveService.getCustomerLastPrice(customerName, custDetails, itemId, httpSession.getAttribute(BRANCHID).toString());
     }
 }
