@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.feescategory.action;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategoryDto;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
@@ -153,6 +155,42 @@ public class FeesActionAdapter {
 		otherFeecategoryDto.setCategoryYearOf(request.getParameter("categoryyearof"));
 		feesService.addOtherFeesParticular(otherFeecategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
 		
+	}
+
+	public boolean viewOtherFees() {
+		FeesService feesService = new FeesService(request, response);
+		OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = feesService.viewOtherFees(
+				httpSession.getAttribute("branchid").toString(),
+				httpSession.getAttribute("currentAcademicYear").toString());
+		httpSession.setAttribute("otherfeescategory", otherFeesCategoryResponseDto.getOtherFeesCategory());
+		return otherFeesCategoryResponseDto.isSuccess();
+	}
+
+	public void getFeeCategory() throws IOException {
+		FeesService feesService = new FeesService(request, response);
+		String classname = request.getParameter("classstudying");
+    	String yearofAdmission = request.getParameter("yearofadmission");
+    	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,currentAcademicYear,httpSession.getAttribute("branchid").toString());
+    	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+	}
+
+	public String applyotherConcession() {
+		FeesService feesService = new FeesService(request, response);
+		ConcessionDto concessionDto = new ConcessionDto();
+		concessionDto.setSfsid(request.getParameterValues("sfsid"));
+		concessionDto.setId( request.getParameter("id"));
+		Map<String, String> allRequestParameters = new HashMap<>();
+		Enumeration<String> enumeration = request.getParameterNames();
+		while (enumeration.hasMoreElements()) {
+			String fieldName = enumeration.nextElement();
+			String fieldValue = request.getParameter(fieldName);
+			allRequestParameters.put(fieldName, fieldValue);
+		}
+		concessionDto.setRequestParams(allRequestParameters);
+		StudentIdDto studentIdDto = feesService.applyotherConcession(concessionDto);
+		String studentId = studentIdDto.getStudentId();
+		return studentId;
 	}
 	
 }

@@ -32,6 +32,7 @@ import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategoryDto;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -510,25 +511,29 @@ public class FeesService {
         }
 	}
 	
-	   public boolean viewOtherFees() {
+	   public OtherFeesCategoryResponseDto viewOtherFees(String branchid, String currentAcademicYear ) {
 
+		   OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = new OtherFeesCategoryResponseDto();
            boolean result = false;
 
-           if(httpSession.getAttribute(BRANCHID)!=null){
-        	   String[] currentYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+           if(branchid!=null){
+        	   String[] currentYear = currentAcademicYear.split("/");
         	   int cYear = Integer.parseInt(currentYear[0])+1;
         	   int cYear2 = Integer.parseInt(currentYear[1])+1;
         	   String nextYear = ""+cYear+"/"+cYear2+"";
         		try {
-                          List<OtherFeecategory> list = new feesCategoryDAO().readListOfOtherFeeObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("currentAcademicYear").toString(),nextYear);
-                      httpSession.setAttribute("otherfeescategory", list);
-                      result = true;
+                          List<OtherFeecategory> list = new feesCategoryDAO().readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
+                          otherFeesCategoryResponseDto.setOtherFeesCategory(list);
+                          //httpSession.setAttribute("otherfeescategory", list);
+                          otherFeesCategoryResponseDto.setSuccess(true);
+                          result = true;
                   } catch (Exception e) {
                       e.printStackTrace();
+                      otherFeesCategoryResponseDto.setSuccess(false);
                       result = false;
                   }
            }
-          return result;
+          return otherFeesCategoryResponseDto;
   }
 	   
 	   public void addOtherFeesParticular(OtherFeecategoryDto otherFeecategoryDto,String branchid,String userloginid) {
@@ -566,24 +571,24 @@ public class FeesService {
            }
   }
 	   
-	   public void getFeeCategory() throws IOException {
+	   public FeescategoryResponseDto getFeeCategory(String classname,String yearofAdmissionStr,String currentAcademicYearStr,String branchid) throws IOException {
 
-	        if(httpSession.getAttribute(BRANCHID)!=null){
-	        	String classname = request.getParameter("classstudying");
-	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
-	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+		   FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+	        if(branchid!=null){
+	        	String[] yearofAdmission = yearofAdmissionStr.split("/");
+	        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
 	        	String searchYear = null;
 	        	int yoa = Integer.parseInt(yearofAdmission[0]);
 	        	int ca = Integer.parseInt(currentAcademicYear[0]);
 	        	
 	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = httpSession.getAttribute("currentAcademicYear").toString();
+	        		searchYear = currentAcademicYearStr;
 	        	}else if (yoa > ca) {
-	        		searchYear = request.getParameter("yearofadmission");
+	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
 	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
-	            httpSession.setAttribute("feescategory", feecategoryList);
+	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
@@ -638,17 +643,19 @@ public class FeesService {
 
 
 	        }
+	        return feescategoryResponseDto;
 	    }
 	   
-	   public String applyotherConcession() {
+	   public StudentIdDto applyotherConcession(ConcessionDto concessionDto) {
 
-	        String[] idfeescategory = request.getParameterValues("sfsid");
+		   StudentIdDto studentIdDto = new StudentIdDto();
+	        String[] idfeescategory = concessionDto.getSfsid();
 	        List<Integer> sfsId = new ArrayList<Integer>();
 	        List<Integer> feesCatId = new ArrayList<Integer>();
 	        List<String> consession = new ArrayList<String>();
 	        List<Concession> concessionList = new ArrayList<Concession>();
 
-	        String studentId = request.getParameter("id");
+	        String studentId = concessionDto.getId();
 
 	        if(idfeescategory!=null){
 
@@ -657,21 +664,22 @@ public class FeesService {
 	                		Concession con = new Concession();
 	                		String[] test = string.split("_");
 	                        sfsId.add(Integer.valueOf(test[0]));
-	                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
-	                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+	                			                        String dueAmount = concessionDto.getRequestParams().get("dueamount:"+Integer.valueOf(test[0]));
+	                        String concessionAmount = concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0]));
 
 	                        if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
 	                        	feesCatId.add(Integer.valueOf(test[1]));
 	                            con.setSfsid(Integer.valueOf(test[0]));
 	                            con.setFeescatid(Integer.valueOf(test[1]));
-	                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
-	                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+	                            con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
+	                            con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
 	                            concessionList.add(con);
 	                        }
 
 	               }
 	           new feesCategoryDAO().applyotherConcession(concessionList,studentId);
-	           return studentId;
+	           studentIdDto.setStudentId(studentId);
+	           return studentIdDto;
 	        }
 
 	        throw new IllegalArgumentException("Fees category for the given student does not exist");
