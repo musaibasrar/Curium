@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.examdetails.action;
 
-import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
