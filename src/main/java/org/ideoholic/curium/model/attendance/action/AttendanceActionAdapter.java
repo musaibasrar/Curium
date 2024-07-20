@@ -241,7 +241,7 @@ public class AttendanceActionAdapter {
     public void viewAllHolidays() {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
-        ResultResponse resultResponse = attendanceService.viewAllHolidays(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = attendanceService.viewAllHolidays( httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         if(resultResponse != null && resultResponse.getResultList() != null){
             request.setAttribute("holidaysList", resultResponse.getResultList());
         }
@@ -250,7 +250,7 @@ public class AttendanceActionAdapter {
     public void viewAllWeekOffs() {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
-        ResultResponse resultResponse = attendanceService.viewAllWeekOffs(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = attendanceService.viewAllWeekOffs( httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         if(resultResponse != null && resultResponse.getResultList() != null){
             request.setAttribute("weekOffList", resultResponse.getResultList());
         }
