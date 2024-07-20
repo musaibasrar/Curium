@@ -101,7 +101,7 @@ public class MessStockMoveAction {
 	@PostMapping("/dueReport")
 	public String dueReport() {
 		    	
-    	new MessStockMoveService(request, response).viewStockDueDetails();
+    	messStockMoveActionAdapter.viewStockDueDetails();
     	
     	return "duereport";
     }
@@ -119,7 +119,7 @@ public class MessStockMoveAction {
 	public void getCustomerLastPrice() {
 		
     	try {
-			new MessStockMoveService(request, response).getCustomerLastPrice();
+			messStockMoveActionAdapter.getCustomerLastPrice();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

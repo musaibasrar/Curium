@@ -617,11 +617,9 @@ public class MessStockMoveService {
 	
 	
 	
-	public void getCustomerLastPrice() throws IOException {
-		
-		String customerName = request.getParameter("customerName");
-		String[] custDetails = request.getParameter("customerName").split("_");
-		String itemid = request.getParameter("itemid");
+	public void getCustomerLastPrice(String customerName, String strCustDetails, String itemid, String branchId) throws IOException {
+
+		String[] custDetails = strCustDetails.split("_");
 		Locale indiaLocale = new Locale("en", "IN");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("text/xml");
@@ -629,7 +627,7 @@ public class MessStockMoveService {
         
 		if(!customerName.isEmpty() && !itemid.isEmpty() ) {
 			
-			List<MessStockMove> messStockMove = new MessStockMoveDAO().getCustomerLastPrices(custDetails[0]+"_"+custDetails[1], itemid, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<MessStockMove> messStockMove = new MessStockMoveDAO().getCustomerLastPrices(custDetails[0]+"_"+custDetails[1], itemid, Integer.parseInt(branchId));
 			
 			String priceList = "";
 			String priceListFirst = "";
@@ -675,22 +673,22 @@ public class MessStockMoveService {
 
 
 
-	public boolean viewStockDueDetails() {
+	public ResultResponse viewStockDueDetails(ClassSearchDto dto, String branchId) {
 
-		String classSearch = request.getParameter("classsearch");
+		String classSearch = dto.getClassSearch();
 		String conClassStudying = "";
 
 		if (!classSearch.equalsIgnoreCase("")) {
 			conClassStudying = classSearch+"--"+"%";
 		}
-		boolean result = false;
-		List<Parents> parentDetails = new ArrayList<Parents>();
+		ResultResponse result = ResultResponse.builder().build();
+		List<Parents> parentDetails = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			
 			try {
 								
-				List<Object[]> list = new MessStockMoveDAO().readStockDueDetails(conClassStudying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Object[]> list = new MessStockMoveDAO().readStockDueDetails(conClassStudying,Integer.parseInt(branchId));
 				
 	            for(Object[] parentdetails: list){
 	            	Parents parent = new Parents();
@@ -706,12 +704,12 @@ public class MessStockMoveService {
 	                parentDetails.add(parent);
 	            }
 				
-				result = true;
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			request.setAttribute("studentsduelist", parentDetails);
+
+			result.setResultList(parentDetails);
 		}
 		
 		return result;
