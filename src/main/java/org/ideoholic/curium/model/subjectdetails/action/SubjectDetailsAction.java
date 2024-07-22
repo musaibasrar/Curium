@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.subjectdetails.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -18,13 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SubjectDetailsAction {
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private ExamDetailsActionAdapter examDetailsActionAdapter;
 	
 	
 	@PostMapping("/deleteMultipleSubjects")
@@ -73,7 +76,7 @@ public class SubjectDetailsAction {
 	public String readListOfSubjectsExams() {
 		new SubjectDetailsService(request, response).readListOfSubjects();
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
-		new ExamDetailsService(request, response).readListOfExams();
+		examDetailsActionAdapter.readListOfExams();
 		standardActionAdapter.viewClasses();
         return "SubjectDetails";
 	}

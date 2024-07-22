@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -20,22 +21,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TeachersPerformanceAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
 
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+
+	@Autowired
+	private ExamDetailsActionAdapter examDetailsActionAdapter;
 
 	@GetMapping("/SearchTeachers")
 	public String SearchTeachers() {
 		standardActionAdapter.viewClasses();
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
-		new ExamDetailsService(request, response).readListOfExams();
+		examDetailsActionAdapter.readListOfExams();
 		return "teachersPerormance";
 	}
 	
