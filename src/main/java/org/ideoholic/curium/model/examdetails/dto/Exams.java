@@ -37,7 +37,8 @@ public class Exams implements java.io.Serializable {
 	@Column(name = "branchid")
 	private int branchid;
 
-	@Column(name = "branchid")
+	@Column(name = "userid")
 	private int userid;
+
 
 }

@@ -7,17 +7,15 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
-import org.ideoholic.curium.model.examdetails.action.ExamDetailsAction;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
+import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -45,22 +43,22 @@ public class ExamDetailsService {
 	}
 
 
-	public Boolean addExam() {
+	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 		// TODO Auto-generated method stub
 		Exams exams = new Exams();
-		boolean result = true;
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
-		exams.setExamname(DataUtil.emptyString(request.getParameter("examname")));
-		exams.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
+		exams.setBranchid(Integer.parseInt(branchId));
 		exams = new ExamDetailsDAO().addExams(exams);
 
 		}
 		if(exams == null){
-			result=false;
+			return ResultResponse.builder().success(false).build();
+
 		}
-		return result;
+		return ResultResponse.builder().build();
 	}
 
 
@@ -84,9 +82,9 @@ public class ExamDetailsService {
 
 	public boolean deleteMultiple() {
 		String[] examIds = request.getParameterValues("examIDs");
-		boolean result = false;
+		boolean result;
 		 if(examIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : examIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
@@ -104,7 +102,7 @@ public class ExamDetailsService {
 	public boolean addSchedule() {
 		
 		boolean result = false;
-		List<Examschedule> examScheduleList = new ArrayList<Examschedule>();
+		List<Examschedule> examScheduleList = new ArrayList<>();
 		
 		String[] subject = request.getParameterValues("subject");
 		String[] date = request.getParameterValues("fromdate");
@@ -136,7 +134,7 @@ public class ExamDetailsService {
 							  DateFormat df = new SimpleDateFormat("HH:mm");
 						       //Date/time pattern of desired output date
 						       DateFormat outputformat = new SimpleDateFormat("hh:mm");
-						       Date date1 = null;
+						       Date date1;
 						       try{
 						          //Conversion of input String to date
 						    	  date1= df.parse(startTime[i]);
@@ -161,7 +159,7 @@ public class ExamDetailsService {
 							  DateFormat df = new SimpleDateFormat("HH:mm");
 						       //Date/time pattern of desired output date
 						       DateFormat outputformat = new SimpleDateFormat("hh:mm");
-						       Date date1 = null;
+						       Date date1;
 						       
 						       try{
 						          //Conversion of input String to date
@@ -208,9 +206,9 @@ public class ExamDetailsService {
 	public boolean deleteExamSchedule() {
 
 		String[] examIds = request.getParameterValues("idexamschedule");
-		boolean result = false;
+		boolean result;
 		 if(examIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : examIds) {
 	            ids.add(Integer.valueOf(id));
 
@@ -239,14 +237,13 @@ public class ExamDetailsService {
 		request.setAttribute("selectedclassandsec", classAdmno);
 		request.setAttribute("selectedadmissionno", DataUtil.emptyString(request.getParameter("admno")));
 		
-		if(classAdmno!=""){
+		if(!classAdmno.equals("")){
 			String[] c = classAdmno.split(" ");
 			classH  = c[0];
 		}
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			List<Examschedule> examschedules = new ArrayList<Examschedule>();
-			examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
+			List<Examschedule> examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("examschedules", examschedules);
 			if(!examschedules.isEmpty()){
 				return true;
@@ -272,12 +269,12 @@ public class ExamDetailsService {
 		
 		if(examName!=null){
 		
-		List<Parents> studentList = new ArrayList<Parents>();
-		List<Examschedule> examscheduleList = new ArrayList<Examschedule>();
+		List<Parents> studentList = new ArrayList<>();
+		List<Examschedule> examscheduleList = new ArrayList<>();
 		String classStudying = DataUtil.emptyString(request.getParameter("class"));
 		classStudying = classStudying+"--" +"%";
 		
-		if(admNo==""){
+		if(admNo.equals("")){
 			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '"+classStudying+"' and (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = "+httpSession.getAttribute(BRANCHID).toString()+" order by parents.Student.sid desc");
 		}else{
 			Parents parent = new Parents();
