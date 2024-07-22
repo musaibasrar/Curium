@@ -35,6 +35,10 @@ public class FeesActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+	
+	String branchId = httpSession.getAttribute("branchid").toString();
 
 	public String applyConcession() {
 		FeesService feesService = new FeesService(request, response);
@@ -160,8 +164,8 @@ public class FeesActionAdapter {
 	public boolean viewOtherFees() {
 		FeesService feesService = new FeesService(request, response);
 		OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = feesService.viewOtherFees(
-				httpSession.getAttribute("branchid").toString(),
-				httpSession.getAttribute("currentAcademicYear").toString());
+		httpSession.getAttribute("branchid").toString(),
+		httpSession.getAttribute("currentAcademicYear").toString());
 		httpSession.setAttribute("otherfeescategory", otherFeesCategoryResponseDto.getOtherFeesCategory());
 		return otherFeesCategoryResponseDto.isSuccess();
 	}
@@ -170,8 +174,7 @@ public class FeesActionAdapter {
 		FeesService feesService = new FeesService(request, response);
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,currentAcademicYear,httpSession.getAttribute("branchid").toString());
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,currentAcademicYear,branchId);
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
