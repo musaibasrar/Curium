@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.examdetails.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,7 @@ public class ExamDetailsActionAdapter {
     public Boolean addExam() {
         ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
-        Exams result = examDetailsService.addExam(httpSession.getAttribute(BRANCHID).toString());
-        result.setExamname(request.getParameter("examname"));
+        ResultResponse result = examDetailsService.addExam(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("examname"));
 
         return result.isSuccess();
     }

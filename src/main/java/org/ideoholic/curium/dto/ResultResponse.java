@@ -18,4 +18,5 @@ public class ResultResponse {
     private Map resultMap;
     private Integer resultValue;
     private List resultList;
+
 }

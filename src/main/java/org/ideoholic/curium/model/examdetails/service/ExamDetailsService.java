@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
@@ -41,21 +42,22 @@ public class ExamDetailsService {
 	}
 
 
-	public Exams addExam( String branchId) {
+	public ResultResponse addExam(String branchId,String examName) {
 		// TODO Auto-generated method stub
 		Exams exams = new Exams();
 		
 		if(branchId!=null){
 
-		exams.setExamname(DataUtil.emptyString(exams.getExamname()));
+		exams.setExamname(DataUtil.emptyString(examName));
 		exams.setBranchid(Integer.parseInt(branchId));
 		exams = new ExamDetailsDAO().addExams(exams);
 
 		}
 		if(exams == null){
-			exams.setSuccess(false);
+			return ResultResponse.builder().success(false).build();
+
 		}
-		return exams;
+		return ResultResponse.builder().build();
 	}
 
 
