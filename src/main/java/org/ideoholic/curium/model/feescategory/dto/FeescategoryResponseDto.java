@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class FeescategoryResponseDto {
 		
 	private List<Feescategory> feescategory;
