@@ -18,7 +18,7 @@ import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
-import org.ideoholic.curium.model.examdetails.dto.ReadListOfExamsDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -63,19 +63,18 @@ public class ExamDetailsService {
 	}
 
 
-	public ResultResponse readListOfExams(ReadListOfExamsDto readListOfExamsDto, String branchId) {
-
+	public ExamsListResponseDto readListOfExams(String branchId) {
+		ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
 		if(branchId!=null){
 			
 			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
-			 readListOfExamsDto.setExams(exams);
+			 examsListResponseDto.setExams(exams);
 			 if(exams == null){
-					return ResultResponse.builder().success(false).build();
+				 examsListResponseDto.setSuccess(false);
 				}
 		}
 		
-		
-		return ResultResponse.builder().build();
+		return examsListResponseDto;
 	}
 
 
