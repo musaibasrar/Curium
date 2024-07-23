@@ -331,8 +331,9 @@ public class DocumentService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}else {
 		studentListAaResponseDto.setSuccess(false);
+		}
 		return studentListAaResponseDto;
 	
 	}

@@ -169,25 +169,25 @@ public class EmployeeService {
     return viewAllEmployeeResponseDto;
 }
 
-	public EmployeeDetailsResponseDto viewDetailsEmployee() {
-		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
+	public ViewDetailsEmployeeResponseDto viewDetailsEmployee(String strid) {
+		ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = new ViewDetailsEmployeeResponseDto();
 		 boolean result = false;
 	        try {
-	            long id = Long.parseLong(request.getParameter("id"));
+	            long id = Long.parseLong(strid);
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
 	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
-	            	employeeDetailsResponseDto.setEmployee(employee);
-	                employeeDetailsResponseDto.setEmployeeLogin(employeeLogin);
+	            	viewDetailsEmployeeResponseDto.setEmployee(employee);
+	            	viewDetailsEmployeeResponseDto.setEmployeeLogin(employeeLogin);
 
-	                employeeDetailsResponseDto.setSuccess(true);
+	            	viewDetailsEmployeeResponseDto.setSuccess(true);
 	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            employeeDetailsResponseDto.setSuccess(false);
+	            viewDetailsEmployeeResponseDto.setSuccess(false);
 	        }
-	        return employeeDetailsResponseDto;
+	        return viewDetailsEmployeeResponseDto;
 	}
 
 	public Teacher updateEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto) {

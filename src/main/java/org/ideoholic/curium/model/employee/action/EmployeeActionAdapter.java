@@ -52,13 +52,13 @@ public class EmployeeActionAdapter {
     }
     public boolean viewDetailsEmployee() {
         EmployeeService employeeService = new EmployeeService(request,response);
-        EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee();
+        ViewDetailsEmployeeResponseDto viewDetailsEmployeeResponseDto = employeeService.viewDetailsEmployee(request.getParameter("id"));
 
-        request.setAttribute("stafflogin", employeeDetailsResponseDto.getEmployeeLogin());
+        request.setAttribute("stafflogin", viewDetailsEmployeeResponseDto.getEmployeeLogin());
 
-        httpSession.setAttribute("employee", employeeDetailsResponseDto.getEmployee());
+        httpSession.setAttribute("employee", viewDetailsEmployeeResponseDto.getEmployee());
 
-        return employeeDetailsResponseDto.isSuccess();
+        return viewDetailsEmployeeResponseDto.isSuccess();
     }
     public String updateEmployee(MultipartFile[] listOfFiles) {
         EmployeeService employeeService = new EmployeeService(request,response);
