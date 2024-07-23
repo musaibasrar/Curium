@@ -54,7 +54,7 @@ public class ExamDetailsAction {
 	public String searchHallTicketDetails() {
 		
 		new ExamDetailsService(request, response).getExamScheduleDetails();
-		new ExamDetailsService(request, response).readListOfExams();
+		examDetailsActionAdapter.readListOfExams();
 		new SubjectDetailsService(request, response).readListOfSubjects();
 		
 		return "generatehallticket";
@@ -65,7 +65,7 @@ public class ExamDetailsAction {
 		
 		boolean result;
 		
-		result = new ExamDetailsService(request, response).readListOfExams();
+		result = examDetailsActionAdapter.readListOfExams();
 		if (!result) 
 			return error;
 		result = standardActionAdapter.viewClasses();
@@ -110,14 +110,14 @@ public class ExamDetailsAction {
 		
 		boolean result;
 		
-		result = new ExamDetailsService(request, response).readListOfExams();
+		result = examDetailsActionAdapter.readListOfExams();
 		if (!result) 
 			return error;
 		result = standardActionAdapter.viewClasses();
 		if (!result) 
 			return error;
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
-		if (!result) 
+		if (!result)
 			return error;
 		result = yearActionAdapter.getYear();
 		if (!result) 
@@ -141,7 +141,7 @@ public class ExamDetailsAction {
 
 	@GetMapping("/readListOfExams")
 	public String readListOfExams() {
-		if(new ExamDetailsService(request, response).readListOfExams()){
+		if(examDetailsActionAdapter.readListOfExams()){
 			return "ExamDetails";
 		}else{
 			return "error";
@@ -160,4 +160,3 @@ public class ExamDetailsAction {
 	}
 
 }
-//Make Adpater of it

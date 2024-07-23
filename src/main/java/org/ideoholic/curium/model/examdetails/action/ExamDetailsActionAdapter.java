@@ -2,7 +2,7 @@ package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
-import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +34,13 @@ public class ExamDetailsActionAdapter {
         return resultResponse.isSuccess();
     }
 
+    public boolean readListOfExams() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
+        ExamsListResponseDto result = examDetailsService.readListOfExams(httpSession.getAttribute(BRANCHID).toString());
+
+        httpSession.setAttribute("examdetails", result.getExams());
+        return result.isSuccess();
+    }
+    
 }

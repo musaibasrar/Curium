@@ -18,6 +18,7 @@ import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -62,21 +63,19 @@ public class ExamDetailsService {
 	}
 
 
-	public boolean readListOfExams() {
-		
-		boolean result = true;
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+	public ExamsListResponseDto readListOfExams(String branchId) {
+		ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
+		if(branchId!=null){
 			
-			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 httpSession.setAttribute("examdetails", exams);
+			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			 examsListResponseDto.setExams(exams);
+			 examsListResponseDto.setSuccess(true);
 			 if(exams == null){
-					result=false;
+				 examsListResponseDto.setSuccess(false);
 				}
 		}
 		
-		
-		return result;
+		return examsListResponseDto;
 	}
 
 
