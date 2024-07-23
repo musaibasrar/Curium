@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.*;
@@ -26,11 +27,12 @@ import org.ideoholic.curium.util.DateUtil;
  * @author Musaib_2
  *
  */
+@Slf4j
 public class ExamDetailsService {
 
-	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 
 	public ExamDetailsService(HttpServletRequest request, HttpServletResponse response) {
@@ -75,13 +77,13 @@ public class ExamDetailsService {
 	}
 
 
-	public ResultResponse deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
+	public ResultResponse deleteMultiple(ExamIdsDto examIdsDto) {
 
-		String[] examIds = deleteMultipleDto.getExamIds();
+		String[] examIds = examIdsDto.getExamIds();
 		if (examIds != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : examIds) {
-				System.out.println("id" + id);
+				log.debug("id" + id);
 				ids.add(Integer.valueOf(id));
 
 			}

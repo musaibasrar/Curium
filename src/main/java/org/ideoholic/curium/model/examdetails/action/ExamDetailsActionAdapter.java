@@ -2,7 +2,7 @@ package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
-import org.ideoholic.curium.model.examdetails.dto.DeleteMultipleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +46,10 @@ public class ExamDetailsActionAdapter {
     public boolean deleteMultiple() {
         ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
-        DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
-        deleteMultipleDto.setExamIds(request.getParameterValues("examIDs"));
+        ExamIdsDto examIdsDto = new ExamIdsDto();
+        examIdsDto.setExamIds(request.getParameterValues("examIDs"));
 
-        ResultResponse resultResponse = examDetailsService.deleteMultiple(deleteMultipleDto);
+        ResultResponse resultResponse = examDetailsService.deleteMultiple(examIdsDto);
         return resultResponse.isSuccess();
     }
     
