@@ -9,14 +9,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class FeescategoryResponseDto {
-		
-	private List<Feescategory> feescategory;
+public class OtherFeesCategoryResponseDto {
+         
+	private List<OtherFeecategory> otherFeesCategory;
 	private boolean success;
 }

@@ -162,14 +162,14 @@ public class FeesAction {
 	
 	@GetMapping("/otherFeesView")
 	public String otherviewFees() {
-		new FeesService(request, response).viewOtherFees();
+		feesActionAdapter.viewOtherFees();
 		standardActionAdapter.viewClasses();
 		return "otherfeecategory";
 	}
 	
 	@GetMapping("/otherfeesCollect")
 	public String otherfeesCollect() {
-		new FeesService(request, response).viewOtherFees();
+		feesActionAdapter.viewOtherFees();
 		feesActionAdapter.viewAllStudentsList();
 		return "otherfeesCollection";
 	}
@@ -177,14 +177,14 @@ public class FeesAction {
 	@GetMapping("/otherfeesReport")
 	public String otherfeesReport() {
 		standardActionAdapter.viewClasses();
-		new FeesService(request, response).viewOtherFees();
+		feesActionAdapter.viewOtherFees();
 		return "otherfeesreport";
 	}
 	
 	@GetMapping("/searchfeecategory")
 	public void searchFeeCategory() {
 			try {
-				new FeesService(request, response).getFeeCategory();
+				feesActionAdapter.getFeeCategory();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -197,7 +197,7 @@ public class FeesAction {
 	
 	@PostMapping("/applyotherConcession")
 	public String applyotherConcession() {
-		String studentId = new FeesService(request, response).applyotherConcession();
+		String studentId = feesActionAdapter.applyotherConcession();
 		return studentotherFeePage(studentId);
 	}
 	
