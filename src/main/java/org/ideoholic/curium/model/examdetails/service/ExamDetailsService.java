@@ -69,6 +69,7 @@ public class ExamDetailsService {
 			
 			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 			 examsListResponseDto.setExams(exams);
+			 examsListResponseDto.setSuccess(true);
 			 if(exams == null){
 				 examsListResponseDto.setSuccess(false);
 				}
