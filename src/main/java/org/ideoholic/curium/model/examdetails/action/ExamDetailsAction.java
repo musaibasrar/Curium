@@ -132,7 +132,7 @@ public class ExamDetailsAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		if(new ExamDetailsService(request, response).deleteMultiple()){
+		if(examDetailsActionAdapter.deleteMultiple()){
 			return readListOfExams();
 		}else{
 			return "error";

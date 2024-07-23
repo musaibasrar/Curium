@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
-import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
-import org.ideoholic.curium.model.examdetails.dto.Exams;
-import org.ideoholic.curium.model.examdetails.dto.Examschedule;
-import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.*;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -35,9 +32,8 @@ public class ExamDetailsService {
 	HttpServletResponse response;
 	HttpSession httpSession;
 	private String BRANCHID = "branchid";
-	
-	public ExamDetailsService(HttpServletRequest request,
-			HttpServletResponse response) {
+
+	public ExamDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
@@ -47,15 +43,15 @@ public class ExamDetailsService {
 	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 		// TODO Auto-generated method stub
 		Exams exams = new Exams();
-		
-		if(branchId!=null){
 
-		exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
-		exams.setBranchid(Integer.parseInt(branchId));
-		exams = new ExamDetailsDAO().addExams(exams);
+		if (branchId != null) {
+
+			exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
+			exams.setBranchid(Integer.parseInt(branchId));
+			exams = new ExamDetailsDAO().addExams(exams);
 
 		}
-		if(exams == null){
+		if (exams == null) {
 			return ResultResponse.builder().success(false).build();
 
 		}
@@ -65,37 +61,37 @@ public class ExamDetailsService {
 
 	public ExamsListResponseDto readListOfExams(String branchId) {
 		ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
-		if(branchId!=null){
-			
+		if (branchId != null) {
+
 			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
-			 examsListResponseDto.setExams(exams);
-			 examsListResponseDto.setSuccess(true);
-			 if(exams == null){
-				 examsListResponseDto.setSuccess(false);
-				}
+			examsListResponseDto.setExams(exams);
+			examsListResponseDto.setSuccess(true);
+			if (exams == null) {
+				examsListResponseDto.setSuccess(false);
+			}
 		}
-		
+
 		return examsListResponseDto;
 	}
 
 
-	public boolean deleteMultiple() {
-		String[] examIds = request.getParameterValues("examIDs");
-		boolean result;
-		 if(examIds!=null){
-	        List<Integer> ids = new ArrayList<>();
-	        for (String id : examIds) {
-	            System.out.println("id" + id);
-	            ids.add(Integer.valueOf(id));
+	public ResultResponse deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
 
-	        }
-	        new ExamDetailsDAO().deleteMultiple(ids);
-	        result = true;
-	}else{
-		result = false;
+		String[] examIds = deleteMultipleDto.getExamIds();
+		if (examIds != null) {
+			List<Integer> ids = new ArrayList<>();
+			for (String id : examIds) {
+				System.out.println("id" + id);
+				ids.add(Integer.valueOf(id));
+
+			}
+			new ExamDetailsDAO().deleteMultiple(ids);
+			return ResultResponse.builder().success(true).build();
+		} else {
+			return ResultResponse.builder().success(false).build();
+		}
 	}
-		 return result;
-	}
+
 
 
 	public boolean addSchedule() {
