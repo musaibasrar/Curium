@@ -23,10 +23,10 @@ import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
-import org.ideoholic.curium.model.feescategory.dto.DnDReportResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
@@ -781,16 +781,16 @@ public class FeesService {
 	        return feescategoryResponseDto;
 	    }
 		
-		public DnDReportResponseDto getDndReport(String branchid) {
+		public SearchStudentResponseDto getDndReport(String branchid) {
 
-			DnDReportResponseDto dnDReportResponseDto = new DnDReportResponseDto();
+			SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(branchid)+" AND";
 			String querySub = " parents.Student.archive = 0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND crecorddate is not null order by parents.Student.crecorddate DESC";
 			queryMain = queryMain + querySub;
 
 			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-			dnDReportResponseDto.setSearchStudentList(searchStudentList);
-			return dnDReportResponseDto;
+			searchStudentResponseDto.setSearchStudentList(searchStudentList);
+			return searchStudentResponseDto;
 		}
 		
 		public StudentIdDto deleteOtherFeesCategory(ConcessionDto concessionDto) {

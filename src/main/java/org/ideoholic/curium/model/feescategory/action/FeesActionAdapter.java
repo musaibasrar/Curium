@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
-import org.ideoholic.curium.model.feescategory.dto.DnDReportResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
@@ -208,8 +208,8 @@ public class FeesActionAdapter {
 
 	public void getDndReport() {
 		FeesService feesService = new FeesService(request, response);
-		DnDReportResponseDto dnDReportResponseDto = feesService.getDndReport(httpSession.getAttribute(BRANCHID).toString());
-		request.setAttribute("dndStudentList", dnDReportResponseDto.getSearchStudentList());
+		SearchStudentResponseDto searchStudentResponseDto = feesService.getDndReport(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("dndStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
 	public String deleteOtherFeesCategory() {
