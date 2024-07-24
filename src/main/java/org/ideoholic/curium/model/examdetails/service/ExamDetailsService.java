@@ -94,30 +94,28 @@ public class ExamDetailsService {
 		}
 	}
 
-
-
-	public boolean addSchedule() {
+	public ResultResponse addSchedule(AddScheduleDto addScheduleDto, String branchId) {
 		
-		boolean result = false;
+		boolean result;
 		List<Examschedule> examScheduleList = new ArrayList<>();
+
+		String[] subject = addScheduleDto.getSubject();
+		String[] date = addScheduleDto.getDate();
+		String[] startTime = addScheduleDto.getStartTime();
+		String[] endTime = addScheduleDto.getEndTime();
+		String[] classesSelected = addScheduleDto.getClassesSelected();
 		
-		String[] subject = request.getParameterValues("subject");
-		String[] date = request.getParameterValues("fromdate");
-		String[] startTime = request.getParameterValues("starttime");
-		String[] endTime = request.getParameterValues("endtime");
-		String[] classesSelected = request.getParameterValues("classesselected");
 		
 		
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			
 			for (String selectedClass : classesSelected) {
 				
 				for (int i=0; i<subject.length;i++) {
 					Examschedule examschedule = new Examschedule();
-					examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
+					examschedule.setAcademicyear(DataUtil.emptyString(addScheduleDto.getAcademicyear()));
 					examschedule.setClasses(selectedClass);
-					examschedule.setExamname(DataUtil.emptyString(request.getParameter("exam")));
+					examschedule.setExamname(DataUtil.emptyString(addScheduleDto.getExam()));
 					examschedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
 					String[] starttimeSplit = startTime[i].split(":");
 					String hours = starttimeSplit[0];
@@ -172,14 +170,14 @@ public class ExamDetailsService {
 						  
 					examschedule.setEndtime(outputEndTime+" "+endmeridian);
 					examschedule.setSubject(DataUtil.emptyString(subject[i]));
-					examschedule.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					examschedule.setBranchid(Integer.parseInt(branchId));
 					examScheduleList.add(examschedule);
 				}
 			}
 			result = new ExamDetailsDAO().addExamSchedule(examScheduleList);
+			return  ResultResponse.builder().success(result).build();
 		}
-		
-		return result;
+		return ResultResponse.builder().build();
 	}
 
 

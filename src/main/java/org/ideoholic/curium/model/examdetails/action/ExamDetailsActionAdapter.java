@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
+import org.ideoholic.curium.model.examdetails.dto.AddScheduleDto;
 import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
@@ -50,6 +51,22 @@ public class ExamDetailsActionAdapter {
         examIdsDto.setExamIds(request.getParameterValues("examIDs"));
 
         ResultResponse resultResponse = examDetailsService.deleteMultiple(examIdsDto);
+        return resultResponse.isSuccess();
+    }
+    public boolean addSchedule() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
+
+        AddScheduleDto addScheduleDto = new AddScheduleDto();
+        addScheduleDto.setSubject(request.getParameterValues("subject"));
+        addScheduleDto.setDate(request.getParameterValues("fromdate"));
+        addScheduleDto.setStartTime(request.getParameterValues("starttime"));
+        addScheduleDto.setEndTime(request.getParameterValues("endtime"));
+        addScheduleDto.setClassesSelected(request.getParameterValues("classesselected"));
+        addScheduleDto.setAcademicyear(request.getParameter("academicyear"));
+        addScheduleDto.setExam(request.getParameter("exam"));
+
+        ResultResponse resultResponse = examDetailsService.addSchedule(addScheduleDto, httpSession.getAttribute(BRANCHID).toString());
+
         return resultResponse.isSuccess();
     }
     

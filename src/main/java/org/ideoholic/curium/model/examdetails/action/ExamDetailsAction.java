@@ -97,7 +97,7 @@ public class ExamDetailsAction {
 	@PostMapping("addSchedule")
 	public String addSchedule() {
 		
-		if(new ExamDetailsService(request, response).addSchedule()){
+		if(examDetailsActionAdapter.addSchedule()){
 			return examSchedule();
 		}else{
 			return "error";
