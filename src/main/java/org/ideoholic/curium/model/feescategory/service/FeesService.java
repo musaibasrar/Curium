@@ -723,7 +723,7 @@ public class FeesService {
 	        	int ca = Integer.parseInt(currentAcademicYear[0]);
 	        	
 	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = currentAcademicYearStr.toString();
+	        		searchYear = currentAcademicYearStr;
 	        	}else if (yoa > ca) {
 	        		searchYear = yearofAdmissionStr;
 	        	}

@@ -218,8 +218,7 @@ public class FeesActionAdapter {
 		concessionDto.setSfsid(request.getParameterValues("sfsid"));
 		concessionDto.setId(request.getParameter("id"));
 		StudentIdDto studentIdDto = feesService.deleteOtherFeesCategory(concessionDto);
-		String studentId = studentIdDto.getStudentId();
-		return studentId;
+		return studentIdDto.getStudentId();
 	}
 	
 }
