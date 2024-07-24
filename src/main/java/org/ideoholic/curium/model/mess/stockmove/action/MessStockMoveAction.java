@@ -40,7 +40,7 @@ public class MessStockMoveAction {
 	@PostMapping("/cancelStockMove")
 	public String cancelStockMove() {
 
-		new MessStockMoveService(request, response).cancelStockMove();
+		messStockMoveActionAdapter.cancelStockMove();
 		messItemActionAdapter.getCurrentStockToIssue();
 		/*
 		 * Batch stock issue new MessStockMoveService(request,

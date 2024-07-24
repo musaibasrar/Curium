@@ -1,10 +1,7 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.mess.stockmove.dto.ClassSearchDto;
-import org.ideoholic.curium.model.mess.stockmove.dto.MoveStockResponseDto;
-import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveDto;
-import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.*;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class MessStockMoveActionAdapter {
@@ -111,5 +111,24 @@ public class MessStockMoveActionAdapter {
         String itemId = request.getParameter("itemid");
 
         messStockMoveService.getCustomerLastPrice(customerName, custDetails, itemId, httpSession.getAttribute(BRANCHID).toString());
+    }
+
+    public void cancelStockMove() {
+        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
+
+        StockMoveIdsDto dto = new StockMoveIdsDto();
+        dto.setStockMoveIds(request.getParameterValues("stockmoveid"));
+
+        Map<String, String> allRequestParameters = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String fieldName = enumeration.nextElement();
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameters.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameters);
+
+        ResultResponse resultResponse = messStockMoveService.cancelStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemscancelled", resultResponse.isSuccess());
     }
 }
