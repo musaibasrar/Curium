@@ -571,9 +571,10 @@ public class MessStockMoveService {
 	}
 
 
-	public void cancelStockMove() {
+	public ResultResponse cancelStockMove(StockMoveIdsDto dto, String branchId, String userId) {
+	ResultResponse resultResponse = ResultResponse.builder().build();
 		
-	String[] smIds = request.getParameterValues("stockmoveid");
+	String[] smIds = dto.getStockMoveIds();
 	
 	for (String stockmoveids : smIds) {
 		
@@ -584,8 +585,8 @@ public class MessStockMoveService {
 		
 		//Pass J.V. : Debit the assets & credit the Expenses
 		
-		int drStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		int crStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int drStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
+		int crStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(branchId));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
@@ -594,13 +595,13 @@ public class MessStockMoveService {
 		transactions.setDramount(BigDecimal.valueOf(totalValue));
 		transactions.setCramount(BigDecimal.valueOf(totalValue));
 		transactions.setVouchertype(4);
-		transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate_"+stockmoveids)));
+		transactions.setTransactiondate(DateUtil.indiandateParser(dto.getRequestParams().get("transactiondate_"+stockmoveids)));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration("Towards Revarsal of Stock Issue");
 		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(branchId));
+		transactions.setUserid(Integer.parseInt(userId));
 		
 		BigDecimal drAmountReceipt = BigDecimal.valueOf(totalValue);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+drStockLedgerId;
@@ -609,10 +610,11 @@ public class MessStockMoveService {
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerIdExpense;
 		
 		boolean result = new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
-		request.setAttribute("itemscancelled", result);
+		resultResponse.setSuccess(result);
 		
 	}
-	
+	resultResponse.setSuccess(true);
+	return resultResponse;
 }
 	
 	
