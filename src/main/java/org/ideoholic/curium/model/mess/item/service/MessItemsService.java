@@ -1,20 +1,5 @@
 package org.ideoholic.curium.model.mess.item.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -25,12 +10,22 @@ import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.StockIssuance;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class MessItemsService {
 
@@ -39,6 +34,9 @@ public class MessItemsService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+
+	@Autowired
+	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 	
 	public MessItemsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -546,7 +544,7 @@ public class MessItemsService {
 		public ResultResponse receiveStockReport() {
 			ResultResponse result = ResultResponse.builder().build();
 
-			new MessSuppliersService(request, response).viewSuppliersDetails();
+			messSuppliersActionAdapter.viewSuppliersDetails();
 			
 			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
 			result.setResultList(messItemsList);

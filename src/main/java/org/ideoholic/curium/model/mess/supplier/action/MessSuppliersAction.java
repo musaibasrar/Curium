@@ -3,11 +3,6 @@
  */
 package org.ideoholic.curium.model.mess.supplier.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Musaib_2
@@ -25,9 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MessSuppliersAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
+
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
+
+	@Autowired
+	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 
 	@PostMapping("/printSearchSupplierPaymentDetails")
 	public String printSearchSupplierPaymentDetails() {
@@ -38,13 +41,13 @@ public class MessSuppliersAction {
 	@PostMapping("/searchSupplierPaymentDetails")
 	public String searchSupplierPaymentDetails() {
 		new AccountService(request, response).searchJournalEntries();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		return "supplierpaymentdetails";
 	}
 
 	@GetMapping("/supplierPaymentReport")
 	public String supplierPaymentReport() {
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		return "supplierpaymentdetails";
 	}
 
@@ -62,7 +65,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/printSupplierPayment")
 	public String printSupplierPayment() {
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "printsupplierpayment";
 	}
@@ -71,7 +74,7 @@ public class MessSuppliersAction {
 	public String cancelCheque() {
 
 		new MessSuppliersService(request, response).cancelCheque();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
 
@@ -81,7 +84,7 @@ public class MessSuppliersAction {
 	public String clearedCheque() {
 
 		new MessSuppliersService(request, response).clearedCheque();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
 
@@ -90,7 +93,7 @@ public class MessSuppliersAction {
 	@PostMapping("/deliveredCheque")
 	public String deliveredCheque() {
 		new MessSuppliersService(request, response).deliveredCheque();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
@@ -98,7 +101,7 @@ public class MessSuppliersAction {
 	@PostMapping("/issueCheque")
 	public String issueCheque() {
 		new MessSuppliersService(request, response).issueCheque();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
@@ -115,7 +118,7 @@ public class MessSuppliersAction {
 
 	@GetMapping("/paymentSuppliers")
 	public String paymentSuppliers() {
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
@@ -135,7 +138,7 @@ public class MessSuppliersAction {
 
 	@GetMapping("/viewSuppliers")
 	public String viewSuppliers() {
-		return new MessSuppliersService(request, response).viewSuppliersDetails();
+		return messSuppliersActionAdapter.viewSuppliersDetails();
 	}
 
 	@PostMapping("/addSuppliers")

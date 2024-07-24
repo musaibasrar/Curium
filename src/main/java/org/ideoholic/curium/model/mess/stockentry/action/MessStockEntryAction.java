@@ -3,22 +3,19 @@
  */
 package org.ideoholic.curium.model.mess.stockentry.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author Musaib_2
@@ -39,6 +36,8 @@ public class MessStockEntryAction {
 	private MessItemActionAdapter messItemActionAdapter;
 	@Autowired
 	private MessStockEntryActionAdapter messStockEntryActionAdapter;
+	@Autowired
+	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 
 	@GetMapping("/mrvDetails")
 	public void mrvDetails() {
@@ -81,7 +80,7 @@ public class MessStockEntryAction {
 
 	@GetMapping("/purchaseItems")
 	public String purchaseItems() {
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		return "purchase";
 	}
