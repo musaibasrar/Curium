@@ -227,7 +227,7 @@ public class FeesAction {
 	@GetMapping("/searchfeecategoryheadwise")
 	public void searchFeeCategoryHeadWise() {
 			try {
-				new FeesService(request, response).getFeeCategoryHeadWise();
+				feesActionAdapter.getFeeCategoryHeadWise();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -242,13 +242,13 @@ public class FeesAction {
 
 	@GetMapping("/dndReport")
 	public String dndReport() {
-		new FeesService(request, response).getDndReport();
+		feesActionAdapter.getDndReport();
 		return "dndreport";
 	}
 	
 	@PostMapping("/deleteOtherFeesCategory")
 	public String deleteOtherFeesCategory() {
-		String studentId = new FeesService(request, response).deleteOtherFeesCategory();
+		String studentId = feesActionAdapter.deleteOtherFeesCategory();
 		return studentotherFeePage(studentId);
 	}
 }

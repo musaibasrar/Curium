@@ -26,6 +26,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
+import org.ideoholic.curium.model.feescategory.dto.DnDReportResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
@@ -711,24 +712,24 @@ public class FeesService {
 			    return result;
 		}
 
-		public void getFeeCategoryHeadWise() throws IOException {
+		public FeescategoryResponseDto getFeeCategoryHeadWise(String classname,String yearofAdmissionStr,String currentAcademicYearStr,String branchid) throws IOException {
 
-	        if(httpSession.getAttribute(BRANCHID)!=null){
-	        	String classname = request.getParameter("classstudying");
-	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
-	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+			FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+	        if(branchid!=null){
+	        	String[] yearofAdmission = yearofAdmissionStr.split("/");
+	        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
 	        	String searchYear = null;
 	        	int yoa = Integer.parseInt(yearofAdmission[0]);
 	        	int ca = Integer.parseInt(currentAcademicYear[0]);
 	        	
 	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = httpSession.getAttribute("currentAcademicYear").toString();
+	        		searchYear = currentAcademicYearStr.toString();
 	        	}else if (yoa > ca) {
-	        		searchYear = request.getParameter("yearofadmission");
+	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
 	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
-	            httpSession.setAttribute("feescategory", feecategoryList);
+	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
@@ -777,25 +778,29 @@ public class FeesService {
 
 
 	        }
+	        return feescategoryResponseDto;
 	    }
 		
-		public void getDndReport() {
+		public DnDReportResponseDto getDndReport(String branchid) {
 
-			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+			DnDReportResponseDto dnDReportResponseDto = new DnDReportResponseDto();
+			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(branchid)+" AND";
 			String querySub = " parents.Student.archive = 0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND crecorddate is not null order by parents.Student.crecorddate DESC";
 			queryMain = queryMain + querySub;
 
 			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-			request.setAttribute("dndStudentList", searchStudentList);
+			dnDReportResponseDto.setSearchStudentList(searchStudentList);
+			return dnDReportResponseDto;
 		}
 		
-		public String deleteOtherFeesCategory() {
+		public StudentIdDto deleteOtherFeesCategory(ConcessionDto concessionDto) {
             
-            String[] idfeescategory = request.getParameterValues("sfsid");
+			StudentIdDto studentIdDto = new StudentIdDto();
+            String[] idfeescategory = concessionDto.getSfsid();
             List<Integer> sfsId = new ArrayList();
             List<Integer> feesCatId = new ArrayList();
             
-            String studentId = request.getParameter("id");
+            String studentId = concessionDto.getId();
             
             if(idfeescategory!=null){
                     
@@ -805,8 +810,8 @@ public class FeesService {
                             feesCatId.add(Integer.valueOf(test[1]));
                    }
            new feesCategoryDAO().deleteOtherFeesCategory(sfsId,feesCatId,studentId);
-           
-           return studentId;
+           studentIdDto.setStudentId(studentId);
+           return studentIdDto;
             }
            throw new IllegalArgumentException("Fees category for the given student does not exist");
            
