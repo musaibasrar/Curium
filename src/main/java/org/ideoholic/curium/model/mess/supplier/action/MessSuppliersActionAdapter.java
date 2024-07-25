@@ -95,6 +95,6 @@ public class MessSuppliersActionAdapter {
         dto.setIssueAmount(request.getParameter("chequeamount"));
 
         ResultResponse resultResponse = messSuppliersService.issueCheque(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
-        request.setAttribute("supplierpaymentissued", resultResponse.getResultList());
+        request.setAttribute("supplierpaymentissued", resultResponse.isSuccess());
     }
 }
