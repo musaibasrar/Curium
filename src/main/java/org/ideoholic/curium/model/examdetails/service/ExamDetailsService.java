@@ -189,6 +189,7 @@ public class ExamDetailsService {
 			
 			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
 			 result.setExams(exams);
+			 result.setSuccess(true);
 			if(exams == null){
 	            result.setSuccess(false);
 			}
