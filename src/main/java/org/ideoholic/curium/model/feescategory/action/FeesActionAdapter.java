@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
@@ -195,6 +196,29 @@ public class FeesActionAdapter {
 		StudentIdDto studentIdDto = feesService.applyotherConcession(concessionDto);
 		String studentId = studentIdDto.getStudentId();
 		return studentId;
+	}
+
+	public void getFeeCategoryHeadWise() throws IOException {
+		FeesService feesService = new FeesService(request, response);
+		String classname = request.getParameter("classstudying");
+    	String yearofAdmission = request.getParameter("yearofadmission");
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+    	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+	}
+
+	public void getDndReport() {
+		FeesService feesService = new FeesService(request, response);
+		SearchStudentResponseDto searchStudentResponseDto = feesService.getDndReport(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("dndStudentList", searchStudentResponseDto.getSearchStudentList());
+	}
+
+	public String deleteOtherFeesCategory() {
+		FeesService feesService = new FeesService(request, response);
+		ConcessionDto concessionDto = new ConcessionDto();
+		concessionDto.setSfsid(request.getParameterValues("sfsid"));
+		concessionDto.setId(request.getParameter("id"));
+		StudentIdDto studentIdDto = feesService.deleteOtherFeesCategory(concessionDto);
+		return studentIdDto.getStudentId();
 	}
 	
 }
