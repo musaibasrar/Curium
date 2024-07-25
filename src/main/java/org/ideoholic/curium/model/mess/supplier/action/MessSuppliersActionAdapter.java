@@ -24,12 +24,12 @@ public class MessSuppliersActionAdapter {
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
-    public String viewSuppliersDetails() {
+    public boolean viewSuppliersDetails() {
         MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
 
         ResultResponse resultResponse = messSuppliersService.viewSuppliersDetails(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("messsupplierslist", resultResponse.getResultList());
 
-        return "supplierdetails";
+        return resultResponse.isSuccess();
     }
 }

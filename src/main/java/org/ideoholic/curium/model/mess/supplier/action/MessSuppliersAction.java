@@ -138,8 +138,12 @@ public class MessSuppliersAction {
 
 	@GetMapping("/viewSuppliers")
 	public String viewSuppliers() {
-		return messSuppliersActionAdapter.viewSuppliersDetails();
-	}
+		if(messSuppliersActionAdapter.viewSuppliersDetails()){
+			return "addsuppliers";
+		}
+		else
+			return "error";
+	    }
 
 	@PostMapping("/addSuppliers")
 	public String addSuppliers() {
