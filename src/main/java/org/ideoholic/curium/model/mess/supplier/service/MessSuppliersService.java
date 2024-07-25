@@ -535,28 +535,31 @@ public class MessSuppliersService {
 	}
 
 
-	public void viewBalanceSuppliers() {
+	public ResultResponse viewBalanceSuppliers(String branchId) {
 
 		
-		List<MessSuppliers> messSuppliersList = new ArrayList<MessSuppliers>();
-		List<Accountdetailsbalance> accountdetailsbalanceList = new ArrayList<Accountdetailsbalance>();
-			
+		List<MessSuppliers> messSuppliersList;
+		List<Accountdetailsbalance> accountdetailsbalanceList = new ArrayList<>();
+
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
 			 	messSuppliersList =	new MessSuppliersDAO().getSupplierDetails();
 			 	
-			 	List<Integer> supplierLedgerId = new ArrayList<Integer>();
+			 	List<Integer> supplierLedgerId = new ArrayList<>();
 			 	
 			 	for (MessSuppliers messSuppliers : messSuppliersList) {
 			 				supplierLedgerId.add(messSuppliers.getLinkedledgerid());
 				}
 			 	
-			 	accountdetailsbalanceList = new AccountDAO().getAccountBalanceDetails(supplierLedgerId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 	accountdetailsbalanceList = new AccountDAO().getAccountBalanceDetails(supplierLedgerId, Integer.parseInt(branchId));
 			 	
 			 	
 		 }
-		 
-		 request.setAttribute("supplierbalancedetails", accountdetailsbalanceList);
+		 return ResultResponse
+				 .builder()
+				 .resultList(accountdetailsbalanceList)
+				 .success(true)
+				 .build();
 	}
 	
 }

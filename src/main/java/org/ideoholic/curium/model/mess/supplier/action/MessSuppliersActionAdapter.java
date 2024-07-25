@@ -32,4 +32,11 @@ public class MessSuppliersActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public void viewBalanceSuppliers() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        ResultResponse resultResponse = messSuppliersService.viewBalanceSuppliers(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("supplierbalancedetails", resultResponse.getResultList());
+    }
 }

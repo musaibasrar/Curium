@@ -53,13 +53,13 @@ public class MessSuppliersAction {
 
 	@PostMapping("/printSuppliersBalance")
 	public String printSuppliersBalance() {
-		new MessSuppliersService(request, response).viewBalanceSuppliers();
+		messSuppliersActionAdapter.viewBalanceSuppliers();
 		return "printsuppliersbalance";
 	}
 
 	@GetMapping("/balanceSuppliers")
 	public String balanceSuppliers() {
-		new MessSuppliersService(request, response).viewBalanceSuppliers();
+		messSuppliersActionAdapter.viewBalanceSuppliers();
 		return "suppliersbalance";
 	}
 
