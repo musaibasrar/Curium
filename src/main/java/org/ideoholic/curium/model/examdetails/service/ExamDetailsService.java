@@ -199,10 +199,10 @@ public class ExamDetailsService {
 	}
 
 
-	public boolean deleteExamSchedule() {
+	public ResultResponse deleteExamSchedule(ExamIdsDto examIdsDto) {
 
-		String[] examIds = request.getParameterValues("idexamschedule");
-		boolean result;
+		String[] examIds = examIdsDto.getExamIds();
+
 		 if(examIds!=null){
 	        List<Integer> ids = new ArrayList<>();
 	        for (String id : examIds) {
@@ -210,11 +210,10 @@ public class ExamDetailsService {
 
 	        }
 	        new ExamDetailsDAO().deleteExamSchedule(ids);
-	        result = true;
+	       return ResultResponse.builder().success(true).build();
 	}else{
-		result = false;
+		return  ResultResponse.builder().success(false).build();
 	}
-		 return result;
 	
 	}
 

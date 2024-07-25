@@ -87,7 +87,7 @@ public class ExamDetailsAction {
 	@PostMapping("/deleteExamSchedule")
 	public String deleteExamSchedule() {
 		
-		if(new ExamDetailsService(request, response).deleteExamSchedule()){
+		if(examDetailsActionAdapter.deleteExamSchedule()){
 			return examSchedule();
 		}else{
 			return "error";

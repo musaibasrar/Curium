@@ -74,5 +74,15 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean deleteExamSchedule() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
+
+        ExamIdsDto examIdsDto = new ExamIdsDto();
+        examIdsDto.setExamIds(request.getParameterValues("idexamschedule"));
+
+        ResultResponse result = examDetailsService.deleteExamSchedule(examIdsDto);
+
+        return result.isSuccess();
+    }
     
 }
