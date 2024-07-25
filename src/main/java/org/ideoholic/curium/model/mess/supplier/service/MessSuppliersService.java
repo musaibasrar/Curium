@@ -5,6 +5,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
+import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
 import org.ideoholic.curium.util.DataUtil;
@@ -256,31 +257,32 @@ public class MessSuppliersService {
 	}
 
 
-	public void issueCheque() {
+	public ResultResponse issueCheque(ChequeDto dto, String branchId, String userId) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
 		
-		String date = request.getParameter("transactiondate");
-		String sup = request.getParameter("supplierid");
+		String date = dto.getDate();
+		String sup = dto.getSupplierId();
 		String[] supplieridledgerid = sup.split(":");
-		String chequeNo = request.getParameter("chequeno");
-		String issueAmount = request.getParameter("chequeamount");
+		String chequeNo = dto.getChequeNo();
+		String issueAmount = dto.getIssueAmount();
 		String amount = issueAmount.replace(",", "");
 											  	
-		if (httpSession.getAttribute(BRANCHID).toString()!=null) {
+		if (branchId!=null) {
 			
 			MessSuppliersPayment messSuppliersPayment = new MessSuppliersPayment();
 			messSuppliersPayment.setAmount(Float.parseFloat(amount));
-			messSuppliersPayment.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			messSuppliersPayment.setBranchid(Integer.parseInt(branchId));
 			messSuppliersPayment.setChequeno(chequeNo);
 			messSuppliersPayment.setIssuedate(DateUtil.indiandateParser(date));
 			messSuppliersPayment.setExternalid(supplieridledgerid[2]+"_"+supplieridledgerid[1]);
 			messSuppliersPayment.setStatus("ISSUED");
 			messSuppliersPayment.setEntrydate(DateUtil.todaysDate());
 			messSuppliersPayment.setSupplierid(Integer.parseInt(supplieridledgerid[0]));
-			messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			messSuppliersPayment.setUserid(Integer.parseInt(userId));
 			
 			//Pass J.V. : Credit the Cheque Awaiting Settlement & debit the Payment Awaiting Settlement 
-			int crCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int drPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int crCasId = getLedgerAccountId("CAS"+Integer.parseInt(branchId));
+			int drPasId = getLedgerAccountId("PAS"+Integer.parseInt(branchId));
 			
 			VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 			
@@ -293,9 +295,9 @@ public class MessSuppliersService {
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration("Towards Payment of supplier '"+supplieridledgerid[2]+"'");
 			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-			transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setBranchid(Integer.parseInt(branchId));
+			transactions.setUserid(Integer.parseInt(userId));
 			
 			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+amount+" where accountdetailsid="+crCasId;
 
@@ -304,10 +306,11 @@ public class MessSuppliersService {
 			
 			
 			boolean result = new MessSuppliersDAO().saveIssueCheque(messSuppliersPayment,transactions,updateCrAccount,updateDrAccount);
-			
-			request.setAttribute("supplierpaymentissued", result);
+
+			resultResponse.setSuccess(result);
 		}
-		
+		resultResponse.setSuccess(true);
+		return resultResponse;
 	}
 	
 	private Integer getLedgerAccountId(String itemAccount) {

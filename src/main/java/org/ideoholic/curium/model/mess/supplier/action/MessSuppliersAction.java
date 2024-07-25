@@ -100,7 +100,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/issueCheque")
 	public String issueCheque() {
-		new MessSuppliersService(request, response).issueCheque();
+		messSuppliersActionAdapter.issueCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
 		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
 		return "supplierpayment";
