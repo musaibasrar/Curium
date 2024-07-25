@@ -1,10 +1,7 @@
 package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
-import org.ideoholic.curium.model.examdetails.dto.AddScheduleDto;
-import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
-import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.*;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +65,14 @@ public class ExamDetailsActionAdapter {
         ResultResponse resultResponse = examDetailsService.addSchedule(addScheduleDto, httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse.isSuccess();
+    }
+    public boolean getExamSchedule() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
+
+        ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("examschedule", result.getExams());
+
+        return result.isSuccess();
     }
     
 }

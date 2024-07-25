@@ -181,16 +181,17 @@ public class ExamDetailsService {
 	}
 
 
-	public boolean getExamSchedule() {
+	public ExamScheduleResponseDto getExamSchedule(String branchId) {
+
+		ExamScheduleResponseDto result = new ExamScheduleResponseDto();
 		
-		boolean result = true;
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			
-			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 httpSession.setAttribute("examschedule", exams);
+			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
+			 result.setExams(exams);
+			 result.setSuccess(true);
 			if(exams == null){
-				result=false;
+	            result.setSuccess(false);
 			}
 		}
 		
