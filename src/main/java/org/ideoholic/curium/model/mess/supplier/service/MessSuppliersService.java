@@ -1,37 +1,23 @@
 package org.ideoholic.curium.model.mess.supplier.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.*;
+import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.Accountdetails;
-import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
-import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
-import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
-import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
-import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.*;
 
 public class MessSuppliersService {
 
@@ -48,17 +34,19 @@ public class MessSuppliersService {
 	}
 
 
-	public String viewSuppliersDetails() {
+	public ResultResponse viewSuppliersDetails(String branchId) {
 		
 		List<MessSuppliers> messSuppliersList = new ArrayList<MessSuppliers>();
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
 			 	messSuppliersList =	new MessSuppliersDAO().getSupplierDetails();
 		 }
 		 
-		 request.setAttribute("messsupplierslist", messSuppliersList);
-		 
-		return "addsuppliers";
+		 return ResultResponse
+				 .builder()
+				 .resultList(messSuppliersList)
+				 .success(true)
+				 .build();
 	}
 
 

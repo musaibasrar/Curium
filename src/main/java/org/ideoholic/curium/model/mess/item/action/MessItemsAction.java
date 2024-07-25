@@ -3,7 +3,7 @@
  */
 package org.ideoholic.curium.model.mess.item.action;
 
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,8 @@ public class MessItemsAction {
 	private MessItemActionAdapter messItemActionAdapter;
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 
 	@PostMapping("/printStockReceivedReport")
 	public String printStockReceivedReport() {
@@ -96,7 +98,7 @@ public class MessItemsAction {
 	public String cancelPurchase() {
 
 		messItemActionAdapter.cancelPurchase();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
@@ -105,7 +107,7 @@ public class MessItemsAction {
 	@PostMapping("/savePurchase")
 	public String savePurchase() {
 		messItemActionAdapter.savePurchase();
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
@@ -137,7 +139,7 @@ public class MessItemsAction {
 
 	@GetMapping("/purchaseItems")
 	public String purchaseItems() {
-		new MessSuppliersService(request, response).viewSuppliersDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
 		messItemActionAdapter.viewItemDetails();
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
