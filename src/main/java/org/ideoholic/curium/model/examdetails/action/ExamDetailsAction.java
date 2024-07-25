@@ -122,7 +122,7 @@ public class ExamDetailsAction {
 		result = yearActionAdapter.getYear();
 		if (!result) 
 			return error;
-		result = new ExamDetailsService(request, response).getExamSchedule();
+		result = examDetailsActionAdapter.getExamSchedule();
 		if (!result) 
 			return error;
 		
