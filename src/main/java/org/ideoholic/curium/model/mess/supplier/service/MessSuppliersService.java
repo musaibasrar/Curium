@@ -4,6 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
+import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
 import org.ideoholic.curium.util.DataUtil;
@@ -388,22 +389,23 @@ public class MessSuppliersService {
 	}
 
 
-	public void clearedCheque() {
+	public ResultResponse clearedCheque(ChequeDetailsDto dto, String branchId, String userId) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
 		
-		String date = request.getParameter("cleardate");
-		String bankName = request.getParameter("bankname");
-		String[] supplierIds = request.getParameterValues("supplierpaymentid");
+		String date = dto.getDate();
+		String bankName = dto.getBankName();
+		String[] supplierIds = dto.getSupplierIds();
 		
 		
-		if (httpSession.getAttribute(BRANCHID).toString()!=null) {
+		if (branchId!=null) {
 			
 			
 			for (String supid : supplierIds) {
 				
-				String supplierName = request.getParameter("externalid_"+supid);
-				String issueAmount = request.getParameter("chequeamount_"+supid);
+				String supplierName = dto.getRequestParams().get("externalid_"+supid);
+				String issueAmount = dto.getRequestParams().get("chequeamount_"+supid);
 				String amount = issueAmount.replace(",", "");
-				String paymentType = request.getParameter("chequeno_"+supid);
+				String paymentType = dto.getRequestParams().get("chequeno_"+supid);
 
 				if ("Cash".equalsIgnoreCase(paymentType)) {
 						paymentType = "By Cash";
@@ -416,11 +418,11 @@ public class MessSuppliersService {
 				messSuppliersPayment.setId(Integer.parseInt(supid));
 				messSuppliersPayment.setDelivereddate(DateUtil.indiandateParser(date));
 				messSuppliersPayment.setStatus("CLEARED");
-				messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				messSuppliersPayment.setUserid(Integer.parseInt(userId));
 				
 				//Pass J.V. : Credit the Bank & debit the Cheque Awaiting Settlement 
-				int crBankId = getLedgerAccountId(bankName+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int crBankId = getLedgerAccountId(bankName+Integer.parseInt(branchId));
+				int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(branchId));
 				
 				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 				
@@ -433,9 +435,9 @@ public class MessSuppliersService {
 				transactions.setEntrydate(DateUtil.todaysDate());
 				transactions.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 				transactions.setCancelvoucher("no");
-				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(branchId));
+				transactions.setUserid(Integer.parseInt(userId));
 				
 				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crBankId;
 				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drCasId;
@@ -443,8 +445,8 @@ public class MessSuppliersService {
 				
 				
 				//Pass J.V. : Credit the Payment Awaiting Settlement & Debit the Supplier 
-				int crPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				int drSupplierLedgerId = Integer.parseInt(request.getParameter("supplierledgerid_"+supid));
+				int crPasId = getLedgerAccountId("PAS"+Integer.parseInt(branchId));
+				int drSupplierLedgerId = Integer.parseInt(dto.getRequestParams().get("supplierledgerid_"+supid));
 				
 				VoucherEntrytransactions transactionsSupplier = new VoucherEntrytransactions();
 				
@@ -457,47 +459,49 @@ public class MessSuppliersService {
 				transactionsSupplier.setEntrydate(DateUtil.todaysDate());
 				transactionsSupplier.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 				transactionsSupplier.setCancelvoucher("no");
-				transactionsSupplier.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-				transactionsSupplier.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				transactionsSupplier.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				transactionsSupplier.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactionsSupplier.setBranchid(Integer.parseInt(branchId));
+				transactionsSupplier.setUserid(Integer.parseInt(userId));
 				
 				String updateDrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crPasId;
 				String updateCrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drSupplierLedgerId;
 				
 				boolean result = new MessSuppliersDAO().updateSupplierPayment(messSuppliersPayment,transactions,updateCrAccount,updateDrAccount,transactionsSupplier,updateCrAccountSupplier,updateDrAccountSupplier);
-				request.setAttribute("chequecleared", result);
+				resultResponse.setSuccess(result);
 			}
 			
 			
 			
 		}
-		
+		resultResponse.setSuccess(true);
+		return resultResponse;
 	}
 
 
-	public void cancelCheque() {
+	public ResultResponse cancelCheque(ChequeDetailsDto dto, String branchId, String userId) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
 		
-		String[] supplierIds = request.getParameterValues("supplierpaymentid");
+		String[] supplierIds = dto.getSupplierIds();
 		
 		
-		if (httpSession.getAttribute(BRANCHID).toString()!=null) {
+		if (branchId!=null) {
 			
 			for (String supId : supplierIds) {
-				String status = request.getParameter("status_"+supId);
+				String status = dto.getRequestParams().get("status_"+supId);
 				
 					if("DELIVERED".equalsIgnoreCase(status)) {
 						new MessSuppliersDAO().updateSupplierPaymentToIssueed("update MessSuppliersPayment set status='ISSUED' where id="+supId+"");
 					}else if("ISSUED".equalsIgnoreCase(status)) {
-						String issueVoucherId = request.getParameter("issuevoucherid_"+supId);
-						String chequeAmount = request.getParameter("chequeamount_"+supId);
+						String issueVoucherId = dto.getRequestParams().get("issuevoucherid_"+supId);
+						String chequeAmount = dto.getRequestParams().get("chequeamount_"+supId);
 						String amount = chequeAmount.replace(",", "");
-						String supplierName = request.getParameter("externalid_"+supId);
+						String supplierName = dto.getRequestParams().get("externalid_"+supId);
 						
 						// Reverse entry for issue cheque
 
 						//Pass J.V. : Credit the Cheque Awaiting Settlement & debit the Payment Awaiting Settlement 
-						int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						int CrPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(branchId));
+						int CrPasId = getLedgerAccountId("PAS"+Integer.parseInt(branchId));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 						
@@ -510,9 +514,9 @@ public class MessSuppliersService {
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards reversal of payment to supplier '"+supplierName+"' and voucher # '"+issueVoucherId+"'");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-						transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setBranchid(Integer.parseInt(branchId));
+						transactions.setUserid(Integer.parseInt(userId));
 						
 						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+CrPasId;
 
@@ -521,8 +525,8 @@ public class MessSuppliersService {
 						String updateMessSupplierPayment = "update MessSuppliersPayment set status='CANCELLED' where id="+supId+"";
 						
 						boolean result = new MessSuppliersDAO().reverseIssueCheque(updateMessSupplierPayment,transactions,updateCrAccount,updateDrAccount);
-					
-						request.setAttribute("chequecancelled", result);
+
+						resultResponse.setSuccess(result);
 						
 						// End reverse entry
 						
@@ -531,7 +535,8 @@ public class MessSuppliersService {
 			}
 			
 		}
-		
+		resultResponse.setSuccess(true);
+		return resultResponse;
 	}
 
 
