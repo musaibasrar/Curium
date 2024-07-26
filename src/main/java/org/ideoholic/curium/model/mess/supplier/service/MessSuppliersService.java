@@ -309,7 +309,6 @@ public class MessSuppliersService {
 
 			resultResponse.setSuccess(result);
 		}
-		resultResponse.setSuccess(true);
 		return resultResponse;
 	}
 	
