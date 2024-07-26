@@ -128,7 +128,7 @@ public class Diaryservice {
 			         Student student = new studentDetailsDAO().readploginUniqueObject(studentId);
 			         String classsec = student.getClassstudying();
                 	 int page = 1;
-     				int recordsPerPage = 100;
+     				int recordsPerPage = 20;
      				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}

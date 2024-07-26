@@ -131,25 +131,25 @@ margin-right:0px;
                 
         
        <!-- Main Content -->
-       <div class="container" style="max-width:42%;">
+       <div class="container" style="width: 38%;padding:0.25rem;">
 
 <h2 align="center" style="color:#FF914D">Diary</h2>
 </div>
 	<div class="container-fluid">
-		<div class="row main-content  text-center" style=" border:2px solid black; width:40%;margin:0px;" >
+		<div class="row main-content  text-center" style=" border:2px solid black; width:38%;margin:0px;" >
 			<div class="container-fluid">
 	
 					<div class="row">
-								<label style="font-size:22px;">Subject</label><input type="text" style="font-size:22px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;" class="form__input" value=" ${diary.subject}">
+								<label style="font-size:20px;">Subject</label><input type="text" style="font-size:18px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;" class="form__input" value=" ${diary.subject}">
 							</div>
 							<div class="row">
 							<!-- <textarea class="form__input" > -->
-							 	<label style="font-size:22px;">Message</label><p style="text-align:justify;margin:0px 0px 0px 0px;font-size: 18px;">${diary.message}</p><br><br><br>
+							 	<label style="font-size:20px;">Message</label><p style="text-align:justify;margin:0px 0px 0px 0px;font-size: 18px;">${diary.message}</p><br><br><br>
 							</div>
 					</div>
 			</div>
 	</div>
-	<div class="container" style="max-width:42%;">
+	<div class="container" style="width: 38%;padding:0.25rem;">
 
 			<form action="/bright/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row" align="center">

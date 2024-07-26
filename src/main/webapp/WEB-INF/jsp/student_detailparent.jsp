@@ -53,7 +53,7 @@ padding:1 rem;
    
 
 <!-- profile pic start-->
-        <div class="card mb-2" style="width: 400px;">
+        <div class="card mb-2" style="width: 360px;padding:0.25rem;">
           <div class="card-body text-left">
              <img class="rounded-circle" src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
             <h5 class="my-3"><c:out value="${student.name}" /></h5>
@@ -65,7 +65,7 @@ padding:1 rem;
           </div>
         </div>
 <!-- profile pic end-->
- <div class="card-body text-left" style="width: 400px;">
+ <div class="card-body text-left" style="width: 360px;padding:0.25rem;">
        <h5 align="left" style="color: #FF914D;font-weight:bold;">Student Details<br>UID: &nbsp;<c:out value="${student.studentexternalid}" /></h5>
                 <hr class="mt-0 mb-2">
                 <div class="card-body" style="border: 2px solid rgb(0 0 0);">
