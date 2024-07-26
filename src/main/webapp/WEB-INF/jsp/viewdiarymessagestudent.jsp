@@ -149,7 +149,7 @@ margin-right:0px;
 	</div>
 	<div class="container" style="width: 38%;padding:0.25rem;">
 
-			<form action="/bright/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
+			<form action="/sneha/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row" align="center">
 								<input type="submit" value="Back" class="btn">
 							</div>

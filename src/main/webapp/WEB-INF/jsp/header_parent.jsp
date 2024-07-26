@@ -113,26 +113,24 @@ for(Cookie cookie : cookies){
         ">
         
                         <table width="100%" border="0" align="center"
-						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
-						<tr style="height: 85px;">
+						<tr style="height: 45px;">
 							
-									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/sneha/welcomeparent" ><img src="/sneha/images/curiumheader.png" width="206" height="75"/></a>
+									<td style="padding-left: 20px;width: 170px;">
+								<a target="mainFrame" href="/sneha/welcomeparent" ><img src="/sneha/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/sneha/images/sneha/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td align="right"><a target="mainFrame" href="/sneha/welcomeparent" style="font-size: 40px;"> <img
-									src="/sneha/images/home.svg" width="80" height="60" 
+							<td align="left"><a target="mainFrame" href="/sneha/welcomeparent"> <img
+									src="/sneha/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: center;" />Home
-							</a></td>
-
-							<td align="right" style="width: 242px;"><a target="_parent" style="font-size: 40px;"
+							</a> &nbsp;&nbsp;<a target="_parent"
 								href="/sneha/UserProcess/logout"><img
-									src="/sneha/images/logout.svg" width="80" height="57" alt="Log Out" 
+									src="/sneha/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
-							<td width="60"></td>
+
 						</tr>
 
 					</table>

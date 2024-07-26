@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/bright/css/bootstrap.min.css">
-    <script src="/bright/js/jquery.min.js"></script>
-    <script src="/bright/js/bootstrap.min.js"></script>
-    <script src="/bright/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/sneha/css/bootstrap.min.css">
+    <script src="/sneha/js/jquery.min.js"></script>
+    <script src="/sneha/js/bootstrap.min.js"></script>
+    <script src="/sneha/js/popper.min.js"></script>
         
 <style>
  .headerText {

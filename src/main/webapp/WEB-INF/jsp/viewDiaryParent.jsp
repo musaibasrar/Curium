@@ -138,8 +138,12 @@ function viewStudentDiary(sid){
 
 #myTable {
   border : 2px solid;
+  font-size : 12px;
 }
-
+.container{
+margin-left:0px;
+margin-right:0px;
+}
 </style>
 
  <style>
