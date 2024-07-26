@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.mess.supplier.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
+import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +83,18 @@ public class MessSuppliersActionAdapter {
 
         ResultResponse resultResponse = messSuppliersService.clearedCheque(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("chequecleared", resultResponse.isSuccess());
+    }
+
+    public void issueCheque() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        ChequeDto dto = new ChequeDto();
+        dto.setDate(request.getParameter("transactiondate"));
+        dto.setSupplierId(request.getParameter("supplierid"));
+        dto.setChequeNo(request.getParameter("chequeno"));
+        dto.setIssueAmount(request.getParameter("chequeamount"));
+
+        ResultResponse resultResponse = messSuppliersService.issueCheque(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("supplierpaymentissued", resultResponse.isSuccess());
     }
 }
