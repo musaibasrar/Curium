@@ -130,4 +130,34 @@ public class MessSuppliersActionAdapter {
         ResultResponse resultResponse = messSuppliersService.updateSuppliers(dto);
         request.setAttribute("suppliersupdate", resultResponse.isSuccess());
     }
+
+    public void deliveredCheque() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        ChequeDetailsDto dto = new ChequeDetailsDto();
+        dto.setDate(request.getParameter("deliverydate"));
+        dto.setSupplierIds(request.getParameterValues("supplierpaymentid"));
+
+        ResultResponse resultResponse = messSuppliersService.deliveredCheque(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("chequedelivered", resultResponse.isSuccess());
+    }
+
+    public void deleteMultipleSuppliers() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        MessIdsDto dto = new MessIdsDto();
+        dto.setMessIds(request.getParameterValues("messsuppliersids"));
+
+        Map<String, String> allRequestParameter = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()){
+            String fieldName = enumeration.nextElement();;
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameter.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameter);
+
+        ResultResponse resultResponse = messSuppliersService.deleteMultipleSuppliers(dto);
+        request.setAttribute("suppliersdelete", resultResponse.isSuccess());
+    }
 }
