@@ -1421,7 +1421,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
+						<td class="alignLeft">Father's Aadhaar No.</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1429,7 +1429,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhaar No.</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
