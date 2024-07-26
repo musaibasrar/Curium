@@ -142,7 +142,11 @@ function viewStudentDiary(sid){
 
 </style>
 
-
+ <style>
+        .highlight {
+            background-color: #bcffa4;
+        }
+    </style>
 
 </head>
   <%
@@ -163,7 +167,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <form id="form1" method="post">
-<div class="container mt-5" style="max-width:100%;">
+<div class="container" style="max-width:40%;">
 
 <h2 align="center" style="color:#FF914D">Diary</h2>
 <table class="table table-striped table-bordered table-hover" id="myTable">
@@ -178,7 +182,7 @@ for(Cookie cookie : cookies){
 </thead>
 <tbody>
 <c:forEach items="${diaryparents}" var="diary">
-<tr>
+<tr class="diaryRow">
 <!-- <td><input type="checkbox"
 								id="<c:out value="${diary.id}"/>" class="chcktbl"
 								name="id"
@@ -186,7 +190,7 @@ for(Cookie cookie : cookies){
 <%-- <td><c:out value="${diary.classsec}" /></td> --%>
 <td><c:out value="${diary.subject}" /> </td>
 <td><a class="dataText" style="cursor: pointer;" onclick="viewStudentDiary(${diary.id})">Read More...</a></td>
-<td><c:out value="${diary.startdate}" /></td>
+<td class="dateCell"><c:out value="${diary.startdate}" /></td>
 <td><c:out value="${diary.enddate}" /></td>
 
 </tr>
@@ -197,7 +201,7 @@ for(Cookie cookie : cookies){
 
 
 </div>
-<div class="container" style="max-width:100%;">
+<div class="container" style="width: 40%;padding:0.25rem;">
  <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
                     <td><a style="color: #4B6A84;font-size: 12px" href="/sneha/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a></td>
@@ -225,4 +229,24 @@ for(Cookie cookie : cookies){
                 </c:if>
 </div>
 </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the current date
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        // Get all the rows with the class diaryRow
+        const diaryRows = document.querySelectorAll(".diaryRow");
+
+        // Loop through each row
+        diaryRows.forEach(function(row) {
+            const dateCell = row.querySelector(".dateCell");
+            const startDate = dateCell.textContent.trim();
+
+            // Compare dates and change the color of the row if they match
+            if (currentDate === startDate) {
+                row.classList.add("highlight");
+            }
+        });
+    });
+</script>
 	</body></html>
