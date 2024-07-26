@@ -66,7 +66,7 @@ public class MessSuppliersAction {
 	@PostMapping("/printSupplierPayment")
 	public String printSupplierPayment() {
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "printsupplierpayment";
 	}
 
@@ -75,7 +75,7 @@ public class MessSuppliersAction {
 
 		messSuppliersActionAdapter.cancelCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
 
 	}
@@ -85,7 +85,7 @@ public class MessSuppliersAction {
 
 		messSuppliersActionAdapter.clearedCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
 
 	}
@@ -94,7 +94,7 @@ public class MessSuppliersAction {
 	public String deliveredCheque() {
 		new MessSuppliersService(request, response).deliveredCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
 
@@ -102,7 +102,7 @@ public class MessSuppliersAction {
 	public String issueCheque() {
 		messSuppliersActionAdapter.issueCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
 
@@ -119,7 +119,7 @@ public class MessSuppliersAction {
 	@GetMapping("/paymentSuppliers")
 	public String paymentSuppliers() {
 		messSuppliersActionAdapter.viewSuppliersDetails();
-		new MessSuppliersService(request, response).viewSuppliersPaymentDetails();
+		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
 	}
 
@@ -132,7 +132,7 @@ public class MessSuppliersAction {
 	@PostMapping("/updateSuppliers")
 	public String updateSuppliers() {
 
-		new MessSuppliersService(request, response).updateSuppliers();
+		messSuppliersActionAdapter.updateSuppliers();
 		return viewSuppliers();
 	}
 

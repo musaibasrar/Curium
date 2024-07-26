@@ -3,11 +3,9 @@ package org.ideoholic.curium.model.mess.supplier.service;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.*;
+import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
-import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
-import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
+import org.ideoholic.curium.model.mess.supplier.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -109,35 +107,35 @@ public class MessSuppliersService {
 	}
 
 
-	public void updateSuppliers() {
-		
+	public ResultResponse updateSuppliers(MessIdsDto dto) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
 
-		String[] messIds = request.getParameterValues("messsuppliersids");
+		String[] messIds = dto.getMessIds();
         
         
         if(messIds!=null){
         	
-            List<MessSuppliers> messList = new ArrayList<MessSuppliers>();
+            List<MessSuppliers> messList = new ArrayList<>();
             
             for(int i=0; i<messIds.length;i++) {
             	
             	MessSuppliers messSuppliers = new MessSuppliers();
                 String supplierId = messIds[i];
-                messSuppliers.setName(request.getParameter("updatesuppliersname_"+supplierId));
-                messSuppliers.setContactnumber(request.getParameter("updatesupplierscontactnumber_"+supplierId));
-                messSuppliers.setBankaccountno(request.getParameter("updatesuppliersbankaccountno_"+supplierId));
-                messSuppliers.setIfsccode(request.getParameter("updatesuppliersifsccode_"+supplierId));
-                messSuppliers.setAddress(request.getParameter("updatesuppliersaddress_"+supplierId));
+                messSuppliers.setName(dto.getRequestParams().get("updatesuppliersname_"+supplierId));
+                messSuppliers.setContactnumber(dto.getRequestParams().get("updatesupplierscontactnumber_"+supplierId));
+                messSuppliers.setBankaccountno(dto.getRequestParams().get("updatesuppliersbankaccountno_"+supplierId));
+                messSuppliers.setIfsccode(dto.getRequestParams().get("updatesuppliersifsccode_"+supplierId));
+                messSuppliers.setAddress(dto.getRequestParams().get("updatesuppliersaddress_"+supplierId));
                 messSuppliers.setId(DataUtil.parseInt(supplierId));
-                messSuppliers.setPayto(request.getParameter("updatepayto_"+supplierId));
+                messSuppliers.setPayto(dto.getRequestParams().get("updatepayto_"+supplierId));
                 messList.add(messSuppliers);
                 
             }
             
             boolean result = new MessSuppliersDAO().updateMultipleSuppliers(messList);
-            request.setAttribute("suppliersupdate", result);
+            resultResponse.setSuccess(result);
         }
-		
+		return resultResponse;
 	}
 	
 
@@ -334,30 +332,30 @@ public class MessSuppliersService {
 	}
 
 
-	public boolean viewSuppliersPaymentDetails() {
+	public PaymentDetailsResponseDto viewSuppliersPaymentDetails(String strPage, String branchId) {
 
-		boolean result = false;
+		PaymentDetailsResponseDto result = PaymentDetailsResponseDto.builder().build();
 
 		String pages = "1";
 		try {
 			int page = 1;
 			int recordsPerPage = 50;
 			
-			if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-				page = Integer.parseInt(request.getParameter("page"));
+			if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+				page = Integer.parseInt(strPage);
 			}
 
 			List<MessSuppliersPayment> supplierPaymentlist = new MessSuppliersDAO().readListOfSuppliersPaymentPagination((page - 1) * recordsPerPage,
-					recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int noOfRecords = new MessSuppliersDAO().getNoOfSuppliersPaymentDetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					recordsPerPage, Integer.parseInt(branchId));
+			int noOfRecords = new MessSuppliersDAO().getNoOfSuppliersPaymentDetails(Integer.parseInt(branchId));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-			request.setAttribute("supplierpaymentlist", supplierPaymentlist);
-			request.setAttribute("noOfPages", noOfPages);
-			request.setAttribute("currentPage", page);
-			result = true;
+			result.setSupplierPaymentList(supplierPaymentlist);
+			result.setNoOfPages(noOfPages);
+			result.setPage(page);
+			result.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			result.setSuccess(false);
 		}
 		return result;
 	}
@@ -475,7 +473,6 @@ public class MessSuppliersService {
 			
 			
 		}
-		resultResponse.setSuccess(true);
 		return resultResponse;
 	}
 
@@ -537,7 +534,6 @@ public class MessSuppliersService {
 			}
 			
 		}
-		resultResponse.setSuccess(true);
 		return resultResponse;
 	}
 

@@ -1,8 +1,10 @@
 package org.ideoholic.curium.model.mess.supplier.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
 import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
 import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
+import org.ideoholic.curium.model.mess.supplier.dto.PaymentDetailsResponseDto;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,5 +98,36 @@ public class MessSuppliersActionAdapter {
 
         ResultResponse resultResponse = messSuppliersService.issueCheque(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("supplierpaymentissued", resultResponse.isSuccess());
+    }
+
+    public void viewSuppliersPaymentDetails() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        String page = request.getParameter("page");
+
+        PaymentDetailsResponseDto responseDto = messSuppliersService.viewSuppliersPaymentDetails(page, httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("supplierpaymentlist", responseDto.getSupplierPaymentList());
+        request.setAttribute("noOfPages", responseDto.getNoOfPages());
+        request.setAttribute("currentPage", responseDto.getPage());
+    }
+
+    public void updateSuppliers() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        MessIdsDto dto = new MessIdsDto();
+        dto.setMessIds(request.getParameterValues("messsuppliersids"));
+
+        Map<String, String> allRequestParameters = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String fieldName = enumeration.nextElement();
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameters.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameters);
+
+        ResultResponse resultResponse = messSuppliersService.updateSuppliers(dto);
+        request.setAttribute("suppliersupdate", resultResponse.isSuccess());
     }
 }
