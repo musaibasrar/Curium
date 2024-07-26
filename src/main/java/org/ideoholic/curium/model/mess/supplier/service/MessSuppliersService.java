@@ -81,29 +81,31 @@ public class MessSuppliersService {
 	}
 
 
-	public void deleteMultipleSuppliers() {
+	public ResultResponse deleteMultipleSuppliers(MessIdsDto dto) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
         
-        String[] messIds = request.getParameterValues("messsuppliersids");
+        String[] messIds = dto.getMessIds();
         
         if(messIds!=null){
         
-       List<MessSuppliers> messList = new ArrayList<MessSuppliers>();
+       List<MessSuppliers> messList = new ArrayList<>();
        
        		for (String id : messIds) {
     	   
 		    	   MessSuppliers messSuppliers = new MessSuppliers();
-		    	   
+
 		           String messId = id;
 		           messSuppliers.setId(DataUtil.parseInt(messId));
-		           messSuppliers.setLinkedledgerid(Integer.parseInt(request.getParameter("linkedledgerid_"+messId)));
+		           messSuppliers.setLinkedledgerid(Integer.parseInt(dto.getRequestParams().get("linkedledgerid_"+messId)));
 		           messList.add(messSuppliers);
            
        		}
        		
        boolean result = new MessSuppliersDAO().deleteSuppliers(messList);
-       request.setAttribute("suppliersdelete", result);
+       resultResponse.setSuccess(result);
         
         }
+		return resultResponse;
 	}
 
 
@@ -361,15 +363,16 @@ public class MessSuppliersService {
 	}
 
 
-	public void deliveredCheque() {
+	public ResultResponse deliveredCheque(ChequeDetailsDto dto, String branchId) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
+
+		String date = dto.getDate();
+		String[] supplierIds = dto.getSupplierIds();
 		
-		String date = request.getParameter("deliverydate");
-		String[] supplierIds = request.getParameterValues("supplierpaymentid");
 		
-		
-		if (httpSession.getAttribute(BRANCHID).toString()!=null) {
+		if (branchId!=null) {
 			
-			List<MessSuppliersPayment> messSuppliersPaymentList = new ArrayList<MessSuppliersPayment>();
+			List<MessSuppliersPayment> messSuppliersPaymentList = new ArrayList<>();
 			
 			for (String supid : supplierIds) {
 				
@@ -383,9 +386,9 @@ public class MessSuppliersService {
 			
 			
 			boolean result = new MessSuppliersDAO().updateSupplierPaymentDelivered(messSuppliersPaymentList);
-			request.setAttribute("chequedelivered", result);
+			resultResponse.setSuccess(result);
 		}
-		
+		return resultResponse;
 	}
 
 

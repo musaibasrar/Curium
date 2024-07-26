@@ -92,7 +92,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/deliveredCheque")
 	public String deliveredCheque() {
-		new MessSuppliersService(request, response).deliveredCheque();
+		messSuppliersActionAdapter.deliveredCheque();
 		messSuppliersActionAdapter.viewSuppliersDetails();
 		messSuppliersActionAdapter.viewSuppliersPaymentDetails();
 		return "supplierpayment";
@@ -125,7 +125,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/deleteSuppliers")
 	public String deleteSuppliers() {
-		new MessSuppliersService(request, response).deleteMultipleSuppliers();
+		messSuppliersActionAdapter.deleteMultipleSuppliers();
 		return viewSuppliers();
 	}
 
