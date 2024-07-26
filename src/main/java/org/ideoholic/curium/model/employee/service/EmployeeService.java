@@ -108,6 +108,10 @@ public class EmployeeService {
 		                	employee.setJoiningdate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                
+		                if (fieldName.equalsIgnoreCase("subjectsteaching")) {
+		                	employee.setSubjectsteaching(DataUtil.emptyString(request.getParameter(fieldName)));
+		                }
+		                
 		                //Bank Details
 		                if (fieldName.equalsIgnoreCase("bankname")) {
 		                	employee.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
@@ -340,6 +344,10 @@ public class EmployeeService {
     	                if (fieldName.equalsIgnoreCase("branchid")) {
     	                	employee.setBranchid(Integer.parseInt(DataUtil.emptyString(request.getParameter(fieldName))));
     	                }
+    	                
+    	                if (fieldName.equalsIgnoreCase("subjectsteaching")) {
+		                	employee.setSubjectsteaching(DataUtil.emptyString(request.getParameter(fieldName)));
+		                }
     	                
     	                if (fieldName.equalsIgnoreCase("leavingdate")) {
 

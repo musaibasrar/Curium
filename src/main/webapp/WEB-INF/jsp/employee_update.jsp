@@ -317,6 +317,7 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-4">Upload Photo</a></li>
 					<li><a href="#tabs-2">Bank Details</a></li>
 					<li><a href="#tabs-3">Additional Details</a></li>
+					<li><a href="#tabs-5">Leaving Details</a></li>
 
 				</ul>
 
@@ -361,7 +362,7 @@ for(Cookie cookie : cookies){
 								<input type="hidden" name="branchid" id="branchid"
 								value="<c:out value="${employee.branchid}" />" /> 
 								<label><input
-									name="name" type="text" style="text-transform:uppercase"
+									name="name" type="text" style="text-transform:capitalize"
 									value="<c:out value="${employee.teachername}" />"
 									class="textField" id="name" size="30"
 									data-validate="validate(required)">
@@ -425,7 +426,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
 										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepicker" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
@@ -549,7 +550,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
 										<input name="joiningdate"
-									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepickerCD" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
@@ -634,7 +635,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Bank Name &nbsp;</td>
 							<td width="28%">
 								<label><input
-									name="bankname" type="text" style="text-transform:uppercase"
+									name="bankname" type="text" style="text-transform:capitalize"
 									value="<c:out value="${employee.bankname}" />"
 									class="textField" id="bankname" size="30"
 									data-validate="validate(required)">
@@ -643,7 +644,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Bank IFSC &nbsp;</td>
 
 							<td width="16%" class="alignLeft"><label><input
-									name="bankifsc" type="text" style="text-transform:uppercase"
+									name="bankifsc" type="text" style="text-transform:capitalize"
 									value="<c:out value="${employee.bankifsc}" />"
 									class="textField" id="bankifsc" size="30"
 									data-validate="validate(required)">
@@ -721,14 +722,15 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
 						<tr>
-							<td width="16%" class="alignRight">Date of Leaving &nbsp;</td>
-							<td width="28%">
+							<td width="16%" class="alignRight">Additional Courses/Qualification &nbsp;</td>
+
+							<td width="16%" class="alignLeft">
 								<label>
-								<input name="leavingdate"
-									type="text" value="${employee.leavingdate}"
-									class="textField" id="datepickerleaving" size="30"
+								<input
+									name="subjectsteaching" type="text" style="text-transform:capitalize"
+									value="<c:out value="${employee.subjectsteaching}" />"
+									class="textField" id="subjectsteaching" size="30"
 									data-validate="validate(required)">
 							</label></td>
 
@@ -889,6 +891,75 @@ for(Cookie cookie : cookies){
 						</div>
 						
 </div>
+
+	<div id="tabs-5">
+					<table width="70%" border="0" align="center" id="table1">
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td width="16%" class="alignRight">Date of Leaving &nbsp;</td>
+							<td width="28%">
+								<label>
+								<input name="leavingdate"
+									type="text" value="${employee.leavingdate}"
+									class="textField" id="datepickerleaving" size="30"
+									data-validate="validate(required)">
+							</label></td>
+
+						</tr>
+						
+						<tr>
+							<td></td>
+						</tr>
+						
+					</table>
+
+					<table id="table2" width="30%" border="0" align="center">
+
+						<tr>
+
+							<td></td>
+
+						</tr>
+						
+						<tr>
+									
+										<td align="right">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+									
+						<tr>
+
+							<td></td>
+
+						</tr>
+						<tr>
+							<td align="center">
+
+								<button id="set5" class="set">Update</button>
+
+							</td>
+							<td><button type="submit" id="cancel5" class="cancel">Cancel</button></td>
+						</tr>
+
+
+					</table>
+				</div>
 				
 			</div>
 

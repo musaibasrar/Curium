@@ -609,6 +609,37 @@ for(Cookie cookie : cookies){
                     <table border="0px" width="100%"  id="table1" align="center">
 
                         <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Additional Courses/Qualification
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.subjectsteaching}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="accordion" style="width: 100%;height: 100%">
+
+                <h3><a href="#">Leaving Details</a></h3>
+                <div>
+
+                    <table border="0px" width="100%"  id="table1" align="center">
+
+                        <tr>
                             <td width="25%"  class="alignLeft" height="50">Date of Leaving&nbsp;</td>
                             <td width="25%" class="tablerows"  style="text-transform:uppercase">
                             <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.leavingdate}"/>
