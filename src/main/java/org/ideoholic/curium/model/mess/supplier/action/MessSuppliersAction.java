@@ -109,7 +109,7 @@ public class MessSuppliersAction {
 	@GetMapping("/getSupplierBalance")
 	public void getSupplierBalance() {
 		try {
-			new MessSuppliersService(request, response).getSupplierBalance();
+			messSuppliersActionAdapter.getSupplierBalance();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +147,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/addSuppliers")
 	public String addSuppliers() {
-		new MessSuppliersService(request, response).addSupplierDetails();
+		messSuppliersActionAdapter.addSupplierDetails();
 		return viewSuppliers();
 	}
 
