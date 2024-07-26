@@ -660,7 +660,11 @@ for(Cookie cookie : cookies){
 								${student.lunch == 'lunch' ? 'checked' : ''} />
 								&nbsp;&nbsp;Dinner<input type="checkbox"
 								value="dinner" name="dinner" id="dinner" 
-								${student.dinner == 'dinner' ? 'checked' : ''} />
+								${student.dinner == 'dinner' ? 'checked' : ''} 
+								 />
+								&nbsp;&nbsp;Corn Flakes & Milk<input type="checkbox"
+								value="cornflakesandmilk" name="bankifsc" id="bankifsc" 
+								${student.bankifsc == 'cornflakesandmilk' ? 'checked' : ''}/>
 
 							</td>
 							

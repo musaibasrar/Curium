@@ -484,6 +484,15 @@ for(Cookie cookie : cookies){
 														</a>
 		                         					<label style="font-size: 25px;">${studentlist.key.student.dinner}</label>
 		                         					</c:if>
+		                         					
+		                         					&nbsp;&nbsp;&nbsp;
+		                         					<c:if test="${studentlist.key.student.bankifsc == 'cornflakesandmilk'}">
+		                         						<a > <img
+															src="images/cornflakesandmilk.png" width="30" height="30" 
+															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
+														</a>
+		                         					<label style="font-size: 25px;">Corn Flakes And Milk</label>
+		                         					</c:if>
 							
 		                         		<hr style="margin-top: 1px;margin-bottom: 1px;color: black;">
 		                         						 

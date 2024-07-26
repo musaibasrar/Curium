@@ -410,6 +410,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Breakfast</th>
                             <th title="click to sort" class="headerText">Lunch</th>
                             <th title="click to sort" class="headerText">Dinner</th>
+                            <th title="click to sort" class="headerText">Corn Flakes & Milk</th>
                         </tr>
                     </thead>
 
@@ -441,6 +442,11 @@ for(Cookie cookie : cookies){
                                 	<input type="checkbox"
 										value="dinner" name="dinner" id="dinner" 
 									${Parents.student.dinner == 'dinner' ? 'checked' : ''} />
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox"
+										value="cornflakesandmilk" name="bankifsc" id="cornflakesandmilk" 
+									${Parents.student.bankifsc == 'cornflakesandmilk' ? 'checked' : ''} />
                                 </td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->

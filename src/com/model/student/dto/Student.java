@@ -81,8 +81,11 @@ public class Student implements java.io.Serializable {
 	private Integer rte;
 	private String bankbranch;
 	private String accno;
-	private String bankifsc;
 	private int userid;
+	
+
+	// for mess Chocos and Milk
+	private String bankifsc;
 	
 	//for mess private String bankname;
 	private String college;

@@ -950,6 +950,9 @@ for(Cookie cookie : cookies){
                                 <td class="dataText" style="text-transform:uppercase">
                                 	<input type="checkbox" 	${Parents.student.dinner == 'dinner' ? 'checked' : ''} />
                                 </td>
+                                 <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox" 	${Parents.student.bankifsc == 'chocosandmilk' ? 'checked' : ''} />
+                                </td>
 						</tr>
 					</c:forEach>
 				</tbody>

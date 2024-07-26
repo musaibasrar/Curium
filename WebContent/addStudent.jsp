@@ -769,6 +769,7 @@
 								type="checkbox" value="breakfast" name="breakfast" id="breakfast"/>
 								&nbsp; &nbsp;Lunch<input type="checkbox" value="lunch" name="lunch" id="lunch"/>
 								&nbsp; &nbsp;Dinner<input type="checkbox" value="dinner" name="dinner" id="dinner"/>
+								&nbsp; &nbsp;Corn Flakes & Milk<input type="checkbox" value="cornflakesandmilk" name="bankifsc" id="cornflakesandmilk"/>
 							</td>
 							
 							<td  class="alignRight" style="display: none;">Admitted in Class &nbsp;
