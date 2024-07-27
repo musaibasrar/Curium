@@ -74,7 +74,7 @@ public class MessSuppliersService {
 			 if(messSuppliers.getId()!=null) {
 				 result.setSupplierSave(true);
 				 result.setSupplierName(messSuppliers.getName());
-				 result.setSuccess(true);
+				 result.setSupplierSave(true);
 			 }
 		 }
 		return result;

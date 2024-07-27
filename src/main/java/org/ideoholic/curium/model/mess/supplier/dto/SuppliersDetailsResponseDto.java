@@ -10,5 +10,4 @@ import lombok.Data;
 public class SuppliersDetailsResponseDto {
     private boolean supplierSave;
     private String supplierName;
-    private boolean success;
 }
