@@ -3,8 +3,8 @@
  */
 package org.ideoholic.curium.model.mess.supplier.action;
 
+import org.ideoholic.curium.model.account.action.AccountActionAdapter;
 import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +32,11 @@ public class MessSuppliersAction {
 	@Autowired
 	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 
+	@Autowired private AccountActionAdapter accountActionAdapter;
+
 	@PostMapping("/printSearchSupplierPaymentDetails")
 	public String printSearchSupplierPaymentDetails() {
-		new AccountService(request, response).printSearchJournalEntries();
+		accountActionAdapter.printSearchJournalEntries();
 		return "printsupplierpaymentdetails";
 	}
 
@@ -106,10 +108,11 @@ public class MessSuppliersAction {
 		return "supplierpayment";
 	}
 
+	//TODO : This need refactoring in order to return JSON Response.
 	@GetMapping("/getSupplierBalance")
 	public void getSupplierBalance() {
 		try {
-			new MessSuppliersService(request, response).getSupplierBalance();
+			messSuppliersActionAdapter.getSupplierBalance();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +150,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/addSuppliers")
 	public String addSuppliers() {
-		new MessSuppliersService(request, response).addSupplierDetails();
+		messSuppliersActionAdapter.addSupplierDetails();
 		return viewSuppliers();
 	}
 

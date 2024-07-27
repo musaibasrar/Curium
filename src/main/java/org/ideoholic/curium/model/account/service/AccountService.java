@@ -1,27 +1,5 @@
 package org.ideoholic.curium.model.account.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,6 +9,16 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class AccountService {
 	
@@ -1269,16 +1257,6 @@ public class AccountService {
 		
 	}
 		return true;
-	}
-
-	//This method is placed here for MessSuppliersAction. Please delete this method after migrating MessSuppliersAction.
-	public ResultResponse printSearchJournalEntries(){
-		PrintSearchJournalEntriesDto printSearchJournalEntriesDto = new PrintSearchJournalEntriesDto();
-		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
-		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
-		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
-
-		return printSearchJournalEntries(printSearchJournalEntriesDto);
 	}
 	
 	public ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto) {

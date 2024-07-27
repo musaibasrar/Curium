@@ -50,31 +50,31 @@ public class MessSuppliersService {
 	}
 
 
-	public String addSupplierDetails() {
+	public SuppliersDetailsResponseDto addSupplierDetails(SuppliersDetailsDto dto, String branchId, String userId) {
+		SuppliersDetailsResponseDto result = SuppliersDetailsResponseDto.builder().build();
 		
 		MessSuppliers messSuppliers = new MessSuppliers();
-		String result = "false";
 		
-		 if(httpSession.getAttribute(BRANCHID)!=null){
+		 if(branchId!=null){
              
-			 messSuppliers.setName(DataUtil.emptyString(request.getParameter("suppliername")));
-			 messSuppliers.setExternalid(DataUtil.emptyString(request.getParameter("suppliername")));
-			 messSuppliers.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
-			 messSuppliers.setBankaccountno(DataUtil.emptyString(request.getParameter("bankaccountno")));
-			 messSuppliers.setIfsccode(DataUtil.emptyString(request.getParameter("ifsccode")));
-			 messSuppliers.setAddress(DataUtil.emptyString(request.getParameter("address")));
-			 messSuppliers.setPayto(DataUtil.emptyString(request.getParameter("payto")));
-			 messSuppliers.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 messSuppliers.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			 messSuppliers.setName(DataUtil.emptyString(dto.getName()));
+			 messSuppliers.setExternalid(DataUtil.emptyString(dto.getExternalId()));
+			 messSuppliers.setContactnumber(DataUtil.emptyString(dto.getContactNumber()));
+			 messSuppliers.setBankaccountno(DataUtil.emptyString(dto.getBankAccountNo()));
+			 messSuppliers.setIfsccode(DataUtil.emptyString(dto.getIfscCode()));
+			 messSuppliers.setAddress(DataUtil.emptyString(dto.getAddress()));
+			 messSuppliers.setPayto(DataUtil.emptyString(dto.getPayTo()));
+			 messSuppliers.setBranchid(Integer.parseInt(branchId));
+			 messSuppliers.setUserid(Integer.parseInt(userId));
 			 messSuppliers.setLinkedledgerid(1);
 			 messSuppliers = createLedgerForSupplierAndSave(messSuppliers);
 			 
 			 /*messSuppliers= new MessSuppliersDAO().addNewSuppplier(messSuppliers);*/
 			 
 			 if(messSuppliers.getId()!=null) {
-				 request.setAttribute("suppliersave", true);
-				 request.setAttribute("suppliername", messSuppliers.getName());
-				 result = "true";
+				 result.setSupplierSave(true);
+				 result.setSupplierName(messSuppliers.getName());
+				 result.setSupplierSave(true);
 			 }
 		 }
 		return result;
@@ -216,16 +216,15 @@ public class MessSuppliersService {
 	}
 
 
-	public void getSupplierBalance() throws IOException {
-		
-		String sup = request.getParameter("supplierid");
-		String[] supplieridledgerid = sup.split(":");
+	public void getSupplierBalance(String supplierId) throws IOException {
+
+        String[] supplieridledgerid = supplierId.split(":");
 		Locale indiaLocale = new Locale("en", "IN");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         
-		if(!sup.isEmpty()) {
+		if(!supplierId.isEmpty()) {
 			
 			Accountdetailsbalance accountDetailsBalance =  new MessSuppliersDAO().getSupplierBalance(supplieridledgerid[1]);
 			NumberFormat currency  = NumberFormat.getCurrencyInstance(indiaLocale);

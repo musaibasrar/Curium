@@ -2,9 +2,7 @@ package org.ideoholic.curium.model.mess.supplier.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
-import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
-import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
-import org.ideoholic.curium.model.mess.supplier.dto.PaymentDetailsResponseDto;
+import org.ideoholic.curium.model.mess.supplier.dto.*;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -159,5 +158,30 @@ public class MessSuppliersActionAdapter {
 
         ResultResponse resultResponse = messSuppliersService.deleteMultipleSuppliers(dto);
         request.setAttribute("suppliersdelete", resultResponse.isSuccess());
+    }
+
+    public void getSupplierBalance() throws IOException {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        String supplierId = request.getParameter("supplierid");
+
+        messSuppliersService.getSupplierBalance(supplierId);
+    }
+
+    public void addSupplierDetails() {
+        MessSuppliersService messSuppliersService = new MessSuppliersService(request, response);
+
+        SuppliersDetailsDto dto = new SuppliersDetailsDto();
+        dto.setName(request.getParameter("suppliername"));
+        dto.setExternalId(request.getParameter("externalid"));
+        dto.setContactNumber(request.getParameter("contactnumber"));
+        dto.setBankAccountNo(request.getParameter("bankaccountno"));
+        dto.setIfscCode(request.getParameter("ifsccode"));
+        dto.setAddress(request.getParameter("address"));
+        dto.setPayTo(request.getParameter("payto"));
+
+        SuppliersDetailsResponseDto responseDto = messSuppliersService.addSupplierDetails(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("suppliersave", responseDto.isSupplierSave());
+        request.setAttribute("suppliername", responseDto.getSupplierName());
     }
 }
