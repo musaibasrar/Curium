@@ -218,20 +218,20 @@ public class ExamDetailsService {
 	}
 
 
-	public ExamScheduleResponseDto getExamScheduleDetails(ExamIdsDto examIdsDto,String branchId) {
+	public ExamScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto,String branchId) {
 		ExamScheduleResponseDto result = new ExamScheduleResponseDto();
 
-		String academicYear = examIdsDto.getAcademicYear();
-		String classH = examIdsDto.getClassH();
-		String classAdmno = examIdsDto.getClassAdmno();
-		String studentName = examIdsDto.getStudentName();
-		String exam = examIdsDto.getExam();
+		String academicYear = examScheduleDto.getAcademicYear();
+		String classH = examScheduleDto.getClassH();
+		String classAdmno = examScheduleDto.getClassAdmno();
+		String studentName = examScheduleDto.getStudentName();
+		String exam = examScheduleDto.getExam();
 		
 		result.setSelectedclass(classH);
 		result.setSelectedexam(exam);
 		result.setSelectedstudentname(studentName);
 		result.setSelectedclassandsec(classAdmno);
-		result.setSelectedadmissionno(examIdsDto.getClassAdmno());
+		result.setSelectedadmissionno(examScheduleDto.getClassAdmno());
 
 		
 		if(!classAdmno.equals("")){

@@ -88,14 +88,14 @@ public class ExamDetailsActionAdapter {
     public boolean getExamScheduleDetails() {
         ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
-        ExamIdsDto examIdsDto = new ExamIdsDto();
-        examIdsDto.setAcademicYear(request.getParameter("academicyear"));
-        examIdsDto.setClassH(request.getParameter("class"));
-        examIdsDto.setClassAdmno(request.getParameter("classandsec"));
-        examIdsDto.setStudentName(request.getParameter("studentName"));
-        examIdsDto.setExam(request.getParameter("exam"));
+        ExamScheduleDto examScheduleDto = new ExamScheduleDto();
+        examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
+        examScheduleDto.setClassH(request.getParameter("class"));
+        examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
+        examScheduleDto.setStudentName(request.getParameter("studentName"));
+        examScheduleDto.setExam(request.getParameter("exam"));
 
-        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examIdsDto,httpSession.getAttribute(BRANCHID).toString());
+        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto,httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("selectedclass", result.getSelectedclass());
         request.setAttribute("selectedexam", result.getSelectedexam());
         request.setAttribute("selectedstudentname", result.getSelectedstudentname());
