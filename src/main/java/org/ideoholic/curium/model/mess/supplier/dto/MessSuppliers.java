@@ -62,5 +62,5 @@ public class MessSuppliers implements java.io.Serializable {
 	@Column(name = "userid")
 	private int userid;
 	
-	
+	private boolean success;
 }

@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.account.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
+@Slf4j
 public class AccountService {
 	
 	 	private HttpServletRequest request;
@@ -1110,60 +1112,51 @@ public class AccountService {
 		return resultResponse;
 	}
 
-
-	//TODO:This method is placed here for MessSuppliersAction. Please delete this method after migrating MessSuppliersAction.
-	public SearchLedgerEntriesResponseDto searchJournalEntries(){
-		SearchLedgerEntriesDto searchLedgerEntriesDto = new SearchLedgerEntriesDto();
-		searchLedgerEntriesDto.setAccountDetails(request.getParameter("accountid"));
-		searchLedgerEntriesDto.setFromDate(request.getParameter("fromdate"));
-		searchLedgerEntriesDto.setToDate(request.getParameter("todate"));
-
-		return searchJournalEntries(searchLedgerEntriesDto);
-	}
-
 	public SearchLedgerEntriesResponseDto searchJournalEntries(SearchLedgerEntriesDto searchLedgerEntriesDto) {
+		SearchLedgerEntriesResponseDto result = SearchLedgerEntriesResponseDto.builder().build();
 
-		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String accountDetails = DataUtil.emptyString(searchLedgerEntriesDto.getAccountDetails());
-		String[] accountIdName = accountDetails.split(":");
-		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getFromDate());
-		String toDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getToDate());
-		if(searchLedgerEntriesDto.getBranchId()!=null) {
+		try {
+			List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+			String accountDetails = DataUtil.emptyString(searchLedgerEntriesDto.getAccountDetails());
+			String[] accountIdName = accountDetails.split(":");
+			int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+			String fromDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getFromDate());
+			String toDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getToDate());
+			if(searchLedgerEntriesDto.getBranchId()!=null) {
 
-			String twoAccounts = null;
+				String twoAccounts = null;
 
-			Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-			int financialYearId = new AccountDAO().getCurrentFinancialYear(searchLedgerEntriesDto.getBranchId()).getFinancialid();
-			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,searchLedgerEntriesDto.getBranchId());
+				Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<>();
+				int financialYearId = new AccountDAO().getCurrentFinancialYear(searchLedgerEntriesDto.getBranchId()).getFinancialid();
+				voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,searchLedgerEntriesDto.getBranchId());
 
-			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+				for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 
-				if(voucherEntry.getDraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
-				}else if(voucherEntry.getCraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+					if(voucherEntry.getDraccountid() != accountId) {
+						twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+					}else if(voucherEntry.getCraccountid() != accountId) {
+						twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+					}
+					//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+					voucherMap.put(voucherEntry, twoAccounts);
 				}
-				//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
-				voucherMap.put(voucherEntry, twoAccounts);
+
+				result.setLedgerTransaction(voucherMap);
+				result.setAccountId(searchLedgerEntriesDto.getAccountDetails());
+				result.setLedgerName(searchLedgerEntriesDto.getAccountIdName());
+				result.setFromDate(searchLedgerEntriesDto.getFromDate());
+				result.setToDate(searchLedgerEntriesDto.getToDate());
+				result.setSuccess(true);
+				return result;
 			}
-
-			return SearchLedgerEntriesResponseDto
-					.builder()
-					.ledgerTransaction(voucherMap)
-					.accountId(searchLedgerEntriesDto.getAccountDetails())
-					.ledgerName(searchLedgerEntriesDto.getAccountIdName())
-					.fromDate(searchLedgerEntriesDto.getFromDate())
-					.toDate(searchLedgerEntriesDto.getToDate())
-					.success(true)
-					.build();
-
-
+			result.setSuccess(false);
+			return result;
+		}catch (Exception e) {
+			log.error("Error in printSearchJournalEntries: ", e);
+			result.setSuccess(false);
+			result.setVoucherType("An error occurred while processing the request: " + e.getMessage());
 		}
-		return SearchLedgerEntriesResponseDto
-				.builder()
-				.success(false)
-				.build();
+		return result;
 	}
 
 
@@ -1260,48 +1253,53 @@ public class AccountService {
 	}
 	
 	public ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto) {
+		ResultResponse result = ResultResponse.builder().build();
 
-		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String accountDetails = DataUtil.emptyString(printSearchJournalEntriesDto.getAccountDetails());
-		String[] accountIdName = accountDetails.split(":");
-		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getFromDate()));
-		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getToDate()));
-		
-		if (printSearchJournalEntriesDto.getBranchId() != null) {
+		try {
+			List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+			String accountDetails = DataUtil.emptyString(printSearchJournalEntriesDto.getAccountDetails());
+			String[] accountIdName = accountDetails.split(":");
+			int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+			String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getFromDate()));
+			String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getToDate()));
 
-			String twoAccounts = null;
+			if (printSearchJournalEntriesDto.getBranchId() != null) {
 
-			Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-			int financialYearId = new AccountDAO()
-					.getCurrentFinancialYear((printSearchJournalEntriesDto.getBranchId()))
-					.getFinancialid();
-			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
-					printSearchJournalEntriesDto.getBranchId());
+				String twoAccounts = null;
 
-			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+				Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+				int financialYearId = new AccountDAO()
+						.getCurrentFinancialYear((printSearchJournalEntriesDto.getBranchId()))
+						.getFinancialid();
+				voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
+						printSearchJournalEntriesDto.getBranchId());
 
-				if (voucherEntry.getDraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid()) + ":Dr";
-				} else if (voucherEntry.getCraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid()) + ":Cr";
+				for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+
+					if (voucherEntry.getDraccountid() != accountId) {
+						twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid()) + ":Dr";
+					} else if (voucherEntry.getCraccountid() != accountId) {
+						twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid()) + ":Cr";
+					}
+					// twoAccounts = new
+					// AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new
+					// AccountDAO().getAccountName(voucherEntry.getCraccountid());
+					voucherMap.put(voucherEntry, twoAccounts);
 				}
-				// twoAccounts = new
-				// AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new
-				// AccountDAO().getAccountName(voucherEntry.getCraccountid());
-				voucherMap.put(voucherEntry, twoAccounts);
+
+				result.setResultMap(voucherMap);
+				result.setMessage(accountIdName[1]);
+				result.setSuccess(true);
+				return result;
 			}
-
-			return ResultResponse.builder()
-					.resultMap(voucherMap)
-					.message(accountIdName[1])
-					.success(true)
-					.build();
-
+			result.setSuccess(false);
+			return result;
+		}catch (Exception e) {
+			log.error("Error in cancelCheque: ", e);
+			result.setSuccess(false);
+			result.setMessage("An error occurred while processing the request: " + e.getMessage());
 		}
-		return ResultResponse.builder()
-				.success(false)
-				.build();
+		return  result;
 	}
 	
 	
