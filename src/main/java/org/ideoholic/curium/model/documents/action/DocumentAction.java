@@ -111,7 +111,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatepreviewduplicate";
+        return "transfercertificatepreview";
 		}
 		return error;
 	}

@@ -58,7 +58,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 45px;
+	font-size: 40px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -66,7 +66,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -80,7 +80,7 @@
 
   td{
 	font-style:italic;
-	font-size: 22px;
+	font-size: 18px;
 	margin-top:5px;
 	margin-bottom: 5px;
 	
@@ -176,6 +176,14 @@ margin-top:0px;
         width:10px;
         text-align:center;
         }
+        
+        span{
+    display:inline;
+    border:1px solid black;
+    padding:1px;
+    font-weight: normal;
+    text-align:center;
+}
     </style>
 	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -212,26 +220,28 @@ for(Cookie cookie : cookies){
 		<table align="center">
 		
 		<tr>
-		<td><br><br><br></td>
+		<td><br></td>
 		</tr>
-			<tr><td>
+			<tr><td style="margin-right:0px;padding-right:0px;">
 			
-			<img  src="/abc/images/alirfan.jpg" alt="alirfan logo" width="120" height="140">&emsp;&emsp;</td>
+			<img  src="/abc/images/alirfan.jpg" alt="alirfan logo" width="103" height="120">&emsp;&emsp;</td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
 				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
 				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-				<td>&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="110" height="122"></td>
+				<td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="100" height="111"></td>
 				</tr>
 </table>
 
 <TABLE align="center">
 
+                
+                <tr><td><br></td></tr>
                 <tr>
                     <td>Email id:</td><td>&nbsp; mail@alirfanschool.edu.in&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                    &emsp;&emsp;&emsp;&emsp;</td>
+                    &emsp;&emsp;&emsp;</td>
                      <td>CBSE affiliation No.:</td><td>&nbsp;1130056</td>
                 </tr>
                 
@@ -250,7 +260,7 @@ for(Cookie cookie : cookies){
 
 				<td align="center">
 
-			<h3><u>SCHOOL LEAVING CERTIFICATE</u><br>${type}</h3>
+			<h3 style="margin-bottom:0px;"><u>SCHOOL LEAVING CERTIFICATE</u><br>${type}</h3>
 			</td>
 			</tr>
 			
@@ -269,7 +279,7 @@ for(Cookie cookie : cookies){
              <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;G.R. No.:&nbsp;<c:out value="${studentdetails.student.sts}" /> </td>
 			</tr>
 			
-			<tr><td>Student ID:&nbsp;${grno}</td>
+			<tr><td>Student ID:&nbsp;<span> ${grno}</span></td>
              <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;UID No.:&nbsp;<c:out value="${studentdetails.student.disabilitychild}" /></td>
 			</tr>
 			
@@ -306,14 +316,22 @@ for(Cookie cookie : cookies){
 					<td>
 					5.&nbsp;&nbsp;&nbsp;Mother Tongue </td><td>
 									<c:out value="${studentdetails.student.mothertongue}" />
-					 6.&nbsp;&nbsp;&nbsp;Religion&nbsp;&nbsp;&nbsp; <c:out value="${studentdetails.student.religion}" />
+					</td>
+					</tr>
+					<tr>
+					<td>				
+					 6.&nbsp;&nbsp;&nbsp;Religion&nbsp;&nbsp;&nbsp;</td><td> <c:out value="${studentdetails.student.religion}" />
 					 </td></tr>
 				
 					<tr>
 					<td>
 					7.&nbsp;&nbsp;&nbsp;Caste </td><td>
 					<c:out value="${studentdetails.student.caste}" />
-					 8.&nbsp;&nbsp;&nbsp;Sub-caste: <c:out value="${studentdetails.student.socialcategory}" />
+					</td>
+					</tr>
+					<tr>
+					<td>
+					 8.&nbsp;&nbsp;&nbsp;Sub-caste: </td><td><c:out value="${studentdetails.student.socialcategory}" />
 					 </td>
 					 </tr>
 					
@@ -365,8 +383,8 @@ for(Cookie cookie : cookies){
 				    <tr>
 				    <td>
 					13.&nbsp;&nbsp;&nbsp;Progress </td><td>
-				      ${progress} &nbsp;&nbsp;&nbsp;
-					 14.&nbsp;&nbsp;&nbsp;Conduct &nbsp;&nbsp;&nbsp;${conduct} 
+				      ${progress} &nbsp;&nbsp;&nbsp;</td></tr><tr><td>
+					 14.&nbsp;&nbsp;&nbsp;Conduct</td><td>${conduct} 
 					 </td></tr>
 				
 				    <tr>
@@ -414,8 +432,7 @@ for(Cookie cookie : cookies){
 		
 		<tr>
 		<td>
-		<br><br><br>
-		<br><br><br>
+		<br><br>
 		</td>
 		</tr>
 			
