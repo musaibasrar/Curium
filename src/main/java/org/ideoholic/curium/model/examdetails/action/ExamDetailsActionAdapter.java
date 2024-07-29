@@ -105,5 +105,26 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
-    
+    public void printPreviewHallTicket() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request, response);
+
+        PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
+        printPreviewHallTicketDto.setExamName(request.getParameterValues("examname"));
+        printPreviewHallTicketDto.setClasses(request.getParameterValues("classes"));
+        printPreviewHallTicketDto.setSubject(request.getParameterValues("subject"));
+        printPreviewHallTicketDto.setDateOfExam(request.getParameterValues("date"));
+        printPreviewHallTicketDto.setStartTime(request.getParameterValues("starttime"));
+        printPreviewHallTicketDto.setEndTime(request.getParameterValues("endtime"));
+        printPreviewHallTicketDto.setClassAndSec(request.getParameter("classandsec"));
+        printPreviewHallTicketDto.setAdmNo(request.getParameter("admno"));
+        printPreviewHallTicketDto.setStudentName(request.getParameter("studentName"));
+        printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
+        printPreviewHallTicketDto.setClassStudying(request.getParameter("class"));
+
+        HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", result.getStudentList());
+        request.setAttribute("examname", result.getExamname());
+        request.setAttribute("examschedulelist", result.getExamscheduleList());
+        request.setAttribute("urlbranchid", result.getUrlbranchid());
+    }
 }
