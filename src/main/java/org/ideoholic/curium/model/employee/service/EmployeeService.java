@@ -62,6 +62,7 @@ public class EmployeeService {
 		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
 		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
 							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
+							employee.setSubjectsteaching(DataUtil.emptyString(employeeDto.getSubjectsteaching()));
 		                //End Bank Details
 
 			// Process form file field (input type="file")
@@ -225,6 +226,7 @@ public class EmployeeService {
 			employee.setBranchid(Integer.parseInt(DataUtil.emptyString(employeeDto.getBranchId())));
 			employee.setLeavingdate(DateUtil.indiandateParser(employeeDto.getLeavingdate()));
 			employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+			employee.setSubjectsteaching(DataUtil.emptyString(employeeDto.getSubjectsteaching()));
 			//Bank Details
 
 			employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));

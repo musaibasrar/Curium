@@ -548,6 +548,7 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-4">Upload Documents</a></li>
 					<li><a href="#tabs-2">Bank Details</a></li>
 					<li><a href="#tabs-3">Additional Details</a></li>
+					<li><a href="#tabs-5">Leaving Details</a></li>
 				</ul>
 
 				<div id="tabs-1">
@@ -564,7 +565,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Name* &nbsp;</td>
 							<td align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
@@ -589,14 +590,14 @@ for(Cookie cookie : cookies){
 
 							<td class="alignRight">Address &nbsp;</td>
 							<td><label> <input name="address"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+							style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									type="text" class="myclass" id="address" size="36">
 							</label></td>
 
 							<td class="alignRight">Contact Number &nbsp;</td>
 							<td><label> <input
 									name="contactnumber" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									id="contactnumber" size="36" maxlength="10" minlength="10"/>
 							</label></td>
 						</tr>
@@ -612,13 +613,13 @@ for(Cookie cookie : cookies){
 
 							<td class="alignRight">email &nbsp;</td>
 							<td><label> <input name="email"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="email" class="myclass" id="email" size="36">
+							style="height: 18px;font-size: 13px;border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: #5d7e9b; border-right-color: #5d7e9b; border-bottom-color: #5d7e9b; border-left-color: #5d7e9b; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; width: auto; height: 28px; color: black; border-radius: 4px;"
+									type="email" id="email" size="36">
 							</label></td>
 
 							<td class="alignRight">Date Of Birth &nbsp;</td>
-							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+							<td><label> <input name="dateofjoining"
+										style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									type="text" class="myclass" id="datepicker" size="36"
 									data-validate="validate(required)">
 							</label></td>
@@ -635,7 +636,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Total Experience &nbsp;</td>
 							<td align="left"><label> <input
 									name="totalexperience" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									id="totalexperience" size="36" onblur="validateName();">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -643,7 +644,7 @@ for(Cookie cookie : cookies){
 
 							<td class="alignRight">Qualification &nbsp;</td>
 							<td><label> <input name="qualification"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+							style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									type="text" class="myclass" id="qualification" size="36"
 									>
 							</label></td>
@@ -708,14 +709,14 @@ for(Cookie cookie : cookies){
 						<td class="alignRight">Father / Guardian Name &nbsp;</td>
 							<td align="left"><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 							
 
 							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/YYYY"/>"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+							<td><label> <input name="joiningdate"
+										style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									type="text" class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">
 							</label></td>
@@ -783,14 +784,14 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Bank Name &nbsp;</td>
 							<td align="left"><label> <input
 									name="bankname" type="text" class="myclass" id="bankname" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 							<td class="alignRight">Bank IFSC &nbsp;</td>
 							<td class="alignLeft"><label> <input
 									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									onblur="validateName();">
 							</label>
 							</td>
@@ -807,7 +808,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Account Number &nbsp;</td>
 							<td><label> <input name="accno"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+							style="text-transform:capitalize;height: 18px;font-size: 13px;"
 									type="text" class="textField" id="accno" size="36">
 							</label></td>
 						</tr>
@@ -853,14 +854,14 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
-							<td class="alignRight">Date Of Leaving &nbsp;</td>
+							<td class="alignRight">Additional Courses/Qualification &nbsp;</td>
 							<td><label> 
-										<input name="dateofleaving"
-									type="text" class="myclass" id="datepickerleaving" size="30" autocomplete="off"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+										<input
+									name="subjectsteaching" type="text" class="myclass" id="subjectsteaching" size="30" 
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
+									onblur="validateName();">
 									
 							</label></td>
 						</tr>
@@ -879,9 +880,9 @@ for(Cookie cookie : cookies){
 									<tr>
 									
 										<td align="right">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Previous</a></td>
@@ -1013,6 +1014,66 @@ for(Cookie cookie : cookies){
 							</div>
 
 						</div>
+						
+						<div id="tabs-5">
+
+					<table width="100%" border="0" align="center" id="table1">
+					
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight">Date Of Leaving &nbsp;</td>
+							<td><label> 
+										<input name="dateofleaving"
+									type="text" class="myclass" id="datepickerleaving" size="30" autocomplete="off"
+									style="text-transform:capitalize;height: 18px;font-size: 13px;"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+									
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+									<tr>
+									
+										<td align="right">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+									
+									
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>
+										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancel" class="cancel">Cancel</button>
+
+									</td>
+								</tr>
+					</table>
+					</div>
 					
 					</div>
 					
