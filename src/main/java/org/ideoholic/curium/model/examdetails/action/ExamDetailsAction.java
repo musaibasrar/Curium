@@ -46,7 +46,7 @@ public class ExamDetailsAction {
 	@PostMapping("/printPreviewHallTicket")
 	public String printPreviewHallTicket() {
 		
-		new ExamDetailsService(request, response).printPreviewHallTicket();
+		examDetailsActionAdapter.printPreviewHallTicket();
 		return "printpreviewhallticket";
 	}
 	
