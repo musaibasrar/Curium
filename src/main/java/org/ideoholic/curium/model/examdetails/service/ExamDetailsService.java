@@ -218,34 +218,36 @@ public class ExamDetailsService {
 	}
 
 
-	public boolean getExamScheduleDetails() {
+	public ExamScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto,String branchId) {
+		ExamScheduleResponseDto result = new ExamScheduleResponseDto();
+
+		String academicYear = examScheduleDto.getAcademicYear();
+		String classH = examScheduleDto.getClassH();
+		String classAdmno = examScheduleDto.getClassAdmno();
+		String studentName = examScheduleDto.getStudentName();
+		String exam = examScheduleDto.getExam();
 		
-		String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
-		String classH = DataUtil.emptyString(request.getParameter("class"));
-		String classAdmno = DataUtil.emptyString(request.getParameter("classandsec"));
-		String studentName = DataUtil.emptyString(request.getParameter("studentName"));
-		String exam = DataUtil.emptyString(request.getParameter("exam"));
-		
-		request.setAttribute("selectedclass", classH);
-		request.setAttribute("selectedexam", exam);
-		request.setAttribute("selectedstudentname", studentName);
-		request.setAttribute("selectedclassandsec", classAdmno);
-		request.setAttribute("selectedadmissionno", DataUtil.emptyString(request.getParameter("admno")));
+		result.setSelectedclass(classH);
+		result.setSelectedexam(exam);
+		result.setSelectedstudentname(studentName);
+		result.setSelectedclassandsec(classAdmno);
+		result.setSelectedadmissionno(examScheduleDto.getClassAdmno());
+
 		
 		if(!classAdmno.equals("")){
 			String[] c = classAdmno.split(" ");
 			classH  = c[0];
 		}
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
-			List<Examschedule> examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("examschedules", examschedules);
+			List<Examschedule> examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(branchId));
+			result.setExamschedules(examschedules);
+			result.setSuccess(true);
 			if(!examschedules.isEmpty()){
-				return true;
+				return result;
 			}
 		}
-		
-		return false;
+		return result;
 	}
 
 

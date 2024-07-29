@@ -53,7 +53,7 @@ public class ExamDetailsAction {
 	@PostMapping("/searchHallTicketDetails")
 	public String searchHallTicketDetails() {
 		
-		new ExamDetailsService(request, response).getExamScheduleDetails();
+		examDetailsActionAdapter.getExamScheduleDetails();
 		examDetailsActionAdapter.readListOfExams();
 		new SubjectDetailsService(request, response).readListOfSubjects();
 		

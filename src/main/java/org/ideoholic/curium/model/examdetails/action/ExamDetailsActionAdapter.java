@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.examdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.*;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +82,26 @@ public class ExamDetailsActionAdapter {
         examIdsDto.setExamIds(request.getParameterValues("idexamschedule"));
 
         ResultResponse result = examDetailsService.deleteExamSchedule(examIdsDto);
+
+        return result.isSuccess();
+    }
+    public boolean getExamScheduleDetails() {
+        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
+
+        ExamScheduleDto examScheduleDto = new ExamScheduleDto();
+        examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
+        examScheduleDto.setClassH(request.getParameter("class"));
+        examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
+        examScheduleDto.setStudentName(request.getParameter("studentName"));
+        examScheduleDto.setExam(request.getParameter("exam"));
+
+        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto,httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("selectedclass", result.getSelectedclass());
+        request.setAttribute("selectedexam", result.getSelectedexam());
+        request.setAttribute("selectedstudentname", result.getSelectedstudentname());
+        request.setAttribute("selectedclassandsec", result.getSelectedclassandsec());
+        request.setAttribute("selectedadmissionno", result.getSelectedadmissionno());
+        request.setAttribute("examschedules", result.getExamschedules());
 
         return result.isSuccess();
     }
