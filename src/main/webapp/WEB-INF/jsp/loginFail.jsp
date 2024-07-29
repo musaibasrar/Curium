@@ -151,7 +151,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 220px;width: 211px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
@@ -163,7 +163,7 @@ form{
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
-						<form action="/cambridge/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/cambridge/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
