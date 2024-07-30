@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.mess.supplier.action;
 
-import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
@@ -80,7 +79,7 @@ public class MessSuppliersApiAction {
     }
 
     @PostMapping("/printSupplierPayment")
-    public ResponseEntity<SupplierPaymentDto> printSupplierPayment(@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> printSupplierPayment(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
@@ -95,7 +94,7 @@ public class MessSuppliersApiAction {
     }
 
     @PostMapping("/cancelCheque")
-    public ResponseEntity<SupplierPaymentDto> cancelCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> cancelCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse cancelChequeResult = messSuppliersService.cancelCheque(dto, branchId, userId);
@@ -114,7 +113,7 @@ public class MessSuppliersApiAction {
     }
 
     @PostMapping("/clearedCheque")
-    public ResponseEntity<SupplierPaymentDto> clearedCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> clearedCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse cancelChequeResult = messSuppliersService.clearedCheque(dto, branchId, userId);
@@ -133,7 +132,7 @@ public class MessSuppliersApiAction {
     }
 
     @PostMapping("/deliveredCheque")
-    public ResponseEntity<SupplierPaymentDto> deliveredCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> deliveredCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse cancelChequeResult = messSuppliersService.deliveredCheque(dto, branchId);
@@ -151,7 +150,7 @@ public class MessSuppliersApiAction {
     }
 
     @PostMapping("/issueCheque")
-    public ResponseEntity<SupplierPaymentDto> issueCheque(@RequestBody ChequeDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> issueCheque(@RequestBody ChequeDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse cancelChequeResult = messSuppliersService.issueCheque(dto, branchId, userId);
@@ -181,7 +180,7 @@ public class MessSuppliersApiAction {
     }
 
     @GetMapping("/paymentSuppliers")
-    public ResponseEntity<SupplierPaymentDto> paymentSuppliers(@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "page") String page) {
+    public ResponseEntity<SupplierPaymentDto> paymentSuppliers(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         SupplierPaymentDto paymentDto = new SupplierPaymentDto();
 
         ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
