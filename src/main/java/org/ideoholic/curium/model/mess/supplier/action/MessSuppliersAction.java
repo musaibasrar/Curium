@@ -4,15 +4,12 @@
 package org.ideoholic.curium.model.mess.supplier.action;
 
 import org.ideoholic.curium.model.account.action.AccountActionAdapter;
-import org.ideoholic.curium.model.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -24,15 +21,10 @@ import java.io.IOException;
 public class MessSuppliersAction {
 
 	@Autowired
-	private HttpServletRequest request;
-
-	@Autowired
-	private HttpServletResponse response;
-
-	@Autowired
 	private MessSuppliersActionAdapter messSuppliersActionAdapter;
 
-	@Autowired private AccountActionAdapter accountActionAdapter;
+	@Autowired
+	private AccountActionAdapter accountActionAdapter;
 
 	@PostMapping("/printSearchSupplierPaymentDetails")
 	public String printSearchSupplierPaymentDetails() {
@@ -42,7 +34,7 @@ public class MessSuppliersAction {
 
 	@PostMapping("/searchSupplierPaymentDetails")
 	public String searchSupplierPaymentDetails() {
-		new AccountService(request, response).searchJournalEntries();
+		accountActionAdapter.searchJournalEntries();
 		messSuppliersActionAdapter.viewSuppliersDetails();
 		return "supplierpaymentdetails";
 	}
