@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/api/v1/DiaryProcess")
@@ -39,15 +40,15 @@ public class DiaryApiAction {
 			@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,
 			@RequestHeader(value = "userloginid") String userLoginId) {
-		diaryService.addDiary(addDiaryDto, branchId, currentAcademicYear, userLoginId);
+		diaryService.addDiary(addDiaryDto, branchId, userLoginId, currentAcademicYear);
 		return ResponseEntity.ok().build();
 
 	}
 
 	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId,
-			String strPage) {
-		DiaryResponseDto result = diaryService.viewDiary(branchId, strPage);
+	public ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId, @RequestParam(value="page")
+			String page) {
+		DiaryResponseDto result = diaryService.viewDiary(branchId, page);
 		return ResponseEntity.ok(result);
 	}
 
