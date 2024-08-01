@@ -363,7 +363,7 @@ public class MessItemsService {
 					result.setSuccess(false);
 				}
 				}else {
-					System.out.println("Can't cancel receive voucher");
+					log.error("Can't cancel receive voucher");
 				}
 			}
 			return result;

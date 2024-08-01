@@ -161,6 +161,7 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
         return viewItems(branchId);
     }
 
+    @ResponseBody
     @GetMapping("/purchaseItems")
     public ResponseEntity<PurchaseCancelDto> purchaseItems(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         PurchaseCancelDto purchaseCancelDto = new PurchaseCancelDto();
