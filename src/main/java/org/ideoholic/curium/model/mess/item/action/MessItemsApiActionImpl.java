@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/v1/messItemsProcess")
-public class MessItemsApiActionImpl {
+public class MessItemsApiActionImpl implements MessItemsApiAction {
 
     @Autowired
     private HttpServletRequest request;

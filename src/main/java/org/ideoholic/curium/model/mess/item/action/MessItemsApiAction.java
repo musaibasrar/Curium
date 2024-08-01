@@ -1,58 +1,44 @@
 package org.ideoholic.curium.model.mess.item.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.mess.item.dto.IssuanceReportResponseDto;
-import org.ideoholic.curium.model.mess.item.dto.PurchaseCancelDto;
-import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.model.mess.item.dto.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public interface MessItemsApiAction {
 
-@RestController
-@RequestMapping("/api/v1/messItemsProcess")
-public class MessItemsApiAction {
+    String printStockReceivedReport();
 
-    public String printStockReceivedReport;
+    ResponseEntity<StockReportResponseDto> generateStockReceivedReport(StockReportDto dto, String branchId);
 
-    public ResponseEntity<StockReportResponseDto> generateStockReceivedReport;
+    ResponseEntity<ResultResponse> receiveStockReport(String branchId);
 
-    public ResponseEntity<ResultResponse> receiveStockReport;
+    String printStockIssuanceReport();
 
-    public String printStockIssuanceReport;
+    ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(IssuanceReportDto dto);
 
+    ResponseEntity<ResultResponse> issuanceStock();
 
-    public ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport;
+    ResponseEntity<ResultResponse> printBatchStockAvailability();
 
-    public ResponseEntity<ResultResponse> issuanceStock;
+    ResponseEntity<ResultResponse> batchStock();
 
-    public ResponseEntity<ResultResponse> printBatchStockAvailability;
+    ResponseEntity<ResultResponse> printStockAvailability();
 
-    public ResponseEntity<ResultResponse> batchStock;
+    ResponseEntity<ResultResponse> currentStock();
 
-    public ResponseEntity<ResultResponse> printStockAvailability;
+    ResponseEntity<PurchaseCancelDto> cancelPurchase(InvoiceIdsDto dto, String branchId, String page);
 
-    public ResponseEntity<ResultResponse> currentStock;
+    ResponseEntity<PurchaseCancelDto> savePurchase(PurchaseDto dto, String branchId, String userId, String page);
 
-    public ResponseEntity<PurchaseCancelDto> cancelPurchase;
+    ResponseEntity<ResultResponse> deleteItems(MessIdsDto dto, String branchId);
 
-    public ResponseEntity<PurchaseCancelDto> savePurchase;
+    ResponseEntity<ResultResponse> updateItems(ItemsDto dto, String branchId);
 
-    public ResponseEntity<ResultResponse> deleteItems;
+    ResponseEntity<ResultResponse> viewItems(String branchId);
 
-    public ResponseEntity<ResultResponse> updateItems;
+    ResponseEntity addItems(ItemDetailsDto dto, String branchId, String userId);
 
-    public ResponseEntity<ResultResponse> viewItems;
+    ResponseEntity<PurchaseCancelDto> purchaseItems(String branchId, String page);
 
-    public ResponseEntity addItems;
-
-    public ResponseEntity<PurchaseCancelDto> purchaseItems;
-
-    public String addSuppliers;
+    String addSuppliers();
 }
