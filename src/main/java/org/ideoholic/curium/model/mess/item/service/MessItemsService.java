@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.mess.item.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -13,36 +14,28 @@ import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.StockIssuance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Slf4j
+@Service
 public class MessItemsService {
-
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
 
 	@Autowired
 	private MessSuppliersActionAdapter messSuppliersActionAdapter;
-	
-	public MessItemsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+
+	@Autowired
+	private MessSuppliersService messSuppliersService;
 
 
 	public ResultResponse viewItemDetails(String branchId) {
@@ -189,9 +182,9 @@ public class MessItemsService {
 				String[] supplieridledgerid = sup.split(":");
 				String randomString =  DataUtil.generateString(8);
 				String[] purchasePrice = dto.getPurchasePrice();
-				String[] sgst = dto.getSGst();
-				String[] cgst = dto.getCGst();
-				
+				String[] sgst = dto.getStateGst();
+				String[] cgst = dto.getCenterGst();
+
 				//Invoice Details
 				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
 				messInvoiceDetails.setBranchid(Integer.parseInt(branchId));
@@ -338,6 +331,7 @@ public class MessItemsService {
 
 
 		public ResultResponse cancelPurchase(InvoiceIdsDto dto) {
+		ResultResponse result = ResultResponse.builder().success(true).build();
 				
 			String[] ids = dto.getInvoiceId();
 			Date now = new Date();
@@ -356,21 +350,23 @@ public class MessItemsService {
 				List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntry(invoiceId);
 				
 				VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(ivids[1]);
-				
-				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
-				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
-				String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+voucherId;
-				
-				new MessItemsDAO().cancelPurchase(invoiceId,messStockEntryList,updateDrAccount, updateCrAccount, cancelVoucher);
-				
+				if(voucherTransaction != null) {
+
+					String updateDrAccount = "update Accountdetailsbalance set currentbalance=currentbalance-" + voucherTransaction.getDramount() + " where accountdetailsid=" + voucherTransaction.getDraccountid();
+					String updateCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance-" + voucherTransaction.getCramount() + " where accountdetailsid=" + voucherTransaction.getCraccountid();
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='" + todaysDate + "' where transactionsid=" + voucherId;
+
+					new MessItemsDAO().cancelPurchase(invoiceId, messStockEntryList, updateDrAccount, updateCrAccount, cancelVoucher);
+
+				}else {
+					log.error("Unable to fetch transaction of {}", ivids[1]);
+					result.setSuccess(false);
+				}
 				}else {
 					System.out.println("Can't cancel receive voucher");
 				}
 			}
-			return ResultResponse
-					.builder()
-					.success(true)
-					.build();
+			return result;
 		}
 
 
@@ -541,10 +537,10 @@ public class MessItemsService {
 		}
 
 
-		public ResultResponse receiveStockReport() {
+		public ResultResponse receiveStockReport(String branchId) {
 			ResultResponse result = ResultResponse.builder().build();
 
-			messSuppliersActionAdapter.viewSuppliersDetails();
+			messSuppliersService.viewSuppliersDetails(branchId);
 			
 			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
 			result.setResultList(messItemsList);
@@ -554,7 +550,7 @@ public class MessItemsService {
 		}
 
 
-		public StockReportResponseDto generateStockReceivedReport(StockReportDto dto) {
+		public StockReportResponseDto generateStockReceivedReport(StockReportDto dto, String branchId) {
 			StockReportResponseDto responseDto = StockReportResponseDto.builder().build();
 
 			String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
@@ -588,7 +584,7 @@ public class MessItemsService {
 			responseDto.setTransactionFromDateSelected("From:"+dto.getFromDate());
 			responseDto.setTransactionToDateSelected("To:"+dto.getToDate());
 			
-			receiveStockReport();
+			receiveStockReport(branchId);
 
 			responseDto.setSuccess(true);
 

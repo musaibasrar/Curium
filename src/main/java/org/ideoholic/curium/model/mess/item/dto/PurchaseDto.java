@@ -12,8 +12,8 @@ public class PurchaseDto {
     private String[] batchNo;
     private String[] lineTotal;
     private String[] purchasePrice;
-    private String[] sGst;
-    private String[] cGst;
+    private String[] stateGst;
+    private String[] centerGst;
     private String supplierId;
     private String invoiceDate;
     private String supplierReferenceNo;

@@ -25,19 +25,20 @@ public class MessItemActionAdapter {
     @Autowired
     private HttpSession httpSession;
     
+    @Autowired
+    private MessItemsService messItemsService;
+    
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
     public void generateStockReceivedReport() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         StockReportDto dto = new StockReportDto();
         dto.setFromDate(request.getParameter("transactiondatefrom"));
         dto.setToDate(request.getParameter("transactiondateto"));
         dto.setSupplierId(request.getParameter("supplier"));
         dto.setItem(request.getParameter("itemname"));
 
-        StockReportResponseDto responseDto = messItemsService.generateStockReceivedReport(dto);
+        StockReportResponseDto responseDto = messItemsService.generateStockReceivedReport(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("supplierselected", responseDto.getSupplierSelected());
         httpSession.setAttribute("itemselected", responseDto.getItemSelected());
         httpSession.setAttribute("messstockentrylist", responseDto.getMessStockEntryList());
@@ -47,36 +48,26 @@ public class MessItemActionAdapter {
     }
 
     public void receiveStockReport() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
-        ResultResponse resultResponse = messItemsService.receiveStockReport();
+        ResultResponse resultResponse = messItemsService.receiveStockReport(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("itemslist", resultResponse.getResultList());
     }
 
     public void getIssuanceStock() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ResultResponse resultResponse = messItemsService.getIssuanceStock();
         request.setAttribute("itemslist", resultResponse.getResultList());
     }
 
     public void getBatchStock() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ResultResponse resultResponse = messItemsService.getBatchStock();
         request.setAttribute("messstockentrylist", resultResponse.getResultList());
     }
 
     public void getCurrentStock() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ResultResponse resultResponse = messItemsService.getCurrentStock();
         request.setAttribute("currentstocklist", resultResponse.getResultList());
     }
 
     public void addItemDetails() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ItemDetailsDto dto = new ItemDetailsDto();
         dto.setItemName(request.getParameter("itemname"));
         dto.setUnitOfMeasure(request.getParameter("unitofmeasure"));
@@ -89,8 +80,6 @@ public class MessItemActionAdapter {
     }
 
     public String viewItemDetails() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ResultResponse resultResponse = messItemsService.viewItemDetails(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("messstockavailabilitylist", resultResponse.getResultList());
 
@@ -101,8 +90,6 @@ public class MessItemActionAdapter {
     }
 
     public void deleteMultipleItems() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         MessIdsDto dto = new MessIdsDto();
         dto.setMessIds(request.getParameterValues("messitemsids"));
 
@@ -111,8 +98,6 @@ public class MessItemActionAdapter {
     }
 
     public void updateItems() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ItemsDto dto = new ItemsDto();
         dto.setMessIds(request.getParameterValues("messitemidsz"));
 
@@ -133,8 +118,6 @@ public class MessItemActionAdapter {
 
 
     public void savePurchase() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         PurchaseDto dto = new PurchaseDto();
         dto.setItemsTotal(request.getParameter("itemsGrandTotalAmountWithoutGST"));
         dto.setItemIds(request.getParameterValues("itemids"));
@@ -145,8 +128,8 @@ public class MessItemActionAdapter {
         dto.setLineTotal(request.getParameterValues("linetotal"));
         dto.setSupplierId(request.getParameter("supplierid"));
         dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
-        dto.setSGst(request.getParameterValues("sgst"));
-        dto.setCGst(request.getParameterValues("cgst"));
+        dto.setStateGst(request.getParameterValues("sgst"));
+        dto.setCenterGst(request.getParameterValues("cgst"));
         dto.setItemEntryDate(request.getParameter("itementrydate"));
         dto.setInvoiceDate(request.getParameter("invoicedate"));
         dto.setSupplierReferenceNo(request.getParameter("supplierreferenceno"));
@@ -155,18 +138,13 @@ public class MessItemActionAdapter {
         request.setAttribute("itemsreceived", resultResponse.isSuccess());
     }
 
-    public void cancelPurchase() {
-        MessItemsService messItemsService= new MessItemsService(request, response);
-
-        InvoiceIdsDto dto = new InvoiceIdsDto();
+    public void cancelPurchase() {InvoiceIdsDto dto = new InvoiceIdsDto();
         dto.setInvoiceId(request.getParameterValues("invoiceid"));
 
         ResultResponse resultResponse = messItemsService.cancelPurchase(dto);
     }
 
     public void getInvoiceDetails() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         String page = request.getParameter("page");
 
         InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceDetails(page, httpSession.getAttribute(BRANCHID).toString());
@@ -176,8 +154,6 @@ public class MessItemActionAdapter {
     }
 
     public void generateStockIssuanceReport() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         IssuanceReportDto dto = new IssuanceReportDto();
         dto.setFromDate(request.getParameter("transactiondatefrom"));
         dto.setToDate(request.getParameter("transactiondateto"));
@@ -194,8 +170,6 @@ public class MessItemActionAdapter {
     }
 
     public void getCurrentStockToIssue() {
-        MessItemsService messItemsService = new MessItemsService(request, response);
-
         ResultResponse resultResponse = messItemsService.getCurrentStockToIssue();
         request.setAttribute("stocklist", resultResponse.getResultList());
     }
