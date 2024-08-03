@@ -28,14 +28,15 @@ public interface DiaryApiAction {
 			@RequestHeader(value = "branchid") String branchId);
 
 	 ResponseEntity<DiaryResponseDto> deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,
-			@RequestHeader(value = "branchid") String branchId) ;
+			@RequestHeader(value = "branchid") String branchId,@RequestParam(value="page")
+		String page) ;
 
      ResponseEntity<String> diarySaved(); 
 		
 
-	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> ViewDiaryDetails(
+	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetails(
 			@RequestBody StudentIdDto studentIdDto) ;
 
-	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> ViewDiaryDetailsParent(
+	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetailsParent(
 			@RequestBody StudentIdDto studentIdDto) ;
 }

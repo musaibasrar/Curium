@@ -1,6 +1,8 @@
 package org.ideoholic.curium.model.diary.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.exceptions.CustomErrorMessage;
+import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
@@ -60,10 +62,11 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 	}
 
 	@PostMapping("/deleteRecord")
-	public ResponseEntity<DiaryResponseDto> deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,
+	public ResponseEntity<DiaryResponseDto> deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,@RequestParam(value="page")
+	String page,
 			@RequestHeader(value = "branchid") String branchId) {
 		diaryService.deleteRecord(dairyIdsDto);
-		DiaryResponseDto result = diaryService.viewDiary(branchId, dairyIdsDto.getPage());
+		DiaryResponseDto result = diaryService.viewDiary( page,branchId);
 		return ResponseEntity.ok(result);
 	}
 
@@ -73,23 +76,27 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 		return ResponseEntity.ok("viewDiary");
 	}
 
-	@PostMapping("/ViewDiaryDetails")
-	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> ViewDiaryDetails(
+	@PostMapping("/viewDiaryDetails")
+	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetails(
 			@RequestBody StudentIdDto studentIdDto) {
 		ViewDetailsOfDiaryMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if (result.isSuccess()) {
-
+			return ResponseEntity.ok(result);
+		}else {
+			throw new CustomResponseException(CustomErrorMessage.ERROR);
 		}
-		return ResponseEntity.ok(result);
+		
 	}
 
-	@PostMapping("/ViewDiaryDetailsParent")
-	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> ViewDiaryDetailsParent(
+	@PostMapping("/viewDiaryDetailsParent")
+	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetailsParent(
 			@RequestBody StudentIdDto studentIdDto) {
 		ViewDetailsOfDiaryMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if (result.isSuccess()) {
-
+			return ResponseEntity.ok(result);
+		}else {
+			throw new CustomResponseException(CustomErrorMessage.ERROR);
 		}
-		return ResponseEntity.ok(result);
+		
 	}
 }
