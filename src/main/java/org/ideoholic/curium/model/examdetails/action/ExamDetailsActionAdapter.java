@@ -3,28 +3,24 @@ package org.ideoholic.curium.model.examdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.*;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
-import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 @Service
 public class ExamDetailsActionAdapter {
     @Autowired
     private HttpServletRequest request;
     @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private ExamDetailsService examDetailsService;
 
     private String BRANCHID = "branchid";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
     public Boolean addExam() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         AddExamDto result = new AddExamDto();
         result.setExamName( request.getParameter("examname"));
@@ -35,7 +31,6 @@ public class ExamDetailsActionAdapter {
     }
 
     public boolean readListOfExams() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamsListResponseDto result = examDetailsService.readListOfExams(httpSession.getAttribute(BRANCHID).toString());
 
@@ -43,7 +38,6 @@ public class ExamDetailsActionAdapter {
         return result.isSuccess();
     }
     public boolean deleteMultiple() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
         examIdsDto.setExamIds(request.getParameterValues("examIDs"));
@@ -52,7 +46,6 @@ public class ExamDetailsActionAdapter {
         return resultResponse.isSuccess();
     }
     public boolean addSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         AddScheduleDto addScheduleDto = new AddScheduleDto();
         addScheduleDto.setSubject(request.getParameterValues("subject"));
@@ -68,7 +61,6 @@ public class ExamDetailsActionAdapter {
         return resultResponse.isSuccess();
     }
     public boolean getExamSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("examschedule", result.getExams());
@@ -76,7 +68,6 @@ public class ExamDetailsActionAdapter {
         return result.isSuccess();
     }
     public boolean deleteExamSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
         examIdsDto.setExamIds(request.getParameterValues("idexamschedule"));
@@ -86,7 +77,6 @@ public class ExamDetailsActionAdapter {
         return result.isSuccess();
     }
     public boolean getExamScheduleDetails() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
         examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
@@ -106,7 +96,6 @@ public class ExamDetailsActionAdapter {
         return result.isSuccess();
     }
     public void printPreviewHallTicket() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request, response);
 
         PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
         printPreviewHallTicketDto.setExamName(request.getParameterValues("examname"));

@@ -22,25 +22,15 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Musaib_2
  *
  */
 @Slf4j
+@Service
 public class ExamDetailsService {
-
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    private HttpSession httpSession;
-    private String BRANCHID = "branchid";
-
-    public ExamDetailsService(HttpServletRequest request, HttpServletResponse response) {
-        this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-    }
-
 
     public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
         // TODO Auto-generated method stub
