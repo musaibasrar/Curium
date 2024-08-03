@@ -7,6 +7,7 @@ import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,8 @@ public class ExamDetailsAction {
 
 	@Autowired
 	private ExamDetailsActionAdapter examDetailsActionAdapter;
+	@Autowired
+	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 	
 	private String error = "error";
 	
@@ -55,7 +58,7 @@ public class ExamDetailsAction {
 		
 		examDetailsActionAdapter.getExamScheduleDetails();
 		examDetailsActionAdapter.readListOfExams();
-		new SubjectDetailsService(request, response).readListOfSubjects();
+		subjectDetailsActionAdapter.readListOfSubjects();
 		
 		return "generatehallticket";
 	}
@@ -71,7 +74,7 @@ public class ExamDetailsAction {
 		result = standardActionAdapter.viewClasses();
 		if (!result) 
 			return error;
-		result = new SubjectDetailsService(request, response).readListOfSubjects();
+		result = subjectDetailsActionAdapter.readListOfSubjects();
 		if (!result) 
 			return error;
 		result = yearActionAdapter.getYear();

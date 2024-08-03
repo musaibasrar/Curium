@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
@@ -21,9 +22,9 @@ import org.ideoholic.curium.util.DataUtil;
  */
 public class SubjectDetailsService {
 
-	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private HttpSession httpSession;
 	
 	public SubjectDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -31,16 +32,17 @@ public class SubjectDetailsService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean readListOfSubjects() {
-		boolean result = false;
-	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-	        httpSession.setAttribute("listSubject", list);
+	public ListOfSubjectsResponseDto readListOfSubjects(String branchId) {
+		ListOfSubjectsResponseDto result = new ListOfSubjectsResponseDto();
 
-	        result = true;
+	    try {
+	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchId));
+	        result.setList(list);
+
+			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        result = false;
+			result.setSuccess(false);
 	    }
 		return result;
 	}

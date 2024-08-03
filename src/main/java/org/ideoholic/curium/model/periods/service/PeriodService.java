@@ -21,17 +21,19 @@ import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PeriodService {
 
-	@Autowired
-	StandardActionAdapter standardActionAdapter;
 
-	@Autowired
-	EmployeeActionAdapter employeeActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+
+	private EmployeeActionAdapter employeeActionAdapter;
+
+	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -58,7 +60,7 @@ public class PeriodService {
 	                Currentacademicyear currentYear = new YearDAO().showYear();
 	                httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
 	                
-	                new SubjectDetailsService(request, response).readListOfSubjects();
+	                subjectDetailsActionAdapter.readListOfSubjects();
 	                
 	                employeeActionAdapter.ViewAllEmployee();
 	                standardActionAdapter.viewClasses();
