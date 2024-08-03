@@ -11,8 +11,8 @@ public class StockMoveDto {
     private String[] itemUintPrice;
     private String[] purchasePrice;
     private String custDetails;
-    private String[] sgst;
-    private String[] cgst;
+    private String[] stateGst;
+    private String[] centerGst;
     private String[] uom;
     private String[] batchNo;
     private String[] singleItemTotal;

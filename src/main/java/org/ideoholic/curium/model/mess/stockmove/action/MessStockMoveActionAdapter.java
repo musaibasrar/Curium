@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -21,25 +20,23 @@ public class MessStockMoveActionAdapter {
     private HttpServletRequest request;
 
     @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
     private HttpSession httpSession;
+    
+    @Autowired
+    private MessStockMoveService messStockMoveService;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
 
     public void viewStockEntryDetails() {
-        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
-
+        
         ResultResponse resultResponse = messStockMoveService.viewStockEntryDetails(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("messstockitemdetailslist", resultResponse.getResultList());
     }
 
     public void viewStockMoveDetails() {
-        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
-
+        
         String page = request.getParameter("page");
 
         StockMoveResponseDto responseDto = messStockMoveService.viewStockMoveDetails(page, httpSession.getAttribute(BRANCHID).toString());
@@ -48,8 +45,7 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
     }
 
-    public void saveStockMove() {MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
-
+    public void saveStockMove() {
         StockMoveDto dto = new StockMoveDto();
         dto.setStockEntryIds(request.getParameterValues("ids"));
         dto.setItemsName(request.getParameterValues("itemsname"));
@@ -58,8 +54,8 @@ public class MessStockMoveActionAdapter {
         dto.setItemUintPrice(request.getParameterValues("itemunitprice"));
         dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
         dto.setCustDetails(request.getParameter("issuedto"));
-        dto.setSgst(request.getParameterValues("sgst"));
-        dto.setCgst(request.getParameterValues("cgst"));
+        dto.setStateGst(request.getParameterValues("sgst"));
+        dto.setCenterGst(request.getParameterValues("cgst"));
         dto.setUom(request.getParameterValues("itemsunitofmeasure"));
         dto.setBatchNo(request.getParameterValues("batchno"));
         dto.setSingleItemTotal(request.getParameterValues("linetotal"));
@@ -94,8 +90,7 @@ public class MessStockMoveActionAdapter {
     }
 
     public void viewStockDueDetails() {
-        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
-
+        
         ClassSearchDto dto = new ClassSearchDto();
         dto.setClassSearch(request.getParameter("classsearch"));
 
@@ -104,7 +99,6 @@ public class MessStockMoveActionAdapter {
     }
 
     public void getCustomerLastPrice() throws IOException {
-        MessStockMoveService messStockMoveService = new MessStockMoveService(request,response);
 
         String customerName = request.getParameter("customerName");
         String custDetails = request.getParameter("customerName");
@@ -114,8 +108,7 @@ public class MessStockMoveActionAdapter {
     }
 
     public void cancelStockMove() {
-        MessStockMoveService messStockMoveService = new MessStockMoveService(request, response);
-
+        
         StockMoveIdsDto dto = new StockMoveIdsDto();
         dto.setStockMoveIds(request.getParameterValues("stockmoveid"));
 
@@ -130,5 +123,28 @@ public class MessStockMoveActionAdapter {
 
         ResultResponse resultResponse = messStockMoveService.cancelStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("itemscancelled", resultResponse.isSuccess());
+    }
+    
+    public boolean saveStockMoveOld(){
+                
+        StockMoveOldDto dto = new StockMoveOldDto();
+        dto.setStockEntryIds(request.getParameterValues("itemids"));
+        dto.setTransactionDate(request.getParameter("transactiondate"));
+        dto.setPurpose(request.getParameter("purpose"));
+        dto.setIssuedTo(request.getParameter("issuedto"));
+
+        Map<String, String> allRequestParameters = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String fieldName = enumeration.nextElement();
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameters.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameters);
+        
+        ResultResponse resultResponse = messStockMoveService.saveStockMoveOld(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsissued", resultResponse.isSuccess());
+        
+        return resultResponse.isSuccess();
     }
 }

@@ -1,11 +1,12 @@
 package org.ideoholic.curium.model.mess.stockmove.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
@@ -16,10 +17,9 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -29,22 +29,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+@Slf4j
+@Service
 public class MessStockMoveService {
 
-	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
 
 	@Autowired
-	private MessItemActionAdapter messItemActionAdapter;
-	
-	public MessStockMoveService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+	private MessItemsService messItemsService;
 
 	
 	
@@ -63,8 +56,8 @@ public class MessStockMoveService {
 			String[] itemunitprice = dto.getItemUintPrice();
 			String[] purchaseprice = dto.getPurchasePrice();
 			String[] custDetails = dto.getCustDetails().split("_");
-			String[] sgst = dto.getSgst();
-			String[] cgst = dto.getCgst();
+			String[] sgst = dto.getStateGst();
+			String[] cgst = dto.getCenterGst();
 			String[] uom = dto.getUom();
 			String[] batchno = dto.getBatchNo();
 			String[] singleItemTotal = dto.getSingleItemTotal();
@@ -308,17 +301,17 @@ public class MessStockMoveService {
 							results.setBillDetailsStudentName(custDetails[0]);
 							results.setBillDetailsClassStudying(custDetails[1]);
 							results.setBillDetailsFatherName(custDetails[2]);
-							
-							
+
+
 							NumberToWord toWord = new NumberToWord();
 							String grandTotalInWords = "";
 							if(totalValue.compareTo(BigDecimal.ZERO) != 0){
 								grandTotalInWords = toWord.convert(grandTotal.intValue());
 							}
-							
+
 							StringBuffer res = new StringBuffer();
 							String[] strArr = grandTotalInWords.split(" ");
-							
+
 							for(String str : strArr){
 								char[] stringArray = str.trim().toCharArray();
 								stringArray[0] = Character.toUpperCase(stringArray[0]);
@@ -328,7 +321,7 @@ public class MessStockMoveService {
 							grandTotalInWords = res.toString().trim();
 							results.setBillDetailsTotalTotal(grandTotalInWords+" "+"Only");
 							results.setBillGrandTotal(grandTotal);
-							
+
 							//Get Bill No
 							MessStockMove msm = new MessStockMoveDAO().getMessStockMoveMaxRow();
 							int billNo = 0;
@@ -348,32 +341,33 @@ public class MessStockMoveService {
 					results.setItemsIssued(result);
 				}
 
-					messItemActionAdapter.viewItemDetails();
+					messItemsService.viewItemDetails(branchId);
 
 					results.setSuccess(true);
 					return results;
 			}
 
-	public boolean saveStockMoveOld() {
+	public ResultResponse saveStockMoveOld(StockMoveOldDto dto, String branchId, String userId) {
 
 		boolean result = false;
+		ResultResponse resultResponse = ResultResponse.builder().build();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			
 			
-				String[] StockEntryIds = request.getParameterValues("itemids");
+				String[] StockEntryIds = dto.getStockEntryIds();
 				/*String[] itemsName = request.getParameterValues("itemsname");
 				String[] itemsIds = request.getParameterValues("itemsids");
 				String[] issuequantity = request.getParameterValues("issuequantity");
 				String[] itemunitprice = request.getParameterValues("itemunitprice");*/
 				BigDecimal totalValue = BigDecimal.ZERO;
 				
-				List<MessStockMove> messStockMovesList = new ArrayList<MessStockMove>();
+				List<MessStockMove> messStockMovesList = new ArrayList<>();
 				
 				if(StockEntryIds!=null) {
 					
 					for(int i=0; i < StockEntryIds.length ; i++){
-						String issueQuantity = request.getParameter("issuequantity_"+StockEntryIds[i]);
+						String issueQuantity = dto.getRequestParams().get("issuequantity_"+StockEntryIds[i]);
 						float reqQty = Float.parseFloat(issueQuantity);
 						//Query stock entry
 						
@@ -387,14 +381,14 @@ public class MessStockMoveService {
 										
 										messStockMove.setStockentryid(messStockEntry.getId());
 										messStockMove.setItemid(messStockEntry.getItemid());
-										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i]));
+										messStockMove.setExternalid(dto.getRequestParams().get("itemname_"+StockEntryIds[i]));
 										messStockMove.setQuantity(reqQty);
-										messStockMove.setPurpose(request.getParameter("purpose"));
-										messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
-										messStockMove.setIssuedto(request.getParameter("issuedto"));
-										messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+										messStockMove.setPurpose(dto.getPurpose());
+										messStockMove.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
+										messStockMove.setIssuedto(dto.getIssuedTo());
+										messStockMove.setBranchid(Integer.parseInt(branchId));
 										messStockMove.setStatus("ACTIVE");
-										messStockMove.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+										messStockMove.setUserid(Integer.parseInt(userId));
 										
 										totalValue = totalValue.add(new BigDecimal(reqQty).multiply(new BigDecimal(messStockEntry.getItemunitprice())));
 										messStockMovesList.add(messStockMove);
@@ -405,14 +399,14 @@ public class MessStockMoveService {
 										
 										messStockMove.setStockentryid(messStockEntry.getId());
 										messStockMove.setItemid(messStockEntry.getItemid());
-										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i]));
+										messStockMove.setExternalid(dto.getRequestParams().get("itemname_"+StockEntryIds[i]));
 										messStockMove.setQuantity(messStockEntry.getAvailablequantity());
-										messStockMove.setPurpose(request.getParameter("purpose"));
-										messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
-										messStockMove.setIssuedto(request.getParameter("issuedto"));
-										messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+										messStockMove.setPurpose(dto.getPurpose());
+										messStockMove.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
+										messStockMove.setIssuedto(dto.getIssuedTo());
+										messStockMove.setBranchid(Integer.parseInt(branchId));
 										messStockMove.setStatus("ACTIVE");
-										messStockMove.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+										messStockMove.setUserid(Integer.parseInt(userId));
 										
 										totalValue = totalValue.add(new BigDecimal(messStockEntry.getAvailablequantity()).multiply(new BigDecimal(messStockEntry.getItemunitprice())));
 										messStockMovesList.add(messStockMove);
@@ -426,8 +420,8 @@ public class MessStockMoveService {
 						}
 					
 						//Pass J.V. : credit the assets & debit the Expenses
-						int drStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						int crStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						int drStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(branchId));
+						int crStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 						
@@ -436,13 +430,13 @@ public class MessStockMoveService {
 						transactions.setDramount(totalValue);
 						transactions.setCramount(totalValue);
 						transactions.setVouchertype(4);
-						transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
+						transactions.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards Stock Issue");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-						transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setBranchid(Integer.parseInt(branchId));
+						transactions.setUserid(Integer.parseInt(userId));
 						
 						BigDecimal drAmountReceipt = totalValue;
 						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+drStockLedgerIdExpense;
@@ -453,10 +447,11 @@ public class MessStockMoveService {
 						//important result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
 					}
 		
-						messItemActionAdapter.viewItemDetails();
-						request.setAttribute("itemsissued", result);
+						messItemsService.viewItemDetails(branchId);
+						resultResponse.setSuccess(result);
 				}	
-						return result;
+						resultResponse.setSuccess(false);
+						return resultResponse;
 		}
 
 
@@ -574,44 +569,50 @@ public class MessStockMoveService {
 	public ResultResponse cancelStockMove(StockMoveIdsDto dto, String branchId, String userId) {
 	ResultResponse resultResponse = ResultResponse.builder().build();
 		
-	String[] smIds = dto.getStockMoveIds();
-	
-	for (String stockmoveids : smIds) {
-		
-		
-		MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
-		MessStockEntry messStockEntry = new MessItemsDAO().getMessStockEntryByID(messStockMove.getStockentryid());
-		float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
-		
-		//Pass J.V. : Debit the assets & credit the Expenses
-		
-		int drStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
-		int crStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(branchId));
-		
-		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
-		
-		transactions.setDraccountid(drStockLedgerId);
-		transactions.setCraccountid(crStockLedgerIdExpense);
-		transactions.setDramount(BigDecimal.valueOf(totalValue));
-		transactions.setCramount(BigDecimal.valueOf(totalValue));
-		transactions.setVouchertype(4);
-		transactions.setTransactiondate(DateUtil.indiandateParser(dto.getRequestParams().get("transactiondate_"+stockmoveids)));
-		transactions.setEntrydate(DateUtil.todaysDate());
-		transactions.setNarration("Towards Revarsal of Stock Issue");
-		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
-		transactions.setBranchid(Integer.parseInt(branchId));
-		transactions.setUserid(Integer.parseInt(userId));
-		
-		BigDecimal drAmountReceipt = BigDecimal.valueOf(totalValue);
-		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+drStockLedgerId;
+	try {
+		String[] smIds = dto.getStockMoveIds();
 
-		BigDecimal crAmountReceipt = BigDecimal.valueOf(totalValue);
-		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerIdExpense;
-		
-		boolean result = new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
-		resultResponse.setSuccess(result);
-		
+		for (String stockmoveids : smIds) {
+
+
+			MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
+			MessStockEntry messStockEntry = new MessItemsDAO().getMessStockEntryByID(messStockMove.getStockentryid());
+			float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
+
+			//Pass J.V. : Debit the assets & credit the Expenses
+
+			int drStockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
+			int crStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(branchId));
+
+			VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+
+			transactions.setDraccountid(drStockLedgerId);
+			transactions.setCraccountid(crStockLedgerIdExpense);
+			transactions.setDramount(BigDecimal.valueOf(totalValue));
+			transactions.setCramount(BigDecimal.valueOf(totalValue));
+			transactions.setVouchertype(4);
+			transactions.setTransactiondate(DateUtil.indiandateParser(dto.getRequestParams().get("transactiondate_"+stockmoveids)));
+			transactions.setEntrydate(DateUtil.todaysDate());
+			transactions.setNarration("Towards Revarsal of Stock Issue");
+			transactions.setCancelvoucher("no");
+			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setBranchid(Integer.parseInt(branchId));
+			transactions.setUserid(Integer.parseInt(userId));
+
+			BigDecimal drAmountReceipt = BigDecimal.valueOf(totalValue);
+			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+drStockLedgerId;
+
+			BigDecimal crAmountReceipt = BigDecimal.valueOf(totalValue);
+			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerIdExpense;
+
+			boolean result = new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
+			resultResponse.setSuccess(result);
+
+		}
+	}catch (Exception e){
+		log.error("Error in cancelStockMove: ", e);
+		resultResponse.setSuccess(false);
+		resultResponse.setMessage("An error occurred while processing the request: " + e.getMessage());
 	}
 	resultResponse.setSuccess(true);
 	return resultResponse;
@@ -623,21 +624,21 @@ public class MessStockMoveService {
 
 		String[] custDetails = strCustDetails.split("_");
 		Locale indiaLocale = new Locale("en", "IN");
-		PrintWriter out = response.getWriter(); 
+		PrintWriter out = response.getWriter();
 		response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
-        
+
 		if(!customerName.isEmpty() && !itemid.isEmpty() ) {
-			
+
 			List<MessStockMove> messStockMove = new MessStockMoveDAO().getCustomerLastPrices(custDetails[0]+"_"+custDetails[1], itemid, Integer.parseInt(branchId));
-			
+
 			String priceList = "";
 			String priceListFirst = "";
 			int i=0;
-				
-			
+
+
 				for (MessStockMove messStockMove2 : messStockMove) {
-					
+
 					if(priceList.isEmpty()) {
 						priceListFirst = "Date:"+DateUtil.dateParserddMMYYYY(messStockMove2.getTransactiondate())+" Price:"+messStockMove2.getPurpose();
 						priceList = "Date:"+messStockMove2.getTransactiondate()+" Price:"+messStockMove2.getPurpose();
@@ -650,7 +651,7 @@ public class MessStockMoveService {
 		        		String buffer = "<label style='font-size: 14px;font-weight: bold;'>Last Payment: </label> <label style='font-size: 14px;font-weight: bold;'>"+priceListFirst+" </label>";
 		        		buffer = buffer+"<br><label>Payment History: </label> <label>"+priceList+"</label>";
 			        	response.getWriter().println(buffer);
-		        	
+
 		        } catch (Exception e) {
 		            out.write("");
 		        } finally {
@@ -662,7 +663,7 @@ public class MessStockMoveService {
         		String buffer = "<label style='font-size: 14px;font-weight: bold;'>Last Payment: </label> <label style='font-size: 14px;font-weight: bold;'></label>";
         		buffer = buffer+"<br><label>Payment History: </label> <label></label>";
 	        	response.getWriter().println(buffer);
-        	
+
         } catch (Exception e) {
             out.write("");
         } finally {
