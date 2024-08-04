@@ -164,7 +164,7 @@ form{
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/abc/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/abc/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>

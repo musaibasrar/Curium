@@ -510,15 +510,15 @@
 
 <script type="text/javascript">
 					
-					var attedanceresult='<c:out default="" value="${attedanceresult}"/>';
-					var splitMessage = attedanceresult.split('-');
+					var attendanceresult='<c:out default="" value="${attendanceresult}"/>';
+					var splitMessage = attendanceresult.split('-');
 					
-		            if(attedanceresult.includes("success")){
+		            if(attendanceresult.includes("success")){
 		            	 $(function(){
 		            		 $( "div.success" ).html(splitMessage[1]);
 		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            	 });
-		            	 }else if(attedanceresult.includes("error")){
+		            	 }else if(attendanceresult.includes("error")){
 		            	  $(function(){
 		            		 $( "div.failure" ).html(splitMessage[1]);
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );

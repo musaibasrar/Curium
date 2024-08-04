@@ -163,7 +163,7 @@ form{
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
-						<form action="/abc/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/abc/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>

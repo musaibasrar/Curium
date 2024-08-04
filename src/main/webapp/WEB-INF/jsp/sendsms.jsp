@@ -596,6 +596,40 @@
 	    }).change();
 	});
 	
+	$(function() {
+		$('#chckHead').click(function() {
+			var length = $('.chcktbl:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktbl:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktbl:checked').attr('checked', false);
+				} else {
+					$('.chcktbl:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktbl').click(function() {
+			var length = $('.chcktbl:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktbl:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktbl:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+	
 </script>
 </head>
   <%
@@ -638,10 +672,12 @@ for(Cookie cookie : cookies){
 
 						
 						<tr>
-							<td class="alignRight"><label>Class </label>
-							</td><td>
-							<label>
-							<select name="addclass" id="addclass"
+							<td class="alignRight"><label>Class&nbsp; </label></td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+						<%-- 	<select name="addclass" id="addclass"
 									style="width: 120px">
 										<option selected></option>
 										<option>ALL</option>
@@ -652,13 +688,28 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:if>	
 										</c:forEach>
-								</select>
+								</select> --%>
+								<td>
+								 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" class="chcktbl"  name="addclass" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
 
-							</label> <label>&nbsp;Sec
-									<select name="addsec" id="addsec"
+							
+								</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight"><label>Section&nbsp; </label></td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D"> <select name="addsec" id="addsec"
 									style=" width: 120px">
 										<option selected></option>
-										<option>ALL</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
 											<option value="${classdetailslist.section}">
@@ -667,8 +718,9 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										</c:forEach>
 
-								</select></label>
-								</td>
+								</select>
+							</label>
+							</td>
 						</tr>
 							<tr>
 							<td><br /></td>
@@ -1002,4 +1054,3 @@ for(Cookie cookie : cookies){
 						</script>
 </body>
 </html>
-

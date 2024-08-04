@@ -117,7 +117,7 @@ public class AccountActionAdapter {
 		AccountPaymentDto accountPaymentDto = new AccountPaymentDto();
 		accountPaymentDto.setDraccountName(request.getParameter("accountnamepayment"));
 		accountPaymentDto.setCraccountName(request.getParameter("accountnamepaymentsecond"));
-		accountPaymentDto.setPaymentVoucher(request.getParameter("paymentavoucher"));
+		accountPaymentDto.setPaymentVoucher(request.getParameter("paymentvoucher"));
 		accountPaymentDto.setDrAmountPayment(request.getParameter("dramountpayment"));
 		accountPaymentDto.setCrAmountPayment(request.getParameter("cramountpaymentsecond"));
 		accountPaymentDto.setPaymentDate(request.getParameter("dateofpayment"));

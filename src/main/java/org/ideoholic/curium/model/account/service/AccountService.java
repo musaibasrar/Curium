@@ -344,32 +344,23 @@ public class AccountService {
 			accountIds.add(3);
 			accountIds.add(4);
 			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsBalance(accountDetailsBalance)
-					.build();
 			accountIds.clear();
+			
+			List<Accountdetailsbalance> accountDetailsBalanceExpenses = new ArrayList<Accountdetailsbalance>();
 			accountIds.add(5);
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsJournalEntry(accountDetailsBalance)
-					.build();
+			accountDetailsBalanceExpenses = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
 
 			List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
 			accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(branchId));
-			CreateVoucherResponseDto
-					.builder()
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
-					.build();
 
 			List<Accountdetailsbalance> accountDetailsJournalEntry = new ArrayList<Accountdetailsbalance>();
 			accountDetailsJournalEntry = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(branchId));
 
 			return CreateVoucherResponseDto
 					.builder()
+					.accountDetailsBalance(accountDetailsBalance)
+					.accountDetailsJournalEntry(accountDetailsBalanceExpenses)
+					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
 					.accountDetailsJournalEntry(accountDetailsJournalEntry)
 					.success(true)
 					.build();
