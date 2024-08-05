@@ -570,7 +570,7 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
   <td></td>
-  <td>PRINCIPAL</td>
+  <td>Signature</td>
   </tr>
 </table>
     
