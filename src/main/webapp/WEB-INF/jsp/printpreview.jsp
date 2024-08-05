@@ -566,7 +566,7 @@ for(Cookie cookie : cookies){
   <tr><td><br></td></tr>
   <tr>
   <td></td>
-  <td>Signature Here</td>
+  <td><img src="/bsr/images/signbsr.png" alt="Sign Brainy Stars" width="75" height="25"></td>
   </tr>
   <tr>
   <td></td>
