@@ -665,10 +665,10 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Contact Number</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
-							<th title="click to sort" class="headerText">Promoted Year</th>
-							<th title="click to sort" class="headerText">Admission Year</th>
+						<th title="click to sort" class="headerText">Promoted Year</th>
+						<th title="click to sort" class="headerText">Admission Year</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
-						
+						<th title="click to sort" class="headerText">Place</th>
 
 
 
@@ -699,7 +699,7 @@ for(Cookie cookie : cookies){
 									value="${Parents.student.yearofadmission}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
-
+							<td class="dataText"><c:out value="${Parents.profession}" /></td>
 
 						</tr>
 					</c:forEach>
