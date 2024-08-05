@@ -262,9 +262,9 @@
             -->
             .dataTextBoldCenter {
 	font-weight: normal;
-	font-family: Tahoma;
+	font-family: bolder;
 	color: black;
-	font-size: 14px;
+	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -272,7 +272,7 @@
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
-	color: black;
+	color: white;
 	font-size: 9px;
 	letter-spacing: normal;
 	text-align: center;
@@ -437,7 +437,7 @@ for(Cookie cookie : cookies){
     }
     
     .table-container table {
-      margin-right: 20px;
+     // margin-right: 20px;
     }
     
     /* CSS for table styling */
@@ -448,7 +448,7 @@ for(Cookie cookie : cookies){
     
     th, td {
       border: none; /* Remove borders */
-      padding: 8px;
+     // padding: 8px;
       text-align: left;
     }
     
@@ -472,8 +472,8 @@ for(Cookie cookie : cookies){
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">
-			<div class="card" style="background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;">
-  <div class="table-container" style="margin-bottom: 5px;">
+			<div class="card" style="background-image: url('/bsr/images/bggreen.png');background-repeat:no-repeat;background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;">
+  <div class="table-container" style="padding-left: 10px;margin-bottom:0px;padding-bottom:0px;">
     <%-- <table>
       <tr>
         <td>
@@ -493,57 +493,84 @@ for(Cookie cookie : cookies){
         </td>
       </tr>
     </table> --%>
-    <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+    <%-- <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/bsr/images/bsr.png" width="80" height="80"/></td>
+				<td><img src="/bsr/images/bsr.png" width="60" height="60"/></td>
 				<td style="height: 90px;padding-right: 0px;padding-left: 0px;">
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}&emsp;&emsp;</label><br><br><br>
+				<label class="addressLine">&emsp;&emsp;${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<!-- <label class="addressLine">Email:&nbsp;thebrainystarsacademy@gmail.com </label> -->
 				</td>
 			</tr>
-		</table>
-  </div>
-
-  <div class="table-container" style="padding-left: 10px;">
-  
-  <table style="width: 70%;">
-      <tr>
-		<td style="background-color: green;border-radius: 5px;text-align: center;"><label style="color: #FEE12B;font-weight: bold;font-size: 12px;">Student ID</label></td>      
-      </tr>
-      <tr>
-        <td>
-          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+		</table> --%> <table style="width: 50%;margin-bottom:0px;padding-bottom:0px;margin-left:16px;">
+   <tr>
+        <td>&emsp;&emsp;
+          <img src="/bsr/images/bsr.png" width="80" height="80"/>
         </td>
       </tr>
     </table>
     
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 130%;">
+    <table style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:5px;">
+  <tr><td>
+<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label></td></tr>
+				<tr><td>
+				<label class="addressLine" style="font-size:12px;">&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
+				<label class="addressLine">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				</td>  </tr>
+</table>
+  </div>
+
+  <div class="table-container" style="padding-left: 10px;margin-top:0px;padding-top:0px;">
+  
+  <table style="width: 70%;margin-top:0px;padding-top:0px;">
+   <tr>
+        <td>&emsp;
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+        </td>
+      </tr>
+      <tr>
+		<td style="color: black;font-weight: bold;font-size: 12px;margin-top:0px;">&emsp;IDENTITY CARD</td>      
+      </tr>
+     
+    </table>
+    
+    <table style="border-collapse: collapse;width: 130%;margin-top:0px;">
+ <tr><td><br></td></tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;Name</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+    <td style="padding-top: 5px;margin:0px;">&nbsp;&nbsp;Name</td>
+    <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;Father's Name</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0px;margin:0px;">&nbsp;&nbsp;Father's Name</td>
+    <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;Mother's Name</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Mother's Name</td>
+    <td style="padding: 0;margin:0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;Class</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Class</td>
+    <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;Phone</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Phone</td>
+    <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;Address</td>
-    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
+    <td style="padding: 0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
+  </tr>
+ <tr><td><br></td></tr>
+  <tr><td><br></td></tr>
+  <tr>
+  <td></td>
+  <td>Signature Here</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>PRINCIPAL</td>
   </tr>
 </table>
     
