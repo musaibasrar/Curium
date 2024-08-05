@@ -16,19 +16,13 @@ import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntryResponseDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessStockEntryService {
-
-	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	
-	public MessStockEntryService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
 
 
 	public MessStockEntryResponseDto getMRVDetails(String strInvoiceDetailsId, String supplierRefNo, String invoiceTotal, String supplierName, String invoiceDate, String branchId)  throws IOException {
