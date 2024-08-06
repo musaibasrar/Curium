@@ -253,11 +253,13 @@
  				 		<th class=datath>Adm. No.</th>
  				 		<th class="datath">Student Name</th>
 						<th class="datath">Class</th>
+						<th class="datath">Father Name</th>
 						<th class="datath">Fees Cat.</th>
 						<th class="datath">Fees Amount</th>
 						<th class="datath">Inst.</th>
 						<th class="datath">Total Fees Amount</th>
 						<th class="datath">Concession Amount</th>
+						<th class="datath">Concession By</th>
  				 </tr>
  				 
  			 </thead>
@@ -272,6 +274,7 @@
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.admissionnumber}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.name}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.classstudying}" /></td>
+									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.fathersname}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.feescategory.feescategoryname}" /></td>
 									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feescategory.amount}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.totalinstallment}" /></td>
@@ -279,6 +282,7 @@
 									<td class="datatdright" style="font-size: 9px;">
 									<c:set var="itemTotal" value="${itemTotal + fees.concession}" />
 										<c:out value="${fees.concession}" /></td>
+									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.concessionby}" /></td>
 							</tr>	
 						</c:forEach>
 					</c:forEach>
@@ -291,7 +295,7 @@
 							<td align="right">
 							<label style="font-weight: bold;">
 							Grand Total: 
-							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:setLocale value="en_IN" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" />
 							</label>
 							</td>

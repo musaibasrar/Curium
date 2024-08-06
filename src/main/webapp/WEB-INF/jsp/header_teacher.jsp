@@ -130,8 +130,6 @@ for(Cookie cookie : cookies){
 								</a>
 								</td>
 								
-							<!-- <td align="left"><img src="/shatabdi/images/shatabdiheader.png"
-								style="width: 200px; height: 20px;" /></td> -->
 							<td>
 							<a target="leftFrame" href="/shatabdi/left_teacher"><img
 									src="/shatabdi/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
@@ -145,66 +143,6 @@ for(Cookie cookie : cookies){
 									Reports		
 								</a>
 							</td>
-
-							<!-- <td><a target="mainFrame"
-								href="/shatabdi/FeesProcess/feesCollect"> <img
-									src="/shatabdi/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
-							</a></td>
-
-							<td>
-								<a target="mainFrame"
-								href="/shatabdi/AccountProcess/createVoucher"> <img
-									src="/shatabdi/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<td ><a target="mainFrame" href="/shatabdi/feesCollectionDetails"><img  alt="Fees Details" src="/shatabdi/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
-
-							<td><a target="mainFrame"
-								href="/shatabdi/StudentProcess/addNew"> <img
-									src="/shatabdi/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/shatabdi/leftsettings_officeadmin">
-									<img alt="Settings" src="/shatabdi/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/shatabdi/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/shatabdi/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><a target="mainFrame" href="/shatabdi/sendsms"><img
-									src="/shatabdi/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a>
-								<a target="leftFrame" href="/shatabdi/reports_officeadmin"><img
-									src="/shatabdi/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							
-							</td>
-
-							<td ><a target="mainFrame"
-								href="/shatabdi/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/shatabdi/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td> -->
-							
-							<!-- <td ><a target="mainFrame"
-								href="/shatabdi/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/shatabdi/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/shatabdi/UserProcess/logout"><img

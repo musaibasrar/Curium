@@ -258,4 +258,10 @@ public class FeesCollectionAction {
 				return "otherfeescancelledreceipts";
 			}
 		 
+		 @PostMapping("/searchFeesReportDue")
+	        public String searchFeesReportDue() {
+	            new FeesCollectionService(request, response).getFeesReportDue();
+	            return "feesreportdue";
+	        }
+		 
 }

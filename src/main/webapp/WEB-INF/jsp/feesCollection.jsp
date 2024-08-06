@@ -297,6 +297,13 @@
                 $("#dateoffees").val(getCurrentDate());
                 //$("#dateoffees").datepicker();
                 
+                  $("#fineamount").keyup(function(){
+                	  calculateTotal();
+
+                });
+                $("#miscamount").keyup(function(){
+                	calculateTotal();
+                });
                 
                 $("#dataTable").keyup(function(){
                     var fineamount=parseFloat($("#fineamount").val());
@@ -903,35 +910,35 @@
             }
             
  
-		 function calculate(value2) {
-		 	
-		     var feescatamount=document.getElementById("amountpaying_"+value2).value;
-		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
-		     var final1=document.getElementById("grandTotalAmount");
-		     var grandAmount = parseInt(grandtotalamount, 10);
-		     var feeAmount = parseInt(feescatamount, 10);
-		         final1.value=grandAmount+feeAmount;
+		 function calculate(value2, isChecked) {
+			 
+		         var feescatamount = document.getElementById("amountpaying_" + value2).value;
+		         var grandtotalamount = document.getElementById("grandTotalAmount").value;
+		         var final1 = document.getElementById("grandTotalAmount");
+		         var grandAmount = parseInt(grandtotalamount, 10) || 0;
+		         var feeAmount = parseInt(feescatamount, 10) || 0;
+
+		         if (isChecked) {
+		             final1.value = grandAmount + feeAmount;
+		         } else {
+		             final1.value = grandAmount - feeAmount;
+		         }
 		 }
 		 
-		 function calculateFineAmount() {
-			 	
-		     var feescatamount=document.getElementById("fineamount").value;
-		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
-		     var final1=document.getElementById("grandTotalAmount");
-		     var grandAmount = parseInt(grandtotalamount, 10);
-		     var feeAmount = parseInt(feescatamount, 10);
-		         final1.value=grandAmount+feeAmount;
-		 }
-		 
-		 function calculateMiscAmount() {
-			 	
-		     var feescatamount=document.getElementById("miscamount").value;
-		     var grandtotalamount=document.getElementById("grandTotalAmount").value;
-		     var final1=document.getElementById("grandTotalAmount");
-		     var grandAmount = parseInt(grandtotalamount, 10);
-		     var feeAmount = parseInt(feescatamount, 10);
-		         final1.value=grandAmount+feeAmount;
-		 }
+		 function calculateTotal() {
+			    var fineamount = parseFloat($("#fineamount").val()) || 0;
+			    var miscamount = parseFloat($("#miscamount").val()) || 0;
+			    var sum = 0.0;
+
+			    $('.chcktb2:checked').each(function() {
+			        var relatedAmount = $(this).closest('tr').find('.amountpaying').val();
+			        sum += parseFloat(relatedAmount) || 0;
+			    });
+
+			    var totalSum = sum + fineamount + miscamount;
+			    $('#grandTotalAmount').val(totalSum);
+			}
+		
         </script>
     </head>
     <%
@@ -1094,8 +1101,8 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
-								name="studentsfsids" 
-								onclick="calculate(${status.index})"
+								name="studentsfsids"
+								onclick="calculate(${status.index},this.checked)"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
@@ -1122,7 +1129,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine');calculateFineAmount()"/>
+							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine')"/>
 							</td>
 						</tr>
 						
@@ -1137,7 +1144,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc');calculateMiscAmount()"/>
+							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc')"/>
 							</td>
 						</tr>
 						<c:forEach items="${studentfeesdetailspreviousyear}" var="studentfeesdetails" varStatus="status">

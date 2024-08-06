@@ -3,11 +3,14 @@
  */
 package org.ideoholic.curium.model.sendsms.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -69,6 +72,14 @@ public class SmsAction {
 		new YearService(request, response).updateYear();
 		return "academicyear";
 
+	}
+	
+	@PostMapping("/sendSMSFeesDueReminder")
+	public String sendSMSFeesDueReminder() {
+		if (new SmsService(request, response).sendSMSFeesDueReminder()) {
+			return "successsms";
+		}
+		return "errorsms";
 	}
 
 }

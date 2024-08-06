@@ -24,6 +24,7 @@ import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.util.DataUtil;
@@ -333,5 +334,45 @@ public class SmsService {
 		}
 		return responseCode;
 	}
+
+
+	public boolean sendSMSFeesDueReminder() {
+		int resultSMS=0;
+		boolean result = false;
+		
+			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			
+				String numbers = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!studentFeesReportList.isEmpty()){
+						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+							
+							String phoneNo = studentFeesReport.getParents().getContactnumber();
+							if(phoneNo!=null && !phoneNo.isEmpty()) {
+								char[] contactNo = phoneNo.toCharArray();
+								
+								if(contactNo.length == 10) {
+									sbN.append(studentFeesReport.getParents().getContactnumber());
+									sbN.append(",");
+								}
+							}
+						}
+						numbers=sbN.toString();
+						numbers = numbers.substring(0, numbers.length()-1);
+						logger.info("Numbers are *** "+numbers);
+						
+						String SMSTempType = "feesreminder";
+						String message = "deadline";
+						
+						resultSMS = sendSMS(numbers,message,SMSTempType);
+					}
+					
+			if(resultSMS==200){
+				result = true;
+			}
+			
+			return result;
+		}
 	
 }

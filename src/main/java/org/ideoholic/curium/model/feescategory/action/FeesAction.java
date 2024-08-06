@@ -129,6 +129,8 @@ public class FeesAction {
 				return "student_details_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("clerk")) {
 				return "student_details_feesstructure_admin";
+			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+				return "student_details_feesstructure_admin";
 			}else {
 				return "student_details_feesstructure";
 			}
@@ -225,6 +227,13 @@ public class FeesAction {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+	}
+	
+	@GetMapping("/feesReportDue")
+	public String feesReportDue() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
+		return "feesreportdue";
 	}
 
 }

@@ -102,8 +102,8 @@ public class feesCategoryDAO {
 			feesCollection = queryOne.list();
 			
 			if(feesCollection.isEmpty()){
-				Query query = session.createQuery("delete from Studentfeesstructure as fees where fees.sid = "+sid+" and fees.Feescategory.idfeescategory IN (:feescat)");
-				query.setParameterList("feescat", feesCatId);
+				Query query = session.createQuery("delete from Studentfeesstructure as fees where fees.sid = "+sid+" and fees.sfsid IN (:ids)");
+				query.setParameterList("ids", ids);
 				query.executeUpdate();
 				
 				for (VoucherEntrytransactions transactions : transactionsList) {
