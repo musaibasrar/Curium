@@ -685,13 +685,40 @@ for(Cookie cookie : cookies){
 				</thead>
 				
 				<tbody>	
+				<fmt:setLocale value="en_IN" scope="session"/>
+					<c:set var="total" value="${0}" />
 					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 							<td class="dataText"><c:out value="${feeCategoryCollectionMap.key}" /></td>
 							<td class="dataText"><c:out value="${feeCategoryCollectionMap.value}" /></td>
+							<c:set var="total" value="${total + feeCategoryCollectionMap.value}" />
 						</tr>
 					</c:forEach>
 				</tbody>	
+					<tr>
+						<td class="dataText">Total Fees Paid by Cash</td>
+						<td class="dataText">${feesbycash}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Fees Paid by Bank</td>
+						<td class="dataText">${feesbybank}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Other Fees Paid by Cash</td>
+						<td class="dataText">${feesbycashotherfees}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Other Fees Paid by Bank</td>
+						<td class="dataText">${feesbybankotherfees}</td>
+					</tr>
+				
+					<tr>
+							<td class="dataText" style="text-align: right;">Total
+							</td>
+							<td class="dataText" style="text-align: right;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total}" />
+							</td>
+					</tr>
 			<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><button id="print">Print</button>
