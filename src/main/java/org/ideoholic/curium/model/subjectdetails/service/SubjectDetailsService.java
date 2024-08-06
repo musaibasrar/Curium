@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.AddSubjectDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
@@ -49,18 +49,18 @@ public class SubjectDetailsService {
 		return result;
 	}
 
-	public ResultResponse addSubject(AddSubjectDto addSubjectDto, String branchId, String userLoginId) {
+	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subject subject = new Subject();
 		boolean result;
 		
 		if(branchId!=null){
-			String[] subjectNameId = DataUtil.emptyString(addSubjectDto.getSubjectname()).split(":");
+			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectname()).split(":");
 			subject.setSubjectname(subjectNameId[0]);
 			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
-			subject.setMinmarks(DataUtil.parseInt(addSubjectDto.getMinMarks()));
-			subject.setMaxmarks(DataUtil.parseInt(addSubjectDto.getMaxMarks()));
-			subject.setExamname(DataUtil.emptyString(addSubjectDto.getExamName()));
-			subject.setExamclass(DataUtil.emptyString(addSubjectDto.getExamClass()));
+			subject.setMinmarks(DataUtil.parseInt(subjectDto.getMinMarks()));
+			subject.setMaxmarks(DataUtil.parseInt(subjectDto.getMaxMarks()));
+			subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
+			subject.setExamclass(DataUtil.emptyString(subjectDto.getExamClass()));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubject(subject);
