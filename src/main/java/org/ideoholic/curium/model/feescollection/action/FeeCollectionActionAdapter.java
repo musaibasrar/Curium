@@ -1,6 +1,8 @@
 package org.ideoholic.curium.model.feescollection.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesReportDto;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -52,5 +54,24 @@ public class FeeCollectionActionAdapter {
         
         ResultResponse resultResponse = feesCollectionService.undoFeesReceipt(receiptId, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("cancelreceiptresult", resultResponse.isSuccess());
+    }
+
+    public void viewCancelledReceipts() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setOneDay(request.getParameter("oneday"));
+
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getFeesDetailsList());
+        httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
+        httpSession.setAttribute("dayonecancel", dto.getOneDay());
+        httpSession.setAttribute("datefromcancel", responseDto.getDateFromCancel());
+        httpSession.setAttribute("datetocancel", responseDto.getDateToCancel());
     }
 }
