@@ -12,7 +12,7 @@ public interface MessStockEntryApiAction {
 
     ResponseEntity<MessStockEntryResponseDto> mrvDetails(@RequestParam(value = "invoicedetailsid") String invoiceDetailsId, @RequestParam(value = "supplierreferenceno") String supplierRefNo, @RequestParam(value = "invoicetotal") String invoiceTotal, @RequestParam(value = "suppliername") String supplierName, @RequestParam(value = "entrydate") String invoiceDate, @RequestHeader(value = "branchid") String branchId);
 
-    String savePurchase();
+    ResponseEntity<String> savePurchase();
 
     ResponseEntity<ResultResponse> deleteItems(@RequestBody MessIdsDto dto, @RequestHeader(value = "branchid") String branchId);
 
@@ -24,6 +24,6 @@ public interface MessStockEntryApiAction {
 
     ResponseEntity<PurchaseCancelDto> purchaseItems(@RequestHeader(value = "branchid") String branchId);
 
-    String addSuppliers();
+    ResponseEntity<String> addSuppliers();
 
 }

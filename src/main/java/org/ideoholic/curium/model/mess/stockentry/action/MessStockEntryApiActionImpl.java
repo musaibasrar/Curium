@@ -35,9 +35,8 @@ public class MessStockEntryApiActionImpl implements MessStockEntryApiAction {
     }
 
     @PostMapping("/savePurchase")
-    public String savePurchase() {
-
-        return "purchase";
+    public ResponseEntity<String> savePurchase() {
+        return ResponseEntity.ok("purchase");
     }
 
     @PostMapping("/deleteItems")
@@ -80,8 +79,8 @@ public class MessStockEntryApiActionImpl implements MessStockEntryApiAction {
     }
 
     @RequestMapping(value = "/addSuppliers", method = { RequestMethod.GET, RequestMethod.POST })
-    public String addSuppliers() {
-        return "addsuppliers";
+    public ResponseEntity<String> addSuppliers() {
+        return ResponseEntity.ok("addsuppliers");
     }
 
 }
