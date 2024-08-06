@@ -77,5 +77,13 @@ public class SmsAction {
 		return "academicyear";
 
 	}
+	
+	@PostMapping("/sendSMSFeesDueReminder")
+		public String sendSMSFeesDueReminder() {
+			if (new SmsService(request, response).sendSMSFeesDueReminder()) {
+				return "successsms";
+			}
+			return "errorsms";
+		}
 
 }

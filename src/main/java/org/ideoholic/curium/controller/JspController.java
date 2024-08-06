@@ -600,4 +600,9 @@ public class JspController {
 	public String otherFeesCancelledReceipts() {
 		return "otherfeescancelledreceipts";
 	}
+	
+	@GetMapping("/feesreportdue")
+		public String getFeesReportDue() {
+			return "feesreportdue";
+		}
 }
