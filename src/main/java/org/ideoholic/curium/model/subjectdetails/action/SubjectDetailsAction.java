@@ -28,7 +28,7 @@ public class SubjectDetailsAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private ExamDetailsActionAdapter examDetailsActionAdapter;
-
+    @Autowired
 	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 	
 	

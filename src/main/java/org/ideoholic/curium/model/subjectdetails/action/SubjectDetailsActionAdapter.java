@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
-import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class SubjectDetailsActionAdapter {
     public boolean readListOfSubjects() {
         SubjectDetailsService  subjectDetailsService = new SubjectDetailsService(request,response);
 
-        ListOfSubjectsResponseDto result = subjectDetailsService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
+        SubjectsResponseDto result = subjectDetailsService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
         httpSession.setAttribute("listSubject", result.getList());
         return result.isSuccess();
     }

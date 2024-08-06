@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class ListOfSubjectsResponseDto {
+public class SubjectsResponseDto {
     private List<Subject> list;
     private boolean success;
 }

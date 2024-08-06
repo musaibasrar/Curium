@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
@@ -32,8 +32,8 @@ public class SubjectDetailsService {
 		this.httpSession = request.getSession();
 	}
 
-	public ListOfSubjectsResponseDto readListOfSubjects(String branchId) {
-		ListOfSubjectsResponseDto result = new ListOfSubjectsResponseDto();
+	public SubjectsResponseDto readListOfSubjects(String branchId) {
+		SubjectsResponseDto result = new SubjectsResponseDto();
 
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchId));
