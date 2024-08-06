@@ -206,4 +206,58 @@ public class DocumentAction {
 		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/studentsArticleCertificate")
+	public String studentsArticleCertificate() {
+		standardActionAdapter.viewClasses(); 
+		return "studentarticlecertificate";
+	}
+	
+	@PostMapping("/searchStudentsForArticle")
+	public String searchStudentsForArticle() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentarticlecertificate";
+	}
+	
+	@PostMapping("/GenerateArticle")
+	public String generateArticle() {
+		String result = documentActionAdapter.generateArticle();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	@GetMapping("/printArticleCertificate")
+	public String printArticleCertificate() {
+		return "articlecertificateprint";
+	}
+	
+	@GetMapping("/studentsDetailsConsellingCertificate")
+	public String studentsDetailsConsellingCertificate() {
+		standardActionAdapter.viewClasses(); 
+		return "counsellingdetailscertificate";
+	}
+	
+	@PostMapping("/GenerateStudyCertificateforCounselling")
+	public String GenerateStudyCertificateforCounselling() {
+		String result = documentActionAdapter.studyCertificateforCounselling();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	@GetMapping("/printStudyCertificateCounselling")
+	public String printStudyCertificateCounselling() {
+		return "counsellingstudycertificateprint";
+	}
+	
+	@PostMapping("/searchStudentsForCounselling")
+	public String searchStudentsForCounselling() {
+		new StampFeesService(request, response).advanceSearch();
+		return "counsellingdetailscertificate";
+	}
 }

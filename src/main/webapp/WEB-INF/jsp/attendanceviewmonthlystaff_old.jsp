@@ -14,39 +14,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>fees structure</title>
-<script src="/abc/js/Chart.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-<link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.min.css">
+<script src="/littleangels/js/Chart.js"></script>
+<link rel="stylesheet" href="/littleangels/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/littleangels/css/datePicker/demos.css">
+<link rel="stylesheet" href="/littleangels/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/littleangels/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/littleangels/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/abc/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/abc/js/jquery.jqplot.min.js" ></script>
-        <script src="/abc/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/littleangels/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/littleangels/js/jquery.jqplot.min.js" ></script>
+        <script src="/littleangels/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +328,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/littleangels/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/littleangels/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/littleangels/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/littleangels/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/littleangels/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/littleangels/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -523,7 +523,7 @@
     	}
        
         </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/littleangels/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -551,7 +551,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "/littleangels/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -559,7 +559,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "/littleangels/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -567,7 +567,7 @@
 	
 	function searchStudentAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AttendanceProcess/searchStudentAttendanceDetails";
+		form1.action = "/littleangels/AttendanceProcess/searchStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -727,7 +727,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AttendanceProcess/updateStudentAttendanceDetails";
+		form1.action = "/littleangels/AttendanceProcess/updateStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -739,7 +739,7 @@
 </head>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/abc/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/littleangels/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

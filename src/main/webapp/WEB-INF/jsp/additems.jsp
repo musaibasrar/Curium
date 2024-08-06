@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Items</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/littleangels/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/littleangels/css/datePicker/demos.css">
 
 <style type="text/css">
 
@@ -421,10 +421,10 @@
 
 </style>
 
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script type="text/javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" src="/littleangels/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/littleangels/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -448,7 +448,7 @@
 	});
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/littleangels/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 
@@ -486,7 +486,7 @@
 	function addItems(){
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/abc/MessItemsProcess/addItems";
+			form1.action = "/littleangels/MessItemsProcess/addItems";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -495,13 +495,13 @@
 	
 	function updateItems(){
 		var form1 = document.getElementById("form1");
-			form1.action = "/abc/MessItemsProcess/updateItems";
+			form1.action = "/littleangels/MessItemsProcess/updateItems";
 			form1.method = "POST";
 			form1.submit();	
 	}
 	
 	function deleteItems(){
-			form1.action = "/abc/MessItemsProcess/deleteItems";
+			form1.action = "/littleangels/MessItemsProcess/deleteItems";
 			form1.method = "POST";
 			form1.submit();	
 	}
@@ -580,7 +580,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleangels/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

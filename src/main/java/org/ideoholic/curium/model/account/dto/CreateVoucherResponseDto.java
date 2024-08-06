@@ -9,6 +9,7 @@ import java.util.List;
 @Builder
 public class CreateVoucherResponseDto {
     private List accountDetailsBalance;
+    private List accountDetailsBalanceExpenses;
     private List accountDetailsBalanceBankCash;
     private List accountDetailsJournalEntry;
     private boolean success;

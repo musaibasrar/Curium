@@ -21,6 +21,7 @@ import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 public class DocumentActionAdapter {
@@ -209,5 +210,35 @@ public class DocumentActionAdapter {
 		CharacterResponseDto characterResponseDto = documentService.printCharacterCertificate(characterDto);
 		request.setAttribute("character", characterResponseDto.getCharacter());
 	}
+	
+	public String studentsArticleCertificate() {
+		standardActionAdapter.viewClasses(); 
+		return "studentarticlecertificate";
+	}
+	
+	public String generateArticle() {
 
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDto != null) {
+			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			return "articleprint";
+		}
+		return null;
+	}
+	
+	public String studyCertificateforCounselling() {
+		
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDto != null) {
+			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			return "studycertificateforcounsellingprint";
+		}
+		return null;
+	}
 }
