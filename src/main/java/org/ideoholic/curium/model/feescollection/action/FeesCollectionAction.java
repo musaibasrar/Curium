@@ -45,15 +45,18 @@ public class FeesCollectionAction {
 		@Autowired
 		private FeesActionAdapter feesActionAdapter;
 
+		@Autowired
+		private FeeCollectionActionAdapter feeCollectionActionAdapter;
+
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
-            new FeesCollectionService(request, response, standardActionAdapter).getFeesReport();
+            feeCollectionActionAdapter.getFeesReport();
             return "feesreport";
         }
 
         @GetMapping("/UndoFeesReceipt")
 		public String undoFeesReceipt() {
-        	new FeesCollectionService(request, response, standardActionAdapter).undoFeesReceipt();
+        	feeCollectionActionAdapter.undoFeesReceipt();
 			return viewCancelledReceipts();
 		}
 
@@ -238,7 +241,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchFeesDueHeadWiseReport")
 	        public String searchFeesDueHeadWiseReport() {
-	            new FeesCollectionService(request, response, standardActionAdapter).getFeesReport();
+	            feeCollectionActionAdapter.getFeesReport();
 	            return "feesdueheadwisereport";
 	        }
 		 
