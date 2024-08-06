@@ -32,9 +32,6 @@ import java.util.*;
 public class MessItemsService {
 
 	@Autowired
-	private MessSuppliersActionAdapter messSuppliersActionAdapter;
-
-	@Autowired
 	private MessSuppliersService messSuppliersService;
 
 

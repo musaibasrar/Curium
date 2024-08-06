@@ -21,11 +21,13 @@ public class MessStockEntryActionAdapter {
     @Autowired
     private HttpSession httpSession;
 
+    @Autowired
+    private MessStockEntryService messStockEntryService;
+
     private String BRANCHID = "branchid";
 
 
     public void getMRVDetails() throws IOException {
-        MessStockEntryService messStockEntryService = new MessStockEntryService(request, response);
 
         String invoiceDetailsId = request.getParameter("invoicedetailsid");
         String supplierRefNo = request.getParameter("supplierreferenceno");
