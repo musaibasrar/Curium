@@ -221,7 +221,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/abclogo.png" width="150" height="80"/>
+				<img src="/sunrise/images/sunriselogo.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label style="text-transform: uppercase;font-size: 24px;">Suprema Law Associates</label><br>

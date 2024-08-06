@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/sunrise/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sunrise/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -297,45 +297,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/sunrise/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/sunrise/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/sunrise/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/sunrise/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/sunrise/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/sunrise/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/abc/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/abc/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/sunrise/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/sunrise/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/sunrise/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/sunrise/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/sunrise/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/sunrise/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/StampFeesProcess/advanceSearchForStampFees";
+		form1.action = "/sunrise/StampFeesProcess/advanceSearchForStampFees";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/StampFeesProcess/delete";
+		form1.action = "/sunrise/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -694,7 +694,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sunrise/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -707,7 +707,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/abc/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/sunrise/StampFeesProcess/applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -829,34 +829,6 @@ for(Cookie cookie : cookies){
    			        			<c:forEach items="${feescategory}" var="feescategory" varStatus="status">
    			        			
    			        			<tr>
-									<c:choose>
-										<c:when test="${feescategory.feescategoryname == 'Previous Year 2023-24 Due'}">
-											<td><label class="labelClass"
-												style="font-weight: bold; color: #325F6D"> <input
-													type="checkbox" name="feesIDS"
-													id="feesIDS_${status.index+1}" class="chcktbl"
-													value="${feescategory.idfeescategory}_${status.index}"
-													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
-													size="18"> ${feescategory.feescategoryname} :
-											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
-												id="fees_status_${status.index+1}" value="not set" /> <input
-												name="currentyear" type="hidden" value="${currentYear}"
-												class="myclass" id="currentyear"> <input
-												class="feesYear" type="hidden"
-												value="${feescategory.academicyear}" name="feesYears"
-												id="fees_year_${status.index+1}" readonly /></td>
-												
-												<td> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}
-   			        				</label> <input type="hidden" value="0" name="feesConcession" id="feesConcession_${status.index+1}" />
-   			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
-   			        				
-   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="fessFullCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
-   			        				<td> <input	type="text" value="0" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
-   			        				<td> <input class="feesFullAmount" type="text" value="0" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
-   			        				</td>
-   			        				
-										</c:when>
-										<c:otherwise>
 											<td><label class="labelClass"
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
@@ -906,7 +878,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
@@ -925,8 +897,8 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/abc/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+								href="/sunrise/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
