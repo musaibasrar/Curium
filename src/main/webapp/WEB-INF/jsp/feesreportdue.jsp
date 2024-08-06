@@ -373,11 +373,25 @@
 		form1.submit();
 
 	}
+	
+	function sendSMS() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/abc/SMSProcess/sendSMSFeesDueReminder";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 
 	$(function() {
 
 		$("#search").button().click(function() {
 			searchForStudents();
+		});
+		
+		$("#sendsms").button().click(function() {
+			sendSMS();
+			return false;
+
 		});
 		
 
@@ -761,8 +775,12 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 					
-					<td  class="footerTD" > <input value="Export"
-							type="submit" id="export"/></td>
+					<td  class="footerTD" colspan="2" >
+					 <input value="Export"
+							type="submit" id="export"/>
+							
+							<button id="sendsms">Send SMS Reminder</button>
+							</td>
 													
 						<td class="footerTD" colspan="7" >
 						 

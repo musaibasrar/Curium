@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -19,15 +17,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.Session;
 
 public class SmsService {
 	
@@ -307,5 +301,44 @@ public class SmsService {
 		}
 		return responseCode;
 	}
+	
+	public boolean sendSMSFeesDueReminder() {
+		int resultSMS=0;
+		boolean result = false;
+		
+			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			
+				String numbers = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!studentFeesReportList.isEmpty()){
+						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+							
+							String phoneNo = studentFeesReport.getParents().getContactnumber();
+							if(phoneNo!=null && !phoneNo.isEmpty()) {
+								char[] contactNo = phoneNo.toCharArray();
+								
+								if(contactNo.length == 10) {
+									sbN.append(studentFeesReport.getParents().getContactnumber());
+									sbN.append(",");
+								}
+							}
+						}
+						numbers=sbN.toString();
+						numbers = numbers.substring(0, numbers.length()-1);
+						logger.info("Numbers are *** "+numbers);
+						
+						String SMSTempType = "feesreminder";
+						String message = "deadline";
+						
+						resultSMS = sendSMS(numbers,message,SMSTempType);
+					}
+					
+			if(resultSMS==200){
+				result = true;
+			}
+			
+			return result;
+		}
 	
 }
