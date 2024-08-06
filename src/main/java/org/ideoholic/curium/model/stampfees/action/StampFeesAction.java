@@ -32,16 +32,19 @@ public class StampFeesAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private FeesActionAdapter feesActionAdapter;
+	
+	@Autowired
+	private StampFeesActionAdapter stampFeesActionAdapter;
 
 	@PostMapping("/searchForFees")
 	public String searchForFees() {
-		new StampFeesService(request, response).advanceSearch();
+		stampFeesActionAdapter.advanceSearch();
 		return "feesstructure";
 	}
 
 	@PostMapping("/delete")
 	public String deleteFeesStructure() {
-		new StampFeesService(request, response).deleteFeesStamp();
+		stampFeesActionAdapter.deleteFeesStamp();
 		return "feesstampsuccess";
 	}
 
@@ -61,7 +64,7 @@ public class StampFeesAction {
 
 	@PostMapping("/search")
 	public String search() {
-		new StampFeesService(request, response).advanceSearch();
+		stampFeesActionAdapter.advanceSearch();
 		return "stampfees";
 	}
 	
