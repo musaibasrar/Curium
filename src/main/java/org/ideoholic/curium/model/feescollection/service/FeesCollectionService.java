@@ -1,46 +1,15 @@
 package org.ideoholic.curium.model.feescollection.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
-import org.ideoholic.curium.model.feescollection.dto.Feescollection;
-import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
-import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
-import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
+import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
@@ -48,7 +17,6 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
@@ -58,7 +26,17 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
 
 public class FeesCollectionService {
 
@@ -643,33 +621,36 @@ public class FeesCollectionService {
 			httpSession.setAttribute("sumofdetailsfeescancelled", sumOfFees);
 	}
 
-	public void undoFeesReceipt() {
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+	public ResultResponse undoFeesReceipt(String strReceiptId, String currentAcademicYear) {
+		ResultResponse resultResponse = ResultResponse.builder().success(true).build();
+
+		if(currentAcademicYear!=null){
 			
-			int receiptId = DataUtil.parseInt(request.getParameter("id"));
+			int receiptId = DataUtil.parseInt(strReceiptId);
 			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(receiptId);
 			boolean result = new feesDetailsDAO().undoFeesReceipt(receiptId, feesCollection);
 			
-			request.setAttribute("cancelreceiptresult", result);
+			resultResponse.setSuccess(result);
 				
 		}
+		return resultResponse;
 	}
 
-	public void getFeesReport() {
-		
-		
-		String academicYear = request.getParameter("academicyear");
-		String[] feesCat = request.getParameterValues("feescategory");
+	public ResultResponse getFeesReport(FeesReportDto dto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().success(true).build();
+
+
+		String academicYear = dto.getAcademicYear();
+		String[] feesCat = dto.getFeesCat();
 		
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 		
 		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
+		String[] addClass = dto.getAddClass();
 		StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -689,7 +670,7 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -701,7 +682,7 @@ public class FeesCollectionService {
 		//End Students
 		
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 			
 			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 			
@@ -726,10 +707,11 @@ public class FeesCollectionService {
 					
 				}
 			}
-		
-			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+
+			result.setResultList(studentFeesReportList);
 		}
-		
+
+		return result;
 	  }
 	
 	
@@ -1819,7 +1801,7 @@ public class FeesCollectionService {
 		int idBranch = 0;
                
 		Map<String, Long> feeCategoryCollectionMapReport = new LinkedHashMap<String, Long>();
-		
+
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
 
@@ -1865,15 +1847,15 @@ public class FeesCollectionService {
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 			
 //Other Fees Details
-			
+
 			String queryMainOtherFees ="From Otherreceiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 			String toDateOtherFees = DataUtil.emptyString(request.getParameter("todate"));
 			String fromDateOtherFees = DataUtil.emptyString(request.getParameter("fromdate"));
 			String oneDayOtherFees = DataUtil.emptyString(request.getParameter("oneday"));
-			
-			
+
+
 				String querySubOtherFees = "";
-				
+
 				if(!oneDayOtherFees.equalsIgnoreCase("")){
 					querySub = " feesdetails.date = '"+oneDayOtherFees+"'" ;
 					 httpSession.setAttribute("dayone", oneDayOtherFees);
@@ -1882,24 +1864,24 @@ public class FeesCollectionService {
 				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
 					querySubOtherFees = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
 				}
-				
+
 				if(!fromDateOtherFees.equalsIgnoreCase("")  && !toDateOtherFees.equalsIgnoreCase("")){
 					querySubOtherFees = " feesdetails.date between '"+fromDateOtherFees+"' AND '"+toDateOtherFees+"'";
 					httpSession.setAttribute("datefrom", fromDateOtherFees);
 					httpSession.setAttribute("dateto", toDateOtherFees);
 					httpSession.setAttribute("dayone", "");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) &&
 						!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
 					querySubOtherFees = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
 				}
-				
+
 				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
 				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 				System.out.println("SEARCH QUERY ***** "+queryMainOtherFees);
 				otherFeesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMainOtherFees);
-				
+
 			//End Other Fees Details
-			
+
 	}
 			long sumOfFees = 0l;
 			long fine = 0l;
@@ -1908,7 +1890,7 @@ public class FeesCollectionService {
 			long feesByBank = 0;
 			long feesByCashOtherFees = 0;
 			long feesByBankOtherFees = 0;
-			
+
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
@@ -1935,7 +1917,7 @@ public class FeesCollectionService {
 			            }
 			        }
 				}
-				
+
 				String cashOrBank = receiptinfo.getPaymenttype();
 				if(cashOrBank.contains("Cash")) {
 					feesByCash = feesByCash+receiptinfo.getTotalamount();
@@ -1963,37 +1945,37 @@ public class FeesCollectionService {
 	            }
 			}
 		}
-		
-		for (Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {  
-			
-			feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue()); 
+
+		for (Map.Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {
+
+			feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
 			/*
 			 if(entry.getKey().contains("Fee")) { tutionFees =
 			  tutionFees+entry.getValue(); }else {
 			  feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue()); }
 			 */
 		}
-		
+
 		//feeCategoryCollectionMapReport.put("Tuition Fee", tutionFees);
-		
-		//Other Fees 
-		
+
+		//Other Fees
+
 		long sumOfFeesOtherFees = 0l;
 		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
 			sumOfFeesOtherFees = sumOfFeesOtherFees + receiptinfo.getTotalamount();
 		}
-		
+
 		Map<String, Long> otherFeeCategoryCollectionMap = new LinkedHashMap<String, Long>();
-		
+
 		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
-			
+
 			Set<Otherfeescollection> setFeesCollectionOtherFees = receiptinfo.getFeesCollectionRecords();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollectionOtherFees) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
 				//feeCategoryFeeCollectionMap.get(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
 				//feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
-				
+
 				for (Studentotherfeesstructure studentfeesSingle : studentfeesstructure) {
 		            if (otherFeeCategoryCollectionMap.containsKey(studentfeesSingle.getOtherfeescategory().getFeescategoryname())) {
 		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), otherFeeCategoryCollectionMap.get(studentfeesSingle.getOtherfeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
@@ -2002,7 +1984,7 @@ public class FeesCollectionService {
 		            }
 		        }
 			}
-			
+
 			String cashOrBank = receiptinfo.getPaymenttype();
 			if(cashOrBank.contains("Cash")) {
 				feesByCashOtherFees = feesByCash+receiptinfo.getTotalamount();
@@ -2010,15 +1992,15 @@ public class FeesCollectionService {
 				feesByBankOtherFees = feesByBank+receiptinfo.getTotalamount();
 			}
 		}
-		
-		for (Entry<String, Long> entry : otherFeeCategoryCollectionMap.entrySet()) {  
+
+		for (Map.Entry<String, Long> entry : otherFeeCategoryCollectionMap.entrySet()) {
 			feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
 			}
 		//feeCategoryCollectionMapReport.put("Other Fee", otherFees);
-		
+
 		//End Other Fees
-		
-		
+
+
 		httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMapReport);
 		httpSession.setAttribute("feesbycash", feesByCash);
 		httpSession.setAttribute("feesbybank", feesByBank);
