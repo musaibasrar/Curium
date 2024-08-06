@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,8 @@ public class PeriodAction {
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
 	EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 	String url;
 	private String error ="error";
 
@@ -48,7 +51,7 @@ public class PeriodAction {
 	@GetMapping("/viewTeacherTimeTable")
 	public String viewTeacherTimeTable() {
 		
-		if(new PeriodService(request, response).viewTeacherTimeTable()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).viewTeacherTimeTable()){
 			return "teachertimetableview";
 		}
 		return error;
@@ -67,7 +70,7 @@ public class PeriodAction {
 	@GetMapping("/generateTimeTable")
 	public String generateTimeTable() {
 		
-		if(new PeriodService(request, response).generateTimeTable()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).generateTimeTable()){
 			return "classestimetable";
 		}
 		return error;
@@ -75,7 +78,7 @@ public class PeriodAction {
 
 	@PostMapping("/deletePeriods")
 	public String deletePeriods() {
-		if(new PeriodService(request, response).deletePeriods()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).deletePeriods()){
 			return periodConfiguration();
 		}
 		
@@ -85,7 +88,7 @@ public class PeriodAction {
 	@GetMapping("/viewTimeTable")
 	public String viewTimeTable() {
 		
-		if(new PeriodService(request, response).viewTimeTable()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).viewTimeTable()){
 			return "timetable";
 		}
 		
@@ -95,7 +98,7 @@ public class PeriodAction {
 	@PostMapping("/savePeriods")
 	public String savePeriods() {
 		
-		if(new PeriodService(request, response).savePeriods()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).savePeriods()){
 			return periodConfiguration();
 		}
 		return error;
@@ -104,7 +107,7 @@ public class PeriodAction {
 	@GetMapping("/periodConfiguration")
 	public String periodConfiguration() {
 		
-		if(new PeriodService(request, response).periodConfiguration()){
+		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).periodConfiguration()){
 			return "periodmaster";
 		}
 		return error;

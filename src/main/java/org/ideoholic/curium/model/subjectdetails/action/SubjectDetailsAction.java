@@ -28,6 +28,8 @@ public class SubjectDetailsAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private ExamDetailsActionAdapter examDetailsActionAdapter;
+    @Autowired
+	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 	
 	
 	@PostMapping("/deleteMultipleSubjects")
@@ -74,7 +76,7 @@ public class SubjectDetailsAction {
 
 	@GetMapping("/readListOfSubjects")
 	public String readListOfSubjectsExams() {
-		new SubjectDetailsService(request, response).readListOfSubjects();
+		subjectDetailsActionAdapter.readListOfSubjects();
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		examDetailsActionAdapter.readListOfExams();
 		standardActionAdapter.viewClasses();
