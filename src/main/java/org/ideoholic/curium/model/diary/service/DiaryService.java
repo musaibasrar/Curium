@@ -4,13 +4,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.dto.RequestPageDto;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.*;
+import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
+import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
+import org.ideoholic.curium.model.diary.dto.Diary;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -18,23 +17,17 @@ import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DiaryService {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	/**
 	 * Size of a byte buffer to read/write file
 	 */
 	private static final int BUFFER_SIZE = 4096;
 
-	public DiaryService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
+	
 	public void adddetail() {
 		// TODO Auto-generated method stub
 		Login login = new Login();

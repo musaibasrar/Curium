@@ -19,11 +19,12 @@ public class DiaryActionAdapter {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private DiaryService diaryService;
 
     private String BRANCHID = "branchid";
 
     public void addDiary() {
-        DiaryService diaryService = new DiaryService(request, response);
         AddDiaryDto addDiaryDto = new AddDiaryDto();
         addDiaryDto.setAddSec(request.getParameter("addsec"));
         addDiaryDto.setAddClass(request.getParameter("addclass"));
@@ -41,7 +42,6 @@ public class DiaryActionAdapter {
     }
 
     public boolean viewDiary() {
-        DiaryService diaryService = new DiaryService(request, response);
 
         String page = request.getParameter("page");
 
@@ -55,13 +55,11 @@ public class DiaryActionAdapter {
     }
 
     public void deleteRecord() {
-        DiaryService diaryService = new DiaryService(request, response);
         DairyIdsDto dairyIdsDto = new DairyIdsDto();
         dairyIdsDto.setIdDiary(request.getParameterValues("id"));
         diaryService.deleteRecord(dairyIdsDto);
     }
     public boolean viewDiaryParent() {
-        DiaryService diaryService = new DiaryService(request,response);
 
         StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
         studentIdPageDto.setStudentId(request.getParameter("id"));
@@ -74,7 +72,6 @@ public class DiaryActionAdapter {
         return diaryResponseDto.isSuccess();
     }
     public boolean viewDetailsOfDiaryMessage() {
-        DiaryService diaryService = new DiaryService(request,response);
         StudentIdDto studentIdDto =new StudentIdDto();
         studentIdDto.setStudentId(request.getParameter("id").toString());
         ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
