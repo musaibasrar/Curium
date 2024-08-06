@@ -299,6 +299,11 @@
 	height: 22px;
 }
 
+.ui-button-text {
+    display: block;
+    line-height: 0.5;
+}
+
 </style>
 <style>
 #button {
@@ -374,6 +379,13 @@
 
 	}
 	
+	function exportStudentFeesDues(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/sunrise/FeesCollection/exportDataForStudentsFeesReport";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 	function sendSMS() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/sunrise/SMSProcess/sendSMSFeesDueReminder";
@@ -394,6 +406,12 @@
 
 		});
 		
+		$("#export").button().click(function() {
+			exportStudentFeesDues();
+			return false;
+
+		});
+		
 
 	});
 
@@ -408,14 +426,6 @@
 
 	});
 	
-	$(function() {
-		$("#export").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
-	});
-
 	$(function() {
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -776,9 +786,9 @@ for(Cookie cookie : cookies){
 					<tr>
 					
 					<td  class="footerTD" colspan="2" >
-					 <input value="Export"
-							type="submit" id="export"/>
-							
+					 <!-- <input value="Export"
+							type="submit" id="export" style="font-size: 10px; padding: 2px 5px;"/> -->
+							<button id="export">Export</button>
 							<button id="sendsms">Send SMS Reminder</button>
 							</td>
 													

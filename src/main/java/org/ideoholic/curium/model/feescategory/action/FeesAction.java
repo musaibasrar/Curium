@@ -251,4 +251,11 @@ public class FeesAction {
 		String studentId = new FeesService(request, response).deleteOtherFeesCategory();
 		return studentotherFeePage(studentId);
 	}
+	
+	@GetMapping("/feesReportDue")
+	public String feesReportDue() {
+		standardActionAdapter.viewClasses();
+		feesActionAdapter.viewFees();
+		return "feesreportdue";
+	}
 }

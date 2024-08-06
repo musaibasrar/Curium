@@ -605,4 +605,9 @@ public class JspController {
 		public String getFeesReportDue() {
 			return "feesreportdue";
 		}
+	
+	@GetMapping("/feescollectiondetailscategory")
+	public String getFeescollectionDetailsCategory() {
+		return "feescollectiondetailscategory";
+	}
 }

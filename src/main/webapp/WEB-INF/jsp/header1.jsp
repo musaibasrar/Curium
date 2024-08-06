@@ -163,7 +163,7 @@
                     <td height="10" valign="top" background="/images/headerBook.png">
                         <table width="100%" height="137" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
-                               <td width="234" rowspan="2"><!--<div align="center"><img src="/sunrise/images/logo.png" width="200" height="64" /></div> --></td> 
+                               <td width="234" rowspan="2"><!--<div align="center"><img src="/sunrise/images/sunrise.png" width="200" height="64" /></div> --></td> 
                                 <!-- <td width="548" rowspan="2"><div align="center"><img src="/sunrise/images/SMS.png" width="391" height="92" /></div></td> -->
                                 <!-- <td width="210" height="104">&nbsp;</td> -->
                             </tr>
