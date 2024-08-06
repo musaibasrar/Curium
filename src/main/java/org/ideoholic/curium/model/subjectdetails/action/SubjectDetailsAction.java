@@ -67,7 +67,7 @@ public class SubjectDetailsAction {
 
 	@PostMapping("/addSubject")
 	public String addSubject() {
-		if(new SubjectDetailsService(request, response).addSubject()){
+		if(subjectDetailsActionAdapter.addSubject()){
 			return readListOfSubjectsExams();
 		}else{
 			return "error";
