@@ -295,10 +295,11 @@
 <script type="text/javascript">
 	function saveBook() {
 		var form1 = document.getElementById("form1");
+		if(form1.checkValidity()) {
 		form1.action = "/abc/LibraryProcess/saveBook";
 		form1.method = "POST";
 		form1.submit();
-
+		}
 	}
 	$(function() {
 
@@ -356,9 +357,9 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Book Name &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Book Name* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="bookname"
-											type="text" class="myclass" id="bookname" 
+											type="text" class="myclass" id="bookname" required
 											/>
 							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -366,9 +367,9 @@ for(Cookie cookie : cookies){
 							
 						
 						
-						<td style="font-weight: bold;color: #325F6D;">Subject &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Subject* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="subject"
-											type="text" class="myclass" id="subject" 
+											type="text" class="myclass" id="subject" required 
 											/>
 							</label></td>
 							
@@ -380,17 +381,17 @@ for(Cookie cookie : cookies){
 						
 					<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Author &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Author* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="author"
-											type="text" class="myclass" id="author" 
+											type="text" class="myclass" id="author" required
 											/>
 							</label></td>
 							
 						
 						
-						<td style="font-weight: bold;color: #325F6D;">Publisher &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Publisher* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="publisher"
-											type="text" class="myclass" id="publisher" 
+											type="text" class="myclass" id="publisher" required
 											/>
 							</label></td>
 							
@@ -422,18 +423,20 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Status &nbsp;</td>
-							<td style="font-weight: bold"> <label> <select name="status" class="myclass" style="width:185px;height:32px;"
-									id="status" >
-										<option selected></option>
-										<option>Available</option>
-										<option>Issued</option>
-								</select></td>
-							
-												
+						<td style="font-weight: bold;color: #325F6D;">Available Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="availableQty"
+											type="text" class="myclass" id="isbn" 
+											/>
+							</label></td>
+						<td style="font-weight: bold;color: #325F6D;">Issued Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="issuedQty"
+											type="text" class="myclass" id="shelfe" 
+											/>
+							</label></td>
 						
 							
 						</tr>
+
 						
 						 <tr>
 							<td><br/></td>

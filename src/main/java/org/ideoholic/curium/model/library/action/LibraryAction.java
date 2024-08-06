@@ -67,11 +67,14 @@ public class LibraryAction {
 	
 	@PostMapping("/bookIssuedStudent")
 	public String bookIssuedStudent() {
-		new LibraryService(request, response).updateBook();
+		if(new LibraryService(request, response).updateBook()) {
 		return "bookIssued";
+		}
+		return error;
 
 	}
 	
+		
 	@GetMapping("/returnbooks")
 	public String bookReturnStudent() {
 		new DocumentService(request, response).transferCertificate();
@@ -110,9 +113,22 @@ public class LibraryAction {
 	
 	@PostMapping("/updateBook")
 	public String updateBook() {
-
 		new LibraryService(request, response).updateBookitems();
 		return viewbooks();
 	}
+	
+	@GetMapping("/bookHistory")
+	public String bookHistory() {
+		new LibraryService(request, response).getBookHistory();
+		return "bookhistory";
+	}
+	
+	@PostMapping("/deleteBookHistory")
+	public String deleteBookHistory() {
+		new LibraryService(request, response).deleteBookHistory();
+		new LibraryService(request, response).getBookHistory();
+		return "bookhistory";
+	}
+
 
 }

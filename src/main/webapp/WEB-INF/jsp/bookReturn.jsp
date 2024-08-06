@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fees Collection</title>
+        <title>Book Return</title>
         <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
 
@@ -811,11 +811,9 @@ for(Cookie cookie : cookies){
                     <tr>
 								<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<th title="click to sort" class="headerText">Subject</th>
-						<th title="click to sort" class="headerText">Author</th>
-						<th title="click to sort" class="headerText">Publisher</th>
-						<th title="click to sort" class="headerText">isbn</th>
+						<th title="click to sort" class="headerText">Book Id</th>
 						<th title="click to sort" class="headerText">Date of Issue</th>
+						<th title="click to sort" class="headerText">Total Days</th>
 							</tr>
                 </thead>
 
@@ -823,13 +821,11 @@ for(Cookie cookie : cookies){
 
 						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
            							<tr>
-           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.bid}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.bid}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookname}" /> </td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.subject}" /> </td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.author}" /></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.publisher}" /> </td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.isbn}" /> </td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startdate}" /></td>
+           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /></td>
                 					</tr>
 								
 							</c:forEach> 
