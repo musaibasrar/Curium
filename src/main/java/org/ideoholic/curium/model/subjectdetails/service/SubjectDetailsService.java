@@ -63,7 +63,7 @@ public class SubjectDetailsService {
 			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
-			if(subject == null){
+			if(subject!=null){
 				return ResultResponse.builder().success(result).build();
 			}
 		}
