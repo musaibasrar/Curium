@@ -49,7 +49,7 @@ public class SubjectDetailsService {
 
 	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subject subject = new Subject();
-		boolean result;
+		boolean result= true;
 		
 		if(branchId!=null){
 			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectName()).split(":");
@@ -64,7 +64,6 @@ public class SubjectDetailsService {
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
 			if(subject == null){
-				result=false;
 				return ResultResponse.builder().success(result).build();
 			}
 		}
@@ -106,6 +105,8 @@ public class SubjectDetailsService {
 				result=false;
 				return ResultResponse.builder().success(result).build();
 			}
+			result= true;
+			return ResultResponse.builder().success(result).build();
 		}
 		return ResultResponse.builder().build();
 	}
