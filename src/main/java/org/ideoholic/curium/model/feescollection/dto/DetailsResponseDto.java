@@ -25,6 +25,7 @@ public class DetailsResponseDto {
     private String grandTotal;
     private Login userLogin;
     private Parents parents;
-    private boolean success;
+    @Builder.Default
+    private boolean success = false;
 
 }

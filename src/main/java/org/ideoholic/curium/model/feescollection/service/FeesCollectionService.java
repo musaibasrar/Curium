@@ -434,7 +434,7 @@ public class FeesCollectionService {
 	}
 
 	public DetailsResponseDto previewDetails(String strReceiptNumber, String duplicate, String currentAcademicYear) {
-		DetailsResponseDto result = DetailsResponseDto.builder().success(true).build();
+		DetailsResponseDto result = DetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
             Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(strReceiptNumber));
@@ -460,6 +460,7 @@ public class FeesCollectionService {
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			result.setGrandTotal(grandTotal+" "+"Only");
+			result.setSuccess(true);
 			
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 		}
@@ -467,7 +468,7 @@ public class FeesCollectionService {
 	}
 
 	public DetailsResponseDto previewFeesDetails(String sId, String strReceiptNo, String currentAcademicYear) {
-		DetailsResponseDto result = DetailsResponseDto.builder().success(true).build();
+		DetailsResponseDto result = DetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
 			long sid=DataUtil.parseLong(sId);
@@ -489,6 +490,7 @@ public class FeesCollectionService {
 			result.setReceiptInfo(rinfo);
 			result.setFeeCatMap(feeCatMap);
 			result.setDuplicate("duplicate");
+			result.setSuccess(true);
 
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 			
