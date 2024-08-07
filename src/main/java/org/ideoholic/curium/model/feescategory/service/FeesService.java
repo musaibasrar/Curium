@@ -473,13 +473,13 @@ public class FeesService {
 	}
 
 
-	public void viewFeesYearly() throws IOException {
-        
-        String academicYear = request.getParameter("year");
-        if(httpSession.getAttribute(BRANCHID)!=null){
+	public FeescategoryResponseDto viewFeesYearly(FeesCategoryDto feesCategoryDto,String branchid) throws IOException {
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+        String academicYear = feesCategoryDto.getCategoryYear();
+        if(branchid!=null){
         	
-                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),academicYear);
-                httpSession.setAttribute("feescategory", list);
+                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchid),academicYear);
+                feescategoryResponseDto.setFeescategory(list);
                 PrintWriter out = response.getWriter(); 
        			response.setContentType("text/xml");
        		    response.setHeader("Cache-Control", "no-cache");
@@ -509,7 +509,9 @@ public class FeesService {
        		            out.flush();
        		            out.close();
        		        }
+       
         }
+	    return feescategoryResponseDto;
 	}
 	
 	   public OtherFeesCategoryResponseDto viewOtherFees(String branchid, String currentAcademicYear ) {

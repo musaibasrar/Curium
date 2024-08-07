@@ -50,7 +50,7 @@ public class StampFeesAction {
 
 	@PostMapping("/applyFees")
 	public String applyFees() {
-		new StampFeesService(request, response).addFeesStamp();
+		stampFeesActionAdapter.addFeesStamp();
 		return "feesstampsuccess";
 	}
 
@@ -71,7 +71,7 @@ public class StampFeesAction {
 	@GetMapping("/showFeesDetailsYearly")
 	public void showFeesDetailsYearly() {
 		try {
-			new FeesService(request, response).viewFeesYearly();
+			feesActionAdapter.viewFeesYearly();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
