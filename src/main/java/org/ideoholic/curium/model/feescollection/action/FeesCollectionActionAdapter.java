@@ -1,9 +1,7 @@
 package org.ideoholic.curium.model.feescollection.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
-import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
-import org.ideoholic.curium.model.feescollection.dto.FeesReportDto;
+import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Service
-public class FeeCollectionActionAdapter {
+public class FeesCollectionActionAdapter {
 
     @Autowired
     private HttpServletRequest request;
@@ -73,5 +71,46 @@ public class FeeCollectionActionAdapter {
         httpSession.setAttribute("dayonecancel", dto.getOneDay());
         httpSession.setAttribute("datefromcancel", responseDto.getDateFromCancel());
         httpSession.setAttribute("datetocancel", responseDto.getDateToCancel());
+    }
+
+    public void getStampFees() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        StampFeesDto dto = new StampFeesDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setId(request.getParameter("studentId"));
+        dto.setStudentName(request.getParameter("studentname"));
+        dto.setAdmissionNo(request.getParameter("admissionno"));
+        dto.setClassAndSec(request.getParameter("classandsec"));
+        dto.setStudentId(request.getParameter("studentId"));
+        dto.setDateOfFees(request.getParameter("dateoffees"));
+
+        StampFeeResponseDto responseDto = feesCollectionService.getStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("studentfeesdetailspreviousyear", responseDto.getFeesMapPreviousYear());
+        request.setAttribute("previousyear", responseDto.getPreviousYear());
+        request.setAttribute("studentfeesdetails", responseDto.getFeesMap());
+        request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
+        request.setAttribute("admnoDetails", responseDto.getAdmNoDetails());
+        request.setAttribute("classandsecDetails", responseDto.getClassAndSecDetails());
+        request.setAttribute("studentIdDetails", responseDto.getStudentIdDetails());
+        request.setAttribute("dateoffeesDetails", responseDto.getDateOfFeesDetails());
+    }
+
+    public void getFeesDetails() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setStudentId(request.getParameter("studentId"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+
+        FeesDetailsResponseDto responseDto = feesCollectionService.getFeesDetails(dto);
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
+
     }
 }

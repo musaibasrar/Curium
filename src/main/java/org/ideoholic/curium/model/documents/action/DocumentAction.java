@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.action.AdminActionAdapter;
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -41,6 +42,9 @@ public class DocumentAction {
 
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+
+	@Autowired
+	private StampFeesActionAdapter stampFeesActionAdapter;
 	
 	public String error ="error";
 
@@ -181,7 +185,7 @@ public class DocumentAction {
 	
 	@PostMapping("/searchStudentsForStudyCertificate")
 	public String searchStudentsForStudyCertificate() {
-		new StampFeesService(request, response).advanceSearch();
+		stampFeesActionAdapter.advanceSearch();
 		return "studentsdetailsstudycertificate";
 	}
 
@@ -197,7 +201,7 @@ public class DocumentAction {
 	
 	@PostMapping("/searchStudentsForCharacter")
 	public String searchStudentsForCharacter() {
-		new StampFeesService(request, response).advanceSearch();
+		stampFeesActionAdapter.advanceSearch();
 		return "studentcharactersdetails";
 	}
 	

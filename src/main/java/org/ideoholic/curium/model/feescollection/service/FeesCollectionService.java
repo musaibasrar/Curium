@@ -146,11 +146,13 @@ public class FeesCollectionService {
 		
 	}
 
-	public void getStampFees() {
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		String academicYear = request.getParameter("academicyear");	
+	public StampFeeResponseDto getStampFees(StampFeesDto dto, String currentAcademicYear) {
+		StampFeeResponseDto result = StampFeeResponseDto.builder().success(true).build();
+
+		if(currentAcademicYear!=null){
+		String academicYear = dto.getAcademicYear();
 			
-		long id = Long.parseLong(request.getParameter("studentId"));
+		long id = Long.parseLong(dto.getId());
 		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
@@ -211,18 +213,19 @@ public class FeesCollectionService {
 				}
 			
 		}
-		
-		request.setAttribute("studentfeesdetailspreviousyear", feesMapPreviousYear);
-		request.setAttribute("previousyear", previousYear);
-		request.setAttribute("studentfeesdetails", feesMap);
-		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
+
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
-		request.setAttribute("admnoDetails", request.getParameter("admissionno"));
-		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
-		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
-		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
+		result.setFeesMapPreviousYear(feesMapPreviousYear);
+		result.setPreviousYear(previousYear);
+		result.setFeesMap(feesMap);
+		result.setStudentNameDetails(dto.getStudentName());
+		result.setAdmNoDetails(dto.getAdmissionNo());
+		result.setClassAndSecDetails(dto.getClassAndSec());
+		result.setStudentIdDetails(dto.getStudentId());
+		result.setDateOfFeesDetails(dto.getDateOfFees());
 		
 		}
+		return result;
 	}
 
 	public Receiptinfo add() {
@@ -905,17 +908,18 @@ public class FeesCollectionService {
 		    return result;
 	}
 
-	public void getFeesDetails() {
+	public FeesDetailsResponseDto getFeesDetails(FeesReportDto dto) {
+		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().success(true).build();
 		
 		try {
-			long id = Long.parseLong(request.getParameter("studentId"));
-			String academicYear = request.getParameter("academicyear");
+			long id = Long.parseLong(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
 			
 			//Currentacademicyear currentYear = new YearDAO().showYear();
 			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 			
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
-			request.setAttribute("receiptinfo",rinfo);
+			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 			
 			long totalSum = 0l;
@@ -927,17 +931,18 @@ public class FeesCollectionService {
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
-			
-				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("sumoffees", totalSum);
-				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
-				httpSession.setAttribute("totalfees", totalFeesAmount);
-				httpSession.setAttribute("academicPerYear", academicYear);
-				httpSession.setAttribute("currentAcademicYear", academicYear);
-				
+
+				result.setFeesStructure(feesstructure);
+				result.setTotalSum(totalSum);
+				result.setDueAmount(totalFeesAmount-totalSum);
+				result.setTotalFeesAmount(totalFeesAmount);
+				result.setAcademicPerYear(academicYear);
+				result.setCurrentAcademicYear(academicYear);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 
 	public boolean exportDataForStudentsFeesReport() {
