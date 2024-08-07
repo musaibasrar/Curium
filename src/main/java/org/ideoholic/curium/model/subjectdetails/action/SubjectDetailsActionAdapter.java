@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
@@ -42,6 +43,16 @@ public class SubjectDetailsActionAdapter {
         ResultResponse result = subjectDetailsService.addSubject(subjectDto, httpSession.getAttribute("branchid").toString(),
                                                                    httpSession.getAttribute("userloginid").toString());
         return result.isSuccess();
+    }
+    public boolean deleteMultiple() {
+        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
+
+        ExamIdsDto examIdsDto = new ExamIdsDto();
+        examIdsDto.setExamIds(request.getParameterValues("subjectIDs"));
+
+        ResultResponse resultResponse = subjectDetailsService.deleteMultiple(examIdsDto);
+
+        return resultResponse.isSuccess();
     }
 
 }

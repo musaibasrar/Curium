@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
-import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
-import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
+import org.ideoholic.curium.model.subjectdetails.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 
 /**
@@ -74,9 +72,9 @@ public class SubjectDetailsService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean deleteMultiple() {
-		String[] examIds = request.getParameterValues("subjectIDs");
-		boolean result = false;
+	public ResultResponse deleteMultiple(ExamIdsDto examIdsDto) {
+		String[] examIds = examIdsDto.getExamIds();
+		boolean result;
 		 if(examIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
@@ -87,10 +85,11 @@ public class SubjectDetailsService {
 	        System.out.println("id length" + examIds.length);
 	        new SubjectDetailsDAO().deleteMultiple(ids);
 	        result = true;
-	}else{
-		result = false;
-	}
-		 return result;
+			return  ResultResponse.builder().success(result).build();
+	}else {
+			 result = false;
+			 return ResultResponse.builder().success(result).build();
+		 }
 	}
 
 	public boolean addSubjectMaster() {

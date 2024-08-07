@@ -58,7 +58,7 @@ public class SubjectDetailsAction {
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		if(new SubjectDetailsService(request, response).deleteMultiple()){
+		if(subjectDetailsActionAdapter.deleteMultiple()){
 			return readListOfSubjectsExams();
 		}else{
 			return "error";
