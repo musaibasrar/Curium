@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.subjectdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,10 @@ public class SubjectDetailsActionAdapter {
     public boolean deleteMultiple() {
         SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
 
-        ExamIdsDto examIdsDto = new ExamIdsDto();
-        examIdsDto.setExamIds(request.getParameterValues("subjectIDs"));
+        SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
+        subjectIdsDto.setExamIds(request.getParameterValues("subjectIDs"));
 
-        ResultResponse resultResponse = subjectDetailsService.deleteMultiple(examIdsDto);
+        ResultResponse resultResponse = subjectDetailsService.deleteMultiple(subjectIdsDto);
 
         return resultResponse.isSuccess();
     }

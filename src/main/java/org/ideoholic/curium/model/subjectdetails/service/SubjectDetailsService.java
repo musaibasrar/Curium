@@ -72,8 +72,8 @@ public class SubjectDetailsService {
 		return ResultResponse.builder().build();
 	}
 
-	public ResultResponse deleteMultiple(ExamIdsDto examIdsDto) {
-		String[] examIds = examIdsDto.getExamIds();
+	public ResultResponse deleteMultiple(SubjectIdsDto subjectIdsDto) {
+		String[] examIds = subjectIdsDto.getExamIds();
 		boolean result;
 		 if(examIds!=null){
 	        List<Integer> ids = new ArrayList();
