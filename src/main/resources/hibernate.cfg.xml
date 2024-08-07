@@ -4,50 +4,50 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory name="multibranch">
-		
-		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
-         	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
-            <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 
-		 
+		<!-- <property name="hibernate.multiTenancy">SCHEMA</property>
+            <property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
+           <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
+
+
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-	 	<property name="hibernate.connection.password">mysql</property>
+		<property name="hibernate.connection.password">mysql</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/abc</property>
-		<property name="hibernate.connection.username">root</property> 
-		
+		<property name="hibernate.connection.username">root</property>
+
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">cmuursaiuibm@123#</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cambridgelive</property>
         <property name="hibernate.connection.username">curium</property> -->
-		
-		
-		
+
+
+
 		<!-- <property name="hibernate.default_schema">school</property> -->
-        <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
-            
+		<!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
+
 		<!-- <property name="hibernate.connection.password">schoolschool</property>
 		<property name="hibernate.connection.url">jdbc:mysql://118.67.248.230:3306/schoolschool?sessionVariables=wait_timeout=3600</property>
 		<property name="hibernate.connection.username">schoolschool</property>
 		<property name="hibernate.default_schema">schoolschool</property>
 		 -->
-		
-		 <property name="hibernate.c3p0.min_size">5</property>
-		  <property name="hibernate.c3p0.max_size">20</property>
-		  <property name="hibernate.c3p0.timeout">3000</property>
-		  <property name="hibernate.c3p0.max_statements">50</property>
-		  <property name="hibernate.c3p0.idle_test_period">300</property>
-		  
-		  
-		  
-			<!-- Query Cache -->
-			<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
-			<!-- <property name="hibernate.show_sql">true</property>  -->
-			<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
-		 	<property name="cache.use_query_cache">true</property>
- 		 	<property name="net.sf.ehcache.configurationResourceName">myehcache.xml</property>
-			<!-- End Query Cache-->
-			
-			
+
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">3000</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.idle_test_period">300</property>
+
+
+
+		<!-- Query Cache -->
+		<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
+		<!-- <property name="hibernate.show_sql">true</property>  -->
+		<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<property name="cache.use_query_cache">true</property>
+		<property name="net.sf.ehcache.configurationResourceName">myehcache.xml</property>
+		<!-- End Query Cache-->
+
+
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="current_session_context_class">thread</property>
 		<!-- <mapping class="com.model.user.dto.Login"/> -->
@@ -88,7 +88,7 @@
 		<mapping resource="mappings/Leavedetails.hbm.xml"></mapping>
 		<mapping resource="mappings/Payhead.hbm.xml"></mapping>
 		<mapping resource="mappings/Payheadstaffdetails.hbm.xml"></mapping>
-		<mapping resource="mappings/Paybasic.hbm.xml"></mapping>	
+		<mapping resource="mappings/Paybasic.hbm.xml"></mapping>
 		<mapping resource="mappings/Pf.hbm.xml"></mapping>
 		<mapping resource="mappings/Payadvancesalary.hbm.xml"></mapping>
 		<mapping resource="mappings/Leaveapplication.hbm.xml"></mapping>

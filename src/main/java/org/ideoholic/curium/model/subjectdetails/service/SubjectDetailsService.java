@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
@@ -47,28 +49,29 @@ public class SubjectDetailsService {
 		return result;
 	}
 
-	public boolean addSubject() {
+	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subject subject = new Subject();
-		boolean result = true;
+		boolean result;
 		
-		if(httpSession.getAttribute("branchid")!=null){
-			String[] subjectNameId = DataUtil.emptyString(request.getParameter("subjectname")).split(":");
+		if(branchId!=null){
+			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectname()).split(":");
 			subject.setSubjectname(subjectNameId[0]);
 			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
-			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
-			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
-			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));
-			subject.setExamclass(DataUtil.emptyString(request.getParameter("examclass")));
-			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			subject.setMinmarks(DataUtil.parseInt(subjectDto.getMinMarks()));
+			subject.setMaxmarks(DataUtil.parseInt(subjectDto.getMaxMarks()));
+			subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
+			subject.setExamclass(DataUtil.emptyString(subjectDto.getExamClass()));
+			subject.setBranchid(Integer.parseInt(branchId));
+			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
 			if(subject == null){
 				result=false;
+				return ResultResponse.builder().success(result).build();
 			}
 		}
 		
-		return result;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean deleteMultiple() {
