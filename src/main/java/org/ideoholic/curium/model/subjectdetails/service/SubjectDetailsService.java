@@ -52,7 +52,7 @@ public class SubjectDetailsService {
 		boolean result;
 		
 		if(branchId!=null){
-			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectname()).split(":");
+			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectName()).split(":");
 			subject.setSubjectname(subjectNameId[0]);
 			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
 			subject.setMinmarks(DataUtil.parseInt(subjectDto.getMinMarks()));
@@ -92,21 +92,22 @@ public class SubjectDetailsService {
 		 }
 	}
 
-	public boolean addSubjectMaster() {
+	public ResultResponse addSubjectMaster(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subjectmaster subject = new Subjectmaster();
-		boolean result = true;
+		boolean result;
 		
-		if(httpSession.getAttribute("branchid")!=null){
-			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
-			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+		if(branchId!=null){
+			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectName()));
+			subject.setBranchid(Integer.parseInt(branchId));
+			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
 			 
 			if(subject == null){
 				result=false;
+				return ResultResponse.builder().success(result).build();
 			}
 		}
-		return result;
+		return ResultResponse.builder().build();
 	}
 
 	public void readListOfSubjectNames() {

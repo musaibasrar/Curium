@@ -49,7 +49,7 @@ public class SubjectDetailsAction {
 
 	@PostMapping("/addSubjectMaster")
 	public String addSubjectMaster() {
-		if(new SubjectDetailsService(request, response).addSubjectMaster()){
+		if(subjectDetailsActionAdapter.addSubjectMaster()){
 			return readListOfSubjectNames();
 		}else{
 			return "error";

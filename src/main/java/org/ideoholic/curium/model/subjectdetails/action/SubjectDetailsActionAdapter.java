@@ -36,7 +36,7 @@ public class SubjectDetailsActionAdapter {
         SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
 
         SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setSubjectname(request.getParameter("subjectname"));
+        subjectDto.setSubjectName(request.getParameter("subjectname"));
         subjectDto.setMinMarks(request.getParameter("minmarks"));
         subjectDto.setMaxMarks(request.getParameter("maxmarks"));
         subjectDto.setExamName(request.getParameter("examname"));
@@ -52,6 +52,18 @@ public class SubjectDetailsActionAdapter {
         subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
 
         ResultResponse resultResponse = subjectDetailsService.deleteMultiple(subjectIdsDto);
+
+        return resultResponse.isSuccess();
+    }
+    public boolean addSubjectMaster() {
+        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
+
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setSubjectName(request.getParameter("subjectname"));
+
+        ResultResponse resultResponse =
+                subjectDetailsService.addSubjectMaster(subjectDto, httpSession.getAttribute("branchid").toString(),
+                        httpSession.getAttribute("userloginid").toString());
 
         return resultResponse.isSuccess();
     }
