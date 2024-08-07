@@ -1141,6 +1141,16 @@ for(Cookie cookie : cookies){
                     </tr>
                 </tfoot>
 			</table>
+				<table>
+					<tr>
+						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+                        <td align="left"><label><textarea  name="narrationreceipt"
+											type="text" class="textField" id="narrationreceipt" rows="2" cols="40"
+											
+											onkeypress="return validateContactNum(this);"></textarea></label></td>
+                    </tr>
+                    
+                    </table>
             <!-- <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >

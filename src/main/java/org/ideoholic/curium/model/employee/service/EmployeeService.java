@@ -194,8 +194,13 @@ public class EmployeeService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		int branchid = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+		if(branchid==2) {
+			employee.setTeacherexternalid(httpSession.getAttribute("branchcode").toString());
+		}else if(branchid==3) {
+			employee.setTeacherexternalid("3"+httpSession.getAttribute("branchcode").toString());
+		}
 		
-		employee.setTeacherexternalid(httpSession.getAttribute("branchcode").toString());
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new EmployeeDAO().create(employee)){

@@ -75,7 +75,10 @@ public class DocumentAction {
 
 	@GetMapping("/printBonafide")
 	public String printBonafide() {
-		return "bonafideprint";
+		if(new DocumentService(request, response).printBonafide()){
+			return "bonafideprint";
+		}
+		return error;
 	}
 
 	@GetMapping("/studentsDetailsBonafide")

@@ -2021,7 +2021,7 @@ public class StudentService {
 						DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
 						DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 						DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
-						DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
+						studentDetails.getStudent().getAge(),
 						DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 						DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 						DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),

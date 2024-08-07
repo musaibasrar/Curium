@@ -367,7 +367,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -568,7 +568,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>

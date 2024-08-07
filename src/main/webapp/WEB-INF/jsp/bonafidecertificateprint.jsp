@@ -96,6 +96,26 @@ span{
 	<script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
+        <script type="text/javascript">
+        function getSelectedRadioButtonValue() {
+            var radios = document.getElementsByName('birthdate');
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value;
+                }
+            }
+            return null;
+        }
+
+        function redirectToResultPage() {
+            var selectedValue = getSelectedRadioButtonValue();
+            if (selectedValue) {
+                window.location.href = '/scholar/DocumentsProcess/printBonafide?birthdate=' + encodeURIComponent(selectedValue);
+            } else {
+                alert('Please select a contact method.');
+            }
+        }
+    </script>
 </head>
 <%
 //allow access only if session exists
@@ -213,10 +233,16 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
+					 as per School record is
 					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					</h3>
-					
+					<label for="aadharcard"> <input type="radio"
+						id="aadharcard" name="birthdate" value="Aadhar Card">
+						Aadhar Card
+				</label> &nbsp;&nbsp;<label for="contactPhone"> <input type="radio"
+						id="contactPhone" name="birthdate" value="Birth Certificate">
+						Birth Certificate
+				</label>
 				</td>
 				
 
@@ -251,7 +277,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/scholar/DocumentsProcess/printBonafide">Print</a></td>
+              <td align="center"><a href="javascript:void(0);" onclick="redirectToResultPage()">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

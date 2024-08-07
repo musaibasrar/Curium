@@ -814,4 +814,10 @@ public class DocumentService {
 			
 			return bonafidePage;
 		}
+
+
+	public boolean printBonafide() {
+		request.setAttribute("birthdate", request.getParameter("birthdate"));
+		return true;
+	}
 }

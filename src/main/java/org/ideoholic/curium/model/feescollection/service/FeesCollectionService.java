@@ -264,7 +264,8 @@ public class FeesCollectionService {
 		String chequeDate = request.getParameter("chequedate");
 		String chequeBankname = request.getParameter("chequebankname");
 		String paymentType = "Cash";
-				
+		String receiptNarration = request.getParameter("narrationreceipt");
+		httpSession.setAttribute("narrationreceipt",receiptNarration);		
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
 				paymentType = "Bank Transfer - ACK. No.:"+ackNo;
@@ -336,7 +337,7 @@ public class FeesCollectionService {
 			transactions.setVouchertype(1);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
-			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactions.setNarration(receiptNarration+"Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
 			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -362,7 +363,7 @@ public class FeesCollectionService {
 			transactionsIncome.setVouchertype(4);
 			transactionsIncome.setTransactiondate(receiptInfo.getDate());
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
-			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactionsIncome.setNarration(receiptNarration+"Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactionsIncome.setCancelvoucher("no");
 			transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 			transactionsIncome.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
