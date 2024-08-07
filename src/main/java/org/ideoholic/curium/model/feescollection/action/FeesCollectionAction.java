@@ -3,23 +3,21 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.user.action.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Musaib_2
@@ -46,23 +44,23 @@ public class FeesCollectionAction {
 		private FeesActionAdapter feesActionAdapter;
 
 		@Autowired
-		private FeeCollectionActionAdapter feeCollectionActionAdapter;
+		private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
-            feeCollectionActionAdapter.getFeesReport();
+            feesCollectionActionAdapter.getFeesReport();
             return "feesreport";
         }
 
         @GetMapping("/UndoFeesReceipt")
 		public String undoFeesReceipt() {
-        	feeCollectionActionAdapter.undoFeesReceipt();
+        	feesCollectionActionAdapter.undoFeesReceipt();
 			return viewCancelledReceipts();
 		}
 
 		@PostMapping("/viewCancelledReceipts")
 		public String viewCancelledReceipts() {
-        	feeCollectionActionAdapter.viewCancelledReceipts();
+        	feesCollectionActionAdapter.viewCancelledReceipts();
 			return "feescancelledreceipts";
 		}
 
@@ -76,8 +74,8 @@ public class FeesCollectionAction {
 
 		@PostMapping("/StampFees")
 		public String StampFees() {
-                new FeesCollectionService(request, response, standardActionAdapter).getStampFees();
-                new FeesCollectionService(request, response, standardActionAdapter).getFeesDetails();
+                feesCollectionActionAdapter.getStampFees();
+                feesCollectionActionAdapter.getFeesDetails();
                 standardActionAdapter.viewClasses();
                 feesActionAdapter.viewAllStudentsList();
                 return "feesCollection";
@@ -241,7 +239,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchFeesDueHeadWiseReport")
 	        public String searchFeesDueHeadWiseReport() {
-	            feeCollectionActionAdapter.getFeesReport();
+	            feesCollectionActionAdapter.getFeesReport();
 	            return "feesdueheadwisereport";
 	        }
 		 
