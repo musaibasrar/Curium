@@ -73,7 +73,7 @@ public class SubjectDetailsService {
 	}
 
 	public ResultResponse deleteMultiple(SubjectIdsDto subjectIdsDto) {
-		String[] examIds = subjectIdsDto.getExamIds();
+		String[] examIds = subjectIdsDto.getSubjectIds();
 		boolean result;
 		 if(examIds!=null){
 	        List<Integer> ids = new ArrayList();

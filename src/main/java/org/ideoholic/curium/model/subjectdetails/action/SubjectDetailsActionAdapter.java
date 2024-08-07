@@ -49,7 +49,7 @@ public class SubjectDetailsActionAdapter {
         SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
 
         SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
-        subjectIdsDto.setExamIds(request.getParameterValues("subjectIDs"));
+        subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
 
         ResultResponse resultResponse = subjectDetailsService.deleteMultiple(subjectIdsDto);
 

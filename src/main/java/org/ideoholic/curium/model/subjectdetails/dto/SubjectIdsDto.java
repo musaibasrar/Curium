@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class SubjectIdsDto {
-private String[] examIds;
+private String[] subjectIds;
 }
