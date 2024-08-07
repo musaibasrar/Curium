@@ -84,14 +84,14 @@ public class FeesCollectionAction {
 		@GetMapping("/ViewDetails")
         public String ViewDetails() {
                 //new FeesCollectionService(request, response).preview();
-                new FeesCollectionService(request, response, standardActionAdapter).previewFeesDetails();
+                feesCollectionActionAdapter.previewFeesDetails();
                 //return "previewFeesDetail";
                 return "previewFeesReceiptDetail";
         }
 
         @GetMapping("/printReceipt")
         public String printReceipt() {
-                new FeesCollectionService(request, response, standardActionAdapter).previewDetails();
+                feesCollectionActionAdapter.previewDetails();
                 
 				/*
 				 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
@@ -143,7 +143,7 @@ public class FeesCollectionAction {
         
         @GetMapping("/printFeesReceipt")
         private String printFeesReceipt() {
-            new FeesCollectionService(request, response, standardActionAdapter).previewDetails();
+            feesCollectionActionAdapter.previewDetails();
             return "printReceiptFeesDetail";
     }
         

@@ -433,13 +433,11 @@ public class FeesCollectionService {
 		
 	}
 
-	public void previewDetails() {
+	public DetailsResponseDto previewDetails(String strReceiptNumber, String duplicate, String currentAcademicYear) {
+		DetailsResponseDto result = DetailsResponseDto.builder().success(true).build();
 		
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			String receiptNumber = request.getParameter("id");
-			String dp = request.getParameter("duplicate");
-			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(receiptNumber));
+		if(currentAcademicYear!=null){
+            Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(strReceiptNumber));
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
@@ -452,27 +450,28 @@ public class FeesCollectionService {
 			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
 			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
-			httpSession.setAttribute("parents", parents);
-			httpSession.setAttribute("student", student);
-			request.setAttribute("recieptdate", reDate);
-			request.setAttribute("recieptinfo", rinfo);
-			request.setAttribute("feescatmap", feeCatMap);
-			request.setAttribute("duplicate", dp);
-			request.setAttribute("user", userLogin);
+			result.setParents(parents);
+			result.setStudent(student);
+			result.setReceiptDate(reDate);
+			result.setReceiptInfo(rinfo);
+			result.setFeeCatMap(feeCatMap);
+			result.setDuplicate(duplicate);
+			result.setUserLogin(userLogin);
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
-			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
+			result.setGrandTotal(grandTotal+" "+"Only");
 			
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 		}
-		
+		return result;
 	}
 
-	public void previewFeesDetails() {
+	public DetailsResponseDto previewFeesDetails(String sId, String strReceiptNo, String currentAcademicYear) {
+		DetailsResponseDto result = DetailsResponseDto.builder().success(true).build();
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			long sid=DataUtil.parseLong(request.getParameter("sid"));	
-			int receiptNo = DataUtil.parseInt(request.getParameter("id"));
+		if(currentAcademicYear!=null){
+			long sid=DataUtil.parseLong(sId);
+			int receiptNo = DataUtil.parseInt(strReceiptNo);
 			 
 			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(receiptNo);
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
@@ -485,15 +484,16 @@ public class FeesCollectionService {
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(sid);
-			httpSession.setAttribute("student", student);
-			request.setAttribute("recieptdate", reDate);
-			request.setAttribute("recieptinfo", rinfo);
-			request.setAttribute("feescatmap", feeCatMap);
-			request.setAttribute("duplicate", "duplicate");
+			result.setStudent(student);
+			result.setReceiptDate(reDate);
+			result.setReceiptInfo(rinfo);
+			result.setFeeCatMap(feeCatMap);
+			result.setDuplicate("duplicate");
 
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 			
 		}
+		return result;
 	}
 
 	public void cancelFeesReceipt() {
