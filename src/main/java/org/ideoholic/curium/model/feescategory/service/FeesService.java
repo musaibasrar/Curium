@@ -473,9 +473,8 @@ public class FeesService {
 	}
 
 
-	public FeescategoryResponseDto viewFeesYearly(FeesCategoryDto feesCategoryDto,String branchid) throws IOException {
+	public FeescategoryResponseDto viewFeesYearly(String academicYear,String branchid) throws IOException {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
-        String academicYear = feesCategoryDto.getCategoryYear();
         if(branchid!=null){
         	
                 List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchid),academicYear);

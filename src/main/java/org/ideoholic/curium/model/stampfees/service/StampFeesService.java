@@ -193,9 +193,9 @@ public class StampFeesService {
 
 	}
 
-	public void addFeesStamp(StampFeesDto stampFeesDto,String CURRENTACADEMICYEAR,String branchid,String userid ) {
+	public void addFeesStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
 		
-		if(CURRENTACADEMICYEAR!=null){
+		if(currentAcademicYear!=null){
 		String[] studentIds = stampFeesDto.getStudentIds();
 		if(studentIds!=null){
 		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
@@ -279,7 +279,7 @@ public class StampFeesService {
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 		
 		// End J.V
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,CURRENTACADEMICYEAR,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}

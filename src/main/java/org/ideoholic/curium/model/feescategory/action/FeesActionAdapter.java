@@ -224,8 +224,8 @@ public class FeesActionAdapter {
 	public void viewFeesYearly() throws IOException {
 		FeesService feesService = new FeesService(request, response);
 		FeesCategoryDto feesCategoryDto = new FeesCategoryDto();
-		feesCategoryDto.setCategoryYear(request.getParameter("year"));
-		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(feesCategoryDto,httpSession.getAttribute(BRANCHID).toString());
+		String academicYear =request.getParameter("year");
+		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,httpSession.getAttribute(BRANCHID).toString());
 		 httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 	
