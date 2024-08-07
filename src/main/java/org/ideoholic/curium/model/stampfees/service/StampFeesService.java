@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
@@ -23,6 +25,7 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
@@ -44,15 +47,16 @@ public class StampFeesService {
 		this.httpSession = request.getSession();
 	}
 
-	public void advanceSearch() {
+	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 		
 		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+		String addClass = searchStudentDto.getClassSearch();
+		String addSec = searchStudentDto.getSecSearch();
 		String conClassStudying = "";
 
 		if (!addClass.equalsIgnoreCase("")) {
@@ -67,7 +71,7 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
@@ -76,7 +80,7 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -85,8 +89,8 @@ public class StampFeesService {
 		}
 		
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
-
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
+		return searchStudentResponseDto;
 	}
 	
 	public void multiClassSearch() {
@@ -306,9 +310,9 @@ public class StampFeesService {
 		    return result;
 	}
 
-	public void deleteFeesStamp() {
-		String currentYear = request.getParameter("currentyear");
-		String[] studentIds = request.getParameterValues("studentIDs");
+	public void deleteFeesStamp(StudentIdsDto studentIdsDto) {
+		String currentYear = studentIdsDto.getCurrentYear();
+		String[] studentIds = studentIdsDto.getStudentIds();
 		if(studentIds!=null){
 			List<Integer> ids = new ArrayList();
 	        for (String id : studentIds) {
