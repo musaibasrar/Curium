@@ -7,5 +7,5 @@ public class FeesReportDto {
     private String academicYear;
     private String[] feesCat;
     private String[] addClass;
-    private String id;
+    private String studentId;
 }

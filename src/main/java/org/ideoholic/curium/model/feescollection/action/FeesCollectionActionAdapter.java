@@ -100,7 +100,7 @@ public class FeesCollectionActionAdapter {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
-        dto.setId(request.getParameter("studentId"));
+        dto.setStudentId(request.getParameter("studentId"));
         dto.setAcademicYear(request.getParameter("academicyear"));
 
         FeesDetailsResponseDto responseDto = feesCollectionService.getFeesDetails(dto);

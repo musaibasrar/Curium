@@ -912,7 +912,7 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().success(true).build();
 		
 		try {
-			long id = Long.parseLong(dto.getId());
+			long id = Long.parseLong(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 			
 			//Currentacademicyear currentYear = new YearDAO().showYear();
