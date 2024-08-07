@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public class FeesDetailsResponseDto {
     private long dueAmount;
     private String academicPerYear;
     private String currentAcademicYear;
-    private boolean success;
+    private List<Studentotherfeesstructure> otherFeesStructure;
+    @Builder.Default
+    private boolean success = false;
 }

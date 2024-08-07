@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 
 import java.util.Map;
 
@@ -23,5 +24,7 @@ public class StampFeeResponseDto {
     private String classAndSecDetails;
     private String studentIdDetails;
     private String dateOfFeesDetails;
-    private boolean success;
+    private Map<Studentotherfeesstructure,Long> otherFeesMap;
+    @Builder.Default
+    private boolean success = false;
 }

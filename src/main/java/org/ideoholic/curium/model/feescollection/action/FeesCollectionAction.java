@@ -149,8 +149,8 @@ public class FeesCollectionAction {
         
 		@PostMapping("/otherStampFees")
 		public String otherStampFees() {
-                new FeesCollectionService(request, response, standardActionAdapter).getotherStampFees();
-                new FeesCollectionService(request, response, standardActionAdapter).getotherFeesDetails();
+                feesCollectionActionAdapter.getotherStampFees();
+                feesCollectionActionAdapter.getotherFeesDetails();
                 standardActionAdapter.viewClasses();
                 feesActionAdapter.viewAllStudentsList();
                 return "otherfeesCollection";
