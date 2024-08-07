@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class StampFeesActionAdapter {
 	private StampFeesService stampFeesService;
 	
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 	public void advanceSearch() {
 		StampFeesService stampFeesService = new StampFeesService(request, response);
@@ -44,6 +47,20 @@ public class StampFeesActionAdapter {
 		studentIdsDto.setCurrentYear(request.getParameter("currentyear"));
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesService.deleteFeesStamp(studentIdsDto); 
+		
+	}
+
+	public void addFeesStamp() {
+		StampFeesService stampFeesService = new StampFeesService(request, response);
+		StampFeesDto stampFeesDto = new StampFeesDto();
+		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
+		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
+		stampFeesDto.setFeesCategoryIds(request.getParameterValues("feesIDS"));
+		stampFeesDto.setFeesAmount(request.getParameterValues("fessFullCat"));
+		stampFeesDto.setConcession(request.getParameterValues("feesConcession"));
+		stampFeesDto.setTotalInstallments(request.getParameterValues("feesCount"));
+		stampFeesDto.setFeesYears(request.getParameterValues("feesYears"));
+		stampFeesService.addFeesStamp(stampFeesDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 		
 	}
 }

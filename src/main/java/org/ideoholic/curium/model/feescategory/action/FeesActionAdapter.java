@@ -220,5 +220,13 @@ public class FeesActionAdapter {
 		StudentIdDto studentIdDto = feesService.deleteOtherFeesCategory(concessionDto);
 		return studentIdDto.getStudentId();
 	}
+
+	public void viewFeesYearly() throws IOException {
+		FeesService feesService = new FeesService(request, response);
+		FeesCategoryDto feesCategoryDto = new FeesCategoryDto();
+		String academicYear =request.getParameter("year");
+		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,httpSession.getAttribute(BRANCHID).toString());
+		 httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+	}
 	
 }
