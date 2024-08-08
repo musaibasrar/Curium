@@ -19,6 +19,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
@@ -327,23 +328,23 @@ public class StampFeesService {
 	}
 		}
 	
-	public void addotherFeesStamp() {
+	public void addotherFeesStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
 
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		String[] studentIds = request.getParameterValues("studentIDs");
+		if(currentAcademicYear!=null){
+		String[] studentIds = stampFeesDto.getStudentIds();
 		if(studentIds!=null){
 			Academicotherfeesstructure academicfessstructure = new Academicotherfeesstructure();
 		List<Academicotherfeesstructure> listOfacademicfessstructure = new ArrayList<Academicotherfeesstructure>();
 		List<Studentotherfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentotherfeesstructure>();
 
-		String feesTotalAmount = request.getParameter("feesTotalAmount");
+		String feesTotalAmount = stampFeesDto.getFeesTotalAmount();
 		Long grandTotal = 0l;
 
-		String[] feesCategoryIds = request.getParameterValues("feesIDS");
-		String[] feesAmount = request.getParameterValues("fessFullCat");
-		String[] concession = request.getParameterValues("feesConcession");
-		String[] totalInstallments = request.getParameterValues("feesCount");
-		String[] feesYears = request.getParameterValues("feesYears");
+		String[] feesCategoryIds = stampFeesDto.getFeesCategoryIds();
+		String[] feesAmount = stampFeesDto.getFeesAmount();
+		String[] concession = stampFeesDto.getConcession();
+		String[] totalInstallments = stampFeesDto.getTotalInstallments();
+		String[] feesYears = stampFeesDto.getFeesYears();
 		
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
@@ -351,11 +352,11 @@ public class StampFeesService {
 			academicfessstructure = new Academicotherfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(feesYears[0]);
-			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(userid));
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
-			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			academicfessstructure.setBranchid(Integer.parseInt(branchid));
+			academicfessstructure.setUserid(Integer.parseInt(userid));
 
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
@@ -376,8 +377,8 @@ public class StampFeesService {
 			studentfeesstructure.setWaiveoff((long) 0);
 			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
 			studentfeesstructure.setAcademicyear(feesYears[i]);
-			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			studentfeesstructure.setBranchid(Integer.parseInt(branchid));
+			studentfeesstructure.setUserid(Integer.parseInt(userid));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
@@ -386,22 +387,23 @@ public class StampFeesService {
 
 		}
 
-		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure);
+		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
 		}
 	}
 	
-	public void otheradvanceSearch() {
+	public SearchStudentResponseDto otheradvanceSearch(SearchStudentDto searchStudentDto,String branchid) {
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
 		if(httpSession.getAttribute(BRANCHID)!=null){
 
 		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+		String addClass = searchStudentDto.getClassSearch();
+		String addSec = searchStudentDto.getSecSearch();
 		String conClassStudying = "";
 
 		if (!addClass.equalsIgnoreCase("")) {
@@ -416,7 +418,7 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
@@ -425,7 +427,7 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -434,20 +436,19 @@ public class StampFeesService {
 		}
 
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
-
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
+		return searchStudentResponseDto;
 	}
 
-	public void advanceSearchForStampFees(){
+	public FeescategoryResponseDto advanceSearchForStampFees(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear){
 		
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 
-
-        if(httpSession.getAttribute(BRANCHID)!=null){
-        	String className = request.getParameter("classsearch");
-        	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+        if(branchid!=null){
+        	String className = searchStudentDto.getClassSearch();
         	
             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
-            httpSession.setAttribute("feescategory", feecategoryList);
+            feescategoryResponseDto.setFeescategory(feecategoryList);
   		
     		
     		
@@ -455,12 +456,12 @@ public class StampFeesService {
     		
     		List<Parents> searchStudentList = new ArrayList<Parents>();
     		
-    		if(httpSession.getAttribute(BRANCHID)!=null){
+    		if(branchid!=null){
     		
     		String queryMain = "From Parents as parents where";
-    		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-    		String addClass = request.getParameter("classsearch");
-    		String addSec = request.getParameter("secsearch");
+    		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+    		String addClass = searchStudentDto.getClassSearch();
+    		String addSec = searchStudentDto.getSecSearch();
     		String conClassStudying = "";
 
     		if (!addClass.equalsIgnoreCase("")) {
@@ -475,7 +476,7 @@ public class StampFeesService {
     		String querySub = "";
 
     		if (!studentname.equalsIgnoreCase("")) {
-    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
     		}
 
     		if (!classStudying.equalsIgnoreCase("")
@@ -484,7 +485,7 @@ public class StampFeesService {
     					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
     		} else if (!classStudying.equalsIgnoreCase("")) {
     			querySub = querySub + " parents.Student.classstudying like '"
-    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
     		}
 
     		if(!"".equalsIgnoreCase(querySub)) {
@@ -493,10 +494,11 @@ public class StampFeesService {
     		}
     		
     	}
-    		request.setAttribute("searchStudentList", searchStudentList);
+    		feescategoryResponseDto.setSearchStudentList(searchStudentList);
 
 
         }
+        return feescategoryResponseDto;
 	}
 
 }

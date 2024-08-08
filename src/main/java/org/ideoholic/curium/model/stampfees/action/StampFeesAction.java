@@ -80,7 +80,7 @@ public class StampFeesAction {
 	
 	@PostMapping("/applyotherFees")
 	public String applyotherFees() {
-		new StampFeesService(request, response).addotherFeesStamp();
+		stampFeesActionAdapter.addotherFeesStamp();
 		return "feesstampsuccess";
 	}
 	
@@ -94,13 +94,13 @@ public class StampFeesAction {
 	
 	@PostMapping("/othersearch")
 	public String othersearch() {
-		new StampFeesService(request, response).otheradvanceSearch();
+		stampFeesActionAdapter.otheradvanceSearch();
 		return "otherstampfees";
 	}
 	
 	@PostMapping("/advanceSearchForStampFees")
 	public String advanceSearchForStampFees() {
-		new StampFeesService(request, response).advanceSearchForStampFees();
+		stampFeesActionAdapter.advanceSearchForStampFees();
 		return "stampfees";
 	}
 	
