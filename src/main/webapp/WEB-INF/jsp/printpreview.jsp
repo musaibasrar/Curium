@@ -267,6 +267,7 @@
 	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
+	margin:0px;
 }
 
 .addressLine{
@@ -512,22 +513,22 @@ for(Cookie cookie : cookies){
       </tr>
     </table>
     
-    <table style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:5px;">
+    <table style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:0px;">
   <tr><td>
 <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label></td></tr>
 				<tr><td>
 				<label class="addressLine" style="font-size:12px;">&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
-				<label class="addressLine">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				<label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
 				</td>  </tr>
 </table>
   </div>
 
   <div class="table-container" style="padding-left: 10px;margin-top:0px;padding-top:0px;">
   
-  <table style="width: 70%;margin-top:0px;padding-top:0px;">
+  <table style="width: 77%;margin-top:0px;padding-top:0px;">
    <tr>
         <td>&emsp;
-          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;" alt="Photo"  />
         </td>
       </tr>
       <tr>
@@ -536,41 +537,41 @@ for(Cookie cookie : cookies){
      
     </table>
     
-    <table style="border-collapse: collapse;width: 130%;margin-top:0px;">
- <tr><td><br></td></tr>
+    <table style="border-collapse: collapse;width: 123%;margin-top:0px;">
   <tr>
-    <td style="padding-top: 5px;margin:0px;">&nbsp;&nbsp;Name</td>
-    <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+    <td style="padding-top: 5px;margin:0px;">Name&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0px;margin:0px;">&nbsp;&nbsp;Father's Name</td>
-    <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0px;margin:0px;">Father's Name&nbsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Mother's Name</td>
-    <td style="padding: 0;margin:0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Mother's Name&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Class</td>
-    <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Class&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;: <%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;margin:0;">&nbsp;&nbsp;Phone</td>
-    <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Phone&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+<%--     <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;Address</td>
-    <td style="padding: 0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
-  </tr>
- <tr><td><br></td></tr>
-  <tr><td><br></td></tr>
-  <tr>
-  <td></td>
-  <td><img src="/bsr/images/signbsr.png" alt="Sign Brainy Stars" width="75" height="25"></td>
+    <td style="padding: 0;">Address&emsp;&emsp;&emsp;&emsp;:<label style="padding: 0;text-align:right;"><%= request.getSession().getAttribute("address" + i + "") %></label></td>
+<%--     <td style="padding: 0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td> --%>
   </tr>
   <tr>
-  <td></td>
-  <td>Signature</td>
+   <td>&nbsp;</td></tr>
+   <tr>
+   <td>&nbsp;</td></tr>
+   <tr>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/bsr/images/signbsr.png" alt="Sign Brainy Stars" width="75" height="25"></td>
+  </tr>
+  <tr>
+  <!-- <td></td> -->
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Signature</td>
   </tr>
 </table>
     
