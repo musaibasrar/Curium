@@ -225,4 +225,29 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("searchotherfeesdetailslist", responseDto.getOtherfeesDetailsList());
         httpSession.setAttribute("sumofotherdetailsfees", responseDto.getSumOfFees());
     }
+
+    public void previewOtherFeesDetails() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        String sId= request.getParameter("sid");
+        String receiptNo = request.getParameter("id");
+
+        DetailsResponseDto responseDto = feesCollectionService.previewOtherFeesDetails(sId, receiptNo, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("student", responseDto.getStudent());
+        request.setAttribute("recieptdate", responseDto.getReceiptDate());
+        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
+        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        request.setAttribute("duplicate", responseDto.getDuplicate());
+    }
+
+    public void cancelOtherFeesReceipt() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        String receiptId = request.getParameter("receiptid");
+        String journalId = request.getParameter("journalid");
+        String feesReceiptId = request.getParameter("id");
+
+        ResultResponse resultResponse = feesCollectionService.cancelOtherFeesReceipt(receiptId, journalId, feesReceiptId, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("cancelreceiptresult", resultResponse.isSuccess());
+    }
 }
