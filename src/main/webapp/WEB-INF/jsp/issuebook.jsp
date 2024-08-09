@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Book</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -446,17 +446,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/alirfan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alirfan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -560,7 +560,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/alirfan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
@@ -906,7 +906,7 @@
         <script type="text/javascript">
 	function issueBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/LibraryProcess/bookIssuedStudent";
+		form1.action = "/alirfan/LibraryProcess/bookIssuedStudent";
 		form1.method = "POST";
 		form1.submit();
 
@@ -928,7 +928,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
