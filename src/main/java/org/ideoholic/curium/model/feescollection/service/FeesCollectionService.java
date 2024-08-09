@@ -568,7 +568,7 @@ public class FeesCollectionService {
 	}
 
 	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dayOneCancel, String dateFromCancel, String dateToCancel) {
-		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().success(true).build();
+		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		String branchId = dto.getBranchId();
@@ -626,6 +626,8 @@ public class FeesCollectionService {
 
 			result.setFeesDetailsList(feesDetailsList);
 			result.setSumOfFees(sumOfFees);
+			result.setSuccess(true);
+
 			return result;
 	}
 
@@ -1537,49 +1539,50 @@ public class FeesCollectionService {
 		return result;
 	  }
 
-	public void searchOtherFeesCollection() {
-		 
+	public CancelledReceiptsResponseDto searchOtherFeesCollection(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
+
 		List<Otherreceiptinfo> feesDetailsList = new ArrayList<Otherreceiptinfo>();
-		String branchId = request.getParameter("selectedbranchid");
+		String branchId = dto.getBranchId();
 		int idBranch = 0;
                
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(strBranchId!=null){
 		
 
 	        if(branchId!=null) {
 	        	String[] branchIdName = branchId.split(":");
 	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
+				result.setFeesDetailsBranchName(branchIdName[1]);
+				result.setBranchName("Branch Name:");
 	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        	idBranch = Integer.parseInt(strBranchId);
 	        }
 	        
 		String queryMain ="From Otherreceiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
-		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
+		String toDate= DataUtil.emptyString(dto.getToDate());
+		String fromDate = DataUtil.emptyString(dto.getFromDate());
+		String oneDay = DataUtil.emptyString(dto.getOneDay());
 		
 		
 			String querySub = "";
 			
 			if(!oneDay.equalsIgnoreCase("")){
 				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 httpSession.setAttribute("dayone", oneDay);
-				 httpSession.setAttribute("datefrom", "");
-				 httpSession.setAttribute("dateto", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
-				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
+				 result.setDayOneCancel(oneDay);
+				 result.setDateFromCancel("");
+				 result.setDateToCancel("");
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
+				querySub = " feesdetails.date = '"+dayOne+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				httpSession.setAttribute("datefrom", fromDate);
-				httpSession.setAttribute("dateto", toDate);
-				httpSession.setAttribute("dayone", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
-					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
-				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
+				result.setDateFromCancel(fromDate);
+				result.setDateToCancel(toDate);
+				result.setDayOneCancel("");
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
+					!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
+				querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1592,9 +1595,12 @@ public class FeesCollectionService {
 			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
-			
-			httpSession.setAttribute("searchotherfeesdetailslist", feesDetailsList);
-			httpSession.setAttribute("sumofotherdetailsfees", sumOfFees);
+
+			result.setOtherfeesDetailsList(feesDetailsList);
+			result.setSumOfFees(sumOfFees);
+			result.setSuccess(true);
+
+			return result;
 	}
 	
 	public void previewOtherFeesDetails() {

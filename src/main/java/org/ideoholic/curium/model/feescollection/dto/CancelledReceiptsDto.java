@@ -8,5 +8,4 @@ public class CancelledReceiptsDto {
     private String toDate;
     private String fromDate;
     private String oneDay;
-    private String dayOne;
 }

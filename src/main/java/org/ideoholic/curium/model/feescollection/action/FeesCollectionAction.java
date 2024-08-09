@@ -9,7 +9,6 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.user.action.UserAction;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -199,7 +198,7 @@ public class FeesCollectionAction {
 	  
 		@PostMapping("/searchOtherFeesCollection")
 		public String searchOtherFeesCollection() {
-			new FeesCollectionService(request, response, standardActionAdapter).searchOtherFeesCollection();
+			feesCollectionActionAdapter.searchOtherFeesCollection();
 			return "otherfeesCollectionDetails";
 		}
 		
