@@ -34,7 +34,7 @@ public class SubjectDetailsAction {
 	
 	@PostMapping("/deleteMultipleSubjects")
 	public String deleteMultipleSubjects() {
-		if(new SubjectDetailsService(request, response).deleteMultipleSubjects()){
+		if(subjectDetailsActionAdapter.deleteMultipleSubject()){
 			return readListOfSubjectNames();
 		}else{
 			return "error";
