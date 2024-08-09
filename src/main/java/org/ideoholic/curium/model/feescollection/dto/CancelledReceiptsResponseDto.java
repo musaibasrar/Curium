@@ -20,6 +20,8 @@ public class CancelledReceiptsResponseDto {
     private String dateFromCancel;
     private String dateToCancel;
     private List<Receiptinfo> feesDetailsList;
+    private List<Otherreceiptinfo> otherfeesDetailsList;
     private long sumOfFees;
-    private boolean success;
+    @Builder.Default
+    private boolean success = false;
 }

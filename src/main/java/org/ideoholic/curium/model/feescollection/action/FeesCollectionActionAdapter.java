@@ -68,7 +68,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getFeesDetailsList());
         httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
-        httpSession.setAttribute("dayonecancel", dto.getOneDay());
+        httpSession.setAttribute("dayonecancel", responseDto.getDayOneCancel());
         httpSession.setAttribute("datefromcancel", responseDto.getDateFromCancel());
         httpSession.setAttribute("datetocancel", responseDto.getDateToCancel());
     }
@@ -205,5 +205,24 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
+    }
+
+    public void searchOtherFeesCollection() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setOneDay(request.getParameter("oneday"));
+
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.searchOtherFeesCollection(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("dayone", responseDto.getDayOneCancel());
+        httpSession.setAttribute("datefrom", responseDto.getDateFromCancel());
+        httpSession.setAttribute("dateto", responseDto.getDateToCancel());
+        httpSession.setAttribute("searchotherfeesdetailslist", responseDto.getOtherfeesDetailsList());
+        httpSession.setAttribute("sumofotherdetailsfees", responseDto.getSumOfFees());
     }
 }
