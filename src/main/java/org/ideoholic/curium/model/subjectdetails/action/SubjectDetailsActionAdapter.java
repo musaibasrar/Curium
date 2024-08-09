@@ -67,5 +67,15 @@ public class SubjectDetailsActionAdapter {
 
         return resultResponse.isSuccess();
     }
+    public boolean deleteMultipleSubject() {
+        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
+
+        SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
+        subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
+
+        ResultResponse resultResponse = subjectDetailsService.deleteMultipleSubjects(subjectIdsDto);
+
+        return resultResponse.isSuccess();
+    }
 
 }

@@ -120,9 +120,9 @@ public class SubjectDetailsService {
 	    }
 	}
 
-	public boolean deleteMultipleSubjects() {
-		String[] examIds = request.getParameterValues("subjectIDs");
-		boolean result = false;
+	public ResultResponse deleteMultipleSubjects(SubjectIdsDto subjectIdsDto) {
+		String[] examIds = subjectIdsDto.getSubjectIds();
+		boolean result;
 		 if(examIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
@@ -133,12 +133,12 @@ public class SubjectDetailsService {
 	        System.out.println("id length" + examIds.length);
 	        new SubjectDetailsDAO().deleteMultipleSubjects(ids);
 	        result = true;
+			 return ResultResponse.builder().success(result).build();
 	}else{
-		result = false;
+		    result = false;
+			 return ResultResponse.builder().success(result).build();
+	  }
+
 	}
-		 return result;
-	}
-	
-	
-	
+
 }
