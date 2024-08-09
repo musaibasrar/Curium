@@ -111,7 +111,8 @@ public class DocumentService {
 		String afflno = DataUtil.emptyString(request.getParameter("afflno"));
 		String code = DataUtil.emptyString(request.getParameter("code"));
 		String proof = DataUtil.emptyString(request.getParameter("proof"));
-		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
+		String dateOfTc = DataUtil.emptyString(request.getParameter("dateoftc"));
+		//Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
@@ -120,7 +121,7 @@ public class DocumentService {
 		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
-			 tc.setDateofissues(dateOfTc);
+			// tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
@@ -128,6 +129,7 @@ public class DocumentService {
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 request.setAttribute("dateOfTc", dateOfTc);
 				 request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
@@ -824,4 +826,14 @@ public class DocumentService {
 			
 			return bonafidePage;
 		}
+	 
+	 public void viewTcDetail() {
+			List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+			List<Integer> sid = new ArrayList<Integer>(); 
+			for (Transfercertificate transfercertificate : tc) {
+				sid.add(transfercertificate.getSid());
+			}
+			List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+			request.setAttribute("studenttcissued", listofParents);
+					}
 }

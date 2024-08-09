@@ -111,7 +111,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatepreview";
+        return "transfercertificatepreviewduplicate";
 		}
 		return error;
 	}
@@ -195,5 +195,16 @@ public class DocumentAction {
 	public String printCharacterCertificate() {
 		new DocumentService(request, response).printCharacterCertificate();
 		return "characterprint";
+	}
+	
+	@GetMapping("/getTcDetail")
+	public String getTcDetail() {
+		return "generatetcdetail";
+	}
+	
+	@PostMapping("/tcDetail")
+	public String tcDetail() {
+		new DocumentService(request, response).viewTcDetail(); 
+		return "studentstcreport";
 	}
 }
