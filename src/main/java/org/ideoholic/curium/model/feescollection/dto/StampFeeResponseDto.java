@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 
 import java.util.Map;
 
@@ -15,7 +16,6 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class StampFeeResponseDto {
-    private Map<Studentfeesstructure,Long> feesMapPreviousYear;
     private String previousYear;
     private Map<Studentfeesstructure,Long> feesMap;
     private String studentNameDetails;
@@ -23,5 +23,7 @@ public class StampFeeResponseDto {
     private String classAndSecDetails;
     private String studentIdDetails;
     private String dateOfFeesDetails;
-    private boolean success;
+    private Map<Studentotherfeesstructure,Long> otherFeesMap;
+    @Builder.Default
+    private boolean success = false;
 }

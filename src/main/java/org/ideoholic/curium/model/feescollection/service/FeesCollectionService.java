@@ -147,7 +147,7 @@ public class FeesCollectionService {
 	}
 
 	public StampFeeResponseDto getStampFees(StampFeesDto dto, String currentAcademicYear) {
-		StampFeeResponseDto result = StampFeeResponseDto.builder().success(true).build();
+		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
 		if(currentAcademicYear!=null){
 		String academicYear = dto.getAcademicYear();
@@ -215,7 +215,7 @@ public class FeesCollectionService {
 		}
 
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
-		result.setFeesMapPreviousYear(feesMapPreviousYear);
+		result.setFeesMap(feesMapPreviousYear);
 		result.setPreviousYear(previousYear);
 		result.setFeesMap(feesMap);
 		result.setStudentNameDetails(dto.getStudentName());
@@ -223,6 +223,7 @@ public class FeesCollectionService {
 		result.setClassAndSecDetails(dto.getClassAndSec());
 		result.setStudentIdDetails(dto.getStudentId());
 		result.setDateOfFeesDetails(dto.getDateOfFees());
+		result.setSuccess(true);
 		
 		}
 		return result;
@@ -911,7 +912,7 @@ public class FeesCollectionService {
 	}
 
 	public FeesDetailsResponseDto getFeesDetails(FeesReportDto dto) {
-		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().success(true).build();
+		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 		
 		try {
 			long id = Long.parseLong(dto.getStudentId());
@@ -940,6 +941,7 @@ public class FeesCollectionService {
 				result.setTotalFeesAmount(totalFeesAmount);
 				result.setAcademicPerYear(academicYear);
 				result.setCurrentAcademicYear(academicYear);
+				result.setSuccess(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1138,11 +1140,13 @@ public class FeesCollectionService {
 		
 	  }
 	
-	public void getotherStampFees() {
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		String academicYear = request.getParameter("academicyear");	
+	public StampFeeResponseDto getotherStampFees(StampFeesDto dto, String currentAcademicYear) {
+		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
-		long id = Long.parseLong(request.getParameter("studentId"));
+		if(currentAcademicYear!=null){
+		String academicYear = dto.getAcademicYear();
+
+		long id = Long.parseLong(dto.getStudentId());
 		List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentotherfeesstructure,Long> feesMap = new LinkedHashMap<Studentotherfeesstructure, Long>();
@@ -1169,28 +1173,29 @@ public class FeesCollectionService {
 
 		}
 
-		request.setAttribute("studentotherfeesdetails", feesMap);
-		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
-		//request.setAttribute("admnoDetails", request.getParameter("admno"));
-		request.setAttribute("admnoDetails", request.getParameter("admissionno"));
-		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
-		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
-		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
-
+		result.setOtherFeesMap(feesMap);
+		result.setStudentNameDetails(dto.getStudentName());
+		result.setAdmNoDetails(dto.getAdmissionNo());
+		result.setClassAndSecDetails(dto.getClassAndSec());
+		result.setStudentIdDetails(dto.getStudentId());
+		result.setDateOfFeesDetails(dto.getDateOfFees());
+		result.setSuccess(true);
 		}
+		return result;
 	}
 	
-	public void getotherFeesDetails() {
+	public FeesDetailsResponseDto getotherFeesDetails(FeesReportDto dto) {
+		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 
 		try {
-			long id = Long.parseLong(request.getParameter("studentId"));
-			String academicYear = request.getParameter("academicyear");
+			long id = Long.parseLong(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
 
 			//Currentacademicyear currentYear = new YearDAO().showYear();
 			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
-			request.setAttribute("receiptinfo",rinfo);
+			result.setReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 
 			long totalSum = 0l;
@@ -1203,16 +1208,18 @@ public class FeesCollectionService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 
-				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("sumoffees", totalSum);
-				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
-				httpSession.setAttribute("totalfees", totalFeesAmount);
-				httpSession.setAttribute("academicPerYear", academicYear);
-				httpSession.setAttribute("currentAcademicYear", academicYear);
+				result.setOtherFeesStructure(feesstructure);
+				result.setTotalSum(totalSum);
+				result.setDueAmount(totalFeesAmount-totalSum);
+				result.setTotalFeesAmount(totalFeesAmount);
+				result.setAcademicPerYear(academicYear);
+				result.setCurrentAcademicYear(academicYear);
+				result.setSuccess(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 
 	public void otherpreview() {

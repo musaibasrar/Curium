@@ -3,12 +3,14 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.action.UserAction;
+import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +48,9 @@ public class FeesCollectionAction {
 		@Autowired
 		private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
+		@Autowired
+		private AdminService adminService;
+
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
             feesCollectionActionAdapter.getFeesReport();
@@ -67,9 +72,8 @@ public class FeesCollectionAction {
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response, standardActionAdapter).cancelFeesReceipt();
-			UserAction userAction = new UserAction();
-			userAction.setHttpobjects(request, response, httpSession);
-			return userAction.searchByDate();
+			new UserService(request, response, standardActionAdapter,adminService).searchByDate();
+			return "feesCollectionDetails";
 		}
 
 		@PostMapping("/StampFees")
@@ -149,8 +153,8 @@ public class FeesCollectionAction {
         
 		@PostMapping("/otherStampFees")
 		public String otherStampFees() {
-                new FeesCollectionService(request, response, standardActionAdapter).getotherStampFees();
-                new FeesCollectionService(request, response, standardActionAdapter).getotherFeesDetails();
+                feesCollectionActionAdapter.getotherStampFees();
+                feesCollectionActionAdapter.getotherFeesDetails();
                 standardActionAdapter.viewClasses();
                 feesActionAdapter.viewAllStudentsList();
                 return "otherfeesCollection";

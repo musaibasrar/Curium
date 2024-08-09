@@ -86,7 +86,7 @@ public class FeesCollectionActionAdapter {
         dto.setDateOfFees(request.getParameter("dateoffees"));
 
         StampFeeResponseDto responseDto = feesCollectionService.getStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-        request.setAttribute("studentfeesdetailspreviousyear", responseDto.getFeesMapPreviousYear());
+        request.setAttribute("studentfeesdetailspreviousyear", responseDto.getFeesMap());
         request.setAttribute("previousyear", responseDto.getPreviousYear());
         request.setAttribute("studentfeesdetails", responseDto.getFeesMap());
         request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
@@ -143,5 +143,38 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
+    }
+
+    public void getotherStampFees() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        StampFeesDto dto = new StampFeesDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setStudentId(request.getParameter("studentId"));
+
+        StampFeeResponseDto responseDto = feesCollectionService.getotherStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("studentotherfeesdetails", responseDto.getOtherFeesMap());
+        request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
+        request.setAttribute("admnoDetails", responseDto.getAdmNoDetails());
+        request.setAttribute("classandsecDetails", responseDto.getClassAndSecDetails());
+        request.setAttribute("studentIdDetails", responseDto.getStudentIdDetails());
+        request.setAttribute("dateoffeesDetails", responseDto.getDateOfFeesDetails());
+    }
+
+    public void getotherFeesDetails() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setStudentId(request.getParameter("studentId"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+
+        FeesDetailsResponseDto responseDto = feesCollectionService.getotherFeesDetails(dto);
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
     }
 }
