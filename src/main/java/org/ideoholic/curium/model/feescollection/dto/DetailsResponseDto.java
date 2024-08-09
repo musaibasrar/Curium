@@ -20,6 +20,7 @@ public class DetailsResponseDto {
     private Student student;
     private String receiptDate;
     private Receiptinfo receiptInfo;
+    private Otherreceiptinfo otherReceiptInfo;
     private Map<String,Long> feeCatMap;
     private String duplicate;
     private String grandTotal;

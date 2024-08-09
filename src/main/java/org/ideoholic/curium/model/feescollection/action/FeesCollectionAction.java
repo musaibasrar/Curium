@@ -162,13 +162,13 @@ public class FeesCollectionAction {
 		
 		  @PostMapping("/othersearchFeesReport")
 	        public String othersearchFeesReport() {
-	            new FeesCollectionService(request, response, standardActionAdapter).getotherFeesReport();
+	            feesCollectionActionAdapter.getotherFeesReport();
 	            return "otherfeesreport";
 	        }
 		  
 	  @GetMapping("/otherprintReceipt")
         public String otherprintReceipt() {
-                new FeesCollectionService(request, response, standardActionAdapter).otherpreviewDetails();
+                feesCollectionActionAdapter.otherpreviewDetails();
 
 					/*
 					 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
