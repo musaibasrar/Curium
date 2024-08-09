@@ -16,7 +16,6 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class StampFeeResponseDto {
-    private Map<Studentfeesstructure,Long> feesMapPreviousYear;
     private String previousYear;
     private Map<Studentfeesstructure,Long> feesMap;
     private String studentNameDetails;
