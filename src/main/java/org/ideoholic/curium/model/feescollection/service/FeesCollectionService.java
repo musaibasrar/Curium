@@ -1426,13 +1426,11 @@ public class FeesCollectionService {
 
 	}
 	
-	public void otherpreviewDetails() {
+	public DetailsResponseDto otherpreviewDetails(String receiptNumber, String duplicate, String currentAcademicYear) {
+		DetailsResponseDto result = DetailsResponseDto.builder().build();
 
-
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			String receiptNumber = request.getParameter("id");
-			String dp = request.getParameter("duplicate");
-			Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(Integer.parseInt(receiptNumber));
+		if(currentAcademicYear!=null){
+            Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(Integer.parseInt(receiptNumber));
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
@@ -1445,36 +1443,37 @@ public class FeesCollectionService {
 			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
 			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
-			httpSession.setAttribute("parents", parents);
-			httpSession.setAttribute("student", student);
-			request.setAttribute("recieptdate", reDate);
-			request.setAttribute("recieptinfo", rinfo);
-			request.setAttribute("feescatmap", feeCatMap);
-			request.setAttribute("duplicate", dp);
-			request.setAttribute("user", userLogin);
+			result.setParents(parents);
+			result.setStudent(student);
+			result.setReceiptDate(reDate);
+			result.setOtherReceiptInfo(rinfo);
+			result.setFeeCatMap(feeCatMap);
+			result.setDuplicate(duplicate);
+			result.setUserLogin(userLogin);
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
-			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
+			result.setGrandTotal(grandTotal+" "+"Only");
+			result.setSuccess(true);
 
 			getOtherFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 		}
-
+		return result;
 	}
 	
-	public void getotherFeesReport() {
+	public ResultResponse getotherFeesReport(FeesReportDto dto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 
-
-		String academicYear = request.getParameter("academicyear");
-		String[] feesCat = request.getParameterValues("otherfeescategory");
+		String academicYear = dto.getAcademicYear();
+		String[] feesCat = dto.getFeesCat();
 
 		//Get Students
 
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
 		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
+		String[] addClass = dto.getAddClass();
 		StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -1494,7 +1493,7 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -1506,7 +1505,7 @@ public class FeesCollectionService {
 		//End Students
 
 
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 
 			List<Studentotherfeesreport> studentOtherFeesReportList = new ArrayList<Studentotherfeesreport>();
 
@@ -1532,9 +1531,10 @@ public class FeesCollectionService {
 				}
 			}
 
-			httpSession.setAttribute("studentotherfeesreportlist", studentOtherFeesReportList);
+			result.setResultList(studentOtherFeesReportList);
+			result.setSuccess(true);
 		}
-
+		return result;
 	  }
 
 	public void searchOtherFeesCollection() {

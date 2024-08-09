@@ -177,4 +177,33 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
     }
+
+    public void getotherFeesReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setFeesCat(request.getParameterValues("otherfeescategory"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+
+        ResultResponse resultResponse = feesCollectionService.getotherFeesReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentotherfeesreportlist", resultResponse.getResultList());
+    }
+
+    public void otherpreviewDetails() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        String receiptNumber = request.getParameter("id");
+        String duplicate = request.getParameter("duplicate");
+
+        DetailsResponseDto responseDto = feesCollectionService.otherpreviewDetails(receiptNumber, duplicate, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("parents", responseDto.getParents());
+        httpSession.setAttribute("student", responseDto.getStudent());
+        request.setAttribute("recieptdate", responseDto.getReceiptDate());
+        request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
+        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        request.setAttribute("duplicate", responseDto.getDuplicate());
+        request.setAttribute("user", responseDto.getUserLogin());
+        httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
+    }
 }
