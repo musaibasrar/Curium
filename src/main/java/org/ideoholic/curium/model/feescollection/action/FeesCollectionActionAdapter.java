@@ -250,4 +250,21 @@ public class FeesCollectionActionAdapter {
         ResultResponse resultResponse = feesCollectionService.cancelOtherFeesReceipt(receiptId, journalId, feesReceiptId, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("cancelreceiptresult", resultResponse.isSuccess());
     }
+
+    public void getFeesDetailsDashBoard() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+
+        FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("classdetailslist"));
+        request.setAttribute("totalFeesAmountDashBoard", responseDto.getTotalFeesAmount());
+        request.setAttribute("totalPaidAmountDashBoard", responseDto.getTotalPaidAmount());
+        request.setAttribute("totalDueAmountDashBoard", responseDto.getTotalDueAmount());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getBranchIdName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("sumOfFeesDaily", responseDto.getSumOfFeesDaily());
+        httpSession.setAttribute("sumOfFeesMonthly", responseDto.getSumOfFeesMonthly());
+        httpSession.setAttribute("Currentmonth", responseDto.getCurrentMonth());
+    }
 }

@@ -224,7 +224,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/feesSummaryReport")
 	        private String feesSummaryReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesDetailsDashBoard();
+	        	feesCollectionActionAdapter.getFeesDetailsDashBoard();
 	            return "feessummaryreport";
 			}	 
 		 
