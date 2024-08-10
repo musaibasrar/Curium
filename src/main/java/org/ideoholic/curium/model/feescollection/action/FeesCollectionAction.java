@@ -205,14 +205,14 @@ public class FeesCollectionAction {
 		@GetMapping("/viewOtherFeesDetails")
         public String viewOtherFeesDetails() {
                 //new FeesCollectionService(request, response).preview();
-                new FeesCollectionService(request, response, standardActionAdapter).previewOtherFeesDetails();
+                feesCollectionActionAdapter.previewOtherFeesDetails();
                 //return "previewFeesDetail";
                 return "otherpreviewfeesdetail";
         }
 		
 		@GetMapping("/CancelOtherFeesReceipt")
 		public String cancelOtherFeesReceipt() {
-			new FeesCollectionService(request, response, standardActionAdapter).cancelOtherFeesReceipt();
+			feesCollectionActionAdapter.cancelOtherFeesReceipt();
 			return searchOtherFeesCollection();
 		}
 		
