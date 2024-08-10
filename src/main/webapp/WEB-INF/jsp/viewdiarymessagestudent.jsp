@@ -17,8 +17,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Student Logbook</title>
-	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/global/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/global/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -117,7 +117,7 @@ margin-right:0px;
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/authenticate";
+                form1.action="/global/UserProcess/authenticate";
                 form1.submit();
             }
         </script>

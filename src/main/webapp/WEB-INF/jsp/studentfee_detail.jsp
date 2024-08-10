@@ -11,7 +11,6 @@
         <script src="/abc/js/jquery.min.js"></script>
         <script src="/abc/js/bootstrap.min.js"></script>
         <script src="/abc/js/popper.min.js"></script>
-
 <style>
  .headerText {
                 border-radius:3px;
