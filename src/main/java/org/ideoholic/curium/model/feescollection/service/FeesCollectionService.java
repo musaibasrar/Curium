@@ -215,7 +215,7 @@ public class FeesCollectionService {
 		}
 
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
-		result.setFeesMap(feesMapPreviousYear);
+		result.setPreviousYearFeesMap(feesMapPreviousYear);
 		result.setPreviousYear(previousYear);
 		result.setFeesMap(feesMap);
 		result.setStudentNameDetails(dto.getStudentName());

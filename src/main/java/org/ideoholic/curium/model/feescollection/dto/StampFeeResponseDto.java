@@ -18,6 +18,7 @@ import java.util.Map;
 public class StampFeeResponseDto {
     private String previousYear;
     private Map<Studentfeesstructure,Long> feesMap;
+    private Map<Studentfeesstructure,Long> previousYearFeesMap;
     private String studentNameDetails;
     private String admNoDetails;
     private String classAndSecDetails;
