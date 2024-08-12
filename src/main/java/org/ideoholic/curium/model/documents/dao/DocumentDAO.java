@@ -166,5 +166,24 @@ public class DocumentDAO {
 		}
 		return status;
 	}
+
+
+
+	public String updateTransferCertificate(Transfercertificate tc) {
+		String result = "false";
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session 
+					.createSQLQuery("update transfercertificate set noofissues = '"+tc.getNoofissues()+"' where sid = '"+tc.getSid()+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+			result = "true";
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return result;
+	}
 	
 }
