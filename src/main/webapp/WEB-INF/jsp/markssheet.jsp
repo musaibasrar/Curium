@@ -243,17 +243,22 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
-              <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">
-				<table align="center">
-					<tr>
-						<td style="font-family: bold;">REPORT CARD</td>
-					</tr>
-					<tr>
-						<td style="font-family: bold;">
-						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
-						Academic Year: ${dataSubParts[0]}-${dataSubParts[1]}</td>
-					</tr>
-				</table>
+                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+                        	<table style="page-break-inside: avoid;border-collapse: collapse;">
+			<tr>
+				<td style="padding-left: 200px;"><img src="/global/images/global${branchid}.jpg" width="72" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label>
+				</td>
+			</tr>
+			<tr>
+			<td></td></tr>
+			<tr></tr>
+</table>
+
+			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
 
 				<table align="center" width="100%"
 						style="page-break-inside: avoid; border-collapse: collapse; border: 1px solid black">
