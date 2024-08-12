@@ -86,7 +86,7 @@ public class FeesCollectionActionAdapter {
         dto.setDateOfFees(request.getParameter("dateoffees"));
 
         StampFeeResponseDto responseDto = feesCollectionService.getStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-        request.setAttribute("studentfeesdetailspreviousyear", responseDto.getFeesMap());
+        request.setAttribute("studentfeesdetailspreviousyear", responseDto.getPreviousYearFeesMap());
         request.setAttribute("previousyear", responseDto.getPreviousYear());
         request.setAttribute("studentfeesdetails", responseDto.getFeesMap());
         request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
