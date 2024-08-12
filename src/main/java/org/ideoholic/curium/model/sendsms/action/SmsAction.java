@@ -81,5 +81,13 @@ public class SmsAction {
 		}
 		return "errorsms";
 	}
+	
+	@GetMapping("/SMSDeliveryReport")
+	public String SMSDeliveryReport() {
+		if (new SmsService(request, response).SMSDeliveryReport()) {
+			return "smsdeliveryreport";
+		}
+		return "error";
+	}
 
 }

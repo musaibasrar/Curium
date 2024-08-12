@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,16 +19,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.SMSReport;
+import org.ideoholic.curium.util.SMSReportResponse;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SmsService {
 	
@@ -374,5 +374,81 @@ public class SmsService {
 			
 			return result;
 		}
+
+
+	public boolean SMSDeliveryReport() {
+		
+		boolean result = false;
+		int responseCode = 0;
+		List<SMSReportResponse> reportResponses = null;
+		 try {
+			 
+			 
+			 	Properties properties = new Properties();
+		        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+		        properties.load(inputStream);
+		        
+		        String smsuser = properties.getProperty("smsuser");
+		        String smssender = properties.getProperty("smssender");
+		        String apikey = properties.getProperty("apikey");
+		        String peid = properties.getProperty("peid");
+			 
+	            // Get the current date and two days earlier date
+	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            Calendar calendar = Calendar.getInstance();
+	            String toDate = dateFormat.format(calendar.getTime());
+	            
+	            calendar.add(Calendar.DAY_OF_YEAR, -1);
+	            String fromDate = dateFormat.format(calendar.getTime());
+	            
+	            // Replace parameters in the URL
+	            String apiUrl = String.format("http://sms.bulksmsind.in/getDLRReport?username=%s&apikey=%s&from=%s&to=%s&sendername=%s", 
+	            		smsuser, apikey, fromDate, toDate, smssender);
+
+	            // Create URL object
+	            URL url = new URL(apiUrl);
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	            // Set request method
+	            connection.setRequestMethod("GET");
+
+	            // Get the response code
+	            responseCode = connection.getResponseCode();
+	            System.out.println("Response Code: " + responseCode);
+	            
+	            // Read the response
+	            if (responseCode == HttpURLConnection.HTTP_OK) {
+	                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                ObjectMapper objectMapper = new ObjectMapper();
+	                reportResponses = objectMapper.readValue(in, new TypeReference<List<SMSReportResponse>>() {});
+					/*
+					 * String inputLine; StringBuilder content = new StringBuilder();
+					 * 
+					 * while ((inputLine = in.readLine()) != null) { content.append(inputLine); }
+					 * // Print the response
+	                System.out.println("Response Content: " + content.toString());
+					 */
+
+	                // Close connections
+	                in.close();
+	                connection.disconnect();
+
+	                
+	                
+	            } else {
+	                System.out.println("GET request failed");
+	            }
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		 
+		 if(responseCode==200) {
+			 result = true;
+			 request.setAttribute("smsdeliveryreport", reportResponses.get(0).getRecords());
+		 }
+		 
+		 return result;
+	}
 	
 }

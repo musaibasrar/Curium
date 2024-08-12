@@ -551,4 +551,9 @@ public class JspController {
 	public String getFeesReportDue() {
 		return "feesreportdue";
 	}
+	
+	@GetMapping("/smsdeliveryreport")
+	public String getsmsDeliveryReport() {
+		return "smsdeliveryreport";
+	}
 }
