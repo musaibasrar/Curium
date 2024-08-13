@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -726,7 +727,7 @@ public class FeesCollectionService {
 	
 	
 	
-	public FeesDashboardResponseDto getFeesDetailsDashBoard(CancelledReceiptsDto dto, String strBranchId, String currentAcademicYear) {
+	public FeesDashboardResponseDto getFeesDetailsDashBoard(ClassesHierarchyDto dto, String strBranchId, String currentAcademicYear) {
 		FeesDashboardResponseDto result = FeesDashboardResponseDto.builder().build();
 
 		Long totalFeesAmount = 0l;
@@ -742,7 +743,7 @@ public class FeesCollectionService {
 
 			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
 			standardActionAdapter.viewClasses();
-			List<Classsec> classList = dto.getClassList();
+			List<Classsec> classList = dto.getClasssecList();
 			
 			
 			StringBuffer conClassStudying = new StringBuffer();
