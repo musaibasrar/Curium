@@ -816,7 +816,7 @@ public class FeesCollectionService {
 		 
 		List<Receiptinfo> feesDetailsListDaily = new ArrayList<Receiptinfo>();
 		List<Receiptinfo> feesDetailsListMonthly = new ArrayList<Receiptinfo>();
-		String branchId = dto.getBranchId();
+		String branchId = dto.getSelectedBranchId();
 		int idBranch = 0;
 		String Currentmonth = null;        
 		
