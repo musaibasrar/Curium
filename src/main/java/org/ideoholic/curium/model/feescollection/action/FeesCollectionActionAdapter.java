@@ -271,4 +271,28 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("sumOfFeesMonthly", responseDto.getSumOfFeesMonthly());
         httpSession.setAttribute("Currentmonth", responseDto.getCurrentMonth());
     }
+
+    public void getDefaultersReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setFeesCat(request.getParameterValues("feescategory"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+
+        ResultResponse resultResponse = feesCollectionService.getDefaultersReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
+
+    public void getFeesReportDue() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setFeesCat(request.getParameterValues("feescategory"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+
+        ResultResponse resultResponse = feesCollectionService.getFeesReportDue(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
 }

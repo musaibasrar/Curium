@@ -265,7 +265,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchDefaultersReport")
 	        public String searchDefaultersReport() {
-	            new FeesCollectionService(request, response, standardActionAdapter).getDefaultersReport();
+	            feesCollectionActionAdapter.getDefaultersReport();
 	            return "defaultersreport";
 	        }
 		 
@@ -277,7 +277,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchFeesReportDue")
 	        public String searchFeesReportDue() {
-	            new FeesCollectionService(request, response,standardActionAdapter).getFeesReportDue();
+	            feesCollectionActionAdapter.getFeesReportDue();
 	            return "feesreportdue";
 	        }
 }
