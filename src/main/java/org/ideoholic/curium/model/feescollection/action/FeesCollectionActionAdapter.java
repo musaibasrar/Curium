@@ -4,12 +4,14 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class FeesCollectionActionAdapter {
@@ -256,8 +258,9 @@ public class FeesCollectionActionAdapter {
 
         CancelledReceiptsDto dto = new CancelledReceiptsDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setClassList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
 
-        FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("classdetailslist"));
+        FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("totalFeesAmountDashBoard", responseDto.getTotalFeesAmount());
         request.setAttribute("totalPaidAmountDashBoard", responseDto.getTotalPaidAmount());
         request.setAttribute("totalDueAmountDashBoard", responseDto.getTotalDueAmount());

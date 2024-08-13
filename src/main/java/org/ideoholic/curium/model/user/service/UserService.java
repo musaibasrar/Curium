@@ -57,12 +57,13 @@ public class UserService {
 	    private Login login;
 	    private String BRANCHID = "branchid";
 
-	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService) {
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService, FeesCollectionActionAdapter feesCollectionActionAdapter) {
 		this.request = request;
         this.response = response;
         this.httpSession = request.getSession();
 		this.standardActionAdapter = standardActionAdapter;
 		this.adminService = adminService;
+		this.feesCollectionActionAdapter = feesCollectionActionAdapter;
 	}
 
 	public boolean authenticateUser() {

@@ -726,7 +726,7 @@ public class FeesCollectionService {
 	
 	
 	
-	public FeesDashboardResponseDto getFeesDetailsDashBoard(CancelledReceiptsDto dto, String strBranchId, String currentAcademicYear, Object classDetailsList) {
+	public FeesDashboardResponseDto getFeesDetailsDashBoard(CancelledReceiptsDto dto, String strBranchId, String currentAcademicYear) {
 		FeesDashboardResponseDto result = FeesDashboardResponseDto.builder().build();
 
 		Long totalFeesAmount = 0l;
@@ -742,7 +742,7 @@ public class FeesCollectionService {
 
 			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
 			standardActionAdapter.viewClasses();
-			List<Classsec> classList = (List<Classsec>) classDetailsList;
+			List<Classsec> classList = dto.getClassList();
 			
 			
 			StringBuffer conClassStudying = new StringBuffer();

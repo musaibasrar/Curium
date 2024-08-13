@@ -71,7 +71,7 @@ public class FeesCollectionAction {
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response, standardActionAdapter).cancelFeesReceipt();
-			new UserService(request, response, standardActionAdapter,adminService).searchByDate();
+			new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
 			return "feesCollectionDetails";
 		}
 
