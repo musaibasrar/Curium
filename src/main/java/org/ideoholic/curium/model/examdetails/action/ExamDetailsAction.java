@@ -119,7 +119,7 @@ public class ExamDetailsAction {
 		result = standardActionAdapter.viewClasses();
 		if (!result) 
 			return error;
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
 		if (!result)
 			return error;
 		result = yearActionAdapter.getYear();
