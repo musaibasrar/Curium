@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.map.LinkedMap;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -1403,7 +1405,7 @@ public class FeesCollectionService {
 
 			Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(receiptInfo.getReceiptnumber());
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			LinkedHashMap<String, Long> feeCatMap = new LinkedHashMap<String, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());

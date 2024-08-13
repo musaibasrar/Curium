@@ -1100,7 +1100,8 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<%-- onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})" --%>
+							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" >
 							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<!-- <td class="dataText" align="center">

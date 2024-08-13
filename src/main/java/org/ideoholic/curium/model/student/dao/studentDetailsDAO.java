@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.student.dao;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -708,12 +709,10 @@ public class studentDetailsDAO {
 	
 	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
 		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
-
 		try {
 			transaction = session.beginTransaction();
 			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
 			transaction.commit();
-
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 
 			hibernateException.printStackTrace();

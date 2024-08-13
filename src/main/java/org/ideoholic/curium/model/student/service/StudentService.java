@@ -931,6 +931,31 @@ public class StudentService {
 				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
+				
+				
+				//code for otherfee
+				List<Otherreceiptinfo> orinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());
+				request.setAttribute("otherreceiptinfo",orinfo);
+				List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
+				long othertotalSum = 0l;
+				for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+					othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+				}
+				long othertotalFeesAmount = 0l;
+				long othertotalFeesConcession = 0l;
+				for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+					othertotalFeesAmount = othertotalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+					othertotalFeesConcession = othertotalFeesConcession+studentotherfeesstructureSingle.getConcession();
+				}
+				//code for otherfee
+				
+				//other fee
+				httpSession.setAttribute("otherfeesstructure", otherfeesstructure);
+				httpSession.setAttribute("othersumoffees", othertotalSum);
+				httpSession.setAttribute("otherdueamount", othertotalFeesAmount-othertotalSum);
+				httpSession.setAttribute("othertotalfees", othertotalFeesAmount);
+				httpSession.setAttribute("othertotalfeesconcession", othertotalFeesConcession);
+				//other fee
 			}
 			new StandardService(request, response).viewClasses();
 		} catch (Exception e) {
@@ -1914,7 +1939,7 @@ public class StudentService {
 			headerData.put("Header",
 					new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
-							"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
+							"Caste", "Fathers Name", "Mothers Name","Contact No.","Co-Contact", "Address","Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1931,7 +1956,7 @@ public class StudentService {
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
+								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),DataUtil.emptyString(studentDetails.getCocontactnumber()),DataUtil.emptyString(studentDetails.getAddresspermanent()),
 								 
 								 
 								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , 
