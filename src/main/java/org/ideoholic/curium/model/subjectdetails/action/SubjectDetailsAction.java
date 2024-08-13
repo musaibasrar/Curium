@@ -43,7 +43,7 @@ public class SubjectDetailsAction {
 
 	@GetMapping("/readListOfSubjectNames")
 	public String readListOfSubjectNames() {
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
         return "SubjectMaster";
 	}
 
@@ -77,7 +77,7 @@ public class SubjectDetailsAction {
 	@GetMapping("/readListOfSubjects")
 	public String readListOfSubjectsExams() {
 		subjectDetailsActionAdapter.readListOfSubjects();
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
 		examDetailsActionAdapter.readListOfExams();
 		standardActionAdapter.viewClasses();
         return "SubjectDetails";

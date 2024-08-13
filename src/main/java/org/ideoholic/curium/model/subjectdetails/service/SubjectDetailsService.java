@@ -111,13 +111,15 @@ public class SubjectDetailsService {
 		return ResultResponse.builder().build();
 	}
 
-	public void readListOfSubjectNames() {
+	public SubjectsResponseDto readListOfSubjectNames(String branchId) {
+		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-	        httpSession.setAttribute("listSubjectNames", list);
+	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+			result.setList(list);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+		return result;
 	}
 
 	public ResultResponse deleteMultipleSubjects(SubjectIdsDto subjectIdsDto) {

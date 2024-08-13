@@ -77,5 +77,11 @@ public class SubjectDetailsActionAdapter {
 
         return resultResponse.isSuccess();
     }
+    public void readListOfSubjectNames() {
+        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
+
+        SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
+        httpSession.setAttribute("listSubjectNames", result.getList());
+    }
 
 }
