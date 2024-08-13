@@ -4,12 +4,15 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class FeesCollectionActionAdapter {
@@ -249,5 +252,23 @@ public class FeesCollectionActionAdapter {
 
         ResultResponse resultResponse = feesCollectionService.cancelOtherFeesReceipt(receiptId, journalId, feesReceiptId, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("cancelreceiptresult", resultResponse.isSuccess());
+    }
+
+    public void getFeesDetailsDashBoard() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        ClassesHierarchyDto dto = new ClassesHierarchyDto();
+        dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
+        dto.setClasssecList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
+
+        FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("totalFeesAmountDashBoard", responseDto.getTotalFeesAmount());
+        request.setAttribute("totalPaidAmountDashBoard", responseDto.getTotalPaidAmount());
+        request.setAttribute("totalDueAmountDashBoard", responseDto.getTotalDueAmount());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getBranchIdName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("sumOfFeesDaily", responseDto.getSumOfFeesDaily());
+        httpSession.setAttribute("sumOfFeesMonthly", responseDto.getSumOfFeesMonthly());
+        httpSession.setAttribute("Currentmonth", responseDto.getCurrentMonth());
     }
 }

@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -726,8 +727,9 @@ public class FeesCollectionService {
 	
 	
 	
-	public void getFeesDetailsDashBoard() {
-		
+	public FeesDashboardResponseDto getFeesDetailsDashBoard(ClassesHierarchyDto dto, String strBranchId, String currentAcademicYear) {
+		FeesDashboardResponseDto result = FeesDashboardResponseDto.builder().build();
+
 		Long totalFeesAmount = 0l;
 		Long totalPaidAmount = 0l;
 		Long totalDueAmount = 0l;
@@ -737,11 +739,11 @@ public class FeesCollectionService {
 
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
-		if (httpSession.getAttribute(BRANCHID) != null) {
+		if (strBranchId != null) {
 
-			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND ";
+			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
 			standardActionAdapter.viewClasses();
-			List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
+			List<Classsec> classList = dto.getClasssecList();
 			
 			
 			StringBuffer conClassStudying = new StringBuffer();
@@ -775,7 +777,7 @@ public class FeesCollectionService {
 		}
 		// End Students
 
-		if (httpSession.getAttribute(CURRENTACADEMICYEAR) != null) {
+		if (currentAcademicYear != null) {
 
 			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 
@@ -785,7 +787,7 @@ public class FeesCollectionService {
 
 				long id = parents.getStudent().getSid();
 				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id,
-						httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+						currentAcademicYear);
 
 				studentFeesReport.setParents(parents);
 				studentFeesReport.setStudentFeesStructure(feesstructure);
@@ -802,10 +804,10 @@ public class FeesCollectionService {
 					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()  - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());
 				}
 			}
-
-			request.setAttribute("totalFeesAmountDashBoard", totalFeesAmount);
-			request.setAttribute("totalPaidAmountDashBoard", totalPaidAmount);
-			request.setAttribute("totalDueAmountDashBoard", totalDueAmount);
+;
+			result.setTotalFeesAmount(totalFeesAmount);
+			result.setTotalPaidAmount(totalPaidAmount);
+			result.setTotalDueAmount(totalDueAmount);
 		}
 		
 		
@@ -814,20 +816,20 @@ public class FeesCollectionService {
 		 
 		List<Receiptinfo> feesDetailsListDaily = new ArrayList<Receiptinfo>();
 		List<Receiptinfo> feesDetailsListMonthly = new ArrayList<Receiptinfo>();
-		String branchId = request.getParameter("selectedbranchid");
+		String branchId = dto.getSelectedBranchId();
 		int idBranch = 0;
 		String Currentmonth = null;        
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(strBranchId!=null){
 		
 
 	        if(branchId!=null) {
 	        	String[] branchIdName = branchId.split(":");
 	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
+				result.setBranchIdName(branchIdName[1]);
+				result.setBranchName("Branch Name:");
 	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        	idBranch = Integer.parseInt(strBranchId);
 	        }
 	        
 		String queryMainDaily ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
@@ -880,12 +882,13 @@ public class FeesCollectionService {
 			for (Receiptinfo receiptinfo : feesDetailsListMonthly) {
 				sumOfFeesMonthly = sumOfFeesMonthly + receiptinfo.getTotalamount();
 			}
-			
-			
-			httpSession.setAttribute("sumOfFeesDaily", sumOfFeesDaily);
-			httpSession.setAttribute("sumOfFeesMonthly", sumOfFeesMonthly);
-			httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
-	
+
+			result.setSumOfFeesDaily(sumOfFeesDaily);
+			result.setSumOfFeesMonthly(sumOfFeesMonthly);
+			result.setCurrentMonth(Currentmonth+"'s");
+			result.setSuccess(true);
+
+			return result;
 	}
 	
 	private Integer getLedgerAccountId(String itemAccount) {

@@ -8,4 +8,5 @@ import java.util.List;
 public class ClassesHierarchyDto {
     private List<Classsec> classsecList;
     private List<Classhierarchy> classHierarchy;
+    private String selectedBranchId;
 }
