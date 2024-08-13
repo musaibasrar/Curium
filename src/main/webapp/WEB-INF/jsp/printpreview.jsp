@@ -264,7 +264,7 @@
 	font-weight: normal;
 	font-family: bolder;
 	color: black;
-	font-size: 25px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 	margin:0px;
@@ -515,10 +515,11 @@ for(Cookie cookie : cookies){
     
     <table style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:0px;">
   <tr><td>
-<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label></td></tr>
+<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label>
+<label class="addressLine" style="font-size:10px;color:black;">&emsp;&emsp;&emsp;&emsp;&emsp;Mob: 7000320310&nbsp;&nbsp;Landline: 07412455722</label>
+</td></tr>
 				<tr><td>
 				<label class="addressLine" style="font-size:12px;">&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
-				<label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
 				</td>  </tr>
 </table>
   </div>
