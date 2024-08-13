@@ -28,12 +28,12 @@ public class StampFeesActionAdapter {
 	@Autowired
 	private StampFeesService stampFeesService;
 	
+	
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 	public void advanceSearch() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -43,7 +43,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void deleteFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setCurrentYear(request.getParameter("currentyear"));
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -52,7 +51,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void addFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StampFeesDto stampFeesDto = new StampFeesDto();
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
@@ -66,7 +64,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void addotherFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StampFeesDto stampFeesDto = new StampFeesDto();
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
@@ -80,7 +77,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void otheradvanceSearch() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -90,7 +86,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void advanceSearchForStampFees() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));

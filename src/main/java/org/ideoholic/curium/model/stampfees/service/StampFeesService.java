@@ -32,7 +32,9 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StampFeesService {
 
 	HttpServletRequest request;
@@ -42,13 +44,7 @@ public class StampFeesService {
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
 
-	public StampFeesService(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
+	
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -290,15 +286,13 @@ public class StampFeesService {
 	private int getLedgerAccountId(String itemAccount) {
 		
 		int result = 0;
-	 	
+		
 	 	Properties properties = new Properties();
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				
 		    
         		String ItemLedgerId = properties.getProperty(itemAccount);
 		    
@@ -308,8 +302,11 @@ public class StampFeesService {
 		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
 		    	result = Integer.parseInt(ItemLedger.toLowerCase());
 		    }
-		    
+        		} catch (Exception e) {
+					e.printStackTrace();
+				}
 		    return result;
+		    
 	}
 
 	public void deleteFeesStamp(StudentIdsDto studentIdsDto) {
@@ -398,7 +395,7 @@ public class StampFeesService {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
