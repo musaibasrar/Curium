@@ -4,7 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsExamsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
@@ -12,15 +12,14 @@ import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("api/v1/subjectDetailsProcess")
+@RestController
+@RequestMapping("/api/v1/subjectDetailsProcess")
 public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
 
     @Autowired
-    private StandardActionAdapter standardActionAdapter;
+    private StandardService standardService;
 
     @Autowired
     private ExamDetailsActionAdapter examDetailsActionAdapter;
@@ -83,7 +82,7 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
         subjectDetailsService.readListOfSubjects(branchId);
         subjectDetailsService.readListOfSubjectNames(branchId);
         examDetailsActionAdapter.readListOfExams();
-        standardActionAdapter.viewClasses();
+        standardService.viewClasses(branchId);
         return ResponseEntity.ok(result);
     }
 }
