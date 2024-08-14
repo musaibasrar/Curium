@@ -1076,18 +1076,18 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public void getFeesStampDueReport() {
+	public ResultResponse getFeesStampDueReport(FeesReportDto dto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 		
-		
-		String academicYear = request.getParameter("academicyear");
+		String academicYear = dto.getAcademicYear();
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 		
 		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
+		String[] addClass = dto.getAddClass();
 		StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -1107,7 +1107,7 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -1119,7 +1119,7 @@ public class FeesCollectionService {
 		//End Students
 		
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 			
 			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 			
@@ -1139,10 +1139,11 @@ public class FeesCollectionService {
 					
 				}
 			}
-		
-			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+
+			result.setResultList(studentFeesReportList);
+			result.setSuccess(true);
 		}
-		
+		return result;
 	  }
 	
 	public StampFeeResponseDto getotherStampFees(StampFeesDto dto, String currentAcademicYear) {
@@ -2061,15 +2062,16 @@ public class FeesCollectionService {
 			}
 	}
 
-	public boolean printOtherDataForFees() {
+	public CancelledReceiptsResponseDto printOtherDataForFees(CancelledReceiptsDto dto) {
+		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
+		String[] feesIds = dto.getFeesIds();
 		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
-		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
-		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
-		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));
+		String toDate= DataUtil.dateFromatConversionDashToSlash(dto.getToDate());
+		String fromDate = DataUtil.dateFromatConversionDashToSlash(dto.getFromDate());
+		String oneDay = DataUtil.dateFromatConversionDashToSlash(dto.getOneDay());
 		
 		long sumOfFees = 0l;
 		
@@ -2085,14 +2087,15 @@ public class FeesCollectionService {
 
 			}
 		}
-		request.setAttribute("feesmap", feesMap);
-		request.setAttribute("sumofdetailsfees", sumOfFees);
+		result.setFeesMap(feesMap);
+		result.setSumOfFees(sumOfFees);
+		result.setSuccess(true);
 		if(oneDay.equalsIgnoreCase("")) {
-			httpSession.setAttribute("daterangefeescollection", "From Date: "+fromDate+"              To Date: "+toDate+"");
+			result.setDateToCancel("From Date: "+fromDate+"              To Date: "+toDate+"");
 		}else {
-			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
+			result.setBranchName("Date: "+oneDay+"");
 		}
-		return true;
+		return result;
 	}
 	
 	public ResultResponse getDefaultersReport(FeesReportDto dto, String branchId, String currentAcademicYear) {

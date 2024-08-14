@@ -127,7 +127,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
-        request.setAttribute("feescatmap", responseDto.getReceiptDate());
+        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
     }
 
@@ -294,5 +294,34 @@ public class FeesCollectionActionAdapter {
 
         ResultResponse resultResponse = feesCollectionService.getFeesReportDue(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
+
+    public void getFeesStampDueReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+
+        ResultResponse resultResponse = feesCollectionService.getFeesStampDueReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
+
+    public boolean printOtherDataForFees() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setFeesIds(request.getParameterValues("feesIDs"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setOneDay(request.getParameter("oneday"));
+
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.printOtherDataForFees(dto);
+        request.setAttribute("feesmap", responseDto.getFeesMap());
+        request.setAttribute("sumofdetailsfees", responseDto.getSumOfFees());
+        httpSession.setAttribute("daterangefeescollection", responseDto.getDateToCancel());
+        httpSession.setAttribute("daterangefeescollection", responseDto.getBranchName());
+
+        return responseDto.isSuccess();
     }
 }
