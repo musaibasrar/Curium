@@ -39,7 +39,7 @@ public class StudentAction {
 
 	@PostMapping("/multiClassSearch")
 	public String multiClassSearch() {
-		new StampFeesService(request, response).multiClassSearch();
+		stampFeesActionAdapter.multiClassSearch();
 		return "studentsdetailsreports";
 	}
 

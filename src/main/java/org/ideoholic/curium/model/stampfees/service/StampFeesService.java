@@ -1,12 +1,9 @@
 package org.ideoholic.curium.model.stampfees.service;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,14 +33,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StampFeesService {
-
-	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
-	private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
-
+	
 	
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
@@ -91,17 +81,18 @@ public class StampFeesService {
 		return searchStudentResponseDto;
 	}
 	
-	public void multiClassSearch() {
+	public SearchStudentResponseDto multiClassSearch(SearchStudentDto searchStudentDto,String branchid) {
 
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 		
-		String academicYear = request.getParameter("academicyear");
+		String academicYear = searchStudentDto.getAcademicyear();
 			
 		String queryMain = "From Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and ";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String[] addClass = request.getParameterValues("classsearch");
+		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+		String[] addClass = searchStudentDto.getClassesSearch();
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
 
@@ -127,16 +118,16 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -145,21 +136,17 @@ public class StampFeesService {
 		}
 		
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
 
-	
+	    return searchStudentResponseDto;
 	}
 
-	public void advanceSearchByParents() {
-
+	public SearchStudentResponseDto advanceSearchByParents(String fathersname,String mothersname,String branchid) {
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchParentsList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-			String fathersname = DataUtil.emptyString(request
-					.getParameter("fathersname"));
-			String mothersname = DataUtil.emptyString(request
-					.getParameter("mothersname"));
+		if(branchid!=null){
+			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(branchid);
 
 			String querySub = "";
 
@@ -186,8 +173,8 @@ public class StampFeesService {
 					.getStudentsList(queryMain);
 		}
 		
-		request.setAttribute("studentList", searchParentsList);
-
+		searchStudentResponseDto.getSearchStudentList();
+        return searchStudentResponseDto;
 	}
 
 	public void addFeesStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {

@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,5 +94,23 @@ public class StampFeesActionAdapter {
 		FeescategoryResponseDto feescategoryResponseDto = stampFeesService.advanceSearchForStampFees(searchStudentDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		request.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
+	}
+	
+	public void multiClassSearch() {
+		SearchStudentDto searchStudentDto = new SearchStudentDto();
+		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setClassesSearch(request.getParameterValues("classsearch"));
+		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.multiClassSearch(searchStudentDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
+	}
+	
+	public void advanceSearchByParents() {
+		String fathersname = DataUtil.emptyString(request
+				.getParameter("fathersname"));
+		String mothersname = DataUtil.emptyString(request
+				.getParameter("mothersname"));
+		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.advanceSearchByParents(fathersname, mothersname,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("studentList", searchStudentResponseDto.getSearchStudentList());
 	}
 }
