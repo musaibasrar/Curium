@@ -2095,20 +2095,20 @@ public class FeesCollectionService {
 		return true;
 	}
 	
-	public void getDefaultersReport() {
+	public ResultResponse getDefaultersReport(FeesReportDto dto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 
-
-		String academicYear = request.getParameter("academicyear");
-		String[] feesCat = request.getParameterValues("feescategory");
+		String academicYear = dto.getAcademicYear();
+		String[] feesCat = dto.getFeesCat();
 
 		//Get Students
 
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
 		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
+		String[] addClass = dto.getAddClass();
 		StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -2128,7 +2128,7 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -2140,7 +2140,7 @@ public class FeesCollectionService {
 		//End Students
 
 
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 
 			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 
@@ -2214,9 +2214,10 @@ public class FeesCollectionService {
 			}
 
 			}
-			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+			result.setResultList(studentFeesReportList);
+			result.setSuccess(true);
 		}
-
+		return result;
 	  }
 
 	public void viewCancelledOtherFeesReceipts() {
@@ -2279,20 +2280,20 @@ public class FeesCollectionService {
 			httpSession.setAttribute("sumofdetailsfeescancelled", sumOfFees);
 	}
 
-	public void getFeesReportDue() {
+	public ResultResponse getFeesReportDue(FeesReportDto dto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 		
-		
-		String academicYear = request.getParameter("academicyear");
-		String[] feesCat = request.getParameterValues("feescategory");
+		String academicYear = dto.getAcademicYear();
+		String[] feesCat = dto.getFeesCat();
 		
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 		
 		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
+		String[] addClass = dto.getAddClass();
 		StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -2312,7 +2313,7 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -2324,7 +2325,7 @@ public class FeesCollectionService {
 		//End Students
 		
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 			
 			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 			
@@ -2358,10 +2359,11 @@ public class FeesCollectionService {
 					
 				}
 			}
-		
-			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+
+			result.setResultList(studentFeesReportList);
+			result.setSuccess(true);
 		}
-		
+		return result;
 	  }
 
 }
