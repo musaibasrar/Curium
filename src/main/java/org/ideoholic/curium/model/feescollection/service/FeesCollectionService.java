@@ -2093,7 +2093,7 @@ public class FeesCollectionService {
 		if(oneDay.equalsIgnoreCase("")) {
 			result.setDateToCancel("From Date: "+fromDate+"              To Date: "+toDate+"");
 		}else {
-			result.setBranchName("Date: "+oneDay+"");
+			result.setDateToCancel("Date: "+oneDay+"");
 		}
 		return result;
 	}

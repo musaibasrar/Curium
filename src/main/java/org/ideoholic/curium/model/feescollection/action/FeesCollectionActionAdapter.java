@@ -320,7 +320,6 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("feesmap", responseDto.getFeesMap());
         request.setAttribute("sumofdetailsfees", responseDto.getSumOfFees());
         httpSession.setAttribute("daterangefeescollection", responseDto.getDateToCancel());
-        httpSession.setAttribute("daterangefeescollection", responseDto.getBranchName());
 
         return responseDto.isSuccess();
     }
