@@ -2089,12 +2089,12 @@ public class FeesCollectionService {
 		}
 		result.setFeesMap(feesMap);
 		result.setSumOfFees(sumOfFees);
-		result.setSuccess(true);
 		if(oneDay.equalsIgnoreCase("")) {
 			result.setDateToCancel("From Date: "+fromDate+"              To Date: "+toDate+"");
 		}else {
 			result.setDateToCancel("Date: "+oneDay+"");
 		}
+		result.setSuccess(true);
 		return result;
 	}
 	
