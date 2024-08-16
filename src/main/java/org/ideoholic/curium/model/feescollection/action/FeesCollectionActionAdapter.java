@@ -323,4 +323,23 @@ public class FeesCollectionActionAdapter {
 
         return responseDto.isSuccess();
     }
+
+    public void viewCancelledOtherFeesReceipts() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setOneDay(request.getParameter("oneday"));
+
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledOtherFeesReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("dayonecancel", responseDto.getDayOneCancel());
+        httpSession.setAttribute("datefromcancel", responseDto.getDateFromCancel());
+        httpSession.setAttribute("datetocancel", responseDto.getDateToCancel());
+        httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getOtherfeesDetailsList());
+        httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
+    }
 }
