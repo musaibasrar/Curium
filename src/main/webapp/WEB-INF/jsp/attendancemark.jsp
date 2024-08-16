@@ -411,6 +411,25 @@
 	
 </script>
 
+<script type="text/javascript">
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+		$("#effect").hide();
+	});
+</script>
+
 <script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
@@ -571,7 +590,10 @@ for(Cookie cookie : cookies){
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form id="form1"  method="POST">
-	
+	<div style="height: 28px">
+			<button " id="add">Mark Attendance</button>
+			<br>
+		</div>
 		<div class="alert-box success"></div>
 		<div class="alert-box failure"></div>
 
