@@ -230,13 +230,13 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchByDateFeesCollectionCategory")
 	        private String searchByDateFeesCollectionCategory() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesCollectionCategory();
+	        	feesCollectionActionAdapter.getFeesCollectionCategory();
 	            return "feescollectiondetailscategory";
 			}
 		 
 		 @PostMapping("/searchByDateFeesCollectionCategoryPrint")
 	        private String searchByDateFeesCollectionCategoryPrint() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesCollectionCategory();
+	        	feesCollectionActionAdapter.getFeesCollectionCategory();
 	            return "printfeescollectiondetailscategory";
 			}
 		 

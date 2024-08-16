@@ -342,4 +342,29 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getOtherfeesDetailsList());
         httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
     }
+
+    public void getFeesCollectionCategory() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setOneDay(request.getParameter(""));
+        dto.setToDateOtherFees(request.getParameter("todate"));
+        dto.setFromDateOtherFees(request.getParameter("fromdate"));
+        dto.setOneDayOtherFees(request.getParameter("oneday"));
+
+        FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
+        httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("dayone", responseDto.getDayOne());
+        httpSession.setAttribute("datefrom", responseDto.getDateFrom());
+        httpSession.setAttribute("dateto", responseDto.getDateTo());
+        httpSession.setAttribute("feeCategoryCollectionMap", responseDto.getFeeCategoryCollectionMapReport());
+        httpSession.setAttribute("feesbycash", responseDto.getFeesByCash());
+        httpSession.setAttribute("feesbybank", responseDto.getFeesByBank());
+        httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByCashOtherFees());
+        httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByBankOtherFees());
+    }
 }
