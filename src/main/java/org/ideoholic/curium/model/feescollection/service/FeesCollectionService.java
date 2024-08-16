@@ -1822,7 +1822,7 @@ public class FeesCollectionService {
 		// getFile(name, path);
 	}
 
-	public FeesCategoryResponseDto getFeesCollectionCategory(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+	public FeesCategoryResponseDto getFeesCollectionCategory(FeesCategoryDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
 		FeesCategoryResponseDto result = FeesCategoryResponseDto.builder().build();
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();

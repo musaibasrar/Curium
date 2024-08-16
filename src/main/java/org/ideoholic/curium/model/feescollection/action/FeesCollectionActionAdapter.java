@@ -346,7 +346,7 @@ public class FeesCollectionActionAdapter {
     public void getFeesCollectionCategory() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        CancelledReceiptsDto dto = new CancelledReceiptsDto();
+        FeesCategoryDto dto = new FeesCategoryDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
         dto.setToDate(request.getParameter("todate"));
         dto.setFromDate(request.getParameter("fromdate"));
