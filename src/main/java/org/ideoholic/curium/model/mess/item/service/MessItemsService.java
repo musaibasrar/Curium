@@ -29,6 +29,7 @@ import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.SMSReport;
 import org.ideoholic.curium.util.StockIssuance;
 
 public class MessItemsService {
@@ -434,7 +435,7 @@ public class MessItemsService {
 			
 			for (MessStockMove messStockMove : messStockMoveList) {
 				
-					StockIssuance stockIssuance = new StockIssuance();
+				StockIssuance stockIssuance = new StockIssuance();
 				for (MessStockEntry stockEntry : messStockEntryList) {
 					
 					if(messStockMove.getStockentryid().equals(stockEntry.getId())) {

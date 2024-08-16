@@ -179,4 +179,17 @@ public class DocumentAction {
 		new DocumentService(request, response).viewTcDetail(); 
 		return "studentstcreport";
 	}
+	
+	@GetMapping("/studentsRegistrationReports")
+	public String studentsRegistrationReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsregistrationreport";
+	}
+	
+	@PostMapping("/multiClassSearchRegistrationReport")
+	public String multiClassSearchRegistrationReport() {
+		new DocumentService(request, response).multiClassSearchRegistrationReport(); 
+		return "studentsregistrationreport";
+	}
+	
 }

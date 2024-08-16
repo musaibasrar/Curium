@@ -508,6 +508,28 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td class="alignLeft">Application Type&nbsp;</td>
+							<td>Admission<input type="checkbox"
+								value="Admission" name="stream" id="yes:at" onclick="yesCheck(this.id);"
+								${student.stream == 'Admission' ? 'checked' : ''} />&nbsp;
+								&nbsp;Registration<input type="checkbox" value="Registration" name="stream"
+								id="no:at" onclick="noCheck(this.id);"
+								${student.stream == 'Registration' ? 'checked' : ''} />
+
+							</td>
+							</tr>
+							
+						<tr>
+
+							<td></td>
+
+						</tr>
+						<tr>
+
+							<td></td>
+
+						</tr>
 						
 						<tr>
 

@@ -223,6 +223,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
+		                //@UI Application Type
 		                if (fieldName.equalsIgnoreCase("stream")) {
 		                	student.setStream(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }		                
@@ -540,10 +541,23 @@ public class StudentService {
 			e.printStackTrace();
 		}
 		
-		student.setArchive(0);
-		student.setPassedout(0);
-		student.setDroppedout(0);
-		student.setLeftout(0);
+		if("Admission".equalsIgnoreCase(student.getStream())) {
+			student.setArchive(0);
+			student.setPassedout(0);
+			student.setDroppedout(0);
+			student.setLeftout(0);
+		}else if ("Registration".equalsIgnoreCase(student.getStream())) {
+			student.setArchive(1);
+			student.setPassedout(1);
+			student.setDroppedout(1);
+			student.setLeftout(1);
+		}else {
+			student.setArchive(0);
+			student.setPassedout(0);
+			student.setDroppedout(0);
+			student.setLeftout(0);
+		}
+		
 		//DataUtil.generateString(5)
 		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -581,7 +595,7 @@ public class StudentService {
 	private void stampFees(Integer stdIds, String setYear) {
 
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		String[] feesCategoryIds = request.getParameterValues("feescategory");
 		if(feesCategoryIds!=null) {
 		String[] studentIds = {stdIds.toString()};
 		if(studentIds!=null){
@@ -617,20 +631,20 @@ public class StudentService {
 		for (String id : studentIds) {
 
 			for(int i=0; i < feesCategoryIds.length ; i++){
-
+			String[] feesCategoryIdsdiv = 	feesCategoryIds[i].split("--");
 			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 			Feescategory feescategory = new Feescategory();
 			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIdsdiv[0]));
 			studentfeesstructure.setFeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[Integer.parseInt(feesCategoryIdsdiv[1])]));
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
+			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[Integer.parseInt(feesCategoryIdsdiv[1])]));
 			studentfeesstructure.setAcademicyear(setYear);
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(Integer.parseInt(concession[Integer.parseInt(feesCategoryIdsdiv[1])]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
 
@@ -1462,7 +1476,19 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		 student.setArchive(0);
+		
+		if("Admission".equalsIgnoreCase(student.getStream())) {
+			student.setArchive(0);
+			student.setPassedout(0);
+			student.setDroppedout(0);
+			student.setLeftout(0);
+		}else if ("Registration".equalsIgnoreCase(student.getStream())) {
+			student.setArchive(1);
+			student.setPassedout(1);
+			student.setDroppedout(1);
+			student.setLeftout(1);
+		}
+		
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 

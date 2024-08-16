@@ -200,7 +200,7 @@ public class StandardDetailsDAO {
                 transaction = session.beginTransaction();
 
                 results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.passedout = 1 order by s.admissionnumber DESC")
+                                "FROM Student s where s.passedout = 1 and s.droppedout = 0 and s.leftout = 0 order by s.admissionnumber DESC")
                                 .list();
                 transaction.commit();
 
@@ -222,7 +222,7 @@ public class StandardDetailsDAO {
                 transaction = session.beginTransaction();
 
                 results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.droppedout = 1 order by s.admissionnumber DESC")
+                                "FROM Student s where s.droppedout = 1 and s.passedout = 0 and s.leftout = 0 order by s.admissionnumber DESC")
                                 .list();
                 transaction.commit();
 
@@ -295,7 +295,7 @@ public class StandardDetailsDAO {
                 transaction = session.beginTransaction();
 
                 results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.leftout = 1 order by s.admissionnumber DESC")
+                                "FROM Student s where s.leftout = 1 and s.passedout = 0 and s.droppedout = 0 order by s.admissionnumber DESC")
                                 .list();
                 transaction.commit();
 
