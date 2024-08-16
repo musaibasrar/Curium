@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
-import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsExamsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsExamsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
@@ -13,11 +13,11 @@ public interface SubjectDetailsApiAction {
 
      ResponseEntity<SubjectsResponseDto> addSubjectMaster(SubjectDto dto,String branchId,String userLoginId);
 
-     ResponseEntity<ListOfSubjectsExamsResponseDto> deleteMultiple(SubjectIdsDto dto,String branchId);
+     ResponseEntity<SubjectsExamsResponseDto> deleteMultiple(SubjectIdsDto dto, String branchId);
 
-     ResponseEntity<ListOfSubjectsExamsResponseDto> addSubject(SubjectDto dto,String branchId,String userLoginId);
+     ResponseEntity<SubjectsExamsResponseDto> addSubject(SubjectDto dto, String branchId, String userLoginId);
 
-     ResponseEntity<ListOfSubjectsExamsResponseDto> readListOfSubjectsExams(String branchId);
+     ResponseEntity<SubjectsExamsResponseDto> readListOfSubjectsExams(String branchId);
 
 
 

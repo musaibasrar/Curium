@@ -1,24 +1,18 @@
 package org.ideoholic.curium.model.subjectdetails.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
 import lombok.Data;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
-
+import org.ideoholic.curium.model.std.dto.Classsec;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class ListOfSubjectsExamsResponseDto {
-    private List<Subject> list;
-    private boolean success;
-
+public class SubjectsExamsResponseDto {
+    private List<Subject> subjects;
+    private List<Subject> subjectNames;
     private List<Exams> exams;
-
-    private String message;
-    private Map resultMap;
-    private Integer resultValue;
-    private List resultList;
+    private List<Classsec> classsecList;
+    private boolean success;
 
 }

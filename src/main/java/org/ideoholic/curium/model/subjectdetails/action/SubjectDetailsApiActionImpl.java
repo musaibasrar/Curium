@@ -5,7 +5,7 @@ import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.subjectdetails.dto.ListOfSubjectsExamsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsExamsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
@@ -57,7 +57,7 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
     }
 
     @PostMapping("/deleteMultiple")
-    public ResponseEntity<ListOfSubjectsExamsResponseDto> deleteMultiple(@RequestBody SubjectIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<SubjectsExamsResponseDto> deleteMultiple(@RequestBody SubjectIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
         ResultResponse result = subjectDetailsService.deleteMultiple(dto);
         if (result.isSuccess()) {
             return readListOfSubjectsExams(branchId);
@@ -67,7 +67,7 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
     }
 
     @PostMapping("/addSubject")
-    public ResponseEntity<ListOfSubjectsExamsResponseDto> addSubject(@RequestBody SubjectDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userLoginId) {
+    public ResponseEntity<SubjectsExamsResponseDto> addSubject(@RequestBody SubjectDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userLoginId) {
         ResultResponse result = subjectDetailsService.addSubject(dto, branchId, userLoginId);
         if (result.isSuccess()) {
             return readListOfSubjectsExams(branchId);
@@ -77,12 +77,23 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
     }
 
     @GetMapping("/readListOfSubjects")
-    public ResponseEntity<ListOfSubjectsExamsResponseDto> readListOfSubjectsExams(@RequestHeader(value = "branchid") String branchId) {
-        ListOfSubjectsExamsResponseDto result = new ListOfSubjectsExamsResponseDto();
-        subjectDetailsService.readListOfSubjects(branchId);
-        subjectDetailsService.readListOfSubjectNames(branchId);
+    public ResponseEntity<SubjectsExamsResponseDto> readListOfSubjectsExams(@RequestHeader(value = "branchid") String branchId) {
+        SubjectsExamsResponseDto result = new SubjectsExamsResponseDto();
+        SubjectsResponseDto responseDto = subjectDetailsService.readListOfSubjects(branchId);
+        result.setSubjects(responseDto.getList());
+        result.setSuccess(responseDto.isSuccess());
+
+        responseDto = subjectDetailsService.readListOfSubjectNames(branchId);
+        result.setSubjectNames(responseDto.getList());
+        result.setSuccess(result.isSuccess() & responseDto.isSuccess());
+
+        // TODO fix this after changing this to service call
         examDetailsActionAdapter.readListOfExams();
-        standardService.viewClasses(branchId);
+
+        ResultResponse response = standardService.viewClasses(branchId);
+        result.setClasssecList(response.getResultList());
+        result.setSuccess(result.isSuccess() & response.isSuccess());
+
         return ResponseEntity.ok(result);
     }
 }
