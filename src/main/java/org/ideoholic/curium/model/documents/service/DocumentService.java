@@ -963,7 +963,7 @@ public class DocumentService {
 				int tcSid = transferCert.getSid();
 				if(studentId==tcSid) {
 					Student student = parents.getStudent();
-					student.setNooftc(transferCert.getNoofissues());
+					student.setNotcissued(transferCert.getNoofissues());
 					parents.setStudent(student);
 				}
 				
