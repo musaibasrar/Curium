@@ -141,13 +141,14 @@ public class StampFeesService {
 	    return searchStudentResponseDto;
 	}
 
-	public SearchStudentResponseDto advanceSearchByParents(String fathersname,String mothersname,String branchid) {
+	public SearchStudentResponseDto advanceSearchByParents(String fatherName,String motherName,String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchParentsList = new ArrayList<Parents>();
 		
 		if(branchid!=null){
 			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(branchid);
-
+			String fathersname = DataUtil.emptyString(fatherName);
+			String mothersname = DataUtil.emptyString(motherName);
 			String querySub = "";
 
 			if (!fathersname.equalsIgnoreCase("")) {

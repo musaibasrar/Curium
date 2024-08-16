@@ -106,10 +106,8 @@ public class StampFeesActionAdapter {
 	}
 	
 	public void advanceSearchByParents() {
-		String fathersname = DataUtil.emptyString(request
-				.getParameter("fathersname"));
-		String mothersname = DataUtil.emptyString(request
-				.getParameter("mothersname"));
+		String fathersname = request.getParameter("fathersname");
+		String mothersname = request.getParameter("mothersname");
 		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.advanceSearchByParents(fathersname, mothersname,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentList", searchStudentResponseDto.getSearchStudentList());
 	}
