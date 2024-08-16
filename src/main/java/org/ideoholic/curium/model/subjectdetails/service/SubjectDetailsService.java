@@ -15,22 +15,15 @@ import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.*;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Musaib_2
  *
  */
+@Service
 public class SubjectDetailsService {
-
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private HttpSession httpSession;
-	
-	public SubjectDetailsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
 
 	public SubjectsResponseDto readListOfSubjects(String branchId) {
 		SubjectsResponseDto result = new SubjectsResponseDto();

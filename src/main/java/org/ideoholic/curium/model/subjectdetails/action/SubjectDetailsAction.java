@@ -17,12 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/SubjectDetailsProcess")
 public class SubjectDetailsAction {
-	
-	@Autowired
-	private HttpServletRequest request;
-	
-	@Autowired
-	private HttpServletResponse response;
 
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
