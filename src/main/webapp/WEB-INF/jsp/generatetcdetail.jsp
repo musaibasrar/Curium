@@ -280,13 +280,13 @@
     </head>
     
    
-    <body onload="hide()"><form id="form1"  >
+    <body onload="generateDetail()"><form id="form1"  >
             
 
                     <div align="center">
                     <br/><br/>
-                    <p class="alignRightHeader">Generate TC Detail</p>
-                    
+                   <!--  <p class="alignRightHeader">Generate TC Detail</p> -->
+                  <img alt="" src="/shatabdi/images/loading.gif">
                     
                     </div>
                             
@@ -295,20 +295,21 @@
 
                                         <td>
                                             <br/>
+                                             
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td align="center">
 
                                             <button id="save" >Submit</button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <!-- <button id="update" >Update</button> -->
+                                            <button id="update" >Update</button>
 
                                         </td>
 
 
-                                    </tr>
+                                    </tr> -->
                                 </table>
 
         </form>

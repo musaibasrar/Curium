@@ -418,7 +418,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${parent.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${parent.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${parent.student.sid}'/>"><c:out value="${parent.student.studentexternalid}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${parent.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${parent.student.studentexternalid}"/></a></td>
                                 <td class="dataText"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"><c:out value="${parent.fathersname}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${parent.student.classstudying}"/></td>
