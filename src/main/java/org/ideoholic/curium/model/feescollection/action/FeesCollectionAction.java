@@ -271,7 +271,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/viewCancelledOtherFeesReceipts")
 			public String viewCancelledOtherFeesReceipts() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).viewCancelledOtherFeesReceipts();
+	        	feesCollectionActionAdapter.viewCancelledOtherFeesReceipts();
 				return "otherfeescancelledreceipts";
 			}
 		 
