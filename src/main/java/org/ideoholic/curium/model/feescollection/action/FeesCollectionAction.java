@@ -140,7 +140,7 @@ public class FeesCollectionAction {
         
         @PostMapping("/searchFeesStampDueReport")
         public String searchFeesStampDueReport() {
-            new FeesCollectionService(request, response, standardActionAdapter).getFeesStampDueReport();
+            feesCollectionActionAdapter.getFeesStampDueReport();
             return "feesstampdue";
         }
         
@@ -255,7 +255,7 @@ public class FeesCollectionAction {
 		 @PostMapping("/printOtherDataForFees")
 			public String printOtherFeesData() {
 				
-				if(new FeesCollectionService(request, response, standardActionAdapter).printOtherDataForFees()){
+				if(feesCollectionActionAdapter.printOtherDataForFees()){
 					return "printotherfeescollectiondetails";
 				}else{
 					return "error";
