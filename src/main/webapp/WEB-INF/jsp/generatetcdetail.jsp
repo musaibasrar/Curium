@@ -6,19 +6,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Generate TC Detail</title>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alirfan/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/alirfan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
 
 
 
@@ -252,7 +252,7 @@
 }
         </style>
 
-        <script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datetimepicker_css.js"></script>
 
         <script type="text/javascript">
         
@@ -270,7 +270,7 @@
             function generateDetail() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/DocumentsProcess/tcDetail";
+                form1.action = "/alirfan/DocumentsProcess/tcDetail";
                 form1.method = "POST";
                 form1.submit();
                 
@@ -286,7 +286,7 @@
                     <div align="center">
                     <br/><br/>
                    <!--  <p class="alignRightHeader">Generate TC Detail</p> -->
-                  <img alt="" src="/abc/images/loading.gif">
+                  <img alt="" src="/alirfan/images/loading.gif">
                     
                     </div>
                             

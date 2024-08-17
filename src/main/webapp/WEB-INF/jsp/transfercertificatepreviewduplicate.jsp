@@ -185,9 +185,9 @@ margin-top:0px;
     text-align:center;
 }
     </style>
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/alirfan/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
           <!--    <script type="text/javascript">
              window.onload = function(){
@@ -201,7 +201,7 @@ margin-top:0px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -222,14 +222,14 @@ for(Cookie cookie : cookies){
 		
 			<tr><td style="margin-right:0px;padding-right:0px;">
 			
-			<img  src="/abc/images/alirfan.jpg" alt="alirfan logo" width="103" height="120">&emsp;&emsp;</td>
+			<img  src="/alirfan/images/alirfan.jpg" alt="alirfan logo" width="103" height="120">&emsp;&emsp;</td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="addressLine">Al-Hira Educational & Welfare Society`s.</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Al-Irfan School</label><br>
 				<label class="addressLine">(Secondary and Senior Secondary Residential and day Boarding)</label><br>
 				<label class="addressLine"> ${branchaddress}</label><br>
 				</td>
-				<td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/abc/images/cbse.png" alt="cbse logo" width="100" height="111"></td>
+				<td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/alirfan/images/cbse.png" alt="cbse logo" width="100" height="111"></td>
 				</tr>
 </table>
 
@@ -452,16 +452,16 @@ for(Cookie cookie : cookies){
 			</tr>
         <tr>
          <td>
-                            <button id="print" type="button" style="background-image: url(/abc/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/alirfan/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
         </tr>
 			<%-- <tr>
-               <td align="center"><a id="print" href="/abc/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+               <td align="center"><a id="print" href="/alirfan/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
              </tr> --%>
 		</TABLE>
 
-		<%-- <a id="print" href="/abc/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/alirfan/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 
 

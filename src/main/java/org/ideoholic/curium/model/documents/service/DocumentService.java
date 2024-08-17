@@ -86,7 +86,7 @@ public class DocumentService {
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		String type = DataUtil.emptyString(request.getParameter("type"));
 		String grno = DataUtil.emptyString(request.getParameter("grno"));
-		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
+		//String tcno = DataUtil.emptyString(request.getParameter("tcno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
@@ -111,21 +111,30 @@ public class DocumentService {
 		String afflno = DataUtil.emptyString(request.getParameter("afflno"));
 		String code = DataUtil.emptyString(request.getParameter("code"));
 		String proof = DataUtil.emptyString(request.getParameter("proof"));
-		String dateOfTc = DataUtil.emptyString(request.getParameter("dateoftc"));
+		Date dateOfTc = DateUtil.datePars(request.getParameter("dateoftc"));
 		//Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
-		
+		int tcno = 0;
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
-		 
+		 Transfercertificate tcLastRow = new DocumentDAO().getTCLastRow();
+		 if(tcLastRow != null) {
+			tcno = tcLastRow.getTcid()+1;
+		 }
 		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			// tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
+			 tc.setDateofissues(dateOfTc);
+			 tc.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 tc.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
+				 int noOfIssues = transferCertificate.getNoofissues();
+				 tc.setNoofissues(noOfIssues+1);
+				 
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
@@ -163,8 +172,17 @@ public class DocumentService {
 				 request.setAttribute("dateinword", dateinword);
 				 request.setAttribute("studentdetails", parents);
 				 request.setAttribute("tcdetails", tc);
-				 return "studentexists";
+				 student.setSid(studentId);
+					new studentDetailsDAO().updateStudentDuplicate(student);
+					transferCertificateString = new DocumentDAO().updateTransferCertificate(tc);
+					/* return "studentexists"; */
 			 }else {
+				 student.setReasonleaving(leavingReason);
+					student.setSid(studentId);
+					student.setNotcissued(1);
+					//+student.setNooftc(1);
+					tc.setNoofissues(1);
+					new studentDetailsDAO().updateStudent(student);
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
 		 }

@@ -823,4 +823,21 @@ public List<Parents> getReferredList(List<Integer> sidList) {
 		 }
 		return DetailsList;
 	}
+
+public boolean updateStudentDuplicate(Student student) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session 
+					.createSQLQuery("update student set notcissued = notcissued+1 where sid = '"+student.getSid()+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return false;
+	}
 }
