@@ -106,6 +106,43 @@ public class DocumentDAO {
 		}
 		return results;
 	}
+
+
+
+	public Transfercertificate getTCLastRow() {
+		Transfercertificate last = new Transfercertificate();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Transfercertificate order by tcid DESC");
+			query.setMaxResults(1);
+			last = (Transfercertificate) query.uniqueResult();
+			
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return last;
+	}
+
+
+	public String updateTransferCertificate(Transfercertificate tc) {
+		String result = "false";
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session 
+					.createSQLQuery("update transfercertificate set noofissues = '"+tc.getNoofissues()+"' where sid = '"+tc.getSid()+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+			result = "true";
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return result;
+	}
 	
 	
 }
