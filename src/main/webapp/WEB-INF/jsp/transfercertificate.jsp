@@ -571,7 +571,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td style="color:green;">Class Last Studied: </td><td><input  type="text" name="classandsec" id="classandsec" style="width: 200px;color:green;" /></td>
-                    <td>Date of issue of TC: </td><td><input  style="width: 200px;" type="text" name="dateoftc" id="dateoftc"   /></td>    
+                    <td>Date of issue of TC: </td><td><input  style="width: 200px;" type="text" name="dateofTc" id="dateofTc"   /></td>    
                     </tr>
                     <tr>
                     <td><br></td>

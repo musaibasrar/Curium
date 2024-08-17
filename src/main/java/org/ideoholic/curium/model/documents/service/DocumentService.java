@@ -111,8 +111,9 @@ public class DocumentService {
 		String afflno = DataUtil.emptyString(request.getParameter("afflno"));
 		String code = DataUtil.emptyString(request.getParameter("code"));
 		String proof = DataUtil.emptyString(request.getParameter("proof"));
-		Date dateOfTc = DateUtil.datePars(request.getParameter("dateoftc"));
-		//Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
+		String dateOfTc = DataUtil.emptyString(request.getParameter("dateofTc"));
+		//Date dateOfTc = DateUtil.datePars(request.getParameter("dateofTc"));
+		//Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateofTc"));
 		int tcno = 0;
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
@@ -191,6 +192,7 @@ public class DocumentService {
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 request.setAttribute("dateOfTc", dateOfTc);
 			 request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);

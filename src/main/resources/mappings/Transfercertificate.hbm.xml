@@ -17,8 +17,8 @@
         <property name="noofissues" type="java.lang.Integer">
             <column name="noofissues" />
         </property>
-        <property name="dateofissues" type="date">
-            <column name="dateofissues" length="10" />
+        <property name="dateofissues" type="string">
+            <column name="dateofissues" length="20" />
         </property>
         <property name="generalconduct" type="string">
             <column name="generalconduct" length="500" />
