@@ -43,9 +43,8 @@ public class Transfercertificate implements java.io.Serializable {
 	@Column(name = "noofissues")
 	private Integer noofissues;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dateofissues", length = 10)
-	private Date dateofissues;
+	@Column(name = "dateofissues", length = 20)
+	private String dateofissues;
 
 	@Column(name = "generalconduct", length = 500)
 	private String generalconduct;
