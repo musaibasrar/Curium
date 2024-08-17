@@ -399,7 +399,7 @@ for(Cookie cookie : cookies){
        .card {
     width: 9cm;
     height: 14cm;
-    background: #FEE12B;
+    //background: #A3805F;
 }
 
 .card:hover {
@@ -451,15 +451,16 @@ for(Cookie cookie : cookies){
                         <tr>
                             <c:if test="${limit < iInitial}">
                             <td class="fontsize" >
-	                         <div class="card" style="position: relative;">
+	                         <div class="card" style="background-image: url('/bsr/images/emp_id.png');position: relative;border:1px solid black;border-radius:10px;">
 	                         		<div style="padding-top: 10px;" align="center">
 	                         			<h3 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h3>
 	                         			<h4 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 0px;">${branchaddress}</h4>
 	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">Contact : ${branchcontact}</h6>
-	                         		</div>
+	                         		
 		                         	
-	  								<img src="/bsr/images/bsr.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 60px;padding-right:10px;">
+	  								<img src="/bsr/images/bsr.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 10px;padding-right:10px;">
 	  								<img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:90px;width:90px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
+	  								</div>
 	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
 	  								<h3 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">STAFF</h3>
 	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
@@ -498,16 +499,16 @@ for(Cookie cookie : cookies){
 	  									</tr>
 	  								
 	  								</table>
-	  								<div style="position: absolute;bottom: 10px;margin-left: 220px;">
-	  									<table align="right" style="margin-right:20px;">
+	  								<div style="position: absolute;bottom: 10px;padding-left: 220px;">
+	  									<table width="100%"  align="right" style="padding-right:20px;">
 	  								
 	  										<tr>
 											<c:choose>
                                 					<c:when test="${branchid eq 3}">
-                                    					<td><img src="images/principalsign.png" alt="sign" style="width:26px;height:60px;padding-left: 5px;"></td>
+                                    					<td><img src="/bsr/images/signbsr.png" alt="sign" style="width:26px;height:60px;padding-left: 5px;"></td>
                                 					</c:when>
                                 			<c:otherwise>
-                                    			<td><img src="images/hmsign.png" alt="sign" style="width:50px;height:50px;padding-left: 5px;"></td>
+                                    			<td><img src="/bsr/images/signbsr.png" alt="sign" style="width:75px;height:25px;padding-left: 5px;"></td>
                                 			</c:otherwise>
                             				</c:choose>
 													  									
