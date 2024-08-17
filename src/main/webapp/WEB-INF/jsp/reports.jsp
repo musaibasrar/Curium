@@ -560,7 +560,19 @@ for(Cookie cookie : cookies){
 				</tr>
 			</table>
 		</div>
-		
+		 <h5 class="sideaccordian" ><a href="#" >Documents</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/abc/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
+            			</td>
+            		</tr>
+            		
+            	</table>
+            </div>
           <!--   <h5 class="sideaccordian">
 			<a href="#">Appointments</a>
 		</h5>
