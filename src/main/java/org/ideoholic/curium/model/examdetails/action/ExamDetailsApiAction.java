@@ -1,150 +1,29 @@
 package org.ideoholic.curium.model.examdetails.action;
 
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.exceptions.CustomErrorMessage;
-import org.ideoholic.curium.exceptions.CustomResponseException;
-import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.examdetails.dto.*;
-import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
-import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-@Controller
-@RequestMapping("/api/v1/examDetailsProcess")
-public class ExamDetailsApiAction {
-    @Autowired
-    private HttpServletRequest request;
-    @Autowired
-    private HttpServletResponse response;
-    @Autowired
-    private StandardService standardService;
-    @Autowired
-    private YearService yearService;
-    @Autowired
-    private ExamDetailsService examDetailsService;
+public interface ExamDetailsApiAction {
+    public ResponseEntity<HallTicketResponseDto> printPreviewHallTicket(PrintPreviewHallTicketDto dto,String branchId);
 
-    private String error = "error";
+    public ResponseEntity<ExamScheduleResponseDto> searchHallTicketDetails(ExamScheduleDto examScheduleDto,String branchId);
 
+    public ResponseEntity<GenerateHallTicketResponseDto> generateHallTicket(String branchId);
 
-    @PostMapping("/printPreviewHallTicket")
-    public ResponseEntity<HallTicketResponseDto> printPreviewHallTicket(@RequestBody PrintPreviewHallTicketDto dto,@RequestHeader(value="branchId") String branchId) {
-        HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(dto,branchId);
-        return ResponseEntity.ok(result);
-    }
+    public ResponseEntity<ExamSchedulesResponseDto> deleteExamSchedule(ExamIdsDto dto,String branchId);
 
-    @PostMapping("/searchHallTicketDetails")
-    public ResponseEntity<ExamScheduleResponseDto> searchHallTicketDetails(@RequestBody ExamScheduleDto examScheduleDto,@RequestHeader(value="branchId") String branchId) {
+    public ResponseEntity<ExamSchedulesResponseDto> addSchedule(AddScheduleDto dto,String branchId);
 
-        ExamScheduleResponseDto examScheduleResponseDto = examDetailsService.getExamScheduleDetails(examScheduleDto,branchId);
-        ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
-        new SubjectDetailsService(request, response).readListOfSubjects();
-        return ResponseEntity.ok(examScheduleResponseDto);
-    }
+    public ResponseEntity<ExamSchedulesResponseDto> examSchedule(String branchId);
 
-    @GetMapping("/generateHallTicket")
-    public ResponseEntity<GenerateHallTicketResponseDto> generateHallTicket(@RequestHeader(value="branchid") String branchId) {
-            GenerateHallTicketResponseDto result = new GenerateHallTicketResponseDto();
+    public ResponseEntity<ExamsListResponseDto> deleteMultiple(ExamIdsDto dto,String branchId);
 
-       examDetailsService.readListOfExams(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        standardService.viewClasses(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        new SubjectDetailsService(request, response).readListOfSubjectNames();
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        yearService.getYear();
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        examDetailsService.getExamSchedule(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
+    public ResponseEntity<ExamsListResponseDto>  readListOfExams(String branchId);
 
-        return ResponseEntity.ok(result);
-    }
-
-    @PostMapping("/deleteExamSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> deleteExamSchedule(@RequestBody ExamIdsDto dto, @RequestHeader(value="branchid") String branchId) {
-        ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
-        examDetailsService.deleteExamSchedule(dto);
-        if(result != null){
-            return examSchedule(branchId);
-        }else{
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        }
-    }
-
-    @PostMapping("addSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> addSchedule(@RequestBody AddScheduleDto dto,@RequestHeader(value="branchid") String branchId) {
-         ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
-        examDetailsService.addSchedule(dto,branchId);
-        if(result != null){
-           return examSchedule(branchId);
-        }else{
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        }
-    }
+    public ResponseEntity<ExamsListResponseDto> addExam(AddExamDto dto,String branchId);
 
 
-    @GetMapping("/examSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> examSchedule(@RequestHeader(value="branchid") String branchId) {
-        ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
 
-            examDetailsService.readListOfExams(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-            standardService.viewClasses(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        new SubjectDetailsService(request, response).readListOfSubjectNames();
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-            yearService.getYear();
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-            examDetailsService.getExamSchedule(branchId);
-        if (result == null)
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
 
-        return ResponseEntity.ok(result);
 
     }
-
-    @PostMapping("/deleteMultiple")
-    public ResponseEntity<ExamsListResponseDto> deleteMultiple(@RequestBody ExamIdsDto dto, @RequestHeader(value="branchid") String branchId) {
-        ResultResponse result = examDetailsService.deleteMultiple(dto);
-        if(result.isSuccess()){
-            return readListOfExams(branchId);
-        }else{
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        }
-    }
-
-    @GetMapping("/readListOfExams")
-    public ResponseEntity<ExamsListResponseDto>  readListOfExams(@RequestHeader(value="branchid") String branchId) {
-         ExamsListResponseDto result = examDetailsService.readListOfExams(branchId);
-        if(result.isSuccess()){
-            return ResponseEntity.ok(result);
-        }else{
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        }
-    }
-
-    @PostMapping("/addExam")
-    public ResponseEntity<ExamsListResponseDto> addExam(@RequestBody AddExamDto dto, @RequestHeader(value="branchid") String branchId) {
-        ResultResponse result = examDetailsService.addExam(dto,branchId);
-        if(result.isSuccess()){
-            return readListOfExams(branchId);
-        }else{
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-        }
-
-    }
-}

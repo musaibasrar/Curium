@@ -14,13 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class GenerateHallTicketResponseDto {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "cayid", unique = true, nullable = false)
-    private Integer cayid;
 
-    @Column(name = "currentacademicyear", length = 100)
-    private String currentacademicyear;
     private List<Examschedule> exams;
     private boolean success;
     private String selectedclass;
