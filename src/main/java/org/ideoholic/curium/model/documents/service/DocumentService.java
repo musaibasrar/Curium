@@ -87,7 +87,7 @@ public class DocumentService {
 		String type = DataUtil.emptyString(request.getParameter("type"));
 		String grno = DataUtil.emptyString(request.getParameter("grno"));
 		String tcno = DataUtil.emptyString(request.getParameter("tcno"));
-		//String caste = DataUtil.emptyString(request.getParameter("caste"));
+		String caste = DataUtil.emptyString(request.getParameter("caste"));
 		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
 		String failpass = DataUtil.emptyString(request.getParameter("failpass"));
@@ -111,15 +111,17 @@ public class DocumentService {
 		String afflno = DataUtil.emptyString(request.getParameter("afflno"));
 		String code = DataUtil.emptyString(request.getParameter("code"));
 		String proof = DataUtil.emptyString(request.getParameter("proof"));
-		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
+		String dateOfTc = DataUtil.emptyString(request.getParameter("dateoftc"));
+		//Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
-		//student.setReasonleaving(leavingReason);
+		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 //boolean updateStudent = new studentDetailsDAO().updateStudent(student);
+		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 
+		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
-			 tc.setDateofissues(dateOfTc);
+			// tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
@@ -127,13 +129,14 @@ public class DocumentService {
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-				 //request.setAttribute("leavingReason", leavingReason);
+				 request.setAttribute("dateOfTc", dateOfTc);
+				 request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("type", type);
 					request.setAttribute("grno", grno);
 					request.setAttribute("tcno", tcno);
-					//request.setAttribute("caste", caste);
+					request.setAttribute("caste", caste);
 					request.setAttribute("classinword", classinword);
 					request.setAttribute("lastexam", lastexam);
 					request.setAttribute("failpass", failpass);
@@ -164,18 +167,19 @@ public class DocumentService {
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
+		 }
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-			 	//request.setAttribute("leavingReason", leavingReason);
+			 request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("type", type);
 				request.setAttribute("grno", grno);
 				request.setAttribute("tcno", tcno);
-				//request.setAttribute("caste", caste);
+				request.setAttribute("caste", caste);
 				request.setAttribute("classinword", classinword);
 				request.setAttribute("lastexam", lastexam);
 				request.setAttribute("failpass", failpass);
@@ -822,4 +826,14 @@ public class DocumentService {
 			
 			return bonafidePage;
 		}
+	 
+	 public void viewTcDetail() {
+			List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+			List<Integer> sid = new ArrayList<Integer>(); 
+			for (Transfercertificate transfercertificate : tc) {
+				sid.add(transfercertificate.getSid());
+			}
+			List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+			request.setAttribute("studenttcissued", listofParents);
+					}
 }

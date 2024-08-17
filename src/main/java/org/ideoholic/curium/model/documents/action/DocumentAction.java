@@ -196,4 +196,15 @@ public class DocumentAction {
 		new DocumentService(request, response).printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/getTcDetail")
+	public String getTcDetail() {
+		return "generatetcdetail";
+	}
+	
+	@PostMapping("/tcDetail")
+	public String tcDetail() {
+		new DocumentService(request, response).viewTcDetail(); 
+		return "studentstcreport";
+	}
 }
