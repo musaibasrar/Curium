@@ -828,12 +828,26 @@ public class DocumentService {
 		}
 	 
 	 public void viewTcDetail() {
-			List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+		 List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
 			List<Integer> sid = new ArrayList<Integer>(); 
 			for (Transfercertificate transfercertificate : tc) {
 				sid.add(transfercertificate.getSid());
 			}
 			List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+			
+			for (Parents parents : listofParents) {
+				int studentId = parents.getStudent().getSid();
+				
+				for (Transfercertificate transferCert : tc) {
+					int tcSid = transferCert.getSid();
+					if(studentId==tcSid) {
+						Student student = parents.getStudent();
+						student.setNooftc(transferCert.getNoofissues());
+						parents.setStudent(student);
+					}
+					
+				}
+			}
 			request.setAttribute("studenttcissued", listofParents);
 					}
 }
