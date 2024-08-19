@@ -367,4 +367,30 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByCashOtherFees());
         httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByBankOtherFees());
     }
+
+    public boolean downlaod() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        ResultResponse resultResponse = feesCollectionService.downlaod();
+
+        return resultResponse.isSuccess();
+    }
+
+    public void exportDataForStudentsOtherFeesReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesDto dto = new FeesDto();
+        dto.setStudentotherfeesreportList((List<Studentotherfeesreport>) httpSession.getAttribute("studentotherfeesreportlist"));
+
+        ResultResponse resultResponse = feesCollectionService.exportDataForStudentsOtherFeesReport(dto);
+    }
+
+    public void printFeesDueHeadWiseReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesDto dto = new FeesDto();
+        dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
+
+        feesCollectionService.printFeesDueHeadWiseReport(dto);
+    }
 }
