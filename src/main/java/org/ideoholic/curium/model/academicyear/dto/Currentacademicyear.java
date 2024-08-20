@@ -36,4 +36,5 @@ public class Currentacademicyear implements java.io.Serializable {
 	@Column(name = "currentacademicyear", length = 100)
 	private String currentacademicyear;
 
+	private boolean success;
 }
