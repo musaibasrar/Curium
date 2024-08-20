@@ -1036,8 +1036,9 @@ public class FeesCollectionService {
 		// getFile(name, path);
 	}
 
-	public boolean downlaod() {
-		boolean result = false;
+	public ResultResponse downlaod() {
+		ResultResponse result = ResultResponse.builder().build();
+
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsfeesreport.xlsx");
@@ -1069,10 +1070,11 @@ public class FeesCollectionService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
+		result.setSuccess(false);
 		return result;
 	}
 
@@ -1740,13 +1742,13 @@ public class FeesCollectionService {
 		return resultResponse;
 	}
 
-	public boolean exportDataForStudentsOtherFeesReport() {
+	public ResultResponse exportDataForStudentsOtherFeesReport(StudentFeesDto dto) {
 
-		boolean writeSucees = false;
+		ResultResponse result = ResultResponse.builder().build();
 		
 		try {
 
-			List<Studentotherfeesreport> studentOtherFeesReportList = (List<Studentotherfeesreport>) httpSession.getAttribute("studentotherfeesreportlist");
+			List<Studentotherfeesreport> studentOtherFeesReportList = dto.getStudentotherfeesreportList();
 			
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
@@ -1813,12 +1815,13 @@ public class FeesCollectionService {
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsfeesreport.xlsx"));
 				workbook.write(out);
 				out.close();
-				writeSucees = true;
+				result.setSuccess(true);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+		result.setSuccess(false);
+		return result;
 		// getFile(name, path);
 	}
 
@@ -2041,11 +2044,11 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public void printFeesDueHeadWiseReport() {
+	public void printFeesDueHeadWiseReport(StudentFeesDto dto) {
 
 		boolean writeSucees = false;
 		
-			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			List<StudentFeesReport> studentFeesReportList = dto.getStudentFeesReportList();
 			
 			// Creating an excel file
 			int i = 1;

@@ -132,7 +132,7 @@ public class FeesCollectionAction {
         
         @PostMapping("/download")
         private String download() {
-        	if (new FeesCollectionService(request, response, standardActionAdapter).downlaod()) {
+        	if (feesCollectionActionAdapter.downlaod()) {
     			return "feesreportexportsuccess";
     		}
     		return "exportfailure";
@@ -218,7 +218,7 @@ public class FeesCollectionAction {
 		
 		 @PostMapping("/exportDataForStudentsOtherFeesReport")
 	        private String exportDataForStudentsOtherFeesReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).exportDataForStudentsOtherFeesReport();
+	        	feesCollectionActionAdapter.exportDataForStudentsOtherFeesReport();
 	            return "feesreportexportsuccess";
 			}
 		 
@@ -248,7 +248,7 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/printFeesDueHeadWiseReport")
 	        private String printFeesDueHeadWiseReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).printFeesDueHeadWiseReport();
+	        	feesCollectionActionAdapter.printFeesDueHeadWiseReport();
 	            return "printfeesdueheadwisereport";
 			}
 		 
