@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
@@ -29,16 +30,7 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.hr.dao.HrDAO;
-import org.ideoholic.curium.model.hr.dto.Leaveapplication;
-import org.ideoholic.curium.model.hr.dto.Leavedetails;
-import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
-import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
-import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.model.hr.dto.Payhead;
-import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
-import org.ideoholic.curium.model.hr.dto.Pf;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -60,16 +52,17 @@ public class HrService {
 
 	}
 
-	public boolean leaveType() {
+	public ResultResponse leaveType(String branchId) {
+        LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
 
 		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(branchId));
 		}
-		httpSession.setAttribute("leavetypemaster", list);
-        	
-        return true;
+        leaveTypeResponseDto.setLeavetypemaster(list);
+
+        return ResultResponse.builder().build();
 	}
 
 	public boolean saveLeaveType() {
