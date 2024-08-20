@@ -379,7 +379,7 @@ public class FeesCollectionActionAdapter {
     public void exportDataForStudentsOtherFeesReport() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        FeesDto dto = new FeesDto();
+        StudentFeesDto dto = new StudentFeesDto();
         dto.setStudentotherfeesreportList((List<Studentotherfeesreport>) httpSession.getAttribute("studentotherfeesreportlist"));
 
         ResultResponse resultResponse = feesCollectionService.exportDataForStudentsOtherFeesReport(dto);
@@ -388,7 +388,7 @@ public class FeesCollectionActionAdapter {
     public void printFeesDueHeadWiseReport() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        FeesDto dto = new FeesDto();
+        StudentFeesDto dto = new StudentFeesDto();
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
 
         feesCollectionService.printFeesDueHeadWiseReport(dto);

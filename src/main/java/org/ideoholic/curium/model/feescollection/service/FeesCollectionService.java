@@ -1742,7 +1742,7 @@ public class FeesCollectionService {
 		return resultResponse;
 	}
 
-	public ResultResponse exportDataForStudentsOtherFeesReport(FeesDto dto) {
+	public ResultResponse exportDataForStudentsOtherFeesReport(StudentFeesDto dto) {
 
 		ResultResponse result = ResultResponse.builder().build();
 		
@@ -2044,7 +2044,7 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public void printFeesDueHeadWiseReport(FeesDto dto) {
+	public void printFeesDueHeadWiseReport(StudentFeesDto dto) {
 
 		boolean writeSucees = false;
 		

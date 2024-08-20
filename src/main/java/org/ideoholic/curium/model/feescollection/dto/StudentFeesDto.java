@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FeesDto {
+public class StudentFeesDto {
     private List<Studentotherfeesreport> studentotherfeesreportList;
     private List<StudentFeesReport> studentFeesReportList;
 }
