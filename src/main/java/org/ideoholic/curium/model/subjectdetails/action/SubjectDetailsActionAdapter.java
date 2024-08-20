@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 @Service
 public class SubjectDetailsActionAdapter {
@@ -19,24 +17,22 @@ public class SubjectDetailsActionAdapter {
     private HttpServletRequest request;
 
     @Autowired
-    private HttpServletResponse response;
+    private HttpSession httpSession;
 
     @Autowired
-    private HttpSession httpSession;
+    private SubjectDetailsService subjectDetailsService;
 
 
     public boolean readListOfSubjects() {
-        SubjectDetailsService  subjectDetailsService = new SubjectDetailsService(request,response);
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
         httpSession.setAttribute("listSubject", result.getList());
         return result.isSuccess();
     }
     public boolean addSubject() {
-        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
 
         SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setSubjectname(request.getParameter("subjectname"));
+        subjectDto.setSubjectName(request.getParameter("subjectname"));
         subjectDto.setMinMarks(request.getParameter("minmarks"));
         subjectDto.setMaxMarks(request.getParameter("maxmarks"));
         subjectDto.setExamName(request.getParameter("examname"));
@@ -46,7 +42,6 @@ public class SubjectDetailsActionAdapter {
         return result.isSuccess();
     }
     public boolean deleteMultiple() {
-        SubjectDetailsService subjectDetailsService = new SubjectDetailsService(request,response);
 
         SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
         subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
@@ -54,6 +49,31 @@ public class SubjectDetailsActionAdapter {
         ResultResponse resultResponse = subjectDetailsService.deleteMultiple(subjectIdsDto);
 
         return resultResponse.isSuccess();
+    }
+    public boolean addSubjectMaster() {
+
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setSubjectName(request.getParameter("subjectname"));
+
+        ResultResponse resultResponse =
+                subjectDetailsService.addSubjectMaster(subjectDto, httpSession.getAttribute("branchid").toString(),
+                        httpSession.getAttribute("userloginid").toString());
+
+        return resultResponse.isSuccess();
+    }
+    public boolean deleteMultipleSubject() {
+
+        SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
+        subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
+
+        ResultResponse resultResponse = subjectDetailsService.deleteMultipleSubjects(subjectIdsDto);
+
+        return resultResponse.isSuccess();
+    }
+    public void readListOfSubjectNames() {
+
+        SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
+        httpSession.setAttribute("listSubjectNames", result.getList());
     }
 
 }

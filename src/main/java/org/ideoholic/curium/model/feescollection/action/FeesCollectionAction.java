@@ -3,12 +3,13 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.user.action.UserAction;
+import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,9 @@ public class FeesCollectionAction {
 		@Autowired
 		private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
+		@Autowired
+		private AdminService adminService;
+
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
             feesCollectionActionAdapter.getFeesReport();
@@ -67,9 +71,8 @@ public class FeesCollectionAction {
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response, standardActionAdapter).cancelFeesReceipt();
-			UserAction userAction = new UserAction();
-			userAction.setHttpobjects(request, response, httpSession);
-			return userAction.searchByDate();
+			new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
+			return "feesCollectionDetails";
 		}
 
 		@PostMapping("/StampFees")
@@ -129,7 +132,7 @@ public class FeesCollectionAction {
         
         @PostMapping("/download")
         private String download() {
-        	if (new FeesCollectionService(request, response, standardActionAdapter).downlaod()) {
+        	if (feesCollectionActionAdapter.downlaod()) {
     			return "feesreportexportsuccess";
     		}
     		return "exportfailure";
@@ -137,7 +140,7 @@ public class FeesCollectionAction {
         
         @PostMapping("/searchFeesStampDueReport")
         public String searchFeesStampDueReport() {
-            new FeesCollectionService(request, response, standardActionAdapter).getFeesStampDueReport();
+            feesCollectionActionAdapter.getFeesStampDueReport();
             return "feesstampdue";
         }
         
@@ -149,8 +152,8 @@ public class FeesCollectionAction {
         
 		@PostMapping("/otherStampFees")
 		public String otherStampFees() {
-                new FeesCollectionService(request, response, standardActionAdapter).getotherStampFees();
-                new FeesCollectionService(request, response, standardActionAdapter).getotherFeesDetails();
+                feesCollectionActionAdapter.getotherStampFees();
+                feesCollectionActionAdapter.getotherFeesDetails();
                 standardActionAdapter.viewClasses();
                 feesActionAdapter.viewAllStudentsList();
                 return "otherfeesCollection";
@@ -158,13 +161,13 @@ public class FeesCollectionAction {
 		
 		  @PostMapping("/othersearchFeesReport")
 	        public String othersearchFeesReport() {
-	            new FeesCollectionService(request, response, standardActionAdapter).getotherFeesReport();
+	            feesCollectionActionAdapter.getotherFeesReport();
 	            return "otherfeesreport";
 	        }
 		  
 	  @GetMapping("/otherprintReceipt")
         public String otherprintReceipt() {
-                new FeesCollectionService(request, response, standardActionAdapter).otherpreviewDetails();
+                feesCollectionActionAdapter.otherpreviewDetails();
 
 					/*
 					 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
@@ -195,45 +198,45 @@ public class FeesCollectionAction {
 	  
 		@PostMapping("/searchOtherFeesCollection")
 		public String searchOtherFeesCollection() {
-			new FeesCollectionService(request, response, standardActionAdapter).searchOtherFeesCollection();
+			feesCollectionActionAdapter.searchOtherFeesCollection();
 			return "otherfeesCollectionDetails";
 		}
 		
 		@GetMapping("/viewOtherFeesDetails")
         public String viewOtherFeesDetails() {
                 //new FeesCollectionService(request, response).preview();
-                new FeesCollectionService(request, response, standardActionAdapter).previewOtherFeesDetails();
+                feesCollectionActionAdapter.previewOtherFeesDetails();
                 //return "previewFeesDetail";
                 return "otherpreviewfeesdetail";
         }
 		
 		@GetMapping("/CancelOtherFeesReceipt")
 		public String cancelOtherFeesReceipt() {
-			new FeesCollectionService(request, response, standardActionAdapter).cancelOtherFeesReceipt();
+			feesCollectionActionAdapter.cancelOtherFeesReceipt();
 			return searchOtherFeesCollection();
 		}
 		
 		 @PostMapping("/exportDataForStudentsOtherFeesReport")
 	        private String exportDataForStudentsOtherFeesReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).exportDataForStudentsOtherFeesReport();
+	        	feesCollectionActionAdapter.exportDataForStudentsOtherFeesReport();
 	            return "feesreportexportsuccess";
 			}
 		 
 		 @PostMapping("/feesSummaryReport")
 	        private String feesSummaryReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesDetailsDashBoard();
+	        	feesCollectionActionAdapter.getFeesDetailsDashBoard();
 	            return "feessummaryreport";
 			}	 
 		 
 		 @PostMapping("/searchByDateFeesCollectionCategory")
 	        private String searchByDateFeesCollectionCategory() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesCollectionCategory();
+	        	feesCollectionActionAdapter.getFeesCollectionCategory();
 	            return "feescollectiondetailscategory";
 			}
 		 
 		 @PostMapping("/searchByDateFeesCollectionCategoryPrint")
 	        private String searchByDateFeesCollectionCategoryPrint() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).getFeesCollectionCategory();
+	        	feesCollectionActionAdapter.getFeesCollectionCategory();
 	            return "printfeescollectiondetailscategory";
 			}
 		 
@@ -245,14 +248,14 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/printFeesDueHeadWiseReport")
 	        private String printFeesDueHeadWiseReport() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).printFeesDueHeadWiseReport();
+	        	feesCollectionActionAdapter.printFeesDueHeadWiseReport();
 	            return "printfeesdueheadwisereport";
 			}
 		 
 		 @PostMapping("/printOtherDataForFees")
 			public String printOtherFeesData() {
 				
-				if(new FeesCollectionService(request, response, standardActionAdapter).printOtherDataForFees()){
+				if(feesCollectionActionAdapter.printOtherDataForFees()){
 					return "printotherfeescollectiondetails";
 				}else{
 					return "error";
@@ -262,19 +265,19 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchDefaultersReport")
 	        public String searchDefaultersReport() {
-	            new FeesCollectionService(request, response, standardActionAdapter).getDefaultersReport();
+	            feesCollectionActionAdapter.getDefaultersReport();
 	            return "defaultersreport";
 	        }
 		 
 		 @PostMapping("/viewCancelledOtherFeesReceipts")
 			public String viewCancelledOtherFeesReceipts() {
-	        	new FeesCollectionService(request, response, standardActionAdapter).viewCancelledOtherFeesReceipts();
+	        	feesCollectionActionAdapter.viewCancelledOtherFeesReceipts();
 				return "otherfeescancelledreceipts";
 			}
 		 
 		 @PostMapping("/searchFeesReportDue")
 	        public String searchFeesReportDue() {
-	            new FeesCollectionService(request, response,standardActionAdapter).getFeesReportDue();
+	            feesCollectionActionAdapter.getFeesReportDue();
 	            return "feesreportdue";
 	        }
 }

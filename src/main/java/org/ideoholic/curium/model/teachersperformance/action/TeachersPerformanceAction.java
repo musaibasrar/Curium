@@ -8,6 +8,7 @@ import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.model.teachersperformance.service.TeacherPerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,13 @@ public class TeachersPerformanceAction {
 	@Autowired
 	private ExamDetailsActionAdapter examDetailsActionAdapter;
 
+	@Autowired
+	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
+
 	@GetMapping("/SearchTeachers")
 	public String SearchTeachers() {
 		standardActionAdapter.viewClasses();
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
 		examDetailsActionAdapter.readListOfExams();
 		return "teachersPerormance";
 	}

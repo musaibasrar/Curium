@@ -17,12 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/SubjectDetailsProcess")
 public class SubjectDetailsAction {
-	
-	@Autowired
-	private HttpServletRequest request;
-	
-	@Autowired
-	private HttpServletResponse response;
 
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
@@ -34,7 +28,7 @@ public class SubjectDetailsAction {
 	
 	@PostMapping("/deleteMultipleSubjects")
 	public String deleteMultipleSubjects() {
-		if(new SubjectDetailsService(request, response).deleteMultipleSubjects()){
+		if(subjectDetailsActionAdapter.deleteMultipleSubject()){
 			return readListOfSubjectNames();
 		}else{
 			return "error";
@@ -43,13 +37,13 @@ public class SubjectDetailsAction {
 
 	@GetMapping("/readListOfSubjectNames")
 	public String readListOfSubjectNames() {
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
         return "SubjectMaster";
 	}
 
 	@PostMapping("/addSubjectMaster")
 	public String addSubjectMaster() {
-		if(new SubjectDetailsService(request, response).addSubjectMaster()){
+		if(subjectDetailsActionAdapter.addSubjectMaster()){
 			return readListOfSubjectNames();
 		}else{
 			return "error";
@@ -77,7 +71,7 @@ public class SubjectDetailsAction {
 	@GetMapping("/readListOfSubjects")
 	public String readListOfSubjectsExams() {
 		subjectDetailsActionAdapter.readListOfSubjects();
-		new SubjectDetailsService(request, response).readListOfSubjectNames();
+		subjectDetailsActionAdapter.readListOfSubjectNames();
 		examDetailsActionAdapter.readListOfExams();
 		standardActionAdapter.viewClasses();
         return "SubjectDetails";

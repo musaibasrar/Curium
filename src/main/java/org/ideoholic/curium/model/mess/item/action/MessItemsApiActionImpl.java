@@ -100,7 +100,7 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
     public ResponseEntity<PurchaseCancelDto> cancelPurchase(@RequestBody InvoiceIdsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         PurchaseCancelDto purchaseCancelDto = new PurchaseCancelDto();
 
-        ResultResponse cancelPurchaseResult = messItemsService.cancelPurchase(dto);
+       ResultResponse cancelPurchaseResult = messItemsService.cancelPurchase(dto);
 
         ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
         purchaseCancelDto.setMessSuppliersList(suppliersDetailsResult.getResultList());

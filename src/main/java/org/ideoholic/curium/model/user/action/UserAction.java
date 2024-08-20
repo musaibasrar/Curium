@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class UserAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -38,20 +41,20 @@ public class UserAction {
 
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
-		new UserService(request, response, standardActionAdapter,adminService).searchByDate();
+		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
 		return "feesCollectionDetails";
 	}
 
 	@PostMapping("/advanceSearchByParents")
 	public String advanceSearchByParents() {
-		new UserService(request, response, standardActionAdapter,adminService).advanceSearchByParents();
+		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).advanceSearchByParents();
 		return "viewAllWithParents";
 	}
 
 	@PostMapping("/backup")
 	public String backup() {
 		String fileName = request.getParameter("filename");
-		if (new UserService(request, response, standardActionAdapter,adminService).backupData(fileName)) {
+		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).backupData(fileName)) {
 			return "BackupSuccess";
 		} else {
 			return "BackupFailed";
@@ -60,20 +63,20 @@ public class UserAction {
 
 	@PostMapping("/advanceSearch")
 	public String advanceSearch() {
-		new UserService(request, response, standardActionAdapter,adminService).advanceSearch();
+		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).advanceSearch();
 		return "advanceSearchResult";
 	}
 
 	@PostMapping("/dashBoard")
 	public String dashBoard() {
-		new UserService(request, response, standardActionAdapter,adminService).dashBoard();
+		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).dashBoard();
 		return "jspbarchart";
 	}
 
 	@PostMapping("/authenticateUser")
 	public String authenticateUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter,adminService).authenticateUser()) {
+		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).authenticateUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -84,7 +87,7 @@ public class UserAction {
 	@GetMapping("/multiUser")
 	public String authenticateMultiUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter,adminService).authenticateMultiUser()) {
+		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
@@ -94,14 +97,14 @@ public class UserAction {
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logOutUser(Model model) {
-		new UserService(request, response, standardActionAdapter,adminService).logOutUser();
+		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).logOutUser();
 		model.addAttribute("logout", true);
 		return "login";
 	}
 
 	@PostMapping("/changePassword")
 	public String changePassword() {
-		if (new UserService(request, response, standardActionAdapter,adminService).ChangePassword()) {
+		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).ChangePassword()) {
 			return "passwordSuccess";
 		} else {
 			return "passwordFail";

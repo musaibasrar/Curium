@@ -31,6 +31,8 @@ import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -47,6 +49,7 @@ public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
 	private AdminService adminService;
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
 	 HttpServletRequest request;
 	    HttpServletResponse response;
@@ -54,12 +57,13 @@ public class UserService {
 	    private Login login;
 	    private String BRANCHID = "branchid";
 
-	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService) {
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService, FeesCollectionActionAdapter feesCollectionActionAdapter) {
 		this.request = request;
         this.response = response;
         this.httpSession = request.getSession();
 		this.standardActionAdapter = standardActionAdapter;
 		this.adminService = adminService;
+		this.feesCollectionActionAdapter = feesCollectionActionAdapter;
 	}
 
 	public boolean authenticateUser() {
@@ -143,7 +147,7 @@ public class UserService {
         	// End Total Teachers
         	
         	//Fees Details
-        	new FeesCollectionService(request, response, standardActionAdapter).getFeesDetailsDashBoard();
+        	feesCollectionActionAdapter.getFeesDetailsDashBoard();
         	//End Fees Details
         	
         	//Daily Expenses
