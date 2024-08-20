@@ -393,4 +393,24 @@ public class FeesCollectionActionAdapter {
 
         feesCollectionService.printFeesDueHeadWiseReport(dto);
     }
+
+    public void cancelFeesReceipt() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        String receiptId = request.getParameter("receiptid");
+        String journalId = request.getParameter("journalid");
+        String feesReceiptId = request.getParameter("id");
+
+        ResultResponse resultResponse = feesCollectionService.cancelFeesReceipt(receiptId, journalId, feesReceiptId, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("cancelreceiptresult", resultResponse.isSuccess());
+    }
+
+    public void exportDataForStudentsFeesReport() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        StudentFeesDto dto = new StudentFeesDto();
+        dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
+
+        ResultResponse resultResponse = feesCollectionService.exportDataForStudentsFeesReport(dto);
+    }
 }

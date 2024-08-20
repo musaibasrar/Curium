@@ -70,7 +70,7 @@ public class FeesCollectionAction {
 
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
-			new FeesCollectionService(request, response, standardActionAdapter).cancelFeesReceipt();
+			feesCollectionActionAdapter.cancelFeesReceipt();
 			new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
 			return "feesCollectionDetails";
 		}
@@ -125,7 +125,7 @@ public class FeesCollectionAction {
         
         @PostMapping("/exportDataForStudentsFeesReport")
         private String exportDataForStudentsFeesReport() {
-        	new FeesCollectionService(request, response, standardActionAdapter).exportDataForStudentsFeesReport();
+        	feesCollectionActionAdapter.exportDataForStudentsFeesReport();
             return "feesreportexportsuccess";
 		}
         

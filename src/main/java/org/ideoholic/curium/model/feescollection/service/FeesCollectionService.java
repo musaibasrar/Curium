@@ -500,13 +500,12 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public void cancelFeesReceipt() {
+	public ResultResponse cancelFeesReceipt(String strReceiptId, String strJournalId, String strFeesReceiptId, String currentAcademicYear) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
 		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			
-			String rid = request.getParameter("receiptid");
-			String jid = request.getParameter("journalid");
-			int feesReceiptId = DataUtil.parseInt(request.getParameter("id"));
+		if(currentAcademicYear!=null){
+
+            int feesReceiptId = DataUtil.parseInt(strFeesReceiptId);
 			boolean result=false;
 			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(feesReceiptId);
 			Date now = new Date();
@@ -514,10 +513,10 @@ public class FeesCollectionService {
 	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 			String todaysDate = formatter.format(now);
 			
-			if(rid !=null && jid !=null ) {
+			if(strReceiptId !=null && strJournalId !=null ) {
 				
-				int receiptId = DataUtil.parseInt(rid);
-				int journalId = DataUtil.parseInt(jid);
+				int receiptId = DataUtil.parseInt(strReceiptId);
+				int journalId = DataUtil.parseInt(strJournalId);
 			
 			// Cancel Voucher
 
@@ -562,10 +561,10 @@ public class FeesCollectionService {
 			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
 					null, null, null);
 		}
-		
-			request.setAttribute("cancelreceiptresult", result);
-				
+
+			resultResponse.setSuccess(result);
 		}
+		return resultResponse;
 	}
 
 	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dayOneCancel, String dateFromCancel, String dateToCancel) {
@@ -954,13 +953,13 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public boolean exportDataForStudentsFeesReport() {
+	public ResultResponse exportDataForStudentsFeesReport(StudentFeesDto dto) {
 
-		boolean writeSucees = false;
+		ResultResponse result = ResultResponse.builder().build();
 		
 		try {
 
-			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			List<StudentFeesReport> studentFeesReportList = dto.getStudentFeesReportList();
 			
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
@@ -1027,13 +1026,14 @@ public class FeesCollectionService {
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsfeesreport.xlsx"));
 				workbook.write(out);
 				out.close();
-				writeSucees = true;
+				result.setSuccess(true);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+		result.setSuccess(false);
 		// getFile(name, path);
+		return result;
 	}
 
 	public ResultResponse downlaod() {
