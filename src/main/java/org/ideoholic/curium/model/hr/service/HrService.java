@@ -59,6 +59,7 @@ public class HrService {
 			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(branchId));
 		}
         leaveTypeResponseDto.setLeavetypemaster(list);
+		leaveTypeResponseDto.setSuccess(true);
 
         return leaveTypeResponseDto;
 	}
