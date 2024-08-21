@@ -30,6 +30,8 @@ public class HrAction {
 	HttpSession httpSession;
 	@Autowired
 	private EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private HrActionAdapter hrActionAdapter;
 
 	String error = "error";
 	
@@ -174,7 +176,7 @@ public class HrAction {
 	@GetMapping("/leaveApplication")
 	public String leaveApplication() {
 		
-		new HrService(request, response).leaveType();
+		hrActionAdapter.leaveType();
 		return "leaveapplication";
 		
 	}
@@ -331,7 +333,7 @@ public class HrAction {
 	public String searchEmployees() {
 		employeeActionAdapter.searchEmployee();
 		employeeActionAdapter.viewAllRelations();
-		new HrService(request, response).leaveType();
+		hrActionAdapter.leaveType();
 		return "assignleave";
 	}
 
@@ -339,7 +341,7 @@ public class HrAction {
 	public String assignLeave() {
 		employeeActionAdapter.viewAllRelations();
 		employeeActionAdapter.ViewAllEmployee();
-		new HrService(request, response).leaveType();
+		hrActionAdapter.leaveType();
 		return "assignleave";
 	}
 
@@ -363,7 +365,7 @@ public class HrAction {
 	@GetMapping("/leaveType")
 	public String leaveType() {
 		
-		if(new HrService(request, response).leaveType()){
+		if(hrActionAdapter.leaveType()){
 			return "leavetypemaster";
 		}
 		return error;

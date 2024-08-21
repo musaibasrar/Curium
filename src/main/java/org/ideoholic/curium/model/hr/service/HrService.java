@@ -27,18 +27,8 @@ import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.hr.dao.HrDAO;
-import org.ideoholic.curium.model.hr.dto.Leaveapplication;
-import org.ideoholic.curium.model.hr.dto.Leavedetails;
-import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
-import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
-import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.model.hr.dto.Payhead;
-import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
-import org.ideoholic.curium.model.hr.dto.Pf;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -60,16 +50,18 @@ public class HrService {
 
 	}
 
-	public boolean leaveType() {
+	public LeaveTypeResponseDto leaveType(String branchId) {
+        LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
 
-		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
+		List<Leavetypemaster> list = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(branchId));
 		}
-		httpSession.setAttribute("leavetypemaster", list);
-        	
-        return true;
+        leaveTypeResponseDto.setLeavetypemaster(list);
+		leaveTypeResponseDto.setSuccess(true);
+
+        return leaveTypeResponseDto;
 	}
 
 	public boolean saveLeaveType() {
@@ -91,7 +83,7 @@ public class HrService {
 		String[] leaveTypeName = request.getParameterValues("leavetypename");
 		String[] totalLeaves = request.getParameterValues("totalleaves");
 		String[] staff = request.getParameterValues("employeeIDs");
-		List<Leavedetails> leaveDetailsList = new ArrayList<Leavedetails>();
+		List<Leavedetails> leaveDetailsList = new ArrayList<>();
 
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
 		for (String staffId : staff) {
@@ -177,7 +169,7 @@ public class HrService {
 			String payHeadId = DataUtil.emptyString(request.getParameter("payhead"));
 			String amountPerc = DataUtil.emptyString(request.getParameter("amtper"));
 			
-			List<Payheadstaffdetails> payHeadStaffDetailsList = new ArrayList<Payheadstaffdetails>();
+			List<Payheadstaffdetails> payHeadStaffDetailsList = new ArrayList<>();
 			
 			for(int i=0; i<staffIds.length; i++){
 				Payheadstaffdetails payHeadStaffDetails = new Payheadstaffdetails();
@@ -209,7 +201,7 @@ public class HrService {
 		String[] paymentType = request.getParameterValues("paymenttype");
 		String[] accountNo = request.getParameterValues("accountno");
 		String[] overTime = request.getParameterValues("ot");
-		List<Integer> overTimeList = new ArrayList<Integer>();
+		List<Integer> overTimeList = new ArrayList<>();
 		
 		if(overTime != null){
 			for (String string : overTime) {
@@ -218,7 +210,7 @@ public class HrService {
 			}
 		}
 		
-		List<Paybasic> payBasicList = new ArrayList<Paybasic>();
+		List<Paybasic> payBasicList = new ArrayList<>();
 		
 		for(int i=0; i<staffIds.length; i++){
 			Paybasic payBasic = new Paybasic();
@@ -261,7 +253,7 @@ public class HrService {
 
 	public void pfSettings() {
 		
-		List<Pf> pf = new ArrayList<Pf>();
+		List<Pf> pf = new ArrayList<>();
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			pf = new HrDAO().pfSettings(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -274,7 +266,7 @@ public class HrService {
 	public void deletePf() {
 		String[] pfids = request.getParameterValues("pfids");
 		if (pfids != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : pfids) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -308,7 +300,7 @@ public class HrService {
 
 	public void salaryApprovalDispaly() {
 		
-		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
+		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			payAdvanceSalary = new HrDAO().salaryApprovalDispaly(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -346,7 +338,7 @@ public class HrService {
 
 	public boolean salaryIssue() {
 		
-		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
+		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			payAdvanceSalary = new HrDAO().salaryIssue(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -413,7 +405,7 @@ public class HrService {
 						return 0;
 					}
 					String[] weeklyOffString = staffAttendanceMaster.get(0).getWeeklyoff().split(",");
-					List<Integer> staffWeeklyOffList = new ArrayList<Integer>();
+					List<Integer> staffWeeklyOffList = new ArrayList<>();
 					boolean staffWeeklyOff = false;
 					boolean staffHoliday = false;
 					for (String weekOffS : weeklyOffString) {
@@ -428,7 +420,7 @@ public class HrService {
 					
 					if(!staffWeeklyOff){
 						String[] holidayString = staffAttendanceMaster.get(0).getHolidayname().split(",");
-						List<Integer> staffHolidayList = new ArrayList<Integer>();
+						List<Integer> staffHolidayList = new ArrayList<>();
 						for (String singleHoliday : holidayString) {
 							staffHolidayList.add(Integer.parseInt(singleHoliday));
 						}
@@ -463,7 +455,7 @@ public class HrService {
 		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
 		
 		if (idleaveapplication != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -478,7 +470,7 @@ public class HrService {
 		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
 		
 		if (idleaveapplication != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -491,10 +483,10 @@ public class HrService {
 	public boolean processStaffSalary() {
 		
 		String[] staffids = request.getParameterValues("employeeIDs");
-		Map<String, BigDecimal> earningMaps = new HashMap<String, BigDecimal>();
-		Map<String, BigDecimal> deductionMaps = new HashMap<String, BigDecimal>();
-		List<Processsalarydetailsheads> processSalarydetailsheadList = new ArrayList<Processsalarydetailsheads>();
-		List<Processsalarydetails> processsalarydetailsList = new ArrayList<Processsalarydetails>(); 
+		Map<String, BigDecimal> earningMaps = new HashMap<>();
+		Map<String, BigDecimal> deductionMaps = new HashMap<>();
+		List<Processsalarydetailsheads> processSalarydetailsheadList = new ArrayList<>();
+		List<Processsalarydetails> processsalarydetailsList = new ArrayList<>();
 		
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
 			
@@ -660,8 +652,8 @@ public class HrService {
 		
 		if(processSalaryId!=null){
 			
-			Map<String, BigDecimal> earningsMap = new LinkedHashMap<String, BigDecimal>();
-			Map<String, BigDecimal> deductionsMap = new LinkedHashMap<String, BigDecimal>();
+			Map<String, BigDecimal> earningsMap = new LinkedHashMap<>();
+			Map<String, BigDecimal> deductionsMap = new LinkedHashMap<>();
 			BigDecimal totalEarnings = BigDecimal.ZERO;
 			BigDecimal totalDeductions = BigDecimal.ZERO;
 			
@@ -710,7 +702,7 @@ public class HrService {
 		String[] StaffId = request.getParameterValues("teacherid");
 		String[] idpayheadstaffdetails = request.getParameterValues("idpayheadstaffdetails");
 		
-		List<Integer> ids = new ArrayList();
+		List<Integer> ids = new ArrayList<>();
 		
 		if (idpayheadstaffdetails != null) {
 			for (String id : idpayheadstaffdetails) {
@@ -750,7 +742,7 @@ public class HrService {
 		boolean result = false;
 		
 		if (idProcessSalaryDetails != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -766,7 +758,7 @@ public class HrService {
 		boolean result = false;
 		
 		if (idProcessSalaryDetails != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -786,7 +778,7 @@ public void updateBasicpayEmployees() {
 		String[] overTime = request.getParameterValues("overtime");
 		String[] academicYear = request.getParameterValues("academicyear");
 		
-		List<Integer> overTimeList = new ArrayList<Integer>();
+		List<Integer> overTimeList = new ArrayList<>();
 		
 		if(overTime != null){
 			for (String string : overTime) {
@@ -796,7 +788,7 @@ public void updateBasicpayEmployees() {
 		}
 		
 		
-		List<Paybasic> payBasicList = new ArrayList<Paybasic>();
+		List<Paybasic> payBasicList = new ArrayList<>();
 		
 		for(int i=0; i<staffIds.length; i++){
 			String[] splitId = staffIds[i].split(":");
