@@ -447,4 +447,37 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
     }
+
+    public Otherreceiptinfo addother() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        AddFeesCollectionDto dto = new AddFeesCollectionDto();
+        dto.setStudentId(request.getParameter("studentIdDetails"));
+        dto.setAmountPaying(request.getParameterValues("amountpaying"));
+        dto.setFine(request.getParameterValues("fine"));
+        dto.setStudentSfsIds(request.getParameterValues("studentsfsids"));
+        dto.setPaymentMethod(request.getParameter("paymentmethod"));
+        dto.setAckNo(request.getParameter("ackno"));
+        dto.setTransferDate(request.getParameter("transferdate"));
+        dto.setTransferBankName(request.getParameter("transferbankname"));
+        dto.setChequeNo(request.getParameter("chequeno"));
+        dto.setChequeDate(request.getParameter("chequedate"));
+        dto.setChequeBankName(request.getParameter("chequebankname"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setDateOfFeesDetails(request.getParameter("dateoffeesDetails"));
+        dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
+
+        Otherreceiptinfo otherreceiptinfo = feesCollectionService.addother(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(USERNAME).toString());
+        return otherreceiptinfo;
+    }
+
+    public void otherpreview(Otherreceiptinfo receiptInfo) {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        DetailsResponseDto responseDto = feesCollectionService.otherpreview(receiptInfo, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("student", responseDto.getStudent());
+        request.setAttribute("recieptdate", responseDto.getReceiptDate());
+        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
+        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+    }
 }

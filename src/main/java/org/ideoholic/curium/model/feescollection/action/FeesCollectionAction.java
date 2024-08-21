@@ -183,12 +183,12 @@ public class FeesCollectionAction {
 	  
 	  @PostMapping("/feesAddother")	
       public String feesAddother() {
-      	Otherreceiptinfo receiptInfo = new FeesCollectionService(request, response, standardActionAdapter).addother();
+      	Otherreceiptinfo receiptInfo = feesCollectionActionAdapter.addother();
               if(receiptInfo.getReceiptnumber()!=null){
                       //under implementation
                       /*SmsService smsSerivce = new SmsService(request, response);
                       smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
-                      new FeesCollectionService(request, response, standardActionAdapter).otherpreview(receiptInfo);
+                      feesCollectionActionAdapter.otherpreview(receiptInfo);
                       return "otherpreviewfeesdetail";
               }else{
                       return "error";

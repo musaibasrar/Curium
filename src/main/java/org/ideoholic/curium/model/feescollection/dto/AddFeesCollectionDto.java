@@ -7,6 +7,7 @@ public class AddFeesCollectionDto {
     private String studentId;
     private String[] amountPaying;
     private String fineAmount;
+    private String[] fine;
     private String miscAmount;
     private String[] studentSfsIds;
     private String paymentMethod;
