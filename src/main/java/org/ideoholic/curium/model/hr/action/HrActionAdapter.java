@@ -23,11 +23,10 @@ public class HrActionAdapter {
     public boolean leaveType() {
         HrService hrService = new HrService(request,response);
 
-        LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
+        LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("leavetypemaster", leaveTypeResponseDto.getLeavetypemaster());
 
-        ResultResponse resultResponse = hrService.leaveType(httpSession.getAttribute(BRANCHID).toString());
-        return resultResponse.isSuccess();
+        return leaveTypeResponseDto.isSuccess();
 
     }
 
