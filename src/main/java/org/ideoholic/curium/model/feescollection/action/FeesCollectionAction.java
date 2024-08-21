@@ -110,12 +110,12 @@ public class FeesCollectionAction {
 
         @PostMapping("/feesAdd")	
         public String feesAdd() {
-                Receiptinfo receiptInfo = new FeesCollectionService(request, response, standardActionAdapter).add();
+                Receiptinfo receiptInfo = feesCollectionActionAdapter.add();
                 if(receiptInfo.getReceiptnumber()!=null){
                         //under implementation
                         /*SmsService smsSerivce = new SmsService(request, response);
                         smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
-                        new FeesCollectionService(request, response, standardActionAdapter).preview(receiptInfo);
+                        feesCollectionActionAdapter.preview(receiptInfo);
                         return "previewFeesDetail";
                 }else{
                         return "error";
