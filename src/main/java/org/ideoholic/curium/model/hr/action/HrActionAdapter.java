@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.hr.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class HrActionAdapter {
     @Autowired
     private HttpSession httpSession;
     private String BRANCHID = "branchid";
+    private String USERID ="userid";
 
     public boolean leaveType() {
         HrService hrService = new HrService(request,response);
@@ -27,6 +29,16 @@ public class HrActionAdapter {
         httpSession.setAttribute("leavetypemaster", leaveTypeResponseDto.getLeavetypemaster());
 
         return leaveTypeResponseDto.isSuccess();
+
+    }
+    public boolean saveLeaveType() {
+        HrService hrService = new HrService(request,response);
+
+        LeaveTypeDto dto = new LeaveTypeDto();
+        ResultResponse resultResponse =  hrService.saveLeaveType(dto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
+        dto.setLeaveTypeName(request.getParameter("leavetypename"));
+
+        return resultResponse.isSuccess();
 
     }
 

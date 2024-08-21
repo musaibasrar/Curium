@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
@@ -64,13 +65,15 @@ public class HrService {
         return leaveTypeResponseDto;
 	}
 
-	public boolean saveLeaveType() {
+	public ResultResponse saveLeaveType(LeaveTypeDto dto, String branchId, String userId) {
 		
 		Leavetypemaster leaveMaster = new Leavetypemaster();
-		leaveMaster.setLeavetypename(DataUtil.emptyString(request.getParameter("leavetypename")));
-		leaveMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		leaveMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-		return new HrDAO().saveLeaveType(leaveMaster);
+		leaveMaster.setLeavetypename(DataUtil.emptyString(dto.getLeaveTypeName()));
+		leaveMaster.setBranchid(Integer.parseInt(branchId));
+		leaveMaster.setUserid(Integer.parseInt(userId));
+
+		return ResultResponse.builder().success(true).build();
+		// new HrDAO().saveLeaveType(leaveMaster);
 	}
 
 	public boolean deleteLeaveType() {
