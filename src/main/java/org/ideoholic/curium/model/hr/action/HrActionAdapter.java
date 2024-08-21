@@ -35,8 +35,8 @@ public class HrActionAdapter {
         HrService hrService = new HrService(request,response);
 
         LeaveTypeDto dto = new LeaveTypeDto();
-        ResultResponse resultResponse =  hrService.saveLeaveType(dto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
         dto.setLeaveTypeName(request.getParameter("leavetypename"));
+        ResultResponse resultResponse =  hrService.saveLeaveType(dto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 
         return resultResponse.isSuccess();
 

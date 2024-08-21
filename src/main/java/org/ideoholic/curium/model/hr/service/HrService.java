@@ -72,8 +72,8 @@ public class HrService {
 		leaveMaster.setBranchid(Integer.parseInt(branchId));
 		leaveMaster.setUserid(Integer.parseInt(userId));
 
-		return ResultResponse.builder().success(true).build();
-		// new HrDAO().saveLeaveType(leaveMaster);
+		return ResultResponse.builder().success(new HrDAO().saveLeaveType(leaveMaster)).build();
+
 	}
 
 	public boolean deleteLeaveType() {
