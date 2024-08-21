@@ -1,46 +1,30 @@
 package org.ideoholic.curium.model.marksdetails.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
-import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
-import org.ideoholic.curium.model.marksdetails.dto.MarksGrade;
-import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
+import org.ideoholic.curium.model.marksdetails.dto.*;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.MarksSheet;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class MarksDetailsService {
 
@@ -156,15 +140,16 @@ public class MarksDetailsService {
 		return result;
 	}
 
-	public void Search() {
+	public SearchStudentResponseDto Search(ExportMonthlyDataDto dto, String branchId) {
+		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			
 		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+		String studentname = DataUtil.emptyString(dto.getMonthOf());
 
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String addClass = dto.getAddClass();
+		String addSec = dto.getAddSec();
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
 
@@ -189,7 +174,7 @@ public class MarksDetailsService {
 			querySub = " parents.Student.classstudying like '" + classStudying
 					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 		}
 
 		queryMain = queryMain + querySub;
@@ -200,17 +185,18 @@ public class MarksDetailsService {
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
 		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-		request.setAttribute("searchStudentList", searchStudentList);
+		result.setSearchStudentList(searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("listSubjectNames", subjectList);
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectList(subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("listExam", examList);
+		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		result.setExamsList(examList);
+		result.setSuccess(true);
 		}
-
+		return result;
 	}
 //code for searchid
 /*	public void Searchid() {
@@ -271,24 +257,26 @@ public class MarksDetailsService {
 	}*/
 	
 	//end of searchid
-	public void getStudentGraph()
+	public StudentGraphResponseDto getStudentGraph(StudentIdsDto dto, String branchId, String currentAcademicYear)
 	{
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		StudentGraphResponseDto result = StudentGraphResponseDto.builder().build();
+
+		if(branchId!=null){
 			
 			//String studentid = DataUtil.emptyString(request.getParameter("id"));
-			String[] studentIds = request.getParameterValues("studentIDs");
+			String[] studentIds = dto.getStudentIds();
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
-			String[] examClass = request.getParameterValues("examclass");
+			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
-				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),exCl[0]);
+				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
 				for (Exams exams : examDetailsList) {
 					
 					ExamsDetails examsD = new ExamsDetails();
 							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
-									httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+									currentAcademicYear);
 							List<String> subjectAppeared = new LinkedList<String>();
 							List<Integer> marksScored = new LinkedList<Integer>();
 							examsD.setExamName("\""+exams.getExamname()+"\"");
@@ -310,11 +298,13 @@ public class MarksDetailsService {
 								examDetails.add(examsD);
 							}
 				}
-				
-				request.setAttribute("examDetailsGraph", examDetails);
-				request.setAttribute("examDetailsGraphSize", examDetails.size());
-				request.setAttribute("studentName", searchStudent.getName().toUpperCase());
+
+				result.setExamDetailsGraph(examDetails);
+				result.setExamDetailsGraphSize(examDetails.size());
+				result.setSearchStudent(searchStudent.getName().toUpperCase());
+				result.setSuccess(true);
 		}
+		return result;
 	}
 	public boolean viewMarks() {
 		
@@ -856,10 +846,13 @@ public boolean generateReportParent() {
 
 	}
 
-	public void getStudentList() {
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("studentList", studentList);
-		
+	public ResultResponse getStudentList(String branchId) {
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		return ResultResponse
+				.builder()
+				.resultList(studentList)
+				.success(true)
+				.build();
 	}
 
 	public boolean downloadReportCard() {

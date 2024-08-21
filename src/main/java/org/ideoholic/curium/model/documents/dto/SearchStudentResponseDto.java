@@ -2,12 +2,14 @@ package org.ideoholic.curium.model.documents.dto;
 
 import java.util.List;
 
+import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 
 
 @Data
@@ -15,6 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchStudentResponseDto {
-		private boolean success;
+		@Builder.Default
+		private boolean success = false;
 		private List<Parents> searchStudentList;
+		private List<Exams> examsList;
+		private List<Subject> subjectList;
 }
