@@ -76,10 +76,12 @@ public class HrService {
 
 	}
 
-	public boolean deleteLeaveType() {
+	public ResultResponse deleteLeaveType(LeaveTypeDto dto) {
 		Leavetypemaster leaveType = new Leavetypemaster();
-		leaveType.setIdleavetypemaster(Integer.parseInt(DataUtil.emptyString(request.getParameter("idleave"))));
-		return new HrDAO().deleteLeaveType(leaveType);
+		leaveType.setIdleavetypemaster(Integer.parseInt(DataUtil.emptyString(dto.getIdLeave())));
+
+		return ResultResponse.builder().success(new HrDAO().deleteLeaveType(leaveType)).build();
+
 	}
 
 	public boolean addLeaves() {

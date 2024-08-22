@@ -347,7 +347,7 @@ public class HrAction {
 
 	@PostMapping("/deleteLeaveType")
 	public String deleteLeaveType() {
-		if(new HrService(request, response).deleteLeaveType()){
+		if(hrActionAdapter.deleteLeaveType()){
 			return leaveType();
 		}
 		return error;
