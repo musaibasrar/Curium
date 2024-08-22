@@ -356,7 +356,7 @@ public class HrAction {
 	@PostMapping("/saveLeaveType")
 	public String saveLeaveType() {
 		
-		if(new HrService(request, response).saveLeaveType()){
+		if(hrActionAdapter.saveLeaveType()){
 			return leaveType();
 		}
 		return error;
