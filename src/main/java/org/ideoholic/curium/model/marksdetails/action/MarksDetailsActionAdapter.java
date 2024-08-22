@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.marksdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.marksdetails.dto.SearchStudentExamDto;
 import org.ideoholic.curium.model.marksdetails.dto.StudentGraphResponseDto;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
@@ -52,10 +53,10 @@ public class MarksDetailsActionAdapter {
     public void Search() {
         MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
-        ExportMonthlyDataDto dto = new ExportMonthlyDataDto();
+        SearchStudentExamDto dto = new SearchStudentExamDto();
+        dto.setStudentName(request.getParameter("namesearch"));
         dto.setAddClass(request.getParameter("classsearch"));
         dto.setAddSec(request.getParameter("secsearch"));
-        dto.setMonthOf(request.getParameter("namesearch"));
 
         SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());

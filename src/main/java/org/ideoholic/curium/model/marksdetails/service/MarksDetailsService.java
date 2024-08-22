@@ -140,13 +140,13 @@ public class MarksDetailsService {
 		return result;
 	}
 
-	public SearchStudentResponseDto Search(ExportMonthlyDataDto dto, String branchId) {
+	public SearchStudentResponseDto Search(SearchStudentExamDto dto, String branchId) {
 		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 
 		if(branchId!=null){
 			
 		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(dto.getMonthOf());
+		String studentname = DataUtil.emptyString(dto.getStudentName());
 
 		String addClass = dto.getAddClass();
 		String addSec = dto.getAddSec();
