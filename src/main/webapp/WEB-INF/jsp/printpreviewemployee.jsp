@@ -458,7 +458,7 @@ for(Cookie cookie : cookies){
 	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">Contact : ${branchcontact}</h6>
 	                         		
 		                         	
-	  								<img src="/bsr/images/bsr.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 10px;padding-right:10px;">
+	  								<img src="/bsr/images/logoId.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 10px;padding-right:10px;">
 	  								<img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:90px;width:90px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
 	  								</div>
 	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">

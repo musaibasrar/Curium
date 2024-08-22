@@ -508,7 +508,7 @@ for(Cookie cookie : cookies){
 		</table> --%> <table style="width: 50%;margin-bottom:0px;padding-bottom:0px;margin-left:16px;">
    <tr>
         <td>&emsp;&emsp;
-          <img src="/bsr/images/bsr.png" width="80" height="80"/>
+          <img src="/bsr/images/logoId.png" width="80" height="80"/>
         </td>
       </tr>
     </table>
