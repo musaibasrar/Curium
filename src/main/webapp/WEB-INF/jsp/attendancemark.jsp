@@ -586,7 +586,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
+							<td><label> <select name="classsearch"
 									id="classsearch" style="width: 90px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -610,6 +610,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label>
+							</td>
 						</tr>
 
 						<tr>
@@ -618,17 +619,10 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td><br /></td>
 
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+							<td class="alignRight"></td>
+							<td><button id="search">Search</button>
+								
 							</td>
 						</tr>
 
@@ -636,10 +630,14 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
 									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
 							</label></td>
