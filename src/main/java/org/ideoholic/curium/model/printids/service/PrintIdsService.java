@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -208,10 +210,11 @@ public void searchDetailsCardValidity() {
 	}
 
 	
-public boolean updateCardValidity() {
+        public SearchStudentResponseDto updateCardValidity(PrintIdsDto printIdsDto) {
 		
+	    SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		boolean result = false;
-        String[] studentIDs = request.getParameterValues("studentIDs");
+        String[] studentIDs = printIdsDto.getStudentIDs();
         List<Card> cardList = new ArrayList<Card>();
         
         Parents parentsDetails = new Parents();
@@ -224,8 +227,8 @@ public boolean updateCardValidity() {
              int sid = Integer.valueOf(id);
              
             card.setSid(sid);
-            card.setValidfrom(DateUtil.indiandateParser(request.getParameter("validfrom_"+sid)));
-            card.setValidto(DateUtil.indiandateParser(request.getParameter("validto_"+sid)));
+            card.setValidfrom(DateUtil.indiandateParser(printIdsDto.getRequestParams().get("validfrom_"+sid)));
+            card.setValidto(DateUtil.indiandateParser(printIdsDto.getRequestParams().get("validto_"+sid)));
              cardList.add(card);
              
          }
@@ -234,8 +237,9 @@ public boolean updateCardValidity() {
         	result = new PrintIdsDAO().updateCardValidity(cardList);
         }
         }
-        request.setAttribute("updatecard", result);
-        return result;
+        
+        searchStudentResponseDto.setSuccess(result);
+        return searchStudentResponseDto;
 	}
 	
 }
