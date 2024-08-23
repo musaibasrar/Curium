@@ -1,11 +1,7 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/MarksDetailsProcess")
 public class MarksDetailsAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private MarksDetailsActionAdapter marksDetailsActionAdapter;
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
@@ -46,20 +47,20 @@ public class MarksDetailsAction {
 
 	@PostMapping("/getStudentGraph")
 	public String getStudentGraph() {
-		new MarksDetailsService(request, response).getStudentGraph();
+		marksDetailsActionAdapter.getStudentGraph();
 		return "studentgraph";
 	}
 
 	@GetMapping("/getGraphicalReportData")
 	public String getGraphicalReportData() {
-		new MarksDetailsService(request, response).getStudentList();
+		marksDetailsActionAdapter.getStudentList();
 		standardActionAdapter.viewClasses();
 		return "graphicalreport";
 	}
 
 	@PostMapping("/searchForReport")
 	public String searchForReport() {
-		new MarksDetailsService(request, response).Search();
+		marksDetailsActionAdapter.Search();
 		return "progressreport";
 	}
 	
@@ -131,14 +132,14 @@ public class MarksDetailsAction {
 
 	@PostMapping("/search")
 	public String search() {
-		new MarksDetailsService(request, response).Search();
+		marksDetailsActionAdapter.Search();
 		return "marksentry";
 	}
 
 	@PostMapping("/searchForGraphicalReport")
 	public String searchForGraphicalReport() {
-		new MarksDetailsService(request, response).Search();
-		new MarksDetailsService(request, response).getStudentList();
+		marksDetailsActionAdapter.Search();
+		marksDetailsActionAdapter.getStudentList();
 		return "graphicalreport";
 	}
 	
