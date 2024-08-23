@@ -671,12 +671,14 @@ public class MarksDetailsService {
 		return result;
 	}
 // code for generate parent report
-public GenerateReportResponseDto generateReportParent(String strStudentUID, String[] strStudentIds, String currentAcademicYear, String branchId) {
+public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, String currentAcademicYear, String branchId) {
 
 		GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
-            Student student = new studentDetailsDAO().readploginUniqueObject(strStudentUID);
+			String studentUID = dto.getStudentUID();
+            Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
+			String[] studentIds = dto.getStudentIds();
             String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");

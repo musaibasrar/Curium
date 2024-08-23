@@ -81,10 +81,11 @@ public class MarksDetailsActionAdapter {
     public boolean generateReportParent() {
         MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
-        String studentUID = request.getParameter("id");
-        String[] studentIds = request.getParameterValues("studentIDs");
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentUID(request.getParameter("id"));
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
 
-        GenerateReportResponseDto responseDto = marksDetailsService.generateReportParent(studentUID, studentIds, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReportParent(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 
