@@ -41,6 +41,14 @@ public class HrActionAdapter {
         return resultResponse.isSuccess();
 
     }
+    public boolean deleteLeaveType() {
+        HrService hrService = new HrService(request,response);
+
+        LeaveTypeDto dto = new LeaveTypeDto();
+        dto.setIdLeave(request.getParameter("idleave"));
+        ResultResponse resultResponse = hrService.deleteLeaveType(dto);
+        return resultResponse.isSuccess();
+    }
 
 
 }
