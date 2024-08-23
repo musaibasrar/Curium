@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.documents.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
@@ -16,6 +17,7 @@ import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class SearchStudentResponseDto {
 		@Builder.Default
 		private boolean success = false;
