@@ -529,8 +529,8 @@
 		        		$("#dateofattendance").datepicker({
 		        			changeYear : true,
 		        			changeMonth : true,
-		        			dateFormat: 'yy-mm-dd',
-		        			yearRange: "-50:+10"
+		        			dateFormat: 'dd/mm/yy',
+		        			yearRange: "-1:+1"
 		        		});
 		        		$("#dateofattendance").change(
 		        				function() {
@@ -585,21 +585,6 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" readonly="readonly" data-validate="validate(required)"/>
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
 									id="classsearch" style="width: 90px">
@@ -651,6 +636,21 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Date &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="dateofattendance" type="text" class="textField"
+									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
 
 					</table>
 				</div>
