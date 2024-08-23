@@ -6,4 +6,11 @@ import lombok.Data;
 public class LeaveTypeDto {
     private String leaveTypeName;
     private String idLeave;
+
+    private String[] leaveTypeNames;
+    private String[] totalLeaves;
+    private String[] staff;
+    private String currentAcademicYear;
+
+
 }

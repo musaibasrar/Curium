@@ -49,6 +49,22 @@ public class HrActionAdapter {
         ResultResponse resultResponse = hrService.deleteLeaveType(dto);
         return resultResponse.isSuccess();
     }
+    public boolean addLeaves() {
+        HrService hrService = new HrService(request,response);
+
+        LeaveTypeDto dto = new LeaveTypeDto();
+        dto.setLeaveTypeNames(request.getParameterValues("leavetypename"));
+        dto.setTotalLeaves(request.getParameterValues("totalleaves"));
+        dto.setStaff(request.getParameterValues("employeeIDs"));
+
+        dto.setCurrentAcademicYear(httpSession.getAttribute("currentAcademicYear").toString());
+
+        ResultResponse resultResponse = hrService.addLeaves(dto, httpSession.getAttribute(BRANCHID).toString(),
+                httpSession.getAttribute(USERID).toString());
+
+        return resultResponse.isSuccess();
+
+    }
 
 
 }
