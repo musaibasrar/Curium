@@ -2,7 +2,6 @@ package org.ideoholic.curium.model.marksdetails.service;
 
 import org.apache.poi.ss.usermodel.*;
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
@@ -491,10 +490,10 @@ public class MarksDetailsService {
 		return result;
 	}
 
-	public boolean deleteMultiple() {
-		boolean result = true;
-		String[] studentIds = request.getParameterValues("studentIDs");
-		String[] marksIds = request.getParameterValues("marksid");
+	public ResultResponse deleteMultiple(GenerateReportDto dto) {
+		ResultResponse result = ResultResponse.builder().build();
+		String[] studentIds = dto.getStudentIds();
+		String[] marksIds = dto.getMarksIds();
 		if (marksIds != null) {
 			List<Integer> marksListids = new ArrayList();
 			List<Integer> studentListids = new ArrayList();
@@ -510,27 +509,27 @@ public class MarksDetailsService {
 			}
 			System.out.println("id length" + marksIds.length);
 			if (new MarksDetailsDAO().deleteMultiple(marksListids, studentListids)) {
-				result = true;
+				result.setSuccess(true);
 			} else {
-				result = false;
+				result.setSuccess(false);
 			}
 
 		}
 		return result;
 	}
 
-	public boolean generateReport() {
+	public GenerateReportResponseDto generateReport(GenerateReportDto dto, String currentAcademicYear, String branchId) {
+
+		GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
 		
-		boolean result = false;
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(currentAcademicYear!=null){
 			
-			String[] studentIds = request.getParameterValues("studentIDs");
-			String examC = request.getParameter("examclass");
+			String[] studentIds = dto.getStudentIds();
+			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
@@ -550,8 +549,8 @@ public class MarksDetailsService {
 					int totalObtainedMarks = 0;
 					int totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
-					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid());
+					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
 					
 					
 					for (Marks marks : marksDetailsList) {
@@ -602,7 +601,7 @@ public class MarksDetailsService {
 						examMarks.setSubMarks(subMarks);
 						//here
                         int mypercent= (int)Math.round(d);
-						List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(branchId));
 						for (MarksGrade marksGrade : marksGradeDetailsList) {
 							if( mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage())	
 							{
@@ -611,7 +610,7 @@ public class MarksDetailsService {
 							}
 							
 						}
-						ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),currentAcademicYear,Integer.parseInt(branchId));
 						if(examRank!=null) {
 						examMarks.setRank(examRank.getRank());
 						}
@@ -631,7 +630,7 @@ public class MarksDetailsService {
 				markssheet.setExammarks(examMarksList);
 				marksSheetList.add(markssheet);
 				//if(new MarksDetailsDAO().saveMarks(examRankList) )
-				result = true;
+				result.setSuccess(true);
 				/*
 				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
 				 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
@@ -643,9 +642,10 @@ public class MarksDetailsService {
 			
 			int size = examsList.size();
 			int endLoop = size/5;
-			
-			request.setAttribute("endloop", endLoop+1);
-			request.setAttribute("markssheetlist", marksSheetList);
+
+			result.setEndLoop(endLoop+1);
+			result.setMarksSheetList(marksSheetList);
+			result.setSuccess(true);
 			
 			/*for (MarksSheet marksSheet2 : marksSheetList) {
 				
@@ -671,20 +671,18 @@ public class MarksDetailsService {
 		return result;
 	}
 // code for generate parent report
-public boolean generateReportParent() {
+public GenerateReportResponseDto generateReportParent(String strStudentUID, String[] strStudentIds, String currentAcademicYear, String branchId) {
+
+		GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
 		
-		boolean result = false;
-		
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			String studentUID = request.getParameter("id");
-			Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
-			String[] studentIds = request.getParameterValues("studentIDs");
-			String examC = student.getClassstudying();
+		if(currentAcademicYear!=null){
+            Student student = new studentDetailsDAO().readploginUniqueObject(strStudentUID);
+            String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 			//for (int i = 0; i < studentIds.length; i++) {
@@ -702,8 +700,8 @@ public boolean generateReportParent() {
 					int totalObtainedMarks = 0;
 					int totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
-					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(),currentAcademicYear,exam.getExid());
+					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
 					
 					
 					for (Marks marks : marksDetailsList) {
@@ -747,7 +745,7 @@ public boolean generateReportParent() {
 				}
 				markssheet.setExammarks(examMarksList);
 				marksSheetList.add(markssheet);
-				result = true;
+				result.setSuccess(true);
 				/*
 				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
 				 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
@@ -759,9 +757,9 @@ public boolean generateReportParent() {
 			
 			int size = examsList.size();
 			int endLoop = size/5;
-			
-			request.setAttribute("endloop", endLoop+1);
-			request.setAttribute("markssheetlist", marksSheetList);
+
+			result.setEndLoop(endLoop+1);
+			result.setMarksSheetList(marksSheetList);
 			
 			/*for (MarksSheet marksSheet2 : marksSheetList) {
 				
