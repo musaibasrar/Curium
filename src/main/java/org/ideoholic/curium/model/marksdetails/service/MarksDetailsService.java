@@ -123,7 +123,7 @@ public class MarksDetailsService {
 			String output = new MarksDetailsDAO().addMarks(marksList);
 			
 			if(output=="success"){
-				result.setSuccess(true);
+				result.setMessage("true");
 			}else if (output.contains("Duplicate")){
 				result.setMessage("Duplicate");
 			}

@@ -165,11 +165,7 @@ public class MarksDetailsActionAdapter {
 
         ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
 
-        if (resultResponse.isSuccess()) {
-            return "true";
-        } else {
-            return "false";
-        }
+        return resultResponse.getMessage();
     }
 
     public void rankSearch() {
