@@ -93,7 +93,7 @@ public class MarksDetailsAction {
 
 	@PostMapping("/updateMarks")
 	public String updateMarks() {
-		if (new MarksDetailsService(request, response).updateMarks()) {
+		if (marksDetailsActionAdapter.updateMarks()) {
 			return "markssaved";
 		} else {
 			return "error";
@@ -102,15 +102,15 @@ public class MarksDetailsAction {
 
 	@GetMapping("/getSubjectsExams")
 	public String getSubjectsExams() {
-		new MarksDetailsService(request, response).getSubjectExams();
+		marksDetailsActionAdapter.getSubjectExams();
 		standardActionAdapter.viewClasses();
 		return "markssearch";
 	}
 
 	@PostMapping("/viewMarks")
 	public String viewMarks() {
-		if (new MarksDetailsService(request, response).viewMarks()) {
-			new MarksDetailsService(request, response).getSubjectExams();
+		if (marksDetailsActionAdapter.viewMarks()) {
+			marksDetailsActionAdapter.getSubjectExams();
 			return "markssearch";
 		} else {
 			return "error";
