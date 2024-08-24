@@ -57,9 +57,7 @@ public class HrActionAdapter {
         dto.setTotalLeaves(request.getParameterValues("totalleaves"));
         dto.setStaff(request.getParameterValues("employeeIDs"));
 
-        dto.setCurrentAcademicYear(httpSession.getAttribute("currentAcademicYear").toString());
-
-        ResultResponse resultResponse = hrService.addLeaves(dto, httpSession.getAttribute(BRANCHID).toString(),
+        ResultResponse resultResponse = hrService.addLeaves(dto, httpSession.getAttribute("currentAcademicYear").toString() ,httpSession.getAttribute(BRANCHID).toString(),
                 httpSession.getAttribute(USERID).toString());
 
         return resultResponse.isSuccess();

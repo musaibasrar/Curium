@@ -84,13 +84,13 @@ public class HrService {
 
 	}
 
-	public ResultResponse addLeaves(LeaveTypeDto dto, String branchId, String userId) {
+	public ResultResponse addLeaves(LeaveTypeDto dto, String currentAcademicYear, String branchId, String userId) {
 		String[] leaveTypeName = dto.getLeaveTypeNames();
 		String[] totalLeaves = dto.getTotalLeaves();
 		String[] staff = dto.getStaff();
 		List<Leavedetails> leaveDetailsList = new ArrayList<>();
 
-		if(dto.getCurrentAcademicYear()!=null){
+		if(currentAcademicYear!=null){
 		for (String staffId : staff) {
 			
 			for (int i=0; i<leaveTypeName.length; i++) {
@@ -102,7 +102,7 @@ public class HrService {
 				leaveDetails.setLeaveTypeMaster(leave);
 				leaveDetails.setTeacher(teacher);
 				leaveDetails.setNumberofleaves(Integer.parseInt(totalLeaves[i]));
-				leaveDetails.setAcademicyear(dto.getCurrentAcademicYear());
+				leaveDetails.setAcademicyear(currentAcademicYear);
 				leaveDetails.setBranchid(Integer.parseInt(branchId));
 				leaveDetails.setUserid(Integer.parseInt(userId));
 				leaveDetailsList.add(leaveDetails);

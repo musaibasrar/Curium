@@ -10,7 +10,7 @@ public class LeaveTypeDto {
     private String[] leaveTypeNames;
     private String[] totalLeaves;
     private String[] staff;
-    private String currentAcademicYear;
+
 
 
 }
