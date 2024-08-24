@@ -1,8 +1,9 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.marksdetails.dto.GenerateReportDto;
+import org.ideoholic.curium.model.marksdetails.dto.GenerateReportResponseDto;
 import org.ideoholic.curium.model.marksdetails.dto.SearchStudentExamDto;
 import org.ideoholic.curium.model.marksdetails.dto.StudentGraphResponseDto;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
@@ -61,5 +62,45 @@ public class MarksDetailsActionAdapter {
         SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
         request.setAttribute("listExam", responseDto.getExamsList());
+    }
+
+    public boolean generateReport() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+
+        return responseDto.isSuccess();
+    }
+
+    public boolean generateReportParent() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentUID(request.getParameter("id"));
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReportParent(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+
+        return responseDto.isSuccess();
+    }
+
+    public boolean deleteMultiple() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setMarksIds(request.getParameterValues("marksid"));
+
+        ResultResponse resultResponse = marksDetailsService.deleteMultiple(dto);
+
+        return resultResponse.isSuccess();
     }
 }

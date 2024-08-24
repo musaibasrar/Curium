@@ -66,7 +66,7 @@ public class MarksDetailsAction {
 	
 	@PostMapping("/generateReport")
 	public String generateReport() {
-		if (new MarksDetailsService(request, response).generateReport()) {
+		if (marksDetailsActionAdapter.generateReport()) {
 			return "markssheet";
 		} else {
 			return "error";
@@ -75,7 +75,7 @@ public class MarksDetailsAction {
 	
 	@GetMapping("/generateReportParent")
 	public String generateReportParent() {
-		if (new MarksDetailsService(request, response).generateReportParent()) {
+		if (marksDetailsActionAdapter.generateReportParent()) {
 			return "markssheetparent";
 		} else {
 			return "error";
@@ -84,7 +84,7 @@ public class MarksDetailsAction {
 	
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		if (new MarksDetailsService(request, response).deleteMultiple()) {
+		if (marksDetailsActionAdapter.deleteMultiple()) {
 			return "markssaved";
 		} else {
 			return "notSaved";
