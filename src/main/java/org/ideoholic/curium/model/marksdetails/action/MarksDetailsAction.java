@@ -33,7 +33,7 @@ public class MarksDetailsAction {
 
 	@PostMapping("/downloadReportCard")
 	public String downloadReportCard() {
-		new MarksDetailsService(request, response).downloadReportCard();
+		marksDetailsActionAdapter.downloadReportCard();
 		return "reportcardsaved";
 
 	}
@@ -119,7 +119,7 @@ public class MarksDetailsAction {
 
 	@PostMapping("/addMarks")
 	public String addMarks() {
-		String result = new MarksDetailsService(request, response).addMarks();
+		String result = marksDetailsActionAdapter.addMarks();
 		if (result == "true") {
 			return "markssaved";
 		} else if (result == "Duplicate") {
@@ -151,13 +151,13 @@ public class MarksDetailsAction {
 	
 	@PostMapping("/searchForRank")
 	public String searchForRank() {
-		new MarksDetailsService(request, response).rankSearch();
+		marksDetailsActionAdapter.rankSearch();
 		return "rankreport";
 	}
 
 	@PostMapping("/generateRankReport")
 	public String generateRankReport() {
-		if (new MarksDetailsService(request, response).generateRankReport()) {
+		if (marksDetailsActionAdapter.generateRankReport()) {
 			return "studentRankReport";
 		} else {
 			return "error";

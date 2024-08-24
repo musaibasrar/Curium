@@ -147,4 +147,54 @@ public class MarksDetailsActionAdapter {
         return responseDto.isSuccess();
 
     }
+
+    public void downloadReportCard() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        ResultResponse resultResponse = marksDetailsService.downloadReportCard();
+    }
+
+    public String addMarks() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        MarksUpdateDto dto = new MarksUpdateDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setStudentsMarks(request.getParameterValues("studentMarks"));
+        dto.setExam(request.getParameter("exam"));
+        dto.setSubject(request.getParameter("subject"));
+
+        ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+
+        if (resultResponse.isSuccess()) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    public void rankSearch() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        SearchStudentExamDto dto = new SearchStudentExamDto();
+        dto.setAddClass(request.getParameter("classsearch"));
+        dto.setAddSec(request.getParameter("secsearch"));
+
+        SearchStudentResponseDto responseDto = marksDetailsService.rankSearch(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
+        request.setAttribute("listExam", responseDto.getExamsList());
+    }
+
+    public boolean generateRankReport() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generateRankReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+
+        return responseDto.isSuccess();
+    }
 }
