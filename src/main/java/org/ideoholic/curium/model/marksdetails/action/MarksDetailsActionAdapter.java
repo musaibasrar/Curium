@@ -2,10 +2,7 @@ package org.ideoholic.curium.model.marksdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.marksdetails.dto.GenerateReportDto;
-import org.ideoholic.curium.model.marksdetails.dto.GenerateReportResponseDto;
-import org.ideoholic.curium.model.marksdetails.dto.SearchStudentExamDto;
-import org.ideoholic.curium.model.marksdetails.dto.StudentGraphResponseDto;
+import org.ideoholic.curium.model.marksdetails.dto.*;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,5 +99,52 @@ public class MarksDetailsActionAdapter {
         ResultResponse resultResponse = marksDetailsService.deleteMultiple(dto);
 
         return resultResponse.isSuccess();
+    }
+
+    public boolean updateMarks() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        MarksUpdateDto dto = new MarksUpdateDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setStudentsMarks(request.getParameterValues("studentMarks"));
+        dto.setMarksId(request.getParameterValues("marksid"));
+        dto.setExam(request.getParameter("examidselected"));
+        dto.setSubject(request.getParameter("subjectidselected"));
+
+        ResultResponse resultResponse = marksDetailsService.updateMarks(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
+
+    public void getSubjectExams() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        SearchStudentResponseDto responseDto = marksDetailsService.getSubjectExams(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("listSubject", responseDto.getSubjectList());
+        request.setAttribute("listExam", responseDto.getExamsList());
+    }
+
+    public boolean viewMarks() {
+        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
+
+        MarksViewDto dto = new MarksViewDto();
+        dto.setStudentName(request.getParameter("namesearch"));
+        dto.setAddClass(request.getParameter("classsearch"));
+        dto.setAddSec(request.getParameter("secsearch"));
+        dto.setExam(request.getParameter("exam"));
+        dto.setSubject(request.getParameter("subject"));
+        dto.setSubjectSelected(request.getParameter("subjectselected"));
+        dto.setExamSelected(request.getParameter("examselected"));
+
+        MarksResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("newStudentList", responseDto.getNewStudentList());
+        request.setAttribute("newMarksDetails", responseDto.getNewMarksDetails());
+        request.setAttribute("subjectselected", responseDto.getSubjectSelected());
+        request.setAttribute("examselected", responseDto.getExamSelected());
+        request.setAttribute("subjectid", responseDto.getSubject());
+        request.setAttribute("examid", responseDto.getExam());
+
+        return responseDto.isSuccess();
+
     }
 }

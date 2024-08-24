@@ -305,14 +305,15 @@ public class MarksDetailsService {
 		}
 		return result;
 	}
-	public boolean viewMarks() {
+	public MarksResponseDto viewMarks(MarksViewDto dto, String branchId) {
+		MarksResponseDto result = MarksResponseDto.builder().build();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+		String studentname = DataUtil.emptyString(dto.getStudentName());
 
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String addClass = dto.getAddClass();
+		String addSec = dto.getAddSec();
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
 
@@ -337,7 +338,7 @@ public class MarksDetailsService {
 			querySub = " parents.Student.classstudying like '" + classStudying
 					+ "'  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 		}
 
 		queryMain = queryMain + querySub;
@@ -358,8 +359,8 @@ public class MarksDetailsService {
 		System.out.println("Total Number of Students" + searchStudentList.size());*/
 
 		//
-		String exam = request.getParameter("exam");
-		String subject = request.getParameter("subject");
+		String exam = dto.getExam();
+		String subject = dto.getSubject();
 		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
 
 		List<Parents> newStudentList = new ArrayList<Parents>();
@@ -378,40 +379,44 @@ public class MarksDetailsService {
 			}
 		}
 
-		request.setAttribute("newStudentList", newStudentList);
-		request.setAttribute("newMarksDetails", newMarksDetails);
-		request.setAttribute("subjectselected", request.getParameter("subjectselected"));
-		request.setAttribute("examselected", request.getParameter("examselected"));
-		request.setAttribute("subjectid", subject);
-		request.setAttribute("examid", exam);
+		result.setNewStudentList(newStudentList);
+		result.setNewMarksDetails(newMarksDetails);
+		result.setSubjectSelected(dto.getSubjectSelected());
+		result.setExamSelected(dto.getExamSelected());
+		result.setSubject(subject);
+		result.setExam(exam);
+		result.setSuccess(true);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
 		 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
 		 */
 		
 		}
-		return true;
+		return result;
 	}
 
-	public void getSubjectExams() {
+	public SearchStudentResponseDto getSubjectExams(String branchId) {
+		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("listSubject", subjectList);
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectList(subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("listExam", examList);
+		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		result.setExamsList(examList);
+		result.setSuccess(true);
 
+		return result;
 	}
 
-	public boolean updateMarks() {
-		boolean result = false;
+	public ResultResponse updateMarks(MarksUpdateDto dto, String strCurrentAcademicYear, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
-		String[] studentIds = request.getParameterValues("studentIDs");
-		String[] studentsMarks = request.getParameterValues("studentMarks");
-		String[] marksid = request.getParameterValues("marksid");
-		String exam = request.getParameter("examidselected");
-		String subject = request.getParameter("subjectidselected");
+		String[] studentIds = dto.getStudentIds();
+		String[] studentsMarks = dto.getStudentsMarks();
+		String[] marksid = dto.getMarksId();
+		String exam = dto.getExam();
+		String subject = dto.getSubject();
 		int sizeOfArray = 0;
 		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -473,17 +478,17 @@ public class MarksDetailsService {
 					marks.setSubid(subid);
 					marks.setSid(studentId);
 					marks.setMarksobtained(Integer.parseInt(marksObtained));
-					String currentAcademicYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+					String currentAcademicYear = strCurrentAcademicYear;
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
-					marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					marks.setBranchid(Integer.parseInt(branchId));
 					marksList.add(marks);
 				}
 
 			}
 
 			if (new MarksDetailsDAO().updateMarks(marksList)) {
-				result = true;
+				result.setSuccess(true);
 			}
 		}
 
