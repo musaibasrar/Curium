@@ -305,8 +305,8 @@ public class MarksDetailsService {
 		}
 		return result;
 	}
-	public MarksViewResponseDto viewMarks(MarksViewDto dto, String branchId) {
-		MarksViewResponseDto result = MarksViewResponseDto.builder().build();
+	public MarksResponseDto viewMarks(MarksViewDto dto, String branchId) {
+		MarksResponseDto result = MarksResponseDto.builder().build();
 		
 		if(branchId!=null){
 		String queryMain = "From Parents as parents where";

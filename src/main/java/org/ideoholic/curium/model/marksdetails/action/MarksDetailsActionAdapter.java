@@ -136,7 +136,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubjectSelected(request.getParameter("subjectselected"));
         dto.setExamSelected(request.getParameter("examselected"));
 
-        MarksViewResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(BRANCHID).toString());
+        MarksResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("newStudentList", responseDto.getNewStudentList());
         request.setAttribute("newMarksDetails", responseDto.getNewMarksDetails());
         request.setAttribute("subjectselected", responseDto.getSubjectSelected());

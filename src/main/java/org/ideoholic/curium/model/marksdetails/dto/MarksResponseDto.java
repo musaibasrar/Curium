@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class MarksViewResponseDto {
+public class MarksResponseDto {
     private List<Parents> newStudentList;
     private List<Marks> newMarksDetails;
     private String subjectSelected;
