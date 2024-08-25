@@ -334,12 +334,12 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "180px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -443,6 +443,45 @@
 	});
 	
 	
+	var students = [
+        <c:forEach varStatus="status" items="${studentListPaidFees}" var="student">{
+            value:'<c:out default="0" value="${student.admissionnumber}" />',
+            name:'<c:out default="0" value="${student.name}" />',
+            classandsec:'<c:out default="0" value="${student.classstudying}" />',
+            id:'<c:out default="0" value="${student.sid}" />',
+            
+        }<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    ];
+    $(function() {
+        $( "#admno").autocomplete({
+            source: students,
+            minLength: 1,
+            change:function(event,ui){
+                $( "#studentId").val( ui.item.id );
+                
+                
+            },
+            focus: function( event, ui ) {
+                $( "#studentId").val( ui.item.id );
+                return true;
+            },
+            select: function( event, ui ) {
+                $( "#studentId").val( ui.item.id );
+   			  $( "#studentName").val( ui.item.name );
+   			$( "#classandsec").val( ui.item.classandsec );
+                /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+                return true;
+            }
+        }).data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( "<a><b> " + item.value +" </b> </a>" )
+            .appendTo( ul );
+        };
+    });
+	
+	
 </script>
 
 </head>
@@ -480,10 +519,11 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td class="alignRightFields">Admission No. &nbsp;</td>
+							<td align="left"><label> <!-- <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									size="36""> -->
+									<input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
 							</label></td>
 							
 						</tr>
@@ -494,7 +534,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<%-- <tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
 									id="classsearch" style="width: 235px">
@@ -526,14 +566,14 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 
-						</tr>
+						</tr> --%>
 
 						<tr>
 
-							<td width="30%" class="alignRight"></td>
+							<td></td>
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="search">Search</button>
 							</td>
 						</tr>

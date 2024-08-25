@@ -388,15 +388,21 @@ for(Cookie cookie : cookies){
             .bodymargin{
                 margin-left: 0px ;
                 margin-right: 0px;
+                margin-top: 0px;
             }
         }
-        .card {
-    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+        /* .card {
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
     transition: 0.3s;
     width: 12.2cm;
     height: 17.5cm;
 }
-
+ */
+  .card {
+    width: 11cm;
+    height: 7cm;
+    background: #FEE12B;
+}
 /* .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 } */
@@ -411,6 +417,21 @@ for(Cookie cookie : cookies){
                 text-align: left;
                 font-weight: bold;
             }
+            
+             .tableidcard {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        width: 310px;
+      }
+      .tdidcard {
+        font-size: 16px;
+      }
+      
+       .vertical-line {
+      border-left: 2px solid #350c76; /* Add a vertical line */
+    }
     </style>
 
 
@@ -427,396 +448,156 @@ for(Cookie cookie : cookies){
 
 
 
-                <table cellpadding="2"  border="0"   >
-                
-                
-                	<c:forEach items="${messcardstudentlist}" var="studentlist" varStatus="status">
-                			<tr>
-                            <td class="fontsize" >
-		                         <div class="card">
-		                         		<div>
-		                         			<table>
-		                         				<tr>
-		                         					<td style="padding-left: 30px;">
-		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
-		                         							</a>
-		                         					</td>
-		                         					<td style="padding-left: 20px;">
-		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
-		                         						<br>
-		                         					</td>
-		                         				</tr>
-		                         			</table>
-		                         			</div>
-		                         			<div align="center">
-		                         			<hr style="margin-top: 1px;margin-bottom: 1px;color: black;">
-		                         						<br>
-		                         					<label style="font-size: 18px;">Valid From : <fmt:formatDate type="date" value="${studentlist.value.validfrom}" pattern="dd/MM/yyyy"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valid Till : <fmt:formatDate type="date" value="${studentlist.value.validto}" pattern="dd/MM/yyyy"/></label> <br>
-		                         					<br>
-		                         					<c:if test="${studentlist.key.student.nationality == 'nri'}">
-														<label style="font-size: 25px;">NRI</label>
-		                         					
-		                         					</c:if>
-		                         					<br>
-		                         					<c:if test="${studentlist.key.student.breakfast == 'breakfast'}">
-		                         						<a> <img
-															src="images/breakfast.png" width="30" height="30" 
-															alt="Home" style="vertical-align: baseline;font-size: 180px;" />
-														</a>
-														<label style="font-size: 25px;">${studentlist.key.student.breakfast}</label>
-		                         					
-		                         					</c:if>
-		                         					&nbsp;&nbsp;&nbsp;
-		                         					<c:if test="${studentlist.key.student.lunch == 'lunch'}">
-														<a> <img
-															src="images/lunch.png" width="30" height="30" 
-															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
-															
-														</a>
-														<label style="font-size: 25px;">${studentlist.key.student.lunch}</label>
-		                         					</c:if>
-		                         					
-		                         					&nbsp;&nbsp;&nbsp;
-		                         					<c:if test="${studentlist.key.student.dinner == 'dinner'}">
-		                         						<a > <img
-															src="images/dinner.png" width="30" height="30" 
-															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
-														</a>
-		                         					<label style="font-size: 25px;">${studentlist.key.student.dinner}</label>
-		                         					</c:if>
-		                         					
-		                         					&nbsp;&nbsp;&nbsp;
-		                         					<c:if test="${studentlist.key.student.bankifsc == 'cornflakesandmilk'}">
-		                         						<a > <img
-															src="images/cornflakesandmilk.png" width="30" height="30" 
-															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
-														</a>
-		                         					<label style="font-size: 25px;">Corn Flakes And Milk</label>
-		                         					</c:if>
-							
-		                         		<hr style="margin-top: 1px;margin-bottom: 1px;color: black;">
-		                         						 
-		                         		</div>
-		  								<div class="container" align="center">
-		  								
-		  								<table style="width: auto;height: auto;">
-  											<tr>
-  												<td>
-						    							<img src="data:image;base64,${studentlist.key.student.studentpic}" style="height:250px;width:220px;" alt="Student's Photo" />
-  												</td>
-  											</tr>
-  										</table>
-		  								
-		  									<table>	
-  											<tr>
-  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
-  														Name
-  													</td><td class="carddetails">:&nbsp;${studentlist.key.student.name}
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
-  														Adm. No
-  														</td><td class="carddetails">:&nbsp;${studentlist.key.student.admissionnumber}
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
-						  								UID
-  														</td><td class="carddetails">:&nbsp;${studentlist.key.student.studentexternalid}
-  												</td>
-  											</tr>
-  											
-  										</table>
-  										
-		  								</div>
-								</div>
-								<TABLE width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
-
-			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-		<td></td>
-			<td align="left"></td>	
-			<td align="center"></td>
-			<td align="center"></td>
-		</tr>
-		
-			<tr>
-              <td align="center"></td>
-            </tr>
-		</TABLE>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            
-                            
-                        </tr>
-                	
-                	</c:forEach>
-
-                        <%-- <c:set var="iInitial" value="${iInitial}"/>
-                        <c:set var="limit" value="1"/>
-                        
-                        
-                        <c:forEach begin="1" end="${endValue}">
-                        <%!                        
-                            int i = 1;
-                        %>
-
-                        <tr style="page-break-before: always;">
-                            <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-		                         <div class="card">
-		                         		<div>
-		                         			<table>
-		                         				<tr>
-		                         					<td style="padding-left: 30px;">
-		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
-		                         							</a>
-		                         					</td>
-		                         					<td style="padding-left: 20px;">
-		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
-		                         					</td>
-		                         				</tr>
-		                         			</table>
-		                         			</div>
-		                         			<div align="center">
-		                         			<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         		</div>
-		  								<div class="container" align="center">
-		  								
-		  								<table style="width: auto;height: auto;">
-  											<tr>
-  												<td>
-						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:250px;width:220px;" alt="Student's Photo" />
-  												</td>
-  											</tr>
-  										</table>
-		  								
-		  									<table>	
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Name
-  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Adm. No
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-						  								UID
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("uid" + i + "")%>
-  												</td>
-  											</tr>
-  											
-  										</table>
-  										
-		  								</div>
-								</div>
-                            </td>
-                            <td></td>
-                            <td></td>
+                <table cellpadding="0" border="0">
+    <c:forEach items="${messcardstudentlist}" var="studentlist" varStatus="status">
+        <tr>
+            <td class="fontsize">
+                <div class="card"
+                    style="background-color: #f5c516; width: 5.5cm; height: 8.6cm; border: 1px solid; border-radius: 0px; margin: 0;">
+                    <div width="100%" height="10px" style="background: #f5c516; color: #f5c516;">a</div>
+                    <div style="background-color: white;">
+                        <table width="100%" style="text-align: center; margin: 0; padding: 0;">
+                            <tr>
+                                <td><img src="images/zaiqalogo.png" width="38" height="50" /></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 8px;">www.shaheengroup.org ! Toll Free:1800 121 6235</td>
+                            </tr>
+                        </table>
+                        <table width="100%"
+                            style="background-color: #852411; color: white; text-align: center; margin: 0; padding: 0;">
+                            <c:if test="${studentlist.key.student.nationality == 'nonnri'}">
+                                <tr>
+                                    <td>
+                                        <label style="font-size: 12px;">Monthly Pass</label>
+                                    </td>
+                                </tr>
                             </c:if>
-                            
-                        </tr>
-                        <% i = i + 1;%>
-                        <c:set var="limit" value="${limit+1}"/>
-                        
-                    </c:forEach> --%>
-                    <%-- <% i = 1;%>
-                    <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>  --%>
-                        
-                        
-                    <%-- <c:forEach begin="1" end="${endValue}">
-                        <%!                        
-                            int i = 1;
-                        %>
 
-                        <tr>
-                            <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-		                         <div class="card">
-		                         		<div>
-		                         			<table>
-		                         				<tr>
-		                         					<td style="padding-left: 30px;">
-		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
-		                         							</a>
-		                         					</td>
-		                         					<td style="padding-left: 20px;">
-		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
-		                         					</td>
-		                         				</tr>
-		                         			</table>
-		                         			</div>
-		                         			<div align="center">
-		                         			<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         		</div>
-		  								<div class="container" align="center">
-		  								
-		  								<table style="width: auto;height: auto;">
-  											<tr>
-  												<td>
-						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:250px;width:220px;" alt="Student's Photo" />
-  												</td>
-  											</tr>
-  										</table>
-		  								
-		  									<table>	
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Name
-  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Adm. No
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-						  								UID
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("uid" + i + "")%>
-  												</td>
-  											</tr>
-  											
-  										</table>
-  										
-		  								</div>
-								</div>
-                            </td>
-                            <td></td>
-                            <td></td>
+                            <c:if test="${studentlist.key.student.nationality == 'nri'}">
+                                <tr>
+                                    <td>
+                                        <label style="font-size: 12px;">Monthly Pass-NRI</label>
+                                    </td>
+                                </tr>
                             </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> 
-                            	<div class="card">
-		                         		<div align="center">
-		                         			<img src="images/shaheenlogo.png" style="width:100px;height:68px;" alt="shaheenlogo"><br>
-		                         			<label>Zaiqa Mess Services</label>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         		</div>
-		  								<div class="container" align="center">
-		  								
-		  								<table style="width: auto;height: auto;">
-  											<tr>
-  												<td>
-						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:120px;" alt="Student's Photo" />
-  												</td>
-  											</tr>
-  										</table>
-		  								
-		  									<table>	
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Name
-  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Adm. No
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-						  								UID
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("UID" + i + "")%>
-  												</td>
-  											</tr>
-  											
-  										</table>
-  										
-		  								</div>
-								</div>
-                            </td>
-						 <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize">
-                            		<div class="card">
-		                         		<div align="center">
-		                         			<img src="images/shaheenlogo.png" style="width:100px;height:68px;" alt="shaheenlogo"><br>
-		                         			<label>Zaiqa Mess Services</label>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
-		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
-		                         		</div>
-		  								<div class="container" align="center">
-		  								
-		  								<table style="width: auto;height: auto;">
-  											<tr>
-  												<td>
-						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:120px;" alt="Student's Photo" />
-  												</td>
-  											</tr>
-  										</table>
-		  								
-		  									<table>	
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Name
-  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-  														Adm. No
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "")%>
-  												</td>
-  											</tr>
-  											<tr>
-  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
-						  								UID
-  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("UID" + i + "")%>
-  												</td>
-  											</tr>
-  											
-  										</table>
-  										
-		  								</div>
-								</div>
-                            </td>
-                            </c:if>
-                        </tr>
-                        <% i = i + 1;%>
-                        <c:set var="limit" value="${limit+1}"/>
-                        
-                    </c:forEach>
-                    <% i = 1;%>
-                    <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>  --%>
+
+                            <tr>
+                                <td>
+                                    <c:set var="counter" value="0" scope="page" />
+                                    <c:if test="${studentlist.key.student.breakfast == 'breakfast'}">
+                                        <label style="font-size: 8px;padding-right: 5px;font-weight: bold;">Breakfast</label>
+                                        <c:set var="counter" value="${counter + 1}" scope="page" />
+                                    </c:if>
+
+                                    <c:if test="${studentlist.key.student.lunch == 'lunch'}">
+                                        <c:choose>
+                                            <c:when test="${counter > 1}">
+                                                <label style="font-size: 8px;padding-right: 5px;font-weight: bold;">--Lunch</label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <label style="font-size: 8px;padding-right: 5px;font-weight: bold;">Lunch</label>
+                                                <c:set var="counter" value="${counter + 1}" scope="page" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:set var="counter" value="${counter + 1}" scope="page" />
+                                    </c:if>
+
+                                    <c:if test="${studentlist.key.student.dinner == 'dinner'}">
+                                        <c:choose>
+                                            <c:when test="${counter > 1}">
+                                                <label style="font-size: 8px;font-weight: bold;">--Dinner</label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <label style="font-size: 8px;font-weight: bold;">Dinner</label>
+                                                <c:set var="counter" value="${counter + 1}" scope="page" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:set var="counter" value="${counter + 1}" scope="page" />
+                                    </c:if>
+
+                                    <c:if test="${studentlist.key.student.bankifsc == 'milkandcornflakes'}">
+                                        <c:choose>
+                                            <c:when test="${counter > 1}">
+                                                <label style="font-size: 8px;font-weight: bold;">--Milk and Corn Flakes</label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <label style="font-size: 8px;font-weight: bold;">Milk and Corn Flakes</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table style="width: 100%;background-color:#f5c516;text-align:center;margin: 0; padding: 0;">
+                            <tr>
+                                <td><img src="data:image;base64,${studentlist.key.student.studentpic}"
+                                        style="height:68px;width:50px;border: 1px solid black;border-radius: 10px;" alt="Student's Photo" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <table style="background-color:#f5c516;width: 100%;padding-left:5px;padding-right:5px;font-size:10px;">
+											<tr>
+													<td style="width: 70px;">Student Id</td>
+												<td >: ${studentlist.key.student.semester}
+												</td>
+											</tr>
+											<tr>
+													<td style="width: 70px;">Admission No.</td>
+												<td >: ${studentlist.key.student.admissionnumber}
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 70px;">Student Name<c:set var="fullName" value="${studentlist.key.student.name}" /></td>
+												<td >: ${fn:substring(fullName, 0, 16)} 
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 70px;">Date of Issue</td>
+												<td >: <fmt:formatDate type="date" value="${studentlist.value.validfrom}" pattern="dd/MM/yyyy" />
+												</td>
+											</tr>
+											<tr>
+												<td  style="width: 70px;">Valid Till Date</td>
+												<td >: <fmt:formatDate type="date" value="${studentlist.value.validto}"	pattern="dd/MM/yyyy" />
+												</td>
+											</tr>
+
+										</table>
+                    <div height="35" width="100%" style="text-align:right;background-color:#f5c516; margin: 0;">
+                        <img src="images/sign.png" width="30" height="22" style="padding-right: 20px;" />
+                        <div style="padding-right: 20px;font-size:8px;">Signature</div>
+                    </div>
+                </div>
+                <table width="100%" border="0"
+                    style="page-break-after: always; border-collapse: collapse; margin: 0; padding: 0;">
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left"></td>
+                        <td align="center"></td>
+                        <td align="center"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"></td>
+                    </tr>
                 </table>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
+
                 
                 
                 

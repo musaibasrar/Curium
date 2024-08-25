@@ -54,11 +54,24 @@ public class DocumentAction {
 			url = generateAdmissionAbstract();
 		}else if ("download".equalsIgnoreCase(action)) {
 			url = downloadAdmissionAbstract();
+		}else if (action.equalsIgnoreCase("admissionReportSearch")) {
+            url = admissionReportSearch();
+		}else if (action.equalsIgnoreCase("printAdmissionReport")) {
+            url = printAdmissionReport();
 		}
 		return url; 
 	} 
 	
+    private String printAdmissionReport() {
+    	new DocumentService(request, response).printAdmissionReportSearch();
+		return "printadmissionreport.jsp";
+	}
 
+	private String admissionReportSearch() {
+			new DocumentService(request, response).admissionReportSearch();
+			return "admissionreport.jsp";
+		}
+    
 	private String downloadAdmissionAbstract() {
 		if(new DocumentService(request, response).downlaodFile()){
             return "exportsuccessaa.jsp";

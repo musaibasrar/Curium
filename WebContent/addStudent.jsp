@@ -602,7 +602,7 @@
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<!-- <li><a href="#fragment-2">Parent's Details</a></li> -->
-					<li><a href="#fragment-3">Upload Photo</a></li>
+					<!-- <li><a href="#fragment-3">Upload Photo</a></li> -->
 					<!-- <li><a href="#fragment-5">Previous School Details</a></li> -->
 					<!-- <li><a href="#fragment-4">Additional Details</a></li> -->
 					<!-- <li><a href="#fragment-6">Bank Details</a></li> -->
@@ -620,18 +620,18 @@
 						</tr>
 
 						<tr>
-							<td  class="alignLeft">Admission Number &nbsp;</td>
-							<td ><label> <input name="admnno" 
+							<td  class="alignLeft">Admission Number* &nbsp;</td>
+							<td ><label> <input name="admnno" required
 									type="text" class="myclass" id="admnno" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">College&nbsp;</td>
-							<td ><label> 
+							<td class="alignLeft" style="padding-left: 20px;display: none;">College&nbsp;</td>
+							<td style="display: none;"><label> 
 									<select name="collegename"	id="collegename" style="width: 256px;">
-										<option selected></option>
-										<option value="shaheen_sn">Shaheen School</option>
+										<!-- <option selected></option> -->
+										<option value="shaheen_sn" selected="selected">Shaheen School</option>
 										<option value="maulanaazad_ma">Maulana Azad</option>
 										<option value="allamaiqbal_ai">Allama Iqbal</option>
 										<option value="neetrepeaters_nr">NEET Academy</option>
@@ -663,15 +663,34 @@
 							<td align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="30" required
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									required>
+									>
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+			 				<!-- <td class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
+							<td height="30" class="alignLeft" style="display: none;">&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" /> 
+
+							</td> -->
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+			 				<td class="alignLeft">Gender &nbsp;</td>
 							<td height="30" class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="Male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />
+								onclick="noCheck(this.id)" /> 
 
 							</td>
 
@@ -733,12 +752,31 @@
 						<tr>
 							<td><br /></td>
 						</tr> -->
+						
+						<tr>
+						<td class="alignLeft">Contact Number &nbsp;</td>
 
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="contactnumber" size="30" maxlength="10" minlength="10">
+
+									</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 
 
-							<td class="alignLeft">Class Studying&nbsp;</td>
-							<td ><label> <select name="addclass" required
+							<td class="alignLeft" style="display: none;">Class Studying&nbsp;</td>
+							<td style="display: none;"><label> <select name="addclass"
 									id="addclass" style="width: 256px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -764,12 +802,12 @@
 								</select>
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Meals &nbsp;</td>
-							<td height="30" class="alignLeft">&nbsp;Breakfast<input
-								type="checkbox" value="breakfast" name="breakfast" id="breakfast"/>
-								&nbsp; &nbsp;Lunch<input type="checkbox" value="lunch" name="lunch" id="lunch"/>
-								&nbsp; &nbsp;Dinner<input type="checkbox" value="dinner" name="dinner" id="dinner"/>
-								&nbsp; &nbsp;Corn Flakes & Milk<input type="checkbox" value="cornflakesandmilk" name="bankifsc" id="cornflakesandmilk"/>
+							<td class="alignLeft">Meals &nbsp;</td>
+							<td height="30" class="alignLeft">
+								Milk and Corn Flakes<input type="checkbox" value="milkandcornflakes" name="bankifsc" id="milkandcornflakes" checked="checked"/>
+								&nbsp;&nbsp;Breakfast<input	type="checkbox" value="breakfast" name="breakfast" id="breakfast"/>
+								&nbsp;&nbsp;Lunch<input type="checkbox" value="lunch" name="lunch" id="lunch"/>
+								&nbsp;&nbsp;Dinner<input type="checkbox" value="dinner" name="dinner" id="dinner"/>
 							</td>
 							
 							<td  class="alignRight" style="display: none;">Admitted in Class &nbsp;
@@ -810,8 +848,8 @@
 						
 						
 						<tr>
-							<td class="alignLeft">Type&nbsp;</td>
-							<td ><label> 
+							<td class="alignLeft" style="display: none;">Type&nbsp;</td>
+							<td style="display: none;"><label> 
 									<select name="staytype"	id="staytype" style="width: 256px;">
 										<option selected>Day Scholar</option>
 										<option>Day Scholar with Bus</option>
@@ -820,8 +858,8 @@
 										</select>
 							</label> </td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Campus&nbsp;</td>
-							<td ><label> 
+							<td class="alignLeft" style="padding-left: 20px;display: none;">Campus&nbsp;</td>
+							<td style="display: none;"><label> 
 												<select name="campus" id="campus" style="width: 256px;">
 														<option selected value="Shaheen Nagar_SN">Shaheen Nagar</option>
 														<option value="Gole Khana_GK">Gole Khana</option>
@@ -832,22 +870,15 @@
 						</tr>
 
 						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
 							
-							<td   class="alignLeft">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
+							<td   class="alignLeft" style="display: none;">Date of admission&nbsp;</td>
+							<td style="display: none;"><label><input name="dateofadmission" autocomplete="false"
 								value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									type="text" class="myclass" id="dateofadmission" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)"> </label></td>
+									> </label></td>
 									
-							<td class="alignLeft" style="padding-left: 20px;">Apply Fees &nbsp;</td>
+							<td class="alignLeft">Apply Fees &nbsp;</td>
 							<td height="30" class="alignLeft">&nbsp;Non-NRI<input
 								type="radio" value="nonnri" name="nationality" id="yes" checked/>
 								&nbsp;NRI<input
@@ -859,7 +890,7 @@
 										<option value="1">1 Month</option>
 										<option value="2">2 Months</option>
 										<option value="3">3 Months</option>
-										<option value="4">4 Months</option>
+										<!-- <option value="4">4 Months</option>
 										<option value="5">5 Months</option>
 										<option value="6">6 Months</option>
 										<option value="7">7 Months</option>
@@ -867,7 +898,7 @@
 										<option value="9">9 Months</option>
 										<option value="10">10 Months</option>
 										<option value="11">11 Months</option>
-										<option value="12">12 Months</option>
+										<option value="12">12 Months</option> -->
 										</select>
 							</label>
 
@@ -878,28 +909,25 @@
 						<tr>
 							
 							<td class="alignLeft">&nbsp;</td>
-							<td ></td>
-									
-							<td class="alignLeft" style="padding-left: 20px;">&nbsp;</td>
 							<td height="30" class="alignLeft">
 							Valid From
 							<input name="validfrom" autocomplete="false"
 									type="text" class="myclass" id="validfrom" size="6"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)">
+									>
 							&nbsp;&nbsp;Valid Till
 							<input name="validtill" autocomplete="false"
 									type="text" class="myclass" id="validtill" size="6"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)">
+									>
 							</td>
 							
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 						
@@ -1182,34 +1210,34 @@
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"s
-									data-validate="validate(required)">
+									>
 							</label></td>
 							
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						 <tr>
+						 <tr style="display: none;">
 							<td><br /></td>
 						</tr>
 						 
-						 <tr>
+						 <tr style="display: none;">
 									<td align="center"><h3 style="text-decoration: underline;color: #eb6000">Parent's Details:</h3><br /></td>
 								</tr>
 								
 								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
-									<td align="left"><label> <input
-											name="fathersname" type="text" class="myclass" required
+									<td class="alignLeft" style="display: none;">Father's Name* &nbsp;</td>
+									<td align="left" style="display: none;"><label> <input
+											name="fathersname" type="text" class="myclass" 
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="fathersname" size="30"
-											required> <!-- onkeyup="check(this.value);"  -->
+											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 									
-									<td class="alignLeft" style="padding-left: 20px;">Contact Number* &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;display: none;">Contact Number* &nbsp;</td>
 
-									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
+									<td style="display: none;"><label> <input
+											name="contactnumber" type="text" class="myclass" 
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="contactnumber" size="30" maxlength="10" minlength="10">
 
@@ -1227,7 +1255,7 @@
 
 
 
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 								<tr>
@@ -1380,7 +1408,7 @@
 								<tr>
 									<td><br /></td>
 								</tr> -->
-								<tr>
+								<tr style="display: none;">
 
 								<td class="alignLeft">Permanent Address &nbsp;</td>
 
@@ -1401,15 +1429,7 @@
 
 
 
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
+								<tr style="display: none;">
 
 									<td class="alignLeft">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -1420,25 +1440,66 @@
 								</tr>
 
 								<tr>
+									<td class="alignLeft">Student Photo &nbsp;</td>
+									<td>
+									<input type="file" name="fileToUpload"
+										id="fileToUpload" accept="image/*">
+									</td>
+								</tr>
+								<tr>
+
 									<td><br /></td>
 								</tr>
 								
-
-						<div>
-							<table width="100%">
 								<tr>
 
 									<td><br /></td>
 								</tr>
-
+																
 								<tr>
+
+									<td class="alignLeft">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											>
+									</label></td>
+																	
+								</tr>
+									<tr>
+
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+
+									<td><br /></td>
+								</tr>
+									
+									<tr>
+									<td   class="alignLeft">Date of admission&nbsp;</td>
+									<td><label><input name="dateofadmission" autocomplete="false"
+								value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									type="text" class="myclass" id="dateofadmission" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									> </label></td>
+								</tr>
+
+						<div>
+							<table width="100%">
+								<tr style="display: none;">
+
+									<td><br /></td>
+								</tr>
+
+								<tr style="display: none;">
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Next</a></td>
 								</tr>
 
-								<tr>
+								<tr >
 
 									<td><br /></td>
 								</tr>
@@ -1462,7 +1523,7 @@
 
 
 
-						<div id="fragment-3">
+						<!-- <div id="fragment-3">
 							<table width="100%" border="0" align="center">
 								<tr>
 									<td><br /> <input type="file" name="fileToUpload"
@@ -1483,9 +1544,9 @@
 
 									<tr>
 
-										<td align="center"><!-- <a class="nexttab"
+										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> <a
+											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Previous</a></td>
@@ -1525,7 +1586,7 @@
 
 							</div>
 
-						</div>
+						</div> -->
 
 
 						<%-- <div id="fragment-4">

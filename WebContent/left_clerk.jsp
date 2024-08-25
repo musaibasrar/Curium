@@ -6,6 +6,8 @@ Author     : Musaib
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -157,7 +159,10 @@ for(Cookie cookie : cookies){
 %>
     <body onload="StartClock()" onunload="KillClock()" >
         <%--  <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
         <div id="container" style="width: 95%;">
         			<!-- border:none;border-bottom: 1px solid #010d1c !important; border-right: 1px solid #010d1c !important;-->
             
@@ -173,6 +178,11 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:40px ;">
             				 <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=admissionReportSearch" style="font-size: 12px;">Admission Report</a>
             			</td>
             		</tr>
             	</table>
@@ -193,7 +203,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:40px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a>
+            				<a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReportByUser&fromdate=<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>&todate=<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		<tr>
@@ -218,11 +228,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:40px ;">
             				 <a target="mainFrame" href="Controller?process=printids&action=cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
-            		</tr>
+            		</tr> -->
             	</table>
             </div>
             

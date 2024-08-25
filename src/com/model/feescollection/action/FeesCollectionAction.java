@@ -44,11 +44,18 @@ public class FeesCollectionAction {
                             url = undoFeesReceipt();
                         }else if (action.equalsIgnoreCase("searchFeesReport")) {
                             url = searchFeesReport();
-                    }
+                        }else if (action.equalsIgnoreCase("searchFeesReportByUser")) {
+                            url = searchFeesReportByUser();
+                        }
                 return url;
         }
 
-        private String searchFeesReport() {
+        private String searchFeesReportByUser() {
+			new FeesCollectionService(request, response).getFeesReportByUser();
+			return "feesCollectionDetails.jsp";
+		}
+
+		private String searchFeesReport() {
             new FeesCollectionService(request, response).getFeesReport();
             return "feesreport.jsp";
     }

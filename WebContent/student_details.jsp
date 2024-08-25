@@ -517,6 +517,8 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.lunch}" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <c:out default="" value="${student.dinner}" />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <c:out default="" value="${student.bankifsc}" />
                             </td>
                             
                                <%--  <c:out default="" value="${student.classstudying}" /> --%>
@@ -903,7 +905,7 @@ for(Cookie cookie : cookies){
                 
                 <div>
 					<div align="center">
-				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
+				<%-- <h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp; --%>
 				<h class="dataTextFees">Total fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total fees paid : Rs. ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>

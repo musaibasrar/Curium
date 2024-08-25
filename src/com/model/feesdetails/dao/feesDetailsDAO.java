@@ -327,4 +327,26 @@ public class feesDetailsDAO {
 			
 		}
 
+		public List<Student> readListOfStudentsPaidAmount(int branchId) {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+
+                    results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.feespaid > 0 and f.branchid = "+branchId+")")
+                                    .list();
+                    transaction.commit();
+
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            } finally {
+        			HibernateUtil.closeSession();
+                    return results;
+            }
+    }
+
 }

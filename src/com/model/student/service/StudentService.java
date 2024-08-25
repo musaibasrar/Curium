@@ -32,8 +32,10 @@ import com.model.academicyear.dto.Currentacademicyear;
 import com.model.degreedetails.dto.Degreedetails;
 import com.model.feescategory.dao.feesCategoryDAO;
 import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Receiptinfo;
+import com.model.feescollection.service.FeesCollectionService;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
@@ -513,32 +515,49 @@ public class StudentService {
 		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 		//Stamp fees
-		
+		int totalFeesAmount = 0;
 		if("nonnri".equalsIgnoreCase(student.getNationality())) {
 			
 			List<Feescategory> feesCategory = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, totalFeesAmount = 0;
+			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesmilkandcornflakesid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0,feesmilkandcornflakes =0;
 			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
 			
 			for (Feescategory feescat : feesCategory) {
-					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Breakfast")) {
+					String feesCategoryName = feescat.getFeescategoryname();
+					int monthlyInstallment = Integer.parseInt(monthfees);
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feesCategoryName,"General Food - Breakfast")) {
 						feesbreakfastid = feescat.getIdfeescategory();
 						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
 						studentFeesStructure.add(studentFeesBreakFast);
-					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Lunch")) {
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feesCategoryName,"General Food - Lunch")) {
 						feeslunchid = feescat.getIdfeescategory();
 						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
 						studentFeesStructure.add(studentFeesLunch);
-					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Dinner")) {
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feesCategoryName,"General Food - Dinner")) {
 						feesdinnerid = feescat.getIdfeescategory();
 						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));
 						studentFeesStructure.add(studentFeesDinner);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes").equalsIgnoreCase(feesCategoryName) && monthlyInstallment==1) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes"+monthfees).equalsIgnoreCase(feesCategoryName) && monthlyInstallment==2) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes"+monthfees).equalsIgnoreCase(feesCategoryName)&& monthlyInstallment==3) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
 					}
 				}
-			totalFeesAmount = feesbreakfast + feeslunch + feesdinner ;
+			totalFeesAmount = feesbreakfast + feeslunch + feesdinner + feesmilkandcornflakes;
 			Academicfeesstructure academicFessStructure  = new StampFeesService(request, response).stampAcademicFessStructure(Integer.toString(totalFeesAmount));
 			
 			//Card Details
@@ -553,28 +572,45 @@ public class StudentService {
 		}else if("nri".equalsIgnoreCase(student.getNationality())) {
 			
 			List<Feescategory> feesCategory = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, totalFeesAmount = 0;
+			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0,feesmilkandcornflakesid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, feesmilkandcornflakes=0;
 			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
 			
 			for (Feescategory feescat : feesCategory) {
-					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Breakfast Fee")) {
+				String feesCategoryName = feescat.getFeescategoryname();
+				int monthlyInstallment = Integer.parseInt(monthfees);
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feesCategoryName,"NRI-Breakfast Fee")) {
 						feesbreakfastid = feescat.getIdfeescategory();
 						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
 						studentFeesStructure.add(studentFeesBreakFast);
-					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Lunch Fee")) {
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feesCategoryName,"NRI-Lunch Fee")) {
 						feeslunchid = feescat.getIdfeescategory();
 						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
 						studentFeesStructure.add(studentFeesLunch);
-					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Dinner Fee")) {
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feesCategoryName,"NRI-Dinner Fee")) {
 						feesdinnerid = feescat.getIdfeescategory();
 						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));
 						studentFeesStructure.add(studentFeesDinner);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes").equalsIgnoreCase(feesCategoryName) && monthlyInstallment==1) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes"+monthfees).equalsIgnoreCase(feesCategoryName) && monthlyInstallment==2) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
+					}else if("milkandcornflakes".equalsIgnoreCase(student.getBankifsc()) && ("Milk and Corn Flakes"+monthfees).equalsIgnoreCase(feesCategoryName) && monthlyInstallment==3) {
+						feesmilkandcornflakesid = feescat.getIdfeescategory();
+						feesmilkandcornflakes = feescat.getAmount();
+						Studentfeesstructure studentFeesMilkAndCornflakes = new StampFeesService(request, response).stampStudentFeesStructure(feesmilkandcornflakesid, new Long(feesmilkandcornflakes));
+						studentFeesStructure.add(studentFeesMilkAndCornflakes);
 					}
 				}
-			totalFeesAmount = feesbreakfast + feeslunch + feesdinner ;
+			totalFeesAmount = feesbreakfast + feeslunch + feesdinner + feesmilkandcornflakes;
 			Academicfeesstructure academicFessStructure  = new StampFeesService(request, response).stampAcademicFessStructure(Integer.toString(totalFeesAmount));
 			
 			//Card Details
@@ -595,6 +631,7 @@ public class StudentService {
 		
 
 		if(parents!=null){
+			new FeesCollectionService(request, response).getStampFees(parents,totalFeesAmount);
 			result=true;
 		}
 
@@ -1460,7 +1497,7 @@ public class StudentService {
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
 					new Object[] { "Student Name", "Gender", "Class Studying",
-							"Admission Number", "College", "Breakfast", "Lunch",
+							"Admission Number", "College","Milk and Corn Flakes", "Breakfast", "Lunch",
 							"Dinner", "Campus", "Fathers Name",  "Card Valid From" , "Card Valid Till" , "Nationality", "Status" });
 			int i = 1;
 			
@@ -1486,6 +1523,7 @@ public class StudentService {
 												 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 												 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 												 DataUtil.emptyString(studentDetails.getStudent().getCollege()),
+												 DataUtil.emptyString(studentDetails.getStudent().getBankifsc()),
 												 DataUtil.emptyString(studentDetails.getStudent().getBreakfast()),
 												 DataUtil.emptyString(studentDetails.getStudent().getLunch()),
 												 DataUtil.emptyString(studentDetails.getStudent().getDinner()),

@@ -70,6 +70,7 @@ public class PrintIdsAction {
 
 	private String generateIds() {
 		 new StandardService(request, response).viewClasses();
+		 new FeesService(request, response).viewAllStudentsListWithPaidAmount();
 		return "generateids.jsp";
 	}
 

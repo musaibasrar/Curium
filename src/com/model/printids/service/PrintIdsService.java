@@ -34,38 +34,38 @@ public class PrintIdsService {
 		
 		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(request
-					.getParameter("namesearch"));
+			String admissionNo = DataUtil.emptyString(request
+					.getParameter("admno"));
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
-			String conClassStudying = "";
-
-			if (!addClass.equalsIgnoreCase("")) {
-
-				conClassStudying = addClass+"--" +"%";
-
-			}
-			if (!addSec.equalsIgnoreCase("")) {
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
-
-			String classStudying = DataUtil.emptyString(conClassStudying);
+			/*
+			 * String addClass = request.getParameter("classsearch"); String addSec =
+			 * request.getParameter("secsearch"); String conClassStudying = "";
+			 * 
+			 * if (!addClass.equalsIgnoreCase("")) {
+			 * 
+			 * conClassStudying = addClass+"--" +"%";
+			 * 
+			 * } if (!addSec.equalsIgnoreCase("")) { conClassStudying = addClass;
+			 * conClassStudying = conClassStudying+"--"+addSec+"%"; }
+			 * 
+			 * String classStudying = DataUtil.emptyString(conClassStudying);
+			 */
 			String querySub = "";
 
-			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+			if (!admissionNo.equalsIgnoreCase("")) {
+				querySub = " parents.Student.admissionnumber like '%" + admissionNo + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}
 
-			if (!classStudying.equalsIgnoreCase("")
-					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
-			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
-			}
+			/*
+			 * if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+			 * querySub = querySub + " AND parents.Student.classstudying like '" +
+			 * classStudying +
+			 * "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0"
+			 * ; } else if (!classStudying.equalsIgnoreCase("")) { querySub = querySub +
+			 * " parents.Student.classstudying like '" + classStudying +
+			 * "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="
+			 * +Integer.parseInt(httpSession.getAttribute("branchid").toString()); }
+			 */
 
 			queryMain = queryMain + querySub;
 			/*
@@ -73,7 +73,6 @@ public class PrintIdsService {
 			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
 			request.setAttribute("searchStudentList", searchStudentList);

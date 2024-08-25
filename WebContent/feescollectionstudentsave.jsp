@@ -895,14 +895,14 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
+                        <td style="display: none;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
                         
                     </tr>
                     
                     <tr>
                     
                         <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        <td style="display: none;">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
                         
                     </tr>
                     <tr>
@@ -929,7 +929,6 @@ for(Cookie cookie : cookies){
                 </thead>
 
 				<tbody>
-					<c:set var="TotalDueAmount" value="0" />
 					<c:forEach items="${studentfeesdetails}" var="studentfeesdetails" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -942,7 +941,6 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.value}/${studentfeesdetails.key.feesamount}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
-							<c:set var="TotalDueAmount" value="${TotalDueAmount+studentfeesdetails.value}" />
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this)">
@@ -958,7 +956,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
                         <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
-                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="${TotalDueAmount}" readonly /></b></td>
+                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="${totalfeesamount}" readonly /></b></td>
                     </tr>
                 </tfoot>
 			</table>

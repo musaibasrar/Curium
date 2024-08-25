@@ -624,7 +624,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-						<tr>
+						<!-- <tr>
 							<td width="30%" class="alignRight">STS Number&nbsp;</td>
 							<td width="12%" align="left"><label>
 										<input
@@ -673,7 +673,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 
 						<tr>
 
@@ -748,7 +748,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<%-- <tr>
 
 
 							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
@@ -783,7 +783,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 
@@ -812,7 +812,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 
 
 
@@ -931,7 +931,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+ -->
 
 
 

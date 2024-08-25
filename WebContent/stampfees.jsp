@@ -6,7 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -437,7 +438,7 @@
 
 		$("#go").button()
 		
-		$(function() {
+		/* $(function() {
 			$("#validfrom").datepicker({
 				changeYear : true,
 				changeMonth : true,
@@ -461,7 +462,7 @@
 					function() {
 						$("#validtill").datepicker("option", "showAnim", $(this).val());
 					});
-		});
+		}); */
 		
 	});
 	
@@ -574,6 +575,14 @@
             	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
             	//feesConcession (direct amount)
                 final1.value=(feesCat*feesCount)-feesConcession;
+            	
+             var month = feesCount;
+       		 var startDate = document.getElementById('startdate').value;
+       		 document.getElementById('validfrom').value = startDate;
+       		 var dateSplit = startDate.split('/');
+       		 var month = parseInt(dateSplit[1])+parseInt(month);
+       		 var endDate = dateSplit[0]+'/'+month+'/'+dateSplit[2];
+       		 document.getElementById('validtill').value = endDate;
            
         }
        
@@ -721,6 +730,32 @@
     	}
     	
     }
+    
+    $(function() {
+		$("#startdate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "0:+1"
+		});
+		$("#anim").change(
+				function() {
+					$("#startdate").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+    
+    function calculateValidity(id){
+		 
+		 var month = document.getElementById(id).value;
+		 var startDate = document.getElementById('startdate').value;
+		 document.getElementById('validfrom').value = startDate;
+		 var dateSplit = startDate.split('/');
+		 var month = parseInt(dateSplit[1])+parseInt(month);
+		 var endDate = dateSplit[0]+'/'+month+'/'+dateSplit[2];
+		 document.getElementById('validtill').value = endDate;
+		 
+	 }
         </script>
 
 </head>
@@ -850,18 +885,23 @@ for(Cookie cookie : cookies){
 									
 								
 							<label style="color: #eb6000;font-size: 12px;">&nbsp;&nbsp;Mess Card:</label>
-									
+									<label style="color: #466580;font-size: 12px;">&nbsp;&nbsp;Start Date</label>
+									<label><input name="startdate" autocomplete="false"
+								value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									type="text" class="myclass" id="startdate" size="16"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)"> </label>
 							<label style="color: #466580;font-size: 12px;">&nbsp;&nbsp;Valid From</label>
-							<input name="validfrom" autocomplete="false"
+							<input name="validfrom" autocomplete="false" readonly
 									type="text" class="myclass" id="validfrom" size="6" autocomplete="off"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)">
+									>
 									
 							<label style="color: #466580;font-size: 12px;">&nbsp;&nbsp;Valid Till</label>
-							<input name="validtill" autocomplete="false"
+							<input name="validtill" autocomplete="false" readonly
 									type="text" class="myclass" id="validtill" size="6" autocomplete="off"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)">									
+									>									
 									
 					</div>
 					<TABLE id="dataTable" width="100%" border="0">
@@ -872,7 +912,7 @@ for(Cookie cookie : cookies){
 									onclick="selectAllRow('dataTable')" /></td>
 								<td class="headerText">Fees Category</td>
 								<td class="headerText">Fees Amount</td>
-								<td class="headerText">No.of installments in a Year</td>
+								<td class="headerText">Total Months</td>
 								<td class="headerText">Concession Amount</td>
 								<td class="headerText">Fees Total Amount</td>
 
@@ -918,6 +958,7 @@ for(Cookie cookie : cookies){
                         <th title="click to sort" class="headerText">Breakfast</th>
                         <th title="click to sort" class="headerText">Lunch</th>
                         <th title="click to sort" class="headerText">Dinner</th>
+                        <th title="click to sort" class="headerText">Milk and Corn Flakes</th>
 					</tr>
 				</thead>
 
@@ -951,7 +992,7 @@ for(Cookie cookie : cookies){
                                 	<input type="checkbox" 	${Parents.student.dinner == 'dinner' ? 'checked' : ''} />
                                 </td>
                                  <td class="dataText" style="text-transform:uppercase">
-                                	<input type="checkbox" 	${Parents.student.bankifsc == 'chocosandmilk' ? 'checked' : ''} />
+                                	<input type="checkbox" 	${Parents.student.bankifsc == 'milkandcornflakes' ? 'checked' : ''} />
                                 </td>
 						</tr>
 					</c:forEach>

@@ -45,7 +45,7 @@ public class UserAction {
 
 	private String searchByDate() {
 		new UserService(request, response).searchByDate();
-        return "feesCollectionDetails.jsp";
+        return "feesCollectionDetailsAdmin.jsp";
 	}
 
 	private String advanceSearchByParents() {

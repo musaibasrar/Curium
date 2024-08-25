@@ -125,7 +125,7 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number", "Student Name", "Date of Fees", "Total"});
+					new Object[] { "Admission Number", "Student Name", "Gender", "Milk & Cornflakes", "Breakfast", "Lunch", "Dinner", "Date of Fees", "Total"});
 			int i = 1;
 			for (Receiptinfo feesDetails : listOfFeesDetails) {
 				
@@ -133,7 +133,8 @@ public class FeesDetailsService {
 				
 					if(studentDetails.getSid() == feesDetails.getSid()) {
 						data.put(Integer.toString(i),new Object[] { 
-								studentDetails.getAdmissionnumber(),studentDetails.getName(),
+								studentDetails.getAdmissionnumber(),studentDetails.getName(),studentDetails.getGender(),studentDetails.getBankifsc(),
+								studentDetails.getBreakfast(),studentDetails.getLunch(),studentDetails.getDinner(),
 								feesDetails.getDate().toString(),
 								feesDetails.getTotalamount() });	
 					}

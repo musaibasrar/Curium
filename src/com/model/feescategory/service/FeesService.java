@@ -217,4 +217,18 @@ public class FeesService {
        return "error.jsp";
        
 	}
+
+
+	public boolean viewAllStudentsListWithPaidAmount() {
+
+        boolean result = false;
+        try {
+                List<Student> list = new feesDetailsDAO().readListOfStudentsPaidAmount(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                request.setAttribute("studentListPaidFees", list);
+                result = true;
+        } catch (Exception e) {
+                result = false;
+        }
+        return result;
+}
 }

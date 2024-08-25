@@ -14,6 +14,7 @@ import com.model.parents.dto.Parents;
 import com.model.stampfees.dao.StampFeesDAO;
 import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.DataUtil;
 import com.util.DateUtil;
@@ -222,9 +223,10 @@ public class StampFeesService {
 		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
 		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 		List<Card> cardList = new ArrayList<Card>();
+		List<Student> studentList = new ArrayList<Student>();
 		
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
-
+		String[] feesNames = request.getParameterValues("feesNames");
 		String[] feesCategoryIds = request.getParameterValues("feesIDS");
 		String[] feesAmount = request.getParameterValues("fessFullCat");
 		String[] concession = request.getParameterValues("feesConcession");
@@ -252,6 +254,27 @@ public class StampFeesService {
 			cardDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			cardList.add(cardDetails);
 			//End Mess Card
+			
+			//Student Meals Update
+				Student student = new Student();
+				student.setSid(Integer.valueOf(id));
+				student.setBreakfast("");
+				student.setLunch("");
+				student.setDinner("");
+				student.setBankifsc("");
+				for (String feesName : feesNames) {
+					if(feesName.contains("Break")) {
+						student.setBreakfast("breakfast");
+					}else if(feesName.contains("Lunch")) {
+						student.setLunch("lunch");
+					}else if(feesName.contains("Dinner")) {
+						student.setDinner("dinner");
+					}else if (feesName.contains("Milk and Corn Flakes")) {
+						student.setBankifsc("milkandcornflakes");
+					}	
+				}
+				studentList.add(student);
+			//
 
 		}
 		
@@ -277,7 +300,7 @@ public class StampFeesService {
 			
 		}
 		
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), cardList);
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), cardList, studentList);
 		new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}

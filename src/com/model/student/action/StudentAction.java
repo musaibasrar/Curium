@@ -80,9 +80,8 @@ public class StudentAction {
             }
                 return url;
         }
-        
 
-    private String multiClassSearch() {
+	private String multiClassSearch() {
 
         new StampFeesService(request, response).multiClassSearch();
         return "studentsdetailsreports.jsp";
@@ -123,7 +122,7 @@ public class StudentAction {
 
         private String searchStudentsForBonafide() {
                 new StampFeesService(request, response).advanceSearch();
-        return "studentsdetailsbonafide.jsp";
+                return "studentsdetailsbonafide.jsp";
         }
 
         private String searchForStudents() {
@@ -238,7 +237,7 @@ public class StudentAction {
 
         private String addStudent() {
                  if (new StudentService(request, response).addStudent()) {
-                    return "saved.jsp";
+                    return "feescollectionstudentsave.jsp";
                 } else {
                     return "notSaved.jsp";
                 }

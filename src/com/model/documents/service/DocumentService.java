@@ -33,6 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.model.documents.dao.DocumentDAO;
 import com.model.documents.dto.Transfercertificate;
+import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
@@ -487,6 +488,58 @@ public class DocumentService {
 		return result;
 	}
 
-	
+	public void admissionReportSearch() {
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String toDate= DateUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		String fromDate = DataUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
+		String gender = DataUtil.emptyString(request.getParameter("gender"));
+		
+			if(gender!="") {
+				queryMain = queryMain + " parents.Student.gender='"+gender+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.admissiondate between '"+fromDate+"' and '"+toDate+"') and parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			}else {
+				queryMain = queryMain + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.admissiondate between '"+fromDate+"' and '"+toDate+"') and parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			}
+
+			
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			request.setAttribute("fromdateselected", "From Date "+request.getParameter("fromdate"));
+			request.setAttribute("todateselected", "To Date "+request.getParameter("todate"));
+		
+	}
+		
+		
+		request.setAttribute("searchStudentList", searchStudentList);
+
+	}
+
+
+	public void printAdmissionReportSearch() {
+
+		String[] studentIds = request.getParameterValues("studentIDs");
+		
+		List<Parents> listOfStudentRecords = new ArrayList<Parents>();
+		List<Card> listOfStudentCards = new ArrayList<Card>();
+		List<Integer> studentids = new ArrayList<Integer>();
+		
+		if (studentIds != null) {
+			for (String id : studentIds) {
+					studentids.add(Integer.parseInt(id));
+			}
+			
+			
+			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+			String querySub = " parents.Student.id IN (:ids) order by parents.Student.admissionnumber ASC";
+			queryMain = queryMain + querySub;
+
+			List<Parents> searchStudentList = new studentDetailsDAO().getParentsStudents(queryMain,studentids);
+			listOfStudentCards = new studentDetailsDAO().getCardDetails(studentids);
+			request.setAttribute("searchStudentList", searchStudentList);
+		}
+
+	}
 	
 }

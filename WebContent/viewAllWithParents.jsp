@@ -405,12 +405,12 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name</th>
-                            <th title="click to sort" class="headerText">Class</th>
-                            <th title="click to sort" class="headerText">Father's Name</th>
+                            <!-- <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Father's Name</th> -->
                             <th title="click to sort" class="headerText">Breakfast</th>
                             <th title="click to sort" class="headerText">Lunch</th>
                             <th title="click to sort" class="headerText">Dinner</th>
-                            <th title="click to sort" class="headerText">Corn Flakes & Milk</th>
+                            <th title="click to sort" class="headerText">Milk and Corn Flakes</th>
                         </tr>
                     </thead>
 
@@ -422,12 +422,12 @@ for(Cookie cookie : cookies){
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
-                                <td class="dataText" style="text-transform:uppercase">
+                                <%-- <td class="dataText" style="text-transform:uppercase">
                                  <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
                                 </td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td> --%>
                                 <td class="dataText" style="text-transform:uppercase">
                                 	<input type="checkbox"
 										value="breakfast" name="breakfast" id="breakfast" 
@@ -445,8 +445,8 @@ for(Cookie cookie : cookies){
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
                                 	<input type="checkbox"
-										value="cornflakesandmilk" name="bankifsc" id="cornflakesandmilk" 
-									${Parents.student.bankifsc == 'cornflakesandmilk' ? 'checked' : ''} />
+										value="milkandcornflakes" name="bankifsc" id="milkandcornflakes" 
+									${Parents.student.bankifsc == 'milkandcornflakes' ? 'checked' : ''} />
                                 </td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->

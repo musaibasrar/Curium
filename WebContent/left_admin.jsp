@@ -525,7 +525,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#" >Mess Cards</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a><br/>
-                <a target="mainFrame" href="Controller?process=printids&action=cardValidity" style="font-size: 12px;">Card Validity</a><br/>
+                <!-- <a target="mainFrame" href="Controller?process=printids&action=cardValidity" style="font-size: 12px;">Card Validity</a><br/> -->
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>

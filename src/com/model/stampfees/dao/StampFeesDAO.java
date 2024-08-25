@@ -134,7 +134,7 @@ public class StampFeesDAO {
 	}
 
 	public void addStampFees(
-			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear, List<Card> cardList) {
+			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear, List<Card> cardList, List<Student> studentList) {
 		try {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
@@ -168,7 +168,11 @@ public class StampFeesDAO {
             		session.save(card);
             	}
 			}
-
+			
+			for (Student student : studentList) {
+				Query query = session.createQuery("update Student set breakfast = '"+student.getBreakfast()+"', lunch='"+student.getLunch()+"',dinner='"+student.getDinner()+"',bankifsc='"+student.getBankifsc()+"' where sid="+student.getSid());
+	            query.executeUpdate();
+			}
 			transaction.commit();
 			System.out.println("in add3");
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

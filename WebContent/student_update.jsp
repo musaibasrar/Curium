@@ -465,6 +465,7 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
                     <input type="hidden" value="<c:out value="${student.leftout}"/>" id="leftout" name="leftout">
+                    <input type="hidden" value="<c:out value="${student.semester}"/>" id="leftout" name="semester">
                     </td>
                     </tr>
 				
@@ -662,9 +663,9 @@ for(Cookie cookie : cookies){
 								value="dinner" name="dinner" id="dinner" 
 								${student.dinner == 'dinner' ? 'checked' : ''} 
 								 />
-								&nbsp;&nbsp;Corn Flakes & Milk<input type="checkbox"
-								value="cornflakesandmilk" name="bankifsc" id="bankifsc" 
-								${student.bankifsc == 'cornflakesandmilk' ? 'checked' : ''}/>
+								&nbsp;&nbsp;Milk and Corn Flakes<input type="checkbox"
+								value="milkandcornflakes" name="bankifsc" id="bankifsc" 
+								${student.bankifsc == 'milkandcornflakes' ? 'checked' : ''}/>
 
 							</td>
 							
@@ -1024,7 +1025,7 @@ for(Cookie cookie : cookies){
 									name="dateofadmission" type="text" class="textField" autocomplete="false"
 									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
 									id="dateofadmission" size="30"
-									data-validate="validate(required)">
+									>
 
 							</label></td>
 							
@@ -1059,7 +1060,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"
-									id="datepickerCD" size="30" data-validate="validate(required)">
+									id="datepickerCD" size="30" >
 							</label></td>
 
 							</tr>
@@ -1081,7 +1082,7 @@ for(Cookie cookie : cookies){
 								name="idparents" id="idparents"
 								value="<c:out value="${parents.pid}" />" /> <label> <input
 									name="fathersname" type="text" class="myclass" id="name"
-									size="36" style="text-transform:uppercase" required
+									size="36" style="text-transform:uppercase" 
 									value="<c:out default="" value="${parents.fathersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -1090,7 +1091,7 @@ for(Cookie cookie : cookies){
 							<td  class="alignLeft">Contact Number* &nbsp;</td>
 
 							<td ><label> <input name="contactnumber"
-									type="text" class="textField" id="contactnumber" size="36" required
+									type="text" class="textField" id="contactnumber" size="36" 
 									value="<c:out default="" value="${parents.contactnumber}" />">
 
 							</label></td>

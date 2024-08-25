@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>Admission Report</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <link rel="stylesheet" href="css/font-awesome.css">
@@ -409,11 +409,19 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=UserProcess&action=searchByDate";
+		form1.action = "Controller?process=DocumentsProcess&action=admissionReportSearch";
 		form1.method = "POST";
 		form1.submit();
 
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=DocumentsProcess&action=printAdmissionReport";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -508,7 +516,7 @@
 		$("#datepickerfrom").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
@@ -518,7 +526,7 @@
 		$("#datepickerto").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
@@ -540,6 +548,38 @@
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            		 });
 		            	 }
+		            
+		            function yesCheck(id) {
+
+		        		if (document.getElementById(id).checked == true) {
+		        			var splitId = id.split(':');
+		        			document.getElementById('no:'+splitId[1]).checked = false;
+		        		}
+
+		        	}
+		        	function noCheck(id) {
+
+		        		if (document.getElementById(id).checked == true) {
+		        			var splitId = id.split(':');
+		        			document.getElementById('yes:'+splitId[1]).checked = false;
+		        		}
+
+		        	}
+		        	
+		        	$(function(){
+		       		 
+		                
+		                $("#print").button({
+		                    icons:{
+		                        primary: "ui-icon-print"
+		                    }
+		                }).click(function(){
+		                    printRecords();
+		                    return false;
+
+		                });
+		                
+		            });
             
         </script>
         
@@ -562,18 +602,14 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="Controller?process=FeesDetails&action=exportDataForFees" method="POST">
-		
-		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
-		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
-		
+		action="Controller?process=StudentProcess&action=exportDataForStudents" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		
 		<div style="height: 28px">
-			<button id="add">Search Fees Collection Details</button>
+			<button id="add">Parameters</button>
 			<br />
 		</div>
 
@@ -606,13 +642,13 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
+							<td width="20%" class="alignRight">From Date  &nbsp;&nbsp;</td>
 							<td ><label> <input name="fromdate"
 									type="text" class="textField" id="datepickerfrom" size="36"
 									 value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
-							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:  &nbsp;&nbsp;</td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date&nbsp;&nbsp;</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" autocomplete="false"
@@ -625,6 +661,20 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 						<td>&nbsp;</td>
+						</tr>
+						
+						
+						<tr>
+			 				<td width="20%" class="alignRight">Gender &nbsp;&nbsp;</td>
+							<td >&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" /> 
+
+							</td>
+
+
 						</tr>
 						
 						<!-- <tr>
@@ -664,7 +714,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>Rs. ${sumofdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -673,25 +723,40 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Total Amount</th>
-                            <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Gender</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
+                            <th title="click to sort" class="headerText">Admission Date</th>
+                            <th title="click to sort" class="headerText">Milk & Corn Flakes</th>
+                            <th title="click to sort" class="headerText">Breakfast</th>
+                            <th title="click to sort" class="headerText">Lunch</th>
+							<th title="click to sort" class="headerText">Dinner</th>
+
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchStudentList}" var="parent">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
-								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
-								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+								id="<c:out value="${parent.student.sid}"/>" class="chcktbl"
+								name="studentIDs"
+								value="<c:out value="${parent.student.sid}"/>" /></td>
+                                <td  class="dataText"><c:out value="${parent.student.admissionnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${parent.student.name}"/></a></td>
+                                <td  class="dataText"><c:out value="${parent.student.gender}"/></a></td>
+                                <td class="dataText"><c:out value="${parent.contactnumber}"/></td>
+                                <td class="dataText"><c:out value="${parent.student.admissiondate}"/></td>
+								<td class="dataText">
+									<c:if test="${(parent.student.bankifsc == 'milkandcornflakes')}">
+										<c:out value="Milk & Corn Flakes"/>
+									</c:if>
+								</td>
+								<td class="dataText"><c:out value="${parent.student.breakfast}"/></td>
+								<td class="dataText"><c:out value="${parent.student.lunch}"/></td>
+								<td class="dataText"><c:out value="${parent.student.dinner}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -705,6 +770,7 @@ for(Cookie cookie : cookies){
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
 							</label> -->
+							<button id="print">Print</button>
 						<input value="Export"
 							type="submit" id="export"/></td>
 							

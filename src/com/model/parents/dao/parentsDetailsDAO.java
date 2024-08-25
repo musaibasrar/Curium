@@ -14,6 +14,7 @@ import org.hibernate.query.Query;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dto.Academicfeesstructure;
+import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.DateUtil;
 import com.util.HibernateUtil;
@@ -94,12 +95,23 @@ public class parentsDetailsDAO {
 	public Parents create(Parents parents, Academicfeesstructure academicFessStructure,
 			List<Studentfeesstructure> studentFeesStructure, String currentYear, Card cardDetails) {
 		 try {
+			 
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
+	            
+	          //get Semester
+			 	Query queryMaxRow = session.createQuery("from Student ORDER BY sid DESC");
+				queryMaxRow.setMaxResults(1);
+				Student msm = (Student) queryMaxRow.uniqueResult();
+	   			int sem = msm.getSemester();
+	   			int semester = sem+1;
+	            
 	            session.save(parents);
 	            Query query = session.createQuery("update Student set studentexternalid = concat(studentexternalid,"+parents.getStudent().getSid()+") where sid="+parents.getStudent().getSid());
 	            query.executeUpdate();
 	            
+				Query querySemester = session.createQuery("update Student set semester = "+semester+" where sid="+parents.getStudent().getSid());
+	            querySemester.executeUpdate();
 	            
 	            //academic fees structure
 	            academicFessStructure.setSid(parents.getStudent().getSid());
