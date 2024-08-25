@@ -752,7 +752,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			
 			String[] attendanceIds = attendanceDto.getAttendanceIds();
 			String[] studentAttendanceStatus = attendanceDto.getStudentAttendanceStatus();
-						
+			Date dateofAttendance = attendanceDto.getDateofAttendance();			
 			if(attendanceIds!=null) {
 			
 			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
@@ -764,7 +764,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setAttendeeid(attidString[0]);
 				studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[i]);
 				studentDailyAttendance.setIntime("00:00");
-				studentDailyAttendance.setDate(new Date());
+				studentDailyAttendance.setDate(dateofAttendance);
 				studentDailyAttendance.setAcademicyear(currentAcademicYear);
 				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);

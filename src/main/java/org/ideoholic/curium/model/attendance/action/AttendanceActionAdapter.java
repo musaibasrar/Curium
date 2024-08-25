@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.attendance.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -195,7 +196,8 @@ public class AttendanceActionAdapter {
         StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
         attendanceDto.setAttendanceIds(request.getParameterValues("externalIDs"));
         attendanceDto.setStudentAttendanceStatus(request.getParameterValues("studentAttendanceStatus"));
-
+        attendanceDto.setDateofAttendance(DateUtil.simpleDateParser(request.getParameter("dateofattendance")));
+        
         ResultResponse resultResponse = attendanceService.markStudentsAttendance(attendanceDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("attendanceresult", resultResponse.getMessage());
 
