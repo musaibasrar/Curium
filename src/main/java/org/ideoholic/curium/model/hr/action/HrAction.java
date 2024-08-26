@@ -323,7 +323,7 @@ public class HrAction {
 
 	@PostMapping("/addLeaves")
 	public String addLeaves() {
-		if(new HrService(request, response).addLeaves()){
+		if(hrActionAdapter.addLeaves()){
 			return "addleavessuccess";
 		}
 		return error;

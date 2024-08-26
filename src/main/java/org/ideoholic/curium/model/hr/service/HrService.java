@@ -84,13 +84,13 @@ public class HrService {
 
 	}
 
-	public boolean addLeaves() {
-		String[] leaveTypeName = request.getParameterValues("leavetypename");
-		String[] totalLeaves = request.getParameterValues("totalleaves");
-		String[] staff = request.getParameterValues("employeeIDs");
+	public ResultResponse addLeaves(LeaveTypeDto dto, String currentAcademicYear, String branchId, String userId) {
+		String[] leaveTypeName = dto.getLeaveTypeNames();
+		String[] totalLeaves = dto.getTotalLeaves();
+		String[] staff = dto.getStaff();
 		List<Leavedetails> leaveDetailsList = new ArrayList<>();
 
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
+		if(currentAcademicYear!=null){
 		for (String staffId : staff) {
 			
 			for (int i=0; i<leaveTypeName.length; i++) {
@@ -102,16 +102,17 @@ public class HrService {
 				leaveDetails.setLeaveTypeMaster(leave);
 				leaveDetails.setTeacher(teacher);
 				leaveDetails.setNumberofleaves(Integer.parseInt(totalLeaves[i]));
-				leaveDetails.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-				leaveDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				leaveDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				leaveDetails.setAcademicyear(currentAcademicYear);
+				leaveDetails.setBranchid(Integer.parseInt(branchId));
+				leaveDetails.setUserid(Integer.parseInt(userId));
 				leaveDetailsList.add(leaveDetails);
 			}
 			
 		}
-		return new HrDAO().addLeaves(leaveDetailsList);
+		return ResultResponse.builder().success(new HrDAO().addLeaves(leaveDetailsList)).build();
+
 	}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean viewLeavesDetails() {
