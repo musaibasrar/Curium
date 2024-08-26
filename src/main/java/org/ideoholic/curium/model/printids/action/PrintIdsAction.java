@@ -26,18 +26,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PrintIdsAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 	@Autowired
-	EmployeeActionAdapter employeeActionAdapter;
+	private EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private PrintIdsActionAdapter printIdsActionAdapter;
 
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
 
-		new PrintIdsService(request, response).updateCardValidity();
+		printIdsActionAdapter.updateCardValidity();
 		return "cardvalidity";
 
 	}
