@@ -47,7 +47,7 @@ public class PrintIdsAction {
 	@PostMapping("/searchDetailsCardValidity")
 	public String searchDetailsCardValidity() {
 
-		new PrintIdsService(request, response).searchDetailsCardValidity();
+		printIdsActionAdapter.searchDetailsCardValidity();
 		return "cardvalidity";
 	}
 
@@ -66,7 +66,7 @@ public class PrintIdsAction {
 	@PostMapping("/searchDetails")
 	public String searchDetails() {
 
-		new PrintIdsService(request, response).searchDetails();
+		printIdsActionAdapter.searchDetails();
 		return "generateids";
 	}
 

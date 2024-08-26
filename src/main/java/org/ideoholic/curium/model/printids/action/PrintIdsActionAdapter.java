@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,26 @@ public class PrintIdsActionAdapter {
 		printIdsDto.setRequestParams(allRequestParameters);
 		ResultResponse result = printIdsService.updateCardValidity(printIdsDto);
 		request.setAttribute("updatecard", result.isSuccess());
+	}
+
+	public void searchDetailsCardValidity() {
+		PrintIdsService printIdsService = new PrintIdsService(request, response);
+		SearchStudentDto searchStudentDto = new SearchStudentDto();
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
+		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		ParentCardResponsDto parentCardResponsDto = printIdsService.searchDetailsCardValidity(searchStudentDto,httpSession.getAttribute("branchid").toString());
+		request.setAttribute("parentscardlist", parentCardResponsDto.getParentsCardList());
+	}
+
+	public void searchDetails() {
+		PrintIdsService printIdsService = new PrintIdsService(request, response);
+		SearchStudentDto searchStudentDto = new SearchStudentDto();
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
+		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		SearchStudentResponseDto searchStudentResponseDto = printIdsService.searchDetails(searchStudentDto,httpSession.getAttribute("branchid").toString());
+		searchStudentResponseDto.getSearchStudentList();
 	}
 
 }

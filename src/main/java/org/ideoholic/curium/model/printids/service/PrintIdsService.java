@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DataUtil;
@@ -31,17 +33,17 @@ public class PrintIdsService {
 		this.httpSession = request.getSession();
 	}
 
-	public void searchDetails() {
+	public SearchStudentResponseDto searchDetails(SearchStudentDto searchStudentDto,String branchid) {
 		
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchid!=null){
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(request
-					.getParameter("namesearch"));
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
 			String conClassStudying = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
@@ -58,7 +60,7 @@ public class PrintIdsService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
@@ -67,7 +69,7 @@ public class PrintIdsService {
 						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			} else if (!classStudying.equalsIgnoreCase("")) {
 				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -79,7 +81,8 @@ public class PrintIdsService {
 			System.out.println("SEARCH QUERY ***** " + queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
-			request.setAttribute("searchStudentList", searchStudentList);
+		    searchStudentResponseDto.setSearchStudentList(searchStudentList);
+			return searchStudentResponseDto;
 		
 	}
 
@@ -138,18 +141,18 @@ public class PrintIdsService {
 }
 	
 	
-public void searchDetailsCardValidity() {
+public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStudentDto,String branchid) {
 		
+	    ParentCardResponsDto parentCardResponsDto = new ParentCardResponsDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		Map<Parents,Card> parentsCardList = new HashMap<Parents,Card>();
 		
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchid!=null){
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(request
-					.getParameter("namesearch"));
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
 
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
 			String conClassStudying = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
@@ -166,16 +169,16 @@ public void searchDetailsCardValidity() {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
 				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
 				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -206,7 +209,8 @@ public void searchDetailsCardValidity() {
 			}
 			
 		}
-			request.setAttribute("parentscardlist", parentsCardList);
+		    parentCardResponsDto.setParentsCardList(parentsCardList);
+		    return parentCardResponsDto;
 		
 	}
 
