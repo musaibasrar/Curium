@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class PrintIdsDto {
 	
 	private String[] studentIDs;
-	Map<String, String> requestParams;
+	private Map<String, String> requestParams;
 
 }

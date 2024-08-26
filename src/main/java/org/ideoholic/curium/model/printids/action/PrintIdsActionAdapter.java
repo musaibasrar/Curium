@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
@@ -38,8 +39,8 @@ public class PrintIdsActionAdapter {
 			allRequestParameters.put(fieldName, fieldValue);
 		}
 		printIdsDto.setRequestParams(allRequestParameters);
-		SearchStudentResponseDto searchStudentResponseDto = printIdsService.updateCardValidity(printIdsDto);
-		request.setAttribute("updatecard", searchStudentResponseDto.isSuccess());
+		ResultResponse result = printIdsService.updateCardValidity(printIdsDto);
+		request.setAttribute("updatecard", result.isSuccess());
 	}
 
 }

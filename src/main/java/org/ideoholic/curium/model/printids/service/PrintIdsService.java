@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -210,10 +211,10 @@ public void searchDetailsCardValidity() {
 	}
 
 	
-        public SearchStudentResponseDto updateCardValidity(PrintIdsDto printIdsDto) {
+        public ResultResponse updateCardValidity(PrintIdsDto printIdsDto) {
 		
-	    SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
-		boolean result = false;
+        ResultResponse result = ResultResponse.builder().build();
+		boolean success = false;
         String[] studentIDs = printIdsDto.getStudentIDs();
         List<Card> cardList = new ArrayList<Card>();
         
@@ -234,12 +235,12 @@ public void searchDetailsCardValidity() {
          }
         
         if(cardList.size()>0) {
-        	result = new PrintIdsDAO().updateCardValidity(cardList);
+        	success = new PrintIdsDAO().updateCardValidity(cardList);
         }
         }
         
-        searchStudentResponseDto.setSuccess(result);
-        return searchStudentResponseDto;
+        result.setSuccess(success);
+        return result;
 	}
 	
 }
