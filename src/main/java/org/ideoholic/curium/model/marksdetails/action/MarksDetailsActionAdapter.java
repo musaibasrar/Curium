@@ -24,12 +24,14 @@ public class MarksDetailsActionAdapter {
     @Autowired
     private HttpSession httpSession;
 
+    @Autowired
+    private MarksDetailsService marksDetailsService;
+
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
     public void getStudentGraph() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -42,14 +44,12 @@ public class MarksDetailsActionAdapter {
     }
 
     public void getStudentList() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         ResultResponse resultResponse = marksDetailsService.getStudentList(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", resultResponse.getResultList());
     }
 
     public void Search() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         SearchStudentExamDto dto = new SearchStudentExamDto();
         dto.setStudentName(request.getParameter("namesearch"));
@@ -62,7 +62,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean generateReport() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -76,7 +75,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean generateReportParent() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentUID(request.getParameter("id"));
@@ -90,7 +88,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean deleteMultiple() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -102,7 +99,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean updateMarks() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         MarksUpdateDto dto = new MarksUpdateDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -117,7 +113,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public void getSubjectExams() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         SearchStudentResponseDto responseDto = marksDetailsService.getSubjectExams(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("listSubject", responseDto.getSubjectList());
@@ -125,7 +120,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean viewMarks() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         MarksViewDto dto = new MarksViewDto();
         dto.setStudentName(request.getParameter("namesearch"));
@@ -149,13 +143,11 @@ public class MarksDetailsActionAdapter {
     }
 
     public void downloadReportCard() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         ResultResponse resultResponse = marksDetailsService.downloadReportCard();
     }
 
     public String addMarks() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         MarksUpdateDto dto = new MarksUpdateDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -169,7 +161,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public void rankSearch() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         SearchStudentExamDto dto = new SearchStudentExamDto();
         dto.setAddClass(request.getParameter("classsearch"));
@@ -181,7 +172,6 @@ public class MarksDetailsActionAdapter {
     }
 
     public boolean generateRankReport() {
-        MarksDetailsService marksDetailsService = new MarksDetailsService(request, response);
 
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));

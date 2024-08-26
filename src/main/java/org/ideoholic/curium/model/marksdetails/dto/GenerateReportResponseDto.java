@@ -15,4 +15,5 @@ public class GenerateReportResponseDto {
     private List<MarksSheet> marksSheetList;
     @Builder.Default
     private boolean success = false;
+    private String message;
 }

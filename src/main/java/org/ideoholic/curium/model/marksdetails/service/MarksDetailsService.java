@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.marksdetails.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
@@ -17,29 +18,21 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.MarksSheet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
-
+@Slf4j
+@Service
 public class MarksDetailsService {
 
-	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
-	private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
+	@Autowired
+	private HttpServletResponse response;
+
 	private static final int BUFFER_SIZE = 4096;
-	
-	public MarksDetailsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
 
 	public ResultResponse addMarks(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
 
@@ -680,9 +673,9 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 		
 		if(currentAcademicYear!=null){
 			String studentUID = dto.getStudentUID();
-            Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
+			Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
 			String[] studentIds = dto.getStudentIds();
-            String examC = student.getClassstudying();
+			String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
@@ -691,93 +684,93 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 			//for (int i = 0; i < studentIds.length; i++) {
-				MarksSheet markssheet = new MarksSheet();
-				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
-				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(student.getSid());
-				markssheet.setParents(studentDetails);
-				
-				for (Exams exam : examsList) {
-						
-					ExamsMarks examMarks = new ExamsMarks();
-					examMarks.setExamName(exam.getExamname());
-					boolean present = false;
-					Map<String,String> subMarks = new HashMap<String, String>();
-					int totalObtainedMarks = 0;
-					int totalMarks = 0;
-					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(),currentAcademicYear,exam.getExid());
-					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
-					
-					
-					for (Marks marks : marksDetailsList) {
-							
-							int examId = exam.getExid();
-							int marksExamId = marks.getExamid();
-							
-						if( examId == marksExamId) {
-									present = true;
-									
-								for (Subject sub : subjectList) {
-									
-									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
-									
-									if(marksSubid == subjectId) {
-										
-										if( marks.getMarksobtained() < sub.getMinmarks()) {
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
-										}else if ( marks.getMarksobtained() >= sub.getMinmarks()) {
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
-										}
-										
-										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
-										totalMarks = totalMarks+sub.getMaxmarks();
-									}
-								}
-						}
-						
-					}
-					
-					if(present) {
-						examMarks.setTotalMarks(totalMarks);
-						examMarks.setTotalMarksObtained(totalObtainedMarks);
-						double d = (totalObtainedMarks*100.0)/totalMarks;
-						examMarks.setPercentage(d);
-						examMarks.setSubMarks(subMarks);
-						examMarksList.add(examMarks);
-					}
-					
-				}
-				markssheet.setExammarks(examMarksList);
-				marksSheetList.add(markssheet);
-				result.setSuccess(true);
-				/*
-				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
-				 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
-				 * 
-				 * for (int m=0; m<marksDetailsList.size(); m++) { marksList[i][k] =
-				 * marksDetailsList.get(m).getMarksobtained().toString(); k++; }
-				 */
-			//}
-			
-			int size = examsList.size();
-			int endLoop = size/5;
+			MarksSheet markssheet = new MarksSheet();
+			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(student.getSid());
+			markssheet.setParents(studentDetails);
 
-			result.setEndLoop(endLoop+1);
+			for (Exams exam : examsList) {
+
+				ExamsMarks examMarks = new ExamsMarks();
+				examMarks.setExamName(exam.getExamname());
+				boolean present = false;
+				Map<String, String> subMarks = new HashMap<String, String>();
+				int totalObtainedMarks = 0;
+				int totalMarks = 0;
+
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(), currentAcademicYear, exam.getExid());
+				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId), examClass[0], exam.getExamname());
+
+
+				for (Marks marks : marksDetailsList) {
+
+					int examId = exam.getExid();
+					int marksExamId = marks.getExamid();
+
+					if (examId == marksExamId) {
+						present = true;
+
+						for (Subject sub : subjectList) {
+
+							int marksSubid = marks.getSubid();
+							int subjectId = sub.getSubjectid();
+
+							if (marksSubid == subjectId) {
+
+								if (marks.getMarksobtained() < sub.getMinmarks()) {
+									subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained()) + "/" + sub.getMaxmarks() + "" + "_F");
+								} else if (marks.getMarksobtained() >= sub.getMinmarks()) {
+									subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained()) + "/" + sub.getMaxmarks() + "" + "_P");
+								}
+
+								totalObtainedMarks = totalObtainedMarks + marks.getMarksobtained();
+								totalMarks = totalMarks + sub.getMaxmarks();
+							}
+						}
+					}
+
+				}
+
+				if (present) {
+					examMarks.setTotalMarks(totalMarks);
+					examMarks.setTotalMarksObtained(totalObtainedMarks);
+					double d = (totalObtainedMarks * 100.0) / totalMarks;
+					examMarks.setPercentage(d);
+					examMarks.setSubMarks(subMarks);
+					examMarksList.add(examMarks);
+				}
+
+			}
+			markssheet.setExammarks(examMarksList);
+			marksSheetList.add(markssheet);
+			result.setSuccess(true);
+			/*
+			 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
+			 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
+			 *
+			 * for (int m=0; m<marksDetailsList.size(); m++) { marksList[i][k] =
+			 * marksDetailsList.get(m).getMarksobtained().toString(); k++; }
+			 */
+			//}
+
+			int size = examsList.size();
+			int endLoop = size / 5;
+
+			result.setEndLoop(endLoop + 1);
 			result.setMarksSheetList(marksSheetList);
-			
+
 			/*for (MarksSheet marksSheet2 : marksSheetList) {
-				
+
 				for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {
 					System.out.println("Exam Name "+marksSheet3.getExamName());
 					System.out.println("Exam total "+marksSheet3.getTotalMarks());
-					
+
 					for (Map.Entry<String,String> entry : marksSheet3.getSubMarks().entrySet()) {
 						System.out.println("Key = " + entry.getKey() +
 	                             ", Value = " + entry.getValue());
 					}
-			            
-					
+
+
 				}
 		}*/
 
@@ -929,7 +922,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 				querySub = " parents.Student.classstudying like '" + classStudying
 						+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
