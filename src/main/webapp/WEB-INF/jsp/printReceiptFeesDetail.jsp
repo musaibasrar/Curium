@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -336,16 +336,17 @@
 			</tr>
 
 			<tr>
-				<td class="headerText">
+				<%-- <td class="headerText">
 					Total Fees: Rs. ${totalfees}
-				</td>
+				</td> --%>
+				<td class="headerText"></td>
 				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
-				
+				<td class="headerText"></td>
 			</tr>
 			
 			<tr>
@@ -368,7 +369,6 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/global/images/globalpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -383,7 +383,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -538,7 +538,7 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					<%-- Total Fees: Rs. ${totalfees} --%>
 				</td>
 				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}
@@ -546,7 +546,8 @@
 				<td class="headerText">
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
-				
+				<td class="headerText">
+				</td>
 			</tr>
 			
 			<tr>
@@ -569,7 +570,6 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/global/images/globalpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

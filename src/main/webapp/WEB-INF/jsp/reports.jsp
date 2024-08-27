@@ -287,7 +287,8 @@ for(Cookie cookie : cookies){
             <div id="clock" class="headerTD"></div>
         </form> -->
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <div class="headerTD" style="width: 95%;height: 40px;" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> <br>
+	<label style="font-size: 12px;">&nbsp;${branchname}</label></div>
 
         <div id="container" style="width: 95%" >
             
@@ -338,7 +339,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/global/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
             			</td>
             		</tr>
@@ -357,48 +358,48 @@ for(Cookie cookie : cookies){
             		</tr>
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/global/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
             			</td>
             		</tr>
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/global/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/global/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/global/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/global/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/global/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/global/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/global/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/global/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
             			</td>
             		</tr>
@@ -438,17 +439,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
+            				 <a target="mainFrame" href="/global/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Marks Card</a>
             			</td>
             		</tr>
             		<tr>
@@ -595,20 +586,6 @@ for(Cookie cookie : cookies){
 			</table>
 		</div>
 		
-		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
-
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-		
           <!--   <h5 class="sideaccordian">
 			<a href="#">Appointments</a>
 		</h5>
@@ -624,19 +601,6 @@ for(Cookie cookie : cookies){
 				</tr>
 			</table>
 		</div> -->
-             <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
             
             </div>
                    
