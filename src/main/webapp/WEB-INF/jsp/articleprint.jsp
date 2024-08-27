@@ -191,15 +191,25 @@ Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
 Date:<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
 </td>
-</tr>
-<tr><td></td>
 <td>
 Head of Institution 
 </td>
 </tr>
 <tr>
+<td colspan="2" style="text-align:center">
+CERTIFICATE 
+</td>
+</tr>
+<tr>
+<td colspan="2">
+&emsp;&emsp;&emsp;&emsp;&emsp;This is to certify that I have satisfied myself that the certificate given above is<br> true as per available record
+</td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
 <td>
-<br><br><br><br>
 Place:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;"></span> 
 </td><td>
 Name:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;"></span> 
