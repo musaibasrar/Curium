@@ -336,9 +336,6 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
-				</td>
-				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
@@ -535,16 +532,14 @@
 			</tr>
 
 			<tr>
-				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
-				</td>
+				<td></td>
 				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
-				
+				<td></td>
 			</tr> 
 			
 			<tr>

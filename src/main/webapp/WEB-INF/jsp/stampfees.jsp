@@ -714,6 +714,28 @@
 			}
 		});
 	}); 
+	 
+	 function toggleFeesCount(allCheckbox) {
+		    var checkboxes = document.querySelectorAll('.chcktblStamp');
+		    var totalAmount = 0;
+
+		    checkboxes.forEach(function(checkbox, index) {
+		        var feesCountInput = document.getElementById('feesCount_' + (index + 1));
+		        var feesAmountInput = document.getElementById('hiddenfees_full_amount_' + (index + 1));
+		        
+		        if (allCheckbox.checked) {
+		            feesCountInput.value = '1';
+		            totalAmount += parseFloat(feesAmountInput.value || 0);
+		        } else {
+		            feesCountInput.value = '0';
+		        }
+
+		        calculate(index + 1);
+		    });
+
+		    // Set the total amount field based on checkbox state
+		    document.getElementById('feesTotalAmount').value = allCheckbox.checked ? totalAmount.toFixed(2) : '0.00';
+		}
 	
         </script>
         

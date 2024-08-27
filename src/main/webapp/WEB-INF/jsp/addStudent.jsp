@@ -639,8 +639,14 @@ function calculate(value2) {
      	
      	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
      	//feesConcession (direct amount)
-        //final1.value=feesCat*feesCount;
-     	final1.value=feesCat;
+     	if(feesCount<1){
+     		document.getElementById(value2).checked = false; 
+     		
+     	}else{
+     		document.getElementById(value2).checked = true;
+     	}
+        final1.value=feesCat*feesCount;
+     	//final1.value=feesCat;
          calculateGrandTotal();
    
 }
@@ -756,8 +762,8 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" required
+							<td class="alignLeft">Admission Number &nbsp;</td>
+							<td ><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
@@ -854,7 +860,7 @@ $(document).ready(function() {
 						<tr>
 
 
-							<td class="alignLeft">Studying in Class&nbsp;</td>
+							<td class="alignLeft">Studying in Class*&nbsp;</td>
 							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
@@ -1172,7 +1178,7 @@ $(document).ready(function() {
 							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
-                                        <label> <select name="yearofadmission" id="yearofadmission" required
+                                        <label> <select name="yearofadmission" id="yearofadmission" 
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>

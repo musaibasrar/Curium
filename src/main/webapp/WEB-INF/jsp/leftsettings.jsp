@@ -334,8 +334,8 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> <br>
-	<label style="font-size: 14px;">&nbsp;${branchname}</label></div>
+        <div class="headerTD" style="width: 95%;height: 40px;" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> <br>
+	<label style="font-size: 12px;">&nbsp;${branchname}</label></div>
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
@@ -360,13 +360,6 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="/global/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
                 <a target="mainFrame" href="/global/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
-
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
-            <div>
-                <a target="mainFrame" href="/noble/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
-                <a target="mainFrame" href="/noble/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
 
             </div>
             

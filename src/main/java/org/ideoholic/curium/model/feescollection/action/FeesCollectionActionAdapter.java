@@ -124,7 +124,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
-        request.setAttribute("feescatmap", responseDto.getReceiptDate());
+        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
     }
 
