@@ -1423,11 +1423,11 @@ public class StudentService {
 				if (fieldName.equalsIgnoreCase("yearofadmission")) {
 					student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
-				if (fieldName.equalsIgnoreCase("promotedyear")) {
-					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
-				}
 				if (fieldName.equalsIgnoreCase("archive")) {
 					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+				if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
 				// Updating paretns information
 
