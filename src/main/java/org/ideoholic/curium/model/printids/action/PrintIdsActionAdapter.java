@@ -62,7 +62,7 @@ public class PrintIdsActionAdapter {
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = printIdsService.searchDetails(searchStudentDto,httpSession.getAttribute("branchid").toString());
-		searchStudentResponseDto.getSearchStudentList();
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
 }
