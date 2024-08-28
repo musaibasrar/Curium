@@ -10,7 +10,9 @@ public enum CustomErrorMessage {
 	FAILURELEFTOUT(102, "failureleftout"),
 	FAILUREDROPPEDOUT(103, "failuredroppedout"),
 	FAILUREGRADUATE(104, "failuregraduate"),
- 	NOTSAVEDEXPENSES(105,"notSavedExpenses");
+ 	NOTSAVEDEXPENSES(105,"notSavedExpenses"),
+	NOTSAVED(106, "notSaved"),
+	ERRORADDINGMARKS(107, "erroraddingmarks");
 
 	private final int code;
 	private final String message;
