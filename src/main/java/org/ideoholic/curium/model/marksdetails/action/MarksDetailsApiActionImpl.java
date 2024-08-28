@@ -127,8 +127,8 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
         MarksResponseDto marksResult = marksDetailsService.viewMarks(dto, branchId);
         marksDto.setNewStudentList(marksResult.getNewStudentList());
         marksDto.setNewMarksDetails(marksResult.getNewMarksDetails());
-        marksDto.setSubjectSelected(dto.getSubjectSelected());
-        marksDto.setExamSelected(dto.getExamSelected());
+        marksDto.setSubjectSelected(marksResult.getSubjectSelected());
+        marksDto.setExamSelected(marksResult.getExamSelected());
         marksDto.setSubject(marksResult.getSubject());
         marksDto.setExam(marksResult.getExam());
 
@@ -146,7 +146,7 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
     @PostMapping("/addMarks")
     public ResponseEntity<ResultResponse> addMarks(@RequestBody MarksUpdateDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear, @RequestHeader(value = "userloginid") String userId) {
         ResultResponse result = marksDetailsService.addMarks(dto, branchId, currentAcademicYear, userId);
-        if (result.getMessage() != null && result.getMessage().equals("true")) {
+        if ("true".equals(result.getMessage())) {
             result.setSuccess(true);
             return ResponseEntity.ok(result);
         } else if (result.getMessage() != null && result.getMessage().equals("Duplicate") ) {
