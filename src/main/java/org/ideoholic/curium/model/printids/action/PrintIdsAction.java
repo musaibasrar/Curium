@@ -73,7 +73,7 @@ public class PrintIdsAction {
 	@PostMapping("/printPreview")
 	public String printPreview() {
 
-		new PrintIdsService(request, response).printMultiple();
+		printIdsActionAdapter.printMultiple();
 		return "printpreview";
 	}
 	
