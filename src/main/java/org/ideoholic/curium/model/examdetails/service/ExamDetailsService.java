@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
@@ -170,9 +167,9 @@ public class ExamDetailsService {
     }
 
 
-    public ExamScheduleResponseDto getExamSchedule(String branchId) {
+    public ExamsScheduleResponseDto getExamSchedule(String branchId) {
 
-        ExamScheduleResponseDto result = new ExamScheduleResponseDto();
+        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
 
         if (branchId != null) {
 
@@ -207,8 +204,8 @@ public class ExamDetailsService {
     }
 
 
-    public ExamScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto, String branchId) {
-        ExamScheduleResponseDto result = new ExamScheduleResponseDto();
+    public ExamsScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto, String branchId) {
+        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
 
         String academicYear = examScheduleDto.getAcademicYear();
         String classH = examScheduleDto.getClassH();

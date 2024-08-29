@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 public interface ExamDetailsApiAction {
     public ResponseEntity<HallTicketResponseDto> printPreviewHallTicket(PrintPreviewHallTicketDto dto,String branchId);
 
-    public ResponseEntity<ExamScheduleResponseDto> searchHallTicketDetails(ExamScheduleDto examScheduleDto,String branchId);
+    public ResponseEntity<ExamsScheduleResponseDto> searchHallTicketDetails(ExamScheduleDto examScheduleDto, String branchId);
 
     public ResponseEntity<GenerateHallTicketResponseDto> generateHallTicket(String branchId);
 

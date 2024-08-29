@@ -12,7 +12,6 @@ import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,12 +36,12 @@ public class ExamDetailsApiActionImpl {
     }
 
     @PostMapping("/searchHallTicketDetails")
-    public ResponseEntity<ExamScheduleResponseDto> searchHallTicketDetails(@RequestBody ExamScheduleDto examScheduleDto,@RequestHeader(value="branchId") String branchId) {
+    public ResponseEntity<ExamsScheduleResponseDto> searchHallTicketDetails(@RequestBody ExamScheduleDto examScheduleDto, @RequestHeader(value="branchId") String branchId) {
 
-        ExamScheduleResponseDto examScheduleResponseDto = examDetailsService.getExamScheduleDetails(examScheduleDto,branchId);
+        ExamsScheduleResponseDto examsScheduleResponseDto = examDetailsService.getExamScheduleDetails(examScheduleDto,branchId);
         ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
         subjectDetailsService.readListOfSubjects(branchId);
-        return ResponseEntity.ok(examScheduleResponseDto);
+        return ResponseEntity.ok(examsScheduleResponseDto);
     }
 
     @GetMapping("/generateHallTicket")
@@ -61,16 +60,16 @@ public class ExamDetailsApiActionImpl {
         Currentacademicyear currentacademicyear = yearService.getYear();
         if (!currentacademicyear.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
-        ExamScheduleResponseDto examScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
-        if (!examScheduleResponseDto.isSuccess())
+        ExamsScheduleResponseDto examsScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
+        if (!examsScheduleResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
 
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/deleteExamSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> deleteExamSchedule(@RequestBody ExamIdsDto dto, @RequestHeader(value="branchid") String branchId) {
-        ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
+    public ResponseEntity<ExamsScheduleResponseDto> deleteExamSchedule(@RequestBody ExamIdsDto dto, @RequestHeader(value="branchid") String branchId) {
+        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
         examDetailsService.deleteExamSchedule(dto);
         if(result != null){
             return examSchedule(branchId);
@@ -80,8 +79,8 @@ public class ExamDetailsApiActionImpl {
     }
 
     @PostMapping("addSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> addSchedule(@RequestBody AddScheduleDto dto,@RequestHeader(value="branchid") String branchId) {
-         ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
+    public ResponseEntity<ExamsScheduleResponseDto> addSchedule(@RequestBody AddScheduleDto dto, @RequestHeader(value="branchid") String branchId) {
+        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
         examDetailsService.addSchedule(dto,branchId);
         if(result != null){
            return examSchedule(branchId);
@@ -92,8 +91,8 @@ public class ExamDetailsApiActionImpl {
 
 
     @GetMapping("/examSchedule")
-    public ResponseEntity<ExamSchedulesResponseDto> examSchedule(@RequestHeader(value="branchid") String branchId) {
-        ExamSchedulesResponseDto result = new ExamSchedulesResponseDto();
+    public ResponseEntity<ExamsScheduleResponseDto> examSchedule(@RequestHeader(value="branchid") String branchId) {
+        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
 
 
         ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
@@ -108,8 +107,8 @@ public class ExamDetailsApiActionImpl {
         Currentacademicyear currentacademicyear = yearService.getYear();
         if (currentacademicyear.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
-        ExamScheduleResponseDto examScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
-        if (!examScheduleResponseDto.isSuccess())
+        ExamsScheduleResponseDto examsScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
+        if (!examsScheduleResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
 
         return ResponseEntity.ok(result);
