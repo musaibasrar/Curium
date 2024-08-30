@@ -165,7 +165,7 @@ public class DocumentAction {
 	
 	@PostMapping("/searchStudentsForCharacter")
 	public String searchStudentsForCharacter() {
-		new StampFeesService(request, response).advanceSearch();
+		new StampFeesService(request, response).advanceSearchForCharacterCert();
 		return "studentcharactersdetails";
 	}
 	

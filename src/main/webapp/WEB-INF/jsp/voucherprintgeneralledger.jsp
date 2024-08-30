@@ -107,6 +107,42 @@
 	text-transform: capitalize;
 }
 
+/* General table styling */
+    .datatable {
+        width: 100%;
+        border-collapse: collapse; /* Ensures borders don't double up */
+    }
+    
+    /* Table header styling */
+    .datatable th.datath {
+        border: 1px solid black; /* Borders for table headers */
+        padding: 8px;
+        background-color: #f2f2f2; /* Light gray background for headers */
+        text-align: center;
+    }
+    
+    /* Table body styling */
+    .datatable td.datatd {
+        border: 1px solid black; /* Borders for table cells */
+        padding: 8px;
+        text-align: left; /* Align text to the left */
+    }
+    
+    /* Row styling */
+    .datatable .trClass {
+        background-color: #ffffff; /* White background for rows */
+    }
+    
+    /* Optional: Hover effect for rows */
+    .datatable .trClass:hover {
+        background-color: #f9f9f9; /* Light gray background on hover */
+    }
+    
+    /* Text alignment for the amount column */
+    .datatable .amount-column {
+        text-align: right; /* Right-align the amount column */
+    }
+
 </style>
 
 
@@ -188,6 +224,7 @@
                 margin-right: 0px;
             }
         }
+        
     </style>
 
 
@@ -197,6 +234,9 @@
 	<form method="post" class="bodymargin">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
+				<td align="center">
+				<img src="/shatabdi/images/logo.jpg" width="80" height="80"/>
+				</td>
 				<td style="width: 100%;" align="center">
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br><br>
 				<label class="addressLine">Payment Voucher</label><br>
@@ -204,88 +244,67 @@
 			</tr>
 </table>
 
-		<TABLE  width="100%" style="border-collapse:collapse;">
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
-                    <td ><hr width="100%"></td>
+
+                    <td colspan="4" ></td>
+
                 </tr>
             </TABLE>
-
-		<table  width="100%" border="0" align="left" id="table1">
 		
-			<tr>
-			<td></td>
-			
-			</tr>
-			
-			<tr>
-				<td class="dataTextBoldLeft" >Voucher Number:</td>
-				<td align="left"><c:out value="${adminexpenses.idAdminExpenses}" /></td>
-				<td class="dataTextBoldLeft" >Date:</td>
-				<td align="left"> <fmt:formatDate value="${adminexpenses.entrydate}" pattern="dd/MM/yyyy"/></td>
-			</tr>
-			<tr>
-                    <td colspan="4"><hr width="100%"></td>
-                </tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="text-align: left;" >Amount (Rs.):</td>
-				<td align="left">Rs. <c:out	value="${adminexpenses.priceofitem}" />	</td>
-			</tr>
+            <table class="datatable">
+    <thead>
+        <tr>
+            <th class="datath">Sl.No</th>
+            <th class="datath">Voucher No.</th>
+            <th class="datath">Date</th>
+            <th class="datath">Dr Account -- Cr Account</th>
+            <th class="datath">Narration</th>
+            <th class="datath">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <fmt:setLocale value="en_IN" scope="session"/>
+        <c:set var="vouchertotal" value="${0}" />
+        <c:forEach items="${vouchertransactions}" var="vouchertransactions" varStatus="status">
+            <tr class="trClass">
+                <td class="datatd">
+                    <c:out value="${status.index+1}" />
+                </td>
+                <td class="datatd"><c:out value="${vouchertransactions.key.transactionsid}" /></td>
+                <td class="datatd"><c:out value="${vouchertransactions.key.transactiondate}" /></td>
+                <td class="datatd"><c:out value="${vouchertransactions.value}" /></td>
+                <td class="datatd"><c:out value="${vouchertransactions.key.narration}" /></td>
+                <td class="datatd amount-column">
+                    <c:set var="vouchertotal" value="${vouchertotal + vouchertransactions.key.dramount}" />
+                    <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.dramount}"/>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+			<br>
+			<table width="13%" border="0" style="border-color: #4b6a84;float: right;padding-right: 15px;"
+				id="myTable">
 
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="text-align: left;">Paid To:</td>
-				<td align="left">  <c:out value="${adminexpenses.paidto}" /></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-				<td class="dataTextBoldLeft" style="text-align: left;">On Account of: </td>
-				<td align="left"><c:out value="${adminexpenses.itemdescription}" /></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-				<td class="dataTextBoldLeft" style="text-align: left;">Payment Type: </td>
-				<td align="left"> 
-				
-							<c:choose>
-                                <c:when test="${adminexpenses.paymenttype=='Cash'}">
-                                    By Cash
-                                </c:when>
-                                <c:otherwise>
-                                    By Cheque # <c:out value="${adminexpenses.chequeno}" />
-                                </c:otherwise>
-                            </c:choose>
-				
-				
-				</td>
-			</tr>
-
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-
-		</table>
+				<tbody>
+					<tr align="right">
+					
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Total</b>
+							</label> 
+							</td>
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+									<fmt:formatNumber type="currency"  value="${vouchertotal}" />
+								</b>
+								</label>
+							</td>
+					</tr>
+				</tbody>
+			</table>
 		<TABLE id="dataTable" width="100%" border="0"
 			style="page-break-after: always; border-collapse: collapse;">
 
@@ -299,9 +318,9 @@
 	
 	<tr>
 
-		<td>Prepared By</td>
-		<td>Checked By</td>
-		<td>Approved By</td>
+		<td>Secretary</td>
+		<td>Treasurer</td>
+		<td>Asst. Secretary</td>
 	</tr>
 		</TABLE>
 

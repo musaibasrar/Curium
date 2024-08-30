@@ -1147,6 +1147,12 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
+			if (fieldName.equalsIgnoreCase("archive")) {
+					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+			if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
+				}
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1362,6 +1368,19 @@ public class StudentService {
 		                	studentdoc5delete=DataUtil.emptyString(request.getParameter(fieldName));
 		                }
 		                
+		                //
+		                if (fieldName.equalsIgnoreCase("archive")) {
+		                	student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+		                }
+		                if (fieldName.equalsIgnoreCase("passedout")) {
+		                	student.setPassedout(DataUtil.parseInt(request.getParameter(fieldName)));
+		                }
+		                if (fieldName.equalsIgnoreCase("droppedout")) {
+		                	student.setDroppedout(DataUtil.parseInt(request.getParameter(fieldName)));
+		                }
+		                if (fieldName.equalsIgnoreCase("leftout")) {
+		                	student.setLeftout(DataUtil.parseInt(request.getParameter(fieldName)));
+		                }
 	            } 
 			
 			
@@ -1476,13 +1495,14 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
+		String applicationType = request.getParameter("applicationtype");
 		
-		if("Admission".equalsIgnoreCase(student.getStream())) {
+		if("Registration".equalsIgnoreCase(applicationType) && "Admission".equalsIgnoreCase(student.getStream())) {
 			student.setArchive(0);
 			student.setPassedout(0);
 			student.setDroppedout(0);
 			student.setLeftout(0);
-		}else if ("Registration".equalsIgnoreCase(student.getStream())) {
+		}else if ("Admission".equalsIgnoreCase(applicationType) && "Registration".equalsIgnoreCase(student.getStream())) {
 			student.setArchive(1);
 			student.setPassedout(1);
 			student.setDroppedout(1);
@@ -1619,7 +1639,7 @@ public class StudentService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 1000;
+				int recordsPerPage = 1500;
 					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}

@@ -379,4 +379,11 @@ public class AccountAction {
 		return "exportfailure";
 		}
 	
+	@PostMapping("/voucherPrintGeneralLedger")
+	private String voucherPrintGeneralLedger() {
+		if (new AccountService(request, response).voucherPrintGeneralLedger()) {
+			return "voucherprintgeneralledger";
+		}
+		return "exportfailure";
+		}
 }

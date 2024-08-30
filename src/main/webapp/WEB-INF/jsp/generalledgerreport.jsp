@@ -381,6 +381,13 @@
 		form1.method = "POST";
 		form1.submit();
 }
+	
+	function printVoucherRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/shatabdi/AccountProcess/voucherPrintGeneralLedger";
+		form1.method = "POST";
+		form1.submit();
+	}
 
 	$(function() {
 
@@ -395,6 +402,16 @@
              }
          }).click(function(){
              printRecords();
+             return false;
+
+         });
+		 
+		 $("#printvoucher").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printVoucherRecords();
              return false;
 
          });
@@ -679,7 +696,7 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="print">Print</button>
+						<td class="footerTD" colspan="2"><button id="print">Print</button> <button id="printvoucher">Print Voucher</button>
 							</td>
 							
 
