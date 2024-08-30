@@ -1,13 +1,5 @@
 package org.ideoholic.curium.model.employee.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
@@ -25,23 +17,24 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+@Service
 public class EmployeeService {
 
+	@Autowired
 	private HttpServletRequest request;
+	@Autowired
     private HttpServletResponse response;
-    private HttpSession httpSession;
-    private String BRANCHID = "branchid";
-    
-	public EmployeeService(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
 
-	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId) {
+	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
 		
 		try {
@@ -140,11 +133,11 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
-		employee.setTeacherexternalid(employeeDto.getBranchCode());
+		employee.setTeacherexternalid(branchCode);
 		employee.setBranchid(Integer.parseInt(branchId));
-		
+
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response,null,null,null).addUser(employee)){
+			if(new UserService(request, response,null,null,null).addUser(employee, branchId)){
 				return ResultResponse.builder().success(true).build();
 			}else{
 				new EmployeeDAO().delete(employee);
@@ -192,7 +185,7 @@ public class EmployeeService {
 
 	public Teacher updateEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto) {
 		Teacher employee = new Teacher();
-		String id = "";
+
 		int employeeId = 0;
 		String employeePhotoUpdate = null;
 		String employeePhotodelete = null;
@@ -208,6 +201,14 @@ public class EmployeeService {
 		String employeedoc5delete = null;
 
 		try {
+
+				String id = DataUtil.emptyString(employeeDto.getId());
+
+
+			if(!id.isEmpty()){
+				employeeId = Integer.parseInt(id);
+				employee.setTid(employeeId);
+			}
 
 			employee.setTeachername(DataUtil.emptyString(employeeDto.getName()));
 			employee.setGender(DataUtil.emptyString(employeeDto.getGender()));

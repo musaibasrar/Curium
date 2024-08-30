@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.employee.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mysql.cj.jdbc.Blob;
 import lombok.Data;
 
 @Data
@@ -24,7 +23,6 @@ public class EmployeeDto {
     private String bankName;
     private String bankIFSC;
     private String accNo;
-    private String branchCode;
     private String id;
     private String teacherExternalId;
     private String leavingdate;

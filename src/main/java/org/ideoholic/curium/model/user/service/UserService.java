@@ -627,7 +627,7 @@ public class UserService {
 			httpSession.setAttribute("sumofmisc", misc);
 	}
 
-	public boolean addUser(Teacher employee) {
+	public boolean addUser(Teacher employee, String branchId) {
 		
 		Login user = new Login();
 		user.setUsername(employee.getTeacherexternalid());
@@ -641,7 +641,7 @@ public class UserService {
 		user.setPassword(builder.toString());
 		user.setUsertype("teacher");
 		Branch branch = new Branch();
-		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		branch.setIdbranch(Integer.parseInt(branchId));
 		user.setBranch(branch);
 		
 		return new UserDAO().addUser(user);
