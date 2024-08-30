@@ -11,9 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,20 @@ public class PrintIdsActionAdapter {
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = printIdsService.searchDetails(searchStudentDto,httpSession.getAttribute("branchid").toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
+	}
+
+	public void printMultiple() {
+		PrintIdsService printIdsService = new PrintIdsService(request, response);
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = printIdsService.printMultiple(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+	    if(printMultipleEmployeesResponseDto.isSuccess()) {
+	    	  httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
+	    	  httpSession.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
+	    	  for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
+	                httpSession.setAttribute(entry.getKey(), entry.getValue());
+	            }
+	    }
 	}
 
 }

@@ -12,12 +12,14 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -86,9 +88,9 @@ public class PrintIdsService {
 		
 	}
 
-	public boolean printMultiple() {
-		boolean result = false;
-        String[] studentIDs = request.getParameterValues("studentIDs");
+	public PrintMultipleEmployeesResponseDto printMultiple(StudentIdsDto studentIdsDto,String currentAcademicYear) {
+		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = new PrintMultipleEmployeesResponseDto();
+        String[] studentIDs = studentIdsDto.getStudentIds();
         List<Long> ids = new ArrayList<Long>();
         Parents parentsDetails = new Parents();
      
@@ -105,17 +107,17 @@ public class PrintIdsService {
                //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
                if (parentsDetails != null) {
-                   httpSession.setAttribute("studentname" + i + "", parentsDetails.getStudent().getName());
-                   httpSession.setAttribute("fathersname" + i + "", parentsDetails.getFathersname());
-                   httpSession.setAttribute("mothersname" + i + "", parentsDetails.getMothersname());
-                   httpSession.setAttribute("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
-                   httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
-                   httpSession.setAttribute("address" + i + "", parentsDetails.getAddresspermanent());
-                   httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
-                   httpSession.setAttribute("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
-                   request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
-                   httpSession.setAttribute("rollnumber" + i + "", parentsDetails.getStudent().getSts());
-                   httpSession.setAttribute("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("studentname" + i + "", parentsDetails.getStudent().getName());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("fathersname" + i + "", parentsDetails.getFathersname());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("mothersname" + i + "", parentsDetails.getMothersname());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("contactnumber" + i + "", parentsDetails.getContactnumber());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("address" + i + "", parentsDetails.getAddresspermanent());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
+            	   printMultipleEmployeesResponseDto.getResultParams().put("currentacadmicyear", currentAcademicYear);
+            	   printMultipleEmployeesResponseDto.getResultParams().put("rollnumber" + i + "", parentsDetails.getStudent().getSts());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
                    //result = true;
                } else {
 
@@ -126,17 +128,17 @@ public class PrintIdsService {
                i++;
            }
        
-       httpSession.setAttribute("iInitial", i);
+       printMultipleEmployeesResponseDto.setInitialValue(i);
        i = (int) (Math.ceil((float) (i) / 3));
-       httpSession.setAttribute("endValue", i);
+       printMultipleEmployeesResponseDto.setEndValue(i);
        
        
         if (parentsDetails == null) {
-            result = false;
+        	printMultipleEmployeesResponseDto.setSuccess(false);
         } else {
-            result = true;
+        	printMultipleEmployeesResponseDto.setSuccess(true);
         }
-        return result;
+        return printMultipleEmployeesResponseDto;
 
 }
 	
