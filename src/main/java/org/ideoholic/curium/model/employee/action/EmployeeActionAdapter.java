@@ -22,10 +22,12 @@ public class EmployeeActionAdapter {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private EmployeeService employeeService;
+
     private String BRANCHID = "branchid";
 
     public boolean addEmployee(MultipartFile[] listOfFiles) {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setName(request.getParameter("name"));
@@ -45,13 +47,10 @@ public class EmployeeActionAdapter {
         employeeDto.setBankName(request.getParameter("bankname"));
         employeeDto.setBankIFSC(request.getParameter("bankifsc"));
         employeeDto.setAccNo(request.getParameter("accno"));
-
-        employeeDto.setBranchCode(httpSession.getAttribute("branchcode").toString());
-        ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("branchcode").toString());
         return resultResponse.isSuccess();
     }
     public boolean viewDetailsEmployee() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee(request.getParameter("id"));
 
@@ -62,7 +61,6 @@ public class EmployeeActionAdapter {
         return employeeDetailsResponseDto.isSuccess();
     }
     public String updateEmployee(MultipartFile[] listOfFiles) {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(request.getParameter("id"));
@@ -96,6 +94,7 @@ public class EmployeeActionAdapter {
         employeeDto.setEmployeedoc3delete(request.getParameter("employeedoc3delete"));
         employeeDto.setEmployeedoc4delete(request.getParameter("employeedoc4delete"));
         employeeDto.setEmployeedoc5delete(request.getParameter("employeedoc5delete"));
+        employeeDto.setBranchId(request.getParameter("branchid"));
 
         Teacher employee = employeeService.updateEmployee(listOfFiles,employeeDto);
 
@@ -103,7 +102,6 @@ public class EmployeeActionAdapter {
 
     }
     public boolean ViewAllEmployee() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("employeeList", viewAllEmployeeResponseDto.getEmployeeList());
@@ -113,20 +111,19 @@ public class EmployeeActionAdapter {
         return viewAllEmployeeResponseDto.isSuccess();
     }
     public void deleteMultiple() {
-        EmployeeService employeeService = new EmployeeService(request,response);
+
         EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
         employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
         employeeService.deleteMultiple(employeeIdsDto);
     }
     public void viewAllRelations() {
-        EmployeeService employeeService = new EmployeeService(request,response);
+
         ViewAllRelationsResponseDto viewAllRelationsResponseDto = employeeService.viewAllRelations(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("listDepartment", viewAllRelationsResponseDto.getListDepartment());
         httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
 
     }
     public void searchEmployee() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         SearchEmployeeDto searchEmployeeDto = new SearchEmployeeDto();
         searchEmployeeDto.setStaffName(request.getParameter("staffName"));
@@ -136,21 +133,18 @@ public class EmployeeActionAdapter {
         request.setAttribute("searchedemployeeList", employeeListDto.getEmployeeList());
     }
     public void basicpayEmployees() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         BasicPayEmployeesDto basicPayEmployeesDto = employeeService.basicpayEmployees(httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("vieweditbasicpay", basicPayEmployeesDto.getBasicPay());
     }
     public void viewDepartments() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         DepartmentResponseDto departmentResponseDto = employeeService.viewDepartments(httpSession.getAttribute(BRANCHID).toString());
 
         httpSession.setAttribute("listDepartment", departmentResponseDto.getDepartmentList());
     }
     public void printMultipleEmployees() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         StudentIdsDto studentIdsDto = new StudentIdsDto();
         studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
@@ -166,7 +160,6 @@ public class EmployeeActionAdapter {
 
     }
     public boolean viewDetailsEmployeeStaffLogin() {
-        EmployeeService employeeService = new EmployeeService(request,response);
 
         EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
         httpSession.setAttribute("employee", result.getEmployee());
