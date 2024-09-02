@@ -3,21 +3,19 @@
  */
 package org.ideoholic.curium.model.student.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Musaib_2
@@ -36,6 +34,8 @@ public class StudentAction {
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private StampFeesActionAdapter stampFeesActionAdapter;
+	@Autowired
+	private StudentActionAdapter studentActionAdapter;
 
 	@PostMapping("/multiClassSearch")
 	public String multiClassSearch() {
@@ -51,19 +51,19 @@ public class StudentAction {
 
 	@RequestMapping(value = "/viewAllSuperAdmin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewAllSuperAdmin() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsSuperAdmin();
+		studentActionAdapter.viewAllStudentsSuperAdmin();
 		return "viewAllWithParents";
 	}
 
 	@GetMapping("/addNew")
 	public String addNew() {
 		standardActionAdapter.viewClasses();
-		return new StudentService(request, response, standardActionAdapter).addNew();
+		return studentActionAdapter.addNew();
 	}
 
 	@PostMapping("/download")
 	public String downlaodFile() {
-		if (new StudentService(request, response, standardActionAdapter).downlaodFile()) {
+		if (studentActionAdapter.downlaodFile()) {
 			return "exportsuccess";
 		}
 		return "exportfailure";
