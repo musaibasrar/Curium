@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.examdetails.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class GenerateHallTicketResponseDto {
 
-    private List<Examschedule> exams;
+    private List<Exams> exams;
+    private List<Subject> list;
     private boolean success;
     private String selectedclass;
     private String selectedexam;
@@ -30,6 +32,7 @@ public class GenerateHallTicketResponseDto {
     private Integer resultValue;
     private List resultList;
 
+    private String currentacademicyear;
 
 
 }

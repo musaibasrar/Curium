@@ -51,18 +51,38 @@ public class ExamDetailsApiActionImpl {
         ExamsListResponseDto examsListResponseDto =  examDetailsService.readListOfExams(branchId);
         if (!examsListResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+        result.setExams(examsListResponseDto.getExams());
         ResultResponse classResponse = standardService.viewClasses(branchId);
         if (!classResponse.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+            result.setMessage(classResponse.getMessage());
+            result.setResultMap(classResponse.getResultMap());
+            result.setResultValue(classResponse.getResultValue());
+            result.setResultList(classResponse.getResultList());
+
         SubjectsResponseDto subjectsResponseDto = subjectDetailsService.readListOfSubjectNames(branchId);
         if (!subjectsResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+        result.setResultList(subjectsResponseDto.getList());
         Currentacademicyear currentacademicyear = yearService.getYear();
-        if (!currentacademicyear.isSuccess())
+        if (currentacademicyear == null)
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+             result.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());
         ExamsScheduleResponseDto examsScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
         if (!examsScheduleResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+                 result.setExams(examsScheduleResponseDto.getExams());
+                 result.setList(examsScheduleResponseDto.getList());
+                 result.setSelectedclass(examsScheduleResponseDto.getSelectedclass());
+                 result.setSelectedexam(examsScheduleResponseDto.getSelectedexam());
+                 result.setSelectedstudentname(examsScheduleResponseDto.getSelectedstudentname());
+                 result.setSelectedclassandsec(examsScheduleResponseDto.getSelectedclassandsec());
+                 result.setSelectedadmissionno(examsScheduleResponseDto.getSelectedadmissionno());
+                 result.setExamschedules(examsScheduleResponseDto.getExamschedules());
+                 result.setMessage(examsScheduleResponseDto.getMessage());
+                 result.setResultMap(examsScheduleResponseDto.getResultMap());
+                 result.setResultValue(examsScheduleResponseDto.getResultValue());
+                 result.setResultList(examsScheduleResponseDto.getResultList());
 
         return ResponseEntity.ok(result);
     }
@@ -95,22 +115,43 @@ public class ExamDetailsApiActionImpl {
         ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
 
 
+
         ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
+
         if (!examsListResponseDto.isSuccess())
+
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+                result.setExams(examsListResponseDto.getExams());
         ResultResponse classResponse = standardService.viewClasses(branchId);
         if (!classResponse.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+                result.setMessage(classResponse.getMessage());
+                result.setResultMap(classResponse.getResultMap());
+                result.setResultValue(classResponse.getResultValue());
+                result.setResultList(classResponse.getResultList());
         SubjectsResponseDto subjectsResponseDto = subjectDetailsService.readListOfSubjectNames(branchId);
         if (!subjectsResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+                result.setList(subjectsResponseDto.getList());
         Currentacademicyear currentacademicyear = yearService.getYear();
-        if (currentacademicyear.isSuccess())
+        if (currentacademicyear == null)
             throw new CustomResponseException(CustomErrorMessage.ERROR);
+        result.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());
         ExamsScheduleResponseDto examsScheduleResponseDto = examDetailsService.getExamSchedule(branchId);
         if (!examsScheduleResponseDto.isSuccess())
             throw new CustomResponseException(CustomErrorMessage.ERROR);
-
+                result.setExams(examsScheduleResponseDto.getExams());
+                result.setList(examsScheduleResponseDto.getList());
+                result.setSelectedclass(examsScheduleResponseDto.getSelectedclass());
+                result.setSelectedexam(examsScheduleResponseDto.getSelectedexam());
+                result.setSelectedstudentname(examsScheduleResponseDto.getSelectedstudentname());
+                result.setSelectedclassandsec(examsScheduleResponseDto.getSelectedclassandsec());
+                result.setSelectedadmissionno(examsScheduleResponseDto.getSelectedadmissionno());
+                result.setExamschedules(examsScheduleResponseDto.getExamschedules());
+                result.setMessage(examsScheduleResponseDto.getMessage());
+                result.setResultMap(examsScheduleResponseDto.getResultMap());
+                result.setResultValue(examsScheduleResponseDto.getResultValue());
+                result.setResultList(examsScheduleResponseDto.getResultList());
         return ResponseEntity.ok(result);
 
     }

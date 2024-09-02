@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class ExamsListResponseDto {
-    private List<Exams> exams;
+    private  List<Exams> exams;
     private boolean success;
 }

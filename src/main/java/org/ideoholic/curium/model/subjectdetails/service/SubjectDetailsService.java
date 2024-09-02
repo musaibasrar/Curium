@@ -109,6 +109,7 @@ public class SubjectDetailsService {
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
 			result.setList(list);
+			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

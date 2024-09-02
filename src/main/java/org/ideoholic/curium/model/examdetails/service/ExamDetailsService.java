@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 public class ExamDetailsService {
 
     public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
-        // TODO Auto-generated method stub
+
         Exams exams = new Exams();
 
         if (branchId != null) {
@@ -44,7 +44,7 @@ public class ExamDetailsService {
             return ResultResponse.builder().success(false).build();
 
         }
-        return ResultResponse.builder().build();
+        return ResultResponse.builder().success(true).build();
     }
 
 
@@ -52,7 +52,7 @@ public class ExamDetailsService {
         ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
         if (branchId != null) {
 
-            List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+            List<Exams> exams  = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
             examsListResponseDto.setExams(exams);
             examsListResponseDto.setSuccess(true);
             if (exams == null) {
@@ -174,7 +174,7 @@ public class ExamDetailsService {
         if (branchId != null) {
 
             List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
-            result.setExams(exams);
+            result.setExamschedules(exams);
             result.setSuccess(true);
             if (exams == null) {
                 result.setSuccess(false);
