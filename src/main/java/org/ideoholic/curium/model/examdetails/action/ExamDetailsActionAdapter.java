@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 @Service
 public class ExamDetailsActionAdapter {
     @Autowired
@@ -23,9 +24,9 @@ public class ExamDetailsActionAdapter {
     public Boolean addExam() {
 
         AddExamDto result = new AddExamDto();
-        result.setExamName( request.getParameter("examname"));
+        result.setExamName(request.getParameter("examname"));
 
-        ResultResponse resultResponse = examDetailsService.addExam(result,httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = examDetailsService.addExam(result, httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
@@ -37,6 +38,7 @@ public class ExamDetailsActionAdapter {
         httpSession.setAttribute("examdetails", result.getExams());
         return result.isSuccess();
     }
+
     public boolean deleteMultiple() {
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
@@ -45,6 +47,7 @@ public class ExamDetailsActionAdapter {
         ResultResponse resultResponse = examDetailsService.deleteMultiple(examIdsDto);
         return resultResponse.isSuccess();
     }
+
     public boolean addSchedule() {
 
         AddScheduleDto addScheduleDto = new AddScheduleDto();
@@ -60,6 +63,7 @@ public class ExamDetailsActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
     public boolean getExamSchedule() {
 
         ExamsScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
@@ -67,6 +71,7 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+
     public boolean deleteExamSchedule() {
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
@@ -76,6 +81,7 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+
     public boolean getExamScheduleDetails() {
 
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
@@ -85,7 +91,7 @@ public class ExamDetailsActionAdapter {
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
 
-        ExamsScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto,httpSession.getAttribute(BRANCHID).toString());
+        ExamsScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("selectedclass", result.getSelectedclass());
         request.setAttribute("selectedexam", result.getSelectedexam());
         request.setAttribute("selectedstudentname", result.getSelectedstudentname());
@@ -95,6 +101,7 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+
     public void printPreviewHallTicket() {
 
         PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
