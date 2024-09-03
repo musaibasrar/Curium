@@ -610,4 +610,9 @@ public class JspController {
 	public String getsmsDeliveryReport() {
 		return "smsdeliveryreport";
 	}
+	
+	@GetMapping("/importfilefees")
+	public String getImportFileFees() {
+		return "importfilefees";
+	}
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.importfile.service.ImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,4 +41,17 @@ public class ImportFileAction {
 		}
 		return "importsuccess";
 	}
+	
+	 @RequestMapping(value = "/readFileFees", method = RequestMethod.POST, consumes = "multipart/form-data")
+		public String readFileForFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
+			try {
+				if (new FeesCollectionService(request, response,null).readFileForFees(uploadedFiles)) {
+					return "importfile";
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "importsuccess";
+		}
 }

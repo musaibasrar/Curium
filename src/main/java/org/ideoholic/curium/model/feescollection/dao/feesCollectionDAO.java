@@ -377,4 +377,25 @@ public class feesCollectionDAO {
 		return receiptInfo;
 	}
 
+	public Studentfeesstructure getStudentFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
+		
+		Studentfeesstructure result = new Studentfeesstructure();
+
+		try {
+			transaction = session.beginTransaction();
+
+			Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sid="+sid+" and sfs.Feescategory.idfeescategory="+idFeesCategory+" and sfs.academicyear = '"+currentAcademicYear+"'");
+			result = (Studentfeesstructure) query.uniqueResult();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+		}
+	}
+
 }

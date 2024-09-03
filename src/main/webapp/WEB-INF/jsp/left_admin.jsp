@@ -930,6 +930,11 @@ for(Cookie cookie : cookies){
                               <a target="mainFrame" href="/abc/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
+				     <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="mainFrame" href="/abc/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+				        </td>
+				     </tr>
 				 </table>
             </div>
              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
