@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.mess.stockmove.dto.*;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -115,7 +116,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
         stockMoveSaveDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
         //Get Student
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
 
         return ResponseEntity.ok(stockMoveSaveDto);
         //return "issuestock";

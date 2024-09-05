@@ -4,8 +4,8 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.model.mess.item.action.MessItemActionAdapter;
-import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +36,8 @@ public class MessStockMoveAction {
 	private MessStockMoveActionAdapter messStockMoveActionAdapter;
 	@Autowired
 	private MessItemActionAdapter messItemActionAdapter;
+	@Autowired
+	private StudentActionAdapter studentActionAdapter;
 
 	@PostMapping("/cancelStockMove")
 	public String cancelStockMove() {
@@ -84,7 +86,7 @@ public class MessStockMoveAction {
     	
     	messStockMoveActionAdapter.viewStockMoveDetails();
     	//Get Student
-    	new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+    	studentActionAdapter.viewAllStudentsParents();
     	return "bill";
     	//return "issuestock";
 

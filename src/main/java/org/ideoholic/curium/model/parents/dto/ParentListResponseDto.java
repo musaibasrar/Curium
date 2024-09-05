@@ -17,5 +17,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class ParentListResponseDto {
 		private List<Parents> list;
+		private int page;
+		private int noOfPages;
 		private boolean success;
 }

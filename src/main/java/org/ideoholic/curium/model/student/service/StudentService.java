@@ -14,9 +14,11 @@ import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
@@ -1868,16 +1870,16 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewAllStudentsParents() {
+	public ParentListResponseDto viewAllStudentsParents(String strPage, String branchId) {
+		ParentListResponseDto result = ParentListResponseDto.builder().success(false).build();
 
-		boolean result = false;
 		//String pages = "1";
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 1000;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+					page = Integer.parseInt(strPage);
 				}
 
 				/*
@@ -1888,7 +1890,7 @@ public class StudentService {
 				 */
 
 				List<Object[]> list = new studentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-					recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					recordsPerPage, Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for(Object[] parentdetails: list){
@@ -1905,12 +1907,12 @@ public class StudentService {
 					parentDetails.add(parent);
 				}
 
-				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("studentList", parentDetails);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				result.setList(parentDetails);
+				result.setNoOfPages(noOfPages);
+				result.setPage(page);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1919,16 +1921,16 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewfeesStructurePerYear() {
-		boolean result = false;
+	public FeesDetailsResponseDto viewfeesStructurePerYear(StudentIdDto dto) {
+		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 
 		try {
 
-			long id = Long.parseLong(request.getParameter("id"));
-			String academicYear = request.getParameter("academicyear");
+			long id = Long.parseLong(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
 
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
-			request.setAttribute("receiptinfo",rinfo);
+			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 
 			long totalSum = 0l;
@@ -1942,14 +1944,13 @@ public class StudentService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
-			httpSession.setAttribute("feesstructure", feesstructure);
-			httpSession.setAttribute("sumoffees", totalSum);
-			httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
-			httpSession.setAttribute("totalfees", totalFeesAmount);
-			httpSession.setAttribute("academicPerYear", academicYear);
-			httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
-
-			result = true;
+			result.setFeesStructure(feesstructure);
+			result.setTotalSum(totalSum);
+			result.setDueAmount(totalFeesAmount-totalSum);
+			result.setTotalFeesAmount(totalFeesAmount);
+			result.setAcademicPerYear(academicYear);
+			result.setTotalFeesConcession(totalFeesConcession);
+			result.setSuccess(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2078,19 +2079,21 @@ public class StudentService {
 		// getFile(name, path);
 	}
 
-	public String generateBonafide() {
+	public BonafideGenerationResponseDto generateBonafide(StudentIdsDto dto) {
+		BonafideGenerationResponseDto result = BonafideGenerationResponseDto.builder().build();
 
-		String[] studentIds = request.getParameterValues("studentIDs");
+		String[] studentIds = dto.getStudentIds();
 		String bonafidePage = null;
 
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-			httpSession.setAttribute("studentdetailsbonafide", parents);
-			bonafidePage = "bonafidecertificateprint";
+			result.setParents(parents);
+			result.setSuccess(true);
+			result.setMessage("bonafidecertificateprint");
 		}
 
-		return bonafidePage;
+		return result;
 	}
 
 	public ResultResponse downlaodFile() {

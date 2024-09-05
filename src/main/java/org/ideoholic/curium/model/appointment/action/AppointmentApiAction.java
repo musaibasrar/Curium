@@ -8,7 +8,7 @@ import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
-import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class AppointmentApiAction {
 	@Autowired
 	private AppointmentService appointmentService;
 	@Autowired
-	private EmployeeActionAdapter employeeActionAdapter;
-	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private EmployeeService employeeService;
 
 	@PostMapping("/download")
 	private ResponseEntity<ResultResponse> download() {
@@ -97,12 +97,12 @@ public class AppointmentApiAction {
 	}
 
 	@PostMapping("/addAppointment")
-	private ResponseEntity<ResultResponse> addAppointment(@RequestBody AddAppointmentDto addAppointmentDto, @RequestHeader(value="branchId") String branchId, @RequestHeader(value="currentAcademicYear") String currentAcademicYear, @RequestHeader(value="userLoginId") String userLoginId) {
+	private ResponseEntity<ResultResponse> addAppointment(@RequestBody AddAppointmentDto addAppointmentDto, @RequestHeader(value="branchid") String branchId, @RequestHeader(value="currentAcademicYear") String currentAcademicYear, @RequestHeader(value="userloginid") String userLoginId, @RequestParam(value = "page") String page) {
 		ResultResponse result = appointmentService.addAppointment(addAppointmentDto, branchId, currentAcademicYear, userLoginId);
 		if (result.isSuccess()) {
 			// TODO: Need to fix this after migrating StudentService and EmployeeService
-			new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
-			employeeActionAdapter.ViewAllEmployee();
+			new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
+			employeeService.ViewAllEmployee(branchId);
 			return ResponseEntity.ok(result);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);

@@ -4,16 +4,12 @@
 package org.ideoholic.curium.model.mess.item.action;
 
 import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Musaib_2
@@ -22,17 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/MessItemsProcess")
 public class MessItemsAction {
-
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
 	@Autowired
 	private MessItemActionAdapter messItemActionAdapter;
 	@Autowired
-	private StandardActionAdapter standardActionAdapter;
-	@Autowired
 	private MessSuppliersActionAdapter messSuppliersActionAdapter;
+	@Autowired
+	private StudentActionAdapter studentActionAdapter;
 
 	@PostMapping("/printStockReceivedReport")
 	public String printStockReceivedReport() {
@@ -59,14 +50,14 @@ public class MessItemsAction {
 	@PostMapping("/generateStockIssuanceReport")
 	public String generateStockIssuanceReport() {
 		messItemActionAdapter.generateStockIssuanceReport();
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "stockissuancereport";
 	}
 
 	@GetMapping("/issuanceStock")
 	public String issuanceStock() {
 		messItemActionAdapter.getIssuanceStock();
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "stockissuancereport";
 	}
 

@@ -7,6 +7,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,9 +77,9 @@ public class StudentAction {
 
 	@PostMapping("/GenerateBonafide")
 	public String generateBonafide() {
-		String result = new StudentService(request, response, standardActionAdapter).generateBonafide();
-		if (result != null) {
-			return result;
+		BonafideGenerationResponseDto result = studentActionAdapter.generateBonafide();
+		if ( result != null && result.isSuccess()) {
+			return result.getMessage();
 		} else {
 			return "bonafidefailure";
 		}
@@ -98,7 +99,7 @@ public class StudentAction {
 
 	@PostMapping("/feesStructurePerYear")
 	public String feesStructurePerYear() {
-		new StudentService(request, response, standardActionAdapter).viewfeesStructurePerYear();
+		studentActionAdapter.viewfeesStructurePerYear();
 		return "student_details_feesstructure";
 	}
 
@@ -121,13 +122,13 @@ public class StudentAction {
 
 	@GetMapping("/viewAllStudentsWithParents")
 	public String viewAllStudentsWithParents() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 
 	@GetMapping("/viewAllStudents")
 	public String viewAllStudents() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 	//student detail
@@ -281,7 +282,7 @@ public class StudentAction {
 
 	@RequestMapping(value = "/viewAll", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewAll() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
 

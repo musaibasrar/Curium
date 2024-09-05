@@ -1,7 +1,13 @@
 package org.ideoholic.curium.model.student.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +59,45 @@ public class StudentActionAdapter {
         ResultResponse resultResponse = studentService.downlaodFile();
 
         return resultResponse.isSuccess();
+    }
+
+    public BonafideGenerationResponseDto generateBonafide() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentIdsDto dto = new StudentIdsDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        BonafideGenerationResponseDto responseDto = studentService.generateBonafide(dto);
+        httpSession.setAttribute("studentdetailsbonafide", responseDto.getParents());
+
+        return responseDto;
+    }
+
+    public void viewfeesStructurePerYear() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentId(request.getParameter("id"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+
+        FeesDetailsResponseDto responseDto = studentService.viewfeesStructurePerYear(dto);
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
+    }
+
+    public void viewAllStudentsParents() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        String page = request.getParameter("page");
+
+        ParentListResponseDto responseDto = studentService.viewAllStudentsParents(page, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", responseDto.getList());
+        request.setAttribute("noOfPages", responseDto.getNoOfPages());
+        request.setAttribute("currentPage", responseDto.getPage());
     }
 }

@@ -21,6 +21,7 @@ public class FeesDetailsResponseDto {
     private long totalSum;
     private long totalFeesAmount;
     private long dueAmount;
+    private long totalFeesConcession;
     private String academicPerYear;
     private String currentAcademicYear;
     private List<Studentotherfeesstructure> otherFeesStructure;

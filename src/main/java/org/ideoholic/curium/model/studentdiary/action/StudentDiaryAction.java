@@ -1,13 +1,8 @@
 package org.ideoholic.curium.model.studentdiary.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.diary.action.DiaryActionAdapter;
-import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.studentdiary.service.StudentDiaryservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/StudentDiaryProcess")
@@ -29,10 +28,12 @@ public class StudentDiaryAction {
 	private DiaryActionAdapter diaryActionAdapter;
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private StudentActionAdapter studentActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+		studentActionAdapter.viewAllStudentsParents();
 		return "studentdiary";
 	}
 	
