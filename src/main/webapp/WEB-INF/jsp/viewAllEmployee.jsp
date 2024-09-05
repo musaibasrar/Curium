@@ -304,6 +304,37 @@
 
         </script>
         <script type="text/javascript">
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/dolphin/EmployeeProcess/printViewTeacher";
+		form1.method = "POST";
+		form1.submit();
+}
+
+	
+	$(function() {
+
+		$("#tabs").tabs();
+		$("#search").button().click(function() {
+			searchByDate();
+		});
+		$("#effect").hide();
+		
+		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+
+	});
+	
+        </script>
+        <script type="text/javascript">
             $(function(){
                 $("#delete").button({
                     icons:{
@@ -437,7 +468,9 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Delete" type="submit" id="delete"/> </td>
+                            <td  class="footerTD" colspan="2" >
+                            <input value="Print" style="width: 35px;" id="print"/>
+                            <input value="Delete" type="submit" id="delete"/> </td>
                     
                         </tr></tfoot>
                 </table>

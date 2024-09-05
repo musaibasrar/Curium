@@ -76,5 +76,11 @@ public class EmployeeAction {
 			return "EmployeenotSaved";
 		}
 	}
+	
+	@PostMapping("/printViewTeacher")
+	public String printViewTeacher() {
+		return "printteacherdetail";
+	}
+
 
 }
