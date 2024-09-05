@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Print General Ledger Report
+    Document   : Print Teacher Details
     Created on : JAN 13 2021, 9:38 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Teacher Detail</title>
+<title>Print Teachers Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -234,6 +234,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
+				<h3>Staff Details</h3>
 				</td>
 			</tr>
 	</table>
