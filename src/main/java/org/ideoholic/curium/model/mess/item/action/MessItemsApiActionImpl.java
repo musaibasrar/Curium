@@ -5,6 +5,7 @@ import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 public class MessItemsApiActionImpl implements MessItemsApiAction {
 
     @Autowired
+    private MessItemsService messItemsService;
+
+    @Autowired
+    private MessSuppliersService messSuppliersService;
+
+    @Autowired
     private HttpServletRequest request;
 
     @Autowired
@@ -25,12 +32,6 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
 
     @Autowired
     private StandardActionAdapter standardActionAdapter;
-
-    @Autowired
-    private MessItemsService messItemsService;
-
-    @Autowired
-    private MessSuppliersService messSuppliersService;
 
     @PostMapping("/printStockReceivedReport")
     public String printStockReceivedReport() {
@@ -55,20 +56,20 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
     }
 
     @PostMapping("/generateStockIssuanceReport")
-    public ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(@RequestBody IssuanceReportDto dto) {
+    public ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(@RequestBody IssuanceReportDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId) {
         IssuanceReportResponseDto result = messItemsService.generateStockIssuanceReport(dto);
 
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/issuanceStock")
-    public ResponseEntity<ResultResponse> issuanceStock() {
+    public ResponseEntity<ResultResponse> issuanceStock(@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId) {
         ResultResponse result = messItemsService.getIssuanceStock();
 
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents();
+        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }
 

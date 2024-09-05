@@ -8,4 +8,5 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class StudentIdDto {
     private String studentId;
+    private String academicYear;
 }

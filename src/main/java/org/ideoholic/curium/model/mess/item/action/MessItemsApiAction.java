@@ -14,9 +14,9 @@ public interface MessItemsApiAction {
 
     String printStockIssuanceReport();
 
-    ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(IssuanceReportDto dto);
+    ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(IssuanceReportDto dto, String page, String branchId);
 
-    ResponseEntity<ResultResponse> issuanceStock();
+    ResponseEntity<ResultResponse> issuanceStock(String page, String branchId);
 
     ResponseEntity<ResultResponse> printBatchStockAvailability();
 
