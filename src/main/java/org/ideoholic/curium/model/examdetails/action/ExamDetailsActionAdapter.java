@@ -66,7 +66,7 @@ public class ExamDetailsActionAdapter {
 
     public boolean getExamSchedule() {
 
-        ExamsScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
+        ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("examschedule", result.getExams());
 
         return result.isSuccess();
@@ -91,7 +91,7 @@ public class ExamDetailsActionAdapter {
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
 
-        ExamsScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(BRANCHID).toString());
+        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("selectedclass", result.getSelectedclass());
         request.setAttribute("selectedexam", result.getSelectedexam());
         request.setAttribute("selectedstudentname", result.getSelectedstudentname());

@@ -167,9 +167,9 @@ public class ExamDetailsService {
     }
 
 
-    public ExamsScheduleResponseDto getExamSchedule(String branchId) {
+    public ExamScheduleResponseDto getExamSchedule(String branchId) {
 
-        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
+        ExamScheduleResponseDto result = new ExamScheduleResponseDto();
 
         if (branchId != null) {
 
@@ -204,8 +204,8 @@ public class ExamDetailsService {
     }
 
 
-    public ExamsScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto, String branchId) {
-        ExamsScheduleResponseDto result = new ExamsScheduleResponseDto();
+    public ExamScheduleResponseDto getExamScheduleDetails(ExamScheduleDto examScheduleDto, String branchId) {
+        ExamScheduleResponseDto result = new ExamScheduleResponseDto();
 
         String academicYear = examScheduleDto.getAcademicYear();
         String classH = examScheduleDto.getClassH();

@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class ExamsScheduleResponseDto {
+public class ExamScheduleResponseDto {
     private List<Exams> exams;
     private List<Subject> list;
     private boolean success;
