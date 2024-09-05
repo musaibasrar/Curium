@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Fees Collection Details</title>
+<title>Print Teacher Detail</title>
 <style type="text/css">
 <!--
 .headerText {
