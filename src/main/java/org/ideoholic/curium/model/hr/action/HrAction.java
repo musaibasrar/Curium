@@ -306,7 +306,7 @@ public class HrAction {
 	@PostMapping("/leaveDetailsPerYear")
 	public String leaveDetailsPerYear() {
 		
-		if(new HrService(request, response).leaveDetailsPerYear()){
+		if(hrActionAdapter.leaveDetailsPerYear()){
 			return "leavedetails";
 		}
 		return error;

@@ -1,10 +1,12 @@
 package org.ideoholic.curium.model.hr.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.hr.dto.LeaveDetailsPerYearDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
 import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
 import org.ideoholic.curium.model.hr.service.HrService;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -71,14 +73,30 @@ public class HrActionAdapter {
         LeavesDetailsResponseDto result = hrService.viewLeavesDetails();
 
         request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
-        request.setAttribute("teachername",result.getTeachername());
+        request.setAttribute("teachername",result.getTeacherName());
 
-        httpSession.setAttribute("leavedetailsteachersid", result.getLeavedetailsteachersid());
+        httpSession.setAttribute("leavedetailsteachersid", result.getLeaveDetailsTeachersId());
         httpSession.setAttribute("academicPerYear", result.getAcademicPerYear());
         httpSession.setAttribute("currentAcademicYear",result.getCurrentAcademicYear());
 
         return result.isSuccess();
 
+    }
+    public boolean leaveDetailsPerYear() {
+        HrService hrService = new HrService(request,response);
+
+        LeaveDetailsPerYearDto leaveDetailsPerYearDto = new LeaveDetailsPerYearDto();
+
+        leaveDetailsPerYearDto.setLeaveDetailsTeachersId(request.getParameter("leavedetailsteachersid"));
+        leaveDetailsPerYearDto.setAcademicYear(request.getParameter("academicyear"));
+
+        LeavesDetailsResponseDto result = hrService.leaveDetailsPerYear(leaveDetailsPerYearDto);
+
+        request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
+
+        httpSession.setAttribute("academicPerYear",result.getAcademicPerYear());
+
+        return result.isSuccess();
     }
 
 
