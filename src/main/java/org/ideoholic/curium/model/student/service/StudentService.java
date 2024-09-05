@@ -1,30 +1,11 @@
 package org.ideoholic.curium.model.student.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
@@ -42,15 +23,20 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class StudentService {
 
@@ -2107,8 +2093,8 @@ public class StudentService {
 		return bonafidePage;
 	}
 
-	public boolean downlaodFile() {
-		boolean result = false;
+	public ResultResponse downlaodFile() {
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx");
@@ -2140,18 +2126,19 @@ public class StudentService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
 		return result;
 	}
 
-	public String addNew() {
+	public ResultResponse addNew(String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			String branchId = httpSession.getAttribute(BRANCHID).toString();
-			return "addStudent";
+		if(branchId!=null){
+			result.setMessage("addStudent");
+			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("4".equalsIgnoreCase(branchId)) {
@@ -2160,10 +2147,12 @@ public class StudentService {
                 return "addStudentDC.jsp";
             }*/
 		}
-		return "sessiontimeout";
+		result.setMessage("sessiontimeout");
+		return result;
 	}
 
-	public void viewAllStudentsSuperAdmin() {
+	public StudentsSuperAdminResponseDto viewAllStudentsSuperAdmin() {
+		StudentsSuperAdminResponseDto result = StudentsSuperAdminResponseDto.builder().build();
 
 		String pages = "1";
 
@@ -2175,16 +2164,16 @@ public class StudentService {
 			}
 			List<Parents> list = new studentDetailsDAO().readListStudentsSuperAdmin((page - 1) * recordsPerPage,
 				recordsPerPage);
-			request.setAttribute("studentList", list);
 			int noOfRecords = new studentDetailsDAO().getNoOfRecords();
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-			request.setAttribute("studentList", list);
-			request.setAttribute("noOfPages", noOfPages);
-			request.setAttribute("currentPage", page);
+			result.setStudentList(list);
+			result.setNoOfPages(noOfPages);
+			result.setPage(page);
+			result.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return result;
 	}
 
 	public boolean viewStudentsParentsPerBranch() {
