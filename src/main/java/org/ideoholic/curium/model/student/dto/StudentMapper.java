@@ -40,11 +40,11 @@ public interface StudentMapper {
 
     static String createClassadmittedin(StudentDto studentDto) {
         String conClassAdmittedIn = "";
-        String addClassE = DataUtil.emptyString(studentDto.getAddclass());
-        if (!conClassAdmittedIn.equalsIgnoreCase("")) {
+        String addClassE = DataUtil.emptyString(studentDto.getAdmclassE());
+        if (!addClassE.equalsIgnoreCase("")) {
             conClassAdmittedIn = addClassE + "--";
         }
-        String addSecE = DataUtil.emptyString(studentDto.getAddsec());
+        String addSecE = DataUtil.emptyString(studentDto.getAdmsecE());
         if (!addSecE.equalsIgnoreCase("")) {
             conClassAdmittedIn = conClassAdmittedIn + addSecE;
         }

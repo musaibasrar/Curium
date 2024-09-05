@@ -730,7 +730,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			
 			String[] attendanceIds = request.getParameterValues("externalIDs");
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
-						
+			String dateofAttendance = request.getParameter("dateofattendance");			
 			if(attendanceIds!=null) {
 			
 			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
@@ -742,7 +742,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				studentDailyAttendance.setAttendeeid(attidString[0]);
 				studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[i]);
 				studentDailyAttendance.setIntime("00:00");
-				studentDailyAttendance.setDate(new Date());
+				studentDailyAttendance.setDate(DateUtil.simpleDateParser(dateofAttendance));
 				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				studentDailyAttendanceList.add(studentDailyAttendance);
