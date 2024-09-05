@@ -4,6 +4,8 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsExamsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
@@ -22,7 +24,7 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
     private StandardService standardService;
 
     @Autowired
-    private ExamDetailsActionAdapter examDetailsActionAdapter;
+    private ExamDetailsService examDetailsService;
 
     @Autowired
     private SubjectDetailsService subjectDetailsService;
@@ -79,20 +81,22 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
     @GetMapping("/readListOfSubjects")
     public ResponseEntity<SubjectsExamsResponseDto> readListOfSubjectsExams(@RequestHeader(value = "branchid") String branchId) {
         SubjectsExamsResponseDto result = new SubjectsExamsResponseDto();
+
         SubjectsResponseDto responseDto = subjectDetailsService.readListOfSubjects(branchId);
-        result.setSubjects(responseDto.getList());
-        result.setSuccess(responseDto.isSuccess());
+          result.setSubjects(responseDto.getList());
+          result.setSuccess(responseDto.isSuccess());
 
         responseDto = subjectDetailsService.readListOfSubjectNames(branchId);
-        result.setSubjectNames(responseDto.getList());
-        result.setSuccess(result.isSuccess() & responseDto.isSuccess());
+          result.setSubjectNames(responseDto.getList());
+          result.setSuccess(result.isSuccess() & responseDto.isSuccess());
 
-        // TODO fix this after changing this to service call
-        examDetailsActionAdapter.readListOfExams();
+        ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
+          result.setExams(examsListResponseDto.getExams());
+          result.setSuccess(result.isSuccess() & examsListResponseDto.isSuccess());
 
         ResultResponse response = standardService.viewClasses(branchId);
-        result.setClasssecList(response.getResultList());
-        result.setSuccess(result.isSuccess() & response.isSuccess());
+          result.setClasssecList(response.getResultList());
+          result.setSuccess(result.isSuccess() & response.isSuccess());
 
         return ResponseEntity.ok(result);
     }

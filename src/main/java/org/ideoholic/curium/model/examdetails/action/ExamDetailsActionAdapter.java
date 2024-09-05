@@ -3,47 +3,43 @@ package org.ideoholic.curium.model.examdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.*;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
-import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 @Service
 public class ExamDetailsActionAdapter {
     @Autowired
     private HttpServletRequest request;
     @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private ExamDetailsService examDetailsService;
 
     private String BRANCHID = "branchid";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
     public Boolean addExam() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         AddExamDto result = new AddExamDto();
-        result.setExamName( request.getParameter("examname"));
+        result.setExamName(request.getParameter("examname"));
 
-        ResultResponse resultResponse = examDetailsService.addExam(result,httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = examDetailsService.addExam(result, httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
 
     public boolean readListOfExams() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamsListResponseDto result = examDetailsService.readListOfExams(httpSession.getAttribute(BRANCHID).toString());
 
         httpSession.setAttribute("examdetails", result.getExams());
         return result.isSuccess();
     }
+
     public boolean deleteMultiple() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
         examIdsDto.setExamIds(request.getParameterValues("examIDs"));
@@ -51,8 +47,8 @@ public class ExamDetailsActionAdapter {
         ResultResponse resultResponse = examDetailsService.deleteMultiple(examIdsDto);
         return resultResponse.isSuccess();
     }
+
     public boolean addSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         AddScheduleDto addScheduleDto = new AddScheduleDto();
         addScheduleDto.setSubject(request.getParameterValues("subject"));
@@ -67,16 +63,16 @@ public class ExamDetailsActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
     public boolean getExamSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("examschedule", result.getExams());
 
         return result.isSuccess();
     }
+
     public boolean deleteExamSchedule() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamIdsDto examIdsDto = new ExamIdsDto();
         examIdsDto.setExamIds(request.getParameterValues("idexamschedule"));
@@ -85,8 +81,8 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+
     public boolean getExamScheduleDetails() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request,response);
 
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
         examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
@@ -95,7 +91,7 @@ public class ExamDetailsActionAdapter {
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
 
-        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto,httpSession.getAttribute(BRANCHID).toString());
+        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("selectedclass", result.getSelectedclass());
         request.setAttribute("selectedexam", result.getSelectedexam());
         request.setAttribute("selectedstudentname", result.getSelectedstudentname());
@@ -105,8 +101,8 @@ public class ExamDetailsActionAdapter {
 
         return result.isSuccess();
     }
+
     public void printPreviewHallTicket() {
-        ExamDetailsService examDetailsService = new ExamDetailsService(request, response);
 
         PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
         printPreviewHallTicketDto.setExamName(request.getParameterValues("examname"));

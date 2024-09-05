@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
@@ -22,28 +19,18 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Musaib_2
  *
  */
 @Slf4j
+@Service
 public class ExamDetailsService {
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    private HttpSession httpSession;
-    private String BRANCHID = "branchid";
-
-    public ExamDetailsService(HttpServletRequest request, HttpServletResponse response) {
-        this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-    }
-
-
     public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
-        // TODO Auto-generated method stub
+
         Exams exams = new Exams();
 
         if (branchId != null) {
@@ -57,7 +44,7 @@ public class ExamDetailsService {
             return ResultResponse.builder().success(false).build();
 
         }
-        return ResultResponse.builder().build();
+        return ResultResponse.builder().success(true).build();
     }
 
 
@@ -65,7 +52,7 @@ public class ExamDetailsService {
         ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
         if (branchId != null) {
 
-            List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+            List<Exams> exams  = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
             examsListResponseDto.setExams(exams);
             examsListResponseDto.setSuccess(true);
             if (exams == null) {
@@ -187,7 +174,7 @@ public class ExamDetailsService {
         if (branchId != null) {
 
             List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
-            result.setExams(exams);
+            result.setExamschedules(exams);
             result.setSuccess(true);
             if (exams == null) {
                 result.setSuccess(false);
