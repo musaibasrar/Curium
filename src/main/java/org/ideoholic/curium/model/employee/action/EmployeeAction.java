@@ -80,9 +80,9 @@ public class EmployeeAction {
 		}
 	}
 	
-	@PostMapping("/printViewTeacher")
-	public String printViewTeacher() {
-		return "printteacherdetail";
+	@PostMapping("/printAllTeachers")
+	public String printAllTeachers() {
+		return "printteachersdetails";
 	}
 
 

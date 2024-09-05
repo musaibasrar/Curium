@@ -307,19 +307,13 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/dolphin/EmployeeProcess/printViewTeacher";
+		form1.action = "/dolphin/EmployeeProcess/printAllTeachers";
 		form1.method = "POST";
 		form1.submit();
 }
 
 	
 	$(function() {
-
-		$("#tabs").tabs();
-		$("#search").button().click(function() {
-			searchByDate();
-		});
-		$("#effect").hide();
 		
 		$("#print").button({
             icons:{
