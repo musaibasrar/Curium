@@ -2133,11 +2133,10 @@ public class StudentService {
 		return result;
 	}
 
-	public ResultResponse addNew(String strBranchId) {
+	public ResultResponse addNew(String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
-		if(strBranchId!=null){
-			String branchId = strBranchId;
+		if(branchId!=null){
 			result.setMessage("addStudent");
 			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {

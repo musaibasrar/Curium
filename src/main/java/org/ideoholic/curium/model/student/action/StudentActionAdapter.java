@@ -39,11 +39,12 @@ public class StudentActionAdapter {
         request.setAttribute("currentPage", responseDto.getPage());
     }
 
-    public String addNew() {
+    public ResultResponse addNew() {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         ResultResponse resultResponse = studentService.addNew(httpSession.getAttribute(BRANCHID).toString());
-        return "addStudent";
+
+        return resultResponse;
     }
 
     public boolean downlaodFile() {

@@ -3,6 +3,7 @@
  */
 package org.ideoholic.curium.model.student.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -58,7 +59,11 @@ public class StudentAction {
 	@GetMapping("/addNew")
 	public String addNew() {
 		standardActionAdapter.viewClasses();
-		return studentActionAdapter.addNew();
+		ResultResponse result = studentActionAdapter.addNew();
+		if(result.isSuccess()){
+			return result.getMessage();
+		}
+		return "error";
 	}
 
 	@PostMapping("/download")
