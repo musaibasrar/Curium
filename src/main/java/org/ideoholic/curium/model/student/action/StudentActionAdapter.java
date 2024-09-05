@@ -1,14 +1,11 @@
 package org.ideoholic.curium.model.student.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
-import org.ideoholic.curium.model.student.dto.StudentIdDto;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
+import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class StudentActionAdapter {
@@ -99,5 +99,52 @@ public class StudentActionAdapter {
         request.setAttribute("studentList", responseDto.getList());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", responseDto.getPage());
+    }
+
+    public boolean promoteMultiple() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        PromoteMultipleDto dto = new PromoteMultipleDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setClassStudying(request.getParameter("classstudying"));
+
+        Map<String, String> allRequestParameters = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String fieldName = enumeration.nextElement();
+            String fieldValue = request.getParameter(fieldName);
+            allRequestParameters.put(fieldName, fieldValue);
+        }
+        dto.setRequestParams(allRequestParameters);
+
+        ResultResponse resultResponse = studentService.promoteMultiple(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+
+        return resultResponse.isSuccess();
+    }
+
+    public void restoreMultiple() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        PromoteMultipleDto dto = new PromoteMultipleDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        studentService.restoreMultiple(dto);
+    }
+
+    public void deleteMultiple() {
+
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        PromoteMultipleDto dto = new PromoteMultipleDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        studentService.deleteMultiple(dto);
+    }
+
+    public void viewAllStudentsArchive() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentAttendanceDetailsResponseDto responseDto = studentService.viewAllStudentsArchive();
+        request.setAttribute("studentListArchive", responseDto.getStudentList());
     }
 }

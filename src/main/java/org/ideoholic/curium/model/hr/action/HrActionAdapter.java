@@ -71,9 +71,9 @@ public class HrActionAdapter {
         LeavesDetailsResponseDto result = hrService.viewLeavesDetails();
 
         request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
-        request.setAttribute("teachername",result.getTeachername());
+        request.setAttribute("teachername",result.getTeacherName());
 
-        httpSession.setAttribute("leavedetailsteachersid", result.getLeavedetailsteachersid());
+        httpSession.setAttribute("leavedetailsteachersid", result.getLeaveDetailsTeachersId());
         httpSession.setAttribute("academicPerYear", result.getAcademicPerYear());
         httpSession.setAttribute("currentAcademicYear",result.getCurrentAcademicYear());
 
