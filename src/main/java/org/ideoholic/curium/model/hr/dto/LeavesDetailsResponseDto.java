@@ -13,8 +13,8 @@ public class LeavesDetailsResponseDto {
 
     private Currentacademicyear currentAcademicYear;
     private List<Leavedetails> leaveDetailsList;
-    private String teachername;
-    private String leavedetailsteachersid;
+    private String teacherName;
+    private String leaveDetailsTeachersId;
     private String academicPerYear;
     private boolean success;
 

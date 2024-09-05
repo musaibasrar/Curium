@@ -126,8 +126,8 @@ public class HrService {
 		result.setLeaveDetailsList(leaveDetailsList);
 		
 		if(!leaveDetailsList.isEmpty()){
-			result.setTeachername(result.getTeachername());
-			result.setLeavedetailsteachersid(result.getLeavedetailsteachersid());
+			result.setTeacherName( leaveDetailsList.get(0).getTeacher().getTeachername());
+			result.setLeaveDetailsTeachersId(leaveDetailsList.get(0).getTeacher().getTid().toString());
 			result.setSuccess(true);
 		}
 
