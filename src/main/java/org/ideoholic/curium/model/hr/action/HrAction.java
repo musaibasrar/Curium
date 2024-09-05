@@ -315,7 +315,7 @@ public class HrAction {
 	@GetMapping("/viewLeavesDetails")
 	public String viewLeavesDetails() {
 		
-		if(new HrService(request, response).viewLeavesDetails()){
+		if(hrActionAdapter.viewLeavesDetails()){
 			return "leavedetails";
 		}
 		return error;

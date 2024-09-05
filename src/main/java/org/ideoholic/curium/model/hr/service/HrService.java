@@ -115,22 +115,25 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean viewLeavesDetails() {
+	public LeavesDetailsResponseDto viewLeavesDetails() {
+		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 		
 		Currentacademicyear currentYear = new YearDAO().showYear();
-		httpSession.setAttribute("currentAcademicYear",currentYear.getCurrentacademicyear());
+
+		result.setCurrentAcademicYear(currentYear);
 		
 		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(request.getParameter("id")),currentYear.getCurrentacademicyear());
-		request.setAttribute("leavedetailslist", leaveDetailsList);
+		result.setLeaveDetailsList(leaveDetailsList);
 		
 		if(!leaveDetailsList.isEmpty()){
-			request.setAttribute("teachername", leaveDetailsList.get(0).getTeacher().getTeachername());
-			httpSession.setAttribute("leavedetailsteachersid", leaveDetailsList.get(0).getTeacher().getTid());
+			result.setTeachername( leaveDetailsList.get(0).getTeacher().getTeachername());
+			result.setLeavedetailsteachersid( leaveDetailsList.get(0).getTeacher().getTid().toString());
+			result.setSuccess(true);
 		}
+
+		result.setAcademicPerYear(currentYear.getCurrentacademicyear());
 		
-		httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
-		
-		return true;
+		return result;
 	}
 
 	public boolean leaveDetailsPerYear() {

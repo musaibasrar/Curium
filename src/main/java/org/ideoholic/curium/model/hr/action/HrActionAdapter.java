@@ -3,9 +3,11 @@ package org.ideoholic.curium.model.hr.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
+import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,6 +63,21 @@ public class HrActionAdapter {
                 httpSession.getAttribute(USERID).toString());
 
         return resultResponse.isSuccess();
+
+    }
+    public boolean viewLeavesDetails() {
+        HrService hrService = new HrService(request,response);
+
+        LeavesDetailsResponseDto result = hrService.viewLeavesDetails();
+
+        request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
+        request.setAttribute("teachername",result.getTeachername());
+
+        httpSession.setAttribute("leavedetailsteachersid", result.getLeavedetailsteachersid());
+        httpSession.setAttribute("academicPerYear", result.getAcademicPerYear());
+        httpSession.setAttribute("currentAcademicYear",result.getCurrentAcademicYear());
+
+        return result.isSuccess();
 
     }
 
