@@ -1,10 +1,7 @@
 package org.ideoholic.curium.model.hr.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.hr.dto.LeaveDetailsDto;
-import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
-import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
-import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
+import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,6 +92,13 @@ public class HrActionAdapter {
         httpSession.setAttribute("academicPerYear",result.getAcademicPerYear());
 
         return result.isSuccess();
+    }
+    public void payHead() {
+        HrService hrService = new HrService(request,response);
+
+        PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("payheadlist", result.getPayHeadList());
     }
 
 

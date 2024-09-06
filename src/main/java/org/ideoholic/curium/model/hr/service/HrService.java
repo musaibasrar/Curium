@@ -149,12 +149,14 @@ public class HrService {
 		return result;
 	}
 
-	public void payHead() {
+	public PayHeadResponseDto payHead(String currentAcademicYear, String branchId) {
+        PayHeadResponseDto result = new PayHeadResponseDto();
 
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-		List<Payhead> payHeadList = new HrDAO().getPayHeadList(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("payheadlist", payHeadList);
+		if(currentAcademicYear!=null){
+		List<Payhead> payHeadList = new HrDAO().getPayHeadList(currentAcademicYear, Integer.parseInt(branchId));
+		result.setPayHeadList(payHeadList);
 		}
+		return result;
 	}
 
 	public boolean savePayHead() {

@@ -285,7 +285,7 @@ public class HrAction {
 	public String addPayHeadStaff() {
 		employeeActionAdapter.ViewAllEmployee();
 		employeeActionAdapter.viewAllRelations();
-		new HrService(request, response).payHead();
+		hrActionAdapter.payHead();
 		return "addpayhead";
 	}
 
@@ -299,7 +299,7 @@ public class HrAction {
 
 	@GetMapping("/payHead")
 	public String payHead() {
-		new HrService(request, response).payHead();
+		hrActionAdapter.payHead();
 		return "payhead";
 	}
 
