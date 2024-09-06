@@ -1,13 +1,13 @@
 package org.ideoholic.curium.model.hr.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.hr.dto.LeaveDetailsDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
 import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
 import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,6 +79,22 @@ public class HrActionAdapter {
 
         return result.isSuccess();
 
+    }
+    public boolean leaveDetailsPerYear() {
+        HrService hrService = new HrService(request,response);
+
+        LeaveDetailsDto leaveDetailsDto = new LeaveDetailsDto();
+
+        leaveDetailsDto.setLeaveDetailsTeachersId(request.getParameter("leavedetailsteachersid"));
+        leaveDetailsDto.setAcademicYear(request.getParameter("academicyear"));
+
+        LeavesDetailsResponseDto result = hrService.leaveDetailsPerYear(leaveDetailsDto);
+
+        request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
+
+        httpSession.setAttribute("academicPerYear",result.getAcademicPerYear());
+
+        return result.isSuccess();
     }
 
 

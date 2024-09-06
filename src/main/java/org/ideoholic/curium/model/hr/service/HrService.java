@@ -136,14 +136,17 @@ public class HrService {
 		return result;
 	}
 
-	public boolean leaveDetailsPerYear() {
+	public LeavesDetailsResponseDto leaveDetailsPerYear(LeaveDetailsDto dto) {
+		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
+
+		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
+		result.setLeaveDetailsList(leaveDetailsList);
+
 		
-		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(request.getParameter("leavedetailsteachersid")),DataUtil.emptyString(request.getParameter("academicyear")));
-		request.setAttribute("leavedetailslist", leaveDetailsList);
+		result.setAcademicPerYear(dto.getAcademicYear());
+		result.setSuccess(true);
 		
-		httpSession.setAttribute("academicPerYear", DataUtil.emptyString(request.getParameter("academicyear")));
-		
-		return true;
+		return result;
 	}
 
 	public void payHead() {
