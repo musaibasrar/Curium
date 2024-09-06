@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class StudentIdsDto {
 
 	private String[] studentIds;
-    private String[] examClass;
     private String currentYear;
 }

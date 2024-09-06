@@ -42,7 +42,7 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
     }
 
     @PostMapping("/getStudentGraph")
-    public ResponseEntity<StudentGraphResponseDto> getStudentGraph(@RequestBody StudentIdsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
+    public ResponseEntity<StudentGraphResponseDto> getStudentGraph(@RequestBody StudentGraphDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
         StudentGraphResponseDto result = marksDetailsService.getStudentGraph(dto, branchId, currentAcademicYear);
         return ResponseEntity.ok(result);
     }

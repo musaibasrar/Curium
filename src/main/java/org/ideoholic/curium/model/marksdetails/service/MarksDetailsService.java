@@ -247,7 +247,7 @@ public class MarksDetailsService {
 	}*/
 	
 	//end of searchid
-	public StudentGraphResponseDto getStudentGraph(StudentIdsDto dto, String branchId, String currentAcademicYear)
+	public StudentGraphResponseDto getStudentGraph(StudentGraphDto dto, String branchId, String currentAcademicYear)
 	{
 		StudentGraphResponseDto result = StudentGraphResponseDto.builder().build();
 

@@ -33,7 +33,7 @@ public class MarksDetailsActionAdapter {
 
     public void getStudentGraph() {
 
-        StudentIdsDto dto = new StudentIdsDto();
+        StudentGraphDto dto = new StudentGraphDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameterValues("examclass"));
 

@@ -1821,7 +1821,7 @@ public class StudentService {
 		return result;
 	}
 
-	public void deleteMultiple(PromoteMultipleDto dto) {
+	public void deleteMultiple(StudentIdsDto dto) {
 		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();
@@ -1837,7 +1837,7 @@ public class StudentService {
 		}
 	}
 
-	public void restoreMultiple(PromoteMultipleDto dto) {
+	public void restoreMultiple(StudentIdsDto dto) {
 		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();

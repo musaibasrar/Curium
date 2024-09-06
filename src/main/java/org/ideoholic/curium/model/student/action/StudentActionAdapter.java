@@ -125,7 +125,7 @@ public class StudentActionAdapter {
     public void restoreMultiple() {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
-        PromoteMultipleDto dto = new PromoteMultipleDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
         studentService.restoreMultiple(dto);
@@ -135,7 +135,7 @@ public class StudentActionAdapter {
 
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
-        PromoteMultipleDto dto = new PromoteMultipleDto();
+        StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
         studentService.deleteMultiple(dto);
