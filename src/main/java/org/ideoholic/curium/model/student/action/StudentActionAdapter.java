@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.student.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -9,6 +10,7 @@ import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -146,5 +148,37 @@ public class StudentActionAdapter {
 
         StudentAttendanceDetailsResponseDto responseDto = studentService.viewAllStudentsArchive();
         request.setAttribute("studentListArchive", responseDto.getStudentList());
+    }
+
+    public void archiveMultiple() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentIdsDto dto = new StudentIdsDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        studentService.archiveMultiple(dto);
+    }
+
+    public boolean addStudent(StudentDto student, MultipartFile[] uploadedFiles) {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentNameSearchDto dto = new StudentNameSearchDto();
+        dto.setYearOfAdmission(request.getParameter("yearofadmission"));
+
+        ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, dto, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+        return resultResponse.isSuccess();
+    }
+
+    public boolean exportDataForStudents() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentIdsDto dto = new StudentIdsDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+
+        ResultResponse resultResponse = studentService.exportDataForStudents(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("searchStudentList", resultResponse.getResultList());
+
+        return resultResponse.isSuccess();
     }
 }

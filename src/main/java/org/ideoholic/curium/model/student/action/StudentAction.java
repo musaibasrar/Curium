@@ -168,7 +168,7 @@ public class StudentAction {
 
 	@PostMapping("/archiveMultiple")
 	public String archiveMultiple() {
-		new StudentService(request, response, standardActionAdapter).archiveMultiple();
+		studentActionAdapter.archiveMultiple();
 		return viewAll();
 	}
 
@@ -273,7 +273,7 @@ public class StudentAction {
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String addStudent(@ModelAttribute("student") StudentDto student,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		if (new StudentService(request, response, standardActionAdapter).addStudent(student, uploadedFiles)) {
+		if (studentActionAdapter.addStudent(student, uploadedFiles)) {
 			return "saved";
 		} else {
 			return "notSaved";
@@ -288,7 +288,7 @@ public class StudentAction {
 
 	@PostMapping("/exportDataForStudents")
 	public String exportDataForStudents() {
-		if (new StudentService(request, response, standardActionAdapter).exportDataForStudents()) {
+		if (studentActionAdapter.exportDataForStudents()) {
 			return "exportsuccess";
 		} else {
 			return "exportfailure";
