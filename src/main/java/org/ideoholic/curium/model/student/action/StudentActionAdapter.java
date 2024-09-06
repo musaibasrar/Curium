@@ -162,10 +162,9 @@ public class StudentActionAdapter {
     public boolean addStudent(StudentDto student, MultipartFile[] uploadedFiles) {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
-        StudentNameSearchDto dto = new StudentNameSearchDto();
-        dto.setYearOfAdmission(request.getParameter("yearofadmission"));
+        student.setYearofadmission(request.getParameter("yearofadmission"));
 
-        ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, dto, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         return resultResponse.isSuccess();
     }

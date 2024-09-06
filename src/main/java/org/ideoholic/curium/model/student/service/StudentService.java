@@ -67,7 +67,7 @@ public class StudentService {
 		this.standardActionAdapter=standardActionAdapter;
 	}
 
-	public ResultResponse addStudent(StudentDto studentDto, MultipartFile[] listOfFiles, StudentNameSearchDto dto, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
+	public ResultResponse addStudent(StudentDto studentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
@@ -119,7 +119,7 @@ public class StudentService {
 			if(yoa == ca || yoa < ca) {
 				setYear = strCurrentAcademicYear;
 			}else if (yoa > ca) {
-				setYear = dto.getYearOfAdmission();
+				setYear = studentDto.getYearofadmission();
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear);
