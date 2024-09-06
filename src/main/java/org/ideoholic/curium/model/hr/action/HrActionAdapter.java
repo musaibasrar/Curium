@@ -20,6 +20,7 @@ public class HrActionAdapter {
     private HttpSession httpSession;
     private String BRANCHID = "branchid";
     private String USERID ="userid";
+    private String CURRENTACADEMICYEAR ="currentAcademicYear";
 
     public boolean leaveType() {
         HrService hrService = new HrService(request,response);
@@ -96,7 +97,7 @@ public class HrActionAdapter {
     public void payHead() {
         HrService hrService = new HrService(request,response);
 
-        PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(BRANCHID).toString());
+        PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("payheadlist", result.getPayHeadList());
     }
