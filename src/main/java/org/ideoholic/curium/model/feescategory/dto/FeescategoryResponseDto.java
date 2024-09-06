@@ -2,6 +2,8 @@ package org.ideoholic.curium.model.feescategory.dto;
 
 import java.util.List;
 
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,4 +24,6 @@ public class FeescategoryResponseDto {
 	private List<Feescategory> feescategory;
 	private List<Parents> searchStudentList;
 	private boolean success;
+	
+	
 }

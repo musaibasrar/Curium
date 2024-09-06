@@ -46,7 +46,9 @@ import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeesService {
         
             private HttpServletRequest request;
@@ -59,11 +61,7 @@ public class FeesService {
              */
             private static final int BUFFER_SIZE = 4096;
         
-        public FeesService(HttpServletRequest request, HttpServletResponse response) {
-                this.request = request;
-       this.response = response;
-       this.httpSession = request.getSession();
-        }
+			
 
 
         public FeescategoryResponseDto viewFees(String branchid,String currentAcademicYear ) {
