@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
@@ -1806,22 +1807,22 @@ public class StudentService {
 		}
 	}
 
-	public boolean viewAllStudentsArchive() {
+	public StudentAttendanceDetailsResponseDto viewAllStudentsArchive() {
 
-		boolean result = false;
+		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().success(false).build();
 
 		try {
 			List<Student> list = new studentDetailsDAO().readListOfStudentsArchive();
-			request.setAttribute("studentListArchive", list);
-			result = true;
+			result.setStudentList(list);
+			result.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 
-	public void deleteMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
+	public void deleteMultiple(StudentIdsDto dto) {
+		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();
 			List<Integer> iddetails = new ArrayList();
@@ -1836,8 +1837,8 @@ public class StudentService {
 		}
 	}
 
-	public void restoreMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
+	public void restoreMultiple(StudentIdsDto dto) {
+		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();
 			for (String id : studentIds) {
@@ -1849,24 +1850,24 @@ public class StudentService {
 		}
 	}
 
-	public boolean promoteMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
-		String classStudying = request.getParameter("classstudying");
-		String promotedYear = httpSession.getAttribute("currentAcademicYear").toString();
-		List<Student> studentList = new ArrayList<Student>();
+	public ResultResponse promoteMultiple(PromoteMultipleDto dto, String currentAcademicYear, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
-		boolean result = false;
+		String[] studentIds = dto.getStudentIds();
+		String classStudying = dto.getClassStudying();
+        List<Student> studentList = new ArrayList<>();
 
 		for (String id : studentIds) {
 			Student student = new Student();
 			student.setSid(Integer.valueOf(id));
-			student.setClassstudying(request.getParameter("classstudying_"+id));
+			student.setClassstudying(dto.getRequestParams().get("classstudying_"+id));
 			studentList.add(student);
 		}
 
-		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()))) {
-			result = true;
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, currentAcademicYear, Integer.parseInt(branchId))) {
+			result.setSuccess(true);
 		}
+		result.setSuccess(false);
 		return result;
 	}
 

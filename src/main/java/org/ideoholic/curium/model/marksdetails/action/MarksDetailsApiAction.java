@@ -15,7 +15,7 @@ public interface MarksDetailsApiAction {
 
     ResponseEntity<ResultResponse> progressreport(@RequestHeader(value = "branchid") String branchId);
 
-    ResponseEntity<StudentGraphResponseDto> getStudentGraph(@RequestBody StudentIdsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
+    ResponseEntity<StudentGraphResponseDto> getStudentGraph(@RequestBody StudentGraphDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 
     ResponseEntity<GraphicalReportDto> getGraphicalReportData(@RequestHeader(value = "branchid") String branchId);
 

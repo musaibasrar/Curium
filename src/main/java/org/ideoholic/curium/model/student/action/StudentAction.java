@@ -141,7 +141,7 @@ public class StudentAction {
 
 	@PostMapping("/promoteClass")
 	public String promoteClass() {
-		if (new StudentService(request, response, standardActionAdapter).promoteMultiple()) {
+		if (studentActionAdapter.promoteMultiple()) {
 			return "successpromote";
 		}
 		return "failurepromote";
@@ -149,19 +149,19 @@ public class StudentAction {
 
 	@PostMapping("/restoreMultiple")
 	public String restoreMultiple() {
-		new StudentService(request, response, standardActionAdapter).restoreMultiple();
+		studentActionAdapter.restoreMultiple();
 		return viewAll();
 	}
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new StudentService(request, response, standardActionAdapter).deleteMultiple();
+		studentActionAdapter.deleteMultiple();
 		return archiveViewAll();
 	}
 
 	@GetMapping("/archiveViewAll")
 	public String archiveViewAll() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsArchive();
+		studentActionAdapter.viewAllStudentsArchive();
 		System.out.println("IN action's view all Archive");
 		return "ArchiveviewAll";
 	}
