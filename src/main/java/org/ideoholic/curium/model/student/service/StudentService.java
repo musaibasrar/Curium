@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
@@ -66,7 +67,8 @@ public class StudentService {
 		this.standardActionAdapter=standardActionAdapter;
 	}
 
-	public boolean addStudent(StudentDto studentDto, MultipartFile[] listOfFiles) {
+	public ResultResponse addStudent(StudentDto studentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
 		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
@@ -95,37 +97,38 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
-		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		student.setStudentexternalid(branchCode);
+		student.setBranchid(Integer.parseInt(branchCode));
+		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
-		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		parents.setBranchid(Integer.parseInt(branchId));
+		parents.setUserid(Integer.parseInt(userId));
 		parents = new parentsDetailsDAO().create(parents);
 
 		if (parents != null) {
 			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
-			String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+			String[] currentAcademicYear = strCurrentAcademicYear.split("/");
 			String setYear = null;
 			int yoa = Integer.parseInt(yearofAdmission[0]);
 			int ca = Integer.parseInt(currentAcademicYear[0]);
 
 			if(yoa == ca || yoa < ca) {
-				setYear = httpSession.getAttribute("currentAcademicYear").toString();
+				setYear = strCurrentAcademicYear;
 			}else if (yoa > ca) {
-				setYear = request.getParameter("yearofadmission");
+				setYear = studentDto.getYearofadmission();
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear);
 			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
-			return true;
+			result.setSuccess(true);
+			return result;
 		}
-
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 	public boolean addStudent(MultipartFile[] listOfFiles) {
@@ -1794,8 +1797,8 @@ public class StudentService {
 		return result;
 	}
 
-	public void archiveMultiple() {
-		String[] studentIds = request.getParameterValues("studentIDs");
+	public void archiveMultiple(StudentIdsDto dto) {
+		String[] studentIds = dto.getStudentIds();
 
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();
@@ -1960,22 +1963,22 @@ public class StudentService {
 	}
 
 
-	public boolean exportDataForStudents() {
+	public ResultResponse exportDataForStudents(StudentIdsDto dto, String branchId) {
 
-		String[] studentIds = request.getParameterValues("studentIDs");
-		boolean successResult = false;
+		String[] studentIds = dto.getStudentIds();
+		ResultResponse result = ResultResponse.builder().build();
 
 		List<Parents> listOfStudentRecords = new ArrayList<Parents>();
 
 		if (studentIds != null) {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+					String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(branchId)+" AND";
 					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 					queryMain = queryMain + querySub;
 
 					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-					request.setAttribute("searchStudentList", searchStudentList);
+					result.setResultList(searchStudentList);
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
@@ -1984,15 +1987,15 @@ public class StudentService {
 			}
 			try {
 				if (exportDataToExcel(listOfStudentRecords)) {
-					successResult = true;
+					result.setSuccess(true);
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
-		return successResult;
+		result.setSuccess(false);
+		return result;
 
 	}
 
