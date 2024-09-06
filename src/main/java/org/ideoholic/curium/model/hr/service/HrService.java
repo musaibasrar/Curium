@@ -136,7 +136,7 @@ public class HrService {
 		return result;
 	}
 
-	public LeavesDetailsResponseDto leaveDetailsPerYear(LeaveDetailsPerYearDto dto) {
+	public LeavesDetailsResponseDto leaveDetailsPerYear(LeaveDetailsDto dto) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 
 		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
