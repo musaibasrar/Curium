@@ -51,7 +51,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeesService {
         
-            private HttpServletRequest request;
             private HttpServletResponse response;
             private HttpSession httpSession;
             private String BRANCHID = "branchid";
@@ -245,8 +244,8 @@ public class FeesService {
                           		transactions.setEntrydate(DateUtil.todaysDate());
                           		transactions.setNarration("Towards Reversal of Fees Stamp");
                           		transactions.setCancelvoucher("no");
-                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-                          		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+                          		transactions.setBranchid(Integer.parseInt(branchid));
                           		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 
                           		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+sfs.get(0).getFeesamount()+" where accountdetailsid="+crAccount;
