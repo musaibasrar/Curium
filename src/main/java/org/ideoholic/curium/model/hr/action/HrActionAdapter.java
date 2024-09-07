@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.hr.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.model.hr.service.HrService;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -100,6 +101,21 @@ public class HrActionAdapter {
         PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("payheadlist", result.getPayHeadList());
+    }
+    public boolean savePayHead() {
+        HrService hrService = new HrService(request,response);
+
+        PayHeadDto dto = new PayHeadDto();
+        dto.setPayHeadName(request.getParameter("payheadname"));
+        dto.setType(request.getParameter("type"));
+        dto.setValidatory(request.getParameter("validatory"));
+        dto.setDescription(request.getParameter("description"));
+
+        ResultResponse result = hrService.savePayHead(dto,
+        httpSession.getAttribute("currentAcademicYear").toString(),
+        httpSession.getAttribute(BRANCHID).toString(),
+        httpSession.getAttribute(USERID).toString());
+        return true;
     }
 
 

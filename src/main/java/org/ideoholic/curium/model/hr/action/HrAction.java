@@ -291,7 +291,7 @@ public class HrAction {
 
 	@PostMapping("/savePayHead")
 	public String savePayHead() {
-		if(new HrService(request, response).savePayHead()){
+		if(hrActionAdapter.savePayHead()){
 			return payHead();
 		}
 		return error;

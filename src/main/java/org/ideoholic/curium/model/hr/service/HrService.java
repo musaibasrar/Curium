@@ -159,20 +159,21 @@ public class HrService {
 		return result;
 	}
 
-	public boolean savePayHead() {
-		
+	public ResultResponse savePayHead(PayHeadDto dto, String currentAcademicYear, String branchId, String userId) {
+
 		Payhead payHead = new Payhead();
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-		payHead.setPayheadname(DataUtil.emptyString(request.getParameter("payheadname")));
-		payHead.setPayheadtype(DataUtil.emptyString(request.getParameter("type")));
-		payHead.setValidatory(DataUtil.emptyString(request.getParameter("validatory")));
-		payHead.setDescription(DataUtil.emptyString(request.getParameter("description")));
-		payHead.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-		payHead.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		payHead.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-		return new HrDAO().savePayHead(payHead);
+		if(currentAcademicYear!=null){
+		payHead.setPayheadname(DataUtil.emptyString(dto.getPayHeadName()));
+		payHead.setPayheadtype(DataUtil.emptyString(dto.getType()));
+		payHead.setValidatory(DataUtil.emptyString(dto.getValidatory()));
+		payHead.setDescription(DataUtil.emptyString(dto.getDescription()));
+		payHead.setAcademicyear(currentAcademicYear);
+		payHead.setBranchid(Integer.parseInt(branchId));
+		payHead.setUserid(Integer.parseInt(userId));
+
+		return ResultResponse.builder().success(new HrDAO().savePayHead(payHead)).build();
 		}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean addPayHeadStaffDetails() {
