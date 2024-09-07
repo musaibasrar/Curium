@@ -44,6 +44,8 @@ public class FeesActionAdapter {
    
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	
+	private String USERID = "userloginid";
+	
 
 	public String applyConcession() {
 		ConcessionDto concessionDto = new ConcessionDto();
@@ -106,7 +108,7 @@ public class FeesActionAdapter {
 		ConcessionDto concessionDto = new ConcessionDto();
 		concessionDto.setSfsid(request.getParameterValues("sfsid"));
 		concessionDto.setId(request.getParameter("id"));
-		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,httpSession.getAttribute("branchid").toString());
+		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute(USERID).toString());
 		String studentId  = studentIdDto.getStudentId();
 		return studentId;
 	}

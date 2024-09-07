@@ -41,7 +41,7 @@ public interface FeesApiAction {
 
 	ResponseEntity<ResultResponse> feesStructure(@RequestHeader(value = "branchid") String branchId);
 
-	ResponseEntity<StudentIdDto> deleteFeesCategory(@RequestBody ConcessionDto concessionDto, @RequestHeader(value = "branchid") String branchId);
+	ResponseEntity<StudentIdDto> deleteFeesCategory(@RequestBody ConcessionDto concessionDto, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId);
 
 	ResponseEntity deleteMultiple(@RequestBody IdFeescategoryDto idFeescategoryDto);
 

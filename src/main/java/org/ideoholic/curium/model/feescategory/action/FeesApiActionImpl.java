@@ -116,8 +116,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	}
 
 	@PostMapping("/deleteFeesCategory")
-	public ResponseEntity<StudentIdDto> deleteFeesCategory(@RequestBody ConcessionDto concessionDto, @RequestHeader(value = "branchid") String branchId) {
-		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,branchId);
+	public ResponseEntity<StudentIdDto> deleteFeesCategory(@RequestBody ConcessionDto concessionDto, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId) {
+		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,branchId,userId);
 		return ResponseEntity.ok(studentIdDto);
 	}
 
