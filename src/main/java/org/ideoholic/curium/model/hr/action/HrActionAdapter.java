@@ -116,7 +116,7 @@ public class HrActionAdapter {
         httpSession.getAttribute("currentAcademicYear").toString(),
         httpSession.getAttribute(BRANCHID).toString(),
         httpSession.getAttribute(USERID).toString());
-        return true;
+        return result.isSuccess();
     }
 
 
