@@ -102,6 +102,13 @@ public class HrActionAdapter {
 
         request.setAttribute("payheadlist", result.getPayHeadList());
     }
+    public void payHead() {
+        HrService hrService = new HrService(request,response);
+
+        PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("payheadlist", result.getPayHeadList());
+    }
     public boolean savePayHead() {
         HrService hrService = new HrService(request,response);
 
