@@ -268,7 +268,7 @@ public class HrAction {
 	@PostMapping("/addPayHeadStaffDetails")
 	public String addPayHeadStaffDetails() {
 		
-		if(new HrService(request, response).addPayHeadStaffDetails()){
+		if(hrActionAdapter.addPayHeadStaffDetails()){
 			return "addpayheadsuccess";
 		}
 		return error;
