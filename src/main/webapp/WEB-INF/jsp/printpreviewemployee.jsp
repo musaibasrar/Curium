@@ -443,7 +443,7 @@ for(Cookie cookie : cookies){
                         <c:set var="iInitial" value="${iInitial}"/>
                         <c:set var="limit" value="1"/>
                         
-                    <c:forEach begin="1" end="${endValue}">
+                    <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
                         %>
@@ -482,7 +482,7 @@ for(Cookie cookie : cookies){
 	  										<td class="tdidcard"><%= request.getSession().getAttribute("guardian" + i + "")%></td>
 	  									</tr>--%>
 	  									<tr>
-	  										<td class="tdidcard">Contact No.</td>
+	  										<td class="tdidcard">Contact&nbsp;No.</td>
 	  										<td class="tdidcard">:</td>
 	  										<td class="tdidcard"><%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
 	  									</tr>
@@ -550,7 +550,7 @@ for(Cookie cookie : cookies){
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/bsr/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
