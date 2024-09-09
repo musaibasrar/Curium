@@ -176,13 +176,13 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean addPayHeadStaffDetails() {
+	public ResultResponse addPayHeadStaffDetails(PayHeadStaffDetailsDto dto, String currentAcademicYear, String branchId, String userId) {
 		
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-			String[] staffIds = request.getParameterValues("employeeIDs");
-			String[] values = request.getParameterValues("values");
-			String payHeadId = DataUtil.emptyString(request.getParameter("payhead"));
-			String amountPerc = DataUtil.emptyString(request.getParameter("amtper"));
+		if(currentAcademicYear!=null){
+			String[] staffIds = dto.getStaffIds();
+			String[] values = dto.getValues();
+			String payHeadId = DataUtil.emptyString(dto.getPayHeadId());
+			String amountPerc = DataUtil.emptyString(dto.getAmountPer());
 			
 			List<Payheadstaffdetails> payHeadStaffDetailsList = new ArrayList<>();
 			
@@ -190,22 +190,22 @@ public class HrService {
 				Payheadstaffdetails payHeadStaffDetails = new Payheadstaffdetails();
 				Teacher teacher = new Teacher();
 				Payhead payHead = new Payhead();
-				payHeadStaffDetails.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+				payHeadStaffDetails.setAcademicyear(currentAcademicYear);
 				payHeadStaffDetails.setAmountperc(amountPerc);
 				teacher.setTid(Integer.parseInt(staffIds[i]));
 				payHeadStaffDetails.setTeacher(teacher);
 				payHead.setIdpayhead(Integer.parseInt(payHeadId));
 				payHeadStaffDetails.setPayhead(payHead);
 				payHeadStaffDetails.setValue(new BigDecimal(values[i]));
-				payHeadStaffDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				payHeadStaffDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				payHeadStaffDetails.setBranchid(Integer.parseInt(branchId));
+				payHeadStaffDetails.setUserid(Integer.parseInt(userId));
 				payHeadStaffDetailsList.add(payHeadStaffDetails);
 			}
 			
 			
-			return new HrDAO().addPayHeadStaffDetails(payHeadStaffDetailsList);
+			return ResultResponse.builder().success(new HrDAO().addPayHeadStaffDetails(payHeadStaffDetailsList)).build();
 		}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean addBasicPay() {

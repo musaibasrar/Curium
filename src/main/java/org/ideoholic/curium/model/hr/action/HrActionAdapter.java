@@ -118,6 +118,23 @@ public class HrActionAdapter {
         httpSession.getAttribute(USERID).toString());
         return result.isSuccess();
     }
+    public boolean addPayHeadStaffDetails() {
+        HrService hrService = new HrService(request,response);
+
+        PayHeadStaffDetailsDto dto = new PayHeadStaffDetailsDto();
+         dto.setStaffIds(request.getParameterValues("employeeIDs"));
+         dto.setValues(request.getParameterValues("values"));
+         dto.setPayHeadId(request.getParameter("payhead"));
+         dto.setAmountPer(request.getParameter("amtper"));
+
+        ResultResponse result = hrService.addPayHeadStaffDetails(dto,
+                    httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                    httpSession.getAttribute(BRANCHID).toString(),
+                    httpSession.getAttribute(USERID).toString());
+
+        return result.isSuccess();
+
+    }
 
 
 }
