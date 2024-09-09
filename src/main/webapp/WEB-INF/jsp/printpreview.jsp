@@ -528,12 +528,15 @@ for(Cookie cookie : cookies){
   
   <table style="width: 77%;margin-top:0px;padding-top:0px;">
    <tr>
-        <td>&emsp;
-          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;" alt="Photo"  />
+        <td style="padding-bottom:0px;">&emsp;
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
         </td>
       </tr>
       <tr>
 		<td style="color: black;font-weight: bold;font-size: 12px;margin-top:0px;">&emsp;IDENTITY CARD</td>      
+      </tr>
+      <tr>
+      <td>&emsp;&nbsp;&nbsp;session:&nbsp;${currentAcademicYear}</td>
       </tr>
      
     </table>
