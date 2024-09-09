@@ -3,7 +3,6 @@ package org.ideoholic.curium.model.hr.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.model.hr.service.HrService;
-import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -134,6 +133,24 @@ public class HrActionAdapter {
 
         return result.isSuccess();
 
+    }
+    public boolean addBasicPay() {
+        HrService hrService = new HrService(request,response);
+
+        BasicPayDto dto = new BasicPayDto();
+        dto.setStaffIds(request.getParameterValues("employeeIDs"));
+        dto.setBasicPay(request.getParameterValues("basicpay"));
+        dto.setPaymentType(request.getParameterValues("paymenttype"));
+        dto.setAccountNo(request.getParameterValues("accountno"));
+        dto.setOverTime(request.getParameterValues("ot"));
+
+
+        ResultResponse result = hrService.addBasicPay(dto,
+                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                httpSession.getAttribute(BRANCHID).toString(),
+                httpSession.getAttribute(USERID).toString());
+
+        return result.isSuccess();
     }
 
 
