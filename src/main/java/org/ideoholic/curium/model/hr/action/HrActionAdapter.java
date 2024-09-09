@@ -113,7 +113,7 @@ public class HrActionAdapter {
         dto.setDescription(request.getParameter("description"));
 
         ResultResponse result = hrService.savePayHead(dto,
-        httpSession.getAttribute("currentAcademicYear").toString(),
+        httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
         httpSession.getAttribute(BRANCHID).toString(),
         httpSession.getAttribute(USERID).toString());
         return result.isSuccess();
