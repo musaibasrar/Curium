@@ -166,6 +166,13 @@ public class HrActionAdapter {
 
 
     }
+    public void pfSettings() {
+        HrService hrService = new HrService(request,response);
+
+        PfSettingsResponseDto result = hrService.pfSettings(httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("pflist", result.getPf());
+    }
 
 
 }
