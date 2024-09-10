@@ -208,14 +208,14 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean addBasicPay() {
+	public ResultResponse addBasicPay(BasicPayDto dto, String currentAcademicYear, String branchId, String userId) {
 		
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-		String[] staffIds =  request.getParameterValues("employeeIDs");
-		String[] basicPay = request.getParameterValues("basicpay");
-		String[] paymentType = request.getParameterValues("paymenttype");
-		String[] accountNo = request.getParameterValues("accountno");
-		String[] overTime = request.getParameterValues("ot");
+		if(currentAcademicYear!=null){
+		String[] staffIds = dto.getStaffIds();
+		String[] basicPay = dto.getBasicPay();
+		String[] paymentType = dto.getPaymentType();
+		String[] accountNo = dto.getAccountNo();
+		String[] overTime = dto.getOverTime();
 		List<Integer> overTimeList = new ArrayList<>();
 		
 		if(overTime != null){
@@ -230,7 +230,7 @@ public class HrService {
 		for(int i=0; i<staffIds.length; i++){
 			Paybasic payBasic = new Paybasic();
 			Teacher teacher = new Teacher();
-			payBasic.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+			payBasic.setAcademicyear(currentAcademicYear);
 			payBasic.setAccountno(accountNo[i]);
 			payBasic.setBasicpay(new BigDecimal(basicPay[i]));
 			teacher.setTid(Integer.parseInt(staffIds[i]));
@@ -241,14 +241,14 @@ public class HrService {
 				payBasic.setOvertime("no");
 			}
 			payBasic.setPaymenttype(paymentType[i]);
-			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			payBasic.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			payBasic.setBranchid(Integer.parseInt(branchId));
+			payBasic.setUserid(Integer.parseInt(userId));
 			payBasicList.add(payBasic);
 		}
-		return new HrDAO().savePayBasic(payBasicList);
+		return ResultResponse.builder().success(new HrDAO().savePayBasic(payBasicList)).build();
 		
 		}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public void addPf() {

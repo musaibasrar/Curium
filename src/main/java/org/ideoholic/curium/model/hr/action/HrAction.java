@@ -245,7 +245,7 @@ public class HrAction {
 
 	@PostMapping("/addBasicPay")
 	public String addBasicPay() {
-		if(new HrService(request, response).addBasicPay()){
+		if(hrActionAdapter.addBasicPay()){
 			return "addbasicpaysuccess";
 		}
 		return error;
