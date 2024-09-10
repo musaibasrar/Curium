@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -46,24 +45,18 @@ import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeesService {
         
-            private HttpServletRequest request;
             private HttpServletResponse response;
-            private HttpSession httpSession;
-            private String BRANCHID = "branchid";
-            private String USERID = "userloginid";
             /**
              * Size of a byte buffer to read/write file
              */
             private static final int BUFFER_SIZE = 4096;
         
-        public FeesService(HttpServletRequest request, HttpServletResponse response) {
-                this.request = request;
-       this.response = response;
-       this.httpSession = request.getSession();
-        }
+			
 
 
         public FeescategoryResponseDto viewFees(String branchid,String currentAcademicYear ) {
@@ -210,7 +203,7 @@ public class FeesService {
         }
 
 
-        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid) {
+        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid,String userid) {
                 
         	     StudentIdDto studentIdDto = new StudentIdDto();
                  String[] idfeescategory = concessionDto.getSfsid();
@@ -247,9 +240,9 @@ public class FeesService {
                           		transactions.setEntrydate(DateUtil.todaysDate());
                           		transactions.setNarration("Towards Reversal of Fees Stamp");
                           		transactions.setCancelvoucher("no");
-                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-                          		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                          		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+                          		transactions.setBranchid(Integer.parseInt(branchid));
+                          		transactions.setUserid(Integer.parseInt(userid));
 
                           		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+sfs.get(0).getFeesamount()+" where accountdetailsid="+crAccount;
 

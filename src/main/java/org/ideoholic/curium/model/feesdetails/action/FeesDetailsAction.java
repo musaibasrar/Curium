@@ -25,10 +25,13 @@ public class FeesDetailsAction {
 	
 	@Autowired
 	HttpSession httpSession;
+	
+	@Autowired
+	private FeesService feesService;
 
 	@PostMapping("/download")
 	public String downloadFile() {
-		if(new FeesService(request, response).downlaodFile()){
+		if(feesService.downlaodFile()){
 			return "feesexportsuccess";
 		}
         return "exportfailure";
