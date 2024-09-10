@@ -266,15 +266,19 @@ public class HrService {
 
 	}
 
-	public void pfSettings() {
-		
+	public PfSettingsResponseDto pfSettings(String branchId) {
+		PfSettingsResponseDto result = new PfSettingsResponseDto();
+
 		List<Pf> pf = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			pf = new HrDAO().pfSettings(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+			pf = new HrDAO().pfSettings(Integer.parseInt(branchId));
 		}
-		
-		request.setAttribute("pflist", pf);
+
+		result.setPf(pf);
+
+		return  result;
+
 		
 	}
 

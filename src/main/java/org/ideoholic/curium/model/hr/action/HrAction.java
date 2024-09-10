@@ -239,7 +239,7 @@ public class HrAction {
 
 	@GetMapping("/pfSettings")
 	public String pfSettings() {
-		new HrService(request, response).pfSettings();
+		hrActionAdapter.pfSettings();
 		return "pfsettings";
 	}
 
