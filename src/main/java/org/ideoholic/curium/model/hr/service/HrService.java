@@ -251,19 +251,19 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public void addPf() {
-		String paidByManagement = DataUtil.emptyString(request.getParameter("paidbymanagement"));
-		String paidByStaff = DataUtil.emptyString(request.getParameter("paidbystaff"));
-		String date = DataUtil.emptyString(request.getParameter("datepf"));
+	public void addPf(PfDto dto, String branchId, String userId) {
+		String paidByManagement = DataUtil.emptyString(dto.getPaidByManagement());
+		String paidByStaff = DataUtil.emptyString(dto.getPaidByStaff());
+		String date = DataUtil.emptyString(dto.getDate());
 		
 		Pf pf = new Pf();
-		pf.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("datepf"))));
+		pf.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(dto.getDate())));
 		pf.setPaidbyemployee(Integer.parseInt(paidByStaff));
 		pf.setPaidbymanagement(Integer.parseInt(paidByManagement));
-		pf.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		pf.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		pf.setBranchid(Integer.parseInt(branchId));
+		pf.setUserid(Integer.parseInt(userId));
 		new HrDAO().addPf(pf);
-		
+
 	}
 
 	public void pfSettings() {

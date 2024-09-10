@@ -152,6 +152,20 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public void addPf() {
+        HrService hrService = new HrService(request,response);
+
+        PfDto dto = new PfDto();
+        dto.setPaidByManagement(request.getParameter("paidbymanagement"));
+        dto.setPaidByStaff(request.getParameter("paidbystaff"));
+        dto.setDate(request.getParameter("datepf"));
+
+        hrService.addPf(dto,
+        httpSession.getAttribute(BRANCHID).toString(),
+        httpSession.getAttribute(USERID).toString());
+
+
+    }
 
 
 }

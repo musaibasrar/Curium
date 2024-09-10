@@ -233,7 +233,7 @@ public class HrAction {
 
 	@PostMapping("/addPf")
 	public String addPf() {
-		new HrService(request, response).addPf();
+		hrActionAdapter.addPf();
 		return pfSettings();
 	}
 
