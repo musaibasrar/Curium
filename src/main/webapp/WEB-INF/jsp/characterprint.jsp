@@ -101,8 +101,8 @@ span{
         }
 </style>
 
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -114,7 +114,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -134,7 +134,7 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/abc/images/abc.jpg" width="126" height="140"/></td>
+				<td ><img src="/noblewisdom/images/noblewisdom.jpg" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	ABC English Medium School</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	Misbah Nagar, Ring Road, Shah Jeelani Cross, Gulbarga-585103</h4>
@@ -241,7 +241,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 		<!-- 	<tr>
-              <td align="center"><a id="print" href="/abc/DocumentsProcess/printCharacterCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/printCharacterCertificate">Print</a></td>
             </tr>-->
 		</TABLE>
 	</form>

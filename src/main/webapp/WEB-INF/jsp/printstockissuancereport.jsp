@@ -228,7 +228,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/logo.jpg" width="150" height="80"/>
+				<img src="/noblewisdom/images/logo.jpg" width="150" height="80"/>
 				</td>
 				<td class="datatdBoldCenter" style="width: 100%">
 				${branchname}<br><br>
