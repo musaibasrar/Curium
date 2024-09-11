@@ -173,6 +173,14 @@ public class HrActionAdapter {
 
         request.setAttribute("pflist", result.getPf());
     }
+    public void deletePf() {
+        HrService hrService = new HrService(request,response);
+
+        PfDto dto = new PfDto();
+        dto.setPfids(request.getParameterValues("pfids"));
+
+        hrService.deletePf(dto);
+    }
 
 
 }

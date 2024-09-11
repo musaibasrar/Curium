@@ -282,8 +282,8 @@ public class HrService {
 		
 	}
 
-	public void deletePf() {
-		String[] pfids = request.getParameterValues("pfids");
+	public void deletePf(PfDto dto) {
+		String[] pfids = dto.getPfids();
 		if (pfids != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : pfids) {
@@ -291,6 +291,7 @@ public class HrService {
 			}
 			new HrDAO().deletePf(ids);
 		}
+
 		
 	}
 
