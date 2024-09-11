@@ -917,7 +917,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -931,7 +931,7 @@ for(Cookie cookie : cookies){
 				        </td>
 				     </tr>
 				 </table>
-            </div>
+            </div> -->
              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">

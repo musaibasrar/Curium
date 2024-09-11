@@ -138,7 +138,7 @@ form{
 		<!-- 	<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
 			<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 100px;" alt="ideoholic" src="/noblewisdom/images/noblewisdom/.png"></h2>
-			<h2 style="font-weight: bold;">Roshan<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/noblewisdom/images/shaheenwhitelogo.png"> </h2></span>
+			<h2 style="font-weight: bold;">Roshan<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/noblewisdom/images/shaheenwhitenoblewisdom.png"> </h2></span>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">

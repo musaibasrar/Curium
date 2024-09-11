@@ -151,14 +151,14 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 220px;width: 211px;" alt="ideoholic" src="/noblewisdom/images/noblewisdom.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 150px;width: 165px;" alt="ideoholic" src="/noblewisdom/images/noblewisdom.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/noblewisdom/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/noblewisdom/images/shaheennoblewisdom.png"></h2></span> -->
 						<h3>Log In</h3>
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>

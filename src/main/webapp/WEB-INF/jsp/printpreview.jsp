@@ -463,9 +463,9 @@ for(Cookie cookie : cookies){
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">Al Falah High School </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Shanti Nagar, Lalapet, Secunderabad-500017</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Mobile No.:8143802598, Email:alfalahhighschool@gmail.com</p>
+   <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname}</p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
    </table>
   </div>
 

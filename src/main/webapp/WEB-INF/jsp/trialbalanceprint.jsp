@@ -211,7 +211,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/noblewisdom/images/shaheenlogo.png" width="150" height="80"/>
+				<img src="/noblewisdom/images/shaheennoblewisdom.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
