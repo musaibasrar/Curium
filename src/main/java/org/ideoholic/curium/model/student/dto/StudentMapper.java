@@ -51,6 +51,23 @@ public interface StudentMapper {
         return conClassAdmittedIn;
     }
 
+    /*static String createSid(StudentDto studentDto){
+        String sId = "";
+        String addSid = studentDto.getId().toString();
+        if(!addSid.equalsIgnoreCase("")){
+            sId=addSid+""
+        }
+    }*/
+
+    /*static String conName(StudentDto studentDto){
+        String conName = "";
+        String addName = DataUtil.emptyString(studentDto.getName());
+        if(!addName.equalsIgnoreCase("")){
+            conName = "name==" + addName;
+        }
+        return conName;
+    }*/
+
     @Mapping(target = "classstudying", expression = "java(StudentMapper.createConClassStudying(studentDto))")
     @Mapping(target = "classadmittedin", expression = "java(StudentMapper.createClassadmittedin(studentDto))")
     @Mapping(target = "dateofbirth", expression = "java(DateUtil.indiandateParser(studentDto.getDateofbirth()))")
@@ -74,6 +91,7 @@ public interface StudentMapper {
     @Mapping(target = "promotedyear", source = "promotedyear")
     Student mapStudent(StudentDto studentDto);
 
+    @Mapping(target = "parentsannualincome", source = "annualincome")
     @Mapping(target = "addresspermanent", source = "permanentaddress")
     @Mapping(target = "addresstemporary", source = "temporaryaddress")
     @Mapping(target = "remarks", source = "remarksadditional")
@@ -87,6 +105,9 @@ public interface StudentMapper {
     @Mapping(target = "aggregatemarkssslc", source = "aggmarks")
     @Mapping(target = "sslcmediuminstruction", source = "xmediuminstruction")
     @Mapping(target = "pumediuminstruction", source = "PUmediuminstruction")
+    @Mapping(target = "idpudetails", source = "pudetailsid")
+    @Mapping(target = "optionalsubjects", source = "subjectspart1")
+    @Mapping(target = "compulsorysubjects", source = "subjectspart2")
     Pudetails mapPudetails(StudentDto studentDto);
 
     @Mapping(target = "exampassedappearance", source = "pepdc")

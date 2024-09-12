@@ -122,4 +122,33 @@ public class StudentDto {
 	private String extracurricular;
 	private String employer;
 	private Integer karnataka;
+
+	private Integer sid;
+	private Integer pid;
+	private String classSec;
+	private String secStudying;
+	private String studentPicUpdate;
+	private String studentDoc1Update;
+	private String studentDoc2Update;
+	private String studentDoc3Update;
+	private String studentDoc4Update;
+	private String studentDoc5Update;
+	private String studentexternalid;
+	private Integer passedout;
+	private Integer leftout;
+	private Integer droppedout;
+	private String archive;
+
+	private String annualincome;
+	private String subjectspart1;
+	private String subjectspart2;
+	private Integer pudetailsid;
+	private String degreeDetailsId;
+
+	private String studentPicDelete;
+	private String studentDoc1Delete;
+	private String studentDoc2Delete;
+	private String studentDoc3Delete;
+	private String studentDoc4Delete;
+	private String studentDoc5Delete;
 }
