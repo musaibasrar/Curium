@@ -295,27 +295,27 @@ public class HrService {
 		
 	}
 
-	public boolean saveAdvanceSalary() {
+	public ResultResponse saveAdvanceSalary(SaveAdvanceSalaryDto dto, String branchId, String userId) {
 		
 		Payadvancesalary payAdvanceSalary = new Payadvancesalary();
 		Teacher teacher = new Teacher();
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			payAdvanceSalary.setAmount(new BigDecimal(DataUtil.emptyString(request.getParameter("amount"))));
-			payAdvanceSalary.setDeductionpermonth(new BigDecimal(DataUtil.emptyString(request.getParameter("deductionpermonth"))));
-			payAdvanceSalary.setDeductionstartmonth(DataUtil.emptyString(request.getParameter("deductionmonth")));
-			payAdvanceSalary.setDeductionstartyear(DataUtil.emptyString(request.getParameter("deductionyear")));
-			teacher.setTid(Integer.parseInt(DataUtil.emptyString(request.getParameter("staffid"))));
+		if(branchId!=null){
+			payAdvanceSalary.setAmount(new BigDecimal(DataUtil.emptyString(dto.getAmount())));
+			payAdvanceSalary.setDeductionpermonth(new BigDecimal(DataUtil.emptyString(dto.getDeductionPerMonth())));
+			payAdvanceSalary.setDeductionstartmonth(DataUtil.emptyString(dto.getDeductionMonth()));
+			payAdvanceSalary.setDeductionstartyear(DataUtil.emptyString(dto.getDeductionYear()));
+			teacher.setTid(Integer.parseInt(DataUtil.emptyString(dto.getStaffId())));
 			payAdvanceSalary.setTeacher(teacher);
-			payAdvanceSalary.setYear(DataUtil.emptyString(request.getParameter("year")));
-			payAdvanceSalary.setMonth(DataUtil.emptyString(request.getParameter("month")));
-			payAdvanceSalary.setSalaryfordays(Integer.parseInt(DataUtil.emptyString(request.getParameter("salaryforday"))));
+			payAdvanceSalary.setYear(DataUtil.emptyString(dto.getYear()));
+			payAdvanceSalary.setMonth(DataUtil.emptyString(dto.getMonth()));
+			payAdvanceSalary.setSalaryfordays(Integer.parseInt(DataUtil.emptyString(dto.getSalaryForDay())));
 			payAdvanceSalary.setStatus("apply");
-			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("dateadvance"))));
-			payAdvanceSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			payAdvanceSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			return new HrDAO().saveAdvanceSalary(payAdvanceSalary);	
+			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(dto.getDateAdvance())));
+			payAdvanceSalary.setBranchid(Integer.parseInt(branchId));
+			payAdvanceSalary.setUserid(Integer.parseInt(userId));
+			return ResultResponse.builder().success( new HrDAO().saveAdvanceSalary(payAdvanceSalary)).build();
 		}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public void salaryApprovalDispaly() {

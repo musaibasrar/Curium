@@ -213,7 +213,7 @@ public class HrAction {
 
 	@PostMapping("/saveAdvanceSalary")
 	public String saveAdvanceSalary() {
-		if(new HrService(request, response).saveAdvanceSalary()){
+		if(hrActionAdapter.saveAdvanceSalary()){
 			return "advancesalarysave";
 		}
 		return error;
