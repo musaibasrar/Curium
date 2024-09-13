@@ -597,5 +597,23 @@ public class AccountDAO {
 		}
 		return voucherTransactions;
 	}
+	
+public List<VoucherEntrytransactions> getVoucherEntryTransactions(List<Integer> transactionIds) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from VoucherEntrytransactions where transactionsid IN (:transactionsid)");
+			query.setParameter("transactionsid", transactionIds);
+			voucherTransactions = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherTransactions;
+	}
 
 }

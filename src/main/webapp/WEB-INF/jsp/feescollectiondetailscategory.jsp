@@ -1,23 +1,22 @@
 <%--
-    Document   : SearchJournalEntries
-    Created on : Nov 19, 2020, 8:44:28 PM
+    Document   : Fees Collecion Details
+    Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Search Journal Entries</title>
+<title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/gnyanganga/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/gnyanganga/css/datePicker/demos.css">
+<link rel="stylesheet" href="/gnyanganga/css/font-awesome.css">
 <style type="text/css">
+<!--
 .divCSS {
 	overflow: scroll;
 	height: 100%;
@@ -92,18 +91,7 @@
 	font-weight: bold;
 }
 
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
-.alignSearch {
+.alignLeft {
 	font-family: Tahoma;
 	font-size: 11px;
 	font-style: normal;
@@ -123,13 +111,15 @@
 	font-style: normal;
 	color: #325F6D;
 }
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
 
-.footerTD {
-	border-radius: 6px;
-	background-color: #4b6a84;
-	text-align: left;
-}
 
+                text-align: left;
+
+
+            }
 .alignCentreMultiple {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -204,6 +194,7 @@
 	color: #325f6d;
 }
 
+<!--
 .header {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -289,18 +280,32 @@
 	font-weight: bold;
 	height: 22px;
 }
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
 
-.dataTextRight {
-	border-radius: 3px;
-	font-family: Tahoma;
-	color: #4b6a84;
-	font-size: 13px;
-	letter-spacing: normal;
-	text-align: right;
-	background-color: #E3EFFF;
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
 }
 </style>
-
+<style>
+#button {
+	
+}
+</style>
 <link rel="stylesheet" href="/gnyanganga/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/gnyanganga/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -337,8 +342,6 @@
 	src="/gnyanganga/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="/gnyanganga/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-	<link href="/gnyanganga/css/select2.min.css" rel="stylesheet" />
-<script src="/gnyanganga/js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -358,68 +361,33 @@
 		var options = {};
 
 		$("#effect").show();
-		
+		$("#medicineId").val(id)
+		$("#medicineName").val(name);
 
 	}
-	
+	function getCurrentDate() {
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		if (month < 10) {
+			month = "0" + month;
+
+		} else {
+			month = month;
+		}
+		if (day < 10) {
+			day = "0" + day;
+
+		} else {
+			day = day;
+		}
+		return month + "/" + day + "/" + year;
+
+	}
 </script>
-
-<script type="text/javascript" src="/gnyanganga/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function search() {
-		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
-			form1.action = "/gnyanganga/AccountProcess/searchLedgerEntries";
-			form1.method = "POST";
-			form1.submit();
-		  }
-	}
-	
-	function printRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/AccountProcess/printSearchLedgerEntries";
-		form1.method = "POST";
-		form1.submit();
-}
-
-	function printVoucherRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/AccountProcess/voucherPrintGeneralLedger";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
 	$(function() {
-
-		$("#search").button().click(function() {
-			search();
-		});
-		
-
-		 $("#print").button({
-             icons:{
-                 primary: "ui-icon-print"
-             }
-         }).click(function(){
-             printRecords();
-             return false;
-
-         });
-		 
-		 $("#printvoucher").button({
-             icons:{
-                 primary: "ui-icon-print"
-             }
-         }).click(function(){
-             printVoucherRecords();
-             return false;
-
-         });
-	});
-
-	$(function() {
-		$("#tabs").tabs();
-		$("#effect").hide();
 		// run the currently selected effect
 		function runEffect() {
 
@@ -434,39 +402,190 @@
 			return false;
 		});
 	});
+</script>
+<script type="text/javascript" src="/gnyanganga/js/datetimepicker_css.js"></script>
+<script type="text/javascript">
+	function searchByDate() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/gnyanganga/FeesCollection/searchByDateFeesCollectionCategory";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/gnyanganga/FeesCollection/searchByDateFeesCollectionCategoryPrint";
+		form1.method = "POST";
+		form1.submit();
+	}
 	
 	$(function() {
-		$("#fromdate").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-5:+4"
+
+		$("#tabs").tabs();
+		$("#search").button().click(function() {
+			searchByDate();
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
-		$("#anim").change(function() {
-			$("#fromdate").datepicker("option", "showAnim", $(this).val());
-		});
+		$("#effect").hide();
 		
-		$("#todate").datepicker({
+		 $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printRecords();
+             return false;
+
+         });
+
+	});
+	
+	 $(function(){
+		 $("#export").button({
+				
+			});
+         $("#delete").button({
+             icons:{
+                 primary: "ui-icon-trash"
+             }
+         }).click(function(){
+             deleteRecords();
+             return false;
+
+         });
+         $('#chckHead').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             if(length>0){
+                 $('.chcktbl:checked').attr('checked', false);
+                 this.checked=false;
+
+             }
+             else{
+                 if (this.checked == false) {
+                     $('.chcktbl:checked').attr('checked', false);
+                 }
+                 else {
+                     $('.chcktbl:not(:checked)').attr('checked', true);
+                 }
+
+             }
+
+         });
+         $('.chcktbl').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             alert(tdLength);
+             if (length > trLength) {
+
+                 $('.chcktbl:not(:checked)').attr('disabled', true);
+             }
+             else {
+                 $('.chcktbl:not(:checked)').attr('disabled', false);
+             }
+         });
+         
+         $( "#go" )
+         .button()
+         
+
+     });
+	 
+
+	 function checkFieldsButton() {
+		 
+			
+			var oneday = document.getElementById('datepicker').value;
+			var fromdate = document.getElementById('datepickerfrom').value;
+			var todate = document.getElementById('datepickerto').value;
+			
+			if(oneday == "" && fromdate == "" && todate == ""){
+				alert("Please enter the search criteria");
+			}
+		
+			if(fromdate > todate ){
+				alert('"To date" should be greater than "From date"');
+			}
+			
+		}
+
+	 
+	 function checkFieldsTo() {
+		 
+			
+				document.getElementById('datepicker').value = "";
+				
+				
+			}
+
+	 
+	 function checkFieldsFrom() {
+		 
+		 document.getElementById('datepicker').value = "";
+		 document.getElementById('datepickerto').value = "";
+		}
+	 
+	 
+	 function checkFields() {
+
+			document.getElementById('datepickerfrom').value = "";
+			document.getElementById('datepickerto').value = "";
+			
+			
+		}
+</script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-5:+4"
+			dateFormat: 'yy-mm-dd'
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
-			$("#todate").datepicker("option", "showAnim", $(this).val());
+			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
 	});
-
-
+	$(function() {
+		$("#datepickerfrom").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#anim").change(function() {
+			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	$(function() {
+		$("#datepickerto").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#anim").change(function() {
+			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
+		});
+	});
 </script>
 
 
-
-
-
+	<script type="text/javascript">
+					
+					var cancelreceipt = '<c:out default="" value="${cancelreceiptresult}"/>';
+		            
+		            if(cancelreceipt == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(cancelreceipt == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+            
+        </script>
+        
 </head>
-  <%
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -483,234 +602,146 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-		<c:set var="crtotal" value="${0}" />
-		<c:set var="drtotal" value="${0}" />
-	<form id="form1">
-	
+	<form id="form1"
+		action="/gnyanganga/FeesDetails/exportDataForFees" method="POST">
+		
+		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
+		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
+		
+		
 		<div style="height: 28px">
-			<button id="add">Parameters</button>
+			<button id="add">Search Fees Collection Details</button>
 			<br />
 		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Search Journal Entries</a></li>
+					<li><a href="#tabs-1">Dates</a></li>
 
 				</ul>
 				<div id="tabs-1">
-					<table style="margin-left: auto;margin-right: auto;">
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-						
-						<td class="alignRight">Select Account</td>
-							<td><label> <select name="accountid" id="accountid" class="select2" style="width: 230px" required>
-										<option selected></option>
-									
-									  <c:forEach items="${ledgeraccountdetails}" var="ledger">
-
-											<option value="${ledger.accountdetailsid}:${ledger.accountname}">
-												<c:out value="${ledger.accountname}" />
-											</option>
-
-										</c:forEach>
-										
-								</select>
-								</label>
-								</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-						<td class="alignRight">From Date&nbsp;</td>
-							<td><label> <input name="fromdate" autocomplete="off" type="text" class="textField" id="fromdate" size="36" required>
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						<tr style="display: none;">
+							<td width="20%" class="alignRight">Date: &nbsp;</td>
+							<td width="28%"><label> <input name="oneday"
+									type="text" class="textField" id="datepicker" size="36"
+									onfocus="checkFields()" value="${dayone}" autocomplete="false"
+									data-validate="validate(required)">
 							</label></td>
-							
-							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;</td>
-							<td ><label> <input name="todate" autocomplete="off" type="text" class="textField" id="todate" size="36" required>
-							</label></td>
-							
-							</tr>
-							
+						</tr>
 
 						<tr>
 							<td><br /></td>
-
+						</tr>
+						<tr style="display: none;">
+						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
 						</tr>
 						
 						<tr>
 							<td><br /></td>
-
 						</tr>
-
 						<tr>
-
-							<td></td>
-							<td><br></td>
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td>
-								<button id="search">Search</button>
+							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
+							<td ><label> <input name="fromdate"
+									type="text" class="textField" id="datepickerfrom" size="36"
+									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td ><label> <input name="todate"
+									type="text" class="textField" id="datepickerto" size="36"
+									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button onmouseover="checkFieldsButton();" id="search">Search</button>
 							</td>
 						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
 					</table>
-					
-					
-
 				</div>
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
-		
 			<table width="100%">
-				<tr>
-					<td class="headerTD">
-						<label style="text-decoration: underline;">General Leger Details</label><br>
-						<label style="text-transform: capitalize;">From:</label>  
-					<input type="text" name="fromdateselected" style="background: transparent;border: none;color: white;font-weight: bold;width: 90px;" value="${fromdate}" >
-					<label style="text-transform: capitalize;">To:</label>  
-					<input type="text" name="todateselected" style="background: transparent;border: none;color: white;font-weight: bold;" value="${todate}" >
-					<label style="text-transform: capitalize;">Ledger:</label>
-					<input type="text" style="background: transparent;border: none;color: white;font-weight: bold;width: 260px;" value="${ledgername}" >
-					<input type="hidden" name="accountidselected" style="background: transparent;border: none;color: white;font-weight: bold;width: 260px;" value="${accountid}" >
-					</td>
-				</tr>
-				
-			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
-
 				<thead>
-					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Voucher Number</th>
-						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
-						<th title="click to sort" class="headerText">Narration</th>
-						<th title="click to sort" class="headerText">Debits&nbsp;</th>
-						<th title="click to sort" class="headerText">Credits&nbsp;</th>
-					</tr>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
 				</thead>
-
-				<tbody>
+				
+				<tbody>	
 				<fmt:setLocale value="en_IN" scope="session"/>
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${ledgertransactions.key.transactionsid}"/>" class="chcktbl"
-								name="transactionids"
-								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
-								
-							</td>
-							<td class="dataTextInActive"><c:out value="${ledgertransactions.key.transactionsid}" />
-							</td>
-							<td class="dataText"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
-							<td class="dataText">
-							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
-							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							 <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
-							
-							<c:if test="${ledgername[1] == 'Dr'}">
-								
-								<td class="dataText"></td>
-								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
-								<td class="dataTextRight">
-									<fmt:formatNumber type="number"  maxFractionDigits = "2" value="${ledgertransactions.key.cramount}" />
-								</td>
-								
-							</c:if>
-							
-							<c:if test="${ledgername[1] == 'Cr'}">
-								
-								<td class="dataTextRight">
-									<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-									<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${ledgertransactions.key.dramount}" />
-								</td>
-								
-								<td class="dataText"></td>
-							</c:if>
+					<c:set var="total" value="${0}" />
+					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap">
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td class="dataText"><c:out value="${feeCategoryCollectionMap.key}" /></td>
+							<td class="dataText"><c:out value="${feeCategoryCollectionMap.value}" /></td>
+							<c:set var="total" value="${total + feeCategoryCollectionMap.value}" />
 						</tr>
 					</c:forEach>
+				</tbody>	
 					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-						<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
-							</label> 
-							</td>
-							<td class="dataTextRight">
-							<label style="color: #eb6000"><b>
-							<fmt:formatNumber type="currency"  value="${crtotal}" /></b>
-							</label>
-							</td>
+						<td class="dataText">Total Fees Paid by Cash</td>
+						<td class="dataText">${feesByCashSingle}</td>
 					</tr>
 					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Balance</b>
-							</label> 
-							</td>
-							
-							<td class="dataTextRight">
-								<label style="color: #eb6000"><b>
-							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
-                                </c:when>
-                                <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
-                                </c:otherwise>
-                            </c:choose>
-							</b>
-							</label>
-							</td>
+						<td class="dataText">Total Fees Paid by Bank</td>
+						<td class="dataText">${feesByBankSingle}</td>
 					</tr>
-				</tbody>
-				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="print">Print</button> <button id="printvoucher">Print Voucher</button>
+						<td class="dataText">Total Paid by Cash - Bus Fees</td>
+						<td class="dataText">${feesByCashSingleBusFees}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Paid by Bank - Bus Fees</td>
+						<td class="dataText">${feesByBankSingleBusFees}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Other Fees Paid by Cash</td>
+						<td class="dataText">${feesbycashotherfees}</td>
+					</tr>
+					<tr>
+						<td class="dataText">Total Other Fees Paid by Bank</td>
+						<td class="dataText">${feesbybankotherfees}</td>
+					</tr>
+				
+					<%-- <tr>
+							<td class="dataText" style="text-align: right;">Total
+							</td>
+							<td class="dataText" style="text-align: right;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total}" />
+							</td>
+					</tr> --%>
+			<tfoot>
+					<tr>
+						<td class="footerTD" colspan="2"><button id="print">Print</button>
 							</td>
 							
 
 					</tr>
 				</tfoot>
+					
 			</table>
 
 		</div>
 
 
 	</form>
-<script>
-    $('.select2').select2();
-</script>
 
 </body>
 </html>

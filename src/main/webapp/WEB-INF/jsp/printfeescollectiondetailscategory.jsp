@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Fees Collection Details</title>
+<title>Print Fees Collection Details Category Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -101,7 +101,7 @@
 
 .datatd, .datath {
     border: 1px solid #000000;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
@@ -225,22 +225,22 @@
 
 
 <body style="text-align: center" class="bodymargin">
-<fmt:setLocale value="en_IN" scope="session"/>
 	<form method="post" class="bodymargin">
+	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="100" height="100"/>
+				<img src="/gnyanganga/images/gnyanganga.jpg" width="70" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Fees Collection Details Report</label><br>
-				<label class="addressLineTwo">${daterangefeescollection}</label><br>
+				<label class="addressLine">Income Report</label><br>
+				<label class="addressLineTwo">From: ${datefrom}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${dateto}</label><br>
 				</td>
 			</tr>
 	</table>
 
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -252,96 +252,69 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No.</th>
-						<th class="datath">UID</th>
-						<th class="datath">Receipt No.</th>
-						<th class="datath">Student Name</th>
-						<th class="datath">Class</th>
-						<th class="datath">Father Name</th>
-						<th class="datath">Date of Fees</th>
-						<th class=datath>Payment Type</th>
-				       	<th class="datath">Total</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Fees Amount</th>
  				 </tr>
  			 </thead>
+ 		 
 			<tbody>
-					<c:forEach items="${feesmap}" var="feesmap" varStatus="status">
+					<fmt:setLocale value="en_IN" scope="session"/>
+					<c:set var="total" value="${0}" />
+					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap" varStatus="status">
+					
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.studentexternalid}" />
+							<td class="datatd"><c:out value="${feeCategoryCollectionMap.key}" />
 							</td>
-							<td class="datatd"><c:out	value="${feesmap.value.branchreceiptnumber}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.name}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.classstudying}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.fathersname}" /></td>
-							<td class="datatd">
-							<fmt:formatDate type="date" value="${feesmap.value.date}" pattern="dd/MM/yyyy"/>
+							<td class="datatd" style="text-align: right;">
+							<fmt:formatNumber type="currency"  value="${feeCategoryCollectionMap.value}" />
+							
+							<c:set var="total" value="${total + feeCategoryCollectionMap.value}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.value.paymenttype}" />
-							</td>
-							<td class="datatd">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${feesmap.value.totalamount}" />
-							</td>
-						</tr>
+					</tr>
 						
 					</c:forEach>
 					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total</b>
-							</label> 
+						<td class="datatd">
 							</td>
-							
-							<td class="dataTextRight">
-								<label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
-							</b>
-							</label>
+						<td class="datatd">Total Fees Paid by Cash</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycash}" /></td>
+					</tr>
+					<tr>
+						<td class="datatd">
+							</td>
+						<td class="datatd">Total Fees Paid by Bank</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybank}" /></td>
+					</tr>
+					<tr>
+						<td class="datatd">
+							</td>
+						<td class="datatd">Total Other Fees Paid by Cash</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycashotherfees}" /></td>
+					</tr>
+					<tr>
+						<td class="datatd">
+							</td>
+						<td class="datatd">Total Other Fees Paid by Bank</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybankotherfees}" /></td>
+					</tr>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="datatd">
+							</td>
+							<td class="datatd" style="text-align: right;font-weight: bold;">Total
+							</td>
+							<td class="datatd" style="text-align: right;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total}" />
 							</td>
 					</tr>
 			</tbody>
 				</table>
+			<br>
 			
-				<br>
-			
-			<table class="datatable">
-						<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total Fees:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofonlyfee}" /> 
-							</b>
-							</label>
-							</label> 
-							</td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total Misc:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofmisc}" /> 
-							</b>
-							</label>
-							</label> 
-							</td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total Fine:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumoffine}" /> 
-							</b>
-							</label>
-							</label> 
-							</td>
-					</tr>
-				</table>
 				
 			<div style="page-break-inside: avoid;" align="center">
 				<table>

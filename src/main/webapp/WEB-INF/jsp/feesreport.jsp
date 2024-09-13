@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -133,7 +134,7 @@
 	width: auto;
 	height: 24px;
 	vertical-align: text-top;
-	text-align: center;
+	text-align: left;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
@@ -373,6 +374,13 @@
 		form1.submit();
 
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/gnyanganga/FeesCollection/printFeesReport";
+		form1.method = "POST";
+		form1.submit();
+	}
 
 	$(function() {
 
@@ -526,6 +534,43 @@
 		}
 		return xmlHttp;
 	}
+	
+	$(function(){
+		
+		$("#tabs").tabs();
+		$("#effect").hide();
+		
+		$('.reset').button().click(function() {
+		});
+		 
+        
+        $("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+        
+    });
+	
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
 
     </script>
 
@@ -550,10 +595,10 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" action="/gnyanganga/FeesCollection/exportDataForStudentsFeesReport" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+		 <div style="height: 28px">
+			<button id="add">Fees Report</button>
+			<br>
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -631,12 +676,15 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
-							<div style="overflow:scroll;width:420px; height: 100px;">
+							<div style="overflow:scroll;width:220px; height: 250px;">
 							<c:forEach items="${feescategory}" var="feescategory">
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									<c:if test="${!fn:contains(feescategory.feescategoryname, 'Bus Fee')}">
+												<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
 									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
 									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label><br>
+									</c:if>
+										
 							
 								</c:forEach>
 								</div>
@@ -697,6 +745,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Paid Amount&nbsp;</th>
+						<th title="click to sort" class="headerText">Due Amount&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
@@ -737,28 +787,20 @@ for(Cookie cookie : cookies){
 									</table>
 									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
 									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-									
+									<c:set var="PaidAmount" value="${TotalAmount-DueAmount}" />
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
 									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 								</c:forEach>
 							</td>
+							<td class="dataText"><c:out value="${PaidAmount}" /></td>
+							<td class="dataText"><c:out value="${DueAmount}" /></td>
 							<td class="dataText">
 									<table>
 										<tr>
-											<c:if test="${DueAmount > 0}">
-												<td style="width: 160px;background-color: red;" align="right" >
-													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
-												</td>
-											</c:if>
-											
-											<c:if test="${DueAmount == 0}">
 												<td style="width: 160px;" align="right" >
 													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
 												</td>
-											</c:if>
-													
-											
 										</tr>
 									</table>
 							</td>
@@ -768,11 +810,13 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 					
-					<td  class="footerTD" > <input value="Export"
-							type="submit" id="export"/></td>
-													
-						<td class="footerTD" colspan="7" >
-						 
+					<td  class="footerTD">
+						
+						<input value="Export"
+							type="submit" id="export"/>
+						
+						<input value="Print" style="width: 35px;"
+							id="print"/> 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }

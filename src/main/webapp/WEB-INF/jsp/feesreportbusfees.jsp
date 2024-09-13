@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -133,7 +134,7 @@
 	width: auto;
 	height: 24px;
 	vertical-align: text-top;
-	text-align: center;
+	text-align: left;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
@@ -368,10 +369,17 @@
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/FeesCollection/searchFeesDueHeadWiseReport";
+		form1.action = "/gnyanganga/FeesCollection/searchFeesReport";
 		form1.method = "POST";
 		form1.submit();
 
+	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/gnyanganga/FeesCollection/printFeesReport";
+		form1.method = "POST";
+		form1.submit();
 	}
 
 	$(function() {
@@ -437,46 +445,6 @@
 	
 </script>
 
-
-<script>
-var xmlHttp;
-    var count;
-    function searchfeecategory() {
-		var classsearch=document.getElementById('classsearch').value;
-		var yoa=document.getElementById('yearofadmission').value;
-			 if (typeof XMLHttpRequest != "undefined") {
-				 xmlHttp = new XMLHttpRequest();
-	            
-	         } else if (window.ActiveXObject) {
-	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	             
-	         }
-			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/gnyanganga/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
-			xmlHttp.send(null);
-		
-	}
-    
-	function stateChanged() {
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-    
-</script>
 
 <script type="text/javascript">
         
@@ -566,6 +534,43 @@ var xmlHttp;
 		}
 		return xmlHttp;
 	}
+	
+	$(function(){
+		
+		$("#tabs").tabs();
+		$("#effect").hide();
+		
+		$('.reset').button().click(function() {
+		});
+		 
+        
+        $("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
+        
+    });
+	
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
 
     </script>
 
@@ -589,51 +594,40 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/gnyanganga/FeesCollection/printFeesDueHeadWiseReport" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	<form id="form1" action="/gnyanganga/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+		 <div style="height: 28px">
+			<button id="add">Fees Report</button>
+			<br>
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Due Head Wise Report</a></li>
+					<li><a href="#tabs-1">Fees Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
 				
 					<table>
-						
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="90%"><label> 
-								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
-									style="width: 120px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label style="visibility: hidden;"> 
-									<select name="secsearch" id="secsearch"
-									style="width: 120px;">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+								<label style="visibility: hidden;"> <select name="secsearch" id="secsearch">
 										<option selected></option>
-
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
 											<option value="${classdetailslist.section}">
 												<c:out value="${classdetailslist.section}" />
 											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-							</label>
+										</c:if>	
+										</c:forEach></td>
 						</tr>
 						
 							<tr>
@@ -648,13 +642,18 @@ for(Cookie cookie : cookies){
                         
                         	<td>
                         	   <label>
-                                         <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
+                                         <select name="academicyear" id="academicyear" onchange="getFeesCategory()" required
 									style="width: 120px">
-										<option selected>${currentAcademicYear}</option>
-										<option>2023/24</option>
-										<option>2024/25</option>
+										<option selected>Current & Next Year</option>
 										<option>2025/26</option>
-										<option>2026/27</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
 										</select>
                               </label>
                         </td>
@@ -665,26 +664,7 @@ for(Cookie cookie : cookies){
 						<td><br></td>
                     </tr>
                     
-                    <tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td>
-							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
-							</label>
-							<br/>
-							</td>
-							
-						</tr>
-											
-						<tr>
-							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
-							<td id="feescat">
-							
-							</td>
-							
-						</tr>
-						
-                    
-                    		<%-- <tr>
+                    		<tr>
 							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
@@ -696,18 +676,21 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
-							<div style="overflow:scroll;width:420px; height: 100px;">
+							<div style="overflow:scroll;width:220px; height: 250px;">
 							<c:forEach items="${feescategory}" var="feescategory">
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									<c:if test="${fn:contains(feescategory.feescategoryname, 'Bus Fee')}">
+												<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
 									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
 									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label><br>
+									</c:if>
+										
 							
 								</c:forEach>
 								</div>
 							</td>
 							
-						</tr> --%>
+						</tr>
 						 <tr>
 							<td><br /></td>
 
@@ -756,7 +739,6 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
-						<th title="click to sort" class="headerText">Sl.No</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
@@ -774,7 +756,7 @@ for(Cookie cookie : cookies){
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -782,8 +764,6 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
-								<td class="dataText"><c:out
-										value="${status.index+1}" /></td>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
@@ -818,9 +798,9 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 									<table>
 										<tr>
-											<td style="width: 160px;" align="right">
-												${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;	
-											</td>
+												<td style="width: 160px;" align="right" >
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
+												</td>
 										</tr>
 									</table>
 							</td>
@@ -830,11 +810,13 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 					
-					<td  class="footerTD" > <input value="Print"
-							type="submit" id="export"/></td>
-													
-						<td class="footerTD" colspan="7" >
-						 
+					<td  class="footerTD">
+						
+						<input value="Export"
+							type="submit" id="export"/>
+						
+						<input value="Print" style="width: 35px;"
+							id="print"/> 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1625,5 +1627,34 @@ public boolean searchSingleLedgerEntries() {
 			System.out.println(""+e);
 		}
 		return result;
+	}
+	
+	public boolean voucherPrintGeneralLedger() {
+		String[] transactionIds = request.getParameterValues("transactionids");
+		 List<Integer> transactionIdList = Arrays.stream(transactionIds)
+                 .map(Integer::parseInt)
+                 .collect(Collectors.toList());
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(transactionIdList);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		
+		return true;
+		
+		}
+		return false;
+	
+		
 	}
 }

@@ -228,5 +228,13 @@ public class FeesAction {
 				e.printStackTrace();
 			}
 	}
+	
+	@GetMapping("/feesReportBusFees")
+	public String feesReportBusFees() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
+		return "feesreportbusfees";
+	}
+
 
 }

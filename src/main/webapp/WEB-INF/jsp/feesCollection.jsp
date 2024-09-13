@@ -476,6 +476,20 @@
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
+            var parents = [
+                <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
+                	value:'<c:out default="0" value="${parent.fathersname}" />',
+                	studentname:'<c:out default="0" value="${parent.student.name}" />',
+                    admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
+                    regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                    name:'<c:out default="0" value="${parent.student.name}" />',
+                    classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
+                    id:'<c:out default="0" value="${parent.student.sid}" />',
+                    fathername:'<c:out default="0" value="${parent.fathersname}" />',
+                    
+                }<c:if test="${!status.last}">,</c:if>
+                </c:forEach>
+            ];
         $(function() {
             $( "#studentname").autocomplete({
                 source: students,
@@ -492,6 +506,7 @@
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
        			  $( "#studentName").val( ui.item.name );
+       			$( "#fathername").val(ui.item.fathername);
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#admissionno").val( ui.item.admissionno );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
@@ -526,6 +541,35 @@
                 deleteRow('dataTable');
                 return false;
             });            
+
+        });
+        $(function() {
+            $( "#fathername").autocomplete({
+                source: parents,
+                minLength: 1,
+                change:function(event,ui){
+                    $( "#studentId").val( ui.item.id );
+                    
+                    
+                },
+                focus: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+                    return true;
+                },
+                select: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+       			  $( "#studentname").val( ui.item.studentname );
+       			$( "#classandsec").val( ui.item.classandsec );
+       			$( "#admissionno").val( ui.item.admissionno );
+                    /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+                    return true;
+                }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> " + item.studentname +" / "+item.classandsec+" / "+item.regno+" / "+item.value+" </b> </a>" )
+                .appendTo( ul );
+            };
 
         });
         $('#selectAll').click(function () {
@@ -951,8 +995,7 @@ for(Cookie cookie : cookies){
                     
                     
                     <tr>
-                    
-                        <td class="alignLeft" style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
+                    	<td class="alignLeft" style="width: 45%;">Father Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fathername" id="fathername" class="myclass" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
                         
                     </tr>
@@ -984,6 +1027,7 @@ for(Cookie cookie : cookies){
                                     </label>
                         
                         </td>
+                        <td class="alignLeft">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
                         
                     </tr>
                     

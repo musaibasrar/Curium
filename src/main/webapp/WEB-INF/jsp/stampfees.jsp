@@ -685,6 +685,58 @@
             textField.value = "0";
         }
     }
+    
+
+	 $(function() {
+		$('#chckHeadStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			if (length > 0) {
+				$('.chcktblStamp:checked').attr('checked', false);
+				this.checked = false;
+			} else {
+				if (this.checked == false) {
+					$('.chcktblStamp:checked').attr('checked', false);
+				} else {
+					$('.chcktblStamp:not(:checked)').attr('checked', true);
+				}
+			}
+		});
+		
+		$('.chcktblStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			alert(tdLength);
+			if (length > trLength) {
+				$('.chcktblStamp:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblStamp:not(:checked)').attr('disabled', false);
+			}
+		});
+	}); 
+	
+	 function toggleFeesCount(allCheckbox) {
+		    var checkboxes = document.querySelectorAll('.chcktblStamp');
+		    var totalAmount = 0;
+
+		    checkboxes.forEach(function(checkbox, index) {
+		        var feesCountInput = document.getElementById('feesCount_' + (index + 1));
+		        var feesAmountInput = document.getElementById('hiddenfees_full_amount_' + (index + 1));
+		        
+		        if (allCheckbox.checked) {
+		            feesCountInput.value = '1';
+		            totalAmount += parseFloat(feesAmountInput.value || 0);
+		        } else {
+		            feesCountInput.value = '0';
+		        }
+
+		        calculate(index + 1);
+		    });
+
+		    // Set the total amount field based on checkbox state
+		    document.getElementById('feesTotalAmount').value = allCheckbox.checked ? totalAmount.toFixed(2) : '0.00';
+		}
+
         </script>
         
 
@@ -824,6 +876,13 @@ for(Cookie cookie : cookies){
     		        			    <td style="font-weight: bold;color:#eb6000">Fees Total Amount</td>
     		        			</tr>
     		        		</thead>
+    		        			<tr>
+    		        				<td>
+  										   <label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
+     									   		<input type="checkbox" id="chckHeadStamp" onchange="toggleFeesCount(this)" />All
+    										</label>
+									</td>
+    		        			</tr>
     		        		
    			        			<c:forEach items="${feescategory}" var="feescategory" varStatus="status">
    			        			
@@ -831,7 +890,7 @@ for(Cookie cookie : cookies){
 											<td><label class="labelClass"
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
-													id="feesIDS_${status.index+1}" class="chcktbl" checked="checked"
+													id="feesIDS_${status.index+1}" class="chcktblStamp" checked="checked"
 													value="${feescategory.idfeescategory}_${status.index}"
 													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
 													size="18"> ${feescategory.feescategoryname} :

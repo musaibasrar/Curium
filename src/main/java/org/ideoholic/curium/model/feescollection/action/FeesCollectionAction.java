@@ -250,4 +250,11 @@ public class FeesCollectionAction {
 				}
 				
 			}
+		 
+		 @PostMapping("/printFeesReport")
+	        public String printFeesReport() {
+				/* new FeesCollectionService(request, response).getFeesReport(); */
+	            return "printfeesreport";
+	        }
+		 
 }
