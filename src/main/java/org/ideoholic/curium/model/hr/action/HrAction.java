@@ -227,7 +227,7 @@ public class HrAction {
 
 	@PostMapping("/deletePf")
 	public String deletePf() {
-		new HrService(request, response).deletePf();
+		hrActionAdapter.deletePf();
 		return pfSettings();
 	}
 

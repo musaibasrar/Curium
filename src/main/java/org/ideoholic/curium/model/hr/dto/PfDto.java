@@ -8,5 +8,6 @@ public class PfDto {
     private String paidByManagement;
     private String paidByStaff;
     private String date;
+    private String[] pfids;
 
 }
