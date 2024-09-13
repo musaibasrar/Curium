@@ -143,7 +143,7 @@ public class StudentDto {
 	private String subjectspart1;
 	private String subjectspart2;
 	private Integer pudetailsid;
-	private String degreeDetailsId;
+	private Integer iddegreedetails;
 
 	private String studentPicDelete;
 	private String studentDoc1Delete;

@@ -272,7 +272,7 @@ public class StudentActionAdapter {
         student.setXmediuminstruction(request.getParameter("Xmediuminstruction"));
         student.setPUmediuminstruction(request.getParameter("PUmediuminstruction"));
         student.setPudetailsid(DataUtil.parseInt(request.getParameter("pudetailsid")));
-        student.setDegreeDetailsId(request.getParameter("degreedetailsid"));
+        student.setIddegreedetails(DataUtil.parseInt(request.getParameter("degreedetailsid")));
         student.setFathersqualification(request.getParameter("fathersqualification"));
         student.setMothersqualification(request.getParameter("mothersqualification"));
         student.setFatherscastecertno(request.getParameter("fatherscastecertno"));

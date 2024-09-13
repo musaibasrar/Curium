@@ -1275,7 +1275,7 @@ public class StudentService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if("".equalsIgnoreCase(newcateg)) {
+		if(newcateg != null && newcateg.isEmpty()) {
 			student.setSpecialcategory(dropdowncateg);
 		}else {
 			student.setSpecialcategory(newcateg);
@@ -1284,7 +1284,7 @@ public class StudentService {
 		student.setBranchid(Integer.parseInt(strBranchId));
 		student.setUserid(Integer.parseInt(userId));
 
-		if(puDetails.getIdpudetails()!=null) {
+		if(puDetails.getIdpudetails()!=0) {
 			new studentDetailsDAO().updatePuDetails(puDetails);
 			student.setPudetails(puDetails);
 		}
