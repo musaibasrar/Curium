@@ -346,14 +346,14 @@ public class HrService {
 		return false;
 	}
 
-	public boolean deleteAdvaceSalaryApproval() {
-		String idPayAdvanceSalary = DataUtil.emptyString(request.getParameter("payadvance"));
+	public ResultResponse deleteAdvaceSalaryApproval(DeleteAdvaceSalaryApprovalDto dto) {
+		String idPayAdvanceSalary = DataUtil.emptyString(dto.getIdPayAdvanceSalary());
 		if(!idPayAdvanceSalary.equalsIgnoreCase("")){
 		Payadvancesalary payAdvance = new Payadvancesalary();
 		payAdvance.setIdpayadvancesalary(Integer.parseInt(idPayAdvanceSalary));
-		return new HrDAO().deleteAdvaceSalaryApproval(payAdvance);
+		return ResultResponse.builder().success(new HrDAO().deleteAdvaceSalaryApproval(payAdvance)).build();
 		}
-		return false;
+		return ResultResponse.builder().success(false).build();
 	}
 
 	public boolean salaryIssue() {

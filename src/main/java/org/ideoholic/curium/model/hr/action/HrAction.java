@@ -191,7 +191,7 @@ public class HrAction {
 
 	@PostMapping("/deleteAdvaceSalaryApproval")
 	public String deleteAdvaceSalaryApproval() {
-		if(new HrService(request, response).deleteAdvaceSalaryApproval()){
+		if(hrActionAdapter.deleteAdvaceSalaryApproval()){
 			return "advancesalaryapproval";	
 		}
 		return error;
