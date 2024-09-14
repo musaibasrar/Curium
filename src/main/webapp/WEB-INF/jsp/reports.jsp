@@ -438,17 +438,17 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
+            				 <a target="mainFrame" href="/sneha/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            				 <a target="mainFrame" href="/sneha/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
+            				 <a target="mainFrame" href="/bsr/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
             			</td>
             		</tr>
             		<tr>
@@ -595,20 +595,6 @@ for(Cookie cookie : cookies){
 			</table>
 		</div>
 		
-		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
-
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-		
           <!--   <h5 class="sideaccordian">
 			<a href="#">Appointments</a>
 		</h5>
@@ -631,7 +617,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
+            				 <a target="mainFrame" href="/shatabdi/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
             			</td>
             		</tr>
             		
