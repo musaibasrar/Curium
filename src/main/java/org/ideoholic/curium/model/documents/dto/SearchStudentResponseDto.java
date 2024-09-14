@@ -24,4 +24,5 @@ public class SearchStudentResponseDto {
 		private List<Parents> searchStudentList;
 		private List<Exams> examsList;
 		private List<Subject> subjectList;
+		private String classSearch;
 }

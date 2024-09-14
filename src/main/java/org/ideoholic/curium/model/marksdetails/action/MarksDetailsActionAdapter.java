@@ -183,4 +183,17 @@ public class MarksDetailsActionAdapter {
 
         return responseDto.isSuccess();
     }
+    
+    public boolean generateReportSingleExams() {
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingle(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+
+        return responseDto.isSuccess();
+    }
 }
