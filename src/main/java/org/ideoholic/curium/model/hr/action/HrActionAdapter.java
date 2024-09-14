@@ -181,6 +181,29 @@ public class HrActionAdapter {
 
         hrService.deletePf(dto);
     }
+    public boolean saveAdvanceSalary() {
+        HrService hrService = new HrService(request,response);
+
+        SaveAdvanceSalaryDto dto = new SaveAdvanceSalaryDto();
+        dto.setAmount(request.getParameter("amount"));
+        dto.setDeductionPerMonth(request.getParameter("deductionpermonth"));
+        dto.setDeductionMonth(request.getParameter("deductionmonth"));
+        dto.setDeductionYear(request.getParameter("deductionyear"));
+        dto.setStaffId(request.getParameter("staffid"));
+        dto.setYear(request.getParameter("year"));
+        dto.setMonth(request.getParameter("month"));
+        dto.setSalaryForDay(request.getParameter("salaryforday"));
+        dto.setDateAdvance(request.getParameter("dateadvance"));
+
+        ResultResponse result = hrService.saveAdvanceSalary(dto,
+                httpSession.getAttribute(BRANCHID).toString(),
+                httpSession.getAttribute(USERID).toString());
+
+
+
+
+        return result.isSuccess();
+    }
 
 
 }
