@@ -10,7 +10,7 @@ public class ExamRank implements java.io.Serializable,Comparable<ExamRank>{
 	private Integer id;
 	private Integer sid;
 	private Integer examid;
-	private Integer marksobtained;
+	private float marksobtained;
 	private String academicyear;
 	private String status;
 	private int rank;
@@ -18,7 +18,7 @@ public class ExamRank implements java.io.Serializable,Comparable<ExamRank>{
 	private int userid;
 	public ExamRank() {
 	}
-	public ExamRank(Integer id, Integer sid, Integer examid, Integer marksobtained, String academicyear, String status,
+	public ExamRank(Integer id, Integer sid, Integer examid, float marksobtained, String academicyear, String status,
 			int rank, int branchid, int userid) {
 		this.id = id;
 		this.sid = sid;
@@ -48,10 +48,10 @@ public class ExamRank implements java.io.Serializable,Comparable<ExamRank>{
 	public void setExamid(Integer examid) {
 		this.examid = examid;
 	}
-	public Integer getMarksobtained() {
+	public float getMarksobtained() {
 		return marksobtained;
 	}
-	public void setMarksobtained(Integer marksobtained) {
+	public void setMarksobtained(float marksobtained) {
 		this.marksobtained = marksobtained;
 	}
 	public String getAcademicyear() {
@@ -86,7 +86,7 @@ public class ExamRank implements java.io.Serializable,Comparable<ExamRank>{
 	}
 	@Override
 	public int compareTo(ExamRank examRank) {
-		 int marksObtained = ((ExamRank) examRank).getMarksobtained();
+		 float marksObtained = ((ExamRank) examRank).getMarksobtained();
 	        return Double.compare(marksObtained, this.marksobtained);
 	}
 	

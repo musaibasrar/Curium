@@ -53,8 +53,8 @@ public class SubjectDetailsService {
 			String[] subjectNameId = DataUtil.emptyString(request.getParameter("subjectname")).split(":");
 			subject.setSubjectname(subjectNameId[0]);
 			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
-			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
-			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
+			subject.setMinmarks(Float.parseFloat(request.getParameter("minmarks")));
+			subject.setMaxmarks(Float.parseFloat(request.getParameter("maxmarks")));
 			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));
 			subject.setExamclass(DataUtil.emptyString(request.getParameter("examclass")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
