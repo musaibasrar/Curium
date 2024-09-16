@@ -204,6 +204,16 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean deleteAdvaceSalaryApproval() {
+        HrService hrService = new HrService(request,response);
+
+        DeleteAdvaceSalaryApprovalDto dto = new DeleteAdvaceSalaryApprovalDto();
+        dto.setIdPayAdvanceSalary(request.getParameter("payadvance"));
+
+        ResultResponse result = hrService.deleteAdvaceSalaryApproval(dto);
+
+        return result.isSuccess();
+    }
 
 
 }
