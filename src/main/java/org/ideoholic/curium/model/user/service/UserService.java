@@ -568,9 +568,6 @@ public class UserService {
 			
 			if(!modeOfPayment.equalsIgnoreCase("")){
 				querySub = querySub +" AND feesdetails.paymenttype = '"+modeOfPayment+"'" ;
-				 httpSession.setAttribute("modeofpayment", modeOfPayment);
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("modeofpayment")))) {
-				querySub = querySub +" AND feesdetails.paymenttype = '"+(String) httpSession.getAttribute("modeofpayment")+"'" ;
 			}
 			
 			queryMain = queryMain+querySub;

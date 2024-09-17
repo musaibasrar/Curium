@@ -9,6 +9,10 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +36,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
+import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
@@ -2228,6 +2236,111 @@ public class FeesCollectionService {
 			}
 		
 			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+		}
+		
+	  }
+
+	public void getDefaulterReport() {
+		
+		
+		//Get Students
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		String classSearch = DataUtil.emptyString(request.getParameter("class"));
+		String exam = DataUtil.emptyString(request.getParameter("exam"));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		
+		
+		String querySub = "";
+
+			querySub = querySub + " parents.Student.classstudying like '"
+					+ classSearch + "--%' AND (parents.Student.promotedyear='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"' or parents.Student.yearofadmission='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		//End Students
+		
+		//Get Last Two Months
+			String monthOne = null;
+			String monthTwo = null;
+			Date startDate = null;
+			List<Examschedule> examschedules = new ArrayList<Examschedule>();
+			examschedules = new ExamDetailsDAO().getExamScheduleDetails(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), classSearch, exam, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
+			for (Examschedule examschedule : examschedules) {
+				 Date currentDate = examschedule.getDate();
+				    
+				    if (startDate == null || currentDate.before(startDate)) {
+				        startDate = currentDate;
+				    }
+			}
+			
+			// Example start date
+			String startDateString = DateUtil.dateParseryyyymmdd(startDate);
+			LocalDate startLDate = LocalDate.parse(startDateString, DateTimeFormatter.ISO_LOCAL_DATE);
+
+	        // Get the last two months
+	        LocalDate firstPreviousMonth = startLDate.minusMonths(1);
+	        LocalDate secondPreviousMonth = startLDate.minusMonths(2);
+
+	        // Get the month names in full format
+	        monthOne = firstPreviousMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+	        monthTwo = secondPreviousMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+
+	        
+		//
+		
+		
+		
+		//Get Fees Categories
+		 List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classSearch,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		 List<Integer> feesCatList = new ArrayList<>(); 
+		 for (Feescategory CatFeesList : feecategoryList) {
+			 feesCatList.add(CatFeesList.getIdfeescategory());
+		}
+		//End Fees Categories
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+			
+			for (Parents parents : searchStudentList) {
+				
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+				String feeStatus = "";
+				long id = parents.getStudent().getSid();
+				List<Studentfeesstructure> feesstructureMain = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
+				
+				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
+					Long dueAmount =0l;
+					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
+					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo))) {
+						feesStructure.add(studentFeesStructure);
+						feeStatus = "Defaulter";
+					}else {
+						feesStructure.add(studentFeesStructure);	
+					}
+				}
+				
+				if (feesStructure.size() > 0) {
+					parents.setAddresstemporary(feeStatus);
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesStructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
+			}
+		
+			httpSession.setAttribute("studentfeesreportdefualterlist", studentFeesReportList);
 		}
 		
 	  }

@@ -10,18 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
-import org.ideoholic.curium.model.examdetails.action.ExamDetailsAction;
+import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -269,16 +268,19 @@ public class ExamDetailsService {
 		String admNo = request.getParameter("admno");
 		String studentName = request.getParameter("studentName");
 		String academicYear = request.getParameter("academicyear");
-		
+		String[] studentIds = request.getParameterValues("studentIDs");
 		if(examName!=null){
 		
 		List<Parents> studentList = new ArrayList<Parents>();
 		List<Examschedule> examscheduleList = new ArrayList<Examschedule>();
 		String classStudying = DataUtil.emptyString(request.getParameter("class"));
 		classStudying = classStudying+"--" +"%";
+		List<Integer> studentIdsList = Arrays.stream(studentIds)
+                						.map(Integer::parseInt)
+                							.collect(Collectors.toList());
 		
 		if(admNo==""){
-			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '"+classStudying+"' and (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = "+httpSession.getAttribute(BRANCHID).toString()+" order by parents.Student.sid desc");
+			studentList = new DocumentDAO().getListofStudentDetail(studentIdsList);
 		}else{
 			Parents parent = new Parents();
 			Student student = new Student();

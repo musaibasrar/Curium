@@ -337,12 +337,21 @@ background-color:rgba(0, 0, 0, 0);
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "180px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
 			"bInfo" : false,
+			"bAutoWidth" : false
+		});
+		$('#myTableDefaulter').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -370,8 +379,22 @@ background-color:rgba(0, 0, 0, 0);
 	$(function() {
 
 		$("#tabs").tabs();
+		$("#effect").hide();
+		/* $("#effect").show(); */
 		$("#search").button().click(function() {
 				search();	
+		});
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
 		});
 		
 		$("#addSchedule").button({
@@ -382,8 +405,6 @@ background-color:rgba(0, 0, 0, 0);
 	    	addRow();
 	    	 return false;
 		});
-		
-		$("#effect").show();
 		
 	        $('#chckHead').click(function () {
 	            var length = $('.chcktbl:checked').length;
@@ -494,10 +515,13 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1">
 			
+			<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			
-				
 				<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Hall Ticket</a></li>
@@ -646,7 +670,59 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search Result </td>
+					<td class="headerTD">Search Result</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTableDefaulter">
+
+				<thead>
+					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th title="click to sort" class="headerText">Sl.No</th> -->
+						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
+						<th title="click to sort" class="headerText">Status</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:set var="TotalPaidAmount" value="0" />
+					<c:set var="TotalDueAmount" value="0" />
+					<c:set var="TotalSum" value="0" />
+					
+					<c:forEach items="${studentfeesreportdefualterlist}" var="studentfeesreportlist" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktbl"
+								name="studentIDs"
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								<%-- <td class="dataText"><c:out
+										value="${status.index+1}" /></td> --%>
+							<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.addresstemporary}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
+                        </tr></tfoot>
+			</table>
+			
+			<table width="100%">
+				<tr>
+					<td class="headerTD">Exam Schedule </td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -697,11 +773,8 @@ for(Cookie cookie : cookies){
 
 
 				</tbody>
-				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
-                        </tr></tfoot>
+				
 			</table>
-
 		</div>
 
 	</form>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
@@ -47,7 +48,7 @@ public class ExamDetailsAction {
 		new ExamDetailsService(request, response).getExamScheduleDetails();
 		new ExamDetailsService(request, response).readListOfExams();
 		new SubjectDetailsService(request, response).readListOfSubjects();
-		
+		new FeesCollectionService(request, response).getDefaulterReport();
 		return "generatehallticket";
 	}
 

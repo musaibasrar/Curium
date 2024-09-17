@@ -344,6 +344,7 @@
     display: none;
 }
 
+
 </style>
 <style>
 #button {
@@ -389,12 +390,12 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "780px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
+			"bSort" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -559,13 +560,19 @@
 		        	});
 		            
 		            
-		            function markabsent(cheese){
-		            	if(cheese.value=="P"){
-		            		cheese.value="A";
-		            	}else if(cheese.value=="A"){
-		            		cheese.value="P";
+		            function markabsent(cheese) {
+		            	  var row = cheese.parentElement.parentElement; // Get the current row
+		            	  var nameLabel = row.querySelector('#studentName'); // Get the name label in the row
+		            	  
+		            	  if (cheese.value == "P") {
+		            	    cheese.value = "A";
+		            	    nameLabel.style.color = "#de0000"; // Change name color for absent (blue)
+		            	  } else if (cheese.value == "A") {
+		            	    cheese.value = "P";
+		            	    nameLabel.style.color = "#2c2c70"; // Change name color for present (red)
+		            	  }
 		            	}
-		            }
+
         </script>
 
 
@@ -687,15 +694,15 @@ for(Cookie cookie : cookies){
 						</td>
 				</tr>
 			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
+			<table width="100%" border="2" style="border-color: #4b6a84;"
 				id="myTable">
 
 				<thead>
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
+						<th title="click to sort" class="headerText">Admission Number/Name/Attendance Status</th>
+						<!-- <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th> -->
 					</tr>
 				</thead>
 
@@ -708,12 +715,35 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"
 								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
+							<td class="dataText">
+								<table>
+									<tr>
+  <td style="width: 20px;text-align: left;font-size:20px;">
+    <label style="color: #2c2c70"><c:out value="${status.index+1})" /></label>
+  </td>
+  <td style="width: 150px;text-align: left;font-size:25px;">
+    <c:out value="${attendanceList.admissionnumber}" />
+  </td>
+  <td style="width: 450px;text-align: left;font-size:50px;">
+    <label id="studentName" style="text-transform: capitalize;font-weight: bold;">
+      <c:out value="${attendanceList.name}" />
+    </label>
+  </td>
+  <td style="width: 50px;text-align: left;font-size:60px;">
+    <input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" 
+           style="text-transform:uppercase; width: 50px;font-size: 30px;" 
+           readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
+  </td>
+</tr>
+
+								
+								</table>
+							
+							
+							<%-- <td class="dataText"><c:out value="${attendanceList.name}" /></td>
 							<td class="dataText">
 							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
-							</td>
+							</td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
