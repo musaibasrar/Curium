@@ -588,5 +588,33 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			HibernateUtil.closeSession();
 		}
 	}
+	
+	public List<Studentdailyattendance> readStudentAttendance(String date) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+		try {
+			transaction = session.beginTransaction();
+			studentdailyattendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"'").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentdailyattendance;
+	}
+
+	public List<Studentdailyattendance> readStudentClassAttendance(String date, List<String> attendeeid) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and attendeeid IN (:ids)");
+			query.setParameterList("ids", attendeeid);
+			studentdailyattendance = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentdailyattendance;
+	}
 
 }

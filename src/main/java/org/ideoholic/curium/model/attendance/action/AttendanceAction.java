@@ -284,4 +284,18 @@ public class AttendanceAction {
 		new EmployeeService(request, response).ViewAllEmployee();
 		return "attendancemaster";
 	}
+	
+
+	@GetMapping("/attendanceReport")
+	public String attendanceReport() {
+		return "attendancesummaryreport";
+
+	}
+	
+	@PostMapping("/attendanceSummaryReport")
+	public String showReports() {
+		new AttendanceService(request, response).attendanceSummaryReport();
+		return "attendancesummaryreport";
+
+	}
 }

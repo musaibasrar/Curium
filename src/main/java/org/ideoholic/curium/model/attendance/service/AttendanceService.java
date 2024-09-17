@@ -56,6 +56,8 @@ import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dao.UserDAO;
@@ -1438,5 +1440,105 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		}
 		
 }
+	
+	public void attendanceSummaryReport() {
+		String date = DateUtil.dateFromatConversionSlash(request.getParameter("attendancedate").toString());
+		int present = 0;
+		int absent = 0;
+		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().readStudentAttendance(date);
+		for (Studentdailyattendance listStudent : listStudentAttendance) {
+			String attendancestatus = listStudent.getAttendancestatus();
+			if (attendancestatus.equals("P")) {
+				present = present + 1;
+			} else {
+				absent = absent + 1;
+			}
+		}
+		request.setAttribute("present", present);
+		request.setAttribute("absent", absent);
+		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	    List<Classsec> secList = new ArrayList<Classsec>();
+	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
+		
+	    for(Classsec classdetail : classsecList) {
+	    	String classDetails =classdetail.getClassdetails(); 
+	    	String section = classdetail.getSection();
+	    	if(classDetails.equalsIgnoreCase("") && !section.equalsIgnoreCase("")) {
+	    		secList.add(classdetail);
+	    	}
+	    }
+	    
+	    int sizeOfArray = classsecList.size()*secList.size();
+	    String[] classSecAttendance = new String[sizeOfArray];
+	    int attendanceValue= 0 ;
+	    	for (Classsec classsec : classsecList) {
+	    		int presentClass = 0;
+				int absentClass = 0;
+				boolean classAttendancePushed = false;
+				if(!classsec.getClassdetails().equalsIgnoreCase("")) {
+					
+				String classStudying = classsec.getClassdetails()+"--";
+				
+	    		for (Classsec section : secList) {
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
+					List<String> studentExternalIdList = new ArrayList<String>();
+					for (Student students : studentList) {
+						studentExternalIdList.add(students.getStudentexternalid());
+					}
+					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().readStudentClassAttendance(date,studentExternalIdList);
+					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
+						String attendancestatus = listStudent.getAttendancestatus();
+						if (attendancestatus.equals("P")) {
+							presentClass = presentClass + 1;
+						} else {
+							absentClass = absentClass + 1;
+						}
+					}
+					
+					if(presentClass!=0 || absentClass!=0) {
+						//studentAttendanceMap.put(classStudying, attendanceStatus);
+						classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+" "+section.getSection()+"/"+presentClass+"/"+absentClass+"";
+						String printClass=classsec.getClassdetails();
+						String printSection=section.getSection();
+						System.out.println("class = "+printClass+" Section ="+printSection+" present Student = "+presentClass+"Absent = "+absentClass);
+						attendanceValue++;
+						presentClass=0;
+						absentClass=0;
+						classAttendancePushed= true;
+					}
+					
+					
+				}
+	    		
+	    		if(!classAttendancePushed) {
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
+					List<String> studentExternalIdList = new ArrayList<String>();
+					for (Student students : studentList) {
+						studentExternalIdList.add(students.getStudentexternalid());
+					}
+					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().readStudentClassAttendance(date,studentExternalIdList);
+					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
+						String attendancestatus = listStudent.getAttendancestatus();
+						if (attendancestatus.equals("P")) {
+							presentClass = presentClass + 1;
+						} else {
+							absentClass = absentClass + 1;
+						}
+					}
+					
+					  if(presentClass!=0 || absentClass!=0) { 
+						  classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+"/"+presentClass+"/ "+absentClass+"";
+					  	attendanceValue++;
+					  	presentClass=0;
+						absentClass=0;
+					     		}
+				
+	    			}
+	    	}
+	}
+	    	 request.setAttribute("studentAttendanceMap", classSecAttendance);
+
+	}
+
 
 }
