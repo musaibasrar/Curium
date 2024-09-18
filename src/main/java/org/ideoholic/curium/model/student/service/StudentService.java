@@ -2144,6 +2144,7 @@ public class StudentService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		if(branchId!=null){
+			result.setSuccess(true);
 			result.setMessage("addStudent");
 			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
