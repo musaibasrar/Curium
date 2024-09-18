@@ -25,48 +25,31 @@ import org.mapstruct.factory.Mappers;
 public interface StudentMapper {
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
-    static String createConClassStudying(StudentDto studentDto) {
+    static String createConClassStudying(CreateStudentDto createStudentDto) {
         String conClassStudying = "";
-        String addClass = DataUtil.emptyString(studentDto.getAddclass());
+        String addClass = DataUtil.emptyString(createStudentDto.getAddclass());
         if (!addClass.equalsIgnoreCase("")) {
             conClassStudying = addClass + "--";
         }
-        String addSec = DataUtil.emptyString(studentDto.getAddsec());
+        String addSec = DataUtil.emptyString(createStudentDto.getAddsec());
         if (!addSec.equalsIgnoreCase("")) {
             conClassStudying = conClassStudying + addSec;
         }
         return conClassStudying;
     }
 
-    static String createClassadmittedin(StudentDto studentDto) {
+    static String createClassadmittedin(CreateStudentDto createStudentDto) {
         String conClassAdmittedIn = "";
-        String addClassE = DataUtil.emptyString(studentDto.getAddclass());
+        String addClassE = DataUtil.emptyString(createStudentDto.getAddclass());
         if (!conClassAdmittedIn.equalsIgnoreCase("")) {
             conClassAdmittedIn = addClassE + "--";
         }
-        String addSecE = DataUtil.emptyString(studentDto.getAddsec());
+        String addSecE = DataUtil.emptyString(createStudentDto.getAddsec());
         if (!addSecE.equalsIgnoreCase("")) {
             conClassAdmittedIn = conClassAdmittedIn + addSecE;
         }
         return conClassAdmittedIn;
     }
-
-    /*static String createSid(StudentDto studentDto){
-        String sId = "";
-        String addSid = studentDto.getId().toString();
-        if(!addSid.equalsIgnoreCase("")){
-            sId=addSid+""
-        }
-    }*/
-
-    /*static String conName(StudentDto studentDto){
-        String conName = "";
-        String addName = DataUtil.emptyString(studentDto.getName());
-        if(!addName.equalsIgnoreCase("")){
-            conName = "name==" + addName;
-        }
-        return conName;
-    }*/
 
     @Mapping(target = "classstudying", expression = "java(StudentMapper.createConClassStudying(studentDto))")
     @Mapping(target = "classadmittedin", expression = "java(StudentMapper.createClassadmittedin(studentDto))")
@@ -89,13 +72,12 @@ public interface StudentMapper {
     @Mapping(target = "instructionmediumlastschool", source = "mediumofinstructionlastschool")
     @Mapping(target = "yearofadmission", source = "yearofadmission")
     @Mapping(target = "promotedyear", source = "promotedyear")
-    Student mapStudent(StudentDto studentDto);
+    Student mapStudent(CreateStudentDto studentDto);
 
-    @Mapping(target = "parentsannualincome", source = "annualincome")
     @Mapping(target = "addresspermanent", source = "permanentaddress")
     @Mapping(target = "addresstemporary", source = "temporaryaddress")
     @Mapping(target = "remarks", source = "remarksadditional")
-    Parents mapParent(StudentDto studentDto);
+    Parents mapParent(CreateStudentDto studentDto);
 
     @Mapping(target = "exampassedappearance", source = "pep")
     @Mapping(target = "exampassedyear", source = "passedyear")
@@ -105,10 +87,7 @@ public interface StudentMapper {
     @Mapping(target = "aggregatemarkssslc", source = "aggmarks")
     @Mapping(target = "sslcmediuminstruction", source = "xmediuminstruction")
     @Mapping(target = "pumediuminstruction", source = "PUmediuminstruction")
-    @Mapping(target = "idpudetails", source = "pudetailsid")
-    @Mapping(target = "optionalsubjects", source = "subjectspart1")
-    @Mapping(target = "compulsorysubjects", source = "subjectspart2")
-    Pudetails mapPudetails(StudentDto studentDto);
+    Pudetails mapPudetails(CreateStudentDto studentDto);
 
     @Mapping(target = "exampassedappearance", source = "pepdc")
     @Mapping(target = "exampassedyear", source = "passedyeardc")
@@ -122,7 +101,41 @@ public interface StudentMapper {
     @Mapping(target = "transfercertificate", source = "originaltc")
     @Mapping(target = "proficiencysports", source = "games")
     @Mapping(target = "areyouemployee", source = "employer")
-    Degreedetails mapDegreedetails(StudentDto studentDto);
+    Degreedetails mapDegreedetails(CreateStudentDto studentDto);
     
-    Classsec mapClassec(StudentDto studentDto);
+    Classsec mapClassec(CreateStudentDto createStudentDto);
+
+
+    static String createConClassStudyings(StudentDto studentDto) {
+        String conClassStudying = "";
+        String addClass = DataUtil.emptyString(studentDto.getAddclass());
+        if (!addClass.equalsIgnoreCase("")) {
+            conClassStudying = addClass + "--";
+        }
+        String addSec = DataUtil.emptyString(studentDto.getAddsec());
+        if (!addSec.equalsIgnoreCase("")) {
+            conClassStudying = conClassStudying + addSec;
+        }
+        return conClassStudying;
+    }
+
+    static String createClassadmittedina(StudentDto studentDto) {
+        String conClassAdmittedIn = "";
+        String addClassE = DataUtil.emptyString(studentDto.getAddclass());
+        if (!conClassAdmittedIn.equalsIgnoreCase("")) {
+            conClassAdmittedIn = addClassE + "--";
+        }
+        String addSecE = DataUtil.emptyString(studentDto.getAddsec());
+        if (!addSecE.equalsIgnoreCase("")) {
+            conClassAdmittedIn = conClassAdmittedIn + addSecE;
+        }
+        return conClassAdmittedIn;
+    }
+
+    /*@Mapping(target = "classstudying", expression = "java(StudentMapper.createConClassStudyings(studentDto))")
+    @Mapping(target = "classadmittedin", expression = "java(StudentMapper.createClassadmittedina(studentDto))")*/
+    Student mapStudent(StudentDto studentDto);
+    Parents mapParent(StudentDto studentDto);
+    Pudetails mapPudetails(StudentDto studentDto);
+    Degreedetails mapDegreedetails(StudentDto studentDto);
 }

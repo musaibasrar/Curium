@@ -304,16 +304,7 @@
                 form1.submit();
             }
             
-            function typeofrelation(){
-                var listitem = document.getElementById("subscriber");
-                var listitemtext = listitem.options[listitem.selectedIndex].text;
-                alert(listitemtext);
-                
-                if(listitemtext=="1"){
-                    document.getElementById("typeofrelation").value="subscriber";
-                    
-                }
-            }
+
             
       
         </script>
@@ -398,7 +389,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
-        <form  method="post" id="form1" modelAttribute="student">
+        <form  method="post" id="form1" enctype="multipart/form-data">
 
             <div>
                 <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
@@ -516,14 +507,17 @@ for(Cookie cookie : cookies){
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
+                            "${student.classstudying}"
+
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
-						    ${splt} 
+						    ${splt}
 							</c:forEach>
                                <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
                             <td width="25%" class="tablerows">
+                                    "${student.classadmittedin}"
 		                            <c:forEach var="splt" items="${fn:split(student.classadmittedin,'--')}">
 								    ${splt} 
 									</c:forEach>

@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.annotations.Parent;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -14,7 +13,6 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
-import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
@@ -68,13 +66,13 @@ public class StudentService {
 		this.standardActionAdapter=standardActionAdapter;
 	}
 
-	public ResultResponse addStudent(StudentDto studentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
+	public ResultResponse addStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
 
-		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
-		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
-		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
-		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(studentDto);
+		Student student = StudentMapper.INSTANCE.mapStudent(createStudentDto);
+		Parents parents = StudentMapper.INSTANCE.mapParent(createStudentDto);
+		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
+		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
 
 		try {
 			// Process form file field (input type="file")
@@ -99,7 +97,7 @@ public class StudentService {
 		student.setDroppedout(0);
 		student.setLeftout(0);
 		student.setStudentexternalid(branchCode);
-		student.setBranchid(Integer.parseInt(branchCode));
+		student.setBranchid(Integer.parseInt(branchId));
 		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
@@ -120,7 +118,7 @@ public class StudentService {
 			if(yoa == ca || yoa < ca) {
 				setYear = strCurrentAcademicYear;
 			}else if (yoa > ca) {
-				setYear = studentDto.getYearofadmission();
+				setYear = createStudentDto.getYearofadmission();
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear);
@@ -807,7 +805,7 @@ public class StudentService {
 		boolean result = false;
 		try {
 			long id = Long.parseLong(studentId);
-			Student student = new studentDetailsDAO().readUniqueObject(id);
+
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
@@ -842,14 +840,14 @@ public class StudentService {
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
 			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
-			if (student == null) {
+			if (parents == null) {
 				result = false;
 			} else {
-				httpSession.setAttribute("student", student);
-				String classStudying = student.getClassstudying();
+				httpSession.setAttribute("student", parents.getStudent());
+				String classStudying = parents.getStudent().getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("classstudying", classStudying);
 					httpSession.setAttribute("secstudying", "");
 					if(classParts.length>1) {
 						httpSession.setAttribute("secstudying", classParts[1]);
@@ -860,7 +858,7 @@ public class StudentService {
 					httpSession.setAttribute("secstudying", "");
 				}
 
-				String classAdmitted = student.getClassadmittedin();
+				String classAdmitted = parents.getStudent().getClassadmittedin();
 
 				if (!classAdmitted.equalsIgnoreCase("")) {
 
@@ -1051,12 +1049,12 @@ public class StudentService {
 		return result;
 	}
 
-	public String updateStudent(StudentDto studentDto, MultipartFile[] listOfFiles) {
-		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
-		Classsec classsec = StudentMapper.INSTANCE.mapClassec(studentDto);
-		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
-		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
-		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(studentDto);
+	public String updateStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles) {
+		Student student = StudentMapper.INSTANCE.mapStudent(createStudentDto);
+		Classsec classsec = StudentMapper.INSTANCE.mapClassec(createStudentDto);
+		Parents parents = StudentMapper.INSTANCE.mapParent(createStudentDto);
+		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
+		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
 		String studentPicUpdate = null;
 
 		try {
@@ -1166,6 +1164,8 @@ public class StudentService {
 
 		String dropdowncateg = studentDto.getSpecialcategory();
 		String newcateg = studentDto.getNewcategory();
+
+		student.setAdmissionnumber(studentDto.getAdmissionnumber());
 
 
 		try{
@@ -1284,12 +1284,12 @@ public class StudentService {
 		student.setBranchid(Integer.parseInt(strBranchId));
 		student.setUserid(Integer.parseInt(userId));
 
-		if(puDetails.getIdpudetails()!=0) {
+		if(puDetails.getIdpudetails()!=null) {
 			new studentDetailsDAO().updatePuDetails(puDetails);
 			student.setPudetails(puDetails);
 		}
 
-		if(degreeDetails.getIddegreedetails()!=null) {
+		if(degreeDetails.getIddegreedetails()!=0) {
 			new studentDetailsDAO().updateDegreeDetails(degreeDetails);
 			student.setDegreedetails(degreeDetails);
 		}

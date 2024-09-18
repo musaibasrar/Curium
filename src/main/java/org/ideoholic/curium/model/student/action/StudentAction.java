@@ -8,6 +8,7 @@ import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
+import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -271,7 +272,7 @@ public class StudentAction {
 		}
 	}
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public String addStudent(@ModelAttribute("student") StudentDto student,
+	public String addStudent(@ModelAttribute("student") CreateStudentDto student,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
 		if (studentActionAdapter.addStudent(student, uploadedFiles)) {
 			return "saved";

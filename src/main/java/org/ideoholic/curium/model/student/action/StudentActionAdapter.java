@@ -8,6 +8,7 @@ import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -159,7 +160,7 @@ public class StudentActionAdapter {
         studentService.archiveMultiple(dto);
     }
 
-    public boolean addStudent(StudentDto student, MultipartFile[] uploadedFiles) {
+    public boolean addStudent(CreateStudentDto student, MultipartFile[] uploadedFiles) {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         student.setYearofadmission(request.getParameter("yearofadmission"));
@@ -189,7 +190,7 @@ public class StudentActionAdapter {
         student.setPid(DataUtil.parseInt(request.getParameter("idparents")));
         student.setName(request.getParameter("name"));
         student.setGender(request.getParameter("gender"));
-        student.setDateofbirth(request.getParameter("dateofbirth"));
+        student.setDateofbirth(DateUtil.indiandateParser(request.getParameter("dateofbirth")));
         student.setAge(DataUtil.parseInt(request.getParameter("age")));
         student.setClassSec(request.getParameter("classsec"));
         student.setSecStudying(request.getParameter("secstudying"));
@@ -197,8 +198,8 @@ public class StudentActionAdapter {
         student.setAdmsecE(request.getParameter("admsec"));
         student.setLastclass(request.getParameter("lastclass"));
         student.setLastschool(request.getParameter("lastschool"));
-        student.setAdmnno(request.getParameter("admnno"));
-        student.setDateofadmission(request.getParameter("dateofadmission"));
+        student.setAdmissionnumber(request.getParameter("admnno"));
+        student.setAdmissiondate(DateUtil.indiandateParser(request.getParameter("dateofadmission")));
         student.setBloodgroup(request.getParameter("bloodgroup"));
         student.setNationality(request.getParameter("nationality"));
         student.setReligion(request.getParameter("religion"));
@@ -214,13 +215,12 @@ public class StudentActionAdapter {
         student.setStudentDoc5Update(request.getParameter("studentdoc5update"));
         student.setStudentexternalid(request.getParameter("studentexternalid"));
         student.setCrecord(request.getParameter("crecord"));
-        student.setCreateddate(request.getParameter("crecorddate"));
-        student.setPlace(request.getParameter("place"));
+        student.setPlaceofbirth(request.getParameter("place"));
         student.setTcno(DataUtil.parseInt(request.getParameter("tcno")));
         student.setDateoftc(DataUtil.emptyString(request.getParameter("dateoftc")));
         student.setClassonleaving(request.getParameter("classonleaving"));
         student.setProgress(request.getParameter("progress"));
-        student.setDateofleaving(request.getParameter("dateofleaving"));
+        student.setDateleaving(request.getParameter("dateofleaving"));
         student.setReasonforleaving(request.getParameter("reasonforleaving"));
         student.setNotcissued(DataUtil.parseInt(request.getParameter("notcissued")));
         student.setDateoftcissued(request.getParameter("dateoftcissued"));
@@ -240,7 +240,7 @@ public class StudentActionAdapter {
         student.setDisabilitychild(request.getParameter("disabilitychild"));
         student.setSpecialcategory(request.getParameter("specialcategory"));
         student.setNewcategory(request.getParameter("newcategory"));
-        student.setSts(DataUtil.parseInt(request.getParameter("sts")));
+        student.setSts((request.getParameter("sts")));
         student.setRte(DataUtil.parseInt(request.getParameter("rte")));
         student.setPassedout(DataUtil.parseInt(request.getParameter("passedout")));
         student.setLeftout(DataUtil.parseInt(request.getParameter("leftout")));
@@ -254,8 +254,8 @@ public class StudentActionAdapter {
         student.setMothersname(request.getParameter("mothersname"));
         student.setProfession(request.getParameter("profession"));
         student.setAnnualincome(request.getParameter("annualincome"));
-        student.setPermanentaddress(request.getParameter("permanentaddress"));
-        student.setTemporaryaddress(request.getParameter("temporaryaddress"));
+        student.setAddresspermanent(request.getParameter("permanentaddress"));
+        student.setAddresstemporary(request.getParameter("temporaryaddress"));
         student.setNoofdependents(DataUtil.parseInt(request.getParameter("noofdependents")));
         student.setRemarksadditional(request.getParameter("remarksadditional"));
         student.setContactnumber(request.getParameter("contactnumber"));
@@ -310,6 +310,7 @@ public class StudentActionAdapter {
         student.setStudentDoc3Delete(request.getParameter("studentdoc3delete"));
         student.setStudentDoc4Delete(request.getParameter("studentdoc4delete"));
         student.setStudentDoc5Delete(request.getParameter("studentdoc5delete"));
+
 
         ResultResponse resultResponse = studentService.updateStudent(uploadedFiles, student, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
 
