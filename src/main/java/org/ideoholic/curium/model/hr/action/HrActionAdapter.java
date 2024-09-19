@@ -235,6 +235,16 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean salaryIssue() {
+        HrService hrService = new HrService(request,response);
+
+        SalaryIssueResponseDto result = hrService.salaryIssue(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("salaryissue",result.getPayAdvanceSalary() );
+
+
+        return result.isSuccess();
+
+    }
 
 
 }
