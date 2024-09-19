@@ -79,7 +79,7 @@ public class FeesCollectionActionAdapter {
     public void getStampFees() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        StampFeesDto dto = new StampFeesDto();
+        StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setId(request.getParameter("studentId"));
         dto.setStudentName(request.getParameter("studentname"));
@@ -151,7 +151,7 @@ public class FeesCollectionActionAdapter {
     public void getotherStampFees() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        StampFeesDto dto = new StampFeesDto();
+        StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setStudentId(request.getParameter("studentId"));
 
