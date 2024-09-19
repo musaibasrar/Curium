@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.hr.action;
 
-import org.apache.catalina.connector.Request;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.model.hr.service.HrService;
@@ -208,7 +207,7 @@ public class HrActionAdapter {
     public void salaryApprovalDispaly() {
         HrService hrService = new HrService(request,response);
 
-        SalaryApprovalResponseDto result = hrService.salaryApprovalDispaly(httpSession.getAttribute(BRANCHID).toString());
+        SalaryResponseDto result = hrService.salaryApprovalDispaly(httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("payadvancesalarylist", result.getPayAdvanceSalary());
     }
@@ -238,7 +237,7 @@ public class HrActionAdapter {
     public boolean salaryIssue() {
         HrService hrService = new HrService(request,response);
 
-        SalaryIssueResponseDto result = hrService.salaryIssue(httpSession.getAttribute(BRANCHID).toString());
+        SalaryResponseDto result = hrService.salaryIssue(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("salaryissue",result.getPayAdvanceSalary() );
 
 

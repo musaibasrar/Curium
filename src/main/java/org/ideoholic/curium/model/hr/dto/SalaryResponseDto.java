@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class SalaryIssueResponseDto {
-    private List<Payadvancesalary> payAdvanceSalary;
-    private boolean success;
+public class SalaryResponseDto {
+     private List<Payadvancesalary> payAdvanceSalary;
+     private boolean success;
 }
