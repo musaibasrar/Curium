@@ -848,6 +848,7 @@ public class StudentService {
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
 					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("classstudy", classParts[0]);
 					httpSession.setAttribute("secstudying", "");
 					if(classParts.length>1) {
 						httpSession.setAttribute("secstudying", classParts[1]);
@@ -1104,7 +1105,7 @@ public class StudentService {
 
 	}
 
-	public ResultResponse updateStudent(MultipartFile[] listOfFiles, StudentDto studentDto, String strBranchId, String userId) {
+	public Student updateStudent(MultipartFile[] listOfFiles, StudentDto studentDto, String strBranchId, String userId) {
 		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
 		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
@@ -1129,14 +1130,14 @@ public class StudentService {
 
 		}
 
-		addSec = DataUtil.emptyString(studentDto.getSecStudying());
+		addSec = DataUtil.emptyString(studentDto.getSecstudying());
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = conClassStudying+addSec;
 		}
 
 		student.setClassstudying(DataUtil.emptyString(conClassStudying));
 
-		addClassE = DataUtil.emptyString(studentDto.getAdmclassE());
+		addClassE = DataUtil.emptyString(studentDto.getClassadm());
 
 		if (!addClassE.equalsIgnoreCase("")) {
 			conClassAdmittedIn = addClassE+"--";
@@ -1282,7 +1283,7 @@ public class StudentService {
 		}
 		//student.setArchive(0);
 		student.setBranchid(Integer.parseInt(strBranchId));
-		student.setUserid(Integer.parseInt(userId));
+		student.setUserid(studentDto.getUserid());
 
 		if(puDetails.getIdpudetails()!=null) {
 			new studentDetailsDAO().updatePuDetails(puDetails);
@@ -1301,14 +1302,7 @@ public class StudentService {
 
 			parents = new parentsDetailsDAO().update(parents);
 		}
-		String stId = student.getSid().toString();
-		int branchId = student.getBranchid();
-		return ResultResponse
-				.builder()
-				.message(stId+"_"+branchId)
-				.success(true)
-				.build();
-
+		return student;
 	}
 
 	public boolean viewAllStudentsList() {
@@ -1678,6 +1672,7 @@ public class StudentService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		if(branchId!=null){
+			result.setSuccess(true);
 			result.setMessage("addStudent");
 			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {

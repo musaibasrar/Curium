@@ -132,8 +132,7 @@ public interface StudentMapper {
         return conClassAdmittedIn;
     }
 
-    /*@Mapping(target = "classstudying", expression = "java(StudentMapper.createConClassStudyings(studentDto))")
-    @Mapping(target = "classadmittedin", expression = "java(StudentMapper.createClassadmittedina(studentDto))")*/
+    @Mapping(target = "dateofbirth", expression = "java(DateUtil.indiandateParser(studentDto.getDateofbirth()))")
     Student mapStudent(StudentDto studentDto);
     Parents mapParent(StudentDto studentDto);
     Pudetails mapPudetails(StudentDto studentDto);
