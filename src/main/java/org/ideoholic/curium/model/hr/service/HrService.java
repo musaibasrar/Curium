@@ -332,21 +332,21 @@ public class HrService {
 		return result;
 	}
 
-	public boolean saveAdvanceSalaryApproval() {
+	public ResultResponse saveAdvanceSalaryApproval(AdvanceSalaryApprovalDto dto ,String branchId) {
 		
-		String paymentAdvance = request.getParameter("payadvance");
-		String reason = request.getParameter("reason_"+paymentAdvance);
-		String status = request.getParameter("status_"+paymentAdvance);
-		if(httpSession.getAttribute(BRANCHID)!=null && paymentAdvance!=null){
+		String paymentAdvance = dto.getPaymentAdvance();
+		String reason = dto.getReason();
+		String status = dto.getStatus();
+		if(branchId!=null && paymentAdvance!=null){
 		Payadvancesalary payAdvance = new Payadvancesalary();
 		payAdvance.setIdpayadvancesalary(Integer.parseInt(paymentAdvance));
 		payAdvance.setReason(DataUtil.emptyString(reason));
 		payAdvance.setStatus(DataUtil.emptyString(status));
-		payAdvance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		payAdvance.setBranchid(Integer.parseInt(branchId));
 		
-		return new HrDAO().saveAdvanceSalaryApproval(payAdvance);
+		return ResultResponse.builder().success(new HrDAO().saveAdvanceSalaryApproval(payAdvance)).build();
 		}
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public ResultResponse deleteAdvaceSalaryApproval(DeleteAdvaceSalaryApprovalDto dto) {

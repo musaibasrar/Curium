@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.hr.action;
 
+import org.apache.catalina.connector.Request;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.model.hr.service.HrService;
@@ -219,6 +220,18 @@ public class HrActionAdapter {
         dto.setIdPayAdvanceSalary(request.getParameter("payadvance"));
 
         ResultResponse result = hrService.deleteAdvaceSalaryApproval(dto);
+
+        return result.isSuccess();
+    }
+    public boolean saveAdvanceSalaryApproval() {
+        HrService hrService = new HrService(request,response);
+
+        AdvanceSalaryApprovalDto dto = new AdvanceSalaryApprovalDto();
+        dto.setPaymentAdvance(request.getParameter("payadvance"));
+        dto.setReason(request.getParameter("reason_"+dto.getPaymentAdvance()));
+        dto.setStatus(request.getParameter("status_"+dto.getPaymentAdvance()));
+
+        ResultResponse result = hrService.saveAdvanceSalaryApproval(dto, httpSession.getAttribute(BRANCHID).toString());
 
         return result.isSuccess();
     }
