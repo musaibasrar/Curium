@@ -207,7 +207,7 @@ public class HrAction {
 
 	@GetMapping("/salaryApproval")
 	public String salaryApproval() {
-		new HrService(request, response).salaryApprovalDispaly();
+		hrActionAdapter.salaryApprovalDispaly();
 		return "advancesalaryapproval";
 	}
 

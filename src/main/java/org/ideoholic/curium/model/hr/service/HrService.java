@@ -318,15 +318,18 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public void salaryApprovalDispaly() {
-		
+	public SalaryApprovalResponseDto salaryApprovalDispaly(String branchId) {
+		SalaryApprovalResponseDto result = new SalaryApprovalResponseDto();
+
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			payAdvanceSalary = new HrDAO().salaryApprovalDispaly(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
+		if (branchId != null) {
+			payAdvanceSalary = new HrDAO().salaryApprovalDispaly(Integer.parseInt(branchId));
 		}
-		
-		request.setAttribute("payadvancesalarylist", payAdvanceSalary);
+
+		result.setPayAdvanceSalary(payAdvanceSalary);
+
+		return result;
 	}
 
 	public boolean saveAdvanceSalaryApproval() {

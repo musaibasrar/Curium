@@ -204,6 +204,14 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public void salaryApprovalDispaly() {
+        HrService hrService = new HrService(request,response);
+
+        SalaryApprovalResponseDto result = hrService.salaryApprovalDispaly(httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("payadvancesalarylist", result.getPayAdvanceSalary());
+    }
+
     public boolean deleteAdvaceSalaryApproval() {
         HrService hrService = new HrService(request,response);
 
