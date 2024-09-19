@@ -166,6 +166,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setParents(parents);
 				 transferCertificateResponseDto.setTc(tc);
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
+				 return transferCertificateResponseDto;
 			 }else {
 					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
@@ -203,6 +204,7 @@ public class DocumentService {
 			 transferCertificateResponseDto.setParents(parents);
 			 transferCertificateResponseDto.setTc(tc);
 			 transferCertificateResponseDto.setStatus(TransferStatus.TCNEW);
+			 return transferCertificateResponseDto;
 		 }
 		 transferCertificateResponseDto.setStatus(TransferStatus.TCFAILED);
 		return transferCertificateResponseDto;
