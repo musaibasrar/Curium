@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.stampfees.action;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
@@ -18,9 +17,6 @@ public class StampFeesActionAdapter {
 
 	@Autowired
 	private HttpServletRequest request;
-
-	@Autowired
-	private HttpServletResponse response;
 
 	@Autowired
 	private HttpSession httpSession;

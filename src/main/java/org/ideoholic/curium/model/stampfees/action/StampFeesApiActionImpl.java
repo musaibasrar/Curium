@@ -2,9 +2,6 @@ package org.ideoholic.curium.model.stampfees.action;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
@@ -34,10 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/stampFeesProcess")
 public class StampFeesApiActionImpl implements StampFeesApiAction {
 
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
 	@Autowired
 	private YearService yearService;
 	@Autowired

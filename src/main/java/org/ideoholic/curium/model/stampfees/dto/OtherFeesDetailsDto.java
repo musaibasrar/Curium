@@ -1,10 +1,7 @@
 package org.ideoholic.curium.model.stampfees.dto;
 import java.util.List;
 
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
-import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -26,22 +23,5 @@ public class OtherFeesDetailsDto {
 	private Integer cayid;
 	private String currentacademicyear;
 	private List<Classsec> classsecList;
-
-	public void copyOtherFeesCategoryResponseDto(OtherFeesCategoryResponseDto otherFeesCategoryResponseDto) {
-		otherFeecategory = otherFeesCategoryResponseDto.getOtherFeesCategory();
-
-	}
-
-	public void copyCurrentacademicyear(Currentacademicyear currentAcademicYear) {
-		currentacademicyear = currentAcademicYear.getCurrentacademicyear();
-		cayid = currentAcademicYear.getCayid();
-
-	}
-
-	public void copyResultResponse(ResultResponse result) {
-		success = result.isSuccess();
-
-	}
-
 
 }
