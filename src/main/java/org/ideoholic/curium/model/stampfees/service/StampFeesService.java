@@ -284,8 +284,7 @@ public class StampFeesService {
 				}
 		    
         		String ItemLedgerId = properties.getProperty(itemAccount);
-		    System.out.println(itemAccount);
-        		//log.debug(ItemLedgerId);
+        		log.debug("The value of ItemLedgerId:{}", ItemLedgerId);
 		    if(ItemLedgerId!=null) {
 		    	result = Integer.parseInt(ItemLedgerId);
 		    }else {

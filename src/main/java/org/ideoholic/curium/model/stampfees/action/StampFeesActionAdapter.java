@@ -99,6 +99,7 @@ public class StampFeesActionAdapter {
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
 		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.multiClassSearch(searchStudentDto, BRANCHID);
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}

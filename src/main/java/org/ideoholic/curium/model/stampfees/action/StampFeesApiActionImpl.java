@@ -78,9 +78,9 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFees(branchId, currentAcademicYear);
 		Currentacademicyear currentacademicyear = yearService.getYear();
 		ResultResponse result = standardService.viewClasses(branchId);
-		feesDetailDto.copyFeescategoryResponseDto(feescategoryResponseDto);
-		feesDetailDto.copyCurrentacademicyear(currentacademicyear);
-		feesDetailDto.copyResultResponse(result);
+		feesDetailDto.setFeescategory(feescategoryResponseDto.getFeescategory()); 
+		feesDetailDto.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());
+		feesDetailDto.setSuccess(result.isSuccess());
 		return ResponseEntity.ok(feesDetailDto);
 	}
 
@@ -126,9 +126,9 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 				currentAcademicYear);
 		Currentacademicyear currentacademicyear = yearService.getYear();
 		ResultResponse result = standardService.viewClasses(branchId);
-		otherFeesDetailsDto.copyOtherFeesCategoryResponseDto(otherFeesCategoryResponseDto);
-		otherFeesDetailsDto.copyCurrentacademicyear(currentacademicyear);
-		otherFeesDetailsDto.copyResultResponse(result);
+		otherFeesDetailsDto.setOtherFeecategory(otherFeesCategoryResponseDto.getOtherFeesCategory());
+		otherFeesDetailsDto.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());
+		otherFeesDetailsDto.setSuccess(result.isSuccess());
 		return ResponseEntity.ok(otherFeesDetailsDto);
 	}
 
