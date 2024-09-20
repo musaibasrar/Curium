@@ -318,8 +318,8 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public SalaryApprovalResponseDto salaryApprovalDispaly(String branchId) {
-		SalaryApprovalResponseDto result = new SalaryApprovalResponseDto();
+	public SalaryResponseDto salaryApprovalDispaly(String branchId) {
+		SalaryResponseDto result = new SalaryResponseDto();
 
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 
@@ -359,16 +359,18 @@ public class HrService {
 		return ResultResponse.builder().success(false).build();
 	}
 
-	public boolean salaryIssue() {
-		
+	public SalaryResponseDto salaryIssue(String branchId) {
+		SalaryResponseDto result = new SalaryResponseDto();
+
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			payAdvanceSalary = new HrDAO().salaryIssue(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		if(branchId!=null){
+			payAdvanceSalary = new HrDAO().salaryIssue(Integer.parseInt(branchId));
 		}
-		
-		request.setAttribute("salaryissue", payAdvanceSalary);
-		return true;
+		result.setPayAdvanceSalary(payAdvanceSalary);
+		result.setSuccess(true);
+
+		return result;
 	}
 
 	public boolean applyLeave() {
