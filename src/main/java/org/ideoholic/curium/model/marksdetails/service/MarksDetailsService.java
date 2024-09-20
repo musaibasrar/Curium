@@ -495,7 +495,7 @@ public class MarksDetailsService {
 					marks.setExamid(examid);
 					marks.setSubid(subid);
 					marks.setSid(studentId);
-					marks.setMarksobtained(Integer.parseInt(marksObtained));
+					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
