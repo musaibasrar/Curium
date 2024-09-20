@@ -167,7 +167,7 @@ public class HrAction {
 
 	@PostMapping("/applyLeave")
 	public String applyLeave() {
-		if(new HrService(request, response).applyLeave()){
+		if(hrActionAdapter.applyLeave()){
 			return "leaveapplicationsuccess";
 		}
 		return error;

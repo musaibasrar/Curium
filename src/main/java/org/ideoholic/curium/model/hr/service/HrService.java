@@ -373,36 +373,37 @@ public class HrService {
 		return result;
 	}
 
-	public boolean applyLeave() {
+	public ResultResponse applyLeave(ApplyLeaveDto dto,String currentAcademicyear, String userAuth, String username, String branchId, String userId) {
 		Leaveapplication leaveApplication = new Leaveapplication();
 		
-		if(httpSession.getAttribute("currentAcademicYear")!=null && httpSession.getAttribute("userAuth") !=null){
+		if(currentAcademicyear!=null && userAuth!=null){
 			
-			leaveApplication.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+			leaveApplication.setAcademicyear(currentAcademicyear);
 			
-			leaveApplication.setLeavetype(DataUtil.emptyString(request.getParameter("leavetypename")));
-			leaveApplication.setReason(DataUtil.emptyString(request.getParameter("reason")));
+			leaveApplication.setLeavetype(DataUtil.emptyString(dto.getLeaveTypeName()));
+			leaveApplication.setReason(DataUtil.emptyString(dto.getReason()));
 			leaveApplication.setStatus("pending");
-			leaveApplication.setFromdate(DateUtil.dateParserUpdateStd(request.getParameter("fromdate")));
-			leaveApplication.setTodate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
-			String userName = httpSession.getAttribute("username").toString();
+			leaveApplication.setFromdate(DateUtil.dateParserUpdateStd(dto.getFromDate()));
+			leaveApplication.setTodate(DateUtil.dateParserUpdateStd(dto.getToDate()));
+			String userName = username;
 				Teacher teacher = new EmployeeDAO().getEmployeeDetails(userName);
 				Teacher addTeacher = new Teacher();
 				addTeacher.setTid(teacher.getTid());
 				leaveApplication.setTeacher(addTeacher);
-				int totalLeaves = calculateLeaves(DateUtil.dateParserUpdateStd(request.getParameter("fromdate")),DateUtil.dateParserUpdateStd(request.getParameter("todate")),teacher.getTid());
+				int totalLeaves = calculateLeaves(DateUtil.dateParserUpdateStd(dto.getFromDate()),DateUtil.dateParserUpdateStd(dto.getToDate()),teacher.getTid());
 				if(totalLeaves==0){
-					return false;
+					return ResultResponse.builder().success(false).build();
 				}
 				leaveApplication.setTotalleaves(totalLeaves);
 				leaveApplication.setDateofapply(new Date());
-				leaveApplication.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				leaveApplication.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-				return new HrDAO().applyLeave(leaveApplication);
+				leaveApplication.setBranchid(Integer.parseInt(branchId));
+				leaveApplication.setUserid(Integer.parseInt(userId));
+
+				return ResultResponse.builder().success( new HrDAO().applyLeave(leaveApplication)).build();
 		}
 		
 		
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	private Integer calculateLeaves(Date fromDate,
