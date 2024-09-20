@@ -21,6 +21,8 @@ public class HrActionAdapter {
     private String BRANCHID = "branchid";
     private String USERID ="userid";
     private String CURRENTACADEMICYEAR ="currentAcademicYear";
+    private String USERNAME = "username";
+    private String USERAUTH = "userAuth";
 
     public boolean leaveType() {
         HrService hrService = new HrService(request,response);
@@ -243,6 +245,24 @@ public class HrActionAdapter {
 
         return result.isSuccess();
 
+    }
+     public boolean applyLeave() {
+        HrService hrService = new HrService(request,response);
+
+        ApplyLeaveDto dto = new ApplyLeaveDto();
+        dto.setLeaveTypeName(request.getParameter("leavetypename"));
+        dto.setReason(request.getParameter("reason"));
+        dto.setFromDate(request.getParameter("fromdate"));
+        dto.setToDate(request.getParameter("todate"));
+
+        ResultResponse result = hrService.applyLeave(dto,
+        httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+        httpSession.getAttribute(USERAUTH).toString(),
+        httpSession.getAttribute(USERNAME).toString(),
+        httpSession.getAttribute(BRANCHID).toString(),
+        httpSession.getAttribute(USERID).toString());
+
+        return result.isSuccess();
     }
 
 
