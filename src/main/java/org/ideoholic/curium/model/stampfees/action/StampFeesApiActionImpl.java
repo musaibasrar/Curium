@@ -78,8 +78,8 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFees(branchId, currentAcademicYear);
 		Currentacademicyear currentacademicyear = yearService.getYear();
 		ResultResponse result = standardService.viewClasses(branchId);
-		feesDetailDto.setFeescategory(feescategoryResponseDto.getFeescategory()); 
-		feesDetailDto.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());
+		feesDetailDto.copyFeescategoryResponseDto(feescategoryResponseDto);
+		feesDetailDto.copyCurrentacademicyear(currentacademicyear);
 		feesDetailDto.setSuccess(result.isSuccess());
 		return ResponseEntity.ok(feesDetailDto);
 	}
