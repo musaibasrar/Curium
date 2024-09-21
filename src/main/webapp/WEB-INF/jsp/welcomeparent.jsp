@@ -83,13 +83,17 @@ for(Cookie cookie : cookies){
     <body>
     	
 
-	<div style="padding-left: 20px;height: 50px;">
+	<!-- <div style="padding-left: 20px;height: 10px;">
 		<table style="align-self: left;">
 			<tr>
-				<td height="150px;"></td>
+				<td height="50px;"></td>
 			</tr>
 
 		</table>
+	</div> -->
+	
+	<div class="row" style="padding-left: 150px;">
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 86px;" alt="ideoholic" src="/abc/images/abc.png"></h2>
 	</div>
 
 	<div class="row" style="padding-left: 20px;">
@@ -109,7 +113,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+     </div>
+     
+     <div class="row" style="padding-left: 20px;">
         	
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FF914D">
@@ -127,8 +133,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FFCC00">
         			
@@ -145,8 +152,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#90CCB8">
         			
@@ -163,8 +171,8 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
-        	
+        	</div>
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#9D0176">
         			
@@ -181,7 +189,7 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	 
         	 
         </div>

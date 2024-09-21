@@ -6,20 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left_parent</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/aysha/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/abc/css/font-awesome.css">
+        <script type="text/javascript" src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/aysha/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/aysha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/aysha/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/aysha/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/aysha/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/aysha/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/aysha/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/aysha/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -422,7 +422,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -439,7 +439,15 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+	   <div class="headerTD" style="width: 95%;height: 40px;" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> <br>
+						<c:choose>
+                                <c:when test="${branchid==2}">
+                                    <label style="font-size: 12px;">&nbsp;Aysha School</label>
+                                </c:when>
+                                <c:otherwise>
+                                    <label style="font-size: 12px;">&nbsp;Aysha P.U.C</label>
+                                </c:otherwise>
+                            </c:choose></div>
 
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
@@ -447,7 +455,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
+            				 <a target="mainFrame" href="/aysha/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
             			</td>
             		</tr>
             	   
@@ -461,8 +469,8 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<!--  <a target="mainFrame" href="/abc/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
-            				  <a target="mainFrame" href="/abc/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
+            				<!--  <a target="mainFrame" href="/aysha/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
+            				  <a target="mainFrame" href="/aysha/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
             			</td>
             		</tr>
             		

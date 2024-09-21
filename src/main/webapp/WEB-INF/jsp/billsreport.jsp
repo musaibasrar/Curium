@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bills Report</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/aysha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/aysha/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/abc/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/abc/js/bootstrap.min.js"></script>
-<!-- <script src="/abc/js/jquery.min.js"></script> -->
+	<!-- <link href="/aysha/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/aysha/js/bootstrap.min.js"></script>
+<!-- <script src="/aysha/js/jquery.min.js"></script> -->
 
 
-<link href="/abc/css/select2.min.css" rel="stylesheet" />
-<script src="/abc/js/select2.min.js"></script>
+<link href="/aysha/css/select2.min.css" rel="stylesheet" />
+<script src="/aysha/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,14 +501,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/aysha/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/abc/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/aysha/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -518,7 +518,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/aysha/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -526,21 +526,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/printVoucher";
+		form1.action = "/aysha/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/approveVoucher";
+		form1.action = "/aysha/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/rejectVoucher";
+		form1.action = "/aysha/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -586,7 +586,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/CustomerLastPrice/getCustomerLastPrice&customerName="+customerName+"&itemid="+itemId+"",true);
+			xmlHttp.open("GET", "/aysha/CustomerLastPrice/getCustomerLastPrice&customerName="+customerName+"&itemid="+itemId+"",true);
 			xmlHttp.send(null);
 	}
 	
@@ -806,7 +806,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -900,7 +900,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/abc/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/aysha/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -913,7 +913,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/abc/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/aysha/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -922,7 +922,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/abc/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/aysha/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     

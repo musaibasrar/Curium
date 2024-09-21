@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Generate Hall Ticket</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -298,42 +298,42 @@ background-color:rgba(0, 0, 0, 0);
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/aysha/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/aysha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/aysha/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/aysha/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/aysha/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -348,12 +348,12 @@ background-color:rgba(0, 0, 0, 0);
 	});
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/aysha/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/ExamDetailsProcess/searchHallTicketDetails";
+		form1.action = "/aysha/ExamDetailsProcess/searchHallTicketDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -361,7 +361,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/ExamDetailsProcess/printPreviewHallTicket";
+		form1.action = "/aysha/ExamDetailsProcess/printPreviewHallTicket";
 		form1.method = "POST";
 		form1.submit();
 
@@ -479,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -657,22 +657,22 @@ for(Cookie cookie : cookies){
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Exam<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/aysha/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/aysha/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/aysha/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/aysha/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/aysha/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/aysha/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>

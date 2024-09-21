@@ -25,15 +25,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/aysha/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/aysha/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/aysha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.button.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -362,21 +362,21 @@
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
-                form1.action="/abc/PersonalProcess/ViewAllGo";
+                form1.action="/aysha/PersonalProcess/ViewAllGo";
                 form1.submit();
                 
                 //window.location.reload();
             } 
             function redirect(){
                  var form1=document.getElementById("form1");
-                    form1.action="/abc/PersonalProcess/redirect";
+                    form1.action="/aysha/PersonalProcess/redirect";
                     form1.submit();
                 
                 //window.location.reload();
             } 
             function createQuery(tid,branchid){
                 var form1=document.getElementById("form1");
-               form1.action="/abc/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
+               form1.action="/aysha/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
                form1.submit();
             }
         </script>
@@ -385,7 +385,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -399,7 +399,7 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="/abc/EmployeeProcess/deleteMultiple" method="post">
+        <form name="form1" id="form1"action="/aysha/EmployeeProcess/deleteMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -429,7 +429,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/abc/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/aysha/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 <td class="dataText"><button id="query_${employee.tid}" class="querybutton" onclick="createQuery(${employee.tid},${employee.branchid})">Create Assignment</button></td>
@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
             <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/abc/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/aysha/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -460,7 +460,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/abc/PersonalProcessPages&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/aysha/PersonalProcessPages&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -469,7 +469,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/abc/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/aysha/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
             
