@@ -490,7 +490,7 @@ for(Cookie cookie : cookies){
    <div align="center">
    <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 0px">
+    <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 0px;margin-right:0px;padding: 0;">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
     <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
@@ -508,7 +508,7 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
+    <td style="padding: 0;">&nbsp;&nbsp;MOBILE</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
