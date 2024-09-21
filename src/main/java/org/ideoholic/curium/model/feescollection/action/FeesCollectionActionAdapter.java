@@ -258,6 +258,7 @@ public class FeesCollectionActionAdapter {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         ClassesHierarchyDto dto = new ClassesHierarchyDto();
+        standardActionAdapter.viewClasses();
         dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
         dto.setClasssecList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
 

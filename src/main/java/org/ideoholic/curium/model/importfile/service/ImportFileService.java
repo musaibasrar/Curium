@@ -101,7 +101,7 @@ public class ImportFileService {
 						student.setAdmissiondate(DateUtil.simpleDateParser(
 								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
 										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--");
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(48).getStringCellValue());
 						
 						student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
 						//student.setBloodgroup(row.getCell(9).getStringCellValue());
@@ -122,7 +122,7 @@ public class ImportFileService {
 						// student.setTotalmarks(Integer.parseInt(row.getCell(40).getStringCellValue()));
 						// student.setPercentage(row.getCell(41).getStringCellValue());
 						//student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
-						student.setUserid(Integer.parseInt(row.getCell(53).getStringCellValue()));
+						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
 						//student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
 						//student.setSts(row.getCell(49).getStringCellValue());
 
@@ -131,9 +131,8 @@ public class ImportFileService {
 						student.setPassedout(0);
 						student.setDroppedout(0);
 						student.setLeftout(0);
-						student.setYearofadmission(row.getCell(52).getStringCellValue());
+						student.setYearofadmission(row.getCell(50).getStringCellValue());
 						//student.setStudentexternalid(row.getCell(1).getStringCellValue());
-						student.setLeftout(0);
 
 						parent.setFathersname(row.getCell(25).getStringCellValue());
 						//parent.setProfession(row.getCell(26).getStringCellValue());
