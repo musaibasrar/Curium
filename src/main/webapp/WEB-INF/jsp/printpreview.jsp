@@ -453,80 +453,97 @@ for(Cookie cookie : cookies){
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-image: url('/noblewisdom/images/backgrounddesign.png');background-repeat:no-repeat;background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius:5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 0px;">
-  <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-   <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:18px;font-weight: 900; color:white"><%-- ${branchname} --%>Noble Wisdom English Medium School</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:9px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">Educating Students to be successful in both the worlds</p>
-   <%-- <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p> --%>
-   </table>
+			<div class="card" style="background-image: url('/noblewisdom/images/backgrounddesign.png'); background-repeat: no-repeat; background-color: white; width: 5.5cm; height: 8.6cm; border: 1px solid; border-radius: 5px; margin: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+  
+  <!-- Content above the bottom table -->
+  <div class="table-container" style="margin-bottom: 0px;margin-top: 10px;">
+    <table width="100%">
+      <tr align="center">
+        <td style="text-align:center;padding:0px;">
+          <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:16px;font-weight: bold; color:white">
+            <%-- ${branchname} --%>Noble Wisdom English Medium School
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:center;padding:0px;">
+          <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">Educating Students to be successful in both the worlds</p>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <div class="table-container" style=" ">
- <table align="center">
- <tr>
- <!-- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td> -->
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:65px;width:65px;border: 4px solid #e09235;border-radius: 50%;" alt="Photo" />
- </td>
- <%-- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td> 
- <td>&nbsp;&nbsp;
- <img src="/noblewisdom/images/noblewisdom.png" width="65" height="72"/>
- </td>--%>
- </tr>
- </table>
-   </div>
-   <!-- <div width="195px" height="190px" style="border:0px solid black;margin-left: 10px;margin-right: 10px;margin-top: 0px;margin-bottom: 0px;box-shadow:0px 0px 2px 3px #d6d6d6;"> -->
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 0px;margin-right:0px;padding: 0;">
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;M/NAME</td>
-    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-        <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>  </tr>
-</table>
-<!-- </div> -->
-<div  width="100%" >
-<table align="center" style="text-align:center;">
-<tr><td>
-<img src="/noblewisdom/images/noblewisdom.jpg" width="35" height="30"/>
-</td>
-</tr>
-<tr><td><label style="background-color:#e09235;color:white;margin-top:0px;font-size:12px;"><img src="/noblewisdom/images/icon.png" width="15" height="12"/>: 9860579809</label></td></tr>
-<tr><td style="color:white">Managed by Salafiya Education Trust</td></tr>
-</table>
+  <div class="table-container">
+    <table align="center">
+      <tr>
+        <td>
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:65px;width:65px;border: 4px solid #e09235;border-radius: 50%;" alt="Photo" />
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div align="center">
+    <p style="font-size:16px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
+  </div>
+
+  <table style="border-collapse: collapse;border-radius: 10px;width: 100%;margin-left: 0px;margin-right:0px;padding: 0;font-size:9px;">
+    <tr>
+      <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
+      <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    </tr>
+    <tr>
+      <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;M/NAME</td>
+      <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    </tr>
+    <tr>
+      <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
+      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    </tr>
+    <tr>
+      <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
+      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+    </tr>
+    <tr>
+      <td style="padding: 0;">&nbsp;&nbsp;MOBILE</td>
+      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    </tr>
+    <tr>
+      <td style="padding: 0;vertical-align: top;">&nbsp;&nbsp;ADDRESS</td>
+      <td style="padding: 0;vertical-align: top; word-wrap: break-word;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
+    </tr>
+  </table>
+
+  <!-- Table at the bottom with top and bottom margins -->
+  <div style="width: 100%; margin-top: auto; margin-bottom: 10px;">
+    <table align="center" style="text-align:center;">
+      <tr>
+        <td>
+          <img src="/noblewisdom/images/noblewisdom.jpg" width="35" height="30"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label style="background-color:#e09235;color:white;margin-top:0px;font-size:12px;">
+            <img src="/noblewisdom/images/icon.png" width="15" height="12"/>: 9860579809
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td style="color:white">Managed by Salafiya Education Trust</td>
+      </tr>
+    </table>
+  </div>
+
 </div>
-</div>
+
+
  </c:if>
    <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
