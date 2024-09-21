@@ -2352,6 +2352,7 @@ public class FeesCollectionService {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
+		boolean result = false;
 		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
@@ -2445,12 +2446,12 @@ public class FeesCollectionService {
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
 						        Receiptinfo receiptinfo = feesCollectionService.addImport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
-					            
+						        result =true;
 					        }
 
 					System.out.println("Values Inserted Successfully");
 
-		return new parentsDetailsDAO().createMultiple(listParents);
+		return result;
 	}
 	
 	

@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Appointments Report</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -369,17 +369,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/aysha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/aysha/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/aysha/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/aysha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -433,12 +433,12 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/aysha/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function generateAppointmentsReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/abc/AppointmentProcess/generateAppointmentsReport";
+			form1.action = "/aysha/AppointmentProcess/generateAppointmentsReport";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -484,7 +484,7 @@
 	 
 	 function exportRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/abc/AppointmentProcess/exportAppointmentsReport";
+			form1.action = "/aysha/AppointmentProcess/exportAppointmentsReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -492,7 +492,7 @@
 	 
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/abc/AppointmentProcess/printAppointmentsReport";
+			form1.action = "/aysha/AppointmentProcess/printAppointmentsReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -551,7 +551,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -677,6 +677,7 @@ for(Cookie cookie : cookies){
                         	<th title="click to sort" class="headerText">Appt. No.</th>
                             <th title="click to sort" class="headerText">Appointment Date</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Father Name</th>
@@ -691,6 +692,7 @@ for(Cookie cookie : cookies){
                             	<td class="dataText"><c:out value="${appointment.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
                                 <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td>
+                                <td class="dataText"><c:out value="${appointment.parent.student.studentexternalid}"/></td>
                                 <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
                                 <td class="dataText">
 		                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
