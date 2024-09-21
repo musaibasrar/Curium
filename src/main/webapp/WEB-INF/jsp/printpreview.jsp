@@ -395,7 +395,7 @@ for(Cookie cookie : cookies){
        .card {
     width: 11cm;
     height: 7cm;
-    background: #FEE12B;
+   // background: #FEE12B;
 }
 
 .card:hover {
@@ -459,52 +459,49 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
+			<div class="card" style="background-image: url('/noblewisdom/images/backgrounddesign.png');background-repeat:no-repeat;background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius:5px;margin: 20px;">
+  <div class="table-container" style="margin-bottom: 0px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-   <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname}</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
+   <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:18px;font-weight: 900; color:white"><%-- ${branchname} --%>Noble Wisdom English Medium School</p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:9px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">Educating Students to be successful in both the worlds</p>
+   <%-- <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p> --%>
    </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table align="center">
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
+ <!-- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
+ </td> -->
  <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:65px;width:65px;border: 4px solid #e09235;border-radius: 50%;" alt="Photo" />
  </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
+ <%-- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
  SESSION ${currentacadmicyear}
- </td>
+ </td> 
  <td>&nbsp;&nbsp;
  <img src="/noblewisdom/images/noblewisdom.png" width="65" height="72"/>
- </td>
+ </td>--%>
  </tr>
  </table>
    </div>
+   <!-- <div width="195px" height="190px" style="border:0px solid black;margin-left: 10px;margin-right: 10px;margin-top: 0px;margin-bottom: 0px;box-shadow:0px 0px 2px 3px #d6d6d6;"> -->
    <div align="center">
    <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 0px">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;M/NAME</td>
+    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
@@ -516,15 +513,18 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr>
+        <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>  </tr>
 </table>
-
-<div height="30" width="20%" style="text-align:right;float:right;">
-
-<img src="/noblewisdom/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
+<!-- </div> -->
+<div  width="100%" >
+<table align="center" style="text-align:center;">
+<tr><td>
+<img src="/noblewisdom/images/noblewisdom.jpg" width="35" height="30"/>
+</td>
+</tr>
+<tr><td><label style="background-color:#e09235;color:white;margin-top:0px;font-size:12px;"><img src="/noblewisdom/images/icon.png" width="15" height="12"/>: 9860579809</label></td></tr>
+<tr><td style="color:white">Managed by Salafiya Education Trust</td></tr>
+</table>
 </div>
 </div>
  </c:if>
