@@ -220,15 +220,15 @@ for(Cookie cookie : cookies){
 		<table align="center">
 		
 		
-			<tr><td style="margin-right:0px;padding-right:0px;">
+			<tr><td style="margin-right:0px;padding-left:10px;">
 			
-			<img  src="/noblewisdom/images/noblewisdom.jpg" alt="noblewisdom logo" width="103" height="94">&emsp;&emsp;</td>
+			<img  src="/noblewisdom/images/noblewisdom.jpg" alt="noblewisdom logo" width="103" height="94"></td>
 				<td style="font-style:normal;text-align:center;" >
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Noble Wisdom English Medium School</label><br>
 				<label class="addressLine">Educating Students to be successful in both the worlds</label><br>
 				<%-- <label class="addressLine"> ${branchaddress}</label><br> --%>
 				</td>
-				<td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/noblewisdom/images/cbse.png" alt="cbse logo" width="90" height="100"></td>
+				<!-- <td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/noblewisdom/images/cbse.png" alt="cbse logo" width="90" height="100"></td> -->
 				</tr>
 </table>
 

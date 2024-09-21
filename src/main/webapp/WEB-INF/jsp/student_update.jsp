@@ -509,8 +509,8 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.studentdoc3}"/>" id="studentdoc3update" name="studentdoc3update">
                     <input type="hidden" value="<c:out value="${student.studentdoc4}"/>" id="studentdoc4update" name="studentdoc4update">
                     <input type="hidden" value="<c:out value="${student.studentdoc5}"/>" id="studentdoc5update" name="studentdoc5update">
-                    
-                    <input type="hidden" value="<c:out value="${student.archive}"/>" id="archive" name="archive">
+                   
+		    <input type="hidden" value="<c:out value="${student.archive}"/>" id="archive" name="archive">
                     <input type="hidden" value="<c:out value="${student.promotedyear}"/>" id="promotedyear" name="promotedyear">
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
@@ -538,7 +538,7 @@ for(Cookie cookie : cookies){
 
 							<td class="alignLeft">Admission Number&nbsp;</td>
 							<td ><label> <input name="admnno"
-									type="text" class="myclass" required
+									type="text" class="myclass"
 									value="<c:out default="" value="${student.admissionnumber}" />"
 									id="admnno" size="30" data-validate="validate(required)">
 
@@ -826,6 +826,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>
@@ -871,7 +872,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bhagyalakshmi Bond No.
+							<td class="alignLeft">Bag No.
 								&nbsp;</td>
 								<td>
 										<input
@@ -993,7 +994,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
 							<td align="left">
-							<label> <select name="yearofadmission" id="yearofadmission" required
+							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
