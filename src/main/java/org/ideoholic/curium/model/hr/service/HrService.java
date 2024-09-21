@@ -466,14 +466,15 @@ public class HrService {
 		return totalLeaves;
 	}
 
-	public boolean leaveApprovals() {
-		
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-			List<Leaveapplication> listLeaveApplication = new HrDAO().leaveApprovals(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("leaveapplicationlist", listLeaveApplication);
-			return true;
+	public LeaveApprovalsResponseDto leaveApprovals(String currentAcademicYear,String branchId) {
+		LeaveApprovalsResponseDto result = new LeaveApprovalsResponseDto();
+
+		if(currentAcademicYear!=null){
+			List<Leaveapplication> listLeaveApplication = new HrDAO().leaveApprovals(currentAcademicYear, Integer.parseInt(branchId));
+			result.setListLeaveApplication(listLeaveApplication);
+			result.setSuccess(true);
 		}
-		return false;
+		return result;
 	}
 
 	public boolean rejectLeave() {

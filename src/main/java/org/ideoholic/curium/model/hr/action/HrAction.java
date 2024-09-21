@@ -140,7 +140,7 @@ public class HrAction {
 	public String rejectLeave() {
 		
 		if(new HrService(request, response).rejectLeave()){
-			new HrService(request, response).leaveApprovals();
+			hrActionAdapter.leaveApprovals();
 			return "leaveapprovals";
 		}
 		return error;
@@ -151,7 +151,7 @@ public class HrAction {
 	public String approveLeave() {
 		
 		if(new HrService(request, response).approveLeave()){
-			new HrService(request, response).leaveApprovals();
+			hrActionAdapter.leaveApprovals();
 			return "leaveapprovals";
 		}
 		return error;
@@ -159,7 +159,7 @@ public class HrAction {
 
 	@GetMapping("/leaveApprovals")
 	public String leaveApprovals() {
-		if(new HrService(request, response).leaveApprovals()){
+		if(hrActionAdapter.leaveApprovals()){
 			return "leaveapprovals";
 		}
 		return error;

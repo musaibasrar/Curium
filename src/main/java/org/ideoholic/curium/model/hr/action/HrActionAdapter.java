@@ -264,6 +264,17 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean leaveApprovals() {
+        HrService hrService = new HrService(request, response);
+
+        LeaveApprovalsResponseDto result = hrService.leaveApprovals(
+                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                httpSession.getAttribute(BRANCHID).toString());
+
+        request.setAttribute("leaveapplicationlist", result.getListLeaveApplication());
+
+    return result.isSuccess();
+    }
 
 
 }
