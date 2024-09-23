@@ -125,7 +125,7 @@ public class MarksDetailsService {
 
 				Marks marks = new Marks();
 				marks.setExamid(examid);
-				marks.setSubid(subid);
+				marks.setSubid(subjectDetails.getSubid());
 				
 				float mymark= Float.parseFloat((String) mapEntry.getValue());
 				float subjectPercentage = ((float)mymark / maxMarks) * 100;
@@ -507,7 +507,7 @@ public class MarksDetailsService {
 					marks.setExamid(examid);
 					marks.setSubid(subid);
 					marks.setSid(studentId);
-					marks.setMarksobtained(Integer.parseInt(marksObtained));
+					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = strCurrentAcademicYear;
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
