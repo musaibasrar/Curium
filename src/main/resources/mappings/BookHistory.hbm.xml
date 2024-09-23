@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Feb, 2018 12:41:26 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.library.dto.BookHistory" table="bookhistory">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="bid" type="string">
+            <column name="bid" length="200" />
+        </property>
+         <property name="bookName" type="string">
+            <column name="bookName" length="200" />
+        </property>
+         <property name="studentName" type="string">
+            <column name="studentName" length="200" />
+        </property>
+        <property name="uid" type="string">
+            <column name="uid" length="200" />
+        </property>
+       
+        <property name="issueDate" type="date">
+            <column name="issueDate"  />
+        </property>
+                <property name="expectedReturnDate" type="date">
+            <column name="expectedReturnDate" />
+        </property>
+        <property name="sid" type="string">
+            <column name="sid" length="45" />
+        </property>
+       
+    </class>
+</hibernate-mapping>
