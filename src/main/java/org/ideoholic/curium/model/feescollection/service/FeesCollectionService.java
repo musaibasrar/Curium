@@ -153,7 +153,7 @@ public class FeesCollectionService {
 		
 	}
 
-	public StampFeeResponseDto getStampFees(StampFeesDto dto, String currentAcademicYear) {
+	public StampFeeResponseDto getStampFees(StampFeeDto dto, String currentAcademicYear) {
 		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
 		if(currentAcademicYear!=null){
@@ -1156,7 +1156,7 @@ public class FeesCollectionService {
 		return result;
 	  }
 	
-	public StampFeeResponseDto getotherStampFees(StampFeesDto dto, String currentAcademicYear) {
+	public StampFeeResponseDto getotherStampFees(StampFeeDto dto, String currentAcademicYear) {
 		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
 		if(currentAcademicYear!=null){

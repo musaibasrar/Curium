@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.stampfees.action;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
@@ -20,17 +19,16 @@ public class StampFeesActionAdapter {
 	private HttpServletRequest request;
 
 	@Autowired
-	private HttpServletResponse response;
-
-	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private StampFeesService stampFeesService;
 	
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 	public void advanceSearch() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -40,7 +38,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void deleteFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setCurrentYear(request.getParameter("currentyear"));
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -49,7 +46,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void addFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StampFeesDto stampFeesDto = new StampFeesDto();
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
@@ -63,7 +59,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void addotherFeesStamp() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		StampFeesDto stampFeesDto = new StampFeesDto();
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
@@ -77,7 +72,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void otheradvanceSearch() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -87,7 +81,6 @@ public class StampFeesActionAdapter {
 	}
 
 	public void advanceSearchForStampFees() {
-		StampFeesService stampFeesService = new StampFeesService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
@@ -95,5 +88,15 @@ public class StampFeesActionAdapter {
 		FeescategoryResponseDto feescategoryResponseDto = stampFeesService.advanceSearchForStampFees(searchStudentDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		request.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
+	}
+
+	public void multiClassSearch() {
+		SearchStudentDto searchStudentDto = new SearchStudentDto();
+		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
+		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.multiClassSearch(searchStudentDto, BRANCHID);
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 }
