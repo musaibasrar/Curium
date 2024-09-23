@@ -477,7 +477,7 @@ public class HrService {
 		return result;
 	}
 
-	public ResultResponse rejectLeave(RejectLeaveDto dto) {
+	public ResultResponse rejectLeave(LeaveIdsDto dto) {
 		
 		String[] idleaveapplication = dto.getIdleaveapplication();
 		

@@ -278,7 +278,7 @@ public class HrActionAdapter {
     public boolean rejectLeave() {
         HrService hrService = new HrService(request, response);
 
-        RejectLeaveDto dto = new RejectLeaveDto();
+        LeaveIdsDto dto = new LeaveIdsDto();
         dto.setIdleaveapplication(request.getParameterValues("idleaveapplication"));
 
         ResultResponse result = hrService.rejectLeave(dto);
