@@ -7,12 +7,12 @@ public class ExamsDetails implements Serializable{
 	
 	String examName;
 	List<String> subjects;
-	List<Integer> marks;
+	List<Float> marks;
 	
 	public ExamsDetails() {
 	}
 
-	public ExamsDetails(String examName, List<String> subjects, List<Integer> marks) {
+	public ExamsDetails(String examName, List<String> subjects, List<Float> marks) {
 		this.examName = examName;
 		this.subjects = subjects;
 		this.marks = marks;
@@ -24,10 +24,10 @@ public class ExamsDetails implements Serializable{
 	public void setSubjects(List<String> subjects) {
 		this.subjects = subjects;
 	}
-	public List<Integer> getMarks() {
+	public List<Float> getMarks() {
 		return marks;
 	}
-	public void setMarks(List<Integer> marks) {
+	public void setMarks(List<Float> marks) {
 		this.marks = marks;
 	}
 

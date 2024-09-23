@@ -83,14 +83,14 @@ public class TeacherPerformanceService {
 				}
 				List<Marks> marksList = new  MarksDetailsDAO().readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
 				int averageMarks = 0;
-				int sum = 0;
+				float sum = 0;
 				int i = marksList.size();
 				for (Marks marks : marksList) {
 					
 				sum= sum + marks.getMarksobtained();
 				}
 				if(i>0) {
-				averageMarks =(sum/i);	
+				averageMarks =(int) (sum/i);	
 				classsection.add("\""+classOne+"\"");
 				averageMarksScored.add(averageMarks);
 				}
