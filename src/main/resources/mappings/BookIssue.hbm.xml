@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Feb, 2018 12:41:26 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.library.dto.BookIssue" table="bookissue">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+         <property name="bookHolder" type="string">
+            <column name="bookholder" length="100" />
+        </property>
+         <property name="startDate" type="date">
+            <column name="startdate"  />
+        </property>
+        <property name="endDate" type="date">
+            <column name="enddate"  />
+        </property>
+        
+        <property name="actualReturnDate" type="date">
+            <column name="actualreturndate"  />
+        </property>
+       
+        <property name="noOfDays" type="int">
+            <column name="noofdays"  />
+        </property>
+        
+        <property name="sid" type="int">
+            <column name="sid"  />
+        </property>
+        
+        <property name="bookId" type="int">
+            <column name="bookid"  />
+        </property>
+        
+        
+        <property name="studentName" type="string">
+            <column name="studentname" length="200" />
+        </property>
+        
+        <property name="returned" type="string">
+            <column name="returned" length="50" />
+        </property>
+        
+        <property name="bookName" type="string">
+            <column name="bookname" length="100" />
+        </property>
+      
+    </class>
+</hibernate-mapping>
