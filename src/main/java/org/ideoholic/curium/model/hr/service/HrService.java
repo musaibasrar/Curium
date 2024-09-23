@@ -477,19 +477,19 @@ public class HrService {
 		return result;
 	}
 
-	public boolean rejectLeave() {
+	public ResultResponse rejectLeave(RejectLeaveDto dto) {
 		
-		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
+		String[] idleaveapplication = dto.getIdleaveapplication();
 		
 		if (idleaveapplication != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
-			return new HrDAO().rejectLeave(ids);
+			return ResultResponse.builder().success( new HrDAO().rejectLeave(ids)).build();
 		}
 		
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean approveLeave() {
