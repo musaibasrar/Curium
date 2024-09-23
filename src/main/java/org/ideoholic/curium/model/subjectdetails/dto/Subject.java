@@ -38,10 +38,10 @@ public class Subject implements java.io.Serializable {
 	private Integer subjectid;
 
 	@Column(name = "minmarks")
-	private Integer minmarks;
+	private float minmarks;
 
 	@Column(name = "maxmarks")
-	private Integer maxmarks;
+	private float maxmarks;
 
 	@Column(name = "branchid")
 	private int branchid;
