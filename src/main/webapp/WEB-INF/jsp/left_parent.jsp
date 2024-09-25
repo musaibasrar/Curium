@@ -6,20 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left_parent</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/cambridge/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/abc/css/font-awesome.css">
+        <script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/cambridge/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/cambridge/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/cambridge/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/cambridge/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/cambridge/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/cambridge/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/cambridge/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -422,7 +422,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
+            				 <a target="mainFrame" href="/cambridge/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
             			</td>
             		</tr>
             	   
@@ -461,8 +461,8 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<!--  <a target="mainFrame" href="/abc/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
-            				  <a target="mainFrame" href="/abc/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
+            				<!--  <a target="mainFrame" href="/cambridge/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
+            				  <a target="mainFrame" href="/cambridge/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
             			</td>
             		</tr>
             		
