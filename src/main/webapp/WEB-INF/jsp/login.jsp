@@ -164,7 +164,7 @@ form{
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/cambridge/UserProcess/authenticateUser"  method="post" id="loginForm" class="form-group">
+						<form action="/sneha/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>

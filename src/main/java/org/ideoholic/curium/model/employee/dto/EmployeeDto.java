@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.employee.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Data;
 
 @Data
@@ -38,5 +39,5 @@ public class EmployeeDto {
     private String employeedoc4delete;
     private String employeedoc5delete;
     private String branchId;
-
+    private String subjectsteaching;
 }
