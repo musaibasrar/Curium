@@ -344,6 +344,7 @@ public class AccountService {
 			accountIds.add(3);
 			accountIds.add(4);
 			accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(branchId));
+
 			accountIds.clear();
 			
 			List<Accountdetailsbalance> accountDetailsBalanceExpenses = new ArrayList<Accountdetailsbalance>();
@@ -359,7 +360,7 @@ public class AccountService {
 			return CreateVoucherResponseDto
 					.builder()
 					.accountDetailsBalance(accountDetailsBalance)
-					.accountDetailsJournalEntry(accountDetailsBalanceExpenses)
+					.accountDetailsBalanceExpenses(accountDetailsBalanceExpenses)
 					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
 					.accountDetailsJournalEntry(accountDetailsJournalEntry)
 					.success(true)

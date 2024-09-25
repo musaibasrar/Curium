@@ -155,7 +155,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 220px;width: 211px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
@@ -164,7 +164,7 @@ form{
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/cambridge/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
+						<form action="/cambridge/UserProcess/authenticateUser"  method="post" id="loginForm" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
