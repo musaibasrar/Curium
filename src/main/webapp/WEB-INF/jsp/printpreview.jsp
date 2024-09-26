@@ -489,34 +489,34 @@ for(Cookie cookie : cookies){
     </table>
   </div>
 
-  <div align="center">
+  <%-- <div align="center">
     <p style="font-size:16px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-  </div>
-
-  <table style="border-collapse: collapse;border-radius: 10px;width: 100%;margin-left: 0px;margin-right:0px;padding: 0;font-size:9px;">
+  </div> --%>
+  <table style="margin-left:10px;">
+  <tr>
+  <%-- <td style="padding: 0;font-size:9px;">Student's<br>Full Name:&nbsp;</td>
+  <td style="font-weight:bold;font-size:16px;"><%= request.getSession().getAttribute("studentname" + i + "") %></td> --%>
+  </tr>
+  </table> 
+  <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 10px;margin-right:0px;padding-right: 0;font-size:9px;">
+<td style="padding: 0;font-size:9px;">Student's Full&nbsp; Name<span style="float:right;">:&nbsp;</span></td>
+  <td style="font-weight:bold;font-size:16px;text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>    
+    <%-- <tr>
+      <td colspan="2" style="padding: 0;text-transform: uppercase;text-align:center;font-weight:bold;font-size:16px;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>
+    </tr>
+ --%>    
     <tr>
-      <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-      <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+      <td style="padding: 0;white-space: nowrap;font-size:9px;">Standard<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("classsection" + i + "") %></td>
     </tr>
     <tr>
-      <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;M/NAME</td>
-      <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+      <td style="padding: 0;font-size:9px;">D. O. B.<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
     </tr>
+   
     <tr>
-      <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-    </tr>
-    <tr>
-      <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-    </tr>
-    <tr>
-      <td style="padding: 0;">&nbsp;&nbsp;MOBILE</td>
-      <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-    </tr>
-    <tr>
-      <td style="padding: 0;vertical-align: top;">&nbsp;&nbsp;ADDRESS</td>
-      <td style="padding: 0;vertical-align: top; word-wrap: break-word;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
+      <td style="padding: 0;vertical-align: top; font-size:9px;">ADDRESS<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;vertical-align: top;font-size:9px; word-wrap: break-word; "><%= request.getSession().getAttribute("address" + i + "") %></td>
     </tr>
   </table>
 
