@@ -150,7 +150,7 @@ public class HrAction {
 	@PostMapping("/approveLeave")
 	public String approveLeave() {
 		
-		if(new HrService(request, response).approveLeave()){
+		if(hrActionAdapter.approveLeave()){
 			hrActionAdapter.leaveApprovals();
 			return "leaveapprovals";
 		}

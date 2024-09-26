@@ -285,6 +285,15 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean approveLeave() {
+        HrService hrService = new HrService(request, response);
+        LeaveTypeDto dto = new LeaveTypeDto();
+        dto.setIdLeaveApplication(request.getParameterValues("idleaveapplication"));
+
+        ResultResponse result = hrService.approveLeave(dto);
+        return result.isSuccess();
+
+    }
 
 
 }

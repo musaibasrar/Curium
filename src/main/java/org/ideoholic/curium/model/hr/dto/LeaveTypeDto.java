@@ -11,6 +11,8 @@ public class LeaveTypeDto {
     private String[] totalLeaves;
     private String[] staff;
 
+    private String[] idLeaveApplication;
+
 
 
 }
