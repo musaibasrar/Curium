@@ -638,6 +638,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
@@ -662,6 +663,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.studentexternalid}" /></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${studentfeesreportlist.parents.student.classstudying}" /></td>

@@ -324,6 +324,7 @@ public class DocumentService {
 		
 	public StudentListAaResponseDto admissionAbstract(String branchid) {
 		StudentListAaResponseDto studentListAaResponseDto = StudentListAaResponseDto.builder().build();
+		studentListAaResponseDto.setSuccess(false);
 		if(branchid!=null){
 			try {
 				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
@@ -334,7 +335,6 @@ public class DocumentService {
 				e.printStackTrace();
 			}
 		}
-		studentListAaResponseDto.setSuccess(false);
 		return studentListAaResponseDto;
 	
 	}

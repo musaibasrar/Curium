@@ -1,20 +1,20 @@
 <%--
-    Document   : index
+    Document   : Fees Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Students Admission Reports</title>
+<title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
+<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -82,7 +82,7 @@
 
 .alignRight {
 	font-family: Tahoma;
-	font-size: 12px;
+	font-size: 11px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
@@ -91,23 +91,7 @@
 	font-weight: bold;
 }
 
-.vl {
-  border-left: 1px solid green;
-  height: 2px;
-}
-
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
-.alignSearch {
+.alignLeft {
 	font-family: Tahoma;
 	font-size: 11px;
 	font-style: normal;
@@ -127,13 +111,15 @@
 	font-style: normal;
 	color: #325F6D;
 }
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
 
-.footerTD {
-	border-radius: 6px;
-	background-color: #4b6a84;
-	text-align: left;
-}
 
+                text-align: left;
+
+
+            }
 .alignCentreMultiple {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -294,6 +280,26 @@
 	font-weight: bold;
 	height: 22px;
 }
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
 </style>
 <style>
 #button {
@@ -355,142 +361,231 @@
 		var options = {};
 
 		$("#effect").show();
-		
+		$("#medicineId").val(id)
+		$("#medicineName").val(name);
 
 	}
-	
-</script>
+	function getCurrentDate() {
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		if (month < 10) {
+			month = "0" + month;
 
+		} else {
+			month = month;
+		}
+		if (day < 10) {
+			day = "0" + day;
+
+		} else {
+			day = day;
+		}
+		return month + "/" + day + "/" + year;
+
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
+</script>
 <script type="text/javascript" src="/cambridge/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForStudents() {
+	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/cambridge/DocumentsProcess/multiClassSearchAdmissoinReport";
+		form1.action = "/cambridge/FeesCollection/searchByDateFeesCollectionCategory";
 		form1.method = "POST";
 		form1.submit();
 
 	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForStudents();
-		});
-		
-
-	});
-
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/cambridge/FeesCollection/searchByDateFeesCollectionCategoryPrint";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
-
-		$("#save").button().click(function() {
-			addDepartment();
+		$("#search").button().click(function() {
+			searchByDate();
 		});
-		/* $("#effect").hide(); */
-
-	});
-	
-	$(function() {
-		$("#export").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
+		$("#effect").hide();
 		
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
+		 $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printRecords();
+             return false;
 
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
-
-		$("#go").button()
+         });
 
 	});
 	
-	
+	 $(function(){
+		 $("#export").button({
+				
+			});
+         $("#delete").button({
+             icons:{
+                 primary: "ui-icon-trash"
+             }
+         }).click(function(){
+             deleteRecords();
+             return false;
+
+         });
+         $('#chckHead').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             if(length>0){
+                 $('.chcktbl:checked').attr('checked', false);
+                 this.checked=false;
+
+             }
+             else{
+                 if (this.checked == false) {
+                     $('.chcktbl:checked').attr('checked', false);
+                 }
+                 else {
+                     $('.chcktbl:not(:checked)').attr('checked', true);
+                 }
+
+             }
+
+         });
+         $('.chcktbl').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             alert(tdLength);
+             if (length > trLength) {
+
+                 $('.chcktbl:not(:checked)').attr('disabled', true);
+             }
+             else {
+                 $('.chcktbl:not(:checked)').attr('disabled', false);
+             }
+         });
+         
+         $( "#go" )
+         .button()
+         
+
+     });
+	 
+
+	 function checkFieldsButton() {
+		 
+			
+			var oneday = document.getElementById('datepicker').value;
+			var fromdate = document.getElementById('datepickerfrom').value;
+			var todate = document.getElementById('datepickerto').value;
+			
+			if(oneday == "" && fromdate == "" && todate == ""){
+				alert("Please enter the search criteria");
+			}
+		
+			if(fromdate > todate ){
+				alert('"To date" should be greater than "From date"');
+			}
+			
+		}
+
+	 
+	 function checkFieldsTo() {
+		 
+			
+				document.getElementById('datepicker').value = "";
+				
+				
+			}
+
+	 
+	 function checkFieldsFrom() {
+		 
+		 document.getElementById('datepicker').value = "";
+		 document.getElementById('datepickerto').value = "";
+		}
+	 
+	 
+	 function checkFields() {
+
+			document.getElementById('datepickerfrom').value = "";
+			document.getElementById('datepickerto').value = "";
+			
+			
+		}
+</script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#anim").change(function() {
+			$("#datepicker").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	$(function() {
+		$("#datepickerfrom").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#anim").change(function() {
+			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	$(function() {
+		$("#datepickerto").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#anim").change(function() {
+			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
+		});
+	});
 </script>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
+					
+					var cancelreceipt = '<c:out default="" value="${cancelreceiptresult}"/>';
+		            
+		            if(cancelreceipt == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(cancelreceipt == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+            
+        </script>
         
-      
-        $(document).ready(function() {
-            
-            
-            $("#dataTable").keyup(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                
-            });
-            $("#dataTable").click(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-               
-            });
-
-
-        });
-    
-    function selectAllRow(tableID){
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        if(rowCount==1){
-            var row = table.rows[0];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=false;
-            alert('No records to select');
-        }
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=true;
-        }
-    }
-
-    </script>
-
-
-
 </head>
-  <%
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -507,211 +602,105 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/cambridge/StudentProcess/exportDataForStudents" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
+	<form id="form1"
+		action="/cambridge/FeesDetails/exportDataForFees" method="POST">
+		
+		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
+		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
+		
+		
+		<div style="height: 28px">
+			<button id="add">Search Fees Collection Details</button>
 			<br />
-		</div> -->
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Admissions Report</a></li>
+					<li><a href="#tabs-1">Dates</a></li>
 
 				</ul>
 				<div id="tabs-1">
-					<table>
-
-						<!-- <tr>
-							<td class="alignRight">Name &nbsp;</td>
-							<td><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						<tr style="display: none;">
+							<td width="20%" class="alignRight">Date: &nbsp;</td>
+							<td width="28%"><label> <input name="oneday"
+									type="text" class="textField" id="datepicker" size="36"
+									onfocus="checkFields()" value="${dayone}" autocomplete="false"
+									data-validate="validate(required)">
 							</label></td>
-							
 						</tr>
 
 						<tr>
 							<td><br /></td>
-
-						</tr> -->
-
-
-						<tr>
-							<td class="alignRight">Class &nbsp;</td>
-							<td>
-							<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}&nbsp;&nbsp;
-										</c:if>	
-										
-							</c:forEach>
-							<%-- <label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-
-							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-
-								</select>
-							</label>
 						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-
-						<tr>
-							<td class="alignRight">Admission Year &nbsp;</td>
-							<td>
-								<label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
-								</select>
-
-							</label> 	
-							</td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
+						<tr style="display: none;">
+						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
 						</tr>
 						
-						
-						<tr>
-
-							<td></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						<tr>
+							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
+							<td ><label> <input name="fromdate"
+									type="text" class="textField" id="datepickerfrom" size="36"
+									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td ><label> <input name="todate"
+									type="text" class="textField" id="datepickerto" size="36"
+									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
 					</table>
-					
-					
-
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button onmouseover="checkFieldsButton();" id="search">Search</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
-				<tr>
-					<td class="headerTD">Search result</td>
-				</tr>
-			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
-
 				<thead>
-					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">UID</th>
-						<th title="click to sort" class="headerText">Name</th>
-						<th title="click to sort" class="headerText">Father Name</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Year</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
-					</tr>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
 				</thead>
-
-				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/cambridge/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.studentexternalid}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-									<td class="dataText"><c:out
-									value="${Parents.student.yearofadmission}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+				
+				<tbody>	
+					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap">
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td class="dataText"><c:out value="${feeCategoryCollectionMap.key}" /></td>
+							<td class="dataText"><c:out value="${feeCategoryCollectionMap.value}" /></td>
 						</tr>
 					</c:forEach>
-				</tbody>
-				<tfoot>
+				</tbody>	
+			<tfoot>
 					<tr>
-													
-						<td class="footerTD" colspan="2"> &nbsp;
-						
-						<input value="Export"
-							type="submit" id="export"/></td>
-							
+						<td class="footerTD" colspan="2"><button id="print">Print</button>
+							</td>
 							
 
 					</tr>
 				</tfoot>
+					
 			</table>
 
 		</div>

@@ -756,8 +756,8 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" required
+							<td class="alignLeft">Admission Number &nbsp;</td>
+							<td ><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
@@ -1172,7 +1172,7 @@ $(document).ready(function() {
 							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
-                                        <label> <select name="yearofadmission" id="yearofadmission" required
+                                        <label> <select name="yearofadmission" id="yearofadmission" 
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>

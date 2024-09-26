@@ -49,13 +49,11 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudentService {
-
-	@Autowired
-	StandardActionAdapter standardActionAdapter;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -897,7 +895,9 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			//TODO : Change this to adaptor call while migration
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -980,7 +980,8 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -1050,7 +1051,8 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -1423,6 +1425,12 @@ public class StudentService {
 				if (fieldName.equalsIgnoreCase("yearofadmission")) {
 					student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
+				if (fieldName.equalsIgnoreCase("archive")) {
+					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+				if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
+				}
 				// Updating paretns information
 
 				parents.setPid(parentsId);
@@ -1752,7 +1760,7 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		student.setArchive(0);
+		//student.setArchive(0);
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 
@@ -2300,7 +2308,8 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
-			standardActionAdapter.viewClasses();
+			ResultResponse resultResponse = new StandardService().viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;

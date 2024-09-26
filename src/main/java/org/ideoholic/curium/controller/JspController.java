@@ -587,17 +587,22 @@ public class JspController {
 	}
 	
 	@GetMapping("/vouchersearch")
-	public String voucherSearch() {
+	public String getVoucherSearch() {
 		return "vouchersearch";
 	}
 	
 	@GetMapping("/vouchercancelsuccess")
-	public String voucherCancelSuccess() {
+	public String getVoucherCancelSuccess() {
 		return "vouchercancelsuccess";
 	}
 	
 	@GetMapping("/otherfeescancelledreceipts")
-	public String otherFeesCancelledReceipts() {
+	public String getOtherFeesCancelledReceipts() {
 		return "otherfeescancelledreceipts";
+	}
+	
+	@GetMapping("/feescollectiondetailscategory")
+	public String getFeescollectiondetailscategory() {
+		return "feescollectiondetailscategory";
 	}
 }

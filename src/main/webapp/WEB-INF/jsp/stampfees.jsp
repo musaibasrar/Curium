@@ -686,6 +686,34 @@
             textField.value = "0";
         }
     }
+    
+    $(function() {
+		$('#chckHeadStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			if (length > 0) {
+				$('.chcktblStamp:checked').attr('checked', false);
+				this.checked = false;
+			} else {
+				if (this.checked == false) {
+					$('.chcktblStamp:checked').attr('checked', false);
+				} else {
+					$('.chcktblStamp:not(:checked)').attr('checked', true);
+				}
+			}
+		});
+		
+		$('.chcktblStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			alert(tdLength);
+			if (length > trLength) {
+				$('.chcktblStamp:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblStamp:not(:checked)').attr('disabled', false);
+			}
+		});
+	}); 
         </script>
         
 
@@ -825,6 +853,14 @@ for(Cookie cookie : cookies){
     		        			    <td style="font-weight: bold;color:#eb6000">Fees Total Amount</td>
     		        			</tr>
     		        		</thead>
+    		        		
+    		        			<tr>
+    		        				<td>
+    		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
+    		        				 		<input  type="checkbox" id = "chckHeadStamp" />All
+										</label>
+									</td>
+    		        			</tr>
     		        		
    			        			<c:forEach items="${feescategory}" var="feescategory" varStatus="status">
    			        			

@@ -569,6 +569,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Category</th>
@@ -593,6 +594,7 @@ for(Cookie cookie : cookies){
 								<td class="dataTextInActive"><a class="dataTextInActive"
 									href="/cambridge/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.admissionnumber}" /></a></td>
+								<td class="dataText"><c:out value="${students.key.student.studentexternalid}" /></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>
 								<td class="dataText"><c:out value="${fees.feescategory.feescategoryname}"/></td>
