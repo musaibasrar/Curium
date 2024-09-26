@@ -615,6 +615,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Contact No.</th>
@@ -641,6 +642,9 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/cambridge/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
+										<td class="dataTextInActive"><a class="dataTextInActive"
+								href="/cambridge/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out value="${Parents.contactnumber}" /></td>

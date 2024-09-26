@@ -756,8 +756,8 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" required
+							<td class="alignLeft">Admission Number &nbsp;</td>
+							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 

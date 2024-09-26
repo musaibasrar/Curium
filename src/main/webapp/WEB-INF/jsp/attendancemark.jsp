@@ -673,6 +673,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
 					</tr>
@@ -689,6 +690,8 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
 										value="${attendanceList.admissionnumber}" /></a></td>
+										<td class="dataTextInActive"><a class="dataTextInActive"><c:out
+										value="${attendanceList.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
 							<td class="dataText">
 							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">

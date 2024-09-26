@@ -538,7 +538,7 @@ for(Cookie cookie : cookies){
 
 							<td class="alignLeft">Admission Number&nbsp;</td>
 							<td ><label> <input name="admnno"
-									type="text" class="myclass" required
+									type="text" class="myclass"
 									value="<c:out default="" value="${student.admissionnumber}" />"
 									id="admnno" size="30" data-validate="validate(required)">
 
@@ -993,7 +993,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
 							<td align="left">
-							<label> <select name="yearofadmission" id="yearofadmission" required
+							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
