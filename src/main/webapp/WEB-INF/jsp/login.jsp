@@ -160,11 +160,11 @@ form{
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/cambridge/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/cambridge/images/shaheencambridge.png"></h2></span> -->
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/sneha/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
+						<form action="/cambridge/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>

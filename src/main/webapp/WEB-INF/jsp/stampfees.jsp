@@ -686,8 +686,7 @@
         }
     }
     
-
-	 $(function() {
+    $(function() {
 		$('#chckHeadStamp').click(function() {
 			var length = $('.chcktblStamp:checked').length;
 			var trLength = $('.labelClassStamp').length;
@@ -876,6 +875,14 @@ for(Cookie cookie : cookies){
     		        			    <td style="font-weight: bold;color:#eb6000">Fees Total Amount</td>
     		        			</tr>
     		        		</thead>
+    		        			<tr>
+    		        				<td>
+    		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
+    		        				 		<input  type="checkbox" id = "chckHeadStamp" />All
+										</label>
+									</td>
+    		        			</tr>
+    		        		
     		        			<tr>
     		        				<td>
     		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">

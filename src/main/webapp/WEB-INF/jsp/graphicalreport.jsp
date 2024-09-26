@@ -642,6 +642,7 @@ for(Cookie cookie : cookies){
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
 									/cambridge/MarksDetailsProcess/getStudentGraph--%>
+							<td class="dataText"><c:out value="${Parents.student.studentexternalid}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							<input type="hidden" id="examclass" name="examclass"
