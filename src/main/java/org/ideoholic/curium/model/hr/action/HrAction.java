@@ -139,7 +139,7 @@ public class HrAction {
 	@PostMapping("/rejectLeave")
 	public String rejectLeave() {
 		
-		if(new HrService(request, response).rejectLeave()){
+		if(hrActionAdapter.rejectLeave()){
 			hrActionAdapter.leaveApprovals();
 			return "leaveapprovals";
 		}
