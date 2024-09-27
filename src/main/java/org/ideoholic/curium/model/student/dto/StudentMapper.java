@@ -105,33 +105,6 @@ public interface StudentMapper {
     
     Classsec mapClassec(CreateStudentDto createStudentDto);
 
-
-    static String createConClassStudyings(StudentDto studentDto) {
-        String conClassStudying = "";
-        String addClass = DataUtil.emptyString(studentDto.getAddclass());
-        if (!addClass.equalsIgnoreCase("")) {
-            conClassStudying = addClass + "--";
-        }
-        String addSec = DataUtil.emptyString(studentDto.getAddsec());
-        if (!addSec.equalsIgnoreCase("")) {
-            conClassStudying = conClassStudying + addSec;
-        }
-        return conClassStudying;
-    }
-
-    static String createClassadmittedina(StudentDto studentDto) {
-        String conClassAdmittedIn = "";
-        String addClassE = DataUtil.emptyString(studentDto.getAddclass());
-        if (!conClassAdmittedIn.equalsIgnoreCase("")) {
-            conClassAdmittedIn = addClassE + "--";
-        }
-        String addSecE = DataUtil.emptyString(studentDto.getAddsec());
-        if (!addSecE.equalsIgnoreCase("")) {
-            conClassAdmittedIn = conClassAdmittedIn + addSecE;
-        }
-        return conClassAdmittedIn;
-    }
-
     @Mapping(target = "dateofbirth", expression = "java(DateUtil.indiandateParser(studentDto.getDateofbirth()))")
     Student mapStudent(StudentDto studentDto);
     Parents mapParent(StudentDto studentDto);

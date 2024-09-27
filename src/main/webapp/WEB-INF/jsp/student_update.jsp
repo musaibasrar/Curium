@@ -697,9 +697,9 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> <label> 
-									<select name="admsec" id="admsec"
+									<select name="secadm" id="secadm"
 									style="width: 75px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${admsec}</option>
+										<option selected>${secadm}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
