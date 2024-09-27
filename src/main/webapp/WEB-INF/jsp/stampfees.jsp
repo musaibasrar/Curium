@@ -879,7 +879,7 @@ for(Cookie cookie : cookies){
     		        			<tr>
     		        				<td>
     		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
-    		        				 		<input  type="checkbox" id = "chckHeadStamp" />All
+    		        				 		<input  type="checkbox" id = "chckHeadStamp" onchange="toggleFeesCount(this)"/>All
 										</label>
 									</td>
     		        			</tr>

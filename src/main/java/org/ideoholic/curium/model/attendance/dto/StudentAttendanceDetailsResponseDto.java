@@ -14,7 +14,7 @@ import java.util.List;
 public class StudentAttendanceDetailsResponseDto {
     private List<Student> studentListAttendance;
     private List<Studentdailyattendance> studentDailyAttendanceDate;
-    private Date searchDate;
+    private String searchDate;
     private List<Student> studentList;
     private boolean success;
 }
