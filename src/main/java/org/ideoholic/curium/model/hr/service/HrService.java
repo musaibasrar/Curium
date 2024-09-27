@@ -479,7 +479,7 @@ public class HrService {
 
 	public ResultResponse rejectLeave(LeaveIdsDto dto) {
 		
-		String[] idleaveapplication = dto.getIdleaveapplication();
+		String[] idleaveapplication = dto.getIdLeaveApplication();
 		
 		if (idleaveapplication != null) {
 			List<Integer> ids = new ArrayList<>();
@@ -492,7 +492,7 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public ResultResponse approveLeave(LeaveTypeDto dto) {
+	public ResultResponse approveLeave(LeaveIdsDto dto) {
 		
 		String[] idleaveapplication = dto.getIdLeaveApplication();
 		
