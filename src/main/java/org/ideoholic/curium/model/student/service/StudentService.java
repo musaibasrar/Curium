@@ -98,7 +98,7 @@ public class StudentService {
 		student.setDroppedout(0);
 		student.setLeftout(0);
 		student.setStudentexternalid(branchCode);
-		student.setBranchid(Integer.parseInt(branchCode));
+		student.setBranchid(Integer.parseInt(branchId));
 		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());

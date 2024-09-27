@@ -406,7 +406,6 @@ public class AttendanceService {
 			String addClass = attendanceDetailsDto.getAddClass();
 			String addSec = attendanceDetailsDto.getAddSec();
 			String conClassStudying = "";
-			String conClassStudyingEquals = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
 
@@ -427,7 +426,6 @@ public class AttendanceService {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
-						+ "' OR student.classstudying = '" + conClassStudyingEquals
 						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
@@ -439,11 +437,10 @@ public class AttendanceService {
 			List<Student> newStudentList = new ArrayList<Student>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
-			Date searchdate = DateUtil.dateParserUpdateStd(attendanceDetailsDto.getSearchDate());
-			Timestamp timestamp = new Timestamp(searchdate.getTime());
+			String searchdate = DateUtil.dateFromatConversionSlash(attendanceDetailsDto.getSearchDate());
 			for (Student student : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, timestamp,student.getStudentexternalid(), Integer.parseInt(branchId));
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudentexternalid(), Integer.parseInt(branchId));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
 					newStudentList.add(student);
 					newStudentDailyAttendance.add(studentDailyAttendance);
@@ -453,7 +450,7 @@ public class AttendanceService {
 
 			result.setStudentListAttendance(newStudentList);
 			result.setStudentDailyAttendanceDate(newStudentDailyAttendance);
-			result.setSearchDate(searchdate);
+			result.setSearchDate(attendanceDetailsDto.getSearchDate());
 			result.setSuccess(true);
 
 		}
@@ -480,22 +477,25 @@ public class AttendanceService {
 		if(currentAcademicYear!=null){
 
 			String studentExternalId = DataUtil.emptyString(attendanceDetailsMonthlyDto.getStudentExternalId());
-			Date fromDate = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getFromDate());
-			Date toDate = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getToDate());
-			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
-			Timestamp toTimestamp = new Timestamp(toDate.getTime());
+			Date fromDateAtt = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getFromDate());
+			Date toDateAtt = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getToDate());
+			Timestamp fromTimestamp = new Timestamp(fromDateAtt.getTime());
+			Timestamp toTimestamp = new Timestamp(toDateAtt.getTime());
+			
+			String fromDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getFromDate());
+			String toDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getToDate());
 
 			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
+			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalId, fromDate, toDate, currentAcademicYear, Integer.parseInt(branchId));
 
 			result.setStudentDailyAttendance(studentDailyAttendance);
 			result.setStudentName(attendanceDetailsMonthlyDto.getStudentName());
 			result.setAdmNo(attendanceDetailsMonthlyDto.getAdmNo());
 
 			Calendar start = Calendar.getInstance();
-			start.setTime(fromDate);
+			start.setTime(fromDateAtt);
 			Calendar end = Calendar.getInstance();
-			end.setTime(toDate);
+			end.setTime(toDateAtt);
 			end.add(Calendar.DATE, 1);
 
 			int absentDays = 0;
@@ -591,8 +591,11 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				Date lastDayOfMonth = start.getTime();
 				Timestamp timestampTo = new Timestamp(lastDayOfMonth.getTime());
 				
+				String fromDateAtt = DateUtil.dateFromatConversionSlash(attendanceGraphDto.getFromDate());
+				String toDateAtt = DateUtil.dateFromatConversionSlash(attendanceGraphDto.getToDate());
+				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendanceGraph(studentExternalIdGraph, timestampFrom, timestampTo, currentAcademicYear, Integer.parseInt(branchId));
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendanceGraph(studentExternalIdGraph, fromDateAtt, toDateAtt, currentAcademicYear, Integer.parseInt(branchId));
 				
 				int absentDays = 0;
 				
@@ -663,8 +666,11 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				Date lastDayOfMonth = cStart.getTime();
 				Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 				
+				String fromDateAtt = DateUtil.dateFromatConversionSlash(request.getParameter("frommonthlyattendance"));
+				String toDateAtt = DateUtil.dateFromatConversionSlash(request.getParameter("tomonthlyattendance"));
+				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalIdGraph, TimestampFrom, Timestampto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalIdGraph, fromDateAtt, toDateAtt, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				mapStudentDailyAttendance.put(i, studentDailyAttendance);
 				
 				cStart.add(Calendar.MONTH, +1);
@@ -708,7 +714,6 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			String addClass = attendanceDetailsMarkDto.getAddClass();
 			String addSec = attendanceDetailsMarkDto.getAddSec();
 			String conClassStudying = "";
-			String conClassStudyingEquals = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
 
@@ -890,6 +895,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 
 	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto, String branchId, String currentAcademicYear) {
+		boolean result = false;
 
 		if(currentAcademicYear!=null) {
 
@@ -936,13 +942,15 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 
-		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto, searchStudentList, Integer.parseInt(branchId));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String startDateAtt = sdf.format(TimestampFrom);
+        String endDateAtt = sdf.format(Timestampto);
+        
+		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(currentAcademicYear, startDateAtt, endDateAtt, searchStudentList, Integer.parseInt(branchId));
 
 		try {
-			ResultResponse
-					.builder()
-					.success(exportDataToExcel(studentsAttendance, monthOf))
-					.build();
+			result = exportDataToExcel(studentsAttendance, monthOf);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -950,7 +958,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		}
 		return ResultResponse
 				.builder()
-				.success(false)
+				.success(result)
 				.build();
 	}
 	

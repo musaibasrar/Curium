@@ -67,7 +67,7 @@ public class ExamDetailsActionAdapter {
     public boolean getExamSchedule() {
 
         ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
-        httpSession.setAttribute("examschedule", result.getExams());
+        httpSession.setAttribute("examschedule", result.getExamschedules());
 
         return result.isSuccess();
     }
