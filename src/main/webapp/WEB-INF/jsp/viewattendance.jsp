@@ -584,8 +584,8 @@
 		$("#dateofattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-2:+0"
 		});
 		$("#anim").change(function() {
 			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
@@ -594,8 +594,8 @@
 		$("#fromdateofattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-2:+0"
 		});
 		$("#anim").change(function() {
 			$("#fromdateofattendance").datepicker("option", "showAnim", $(this).val());
@@ -604,8 +604,8 @@
 		$("#todateofattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-2:+0"
 		});
 		$("#anim").change(function() {
 			$("#todateofattendance").datepicker("option", "showAnim", $(this).val());
@@ -614,8 +614,8 @@
 		$("#frommonthlyattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-2:+0"
 		});
 		$("#anim").change(function() {
 			$("#frommonthlyattendance").datepicker("option", "showAnim", $(this).val());
@@ -624,8 +624,8 @@
 		$("#tomonthlyattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-2:+0"
 		});
 		$("#anim").change(function() {
 			$("#tomonthlyattendance").datepicker("option", "showAnim", $(this).val());
@@ -776,7 +776,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
+									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label></td>
 							
 						</tr>
@@ -852,13 +852,13 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">From Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label> <input
 									name="fromdateofattendance" type="text" class="textField"
-									id="fromdateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
+									id="fromdateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<label>To Date: &nbsp;</label>
 							<label> <input
 									name="todateofattendance" type="text" class="textField"
-									id="todateofattendance" size="25"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"/>
+									id="todateofattendance" size="25"  value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"/>
 							</label>
 							</td>
 							
@@ -924,13 +924,13 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">From Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label> <input
 									name="frommonthlyattendance" type="text" class="textField"
-									id="frommonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
+									id="frommonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label>	
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<label>To Date: &nbsp;</label>
 							<label> <input
 									name="tomonthlyattendance" type="text" class="textField"
-									id="tomonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
+									id="tomonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label>
 							</td>
 							

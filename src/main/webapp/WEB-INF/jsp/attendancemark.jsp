@@ -640,7 +640,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" readonly="readonly" data-validate="validate(required)"/>
+									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
 							</label></td>
 							
 						</tr>

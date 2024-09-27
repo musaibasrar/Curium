@@ -286,7 +286,7 @@ public class AttendanceDAO {
 		return false;
 	}
 
-	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, Timestamp date, String studentExternalId, int branchId) {
+	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, String date, String studentExternalId, int branchId) {
 		
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		
@@ -304,8 +304,8 @@ public class AttendanceDAO {
 	}
 
 	public List<Studentdailyattendance> getStudentDailyAttendance(
-			String studentExternalId, Timestamp fromTimestamp,
-			Timestamp toTimestamp, String currentAcademicYear, int branchId) {
+			String studentExternalId, String fromTimestamp,
+			String toTimestamp, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		try {
 			transaction = session.beginTransaction();
@@ -340,8 +340,8 @@ public class AttendanceDAO {
 	}
 
 	public List<Studentdailyattendance> getStudentDailyAttendanceGraph(
-			String studentExternalIdGraph, Timestamp timestampFrom,
-			Timestamp timestampto, String currentAcademicYear, int branchId) {
+			String studentExternalIdGraph, String timestampFrom,
+			String timestampto, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		try {
 			transaction = session.beginTransaction();
@@ -407,7 +407,7 @@ public class AttendanceDAO {
 	}
 
 	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
-			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
+			String currentAcademicYear, String timestampFrom, String timestampto,
 			List<Student> searchStudentList, int branchId) {
 		
 		Map<String, List<Studentdailyattendance>> mapStudentAttendance = new HashMap<String, List<Studentdailyattendance>>();
