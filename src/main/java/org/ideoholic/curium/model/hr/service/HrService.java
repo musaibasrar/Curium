@@ -479,7 +479,7 @@ public class HrService {
 
 	public ResultResponse rejectLeave(LeaveIdsDto dto) {
 		
-		String[] idleaveapplication = dto.getIdleaveapplication();
+		String[] idleaveapplication = dto.getIdLeaveApplication();
 		
 		if (idleaveapplication != null) {
 			List<Integer> ids = new ArrayList<>();
@@ -492,19 +492,19 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean approveLeave() {
+	public ResultResponse approveLeave(LeaveIdsDto dto) {
 		
-		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
+		String[] idleaveapplication = dto.getIdLeaveApplication();
 		
 		if (idleaveapplication != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
-			return new HrDAO().approveLeave(ids);
+			return  ResultResponse.builder().success(new HrDAO().approveLeave(ids)).build();
 		}
 		
-		return false;
+		return ResultResponse.builder().build();
 	}
 
 	public boolean processStaffSalary() {

@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class LeaveIdsDto {
-  private String[] idleaveapplication;
+  private String[] idLeaveApplication;
 }
