@@ -25,26 +25,26 @@ import org.mapstruct.factory.Mappers;
 public interface StudentMapper {
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
-    static String createConClassStudying(StudentDto studentDto) {
+    static String createConClassStudying(CreateStudentDto createStudentDto) {
         String conClassStudying = "";
-        String addClass = DataUtil.emptyString(studentDto.getAddclass());
+        String addClass = DataUtil.emptyString(createStudentDto.getAddclass());
         if (!addClass.equalsIgnoreCase("")) {
             conClassStudying = addClass + "--";
         }
-        String addSec = DataUtil.emptyString(studentDto.getAddsec());
+        String addSec = DataUtil.emptyString(createStudentDto.getAddsec());
         if (!addSec.equalsIgnoreCase("")) {
             conClassStudying = conClassStudying + addSec;
         }
         return conClassStudying;
     }
 
-    static String createClassadmittedin(StudentDto studentDto) {
+    static String createClassadmittedin(CreateStudentDto createStudentDto) {
         String conClassAdmittedIn = "";
-        String addClassE = DataUtil.emptyString(studentDto.getAddclass());
+        String addClassE = DataUtil.emptyString(createStudentDto.getAddclass());
         if (!conClassAdmittedIn.equalsIgnoreCase("")) {
             conClassAdmittedIn = addClassE + "--";
         }
-        String addSecE = DataUtil.emptyString(studentDto.getAddsec());
+        String addSecE = DataUtil.emptyString(createStudentDto.getAddsec());
         if (!addSecE.equalsIgnoreCase("")) {
             conClassAdmittedIn = conClassAdmittedIn + addSecE;
         }
@@ -72,12 +72,12 @@ public interface StudentMapper {
     @Mapping(target = "instructionmediumlastschool", source = "mediumofinstructionlastschool")
     @Mapping(target = "yearofadmission", source = "yearofadmission")
     @Mapping(target = "promotedyear", source = "promotedyear")
-    Student mapStudent(StudentDto studentDto);
+    Student mapStudent(CreateStudentDto studentDto);
 
     @Mapping(target = "addresspermanent", source = "permanentaddress")
     @Mapping(target = "addresstemporary", source = "temporaryaddress")
     @Mapping(target = "remarks", source = "remarksadditional")
-    Parents mapParent(StudentDto studentDto);
+    Parents mapParent(CreateStudentDto studentDto);
 
     @Mapping(target = "exampassedappearance", source = "pep")
     @Mapping(target = "exampassedyear", source = "passedyear")
@@ -87,7 +87,7 @@ public interface StudentMapper {
     @Mapping(target = "aggregatemarkssslc", source = "aggmarks")
     @Mapping(target = "sslcmediuminstruction", source = "xmediuminstruction")
     @Mapping(target = "pumediuminstruction", source = "PUmediuminstruction")
-    Pudetails mapPudetails(StudentDto studentDto);
+    Pudetails mapPudetails(CreateStudentDto studentDto);
 
     @Mapping(target = "exampassedappearance", source = "pepdc")
     @Mapping(target = "exampassedyear", source = "passedyeardc")
@@ -101,7 +101,13 @@ public interface StudentMapper {
     @Mapping(target = "transfercertificate", source = "originaltc")
     @Mapping(target = "proficiencysports", source = "games")
     @Mapping(target = "areyouemployee", source = "employer")
-    Degreedetails mapDegreedetails(StudentDto studentDto);
+    Degreedetails mapDegreedetails(CreateStudentDto studentDto);
     
-    Classsec mapClassec(StudentDto studentDto);
+    Classsec mapClassec(CreateStudentDto createStudentDto);
+
+    @Mapping(target = "dateofbirth", expression = "java(DateUtil.indiandateParser(studentDto.getDateofbirth()))")
+    Student mapStudent(StudentDto studentDto);
+    Parents mapParent(StudentDto studentDto);
+    Pudetails mapPudetails(StudentDto studentDto);
+    Degreedetails mapDegreedetails(StudentDto studentDto);
 }

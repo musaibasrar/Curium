@@ -2,12 +2,13 @@ package org.ideoholic.curium.model.student.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
-import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -159,7 +160,7 @@ public class StudentActionAdapter {
         studentService.archiveMultiple(dto);
     }
 
-    public boolean addStudent(StudentDto student, MultipartFile[] uploadedFiles) {
+    public boolean addStudent(CreateStudentDto student, MultipartFile[] uploadedFiles) {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         student.setYearofadmission(request.getParameter("yearofadmission"));
@@ -179,5 +180,64 @@ public class StudentActionAdapter {
         request.setAttribute("searchStudentList", resultResponse.getResultList());
 
         return resultResponse.isSuccess();
+    }
+
+
+    public String updateStudent(StudentDto studentDto, MultipartFile[] uploadedFiles) {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        studentDto.setAdmissionnumber(request.getParameter("admnno"));
+        studentDto.setPlaceofbirth(request.getParameter("place"));
+        studentDto.setClassSec(request.getParameter("classsec"));
+        studentDto.setSecstudying(request.getParameter("secstudying"));
+        studentDto.setAdmclassE(request.getParameter("classadm"));
+        studentDto.setAdmsecE(request.getParameter("secadm"));
+        studentDto.setDateleaving(request.getParameter("dateofleaving"));
+        studentDto.setAddresspermanent(request.getParameter("permanentaddress"));
+        studentDto.setAddresstemporary(request.getParameter("temporaryaddress"));
+        studentDto.setSid(DataUtil.parseInt(request.getParameter("id")));
+        studentDto.setPid(DataUtil.parseInt(request.getParameter("idparents")));
+        studentDto.setAge(DataUtil.parseInt(request.getParameter("age")));
+        studentDto.setAdmissiondate(DateUtil.indiandateParser(request.getParameter("dateofadmission")));
+        studentDto.setTcno(DataUtil.parseInt(request.getParameter("tcno")));
+        studentDto.setDateoftc(DataUtil.emptyString(request.getParameter("dateoftc")));
+        studentDto.setNotcissued(DataUtil.parseInt(request.getParameter("notcissued")));
+        studentDto.setSemester(DataUtil.parseInt(request.getParameter("semester")));
+        studentDto.setBelongtobpl(DataUtil.parseInt(request.getParameter("belongtobpl")));
+        studentDto.setRte(DataUtil.parseInt(request.getParameter("rte")));
+        studentDto.setPassedout(DataUtil.parseInt(request.getParameter("passedout")));
+        studentDto.setLeftout(DataUtil.parseInt(request.getParameter("leftout")));
+        studentDto.setDroppedout(DataUtil.parseInt(request.getParameter("droppedout")));
+        studentDto.setNoofdependents(DataUtil.parseInt(request.getParameter("noofdependents")));
+        studentDto.setPep(DataUtil.parseInt(request.getParameter("pep")));
+        studentDto.setPudetailsid(DataUtil.parseInt(request.getParameter("pudetailsid")));
+        studentDto.setIddegreedetails(DataUtil.parseInt(request.getParameter("degreedetailsid")));
+        studentDto.setPepdc(DataUtil.parseInt(request.getParameter("pepdc")));
+        studentDto.setPumarkscard(DataUtil.parseInt(request.getParameter("pumarkscard")));
+        studentDto.setMedicalreport(DataUtil.parseInt(request.getParameter("medicalreport")));
+        studentDto.setIncomecertificate(DataUtil.parseInt(request.getParameter("incomecertificate")));
+        studentDto.setMigrationcertificate(DataUtil.parseInt(request.getParameter("migrationcertificate")));
+        studentDto.setOriginaltc(DataUtil.parseInt(request.getParameter("originaltc")));
+        studentDto.setCastecertificate(DataUtil.parseInt(request.getParameter("castecertificate")));
+        studentDto.setKarnataka(DataUtil.parseInt(request.getParameter("karnataka")));
+        studentDto.setStudentPicDelete(request.getParameter("studentpicdelete"));
+        studentDto.setStudentDoc1Delete(request.getParameter("studentdoc1delete"));
+        studentDto.setStudentDoc2Delete(request.getParameter("studentdoc2delete"));
+        studentDto.setStudentDoc3Delete(request.getParameter("studentdoc3delete"));
+        studentDto.setStudentDoc4Delete(request.getParameter("studentdoc4delete"));
+        studentDto.setStudentDoc5Delete(request.getParameter("studentdoc5delete"));
+        studentDto.setStudentPicUpdate(request.getParameter("studentpicupdate"));
+        studentDto.setStudentDoc1Update(request.getParameter("studentdoc1update"));
+        studentDto.setStudentDoc2Update(request.getParameter("studentdoc2update"));
+        studentDto.setStudentDoc3Update(request.getParameter("studentdoc3update"));
+        studentDto.setStudentDoc4Update(request.getParameter("studentdoc4update"));
+        studentDto.setStudentDoc5Update(request.getParameter("studentdoc5update"));
+        studentDto.setStudentexternalid(request.getParameter("studentexternalid"));
+
+        Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+
+        String stId = student.getSid().toString();
+		int branchId = student.getBranchid();
+		return stId+"_"+branchId;
     }
 }

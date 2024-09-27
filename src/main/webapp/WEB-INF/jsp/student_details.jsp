@@ -304,16 +304,7 @@
                 form1.submit();
             }
             
-            function typeofrelation(){
-                var listitem = document.getElementById("subscriber");
-                var listitemtext = listitem.options[listitem.selectedIndex].text;
-                alert(listitemtext);
-                
-                if(listitemtext=="1"){
-                    document.getElementById("typeofrelation").value="subscriber";
-                    
-                }
-            }
+
             
       
         </script>
@@ -398,7 +389,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
-        <form  method="post" id="form1">
+        <form  method="post" id="form1" modelAttribute="studentDto" enctype="multipart/form-data">
 
             <div>
                 <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
@@ -517,7 +508,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
-						    ${splt} 
+						    ${splt}
 							</c:forEach>
                                <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>

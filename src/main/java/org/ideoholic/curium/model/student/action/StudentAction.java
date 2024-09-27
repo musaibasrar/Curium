@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
+import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,8 +179,8 @@ public class StudentAction {
 	}
 
 	@RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public String updateStudent(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		String idbranchid = new StudentService(request, response, standardActionAdapter).updateStudent(uploadedFiles);
+	public String updateStudent(@ModelAttribute("studentDto") StudentDto student, @RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		String idbranchid = studentActionAdapter.updateStudent(student, uploadedFiles);
 		String id[] = idbranchid.split("_");
 		return viewStudent(id[0], id[1]);
 	}
@@ -276,7 +277,7 @@ public class StudentAction {
 		}
 	}
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public String addStudent(@ModelAttribute("student") StudentDto student,
+	public String addStudent(@ModelAttribute("student") CreateStudentDto student,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
 		if (studentActionAdapter.addStudent(student, uploadedFiles)) {
 			return "saved";

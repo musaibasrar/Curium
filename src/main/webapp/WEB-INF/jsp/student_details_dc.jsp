@@ -383,7 +383,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
-        <form  method="post" id="form1">
+        <form  method="post" id="form1" modelAttribute="student" enctype="multipart/form-data">
 
             <div>
                 <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
