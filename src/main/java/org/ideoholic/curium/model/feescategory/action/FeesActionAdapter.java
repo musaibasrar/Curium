@@ -122,7 +122,7 @@ public class FeesActionAdapter {
 
 	public boolean viewAllStudentsList() {
 		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute("branchid").toString());
-		request.setAttribute("studentListFeesCollection", parentListResponseDto.getList());
+		request.setAttribute("studentListFeesCollection", parentListResponseDto.getParentsList());
 		return parentListResponseDto.isSuccess();
 	}
 

@@ -39,7 +39,7 @@ public class FeescategoryDetailDto {
 	}
 
 	public void copyParentListResponseDto(ParentListResponseDto parentResponseDto) {
-		searchStudentList=parentResponseDto.getList();
+		searchStudentList=parentResponseDto.getParentsList();
 		
 	}
 

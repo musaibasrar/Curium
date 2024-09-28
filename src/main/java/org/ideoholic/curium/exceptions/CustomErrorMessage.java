@@ -14,7 +14,8 @@ public enum CustomErrorMessage {
 	NOTSAVED(106, "notSaved"),
 	ERRORADDINGMARKS(107, "erroraddingmarks"),
 	VIEWALL(108, "viewAll"),
-	EMPLOYEENOTSAVED(109, "EmployeenotSaved");
+	EMPLOYEENOTSAVED(109, "EmployeenotSaved"),
+	BONAFIDEFAILURE(110,"bonafidefailure");
 
 	private final int code;
 	private final String message;

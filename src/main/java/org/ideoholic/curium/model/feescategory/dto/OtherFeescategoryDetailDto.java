@@ -30,7 +30,7 @@ public class OtherFeescategoryDetailDto {
 		
 	}
 	public void copyParentListResponseDto(ParentListResponseDto parentResponseDto) {
-		list = parentResponseDto.getList();
+		list = parentResponseDto.getParentsList();
 		
 	}
 	public void copyResultResponse(ResultResponse result) {

@@ -1913,7 +1913,7 @@ public class StudentService {
 
 				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				result.setList(parentDetails);
+				result.setParentsList(parentDetails);
 				result.setNoOfPages(noOfPages);
 				result.setPage(page);
 				result.setSuccess(true);
