@@ -352,17 +352,18 @@ public class MarksDetailsService {
 		//
 		String exam = dto.getExam();
 		String subject = dto.getSubject();
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
 
+		String[] examIdName = exam.split(":");
+		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
+		int subjectDetailsId = subjectDetails.getSubid();
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
 			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
 			for (Marks marks : singleMarksDetails) {
-				System.out.println("The student id is " + parents.getStudent().getSid());
-				System.out.println("The marks sid is " + marks.getSid());
-				if (marks.getSubid() == Integer.parseInt(subject) && marks.getExamid() == Integer.parseInt(exam)) {
+				int subId = marks.getSubid();
+				if ( subId == subjectDetailsId && marks.getExamid() == Integer.parseInt(examIdName[0])) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
@@ -374,8 +375,8 @@ public class MarksDetailsService {
 		result.setNewMarksDetails(newMarksDetails);
 		result.setSubjectSelected(dto.getSubjectSelected());
 		result.setExamSelected(dto.getExamSelected());
-		result.setSubject(subject);
-		result.setExam(exam);
+		result.setSubject(Integer.toString(subjectDetailsId));
+		result.setExam(examIdName[0]);
 		result.setSuccess(true);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(

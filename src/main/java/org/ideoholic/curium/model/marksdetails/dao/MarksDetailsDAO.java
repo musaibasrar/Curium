@@ -29,7 +29,6 @@ public class MarksDetailsDAO {
 
 	public String addMarks(List<Marks> marksList) {
 		
-		boolean result = false;	
 		String output = "success";
 		
 		try{
@@ -46,6 +45,7 @@ public class MarksDetailsDAO {
 		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
+			output="Duplicate";
 		}finally {
 				HibernateUtil.closeSession();
 			return output;
