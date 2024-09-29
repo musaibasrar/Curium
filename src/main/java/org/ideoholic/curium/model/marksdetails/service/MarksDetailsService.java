@@ -326,17 +326,17 @@ public class MarksDetailsService {
 		//
 		String exam = request.getParameter("exam");
 		String subject = request.getParameter("subject");
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
-
+		String[] examIdName = exam.split(":");
+		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), addClass, examIdName[1], Integer.parseInt(subject));
+		int subjectDetailsId = subjectDetails.getSubid();
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
 			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
 			for (Marks marks : singleMarksDetails) {
-				System.out.println("The student id is " + parents.getStudent().getSid());
-				System.out.println("The marks sid is " + marks.getSid());
-				if (marks.getSubid() == Integer.parseInt(subject) && marks.getExamid() == Integer.parseInt(exam)) {
+				int subId = marks.getSubid();
+				if ( subId == subjectDetailsId && marks.getExamid() == Integer.parseInt(examIdName[0])) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
@@ -348,8 +348,8 @@ public class MarksDetailsService {
 		request.setAttribute("newMarksDetails", newMarksDetails);
 		request.setAttribute("subjectselected", request.getParameter("subjectselected"));
 		request.setAttribute("examselected", request.getParameter("examselected"));
-		request.setAttribute("subjectid", subject);
-		request.setAttribute("examid", exam);
+		request.setAttribute("subjectid", subjectDetailsId);
+		request.setAttribute("examid", examIdName[0]);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
 		 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
