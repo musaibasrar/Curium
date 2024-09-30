@@ -116,7 +116,7 @@ public class HrAction {
 
 	@PostMapping("/processStaffSalary")
 	public String processStaffSalary() {
-		if(new HrService(request, response).processStaffSalary()){
+		if(hrActionAdapter.processStaffSalary()){
 			return "processstaffsalarysuccess";
 		}
 		return error;

@@ -294,6 +294,19 @@ public class HrActionAdapter {
         return result.isSuccess();
 
     }
+    public boolean processStaffSalary() {
+        HrService hrService = new HrService(request, response);
+
+        StaffSalaryDto dto = new StaffSalaryDto();
+        dto.setStaffids(request.getParameterValues("employeeIDs"));
+        dto.setMonth(request.getParameter("month"));
+        dto.setYear(request.getParameter("year"));
+        dto.setDateProcess(request.getParameter("dateprocess"));
+
+        ResultResponse result = hrService.processStaffSalary(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
+
+        return result.isSuccess();
+    }
 
 
 }
