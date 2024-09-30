@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.feescategory.dto.IdFeescategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategoryDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeescategoryDetailDto;
 import org.ideoholic.curium.model.feescategory.dto.SearchFeesResponseDto;
+import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,7 +54,7 @@ public interface FeesApiAction {
 
 	ResponseEntity<FeescategoryDetailDto> viewFees(@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 
-	ResponseEntity<Boolean> studentFeePage(String studentId);
+	ResponseEntity<StudentDetailsResponseDto> studentFeePage(String studentId);
 	
 	ResponseEntity<ResultResponse> feesDueStampFees(@RequestHeader(value = "branchid") String branchId);
 	

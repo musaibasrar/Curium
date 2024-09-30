@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,12 @@ public class FeesAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private FeesActionAdapter feesActionAdapter;
+	@Autowired
+	private StudentActionAdapter studentActionAdapter;
 
 	@PostMapping("/applyConcession")
-	public String applyConcession() {
-		String studentId = feesActionAdapter.applyConcession();
-		return studentFeePage(studentId);
+	public String applyConcession() {;
+		return studentFeePage();
 	}
 
 	@PostMapping("/printFeesWaiveoffReport")
@@ -71,8 +73,7 @@ public class FeesAction {
 
 	@PostMapping("/waiveOffFees")
 	public String waiveOffFees() {
-		String studentId = feesActionAdapter.waiveOffFees();
-		return studentFeePage(studentId);
+		return studentFeePage();
 	}
 
 	@GetMapping("/feesReport")
@@ -90,8 +91,7 @@ public class FeesAction {
 
 	@PostMapping("/deleteFeesCategory")
 	public String deleteFeesCategory() {
-		String studentId = feesActionAdapter.deleteFeesCategory();
-		return studentFeePage(studentId);
+		return studentFeePage();
 	}
 
 	@PostMapping("/deleteMultiple")
@@ -127,8 +127,8 @@ public class FeesAction {
 		return "feesCategory";
 	}
 
-	private String studentFeePage(String studentId) {
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent(studentId)) {
+	private String studentFeePage() {
+		if (studentActionAdapter.viewDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

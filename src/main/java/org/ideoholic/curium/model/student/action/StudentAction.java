@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
-import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
@@ -111,7 +110,7 @@ public class StudentAction {
 
 	@GetMapping("/ViewFeesStructure")
 	public String ViewFeesStructure() {
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
+		if (studentActionAdapter.viewDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
@@ -187,7 +186,7 @@ public class StudentAction {
 
 	@PostMapping("/updateStudentDetails")
 	public String updateStudentDetails(HttpServletRequest request, HttpServletResponse response) {
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
+		if (studentActionAdapter.viewDetailsOfStudent()) {
 			String urlBranchId = request.getParameter("urlbranchid");
 			if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
 					|| "3".equalsIgnoreCase(urlBranchId)) {
@@ -205,7 +204,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewDetails", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewStudent() {
 		String branchId;
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
+		if (studentActionAdapter.viewDetailsOfStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {

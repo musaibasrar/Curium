@@ -110,4 +110,6 @@ public interface StudentMapper {
     Parents mapParent(StudentDto studentDto);
     Pudetails mapPudetails(StudentDto studentDto);
     Degreedetails mapDegreedetails(StudentDto studentDto);
+
+    StudentDto mapStudentDto(Student student);
 }
