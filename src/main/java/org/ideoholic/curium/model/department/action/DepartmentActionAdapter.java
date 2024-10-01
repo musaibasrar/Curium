@@ -31,7 +31,7 @@ public class DepartmentActionAdapter {
     public boolean viewDepartment(){
         DepartmentService departmentService = new DepartmentService(request, response);
         DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
-        departmentService.viewDepartment(httpSession.getAttribute(BRANCHID).toString());
+        departmentResponseDto = departmentService.viewDepartment(httpSession.getAttribute(BRANCHID).toString());
 
         httpSession.setAttribute("departmentList", departmentResponseDto.getDepartmentList());
 
