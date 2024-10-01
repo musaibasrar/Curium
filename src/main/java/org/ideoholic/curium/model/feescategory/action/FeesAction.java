@@ -33,7 +33,8 @@ public class FeesAction {
 	private StudentActionAdapter studentActionAdapter;
 
 	@PostMapping("/applyConcession")
-	public String applyConcession() {;
+	public String applyConcession() {
+		feesActionAdapter.applyConcession();
 		return studentFeePage();
 	}
 
@@ -73,6 +74,7 @@ public class FeesAction {
 
 	@PostMapping("/waiveOffFees")
 	public String waiveOffFees() {
+		feesActionAdapter.waiveOffFees();
 		return studentFeePage();
 	}
 
@@ -91,6 +93,7 @@ public class FeesAction {
 
 	@PostMapping("/deleteFeesCategory")
 	public String deleteFeesCategory() {
+		feesActionAdapter.deleteFeesCategory();
 		return studentFeePage();
 	}
 
