@@ -38,8 +38,6 @@ public class PeriodAction {
 	@Autowired
 	HttpSession httpSession;
 	@Autowired
-	private DocumentService DocumentService;
-	@Autowired
 	private DocumentActionAdapter documentActionAdapter;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;

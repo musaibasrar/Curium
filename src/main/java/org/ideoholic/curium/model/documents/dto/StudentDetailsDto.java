@@ -27,7 +27,7 @@ public class StudentDetailsDto {
 	private List<Parents> searchStudentList;
 	private List<Exams> examsList;
 	private List<Subject> subjectList;
-	private List<Parents> list;
+	private List<Parents> parentsList;
 	private boolean success;
 	private int page;
 	private int noOfPages;
@@ -38,7 +38,7 @@ public class StudentDetailsDto {
 		
 	}
 	public void copyParentListResponseDto(ParentListResponseDto parentListResponseDto) {
-		list = parentListResponseDto.getParentsList();
+		parentsList = parentListResponseDto.getParentsList();
 		
 	}
 }
