@@ -55,10 +55,12 @@ public class MarksDetailsActionAdapter {
         dto.setStudentName(request.getParameter("namesearch"));
         dto.setAddClass(request.getParameter("classsearch"));
         dto.setAddSec(request.getParameter("secsearch"));
-
+        
         SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
+        request.setAttribute("listSubjectNames", responseDto.getSubjectList());
         request.setAttribute("listExam", responseDto.getExamsList());
+        request.setAttribute("classselected", dto.getAddClass());
     }
 
     public boolean generateReport() {
@@ -154,7 +156,7 @@ public class MarksDetailsActionAdapter {
         dto.setStudentsMarks(request.getParameterValues("studentMarks"));
         dto.setExam(request.getParameter("exam"));
         dto.setSubject(request.getParameter("subject"));
-
+        dto.setClassSearch(request.getParameter("classsearch"));
         ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
 
         return resultResponse.getMessage();
