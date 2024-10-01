@@ -8,5 +8,6 @@ public class PayHeadDto {
     private String type;
     private String validatory;
     private String description;
+    private String payHeadType;
 
 }

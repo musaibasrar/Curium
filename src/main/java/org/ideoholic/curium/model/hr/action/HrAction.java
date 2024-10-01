@@ -105,7 +105,7 @@ public class HrAction {
 	public String getPayHead() {
 
 			try {
-				new HrService(request, response).getPayHead();
+				hrActionAdapter.getPayHead();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
