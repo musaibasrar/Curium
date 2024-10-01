@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 
 <html>
@@ -299,6 +300,14 @@
     background-color: #f2dede;
     border-color: #ebccd1;
     display: none;
+}
+.addressLine{
+	font-weight: bold;
+	font-family: ariel;
+	color: black;
+	font-size: 22px;
+	letter-spacing: normal;
+	text-align: center;
 }
 </style>
 <style>
@@ -676,6 +685,7 @@ for(Cookie cookie : cookies){
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
+		
 			<table width="100%">
 				<thead>
 				<tr>
@@ -685,12 +695,206 @@ for(Cookie cookie : cookies){
 				</thead>
 				
 				<tbody>	
+				<fmt:setLocale value="en_IN" scope="session"/>
+					<c:set var="total" value="${0}" />
 					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 							<td class="dataText"><c:out value="${feeCategoryCollectionMap.key}" /></td>
-							<td class="dataText"><c:out value="${feeCategoryCollectionMap.value}" /></td>
+							<td class="dataText"><c:out value="${feeCategoryCollectionMap.value}" />
+							
+							<c:set var="total" value="${total + feeCategoryCollectionMap.value}" />
+							</td>
+							
 						</tr>
 					</c:forEach>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total}" />
+							</td>
+					</tr>
+					
+				</tbody>	
+			</table>
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Other Fees</label><br>
+				</tr>
+			</table>
+		<table width="100%">
+				<thead>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
+				</thead>
+				
+				<tbody>	
+				<fmt:setLocale value="en_IN" scope="request"/>
+					<c:set var="othertotal" value="${0}" />
+					<c:forEach items="${otherFeeCategoryCollectionMapCons}" var="otherFeeCategoryCollectionMapCons">
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td class="dataText"><c:out value="${otherFeeCategoryCollectionMapCons.key}" /></td>
+							<td class="dataText"><c:out value="${otherFeeCategoryCollectionMapCons.value}" />
+							
+							<c:set var="othertotal" value="${othertotal + otherFeeCategoryCollectionMapCons.value}" />
+							</td>
+							
+						</tr>
+					</c:forEach>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${othertotal}" />
+							</td>
+					</tr>
+					
+				</tbody>	
+			</table>
+			
+			<table width="100%">
+				
+				<tbody>	
+				<fmt:setLocale value="en_IN" scope="request"/>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Grand Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${othertotal+total}" />
+							</td>
+					</tr>
+					
+				</tbody>	
+			</table>
+			
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+            
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+			<table width="100%">
+				<thead>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
+				</thead>
+				
+				<tbody>	
+				
+					<c:if test="${TotalFeesByCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Total Fees Cash</td>
+						<td class="dataText">${TotalFeesByCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TotalFeesByBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Total Fees Bank</td>
+						<td class="dataText">${TotalFeesByBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TransportationFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Transportation Fee Cash</td>
+						<td class="dataText">${TransportationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TCChargesCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">TC Charges Cash</td>
+						<td class="dataText">${TCChargesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Library Fees Cash</td>
+						<td class="dataText">${LibraryFeesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Compartmental Exam Fee Cash</td>
+						<td class="dataText">${CompartmentalExamFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">CBSE Registration Fee Cash</td>
+						<td class="dataText">${CBSERegistrationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TransportationFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Transportation Fee Bank</td>
+						<td class="dataText">${TransportationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TCChargesBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">TC Charges Bank</td>
+						<td class="dataText">${TCChargesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Library Fees Bank</td>
+						<td class="dataText">${LibraryFeesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Compartmental Exam Fee Bank</td>
+						<td class="dataText">${CompartmentalExamFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">CBSE Registration Fee Bank</td>
+						<td class="dataText">${CBSERegistrationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Grand Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total+othertotal}" />
+							</td>
+					</tr>
 				</tbody>	
 			<tfoot>
 					<tr>
@@ -702,7 +906,6 @@ for(Cookie cookie : cookies){
 				</tfoot>
 					
 			</table>
-
 		</div>
 
 

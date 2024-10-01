@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.model.user.action.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -263,5 +265,11 @@ public class FeesCollectionAction {
 	            new FeesCollectionService(request, response).getFeesReportDue();
 	            return "feesreportdue";
 	        }
+		 
+		 @PostMapping("/defaulterReport")
+			public String searchHallTicketDetails() {
+				new FeesCollectionService(request, response).getDefaulterReportCurrentAcademicActiveStudents();
+				return "defaulterreport";
+			}
 		 
 }

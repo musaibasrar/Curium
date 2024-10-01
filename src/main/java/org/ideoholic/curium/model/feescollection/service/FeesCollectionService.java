@@ -1830,10 +1830,17 @@ public class FeesCollectionService {
 		List<Otherreceiptinfo> otherFeesDetailsList = new ArrayList<Otherreceiptinfo>();
 		long tutionFees = 0l;
 		long otherFees = 0l;
-		long transportationFees = 0l;
-		long compartmentalExamFee = 0l;
-		long tcCharges = 0l;
-		long libraryFees = 0l;
+		long transportationFeesCash = 0l;
+		long compartmentalExamFeeCash = 0l;
+		long CBSERegistrationFeeCash = 0l;
+		long tcChargesCash = 0l;
+		long libraryFeesCash = 0l;
+		
+		long transportationFeesBank = 0l;
+		long compartmentalExamFeeBank = 0l;
+		long CBSERegistrationFeeBank = 0l;
+		long tcChargesBank = 0l;
+		long libraryFeesBank = 0l;
 		
 		Map<String, Long> feeCategoryCollectionMapReport = new LinkedHashMap<String, Long>();
 		
@@ -1925,6 +1932,10 @@ public class FeesCollectionService {
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
+			long totalFeesByCash = 0;
+			long totalFeesByBank = 0;
+			long totalFeesByCashOtherFees = 0;
+			long totalFeesByBankOtherFees = 0;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
@@ -1950,6 +1961,13 @@ public class FeesCollectionService {
 			            	feeCategoryCollectionMap.put(studentfeesSingle.getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			            }
 			        }
+				}
+				
+				String cashOrBank = receiptinfo.getPaymenttype();
+				if(cashOrBank.contains("Cash")) {
+					totalFeesByCash += receiptinfo.getTotalamount();
+				}else if(cashOrBank.contains("Bank")) {
+					totalFeesByBank += receiptinfo.getTotalamount();
 				}
 			}
 			
@@ -1984,6 +2002,9 @@ public class FeesCollectionService {
 		
 		feeCategoryCollectionMapReport.put("Tuition Fee", tutionFees);
 		
+		
+		httpSession.setAttribute("TotalFeesByCash", totalFeesByCash);
+		httpSession.setAttribute("TotalFeesByBank", totalFeesByBank);
 		//Other Fees 
 		
 		long sumOfFeesOtherFees = 0l;
@@ -1992,6 +2013,7 @@ public class FeesCollectionService {
 		}
 		
 		Map<String, Long> otherFeeCategoryCollectionMap = new LinkedHashMap<String, Long>();
+		Map<String, Long> otherFeeCategoryCollectionMapCons = new LinkedHashMap<String, Long>();
 		
 		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
 			
@@ -2008,31 +2030,70 @@ public class FeesCollectionService {
 		            } else {
 		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 		            }
+		            
+		            String cashOrBank = receiptinfo.getPaymenttype();
+		            String feesCategoryName = studentfeesSingle.getOtherfeescategory().getFeescategoryname().trim().toLowerCase();
+		            double amountPaid = feescollectionSingle.getAmountpaid();
+
+		            if (cashOrBank.contains("Cash")) {
+		                if (feesCategoryName.contains("tc charges")) {
+		                    tcChargesCash += amountPaid;
+		                } else if (feesCategoryName.contains("library")) {
+		                    libraryFeesCash += amountPaid;
+		                } else if (feesCategoryName.contains("compartmental exam fee")) {
+		                    compartmentalExamFeeCash += amountPaid;
+		                } else if (feesCategoryName.contains("cbse registration fee")) {
+		                    CBSERegistrationFeeCash += amountPaid;
+		                }else {
+		                	transportationFeesCash += amountPaid;
+		                }
+		            } else if (cashOrBank.contains("Bank")) {
+		                if (feesCategoryName.contains("tc charges")) {
+		                    tcChargesBank += amountPaid;
+		                } else if (feesCategoryName.contains("library")) {
+		                    libraryFeesBank += amountPaid;
+		                } else if (feesCategoryName.contains("compartmental exam fee")) {
+		                    compartmentalExamFeeBank += amountPaid;
+		                } else if (feesCategoryName.contains("cbse registration fee")) {
+		                    CBSERegistrationFeeBank += amountPaid;
+		                }else {
+		                	transportationFeesBank += amountPaid;
+		                }
+		            }
+
+					
 		        }
+			}
+			
+			String cashOrBank = receiptinfo.getPaymenttype();
+			if(cashOrBank.contains("Cash")) {
+				totalFeesByCashOtherFees += receiptinfo.getTotalamount();
+			}else if(cashOrBank.contains("Bank")) {
+				totalFeesByBankOtherFees += receiptinfo.getTotalamount();
 			}
 		}
 		
-		for (Entry<String, Long> entry : otherFeeCategoryCollectionMap.entrySet()) {  
-					String key = entry.getKey();
-	           if(key.contains("TC Charges")) {
-	        	   tcCharges = tcCharges+entry.getValue();
-	           }else if(key.contains("Library")) {
-	        	   libraryFees = libraryFees+entry.getValue();
-	           }else if(key.contains("Compartmental Exam Fee")) {
-	        	   compartmentalExamFee = compartmentalExamFee+entry.getValue();
-	           }else {
-	        	   transportationFees = transportationFees + entry.getValue();
-	           }
-			}
+		otherFeeCategoryCollectionMapCons.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
+		otherFeeCategoryCollectionMapCons.put("TC Charges", tcChargesCash+tcChargesBank);
+		otherFeeCategoryCollectionMapCons.put("Library Fees", libraryFeesCash+libraryFeesBank);
+		otherFeeCategoryCollectionMapCons.put("Compartmental Exam Fee", compartmentalExamFeeCash+compartmentalExamFeeBank);
+		otherFeeCategoryCollectionMapCons.put("CBSE Registration Fee", CBSERegistrationFeeCash+CBSERegistrationFeeBank);
 		
-		feeCategoryCollectionMapReport.put("Transportation Fee", transportationFees);
-		feeCategoryCollectionMapReport.put("TC Charges", tcCharges);
-		feeCategoryCollectionMapReport.put("Library Fees", libraryFees);
-		feeCategoryCollectionMapReport.put("Compartmental Exam Fee", compartmentalExamFee);
+		httpSession.setAttribute("TransportationFeeCash", transportationFeesCash);
+		httpSession.setAttribute("TCChargesCash", tcChargesCash);
+		httpSession.setAttribute("LibraryFeesCash", libraryFeesCash);
+		httpSession.setAttribute("CompartmentalExamFeeCash", compartmentalExamFeeCash);
+		httpSession.setAttribute("CBSERegistrationFeeCash", CBSERegistrationFeeCash);
 		//feeCategoryCollectionMapReport.put("Other Fee", otherFees);
 		
-		//End Other Fees
+		httpSession.setAttribute("TransportationFeeBank", transportationFeesBank);
+		httpSession.setAttribute("TCChargesBank", tcChargesBank);
+		httpSession.setAttribute("LibraryFeesBank", libraryFeesBank);
+		httpSession.setAttribute("CompartmentalExamFeeBank", compartmentalExamFeeBank);
+		httpSession.setAttribute("CBSERegistrationFeeBank", CBSERegistrationFeeBank);
 		
+		//End Other Fees
+		httpSession.setAttribute("otherFeeCategoryCollectionMapCons", otherFeeCategoryCollectionMapCons);
 		httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMapReport);
 	}
 
@@ -2287,6 +2348,7 @@ public class FeesCollectionService {
 			LocalDate startLDate = LocalDate.parse(startDateString, DateTimeFormatter.ISO_LOCAL_DATE);
 
 	        // Get the last two months
+			String currentMonth = startLDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 	        LocalDate firstPreviousMonth = startLDate.minusMonths(1);
 	        LocalDate secondPreviousMonth = startLDate.minusMonths(2);
 
@@ -2318,13 +2380,26 @@ public class FeesCollectionService {
 				long id = parents.getStudent().getSid();
 				List<Studentfeesstructure> feesstructureMain = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
-				
+				int totalMonths = 0;
 				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
 					Long dueAmount =0l;
 					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
-					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo))) {
+					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo))) {
 						feesStructure.add(studentFeesStructure);
-						feeStatus = "Defaulter";
+						
+						if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo)) {
+							totalMonths = 3;
+						}else if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne)) {
+							if(totalMonths<2) {
+								totalMonths = 2;	
+							}
+							
+						}else if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth)) {
+							if(totalMonths<1) {
+								totalMonths = 1;	
+							}
+						}
+						feeStatus = "Defaulter for Total Months "+totalMonths;
 					}else {
 						feesStructure.add(studentFeesStructure);	
 					}
@@ -2341,6 +2416,112 @@ public class FeesCollectionService {
 			}
 		
 			httpSession.setAttribute("studentfeesreportdefualterlist", studentFeesReportList);
+		}
+		
+	  }
+
+	public void getDefaulterReportCurrentAcademicActiveStudents() {
+		
+		
+		//Get Students
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		String classSearch = DataUtil.emptyString(request.getParameter("class"));
+		String exam = DataUtil.emptyString(request.getParameter("exam"));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		
+		
+		String querySub = "";
+
+			querySub = querySub + " (parents.Student.promotedyear='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"' or parents.Student.yearofadmission='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		//End Students
+		
+		//Get Last Two Months
+			String monthOne = null;
+			String monthTwo = null;
+			Date startDate = new Date();
+			
+			// Example start date
+			String startDateString = DateUtil.dateParseryyyymmdd(startDate);
+			LocalDate startLDate = LocalDate.parse(startDateString, DateTimeFormatter.ISO_LOCAL_DATE);
+
+	        // Get the last two months
+			String currentMonth = startLDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+	        LocalDate firstPreviousMonth = startLDate.minusMonths(1);
+	        LocalDate secondPreviousMonth = startLDate.minusMonths(2);
+
+	        // Get the month names in full format
+	        monthOne = firstPreviousMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+	        monthTwo = secondPreviousMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+
+	        
+		//
+		
+		
+		
+		//Get Fees Categories
+		 List<Feescategory> feecategoryList= new feesCategoryDAO().readListOfFeeCategory(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		 List<Integer> feesCatList = new ArrayList<>(); 
+		 for (Feescategory CatFeesList : feecategoryList) {
+			 feesCatList.add(CatFeesList.getIdfeescategory());
+		}
+		//End Fees Categories
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+			
+			for (Parents parents : searchStudentList) {
+				
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+				String feeStatus = "";
+				long id = parents.getStudent().getSid();
+				List<Studentfeesstructure> feesstructureMain = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
+				int totalMonths = 0;
+				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
+					Long dueAmount =0l;
+					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
+					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo))) {
+						feesStructure.add(studentFeesStructure);
+						
+						if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo)) {
+							totalMonths = 3;
+						}else if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne)) {
+							if(totalMonths<2) {
+								totalMonths = 2;	
+							}
+							
+						}else if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth)) {
+							if(totalMonths<1) {
+								totalMonths = 1;	
+							}
+						}
+						feeStatus = "Defaulter for Total Months "+totalMonths;
+					}
+				}
+				
+				if (feesStructure.size() > 0) {
+					parents.setAddresstemporary(feeStatus);
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesStructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
+			}
+		
+			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
 		}
 		
 	  }

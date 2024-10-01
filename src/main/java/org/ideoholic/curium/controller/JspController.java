@@ -562,4 +562,8 @@ public class JspController {
 		return "studentsregistrationreport";
 	}
 	
+	@GetMapping("/defaulterreportloader")
+	public String getDefaulterReportLoader() {
+		return "defaulterreportloader";
+	}
 }

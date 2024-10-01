@@ -645,8 +645,79 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						<tr>
+							<td class="alignRightFields">Student Type &nbsp;</td>
+							<td width="90%"><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 120px;">
+										<option value="Active" selected>Active</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
 
 						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr> 
+
+						<tr>
+							<td class="alignRightFields">Class &nbsp;</td>
+							<td width="90%"><label> 
+								<select name="classsearch" id="classsearch"
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
+
+							</label> <label> 
+									<select name="secsearch" id="secsearch"
+									style="width: 120px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
+							</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+						<tr>
+
+							<td width="30%" class="alignRight"></td>
+
+							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
+							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="search">Search</button>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<%-- <tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
@@ -707,7 +778,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 					</table>
 					<div class="alignRightFields">
 						Fees Category:
