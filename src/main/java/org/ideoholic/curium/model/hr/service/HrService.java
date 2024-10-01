@@ -507,21 +507,21 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public boolean processStaffSalary() {
+	public ResultResponse processStaffSalary(StaffSalaryDto dto, String currentAcademicYear, String branchId, String userId) {
 		
-		String[] staffids = request.getParameterValues("employeeIDs");
+		String[] staffids = dto.getStaffids();
 		Map<String, BigDecimal> earningMaps = new HashMap<>();
 		Map<String, BigDecimal> deductionMaps = new HashMap<>();
 		List<Processsalarydetailsheads> processSalarydetailsheadList = new ArrayList<>();
 		List<Processsalarydetails> processsalarydetailsList = new ArrayList<>();
 		
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
+		if(currentAcademicYear!=null){
 			
 		for (String staffid : staffids) {
 				
 			
-			if(!checkprocessedStaffSalary(Integer.parseInt(staffid),DataUtil.emptyString(request.getParameter("month")),
-					  DataUtil.emptyString(request.getParameter("year")))){
+			if(!checkprocessedStaffSalary(Integer.parseInt(staffid),DataUtil.emptyString(dto.getMonth()),
+					  DataUtil.emptyString(dto.getYear()))){
 			
 			BigDecimal totalEarnings = BigDecimal.ZERO;
 			BigDecimal totalDeduction = BigDecimal.ZERO;
@@ -530,7 +530,7 @@ public class HrService {
 				
 				//get the basic pay
 			
-				Paybasic basicPay = new HrDAO().getBasicPay(Integer.parseInt(staffid),httpSession.getAttribute("currentAcademicYear").toString());
+				Paybasic basicPay = new HrDAO().getBasicPay(Integer.parseInt(staffid),currentAcademicYear);
 				BigDecimal basicPayStaff = basicPay.getBasicpay();
 				
 				
@@ -538,11 +538,11 @@ public class HrService {
 				processHeadsBasic.setPayheadname("Basic Pay");
 				processHeadsBasic.setPayheadtype("Earning");
 				processHeadsBasic.setAmount(basicPay.getBasicpay());
-				processHeadsBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				processHeadsBasic.setBranchid(Integer.parseInt(branchId));
 				processSalarydetailsheadList.add(processHeadsBasic);   
 	               
 				// earning/deduction calculations
-				List<Payheadstaffdetails> payheadstaffdetailsList = new HrDAO().getPayHeadStaff(Integer.parseInt(staffid),httpSession.getAttribute("currentAcademicYear").toString());
+				List<Payheadstaffdetails> payheadstaffdetailsList = new HrDAO().getPayHeadStaff(Integer.parseInt(staffid),currentAcademicYear);
 					
 				if(!payheadstaffdetailsList.isEmpty()){
 					for (Payheadstaffdetails payheadstaffdetails : payheadstaffdetailsList) {
@@ -581,12 +581,12 @@ public class HrService {
 								totalDeduction = totalDeduction.add(payheadstaffdetails.getValue());
 							}
 						}
-						processHeads.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						processHeads.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+						processHeads.setBranchid(Integer.parseInt(branchId));
+						processHeads.setUserid(Integer.parseInt(userId));
 						processSalarydetailsheadList.add(processHeads);
 					}
 				}else{
-					return false;
+					return ResultResponse.builder().success(false).build();
 				}
 				
 				 
@@ -595,28 +595,28 @@ public class HrService {
 			       Teacher teacher = new Teacher();
 			       teacher.setTid(Integer.parseInt(staffid));
 			       processSalary.setTeacher(teacher);
-			       processSalary.setMonth(DataUtil.emptyString(request.getParameter("month")));
-			       processSalary.setYear(Integer.parseInt(DataUtil.emptyString(request.getParameter("year"))));
+			       processSalary.setMonth(DataUtil.emptyString(dto.getMonth()));
+			       processSalary.setYear(Integer.parseInt(DataUtil.emptyString(dto.getYear())));
 			       processSalary.setStatus("PROCESSED");
-			       processSalary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-			       processSalary.setProcesseddate(DateUtil.dateParserUpdateStd(request.getParameter("dateprocess")));
+			       processSalary.setAcademicyear(currentAcademicYear);
+			       processSalary.setProcesseddate(DateUtil.dateParserUpdateStd(dto.getDateProcess()));
 			       processSalary.setPaymenttype(basicPay.getPaymenttype());
 			       BigDecimal netPayment = basicPayStaff.add(totalEarnings);
 			       netPayment = netPayment.subtract(totalDeduction);
 			       processSalary.setNetpayment(netPayment);	
-			       processSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			       processSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			       processSalary.setBranchid(Integer.parseInt(branchId));
+			       processSalary.setUserid(Integer.parseInt(userId));
 			       processsalarydetailsList.add(processSalary);
 			       
 			}
 		}
 		
 		if(!processsalarydetailsList.isEmpty()){
-			return new HrDAO().processStaffSalary(processsalarydetailsList,processSalarydetailsheadList);
+            return ResultResponse.builder().success(new HrDAO().processStaffSalary(processsalarydetailsList,processSalarydetailsheadList)).build();
 		}
 		
 		}
-		return false;
+		return ResultResponse.builder().success(false).build();
 	}
 
 	public boolean getPayHead() throws IOException {
