@@ -939,12 +939,12 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
+                            <td width="25%"  class="alignLeft" height="50">Father's Aadhar No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Aadhar No
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />

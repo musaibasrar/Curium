@@ -826,6 +826,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>
@@ -1422,7 +1423,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
+						<td class="alignLeft">Father's Aadhar No</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1430,7 +1431,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
