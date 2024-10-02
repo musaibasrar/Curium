@@ -311,10 +311,8 @@ public class HrActionAdapter {
     public void getPayHead() throws IOException {
         HrService hrService = new HrService(request, response);
 
-        PayHeadDto dto = new PayHeadDto();
-        dto.setPayHeadType(request.getParameter("payHeadType"));
 
-        PayHeadResponseDto result = hrService.getPayHead(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+        PayHeadResponseDto result = hrService.getPayHead(request.getParameter("payHeadType"),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("payheadlistdynamic", result.getPayHeadList());
 
     }

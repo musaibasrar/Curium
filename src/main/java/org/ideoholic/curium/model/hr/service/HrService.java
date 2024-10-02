@@ -619,11 +619,10 @@ public class HrService {
 		return ResultResponse.builder().success(false).build();
 	}
 
-	public PayHeadResponseDto getPayHead(PayHeadDto dto, String currentAcademicYear, String branchId) throws IOException {
+	public PayHeadResponseDto getPayHead(String payHeadType,String currentAcademicYear, String branchId) throws IOException {
         PayHeadResponseDto result = new PayHeadResponseDto();
 
 		if(currentAcademicYear!=null){
-			String payHeadType = dto.getPayHeadType();
 		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,currentAcademicYear, Integer.parseInt(branchId));
 		result.setPayHeadList(payHeadList);
 
