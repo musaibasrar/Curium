@@ -25,6 +25,7 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,7 +165,7 @@ public class FeesApiActionImpl implements FeesApiAction{
 		return ResponseEntity.ok(feescategoryDetailDto);
 	}
 
-	public ResponseEntity<Boolean> studentFeePage(String studentId) {
+	public ResponseEntity<StudentDetailsResponseDto> studentFeePage(String studentId) {
 		
 		return ResponseEntity.ok(new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent(studentId));
 	}

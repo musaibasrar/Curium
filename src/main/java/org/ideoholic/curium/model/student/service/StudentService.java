@@ -797,11 +797,12 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewDetailsOfStudent() {
+	public StudentDetailsResponseDto viewDetailsOfStudents() {
 		return viewDetailsOfStudent(request.getParameter("id"));
 	}
 
-	public boolean viewDetailsOfStudent(String studentId) {
+	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId) {
+		StudentDetailsResponseDto response = StudentDetailsResponseDto.builder().success(false).build();
 		boolean result = false;
 		try {
 			long id = Long.parseLong(studentId);
@@ -813,12 +814,12 @@ public class StudentService {
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
 			Currentacademicyear currentYear = new YearDAO().showYear();
-			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			response.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
-			request.setAttribute("receiptinfo",rinfo);
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
+			response.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
@@ -841,22 +842,22 @@ public class StudentService {
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
 			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
 			if (parents == null) {
-				result = false;
+				response.setSuccess(false);
 			} else {
-				httpSession.setAttribute("student", parents.getStudent());
+				response.setStudent(parents.getStudent());
 				String classStudying = parents.getStudent().getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					httpSession.setAttribute("classstudying", classStudying);
-					httpSession.setAttribute("classstudy", classParts[0]);
-					httpSession.setAttribute("secstudying", "");
+					response.setClassStudying(classStudying);
+					response.setClassParts(classParts[0]);
+					response.setSecStudying("");
 					if(classParts.length>1) {
-						httpSession.setAttribute("secstudying", classParts[1]);
+						response.setSecClassParts(classParts[1]);
 					}
 
 				} else {
-					httpSession.setAttribute("classstudying", classStudying);
-					httpSession.setAttribute("secstudying", "");
+					response.setClassStudying(classStudying);
+					response.setSecStudying("");
 				}
 
 				String classAdmitted = parents.getStudent().getClassadmittedin();
@@ -864,37 +865,39 @@ public class StudentService {
 				if (!classAdmitted.equalsIgnoreCase("")) {
 
 					String[] classAdmittedParts = classAdmitted.split("--");
-					request.setAttribute("classadm", classAdmittedParts[0]);
-					request.setAttribute("secadm", "");
+					response.setClassAdmittedParts(classAdmittedParts[0]);
+					response.setSecAdm("");
 					if(classAdmittedParts.length>1) {
-						request.setAttribute("secadm", classAdmittedParts[1]);
+						response.setSecAdmParts(classAdmittedParts[1]);
 					}
 
 				} else {
-					request.setAttribute("classadm", classAdmitted);
-					request.setAttribute("secadm", "");
+					response.setClassAdmitted(classAdmitted);
+					response.setSecAdm("");
 				}
 
-				httpSession.setAttribute("parents", parents);
 				//httpSession.setAttribute("feesdetails", feesdetails);
-				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("sumoffees", totalSum);
-				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
-				httpSession.setAttribute("totalfees", totalFeesAmount);
-				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
-				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
-				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
-				httpSession.setAttribute("totalfineamount", totalFineAmount);
-				httpSession.setAttribute("totalmiscamount", totalMiscAmount);
+
+				response.setParents(parents);
+				response.setFeesStructure(feesstructure);
+				response.setTotalSum(totalSum);
+				response.setDueAmount(totalFeesAmount-totalSum);
+				response.setTotalFeesAmount(totalFeesAmount);
+				response.setAcademicPerYear(currentYear.getCurrentacademicyear());
+				response.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
+				response.setTotalFeesConcession(totalFeesConcession);
+				response.setTotalFineAmount(totalFineAmount);
+				response.setTotalMiscAmount(totalMiscAmount);
 				result = true;
-				httpSession.setAttribute("resultfromservice",result);
+				response.setResultFromService(result);
 			}
 			standardActionAdapter.viewClasses();
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			response.setSuccess(false);
 		}
-		return result;
+		response.setSuccess(true);
+		return response;
 	}
 	//code for viewDetailsbySidOfStudent
 	public boolean viewDetailsbySidStudent() {
