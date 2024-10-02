@@ -234,12 +234,12 @@ public class MarksDetailsDAO {
 			}
 			return ex;
 		}
-		public List<SubjectGrade> readSubjectGrade(int branchid) {
+		public List<SubjectGrade> readSubjectGrade(int branchid, int examid, String classSelected) {
 			List<SubjectGrade> results = new ArrayList<SubjectGrade>();
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From SubjectGrade where branchid = "+branchid+"");
+				Query query = session.createQuery("From SubjectGrade where classsec='"+classSelected+"' and branchid = "+branchid+"");
 				results = query.list();
 				transaction.commit();
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -311,5 +311,45 @@ public class MarksDetailsDAO {
 				return results;
 			}
 		}
+		
+	public List<Marks> readMarksforStudentPerSubject(int sid, String currentAcademicYear, int subid) {
+			
+			List<Marks> results = new ArrayList<Marks>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From Marks where sid = "+sid+" and subid = "+subid+" and academicyear = '"+currentAcademicYear+"' ORDER BY subid ASC");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+			
+		}
+	
+	public List<Marks> readMarksPerExamPerSubject(Integer sid, String currentAcademicYear, List<Integer> exid) {
+		
+		List<Marks> results = new ArrayList<Marks>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From Marks where sid = "+sid+" and academicyear = '"+currentAcademicYear+"' and examid IN (:ids) ORDER BY subid ASC");
+			query.setParameterList("ids", exid);
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+		
+	}
 	
 }

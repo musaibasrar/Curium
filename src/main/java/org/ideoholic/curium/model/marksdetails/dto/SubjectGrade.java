@@ -16,16 +16,18 @@ public class SubjectGrade implements java.io.Serializable {
 	private int maxmarks;
     private String status;
     private int branchid;
+    private int examid;
 	
     public SubjectGrade() {
 	}
 	
-    public SubjectGrade(int id, int minmarks, int maxpmarks, String status, int branchid) {
+    public SubjectGrade(int id, int minmarks, int maxpmarks, String status, int branchid, int examid) {
 		this.id = id;
 		this.minmarks = minmarks;
 		this.maxmarks = maxpmarks;
 		this.status = status;
 		this.branchid = branchid;
+		this.examid = examid;
 	}
 	
     @Id
@@ -64,6 +66,14 @@ public class SubjectGrade implements java.io.Serializable {
 	}
 	public void setBranchid(int branchid) {
 		this.branchid = branchid;
+	}
+	
+	@Column(name = "examid")
+	public int getExamid() {
+		return this.minmarks;
+	}
+	public void setExamid(int examid) {
+		this.examid = examid;
 	}
 	
 	}

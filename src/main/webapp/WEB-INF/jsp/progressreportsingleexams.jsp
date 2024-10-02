@@ -1,21 +1,21 @@
 <%--
-    Document   : marks entry
-    Created on : SEP 23, 2017, 5:52:28 PM
+    Document   : progress report
+    Created on : SEP 23, 2018, 5:52:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Marks Entry</title>
-<link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
+<title>Progress Card</title>
+<link rel="stylesheet" href="/sneha/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sneha/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,42 +296,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/cambridge/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/sneha/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/sneha/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/sneha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/cambridge/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/sneha/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/sneha/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/cambridge/js/datePicker/ui/sliderAccess.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/sneha/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/sneha/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/cambridge/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/sneha/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/sneha/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/cambridge/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/sneha/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -357,11 +357,13 @@
 	
 </script>
 
-<script type="text/javascript" src="/cambridge/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/sneha/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForMarks() {
+	function searchForReports() {
+		
+		
 		var form1 = document.getElementById("form1");
-		form1.action = "/cambridge/MarksDetailsProcess/search";
+		form1.action = "/sneha/MarksDetailsProcess/searchForReportSingleExams";
 		form1.method = "POST";
 		form1.submit();
 
@@ -370,7 +372,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForMarks();
+			searchForReports();
 		});
 		
 
@@ -380,19 +382,26 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
-		});
-		/* $("#effect").hide(); */
-
 	});
 	
 	$(function() {
-		$("#addMarks").button({
+		$("#generatereport").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}
 		});
+		$("#delete").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+        	if(confirm('Are you sure,you want to delete?')){
+        		deleteRecords();	
+        	}
+            
+            return false;
+
+        });
 		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -423,63 +432,18 @@
 			}
 		});
 
-		$("#go").button()
 
 	});
 	
 	
 </script>
 
-
-<script type="text/javascript">
-        
-    function checkMandatory(){
-    	
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}
-    	
-    }
-    
-function checkMandatoryandSubmit(){
-    	
-			var checkBox = document.getElementsByName("studentIDs");
-			var resultCheckBox=true;			
-			for(var i=0; i<checkBox.length; i++){
-				if(checkBox[i].checked){
-					resultCheckBox=false;
-				}
-			}
-			
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}else if(resultCheckBox){
-    		alert('Select the student(s) to update the marks');
-    	}else{
-    		var form1 = document.getElementById("form1");
-    		form1.action = "/cambridge/MarksDetailsProcess/addMarks";
-    		form1.method = "POST";
-    		form1.submit();
-
-    	}
-    	
-    }
-    
-   
-        </script>
-
-
-
 </head>
   <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sneha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -492,7 +456,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/cambridge/MarksDetailsProcess/addMarks" method="POST">
+	<form id="form1" action="/sneha/MarksDetailsProcess/generateReportSingleExams" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -501,7 +465,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Enter Marks</a></li>
+					<li><a href="#tabs-1">Progress Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -512,7 +476,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									size="40">
 							</label></td>
 							
 						</tr>
@@ -526,8 +490,8 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 120px;">
-										<option selected>${classselected}</option>
+									id="classsearch" style="width: 128px;">
+										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
@@ -535,11 +499,10 @@ for(Cookie cookie : cookies){
 												</option>
 											</c:if>
 										</c:forEach>
-										</select>
-									</label>
-							 <label> 
-									<select name="secsearch" id="secsearch"
-									style="width: 110px;">
+								</select>
+
+							</label> <label> <select name="secsearch" id="secsearch"
+									style="width: 128px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -550,16 +513,18 @@ for(Cookie cookie : cookies){
 											</c:if>
 										</c:forEach>
 								</select>
-							</label>
+							</label></td>
 						</tr>
 
-						<tr>
+
+				<tr>
 							<td><br /></td>
+						</tr>
 
+
+							<td><br /></td>
 						</tr>
 						
-						
-
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -569,67 +534,24 @@ for(Cookie cookie : cookies){
 								<button id="search">Search</button>
 							</td>
 						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-						<td width="30%" class="alignRight">Subject &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
-									style="width: 240px" ">
-										<option selected></option>
-
-										<c:forEach items="${listSubjectNames}" var="listSubject">
-
-											<option value="${listSubject.subjectid}">
-												<c:out value="${listSubject.subjectname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></label></td>
-						
-						</tr>						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-						<td width="30%" class="alignRight">Exam &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
-									style="width: 240px">
-										<option selected></option>
-
-										<c:forEach items="${listExam}" var="listExam">
-
-											<option value="${listExam.exid}__${listExam.examname}">
-												<c:out value="${listExam.examname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						</tr>
 						
 						
 						<tr>
 							<td><br /></td>
+
 						</tr>
+						
+						
+
+						
+
+
+						
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
+						
 					</table>
 					
 					
@@ -649,12 +571,11 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">Marks</th>
+						
 
 
 
@@ -662,42 +583,34 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${searchStudentList}" var="Parents" >
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
+							<td class="dataText"><input type="checkbox"
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-										<td class="dataTextInActive"><a class="dataTextInActive"
-								><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
-								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
+							<input type="hidden" id="examclass" name="examclass"
+								value="<c:out value="${Parents.student.classstudying}"/>" />
+							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
 							</td>
-							<td class="dataText"><input type="text"
-								id="studentMarks" 
-								name="studentMarks"
-								onkeyup="checkMandatory();" value="0"
-								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
-								maxlength="3"
-								 /></td>
-
-
 						</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input value="Add Marks"
-							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" onmouseover="checkMandatory();"/>
+					
+						<td class="footerTD" colspan="2"><input value="Generate Report"
+							type="submit" id="generatereport" />
+							
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							
