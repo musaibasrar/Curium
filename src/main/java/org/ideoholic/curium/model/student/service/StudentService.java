@@ -1670,6 +1670,7 @@ public class StudentService {
 		if(branchId!=null){
 			result.setSuccess(true);
 			result.setMessage("addStudent");
+			result.setSuccess(true);
 			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";

@@ -359,7 +359,7 @@ public class AccountService {
 			return CreateVoucherResponseDto
 					.builder()
 					.accountDetailsBalance(accountDetailsBalance)
-					.accountDetailsJournalEntry(accountDetailsBalanceExpenses)
+					.accountDetailsBalanceExpenses(accountDetailsBalanceExpenses)
 					.accountDetailsBalanceBankCash(accountDetailsBalanceBankCash)
 					.accountDetailsJournalEntry(accountDetailsJournalEntry)
 					.success(true)

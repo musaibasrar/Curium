@@ -42,7 +42,19 @@ public class UserAction {
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
 		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
-		return "feesCollectionDetails";
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			return "feesCollectionDetailsAdmin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "feesCollectionDetails";
+		} else {
+			return "feesCollectionDetails";
+		}
 	}
 
 	@PostMapping("/advanceSearchByParents")
