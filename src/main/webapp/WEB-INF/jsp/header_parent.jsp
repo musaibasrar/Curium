@@ -7,10 +7,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/brightschool/css/bootstrap.min.css">
+        <script src="/brightschool/js/jquery.min.js"></script>
+        <script src="/brightschool/js/bootstrap.min.js"></script>
+        <script src="/brightschool/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -85,7 +85,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/logout";
+                form1.action="/brightschool/UserProcess/logout";
                 form1.submit();
             }
 
@@ -95,7 +95,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -113,26 +113,29 @@ for(Cookie cookie : cookies){
         ">
         
                         <table width="100%" border="0" align="center"
-						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
-						<tr style="height: 85px;">
+						<tr style="height: 45px;">
 							
-									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/abc/welcomeparent" ><img src="/abc/images/curiumheader.png" width="206" height="75"/></a>
+									<td style="padding-left: 20px;width: 170px;">
+								<a target="mainFrame" href="/brightschool/welcomeparent" ><img src="/brightschool/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/abc/images/abc/header.png"
+							<!-- <td align="left"><img src="/brightschool/images/brightschool/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td align="right"><a target="mainFrame" href="/abc/welcomeparent" style="font-size: 40px;"> <img
-									src="/abc/images/home.svg" width="80" height="60" 
-									alt="Home" style="vertical-align: center;" />Home
-							</a></td>
+							<td align="left" style="padding-left:40px;">
+ 
+                                                         <a target="mainFrame" href="/brightschool/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="/brightschool/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+     <strong style="font-size: 18px;">Home</strong>
+ </a>&nbsp;&nbsp;
+ 
+                                                          <a target="_parent"
+                                                                 href="/brightschool/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="/brightschool/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 /><strong style="font-size: 17px;">Logout</strong></a></td>
 
-							<td align="right" style="width: 242px;"><a target="_parent" style="font-size: 40px;"
-								href="/abc/UserProcess/logout"><img
-									src="/abc/images/logout.svg" width="80" height="57" alt="Log Out" 
-									style="vertical-align: bottom;"/>Logout</a></td>
-							<td width="60"></td>
+
 						</tr>
 
 					</table>

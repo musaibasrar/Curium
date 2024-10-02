@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dash Board</title>
-        <script src="/abc/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <script src="/brightschool/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/brightschool/css/bootstrap.min.css">
+        <script src="/brightschool/js/jquery.min.js"></script>
+        <script src="/brightschool/js/bootstrap.min.js"></script>
+        <script src="/brightschool/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
 
 		@font-face {
 		  font-family: "IBMPlexSans";
-  		  src: url("/abc/fonts/IBMPlexSans-Regular.ttf");
+  		  src: url("/brightschool/fonts/IBMPlexSans-Regular.ttf");
 		}
 
 		#rcorners1 {
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,13 +83,17 @@ for(Cookie cookie : cookies){
     <body>
     	
 
-	<div style="padding-left: 20px;height: 50px;">
+	<!-- <div style="padding-left: 20px;height: 10px;">
 		<table style="align-self: left;">
 			<tr>
-				<td height="150px;"></td>
+				<td height="50px;"></td>
 			</tr>
 
 		</table>
+	</div> -->
+	
+	<div class="row" style="padding-left: 150px;">
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 86px;" alt="ideoholic" src="/brightschool/images/brightschool.png"></h2>
 	</div>
 
 	<div class="row" style="padding-left: 20px;">
@@ -100,8 +104,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/studentprofile.svg" width="50" height="50"
+								href="/brightschool/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/brightschool/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
         					</td>
@@ -109,7 +113,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+     </div>
+     
+     <div class="row" style="padding-left: 20px;">
         	
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FF914D">
@@ -118,8 +124,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/diary.svg" width="50" height="50"
+								href="/brightschool/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/brightschool/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
@@ -127,8 +133,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FFCC00">
         			
@@ -136,8 +143,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/fees.svg" width="50" height="50"
+								href="/brightschool/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/brightschool/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
         					</td>
@@ -145,8 +152,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#90CCB8">
         			
@@ -154,8 +162,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/abc/images/progressreport.svg" width="50" height="50"
+								href="/brightschool/MarksDetailsProcess/generateReportParent?id=${username}"> <img
+									src="/brightschool/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
         					</td>
@@ -163,8 +171,8 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
-        	
+        	</div>
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#9D0176">
         			
@@ -172,8 +180,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/logbook.svg" width="50" height="50"
+								href="/brightschool/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/brightschool/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>
@@ -181,7 +189,7 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	 
         	 
         </div>
