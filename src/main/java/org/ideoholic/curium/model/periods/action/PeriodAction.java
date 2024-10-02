@@ -6,7 +6,7 @@ package org.ideoholic.curium.model.periods.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
@@ -37,6 +37,8 @@ public class PeriodAction {
 	HttpServletResponse response;
 	@Autowired
 	HttpSession httpSession;
+	@Autowired
+	private DocumentActionAdapter documentActionAdapter;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
@@ -116,7 +118,7 @@ public class PeriodAction {
 
 	@GetMapping("/transferCertificate")
 	public String transferCertificate() {
-		if(new DocumentService(request, response, standardActionAdapter).transferCertificate()){
+		if(documentActionAdapter.transferCertificate()){
 			return "transfercertificate";
 		}
         return error;

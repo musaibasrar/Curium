@@ -51,7 +51,7 @@ public class DocumentAction {
 	
 	@PostMapping("/download")
 	public String downloadAdmissionAbstract() {
-		if(new DocumentService(request, response, standardActionAdapter).downlaodFile()){
+		if(documentActionAdapter.downlaodFile()){
             return "exportsuccessaa";
     }
 		return "exportfailure";

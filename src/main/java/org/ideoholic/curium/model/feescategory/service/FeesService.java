@@ -155,7 +155,7 @@ public class FeesService {
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}
-				parentResponseDto.setList(parentDetails);
+				parentResponseDto.setParentsList(parentDetails);
 				parentResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				parentResponseDto.setSuccess(false);

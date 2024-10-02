@@ -99,7 +99,7 @@ public class StudentActionAdapter {
         String page = request.getParameter("page");
 
         ParentListResponseDto responseDto = studentService.viewAllStudentsParents(page, httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("studentList", responseDto.getList());
+        request.setAttribute("studentList", responseDto.getParentsList());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", responseDto.getPage());
     }
