@@ -1994,7 +1994,6 @@ public class StudentService {
 				e.printStackTrace();
 			}
 		}
-		result.setSuccess(false);
 		return result;
 
 	}
