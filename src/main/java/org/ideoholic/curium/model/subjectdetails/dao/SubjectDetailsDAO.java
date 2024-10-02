@@ -195,6 +195,24 @@ public class SubjectDetailsDAO {
 		}
 	}
 	
+	public List<Subjectmaster> readListOfSubjectMasterNames(int branchId) {
+		
+		List<Subjectmaster> results = new ArrayList<Subjectmaster>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Subjectmaster>) session.createQuery("From Subjectmaster where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	
 	public Subject readSubjectByExam(int branchId, String examClass, String examName, int subId) {
 		
 		Subject results = new Subject();
