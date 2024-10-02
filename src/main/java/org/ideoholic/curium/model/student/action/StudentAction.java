@@ -229,7 +229,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ViewDetailsbyexternalid() {
 		String branchId;
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsbySidStudent()) {
+		if (studentActionAdapter.viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
@@ -254,7 +254,7 @@ public class StudentAction {
 	@RequestMapping(value = "/ViewFeesDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ViewFeesDetailsbyexternalid() {
 		String branchId;
-		if (new StudentService(request, response, standardActionAdapter).viewDetailsbySidStudent()) {
+		if (studentActionAdapter.viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {

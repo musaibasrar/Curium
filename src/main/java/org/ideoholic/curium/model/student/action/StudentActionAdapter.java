@@ -273,4 +273,35 @@ public class StudentActionAdapter {
         return responseDto.isSuccess();
     }
 
+    public boolean viewDetailsbySidStudent() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        String studentId = request.getParameter("id");
+
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId);
+        httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("student", responseDto.getStudent());
+        httpSession.setAttribute("classstudying", responseDto.getClassParts());
+        httpSession.setAttribute("secstudying", responseDto.getSecStudying());
+        httpSession.setAttribute("secstudying", responseDto.getSecClassParts());
+        httpSession.setAttribute("classstudying", responseDto.getClassStudying());
+        request.setAttribute("classadm", responseDto.getClassAdm());
+        request.setAttribute("secadm", responseDto.getSecAdm());
+        request.setAttribute("secadm", responseDto.getSecAdmParts());
+        request.setAttribute("classadm", responseDto.getClassAdmitted());
+        httpSession.setAttribute("parents", responseDto.getParents());
+        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
+        httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
+        httpSession.setAttribute("totalfineamount", responseDto.getTotalFineAmount());
+        httpSession.setAttribute("totalmiscamount", responseDto.getTotalMiscAmount());
+        httpSession.setAttribute("resultfromservice", responseDto.isResultFromService());
+
+        return responseDto.isSuccess();
+    }
 }
