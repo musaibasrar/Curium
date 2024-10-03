@@ -3,14 +3,8 @@
  */
 package org.ideoholic.curium.model.printids.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 @Controller
-@RequestMapping("/Printids")
+@RequestMapping("/PrintIds")
 public class PrintIdsAction {
 
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
