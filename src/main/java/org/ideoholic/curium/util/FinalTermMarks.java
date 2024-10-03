@@ -4,21 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
+public class FinalTermMarks implements Serializable{
 	
 	String examName;
 	Map<String,String> subMarks;
-	float totalMarksObtained;
-	float totalMarks;
+	int totalMarksObtained;
+	int totalMarks;
 	double percentage;
     String resultclass;
     Integer rank;
     
-	public ExamsMarks() {
+	public FinalTermMarks() {
 	}
 
-	public ExamsMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
-			float totalMarksObtained, Integer rank, float totalMarks) {
+	public FinalTermMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
+            int totalMarksObtained, Integer rank, int totalMarks) {
 		this.examName = examName;
 		this.subMarks = subMarks;
 		this.percentage = percentage;
@@ -64,22 +64,15 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	    }
 
 	    
-	    public float getTotalMarksObtained() {
+	    public int getTotalMarksObtained() {
 	        return this.totalMarksObtained;
 	    }
 
 	    
-	    public void setTotalMarksObtained(float totalMarksObtained) {
+	    public void setTotalMarksObtained(int totalMarksObtained) {
 	        this.totalMarksObtained = totalMarksObtained;
 	    }
 
-	    @Override
-	    public int compareTo(ExamsMarks result) {
-	        double percentage = ((ExamsMarks) result).getPercentage();
-	        return Double.compare(percentage, this.percentage);
-	    }
-
-	    
 	    public Integer getRank() {
 	        return this.rank;
 	    }
@@ -89,11 +82,11 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	        this.rank = rank;
 	    }
 
-		public float getTotalMarks() {
+		public int getTotalMarks() {
 			return totalMarks;
 		}
 
-		public void setTotalMarks(float totalMarks) {
+		public void setTotalMarks(int totalMarks) {
 			this.totalMarks = totalMarks;
 		}
 	
