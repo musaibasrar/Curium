@@ -780,7 +780,7 @@ public class HrService {
 			}
 			result = new HrDAO().issueProcessedSalary(ids);
 		}
-		issueStaffSalary();
+		//issueStaffSalary();
 		return result;
 	}
 
@@ -796,7 +796,7 @@ public class HrService {
 			}
 			result = new HrDAO().cancelProcessedSalary(ids);
 		}
-		issueStaffSalary();
+		//issueStaffSalary();
 		return result;
 	}
 	
