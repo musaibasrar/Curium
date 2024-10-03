@@ -619,13 +619,13 @@ public class HrService {
 		return ResultResponse.builder().success(false).build();
 	}
 
-	public boolean getPayHead() throws IOException {
+	public PayHeadResponseDto getPayHead(String payHeadType,String currentAcademicYear, String branchId) throws IOException {
+        PayHeadResponseDto result = new PayHeadResponseDto();
 
+		if(currentAcademicYear!=null){
+		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,currentAcademicYear, Integer.parseInt(branchId));
+		result.setPayHeadList(payHeadList);
 
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-			String payHeadType = request.getParameter("payHeadType");
-		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		request.setAttribute("payheadlistdynamic", payHeadList);
 		
 		
 		PrintWriter out = response.getWriter(); 
@@ -655,7 +655,7 @@ public class HrService {
 	        }
 	        
 		}
-	return true;
+	return result;
 	}
 
 	public boolean issueStaffSalary() {
