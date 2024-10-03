@@ -200,12 +200,12 @@ public class FeesAction {
 	
 	@PostMapping("/applyotherConcession")
 	public String applyotherConcession() {
-		String studentId = feesActionAdapter.applyotherConcession();
-		return studentotherFeePage(studentId);
+		feesActionAdapter.applyotherConcession();
+		return studentotherFeePage();
 	}
 	
-	private String studentotherFeePage(String studentId) {
-		if (new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent(studentId)) {
+	private String studentotherFeePage() {
+		if (studentActionAdapter.viewOtherFeesDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_other_feesstructure_admin";
 			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
@@ -251,8 +251,8 @@ public class FeesAction {
 	
 	@PostMapping("/deleteOtherFeesCategory")
 	public String deleteOtherFeesCategory() {
-		String studentId = feesActionAdapter.deleteOtherFeesCategory();
-		return studentotherFeePage(studentId);
+		feesActionAdapter.deleteOtherFeesCategory();
+		return studentotherFeePage();
 	}
 	
 	@GetMapping("/feesReportDue")

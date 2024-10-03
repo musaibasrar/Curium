@@ -245,7 +245,7 @@ public class FeesApiActionImpl implements FeesApiAction{
 	
 
 	
-	public ResponseEntity<Boolean> studentotherFeePage(String studentId) {
+	public ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(String studentId) {
 
 		return ResponseEntity.ok(new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent(studentId));
 	}

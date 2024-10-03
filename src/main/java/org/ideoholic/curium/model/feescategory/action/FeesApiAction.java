@@ -77,7 +77,7 @@ public interface FeesApiAction {
 		
     ResponseEntity<StudentIdDto> applyotherConcession(@RequestBody ConcessionDto concessionDto);
 	
-	ResponseEntity<Boolean> studentotherFeePage(String studentId);
+	ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(String studentId);
 	
 	ResponseEntity<FeescategoryDetailDto> feesDueReportHeadWise(@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);

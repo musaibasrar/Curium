@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.student.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
@@ -36,4 +37,6 @@ public class StudentDetailsResponseDto {
     private String currentAcademicYear;
     private boolean resultFromService;
     private boolean success;
+    private List<Otherreceiptinfo> otherReceiptInfo;
+    private List<Studentotherfeesstructure> studentOtherFeesStructure;
 }
