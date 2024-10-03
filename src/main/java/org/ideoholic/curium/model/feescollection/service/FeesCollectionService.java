@@ -575,7 +575,7 @@ public class FeesCollectionService {
 		return resultResponse;
 	}
 
-	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dayOneCancel, String dateFromCancel, String dateToCancel) {
+	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId) {
 		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
@@ -607,8 +607,6 @@ public class FeesCollectionService {
 				 result.setDayOneCancel(oneDay);
 				 result.setDateFromCancel("");
 				 result.setDateToCancel("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOneCancel+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
@@ -617,9 +615,6 @@ public class FeesCollectionService {
 				result.setDateToCancel(toDate);
 				 result.setDayOneCancel("");
 				
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFromCancel)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateToCancel)) ) {
-				querySub = " feesdetails.date between '"+dateFromCancel+"' AND '"+dateToCancel+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1555,7 +1550,7 @@ public class FeesCollectionService {
 		return result;
 	  }
 
-	public CancelledReceiptsResponseDto searchOtherFeesCollection(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+	public CancelledReceiptsResponseDto searchOtherFeesCollection(CancelledReceiptsDto dto, String strBranchId) {
 		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 
 		List<Otherreceiptinfo> feesDetailsList = new ArrayList<Otherreceiptinfo>();
@@ -1587,8 +1582,6 @@ public class FeesCollectionService {
 				 result.setDayOneCancel(oneDay);
 				 result.setDateFromCancel("");
 				 result.setDateToCancel("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOne+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
@@ -1596,9 +1589,6 @@ public class FeesCollectionService {
 				result.setDateFromCancel(fromDate);
 				result.setDateToCancel(toDate);
 				result.setDayOneCancel("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-				querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1835,7 +1825,7 @@ public class FeesCollectionService {
 		// getFile(name, path);
 	}
 
-	public FeesCategoryResponseDto getFeesCollectionCategory(FeesCategoryDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+	public FeesCategoryResponseDto getFeesCollectionCategory(FeesCategoryDto dto, String strBranchId) {
 		FeesCategoryResponseDto result = FeesCategoryResponseDto.builder().build();
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
@@ -1860,28 +1850,14 @@ public class FeesCollectionService {
 		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 		String toDate= DataUtil.emptyString(dto.getToDate());
 		String fromDate = DataUtil.emptyString(dto.getFromDate());
-		String oneDay = DataUtil.emptyString(dto.getOneDay());
 		
 		
 			String querySub = "";
-			
-			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 result.setDayOne(oneDay);
-				 result.setDateFrom("");
-				 result.setDateTo("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOne+"'" ;
-			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 				result.setDateFrom(fromDate);
 				result.setDateTo(toDate);
-				result.setDayOne("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-				querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1899,23 +1875,10 @@ public class FeesCollectionService {
 
 				String querySubOtherFees = "";
 
-				if(!oneDayOtherFees.equalsIgnoreCase("")){
-					querySub = " feesdetails.date = '"+oneDayOtherFees+"'" ;
-					result.setDayOne(oneDayOtherFees);
-					result.setDateFrom("");
-					result.setDateTo("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-					querySubOtherFees = " feesdetails.date = '"+dayOne+"'" ;
-				}
-
 				if(!fromDateOtherFees.equalsIgnoreCase("")  && !toDateOtherFees.equalsIgnoreCase("")){
 					querySubOtherFees = " feesdetails.date between '"+fromDateOtherFees+"' AND '"+toDateOtherFees+"'";
 					result.setDateFrom(fromDateOtherFees);
 					result.setDateTo(toDateOtherFees);
-					result.setDayOne("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-						!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-					querySubOtherFees = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 				}
 
 				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
@@ -2240,7 +2203,7 @@ public class FeesCollectionService {
 		return result;
 	  }
 
-	public CancelledReceiptsResponseDto viewCancelledOtherFeesReceipts(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dayOneCancel, String dateFromCancel, String dateToCancel) {
+	public CancelledReceiptsResponseDto viewCancelledOtherFeesReceipts(CancelledReceiptsDto dto, String strBranchId) {
 		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 		 
 		List<Otherreceiptinfo> feesDetailsList = new ArrayList<>();
@@ -2272,8 +2235,6 @@ public class FeesCollectionService {
 				 result.setDayOneCancel(oneDay);
 				 result.setDateFromCancel("");
 				 result.setDateToCancel("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOneCancel+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
@@ -2282,9 +2243,6 @@ public class FeesCollectionService {
 				result.setDateToCancel(toDate);
 				result.setDayOneCancel("");
 				
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFromCancel)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateToCancel)) ) {
-				querySub = " feesdetails.date between '"+dateFromCancel+"' AND '"+dateToCancel+"'";
 			}
 			
 			queryMain = queryMain+querySub;
