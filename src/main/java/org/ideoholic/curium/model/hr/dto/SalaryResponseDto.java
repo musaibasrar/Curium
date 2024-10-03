@@ -10,4 +10,5 @@ import java.util.List;
 public class SalaryResponseDto {
      private List<Payadvancesalary> payAdvanceSalary;
      private boolean success;
+     private List<Processsalarydetails> processSalaryDetailsList;
 }

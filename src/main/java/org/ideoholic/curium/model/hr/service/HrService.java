@@ -40,6 +40,7 @@ public class HrService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private EmployeeActionAdapter employeeActionAdapter;
 
 	public HrService(HttpServletRequest request,
@@ -658,19 +659,23 @@ public class HrService {
 	return result;
 	}
 
-	public boolean issueStaffSalary() {
+	public SalaryResponseDto issueStaffSalary(String currentAcademicYear, int branchId) {
+        SalaryResponseDto result = new SalaryResponseDto();
 
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
+		if(currentAcademicYear!=null){
 			
-			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("processsalarydetailslist", processSalaryDetailsList);
+			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(currentAcademicYear, branchId);
+			result.setProcessSalaryDetailsList(processSalaryDetailsList);
 			
 			if(processSalaryDetailsList.isEmpty()){
-				return false;
+				result.setSuccess(false);
+				return result;
 			}
-			return true;
+			result.setSuccess(true);
+			return result;
 		}
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 	public void printSalarySlip() {
