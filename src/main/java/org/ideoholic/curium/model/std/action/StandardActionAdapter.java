@@ -112,6 +112,7 @@ public class StandardActionAdapter {
         classDto.setSection(request.getParameter("section"));
 
         ResultResponse resultResponse = standardService.createClass(classDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
         return resultResponse.isSuccess();
     }
 
