@@ -66,7 +66,7 @@ public class FeesCollectionActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
 
-        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getFeesDetailsList());
@@ -154,7 +154,10 @@ public class FeesCollectionActionAdapter {
         StampFeesDto dto = new StampFeesDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setStudentId(request.getParameter("studentId"));
-
+        dto.setStudentName(request.getParameter("studentname"));
+        dto.setAdmissionNo(request.getParameter("admissionno"));
+        dto.setClassAndSec(request.getParameter("classandsec"));
+        dto.setDateOfFees(request.getParameter("dateoffees"));
         StampFeeResponseDto responseDto = feesCollectionService.getotherStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("studentotherfeesdetails", responseDto.getOtherFeesMap());
         request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
@@ -219,7 +222,7 @@ public class FeesCollectionActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
 
-        CancelledReceiptsResponseDto responseDto = feesCollectionService.searchOtherFeesCollection(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.searchOtherFeesCollection(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOneCancel());
@@ -333,7 +336,7 @@ public class FeesCollectionActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
 
-        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledOtherFeesReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledOtherFeesReceipts(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayonecancel", responseDto.getDayOneCancel());
@@ -350,12 +353,11 @@ public class FeesCollectionActionAdapter {
         dto.setBranchId(request.getParameter("selectedbranchid"));
         dto.setToDate(request.getParameter("todate"));
         dto.setFromDate(request.getParameter("fromdate"));
-        dto.setOneDay(request.getParameter(""));
         dto.setToDateOtherFees(request.getParameter("todate"));
         dto.setFromDateOtherFees(request.getParameter("fromdate"));
         dto.setOneDayOtherFees(request.getParameter("oneday"));
 
-        FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
+        FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());

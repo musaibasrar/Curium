@@ -15,4 +15,5 @@ public class SearchStudentDto {
 	private String admNo;
 	private String classSearch;
 	private String secSearch;
+	private String[] classesSearch;
 }
