@@ -368,6 +368,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/alfarooq/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/alfarooq/FeesProcess/feesReportExStudents" style="font-size: 12px;">Ex-students Fees Report </a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             

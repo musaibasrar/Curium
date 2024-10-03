@@ -211,4 +211,10 @@ public class FeesAction {
 		}
 	}
 
+	@GetMapping("/feesReportExStudents")
+	public String feesReportExStudents() {
+		new StandardService(request, response).viewClasses();
+		//new FeesService(request, response).viewFees();
+		return "feesreportexstudents";
+	}
 }

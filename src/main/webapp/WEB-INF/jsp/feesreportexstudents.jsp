@@ -1,19 +1,18 @@
 <%--
-    Document   : marks entry
-    Created on : SEP 23, 2017, 5:52:28 PM
+    Document   : Fees Report ex students
+    Created on : AUG 09, 2024, 12:23:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Marks Entry</title>
+<title>Fees Report</title>
 <link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
 <style type="text/css">
@@ -98,8 +97,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
+	text-align: right;
 	font-weight: bold;
 }
 
@@ -125,9 +123,19 @@
 }
 
 .footerTD {
-	border-radius: 6px;
+	border-radius: 3px;
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 14px;
 	background-color: #4b6a84;
-	text-align: left;
+	color: #FFFFFF;
+	font-weight: Bold;
+	width: auto;
+	height: 24px;
+	vertical-align: text-top;
+	text-align: center;
+	background-image:
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .alignCentreMultiple {
@@ -290,6 +298,7 @@
 	font-weight: bold;
 	height: 22px;
 }
+
 </style>
 <style>
 #button {
@@ -308,10 +317,8 @@
 <script type="text/javascript"
 	src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="/alfarooq/js/validation/jquery.ketchup.all.min.js"></script>
+
 <script type="text/javascript"
 	src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -330,8 +337,7 @@
 	src="/alfarooq/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
 	src="/alfarooq/js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -359,9 +365,10 @@
 
 <script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForMarks() {
+
+	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/MarksDetailsProcess/search";
+		form1.action = "/alfarooq/FeesCollection/searchFeesReportExStudents";
 		form1.method = "POST";
 		form1.submit();
 
@@ -370,7 +377,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForMarks();
+			searchForStudents();
 		});
 		
 
@@ -388,15 +395,17 @@
 	});
 	
 	$(function() {
-		$("#addMarks").button({
+		$("#export").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}
 		});
-		
+	});
+
+	$(function() {
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			if (length > 0) {
 				$('.chcktbl:checked').attr('checked', false);
 				this.checked = false;
@@ -411,9 +420,10 @@
 			}
 
 		});
+		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			alert(tdLength);
 			if (length > trLength) {
 
@@ -423,54 +433,101 @@
 			}
 		});
 
-		$("#go").button()
-
 	});
-	
 	
 </script>
 
 
 <script type="text/javascript">
         
-    function checkMandatory(){
-    	
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}
-    	
-    }
-    
-function checkMandatoryandSubmit(){
-    	
-			var checkBox = document.getElementsByName("studentIDs");
-			var resultCheckBox=true;			
-			for(var i=0; i<checkBox.length; i++){
-				if(checkBox[i].checked){
-					resultCheckBox=false;
-				}
-			}
-			
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}else if(resultCheckBox){
-    		alert('Select the student(s) to update the marks');
-    	}else{
-    		var form1 = document.getElementById("form1");
-    		form1.action = "/alfarooq/MarksDetailsProcess/addMarks";
-    		form1.method = "POST";
-    		form1.submit();
+      
+        $(document).ready(function() {
+            
+            
+            $("#dataTable").keyup(function(){
+                
+                var sum = 0.0;
+                var totalSum=0.0;
+                var column2 = $('.feesFullAmount')
+                jQuery.each(column2,function(){
+                    sum += parseFloat($(this).val());
+                });
+                
+                $('#feesTotalAmount').val(sum.toPrecision(6));
+                
+            });
+            $("#dataTable").click(function(){
+                
+                var sum = 0.0;
+                var totalSum=0.0;
+                var column2 = $('.feesFullAmount')
+                jQuery.each(column2,function(){
+                    sum += parseFloat($(this).val());
+                });
+                
+                $('#feesTotalAmount').val(sum.toPrecision(6));
+               
+            });
 
-    	}
-    	
+
+        });
+    
+    function selectAllRow(tableID){
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        if(rowCount==1){
+            var row = table.rows[0];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=false;
+            alert('No records to select');
+        }
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=true;
+        }
     }
     
-   
-        </script>
+    
+    var xmlHttp;
+    var count;
+    function getFeesCategory() {
+
+		var selected=document.getElementById('academicyear').value;
+			
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/alfarooq/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.send(null);
+	}
+    
+	function stateChanged() {
+
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+
+    </script>
 
 
 
@@ -492,7 +549,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/alfarooq/MarksDetailsProcess/addMarks" method="POST">
+	<form id="form1" action="/alfarooq/FeesCollection/exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -501,65 +558,105 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Enter Marks</a></li>
+					<li><a href="#tabs-1">Fees Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
+				
+					<table>
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
+							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+								<label style="visibility: hidden;"> <select name="secsearch" id="secsearch">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach></td>
+						</tr>
+						
+							<tr>
+							<td><br /></td>
+
+						</tr>
+					
+					
+						<%-- <tr>
+                    
+                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        
+                        	<td>
+                        	   <label>
+                                         <select name="academicyear" id="academicyear" onchange="getFeesCategory()" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										</select>
+                              </label>
+                        </td>
+                        
+                    </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    		<tr>
+							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
 							
 						</tr>
-
+											
 						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							<div style="overflow:scroll;width:420px; height: 100px;">
+							<c:forEach items="${feescategory}" var="feescategory">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
+									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</label><br>
+							
+								</c:forEach>
+								</div>
+							</td>
+							
+						</tr>
+						 <tr>
 							<td><br /></td>
 
-						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 120px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-										</select>
-									</label>
-							 <label> 
-									<select name="secsearch" id="secsearch"
-									style="width: 110px;">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						
-
+						</tr> --%>
+                    
+					</table>
+					
+					
+					<table>
+                    
+                    <tr>
+						<td><br></td>
+                    </tr>
+                    
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -574,64 +671,8 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-						<td width="30%" class="alignRight">Subject &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
-									style="width: 240px" ">
-										<option selected></option>
-
-										<c:forEach items="${listSubjectNames}" var="listSubject">
-
-											<option value="${listSubject.subjectid}">
-												<c:out value="${listSubject.subjectname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></label></td>
-						
-						</tr>						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-						<td width="30%" class="alignRight">Exam &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
-									style="width: 240px">
-										<option selected></option>
-
-										<c:forEach items="${listExam}" var="listExam">
-
-											<option value="${listExam.exid}">
-												<c:out value="${listExam.examname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
+		
 					</table>
-					
 					
 
 				</div>
@@ -649,55 +690,85 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Father Name</th>
-						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">Marks</th>
-
-
-
+						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
+						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:set var="TotalPaidAmount" value="0" />
+					<c:set var="TotalDueAmount" value="0" />
+					<c:set var="TotalSum" value="0" />
+					
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
+							<%-- <td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
-								<td class="dataTextInActive"><a class="dataTextInActive"
-								><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
+								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+							<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
 							<td class="dataText">
-								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    		${splt} 
+									<c:set var="DueAmount" value="0" />
+									<c:set var="TotalAmount" value="0" />
+								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
+									<table>
+										<tr>
+											<td style="width: 160px;" align="right">
+												${studentfeescatagorydetails.feescategory.feescategoryname}(${studentfeescatagorydetails.feescategory.academicyear}):&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td align="left">
+												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
+											</td>
+										</tr>
+									</table>
+									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
+									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+									
+									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
+									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 								</c:forEach>
 							</td>
-							<td class="dataText"><input type="text"
-								id="studentMarks" 
-								name="studentMarks"
-								onkeyup="checkMandatory();" value="0"
-								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
-								maxlength="3"
-								 /></td>
-
-
+							<td class="dataText">
+									<table>
+										<tr>
+											<td style="width: 160px;" align="right">
+												${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;	
+											</td>
+										</tr>
+									</table>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input value="Add Marks"
-							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" onmouseover="checkMandatory();"/>
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
+					
+					<td  class="footerTD" > <input value="Export"
+							type="submit" id="export"/></td>
+													
+						<td class="footerTD" colspan="7" >
+						 
+						 Total Amount: ${TotalSum}
+						 &nbsp;&nbsp;&nbsp;
+						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
+						 
+						</td>
+							
 							
 
 					</tr>

@@ -216,6 +216,11 @@ public class FeesCollectionAction {
 	        private String feesSummaryReport() {
 	        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
 	            return "feessummaryreport";
-			}	 
+			}
 		 
+		 @PostMapping("/searchFeesReportExStudents")
+	        public String searchFeesReportExStudents() {
+	            new FeesCollectionService(request, response).getFeesReportExStudents();
+	            return "feesreportexstudents";
+	        } 
 }

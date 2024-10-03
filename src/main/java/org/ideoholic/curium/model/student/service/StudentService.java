@@ -1131,6 +1131,12 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
+			if (fieldName.equalsIgnoreCase("archive")) {
+					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+			if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
+				}
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1460,7 +1466,7 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		 student.setArchive(0);
+		 //student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 
@@ -1591,7 +1597,7 @@ public class StudentService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 100;
+				int recordsPerPage = 1000;
 					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
