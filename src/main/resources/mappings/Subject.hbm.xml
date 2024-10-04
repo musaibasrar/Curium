@@ -11,10 +11,10 @@
         <property name="subjectname" type="string">
             <column name="subjectname" length="45" />
         </property>
-        <property name="minmarks" type="java.lang.Integer">
+        <property name="minmarks" type="java.lang.Float">
             <column name="minmarks" />
         </property>
-        <property name="maxmarks" type="java.lang.Integer">
+        <property name="maxmarks" type="java.lang.Float">
             <column name="maxmarks" />
         </property>
           <property name="branchid" type="int">

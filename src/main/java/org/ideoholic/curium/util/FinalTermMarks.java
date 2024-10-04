@@ -8,8 +8,8 @@ public class FinalTermMarks implements Serializable{
 	
 	String examName;
 	Map<String,String> subMarks;
-	int totalMarksObtained;
-	int totalMarks;
+	float totalMarksObtained;
+	float totalMarks;
 	double percentage;
     String resultclass;
     Integer rank;
@@ -18,7 +18,7 @@ public class FinalTermMarks implements Serializable{
 	}
 
 	public FinalTermMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
-            int totalMarksObtained, Integer rank, int totalMarks) {
+			float totalMarksObtained, Integer rank, float totalMarks) {
 		this.examName = examName;
 		this.subMarks = subMarks;
 		this.percentage = percentage;
@@ -64,12 +64,12 @@ public class FinalTermMarks implements Serializable{
 	    }
 
 	    
-	    public int getTotalMarksObtained() {
+	    public float getTotalMarksObtained() {
 	        return this.totalMarksObtained;
 	    }
 
 	    
-	    public void setTotalMarksObtained(int totalMarksObtained) {
+	    public void setTotalMarksObtained(float totalMarksObtained) {
 	        this.totalMarksObtained = totalMarksObtained;
 	    }
 
@@ -82,11 +82,11 @@ public class FinalTermMarks implements Serializable{
 	        this.rank = rank;
 	    }
 
-		public int getTotalMarks() {
+		public float getTotalMarks() {
 			return totalMarks;
 		}
 
-		public void setTotalMarks(int totalMarks) {
+		public void setTotalMarks(float totalMarks) {
 			this.totalMarks = totalMarks;
 		}
 	

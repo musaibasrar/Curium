@@ -814,4 +814,24 @@ public class studentDetailsDAO {
 			return results;
 		}
 	}
+	
+	public Student readploginUniqueObject(String id) {
+		Student student = new Student();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Student as student where student.studentexternalid='"+id+"'");
+			student = (Student) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return student;
+	}
 }
