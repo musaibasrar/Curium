@@ -20,8 +20,8 @@ public class Subject implements java.io.Serializable {
 	private Integer subid;
 	private String subjectname;
 	private Integer subjectid;
-	private Integer minmarks;
-	private Integer maxmarks;
+	private float minmarks;
+	private float maxmarks;
 	private int branchid;
 	private String examname;
 	private String examclass;
@@ -30,7 +30,7 @@ public class Subject implements java.io.Serializable {
 	public Subject() {
 	}
 
-	public Subject(String subjectname, Integer minmarks, Integer maxmarks,int branchid, String examname, String examclass, int userid, Integer subjectid) {
+	public Subject(String subjectname, float minmarks, float maxmarks,int branchid, String examname, String examclass, int userid, Integer subjectid) {
 		this.subjectname = subjectname;
 		this.subjectid = subjectid;
 		this.minmarks = minmarks;
@@ -62,20 +62,20 @@ public class Subject implements java.io.Serializable {
 	}
 
 	@Column(name = "minmarks")
-	public Integer getMinmarks() {
+	public float getMinmarks() {
 		return this.minmarks;
 	}
 
-	public void setMinmarks(Integer minmarks) {
+	public void setMinmarks(float minmarks) {
 		this.minmarks = minmarks;
 	}
 
 	@Column(name = "maxmarks")
-	public Integer getMaxmarks() {
+	public float getMaxmarks() {
 		return this.maxmarks;
 	}
 
-	public void setMaxmarks(Integer maxmarks) {
+	public void setMaxmarks(float maxmarks) {
 		this.maxmarks = maxmarks;
 	}
 
