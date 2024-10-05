@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/MarksDetailsProcess")
@@ -129,4 +130,57 @@ public class MarksDetailsAction {
 		return "graphicalreport";
 	}
 
+	@PostMapping("/generateRankReport")
+	public String generateRankReport() {
+		if (new MarksDetailsService(request, response).generateRankReport()) {
+			return "studentRankReport";
+		} else {
+			return "error";
+		}
+	}
+	
+	@GetMapping("/prePrimaryProgressReport")
+	public String prePrimaryProgressReport() {
+		new StandardService(request, response).viewClasses();
+		return "preprimaryprogressreport";
+	}
+	
+	@PostMapping("/searchForPreprimaryReport")
+	public String searchForPreprimaryReport() {
+		new MarksDetailsService(request, response).Search();
+		return "preprimaryprogressreport";
+	}
+	
+	@PostMapping("/generatePreprimaryReport")
+	public String generatePreprimaryReport() {
+		if (new MarksDetailsService(request, response).generatePreprimaryReport()) {
+			return "preprimarymarkssheet";
+			// return "reportcardsaved";
+		} else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/progressReportSingleExams", method = { RequestMethod.GET, RequestMethod.POST })
+	public String progressReportSingleExams() {
+		new StandardService(request, response).viewClasses();
+		return "progressreportsingleexams";
+	}
+	
+	
+	@PostMapping("/generateReportSingleExams")
+	public String generateReportSingleExams() {
+		if (new MarksDetailsService(request, response).generateReportSingleExams()) {
+			return "markssheetsingleexams";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/searchForReportSingleExams")
+	public String searchForReportSingleExams() {
+		new MarksDetailsService(request, response).Search();
+		return "progressreportsingleexams";
+	}
+	
 }

@@ -21,8 +21,9 @@ public class Marks implements java.io.Serializable {
 	private Integer sid;
 	private Integer subid;
 	private Integer examid;
-	private Integer marksobtained;
+	private float marksobtained;
 	private String academicyear;
+	private String subgrade;
 	private int branchid;
 	private int userid;
 	
@@ -31,12 +32,13 @@ public class Marks implements java.io.Serializable {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			Integer marksobtained, String academicyear, int branchid, int userid) {
+			float marksobtained, String academicyear,String subgrade, int branchid, int userid) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
 		this.marksobtained = marksobtained;
 		this.academicyear = academicyear;
+		this.subgrade = subgrade;
 		this.branchid = branchid;
 		this.userid = userid;
 	}
@@ -80,11 +82,11 @@ public class Marks implements java.io.Serializable {
 	}
 
 	@Column(name = "marksobtained")
-	public Integer getMarksobtained() {
+	public float getMarksobtained() {
 		return this.marksobtained;
 	}
 
-	public void setMarksobtained(Integer marksobtained) {
+	public void setMarksobtained(float marksobtained) {
 		this.marksobtained = marksobtained;
 	}
 
@@ -96,7 +98,14 @@ public class Marks implements java.io.Serializable {
 	public void setAcademicyear(String academicyear) {
 		this.academicyear = academicyear;
 	}
-	
+	@Column(name = "subgrade")
+	public String getSubgrade() {
+		return subgrade;
+	}
+
+	public void setSubgrade(String subgrade) {
+		this.subgrade = subgrade;
+	}
 	
 
 	public int getUserid() {
@@ -116,5 +125,4 @@ public class Marks implements java.io.Serializable {
 	this.branchid = branchid;
 	}
 		
-
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
+public class FinalTermMarks implements Serializable{
 	
 	String examName;
 	Map<String,String> subMarks;
@@ -14,10 +14,10 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
     String resultclass;
     Integer rank;
     
-	public ExamsMarks() {
+	public FinalTermMarks() {
 	}
 
-	public ExamsMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
+	public FinalTermMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
 			float totalMarksObtained, Integer rank, float totalMarks) {
 		this.examName = examName;
 		this.subMarks = subMarks;
@@ -73,13 +73,6 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	        this.totalMarksObtained = totalMarksObtained;
 	    }
 
-	    @Override
-	    public int compareTo(ExamsMarks result) {
-	        double percentage = ((ExamsMarks) result).getPercentage();
-	        return Double.compare(percentage, this.percentage);
-	    }
-
-	    
 	    public Integer getRank() {
 	        return this.rank;
 	    }
