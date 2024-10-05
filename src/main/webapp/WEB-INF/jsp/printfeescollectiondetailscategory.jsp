@@ -348,7 +348,7 @@
 			</tbody>
 				</table>
 				
-				<table class="datatable">
+				<%-- <table class="datatable">
  		 
 			<tbody>
 					<tr class="trClass" style="border-color: #000000" border="1"
@@ -362,7 +362,7 @@
 							</td>
 					</tr>
 			</tbody>
-				</table>
+				</table> --%>
 				
 				
 			<br>

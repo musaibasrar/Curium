@@ -2003,8 +2003,6 @@ public class FeesCollectionService {
 		feeCategoryCollectionMapReport.put("Tuition Fee", tutionFees);
 		
 		
-		httpSession.setAttribute("TotalFeesByCash", totalFeesByCash);
-		httpSession.setAttribute("TotalFeesByBank", totalFeesByBank);
 		//Other Fees 
 		
 		long sumOfFeesOtherFees = 0l;
@@ -2073,7 +2071,7 @@ public class FeesCollectionService {
 			}
 		}
 		
-		otherFeeCategoryCollectionMapCons.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
+		
 		otherFeeCategoryCollectionMapCons.put("TC Charges", tcChargesCash+tcChargesBank);
 		otherFeeCategoryCollectionMapCons.put("Library Fees", libraryFeesCash+libraryFeesBank);
 		otherFeeCategoryCollectionMapCons.put("Compartmental Exam Fee", compartmentalExamFeeCash+compartmentalExamFeeBank);
@@ -2093,6 +2091,13 @@ public class FeesCollectionService {
 		httpSession.setAttribute("CBSERegistrationFeeBank", CBSERegistrationFeeBank);
 		
 		//End Other Fees
+		
+		feeCategoryCollectionMapReport.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
+		totalFeesByCash +=transportationFeesCash;
+		totalFeesByBank +=transportationFeesBank;
+		httpSession.setAttribute("TotalFeesByCash", totalFeesByCash);
+		httpSession.setAttribute("TotalFeesByBank", totalFeesByBank);
+		
 		httpSession.setAttribute("otherFeeCategoryCollectionMapCons", otherFeeCategoryCollectionMapCons);
 		httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMapReport);
 	}

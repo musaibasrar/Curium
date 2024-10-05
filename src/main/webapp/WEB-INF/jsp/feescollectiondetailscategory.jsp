@@ -755,6 +755,8 @@ for(Cookie cookie : cookies){
 					
 				</tbody>	
 			</table>
+			<br>
+			<%-- <br>
 			
 			<table width="100%">
 				
@@ -778,7 +780,7 @@ for(Cookie cookie : cookies){
                     <td colspan="4" ></td>
 
                 </tr>
-            </TABLE>
+            </TABLE> --%>
             
 			
 			<table width="100%" style="border-collapse: collapse;">
