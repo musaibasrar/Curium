@@ -511,7 +511,11 @@ for(Cookie cookie : cookies){
       <td style="padding: 0;white-space: nowrap;font-size:9px;">Standard<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("classsection" + i + "") %></td>
     </tr>
-     
+    
+    <tr>
+      <td style="padding: 0;font-size:9px;">D. O. B.<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+    </tr> 
      
      <tr>
       <td style="padding: 0;font-size:9px;">Blood Group<span style="float:right;">:&nbsp;</span></td>
