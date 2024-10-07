@@ -504,16 +504,20 @@ for(Cookie cookie : cookies){
     <%-- <tr>
       <td colspan="2" style="padding: 0;text-transform: uppercase;text-align:center;font-weight:bold;font-size:16px;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>
     </tr>
- --%>    
+ --%> 
+ 
+  
     <tr>
       <td style="padding: 0;white-space: nowrap;font-size:9px;">Standard<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("classsection" + i + "") %></td>
     </tr>
-    <tr>
-      <td style="padding: 0;font-size:9px;">D. O. B.<span style="float:right;">:&nbsp;</span></td>
-      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-    </tr>
-   
+     
+     
+     <tr>
+      <td style="padding: 0;font-size:9px;">Blood Group<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("bloodgroup" + i + "") %></td>
+    </tr>  
+        
     <tr>
       <td style="padding: 0;vertical-align: top; font-size:9px;">ADDRESS<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;vertical-align: top;font-size:9px; word-wrap: break-word; "><%= request.getSession().getAttribute("address" + i + "") %></td>
