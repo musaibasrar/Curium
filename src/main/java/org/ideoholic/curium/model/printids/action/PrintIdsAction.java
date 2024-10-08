@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 @Controller
-@RequestMapping("/PrintIds")
+@RequestMapping("/Printids")
 public class PrintIdsAction {
 
 	@Autowired

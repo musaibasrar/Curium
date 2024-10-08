@@ -16,16 +16,16 @@ import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
-@RequestMapping("/api/v1/Printids")
+@RestController
+@RequestMapping("/api/v1/printIds")
 public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 
 	
@@ -83,7 +83,7 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 		return ResponseEntity.ok(result);
 	}
 	
-	@PostMapping("/printpreviewemployee")
+	@PostMapping("/printPreviewEmployee")
 	public ResponseEntity<PrintMultipleEmployeesResponseDto> printpreviewemployee(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
 		PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,currentAcademicYear);
 		return ResponseEntity.ok(result);
