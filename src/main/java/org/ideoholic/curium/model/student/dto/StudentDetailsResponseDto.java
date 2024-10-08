@@ -19,12 +19,8 @@ public class StudentDetailsResponseDto {
     private String classStudying;
     private String classParts;
     private String secStudying;
-    private String secClassParts;
-    private String classAdmittedParts;
-    private String secAdmParts;
     private String classAdm;
     private String secAdm;
-    private String classAdmitted;
     private Parents parents;
     private List<Studentfeesstructure> feesStructure;
     private long dueAmount;
