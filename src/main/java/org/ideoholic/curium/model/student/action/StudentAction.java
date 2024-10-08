@@ -313,7 +313,7 @@ public class StudentAction {
 	
 	@GetMapping("/ViewotherFeesStructure")
 	public String ViewotherFeesStructure() {
-		if (new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent()) {
+		if (studentActionAdapter.viewOtherFeesDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_other_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

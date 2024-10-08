@@ -253,10 +253,7 @@ public class StudentActionAdapter {
         httpSession.setAttribute("classstudying", responseDto.getClassStudying());
         httpSession.setAttribute("classstudy", responseDto.getClassParts());
         httpSession.setAttribute("secstudying", responseDto.getSecStudying());
-        httpSession.setAttribute("secstudying", responseDto.getSecClassParts());
-        request.setAttribute("classadm", responseDto.getClassAdmitted());
         request.setAttribute("secadm", responseDto.getSecAdm());
-        request.setAttribute("secadm", responseDto.getSecAdmParts());
         request.setAttribute("classadm", responseDto.getClassAdm());
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
@@ -268,7 +265,7 @@ public class StudentActionAdapter {
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
         httpSession.setAttribute("totalfineamount", responseDto.getTotalFineAmount());
         httpSession.setAttribute("totalmiscamount", responseDto.getTotalMiscAmount());
-        httpSession.setAttribute("resultfromservice", responseDto.isResultFromService());
+        httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
 
         return responseDto.isSuccess();
     }
@@ -282,14 +279,10 @@ public class StudentActionAdapter {
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
-        httpSession.setAttribute("classstudying", responseDto.getClassParts());
         httpSession.setAttribute("secstudying", responseDto.getSecStudying());
-        httpSession.setAttribute("secstudying", responseDto.getSecClassParts());
         httpSession.setAttribute("classstudying", responseDto.getClassStudying());
         request.setAttribute("classadm", responseDto.getClassAdm());
         request.setAttribute("secadm", responseDto.getSecAdm());
-        request.setAttribute("secadm", responseDto.getSecAdmParts());
-        request.setAttribute("classadm", responseDto.getClassAdmitted());
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
         httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
@@ -298,9 +291,33 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
-        httpSession.setAttribute("totalfineamount", responseDto.getTotalFineAmount());
-        httpSession.setAttribute("totalmiscamount", responseDto.getTotalMiscAmount());
-        httpSession.setAttribute("resultfromservice", responseDto.isResultFromService());
+        httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
+
+        return responseDto.isSuccess();
+    }
+
+    public boolean viewOtherFeesDetailsOfStudent() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        String studentId = request.getParameter("id");
+
+        StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId);
+        httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("student", responseDto.getStudent());
+        httpSession.setAttribute("secstudying", responseDto.getSecStudying());
+        httpSession.setAttribute("classstudying", responseDto.getClassStudying());
+        request.setAttribute("classadm", responseDto.getClassAdm());
+        request.setAttribute("secadm", responseDto.getSecAdm());
+        httpSession.setAttribute("parents", responseDto.getParents());
+        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
+        httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
+        httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
 
         return responseDto.isSuccess();
     }
