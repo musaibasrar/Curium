@@ -14,6 +14,7 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
@@ -1303,24 +1304,24 @@ public class StudentService {
 		return student;
 	}
 
-	public ResultResponse viewAllStudentsList(String branchId) {
+	public StudentListResponseDto viewAllStudentsList(String branchId) {
 
-		ResultResponse results = ResultResponse.builder().build();
+		StudentListResponseDto result = StudentListResponseDto.builder().build();
 		if (branchId != null) {
 
 			try {
 
 				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
-				results.setResultList(list);
-				results.setSuccess(true);
+				result.setStudentList(list);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
-				results.setSuccess(false);
+				result.setSuccess(false);
 			}
 
 		}
-		results.setSuccess(true);
-		return results;
+		result.setSuccess(true);
+		return result;
 	}
 
 	public void archiveMultiple(StudentIdsDto dto) {

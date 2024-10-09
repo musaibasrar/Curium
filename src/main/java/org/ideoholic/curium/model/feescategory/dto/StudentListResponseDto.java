@@ -14,5 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentListResponseDto {
-		private List<Student> studentListFeesCollection;
+		private List<Student> studentList;
+		@Builder.Default
+		private boolean success = false;
+		private String message;
 }

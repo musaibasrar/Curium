@@ -44,7 +44,7 @@ public class FeescategoryDetailDto {
 	}
 
 	public void copyStudentListResponseDto(StudentListResponseDto studentListResponseDto) {
-		studentListFeesCollection= studentListResponseDto.getStudentListFeesCollection();
+		studentListFeesCollection= studentListResponseDto.getStudentList();
 		
 	}
 
