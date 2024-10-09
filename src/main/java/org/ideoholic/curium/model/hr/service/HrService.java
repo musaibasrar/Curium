@@ -40,6 +40,7 @@ public class HrService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private EmployeeActionAdapter employeeActionAdapter;
 
 	public HrService(HttpServletRequest request,
@@ -658,19 +659,23 @@ public class HrService {
 	return result;
 	}
 
-	public boolean issueStaffSalary() {
+	public SalaryResponseDto issueStaffSalary(String currentAcademicYear, String branchId) {
+        SalaryResponseDto result = new SalaryResponseDto();
 
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
+		if(currentAcademicYear!=null){
 			
-			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("processsalarydetailslist", processSalaryDetailsList);
+			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(currentAcademicYear, Integer.parseInt(branchId));
+			result.setProcessSalaryDetailsList(processSalaryDetailsList);
 			
 			if(processSalaryDetailsList.isEmpty()){
-				return false;
+				result.setSuccess(false);
+				return result;
 			}
-			return true;
+			result.setSuccess(true);
+			return result;
 		}
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 	public void printSalarySlip() {
@@ -775,7 +780,7 @@ public class HrService {
 			}
 			result = new HrDAO().issueProcessedSalary(ids);
 		}
-		issueStaffSalary();
+		issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
 		return result;
 	}
 
@@ -791,7 +796,7 @@ public class HrService {
 			}
 			result = new HrDAO().cancelProcessedSalary(ids);
 		}
-		issueStaffSalary();
+		issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), httpSession.getAttribute(BRANCHID).toString());
 		return result;
 	}
 	

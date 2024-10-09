@@ -316,6 +316,14 @@ public class HrActionAdapter {
         request.setAttribute("payheadlistdynamic", result.getPayHeadList());
 
     }
+    public boolean issueStaffSalary() {
+        HrService hrService = new HrService(request, response);
+
+        SalaryResponseDto result = hrService.issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("processsalarydetailslist", result.getProcessSalaryDetailsList());
+
+        return result.isSuccess();
+    }
 
 
 }

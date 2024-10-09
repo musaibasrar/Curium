@@ -95,7 +95,7 @@ public class HrAction {
 	@GetMapping("/issueStaffSalary")
 	public String issueStaffSalary() {
 		
-		if(new HrService(request, response).issueStaffSalary()){
+		if(hrActionAdapter.issueStaffSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
