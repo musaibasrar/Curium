@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -488,8 +489,9 @@ public class JobService {
 		return result;
 	}
 
-	public boolean download() {
-		boolean result = false;
+	public ResultResponse download() {
+		
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/assignmentreport.xlsx");
@@ -521,19 +523,19 @@ public class JobService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
 		return result;
 	}
 
-	public boolean exportQueriesReport() {
+	public ResultResponse exportQueriesReport(Object parentquerylist) {
 		
+		ResultResponse result = ResultResponse.builder().build();
 		
-		List<JobQuery> queriesList = (List<JobQuery>) httpSession.getAttribute("parentquerylist");
+		List<JobQuery> queriesList = (List<JobQuery>) parentquerylist;
 	
-			boolean writeSucees = false;
 			
 			try {
 
@@ -597,11 +599,11 @@ public class JobService {
 					FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/assignmentreport.xlsx"));
 					workbook.write(out);
 					out.close();
-					writeSucees = true;
+					result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return writeSucees;
+			return result;
 			// getFile(name, path);
 	}
 
