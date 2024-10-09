@@ -88,7 +88,7 @@ public class HrAction {
 	
 	@GetMapping("/printSalarySlip")
 	public String printSalarySlip() {
-		new HrService(request, response).printSalarySlip();
+		hrActionAdapter.printSalarySlip();
 		return "printsalaryslip";
 	}
 
