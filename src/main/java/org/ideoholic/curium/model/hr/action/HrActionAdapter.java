@@ -319,8 +319,7 @@ public class HrActionAdapter {
     public boolean issueStaffSalary() {
         HrService hrService = new HrService(request, response);
 
-        SalaryResponseDto result = hrService.issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-
+        SalaryResponseDto result = hrService.issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("processsalarydetailslist", result.getProcessSalaryDetailsList());
 
         return result.isSuccess();

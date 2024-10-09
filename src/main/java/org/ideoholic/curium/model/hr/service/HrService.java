@@ -659,12 +659,12 @@ public class HrService {
 	return result;
 	}
 
-	public SalaryResponseDto issueStaffSalary(String currentAcademicYear, int branchId) {
+	public SalaryResponseDto issueStaffSalary(String currentAcademicYear, String branchId) {
         SalaryResponseDto result = new SalaryResponseDto();
 
 		if(currentAcademicYear!=null){
 			
-			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(currentAcademicYear, branchId);
+			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(currentAcademicYear, Integer.parseInt(branchId));
 			result.setProcessSalaryDetailsList(processSalaryDetailsList);
 			
 			if(processSalaryDetailsList.isEmpty()){
@@ -780,7 +780,7 @@ public class HrService {
 			}
 			result = new HrDAO().issueProcessedSalary(ids);
 		}
-		//issueStaffSalary();
+		issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
 		return result;
 	}
 
@@ -796,7 +796,7 @@ public class HrService {
 			}
 			result = new HrDAO().cancelProcessedSalary(ids);
 		}
-		//issueStaffSalary();
+		issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), httpSession.getAttribute(BRANCHID).toString());
 		return result;
 	}
 	
