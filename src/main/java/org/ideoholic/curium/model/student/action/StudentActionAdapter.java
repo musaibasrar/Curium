@@ -321,22 +321,4 @@ public class StudentActionAdapter {
 
         return responseDto.isSuccess();
     }
-
-    public String viewAllStudentsList(){
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
-
-        ResultResponse resultResponse = studentService.viewAllStudentsList(httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("studentList", resultResponse.getResultList());
-
-        return resultResponse.getMessage();
-    }
-
-    public String viewStudentsParentsPerBranch(){
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
-
-        ResultResponse resultResponse = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("studentList", resultResponse.getResultList());
-
-        return resultResponse.getMessage();
-    }
 }

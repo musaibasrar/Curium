@@ -71,7 +71,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
 
         //Get Customers
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewStudentsParentsPerBranch(branchId);
+        new StudentService(request, response, standardActionAdapter).viewStudentsParentsPerBranch();
 
 
 
