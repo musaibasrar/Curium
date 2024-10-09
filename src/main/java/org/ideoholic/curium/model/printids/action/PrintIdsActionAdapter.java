@@ -30,9 +30,11 @@ public class PrintIdsActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private PrintIdsService printIdsService;
 
 	public void updateCardValidity() {
-		PrintIdsService printIdsService = new PrintIdsService(request, response);
 		PrintIdsDto printIdsDto = new PrintIdsDto();
 		printIdsDto.setStudentIDs(request.getParameterValues("studentIDs"));
 		Map<String, String> allRequestParameters = new HashMap<>();
@@ -48,7 +50,6 @@ public class PrintIdsActionAdapter {
 	}
 
 	public void searchDetailsCardValidity() {
-		PrintIdsService printIdsService = new PrintIdsService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -58,7 +59,6 @@ public class PrintIdsActionAdapter {
 	}
 
 	public void searchDetails() {
-		PrintIdsService printIdsService = new PrintIdsService(request, response);
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
@@ -68,7 +68,6 @@ public class PrintIdsActionAdapter {
 	}
 
 	public void printMultiple() {
-		PrintIdsService printIdsService = new PrintIdsService(request, response);
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
 		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = printIdsService.printMultiple(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
