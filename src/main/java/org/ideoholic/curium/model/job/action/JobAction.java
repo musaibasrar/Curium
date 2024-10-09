@@ -3,23 +3,21 @@
  */
 package org.ideoholic.curium.model.job.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author Musaib_2
@@ -41,6 +39,8 @@ public class JobAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private JobActionAdapter jobActionAdapter;
+    @Autowired
+    private StudentActionAdapter studentActionAdapter;
 
 	
 	@PostMapping("/download")
@@ -327,7 +327,7 @@ public class JobAction {
 	@GetMapping("/taskReport")
 	private String taskReport() {
 		employeeActionAdapter.ViewAllEmployee();
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
+		studentActionAdapter.viewAllStudentsList();
 		return "tasksreport";
 	}
 	

@@ -1303,24 +1303,24 @@ public class StudentService {
 		return student;
 	}
 
-	public boolean viewAllStudentsList() {
+	public ResultResponse viewAllStudentsList(String branchId) {
 
-		boolean result = false;
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		ResultResponse results = ResultResponse.builder().build();
+		if (branchId != null) {
 
 			try {
 
-				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentList", list);
-				result = true;
+				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+				results.setResultList(list);
+				results.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
-				result = false;
+				results.setSuccess(false);
 			}
 
 		}
-
-		return result;
+		results.setSuccess(true);
+		return results;
 	}
 
 	public void archiveMultiple(StudentIdsDto dto) {
@@ -1709,14 +1709,14 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewStudentsParentsPerBranch() {
+	public ResultResponse viewStudentsParentsPerBranch(String branchId) {
 
-		boolean result = false;
+		ResultResponse results = ResultResponse.builder().build();
 		//String pages = "1";
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			try {
 
-				List<Object[]> list = new studentDetailsDAO().readStudentsParentsPerBranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Object[]> list = new studentDetailsDAO().readStudentsParentsPerBranch(Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for(Object[] parentdetails: list){
@@ -1733,14 +1733,14 @@ public class StudentService {
 					parentDetails.add(parent);
 				}
 
-				request.setAttribute("studentList", parentDetails);
-				result = true;
+				results.setResultList(parentDetails);
+				results.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
-		return result;
+		results.setSuccess(true);
+		return results;
 	}
 
 
