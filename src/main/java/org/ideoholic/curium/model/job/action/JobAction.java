@@ -39,11 +39,13 @@ public class JobAction {
 	EmployeeActionAdapter employeeActionAdapter;
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private JobActionAdapter jobActionAdapter;
 
 	
 	@PostMapping("/download")
 	private String download() {
-		if(new JobService(request, response).download()) {
+		if(jobActionAdapter.download()) {
 			return "exportsuccessquery";
 		}
 		return "exportfailure";
@@ -51,7 +53,7 @@ public class JobAction {
 
 	@PostMapping("/exportQueriesReport")
 	private String exportQueriesReport() {
-		new JobService(request, response).exportQueriesReport();
+		jobActionAdapter.exportQueriesReport();
 		return "exportsuccessquery";
 	}
 

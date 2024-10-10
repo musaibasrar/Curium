@@ -30,11 +30,13 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.JobQuery;
+import org.ideoholic.curium.model.job.dto.JobQueryDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -488,8 +490,9 @@ public class JobService {
 		return result;
 	}
 
-	public boolean download() {
-		boolean result = false;
+	public ResultResponse download() {
+		
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/assignmentreport.xlsx");
@@ -521,19 +524,19 @@ public class JobService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
 		return result;
 	}
 
-	public boolean exportQueriesReport() {
+	public ResultResponse exportQueriesReport(JobQueryDto jobQueryDto) {
 		
+		ResultResponse result = ResultResponse.builder().build();
 		
-		List<JobQuery> queriesList = (List<JobQuery>) httpSession.getAttribute("parentquerylist");
+		List<JobQuery> queriesList = jobQueryDto.getQueriesList();
 	
-			boolean writeSucees = false;
 			
 			try {
 
@@ -597,11 +600,11 @@ public class JobService {
 					FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/assignmentreport.xlsx"));
 					workbook.write(out);
 					out.close();
-					writeSucees = true;
+					result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return writeSucees;
+			return result;
 			// getFile(name, path);
 	}
 
