@@ -36,6 +36,7 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.JobQuery;
+import org.ideoholic.curium.model.job.dto.JobQueryDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -530,11 +531,11 @@ public class JobService {
 		return result;
 	}
 
-	public ResultResponse exportQueriesReport(Object parentquerylist) {
+	public ResultResponse exportQueriesReport(JobQueryDto jobQueryDto) {
 		
 		ResultResponse result = ResultResponse.builder().build();
 		
-		List<JobQuery> queriesList = (List<JobQuery>) parentquerylist;
+		List<JobQuery> queriesList = jobQueryDto.getQueriesList();
 	
 			
 			try {
