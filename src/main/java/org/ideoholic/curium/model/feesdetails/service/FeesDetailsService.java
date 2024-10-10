@@ -307,7 +307,7 @@ public class FeesDetailsService {
 		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
@@ -318,7 +318,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
+					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();

@@ -755,18 +755,18 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.value.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.value.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.student.name}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.student.classstudying}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.branchreceiptnumber}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.value.totalamount-feesdetails.value.fine-feesdetails.value.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.value.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.value.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.value.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/littleangels/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
+								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/littleangels/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
 
                             </tr>
                         </c:forEach>
