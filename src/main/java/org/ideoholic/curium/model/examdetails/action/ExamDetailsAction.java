@@ -83,7 +83,7 @@ public class ExamDetailsAction {
         result = yearActionAdapter.getYear();
         if (!result)
             return error;
-        result = Boolean.parseBoolean(studentActionAdapter.viewAllStudentsList());
+        result = studentActionAdapter.viewAllStudentsList();
         if (!result)
             return error;
 

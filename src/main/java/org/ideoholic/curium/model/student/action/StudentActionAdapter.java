@@ -323,21 +323,21 @@ public class StudentActionAdapter {
         return responseDto.isSuccess();
     }
 
-    public String viewAllStudentsList(){
+    public boolean viewAllStudentsList(){
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentListResponseDto result = studentService.viewAllStudentsList(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());
 
-        return result.getMessage();
+        return result.isSuccess();
     }
 
-    public String viewStudentsParentsPerBranch(){
+    public boolean viewStudentsParentsPerBranch(){
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
-        ResultResponse resultResponse = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("studentList", resultResponse.getResultList());
+        StudentListResponseDto response = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", response.getParentDetails());
 
-        return resultResponse.getMessage();
+        return response.isSuccess();
     }
 }

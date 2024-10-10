@@ -1710,9 +1710,9 @@ public class StudentService {
 		return result;
 	}
 
-	public ResultResponse viewStudentsParentsPerBranch(String branchId) {
+	public StudentListResponseDto viewStudentsParentsPerBranch(String branchId) {
 
-		ResultResponse results = ResultResponse.builder().build();
+		StudentListResponseDto result = StudentListResponseDto.builder().build();
 		//String pages = "1";
 		if(branchId!=null){
 			try {
@@ -1734,14 +1734,14 @@ public class StudentService {
 					parentDetails.add(parent);
 				}
 
-				results.setResultList(parentDetails);
-				results.setSuccess(true);
+				result.setParentDetails(parentDetails);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		results.setSuccess(true);
-		return results;
+		result.setSuccess(true);
+		return result;
 	}
 
 
