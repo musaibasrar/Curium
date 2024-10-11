@@ -389,7 +389,7 @@ public class AttendanceService {
 		boolean result = false;
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
-			String queryMain = "From Student as student where";
+			String queryMain = "From Parents as parent where";
 			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 
 			String addClass = request.getParameter("classsearch");
@@ -411,30 +411,30 @@ public class AttendanceService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " student.name like '%" + studentname + "%'";
+				querySub = " parent.Student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " student.classstudying like '" + classStudying
-						+ "' OR student.classstudying = '" + conClassStudyingEquals
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = " parent.Student.classstudying like '" + classStudying
+						+ "' OR parent.Student.classstudying = '" + conClassStudyingEquals
+						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0  AND parent.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND parent.Student.archive=0 and student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			}
 
 			queryMain = queryMain + querySub;
-			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			
-			List<Student> newStudentList = new ArrayList<Student>();
+			List<Parents> newStudentList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
 			
 			Date searchdate = DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance"));
 			Timestamp timestamp = new Timestamp(searchdate.getTime());
-			for (Student student : searchStudentList) {
+			for (Parents parent : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,student.getStudentexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,parent.getStudent().getStudentexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
-						newStudentList.add(student);
+						newStudentList.add(parent);
 						newStudentDailyAttendance.add(studentDailyAttendance);
 					
 				}
@@ -679,7 +679,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		boolean result = false;
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
-			String queryMain = "From Student as student where";
+			String queryMain = "From Parents as parent where";
 			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 
 			String addClass = request.getParameter("classsearch");
@@ -701,18 +701,18 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " student.name like '%" + studentname + "%'";
+				querySub = " parent.Student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = " parent.Student.classstudying like '" + classStudying
+						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			}
 
 			queryMain = queryMain + querySub;
-			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 
 			request.setAttribute("StudentListAttendance", searchStudentList);
 			request.setAttribute("attendanceclass", conClassStudying.replace("--"," ").replace("%", ""));
