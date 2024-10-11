@@ -324,6 +324,17 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public void printSalarySlip() {
+        HrService hrService = new HrService(request, response);
+
+        SalarySlipResponseDto result = hrService.printSalarySlip(request.getParameter("salaryid"));
+        request.setAttribute("processsalarydetails", result.getProcessSalaryDetails());
+        request.setAttribute("earningmap", result.getEarningsMap());
+        request.setAttribute("deductionmap", result.getDeductionsMap());
+        request.setAttribute("totalearning", result.getTotalEarnings());
+        request.setAttribute("totaldeduction", result.getTotalDeductions());
+        request.setAttribute("netpay", result.getNetPay());
+    }
 
 
 }

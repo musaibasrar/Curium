@@ -678,9 +678,8 @@ public class HrService {
 		return result;
 	}
 
-	public void printSalarySlip() {
-		
-		String processSalaryId = DataUtil.emptyString(request.getParameter("salaryid"));
+	public SalarySlipResponseDto printSalarySlip(String processSalaryId ) {
+		SalarySlipResponseDto result = new SalarySlipResponseDto();
 		
 		if(processSalaryId!=null){
 			
@@ -690,7 +689,7 @@ public class HrService {
 			BigDecimal totalDeductions = BigDecimal.ZERO;
 			
 			Processsalarydetails processSalaryDetails = new HrDAO().getProcessSalaryDetails(Integer.parseInt(processSalaryId));
-			request.setAttribute("processsalarydetails", processSalaryDetails);
+			result.setProcessSalaryDetails(processSalaryDetails);
 			
 			List<Processsalarydetailsheads> processSalaryHeads = new HrDAO().getProcessSalaryHeads(Integer.parseInt(processSalaryId));
 			
@@ -708,14 +707,14 @@ public class HrService {
 				}
 				
 			}
-			
-			request.setAttribute("earningmap", earningsMap);
-			request.setAttribute("deductionmap", deductionsMap);
-			request.setAttribute("totalearning", totalEarnings);
-			request.setAttribute("totaldeduction", totalDeductions);
-			request.setAttribute("netpay", processSalaryDetails.getNetpayment());
+
+			result.setEarningsMap(earningsMap);
+			result.setDeductionsMap(deductionsMap);
+			result.setTotalEarnings(totalEarnings);
+			result.setTotalDeductions(totalDeductions);
+			result.setNetPay(String.valueOf(processSalaryDetails.getNetpayment()));
 		}
-		
+		return result;
 	}
 
 	public void getStaffDetails() {
