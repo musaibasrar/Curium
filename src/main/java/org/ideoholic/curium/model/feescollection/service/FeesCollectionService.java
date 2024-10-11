@@ -1828,7 +1828,8 @@ public class FeesCollectionService {
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		List<Otherreceiptinfo> otherFeesDetailsList = new ArrayList<Otherreceiptinfo>();
-		long tutionFees = 0l;
+		long tuitionFeesCash = 0l;
+		long tuitionFeesBank = 0l;
 		long otherFees = 0l;
 		long transportationFeesCash = 0l;
 		long compartmentalExamFeeCash = 0l;
@@ -1960,6 +1961,21 @@ public class FeesCollectionService {
 			            } else {
 			            	feeCategoryCollectionMap.put(studentfeesSingle.getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			            }
+			            
+			            String cashOrBank = receiptinfo.getPaymenttype();
+			            String feesCategoryName = studentfeesSingle.getFeescategory().getFeescategoryname().trim().toLowerCase();
+			            double amountPaid = feescollectionSingle.getAmountpaid();
+			            
+			            if(cashOrBank.contains("Cash")) {
+			            	 if (feesCategoryName.contains("tuition fee")) {
+				                    tuitionFeesCash += amountPaid;
+				                } 
+						}else if(cashOrBank.contains("Bank")) {
+							 if (feesCategoryName.contains("tuition fee")) {
+								 tuitionFeesBank += amountPaid;
+				                } 
+						}
+			            
 			        }
 				}
 				
@@ -1993,14 +2009,12 @@ public class FeesCollectionService {
 		
 		for (Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {  
 			
-           if(entry.getKey().contains("Tuition Fee")) {
-        	   tutionFees = tutionFees+entry.getValue();
-           }else {
+           if(!entry.getKey().contains("Tuition Fee")) {
         	   feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
            }
 		}
 		
-		feeCategoryCollectionMapReport.put("Tuition Fee", tutionFees);
+		feeCategoryCollectionMapReport.put("Tuition Fee", tuitionFeesCash+tuitionFeesBank);
 		
 		
 		//Other Fees 
@@ -2093,10 +2107,14 @@ public class FeesCollectionService {
 		//End Other Fees
 		
 		feeCategoryCollectionMapReport.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
-		totalFeesByCash +=transportationFeesCash;
-		totalFeesByBank +=transportationFeesBank;
+		//totalFeesByCash +=transportationFeesCash;
+		//totalFeesByBank +=transportationFeesBank;
+		httpSession.setAttribute("TuitionFeesByCash", tuitionFeesCash);
+		httpSession.setAttribute("TuitionFeesByBank", tuitionFeesBank);
 		httpSession.setAttribute("TotalFeesByCash", totalFeesByCash);
 		httpSession.setAttribute("TotalFeesByBank", totalFeesByBank);
+		httpSession.setAttribute("TotalFeesByCashOthers", totalFeesByCashOtherFees);
+		httpSession.setAttribute("TotalFeesByBankOthers", totalFeesByBankOtherFees);
 		
 		httpSession.setAttribute("otherFeeCategoryCollectionMapCons", otherFeeCategoryCollectionMapCons);
 		httpSession.setAttribute("feeCategoryCollectionMap", feeCategoryCollectionMapReport);

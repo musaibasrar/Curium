@@ -756,7 +756,7 @@ for(Cookie cookie : cookies){
 				</tbody>	
 			</table>
 			<br>
-			<%-- <br>
+			 <br>
 			
 			<table width="100%">
 				
@@ -780,12 +780,12 @@ for(Cookie cookie : cookies){
                     <td colspan="4" ></td>
 
                 </tr>
-            </TABLE> --%>
+            </TABLE>
             
 			
 			<table width="100%" style="border-collapse: collapse;">
 				<tr style="text-align: center;">
-					<label class="addressLine">Break-up</label><br>
+					<label class="addressLine">Break-up Cash</label><br>
 				</tr>
 			</table>
 
@@ -810,20 +810,6 @@ for(Cookie cookie : cookies){
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 						<td class="dataText">Total Fees Cash</td>
 						<td class="dataText">${TotalFeesByCash}</td>
-					</tr>
-					</c:if>
-					
-					<c:if test="${TotalFeesByBank>0}">
-					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
-						<td class="dataText">Total Fees Bank</td>
-						<td class="dataText">${TotalFeesByBank}</td>
-					</tr>
-					</c:if>
-					
-					<c:if test="${TransportationFeeCash>0}">
-					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
-						<td class="dataText">Transportation Fee Cash</td>
-						<td class="dataText">${TransportationFeeCash}</td>
 					</tr>
 					</c:if>
 					
@@ -855,6 +841,83 @@ for(Cookie cookie : cookies){
 					</tr>
 					</c:if>
 					
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Grand Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" />
+							</td>
+					</tr>
+				</tbody>	
+					
+			</table>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Cash Transportation Fees</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+			<table width="100%">
+				<thead>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
+				</thead>
+				
+				<tbody>	
+				
+					<c:if test="${TransportationFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Transportation Fee Cash</td>
+						<td class="dataText">${TransportationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Grand Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TransportationFeeCash}" />
+							</td>
+					</tr>
+				</tbody>	
+					
+			</table>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Bank</label><br>
+				</tr>
+			</table>
+			
+			<table width="100%">
+				<thead>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
+				</thead>
+				
+				<tbody>	
+				
+					<c:if test="${TuitionFeesByBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="dataText">Total Fees Bank</td>
+						<td class="dataText">${TotalFeesByBank}</td>
+					</tr>
+					</c:if>
+					
 					<c:if test="${TransportationFeeBank>0}">
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 						<td class="dataText">Transportation Fee Bank</td>
@@ -862,6 +925,32 @@ for(Cookie cookie : cookies){
 					</tr>
 					</c:if>
 					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+							<td  class="dataText" style="text-align: right;">Grand Total
+							</td>
+							<td  class="dataText" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TotalFeesByBank+TransportationFeeBank}" />
+							</td>
+					</tr>
+				</tbody>	
+			</table>
+			
+				<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Bank Other Fees</label><br>
+				</tr>
+			</table>
+			
+			<table width="100%">
+				<thead>
+				<tr>
+					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Fees Amount</td>
+				</tr>
+				</thead>
+				
+				<tbody>	
+				
 					<c:if test="${TCChargesBank>0}">
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 						<td class="dataText">TC Charges Bank</td>
@@ -894,7 +983,7 @@ for(Cookie cookie : cookies){
 							<td  class="dataText" style="text-align: right;">Grand Total
 							</td>
 							<td  class="dataText" style="text-align: center;font-weight: bold;">
-							<fmt:formatNumber type="currency"  value="${total+othertotal}" />
+							<fmt:formatNumber type="currency"  value="${TCChargesBank+LibraryFeesBank+CompartmentalExamFeeBank+CBSERegistrationFeeBank}" />
 							</td>
 					</tr>
 				</tbody>	

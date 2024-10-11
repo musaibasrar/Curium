@@ -113,5 +113,8 @@
 		<mapping resource="mappings/Otherfeescollection.hbm.xml"></mapping>
 		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
 		<mapping resource="mappings/StudyCertificate.hbm.xml"></mapping>
+		<mapping resource="mappings/Marksgrade.hbm.xml"></mapping>
+		<mapping resource="mappings/ExamRank.hbm.xml"></mapping>
+		<mapping resource="mappings/SubjectGrade.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>
