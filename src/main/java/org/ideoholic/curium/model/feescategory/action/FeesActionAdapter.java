@@ -128,7 +128,7 @@ public class FeesActionAdapter {
 
 	public void viewAllBranchStudents() {
 		StudentListResponseDto studentListResponseDto = feesService.viewAllBranchStudents();
-		request.setAttribute("studentListFeesCollection", studentListResponseDto.getStudentListFeesCollection());
+		request.setAttribute("studentListFeesCollection", studentListResponseDto.getStudentList());
 	}
 
 	public void addFeesParticular() {

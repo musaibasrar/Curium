@@ -68,7 +68,7 @@ public class AppointmentAction {
 
 	@GetMapping("/appointmentReport")
 	private String appointmentReport() {
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
+		studentActionAdapter.viewAllStudentsList();
 		return "appointmentsreport";
 	}
 

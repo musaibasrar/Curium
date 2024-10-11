@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.student.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -320,5 +321,23 @@ public class StudentActionAdapter {
         httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
 
         return responseDto.isSuccess();
+    }
+
+    public boolean viewAllStudentsList(){
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentListResponseDto result = studentService.viewAllStudentsList(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", result.getStudentList());
+
+        return result.isSuccess();
+    }
+
+    public boolean viewStudentsParentsPerBranch(){
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentListResponseDto response = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", response.getParentDetails());
+
+        return response.isSuccess();
     }
 }

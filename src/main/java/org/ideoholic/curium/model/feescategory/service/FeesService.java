@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -270,7 +269,7 @@ public class FeesService {
     	StudentListResponseDto studentListResponseDto = new StudentListResponseDto();
         try {
                 List<Student> list = new feesDetailsDAO().readListOfAllBranchStudents();
-                studentListResponseDto.setStudentListFeesCollection(list);
+                studentListResponseDto.setStudentList(list);
         } catch (Exception e) {
         }
         return studentListResponseDto;

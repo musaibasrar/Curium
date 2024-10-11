@@ -14,6 +14,7 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
@@ -1303,23 +1304,22 @@ public class StudentService {
 		return student;
 	}
 
-	public boolean viewAllStudentsList() {
+	public StudentListResponseDto viewAllStudentsList(String branchId) {
 
-		boolean result = false;
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		StudentListResponseDto result = StudentListResponseDto.builder().build();
+		if (branchId != null) {
 
 			try {
 
-				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentList", list);
-				result = true;
+				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+				result.setStudentList(list);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
-				result = false;
+				result.setSuccess(false);
 			}
 
 		}
-
 		return result;
 	}
 
@@ -1709,14 +1709,14 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewStudentsParentsPerBranch() {
+	public StudentListResponseDto viewStudentsParentsPerBranch(String branchId) {
 
-		boolean result = false;
+		StudentListResponseDto result = StudentListResponseDto.builder().build();
 		//String pages = "1";
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 			try {
 
-				List<Object[]> list = new studentDetailsDAO().readStudentsParentsPerBranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Object[]> list = new studentDetailsDAO().readStudentsParentsPerBranch(Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for(Object[] parentdetails: list){
@@ -1733,13 +1733,12 @@ public class StudentService {
 					parentDetails.add(parent);
 				}
 
-				request.setAttribute("studentList", parentDetails);
-				result = true;
+				result.setParentDetails(parentDetails);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
 		return result;
 	}
 

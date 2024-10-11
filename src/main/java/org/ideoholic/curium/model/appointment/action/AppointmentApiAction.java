@@ -62,15 +62,15 @@ public class AppointmentApiAction {
 	}
 	
 	@PostMapping("/generateAppointmentsReport")
-	private String generateAppointmentsReport(@RequestBody GenerateAppointmentsReportDto appointmentsReport) {
+	private String generateAppointmentsReport(@RequestBody GenerateAppointmentsReportDto appointmentsReport, @RequestHeader(value = "branchid") String branchId) {
 		appointmentService.generateAppointmentsReport(appointmentsReport);
-		return appointmentReport();
+		return appointmentReport(branchId);
 	}
 
 	@GetMapping("/appointmentReport")
-	private String appointmentReport() {
+	private String appointmentReport(@RequestHeader(value = "branchid") String branchId) {
 		// TODO: Need to fix this after migrating StudentService
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsList();
+		new StudentService(request, response, standardActionAdapter).viewAllStudentsList(branchId);
 		return "appointmentsreport";
 	}
 
