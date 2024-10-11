@@ -1320,7 +1320,6 @@ public class StudentService {
 			}
 
 		}
-		result.setSuccess(true);
 		return result;
 	}
 
@@ -1740,7 +1739,6 @@ public class StudentService {
 				e.printStackTrace();
 			}
 		}
-		result.setSuccess(true);
 		return result;
 	}
 
