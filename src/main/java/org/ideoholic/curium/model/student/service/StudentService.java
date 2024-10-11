@@ -19,6 +19,7 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.mess.item.dto.InvoiceDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -772,9 +773,9 @@ public class StudentService {
 		return result;
 	}
 
-	public boolean viewAllStudents() {
+	public InvoiceDetailsResponseDto viewAllStudents(String branchId) {
 
-		boolean result = false;
+		InvoiceDetailsResponseDto result = InvoiceDetailsResponseDto.builder().build();
 		String pages = "1";
 		try {
 			int page = 1;
@@ -784,16 +785,16 @@ public class StudentService {
 			}
 
 			List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
-				recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				recordsPerPage, Integer.parseInt(branchId));
+			int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(branchId));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-			request.setAttribute("studentList", list);
-			request.setAttribute("noOfPages", noOfPages);
-			request.setAttribute("currentPage", page);
-			result = true;
+			result.setParentsList(list);
+			result.setNoOfPages(noOfPages);
+			result.setCurrentPage(page);
+			result.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			result.setSuccess(false);
 		}
 		return result;
 	}
@@ -980,11 +981,8 @@ public class StudentService {
 	}
 	//end of viewDetailsbySidOfStudent
 //other view detail of students
-	public boolean otherviewDetailsOfStudent() {
-		return otherviewDetailsOfStudent(request.getParameter("id"));
-	}
-	public boolean otherviewDetailsOfStudent(String studentId) {
-		boolean result = false;
+	public StudentDetailsResponseDto otherviewDetailsOfStudent(String studentId) {
+		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().build();
 		try {
 			long id = Long.parseLong(studentId);
 			Student student = new studentDetailsDAO().readUniqueObject(id);
@@ -995,12 +993,12 @@ public class StudentService {
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
 			Currentacademicyear currentYear = new YearDAO().showYear();
-			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
-			request.setAttribute("receiptinfo",rinfo);
+			result.setOtherReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
@@ -1019,32 +1017,32 @@ public class StudentService {
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
 			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
 			if (student == null) {
-				result = false;
+				result.setSuccess(false);
 			} else {
-				httpSession.setAttribute("student", student);
+				result.setStudent(student);
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					httpSession.setAttribute("classstudying", classParts[0]);
-					httpSession.setAttribute("secstudying", "");
+					result.setClassStudying(classParts[0]);
+					result.setSecStudying("");
 					if(classParts.length>1) {
-						httpSession.setAttribute("secstudying", classParts[1]);
+						result.setSecStudying(classParts[1]);
 					}
 
 				} else {
-					httpSession.setAttribute("classstudying", classStudying);
-					httpSession.setAttribute("secstudying", "");
+					result.setClassStudying(classStudying);
+					result.setSecStudying("");
 				}
 
 				String classAdmitted = student.getClassadmittedin();
 
-				result = true;
-				httpSession.setAttribute("resultfromservice",result);
+				result.setSuccess(true);
+
 			}
 			standardActionAdapter.viewClasses();
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			result.setSuccess(false);
 		}
 		return result;
 	}
