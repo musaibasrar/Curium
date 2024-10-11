@@ -171,7 +171,7 @@ public class MarksDetailsDAO {
 			}
 			
 		}
-		
+
 		public List<MarksGrade> readMarksGrade(int branchid) {
 			List<MarksGrade> results = new ArrayList<MarksGrade>();
 			try {
@@ -232,6 +232,7 @@ public class MarksDetailsDAO {
 			}
 			return ex;
 		}
+
 		public List<SubjectGrade> readSubjectGrade(int branchid, int examid, String classSelected) {
 			List<SubjectGrade> results = new ArrayList<SubjectGrade>();
 			try {

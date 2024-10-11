@@ -98,7 +98,7 @@ public class Marks implements java.io.Serializable {
 	public void setAcademicyear(String academicyear) {
 		this.academicyear = academicyear;
 	}
-	
+
 	@Column(name = "subgrade")
 	public String getSubgrade() {
 		return subgrade;
@@ -126,5 +126,4 @@ public class Marks implements java.io.Serializable {
 	this.branchid = branchid;
 	}
 		
-
 }

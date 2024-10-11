@@ -35,7 +35,8 @@ public class MarksDetailsAction {
 
 	}
 
-	@GetMapping("/progressReport")
+	//@GetMapping("/progressReport")
+	@RequestMapping(value = "/progressReport", method = { RequestMethod.GET, RequestMethod.POST })
 	public String progressreport() {
 		new StandardService(request, response).viewClasses();
 		return "progressreport";
@@ -59,7 +60,7 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).Search();
 		return "progressreport";
 	}
-
+	
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
@@ -129,6 +130,18 @@ public class MarksDetailsAction {
 		new MarksDetailsService(request, response).Search();
 		new MarksDetailsService(request, response).getStudentList();
 		return "graphicalreport";
+	}
+	
+	@GetMapping("/rankReport")
+	public String rankreport() {
+		new StandardService(request, response).viewClasses();
+		return "rankreport";
+	}
+	
+	@PostMapping("/searchForRank")
+	public String searchForRank() {
+		new MarksDetailsService(request, response).rankSearch();
+		return "rankreport";
 	}
 
 	@PostMapping("/generateRankReport")
