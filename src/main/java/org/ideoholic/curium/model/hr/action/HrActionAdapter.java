@@ -335,6 +335,13 @@ public class HrActionAdapter {
         request.setAttribute("totaldeduction", result.getTotalDeductions());
         request.setAttribute("netpay", result.getNetPay());
     }
+    public void getStaffDetails() {
+        HrService hrService = new HrService(request, response);
+
+        StaffDetailsResponseDto result = hrService.getStaffDetails(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), request.getParameter("staffid"));
+
+        request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
+    }
 
 
 }

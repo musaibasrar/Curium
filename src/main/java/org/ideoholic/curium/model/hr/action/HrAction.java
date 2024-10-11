@@ -76,7 +76,7 @@ public class HrAction {
 	@PostMapping("/getStaffDetails")
 	public String getStaffDetails() {
 		
-		new HrService(request, response).getStaffDetails();
+		hrActionAdapter.getStaffDetails();
 		return "deletepayhead";
 	}
 
