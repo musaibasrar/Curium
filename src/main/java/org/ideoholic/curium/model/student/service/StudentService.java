@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.documents.dto.StudentDetailsDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -773,9 +774,9 @@ public class StudentService {
 		return result;
 	}
 
-	public InvoiceDetailsResponseDto viewAllStudents(String branchId) {
+	public StudentDetailsDto viewAllStudents(String branchId) {
 
-		InvoiceDetailsResponseDto result = InvoiceDetailsResponseDto.builder().build();
+		StudentDetailsDto result = StudentDetailsDto.builder().build();
 		String pages = "1";
 		try {
 			int page = 1;
@@ -790,7 +791,7 @@ public class StudentService {
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			result.setParentsList(list);
 			result.setNoOfPages(noOfPages);
-			result.setCurrentPage(page);
+			result.setPage(page);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
