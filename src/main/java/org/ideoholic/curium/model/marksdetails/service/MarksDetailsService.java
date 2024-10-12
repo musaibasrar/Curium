@@ -123,10 +123,9 @@ public class MarksDetailsService {
 				Marks marks = new Marks();
 				marks.setExamid(examid);
 				marks.setSubid(subid);
-				//here
                 int mymark= Integer.parseInt(test);
 				
-				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),Integer.parseInt(examidName[1]),classSelected);
 				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
 					if( mymark >= subjectGrade.getMinmarks() && mymark <= subjectGrade.getMaxmarks())	
 					{
@@ -537,7 +536,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
@@ -1143,7 +1142,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
@@ -1454,7 +1453,7 @@ public boolean generatePreprimaryReport() {
 							for (Subject sub : subjectList) {
 								
 								int marksSubid = marks.getSubid();
-								int subjectId = sub.getSubjectid();
+								int subjectId = sub.getSubid();
 								
 								if(marksSubid == subjectId) {
 									// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
@@ -2051,7 +2050,7 @@ public boolean generateRankReport() {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
@@ -2086,7 +2085,7 @@ public boolean generateRankReport() {
 						double d = (totalObtainedMarks*100.0)/totalMarks;
 						examMarks.setPercentage(d);
 						examMarks.setSubMarks(subMarks);
-						//here
+						
                         int mypercent= (int)Math.round(d);
 						List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						for (MarksGrade marksGrade : marksGradeDetailsList) {
@@ -2108,13 +2107,10 @@ public boolean generateRankReport() {
 						examRankList.add(examrank);
 					}
 					
-					/*
-					 * ExamRank examRank = new
-					 * MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),
-					 * httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(
-					 * httpSession.getAttribute(BRANCHID).toString()));
-					 * examMarks.setRank(examRank.getRank());
-					 */
+					
+					 /* ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					  examMarks.setRank(examRank.getRank());*/
+					 
 				}
 				
 				
