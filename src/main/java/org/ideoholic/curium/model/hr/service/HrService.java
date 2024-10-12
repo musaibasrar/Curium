@@ -717,10 +717,12 @@ public class HrService {
 		return result;
 	}
 
-	public StaffDetailsResponseDto getStaffDetails(String currentAcademicYear, String staffId) {
+	public StaffDetailsResponseDto getStaffDetails(StaffDetailsDto dto, String currentAcademicYear) {
 		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
 
 		if(currentAcademicYear!=null){
+			String staffId = dto.getStaffId();
+
 			List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(staffId), currentAcademicYear);
 			result.setPayHeadDetailsList(payHeadDetailsList);
 		}

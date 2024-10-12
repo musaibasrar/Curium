@@ -338,7 +338,10 @@ public class HrActionAdapter {
     public void getStaffDetails() {
         HrService hrService = new HrService(request, response);
 
-        StaffDetailsResponseDto result = hrService.getStaffDetails(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), request.getParameter("staffid"));
+        StaffDetailsDto dto = new StaffDetailsDto();
+        dto.setStaffId(request.getParameter("staffid"));
+
+        StaffDetailsResponseDto result = hrService.getStaffDetails(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
     }
