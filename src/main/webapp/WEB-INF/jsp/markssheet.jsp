@@ -254,6 +254,7 @@ for(Cookie cookie : cookies){
 						Academic Year: ${dataSubParts[0]}-${dataSubParts[1]}</td>
 					</tr>
 				</table>
+
 				<table align="center" width="100%"
 						style="page-break-inside: avoid; border-collapse: collapse; border: 1px solid black">
 						<tr>
