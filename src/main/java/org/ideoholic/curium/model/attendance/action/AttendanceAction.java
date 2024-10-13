@@ -298,4 +298,16 @@ public class AttendanceAction {
 		employeeActionAdapter.ViewAllEmployee();
 		return "attendancemaster";
 	}
+	
+	@GetMapping("/attendanceReport")
+	public String attendanceReport() {
+		return "attendancesummaryreport";
+	}
+	
+	@PostMapping("/attendanceSummaryReport")
+	public String showReports() {
+		attendanceActionAdapter.attendanceSummaryReport();
+		return "attendancesummaryreport";
+	}
+	
 }
