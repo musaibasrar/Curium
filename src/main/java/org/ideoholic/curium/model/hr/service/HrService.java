@@ -717,15 +717,16 @@ public class HrService {
 		return result;
 	}
 
-	public void getStaffDetails() {
-		
-		if(httpSession.getAttribute("currentAcademicYear")!=null){
-			
-			String staffId = request.getParameter("staffid");
-			List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(staffId), httpSession.getAttribute("currentAcademicYear").toString());
-			request.setAttribute("payheaddetailslist", payHeadDetailsList);
+	public StaffDetailsResponseDto getStaffDetails(StaffDetailsDto dto, String currentAcademicYear) {
+		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
+
+		if(currentAcademicYear!=null){
+			String staffId = dto.getStaffId();
+
+			List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(staffId), currentAcademicYear);
+			result.setPayHeadDetailsList(payHeadDetailsList);
 		}
-		
+		return result;
 	}
 
 	public boolean deletePayHeadStaff() {
