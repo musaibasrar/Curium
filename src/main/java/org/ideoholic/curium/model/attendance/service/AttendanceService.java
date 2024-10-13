@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +45,8 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
@@ -1488,6 +1491,113 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			new AttendanceDAO().markDailyAttendanceJobStaff(listStaffAttendance);
 		}
 		
+}
+
+	public ResultResponse attendanceSummaryReport(String branchId, String attendanceDate) {
+		
+		ResultResponse result = ResultResponse.builder().build();
+		String date = DateUtil.dateFromatConversionSlash(attendanceDate);
+		int present = 0;
+		int absent = 0;
+		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().getStudentAttendance(date);
+		for (Studentdailyattendance listStudent : listStudentAttendance) {
+			String attendancestatus = listStudent.getAttendancestatus();
+			if (attendancestatus.equals("P")) {
+				present = present + 1;
+			} else {
+				absent = absent + 1;
+			}
+		}
+		request.setAttribute("present", present);
+		request.setAttribute("absent", absent);
+		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+	    List<Classsec> secList = new ArrayList<Classsec>();
+	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
+		
+	    for(Classsec classdetail : classsecList) {
+	    	String classDetails =classdetail.getClassdetails(); 
+	    	String section = classdetail.getSection();
+	    	if(classDetails.equalsIgnoreCase("") && !section.equalsIgnoreCase("")) {
+	    		secList.add(classdetail);
+	    	}
+	    }
+	    
+	    int sizeOfArray = classsecList.size()*secList.size();
+	    String[] classSecAttendance = new String[sizeOfArray];
+	    int attendanceValue= 0 ;
+	    	for (Classsec classsec : classsecList) {
+	    		int presentClass = 0;
+				int absentClass = 0;
+				boolean classAttendancePushed = false;
+				if(!classsec.getClassdetails().equalsIgnoreCase("")) {
+					
+				String classStudying = classsec.getClassdetails()+"--";
+				
+	    		for (Classsec section : secList) {
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
+					List<String> studentExternalIdList = new ArrayList<String>();
+					for (Student students : studentList) {
+						studentExternalIdList.add(students.getStudentexternalid());
+					}
+					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().getStudentClassAttendance(date,studentExternalIdList);
+					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
+						String attendancestatus = listStudent.getAttendancestatus();
+						if (attendancestatus.equals("P")) {
+							presentClass = presentClass + 1;
+						} else {
+							absentClass = absentClass + 1;
+						}
+					}
+					
+					if(presentClass!=0 || absentClass!=0) {
+						//studentAttendanceMap.put(classStudying, attendanceStatus);
+						classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+" "+section.getSection()+"/"+presentClass+"/"+absentClass+"";
+						String printClass=classsec.getClassdetails();
+						String printSection=section.getSection();
+						System.out.println("class = "+printClass+" Section ="+printSection+" present Student = "+presentClass+"Absent = "+absentClass);
+						attendanceValue++;
+						presentClass=0;
+						absentClass=0;
+						classAttendancePushed= true;
+					}
+					
+					
+				}
+	    		
+	    		if(!classAttendancePushed) {
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
+					List<String> studentExternalIdList = new ArrayList<String>();
+					for (Student students : studentList) {
+						studentExternalIdList.add(students.getStudentexternalid());
+					}
+					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().getStudentClassAttendance(date,studentExternalIdList);
+					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
+						String attendancestatus = listStudent.getAttendancestatus();
+						if (attendancestatus.equals("P")) {
+							presentClass = presentClass + 1;
+						} else {
+							absentClass = absentClass + 1;
+						}
+					}
+					
+					  if(presentClass!=0 || absentClass!=0) { 
+						  classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+"/"+presentClass+"/ "+absentClass+"";
+					  	attendanceValue++;
+					  	presentClass=0;
+						absentClass=0;
+					     		}
+				
+	    			}
+	    	}
+	}
+	    	
+	    	List<String> classSecAttendanceList = Arrays.asList(classSecAttendance);
+	    	result.setResultList(classSecAttendanceList);
+			if(!classSecAttendanceList.isEmpty()){
+				result.setSuccess(true);
+				return result;
+			}
+			return result;
 }
 
 }

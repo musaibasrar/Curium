@@ -333,4 +333,12 @@ public class AttendanceActionAdapter {
 
         return attendanceService.downloadFile();
     }
+
+	public boolean attendanceSummaryReport() {
+        AttendanceService attendanceService = new AttendanceService(request, response);
+        ResultResponse resultResponse = attendanceService.attendanceSummaryReport(httpSession.getAttribute(BRANCHID).toString(),request.getParameter("attendancedate").toString());
+        request.setAttribute("studentAttendanceMap", resultResponse.getResultList());
+
+        return resultResponse.isSuccess();
+    }
 }
