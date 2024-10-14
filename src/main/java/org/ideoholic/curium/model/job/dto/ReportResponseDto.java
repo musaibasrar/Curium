@@ -11,9 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobQueryDto {
-	private List<JobQuery> queriesList;
-	private int noOfPages;
-	private int page;
-	private boolean success;
+public class ReportResponseDto {
+	
+	private String statusSelected;
+	private String staffSelected;
+	private List<JobQuery> JobQueryList;
+	private String transactionFromDateSelected;
+	private String transactionToDateSelected;
+
 }
