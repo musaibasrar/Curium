@@ -345,6 +345,15 @@ public class HrActionAdapter {
 
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
     }
+    public boolean deletePayHeadStaff() {
+        HrService hrService = new HrService(request, response);
 
+        StaffSalaryDto dto = new StaffSalaryDto();
+        dto.setStaffids(request.getParameterValues("teacherid"));
+        dto.setIdPayHeadStaffDetails(request.getParameterValues("idpayheadstaffdetails"));
+        StaffDetailsResponseDto result = hrService.deletePayHeadStaff(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
+        return result.isSuccess();
+    }
 
 }

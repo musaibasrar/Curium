@@ -729,10 +729,11 @@ public class HrService {
 		return result;
 	}
 
-	public boolean deletePayHeadStaff() {
-		
-		String[] StaffId = request.getParameterValues("teacherid");
-		String[] idpayheadstaffdetails = request.getParameterValues("idpayheadstaffdetails");
+	public StaffDetailsResponseDto deletePayHeadStaff(StaffSalaryDto dto,String currentAcademicYear ) {
+		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
+
+		String[] StaffId = dto.getStaffids();
+		String[] idpayheadstaffdetails = dto.getIdPayHeadStaffDetails();
 		
 		List<Integer> ids = new ArrayList<>();
 		
@@ -747,14 +748,16 @@ public class HrService {
 		if(processSalaryDetails.isEmpty()){
 				if(new HrDAO().deletePayHeadStaff(ids))
 				{
-					List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(StaffId[0]), httpSession.getAttribute("currentAcademicYear").toString());
-					request.setAttribute("payheaddetailslist", payHeadDetailsList);
-					return true;
+					List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(StaffId[0]), currentAcademicYear);
+
+					result.setPayHeadDetailsList(payHeadDetailsList);
+					result.setSuccess(true);
+					return result;
 					
 				}
 		}
-		
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 	public boolean checkprocessedStaffSalary(int staffId, String month, String year) {

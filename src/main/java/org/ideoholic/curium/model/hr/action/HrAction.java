@@ -67,7 +67,7 @@ public class HrAction {
 
 	@PostMapping("/deletePayHeadStaff")
 	public String deletePayHeadStaff() {
-		if(new HrService(request, response).deletePayHeadStaff()){
+		if(hrActionAdapter.deletePayHeadStaff()){
 			return "deletepayhead";
 		}
 		return "deletepayheadfailed";
