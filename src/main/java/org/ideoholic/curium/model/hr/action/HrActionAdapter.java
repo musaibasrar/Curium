@@ -298,7 +298,7 @@ public class HrActionAdapter {
     public boolean processStaffSalary() {
         HrService hrService = new HrService(request, response);
 
-        StaffSalaryDto dto = new StaffSalaryDto();
+        SalaryDto dto = new SalaryDto();
         dto.setStaffids(request.getParameterValues("employeeIDs"));
         dto.setMonth(request.getParameter("month"));
         dto.setYear(request.getParameter("year"));
@@ -348,7 +348,7 @@ public class HrActionAdapter {
     public boolean deletePayHeadStaff() {
         HrService hrService = new HrService(request, response);
 
-        StaffSalaryDto dto = new StaffSalaryDto();
+        SalaryDto dto = new SalaryDto();
         dto.setStaffids(request.getParameterValues("teacherid"));
         dto.setIdPayHeadStaffDetails(request.getParameterValues("idpayheadstaffdetails"));
         StaffDetailsResponseDto result = hrService.deletePayHeadStaff(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());

@@ -508,7 +508,7 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public ResultResponse processStaffSalary(StaffSalaryDto dto, String currentAcademicYear, String branchId, String userId) {
+	public ResultResponse processStaffSalary(SalaryDto dto, String currentAcademicYear, String branchId, String userId) {
 		
 		String[] staffids = dto.getStaffids();
 		Map<String, BigDecimal> earningMaps = new HashMap<>();
@@ -729,7 +729,7 @@ public class HrService {
 		return result;
 	}
 
-	public StaffDetailsResponseDto deletePayHeadStaff(StaffSalaryDto dto,String currentAcademicYear ) {
+	public StaffDetailsResponseDto deletePayHeadStaff(SalaryDto dto, String currentAcademicYear ) {
 		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
 
 		String[] StaffId = dto.getStaffids();
