@@ -355,5 +355,15 @@ public class HrActionAdapter {
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
         return result.isSuccess();
     }
+    public boolean issueProcessedSalary() {
+        HrService hrService = new HrService(request, response);
+
+        SalaryDto dto = new SalaryDto();
+        dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
+
+        ResultResponse result = hrService.issueProcessedSalary(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+
+        return result.isSuccess();
+    }
 
 }

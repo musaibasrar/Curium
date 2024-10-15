@@ -59,7 +59,7 @@ public class HrAction {
 	@PostMapping("/issueProcessedSalary")
 	public String issueProcessedSalary() {
 		
-		if(new HrService(request, response).issueProcessedSalary()){
+		if(hrActionAdapter.issueProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
@@ -370,7 +370,5 @@ public class HrAction {
 		}
 		return error;
 	}
-
-	
 
 }
