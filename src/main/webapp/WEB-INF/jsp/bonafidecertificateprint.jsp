@@ -139,7 +139,7 @@ for(Cookie cookie : cookies){
 			<tr><td><br></td></tr>
 			<tr>
 			<td>
-			<span style="border:1px solid black;width: 100px;height:100px;">
+			<span style="border:1px solid black;width: 120px;height:150px;">
 					</span>
 			
 			<%-- <img src="data:image;base64,<c:out value="${studentdetailsbonafide.student.studentpic}"/>" alt="Student's Photo" style="width: 100px;height: 100px;"> --%>
@@ -171,7 +171,13 @@ for(Cookie cookie : cookies){
 					<tr><td><br></td></tr>
 					<tr>
 					<td>
-					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>is/was a
+					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					S/O,D/O
+					 </td></tr>
+					 <tr><td><br></td></tr>
+					<tr>
+					<td>
+					 <span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.fathersname}" /></span>&emsp;&emsp;is/was a bonafide
 				</td>
 			</tr>
 			<tr>
@@ -182,7 +188,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-					bonafide student of this high school studying in std &nbsp;&nbsp; 
+					 student of this high school studying in std &nbsp;&nbsp; 
 					
 							<c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" />
 					<span style="font-weight: bold;width: 70px;">
@@ -215,9 +221,9 @@ for(Cookie cookie : cookies){
 					</td></tr>
 					<tr><td><br></td></tr>
 					<tr><td>
-					and he/she belongs to the caste <span style="font-weight: bold;width: 100px;">
+					and he/she belongs to the caste &emsp;<span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
-					</span>and his place of birth
+					</span>&emsp;and his place of birth
 					</td></tr>
 					<tr><td><br></td></tr>
 					<tr><td>
@@ -254,8 +260,9 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td>&nbsp;</td>
-			<td align="center">&emsp;&emsp;&emsp;Headmaster/Principal</td>
+		<td></td>
+			<td align="center">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Headmaster/Principal</td>
 		</tr>
 		<tr><td><br></td></tr>
 		<tr><td><br></td></tr>
