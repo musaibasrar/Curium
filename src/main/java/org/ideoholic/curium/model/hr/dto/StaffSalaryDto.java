@@ -9,5 +9,6 @@ public class StaffSalaryDto {
     private String month;
     private String year;
     private String dateProcess;
+    private String[] idPayHeadStaffDetails;
 
 }
