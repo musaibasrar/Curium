@@ -14,4 +14,5 @@ public class BonafideGenerationResponseDto {
     private boolean success = false;
     private Parents parents;
     private String message;
+    private String dateInWord;
 }

@@ -28,6 +28,8 @@
 	text-align: center;
 }
 
+
+
 .headerTextLeft {
 	width: 10px;
 	font-family: Tahoma;
@@ -95,7 +97,7 @@ span{
 </style>
 	<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <title>Bonafide Certificate</title>
+                 <title>Bonafide Certificate</title>
 </head>
 <%
 //allow access only if session exists
@@ -117,115 +119,123 @@ for(Cookie cookie : cookies){
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
-		
+		<div style="border:2px solid black;">
 		<table align="center">
-			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/noblewisdom/images/noblewisdom.png">
+			<img border="0" style="vertical-align: text-bottom;height: 91px;width: 100px;" alt="logo" src="/noblewisdom/images/noblewisdom.png">
+			</td>
+				<td >
+					<h3 style="margin-bottom:0px;">NOBLE WISDOM ENGLISH MEDIUM SCHOOL<br>${branchaddress}
+					<br> Contact No. 7020123332</h3>
+					
+				</td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr>
+			<td>
+			<span style="border:1px solid black;width: 100px;height:100px;">
+					</span>
+			
+			<%-- <img src="data:image;base64,<c:out value="${studentdetailsbonafide.student.studentpic}"/>" alt="Student's Photo" style="width: 100px;height: 100px;"> --%>
 			</td>
 				<td >
 					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					<h3 style="margin-bottom:0px;">BONAFIDE & CHARACTER CERTIFICATE</h3>
+					<h3 style="margin-top:0px;">G R No.<span style="font-weight: bold;width: 80px;">${studentdetailsbonafide.student.sts}</span>&nbsp;&nbsp;Date <span style="font-weight: bold;width: 80px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></span> </h3>
 					
 				</td>
 			</tr>
 			</table>
 			
-		<table>
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
-			
-			</tr>
+		<table align="center">
 			
 			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
-					<br>
-					<u>BONAFIDE CERTIFICATE</u>
-					<br><br>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
+			<td><br></td>
 			
 			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
+					This is to certify that &nbsp;&nbsp;
+					</td>
+					</tr>
+					<tr><td><br></td></tr>
+					<tr>
+					<td>
+					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>is/was a
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			<td><br></td>
 			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
-					</span>
-					
-					</h3>
-				</td>
 			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
 			<tr>
 			
 				<td class="dataTextBoldLeft"  >
 				
-				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
+					bonafide student of this high school studying in std &nbsp;&nbsp; 
+					
+							<c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" />
+					<span style="font-weight: bold;width: 70px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${itempart[0]} 
+					</span>Div <span style="font-weight: bold;width: 70px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${itempart[1]} 
 					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<tr>
+					in the </td></tr>
+					<tr>
 			<td></td>
 			</tr>
-			<tr>
-			<tr>
+					<tr><td><br></td></tr>
+					<tr>
+					<td class="dataTextBoldLeft"  >
+					year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					in the general register is <span style="font-weight: bold;width: 120px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.dateofbirth} 
+					</span></td>
+					</tr>
+					
+					<tr>
+			<td><br></td>
+			</tr>
+					
+					<tr>
+					<td class="dataTextBoldLeft"  >
+					in word <span style="font-weight: bold;width: 400px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${dateinword} 
+					</span>
+					</td></tr>
+					<tr><td><br></td></tr>
+					<tr><td>
+					and he/she belongs to the caste <span style="font-weight: bold;width: 100px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
+					</span>and his place of birth
+					</td></tr>
+					<tr><td><br></td></tr>
+					<tr><td>
+					 <span style="font-weight: bold;width: 120px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.placeofbirth} 
+					</span> He/She 
+					
+					is/was regular in attendance. To the best of my knowledge  </td>
+					</tr>
+					<tr><td><br></td></tr>
+					<tr>
+					<td class="dataTextBoldLeft"  >
+					He/She bears a good moral character</td>
+					
+
+			</tr>
 			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
+			
 		</table>
 		
 
@@ -244,16 +254,26 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+		<td>&nbsp;</td>
+			<td align="center">&emsp;&emsp;&emsp;Headmaster/Principal</td>
 		</tr>
+		<tr><td><br></td></tr>
+		<tr><td><br></td></tr>
+		<tr><td><br></td></tr>
 		
-			<tr>
-              <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/printBonafide">Print</a></td>
-            </tr>
+		
+			
 		</TABLE>
+		</div>
+		<table>
+		<tr>
+			<td>
+                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
+                        </td>
+<!--               <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/printBonafide">Print</a></td>
+ -->            </tr>
+		</table>
 	</form>
 </body>
 </html>

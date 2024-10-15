@@ -69,6 +69,11 @@ public class DocumentService {
 		this.standardActionAdapter = standardActionAdapter;
 	}
 
+	
+	public DocumentService() {
+	}
+
+
 	//TODO:Delete this after migrating the PeriodService class.
 	public boolean transferCertificate(){
 		return transferCertificate(httpSession.getAttribute(BRANCHID).toString()).isSuccess();
@@ -211,7 +216,7 @@ public class DocumentService {
 	}
 
 
-		private String generateDate(Date dateofbirth) {
+		public String generateDate(Date dateofbirth) {
 		// TODO Auto-generated method stub
 
 		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);

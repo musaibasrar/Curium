@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
@@ -2081,13 +2082,17 @@ public class StudentService {
 
 	public BonafideGenerationResponseDto generateBonafide(StudentIdsDto dto) {
 		BonafideGenerationResponseDto result = BonafideGenerationResponseDto.builder().build();
-
+        
+		DocumentService documentService = new DocumentService();
 		String[] studentIds = dto.getStudentIds();
 		String bonafidePage = null;
+		
 
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			String dateinword = documentService.generateDate(parents.getStudent().getDateofbirth());
+			result.setDateInWord(dateinword);
 			result.setParents(parents);
 			result.setSuccess(true);
 			result.setMessage("bonafidecertificateprint");
