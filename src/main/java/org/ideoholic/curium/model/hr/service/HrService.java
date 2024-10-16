@@ -774,17 +774,18 @@ public class HrService {
 	public ResultResponse issueProcessedSalary(SalaryDto dto, String currentAcademicYear, String branchId) {
 
 		String[] idProcessSalaryDetails = dto.getIdProcessSalaryDetails();
-		
+		ResultResponse result = ResultResponse.builder().build();
+
 		if (idProcessSalaryDetails != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
+
 			}
-			return ResultResponse.builder().success( new HrDAO().issueProcessedSalary(ids)).build();
-		}
+			 result.setSuccess(new HrDAO().issueProcessedSalary(ids));		}
 
 		issueStaffSalary(currentAcademicYear,branchId);
-		return ResultResponse.builder().build();
+		return result;
 	}
 
 	public boolean cancelProcessedSalary() {
