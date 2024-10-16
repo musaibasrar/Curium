@@ -151,4 +151,12 @@ public class CreateStudentDto {
 	private String studentDoc3Delete;
 	private String studentDoc4Delete;
 	private String studentDoc5Delete;
+
+	//Private method stampFees.
+	private String[] feesCategory;
+	private String feesTotalAmount;
+	private String[] feesAmount;
+	private String[] concession;
+	private String[] totalInstallments;
+
 }

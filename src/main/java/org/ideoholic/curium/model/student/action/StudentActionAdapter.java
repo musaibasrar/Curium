@@ -165,6 +165,11 @@ public class StudentActionAdapter {
         StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         student.setYearofadmission(request.getParameter("yearofadmission"));
+        student.setFeesCategory(request.getParameterValues("feescategory"));
+        student.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
+        student.setFeesAmount(request.getParameterValues("fessCat"));
+        student.setConcession(request.getParameterValues("feesConcession"));
+        student.setTotalInstallments(request.getParameterValues("feesCount"));
 
         ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
