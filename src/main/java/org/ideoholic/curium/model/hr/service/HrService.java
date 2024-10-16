@@ -508,7 +508,7 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public ResultResponse processStaffSalary(StaffSalaryDto dto, String currentAcademicYear, String branchId, String userId) {
+	public ResultResponse processStaffSalary(SalaryDto dto, String currentAcademicYear, String branchId, String userId) {
 		
 		String[] staffids = dto.getStaffids();
 		Map<String, BigDecimal> earningMaps = new HashMap<>();
@@ -729,7 +729,7 @@ public class HrService {
 		return result;
 	}
 
-	public StaffDetailsResponseDto deletePayHeadStaff(StaffSalaryDto dto,String currentAcademicYear ) {
+	public StaffDetailsResponseDto deletePayHeadStaff(SalaryDto dto, String currentAcademicYear ) {
 		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
 
 		String[] StaffId = dto.getStaffids();
@@ -771,19 +771,20 @@ public class HrService {
 		return false;
 	}
 
-	public boolean issueProcessedSalary() {
+	public ResultResponse issueProcessedSalary(SalaryDto dto, String currentAcademicYear, String branchId) {
 
-		String[] idProcessSalaryDetails = request.getParameterValues("idprocesssalarydetails");
-		boolean result = false;
-		
+		String[] idProcessSalaryDetails = dto.getIdProcessSalaryDetails();
+		ResultResponse result = ResultResponse.builder().build();
+
 		if (idProcessSalaryDetails != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
+
 			}
-			result = new HrDAO().issueProcessedSalary(ids);
-		}
-		issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+			 result.setSuccess(new HrDAO().issueProcessedSalary(ids));		}
+
+		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
 	}
 
