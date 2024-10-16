@@ -139,15 +139,15 @@ for(Cookie cookie : cookies){
 			<tr><td><br></td></tr>
 			<tr>
 			<td>
-			<span style="border:1px solid black;width: 100px;height:100px;">
+			<span style="border:1px solid black;width: 120px;height:150px;">
 					</span>
 			
 			<%-- <img src="data:image;base64,<c:out value="${studentdetailsbonafide.student.studentpic}"/>" alt="Student's Photo" style="width: 100px;height: 100px;"> --%>
 			</td>
 				<td >
 					<br>
-					<h3 style="margin-bottom:0px;">BONAFIDE & CHARACTER CERTIFICATE</h3><br>
-					<h3 style="margin-top:0px;">G.R. No.<span style="font-weight: bold;width: 80px;">${studentdetailsbonafide.student.sts}</span>&nbsp;&nbsp;Date <span style="font-weight: bold;width: 80px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					<h3 style="margin-bottom:0px;">BONAFIDE & CHARACTER CERTIFICATE</h3>
+					<h3 style="margin-top:0px;">G R No.<span style="font-weight: bold;width: 80px;">${studentdetailsbonafide.student.sts}</span>&nbsp;&nbsp;Date <span style="font-weight: bold;width: 80px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></span> </h3>
 					
 				</td>
@@ -170,8 +170,14 @@ for(Cookie cookie : cookies){
 					</tr>
 					<tr><td><br></td></tr>
 					<tr>
-					<td style="text-align: left;">
-					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>is/was a
+					<td>
+					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					S/O,D/O
+					 </td></tr>
+					 <tr><td><br></td></tr>
+					<tr>
+					<td>
+					 <span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.fathersname}" /></span>&emsp;&emsp;is/was a bonafide
 				</td>
 			</tr>
 			<tr>
@@ -182,7 +188,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-					bonafide student of this high school studying in std &nbsp;&nbsp; 
+					 student of this high school studying in std &nbsp;&nbsp; 
 					
 							<c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" />
 					<span style="font-weight: bold;width: 70px;">
@@ -214,9 +220,10 @@ for(Cookie cookie : cookies){
 					</span>
 					</td></tr>
 					<tr><td><br></td></tr>
-					<tr><td style="text-align: left;">and he/she belongs to the caste <span style="font-weight: bold;width: 100px;">
+					<tr><td>
+					and he/she belongs to the caste &emsp;<span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
-					</span>and his place of birth
+					</span>&emsp;and his place of birth
 					</td></tr>
 					<tr><td><br></td></tr>
 					<tr><td>
@@ -253,8 +260,9 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td>&nbsp;</td>
-			<td align="center">&emsp;&emsp;&emsp;Headmaster/Principal</td>
+		<td></td>
+			<td align="center">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Headmaster/Principal</td>
 		</tr>
 		<tr><td><br></td></tr>
 		<tr><td><br></td></tr>
@@ -267,7 +275,8 @@ for(Cookie cookie : cookies){
 		<table>
 		<tr>
 			<td>
-                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="this.style.visibility = 'hidden'; window.print();" class="hide"></button>     
+                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 <!--               <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/printBonafide">Print</a></td>
  -->            </tr>
