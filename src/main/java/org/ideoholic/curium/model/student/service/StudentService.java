@@ -2011,7 +2011,7 @@ public class StudentService {
 			headerData.put("Header",
 				new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 					"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
-					"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
+					"Caste", "Fathers Name", "Mothers Name","Contact No.","Permanent Address","Temporary Address", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -2029,8 +2029,8 @@ public class StudentService {
 						DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
 						DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
 						DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
-
-
+						DataUtil.emptyString(studentDetails.getAddresspermanent()),DataUtil.emptyString(studentDetails.getAddresstemporary()),
+							
 						studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" ,
 						studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
 						studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});

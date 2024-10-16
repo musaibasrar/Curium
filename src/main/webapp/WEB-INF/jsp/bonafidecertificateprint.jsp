@@ -146,8 +146,8 @@ for(Cookie cookie : cookies){
 			</td>
 				<td >
 					<br>
-					<h3 style="margin-bottom:0px;">BONAFIDE & CHARACTER CERTIFICATE</h3>
-					<h3 style="margin-top:0px;">G R No.<span style="font-weight: bold;width: 80px;">${studentdetailsbonafide.student.sts}</span>&nbsp;&nbsp;Date <span style="font-weight: bold;width: 80px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					<h3 style="margin-bottom:0px;">BONAFIDE & CHARACTER CERTIFICATE</h3><br>
+					<h3 style="margin-top:0px;">G.R. No.<span style="font-weight: bold;width: 80px;">${studentdetailsbonafide.student.sts}</span>&nbsp;&nbsp;Date <span style="font-weight: bold;width: 80px;"><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></span> </h3>
 					
 				</td>
@@ -170,7 +170,7 @@ for(Cookie cookie : cookies){
 					</tr>
 					<tr><td><br></td></tr>
 					<tr>
-					<td>
+					<td style="text-align: left;">
 					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>is/was a
 				</td>
 			</tr>
@@ -214,8 +214,7 @@ for(Cookie cookie : cookies){
 					</span>
 					</td></tr>
 					<tr><td><br></td></tr>
-					<tr><td>
-					and he/she belongs to the caste <span style="font-weight: bold;width: 100px;">
+					<tr><td style="text-align: left;">and he/she belongs to the caste <span style="font-weight: bold;width: 100px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
 					</span>and his place of birth
 					</td></tr>
@@ -268,8 +267,7 @@ for(Cookie cookie : cookies){
 		<table>
 		<tr>
 			<td>
-                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
+                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="this.style.visibility = 'hidden'; window.print();" class="hide"></button>     
                         </td>
 <!--               <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/printBonafide">Print</a></td>
  -->            </tr>
