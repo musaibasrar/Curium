@@ -12,7 +12,11 @@ import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentMapper;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
@@ -680,5 +684,60 @@ public class StudentServiceArchive {
         }
 
         return result;
+    }
+
+    public String updateStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles) {
+        Student student = StudentMapper.INSTANCE.mapStudent(createStudentDto);
+        Classsec classsec = StudentMapper.INSTANCE.mapClassec(createStudentDto);
+        Parents parents = StudentMapper.INSTANCE.mapParent(createStudentDto);
+        Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
+        Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
+        String studentPicUpdate = null;
+
+        try {
+            if (listOfFiles != null && listOfFiles.length != 0) {
+                for (MultipartFile fileItem : listOfFiles) {
+                    String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
+                    String fileValue = (DataUtil.emptyString(fileItem.getName()));
+                    if (!fileName.equalsIgnoreCase("")) {
+                        // Resize the image
+                        byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
+                        System.out.println("ecncoded value is " + new String(bytesEncoded));
+                        String saveFile = new String(bytesEncoded);
+                        student.setStudentpic(saveFile);
+                    } else {
+                        student.setStudentpic(studentPicUpdate);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //student.setArchive(0);
+        student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+
+        if (puDetails.getIdpudetails() != null) {
+            new studentDetailsDAO().updatePuDetails(puDetails);
+            student.setPudetails(puDetails);
+        }
+
+        if (degreeDetails.getIddegreedetails() != null) {
+            new studentDetailsDAO().updateDegreeDetails(degreeDetails);
+            student.setDegreedetails(degreeDetails);
+        }
+        student = new studentDetailsDAO().update(student);
+        if (parents.getPid() != null) {
+            parents.setStudent(student);
+            parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+
+            parents = new parentsDetailsDAO().update(parents);
+        }
+        String stId = student.getSid().toString();
+        int branchId = student.getBranchid();
+        return stId + "_" + branchId;
+
     }
 }
