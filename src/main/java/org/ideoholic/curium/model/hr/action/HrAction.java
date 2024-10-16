@@ -50,7 +50,7 @@ public class HrAction {
 	@PostMapping("/cancelStaffSalary")
 	public String cancelStaffSalary() {
 		
-		if(new HrService(request, response).cancelProcessedSalary()){
+		if(hrActionAdapter.cancelProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;

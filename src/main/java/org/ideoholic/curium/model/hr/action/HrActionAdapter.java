@@ -365,5 +365,14 @@ public class HrActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean cancelProcessedSalary() {
+        HrService hrService = new HrService(request, response);
+
+        SalaryDto dto = new SalaryDto();
+        dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
+
+        ResultResponse result = hrService.cancelProcessedSalary(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        return true;
+    }
 
 }
