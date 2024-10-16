@@ -804,15 +804,16 @@ public class HrService {
 		return result;
 	}
 	
-public void updateBasicpayEmployees() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		String[] staffIds =  request.getParameterValues("employeeIDs");
-		String[] basicPay = request.getParameterValues("basicpay");
-		String[] paymentType = request.getParameterValues("paymenttype");
-		String[] accountNo = request.getParameterValues("accountno");
-		String[] overTime = request.getParameterValues("overtime");
-		String[] academicYear = request.getParameterValues("academicyear");
+public BasicPayResponseDto updateBasicPayEmployees(BasicPayDto dto, String branchId) {
+		BasicPayResponseDto result = new BasicPayResponseDto();
+
+		if(branchId!=null){
+		String[] staffIds = dto.getStaffIds();
+		String[] basicPay = dto.getBasicPay();
+		String[] paymentType = dto.getPaymentType();
+		String[] accountNo = dto.getAccountNo();
+		String[] overTime = dto.getOverTime();
+		String[] academicYear = dto.getAcademicYear();
 		
 		List<Integer> overTimeList = new ArrayList<>();
 		
@@ -842,14 +843,15 @@ public void updateBasicpayEmployees() {
 				payBasic.setOvertime("no");
 			}
 			payBasic.setPaymenttype(paymentType[Integer.parseInt(splitId[1])]);
-			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			payBasic.setBranchid(Integer.parseInt(branchId));
 			
 			payBasicList.add(payBasic);
 		}
-		 boolean result = new HrDAO().updatePayBasic(payBasicList);
-			 request.setAttribute("basicpayupdate", result);
+		 result.setBasicPayUpdate(new HrDAO().updatePayBasic(payBasicList));
+
 		}
 		employeeActionAdapter.basicpayEmployees();
+	    return result;
 	}
-	
+
 }

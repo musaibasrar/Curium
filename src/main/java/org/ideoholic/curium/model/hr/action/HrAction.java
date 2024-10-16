@@ -37,7 +37,7 @@ public class HrAction {
 	
 	@PostMapping("/updateBasicPay")
 	public String updateBasicPay() {
-		new HrService(request, response).updateBasicpayEmployees();
+		hrActionAdapter.updateBasicpayEmployees();
 		return "vieweditbasicpay";
 	}
 

@@ -372,7 +372,21 @@ public class HrActionAdapter {
         dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
 
         ResultResponse result = hrService.cancelProcessedSalary(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
-        return true;
+        return result.isSuccess();
+    }
+    public void updateBasicpayEmployees() {
+        HrService hrService = new HrService(request, response);
+
+        BasicPayDto dto = new BasicPayDto();
+        dto.setStaffIds(request.getParameterValues("employeeIDs"));
+        dto.setBasicPay(request.getParameterValues("basicpay"));
+        dto.setPaymentType(request.getParameterValues("paymenttype"));
+        dto.setAccountNo(request.getParameterValues("accountno"));
+        dto.setOverTime(request.getParameterValues("overtime"));
+        dto.setAcademicYear(request.getParameterValues("academicyear"));
+
+        BasicPayResponseDto result = hrService.updateBasicPayEmployees(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("basicpayupdate", result.isBasicPayUpdate());
     }
 
 }
