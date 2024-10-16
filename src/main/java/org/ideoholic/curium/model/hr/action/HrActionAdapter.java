@@ -374,7 +374,7 @@ public class HrActionAdapter {
         ResultResponse result = hrService.cancelProcessedSalary(dto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         return result.isSuccess();
     }
-    public void updateBasicpayEmployees() {
+    public void updateBasicPayEmployees() {
         HrService hrService = new HrService(request, response);
 
         BasicPayDto dto = new BasicPayDto();
@@ -385,8 +385,8 @@ public class HrActionAdapter {
         dto.setOverTime(request.getParameterValues("overtime"));
         dto.setAcademicYear(request.getParameterValues("academicyear"));
 
-        BasicPayResponseDto result = hrService.updateBasicPayEmployees(dto, httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("basicpayupdate", result.isBasicPayUpdate());
+        ResultResponse result = hrService.updateBasicPayEmployees(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("basicpayupdate", result.isSuccess());
     }
 
 }

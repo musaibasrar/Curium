@@ -804,8 +804,7 @@ public class HrService {
 		return result;
 	}
 	
-public BasicPayResponseDto updateBasicPayEmployees(BasicPayDto dto, String branchId) {
-		BasicPayResponseDto result = new BasicPayResponseDto();
+public ResultResponse updateBasicPayEmployees(BasicPayDto dto, String branchId) {
 
 		if(branchId!=null){
 		String[] staffIds = dto.getStaffIds();
@@ -847,11 +846,12 @@ public BasicPayResponseDto updateBasicPayEmployees(BasicPayDto dto, String branc
 			
 			payBasicList.add(payBasic);
 		}
-		 result.setBasicPayUpdate(new HrDAO().updatePayBasic(payBasicList));
+
+		   return ResultResponse.builder().success(new HrDAO().updatePayBasic(payBasicList)).build();
 
 		}
 		employeeActionAdapter.basicpayEmployees();
-	    return result;
+	    return ResultResponse.builder().build();
 	}
 
 }
