@@ -788,19 +788,19 @@ public class HrService {
 		return result;
 	}
 
-	public boolean cancelProcessedSalary() {
+	public ResultResponse cancelProcessedSalary(SalaryDto dto, String currentAcademicYear, String branchId) {
 		
-		String[] idProcessSalaryDetails = request.getParameterValues("idprocesssalarydetails");
-		boolean result = false;
+		String[] idProcessSalaryDetails = dto.getIdProcessSalaryDetails();
+		ResultResponse result = ResultResponse.builder().build();
 		
 		if (idProcessSalaryDetails != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
-			result = new HrDAO().cancelProcessedSalary(ids);
+			result.setSuccess(new HrDAO().cancelProcessedSalary(ids));
 		}
-		issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), httpSession.getAttribute(BRANCHID).toString());
+		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
 	}
 	
