@@ -122,7 +122,7 @@ public class StudentService {
 				setYear = createStudentDto.getYearofadmission();
 			}
 
-			stampFees(parents.getStudent().getSid(),setYear);
+			stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
 			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			result.setSuccess(true);
 			return result;
@@ -144,10 +144,10 @@ public class StudentService {
 	}
 
 
-	private void stampFees(Integer stdIds, String setYear) {
+	private void stampFees(Integer stdIds, String setYear, CreateStudentDto dto, String currentAcademicYear, String branchId, String userId) {
 
-		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-			String[] feesCategoryIds = request.getParameterValues("feescategory");
+		if(currentAcademicYear!=null){
+			String[] feesCategoryIds = dto.getFeesCategory();
 			if(feesCategoryIds!=null) {
 
 				String[] studentIds = {stdIds.toString()};
@@ -156,12 +156,12 @@ public class StudentService {
 					List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
 					List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 
-					String feesTotalAmount = request.getParameter("feesTotalAmount");
+					String feesTotalAmount = dto.getFeesTotalAmount();
 					Long grandTotal = 0l;
 
-					String[] feesAmount = request.getParameterValues("fessCat");
-					String[] concession = request.getParameterValues("feesConcession");
-					String[] totalInstallments = request.getParameterValues("feesCount");
+					String[] feesAmount = dto.getFeesAmount();
+					String[] concession = dto.getConcession();
+					String[] totalInstallments = dto.getTotalInstallments();
 
 					List<Integer> ids = new ArrayList();
 					listOfacademicfessstructure.clear();
@@ -170,11 +170,11 @@ public class StudentService {
 						academicfessstructure = new Academicfeesstructure();
 						academicfessstructure.setSid(Integer.valueOf(id));
 						academicfessstructure.setAcademicyear(setYear);
-						academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+						academicfessstructure.setUserid(Integer.parseInt(userId));
 						academicfessstructure.setTotalfees(feesTotalAmount);
 						grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
-						academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+						academicfessstructure.setBranchid(Integer.parseInt(branchId));
+						academicfessstructure.setUserid(Integer.parseInt(userId));
 
 						listOfacademicfessstructure.add(academicfessstructure);
 						// ids.add(Integer.valueOf(id));
@@ -196,8 +196,8 @@ public class StudentService {
 							studentfeesstructure.setWaiveoff((long) 0);
 							studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[Integer.parseInt(feesCategoryIdsdiv[1])]));
 							studentfeesstructure.setAcademicyear(setYear);
-							studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-							studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+							studentfeesstructure.setBranchid(Integer.parseInt(branchId));
+							studentfeesstructure.setUserid(Integer.parseInt(userId));
 							studentfeesstructure.setConcession(Integer.parseInt(concession[Integer.parseInt(feesCategoryIdsdiv[1])]));
 							listOfstudentfeesstructure.add(studentfeesstructure);
 						}
@@ -209,8 +209,8 @@ public class StudentService {
 					//Accounts
 					//Pass J.V. : credit the Fees as income & debit the cash
 
-					int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-					int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+					int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
+					int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));;
 
 					VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -223,16 +223,16 @@ public class StudentService {
 					transactions.setEntrydate(DateUtil.todaysDate());
 					transactions.setNarration("Towards Fees Stamp");
 					transactions.setCancelvoucher("no");
-					transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-					transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-					transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+					transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+					transactions.setBranchid(Integer.parseInt(branchId));
+					transactions.setUserid(Integer.parseInt(userId));
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
 
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 
 					// End J.V
-					new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+					new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 					//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 				}
@@ -289,10 +289,6 @@ public class StudentService {
 			result.setSuccess(false);
 		}
 		return result;
-	}
-
-	public StudentDetailsResponseDto viewDetailsOfStudents() {
-		return viewDetailsOfStudent(request.getParameter("id"));
 	}
 
 	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId) {
@@ -1179,11 +1175,7 @@ public class StudentService {
 		}
 		return result;
 	}
-
-
-	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent() {
-		return viewOtherFeesDetailsOfStudent(request.getParameter("id"));
-	}
+	
 	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent(String studentId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
