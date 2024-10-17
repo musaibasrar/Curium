@@ -10,5 +10,6 @@ import java.util.List;
 public class StaffDetailsResponseDto {
 
     private List<Payheadstaffdetails> payHeadDetailsList;
+    private boolean success;
 
 }

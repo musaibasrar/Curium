@@ -50,7 +50,7 @@ public class HrAction {
 	@PostMapping("/cancelStaffSalary")
 	public String cancelStaffSalary() {
 		
-		if(new HrService(request, response).cancelProcessedSalary()){
+		if(hrActionAdapter.cancelProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
@@ -59,7 +59,7 @@ public class HrAction {
 	@PostMapping("/issueProcessedSalary")
 	public String issueProcessedSalary() {
 		
-		if(new HrService(request, response).issueProcessedSalary()){
+		if(hrActionAdapter.issueProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
@@ -67,7 +67,7 @@ public class HrAction {
 
 	@PostMapping("/deletePayHeadStaff")
 	public String deletePayHeadStaff() {
-		if(new HrService(request, response).deletePayHeadStaff()){
+		if(hrActionAdapter.deletePayHeadStaff()){
 			return "deletepayhead";
 		}
 		return "deletepayheadfailed";
@@ -370,7 +370,5 @@ public class HrAction {
 		}
 		return error;
 	}
-
-	
 
 }

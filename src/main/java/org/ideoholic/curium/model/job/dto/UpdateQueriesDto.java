@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobQueryDto {
-	private List<JobQuery> queriesList;
-	private int noOfPages;
-	private int page;
-	private boolean success;
+public class UpdateQueriesDto {
+	
+	private String queryId; 
+	private String jobQuery;
+	private String response;
+	private String queryRemarks;
+
 }

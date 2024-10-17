@@ -57,7 +57,7 @@ public class JobAction {
     @PostMapping("/feedback")
     private String feedback() {
 
-        if(new JobService(request, response).feedback()) {
+        if(jobActionAdapter.feedback()) {
             return "feedbackthankyou";
         }else {
             return "feedbackthankyoufail";
@@ -71,7 +71,7 @@ public class JobAction {
 
     @PostMapping("/generateQueriesReport")
     private String generateQueriesReport() {
-        new JobService(request, response).generateQueriesReport();
+    	jobActionAdapter.generateQueriesReport();
         return queryReport();
     }
 
@@ -84,7 +84,7 @@ public class JobAction {
     @RequestMapping(value = "/viewAllQueriesDepartmentWise", method = { RequestMethod.GET, RequestMethod.POST })
     private String viewAllQueriesDepartmentWise() {
 
-        if(new JobService(request, response).viewAllQueriesDepartmentWise()){
+        if(jobActionAdapter.viewAllQueriesDepartmentWise()){
             return "queries";
         }else{
             return "error";
@@ -93,13 +93,13 @@ public class JobAction {
 
     @PostMapping("/updateQueries")
     private String updateQueries() {
-        new JobService(request, response).updateQueries();
+    	jobActionAdapter.updateQueries();
         return viewAllQueries();
     }
 
     @PostMapping("/updateQueryRemarks")
     private String updateQueryRemarks() {
-        new JobService(request, response).updateQueryRemarks();
+    	jobActionAdapter.updateQueryRemarks();
         return viewAllQueries();
     }
 
@@ -107,7 +107,7 @@ public class JobAction {
     private void viewQueryDetails() {
 
         try {
-            new JobService(request, response).viewQueryDetails();
+        	jobActionAdapter.viewQueryDetails();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -162,7 +162,7 @@ public class JobAction {
         if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
             result = new JobService(request, response).viewAllQueries();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
-            result = new JobService(request, response).viewAllQueriesDepartmentWise();
+            result = jobActionAdapter.viewAllQueriesDepartmentWise();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("reception")) {
             result = new JobService(request, response).viewAllQueries();
             return "queriesreadonly";
@@ -282,7 +282,7 @@ public class JobAction {
 
     @PostMapping("/updateTaskRemarks")
     private String updateTaskRemarks() {
-        new JobService(request, response).updateQueryRemarks();
+    	jobActionAdapter.updateQueryRemarks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {
