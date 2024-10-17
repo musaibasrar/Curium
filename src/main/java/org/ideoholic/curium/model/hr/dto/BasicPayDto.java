@@ -9,5 +9,6 @@ public class BasicPayDto {
     private String[] paymentType;
     private String[] accountNo;
     private String[] overTime;
+    private String[] academicYear;
 
 }
