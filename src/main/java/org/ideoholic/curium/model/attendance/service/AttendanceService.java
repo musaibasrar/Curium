@@ -480,8 +480,8 @@ public class AttendanceService {
 		if(currentAcademicYear!=null){
 
 			String studentExternalId = DataUtil.emptyString(attendanceDetailsMonthlyDto.getStudentExternalId());
-			Date fromDateAtt = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getFromDate());
-			Date toDateAtt = DateUtil.dateParserUpdateStd(attendanceDetailsMonthlyDto.getToDate());
+			Date fromDateAtt = DateUtil.indiandateParser(attendanceDetailsMonthlyDto.getFromDate());
+			Date toDateAtt = DateUtil.indiandateParser(attendanceDetailsMonthlyDto.getToDate());
 			Timestamp fromTimestamp = new Timestamp(fromDateAtt.getTime());
 			Timestamp toTimestamp = new Timestamp(toDateAtt.getTime());
 			
@@ -564,8 +564,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			List<String> xAxis = new ArrayList<String>();
 			List<Integer> yAxis = new ArrayList<Integer>();
 			String studentExternalIdGraph = DataUtil.emptyString(attendanceGraphDto.getStudentExternalIdGraph());
-			Date fromDate = DateUtil.dateParserUpdateStd(attendanceGraphDto.getFromDate());
-			Date toDate = DateUtil.dateParserUpdateStd(attendanceGraphDto.getToDate());
+			Date fromDate = DateUtil.indiandateParser(attendanceGraphDto.getFromDate());
+			Date toDate = DateUtil.indiandateParser(attendanceGraphDto.getToDate());
 			 
 			Calendar start = Calendar.getInstance();
 			start.setTime(fromDate);
