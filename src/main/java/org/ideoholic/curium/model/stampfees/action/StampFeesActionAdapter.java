@@ -21,6 +21,9 @@ public class StampFeesActionAdapter {
 
 	@Autowired
 	private HttpServletResponse response;
+	
+	@Autowired
+	private StampFeesService stampFeesService;
 
 	@Autowired
 	private HttpSession httpSession;
@@ -95,5 +98,15 @@ public class StampFeesActionAdapter {
 		FeescategoryResponseDto feescategoryResponseDto = stampFeesService.advanceSearchForStampFees(searchStudentDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		request.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
+	}
+
+	public void multiClassSearch() {
+		SearchStudentDto searchStudentDto = new SearchStudentDto();
+		searchStudentDto.setClassesSearch(request.getParameterValues("classsearch"));
+		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
+		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
+		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.multiClassSearch(searchStudentDto, httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 }

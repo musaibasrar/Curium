@@ -95,17 +95,18 @@ public class StampFeesService {
 		return searchStudentResponseDto;
 	}
 	
-	public void multiClassSearch() {
+	public SearchStudentResponseDto multiClassSearch(SearchStudentDto searchStudentDto,String branchid) {
 
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 		
-		String academicYear = request.getParameter("academicyear");
+		String academicYear = searchStudentDto.getAcademicyear();
 			
 		String queryMain = "From Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and ";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String[] addClass = request.getParameterValues("classsearch");
+		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+		String[] addClass = searchStudentDto.getClassesSearch();
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
 
@@ -131,16 +132,16 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -149,9 +150,9 @@ public class StampFeesService {
 		}
 		
 	}
-		request.setAttribute("searchStudentList", searchStudentList);
+		searchStudentResponseDto.setSearchStudentList(searchStudentList);
 
-	
+	    return searchStudentResponseDto;
 	}
 
 	public void advanceSearchByParents() {

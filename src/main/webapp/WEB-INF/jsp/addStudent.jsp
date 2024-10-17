@@ -639,8 +639,8 @@ function calculate(value2) {
      	
      	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
      	//feesConcession (direct amount)
-        //final1.value=feesCat*feesCount;
-     	final1.value=feesCat;
+        final1.value=feesCat*feesCount;
+     	//final1.value=feesCat;
          calculateGrandTotal();
    
 }
