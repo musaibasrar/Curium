@@ -230,7 +230,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/shatabdi/images/abc.jpg" width="70" height="80"/>
+				<img src="/abc/images/logo.jpg" width="70" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
@@ -276,36 +276,12 @@
 					</tr>
 						
 					</c:forEach>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Fees Paid by Cash</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycash}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Fees Paid by Bank</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybank}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Other Fees Paid by Cash</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycashotherfees}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Other Fees Paid by Bank</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybankotherfees}" /></td>
-					</tr>
 					
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="datatd">
 							</td>
-							<td class="datatd" style="text-align: right;font-weight: bold;">Total
+							<td class="datatd" style="text-align: right;">Total
 							</td>
 							<td class="datatd" style="text-align: right;font-weight: bold;">
 							<fmt:formatNumber type="currency"  value="${total}" />
@@ -314,6 +290,449 @@
 			</tbody>
 				</table>
 			<br>
+			<br>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr>
+					<label class="addressLine">Other Fees</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+			
+			<table class="datatable">
+            <thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Fees Amount</th>
+ 				 </tr>
+ 			 </thead>
+ 		 
+			<tbody>
+					<fmt:setLocale value="en_IN" scope="session"/>
+					<c:set var="othertotal" value="${0}" />
+					<c:forEach items="${otherFeeCategoryCollectionMapCons}" var="otherFeeCategoryCollectionMapCons" varStatus="status">
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="datatd"><c:out value="${status.index+1}" />
+							</td>
+							<td class="datatd"><c:out value="${otherFeeCategoryCollectionMapCons.key}" />
+							</td>
+							<td class="datatd" style="text-align: right;">
+							<fmt:formatNumber type="currency"  value="${otherFeeCategoryCollectionMapCons.value}" />
+							
+							<c:set var="othertotal" value="${othertotal + otherFeeCategoryCollectionMapCons.value}" />
+							</td>
+					</tr>
+						
+					</c:forEach>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="datatd">
+							</td>
+							<td class="datatd" style="text-align: right;">Total
+							</td>
+							<td class="datatd" style="text-align: right;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${othertotal}" />
+							</td>
+					</tr>
+			</tbody>
+				</table>
+				
+				<table class="datatable">
+ 		 
+			<tbody>
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="datatd">
+							</td>
+							<td class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td class="datatd" style="text-align: right;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total + othertotal}" />
+							</td>
+					</tr>
+			</tbody>
+				</table>
+				
+				
+			<br>
+			<br>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Cash</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+			<table class="datatable">
+				<thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Total Amount</th>
+ 				 </tr>
+ 			 </thead>
+				
+				<tbody>	
+				
+					<c:if test="${TotalFeesByCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="1" /></td>
+						<td class="datatd">Total Fees Cash</td>
+						<td class="datatd">${TotalFeesByCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TCChargesCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="2" /></td>
+						<td class="datatd">TC Charges Cash</td>
+						<td class="datatd">${TCChargesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="3" /></td>
+						<td class="datatd">Library Fees Cash</td>
+						<td class="datatd">${LibraryFeesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="4" /></td>
+						<td class="datatd">Compartmental Exam Fee Cash</td>
+						<td class="datatd">${CompartmentalExamFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="5" /></td>
+						<td class="datatd">CBSE Registration Fee Cash</td>
+						<td class="datatd">${CBSERegistrationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd">		</td>
+							<td  class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td  class="datatd" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" />
+							</td>
+					</tr>
+				</tbody>	
+					
+			</table>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Cash Transportation Fees</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+			<table class="datatable">
+				<thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Total Amount</th>
+ 				 </tr>
+ 			 </thead>
+ 			 
+				<tbody>	
+				
+					<c:if test="${TransportationFeeCash>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd"><c:out value="1" /></td>
+						<td class="datatd">Transportation Fee Cash</td>
+						<td class="datatd">${TransportationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd">		</td>
+							<td  class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td  class="datatd" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TransportationFeeCash}" />
+							</td>
+					</tr>
+				</tbody>	
+					
+			</table>
+			
+			<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Bank</label><br>
+				</tr>
+			</table>
+			
+			<table class="datatable">
+				<thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Total Amount</th>
+ 				 </tr>
+ 			 </thead>
+				
+				<tbody>	
+				
+					<c:if test="${TuitionFeesByBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="1" /></td>
+						<td class="datatd">Total Fees Bank</td>
+						<td class="datatd">${TotalFeesByBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TransportationFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="2" /></td>
+						<td class="datatd">Transportation Fee Bank</td>
+						<td class="datatd">${TransportationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd">		</td>
+							<td  class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td  class="datatd" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TotalTotalFeesByBanksportationFeeBank}" />
+							</td>
+					</tr>
+				</tbody>	
+			</table>
+			
+				<table width="100%" style="border-collapse: collapse;">
+				<tr style="text-align: center;">
+					<label class="addressLine">Break-up Bank Other Fees</label><br>
+				</tr>
+			</table>
+			
+			<table  class="datatable">
+				
+				<thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Total Amount</th>
+ 				 </tr>
+ 			 </thead>
+				
+				
+				<tbody>	
+				
+					<c:if test="${TCChargesBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="1" /></td>
+						<td class="datatd">TC Charges Bank</td>
+						<td class="datatd">${TCChargesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="2" /></td>
+						<td class="datatd">Library Fees Bank</td>
+						<td class="datatd">${LibraryFeesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="3" /></td>
+						<td class="datatd">Compartmental Exam Fee Bank</td>
+						<td class="datatd">${CompartmentalExamFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeBank>0}">
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="4" /></td>
+						<td class="datatd">CBSE Registration Fee Bank</td>
+						<td class="datatd">${CBSERegistrationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+					<td class="datatd">		</td>
+							<td  class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td  class="datatd" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${TCChargesBank+LibraryFeesBank+CompartmentalExamFeeBank+CBSERegistrationFeeBank}" />
+							</td>
+					</tr>
+				</tbody>	
+					
+			</table>
+			<%-- 
+				
+			<table width="100%" style="border-collapse: collapse;">
+				<tr>
+					<label class="addressLine">Break-up</label><br>
+				</tr>
+			</table>
+
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+		
+            <table class="datatable">
+            <thead>
+ 				 <tr>
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>Fees Category</th>
+						<th class="datath">Total Amount</th>
+ 				 </tr>
+ 			 </thead>
+ 		 
+			<tbody>
+					<c:if test="${TotalFeesByCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="1" /></td>
+						<td class="datatd">Total Fees Cash</td>
+						<td class="datatd">${TotalFeesByCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TotalFeesByBank>0}">
+					<tr  class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="2" /></td>
+						<td class="datatd">Total Fees Bank</td>
+						<td class="datatd">${TotalFeesByBank}</td>
+					</tr>
+					</c:if>
+					
+					
+					<c:if test="${TransportationFeeCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="3" /></td>
+						<td class="datatd">Transportation Fee Cash </td>
+						<td class="datatd">${TransportationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TCChargesCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="4" /></td>
+						<td class="datatd">TC Charges Cash </td>
+						<td class="datatd">${TCChargesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="5" /></td>					
+						<td class="datatd">Library Fees Cash</td>
+						<td class="datatd">${LibraryFeesCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="6" /></td>					
+						<td class="datatd">Compartmental Exam Fee Cash</td>
+						<td class="datatd">${CompartmentalExamFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeCash>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="7" /></td>					
+						<td class="datatd">CBSE Registration Fee Cash</td>
+						<td class="datatd">${CBSERegistrationFeeCash}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TransportationFeeBank>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="8" /></td>					
+						<td class="datatd">Transportation Fee Bank </td>
+						<td class="datatd">${TransportationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${TCChargesBank>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="9" /></td>					
+						<td class="datatd">TC Charges Bank </td>
+						<td class="datatd">${TCChargesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${LibraryFeesBank>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="10" /></td>					
+						<td class="datatd">Library Fees Bank</td>
+						<td class="datatd">${LibraryFeesBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CompartmentalExamFeeBank>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="11" /></td>					
+						<td class="datatd">Compartmental Exam Fee Bank</td>
+						<td class="datatd">${CompartmentalExamFeeBank}</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${CBSERegistrationFeeBank>0}">
+					<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+						<td class="datatd"><c:out value="10" /></td>					
+						<td class="datatd">CBSE Registration Fee Bank</td>
+						<td class="datatd">${CBSERegistrationFeeBank}</td>
+					</tr>
+					</c:if>
+					
+						
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="datatd">		</td>
+							<td class="datatd" style="text-align: right;">Grand Total
+							</td>
+							<td class="datatd" style="text-align: center;font-weight: bold;">
+							<fmt:formatNumber type="currency"  value="${total+othertotal}" />
+							</td>
+					</tr>
+					
+					
+			</tbody>
+				</table> --%>
 			
 				
 			<div style="page-break-inside: avoid;" align="center">

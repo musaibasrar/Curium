@@ -11,7 +11,9 @@ import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JobActionAdapter {
 	
 	@Autowired
