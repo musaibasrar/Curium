@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SMS Delivery Report</title>
-<link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/shatabdi/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/abc/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/shatabdi/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/shatabdi/js/bootstrap.min.js"></script>
-<!-- <script src="/shatabdi/js/jquery.min.js"></script> -->
+	<!-- <link href="/abc/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/abc/js/bootstrap.min.js"></script>
+<!-- <script src="/abc/js/jquery.min.js"></script> -->
 
 
-<link href="/shatabdi/css/select2.min.css" rel="stylesheet" />
-<script src="/shatabdi/js/select2.min.js"></script>
+<link href="/abc/css/select2.min.css" rel="stylesheet" />
+<script src="/abc/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,7 +501,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {

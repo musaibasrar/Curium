@@ -508,7 +508,7 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public ResultResponse processStaffSalary(StaffSalaryDto dto, String currentAcademicYear, String branchId, String userId) {
+	public ResultResponse processStaffSalary(SalaryDto dto, String currentAcademicYear, String branchId, String userId) {
 		
 		String[] staffids = dto.getStaffids();
 		Map<String, BigDecimal> earningMaps = new HashMap<>();
@@ -729,10 +729,11 @@ public class HrService {
 		return result;
 	}
 
-	public boolean deletePayHeadStaff() {
-		
-		String[] StaffId = request.getParameterValues("teacherid");
-		String[] idpayheadstaffdetails = request.getParameterValues("idpayheadstaffdetails");
+	public StaffDetailsResponseDto deletePayHeadStaff(SalaryDto dto, String currentAcademicYear ) {
+		StaffDetailsResponseDto result = new StaffDetailsResponseDto();
+
+		String[] StaffId = dto.getStaffids();
+		String[] idpayheadstaffdetails = dto.getIdPayHeadStaffDetails();
 		
 		List<Integer> ids = new ArrayList<>();
 		
@@ -747,14 +748,16 @@ public class HrService {
 		if(processSalaryDetails.isEmpty()){
 				if(new HrDAO().deletePayHeadStaff(ids))
 				{
-					List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(StaffId[0]), httpSession.getAttribute("currentAcademicYear").toString());
-					request.setAttribute("payheaddetailslist", payHeadDetailsList);
-					return true;
+					List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(StaffId[0]), currentAcademicYear);
+
+					result.setPayHeadDetailsList(payHeadDetailsList);
+					result.setSuccess(true);
+					return result;
 					
 				}
 		}
-		
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 	public boolean checkprocessedStaffSalary(int staffId, String month, String year) {
@@ -768,47 +771,49 @@ public class HrService {
 		return false;
 	}
 
-	public boolean issueProcessedSalary() {
+	public ResultResponse issueProcessedSalary(SalaryDto dto, String currentAcademicYear, String branchId) {
 
-		String[] idProcessSalaryDetails = request.getParameterValues("idprocesssalarydetails");
-		boolean result = false;
-		
+		String[] idProcessSalaryDetails = dto.getIdProcessSalaryDetails();
+		ResultResponse result = ResultResponse.builder().build();
+
 		if (idProcessSalaryDetails != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
+
 			}
-			result = new HrDAO().issueProcessedSalary(ids);
-		}
-		issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+			 result.setSuccess(new HrDAO().issueProcessedSalary(ids));		}
+
+		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
 	}
 
-	public boolean cancelProcessedSalary() {
+	public ResultResponse cancelProcessedSalary(SalaryDto dto, String currentAcademicYear, String branchId) {
 		
-		String[] idProcessSalaryDetails = request.getParameterValues("idprocesssalarydetails");
-		boolean result = false;
+		String[] idProcessSalaryDetails = dto.getIdProcessSalaryDetails();
+		ResultResponse result = ResultResponse.builder().build();
 		
 		if (idProcessSalaryDetails != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
-			result = new HrDAO().cancelProcessedSalary(ids);
+			result.setSuccess(new HrDAO().cancelProcessedSalary(ids));
 		}
-		issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), httpSession.getAttribute(BRANCHID).toString());
+		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
 	}
 	
-public void updateBasicpayEmployees() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		String[] staffIds =  request.getParameterValues("employeeIDs");
-		String[] basicPay = request.getParameterValues("basicpay");
-		String[] paymentType = request.getParameterValues("paymenttype");
-		String[] accountNo = request.getParameterValues("accountno");
-		String[] overTime = request.getParameterValues("overtime");
-		String[] academicYear = request.getParameterValues("academicyear");
+public ResultResponse updateBasicPayEmployees(BasicPayDto dto, String branchId) {
+        ResultResponse result = ResultResponse.builder().success(true).build();
+
+		if(branchId!=null){
+		String[] staffIds = dto.getStaffIds();
+		String[] basicPay = dto.getBasicPay();
+		String[] paymentType = dto.getPaymentType();
+		String[] accountNo = dto.getAccountNo();
+		String[] overTime = dto.getOverTime();
+		String[] academicYear = dto.getAcademicYear();
 		
 		List<Integer> overTimeList = new ArrayList<>();
 		
@@ -838,14 +843,16 @@ public void updateBasicpayEmployees() {
 				payBasic.setOvertime("no");
 			}
 			payBasic.setPaymenttype(paymentType[Integer.parseInt(splitId[1])]);
-			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			payBasic.setBranchid(Integer.parseInt(branchId));
 			
 			payBasicList.add(payBasic);
 		}
-		 boolean result = new HrDAO().updatePayBasic(payBasicList);
-			 request.setAttribute("basicpayupdate", result);
+
+		    ResultResponse.builder().success(new HrDAO().updatePayBasic(payBasicList)).build();
+
 		}
 		employeeActionAdapter.basicpayEmployees();
+	    return result;
 	}
-	
+
 }

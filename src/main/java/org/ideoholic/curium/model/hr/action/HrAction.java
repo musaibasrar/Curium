@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +35,7 @@ public class HrAction {
 	
 	@PostMapping("/updateBasicPay")
 	public String updateBasicPay() {
-		new HrService(request, response).updateBasicpayEmployees();
+		hrActionAdapter.updateBasicPayEmployees();
 		return "vieweditbasicpay";
 	}
 
@@ -50,7 +48,7 @@ public class HrAction {
 	@PostMapping("/cancelStaffSalary")
 	public String cancelStaffSalary() {
 		
-		if(new HrService(request, response).cancelProcessedSalary()){
+		if(hrActionAdapter.cancelProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
@@ -59,7 +57,7 @@ public class HrAction {
 	@PostMapping("/issueProcessedSalary")
 	public String issueProcessedSalary() {
 		
-		if(new HrService(request, response).issueProcessedSalary()){
+		if(hrActionAdapter.issueProcessedSalary()){
 			return "issuestaffsalary";
 		}
 		return error;
@@ -67,7 +65,7 @@ public class HrAction {
 
 	@PostMapping("/deletePayHeadStaff")
 	public String deletePayHeadStaff() {
-		if(new HrService(request, response).deletePayHeadStaff()){
+		if(hrActionAdapter.deletePayHeadStaff()){
 			return "deletepayhead";
 		}
 		return "deletepayheadfailed";
@@ -370,7 +368,5 @@ public class HrAction {
 		}
 		return error;
 	}
-
-	
 
 }

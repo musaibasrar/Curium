@@ -93,13 +93,13 @@ public class JobAction {
 
     @PostMapping("/updateQueries")
     private String updateQueries() {
-        new JobService(request, response).updateQueries();
+    	jobActionAdapter.updateQueries();
         return viewAllQueries();
     }
 
     @PostMapping("/updateQueryRemarks")
     private String updateQueryRemarks() {
-        new JobService(request, response).updateQueryRemarks();
+    	jobActionAdapter.updateQueryRemarks();
         return viewAllQueries();
     }
 
@@ -107,7 +107,7 @@ public class JobAction {
     private void viewQueryDetails() {
 
         try {
-            new JobService(request, response).viewQueryDetails();
+        	jobActionAdapter.viewQueryDetails();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -282,7 +282,7 @@ public class JobAction {
 
     @PostMapping("/updateTaskRemarks")
     private String updateTaskRemarks() {
-        new JobService(request, response).updateQueryRemarks();
+    	jobActionAdapter.updateQueryRemarks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {

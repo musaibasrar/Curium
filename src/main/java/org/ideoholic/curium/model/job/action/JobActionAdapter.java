@@ -5,12 +5,14 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.job.dto.*;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
+@Service
 public class JobActionAdapter {
 
 	@Autowired
@@ -74,6 +76,35 @@ public class JobActionAdapter {
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage",jobQueryDto.getPage());
 		return jobQueryDto.isSuccess();
+	}
+
+	public void updateQueries() {
+		JobService jobService = new JobService(request, response);
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		updateQueriesDto.setQueryId(request.getParameter("queryid"));
+        updateQueriesDto.setJobQuery(request.getParameter("JobQuery"));
+        updateQueriesDto.setResponse(request.getParameter("response"));
+        SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueries(updateQueriesDto,httpSession.getAttribute("userloginid").toString());
+        request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+		
+	}
+
+	public void updateQueryRemarks() {
+		JobService jobService = new JobService(request, response);
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		updateQueriesDto.setQueryId(request.getParameter("queryid"));
+		updateQueriesDto.setQueryRemarks(request.getParameter("queryremarks"));
+		SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueryRemarks(updateQueriesDto,httpSession.getAttribute("userloginid").toString());
+		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+		
+	}
+
+	public void viewQueryDetails() throws IOException {
+		JobService jobService = new JobService(request, response);
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		updateQueriesDto.setQueryId(request.getParameter("id"));
+		jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute("branchid").toString());
+		
 	}
 
 
