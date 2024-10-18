@@ -38,6 +38,7 @@ import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
+import org.ideoholic.curium.model.job.dto.QueriesDto;
 import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
@@ -212,10 +213,11 @@ public class JobService {
 		}
 	}
 
-	public void cancelQueries() {
-
-		String[] QueryIds = request.getParameterValues("queryids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+	public SearchStudentResponseDto cancelQueries(QueriesDto queriesDto,String userLoginId ) {
+ 
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+		String[] QueryIds = queriesDto.getQueryIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
 		boolean result = false;
 
@@ -225,15 +227,16 @@ public class JobService {
 			}
 
 			result = new JobDAO().cancelQueries(QueryIdsList, userId);
-			request.setAttribute("querystatus",result);
+			searchStudentResponseDto.setSuccess(result);
 		}
-
+       return searchStudentResponseDto;
 	}
 
-	public void inProgressQueries() {
+	public SearchStudentResponseDto inProgressQueries(QueriesDto queriesDto,String userLoginId ) {
 
-		String[] queryIds = request.getParameterValues("queryids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+		String[] queryIds = queriesDto.getQueryIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
 		boolean result = false;
 
@@ -243,9 +246,11 @@ public class JobService {
 			}
 
 			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
-			request.setAttribute("querystatus",result);
+			searchStudentResponseDto.setSuccess(result);
+			
 		}
 
+		return searchStudentResponseDto;
 	}
 
 	public void viewQueryDetails(UpdateQueriesDto updateQueriesDto,String branchid ) throws IOException {
@@ -625,10 +630,11 @@ public class JobService {
 		httpSession.setAttribute("queryList", JobQueryList);
 	}
 
-	public void toDoQueries() {
-
-		String[] queryIds = request.getParameterValues("queryids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+	public SearchStudentResponseDto toDoQueries(QueriesDto queriesDto,String userLoginId ) {
+		
+		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+		String[] queryIds = queriesDto.getQueryIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
 		boolean result = false;
 
@@ -638,9 +644,9 @@ public class JobService {
 			}
 
 			result = new JobDAO().toDoQueries(QueryIdsList, userId);
-			request.setAttribute("querystatus",result);
+			searchStudentResponseDto.setSuccess(result);
 		}
-
+        return searchStudentResponseDto;
 	}
 
 	public SearchStudentResponseDto updateQueryRemarks(UpdateQueriesDto updateQueriesDto,String userLoginId ) {

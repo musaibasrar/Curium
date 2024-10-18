@@ -116,19 +116,19 @@ public class JobAction {
 
     @PostMapping("/inProgressQueries")
     private String inProgressQueries() {
-        new JobService(request, response).inProgressQueries();
+    	jobActionAdapter.inProgressQueries();
         return viewAllQueries();
     }
 
     @PostMapping("/toDoQueries")
     private String toDoQueries() {
-        new JobService(request, response).toDoQueries();
+    	jobActionAdapter.toDoQueries();
         return viewAllQueries();
     }
 
     @PostMapping("/cancelQueries")
     private String cancelQueries() {
-        new JobService(request, response).cancelQueries();
+    	jobActionAdapter.cancelQueries();
         return viewAllQueries();
     }
 
