@@ -205,20 +205,10 @@ public class StudentAction {
 	public String viewStudent() {
 		String branchId;
 		if (new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent()) {
-			Object obj = request.getAttribute("urlbranchid");
-			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
-			if (branchId.equalsIgnoreCase("1")) {
-				return "student_details";
-			} else if (branchId.equalsIgnoreCase("2")) {
-				return "student_details";
-			} else if (branchId.equalsIgnoreCase("3")) {
-				return "student_details";
-			} else if (branchId.equalsIgnoreCase("4")) {
-				return "student_details";
-			} else if (branchId.equalsIgnoreCase("5")) {
-				return "student_details";
-			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
+			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+				return "student_details_without_fees";
 			}
 			return "student_details";
 		} else {

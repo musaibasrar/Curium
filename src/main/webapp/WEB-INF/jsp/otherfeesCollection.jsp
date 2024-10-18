@@ -941,7 +941,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
 
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" required/></td>
 
                     </tr>
 

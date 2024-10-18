@@ -83,7 +83,7 @@ public class FeesDetailsService {
 		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 
 		if (feesIds != null) {
 			for (String id : feesIds) {
@@ -91,7 +91,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
+					feesMap.put(receiptInfo, student);
 				}
 
 			}
@@ -111,7 +111,7 @@ public class FeesDetailsService {
 	}
 	
 	
-	public boolean exportDataToExcel(Map<Parents,Receiptinfo> feeMap)
+	public boolean exportDataToExcel(Map<Receiptinfo,Parents> feeMap)
 			throws Exception {
 
 		boolean writeSucees = false;
@@ -126,19 +126,19 @@ public class FeesDetailsService {
 					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			
-			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
+			for (Entry<Receiptinfo,Parents> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().getStudent().getAdmissionnumber(), 
-						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getKey().getStudent().getSts(), 
-						entry.getValue().getBranchreceiptnumber(),
-						entry.getKey().getStudent().getName(),
-						entry.getKey().getStudent().getClassstudying(),
-						entry.getKey().getFathersname(), 
-						entry.getKey().getContactnumber(), 
-						entry.getValue().getDate().toString(),
-						entry.getValue().getTotalamount() });
+						entry.getValue().getStudent().getAdmissionnumber(), 
+						entry.getValue().getStudent().getStudentexternalid(), 
+						entry.getValue().getStudent().getSts(), 
+						entry.getKey().getBranchreceiptnumber(),
+						entry.getValue().getStudent().getName(),
+						entry.getValue().getStudent().getClassstudying(),
+						entry.getValue().getFathersname(), 
+						entry.getValue().getContactnumber(), 
+						entry.getKey().getDate().toString(),
+						entry.getKey().getTotalamount() });
 				i++;
 				}
 				
@@ -307,7 +307,7 @@ public class FeesDetailsService {
 		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
@@ -318,7 +318,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
+					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();

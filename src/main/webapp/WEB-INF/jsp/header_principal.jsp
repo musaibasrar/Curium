@@ -132,78 +132,25 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/cambridge/images/cambridgeheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/cambridge/left_feescollector"><img
-									src="/cambridge/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
-							
-							<td><a target="mainFrame"
-								href="/cambridge/FeesProcess/feesCollect"> <img
-									src="/cambridge/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+							<td><a target="leftFrame" href="/cambridge/left_principal"> <img
+									src="/cambridge/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
-							<td>
-								<a target="mainFrame"
-								href="/cambridge/AccountProcess/createVoucher"> <img
-									src="/cambridge/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-							
-							<td ><a target="mainFrame"
-								href="/cambridge/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/cambridge/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-							
-							<td>
-							<a target="leftFrame" href="/cambridge/reports_feescollector"><img
-									src="/cambridge/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							</td>
 
-							<!-- <td>
-								<a target="mainFrame"
-								href="/cambridge/AccountProcess/createVoucher"> <img
-									src="/cambridge/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<td ><a target="mainFrame" href="/cambridge/feesCollectionDetails"><img  alt="Fees Details" src="/cambridge/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
-
-							<td><a target="mainFrame"
-								href="/cambridge/StudentProcess/addNew"> <img
-									src="/cambridge/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/cambridge/leftsettings_officeadmin">
-									<img alt="Settings" src="/cambridge/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/cambridge/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/cambridge/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><a target="mainFrame" href="/cambridge/sendsms"><img
+							<td ><!-- <a target="mainFrame" href="/cambridge/sendsms"><img
 									src="/cambridge/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
-							</a>
-								<a target="leftFrame" href="/cambridge/reports_officeadmin"><img
+							</a> -->
+								<a target="leftFrame" href="/cambridge/reports"><img
 									src="/cambridge/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/cambridge/reports_officeadmin"><img
+									src="/cambridge/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 
@@ -212,15 +159,8 @@ for(Cookie cookie : cookies){
 									alt="View All Students" src="/cambridge/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
-							</a></td> -->
+							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/cambridge/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/cambridge/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
-								
 							<td ><a target="_parent"
 								href="/cambridge/UserProcess/logout"><img
 									src="/cambridge/images/logout.svg" width="18" height="18" alt="Log Out" 

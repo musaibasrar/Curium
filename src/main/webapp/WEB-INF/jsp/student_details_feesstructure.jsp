@@ -595,7 +595,6 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
-                            <th title="click to sort" class="headerText">my name</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Installments&nbsp;</th>
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
@@ -615,7 +614,6 @@ for(Cookie cookie : cookies){
 								name="sfsid" 
 								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
-                                <td class="dataText"><c:out value="${name}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>

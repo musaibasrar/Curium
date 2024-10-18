@@ -400,7 +400,7 @@ public class AttendanceService {
 		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().build();
 		if(currentAcademicYear!=null){
 
-			String queryMain = "From Student as student where";
+			String queryMain = "From Parents as parent where";
 			String studentname = DataUtil.emptyString(attendanceDetailsDto.getStudentName());
 
 			String addClass = attendanceDetailsDto.getAddClass();
@@ -421,26 +421,26 @@ public class AttendanceService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " student.name like '%" + studentname + "%'";
+				querySub = " parent.Student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.Student.classstudying like '" + classStudying
+						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0  AND parent.Student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
-			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 
-			List<Student> newStudentList = new ArrayList<Student>();
+			List<Parents> newStudentList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
 			String searchdate = DateUtil.dateFromatConversionSlash(attendanceDetailsDto.getSearchDate());
-			for (Student student : searchStudentList) {
+			for (Parents student : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudentexternalid(), Integer.parseInt(branchId));
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudent().getStudentexternalid(), Integer.parseInt(branchId));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
 					newStudentList.add(student);
 					newStudentDailyAttendance.add(studentDailyAttendance);
@@ -708,7 +708,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		StudentAttendanceDetailsMarkResponseDto result = StudentAttendanceDetailsMarkResponseDto.builder().build();
 		if(currentAcademicYear!=null){
 			
-			String queryMain = "From Student as student where";
+			String queryMain = "From Parents as parent where";
 			String studentname = DataUtil.emptyString(attendanceDetailsMarkDto.getStudentName());
 
 			String addClass = attendanceDetailsMarkDto.getAddClass();
@@ -729,18 +729,18 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " student.name like '%" + studentname + "%'";
+				querySub = " parent.Student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.Student.classstudying like '" + classStudying
+						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
-			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 
 			result.setStudentListAttendance(searchStudentList);
 			result.setAttendanceClass(conClassStudying.replace("--"," ").replace("%", ""));

@@ -142,6 +142,8 @@ form{
                 	window.open('/cambridge/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/cambridge/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/cambridge/index_principal','_self');
                 }
             }
             else if(!flag1){

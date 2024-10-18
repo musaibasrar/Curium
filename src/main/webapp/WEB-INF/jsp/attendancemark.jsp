@@ -674,8 +674,10 @@ for(Cookie cookie : cookies){
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">UID</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name</th>
+						
 					</tr>
 				</thead>
 
@@ -685,17 +687,18 @@ for(Cookie cookie : cookies){
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
-								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
+								id="<c:out value="${attendanceList.student.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"
-								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
+								value="<c:out value="${attendanceList.student.studentexternalid},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.admissionnumber}" /></a></td>
+										value="${attendanceList.student.admissionnumber}" /></a></td>
 										<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
+										value="${attendanceList.student.studentexternalid}" /></a></td>
+							<td class="dataText"><c:out value="${attendanceList.student.name}" /></td>
 							<td class="dataText">
 							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
 							</td>
+							<td class="dataText"><c:out value="${attendanceList.fathersname}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
