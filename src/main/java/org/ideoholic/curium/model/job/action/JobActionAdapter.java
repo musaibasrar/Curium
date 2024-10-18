@@ -105,5 +105,30 @@ public class JobActionAdapter {
 		
 	}
 
+	public void inProgressQueries() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setQueryIds(request.getParameterValues("queryids"));
+		SearchStudentResponseDto searchStudentResponseDto = jobService.inProgressQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+	}
+
+	public void toDoQueries() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setQueryIds(request.getParameterValues("queryids"));
+		SearchStudentResponseDto searchStudentResponseDto = jobService.toDoQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+		
+	}
+
+	public void cancelQueries() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setQueryIds(request.getParameterValues("queryids"));
+		SearchStudentResponseDto searchStudentResponseDto = jobService.cancelQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+	}
+
 
 }
