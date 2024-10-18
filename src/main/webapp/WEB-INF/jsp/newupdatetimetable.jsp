@@ -297,14 +297,17 @@
         
         <script type="text/javascript">
             
-            function updatePeriodDetail(){
-               
-                var form1=document.getElementById("form1");
-                form1.action="/dolphin/PeriodProcess/updatePeriodDetails";
-                method="POST";
-                form1.submit();
-            }
             
+<!--             function updatePeriods() {
+        		
+        		var form1 = document.getElementById("form1");
+        		if(form1.checkValidity()) {
+        			form1.action = "/dolphin/PeriodProcess/updatenewPeriodDetails";
+        			form1.method = "POST";
+        			form1.submit();
+        		  }
+        	}
+
            
             
       
@@ -313,19 +316,36 @@
         
         
 <script type="text/javascript">
-                                $(function() {
-                                    
-                                    $( "#modify" )
-                                    .button()
-                                    .click(function() {
-                                        updatePeriodDetail();
+$("#tabs").tabs();
 
-                                    });
-                                   
-                                });
+$("#update").button().click(function() {
+	updatePeriods();
+	return false;
+});
+
                                 
                                
-                            </script>
+ -->                            </script>
+                            
+                            <script type="text/javascript">
+	function updatePeriods() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/dolphin/PeriodProcess/updatenewPeriodDetails";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	$(function() {
+
+		$("#tabs").tabs();
+		$("#update").button().click(function() {
+			updatePeriods();
+		});
+		//$("#effect").hide();
+
+	});
+	
+	</script>
 
 
 </head>
@@ -351,8 +371,107 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.class_}</td>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;<select name='classsec' id='classsec'><option selected>${timetable.class_}</option>
+					<c:forEach items="${classdetailslist}" var="classdetailslist">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+										</c:forEach>
+										</select>
+				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
+
+							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />
+							<c:set var="itempart" value="${fn:split(item[0], ':')}" />
+							<select name='daystarttime' id='daystarttime'><option selected>
+							<c:out value="${itempart[0]}" /></option>
+							 <option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option></select>
+							</lable>
+							<lable><input type="hidden" name="periodmasterid" value="${periodMasterid}" /></lable>
+							<lable><input type="hidden" name="academicyear" value="${currentAcademicYear}" /></lable>
+							<lable>
+							<select name='daystartminutes' id='daystartminutes'><option selected>
+							<c:out value="${itempart[1]}" /></option>
+							<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+						  
+						  </select></lable>
+						  <lable>
+						  <select name='daystartam' id='daystartam' ><option selected><c:out value="${item[1]}" /></option>
+										<option value="AM">AM</option>
+										<option value="PM">PM</option>
+										
+						  
+						  </select>
+						  </lable>
+							
+							<lable>Day end time<c:set var="item" value="${fn:split(timetable.dayend, ' ')}" />
+							<c:set var="itempart" value="${fn:split(item[0], ':')}" />
+							<select name='dayendtime' id='dayendtime'><option selected>
+							<c:out value="${itempart[0]}" /></option>
+							 <option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option></select>
+							</lable>
+							<lable>
+							<select name='dayendminutes' id='dayendminutes'><option selected>
+							<c:out value="${itempart[1]}" /></option>
+							<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+						  
+						  </select></lable>
+						  <lable>
+						  <select name='dayendam' id='dayendam' ><option selected><c:out value="${item[1]}" /></option>
+										<option value="AM">AM</option>
+										<option value="PM">PM</option>
+										
+						  
+						  </select>
+							</lable>
+							<lable>No.of period &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="totalperiods" style="width:15px" value="<c:out value="${timetable.totalperiods}" />" readonly/></lable>
+					<%-- </c:forEach> --%>
+					</td>
 				</tr>
+				
 			</table>
 			<table width="100%" border="1" style="border-color: #4b6a84;"
 				id="myTable">
@@ -364,12 +483,122 @@ for(Cookie cookie : cookies){
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-							<td class="dataText"><c:out value="${periodmap.key}" /></td>
+							<td class="dataText"><label><select name='days' id='days'><option selected><c:out value="${periodmap.key}" /></option>
+							<option value='monday'>MON</option>
+							<option value='tuesday'>TUE</option>
+							<option value='wednesday'>WED</option>
+							<option value='thursday'>THU</option>
+							<option value='friday'>FRI</option>
+							<option value='saturday'>SAT</option>
+							<option value='sunday'>SUN</option>
+							</select></label></td>
 							<c:forEach items="${periodmap.value}" var="periodmapvalue">
-							<td class="dataText"><label><c:out value="${periodmapvalue.periods}" /></label><br><label><c:out value="${periodmapvalue.subject}" />
-							<br><label><c:out value="${periodmapvalue.staff}" />
+							<td><input type="hidden" name="periodid" value="${periodmapvalue.idperioddetails}"/></td>
+							<td class="dataText"><label><select name='periods' id='periods'><option selected><c:out value="${periodmapvalue.periods}" /></option>
+							<option value='period1'>Period-1</option>
+							<option value='period2'>Period-2</option>
+							<option value='period3'>Period-3</option>
+							<option value='period4'>Period-4</option>
+							<option value='period5'>Period-5</option>
+							<option value='period6'>Period-6</option>
+							<option value='period7'>Period-7</option>
+							<option value='period8'>Period-8</option>
+							<option value='period9'>Period-9</option>
+							<option value='period10'>Period-10</option></select>
+							</label><br><label><select name='subject' id='subject'><option selected><c:out value="${periodmapvalue.subject}" /></option>
+						<c:forEach items="${listSubjectNames}" var="subjectnames">
+												<option value="${subjectnames.subjectname}">
+													<c:out value="${subjectnames.subjectname}" />
+												</option>
+										</c:forEach>
+													</select>
+							<br><label><select name='staff' id='staff'><option selected><c:out value="${periodmapvalue.staff}" /></option>
+							<c:forEach items="${employeeList}" var="employee">
+												<option>
+													<c:out value="${employee.teachername}" />
+												</option>
+										</c:forEach>
+							</select>
 							</label>
-							<br><label><c:out value="${periodmapvalue.timings}" /></label>
+							<br><label><c:set var="item" value="${fn:split(periodmapvalue.timings, 'To')}" />
+							<c:set var="itempart" value="${fn:split(item[0], ':')}" />
+						  <select name='periodstarttimehr' id='periodstarttimehr' ><option selected><c:out value="${itempart[0]}" /></option>
+						                <option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+						  
+						  </select>
+						  <select name='periodstarttimemin' id='periodstarttimemin' ><option selected><c:out value="${itempart[1]}" /></option>
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+						  
+						  </select>
+						  <select name='periodstarttimeam' id='periodstarttimeam' ><option selected><c:out value="${itempart[2]}" /></option>
+										<option value="AM">AM</option>
+										<option value="PM">PM</option>
+										
+						  
+						  </select>to
+						  <c:set var="itemparts" value="${fn:split(item[1], ' ')}" />
+						    <c:set var="itempartss" value="${fn:split(itemparts[0], ':')}" />
+						  <select name='periodendtimehr' id='periodendtimehr' ><option selected><c:out value="${itempartss[0]}" /></option>
+						                <option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+						  
+						  </select>
+						  <select name='periodendtimemin' id='periodendtimemin'><option selected><c:out value="${itempartss[1]}" /></option>
+						                <option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+						                
+										
+										
+						  
+						  </select>
+						  <select name='periodendtimeam' id='periodendtimeam' ><option selected><c:out value="${itemparts[1]}" /></option>
+										<option value="AM">AM</option>
+										<option value="PM">PM</option>
+										
+						  
+						  </select>
 							</td>
 							</c:forEach>
 							
@@ -380,16 +609,19 @@ for(Cookie cookie : cookies){
 			</table>
 
 		</div>
-		<table  width="70%"  id="table11" align="center">
-		<tr><td><br></td></tr>
+		 <table  width="70%"  id="table11" align="center">
                         <tr>
-                                <td align="center" style="font-size:16px;"><a id="print" href="/dolphin/PeriodProcess/updatePeriodDetails?id=<c:out value="${periodMasterid}" />">Modify</a></td>
+                            <td width="30%"> 
+
+                            </td>
+                            <td>
+                                <button id="update">Update</button>
                             </td>
 
                         </tr>
 
                     </table>
-
+ 
 	</form>
 
 </body>
