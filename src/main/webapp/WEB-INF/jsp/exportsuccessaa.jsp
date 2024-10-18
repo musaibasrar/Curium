@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/demov2/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/demov2/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/demov2/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/demov2/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/demov2/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/DocumentsProcess/download";
+                form1.action="/demov2/DocumentsProcess/download";
                 form1.submit();
             }
         </script>
@@ -75,7 +75,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/demov2/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
