@@ -17,8 +17,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Diary Message</title>
-	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/demov2/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/demov2/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -119,7 +119,7 @@ margin-right:0px;
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/authenticate";
+                form1.action="/demov2/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -151,7 +151,7 @@ margin-right:0px;
 	</div>
 	<div class="container" style="width: 38%;padding:0.25rem;">
 
-			<form action="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
+			<form action="/demov2/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
 							<div class="row" align="center">
 								<input type="submit" value="Back" class="btn">
 							</div>

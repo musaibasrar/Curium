@@ -226,7 +226,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/abcfees.jpg" width="90" height="60"/>
+				<img src="/demov2/images/demov2fees.jpg" width="90" height="60"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				

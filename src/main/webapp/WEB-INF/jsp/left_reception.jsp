@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/demov2/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/demov2/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/demov2/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/demov2/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/demov2/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/demov2/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/demov2/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/demov2/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/demov2/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/demov2/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/demov2/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/abc/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/demov2/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/demov2/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/abc/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/abc/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/abc/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/demov2/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/demov2/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/demov2/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/demov2/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/abc/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/abc/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/demov2/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/demov2/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/demov2/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/demov2/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/demov2/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/abc/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/demov2/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/abc/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/abc/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/demov2/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/demov2/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/abc/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/abc/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/abc/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/abc/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/demov2/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/demov2/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/demov2/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/demov2/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/demov2/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             
