@@ -136,12 +136,12 @@ Reference of Document
 <td class="borderset">
 &nbsp;&nbsp;&nbsp;1
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafide.student.promotedyear}
 
 </td>
@@ -170,18 +170,18 @@ Reference of Document
 </th>
 </tr>
 <tr>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 &nbsp;&nbsp;&nbsp;1
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 ${currentAcademicYear}
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 passed
 </td>
 <td class="borderset">
@@ -195,6 +195,23 @@ Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
 <tr><td>
 <br>
 </td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
 <td><br></td>
 </tr>
 <tr>

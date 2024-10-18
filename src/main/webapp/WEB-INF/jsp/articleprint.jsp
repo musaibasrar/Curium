@@ -77,6 +77,7 @@ STUDY CERTIFICATE</b>
 (See Rule 4(c)(ii))</i>
 </td>
 </tr>
+<tr><td><br></td></tr>
 <tr>
 <td style="text-align:center;"><b>
 [The Karnataka Public Employment(Reservation in appoinment </b>
@@ -92,11 +93,12 @@ for Hydrabad-Karnataka Region)</b>
 Rules for Issue Certificate, 2013]</b>
 </td>
 </tr>
+<tr><td><br></td></tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
+This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
 <c:out value="${studentdetailsbonafide.student.name}" />
-</span>   D/O,S/O</td>
+</span>   D/o,S/o</td>
 </tr>
 <tr>
 <td>
@@ -107,9 +109,10 @@ This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period Noted below:-
+<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period mentioned below:-
 </td>
 </tr>
+<tr><td><br></td></tr>
 </table>
 <table class="borderset" align="center"  width="740px">
 <tr>
@@ -186,6 +189,9 @@ passed
 <tr><td>
 Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
 </td></tr>
+<tr><td><br></td></tr>
+<tr><td><br></td></tr>
+<tr><td><br></td></tr>
 <tr>
 <td>
 Date:<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
