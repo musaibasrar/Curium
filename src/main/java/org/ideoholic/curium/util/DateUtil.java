@@ -111,7 +111,7 @@ public class DateUtil {
 		try {
 			Date date = null;
 
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
 

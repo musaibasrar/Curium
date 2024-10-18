@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +35,7 @@ public class HrAction {
 	
 	@PostMapping("/updateBasicPay")
 	public String updateBasicPay() {
-		new HrService(request, response).updateBasicpayEmployees();
+		hrActionAdapter.updateBasicPayEmployees();
 		return "vieweditbasicpay";
 	}
 

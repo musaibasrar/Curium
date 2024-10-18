@@ -101,7 +101,14 @@ form{
 	background-color: #1786b4;
 	color:#fff;
 }
-	
+#myTable {
+  border : 2px solid;
+  font-size : 12px;
+}
+.container{
+margin-left:0px;
+margin-right:0px;
+}
 	</style>
 	
 	     <script type="text/javascript">
@@ -122,31 +129,32 @@ form{
                 
         
        <!-- Main Content -->
-       	<div class="row" align="center">
-						<h3>Logbook</h3>
-					</div>
-	<div class="container-fluid">
-		<div class="row main-content  text-center" style=" border:2px solid black; width:100%;margin:0px;" >
+       <div class="container" style="width: 38%;padding:0.25rem;">
+
+<h2 align="center" style="color:#FF914D">Logbook</h2>
+</div>
+	<div class="container-fluid" >
+		<div class="row main-content  text-center" style=" border:2px solid black; width:38%;margin:0px;" >
 			<div class="container-fluid">
 	
 					<div class="row">
-								<label style="font-size:45px;">Subject</label><input type="text" style="font-size:45px;" class="form__input" value=" ${studentdiary.subject}">
+								<label style="font-size:20px;">Subject</label><input type="text" style="font-size:18px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;" class="form__input" value=" ${studentdiary.subject}">
 							</div>
 							<div class="row">
 							<!-- <textarea class="form__input" > -->
-							 	<label style="font-size:45px;">Message</label><p style="text-align:justify ;margin:0px 50px 0px 50px;font-size:45px;">${studentdiary.message}</p><br><br><br>
+							 	<label style="font-size:20px;">Message</label><p style="text-align:justify ;margin:0px 0px 0px 0px;font-size:18px;">${studentdiary.message}</p><br><br><br>
 							</div>
 					</div>
 			</div>
 	</div>
-	<div class="container-fluid"  align="center">
-					
-						<form action="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
-							<div class="row">
+	<div class="container" style="width: 38%;padding:0.25rem;">
+
+			<form action="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post" class="form-group">
+							<div class="row" align="center">
 								<input type="submit" value="Back" class="btn">
 							</div>
 						</form>
-					
-				</div>
+	</div>
+	
     </body>
 </html>

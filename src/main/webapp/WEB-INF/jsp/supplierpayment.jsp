@@ -1223,7 +1223,7 @@ for(Cookie cookie : cookies){
 									<select name="bankname" id="bankname" class="dropdownlist" style="font-size: 14px;" required>
 											<option></option>
 											<option value="axisbank">Axis Bank</option>
-											<option value="ICICIbank">ICICI Bank</option>
+											<option value="bank">Bank</option>
 											<option value="admin">Cash</option>
 								</select>
 							
