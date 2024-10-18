@@ -7,10 +7,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/demov2/css/bootstrap.min.css">
+        <script src="/demov2/js/jquery.min.js"></script>
+        <script src="/demov2/js/bootstrap.min.js"></script>
+        <script src="/demov2/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -85,7 +85,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/logout";
+                form1.action="/demov2/UserProcess/logout";
                 form1.submit();
             }
 
@@ -95,7 +95,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/demov2/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -118,21 +118,21 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;width: 170px;">
-								<a target="mainFrame" href="/abc/welcomeparent" ><img src="/abc/images/curiumheader.png" width="90" height="30"/></a>
+								<a target="mainFrame" href="/demov2/welcomeparent" ><img src="/demov2/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/abc/images/abc/header.png"
+							<!-- <td align="left"><img src="/demov2/images/demov2/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="left" style="padding-left:40px;">
  
-                                                         <a target="mainFrame" href="/abc/welcomeparent" style="display: inline-flex; align-items: center;">
-     <img src="/abc/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+                                                         <a target="mainFrame" href="/demov2/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="/demov2/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
      <strong style="font-size: 18px;">Home</strong>
  </a>&nbsp;&nbsp;
  
                                                           <a target="_parent"
-                                                                 href="/abc/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
-                                                                         src="/abc/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 href="/demov2/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="/demov2/images/logout.svg" width="22" height="22" alt="Log Out" 
                                                                  /><strong style="font-size: 17px;">Logout</strong></a></td>
 
 
