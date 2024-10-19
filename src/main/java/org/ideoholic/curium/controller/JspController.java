@@ -633,4 +633,9 @@ public class JspController {
 	public String getLeftPrincipal() {
 		return "left_principal";
 	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsPrincipal() {
+		return "reports_principal";
+	}
 }
