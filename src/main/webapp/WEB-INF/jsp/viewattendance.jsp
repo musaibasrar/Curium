@@ -732,7 +732,14 @@
 		form1.submit();
 	}
 	
-	
+
+    function markabsent(cheese){
+    	if(cheese.value=="P"){
+    		cheese.value="A";
+    	}else if(cheese.value=="A"){
+    		cheese.value="P";
+    	}
+    }
 	
 </script>
 
@@ -1022,7 +1029,7 @@ for(Cookie cookie : cookies){
 										value="${StudentListAttendance[status.index].admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${StudentListAttendance[status.index].name}" /></td>
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceList.attendancestatus}" />" maxlength="1">
+							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="<c:out value="${attendanceList.attendancestatus}" />" maxlength="1" onclick="markabsent(this);">
 							</td>
 						</tr>
 					</c:forEach>
