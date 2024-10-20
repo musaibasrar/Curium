@@ -167,7 +167,7 @@ public class StudentActionAdapter {
         student.setYearofadmission(request.getParameter("yearofadmission"));
         student.setFeesCategory(request.getParameterValues("feescategory"));
         student.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
-        student.setFeesAmount(request.getParameterValues("fessCat"));
+        student.setFeesAmount(request.getParameterValues("feesFullCat"));
         student.setConcession(request.getParameterValues("feesConcession"));
         student.setTotalInstallments(request.getParameterValues("feesCount"));
 
