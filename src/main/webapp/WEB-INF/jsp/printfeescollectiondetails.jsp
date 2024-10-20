@@ -230,7 +230,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/logo.jpg" width="100" height="100"/>
+				<img src="/greatindiaacademy/images/logo.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
@@ -252,6 +252,7 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No.</th>
+ 				 		<th class=datath>UID</th>
  				 		<th class=datath>Admission Number</th>
 						<th class="datath">UID</th>
 						<th class="datath">Receipt No.</th>
@@ -268,7 +269,9 @@
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.value.student.admissionnumber}" />
+							<td class="datatd"><c:out value="${feesmap.key.student.studentexternalid}" />
+							</td>
+							<td class="datatd"><c:out value="${feesmap.key.student.admissionnumber}" />
 							</td>
 							<td class="datatd"><c:out value="${feesmap.value.student.studentexternalid}" />
 							</td>

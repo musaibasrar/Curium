@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>CURIUM</title>
-        <link rel="stylesheet" href="/abc/css/font-awesome.css">
+        <link rel="stylesheet" href="/greatindiaacademy/css/font-awesome.css">
 </head>
 <%
 //allow access only if session exists
