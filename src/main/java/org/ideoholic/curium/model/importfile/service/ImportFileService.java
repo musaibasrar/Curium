@@ -18,7 +18,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -43,7 +42,7 @@ public class ImportFileService {
 
 	XSSFRow row;
 
-	public ResultResponse readFile(MultipartFile uploadedFiles,String branchId) throws FileNotFoundException, IOException {
+	public boolean readFile(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
@@ -155,7 +154,7 @@ public class ImportFileService {
 						//parent.setAddresspermanent(row.getCell(54).getStringCellValue()+"-"+row.getCell(55).getStringCellValue()+"-"+row.getCell(56).getStringCellValue()+"-"+row.getCell(57).getStringCellValue()+"-"+row.getCell(58).getStringCellValue());
 						
 						parent.setStudent(student);
-						parent.setBranchid(Integer.parseInt(branchId));
+						parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 
 						listParents.add(parent);
 
@@ -164,7 +163,18 @@ public class ImportFileService {
 					}
 
 					System.out.println("Values Inserted Successfully");
-
-		return ResultResponse.builder().success(true).build();
+					
+					for (Parents parent : listParents) {
+						Login login= new Login();
+						Branch branch = new Branch();
+						login.setUsername(parent.getStudent().getStudentexternalid());
+						login.setPassword(parent.getContactnumber());
+						branch.setIdbranch(parent.getBranchid());
+						login.setBranch(branch);
+						login.setUsertype("parents");
+						listParentLogin.add(login);
+					}
+					
+		return new parentsDetailsDAO().createMultiple(listParents,listParentLogin);
 	}
 }
