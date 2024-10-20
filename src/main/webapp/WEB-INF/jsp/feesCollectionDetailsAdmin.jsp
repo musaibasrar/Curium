@@ -747,8 +747,8 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/demov2/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/demov2/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
