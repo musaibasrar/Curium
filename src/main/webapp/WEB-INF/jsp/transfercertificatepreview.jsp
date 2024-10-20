@@ -204,13 +204,13 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td  style="width: 100%">
 				
-			<h2 style="margin-bottom:0px;">	Al Falah High School </h2></td>
+			<h2 style="margin-bottom:0px;">${branchname}</h2></td>
 			</tr>
 			<tr>
-			<td class="addressLine">Shanti Nagar, Lalapet, Secunderabad-500017</td>
+			<td class="addressLine">${branchaddress}</td>
 			</tr>
 			<tr>
-			<td class="addressLine">Mobile No.: 8143802598, Email: alfalahhighschool@gmail.com</td>
+			<td class="addressLine">${branchcontact}</td>
 			</tr>
 
 			<tr>
