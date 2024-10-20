@@ -262,6 +262,7 @@ public class FeesCollectionActionAdapter {
 
         ClassesHierarchyDto dto = new ClassesHierarchyDto();
         dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
+        standardActionAdapter.viewClasses();
         dto.setClasssecList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
 
         FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
