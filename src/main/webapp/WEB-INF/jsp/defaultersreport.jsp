@@ -720,6 +720,8 @@ for(Cookie cookie : cookies){
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
 							<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
+							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
