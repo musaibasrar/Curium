@@ -747,9 +747,6 @@ for(Cookie cookie : cookies){
 								<td class="dataText"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
