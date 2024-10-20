@@ -615,4 +615,10 @@ public class JspController {
 	public String getImportFileFees() {
 		return "importfilefees";
 	}
+	
+	@GetMapping("/feescollectiondetailscategory")
+	public String getFeesCollectionDetailsCategory() {
+		return "feescollectiondetailscategory";
+	}
+	
 }
