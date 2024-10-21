@@ -15,5 +15,6 @@ public class JobQueryDto {
 	private List<JobQuery> queriesList;
 	private int noOfPages;
 	private int page;
+	private int currentPage;
 	private boolean success;
 }

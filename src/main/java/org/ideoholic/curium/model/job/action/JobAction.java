@@ -134,7 +134,7 @@ public class JobAction {
 
     @PostMapping("/completeQueries")
     private String completeQueries() {
-        new JobService(request, response).completeQueries();
+    	jobActionAdapter.completeQueries();
         return viewAllQueries();
     }
 
@@ -160,14 +160,14 @@ public class JobAction {
         boolean result = false;
 
         if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-            result = new JobService(request, response).viewAllQueries();
+            result = jobActionAdapter.viewAllQueries();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
             result = jobActionAdapter.viewAllQueriesDepartmentWise();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("reception")) {
-            result = new JobService(request, response).viewAllQueries();
+            result = jobActionAdapter.viewAllQueries();
             return "queriesreadonly";
         }else {
-            result = new JobService(request, response).viewAllQueries();
+            result = jobActionAdapter.viewAllQueries();
         }
 
         if(result){
@@ -180,7 +180,7 @@ public class JobAction {
     @PostMapping("/addQuery")
     private String addQuery() {
 
-        if(new JobService(request, response).addQuery()){
+        if(jobActionAdapter.addQuery()){
             return "querysuccess";
         }else{
             return "error";
