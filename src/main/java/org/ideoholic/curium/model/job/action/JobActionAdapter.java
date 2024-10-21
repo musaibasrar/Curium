@@ -132,5 +132,39 @@ public class JobActionAdapter {
 		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
 	}
 
+	public void completeQueries() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setQueryIds(request.getParameterValues("queryids"));
+		ReportResponseDto reportResponseDto = jobService.completeQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		request.setAttribute("querycompleted",reportResponseDto.getQuerycompleted());
+		request.setAttribute("querystatus",reportResponseDto.isSuccess());
+	}
+
+	public boolean viewAllQueries() {
+		String page = request.getParameter("page");
+		JobService jobService = new JobService(request, response);
+		JobQueryDto jobQueryDto = jobService.viewAllQueries(page,httpSession.getAttribute("branchid").toString());
+		request.setAttribute("queryList", jobQueryDto.getQueriesList());
+		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
+		request.setAttribute("currentPage", jobQueryDto.getCurrentPage());
+		return jobQueryDto.isSuccess();
+	}
+
+	public boolean addQuery() {
+		JobService jobService = new JobService(request, response);
+		AddQueryDto addQueryDto = new AddQueryDto();
+		addQueryDto.setEmployeeIDs(request.getParameterValues("employeeIDs"));
+		addQueryDto.setJobquery(request.getParameter("jobquery"));
+		addQueryDto.setJobtitle(request.getParameter("jobtitle"));
+		addQueryDto.setExpecteddeliverydate(request.getParameter("expecteddeliverydate"));
+		addQueryDto.setAssignto(request.getParameterValues("assignto"));
+		addQueryDto.setTask(request.getParameterValues("task"));
+		addQueryDto.setDescription(request.getParameterValues("description"));
+		addQueryDto.setExpecteddd(request.getParameterValues("expecteddeliverydatetask"));
+		ResultResponse response = jobService.addQuery(addQueryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute("userloginid").toString());
+		return response.isSuccess();
+	}
+
 
 }

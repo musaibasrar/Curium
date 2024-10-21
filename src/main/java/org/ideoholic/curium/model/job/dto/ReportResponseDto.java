@@ -18,5 +18,7 @@ public class ReportResponseDto {
 	private List<JobQuery> JobQueryList;
 	private String transactionFromDateSelected;
 	private String transactionToDateSelected;
+	private String querycompleted;
+	private boolean success;
 
 }
