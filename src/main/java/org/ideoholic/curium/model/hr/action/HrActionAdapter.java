@@ -69,7 +69,10 @@ public class HrActionAdapter {
     public boolean viewLeavesDetails() {
         HrService hrService = new HrService(request,response);
 
-        LeavesDetailsResponseDto result = hrService.viewLeavesDetails();
+        LeaveDetailsDto dto = new LeaveDetailsDto();
+        dto.setId(request.getParameter("id"));
+
+        LeavesDetailsResponseDto result = hrService.viewLeavesDetails(dto);
 
         request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
         request.setAttribute("teachername",result.getTeacherName());
