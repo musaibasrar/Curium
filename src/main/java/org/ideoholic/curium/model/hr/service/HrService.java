@@ -116,14 +116,14 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public LeavesDetailsResponseDto viewLeavesDetails() {
+	public LeavesDetailsResponseDto viewLeavesDetails(LeaveDetailsDto dto) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 		
 		Currentacademicyear currentYear = new YearDAO().showYear();
 
 		result.setCurrentAcademicYear(currentYear);
 		
-		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(request.getParameter("id")),currentYear.getCurrentacademicyear());
+		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(dto.getId()),currentYear.getCurrentacademicyear());
 		result.setLeaveDetailsList(leaveDetailsList);
 		
 		if(!leaveDetailsList.isEmpty()){
