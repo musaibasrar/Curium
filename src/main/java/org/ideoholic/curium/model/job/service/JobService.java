@@ -664,80 +664,82 @@ public class JobService {
 		return searchStudentResponseDto;
 	}
 
-	public boolean viewTaskDetails() {
+	public JobQueryDto viewTaskDetails(QueriesDto queriesDto,String branchId) {
 
+		JobQueryDto jobQueryDto = new JobQueryDto();
 		boolean result = false;
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 
-			int jobId = Integer.parseInt(request.getParameter("jobid"));
+			int jobId = Integer.parseInt(queriesDto.getJobId());
 			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
-			request.setAttribute("taskdetails",taskDetails);
-			result = true;
+			jobQueryDto.setList(taskDetails);
+			jobQueryDto.setSuccess(result);
 		}
 
-		return result;
+		return jobQueryDto;
 	}
 
-	public boolean viewAllTasks() {
+	public JobQueryDto viewAllTasks(String strPage, String branchid) {
 
+		JobQueryDto jobQueryDto = new JobQueryDto();
 		boolean result = false;
 		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchid!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+					page = Integer.parseInt(strPage);
 				}
 
 				List<Task> list = new JobDAO().readListOfObjectsPaginationTask((page - 1) * recordsPerPage,
-					recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+					recordsPerPage, Integer.parseInt(branchid));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(branchid));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("taskdetails", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				jobQueryDto.setList(list);
+				jobQueryDto.setNoOfPages(noOfPages);
+				jobQueryDto.setCurrentPage(page);
+				jobQueryDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		return result;
+		return jobQueryDto;
 	}
 
-	public boolean viewAllTasksDepartmentWise() {
+	public JobQueryDto viewAllTasksDepartmentWise(String strPage,String branchId,String userName) {
 
-		boolean result = false;
+		JobQueryDto jobQueryDto = new JobQueryDto();
 		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 
 			//String[] loginDetails = httpSession.getAttribute("usertypedetails").toString().split("-");
-			Teacher employee = new EmployeeDAO().getEmployeeDetails(httpSession.getAttribute("username").toString());
+			Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
 
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+					page = Integer.parseInt(strPage);
 				}
 
 				List<Task> list = new JobDAO().readListOfObjectsPaginationDepartmentWiseTask((page - 1) * recordsPerPage,
-					recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()), employee.getTid());
+					recordsPerPage, Integer.parseInt(branchId), employee.getTid());
 				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(httpSession.getAttribute("branchid").toString()), employee.getTid());
+				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("taskdetails", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				jobQueryDto.setList(list);
+				jobQueryDto.setNoOfPages(noOfPages);
+				jobQueryDto.setCurrentPage(page);
+				jobQueryDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		return result;
+		return jobQueryDto;
 	}
 
 	public void completeTasks() {

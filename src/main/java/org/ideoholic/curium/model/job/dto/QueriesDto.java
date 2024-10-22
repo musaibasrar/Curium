@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class QueriesDto {
 	
 	private String[] queryIds;
+	private String jobId;
 
 }
