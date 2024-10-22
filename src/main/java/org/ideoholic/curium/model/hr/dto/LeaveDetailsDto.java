@@ -7,7 +7,5 @@ public class LeaveDetailsDto {
 
     private String leaveDetailsTeachersId;
     private String academicYear;
-    private String id;
-
 
 }
