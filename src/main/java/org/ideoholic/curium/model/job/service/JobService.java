@@ -65,7 +65,7 @@ public class JobService {
 
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
 
-
+		ResultResponse result = ResultResponse.builder().success(false).build();
 		String[] studentId = request.getParameterValues("employeeIDs");
 		String queryString = request.getParameter("jobquery");
 		String queryTitle = request.getParameter("jobtitle");
@@ -138,7 +138,7 @@ public class JobService {
 			String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
 
 			if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
-				ResultResponse.builder().success(true).build();
+				result.setSuccess(true);
 				String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
 				String[] queryValues = resultQuery.split(":");
 				String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
@@ -150,11 +150,11 @@ public class JobService {
 				//new SmsService(request, response).sendSMS("91"+pidContact[1], messageClient);
 				//check new SmsService(request, response).sendSMS("91"+dep[1], messageInternal);
 			}else if(resultQuery!=null && "no".equalsIgnoreCase(sendQuerySMS)) {
-				ResultResponse.builder().success(true).build();
+				result.setSuccess(true);
 			}
 		}
 
-		return ResultResponse.builder().success(false).build();
+		return result;
 	}
 
 
