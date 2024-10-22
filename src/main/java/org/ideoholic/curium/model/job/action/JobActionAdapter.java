@@ -23,6 +23,14 @@ public class JobActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	private String BRANCHID = "branchid";
+	   
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	
+	private String USERLOGINID = "userloginid";
+	
+	private String USERNAME = "username";
 
 	public boolean download() {
 		JobService jobService = new JobService(request, response);
@@ -70,7 +78,7 @@ public class JobActionAdapter {
 	public boolean viewAllQueriesDepartmentWise() {
 		String page = request.getParameter("page");
 		JobService jobService = new JobService(request, response);
-		JobQueryDto jobQueryDto = jobService.viewAllQueriesDepartmentWise(page,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("username").toString());
+		JobQueryDto jobQueryDto = jobService.viewAllQueriesDepartmentWise(page,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERNAME).toString());
 		request.setAttribute("studentList", jobQueryDto.getQueriesList());
 		request.setAttribute("queryList", jobQueryDto.getQueriesList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
@@ -84,7 +92,7 @@ public class JobActionAdapter {
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
         updateQueriesDto.setJobQuery(request.getParameter("JobQuery"));
         updateQueriesDto.setResponse(request.getParameter("response"));
-        SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueries(updateQueriesDto,httpSession.getAttribute("userloginid").toString());
+        SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueries(updateQueriesDto,httpSession.getAttribute(USERLOGINID).toString());
         request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
 		
 	}
@@ -94,7 +102,7 @@ public class JobActionAdapter {
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
 		updateQueriesDto.setQueryRemarks(request.getParameter("queryremarks"));
-		SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueryRemarks(updateQueriesDto,httpSession.getAttribute("userloginid").toString());
+		SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueryRemarks(updateQueriesDto,httpSession.getAttribute(USERLOGINID).toString());
 		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
 		
 	}
@@ -103,7 +111,7 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("id"));
-		jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute("branchid").toString());
+		jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute(BRANCHID).toString());
 		
 	}
 
@@ -111,7 +119,7 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
-		SearchStudentResponseDto searchStudentResponseDto = jobService.inProgressQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		SearchStudentResponseDto searchStudentResponseDto = jobService.inProgressQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
 		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
 	}
 
@@ -119,7 +127,7 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
-		SearchStudentResponseDto searchStudentResponseDto = jobService.toDoQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		SearchStudentResponseDto searchStudentResponseDto = jobService.toDoQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
 		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
 		
 	}
@@ -128,8 +136,42 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
-		SearchStudentResponseDto searchStudentResponseDto = jobService.cancelQueries(queriesDto,httpSession.getAttribute("userloginid").toString());
+		SearchStudentResponseDto searchStudentResponseDto = jobService.cancelQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
 		request.setAttribute("querystatus",searchStudentResponseDto.isSuccess());
+	}
+
+	public void completeQueries() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setQueryIds(request.getParameterValues("queryids"));
+		ReportResponseDto reportResponseDto = jobService.completeQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
+		request.setAttribute("querycompleted",reportResponseDto.getQuerycompleted());
+		request.setAttribute("querystatus",reportResponseDto.isSuccess());
+	}
+
+	public boolean viewAllQueries() {
+		String page = request.getParameter("page");
+		JobService jobService = new JobService(request, response);
+		JobQueryDto jobQueryDto = jobService.viewAllQueries(page,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("queryList", jobQueryDto.getQueriesList());
+		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
+		request.setAttribute("currentPage", jobQueryDto.getCurrentPage());
+		return jobQueryDto.isSuccess();
+	}
+
+	public boolean addQuery() {
+		JobService jobService = new JobService(request, response);
+		AddQueryDto addQueryDto = new AddQueryDto();
+		addQueryDto.setEmployeeIDs(request.getParameterValues("employeeIDs"));
+		addQueryDto.setJobquery(request.getParameter("jobquery"));
+		addQueryDto.setJobtitle(request.getParameter("jobtitle"));
+		addQueryDto.setExpecteddeliverydate(request.getParameter("expecteddeliverydate"));
+		addQueryDto.setAssignto(request.getParameterValues("assignto"));
+		addQueryDto.setTask(request.getParameterValues("task"));
+		addQueryDto.setDescription(request.getParameterValues("description"));
+		addQueryDto.setExpecteddd(request.getParameterValues("expecteddeliverydatetask"));
+		ResultResponse response = jobService.addQuery(addQueryDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(USERLOGINID).toString());
+		return response.isSuccess();
 	}
 
 

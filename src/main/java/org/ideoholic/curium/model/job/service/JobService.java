@@ -35,6 +35,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
+import org.ideoholic.curium.model.job.dto.AddQueryDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
@@ -62,10 +63,9 @@ public class JobService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean addQuery() {
+	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
 
-		boolean result = false;
-
+		ResultResponse result = ResultResponse.builder().success(false).build();
 		String[] studentId = request.getParameterValues("employeeIDs");
 		String queryString = request.getParameter("jobquery");
 		String queryTitle = request.getParameter("jobtitle");
@@ -78,15 +78,15 @@ public class JobService {
 		//String[] referredby = request.getParameterValues("referredby");
 		StringBuilder sbf = new StringBuilder();
 
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 
 			JobQuery query = new JobQuery();
-			query.setAcademicyear(DataUtil.emptyString(httpSession.getAttribute("currentAcademicYear").toString()));
+			query.setAcademicyear(DataUtil.emptyString(currentAcademicYear));
 			query.setResponse(queryString);
-			query.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			query.setBranchid(Integer.parseInt(branchId));
 			query.setCreateddate(new Date());
 			query.setExpecteddeliverydate(DateUtil.indiandateParser(expecteddeliverydate));
-			query.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			query.setCreateduserid(Integer.parseInt(userLoginId));
 			query.setStatus("To Do");
 
 			Teacher teacher = new Teacher(); teacher.setTid(Integer.parseInt(pidContact[0]));
@@ -109,7 +109,7 @@ public class JobService {
 				newTask.setDescription(description[i]);
 				//newTask.setStaffid(Integer.parseInt(staffDetails[0]));
 				newTask.setExpecteddeliverydate(DateUtil.dateParserUpdateStd(expecteddd[i]));
-				newTask.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				newTask.setBranchid(Integer.parseInt(branchId));
 				teacherTwo.setTid(Integer.parseInt(staffDetails[0]));
 				newTask.setTeacher(teacher);
 				newTask.setStatus("To Do");
@@ -138,7 +138,7 @@ public class JobService {
 			String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
 
 			if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
-				result = true;
+				result.setSuccess(true);
 				String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
 				String[] queryValues = resultQuery.split(":");
 				String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
@@ -150,7 +150,7 @@ public class JobService {
 				//new SmsService(request, response).sendSMS("91"+pidContact[1], messageClient);
 				//check new SmsService(request, response).sendSMS("91"+dep[1], messageInternal);
 			}else if(resultQuery!=null && "no".equalsIgnoreCase(sendQuerySMS)) {
-				result = true;
+				result.setSuccess(true);
 			}
 		}
 
@@ -158,39 +158,40 @@ public class JobService {
 	}
 
 
-	public boolean viewAllQueries() {
-
-		boolean result = false;
+	public JobQueryDto viewAllQueries(String strPage,String branchId) {
+		
+		JobQueryDto jobQueryDto = new JobQueryDto();
 		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
-				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-					page = Integer.parseInt(request.getParameter("page"));
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+					page = Integer.parseInt(strPage);
 				}
 
 				List<JobQuery> list = new JobDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-					recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+					recordsPerPage, Integer.parseInt(branchId));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				int noOfRecords = new JobDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("queryList", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
+				jobQueryDto.setQueriesList(list);
+				jobQueryDto.setNoOfPages(noOfPages);
+				jobQueryDto.setCurrentPage(page);
+				jobQueryDto.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		return result;
+		return jobQueryDto;
 	}
 
-	public void completeQueries() {
+	public ReportResponseDto completeQueries(QueriesDto queriesDto,String userLoginId ) {
 
-		String[] QueryIds = request.getParameterValues("queryids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		ReportResponseDto reportResponseDto = new ReportResponseDto();
+		String[] QueryIds = queriesDto.getQueryIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
 		List<JobQuery> result = new ArrayList<JobQuery>();;
 
@@ -203,14 +204,15 @@ public class JobService {
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
-				request.setAttribute("querycompleted","success");
-				request.setAttribute("querystatus",true);
+				reportResponseDto.setQuerycompleted("success");
+				reportResponseDto.setSuccess(true);
 				for (JobQuery JobQuery : result) {
 					String message = "Your enquiry with enq. no "+JobQuery.getExternalid()+" related to "+JobQuery.getTeacher().getTeachername()+" has been resolved.";
 					// new SmsService(request, response).sendSMS("91"+JobQuery.getParent().getContactnumber(), message);
 				}
 			}
 		}
+	    return reportResponseDto;
 	}
 
 	public SearchStudentResponseDto cancelQueries(QueriesDto queriesDto,String userLoginId ) {
