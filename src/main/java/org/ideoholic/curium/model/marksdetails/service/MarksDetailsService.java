@@ -125,7 +125,7 @@ public class MarksDetailsService {
 
 				Marks marks = new Marks();
 				marks.setExamid(examid);
-				marks.setSubid(subid);
+				marks.setSubid(subjectDetails.getSubid());
 				
 				float mymark= Float.parseFloat((String) mapEntry.getValue());
 				float subjectPercentage = ((float)mymark / maxMarks) * 100;
