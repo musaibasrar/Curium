@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/aysha/css/bootstrap.min.css">
+        <script src="/aysha/js/jquery.min.js"></script>
+        <script src="/aysha/js/bootstrap.min.js"></script>
+        <script src="/aysha/js/popper.min.js"></script>
 
 <style>
  .headerText {
@@ -142,7 +142,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.date}"/></td>
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/aysha/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -225,7 +225,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.date}"/></td>
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/aysha/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

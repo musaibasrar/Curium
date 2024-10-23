@@ -1522,7 +1522,13 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	    	}
 	    }
 	    
-	    int sizeOfArray = classsecList.size()*secList.size();
+	    int sizeOfArray;
+	    if (secList.isEmpty()) {
+	        sizeOfArray = classsecList.size();  
+	    } else {
+	        sizeOfArray = classsecList.size() * secList.size();
+	    }
+	    
 	    String[] classSecAttendance = new String[sizeOfArray];
 	    int attendanceValue= 0 ;
 	    	for (Classsec classsec : classsecList) {

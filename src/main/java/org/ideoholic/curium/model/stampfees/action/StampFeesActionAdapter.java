@@ -50,7 +50,7 @@ public class StampFeesActionAdapter {
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
 		stampFeesDto.setFeesCategoryIds(request.getParameterValues("feesIDS"));
-		stampFeesDto.setFeesAmount(request.getParameterValues("fessFullCat"));
+		stampFeesDto.setFeesAmount(request.getParameterValues("feesFullCat"));
 		stampFeesDto.setConcession(request.getParameterValues("feesConcession"));
 		stampFeesDto.setTotalInstallments(request.getParameterValues("feesCount"));
 		stampFeesDto.setFeesYears(request.getParameterValues("feesYears"));
