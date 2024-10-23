@@ -672,7 +672,7 @@ public class JobService {
 
 			int jobId = Integer.parseInt(queriesDto.getJobId());
 			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
-			jobQueryDto.setList(taskDetails);
+			jobQueryDto.setTaskList(taskDetails);
 			jobQueryDto.setSuccess(result);
 		}
 
@@ -697,7 +697,7 @@ public class JobService {
 				request.setAttribute("studentList", list);
 				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(branchid));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				jobQueryDto.setList(list);
+				jobQueryDto.setTaskList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
 				jobQueryDto.setCurrentPage(page);
 				jobQueryDto.setSuccess(true);
@@ -730,7 +730,7 @@ public class JobService {
 				request.setAttribute("studentList", list);
 				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				jobQueryDto.setList(list);
+				jobQueryDto.setTaskList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
 				jobQueryDto.setCurrentPage(page);
 				jobQueryDto.setSuccess(true);

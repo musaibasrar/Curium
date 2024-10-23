@@ -178,7 +178,7 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		String page = request.getParameter("page");
 		JobQueryDto jobQueryDto = jobService.viewAllTasks(page,httpSession.getAttribute(BRANCHID).toString());
-		request.setAttribute("taskdetails", jobQueryDto.getList());
+		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage", jobQueryDto.getCurrentPage());
 		return jobQueryDto.isSuccess();
@@ -188,7 +188,7 @@ public class JobActionAdapter {
 		JobService jobService = new JobService(request, response);
 		String page = request.getParameter("page");
 		JobQueryDto jobQueryDto = jobService.viewAllTasksDepartmentWise(page,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERNAME).toString());
-		request.setAttribute("taskdetails", jobQueryDto.getList());
+		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage", jobQueryDto.getPage());
 		return jobQueryDto.isSuccess();
@@ -199,7 +199,7 @@ public class JobActionAdapter {
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.viewTaskDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
-		request.setAttribute("taskdetails",jobQueryDto.getList());
+		request.setAttribute("taskdetails",jobQueryDto.getTaskList());
 		return jobQueryDto.isSuccess();
 	}
 
