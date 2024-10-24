@@ -180,7 +180,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/abc/images/abc.jpg" width="54" height="60"/>
+				<img src="/brightschool/images/brightschool.jpg" width="60" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -356,7 +356,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/abc/images/abc.jpg" width="54" height="60"/>
+				<img src="/brightschool/images/brightschool.jpg" width="60" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>

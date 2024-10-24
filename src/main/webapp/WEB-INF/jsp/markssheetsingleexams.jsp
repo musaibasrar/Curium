@@ -216,7 +216,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -236,7 +236,7 @@ for(Cookie cookie : cookies){
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td style="padding-left: 200px;"><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td style="padding-left: 200px;"><img src="/brightschool/images/brightschool.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label>
