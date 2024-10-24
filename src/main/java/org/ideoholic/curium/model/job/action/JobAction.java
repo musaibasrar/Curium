@@ -194,14 +194,14 @@ public class JobAction {
         boolean result = false;
 
         if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-            result = new JobService(request, response).viewAllTasks();
+            result = jobActionAdapter.viewAllTasks();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
-            result = new JobService(request, response).viewAllTasksDepartmentWise();
+            result = jobActionAdapter.viewAllTasksDepartmentWise();
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("reception")) {
-            result = new JobService(request, response).viewAllTasks();
+            result = jobActionAdapter.viewAllTasks();
             return "viewalltasksreadonly";
         }else {
-            result = new JobService(request, response).viewAllTasks();
+            result = jobActionAdapter.viewAllTasks();
         }
 
         if(result){
@@ -214,7 +214,7 @@ public class JobAction {
     @PostMapping("/ViewTaskDetails")
     private String viewTaskDetails() {
 
-        if(new JobService(request, response).viewTaskDetails()){
+        if(jobActionAdapter.viewTaskDetails()){
             return "tasks";
         }else{
             return "error";
