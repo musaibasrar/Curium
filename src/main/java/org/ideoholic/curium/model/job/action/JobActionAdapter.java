@@ -203,5 +203,24 @@ public class JobActionAdapter {
 		return jobQueryDto.isSuccess();
 	}
 
+	public boolean viewOneJobDetails() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setJobId(request.getParameter("jobid"));
+		JobQueryDto jobQueryDto = jobService.viewOneJobDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("queryList",jobQueryDto.getQueriesList());
+		return jobQueryDto.isSuccess();
+	}
+
+	public void inProgressTasks() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setJobId(request.getParameter("jobid"));
+		queriesDto.setTaskIds(request.getParameterValues("taskids"));
+		JobQueryDto jobQueryDto = jobService.inProgressTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
+		request.setAttribute("querystatus",jobQueryDto.isSuccess());
+		request.setAttribute("querystatus",jobQueryDto.isSuccess());
+	}
+
 
 }
