@@ -246,7 +246,7 @@ public class JobAction {
 
     @PostMapping("/toDoTasks")
     private String toDoTasks() {
-        new JobService(request, response).toDoTasks();
+    	jobActionAdapter.toDoTasks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {
@@ -258,7 +258,7 @@ public class JobAction {
 
     @PostMapping("/cancelTasks")
     private String cancelTasks() {
-        new JobService(request, response).cancelTasks();
+    	jobActionAdapter.cancelTasks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {
@@ -270,7 +270,7 @@ public class JobAction {
 
     @PostMapping("/completeTasks")
     private String completeTasks() {
-        new JobService(request, response).completeTasks();
+    	jobActionAdapter.completeTasks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {
