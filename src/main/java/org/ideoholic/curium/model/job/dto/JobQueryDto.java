@@ -19,5 +19,6 @@ public class JobQueryDto {
 	private int noOfPages;
 	private int page;
 	private int currentPage;
+	private String querycompleted;
 	private boolean success;
 }
