@@ -219,7 +219,6 @@ public class JobActionAdapter {
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		JobQueryDto jobQueryDto = jobService.inProgressTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
 		request.setAttribute("querystatus",jobQueryDto.isSuccess());
-		request.setAttribute("querystatus",jobQueryDto.isSuccess());
 	}
 
 

@@ -1112,8 +1112,8 @@ public class JobService {
 		if(branchId!=null){
 
 			int jobId = Integer.parseInt(queriesDto.getJobId());
-			List<JobQuery> JobQueryList = new JobDAO().viewOneJobDetails(jobId);
-			jobQueryDto.setQueriesList(JobQueryList);
+			List<JobQuery> jobQueryList = new JobDAO().viewOneJobDetails(jobId);
+			jobQueryDto.setQueriesList(jobQueryList);
 			jobQueryDto.setSuccess(true);
 		}
 
