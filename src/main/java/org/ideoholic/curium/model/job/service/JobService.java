@@ -920,10 +920,11 @@ public class JobService {
 
 	}
 
-	public void inProgressTasks() {
+	public JobQueryDto inProgressTasks(QueriesDto queriesDto,String userLoginId) {
 
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		String[] taskIds = queriesDto.getTaskIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> taskIdsList = new ArrayList<Integer>();
 		List<Task> result = new ArrayList<Task>();
 		String jobId = null;
@@ -932,15 +933,16 @@ public class JobService {
 			for (String ids : taskIds) {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
-			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
+				jobQueryDto.setSuccess(true);
 			}else {
-				request.setAttribute("querystatus",false);
+				jobQueryDto.setSuccess(false);
 			}
 		}
 
+		return jobQueryDto;
 	}
 
 	public void createTask() {
@@ -1104,17 +1106,17 @@ public class JobService {
 
 	}
 
-	public boolean viewOneJobDetails() {
+	public JobQueryDto viewOneJobDetails(QueriesDto queriesDto,String branchId) {
 
-		boolean result = false;
-		if(httpSession.getAttribute("branchid")!=null){
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		if(branchId!=null){
 
-			int jobId = Integer.parseInt(request.getParameter("jobid"));
-			List<JobQuery> JobQueryList = new JobDAO().viewOneJobDetails(jobId);
-			request.setAttribute("queryList",JobQueryList);
-			result = true;
+			int jobId = Integer.parseInt(queriesDto.getJobId());
+			List<JobQuery> jobQueryList = new JobDAO().viewOneJobDetails(jobId);
+			jobQueryDto.setQueriesList(jobQueryList);
+			jobQueryDto.setSuccess(true);
 		}
 
-		return result;
+		return jobQueryDto;
 	}
 }

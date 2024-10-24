@@ -224,7 +224,7 @@ public class JobAction {
     @PostMapping("/viewOneJobDetails")
     private String viewOneJobDetails() {
 
-        if(new JobService(request, response).viewOneJobDetails()){
+        if(jobActionAdapter.viewOneJobDetails()){
             return "queries";
         }else{
             return "error";
@@ -233,7 +233,7 @@ public class JobAction {
 
     @PostMapping("/inProgressTasks")
     private String inProgressTasks() {
-        new JobService(request, response).inProgressTasks();
+    	jobActionAdapter.inProgressTasks();
         String displayType = request.getParameter("display").toString();
 
         if(displayType.equalsIgnoreCase("viewall")) {
