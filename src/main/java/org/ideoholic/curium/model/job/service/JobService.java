@@ -742,10 +742,11 @@ public class JobService {
 		return jobQueryDto;
 	}
 
-	public void completeTasks() {
+	public JobQueryDto completeTasks(QueriesDto queriesDto,String userLoginId) {
 
-		String[] TaskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		String[] TaskIds = queriesDto.getTaskIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> TaskIdsList = new ArrayList<Integer>();
 		List<Task> result = new ArrayList<Task>();
 		int toDo = -1;
@@ -759,7 +760,7 @@ public class JobService {
 			}
 			completed = TaskIdsList.size();
 
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
+			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -781,31 +782,33 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS) && jobStatus.equalsIgnoreCase("Completed")) {
-				request.setAttribute("querycompleted","success");
-				request.setAttribute("querystatus",true);
+				jobQueryDto.setQuerycompleted("success");
+				jobQueryDto.setSuccess(true);
 				for (Task JobQuery : result) {
 					String message =  "Your job with job. no "+JobQuery.getJobquery().getExternalid()+" has been resolved.";
 					//new SmsService(request,response).sendSMS("91"+JobQuery.getJobquery().getParent().getContactnumber(), message);
 				}
 
 			}else if(!result.isEmpty()){
-				request.setAttribute("querycompleted","success");
-				request.setAttribute("querystatus",true);
+				jobQueryDto.setQuerycompleted("success");
+				jobQueryDto.setSuccess(true);
 			}else {
-				request.setAttribute("querystatus",false);
+				jobQueryDto.setSuccess(false);
 			}
 		}
+	return jobQueryDto;
 	}
 
-	public void cancelTasks() {
+	public JobQueryDto cancelTasks(QueriesDto queriesDto,String userLoginId ) {
 
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		String[] taskIds = queriesDto.getTaskIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> taskIdsList = new ArrayList<Integer>();
 		List<Task> result = new ArrayList<Task>();
 		int toDo = 0;
@@ -820,8 +823,8 @@ public class JobService {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
 			cancel=taskIdsList.size();
-			logger.info("Cancel for the job id "+request.getParameter("jobid"));
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
+			logger.info("Cancel for the job id "+queriesDto.getJobId());
+			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -853,22 +856,24 @@ public class JobService {
 			}
 
 
-			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
+				jobQueryDto.setSuccess(true);
 			}else {
-				request.setAttribute("querystatus",false);
+				jobQueryDto.setSuccess(false);
 			}
 
 		}
 
+	return jobQueryDto;
 	}
 
-	public void toDoTasks() {
+	public JobQueryDto toDoTasks(QueriesDto queriesDto,String userLoginId) {
 
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		String[] taskIds = queriesDto.getTaskIds();
+		int userId = Integer.parseInt(userLoginId);
 		List<Integer> taskIdsList = new ArrayList<Integer>();
 		List<Task> result = new ArrayList<Task>();
 		int toDo = 0;
@@ -880,8 +885,8 @@ public class JobService {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
 			toDo = taskIdsList.size();
-			logger.info("To do for the job id "+request.getParameter("jobid"));
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
+			logger.info("To do for the job id "+queriesDto.getJobId());
+			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -909,15 +914,17 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
+				jobQueryDto.setSuccess(true);
 			}else {
-				request.setAttribute("querystatus",false);
+				jobQueryDto.setSuccess(false);
+				
 			}
 		}
 
+	return jobQueryDto;
 	}
 
 	public JobQueryDto inProgressTasks(QueriesDto queriesDto,String userLoginId) {

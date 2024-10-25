@@ -221,5 +221,35 @@ public class JobActionAdapter {
 		request.setAttribute("querystatus",jobQueryDto.isSuccess());
 	}
 
+	public void toDoTasks() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setTaskIds(request.getParameterValues("taskids"));
+		queriesDto.setJobId(request.getParameter("jobid"));
+		JobQueryDto jobQueryDto = jobService.toDoTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
+		request.setAttribute("querystatus",jobQueryDto.isSuccess());
+	}
+
+	public void cancelTasks() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setTaskIds(request.getParameterValues("taskids"));
+		queriesDto.setJobId(request.getParameter("jobid"));
+		JobQueryDto jobQueryDto = jobService.cancelTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
+		request.setAttribute("querystatus",jobQueryDto.isSuccess());
+		
+	}
+
+	public void completeTasks() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setTaskIds(request.getParameterValues("taskids"));
+		queriesDto.setJobId(request.getParameter("jobid"));
+		JobQueryDto jobQueryDto = jobService.completeTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
+		request.setAttribute("querycompleted",jobQueryDto.getQuerycompleted());
+		request.setAttribute("querystatus",jobQueryDto.isSuccess());
+		
+	}
+
 
 }
