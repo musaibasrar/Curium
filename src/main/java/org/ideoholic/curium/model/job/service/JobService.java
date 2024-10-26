@@ -952,29 +952,31 @@ public class JobService {
 		return jobQueryDto;
 	}
 
-	public void createTask() {
+	public JobQueryDto createTask(QueriesDto queriesDto) {
 
-		String jobId = request.getParameter("jobid");
-		String jobno = request.getParameter("jobno");
-		request.setAttribute("jobid",jobId);
-		request.setAttribute("jobno",jobno);
+		JobQueryDto jobQueryDto = new JobQueryDto();
+		String jobId = queriesDto.getJobId();
+		String jobno = queriesDto.getJobno();
+		jobQueryDto.setJobId(jobId);
+		jobQueryDto.setJobno(jobno);
+		return jobQueryDto;
 	}
 
-	public boolean addTask() {
+	public ResultResponse addTask(QueriesDto queriesDto,String branchId) {
 
-		boolean result = false;
+		ResultResponse result = ResultResponse.builder().success(false).build();
 
-		String jobid = request.getParameter("jobid");
+		String jobid = queriesDto.getJobId();
 
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 
 
 			//GET TASKS
 
-			String[] assignto = request.getParameterValues("assignto");
-			String[] task = request.getParameterValues("task");
-			String[] description = request.getParameterValues("description");
-			String[] expecteddd = request.getParameterValues("expecteddeliverydatetask");
+			String[] assignto = queriesDto.getAssignto();
+			String[] task = queriesDto.getTask();
+			String[] description = queriesDto.getDescription();
+			String[] expecteddd = queriesDto.getExpecteddd();
 
 			//String[] dep = assignto.split(":");
 			List<Task> taskList = new ArrayList<Task>();
@@ -986,7 +988,7 @@ public class JobService {
 				newTask.setDescription(description[i]);
 				//newTask.setStaffid(Integer.parseInt(staffDetails[0]));
 				newTask.setExpecteddeliverydate(DateUtil.dateParserUpdateStd(expecteddd[i]));
-				newTask.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				newTask.setBranchid(Integer.parseInt(branchId));
 				teacher.setTid(Integer.parseInt(staffDetails[0]));
 				newTask.setTeacher(teacher);
 				newTask.setStatus("To Do");
@@ -1004,7 +1006,7 @@ public class JobService {
 			String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(jobid));
 
 			if(resultTask.equalsIgnoreCase("true")) {
-				result = true;
+				result.setSuccess(true);
 			}
 		}
 

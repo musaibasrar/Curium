@@ -300,7 +300,7 @@ public class JobAction {
 
         if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
             employeeActionAdapter.ViewAllEmployee();
-            new JobService(request, response).createTask();
+            jobActionAdapter.createTask();
             result = "createtask";
         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
             employeeActionAdapter.viewDetailsEmployeeStaffLogin();
@@ -314,7 +314,7 @@ public class JobAction {
     @PostMapping("/addTask")
     private String addTask() {
 
-        if(new JobService(request, response).addTask()){
+        if(jobActionAdapter.addTask()){
             return "querysuccess";
         }else{
             return "error";

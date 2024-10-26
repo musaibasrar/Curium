@@ -21,4 +21,6 @@ public class JobQueryDto {
 	private int currentPage;
 	private String querycompleted;
 	private boolean success;
+	private String jobId;
+	private String jobno;
 }

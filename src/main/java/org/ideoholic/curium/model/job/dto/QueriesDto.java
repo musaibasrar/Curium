@@ -14,5 +14,10 @@ public class QueriesDto {
 	private String[] queryIds;
 	private String[] taskIds;
 	private String jobId;
+	private String jobno;
+	private String[] assignto;
+	private String[] task;
+	private String[] description;
+	private String[] expecteddd;
 
 }
