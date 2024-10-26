@@ -75,11 +75,7 @@ public class UserService {
        String userName = request.getParameter("loginName");
        String password = request.getParameter("password");
        
-       LocalDate currentDate = LocalDate.now();
-       Studentdailyattendance attendance = new AttendanceDAO().getStudentCurrentAttendance(userName,currentDate);
-       if(attendance != null) {
-       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
-       }
+       
 
        login = new UserDAO().readUniqueObject(userName, password);
 
@@ -108,6 +104,16 @@ public class UserService {
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
+			
+			if(userType[0].equalsIgnoreCase("parents")) {
+				LocalDate currentDate = LocalDate.now();
+				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
+			       if(attendance != null) {
+			       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
+			       }
+			}
+			
+		       
            result = true;
        } else {
            result = false;

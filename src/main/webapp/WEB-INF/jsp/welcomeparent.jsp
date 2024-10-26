@@ -94,8 +94,36 @@ for(Cookie cookie : cookies){
 	
 	<div class="row" style="padding-left: 150px;">
 						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/brightschool/images/brightschool.png"></h2>
-						<h2>Today's Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${todaysAttendance}</h2>
 	</div>
+	
+     <div class="row" style="padding-left: 35px;">
+        	<div class="col" style="padding-bottom: 20px;">
+        			<div style="background-color:#ffffff">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					
+        					 <c:choose>
+                                <c:when test="${todaysAttendance eq 'P'}">
+                                    <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
+									src="/brightschool/images/studentattendance.svg" width="40" height="40"
+									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
+									</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
+									src="/brightschool/images/studentabsent.svg" width="40" height="40"
+									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
+									</a>
+                                </c:otherwise>
+                            </c:choose>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+     </div>
 
 	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">

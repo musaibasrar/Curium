@@ -617,7 +617,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		return studentdailyattendance;
 	}
 
-	public Studentdailyattendance getStudentCurrentAttendance(String userName, LocalDate currentDate) {
+	public Studentdailyattendance getStudentTodaysAttendance(String userName, LocalDate currentDate) {
 		Studentdailyattendance attendance = new Studentdailyattendance();
 		try {
 			transaction = session.beginTransaction();
