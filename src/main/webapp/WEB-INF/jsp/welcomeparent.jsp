@@ -94,6 +94,7 @@ for(Cookie cookie : cookies){
 	
 	<div class="row" style="padding-left: 150px;">
 						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/brightschool/images/brightschool.png"></h2>
+						<h2>Today's Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${todaysAttendance}</h2>
 	</div>
 
 	<div class="row" style="padding-left: 20px;">
