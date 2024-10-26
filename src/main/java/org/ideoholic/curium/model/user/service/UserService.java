@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +30,8 @@ import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -71,6 +74,12 @@ public class UserService {
         boolean result;
        String userName = request.getParameter("loginName");
        String password = request.getParameter("password");
+       
+       LocalDate currentDate = LocalDate.now();
+       Studentdailyattendance attendance = new AttendanceDAO().getStudentCurrentAttendance(userName,currentDate);
+       if(attendance != null) {
+       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
+       }
 
        login = new UserDAO().readUniqueObject(userName, password);
 
