@@ -251,5 +251,27 @@ public class JobActionAdapter {
 		
 	}
 
+	public void createTask() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setJobId(request.getParameter("jobid"));
+		queriesDto.setJobno(request.getParameter("jobno"));
+		JobQueryDto jobQueryDto = jobService.createTask(queriesDto);
+		request.setAttribute("jobid",jobQueryDto.getJobId());
+		request.setAttribute("jobno",jobQueryDto.getJobno());
+	}
+
+	public boolean addTask() {
+		JobService jobService = new JobService(request, response);
+		QueriesDto queriesDto = new QueriesDto();
+		queriesDto.setJobId(request.getParameter("jobid"));
+		queriesDto.setAssignto(request.getParameterValues("assignto"));
+		queriesDto.setTask(request.getParameterValues("task"));
+		queriesDto.setDescription(request.getParameterValues("description"));
+		queriesDto.setExpecteddd(request.getParameterValues("expecteddeliverydatetask"));
+		ResultResponse response = jobService.addTask(queriesDto,httpSession.getAttribute(BRANCHID).toString());
+		return response.isSuccess();
+	}
+
 
 }
