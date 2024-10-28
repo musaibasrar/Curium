@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -618,6 +619,20 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			HibernateUtil.closeSession();
 		}
 		return studentdailyattendance;
+	}
+	
+	public Studentdailyattendance getStudentTodaysAttendance(String userName, LocalDate currentDate) {
+		Studentdailyattendance attendance = new Studentdailyattendance();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Studentdailyattendance  where attendeeid = '"+userName+"' and date = '"+currentDate+"'");
+			attendance = (Studentdailyattendance) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return attendance;
 	}
 
 }

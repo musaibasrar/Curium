@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,13 +30,13 @@ import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
-import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -44,7 +45,6 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.stereotype.Service;
 
 public class UserService {
 
@@ -99,6 +99,15 @@ public class UserService {
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
+			
+			if(userType[0].equalsIgnoreCase("parents")) {
+				LocalDate currentDate = LocalDate.now();
+				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
+			       if(attendance != null) {
+			       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
+			       }
+			}
+			
            result = true;
        } else {
            result = false;
