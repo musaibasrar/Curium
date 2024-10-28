@@ -1013,55 +1013,58 @@ public class JobService {
 		return result;
 	}
 
-	public void generateTasksReport() {
+	public ReportResponseDto generateTasksReport(ReportDto reportDto) {
 
-		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
-		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-		String dep = request.getParameter("employee");
+		ReportResponseDto reportResponseDto = new ReportResponseDto();
+		String fromDate = DateUtil.dateFromatConversionSlash(reportDto.getTransactionDateFrom());
+		String toDate = DateUtil.dateFromatConversionSlash(reportDto.getTransactionDateTo());
+		String dep = reportDto.getEmployee();
 		String[] depParts = dep.split(":");
-		String status = request.getParameter("status");
-		String staffName = request.getParameter("staffName");
+		String status = reportDto.getStatus();
+		String staffName = reportDto.getStaffName();
 		String queryMain = "from Task pq where pq.jobquery.createddate between '"+fromDate+"' and '"+toDate+"' ";
 		String subQuery = "";
 		List<Task> JobQueryList = new ArrayList<Task>();
 
 		if(!dep.isEmpty()) {
 			subQuery = "and pq.teacher.tid = "+Integer.parseInt(depParts[0])+"";
-			httpSession.setAttribute("teacherselected", "teacher:&nbsp;"+depParts[1]);
+			reportResponseDto.setStaffSelected("teacher:&nbsp;"+depParts[1]);
 		}else {
-			httpSession.setAttribute("teacherselected", "");
+			reportResponseDto.setStaffSelected("");
 		}
 
 		if(!status.isEmpty()) {
 			subQuery = subQuery + " and pq.status = '"+status+"'";
-			httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+			reportResponseDto.setStatusSelected("Status:&nbsp;"+status);
 		}else {
-			httpSession.setAttribute("statusselected", "");
+			reportResponseDto.setStatusSelected("");
 		}
 
 		if(!depParts[0].isEmpty()) {
 			subQuery = subQuery + "and pq.jobquery.teacher.tid = '"+depParts[0]+"'";
-			httpSession.setAttribute("studentselected", "Staff Name:&nbsp;"+depParts[1]);
+			reportResponseDto.setStudentselected("Staff Name:&nbsp;"+depParts[1]);
 		}else {
-			httpSession.setAttribute("studentselected", "");
+			reportResponseDto.setStudentselected("");
 		}
 
 		JobQueryList = new JobDAO().generateTasksReport(queryMain+subQuery);
-
-		httpSession.setAttribute("parenttaskslist", JobQueryList);
-		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
-		httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+        
+		reportResponseDto.setJobQueriList(JobQueryList);
+		reportResponseDto.setTransactionFromDateSelected("From:"+reportDto.getTransactionDateFrom());
+		reportResponseDto.setTransactionToDateSelected("To:"+reportDto.getTransactionDateTo());
+		
+		return reportResponseDto;
 
 	}
 
-	public void getReferredbyDetails() throws IOException{
+	public void getReferredbyDetails(ReportDto reportDto,String branchId) throws IOException{
 
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 
 			PrintWriter out = response.getWriter();
 			try {
 
-				String ref = request.getParameter("referredby");
+				String ref = reportDto.getReferredby();
 
 				String[] refBy = ref.split(",");
 				List<Integer> sidList = new ArrayList<Integer>();

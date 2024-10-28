@@ -273,5 +273,31 @@ public class JobActionAdapter {
 		return response.isSuccess();
 	}
 
+	public void generateTasksReport() {
+		JobService jobService = new JobService(request, response);
+		ReportDto reportDto = new ReportDto();
+		reportDto.setTransactionDateFrom(request.getParameter("transactiondatefrom"));
+		reportDto.setTransactionDateTo(request.getParameter("transactiondateto"));
+		reportDto.setEmployee(request.getParameter("employee"));
+		reportDto.setStatus(request.getParameter("status"));
+		reportDto.setStaffName(request.getParameter("staffName"));
+		ReportResponseDto reportResponseDto = jobService.generateTasksReport(reportDto);
+		httpSession.setAttribute("teacherselected", reportResponseDto.getStaffSelected());
+		httpSession.setAttribute("statusselected", reportResponseDto.getStatusSelected());
+		httpSession.setAttribute("studentselected", reportResponseDto.getStudentselected());
+		httpSession.setAttribute("parenttaskslist", reportResponseDto.getJobQueriList());
+		httpSession.setAttribute("transactionfromdateselected", reportResponseDto.getTransactionFromDateSelected());
+		httpSession.setAttribute("transactiontodateselected", reportResponseDto.getTransactionToDateSelected());
+		
+	}
+
+	public void getReferredbyDetails() throws IOException {
+		JobService jobService = new JobService(request, response);
+		ReportDto reportDto = new ReportDto();
+		reportDto.setReferredby(request.getParameter("referredby"));
+		jobService.getReferredbyDetails(reportDto,httpSession.getAttribute(BRANCHID).toString());
+		
+	}
+
 
 }

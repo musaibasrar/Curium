@@ -3,8 +3,13 @@
  */
 package org.ideoholic.curium.model.job.action;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * @author Musaib_2
@@ -330,7 +330,7 @@ public class JobAction {
 
     @PostMapping("/generateTasksReport")
     private String generateTasksReport() {
-        new JobService(request, response).generateTasksReport();
+    	jobActionAdapter.generateTasksReport();
         return taskReport();
     }
 
@@ -342,7 +342,7 @@ public class JobAction {
     @GetMapping("/viewReferredby")
     public void mrvDetails() {
         try {
-            new JobService(request, response).getReferredbyDetails();
+        	jobActionAdapter.getReferredbyDetails();
         } catch (IOException e) {
             e.printStackTrace();
         }
