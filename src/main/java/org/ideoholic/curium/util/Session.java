@@ -93,4 +93,14 @@ public class Session {
         
     }
 
+	public void clear() {
+		logger.info("clear ");
+		 getCurrentSession().clear();
+	}
+	
+	public void flush() {
+		logger.info("Flush ");
+		 getCurrentSession().flush();
+	}
+
 }
