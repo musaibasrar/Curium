@@ -106,9 +106,9 @@ public class MarksDetailsDAO {
 				for (Marks marks : marksList) {
 					session.update(marks);
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -207,9 +207,9 @@ public class MarksDetailsDAO {
 					}
 					
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -277,9 +277,9 @@ public class MarksDetailsDAO {
 						Query queryUpdate = session.createSQLQuery("update ExamRank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();

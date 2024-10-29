@@ -1495,7 +1495,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
@@ -1697,7 +1697,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 							for (Subject sub : subjectList) {
 								
 								int marksSubid = marks.getSubid();
-								int subjectId = sub.getSubjectid();
+								int subjectId = sub.getSubid();
 								
 								if(marksSubid == subjectId) {
 									// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
