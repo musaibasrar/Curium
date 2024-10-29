@@ -544,6 +544,8 @@ public class UserService {
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
 		String modeOfPayment = DataUtil.emptyString(request.getParameter("modeofpayment"));
+		String feesCollectorWithId = DataUtil.emptyString(request.getParameter("feescollector"));
+		String[] feesCollector = feesCollectorWithId.split(":");
 		
 			String querySub = "";
 			
@@ -568,6 +570,11 @@ public class UserService {
 			
 			if(!modeOfPayment.equalsIgnoreCase("")){
 				querySub = querySub +" AND feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+			}
+			
+			if(!feesCollector[0].equalsIgnoreCase("")){
+				querySub = querySub +" AND feesdetails.userid = '"+feesCollector[0]+"'" ;
+				 request.setAttribute("feescollectorname", feesCollector[1]);
 			}
 			
 			queryMain = queryMain+querySub;

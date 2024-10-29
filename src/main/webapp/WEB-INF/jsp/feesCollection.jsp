@@ -803,7 +803,7 @@
             	
             	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
             	var payment = parseInt(duePayment.value,10);
-            	document.getElementById(sfsid).checked = true; 
+            	//document.getElementById(sfsid).checked = true; 
             	
             	if(payment<=9 && payment>=1){
             		duePayment.value = payment;

@@ -272,4 +272,22 @@ public class FeesCollectionAction {
 				return "defaulterreport";
 			}
 		 
+		 	
+			@PostMapping("/searchBusFeesCollection")
+			public String searchBusFeesCollection() {
+				new FeesCollectionService(request, response).searchOtherFeesCollection();
+				return "busfeesCollectionDetails";
+			}
+			
+			 @PostMapping("/printBusDataForFees")
+				public String printBusFeesData() {
+					
+					if(new FeesCollectionService(request, response).printOtherDataForFees()){
+						return "printbusfeescollectiondetails";
+					}else{
+						return "error";
+					}
+					
+				}
+		 
 }

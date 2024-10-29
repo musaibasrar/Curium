@@ -402,16 +402,21 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shatabdi/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
+            				 <a target="mainFrame" href="/shatabdi/busfeesCollectionDetails" style="font-size: 12px;">Bus Fees Collection</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shatabdi/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
+            				 <a target="mainFrame" href="/shatabdi/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/shatabdi/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/shatabdi/defaulterreportloader" style="font-size: 12px;">Defaulter Report</a>
             			</td>
             		</tr>
@@ -467,6 +472,11 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shatabdi/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shatabdi/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
             			</td>
             		</tr>
                 </table>

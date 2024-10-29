@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
+import org.ideoholic.curium.model.std.action.StandardAction;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -181,6 +182,18 @@ public class MarksDetailsAction {
 	public String searchForReportSingleExams() {
 		new MarksDetailsService(request, response).Search();
 		return "progressreportsingleexams";
+	}
+	
+	@GetMapping("/rankReport")
+	public String rankreport() {
+		new StandardService(request, response).viewClasses();
+		return "rankreport";
+	}
+	
+	@PostMapping("/searchForRank")
+	public String searchForRank() {
+		new MarksDetailsService(request, response).rankSearch();
+		return "rankreport";
 	}
 	
 }

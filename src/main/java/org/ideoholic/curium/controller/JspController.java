@@ -566,4 +566,9 @@ public class JspController {
 	public String getDefaulterReportLoader() {
 		return "defaulterreportloader";
 	}
+	
+	@GetMapping("/busfeesCollectionDetails")
+	public String getBusFeesCollectionDetails() {
+		return "busfeesCollectionDetails";
+	}
 }

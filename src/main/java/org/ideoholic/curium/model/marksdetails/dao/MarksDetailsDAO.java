@@ -197,19 +197,19 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : examRankList) {
-					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear="+examrank.getAcademicyear()+" and branchid = "+examrank.getBranchid()+"");
+					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear='"+examrank.getAcademicyear()+"' and branchid = "+examrank.getBranchid()+"");
 					ExamRank results = (ExamRank) query.uniqueResult();
 					if(results==null) {
 						session.save(examrank);	
 					}else {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 					}
 					
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -274,12 +274,12 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : listExamRank) {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();

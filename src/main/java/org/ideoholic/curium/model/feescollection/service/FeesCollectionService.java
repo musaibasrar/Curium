@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
@@ -1555,6 +1557,7 @@ public class FeesCollectionService {
 	public void searchOtherFeesCollection() {
 		 
 		List<Otherreceiptinfo> feesDetailsList = new ArrayList<Otherreceiptinfo>();
+		List<Otherreceiptinfo> busFeesDetailsList = new ArrayList<Otherreceiptinfo>();
 		String branchId = request.getParameter("selectedbranchid");
 		int idBranch = 0;
                
@@ -1608,6 +1611,38 @@ public class FeesCollectionService {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
 			
+			List<String> feeCategories = Arrays.asList(
+				    "CBSE Board Exam Fee", 
+				    "library fine", 
+				    "Improvment Exam fee", 
+				    "Library Card", 
+				    "Compartmental Exam Fee", 
+				    "TC Charges - X", 
+				    "TC Charges",
+				    "CBSE Registration Fee"
+				);
+			
+			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
+				Set<Otherfeescollection> otherFeesCollection = receiptinfo.getFeesCollectionRecords();
+				for (Otherfeescollection ofc : otherFeesCollection) {
+					int sfsid = ofc.getSfsid();
+					List<Studentotherfeesstructure> sofs = new studentDetailsDAO().getStudentOtherFeesStructureDetails(sfsid);
+					
+					for (Studentotherfeesstructure studentOtherFeeStructure : sofs) {
+						OtherFeecategory otherFeesCat = studentOtherFeeStructure.getOtherfeescategory(); 
+						String feesCatName = otherFeesCat.getFeescategoryname();
+						boolean containsAny = feeCategories.stream().anyMatch(feesCatName::contains);
+
+						if (!containsAny) {
+							busFeesDetailsList.add(receiptinfo);
+						}
+					}
+		        }
+				
+				
+			}
+			
+			httpSession.setAttribute("searchbusfeesdetailslist", busFeesDetailsList);
 			httpSession.setAttribute("searchotherfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofotherdetailsfees", sumOfFees);
 	}
@@ -2086,10 +2121,10 @@ public class FeesCollectionService {
 		}
 		
 		
-		otherFeeCategoryCollectionMapCons.put("TC Charges", tcChargesCash+tcChargesBank);
-		otherFeeCategoryCollectionMapCons.put("Library Fees", libraryFeesCash+libraryFeesBank);
-		otherFeeCategoryCollectionMapCons.put("Compartmental Exam Fee", compartmentalExamFeeCash+compartmentalExamFeeBank);
-		otherFeeCategoryCollectionMapCons.put("CBSE Registration Fee", CBSERegistrationFeeCash+CBSERegistrationFeeBank);
+		feeCategoryCollectionMapReport.put("TC Charges", tcChargesCash+tcChargesBank);
+		feeCategoryCollectionMapReport.put("Library Fees", libraryFeesCash+libraryFeesBank);
+		feeCategoryCollectionMapReport.put("Compartmental Exam Fee", compartmentalExamFeeCash+compartmentalExamFeeBank);
+		feeCategoryCollectionMapReport.put("CBSE Registration Fee", CBSERegistrationFeeCash+CBSERegistrationFeeBank);
 		
 		httpSession.setAttribute("TransportationFeeCash", transportationFeesCash);
 		httpSession.setAttribute("TCChargesCash", tcChargesCash);
@@ -2106,7 +2141,7 @@ public class FeesCollectionService {
 		
 		//End Other Fees
 		
-		feeCategoryCollectionMapReport.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
+		otherFeeCategoryCollectionMapCons.put("Transportation Fee", transportationFeesCash+transportationFeesBank);
 		//totalFeesByCash +=transportationFeesCash;
 		//totalFeesByBank +=transportationFeesBank;
 		httpSession.setAttribute("TuitionFeesByCash", tuitionFeesCash);

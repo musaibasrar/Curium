@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Collecion Details
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Bus Fees Collecion Details
+    Created on : Oct 14, 2024, 5:52:28 PM
     Author     : Musaib
 --%>
 
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>Bus Fees Collection Details</title>
 <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 <link rel="stylesheet" href="/shatabdi/css/font-awesome.css">
@@ -407,7 +407,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/UserProcess/searchByDate";
+		form1.action = "/shatabdi/FeesCollection/searchBusFeesCollection";
 		form1.method = "POST";
 		form1.submit();
 
@@ -415,7 +415,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/FeesDetails/printDataForFees";
+		form1.action = "/shatabdi/FeesCollection/printBusDataForFees";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -429,6 +429,7 @@
 		});
 		$("#effect").hide();
 		
+
 		$("#print").button({
             icons:{
                 primary: "ui-icon-print"
@@ -604,14 +605,14 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/shatabdi/FeesDetails/exportDataForFees" method="POST">
+		action="/shatabdi/FeesDetails/exportDataForOtherFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Fees Collection Details</button>
+			<button id="add">Search Bus Fees Collection Details</button>
 			<br />
 		</div>
 
@@ -624,7 +625,7 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-						<tr style="display: none;">
+						<%-- <tr>
 							<td width="20%" class="alignRight">Date: &nbsp;</td>
 							<td width="28%"><label> <input name="oneday"
 									type="text" class="textField" id="datepicker" size="36"
@@ -633,16 +634,16 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr style="display: none;">
+						<tr>
 							<td><br /></td>
-						</tr>
-						<tr style="display: none;">
+						</tr> 
+						<tr>
 						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
 						</tr>
 						
-						<tr style="display: none;">
+						<tr>
 							<td><br /></td>
-						</tr>
+						</tr>--%>
 						<tr>
 							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="fromdate"
@@ -655,49 +656,17 @@ for(Cookie cookie : cookies){
 									type="text" class="textField" id="datepickerto" size="36"
 									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
 									data-validate="validate(required)">
-							</label></td>
-						</tr>
-						
-						<tr>
-						<td>&nbsp;</td>
-						</tr>
-						<tr>
-						<td>&nbsp;</td>
-						</tr>
-						
-						<tr>
-							<td width="20%" class="alignRight">Mode of Payment: &nbsp;&nbsp;</td>
-							<td ><label> <select name="modeofpayment"
-									id="modeofpayment" style="width: 240px">
-										<option selected></option>
-										<option value="Bank Transfer">Bank</option>
-										<option value="Cash">Cash</option>
-								</select>
-
-							</label></td>
-							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;User:</td>
-							<td ><label> <select name="feescollector"
-									id="feescollector" style="width: 240px">
-										<option selected></option>
-										<c:if test="${branchid eq 2}">
-											<option value="15:irshada">Irshad</option>
-										</c:if>
-										<c:if test="${branchid eq 3}">
-											<option value="12:Imran">Imran</option>
-											<option value="14:Sameer">Sameer</option>
-										</c:if>
-										<c:if test="${branchid eq 4}">
-											<option value="15:Inayat">Inayat</option>
-										</c:if>
-										
-								</select>
-							</label></td>
-						</tr>
+							</label>
 							
+							<input name="oneday"
+									type="hidden" class="textField" id="datepicker" size="36"
+									onfocus="checkFields()" value="${dayone}" autocomplete="false"
+									data-validate="validate(required)"></td>
+						</tr>
+						
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
-						
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
@@ -739,11 +708,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
-					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
-					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
-					
-					</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Other fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -754,16 +719,16 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Fee</th>
-                            <th title="click to sort" class="headerText">Fine</th>
-                            <th title="click to sort" class="headerText">Misc</th>
-                            <th title="click to sort" class="headerText">Grand Total</th>
+                            <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Cancel Receipt</th>
+
+
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchbusfeesdetailslist}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
@@ -772,11 +737,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount-feesdetails.fine-feesdetails.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/viewOtherFeesDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/CancelOtherFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+
                             </tr>
                         </c:forEach>
                     </tbody>
