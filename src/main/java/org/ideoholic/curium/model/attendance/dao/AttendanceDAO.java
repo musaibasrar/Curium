@@ -526,9 +526,13 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 				staffDailyAttendanceDetails = (Staffdailyattendance) query.uniqueResult();
 				if(staffDailyAttendanceDetails == null){
 					session.save(staffDailyAttendance);
+					session.flush();
+			        session.clear();
 				}else{
-					Query queryTwo = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
+					Query queryTwo = session.createSQLQuery("update att_staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
 					queryTwo.executeUpdate();
+					session.flush();
+			        session.clear();
 				}
 			}
 			

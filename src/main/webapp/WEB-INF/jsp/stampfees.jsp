@@ -937,7 +937,8 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
+						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
@@ -961,6 +962,7 @@ for(Cookie cookie : cookies){
 								href="/brightschool/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
@@ -968,8 +970,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 						 	<td class="dataText">
-						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
-						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
+						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '--')}" />
+						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '--')}" />
 						 		 <c:choose>
                                 <c:when test="${classstudying[0] == classadmitted[0]}">
                                    <c:out value="New Admission" />

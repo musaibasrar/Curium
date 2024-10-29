@@ -716,6 +716,8 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+								<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out

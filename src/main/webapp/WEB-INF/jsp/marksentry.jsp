@@ -652,7 +652,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Marks</th>
 

@@ -1011,8 +1011,9 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name</th>
 					</tr>
 				</thead>
 
@@ -1030,11 +1031,12 @@ for(Cookie cookie : cookies){
 										value="${StudentListAttendance[status.index].studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${StudentListAttendance[status.index].admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${StudentListAttendance[status.index].name}" /></td>
+										value="${StudentListAttendance[status.index].student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${StudentListAttendance[status.index].student.name}" /></td>
 							<td class="dataText">
 							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="<c:out value="${attendanceList.attendancestatus}" />" maxlength="1" onclick="markabsent(this);">
 							</td>
+							<td class="dataText"><c:out value="${StudentListAttendance[status.index].fathersname}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
