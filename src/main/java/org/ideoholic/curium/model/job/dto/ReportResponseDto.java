@@ -18,11 +18,11 @@ public class ReportResponseDto {
 	private String statusSelected;
 	private String staffSelected;
 	private String studentselected;
-	private List<JobQuery> JobQueryList;
+	private List<JobQuery> jobQueryList;
 	private String transactionFromDateSelected;
 	private String transactionToDateSelected;
 	private String querycompleted;
 	private boolean success;
-	private List<Task> jobQueriList;
+	private List<Task> taskList;
 
 }

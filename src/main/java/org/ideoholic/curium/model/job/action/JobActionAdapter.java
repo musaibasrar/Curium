@@ -285,7 +285,7 @@ public class JobActionAdapter {
 		httpSession.setAttribute("teacherselected", reportResponseDto.getStaffSelected());
 		httpSession.setAttribute("statusselected", reportResponseDto.getStatusSelected());
 		httpSession.setAttribute("studentselected", reportResponseDto.getStudentselected());
-		httpSession.setAttribute("parenttaskslist", reportResponseDto.getJobQueriList());
+		httpSession.setAttribute("parenttaskslist", reportResponseDto.getTaskList());
 		httpSession.setAttribute("transactionfromdateselected", reportResponseDto.getTransactionFromDateSelected());
 		httpSession.setAttribute("transactiontodateselected", reportResponseDto.getTransactionToDateSelected());
 		

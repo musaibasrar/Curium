@@ -1024,7 +1024,7 @@ public class JobService {
 		String staffName = reportDto.getStaffName();
 		String queryMain = "from Task pq where pq.jobquery.createddate between '"+fromDate+"' and '"+toDate+"' ";
 		String subQuery = "";
-		List<Task> JobQueryList = new ArrayList<Task>();
+		List<Task> taskList = new ArrayList<Task>();
 
 		if(!dep.isEmpty()) {
 			subQuery = "and pq.teacher.tid = "+Integer.parseInt(depParts[0])+"";
@@ -1047,9 +1047,9 @@ public class JobService {
 			reportResponseDto.setStudentselected("");
 		}
 
-		JobQueryList = new JobDAO().generateTasksReport(queryMain+subQuery);
+		taskList = new JobDAO().generateTasksReport(queryMain+subQuery);
         
-		reportResponseDto.setJobQueriList(JobQueryList);
+		reportResponseDto.setTaskList(taskList);
 		reportResponseDto.setTransactionFromDateSelected("From:"+reportDto.getTransactionDateFrom());
 		reportResponseDto.setTransactionToDateSelected("To:"+reportDto.getTransactionDateTo());
 		
