@@ -214,6 +214,13 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
             
+            <h5 class="sideaccordian"><a href="#">Attendance</a></h5>
+            <div>
+            	<a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
+            </div>
+            
             
             <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">

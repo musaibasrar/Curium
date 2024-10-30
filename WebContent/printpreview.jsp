@@ -536,6 +536,9 @@ for(Cookie cookie : cookies){
                                 <td><img src="data:image;base64,${studentlist.key.student.studentpic}"
                                         style="height:68px;width:50px;border: 1px solid black;border-radius: 10px;" alt="Student's Photo" />
                                 </td>
+                                 <td><img src="data:image;base64,${studentlist.key.student.qrcode}"
+                                        style="height:68px;width:50px;border: 1px solid black;border-radius: 10px;" alt="Student's Photo" />
+                                </td>
                             </tr>
                         </table>
                     </div>

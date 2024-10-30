@@ -458,6 +458,13 @@ for(Cookie cookie : cookies){
                 
 
             </div>
+            
+            <h5 class="sideaccordian"><a href="#">Attendance</a></h5>
+            <div>
+            	<a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
+            </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employee List</a><br/>

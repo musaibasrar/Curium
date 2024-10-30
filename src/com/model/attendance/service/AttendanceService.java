@@ -437,6 +437,8 @@ public class AttendanceService {
 			
 			Date searchdate = DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance"));
 			Timestamp timestamp = new Timestamp(searchdate.getTime());
+			
+			if(newStudentList.size()>0) {
 			for (Student student : searchStudentList) {
 
 				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,student.getStudentexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -446,10 +448,21 @@ public class AttendanceService {
 					
 				}
 			}
-
+			}else {
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readStudentAttendance(timestamp, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
+						Student studentAttendance = new studentDetailsDAO().getStudentByExternalId(studentDailyAttendance.getAttendeeid());
+						newStudentList.add(studentAttendance);
+						newStudentDailyAttendance.add(studentDailyAttendance);
+					
+				}
+				
+			}
 			request.setAttribute("StudentListAttendance", newStudentList);
 			request.setAttribute("StudentDailyAttendanceDate", newStudentDailyAttendance);
 			request.setAttribute("searchedDate", DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance")));
+			request.setAttribute("daterange", "Date:"+DateUtil.dateFromatConversionHyphen(request.getParameter("dateofattendance")));
 			
 		        result = true;
 			}
@@ -1463,5 +1476,39 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		}
 		
 }
+
+	public boolean searchStudentsAttendanceMonthly() {
+		boolean result = false;
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+				
+			List<Student> newStudentList = new ArrayList<Student>();
+			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
+			
+			Date fromDate = DateUtil.dateParserUpdateStd(request.getParameter("fromdateofattendance"));
+			Date toDate = DateUtil.dateParserUpdateStd(request.getParameter("todateofattendance"));
+			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
+			Timestamp toTimestamp = new Timestamp(toDate.getTime());
+			
+				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readStudentAttendance(fromTimestamp,toTimestamp, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
+						Student studentAttendance = new studentDetailsDAO().getStudentByExternalId(studentDailyAttendance.getAttendeeid());
+						newStudentList.add(studentAttendance);
+						newStudentDailyAttendance.add(studentDailyAttendance);
+					
+				}
+				
+			request.setAttribute("StudentListAttendance", newStudentList);
+			request.setAttribute("StudentDailyAttendanceDate", newStudentDailyAttendance);
+			request.setAttribute("searchedDate", DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance")));
+			request.setAttribute("daterange", "From Date:"+DateUtil.dateFromatConversionHyphen(request.getParameter("fromdateofattendance"))+" To Date: "+DateUtil.dateFromatConversionHyphen(request.getParameter("todateofattendance"))+"");
+			
+		        result = true;
+			}
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("studentList", studentList);
+		return result;
+	}
 
 }

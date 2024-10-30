@@ -122,6 +122,11 @@ for(Cookie cookie : cookies){
 							<td style="padding-left: 20px;padding-right: 50px;">
 								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.png"/></a>
 								</td>
+								
+							<td><a target="leftFrame" href="left_clerk.jsp"> <img
+									src="images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;" />Home
+							</a></td>
 
 							<td><a target="mainFrame"
 								href="Controller?process=FeesProcess&action=feesCollect"> <img

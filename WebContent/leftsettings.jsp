@@ -351,6 +351,7 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="Controller?process=StampFeesProcess&action=renewFeesDetails" style="font-size: 12px;">Renew Fee</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#">Exams</a></h5>

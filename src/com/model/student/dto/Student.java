@@ -82,7 +82,7 @@ public class Student implements java.io.Serializable {
 	private String bankbranch;
 	private String accno;
 	private int userid;
-	
+	private String qrcode;
 
 	// for mess Chocos and Milk
 	private String bankifsc;
@@ -127,7 +127,7 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String breakfast,String lunch,String dinner,String staytype,String campus,
-			 Integer sts, Integer rte, String college, String bankbranch, String accno, String bankifsc, int userid) {
+			 Integer sts, Integer rte, String college, String bankbranch, String accno, String bankifsc, int userid, String qrcode) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -187,6 +187,7 @@ public class Student implements java.io.Serializable {
 		this.staytype = staytype;
 		this.campus = campus;
 		this.userid = userid;
+		this.qrcode = qrcode;
 		
 	}
 
@@ -737,6 +738,14 @@ public class Student implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 	
 }

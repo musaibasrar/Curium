@@ -460,5 +460,16 @@ public static String dateFromatConversionSlash(String ddmmyyyy) {
 	   return date;
 }
 
+public static String dateFromatConversionHyphen(String ddmmyyyy) {
+	   String date = null;
+	   
+	   if(ddmmyyyy!=null) {
+		   String[] dateToConvert = ddmmyyyy.split("-");
+		   date = dateToConvert[2]+"/"+dateToConvert[1]+"/"+dateToConvert[0];
+	   }
+	   
+	   return date;
+}
+
 
 }

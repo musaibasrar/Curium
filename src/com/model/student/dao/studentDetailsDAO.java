@@ -616,5 +616,25 @@ public class studentDetailsDAO {
 		 }
         return parents;
 	}
+
+	public Student getStudentByExternalId(String attendeeid) {
+		Student student = new Student();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Student as student where student.studentexternalid='"+attendeeid+"'");
+			student = (Student) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return student;
+	}
 	
 }

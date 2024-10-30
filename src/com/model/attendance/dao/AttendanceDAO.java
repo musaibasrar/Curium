@@ -589,4 +589,39 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}
 	}
 
+	public List<Studentdailyattendance> readStudentAttendance(Timestamp date, int branchId) {
+		
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		
+		try{
+			transaction = session.beginTransaction();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and branchid="+branchId).list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			logger.info(e);
+			System.out.println("column "+e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentDailyAttendance;
+	}
+
+	public List<Studentdailyattendance> readStudentAttendance(Timestamp fromTimestamp, Timestamp toTimestamp,
+			int branchId) {
+		
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		
+		try{
+			transaction = session.beginTransaction();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and branchid="+branchId).list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			logger.info(e);
+			System.out.println("column "+e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentDailyAttendance;
+	}
+
 }

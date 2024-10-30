@@ -711,7 +711,9 @@ public class FeesCollectionService {
 		for (Studentfeesstructure singleFeesStructure : feesstructure) {
 			Long totalAmountPerCategory = 0l;
 			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession();
-			feesMap.put(singleFeesStructure,totalDueAmount);
+			if(totalDueAmount>0) {
+				feesMap.put(singleFeesStructure,totalDueAmount);	
+			}
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
 		request.setAttribute("studentNameDetails", parents.getStudent().getName());

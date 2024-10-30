@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees</title>
+<title>Renew fees</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 
@@ -334,7 +334,7 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "180px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=search";
+		form1.action = "Controller?process=StampFeesProcess&action=searchByAdmissionNumber";
 		form1.method = "POST";
 		form1.submit();
 
@@ -607,12 +607,13 @@
         	        	
             var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
             var feesCount=document.getElementById("feesCount_"+value2).value;
-            var feesConcession=document.getElementById("feesConcession_"+value2).value;
+            //var feesConcession=document.getElementById("feesConcession_"+value2).value;
             var final1=document.getElementById("hiddenfees_full_amount_"+value2);
             	
             	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
             	//feesConcession (direct amount)
-                final1.value=(feesCat*feesCount)-feesConcession;
+                //final1.value=(feesCat*feesCount)-feesConcession;
+            	final1.value=(feesCat*feesCount);
             	
              var month = feesCount;
        		 var startDate = document.getElementById('startdate').value;
@@ -623,66 +624,18 @@
        		 document.getElementById('validtill').value = endDate;
            
         }
+        
+        function calculateMonth(){
+        	var month = 1;
+      		 var startDate = document.getElementById('startdate').value;
+      		 document.getElementById('validfrom').value = startDate;
+      		 var dateSplit = startDate.split('/');
+      		 var month = parseInt(dateSplit[1])+parseInt(month);
+      		 var endDate = dateSplit[0]+'/'+month+'/'+dateSplit[2];
+      		 document.getElementById('validtill').value = endDate;
+        }
        
-    function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" readonly/></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='calculate("+rowCount+");' onkeyup='calculate("+rowCount+")' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
-        var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#fees_name_"+rowCount).autocomplete({
-                source: feescat,
-                minLength: 1,
-                change:function(event,ui){
-
-                    $("#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $("#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $("#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                },
-                focus: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.name );
-                    $( "#fees_status_"+rowCount ).val("not set");
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.value );
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
-
-
-
-    }
+   
     
     function selectAllRow(tableID){
         var table = document.getElementById(tableID);
@@ -813,8 +766,12 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-<body>
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
+<body onload="calculateMonth()">
+	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFeesRenew" method="POST">
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -831,23 +788,9 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">
 							
 							<td class="alignRightFields">Admission No. &nbsp;</td>
-							<td align="left"><label> <!-- <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36""> -->
+							<td align="left"><label>
 									<input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
 							</label></td>
-							
-							<input type="radio" id="studentnamesearch" name="advancesearch" value="studentname" onclick="selectSearch(this.id)">
-							<label for="studentname">Student Name</label>
-							 &nbsp;</td>
-							 <td class="alignRightFields">
-							<input type="radio" id="classsearch" name="advancesearch" value="class" onclick="selectSearch(this.id)">
-							<label for="class">Class</label>
-							 &nbsp;</td>
-							 <td class="alignRightFields">
-							<input type="radio" id="mealssearch" name="advancesearch" value="meals" onclick="selectSearch(this.id)">
-							<label for="meals">Meals</label>
-							 &nbsp;</td>
 						</tr>
 						
 						</table>
@@ -858,55 +801,6 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br></td>
 						</tr>
-						
-						<tr style="display: none;"  id="namesearchtr">
-							
-							<td style="padding-left: 70px;"> <input name="namesearch" id="namesearch" type="text" class="myclass">
-							</td>
-						</tr>
-						
-						<tr style="display: none;" id="classsearchtr">
-							<td style="padding-left: 70px;"><label > 
-								<select name="classsearch" id="classsearch"
-									style="width: 120px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label style="display: none;"> 
-									<select name="secsearch" id="secsearch"
-									style="width: 120px;">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-							</label>
-						</tr>
-						<tr style="display: none;" id="mealssearchtr">
-							<td style="padding-left: 70px;" height="30" class="alignLeft" >
-								&nbsp;      Breakfast<input type="checkbox" value="breakfast" name="breakfast" id="breakfast"/>
-								&nbsp;&nbsp;Lunch<input type="checkbox" value="lunch" name="lunch" id="lunch"/>
-								&nbsp;&nbsp;Dinner<input type="checkbox" value="dinner" name="dinner" id="dinner"/>
-							</td>
-						</tr>
-
-						<tr>
-							<td><br/></td>
-						</tr>
-						
-						
 						<tr>
 
 							<td class="alignLeft" style="padding-left: 100px;">
@@ -922,9 +816,9 @@ for(Cookie cookie : cookies){
 					</table>
 					<div class="alignRightFields">
 
-						<label style="color: #eb6000;font-size: 12px;">Fees Category:&nbsp;&nbsp;&nbsp;</label>
+						<!-- <label style="color: #eb6000;font-size: 12px;">Fees Category:&nbsp;&nbsp;&nbsp;</label>
 						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
+						<button id="removeFeesCat">Remove</button> -->
 						<input
 									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
 									size="36"">
@@ -959,7 +853,7 @@ for(Cookie cookie : cookies){
 								<td class="headerText">Fees Category</td>
 								<td class="headerText">Fees Amount</td>
 								<td class="headerText">Total Months</td>
-								<td class="headerText">Concession Amount</td>
+								<!-- <td class="headerText">Concession Amount</td> -->
 								<td class="headerText">Fees Total Amount</td>
 
 
@@ -967,12 +861,55 @@ for(Cookie cookie : cookies){
 							</tr>
 						</thead>
 						<tbody>
+							                     
+								<c:forEach items="${feescategory}" var="fees" varStatus="status">
+							
+								<c:if test="${fees.feescategoryname == 'Renewal Milk and Corn Flakes'}">
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+									<%-- Column 1 --%>
+									<td class="dataTextInActive"><input type="checkbox" 
+										class="chcktbl" id="fees_${status.index}" value="${fees.idfeescategory}" checked /> <input
+										type="hidden" class="feesStatus" name="feesStatuses"
+										id="fees_status_${status.index}" value="not set" /> <input
+										type="hidden" class="feesId" name="feesIDS"
+										id="fees_id_${status.index}" value="${fees.idfeescategory}" /></td>
 
+									<%-- Column 2 --%>
+									<td class="dataTextInActive"><input class="feesName"
+										type="text" name="feesNames" id="fees_name_${status.index}"
+										onkeyup="calculate(${status.index})" value="${fees.feescategoryname}"
+										onclick="calculate(${status.index})" /></td>
+
+									<%-- Column 3 --%>
+									<td class="dataTextInActive"><input class="feesAmount"
+										type="text" name="fessCat" value="${fees.amount}"
+										id="hiddenfees_amount_${status.index}" readonly /></td>
+
+									<%-- Column 4 --%>
+									<td class="dataTextInActive"><select
+										onchange="SelectAll(${status.index}); calculate(${status.index});"
+										onclick="calculate(${status.index}); SelectAll(${status.index})"
+										name="feesCount" id="feesCount_${status.index}">
+											<option></option>
+											<option value="1">1 Month</option>
+											<option value="2">2 Months</option>
+											<option value="3">3 Months</option>
+									</select></td>
+
+									<%-- Column 5 --%>
+									<td class="dataTextInActive"><input class="feesFullAmount"
+										type="text" value="0" name="fessFullCat"
+										id="hiddenfees_full_amount_${status.index}" /></td>
+
+								</tr>
+								</c:if>
+					</c:forEach>
 						</tbody>
 						<tfoot>
 							<tr>
 
-								<td colspan="5" align="right">Total&nbsp;&nbsp;</td>
+								<td colspan="4" align="right">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
 							</tr>
@@ -1013,7 +950,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText"><input type="checkbox" checked
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>

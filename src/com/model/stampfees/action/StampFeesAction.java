@@ -33,9 +33,28 @@ public class StampFeesAction {
 	        	url = deleteFeesStructure();
 	        }else if (action.equalsIgnoreCase("searchForFees")) {
 	        	url = searchForFees();
+	        }else if (action.equalsIgnoreCase("renewFeesDetails")) {
+	            url = renewFeesDetails();
+	        }else if (action.equalsIgnoreCase("searchByAdmissionNumber")) {
+	            url = searchByAdmissionNumber();
+	        }else if (action.equalsIgnoreCase("applyFeesRenew")) {
+	            url = applyFeesRenew();
 	        }
 	       return url;
 	       
+	}
+
+	private String searchByAdmissionNumber() {
+		new StampFeesService(request, response).searchByAdmissionNumber();
+        return "renew.jsp";
+	}
+
+	private String renewFeesDetails() {
+		new FeesService(request, response).viewFees();
+		new YearService(request, response).getYear();
+		new StandardService(request, response).viewClasses();
+		new StudentService(request, response).viewAllStudentsList();
+		return "renew.jsp";
 	}
 
 	private String searchForFees() {
@@ -57,6 +76,7 @@ public class StampFeesAction {
 		new FeesService(request, response).viewFees();
 		new YearService(request, response).getYear();
 		new StandardService(request, response).viewClasses();
+		new StudentService(request, response).viewAllStudentsList();
 		return "stampfees.jsp";
 	}
 
@@ -65,6 +85,9 @@ public class StampFeesAction {
         return "stampfees.jsp";
 	}
 
-	
+	private String applyFeesRenew() {
+		new StampFeesService(request, response).addFeesStampRenew();
+		 return "feescollectionstudentsave.jsp";
+	}
 
 }

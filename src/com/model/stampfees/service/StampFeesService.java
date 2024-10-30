@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.service.FeesCollectionService;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dao.StampFeesDAO;
@@ -42,6 +43,7 @@ public class StampFeesService {
 		
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+		String admissionno = DataUtil.emptyString(request.getParameter("admno"));
 		String addClass = request.getParameter("classsearch");
 		String addSec = request.getParameter("secsearch");
 		String breakfast = DataUtil.emptyString(request.getParameter("breakfast"));
@@ -60,6 +62,10 @@ public class StampFeesService {
 
 		String classStudying = DataUtil.emptyString(conClassStudying);
 		String querySub = "";
+		
+		if (!admissionno.equalsIgnoreCase("")) {
+			querySub = " parents.Student.admissionnumber like '%" + admissionno + "%' AND ";
+		}
 
 		if (!studentname.equalsIgnoreCase("")) {
 			querySub = " parents.Student.name like '%" + studentname + "%' AND ";
@@ -291,7 +297,7 @@ public class StampFeesService {
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(0);
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
@@ -361,5 +367,124 @@ public class StampFeesService {
 			}
 		
 				return studentfeesstructure;
+	}
+
+	public void searchByAdmissionNumber() {
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String admissionno = DataUtil.emptyString(request.getParameter("admno"));
+		String querySub = "";
+		
+		if (!admissionno.equalsIgnoreCase("")) {
+			querySub = " parents.Student.admissionnumber like '%" + admissionno + "%' AND ";
+		}
+
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		request.setAttribute("searchStudentList", searchStudentList);
+
+	}
+
+	public void addFeesStampRenew() {
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String[] studentIds = request.getParameterValues("studentIDs");
+		if(studentIds!=null){
+		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
+		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
+		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
+		List<Card> cardList = new ArrayList<Card>();
+		List<Student> studentList = new ArrayList<Student>();
+		
+		String feesTotalAmount = request.getParameter("feesTotalAmount");
+		String[] feesNames = request.getParameterValues("feesNames");
+		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		String[] feesAmount = request.getParameterValues("fessFullCat");
+		String[] concession = request.getParameterValues("feesConcession");
+		Date validFrom = DateUtil.indiandateParser(request.getParameter("validfrom"));
+		Date validTill = DateUtil.indiandateParser(request.getParameter("validtill"));
+		
+		List ids = new ArrayList();
+		listOfacademicfessstructure.clear();
+		for (String id : studentIds) {
+			System.out.println("id" + id);
+			academicfessstructure = new Academicfeesstructure();
+			academicfessstructure.setSid(Integer.valueOf(id));
+			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setTotalfees(feesTotalAmount);
+			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			listOfacademicfessstructure.add(academicfessstructure);
+			// ids.add(Integer.valueOf(id));
+			
+			//Mess Card
+			Card cardDetails = new Card();
+			cardDetails.setSid(Integer.valueOf(id));
+			cardDetails.setValidfrom(validFrom);
+			cardDetails.setValidto(validTill);
+			cardDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			cardList.add(cardDetails);
+			//End Mess Card
+			
+			//Student Meals Update
+				Student student = new Student();
+				student.setSid(Integer.valueOf(id));
+				student.setBreakfast("");
+				student.setLunch("");
+				student.setDinner("");
+				student.setBankifsc("");
+				for (String feesName : feesNames) {
+					if(feesName.contains("Break")) {
+						student.setBreakfast("breakfast");
+					}else if(feesName.contains("Lunch")) {
+						student.setLunch("lunch");
+					}else if(feesName.contains("Dinner")) {
+						student.setDinner("dinner");
+					}else if (feesName.contains("Milk and Corn Flakes")) {
+						student.setBankifsc("milkandcornflakes");
+					}	
+				}
+				studentList.add(student);
+			//
+
+		}
+		
+		for (String id : studentIds) {
+
+			for(int i=0; i < feesCategoryIds.length ; i++){
+			
+			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+			Feescategory feescategory = new Feescategory();
+			studentfeesstructure.setSid(Integer.valueOf(id));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			studentfeesstructure.setFeescategory(feescategory);
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeespaid((long) 0);
+			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			studentfeesstructure.setConcession(0);
+			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			listOfstudentfeesstructure.add(studentfeesstructure);
+		}
+			
+
+			
+		}
+		
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), cardList, studentList);
+		new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		Parents parents = new studentDetailsDAO().getStudentRecords("from Parents as parents where parents.Student.sid="+studentIds[0]);
+		
+		new FeesCollectionService(request, response).getStampFees(parents,Integer.parseInt(feesTotalAmount));
+		}
+		}
 	}
 }

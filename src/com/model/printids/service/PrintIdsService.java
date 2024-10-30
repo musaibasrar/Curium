@@ -1,18 +1,29 @@
 package com.model.printids.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.printids.dao.PrintIdsDAO;
 import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -84,6 +95,8 @@ public class PrintIdsService {
         String[] studentIDs = request.getParameterValues("studentIDs");
         List<Integer> ids = new ArrayList<Integer>();
         Parents parentsDetails = new Parents();
+        int width = 300;
+        int height = 300;
         
         for (String id : studentIDs) {
 
@@ -103,6 +116,19 @@ public class PrintIdsService {
         	for (Card card : cardList) {
         		
         		if(card.getSid().equals(parentsList.getStudent().getSid())) {
+        			String qrCodeBase64 = "";
+        	        try {
+        	            // Generate QR code and get Base64 string
+        	            qrCodeBase64 = generateQRCodeBase64(parentsList.getStudent().getStudentexternalid(), width, height);
+        	            System.out.println("QR Code Base64: " + qrCodeBase64);
+
+        	            // You can now save `qrCodeBase64` to your database
+        	        } catch (Exception e) {
+        	            System.out.println("Could not generate QR Code: " + e.getMessage());
+        	        }
+        	        Student student = parentsList.getStudent();
+        	        student.setQrcode(qrCodeBase64);
+        	        parentsList.setStudent(student);
         			parentsCard.put(parentsList, card);
         		}
 				
@@ -266,5 +292,20 @@ public class PrintIdsService {
         request.setAttribute("updatecard", result);
         return result;
 	}
+	
+	 public static String generateQRCodeBase64(String text, int width, int height) throws WriterException, IOException {
+	        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+	        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+
+	        // Create BufferedImage from BitMatrix
+	        BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
+
+	        // Convert BufferedImage to ByteArrayOutputStream
+	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	        ImageIO.write(qrImage, "png", outputStream);
+
+	        // Encode ByteArrayOutputStream to Base64
+	        return Base64.getEncoder().encodeToString(outputStream.toByteArray());
+	    }
 	
 }

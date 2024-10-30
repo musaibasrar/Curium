@@ -583,8 +583,34 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-
+						
 						<tr>
+							<td class="alignRightFields">Scan QR Code &nbsp;</td>
+							<td align="left"><label> <input
+									name="externalIDs" type="password" class="textField"
+									id="externalIDs"/>
+							</label>
+							
+							<input type="hidden" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
+							</td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td>
+								<button id="update">Submit</button>
+							</td>	
+						</tr>
+
+						<tr style="display: none;">
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
@@ -599,7 +625,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<tr style="display: none;">
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
 									id="classsearch" style="width: 90px">
@@ -637,7 +663,7 @@ for(Cookie cookie : cookies){
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 
 							<td width="30%" class="alignRight"></td>
 
@@ -657,7 +683,7 @@ for(Cookie cookie : cookies){
 			</div>
 		</div>
 		
-		<div style="overflow: scroll; height: 600px">
+		<%-- <div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
 					<td class="headerTD">Mark Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class:&nbsp;${attendanceclass} 
@@ -708,7 +734,7 @@ for(Cookie cookie : cookies){
 				</tfoot>
 			</table>
 
-		</div>
+		</div> --%>
 
 	</form>
 </body>

@@ -103,11 +103,38 @@ public class AttendanceAction {
 			url = markAttendance();
 		}else if ("attendanceExport".equalsIgnoreCase(action)) {
 			url = attendanceExport();
+		}else if ("printStudentAttendanceDetails".equalsIgnoreCase(action)) {
+			url = printStudentAttendanceDetails();
+		}else if ("printStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
+			url = printStudentAttendanceDetailsMonthly();
+		}else if ("searchStudentsAttendanceMonthly".equalsIgnoreCase(action)) {
+			url = searchStudentsAttendanceMonthly();
 		}
 		return url;
 	}
 	
 	
+	private String searchStudentsAttendanceMonthly() {
+		if(new AttendanceService(request, response).searchStudentsAttendanceMonthly()){
+			return "viewattendancebetweendates.jsp";
+		}
+		return errorPage;
+	}
+
+	private String printStudentAttendanceDetailsMonthly() {
+		if(new AttendanceService(request, response).searchStudentsAttendanceMonthly()){
+			return "printstudentattendance.jsp";
+		}
+		return errorPage;
+	}
+
+	private String printStudentAttendanceDetails() {
+		if(new AttendanceService(request, response).searchStudentAttendanceDetails()){
+			return "printstudentattendance.jsp";
+		}
+		return errorPage;
+	}
+
 	private String attendanceExport() {
 		new StandardService(request, response).viewClasses();
 		return "attendanceexport.jsp";
