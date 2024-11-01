@@ -16,5 +16,7 @@ public class ReportDto {
 	private String status;
 	private String staffId;
 	private String staffName;
+	private String employee;
+	private String referredby;
 
 }
