@@ -234,7 +234,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-                        	<table style="page-break-inside: avoid;border-collapse: collapse;">
+                        	<%-- <table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
 				<td style="padding-left: 200px;"><img src="/global/images/global${branchid}.jpg" width="72" height="80"/></td>
 				<td>
@@ -245,7 +245,21 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td></td></tr>
 			<tr></tr>
-</table>
+</table> --%>
+
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
+			<tr>
+				<td><img src="/global/images/global${branchid}.jpg" width="72" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">${branchcontact}</label><br>
+				<label class="addressLine">Academic Year: ${currentAcademicYear}</label>
+				</td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+			</tr>
+		</table>
 
 			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
@@ -284,14 +298,14 @@ for(Cookie cookie : cookies){
                             
                             </table>
                             
-                            <table style=" border-collapse: collapse;width: 30%;float: left">
+                            <%-- <table style=" border-collapse: collapse;width: 30%;float: left">
                             	<tr>
                             		<td>
                             			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
                             		</td>
                             	</tr>
                             
-                            </table>
+                            </table> --%>
                             
                             <!-- <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                					 <tr>

@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.marksdetails.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -23,6 +24,8 @@ public class MarksDetailsAction {
 	HttpServletResponse response;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
+	@Autowired
+	ExamDetailsActionAdapter examDetailsActionAdapter;
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
@@ -145,6 +148,7 @@ public class MarksDetailsAction {
 	@GetMapping("/rankReport")
 	public String rankreport() {
 		standardActionAdapter.viewClasses();
+		examDetailsActionAdapter.readListOfExams();
 		return "rankreport";
 	}
 	

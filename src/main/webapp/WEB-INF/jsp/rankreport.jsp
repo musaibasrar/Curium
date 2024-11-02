@@ -98,7 +98,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -535,7 +535,24 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
+						<tr>
+						<td width="30%" class="alignRight">Exam &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft"><label>
+									<select name="exam" id="exam"
+									style="width: 240px">
+										<option selected></option>
 
+										<c:forEach items="${examdetails}" var="listExam">
+
+											<option value="${listExam.exid}">
+												<c:out value="${listExam.examname}" />
+											</option>
+
+
+										</c:forEach>
+
+								</select></td>
+						</tr>
 						
 
 

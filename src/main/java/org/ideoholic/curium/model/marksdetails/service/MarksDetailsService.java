@@ -961,9 +961,10 @@ public boolean generateRankReport() {
 			List<Integer> studentsIds = new ArrayList<Integer>();
 			String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
+			String examDetailsId = request.getParameter("exam");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			Exams exam = new ExamDetailsDAO().getExamDetails(Integer.parseInt(examDetailsId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			
 			int rank = 1;
@@ -976,7 +977,7 @@ public boolean generateRankReport() {
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
-				for (Exams exam : examsList) {
+				if (exam!=null) {
 						
 					ExamsMarks examMarks = new ExamsMarks();
 					examMarks.setExamName(exam.getExamname());
@@ -1000,7 +1001,7 @@ public boolean generateRankReport() {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
@@ -1085,12 +1086,10 @@ public boolean generateRankReport() {
 				 */
 			}
 			
-			int size = examsList.size();
-			int endLoop = size/5;
 			
-			for (Exams exams : examsList) {
+			if (exam!=null) {
 				
-				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,exams.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,exam.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				Collections.sort(listExamRank);
 				
 				// Assign ranks
@@ -1113,7 +1112,6 @@ public boolean generateRankReport() {
 					
 			}
 			
-			request.setAttribute("endloop", endLoop+1);
 			request.setAttribute("markssheetlist", marksSheetList);
 			
 			/*for (MarksSheet marksSheet2 : marksSheetList) {
