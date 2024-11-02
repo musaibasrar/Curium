@@ -2424,7 +2424,7 @@ public class FeesCollectionService {
 					     	        }
 					            }
 					            AddFeesCollectionDto dto = new AddFeesCollectionDto();
-					            dto.setChequeBankName(Double.toString(group.get(0).getCell(0).getNumericCellValue()));
+					            dto.setChequeBankName(group.get(0).getCell(0).getStringCellValue());
 					            String[] studentDetails = group.get(0).getCell(1).getStringCellValue().split("_");
 						        dto.setStudentId(studentDetails[2]);
 						        String[] amountPaying = amountPayingClub.split("_");
@@ -2591,7 +2591,7 @@ public class FeesCollectionService {
 			
 			// End J.V
 			  
-			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			createFeesCollection = new feesCollectionDAO().createReceiptFromImport(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());

@@ -397,5 +397,60 @@ public class feesCollectionDAO {
 			return result;
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	public boolean createReceiptFromImport(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 		 	
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
+				
+				// J.V
+				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsIncome);
+				Query queryAccountsIncome = session.createQuery(updateDrAccountIncome);
+				queryAccountsIncome.executeUpdate();
+				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
+				queryqueryAccountsIncome1.executeUpdate();
+				//
+				
+				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				session.save(receiptInfo);
+				
+				if(feescollectionList!=null) {
+					
+					for (Feescollection singleFeescollection :  feescollectionList) {
+						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						query.executeUpdate();
+						 session.save(singleFeescollection);
+					}
+				}
+				
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
+
+	}
 
 }
