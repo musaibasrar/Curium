@@ -1456,9 +1456,10 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 			List<Integer> studentsIds = new ArrayList<Integer>();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
+			String examDetailsId = dto.getExamDetailsID();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			Exams examsList = new ExamDetailsDAO().getExamDetails(Integer.parseInt(examDetailsId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			
 			int rank = 1;
@@ -1471,22 +1472,22 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
-				for (Exams exam : examsList) {
+				if (examsList!=null) {
 						
 					ExamsMarks examMarks = new ExamsMarks();
-					examMarks.setExamName(exam.getExamname());
+					examMarks.setExamName(examsList.getExamname());
 					boolean present = false;
 					Map<String,String> subMarks = new HashMap<String, String>();
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),branchId,exam.getExid());
-					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),branchId,examsList.getExid());
+					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examsList.getExamname());
 					
 					
 					for (Marks marks : marksDetailsList) {
 							
-							int examId = exam.getExid();
+							int examId = examsList.getExid();
 							int marksExamId = marks.getExamid();
 							
 						if( examId == marksExamId) {
@@ -1544,7 +1545,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 						examMarksList.add(examMarks);
 						
 						examrank.setSid(Integer.parseInt(studentIds[i]));
-						examrank.setExamid(exam.getExid());
+						examrank.setExamid(examsList.getExid());
 						examrank.setMarksobtained(totalObtainedMarks);
 						examrank.setAcademicyear(currentAcademicYear);
 						examrank.setBranchid(Integer.parseInt(branchId));
@@ -1580,12 +1581,9 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 				 */
 			}
 			
-			int size = examsList.size();
-			int endLoop = size/5;
-			
-			for (Exams exams : examsList) {
+			if (examsList!=null) {
 				
-				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,exams.getExid(),currentAcademicYear,Integer.parseInt(branchId));
+				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,examsList.getExid(),currentAcademicYear,Integer.parseInt(branchId));
 				Collections.sort(listExamRank);
 				
 				// Assign ranks
@@ -1608,7 +1606,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 					
 			}
 
-			result.setEndLoop(endLoop+1);
+			//result.setEndLoop(endLoop+1);
 			result.setMarksSheetList(marksSheetList);
 			
 			/*for (MarksSheet marksSheet2 : marksSheetList) {

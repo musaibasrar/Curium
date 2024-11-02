@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ public class MarksDetailsAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private MarksDetailsActionAdapter marksDetailsActionAdapter;
+	@Autowired
+	ExamDetailsActionAdapter examDetailsActionAdapter;
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
@@ -138,6 +141,7 @@ public class MarksDetailsAction {
 	@GetMapping("/rankReport")
 	public String rankreport() {
 		standardActionAdapter.viewClasses();
+		examDetailsActionAdapter.readListOfExams();
 		return "rankreport";
 	}
 	

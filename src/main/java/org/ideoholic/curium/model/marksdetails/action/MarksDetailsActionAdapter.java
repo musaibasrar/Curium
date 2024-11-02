@@ -178,6 +178,7 @@ public class MarksDetailsActionAdapter {
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
+        dto.setExamDetailsID(request.getParameter("exam"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateRankReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());

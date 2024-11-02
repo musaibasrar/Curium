@@ -100,7 +100,7 @@ public class ExamDetailsAction {
         }
     }
 
-    @PostMapping("addSchedule")
+    @PostMapping("/addSchedule")
     public String addSchedule() {
 
         if (examDetailsActionAdapter.addSchedule()) {
