@@ -584,9 +584,6 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
-								<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/abc/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/greatindiaacademy/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
