@@ -273,23 +273,26 @@ public class JobActionAdapter {
 		
 	}
 	
-	public void viewQueryDetails( ) throws IOException {
+	public void viewQueryDetails( ) throws Exception {
 
 
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("id"));
-		if(httpSession.getAttribute(BRANCHID).toString()!=null){
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			PrintWriter out = response.getWriter();
 
+			 try {
 			int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
 
 			ResultResponse result = jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute(BRANCHID).toString());
 
-			PrintWriter out = response.getWriter();
+			if(!result.isSuccess()) {
+				   throw new Exception("Failed to retrive data");
+				}
 			response.setContentType("text/xml");
 			response.setHeader("Cache-Control", "no-cache");
 
 
-			try {
 
 				StringBuilder tableBuilder = new StringBuilder(
 					"<table  style='margin-left: auto;margin-right: auto;'>" +
