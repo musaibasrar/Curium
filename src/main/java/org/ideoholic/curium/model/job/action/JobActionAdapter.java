@@ -1,7 +1,9 @@
 package org.ideoholic.curium.model.job.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.*;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Service
@@ -31,15 +34,16 @@ public class JobActionAdapter {
 	private String USERLOGINID = "userloginid";
 	
 	private String USERNAME = "username";
+	
+	@Autowired
+	private JobService jobService;
 
 	public boolean download() {
-		JobService jobService = new JobService(request, response);
 		ResultResponse result = jobService.download();
 		return result.isSuccess();
 	}
 
 	public boolean exportQueriesReport() {
-		JobService jobService = new JobService(request, response);
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		jobQueryDto.setQueriesList((List<JobQuery>)httpSession.getAttribute("parentquerylist"));
 		ResultResponse result = jobService.exportQueriesReport(jobQueryDto);
@@ -48,7 +52,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean feedback() {
-		JobService jobService = new JobService(request, response);
 		FeedbackDto feedbackDto = new FeedbackDto();
 		feedbackDto.setId(request.getParameter("id"));
 		feedbackDto.setNo(request.getParameter("no"));
@@ -58,7 +61,6 @@ public class JobActionAdapter {
 	}
 
 	public void generateQueriesReport() {
-		JobService jobService = new JobService(request, response);
 		ReportDto reportDto = new ReportDto();
 		reportDto.setTransactionDateFrom(request.getParameter("transactiondatefrom"));
 		reportDto.setTransactionDateTo(request.getParameter("transactiondateto"));
@@ -77,7 +79,6 @@ public class JobActionAdapter {
 
 	public boolean viewAllQueriesDepartmentWise() {
 		String page = request.getParameter("page");
-		JobService jobService = new JobService(request, response);
 		JobQueryDto jobQueryDto = jobService.viewAllQueriesDepartmentWise(page,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERNAME).toString());
 		request.setAttribute("studentList", jobQueryDto.getQueriesList());
 		request.setAttribute("queryList", jobQueryDto.getQueriesList());
@@ -87,7 +88,6 @@ public class JobActionAdapter {
 	}
 
 	public void updateQueries() {
-		JobService jobService = new JobService(request, response);
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
         updateQueriesDto.setJobQuery(request.getParameter("JobQuery"));
@@ -98,7 +98,6 @@ public class JobActionAdapter {
 	}
 
 	public void updateQueryRemarks() {
-		JobService jobService = new JobService(request, response);
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
 		updateQueriesDto.setQueryRemarks(request.getParameter("queryremarks"));
@@ -107,16 +106,8 @@ public class JobActionAdapter {
 		
 	}
 
-	public void viewQueryDetails() throws IOException {
-		JobService jobService = new JobService(request, response);
-		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
-		updateQueriesDto.setQueryId(request.getParameter("id"));
-		jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute(BRANCHID).toString());
-		
-	}
-
+	
 	public void inProgressQueries() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
 		SearchStudentResponseDto searchStudentResponseDto = jobService.inProgressQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -124,7 +115,6 @@ public class JobActionAdapter {
 	}
 
 	public void toDoQueries() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
 		SearchStudentResponseDto searchStudentResponseDto = jobService.toDoQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -133,7 +123,6 @@ public class JobActionAdapter {
 	}
 
 	public void cancelQueries() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
 		SearchStudentResponseDto searchStudentResponseDto = jobService.cancelQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -141,7 +130,6 @@ public class JobActionAdapter {
 	}
 
 	public void completeQueries() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setQueryIds(request.getParameterValues("queryids"));
 		ReportResponseDto reportResponseDto = jobService.completeQueries(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -151,7 +139,6 @@ public class JobActionAdapter {
 
 	public boolean viewAllQueries() {
 		String page = request.getParameter("page");
-		JobService jobService = new JobService(request, response);
 		JobQueryDto jobQueryDto = jobService.viewAllQueries(page,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("queryList", jobQueryDto.getQueriesList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
@@ -160,7 +147,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean addQuery() {
-		JobService jobService = new JobService(request, response);
 		AddQueryDto addQueryDto = new AddQueryDto();
 		addQueryDto.setEmployeeIDs(request.getParameterValues("employeeIDs"));
 		addQueryDto.setJobquery(request.getParameter("jobquery"));
@@ -175,7 +161,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewAllTasks() {
-		JobService jobService = new JobService(request, response);
 		String page = request.getParameter("page");
 		JobQueryDto jobQueryDto = jobService.viewAllTasks(page,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
@@ -185,7 +170,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewAllTasksDepartmentWise() {
-		JobService jobService = new JobService(request, response);
 		String page = request.getParameter("page");
 		JobQueryDto jobQueryDto = jobService.viewAllTasksDepartmentWise(page,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERNAME).toString());
 		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
@@ -195,7 +179,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewTaskDetails() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.viewTaskDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
@@ -204,7 +187,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewOneJobDetails() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.viewOneJobDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
@@ -213,7 +195,6 @@ public class JobActionAdapter {
 	}
 
 	public void inProgressTasks() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
@@ -222,7 +203,6 @@ public class JobActionAdapter {
 	}
 
 	public void toDoTasks() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
@@ -231,7 +211,6 @@ public class JobActionAdapter {
 	}
 
 	public void cancelTasks() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
@@ -241,7 +220,6 @@ public class JobActionAdapter {
 	}
 
 	public void completeTasks() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
@@ -252,7 +230,6 @@ public class JobActionAdapter {
 	}
 
 	public void createTask() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		queriesDto.setJobno(request.getParameter("jobno"));
@@ -262,7 +239,6 @@ public class JobActionAdapter {
 	}
 
 	public boolean addTask() {
-		JobService jobService = new JobService(request, response);
 		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		queriesDto.setAssignto(request.getParameterValues("assignto"));
@@ -274,7 +250,6 @@ public class JobActionAdapter {
 	}
 
 	public void generateTasksReport() {
-		JobService jobService = new JobService(request, response);
 		ReportDto reportDto = new ReportDto();
 		reportDto.setTransactionDateFrom(request.getParameter("transactiondatefrom"));
 		reportDto.setTransactionDateTo(request.getParameter("transactiondateto"));
@@ -292,12 +267,82 @@ public class JobActionAdapter {
 	}
 
 	public void getReferredbyDetails() throws IOException {
-		JobService jobService = new JobService(request, response);
 		ReportDto reportDto = new ReportDto();
 		reportDto.setReferredby(request.getParameter("referredby"));
 		jobService.getReferredbyDetails(reportDto,httpSession.getAttribute(BRANCHID).toString());
 		
 	}
+	
+	public void viewQueryDetails( ) throws Exception {
+
+
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		updateQueriesDto.setQueryId(request.getParameter("id"));
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			PrintWriter out = response.getWriter();
+
+			 try {
+			int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
+
+			ResultResponse result = jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute(BRANCHID).toString());
+
+			if(!result.isSuccess()) {
+				   throw new Exception("Failed to retrive data");
+				}
+			response.setContentType("text/xml");
+			response.setHeader("Cache-Control", "no-cache");
+
+
+
+				StringBuilder tableBuilder = new StringBuilder(
+					"<table  style='margin-left: auto;margin-right: auto;'>" +
+						"						<tr>" +
+						"							" +
+						"						</tr>" +
+						"					</table>"
+
+
+				);
+
+
+				StringBuilder rowBuidler = new StringBuilder( "<table border='0' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='querydetailspopup'>");
+
+
+				rowBuidler.append(
+					"<tr style='border-color:#000000' border='0' cellpadding='1' cellspacing='1'>" +
+						"<td class='alignLeft'>Query:</td>" +
+						"<td class='dataText'><textarea name='JobQuerypopup' id='JobQuerypopup' rows='5' cols='38'>"+result.getMessage()+"</textarea>"
+						+ "<input type='hidden' id='queryid' name='queryid' value='"+queryId+"'></td>" +
+						"</tr>"+
+						"<tr>" +
+						"<td><br><br></td>" +
+						"</tr>"+
+						"<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >" +
+						"<td class='alignLeft'>Response:</td>" +
+						"<td class='dataText'><textarea name='responsepopup' id='responsepopup' rows='5' cols='38'>"+result.getMessage()+"</textarea></td>" +
+						"</tr>");
+
+
+
+				rowBuidler.append("</tbody>" +
+					"		                </table>");
+
+				tableBuilder.append(rowBuidler.toString());
+				String outputTable = tableBuilder.toString();
+
+				response.getWriter().println(outputTable);
+
+			} catch (Exception e) {
+				out.write("<table> <tr><td>Data Not Available</td></tr></table>");
+			} finally {
+				out.flush();
+				out.close();
+			}
+		}
+
+
+	}
+
 
 
 }

@@ -48,7 +48,9 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JobService {
 
 	private HttpServletRequest request;
@@ -57,12 +59,7 @@ public class JobService {
 	private static final int BUFFER_SIZE = 4096;
 
 	private static final Logger logger = LogManager.getLogger(JobService.class);
-	public JobService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
+	
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
 
 		ResultResponse result = ResultResponse.builder().success(false).build();
@@ -255,69 +252,24 @@ public class JobService {
 		return searchStudentResponseDto;
 	}
 
-	public void viewQueryDetails(UpdateQueriesDto updateQueriesDto,String branchid ) throws IOException {
+	public ResultResponse viewQueryDetails(UpdateQueriesDto updateQueriesDto, String branchid) throws IOException {
 
+		ResultResponse result = ResultResponse.builder().build();
 
-		if(branchid!=null){
-
-			int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
-
-			JobQuery JobQuery = new JobDAO().viewQueryDetails(queryId);
-
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/xml");
-			response.setHeader("Cache-Control", "no-cache");
-
-
+		if (branchid != null) {
 			try {
+				int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
 
-				StringBuilder tableBuilder = new StringBuilder(
-					"<table  style='margin-left: auto;margin-right: auto;'>" +
-						"						<tr>" +
-						"							" +
-						"						</tr>" +
-						"					</table>"
-
-
-				);
-
-
-				StringBuilder rowBuidler = new StringBuilder( "<table border='0' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='querydetailspopup'>");
-
-
-				rowBuidler.append(
-					"<tr style='border-color:#000000' border='0' cellpadding='1' cellspacing='1'>" +
-						"<td class='alignLeft'>Query:</td>" +
-						"<td class='dataText'><textarea name='JobQuerypopup' id='JobQuerypopup' rows='5' cols='38'>"+JobQuery.getResponse()+"</textarea>"
-						+ "<input type='hidden' id='queryid' name='queryid' value='"+queryId+"'></td>" +
-						"</tr>"+
-						"<tr>" +
-						"<td><br><br></td>" +
-						"</tr>"+
-						"<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >" +
-						"<td class='alignLeft'>Response:</td>" +
-						"<td class='dataText'><textarea name='responsepopup' id='responsepopup' rows='5' cols='38'>"+JobQuery.getResponse()+"</textarea></td>" +
-						"</tr>");
-
-
-
-				rowBuidler.append("</tbody>" +
-					"		                </table>");
-
-				tableBuilder.append(rowBuidler.toString());
-				String outputTable = tableBuilder.toString();
-
-				response.getWriter().println(outputTable);
+				JobQuery jobQuery = new JobDAO().viewQueryDetails(queryId);
+				result.setMessage(jobQuery.getResponse());
+				result.setSuccess(true);
 
 			} catch (Exception e) {
-				out.write("<table> <tr><td>Data Not Available</td></tr></table>");
-			} finally {
-				out.flush();
-				out.close();
+				result.setSuccess(false);
 			}
 		}
 
-
+		return result;
 	}
 
 	public SearchStudentResponseDto updateQueries(UpdateQueriesDto updateQueriesDto,String userLoginId) {
@@ -1131,4 +1083,5 @@ public class JobService {
 
 		return jobQueryDto;
 	}
+	
 }
