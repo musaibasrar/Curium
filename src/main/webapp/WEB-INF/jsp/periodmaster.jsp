@@ -415,9 +415,8 @@
 	            primary: "ui-icon-plus"
 	        }
 	    }).click(function() {
-	    	addColumn(document.getElementById("totalperiods").value);
-	    	
-	    	 return false;
+	    	duplicatePeriods();
+	         return false;
 		});
 		
 		 var removeScheduleButtonID="#removeSchedule";
@@ -470,7 +469,7 @@
     
 	 function addRow() {
         var rowCount = document.getElementById('dataTable').rows.length;    
-        var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
+        var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='Period-1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
         var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
         var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
         var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
@@ -512,6 +511,8 @@
 	        $(function() {
 	            $("#dataTableNew").find('thead').append(newRow);
 	        });
+	        
+	        
 	       /*  var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
 	        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
 	        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
@@ -520,8 +521,207 @@
 	        $(function() {
 	            $("#dataTable").find('tbody').append(newRow);
 	        }); */
+	    } 
+ 
+	
+
+  function duplicatePeriods() {
+	    let periods = [];
+	    let subjects = [];
+	    let staff = [];
+	    let periodstarttimehrs = [];
+	    let periodstarttimemins = [];
+	    let periodstarttimeams = [];
+	    let periodendtimehrs = [];
+	    let periodendtimemins = [];
+	    let periodendtimeams = [];
+	    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]; // Add your days array here
+
+	    // Collect data as before
+	    $("select[name='periods']").each(function() { periods.push($(this).val()); });
+	    $("select[name='subject']").each(function() { subjects.push($(this).val()); });
+	    $("select[name='staff']").each(function() { staff.push($(this).val()); });
+	    $("select[name='periodstarttimehr']").each(function() { periodstarttimehrs.push($(this).val()); });
+	    $("select[name='periodstarttimemin']").each(function() { periodstarttimemins.push($(this).val()); });
+	    $("select[name='periodstarttimeam']").each(function() { periodstarttimeams.push($(this).val()); });
+	    $("select[name='periodendtimehr']").each(function() { periodendtimehrs.push($(this).val()); });
+	    $("select[name='periodendtimemin']").each(function() { periodendtimemins.push($(this).val()); });
+	    $("select[name='periodendtimeam']").each(function() { periodendtimeams.push($(this).val()); });
+	    
+
+	    // Add a single new row with collected data
+	     populateTableWithDropdowns(periods, subjects, staff, days,periodstarttimehrs,periodstarttimemins,periodstarttimeams,
+	    periodendtimehrs,periodendtimemins,periodendtimeams);
+
+	}
+
+	function populateTableWithDropdowns(periods, subjects, staff, days, periodstarttimehrs, periodstarttimemins, periodstarttimeams,
+			periodendtimehrs, periodendtimemins, periodendtimeams) {
+	    let tableBody = document.getElementById('duplicateTable').getElementsByTagName('thead')[0];
+	   // tableBody.innerHTML = ""; // Clear previous rows
+		
+
+	    // Create one row per day, with multiple columns for Period, Subject, and Staff
+	    for (let i = 0; i < 1; i++) {
+	        let row = tableBody.insertRow();
+
+	        // Day dropdown in the first cell
+	        let dayCell = row.insertCell(0);
+	        dayCell.className = "timeth";
+	        let daySelect = document.createElement("select");
+	        days.forEach(day => {
+	            let option = document.createElement("option");
+	            option.value = day;
+	            option.textContent = day;
+	            if (day === days[i]) { // Set the default selected day
+	                option.selected = true;
+	            }
+	            daySelect.appendChild(option);
+	        });
+	        dayCell.appendChild(daySelect);
+
+	        // Add multiple columns for each Period, Subject, and Staff set
+	        for (let j = 0; j < periods.length; j++) {
+	            let periodSubjectStaffCell = row.insertCell(j + 1); // Adjust for the first day column
+	            periodSubjectStaffCell.className = "timeth";
+
+	            // Period dropdown
+	            let periodSelect = document.createElement("select");
+	            periods.forEach(period => {
+	                let option = document.createElement("option");
+	                option.value = period;
+	                option.textContent = period;
+	                if (period === periods[j]) {
+	                    option.selected = true;
+	                }
+	                periodSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodSelect);
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+
+	            // Subject dropdown
+	            let subjectSelect = document.createElement("select");
+	            subjects.forEach(subject => {
+	                let option = document.createElement("option");
+	                option.value = subject;
+	                option.textContent = subject;
+	                subjectSelect.appendChild(option);
+	            });
+	            subjectSelect.value = subjects[j];
+	            periodSubjectStaffCell.appendChild(subjectSelect);
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+
+	            // Staff dropdown
+	            let staffSelect = document.createElement("select");
+	            staff.forEach(staffMember => {
+	                let option = document.createElement("option");
+	                option.value = staffMember;
+	                option.textContent = staffMember;
+	                staffSelect.appendChild(option);
+	            });
+	            staffSelect.value = staff[j];
+	            periodSubjectStaffCell.appendChild(staffSelect);
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            
+	            //hr selection
+	            // let periodSelect = createDropdown(periodstarttimehrs);
+	           // periodSubjectStaffCell.appendChild(periodSelect); 
+	             let periodstarttimehrSelect = document.createElement("select");
+	            periodstarttimehrs.forEach(periodstarttimehr => {
+	                let option = document.createElement("option");
+	                option.value = periodstarttimehr;
+	                option.textContent = periodstarttimehr;
+	                if (periodstarttimehr === periodstarttimehrs[j]) {
+	                    option.selected = true;
+	                }
+	                periodstarttimehrSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodstarttimehrSelect); 
+	            
+	            //min selection
+	            let periodstarttimeminSelect = document.createElement("select");
+	            periodstarttimemins.forEach(periodstarttimemin => {
+	                let option = document.createElement("option");
+	                option.value = periodstarttimemin;
+	                option.textContent = periodstarttimemin;
+	                if (periodstarttimemin === periodstarttimemins[j]) {
+	                    option.selected = true;
+	                }
+	                periodstarttimeminSelect.appendChild(option);
+	                
+	            });
+	            periodSubjectStaffCell.appendChild(periodstarttimeminSelect);
+	            
+	            //am selection
+	            let periodstarttimeamSelect = document.createElement("select");
+	            periodstarttimeams.forEach(periodstarttimeam => {
+	                let option = document.createElement("option");
+	                option.value = periodstarttimeam;
+	                option.textContent = periodstarttimeam;
+	                if (periodstarttimeam === periodstarttimeams[j]) {
+	                    option.selected = true;
+	                }
+	                periodstarttimeamSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodstarttimeamSelect);
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            
+	         // Adding the "To" text
+	            let toTextNode = document.createTextNode(" To ");
+	            periodSubjectStaffCell.appendChild(toTextNode);
+	            
+	            periodSubjectStaffCell.appendChild(document.createElement("br"));
+	            
+	          //hr selection
+	            let periodendtimehrSelect = document.createElement("select");
+	            periodendtimehrs.forEach(periodendtimehr => {
+	                let option = document.createElement("option");
+	                option.value = periodendtimehr;
+	                option.textContent = periodendtimehr;
+	                if (periodendtimehr === periodendtimehrs[j]) {
+	                    option.selected = true;
+	                }
+	                periodendtimehrSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodendtimehrSelect);
+	            
+	            //min selection
+	            let periodendtimeminSelect = document.createElement("select");
+	            periodendtimemins.forEach(periodendtimemin => {
+	                let option = document.createElement("option");
+	                option.value = periodendtimemin;
+	                option.textContent = periodendtimemin;
+	                if (periodendtimemin === periodendtimemins[j]) {
+	                    option.selected = true;
+	                }
+	                periodendtimeminSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodendtimeminSelect);
+	            
+	            //am selection
+	            let periodendtimeamSelect = document.createElement("select");
+	            periodendtimeams.forEach(periodendtimeam => {
+	                let option = document.createElement("option");
+	                option.value = periodendtimeam;
+	                option.textContent = periodendtimeam;
+	                if (periodendtimeam === periodendtimeams[j]) {
+	                    option.selected = true;
+	                }
+	                periodendtimeamSelect.appendChild(option);
+	            });
+	            periodSubjectStaffCell.appendChild(periodendtimeamSelect);
+
+
+
+	        }
 	    }
+
+	}
 	 
+	
 	function savePeriods() {
 		
 		var form1 = document.getElementById("form1");
@@ -569,9 +769,10 @@
 	
 	function getColumns(){
 		
-		for(var i=0; i<=6; i++){
+		addColumn(document.getElementById("totalperiods").value);	
+		/* for(var i=0; i<=6; i++){
 			addColumn(document.getElementById("totalperiods").value);	
-		}
+		} */
 		
 	}
 	
@@ -1049,6 +1250,14 @@ for(Cookie cookie : cookies){
                 <!-- <tbody>
                 </tbody> -->
                             </TABLE>
+                            
+                           
+</TABLE><!-- Duplicate Data Table -->
+<TABLE id="duplicateTable" class="timetable" width="100%" border="1">
+    <thead></thead>
+    <tbody>
+                </tbody>
+</TABLE>
 						
 						<tr>
 							<td><br /></td>
