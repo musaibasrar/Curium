@@ -137,5 +137,21 @@ public class PeriodDAO {
 		}
 		return periodDetailsList;
 	}
+
+	public boolean update(Periodmaster periodMaster) {
+		try{
+			transaction = session.beginTransaction();
+			session.update(periodMaster);
+			
+			transaction.commit();
+			return true;
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+		return false;
+	}
 	
 }
