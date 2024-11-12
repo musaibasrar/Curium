@@ -123,13 +123,18 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/sneha/images/sneha/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td align="left"><a target="mainFrame" href="/sneha/welcomeparent"> <img
-									src="/sneha/images/home.svg" width="18" height="18" 
-									alt="Home" style="vertical-align: center;" />Home
-							</a> &nbsp;&nbsp;<a target="_parent"
-								href="/sneha/UserProcess/logout"><img
-									src="/sneha/images/logout.svg" width="18" height="18" alt="Log Out" 
-									style="vertical-align: bottom;"/>Logout</a></td>
+							<td align="left" style="padding-left:40px;">
+ 
+                                                         <a target="mainFrame" href="/sneha/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="/sneha/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+     <strong style="font-size: 18px;">Home</strong>
+ </a>&nbsp;&nbsp;
+ 
+                                                          <a target="_parent"
+                                                                 href="/sneha/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="/sneha/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 /><strong style="font-size: 17px;">Logout</strong></a></td>
+
 
 						</tr>
 

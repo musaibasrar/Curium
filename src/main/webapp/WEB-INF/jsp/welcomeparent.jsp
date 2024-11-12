@@ -83,13 +83,17 @@ for(Cookie cookie : cookies){
     <body>
     	
 
-	<div style="padding-left: 20px;height: 10px;">
+	<!-- <div style="padding-left: 20px;height: 10px;">
 		<table style="align-self: left;">
 			<tr>
-				<td height="150px;"></td>
+				<td height="50px;"></td>
 			</tr>
 
 		</table>
+	</div> -->
+	
+	<div class="row" style="padding-left: 150px;">
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 86px;" alt="ideoholic" src="/sneha/images/sneha.png"></h2>
 	</div>
 
 	<div class="row" style="padding-left: 20px;">
