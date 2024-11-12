@@ -206,10 +206,14 @@ for(Cookie cookie : cookies){
 				<td >
 					<br>
 					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					<h4 style="margin-top:0px;margin-bottom:0px;">${branchaddress}</h4>
+					 <h4 style="margin-top:0px;margin-bottom:0px;">Ph: 0824 2244629Email:snehapublicschool@gmail.com</h4>
+                     <h4 style="margin-top:0px;margin-bottom:0px;"> Website:www.snehapublicschool.com</h4>
+					
 					
 				</td>
 			</tr>
+			<%-- ${branchcontact}<br> --%>
 			</table>
 			
 		<table align="center" style="padding-left: 30px;padding-right: 20px;">
@@ -222,10 +226,15 @@ for(Cookie cookie : cookies){
 			
 			</tr>
 			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
-					<u>BONAFIDE CERTIFICATE</u>
+					TO WHOMSOEVER IT MAY CONCERN
 					<br><br>
 				</td>
 			</tr>
@@ -241,40 +250,9 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
-					is/ was a student of this School/College.
-					 
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					<h3 style="font-weight: normal;">&emsp;&emsp;&emsp;&emsp;This is to certify that  &nbsp;&nbsp;
+					 <c:out value="${studentdetailsbonafide.student.name}" />
+					S/o, D/o &nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" />	&nbsp;&nbsp;and	
 					</h3>
 				</td>
 			
@@ -286,55 +264,82 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
+				<h3 style="font-weight: normal;" > <c:out value="${studentdetailsbonafide.mothersname}" />	&nbsp;&nbsp;			
+					 was a bonafide student of this School.
+					 
+										 He/She has studied in</h3>
+				</td></tr>
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
+										 
+										  our institution from class &nbsp;&nbsp; <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classadmittedin,'--')}">
+						    		${splt} 
+								</c:forEach>
+								&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+					std
+					in the year &nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.yearofadmission}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to
+					</td></tr>
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
 				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
-				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
-					</h3>
-				</td>
+				<h3 style="font-weight: normal;" >
+					 ${studentdetailsbonafide.student.promotedyear}&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+				</td></tr>
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
 				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
+				<h3 style="font-weight: normal;" >
+				Admission No.&nbsp;&nbsp;${studentdetailsbonafide.student.admissionnumber}&nbsp;&nbsp; </h3>
+				</td></tr>
+				
+								<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				STS No.&nbsp;&nbsp;${studentdetailsbonafide.student.sts}&nbsp;&nbsp; </h3>
+				</td></tr>
+				<tr>
+			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				&emsp;&emsp;&emsp;&emsp;
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Thanking you</h3>
+				</td></tr>
+				
+				
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Headmistress</h3>
+				</td></tr>
+			
 		</table>
 		
 
-		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
-
-			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
-		</tr>
-		</TABLE>
-	</form>
+			</form>
 	
 	
 </body>

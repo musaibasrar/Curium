@@ -123,114 +123,148 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 107px;" alt="logo" src="/sneha/images/sneha.png">
+			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 113px;" alt="logo" src="/sneha/images/sneha.png">
 			</td>
 				<td >
 					<br>
 					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					<h4 style="margin-top:0px;margin-bottom:0px;">${branchaddress}</h4>
+					 <h4 style="margin-top:0px;margin-bottom:0px;">Ph: 0824 2244629Email:snehapublicschool@gmail.com</h4>
+                     <h4 style="margin-top:0px;margin-bottom:0px;"> Website:www.snehapublicschool.com</h4>
+					
 					
 				</td>
 			</tr>
-			<tr><td></td><td>
-					<h2><u>STUDY CERTIFICATE</u></h2></td></tr>
+			<%-- ${branchcontact}<br> --%>
 			</table>
-			<table align="center">
-			<tr>
-			<td></td>
 			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
-					</h3>
-				</td>
-			</tr>
-			
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:540px;"> <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">Son/Daughter of &nbsp;&nbsp;
-					<span  style="font-weight: bold;text-transform: capitalize;width:540px;"> <c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					&nbsp;&nbsp;Was a bonafide
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;"> student of this institute/college during the year from &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:130px;"> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					studying</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">
-					 from<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">During the period his character is found to be Good/Satisfactory. 
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His Date of Birth is &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
-					and Religion is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:200px;"> <c:out value="${studentdetailsbonafide.student.religion}" /></span></h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;"> 
-					caste is <span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.caste}" /></span>
-					as per his/her admission Register No. <span style="font-weight: bold;text-transform: capitalize;width:190px;"></span></h3>
-				</td>
-			</tr>
-			
+		<table align="center" style="padding-left: 30px;padding-right: 20px;">
 			<tr>
 			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
+			<br>
+				<%-- Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
+			
+			</tr>
+			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			
+			<tr>
+				<td colspan="4" class="dataTextBoldCenter">
+					<br>
+					TO WHOMSOEVER IT MAY CONCERN
+					<br><br>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
 			
 			</tr>
 			<tr>
+			<td></td>
 			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					<span style="font-weight: bold;text-transform: capitalize;width:400px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
-					</h3>
-				</td>
 			</tr>
 			
-		</table>
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&emsp;&emsp;&emsp;&emsp;This is to certify that  &nbsp;&nbsp;
+					 <c:out value="${studentdetailsbonafide.student.name}" />
+					S/o, D/o &nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" />	&nbsp;&nbsp;and	
+					</h3>
+				</td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" > <c:out value="${studentdetailsbonafide.mothersname}" />	&nbsp;&nbsp;			
+					 is studying in our institution in 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Std  in this current year</h3>
+				</td></tr>
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" > 
+					 
+										 <c:out value="${currentAcademicYear}" /></h3>
+				</td></tr>
+				
+				
+				
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				Admission No.&nbsp;&nbsp;${studentdetailsbonafide.student.admissionnumber}&nbsp;&nbsp; </h3>
+				</td></tr>
+				
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				Date of birth&nbsp;&nbsp;${studentdetailsbonafide.student.dateofbirth}&nbsp;&nbsp; </h3>
+				</td></tr>
+				
+								<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				STS No.&nbsp;&nbsp;${studentdetailsbonafide.student.sts}&nbsp;&nbsp; </h3>
+				</td></tr>
+				<tr>
+				
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				The above given information is true to my concern.
+				</td></tr>
+				<tr>
+			
+			<tr><td><br></td></tr>
+			<tr><td><br></td></tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				&emsp;&emsp;&emsp;&emsp;
+				Thanking you</h3>
+				</td></tr>
+				
+				
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				<tr><td><br></td></tr>
+				
+				<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Headmistress</h3>
+				</td></tr>
+
+											</table>
 		
 
 		<TABLE id="dataTable" width="100%" border="0"
