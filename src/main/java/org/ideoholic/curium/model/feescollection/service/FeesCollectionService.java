@@ -964,12 +964,13 @@ public class FeesCollectionService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Concession", "Total Due Summary", "Total Fees Summary"});
 			int i = 1;
 			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 				
 				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
 				String feesDetails = "";
+				String concessionFeesDetails = "";
 				Long dueAmount = 0l;
 				Long totalAmount = 0l;
 				
@@ -979,6 +980,10 @@ public class FeesCollectionService {
 					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
 					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
 					feesDetails=feesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+					if(studentFee.getConcession() > 0) {
+						concessionFeesDetails = concessionFeesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+studentFee.getConcession()+"\n";
+					}
+					
 				}
 				
 				data.put(Integer.toString(i),
@@ -988,6 +993,7 @@ public class FeesCollectionService {
 								 DataUtil.emptyString(studentFeesReport.getParents().getFathersname()),
 								 DataUtil.emptyString(studentFeesReport.getParents().getContactnumber()),
 								 DataUtil.emptyString(feesDetails),
+								 DataUtil.emptyString(concessionFeesDetails),
 								 String.valueOf(dueAmount),
 								 String.valueOf(totalAmount) });
 				i++;

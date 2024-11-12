@@ -229,7 +229,6 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
@@ -552,7 +551,6 @@ for(Cookie cookie : cookies){
 										<input name="joiningdate"
 									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepickerCD" size="30"
-									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 						<tr>
 
@@ -1000,7 +998,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/sneha/PersonalProcess/viewAll";
+								form1.action = "/sneha/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 

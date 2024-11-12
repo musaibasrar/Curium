@@ -2128,11 +2128,11 @@ public boolean generateReportSingleExams() {
 									
 									if( marksObtained < minMarks) {
 										
-										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained()/2)+"/"+sub.getMaxmarks()/2+""+"_F");
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 										
-										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P"+"_"+marks.getSubgrade());
+										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained()/2)+"/"+(sub.getMaxmarks()/2)+""+"_P"+"_"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if(marksObtained == 999) {
 										subMarks.put(sub.getSubjectname(), " _AB");
@@ -2148,9 +2148,9 @@ public boolean generateReportSingleExams() {
 				}
 				
 				if(present) {
-					examMarks.setTotalMarks(totalMarks);
-					examMarks.setTotalMarksObtained(totalObtainedMarks);
-					double d = (totalObtainedMarks*100.0)/totalMarks;
+					examMarks.setTotalMarks(totalMarks/2);
+					examMarks.setTotalMarksObtained(totalObtainedMarks/2);
+					double d = ((totalObtainedMarks/2)*100.0)/(totalMarks/2);
 					examMarks.setPercentage(d);
 					examMarks.setSubMarks(subMarks);
 					//here

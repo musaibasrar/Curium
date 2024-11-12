@@ -697,6 +697,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Concession</th>
 						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
@@ -743,6 +744,29 @@ for(Cookie cookie : cookies){
 									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 								</c:forEach>
 							</td>
+							
+							<td class="dataText">
+								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
+									<table>
+										<tr>
+											 <c:choose>
+                                <c:when test="${studentfeescatagorydetails.concession > 0 }">
+                                    <td style="width: 160px;" align="right">
+												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td align="left">
+												${studentfeescatagorydetails.concession}
+											</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td></td>
+                                </c:otherwise>
+                            </c:choose>
+										</tr>
+									</table>
+								</c:forEach>
+							</td>
+							
 							<td class="dataText">
 									<table>
 										<tr>

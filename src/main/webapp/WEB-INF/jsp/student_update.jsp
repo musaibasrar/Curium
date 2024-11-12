@@ -509,11 +509,13 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.studentdoc3}"/>" id="studentdoc3update" name="studentdoc3update">
                     <input type="hidden" value="<c:out value="${student.studentdoc4}"/>" id="studentdoc4update" name="studentdoc4update">
                     <input type="hidden" value="<c:out value="${student.studentdoc5}"/>" id="studentdoc5update" name="studentdoc5update">
-                    <input type="hidden" value="<c:out value="${student.archive}"/>" id="studentarchiveupdate" name="studentarchiveupdate">
-                    
+                   
+		    <input type="hidden" value="<c:out value="${student.archive}"/>" id="archive" name="archive">
+                    <input type="hidden" value="<c:out value="${student.promotedyear}"/>" id="promotedyear" name="promotedyear">
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
                     <input type="hidden" value="<c:out value="${student.leftout}"/>" id="leftout" name="leftout">
+                    <input type="hidden" value="<c:out value="${student.promotedyear}"/>" id="promotedyear" name="promotedyear" >
                     </td>
                     </tr>
 				
@@ -927,6 +929,7 @@ for(Cookie cookie : cookies){
 							<select name="motherT" onblur="validateNameContact();"
 									id="motherT" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
 										<option selected>${student.mothertongue}</option>
+										<option>Beary</option>
 										<option>Urdu</option>
 										<option>Hindi</option>
 										<option>English</option>

@@ -9,15 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.periods.service.PeriodService;
-import org.ideoholic.curium.model.stampfees.service.StampFeesService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
@@ -58,7 +57,8 @@ public class PeriodAction {
 		return error;
 	}
 
-	@GetMapping("/generateTimeTable")
+	
+	@RequestMapping(value = "/generateTimeTable", method = { RequestMethod.GET, RequestMethod.POST })
 	public String generateTimeTable() {
 		
 		if(new PeriodService(request, response).generateTimeTable()){
@@ -112,4 +112,22 @@ public class PeriodAction {
 		}
         return error;
 	}
+	
+	@GetMapping("/updatePeriodDetails")
+	public String updatePeriodDetails() {
+		new PeriodService(request, response).updatePeriodDetails();
+		new PeriodService(request, response).getPeriodDetail();
+		new StandardService(request, response).viewClasses(); 
+		return "newupdatetimetable";
+	}
+	
+	@PostMapping("/updatenewPeriodDetails")
+	public String updatenewPeriodDetails() {
+		if(new PeriodService(request, response).updatenewPeriodDetails()) {
+		return "timetableupdate";
+	}
+		return error;
+	}
+	
+
 }
