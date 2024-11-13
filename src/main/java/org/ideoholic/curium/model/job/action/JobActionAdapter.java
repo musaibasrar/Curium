@@ -273,59 +273,46 @@ public class JobActionAdapter {
 		
 	}
 	
-	public void viewQueryDetails( ) throws Exception {
-
+	public void viewQueryDetails() throws IOException {
 
 		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("id"));
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if (httpSession.getAttribute(BRANCHID) != null) {
 			PrintWriter out = response.getWriter();
 
-			 try {
-			int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
+			try {
+				int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
 
-			ResultResponse result = jobService.viewQueryDetails(updateQueriesDto,httpSession.getAttribute(BRANCHID).toString());
+				ResultResponse result = jobService.viewQueryDetails(updateQueriesDto,
+						httpSession.getAttribute(BRANCHID).toString());
 
-			if(!result.isSuccess()) {
-				   throw new Exception("Failed to retrive data");
+				if (!result.isSuccess()) {
+					throw new IOException("Failed to retrive data");
 				}
-			response.setContentType("text/xml");
-			response.setHeader("Cache-Control", "no-cache");
+				response.setContentType("text/xml");
+				response.setHeader("Cache-Control", "no-cache");
 
-
-
-				StringBuilder tableBuilder = new StringBuilder(
-					"<table  style='margin-left: auto;margin-right: auto;'>" +
-						"						<tr>" +
-						"							" +
-						"						</tr>" +
-						"					</table>"
-
+				StringBuilder tableBuilder = new StringBuilder("<table  style='margin-left: auto;margin-right: auto;'>"
+						+ "						<tr>" + "							" + "						</tr>"
+						+ "					</table>"
 
 				);
 
+				StringBuilder rowBuidler = new StringBuilder(
+						"<table border='0' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='querydetailspopup'>");
 
-				StringBuilder rowBuidler = new StringBuilder( "<table border='0' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='querydetailspopup'>");
+				rowBuidler.append("<tr style='border-color:#000000' border='0' cellpadding='1' cellspacing='1'>"
+						+ "<td class='alignLeft'>Query:</td>"
+						+ "<td class='dataText'><textarea name='JobQuerypopup' id='JobQuerypopup' rows='5' cols='38'>"
+						+ result.getMessage() + "</textarea>"
+						+ "<input type='hidden' id='queryid' name='queryid' value='" + queryId + "'></td>" + "</tr>"
+						+ "<tr>" + "<td><br><br></td>" + "</tr>"
+						+ "<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >"
+						+ "<td class='alignLeft'>Response:</td>"
+						+ "<td class='dataText'><textarea name='responsepopup' id='responsepopup' rows='5' cols='38'>"
+						+ result.getMessage() + "</textarea></td>" + "</tr>");
 
-
-				rowBuidler.append(
-					"<tr style='border-color:#000000' border='0' cellpadding='1' cellspacing='1'>" +
-						"<td class='alignLeft'>Query:</td>" +
-						"<td class='dataText'><textarea name='JobQuerypopup' id='JobQuerypopup' rows='5' cols='38'>"+result.getMessage()+"</textarea>"
-						+ "<input type='hidden' id='queryid' name='queryid' value='"+queryId+"'></td>" +
-						"</tr>"+
-						"<tr>" +
-						"<td><br><br></td>" +
-						"</tr>"+
-						"<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >" +
-						"<td class='alignLeft'>Response:</td>" +
-						"<td class='dataText'><textarea name='responsepopup' id='responsepopup' rows='5' cols='38'>"+result.getMessage()+"</textarea></td>" +
-						"</tr>");
-
-
-
-				rowBuidler.append("</tbody>" +
-					"		                </table>");
+				rowBuidler.append("</tbody>" + "		                </table>");
 
 				tableBuilder.append(rowBuidler.toString());
 				String outputTable = tableBuilder.toString();
