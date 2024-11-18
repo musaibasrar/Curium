@@ -1,5 +1,8 @@
 package org.ideoholic.curium.model.documents.dao;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
@@ -60,6 +63,28 @@ public class DocumentDAO {
 			HibernateUtil.closeSession();
 		}
 		return tc;
+	}
+
+
+
+	public boolean addHallTicketInfo(Map<Integer, String> mapOfHallTicket) {
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			
+			for (Entry<Integer, String> entry : mapOfHallTicket.entrySet()) {
+	            String[] blockandSeat = entry.getValue().split(":");
+				Query queryBalanceBooksUpdate = session.createQuery("update Student set stream='"+blockandSeat[0]+"',urbanrural='"+blockandSeat[1]+"' where sid="+entry.getKey());
+				queryBalanceBooksUpdate.executeUpdate();
+	        }
+			transaction.commit();
+			result = true;
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return result;
 	}
 	
 }

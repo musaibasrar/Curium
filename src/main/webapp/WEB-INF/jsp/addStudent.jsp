@@ -748,7 +748,8 @@ $(document).ready(function() {
 							<td ><label> <input name="admnno" required
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
-
+									<input name="stream" value="0" type="hidden" id="stream">
+									<input name="urbanrural" value="0" type="hidden" id="urbanrural">
 							</label></td>
 							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
 									<td ><label> <input

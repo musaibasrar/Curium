@@ -177,10 +177,10 @@
                             <tr>
                                 <th class="headerText">Fees Category</th>
                                 <!-- <th class="headerText">Fees Amount</th>
-                                <th class="headerText">Total Installments</th> -->
+                                <th class="headerText">Total Installments</th>
                                 <th class="headerText">Fees Amount</th>
                                 <th class="headerText">Fees Paid</th>
-                                <th class="headerText">Due Amount</th>
+                                <th class="headerText">Due Amount</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -188,10 +188,11 @@
                                 <tr>
                                     <td class="dataText"><c:out value="${feesstructure.otherfeescategory.feescategoryname}"/></td>
                                    <%--  <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> --%>
+                                    <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> 
                                     <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                     <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
                                     <td class="dataText"><c:out value="${feesstructure.feesamount - feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff}"/></td>
+                                	--%>
                                 </tr>
                             </c:forEach>
                         </tbody>

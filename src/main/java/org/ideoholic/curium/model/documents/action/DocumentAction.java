@@ -196,4 +196,27 @@ public class DocumentAction {
 		new DocumentService(request, response).printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/hallticketinfo")
+	public String marksEntry() {
+		new StandardService(request, response).viewClasses();
+		return "hallticketinfo";
+	}
+	
+	@PostMapping("/searchStudentsForHallTicketInfo")
+	public String searchStudentsForHallTicketInfo() {
+		new StampFeesService(request, response).advanceSearch();
+		return "hallticketinfo";
+	}
+	
+	@PostMapping("/addHallTicketInfo")
+	public String addHallTicketInfo() {
+		if(new DocumentService(request, response).addHallTicketInfo()) {
+			return "savedgeneral";
+		}else {
+			return "error";
+		}
+		
+	}
+	
 }

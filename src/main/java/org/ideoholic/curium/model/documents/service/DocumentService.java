@@ -9,10 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +35,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
+import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
@@ -814,4 +819,29 @@ public class DocumentService {
 			
 			return bonafidePage;
 		}
+
+
+	public boolean addHallTicketInfo() {
+
+		boolean result = false;
+
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String[] blockNos = request.getParameterValues("blocknos");
+		String[] seatNos = request.getParameterValues("seatnos");
+		Map<Integer, String> mapOfHallTicket = new HashMap<Integer, String>();
+
+		if (studentIds != null) {
+			
+			int i=0;
+			for (String sid : studentIds) {
+				String blockAndSeat = blockNos[i]+":"+seatNos[i];
+				mapOfHallTicket.put(Integer.parseInt(sid), blockAndSeat);
+				i++;
+			}
+
+			result = new DocumentDAO().addHallTicketInfo(mapOfHallTicket);
+		}
+
+		return result;
+	}
 }

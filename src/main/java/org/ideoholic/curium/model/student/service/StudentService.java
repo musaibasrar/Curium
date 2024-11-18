@@ -597,7 +597,7 @@ public class StudentService {
 	private void stampFees(Integer stdIds, String setYear) {
 
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		String[] feesCategoryIds = request.getParameterValues("feescategory");
 		if(feesCategoryIds!=null) {
 		
 		String[] studentIds = {stdIds.toString()};
@@ -650,26 +650,6 @@ public class StudentService {
 							studentfeesstructure.setConcession(Integer.parseInt(concession[Integer.parseInt(feesCategoryIdsdiv[1])]));
 							listOfstudentfeesstructure.add(studentfeesstructure);
 						}
-
-			for(int i=0; i < feesCategoryIds.length ; i++){
-
-			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
-			Feescategory feescategory = new Feescategory();
-			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
-			studentfeesstructure.setFeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
-			studentfeesstructure.setFeespaid((long) 0);
-			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(setYear);
-			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
-			listOfstudentfeesstructure.add(studentfeesstructure);
-		}
-
-
 
 		}
 
@@ -1345,6 +1325,12 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
+			if (fieldName.equalsIgnoreCase("archive")) {
+					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+			if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
+				}
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1674,7 +1660,7 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		 student.setArchive(0);
+		// student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 
