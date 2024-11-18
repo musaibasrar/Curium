@@ -9,12 +9,15 @@ import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.appointment.dto.*;
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,16 +65,25 @@ public class AppointmentApiAction {
 	}
 	
 	@PostMapping("/generateAppointmentsReport")
-	private String generateAppointmentsReport(@RequestBody GenerateAppointmentsReportDto appointmentsReport, @RequestHeader(value = "branchid") String branchId) {
-		appointmentService.generateAppointmentsReport(appointmentsReport);
-		return appointmentReport(branchId);
+	private ResponseEntity<StudentListResponseDto> generateAppointmentsReport(@RequestBody GenerateAppointmentsReportDto appointmentsReport, @RequestHeader(value = "branchid") String branchId) {
+		AppointmentResponseDto appointment = appointmentService.generateAppointmentsReport(appointmentsReport);
+		
+		ResponseEntity<StudentListResponseDto> studentDtoResponse = appointmentReport(branchId);
+		StudentListResponseDto studentDto = studentDtoResponse.getBody();
+		
+		studentDto.setStatusSelected(appointment.getStatusSelected());
+		studentDto.setStudentSelected(appointment.getStudentSelected());
+		studentDto.setAppointmentList(appointment.getAppointmentList());
+		studentDto.setTransactionFromDateSelected(appointment.getTransactionFromDateSelected());
+		studentDto.setTransactionToDateSelected(appointment.getTransactionToDateSelected());
+		return ResponseEntity.ok(studentDto);
 	}
 
 	@GetMapping("/appointmentReport")
-	private String appointmentReport(@RequestHeader(value = "branchid") String branchId) {
+	private ResponseEntity<StudentListResponseDto> appointmentReport(@RequestHeader(value = "branchid") String branchId) {
 		// TODO: Need to fix this after migrating StudentService
-		new StudentService(request, response, standardActionAdapter).viewAllStudentsList(branchId);
-		return "appointmentsreport";
+		StudentListResponseDto studentDto = new StudentService(request, response, standardActionAdapter).viewAllStudentsList(branchId);
+		return ResponseEntity.ok(studentDto);
 	}
 
 	@PostMapping("/cancelAppointments")

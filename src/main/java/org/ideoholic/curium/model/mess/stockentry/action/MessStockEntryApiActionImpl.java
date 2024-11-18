@@ -18,8 +18,10 @@ public class MessStockEntryApiActionImpl implements MessStockEntryApiAction {
 
     @Autowired
     private MessItemsService messItemsService;
+    
     @Autowired
     private MessStockEntryService messStockEntryService;
+    
     @Autowired
     private MessSuppliersService messSuppliersService;
 

@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/api/v1/FeesProcess")
+@RequestMapping("/api/v1/feesProcess")
 public class FeesApiActionImpl implements FeesApiAction{
 	@Autowired
 	private HttpServletRequest request;

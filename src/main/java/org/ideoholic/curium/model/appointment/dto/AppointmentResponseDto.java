@@ -6,9 +6,9 @@ import java.util.List;
 
 @Data
 public class AppointmentResponseDto {
-    private String statusselected;
-    private String studentselected;
+    private String statusSelected;
+    private String studentSelected;
     private List<Appointment> appointmentList;
-    private String transactionfromdateselected;
-    private String transactiontodateselected;
+    private String transactionFromDateSelected;
+    private String transactionToDateSelected;
 }

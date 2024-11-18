@@ -6,7 +6,6 @@ import org.ideoholic.curium.model.mess.stockmove.dto.*;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,19 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
 
     @Autowired
     HttpServletRequest request;
+
     @Autowired
     HttpServletResponse response;
+
     @Autowired
     private StandardActionAdapter standardActionAdapter;
+    
     @Autowired
     private MessStockMoveService messStockMoveService;
+    
     @Autowired
     private MessItemsService messItemsService;
+    
     @Autowired
     private StandardService standardService;
 

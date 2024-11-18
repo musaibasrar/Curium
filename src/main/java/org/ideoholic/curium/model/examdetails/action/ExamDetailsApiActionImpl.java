@@ -26,8 +26,6 @@ public class ExamDetailsApiActionImpl implements ExamDetailsApiAction {
     @Autowired
     private SubjectDetailsService subjectDetailsService;
 
-    private String error = "error";
-
 
     @PostMapping("/printPreviewHallTicket")
     public ResponseEntity<HallTicketResponseDto> printPreviewHallTicket(@RequestBody PrintPreviewHallTicketDto dto, @RequestHeader(value = "branchId") String branchId) {
