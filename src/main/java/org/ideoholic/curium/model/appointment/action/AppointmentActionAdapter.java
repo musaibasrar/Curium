@@ -49,11 +49,11 @@ public class AppointmentActionAdapter {
 
         AppointmentResponseDto appointmentResponseDto = appointmentService.generateAppointmentsReport(generateAppointmentsReportDto);
         
-        httpSession.setAttribute("statusselected", "Status:&nbsp;" + appointmentResponseDto.getStatusselected());
-        httpSession.setAttribute("studentselected", "Student Name:&nbsp;" + appointmentResponseDto.getStudentselected());
+        httpSession.setAttribute("statusselected", "Status:&nbsp;" + appointmentResponseDto.getStatusSelected());
+        httpSession.setAttribute("studentselected", "Student Name:&nbsp;" + appointmentResponseDto.getStudentSelected());
         httpSession.setAttribute("appointmentList", appointmentResponseDto.getAppointmentList());
-        httpSession.setAttribute("transactionfromdateselected", "From:" + appointmentResponseDto.getTransactionfromdateselected());
-        httpSession.setAttribute("transactiontodateselected", "To:" + appointmentResponseDto.getTransactiontodateselected());
+        httpSession.setAttribute("transactionfromdateselected", "From:" + appointmentResponseDto.getTransactionFromDateSelected());
+        httpSession.setAttribute("transactiontodateselected", "To:" + appointmentResponseDto.getTransactionToDateSelected());
     }
 
     public boolean addAppointment() {

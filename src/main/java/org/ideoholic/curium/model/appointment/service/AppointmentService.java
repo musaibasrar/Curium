@@ -218,24 +218,24 @@ public class AppointmentService {
 
 		if(!status.isEmpty()) {
 			subQuery = subQuery + " and status = '"+status+"'";
-			appointmentResponseDto.setStatusselected(status);
+			appointmentResponseDto.setStatusSelected(status);
 		}else {
-			appointmentResponseDto.setStatusselected("");
+			appointmentResponseDto.setStatusSelected("");
 
 		}
 
 		if(!studentId.isEmpty()) {
 			subQuery = subQuery + "and ap.parent.Student.sid = '"+studentId+"'";
-			appointmentResponseDto.setStudentselected(studentName);
+			appointmentResponseDto.setStudentSelected(studentName);
 		}else {
-			appointmentResponseDto.setStudentselected("");
+			appointmentResponseDto.setStudentSelected("");
 		}
 		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
 		appointmentResponseDto.setAppointmentList(appointmentList);
 
-		appointmentResponseDto.setTransactionfromdateselected(generateAppointmentsReportDto.getFromDate());
+		appointmentResponseDto.setTransactionFromDateSelected(generateAppointmentsReportDto.getFromDate());
 
-		appointmentResponseDto.setTransactiontodateselected(generateAppointmentsReportDto.getToDate());
+		appointmentResponseDto.setTransactionToDateSelected(generateAppointmentsReportDto.getToDate());
 
 		return appointmentResponseDto;
 	}

@@ -7,7 +7,6 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.marksdetails.dto.*;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,7 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
 
     @Autowired
     private MarksDetailsService marksDetailsService;
+    
     @Autowired
     private StandardService standardService;
 

@@ -31,8 +31,10 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 	
 	@Autowired
 	private StandardService standardService;
+	
 	@Autowired
-	private EmployeeService employeeService;	
+	private EmployeeService employeeService;
+	
 	@Autowired
 	private PrintIdsService printIdsService;
 
