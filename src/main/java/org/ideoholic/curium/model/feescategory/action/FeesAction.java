@@ -235,6 +235,18 @@ public class FeesAction {
 		new FeesService(request, response).viewFees();
 		return "feesreportbusfees";
 	}
+	
+	@GetMapping("/otherFeesConcessionReport")
+	public String otherFeesConcessionReport() {
+		new StandardService(request, response).viewClasses();
+		return "otherfeesconcessionreport";
+	}
+	
+	@PostMapping("/searchOtherFeesConcessionReport")
+	public String searchOtherFeesConcessionReport() {
+		new FeesService(request, response).searchOtherFeesWaiveofforConcessionReport("concession");
+		return "otherfeesconcessionreport";
+	}
 
 
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Concession Report</title>
+<title>Other Fees Concession Report</title>
 <link rel="stylesheet" href="/gnyanganga/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/gnyanganga/css/datePicker/demos.css">
 <style type="text/css">
@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchForFeesConcession() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/FeesProcess/searchFeesConcessionReport";
+		form1.action = "/gnyanganga/FeesProcess/searchOtherFeesConcessionReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -457,7 +457,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Concession Report</a></li>
+					<li><a href="#tabs-1">Other Fees Concession Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -571,7 +571,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Category</th>
+						<th title="click to sort" class="headerText">Other Fees Category</th>
 						<th title="click to sort" class="headerText">Fees Amount</th>
 						<th title="click to sort" class="headerText">Installment</th>
 						<th title="click to sort" class="headerText">Total Fees Amount</th>
@@ -595,8 +595,8 @@ for(Cookie cookie : cookies){
 											value="${students.key.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>
-								<td class="dataText"><c:out value="${fees.feescategory.feescategoryname}"/></td>
-                                <td class="dataText"><c:out value="${fees.feescategory.amount}"/></td>
+								<td class="dataText"><c:out value="${fees.otherfeescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${fees.otherfeescategory.amount}"/></td>
 								<td class="dataText"><c:out	value="${fees.totalinstallment}" /></td>
 								<td class="dataText"><c:out	value="${fees.feesamount}" /></td>
 								<td class="dataText"><c:out	value="${fees.concession}" /></td>

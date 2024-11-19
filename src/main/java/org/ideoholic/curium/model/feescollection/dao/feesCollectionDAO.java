@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -376,6 +377,32 @@ public class feesCollectionDAO {
 			HibernateUtil.closeSession();
 		}
 		return receiptInfo;
+	}
+
+	public List<Studentotherfeesstructure> getStudentsOtherFeesStructure(List<Integer> studentids,
+			String currentacademicyear, String searchCriteria) {
+		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			// results = (List<PersonalDetails>)
+			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
+			Query query = session.createQuery("from Studentotherfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentacademicyear+"'");
+			query.setParameter("ids", studentids);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
 	}
 
 }
