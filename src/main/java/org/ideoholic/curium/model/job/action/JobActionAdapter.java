@@ -84,6 +84,7 @@ public class JobActionAdapter {
 		request.setAttribute("queryList", jobQueryDto.getQueriesList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage",jobQueryDto.getPage());
+		request.setAttribute("studentList", jobQueryDto.getStudentList());
 		return jobQueryDto.isSuccess();
 	}
 
@@ -98,7 +99,7 @@ public class JobActionAdapter {
 	}
 
 	public void updateQueryRemarks() {
-		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		CombinedQueryDto updateQueriesDto = new CombinedQueryDto();
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
 		updateQueriesDto.setQueryRemarks(request.getParameter("queryremarks"));
 		SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueryRemarks(updateQueriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -166,6 +167,7 @@ public class JobActionAdapter {
 		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage", jobQueryDto.getCurrentPage());
+		request.setAttribute("studentList", jobQueryDto.getTaskList());
 		return jobQueryDto.isSuccess();
 	}
 
@@ -179,7 +181,7 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewTaskDetails() {
-		QueriesDto queriesDto = new QueriesDto();
+		CombinedQueryDto queriesDto = new CombinedQueryDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.viewTaskDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("taskdetails",jobQueryDto.getTaskList());
@@ -195,7 +197,7 @@ public class JobActionAdapter {
 	}
 
 	public void inProgressTasks() {
-		QueriesDto queriesDto = new QueriesDto();
+		CombinedQueryDto queriesDto = new CombinedQueryDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		JobQueryDto jobQueryDto = jobService.inProgressTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -203,7 +205,7 @@ public class JobActionAdapter {
 	}
 
 	public void toDoTasks() {
-		QueriesDto queriesDto = new QueriesDto();
+		CombinedQueryDto queriesDto = new CombinedQueryDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.toDoTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -211,7 +213,7 @@ public class JobActionAdapter {
 	}
 
 	public void cancelTasks() {
-		QueriesDto queriesDto = new QueriesDto();
+		CombinedQueryDto queriesDto = new CombinedQueryDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.cancelTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -220,7 +222,7 @@ public class JobActionAdapter {
 	}
 
 	public void completeTasks() {
-		QueriesDto queriesDto = new QueriesDto();
+		CombinedQueryDto queriesDto = new CombinedQueryDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.completeTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
