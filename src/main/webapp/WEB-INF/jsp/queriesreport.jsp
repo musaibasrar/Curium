@@ -443,6 +443,11 @@
 				form1.submit();
 	}
 	
+	function viewTaskDetails(jobid){
+        var form1=document.getElementById("form1");
+        form1.action="/sneha/JobProcess/ViewTaskDetails?jobid="+jobid+"";
+        form1.submit();
+    }
  
 	 $(function(){
 		 
@@ -687,6 +692,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Created Date</th>
                             <th title="click to sort" class="headerText">Updated Date</th>
                             <th title="click to sort" class="headerText">End Date</th>
+                            <th title="click to sort" class="headerText">Task Details</th>
                             <!-- <th title="click to sort" class="headerText">Feedback</th> -->
                         </tr>
                     </thead>
@@ -712,6 +718,26 @@ for(Cookie cookie : cookies){
                             <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
                             <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
                             <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
+                            <c:if test="${query.status == 'To Do' }">
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;">
+                                	<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">View Tasks</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'In Progress' }">
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">View Tasks</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'Completed' }">
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">View Tasks</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">View Tasks</a>
+                                	</td>
+                                </c:if>
                                 <%-- <td class="dataText"><c:out  value="${query.feedback}"/></td> --%>
                             </tr>
                         </c:forEach>

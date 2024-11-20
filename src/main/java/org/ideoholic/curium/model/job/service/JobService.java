@@ -409,7 +409,7 @@ public class JobService {
 		}
 		
 		if(!staffId.isEmpty()) {
-			subQuery = subQuery + "and pq.employee.tid = '"+staffId+"'";
+			subQuery = subQuery + "and pq.teacher.tid = '"+staffId+"'";
 			httpSession.setAttribute("staffselected", "Staff Name:&nbsp;"+staffName);
 		}else {
 			httpSession.setAttribute("staffselected", "");
