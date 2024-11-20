@@ -224,7 +224,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="font-weight: bold;text-transform: capitalize;width:120px">Chitguppa&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<span style="font-weight: bold;text-transform: capitalize;width:400px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
 					</h3>
 				</td>
