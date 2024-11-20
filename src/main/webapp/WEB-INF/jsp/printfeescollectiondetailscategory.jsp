@@ -279,14 +279,26 @@
 					<tr>
 						<td class="datatd">
 							</td>
-						<td class="datatd">Total Fees Paid by Cash</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycash}" /></td>
+						<td class="datatd">Total Fees Paid by Cash - Fees</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByCashSingle}" /></td>
 					</tr>
 					<tr>
 						<td class="datatd">
 							</td>
-						<td class="datatd">Total Fees Paid by Bank</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybank}" /></td>
+						<td class="datatd">Total Fees Paid by Bank - Fees</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByBankSingle}" /></td>
+					</tr>
+					<tr>
+						<td class="datatd">
+							</td>
+						<td class="datatd">Total Fees Paid by Cash - Bus Fees</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByCashSingleBusFees}" /></td>
+					</tr>
+					<tr>
+						<td class="datatd">
+							</td>
+						<td class="datatd">Total Fees Paid by Bank - Bus Fees</td>
+						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByBankSingleBusFees}" /></td>
 					</tr>
 					<tr>
 						<td class="datatd">

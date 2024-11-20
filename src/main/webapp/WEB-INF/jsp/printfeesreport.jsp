@@ -239,7 +239,7 @@
             <thead>
             	
  				 <tr>
- 				 
+ 				 		<th class="datath">Sl.No.</th>
  				 		<th class="datath">Admission Number</th>
 						<th class="datath">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th class="datath">Class & Sec&nbsp;</th>
@@ -257,7 +257,7 @@
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -265,6 +265,7 @@
 								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+								<td class="dataText">${status.index+1}</td>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>

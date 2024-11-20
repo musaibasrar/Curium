@@ -136,7 +136,7 @@ for(Cookie cookie : cookies){
 		   <c:if test="${(userType == 'parents')}">
 			    <frame   src="/gnyanganga/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
-			<frame src="/gnyanganga/welcomeparent" name="mainFrame" scrolling="yes" />
+			<frame src="/gnyanganga/welcomeparent" name="mainFrame" scrolling="no" />
            <!--  <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/gnyanganga/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
                 <frame src="/gnyanganga/welcomeparent" name="mainFrame" scrolling="yes" />
