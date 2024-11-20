@@ -748,6 +748,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
 						<th title="click to sort" class="headerText">Paid Amount&nbsp;</th>
 						<th title="click to sort" class="headerText">Due Amount&nbsp;</th>
+						<th title="click to sort" class="headerText">Concession&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
@@ -782,12 +783,16 @@ for(Cookie cookie : cookies){
 											<td style="width: 160px;" align="right">
 												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
 											</td>
+											<%-- <td style="width: 160px;" align="right">
+												${studentfeescatagorydetails.feescategory.concession}:&nbsp;&nbsp;&nbsp;	
+											</td> --%>
 											<td align="left">
 												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
 											</td>
 										</tr>
 									</table>
 									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
+									<c:set var="concession" value="${studentfeescatagorydetails.concession}" />
 									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 									<c:set var="PaidAmount" value="${TotalAmount-DueAmount}" />
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
@@ -797,6 +802,7 @@ for(Cookie cookie : cookies){
 							</td>
 							<td class="dataText"><c:out value="${PaidAmount}" /></td>
 							<td class="dataText"><c:out value="${DueAmount}" /></td>
+							<td class="dataText"><c:out value="${concession}" /></td>
 							<td class="dataText">
 									<table>
 										<tr>

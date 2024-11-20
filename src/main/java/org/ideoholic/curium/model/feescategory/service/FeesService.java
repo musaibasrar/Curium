@@ -32,6 +32,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -756,4 +757,92 @@ public class FeesService {
 
 	        }
 	    }
+
+
+		public void searchOtherFeesWaiveofforConcessionReport(String searchCriteria) {
+			List<Parents> searchStudentList = new ArrayList<Parents>();
+			Map<Parents,List<Studentotherfeesstructure>> parentsStudentFeesStructure = new HashMap<Parents,List<Studentotherfeesstructure>>();
+			
+			if(httpSession.getAttribute("branchid")!=null){
+				String queryMain = "From Parents as parents where";
+				String studentname = DataUtil.emptyString(request
+						.getParameter("namesearch"));
+
+				String addClass = request.getParameter("classsearch");
+				String addSec = request.getParameter("secsearch");
+				String conClassStudying = "";
+
+				if (!addClass.equalsIgnoreCase("")) {
+
+					conClassStudying = addClass+"--" +"%";
+
+				}
+				if (!addSec.equalsIgnoreCase("")) {
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying+"--"+addSec+"%";
+				}
+
+				String classStudying = DataUtil.emptyString(conClassStudying);
+				String querySub = "";
+
+				if (!studentname.equalsIgnoreCase("")) {
+					querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				}
+
+				if (!classStudying.equalsIgnoreCase("")
+						&& !querySub.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.classstudying like '"
+							+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				} else if (!classStudying.equalsIgnoreCase("")) {
+					querySub = querySub + " parents.Student.classstudying like '"
+							+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				}
+
+				queryMain = queryMain + querySub;
+				/*
+				 * queryMain =
+				 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+				 * ;
+				 */
+				System.out.println("SEARCH QUERY ***** " + queryMain);
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				List<Integer> studentids = new ArrayList<>(); 
+				
+				for (Parents parents : searchStudentList) {
+					studentids.add(parents.getStudent().getSid());
+				}
+				Currentacademicyear currentYear = new YearDAO().showYear();
+				httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+				
+				List<Studentotherfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsOtherFeesStructure(studentids, currentYear.getCurrentacademicyear(), searchCriteria);
+				
+				
+				for (Parents parents : searchStudentList) {
+					
+					List<Studentotherfeesstructure> singleStudent = new ArrayList<Studentotherfeesstructure>();
+					
+					for (Studentotherfeesstructure fees : listStudentsFeesStructure) {
+						
+						int feeSid = fees.getSid();
+						int sid = parents.getStudent().getSid();
+							
+						if(feeSid == sid) {
+									singleStudent.add(fees);
+							}
+					}
+					parentsStudentFeesStructure.put(parents, singleStudent);
+					
+				}
+				
+			}
+			if("waiveoff".equalsIgnoreCase(searchCriteria)) {
+				httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", parentsStudentFeesStructure);
+				httpSession.setAttribute("studentsfeesstructuredetailsconcession", null);
+			}else if("concession".equalsIgnoreCase(searchCriteria)) {
+				httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", null);
+				httpSession.setAttribute("studentsfeesstructuredetailsconcession", parentsStudentFeesStructure);
+			}
+			
+						
+		}
 }
