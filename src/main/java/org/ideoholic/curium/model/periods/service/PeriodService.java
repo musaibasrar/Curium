@@ -74,7 +74,11 @@ public class PeriodService {
 
 	public boolean savePeriods() {
 		
-		String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
+		boolean result = false;
+    	String[] classesPeriodCat = request.getParameterValues("fromclass");
+		
+    	for (String periodCat : classesPeriodCat) {
+    	String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
 		String totalNoOfPeriods = DataUtil.emptyString(request.getParameter("totalperiods"));
 		String durationOfPeriodsHr = DataUtil.emptyString(request.getParameter("periodduration"));
 		String durationOfPeriodsMin = DataUtil.emptyString(request.getParameter("perioddurationmin"));
@@ -84,8 +88,8 @@ public class PeriodService {
 		String dayEndTimeHr = DataUtil.emptyString(request.getParameter("dayendtime"));
 		String dayEndTimeMin = DataUtil.emptyString(request.getParameter("dayendminutes"));
 		String dayEndAm = DataUtil.emptyString(request.getParameter("dayendam"));
-		String fromClass = DataUtil.emptyString(request.getParameter("fromclass"));
-		String toClass = DataUtil.emptyString(request.getParameter("toclass"));
+		//String fromClass = DataUtil.emptyString(request.getParameter("fromclass"));
+		//String toClass = DataUtil.emptyString(request.getParameter("toclass"));
 		
 		String[] periods = request.getParameterValues("periods");
 		String[] subjects = request.getParameterValues("subject");
@@ -122,16 +126,17 @@ public class PeriodService {
 		List<Perioddetails> periodDetailsList = new ArrayList<Perioddetails>();
 		Periodmaster periodMaster = new Periodmaster();
 		periodMaster.setAcademicyear(academicYear);
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClass_(periodCat);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
 		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
 		periodMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		periodMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-		return new PeriodDAO().save(periodMaster,periodMap);
+		result =  new PeriodDAO().save(periodMaster,periodMap);
+    	}
+    	return result;
 	}
-
 
 	public boolean viewTimeTable() {
 		String periodMasterid = request.getParameter("id");
@@ -490,4 +495,7 @@ request.setAttribute("periodMasterid", periodMasterid);
 
 		
 	}
+
+
+	
 }
