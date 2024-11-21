@@ -37,6 +37,9 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
     @Autowired
     private StandardService standardService;
 
+    @Autowired
+    private StudentService studentService;
+
     @PostMapping("/cancelStockMove")
     public ResponseEntity<StockMoveCancelDto> cancelStockMove(@RequestBody StockMoveIdsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
         StockMoveCancelDto stockMoveCancelDto = new StockMoveCancelDto();
@@ -75,7 +78,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
 
         //Get Customers
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewStudentsParentsPerBranch(branchId);
+        studentService.viewStudentsParentsPerBranch(branchId);
 
 
 
@@ -120,7 +123,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
         stockMoveSaveDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
         //Get Student
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
+        studentService.viewAllStudentsParents(page, branchId);
 
         return ResponseEntity.ok(stockMoveSaveDto);
         //return "issuestock";

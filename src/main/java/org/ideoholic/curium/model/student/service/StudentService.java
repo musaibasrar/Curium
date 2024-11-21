@@ -26,32 +26,28 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
 
+@Service
 public class StudentService {
-
-	private StandardActionAdapter standardActionAdapter;
-
-	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
-	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	@Autowired
+	private StandardService standardService;
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -59,13 +55,6 @@ public class StudentService {
 	 * Size of a byte buffer to read/write file
 	 */
 	private static final int BUFFER_SIZE = 4096;
-
-	public StudentService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-		this.standardActionAdapter=standardActionAdapter;
-	}
 
 	public ResultResponse addStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -291,7 +280,7 @@ public class StudentService {
 		return result;
 	}
 
-	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId) {
+	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
 			long id = Long.parseLong(studentId);
@@ -379,7 +368,7 @@ public class StudentService {
 				result.setTotalMiscAmount(totalMiscAmount);
 				result.setSuccess(true);
 			}
-			standardActionAdapter.viewClasses();
+			standardService.viewClasses(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
@@ -389,7 +378,7 @@ public class StudentService {
 	}
 	//code for viewDetailsbySidOfStudent
 
-	public StudentDetailsResponseDto viewDetailsbySidStudent(String studentId) {
+	public StudentDetailsResponseDto viewDetailsbySidStudent(String studentId, String branchId) {
 
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
@@ -459,7 +448,7 @@ public class StudentService {
 				result.setTotalFeesConcession(totalFeesConcession);
 				result.setSuccess(true);
 			}
-			standardActionAdapter.viewClasses();
+			standardService.viewClasses(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
@@ -469,7 +458,7 @@ public class StudentService {
 	}
 	//end of viewDetailsbySidOfStudent
 //other view detail of students
-	public StudentDetailsResponseDto otherviewDetailsOfStudent(String studentId) {
+	public StudentDetailsResponseDto otherviewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().build();
 		try {
 			long id = Long.parseLong(studentId);
@@ -527,7 +516,7 @@ public class StudentService {
 				result.setSuccess(true);
 
 			}
-			standardActionAdapter.viewClasses();
+			standardService.viewClasses(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
@@ -1176,7 +1165,7 @@ public class StudentService {
 		return result;
 	}
 	
-	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent(String studentId) {
+	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
 			long id = Long.parseLong(studentId);
@@ -1256,7 +1245,7 @@ public class StudentService {
 				result.setTotalFeesConcession(totalFeesConcession);
 				result.setSuccess(true);
 			}
-			standardActionAdapter.viewClasses();
+			standardService.viewClasses(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);

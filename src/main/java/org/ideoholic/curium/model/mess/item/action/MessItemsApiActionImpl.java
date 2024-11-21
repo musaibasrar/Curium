@@ -32,6 +32,9 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
     @Autowired
     private StandardActionAdapter standardActionAdapter;
 
+    @Autowired
+    private StudentService studentService;
+
     @PostMapping("/printStockReceivedReport")
     public String printStockReceivedReport() {
         return "printstockreceivedreport";
@@ -59,7 +62,7 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
         IssuanceReportResponseDto result = messItemsService.generateStockIssuanceReport(dto);
 
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
+        studentService.viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }
 
@@ -68,7 +71,7 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
         ResultResponse result = messItemsService.getIssuanceStock();
 
         // TODO: Need to fix this after migrating StudentService
-        new StudentService(request, response, standardActionAdapter).viewAllStudentsParents(page, branchId);
+        studentService.viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }
 

@@ -35,13 +35,15 @@ public class StudentActionAdapter {
     @Autowired
     private StandardActionAdapter standardActionAdapter;
 
+    @Autowired
+    private StudentService studentService;
+
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
 
     public void viewAllStudentsSuperAdmin() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentsSuperAdminResponseDto responseDto = studentService.viewAllStudentsSuperAdmin();
         request.setAttribute("studentList", responseDto.getStudentList());
@@ -50,7 +52,6 @@ public class StudentActionAdapter {
     }
 
     public ResultResponse addNew() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         ResultResponse resultResponse = studentService.addNew(httpSession.getAttribute(BRANCHID).toString());
 
@@ -58,7 +59,6 @@ public class StudentActionAdapter {
     }
 
     public boolean downlaodFile() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         ResultResponse resultResponse = studentService.downlaodFile();
 
@@ -66,7 +66,6 @@ public class StudentActionAdapter {
     }
 
     public BonafideGenerationResponseDto generateBonafide() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -78,7 +77,6 @@ public class StudentActionAdapter {
     }
 
     public void viewfeesStructurePerYear() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentIdDto dto = new StudentIdDto();
         dto.setStudentId(request.getParameter("id"));
@@ -95,7 +93,6 @@ public class StudentActionAdapter {
     }
 
     public void viewAllStudentsParents() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         String page = request.getParameter("page");
 
@@ -106,7 +103,6 @@ public class StudentActionAdapter {
     }
 
     public boolean promoteMultiple() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         PromoteMultipleDto dto = new PromoteMultipleDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -127,7 +123,6 @@ public class StudentActionAdapter {
     }
 
     public void restoreMultiple() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -137,8 +132,6 @@ public class StudentActionAdapter {
 
     public void deleteMultiple() {
 
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
-
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
@@ -146,14 +139,12 @@ public class StudentActionAdapter {
     }
 
     public void viewAllStudentsArchive() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentAttendanceDetailsResponseDto responseDto = studentService.viewAllStudentsArchive();
         request.setAttribute("studentListArchive", responseDto.getStudentList());
     }
 
     public void archiveMultiple() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
@@ -162,7 +153,6 @@ public class StudentActionAdapter {
     }
 
     public boolean addStudent(CreateStudentDto student, MultipartFile[] uploadedFiles) {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         student.setYearofadmission(request.getParameter("yearofadmission"));
         student.setFeesCategory(request.getParameterValues("feescategory"));
@@ -177,8 +167,6 @@ public class StudentActionAdapter {
     }
 
     public boolean exportDataForStudents() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
-
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
@@ -190,7 +178,6 @@ public class StudentActionAdapter {
 
 
     public String updateStudent(StudentDto studentDto, MultipartFile[] uploadedFiles) {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         studentDto.setAdmissionnumber(request.getParameter("admnno"));
         studentDto.setPlaceofbirth(request.getParameter("place"));
@@ -248,11 +235,10 @@ public class StudentActionAdapter {
     }
 
     public boolean viewDetailsOfStudent() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewDetailsOfStudent(studentId);
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsOfStudent(studentId,  httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -277,11 +263,10 @@ public class StudentActionAdapter {
     }
 
     public boolean viewDetailsbySidStudent() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId);
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -303,11 +288,10 @@ public class StudentActionAdapter {
     }
 
     public boolean viewOtherFeesDetailsOfStudent() {
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId);
+        StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -329,7 +313,6 @@ public class StudentActionAdapter {
     }
 
     public boolean viewAllStudentsList(){
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentListResponseDto result = studentService.viewAllStudentsList(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());
@@ -338,7 +321,6 @@ public class StudentActionAdapter {
     }
 
     public boolean viewStudentsParentsPerBranch(){
-        StudentService studentService = new StudentService(request, response, standardActionAdapter);
 
         StudentListResponseDto response = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", response.getParentDetails());

@@ -22,6 +22,7 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+@Service
 public class StudentServiceArchive {
     private StandardActionAdapter standardActionAdapter;
 

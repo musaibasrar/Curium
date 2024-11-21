@@ -34,8 +34,6 @@ public class StudentAction {
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
-	@Autowired
 	HttpSession httpSession;
 	@Autowired
 	StandardActionAdapter standardActionAdapter;
