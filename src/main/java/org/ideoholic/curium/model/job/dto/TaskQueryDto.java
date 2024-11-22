@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CombinedQueryDto {
+public class TaskQueryDto {
 	private String queryId; 
 	private String jobQuery;
 	private String response;

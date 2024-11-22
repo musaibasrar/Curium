@@ -18,7 +18,7 @@ import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
-import org.ideoholic.curium.model.job.dto.CombinedQueryDto;
+import org.ideoholic.curium.model.job.dto.TaskQueryDto;
 import org.ideoholic.curium.model.job.dto.EmployeeResponseDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
@@ -122,7 +122,7 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/updateQueryRemarks")
-	public ResponseEntity<SearchStudentResponseDto> updateQueryRemarks(@RequestBody CombinedQueryDto updateQueriesDto,
+	public ResponseEntity<SearchStudentResponseDto> updateQueryRemarks(@RequestBody UpdateQueriesDto updateQueriesDto,
 			@RequestHeader(value = "userloginid") String userLoginId) {
 		SearchStudentResponseDto result = jobService.updateQueryRemarks(updateQueriesDto, userLoginId);
 		return ResponseEntity.ok(result);
@@ -257,10 +257,10 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/ViewTaskDetails")
-	public ResponseEntity<JobQueryDto> viewTaskDetails(@RequestBody CombinedQueryDto combinedQueryDto,
+	public ResponseEntity<JobQueryDto> viewTaskDetails(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "branchid") String branchId) {
 
-		JobQueryDto result = jobService.viewTaskDetails(combinedQueryDto, branchId);
+		JobQueryDto result = jobService.viewTaskDetails(queriesDto, branchId);
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
 		} else {
@@ -281,7 +281,7 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/inProgressTasks")
-	public ResponseEntity<JobQueryDto> inProgressTasks(@RequestBody CombinedQueryDto queriesDto,
+	public ResponseEntity<JobQueryDto> inProgressTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId) {
@@ -296,7 +296,7 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/toDoTasks")
-	public ResponseEntity<JobQueryDto> toDoTasks(@RequestBody CombinedQueryDto queriesDto,
+	public ResponseEntity<JobQueryDto> toDoTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId) {
@@ -310,7 +310,7 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/cancelTasks")
-	public ResponseEntity<JobQueryDto> cancelTasks(@RequestBody CombinedQueryDto queriesDto,
+	public ResponseEntity<JobQueryDto> cancelTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId) {
@@ -324,7 +324,7 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/completeTasks")
-	public ResponseEntity<JobQueryDto> completeTasks(@RequestBody CombinedQueryDto queriesDto,
+	public ResponseEntity<JobQueryDto> completeTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId) {
@@ -338,17 +338,32 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@PostMapping("/updateTaskRemarks")
-	public ResponseEntity<JobQueryDto> updateTaskRemarks(@RequestBody CombinedQueryDto combinedQueryDto,
+	public ResponseEntity<JobQueryDto> updateTaskRemarks(@RequestBody TaskQueryDto taskQueryDto,
 			@RequestHeader(value = "userType") String userType,
 			@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId) {
-		jobService.updateQueryRemarks(combinedQueryDto, userLoginId);
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
+		updateQueriesDto.setJobQuery(taskQueryDto.getJobQuery());
+		updateQueriesDto.setQueryId(taskQueryDto.getQueryId());
+		updateQueriesDto.setResponse(taskQueryDto.getResponse());
+		updateQueriesDto.setQueryRemarks(taskQueryDto.getQueryRemarks());
+		jobService.updateQueryRemarks(updateQueriesDto, userLoginId);
 
-		if (combinedQueryDto.getDisplayType().equalsIgnoreCase("viewall")) {
+		if (taskQueryDto.getDisplayType().equalsIgnoreCase("viewall")) {
 			return viewAllTasks(userType, page, branchId, userName);
 		} else {
-			return viewTaskDetails(combinedQueryDto, branchId);
+			QueriesDto queriesDto = new QueriesDto();
+			queriesDto.setAssignto(taskQueryDto.getAssignto());
+			queriesDto.setDescription(taskQueryDto.getDescription());
+			queriesDto.setDisplayType(taskQueryDto.getDisplayType());
+			queriesDto.setExpecteddd(taskQueryDto.getExpecteddd());
+			queriesDto.setJobId(taskQueryDto.getJobId());
+			queriesDto.setJobno(taskQueryDto.getJobno());
+			queriesDto.setQueryIds(taskQueryDto.getQueryIds());
+			queriesDto.setTask(taskQueryDto.getTask());
+			queriesDto.setTaskIds(taskQueryDto.getTaskIds());
+			return viewTaskDetails(queriesDto, branchId);
 		}
 	}
 
@@ -420,7 +435,6 @@ public class JobApiActionImpl implements JobApiAction {
 		return ResponseEntity.ok().build();
 
 	}
-
 
 		
 }

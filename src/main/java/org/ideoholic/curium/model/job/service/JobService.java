@@ -36,7 +36,7 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
-import org.ideoholic.curium.model.job.dto.CombinedQueryDto;
+import org.ideoholic.curium.model.job.dto.QueriesDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
@@ -607,11 +607,11 @@ public class JobService {
         return searchStudentResponseDto;
 	}
 
-	public SearchStudentResponseDto updateQueryRemarks(CombinedQueryDto combinedQueryDto,String userLoginId ) {
+	public SearchStudentResponseDto updateQueryRemarks(UpdateQueriesDto updateQueriesDto,String userLoginId ) {
 
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
-		String queryId = combinedQueryDto.getQueryId();
-		String remarks = combinedQueryDto.getQueryRemarks();
+		String queryId = updateQueriesDto.getQueryId();
+		String remarks = updateQueriesDto.getQueryRemarks();
 		int userId = Integer.parseInt(userLoginId);
 		boolean result = false;
 		remarks = remarks.replace("'", "''");
@@ -620,13 +620,13 @@ public class JobService {
 		return searchStudentResponseDto;
 	}
 
-	public JobQueryDto viewTaskDetails(CombinedQueryDto combinedQueryDto,String branchId) {
+	public JobQueryDto viewTaskDetails(QueriesDto QueriesDto,String branchId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		boolean result = false;
 		if(branchId!=null){
 
-			int jobId = Integer.parseInt(combinedQueryDto.getJobId());
+			int jobId = Integer.parseInt(QueriesDto.getJobId());
 			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
 			jobQueryDto.setTaskList(taskDetails);
 			jobQueryDto.setSuccess(result);
@@ -698,7 +698,7 @@ public class JobService {
 		return jobQueryDto;
 	}
 
-	public JobQueryDto completeTasks(CombinedQueryDto queriesDto,String userLoginId) {
+	public JobQueryDto completeTasks(QueriesDto queriesDto,String userLoginId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		String[] TaskIds = queriesDto.getTaskIds();
@@ -760,7 +760,7 @@ public class JobService {
 	return jobQueryDto;
 	}
 
-	public JobQueryDto cancelTasks(CombinedQueryDto queriesDto,String userLoginId ) {
+	public JobQueryDto cancelTasks(QueriesDto queriesDto,String userLoginId ) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		String[] taskIds = queriesDto.getTaskIds();
@@ -825,7 +825,7 @@ public class JobService {
 	return jobQueryDto;
 	}
 
-	public JobQueryDto toDoTasks(CombinedQueryDto queriesDto,String userLoginId) {
+	public JobQueryDto toDoTasks(QueriesDto queriesDto,String userLoginId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		String[] taskIds = queriesDto.getTaskIds();
@@ -883,7 +883,7 @@ public class JobService {
 	return jobQueryDto;
 	}
 
-	public JobQueryDto inProgressTasks(CombinedQueryDto queriesDto,String userLoginId) {
+	public JobQueryDto inProgressTasks(QueriesDto queriesDto,String userLoginId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
 		String[] taskIds = queriesDto.getTaskIds();

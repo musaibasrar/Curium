@@ -99,7 +99,7 @@ public class JobActionAdapter {
 	}
 
 	public void updateQueryRemarks() {
-		CombinedQueryDto updateQueriesDto = new CombinedQueryDto();
+		UpdateQueriesDto updateQueriesDto = new UpdateQueriesDto();
 		updateQueriesDto.setQueryId(request.getParameter("queryid"));
 		updateQueriesDto.setQueryRemarks(request.getParameter("queryremarks"));
 		SearchStudentResponseDto searchStudentResponseDto = jobService.updateQueryRemarks(updateQueriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -181,7 +181,7 @@ public class JobActionAdapter {
 	}
 
 	public boolean viewTaskDetails() {
-		CombinedQueryDto queriesDto = new CombinedQueryDto();
+		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.viewTaskDetails(queriesDto,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("taskdetails",jobQueryDto.getTaskList());
@@ -197,7 +197,7 @@ public class JobActionAdapter {
 	}
 
 	public void inProgressTasks() {
-		CombinedQueryDto queriesDto = new CombinedQueryDto();
+		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setJobId(request.getParameter("jobid"));
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		JobQueryDto jobQueryDto = jobService.inProgressTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -205,7 +205,7 @@ public class JobActionAdapter {
 	}
 
 	public void toDoTasks() {
-		CombinedQueryDto queriesDto = new CombinedQueryDto();
+		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.toDoTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -213,7 +213,7 @@ public class JobActionAdapter {
 	}
 
 	public void cancelTasks() {
-		CombinedQueryDto queriesDto = new CombinedQueryDto();
+		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.cancelTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());
@@ -222,7 +222,7 @@ public class JobActionAdapter {
 	}
 
 	public void completeTasks() {
-		CombinedQueryDto queriesDto = new CombinedQueryDto();
+		QueriesDto queriesDto = new QueriesDto();
 		queriesDto.setTaskIds(request.getParameterValues("taskids"));
 		queriesDto.setJobId(request.getParameter("jobid"));
 		JobQueryDto jobQueryDto = jobService.completeTasks(queriesDto,httpSession.getAttribute(USERLOGINID).toString());

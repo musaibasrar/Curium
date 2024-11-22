@@ -11,7 +11,7 @@ import org.ideoholic.curium.model.job.dto.EmployeeResponseDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
 import org.ideoholic.curium.model.job.dto.QueriesDto;
-import org.ideoholic.curium.model.job.dto.CombinedQueryDto;
+import org.ideoholic.curium.model.job.dto.TaskQueryDto;
 import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
@@ -44,7 +44,7 @@ public interface JobApiAction {
 	 ResponseEntity<SearchStudentResponseDto> updateQueries(@RequestBody UpdateQueriesDto updateQueriesDto,
 			@RequestHeader(value = "userloginid") String userLoginId);
 
-	 ResponseEntity<SearchStudentResponseDto> updateQueryRemarks(@RequestBody CombinedQueryDto combinedQueryDto,
+	 ResponseEntity<SearchStudentResponseDto> updateQueryRemarks(@RequestBody UpdateQueriesDto updateQueriesDto,
 			@RequestHeader(value = "userloginid") String userLoginId);
 
 	 ResponseEntity<ResultResponse>viewQueryDetails(@RequestBody UpdateQueriesDto updateQueriesDto,
@@ -79,33 +79,33 @@ public interface JobApiAction {
 			@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "username") String userName);
 	
-	 ResponseEntity<JobQueryDto> viewTaskDetails(@RequestBody CombinedQueryDto combinedQueryDto,
+	 ResponseEntity<JobQueryDto> viewTaskDetails(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "branchid") String branchId);
 
 	 ResponseEntity<JobQueryDto> viewOneJobDetails(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "branchid") String branchId);
 
-	 ResponseEntity<JobQueryDto> inProgressTasks(@RequestBody CombinedQueryDto queriesDto,
+	 ResponseEntity<JobQueryDto> inProgressTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId);
 
-	 ResponseEntity<JobQueryDto> toDoTasks(@RequestBody CombinedQueryDto queriesDto,
+	 ResponseEntity<JobQueryDto> toDoTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId);
 
-	 ResponseEntity<JobQueryDto> cancelTasks(@RequestBody CombinedQueryDto queriesDto,
+	 ResponseEntity<JobQueryDto> cancelTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId);
 
-	 ResponseEntity<JobQueryDto> completeTasks(@RequestBody CombinedQueryDto queriesDto,
+	 ResponseEntity<JobQueryDto> completeTasks(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "userType") String userType, @RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "username") String userName,
 			@RequestHeader(value = "userloginid") String userLoginId);
 	
-	 ResponseEntity<JobQueryDto> updateTaskRemarks(@RequestBody CombinedQueryDto combinedQueryDto,
+	 ResponseEntity<JobQueryDto> updateTaskRemarks(@RequestBody TaskQueryDto taskQueryDto,
 		    @RequestHeader(value = "userType") String userType,
 			@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "username") String userName,
