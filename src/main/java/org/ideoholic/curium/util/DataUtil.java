@@ -183,7 +183,6 @@ public class DataUtil {
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
    }
-     
-    
+
 
 }

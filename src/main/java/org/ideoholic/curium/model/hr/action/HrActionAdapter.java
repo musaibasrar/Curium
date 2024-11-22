@@ -19,14 +19,17 @@ public class HrActionAdapter {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private HrService hrService;
+
     private String BRANCHID = "branchid";
     private String USERID ="userid";
     private String CURRENTACADEMICYEAR ="currentAcademicYear";
     private String USERNAME = "username";
     private String USERAUTH = "userAuth";
 
+
     public boolean leaveType() {
-        HrService hrService = new HrService(request,response);
 
         LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("leavetypemaster", leaveTypeResponseDto.getLeavetypemaster());
@@ -35,7 +38,6 @@ public class HrActionAdapter {
 
     }
     public boolean saveLeaveType() {
-        HrService hrService = new HrService(request,response);
 
         LeaveTypeDto dto = new LeaveTypeDto();
         dto.setLeaveTypeName(request.getParameter("leavetypename"));
@@ -45,7 +47,6 @@ public class HrActionAdapter {
 
     }
     public boolean deleteLeaveType() {
-        HrService hrService = new HrService(request,response);
 
         LeaveTypeDto dto = new LeaveTypeDto();
         dto.setIdLeave(request.getParameter("idleave"));
@@ -53,7 +54,6 @@ public class HrActionAdapter {
         return resultResponse.isSuccess();
     }
     public boolean addLeaves() {
-        HrService hrService = new HrService(request,response);
 
         LeaveTypeDto dto = new LeaveTypeDto();
         dto.setLeaveTypeNames(request.getParameterValues("leavetypename"));
@@ -67,7 +67,6 @@ public class HrActionAdapter {
 
     }
     public boolean viewLeavesDetails() {
-        HrService hrService = new HrService(request,response);
 
         LeavesDetailsResponseDto result = hrService.viewLeavesDetails(request.getParameter("id"));
 
@@ -82,7 +81,6 @@ public class HrActionAdapter {
 
     }
     public boolean leaveDetailsPerYear() {
-        HrService hrService = new HrService(request,response);
 
         LeaveDetailsDto leaveDetailsDto = new LeaveDetailsDto();
 
@@ -99,14 +97,12 @@ public class HrActionAdapter {
     }
 
     public void payHead() {
-        HrService hrService = new HrService(request,response);
 
         PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("payheadlist", result.getPayHeadList());
     }
     public boolean savePayHead() {
-        HrService hrService = new HrService(request,response);
 
         PayHeadDto dto = new PayHeadDto();
         dto.setPayHeadName(request.getParameter("payheadname"));
@@ -121,7 +117,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean addPayHeadStaffDetails() {
-        HrService hrService = new HrService(request,response);
 
         PayHeadStaffDetailsDto dto = new PayHeadStaffDetailsDto();
          dto.setStaffIds(request.getParameterValues("employeeIDs"));
@@ -138,7 +133,6 @@ public class HrActionAdapter {
 
     }
     public boolean addBasicPay() {
-        HrService hrService = new HrService(request,response);
 
         BasicPayDto dto = new BasicPayDto();
         dto.setStaffIds(request.getParameterValues("employeeIDs"));
@@ -156,28 +150,24 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public void addPf() {
-        HrService hrService = new HrService(request,response);
 
-        PfDto dto = new PfDto();
-        dto.setPaidByManagement(request.getParameter("paidbymanagement"));
-        dto.setPaidByStaff(request.getParameter("paidbystaff"));
-        dto.setDate(request.getParameter("datepf"));
+            PfDto dto = new PfDto();
+            dto.setPaidByManagement(request.getParameter("paidbymanagement"));
+            dto.setPaidByStaff(request.getParameter("paidbystaff"));
+            dto.setDate(request.getParameter("datepf"));
 
-        hrService.addPf(dto,
-        httpSession.getAttribute(BRANCHID).toString(),
-        httpSession.getAttribute(USERID).toString());
-
+            hrService.addPf(dto,
+                    httpSession.getAttribute(BRANCHID).toString(),
+                    httpSession.getAttribute(USERID).toString());
 
     }
     public void pfSettings() {
-        HrService hrService = new HrService(request,response);
 
         PfSettingsResponseDto result = hrService.pfSettings(httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("pflist", result.getPf());
     }
     public void deletePf() {
-        HrService hrService = new HrService(request,response);
 
         PfDto dto = new PfDto();
         dto.setPfids(request.getParameterValues("pfids"));
@@ -185,7 +175,6 @@ public class HrActionAdapter {
         hrService.deletePf(dto);
     }
     public boolean saveAdvanceSalary() {
-        HrService hrService = new HrService(request,response);
 
         SaveAdvanceSalaryDto dto = new SaveAdvanceSalaryDto();
         dto.setAmount(request.getParameter("amount"));
@@ -208,7 +197,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public void salaryApprovalDispaly() {
-        HrService hrService = new HrService(request,response);
 
         SalaryResponseDto result = hrService.salaryApprovalDispaly(httpSession.getAttribute(BRANCHID).toString());
 
@@ -216,7 +204,6 @@ public class HrActionAdapter {
     }
 
     public boolean deleteAdvaceSalaryApproval() {
-        HrService hrService = new HrService(request,response);
 
         DeleteAdvaceSalaryApprovalDto dto = new DeleteAdvaceSalaryApprovalDto();
         dto.setIdPayAdvanceSalary(request.getParameter("payadvance"));
@@ -226,7 +213,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean saveAdvanceSalaryApproval() {
-        HrService hrService = new HrService(request,response);
 
         AdvanceSalaryApprovalDto dto = new AdvanceSalaryApprovalDto();
         dto.setPaymentAdvance(request.getParameter("payadvance"));
@@ -238,7 +224,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean salaryIssue() {
-        HrService hrService = new HrService(request,response);
 
         SalaryResponseDto result = hrService.salaryIssue(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("salaryissue",result.getPayAdvanceSalary() );
@@ -248,7 +233,6 @@ public class HrActionAdapter {
 
     }
      public boolean applyLeave() {
-        HrService hrService = new HrService(request,response);
 
         ApplyLeaveDto dto = new ApplyLeaveDto();
         dto.setLeaveTypeName(request.getParameter("leavetypename"));
@@ -266,7 +250,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean leaveApprovals() {
-        HrService hrService = new HrService(request, response);
 
         LeaveApprovalsResponseDto result = hrService.leaveApprovals(
                 httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
@@ -277,7 +260,6 @@ public class HrActionAdapter {
     return result.isSuccess();
     }
     public boolean rejectLeave() {
-        HrService hrService = new HrService(request, response);
 
         LeaveIdsDto dto = new LeaveIdsDto();
         dto.setIdLeaveApplication(request.getParameterValues("idleaveapplication"));
@@ -287,7 +269,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean approveLeave() {
-        HrService hrService = new HrService(request, response);
         LeaveIdsDto dto = new LeaveIdsDto();
         dto.setIdLeaveApplication(request.getParameterValues("idleaveapplication"));
 
@@ -296,7 +277,6 @@ public class HrActionAdapter {
 
     }
     public boolean processStaffSalary() {
-        HrService hrService = new HrService(request, response);
 
         SalaryDto dto = new SalaryDto();
         dto.setStaffids(request.getParameterValues("employeeIDs"));
@@ -309,7 +289,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public void getPayHead() throws IOException {
-        HrService hrService = new HrService(request, response);
 
 
         PayHeadResponseDto result = hrService.getPayHead(request.getParameter("payHeadType"),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
@@ -317,7 +296,6 @@ public class HrActionAdapter {
 
     }
     public boolean issueStaffSalary() {
-        HrService hrService = new HrService(request, response);
 
         SalaryResponseDto result = hrService.issueStaffSalary(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("processsalarydetailslist", result.getProcessSalaryDetailsList());
@@ -325,7 +303,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public void printSalarySlip() {
-        HrService hrService = new HrService(request, response);
 
         SalarySlipResponseDto result = hrService.printSalarySlip(request.getParameter("salaryid"));
         request.setAttribute("processsalarydetails", result.getProcessSalaryDetails());
@@ -336,7 +313,6 @@ public class HrActionAdapter {
         request.setAttribute("netpay", result.getNetPay());
     }
     public void getStaffDetails() {
-        HrService hrService = new HrService(request, response);
 
         StaffDetailsDto dto = new StaffDetailsDto();
         dto.setStaffId(request.getParameter("staffid"));
@@ -346,7 +322,6 @@ public class HrActionAdapter {
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
     }
     public boolean deletePayHeadStaff() {
-        HrService hrService = new HrService(request, response);
 
         SalaryDto dto = new SalaryDto();
         dto.setStaffids(request.getParameterValues("teacherid"));
@@ -356,7 +331,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean issueProcessedSalary() {
-        HrService hrService = new HrService(request, response);
 
         SalaryDto dto = new SalaryDto();
         dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
@@ -366,7 +340,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public boolean cancelProcessedSalary() {
-        HrService hrService = new HrService(request, response);
 
         SalaryDto dto = new SalaryDto();
         dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
@@ -375,7 +348,6 @@ public class HrActionAdapter {
         return result.isSuccess();
     }
     public void updateBasicPayEmployees() {
-        HrService hrService = new HrService(request, response);
 
         BasicPayDto dto = new BasicPayDto();
         dto.setStaffIds(request.getParameterValues("employeeIDs"));
@@ -388,5 +360,6 @@ public class HrActionAdapter {
         ResultResponse result = hrService.updateBasicPayEmployees(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("basicpayupdate", result.isSuccess());
     }
+
 
 }

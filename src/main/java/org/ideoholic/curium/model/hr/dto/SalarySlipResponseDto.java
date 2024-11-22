@@ -16,5 +16,6 @@ public class SalarySlipResponseDto {
     private BigDecimal totalEarnings ;
     private BigDecimal totalDeductions ;
     private String netPay;
+    private boolean success;
 
 }
