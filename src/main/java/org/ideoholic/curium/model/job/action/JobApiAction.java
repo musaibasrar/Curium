@@ -15,7 +15,7 @@ import org.ideoholic.curium.model.job.dto.TaskQueryDto;
 import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
-import org.ideoholic.curium.model.job.dto.ViewStudentResponseDto;
+import org.ideoholic.curium.model.job.dto.TaskReportResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -118,7 +118,7 @@ public interface JobApiAction {
 	 ResponseEntity<ResultResponse> addTask(@RequestBody QueriesDto queriesDto,
 			@RequestHeader(value = "branchid") String branchId);
 
-	 ResponseEntity<ViewStudentResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId);
+	 ResponseEntity<TaskReportResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId);
 
 	 ResponseEntity<ReportResponseDto> generateTasksReport(@RequestBody ReportDto reportDto);
 

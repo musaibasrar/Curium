@@ -623,13 +623,12 @@ public class JobService {
 	public JobQueryDto viewTaskDetails(QueriesDto QueriesDto,String branchId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
-		boolean result = false;
 		if(branchId!=null){
 
 			int jobId = Integer.parseInt(QueriesDto.getJobId());
 			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
 			jobQueryDto.setTaskList(taskDetails);
-			jobQueryDto.setSuccess(result);
+			jobQueryDto.setSuccess(true);
 		}
 
 		return jobQueryDto;

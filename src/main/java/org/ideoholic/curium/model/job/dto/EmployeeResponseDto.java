@@ -7,6 +7,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.model.user.dto.Login;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class EmployeeResponseDto {
 	
 	private Teacher employee;

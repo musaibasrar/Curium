@@ -1,10 +1,8 @@
 package org.ideoholic.curium.model.employee.dto;
 
-import lombok.Data;
-
 import java.util.List;
 
-import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
+import lombok.Data;
 
 @Data
 public class ViewAllEmployeeResponseDto {

@@ -8,6 +8,8 @@ import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +19,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ViewStudentResponseDto {
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
+public class TaskReportResponseDto {
 	
 	private List<Teacher> employeeList;
     private List<Teacher> employeeListProcessSalary;

@@ -26,7 +26,7 @@ import org.ideoholic.curium.model.job.dto.QueriesDto;
 import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
-import org.ideoholic.curium.model.job.dto.ViewStudentResponseDto;
+import org.ideoholic.curium.model.job.dto.TaskReportResponseDto;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -401,8 +401,8 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@GetMapping("/taskReport")
-	public ResponseEntity<ViewStudentResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId) {
-		ViewStudentResponseDto viewStudentResponseDto = new ViewStudentResponseDto();
+	public ResponseEntity<TaskReportResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId) {
+		TaskReportResponseDto viewStudentResponseDto = new TaskReportResponseDto();
 		ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
 		viewStudentResponseDto.copyViewAllEmployeeResponseDto(viewAllEmployeeResponseDto);
 		//TODO remove this new after @service
