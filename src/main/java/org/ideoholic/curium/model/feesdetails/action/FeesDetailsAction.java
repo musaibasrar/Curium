@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -28,10 +29,13 @@ public class FeesDetailsAction {
 	
 	@Autowired
 	private FeesService feesService;
+	
+	@Autowired
+	private FeesActionAdapter feesActionAdapter;
 
 	@PostMapping("/download")
 	public String downloadFile() {
-		if(feesService.downlaodFile()){
+		if(feesActionAdapter.downlaodFile()){
 			return "feesexportsuccess";
 		}
         return "exportfailure";

@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
@@ -163,8 +164,7 @@ public class FeesService {
 		}
 
 
-        public boolean downlaodFile() {
-                boolean result = false;
+        public ResultResponse downlaodFile() {
                 try {
 
                         File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx");
@@ -196,11 +196,11 @@ public class FeesService {
 
                         inStream.close();
                         outStream.close();
-                        result = true;
+                        ResultResponse.builder().success(true).build();;
                 } catch (Exception e) {
                         System.out.println("" + e);
                 }
-                return result;
+                return ResultResponse.builder().success(false).build();
         }
 
 

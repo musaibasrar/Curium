@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
@@ -214,6 +215,11 @@ public class FeesActionAdapter {
 		String academicYear =request.getParameter("year");
 		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,httpSession.getAttribute(BRANCHID).toString());
 		 httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+	}
+
+	public boolean downlaodFile() {
+		ResultResponse resultResponse = feesService.downlaodFile();
+		return resultResponse.isSuccess();
 	}
 	
 }
