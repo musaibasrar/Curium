@@ -77,7 +77,6 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
         stockMoveCancelDto.setMessStockItemDetailsList(entryDetailsResult.getResultList());
 
         //Get Customers
-        // TODO: Need to fix this after migrating StudentService
         studentService.viewStudentsParentsPerBranch(branchId);
 
 
@@ -122,7 +121,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
         stockMoveSaveDto.setNoOfPages(stockMoveDetailsResult.getNoOfPages());
         stockMoveSaveDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
         //Get Student
-        // TODO: Need to fix this after migrating StudentService
+
         studentService.viewAllStudentsParents(page, branchId);
 
         return ResponseEntity.ok(stockMoveSaveDto);

@@ -60,8 +60,6 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
     @PostMapping("/generateStockIssuanceReport")
     public ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(@RequestBody IssuanceReportDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId) {
         IssuanceReportResponseDto result = messItemsService.generateStockIssuanceReport(dto);
-
-        // TODO: Need to fix this after migrating StudentService
         studentService.viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }
@@ -69,8 +67,6 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
     @GetMapping("/issuanceStock")
     public ResponseEntity<ResultResponse> issuanceStock(@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId) {
         ResultResponse result = messItemsService.getIssuanceStock();
-
-        // TODO: Need to fix this after migrating StudentService
         studentService.viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }

@@ -265,4 +265,11 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "promotedyear", length = 10)
 	private String promotedyear;
+
+	public int fetchAge() {
+		if(age==null){
+			return 0;
+		}
+		return age;
+	}
 }

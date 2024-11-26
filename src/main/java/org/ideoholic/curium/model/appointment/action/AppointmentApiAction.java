@@ -83,7 +83,6 @@ public class AppointmentApiAction {
 
 	@GetMapping("/appointmentReport")
 	private ResponseEntity<StudentListResponseDto> appointmentReport(@RequestHeader(value = "branchid") String branchId) {
-		// TODO: Need to fix this after migrating StudentService
 		StudentListResponseDto studentDto = studentService.viewAllStudentsList(branchId);
 		return ResponseEntity.ok(studentDto);
 	}
@@ -114,7 +113,6 @@ public class AppointmentApiAction {
 	private ResponseEntity<ResultResponse> addAppointment(@RequestBody AddAppointmentDto addAppointmentDto, @RequestHeader(value="branchid") String branchId, @RequestHeader(value="currentAcademicYear") String currentAcademicYear, @RequestHeader(value="userloginid") String userLoginId, @RequestParam(value = "page") String page) {
 		ResultResponse result = appointmentService.addAppointment(addAppointmentDto, branchId, currentAcademicYear, userLoginId);
 		if (result.isSuccess()) {
-			// TODO: Need to fix this after migrating StudentService and EmployeeService
 			studentService.viewAllStudentsParents(page, branchId);
 			employeeService.ViewAllEmployee(branchId);
 			return ResponseEntity.ok(result);
