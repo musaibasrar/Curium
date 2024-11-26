@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
@@ -77,10 +78,9 @@ public class FeesDetailsService {
 
 
 
-	public boolean exportDataForFees() {
+	public ResultResponse exportDataForFees() {
 		
 		String[] feesIds = request.getParameterValues("feesIDs");
-		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
@@ -97,9 +97,9 @@ public class FeesDetailsService {
 			}
 			try {
 				if (exportDataToExcel(feesMap)) {
-					successResult = true;
+					ResultResponse.builder().success(true).build();
 				} else {
-					successResult = false;
+					ResultResponse.builder().success(false).build();
 				}
 
 			} catch (Exception e) {
@@ -107,7 +107,7 @@ public class FeesDetailsService {
 			}
 		}
 
-		return successResult;
+		return ResultResponse.builder().success(false).build();
 	}
 	
 	

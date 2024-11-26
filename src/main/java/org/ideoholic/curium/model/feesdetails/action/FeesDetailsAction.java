@@ -32,6 +32,9 @@ public class FeesDetailsAction {
 	
 	@Autowired
 	private FeesActionAdapter feesActionAdapter;
+	
+	@Autowired
+	private FeesDetailsActionAdapter feesDetailsActionAdapter;
 
 	@PostMapping("/download")
 	public String downloadFile() {
@@ -44,7 +47,7 @@ public class FeesDetailsAction {
 	@PostMapping("/exportDataForFees")
 	public String exportFeesData() {
 		
-		if(new FeesDetailsService(request, response).exportDataForFees()){
+		if(feesDetailsActionAdapter.exportDataForFees()){
 			return "feesexportsuccess";
 		}else{
 			return "exportfailure";
