@@ -969,7 +969,7 @@ public class FeesCollectionService {
 				
 				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
 				String feesDetails = "";
-				String concessionFeesDetails = "";
+				String concessionFeesDetails = " ";
 				Long dueAmount = 0l;
 				Long totalAmount = 0l;
 				
@@ -991,6 +991,7 @@ public class FeesCollectionService {
 								 DataUtil.emptyString(studentFeesReport.getParents().getFathersname()),
 								 DataUtil.emptyString(studentFeesReport.getParents().getContactnumber()),
 								 DataUtil.emptyString(feesDetails),
+								 concessionFeesDetails,
 								 String.valueOf(dueAmount),
 								 String.valueOf(totalAmount) });
 				i++;

@@ -802,7 +802,23 @@ for(Cookie cookie : cookies){
 							</td>
 							<td class="dataText"><c:out value="${PaidAmount}" /></td>
 							<td class="dataText"><c:out value="${DueAmount}" /></td>
-							<td class="dataText"><c:out value="${concession}" /></td>
+							<td class="dataText">
+								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
+									<table>
+										<tr>
+											<td style="width: 160px;" align="right">
+												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
+											</td>
+											<%-- <td style="width: 160px;" align="right">
+												${studentfeescatagorydetails.feescategory.concession}:&nbsp;&nbsp;&nbsp;	
+											</td> --%>
+											<td align="left">
+												${studentfeescatagorydetails.concession}
+											</td>
+										</tr>
+									</table>
+								</c:forEach>
+							</td>
 							<td class="dataText">
 									<table>
 										<tr>
