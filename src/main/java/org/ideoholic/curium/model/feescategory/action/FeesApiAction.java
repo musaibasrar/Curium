@@ -54,7 +54,7 @@ public interface FeesApiAction {
 
 	ResponseEntity<FeescategoryDetailDto> viewFees(@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 
-	ResponseEntity<StudentDetailsResponseDto> studentFeePage(String studentId);
+	ResponseEntity<StudentDetailsResponseDto> studentFeePage(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);
 	
 	ResponseEntity<ResultResponse> feesDueStampFees(@RequestHeader(value = "branchid") String branchId);
 	
@@ -77,7 +77,7 @@ public interface FeesApiAction {
 		
     ResponseEntity<StudentIdDto> applyotherConcession(@RequestBody ConcessionDto concessionDto);
 	
-	ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(String studentId);
+	ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);
 	
 	ResponseEntity<FeescategoryDetailDto> feesDueReportHeadWise(@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);

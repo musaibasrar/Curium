@@ -25,6 +25,7 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -53,6 +54,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	private StandardService standardService;
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+	@Autowired
+	private StudentService studentService;
 
 	@PostMapping("/applyConcession")
 	public ResponseEntity<StudentIdDto> applyConcession(@RequestBody ConcessionDto concessionDto) {
@@ -165,9 +168,9 @@ public class FeesApiActionImpl implements FeesApiAction{
 		return ResponseEntity.ok(feescategoryDetailDto);
 	}
 
-	public ResponseEntity<StudentDetailsResponseDto> studentFeePage(String studentId) {
+	public ResponseEntity<StudentDetailsResponseDto> studentFeePage(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId) {
 		
-		return ResponseEntity.ok(new StudentService(request, response, standardActionAdapter).viewDetailsOfStudent(studentId));
+		return ResponseEntity.ok(studentService.viewDetailsOfStudent(studentId, branchId));
 	}
 	
 	
@@ -245,9 +248,9 @@ public class FeesApiActionImpl implements FeesApiAction{
 	
 
 	
-	public ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(String studentId) {
+	public ResponseEntity<StudentDetailsResponseDto> studentotherFeePage(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId) {
 
-		return ResponseEntity.ok(new StudentService(request, response, standardActionAdapter).viewOtherFeesDetailsOfStudent(studentId));
+		return ResponseEntity.ok(studentService.viewOtherFeesDetailsOfStudent(studentId, branchId));
 	}
 	
 	@GetMapping("/feesDueReportHeadWise")

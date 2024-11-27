@@ -32,13 +32,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/StudentProcess")
 public class StudentAction {
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpSession httpSession;
 	@Autowired
-	HttpSession httpSession;
-	@Autowired
-	StandardActionAdapter standardActionAdapter;
+	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private StampFeesActionAdapter stampFeesActionAdapter;
 	@Autowired
