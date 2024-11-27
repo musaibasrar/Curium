@@ -682,7 +682,6 @@ public class JobService {
 
 				List<Task> list = new JobDAO().readListOfObjectsPaginationDepartmentWiseTask((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId), employee.getTid());
-				request.setAttribute("studentList", list);
 				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setTaskList(list);

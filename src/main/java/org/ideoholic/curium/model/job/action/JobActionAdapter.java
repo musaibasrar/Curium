@@ -177,6 +177,7 @@ public class JobActionAdapter {
 		request.setAttribute("taskdetails", jobQueryDto.getTaskList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage", jobQueryDto.getPage());
+		request.setAttribute("studentList", jobQueryDto.getTaskList());
 		return jobQueryDto.isSuccess();
 	}
 

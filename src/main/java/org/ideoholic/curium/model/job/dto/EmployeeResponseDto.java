@@ -3,8 +3,8 @@ package org.ideoholic.curium.model.job.dto;
 import java.util.List;
 
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.model.user.dto.Login;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,15 +33,16 @@ public class EmployeeResponseDto {
 		success= employeeDetailsResponseDto.isSuccess();		
 	}
 
-	public void copyViewAllEmployeeResponseDto(ViewAllEmployeeResponseDto viewAllEmployeeResponseDto) {
-		employeeList = viewAllEmployeeResponseDto.getEmployeeList();
-		employeeListProcessSalary = viewAllEmployeeResponseDto.getEmployeeListProcessSalary();
-		
-	}
-
+	
 	public void copyJobQueryDto(JobQueryDto jobQueryDto) {
 		queriesList = jobQueryDto.getQueriesList();
 		taskList = jobQueryDto.getTaskList();
+		
+	}
+
+	public void copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto) {
+		employeeList = employeesWithSalaryResponseDto.getEmployeeList();
+		employeeListProcessSalary = employeesWithSalaryResponseDto.getEmployeeListProcessSalary();
 		
 	}
 

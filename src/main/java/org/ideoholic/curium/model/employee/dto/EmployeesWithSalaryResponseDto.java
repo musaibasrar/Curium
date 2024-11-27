@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ViewAllEmployeeResponseDto {
+public class EmployeesWithSalaryResponseDto {
     private List<Teacher> employeeList;
     private List<Teacher> employeeListProcessSalary;
     private boolean success=false;

@@ -5,7 +5,7 @@ package org.ideoholic.curium.model.job.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
 import org.ideoholic.curium.model.job.dto.EmployeeResponseDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
@@ -35,7 +35,7 @@ public interface JobApiAction {
 
 	 ResponseEntity<ReportResponseDto> generateQueriesReport(@RequestBody ReportDto reportDto);
 
-	 ResponseEntity<ViewAllEmployeeResponseDto> queryReport(@RequestHeader(value = "branchid") String branchId);
+	 ResponseEntity<EmployeesWithSalaryResponseDto> queryReport(@RequestHeader(value = "branchid") String branchId);
 
 	 ResponseEntity<JobQueryDto> viewAllQueriesDepartmentWise(@RequestParam(value = "page") String page,
 			@RequestHeader(value = "branchid") String branchId,

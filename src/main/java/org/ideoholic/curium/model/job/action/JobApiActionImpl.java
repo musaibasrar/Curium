@@ -14,7 +14,8 @@ import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
@@ -96,8 +97,8 @@ public class JobApiActionImpl implements JobApiAction {
 	}
 
 	@GetMapping("/queryReport")
-	public ResponseEntity<ViewAllEmployeeResponseDto> queryReport(@RequestHeader(value = "branchid") String branchId) {
-		ViewAllEmployeeResponseDto result = employeeService.ViewAllEmployee(branchId);
+	public ResponseEntity<EmployeesWithSalaryResponseDto> queryReport(@RequestHeader(value = "branchid") String branchId) {
+		EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
 		return ResponseEntity.ok(result);
 	}
 
@@ -182,8 +183,8 @@ public class JobApiActionImpl implements JobApiAction {
 		if (userType.equalsIgnoreCase("admin")) {
 			EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee(empId);
 			employeeResponseDto.copyEmployeeDetailsResponseDto(employeeDetailsResponseDto);
-			ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
-			employeeResponseDto.copyViewAllEmployeeResponseDto(viewAllEmployeeResponseDto);
+			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+			employeeResponseDto.copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto);
 		} else if (userType.equalsIgnoreCase("teacher")) {
 			EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService
 					.viewDetailsEmployeeStaffLogin(userName);
@@ -375,8 +376,8 @@ public class JobApiActionImpl implements JobApiAction {
 		EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
 
 		if (userType.equalsIgnoreCase("admin")) {
-			ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
-			employeeResponseDto.copyViewAllEmployeeResponseDto(viewAllEmployeeResponseDto);
+			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+			employeeResponseDto.copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto);
 			JobQueryDto jobQueryDto = jobService.createTask(queriesDto);
 			employeeResponseDto.copyJobQueryDto(jobQueryDto);
 		} else if (userType.equalsIgnoreCase("teacher")) {
@@ -403,8 +404,8 @@ public class JobApiActionImpl implements JobApiAction {
 	@GetMapping("/taskReport")
 	public ResponseEntity<TaskReportResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId) {
 		TaskReportResponseDto viewStudentResponseDto = new TaskReportResponseDto();
-		ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
-		viewStudentResponseDto.copyViewAllEmployeeResponseDto(viewAllEmployeeResponseDto);
+		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+		viewStudentResponseDto.copyEmployeesWithSalaryResponseDto(employeesWithSalaryResponseDto);
 		//TODO remove this new after @service
 		StudentListResponseDto studentListResponseDto = new StudentService(request,null,null).viewAllStudentsList(branchId);
 		viewStudentResponseDto.copyStudentListResponseDto(studentListResponseDto);
