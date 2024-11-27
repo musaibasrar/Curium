@@ -12,6 +12,8 @@ import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class StudentApiActionImpl implements StudentApiAction{
-    
+
+    private static final Logger log = LoggerFactory.getLogger(StudentApiActionImpl.class);
     @Autowired
     private StudentService studentService;
     @Autowired
@@ -128,7 +131,7 @@ public class StudentApiActionImpl implements StudentApiAction{
 
     public ResponseEntity<StudentAttendanceDetailsResponseDto> archiveViewAll() {
         StudentAttendanceDetailsResponseDto result = studentService.viewAllStudentsArchive();
-        System.out.println("IN action's view all Archive");
+        log.error("IN action's view all Archive");
         return ResponseEntity.ok(result);
     }
 

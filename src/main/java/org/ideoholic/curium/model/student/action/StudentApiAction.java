@@ -51,7 +51,6 @@ public interface StudentApiAction {
     @GetMapping("/viewAllStudents")
     ResponseEntity<ParentListResponseDto> viewAllStudents(@RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId);
 
-    //student detail
     @GetMapping("/studentdetail")
     String studentdetail();
 
@@ -79,10 +78,8 @@ public interface StudentApiAction {
     @RequestMapping(value = "/viewDetails", method = { RequestMethod.GET, RequestMethod.POST })
     ResponseEntity<StudentDetailsResponseDto> viewStudent(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);
 
-    //view detail with external id ViewDetailsbyexternalid
     @RequestMapping(value = "/viewDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
     ResponseEntity<StudentDetailsResponseDto> ViewDetailsbyexternalid(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);
-    //end view detail
 
     @RequestMapping(value = "/viewFeesDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
     ResponseEntity<StudentDetailsResponseDto> ViewFeesDetailsbyexternalid(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);
