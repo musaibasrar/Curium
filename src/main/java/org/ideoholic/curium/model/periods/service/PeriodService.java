@@ -22,6 +22,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
 import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
+import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -252,22 +253,21 @@ public class PeriodService {
 	}
 
 
-	public boolean viewTeacherTimeTable() {
+	public TeacherTimeTableResponseDto viewTeacherTimeTable(String teacherName, String branchId) {
 		
-		boolean result = false;
-		List<Map> periodMapList = new LinkedList<Map>();
+		TeacherTimeTableResponseDto result = TeacherTimeTableResponseDto.builder().success(false).build();
+		List<Map> periodMapList = new LinkedList<>();
 		
-		Map<String,String> mondayMap = new HashMap<String,String>();
-		Map<String,String> tuesdayMap = new HashMap<String,String>();
-		Map<String,String> wednesdayMap = new HashMap<String,String>();
-		Map<String,String> thursdayMap = new HashMap<String,String>();
-		Map<String,String> fridayMap = new HashMap<String,String>();
-		Map<String,String> saturdayMap = new HashMap<String,String>();
-		Map<String,String> sundayMap = new HashMap<String,String>();
+		Map<String,String> mondayMap = new HashMap<>();
+		Map<String,String> tuesdayMap = new HashMap<>();
+		Map<String,String> wednesdayMap = new HashMap<>();
+		Map<String,String> thursdayMap = new HashMap<>();
+		Map<String,String> fridayMap = new HashMap<>();
+		Map<String,String> saturdayMap = new HashMap<>();
+		Map<String,String> sundayMap = new HashMap<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			String teacherName = request.getParameter("teachername");
-			List<Perioddetails> periodDetailsList = new PeriodDAO().getPeriodDetailsForTeacher(teacherName);
+		if(branchId!=null){
+            List<Perioddetails> periodDetailsList = new PeriodDAO().getPeriodDetailsForTeacher(teacherName);
 			
 			for (Perioddetails perioddetails : periodDetailsList) {
 				
@@ -319,11 +319,11 @@ public class PeriodService {
 			if(!sundayMap.isEmpty()) {
 				periodMapList.add(sundayMap);
 			}
+
+			result.setTeacherName(teacherName);
+			result.setPeriodMapList(periodMapList);
 			
-			request.setAttribute("teachername", teacherName);
-			request.setAttribute("teacherperiodmasterlist", periodMapList);
-			
-			result = true;
+			result.setSuccess(true);
 		}
 		
 		

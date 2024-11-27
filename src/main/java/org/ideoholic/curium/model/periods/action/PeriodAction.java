@@ -45,6 +45,8 @@ public class PeriodAction {
 	EmployeeActionAdapter employeeActionAdapter;
 	@Autowired
 	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
+	@Autowired
+	private PeriodActionAdapter periodActionAdapter;
 	String url;
 	private String error ="error";
 
@@ -53,7 +55,7 @@ public class PeriodAction {
 	@GetMapping("/viewTeacherTimeTable")
 	public String viewTeacherTimeTable() {
 		
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).viewTeacherTimeTable()){
+		if(periodActionAdapter.viewTeacherTimeTable()){
 			return "teachertimetableview";
 		}
 		return error;
