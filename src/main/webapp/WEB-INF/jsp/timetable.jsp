@@ -383,7 +383,7 @@ for(Cookie cookie : cookies){
 		<table  width="70%"  id="table11" align="center">
 		<tr><td><br></td></tr>
                         <tr>
-                                <td align="center" style="font-size:16px;"><a id="print" href="/dolphin/PeriodProcess/updatePeriodDetails?id=<c:out value="${periodMasterid}" />">Modify</a></td>
+                                <td align="center" style="font-size:10px;"><a id="modify" href="/dolphin/PeriodProcess/updatePeriodDetails?id=<c:out value="${periodMasterid}" />">Modify</a></td>
                             </td>
 
                         </tr>

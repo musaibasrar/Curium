@@ -530,9 +530,9 @@
 		        			changeYear : true,
 		        			changeMonth : true,
 		        			dateFormat: 'dd/mm/yy',
-		        			yearRange: "-1:+1"
+		        			yearRange: "0:+1"
 		        		});
-		        		$("#dateofattendance").change(
+		        		$("#anim").change(
 		        				function() {
 		        					$("#dateofattendance").datepicker("option", "showAnim",
 		        							$(this).val());
@@ -638,7 +638,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
+									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label></td>
 							
 						</tr>
