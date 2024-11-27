@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.student.action;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
@@ -12,17 +13,15 @@ import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@Slf4j
 public class StudentApiActionImpl implements StudentApiAction{
 
-    private static final Logger log = LoggerFactory.getLogger(StudentApiActionImpl.class);
     @Autowired
     private StudentService studentService;
     @Autowired
