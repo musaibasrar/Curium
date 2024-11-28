@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class TimeTableGenerateResponseDto {
+public class TimeTableResponseDto {
     private String  currentYear;
     private List<Periodmaster> periodMaster;
     private boolean success;

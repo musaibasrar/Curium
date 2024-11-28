@@ -17,19 +17,14 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
 import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
-import org.ideoholic.curium.model.periods.dto.TimeTableGenerateResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
-import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PeriodService {
     private StandardActionAdapter standardActionAdapter;
@@ -231,8 +226,8 @@ public class PeriodService {
 	}
 
 
-	public TimeTableGenerateResponseDto generateTimeTable(String branchId) {
-		TimeTableGenerateResponseDto result = TimeTableGenerateResponseDto.builder().success(false).build();
+	public TimeTableResponseDto generateTimeTable(String branchId) {
+		TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
 
 		List<Periodmaster> periodMaster = new ArrayList<>();
 		
@@ -244,12 +239,12 @@ public class PeriodService {
 	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(branchId));
 	        result.setPeriodMaster(periodMaster);
 		}
-		
+
         if(periodMaster.isEmpty()){
 			result.setSuccess(false);
-        }
-        
-		result.setSuccess(true);
+        }else {
+			result.setSuccess(true);
+		}
 		return result;
 	}
 

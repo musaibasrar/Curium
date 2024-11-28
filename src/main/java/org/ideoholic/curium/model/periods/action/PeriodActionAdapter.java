@@ -3,7 +3,7 @@ package org.ideoholic.curium.model.periods.action;
 import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
-import org.ideoholic.curium.model.periods.dto.TimeTableGenerateResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -50,7 +50,7 @@ public class PeriodActionAdapter {
     public boolean generateTimeTable() {
         PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
 
-        TimeTableGenerateResponseDto responseDto = periodService.generateTimeTable(httpSession.getAttribute(BRANCHID).toString());
+        TimeTableResponseDto responseDto = periodService.generateTimeTable(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
         httpSession.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
 
