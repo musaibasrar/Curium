@@ -14,14 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
-import org.ideoholic.curium.model.periods.dto.Perioddetails;
-import org.ideoholic.curium.model.periods.dto.Periodmaster;
-import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
-import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.*;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.ideoholic.curium.util.DataUtil;
@@ -211,18 +209,21 @@ public class PeriodService {
 	}
 
 
-	public boolean deletePeriods() {
+	public ResultResponse deletePeriods(PeriodMasterIdDto dto) {
+		ResultResponse result = ResultResponse.builder().build();
 		
-		String[] periodMasterid = request.getParameterValues("idperiodmaster");
+		String[] periodMasterid = dto.getPeriodMasterId();
 		if (periodMasterid != null) {
 			List<Integer> ids = new ArrayList();
 			for (String id : periodMasterid) {
 				ids.add(Integer.valueOf(id));
 			}
-			return new PeriodDAO().deletePeriods(ids);
+			result.setSuccess(new PeriodDAO().deletePeriods(ids));
+			return result;
 		}
 		
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 

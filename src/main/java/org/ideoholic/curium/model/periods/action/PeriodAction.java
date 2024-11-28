@@ -83,7 +83,7 @@ public class PeriodAction {
 
 	@PostMapping("/deletePeriods")
 	public String deletePeriods() {
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).deletePeriods()){
+		if(periodActionAdapter.deletePeriods()){
 			return periodConfiguration();
 		}
 		
