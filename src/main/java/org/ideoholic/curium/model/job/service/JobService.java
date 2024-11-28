@@ -52,6 +52,9 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class JobService {
     @Autowired
@@ -62,7 +65,6 @@ public class JobService {
     private HttpSession httpSession;
 	private static final int BUFFER_SIZE = 4096;
 
-	private static final Logger logger = LogManager.getLogger(JobService.class);
 	
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
 
@@ -777,7 +779,7 @@ public class JobService {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
 			cancel=taskIdsList.size();
-			logger.info("Cancel for the job id "+queriesDto.getJobId());
+			log.info("Cancel for the job id "+queriesDto.getJobId());
 			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
@@ -839,7 +841,7 @@ public class JobService {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
 			toDo = taskIdsList.size();
-			logger.info("To do for the job id "+queriesDto.getJobId());
+			log.info("To do for the job id "+queriesDto.getJobId());
 			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
