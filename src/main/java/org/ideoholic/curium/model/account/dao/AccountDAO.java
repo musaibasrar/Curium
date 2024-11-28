@@ -597,5 +597,19 @@ public class AccountDAO {
 		}
 		return voucherTransactions;
 	}
+	
+	public List<VoucherEntrytransactions> getAllVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int branchId) {
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}		
+		return voucherEntrytransactions;
+	}
 
 }

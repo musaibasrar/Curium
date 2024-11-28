@@ -621,4 +621,9 @@ public class JspController {
 		return "feescollectiondetailscategory";
 	}
 	
+	@GetMapping("/daybook")
+	public String getDayBook() {
+		return "daybook";
+	}
+	
 }

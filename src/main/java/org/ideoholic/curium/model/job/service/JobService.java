@@ -374,7 +374,7 @@ public class JobService {
 		}
 
 		if(!staffId.isEmpty()) {
-			subQuery = subQuery + "and pq.employee.tid = '"+staffId+"'";
+			subQuery = subQuery + "and pq.teacher.tid = '"+staffId+"'";
 			reportResponseDto.setStaffSelected("Staff Name:&nbsp;"+staffName);
 		}else {
 			reportResponseDto.setStaffSelected("");

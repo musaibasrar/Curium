@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -419,5 +420,18 @@ public class AccountActionAdapter {
 		httpSession.setAttribute("todatetb", trialBalanceResponseDto.getToDate());
 
 		return trialBalanceResponseDto.isSuccess();
+	}
+	
+	public boolean getDayBook(){
+		AccountService accountService = new AccountService(request, response);
+
+		String strFromDate = DateUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
+		String strToDate = DateUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		String strBranchId = httpSession.getAttribute("branchid").toString();
+		
+		DayBookDto dayBookDtoOutput = accountService.getDayBook(strFromDate,strToDate,strBranchId);
+		request.setAttribute("voucherentrytransactions", dayBookDtoOutput.getVoucherEntryTransactions());
+		
+		return dayBookDtoOutput.isSuccess();
 	}
 }

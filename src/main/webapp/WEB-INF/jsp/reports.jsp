@@ -480,11 +480,16 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				<a target="mainFrame" href="/abc/daybook" style="font-size: 12px;">Day Book</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/abc/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/abc/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr>
@@ -563,7 +568,7 @@ for(Cookie cookie : cookies){
             </div>
             
             <h5 class="sideaccordian">
-			<a href="#">Jobs</a>
+			<a href="#">Assignment</a>
 		</h5>
 		<div style="padding-left: 0px; padding-right: 0px;">
 			<table style="border-collapse: collapse; width: 100%">
@@ -578,7 +583,7 @@ for(Cookie cookie : cookies){
 			</table>
 		</div>
 		
-		<h5 class="sideaccordian">
+		<!-- <h5 class="sideaccordian">
 			<a href="#">Tasks</a>
 		</h5>
 		<div style="padding-left: 0px; padding-right: 0px;">
@@ -593,7 +598,7 @@ for(Cookie cookie : cookies){
 					</td>
 				</tr>
 			</table>
-		</div>
+		</div> -->
 		
 		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
 

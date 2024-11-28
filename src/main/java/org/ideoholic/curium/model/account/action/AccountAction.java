@@ -284,4 +284,9 @@ public class AccountAction {
 		return "exportfailure";
 		}
 	
+	@PostMapping("/daybook")
+	public String dayBook() {
+		accountActionAdapter.getDayBook();
+		return "daybook";
+	}
 }

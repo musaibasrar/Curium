@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th class="headerText">UID</th>
-                            <th class="headerText">Job No.</th>
+                            <th class="headerText">Assignment</th>
                             <th class="headerText">Staff</th>
                             <th class="headerText">Remarks</th>
                             <th class="headerText">Status</th>

@@ -1815,4 +1815,56 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 		}
 		return result;
 	}
+
+
+	public DayBookDto getDayBook(String strFromDate, String strToDate, String strBranchId) {
+
+		
+		String toDate = null;
+		Map<VoucherEntrytransactions,String> voucherEntryTransactionsMap = new HashMap<VoucherEntrytransactions,String>();
+		
+		if(strToDate == null) {
+			toDate = strFromDate;
+		}else {
+			toDate = strToDate;
+		}
+		
+		
+		if(strBranchId!=null) {
+			
+					int branchId = Integer.parseInt(strBranchId);
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				//Group 1
+				BigDecimal totalIncome = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				//Group 2
+				BigDecimal totalExpense = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				
+				
+				List<VoucherEntrytransactions> allVoucherTransactions = new AccountDAO().getAllVoucherEntryTransactionsBetweenDates(strFromDate, toDate, branchId);
+				
+				for (VoucherEntrytransactions voucherEntrytransactions : allVoucherTransactions) {
+					String drAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getDraccountid());
+					String crAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getCraccountid());
+					
+					voucherEntryTransactionsMap.put(voucherEntrytransactions, drAccountName+":"+crAccountName);
+				}
+				
+	}
+			return DayBookDto
+					.builder()
+					.voucherEntryTransactions(voucherEntryTransactionsMap)
+					.success(true)
+					.build();
+	}
 }
