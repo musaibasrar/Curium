@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.periods.action;
 import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -25,9 +26,9 @@ public class PeriodActionAdapter {
     @Autowired
     private DocumentActionAdapter documentActionAdapter;
     @Autowired
-    StandardActionAdapter standardActionAdapter;
+    private StandardActionAdapter standardActionAdapter;
     @Autowired
-    EmployeeActionAdapter employeeActionAdapter;
+    private EmployeeActionAdapter employeeActionAdapter;
     @Autowired
     private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 
@@ -42,6 +43,16 @@ public class PeriodActionAdapter {
         TeacherTimeTableResponseDto responseDto = periodService.viewTeacherTimeTable(teacherName, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("teachername", responseDto.getTeacherName());
         request.setAttribute("teacherperiodmasterlist", responseDto.getPeriodMapList());
+
+        return responseDto.isSuccess();
+    }
+
+    public boolean generateTimeTable() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        TimeTableResponseDto responseDto = periodService.generateTimeTable(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
+        httpSession.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
 
         return responseDto.isSuccess();
     }

@@ -17,18 +17,14 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
 import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
-import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PeriodService {
     private StandardActionAdapter standardActionAdapter;
@@ -230,26 +226,26 @@ public class PeriodService {
 	}
 
 
-	public boolean generateTimeTable() {
+	public TimeTableResponseDto generateTimeTable(String branchId) {
+		TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
 
-		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
+		List<Periodmaster> periodMaster = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
 			Currentacademicyear currentYear = new YearDAO().showYear();
-	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+	        result.setCurrentYear(currentYear.getCurrentacademicyear());
 	       
-	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("periodmasterlist", periodMaster);
+	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(branchId));
+	        result.setPeriodMaster(periodMaster);
 		}
-		
+
         if(periodMaster.isEmpty()){
-        	return false;
-        }
-        
-		return true;
-		
-	
+			result.setSuccess(false);
+        }else {
+			result.setSuccess(true);
+		}
+		return result;
 	}
 
 
