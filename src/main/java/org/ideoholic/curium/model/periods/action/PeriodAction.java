@@ -75,7 +75,7 @@ public class PeriodAction {
 	@RequestMapping(value = "/generateTimeTable", method = { RequestMethod.GET, RequestMethod.POST })
 	public String generateTimeTable() {
 		
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).generateTimeTable()){
+		if(periodActionAdapter.generateTimeTable()){
 			return "classestimetable";
 		}
 		return error;

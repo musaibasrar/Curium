@@ -23,6 +23,7 @@ import org.ideoholic.curium.model.periods.dao.PeriodDAO;
 import org.ideoholic.curium.model.periods.dto.Perioddetails;
 import org.ideoholic.curium.model.periods.dto.Periodmaster;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableGenerateResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -230,26 +231,26 @@ public class PeriodService {
 	}
 
 
-	public boolean generateTimeTable() {
+	public TimeTableGenerateResponseDto generateTimeTable(String branchId) {
+		TimeTableGenerateResponseDto result = TimeTableGenerateResponseDto.builder().success(false).build();
 
-		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
+		List<Periodmaster> periodMaster = new ArrayList<>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchId!=null){
 
 			Currentacademicyear currentYear = new YearDAO().showYear();
-	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+	        result.setCurrentYear(currentYear.getCurrentacademicyear());
 	       
-	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        httpSession.setAttribute("periodmasterlist", periodMaster);
+	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(branchId));
+	        result.setPeriodMaster(periodMaster);
 		}
 		
         if(periodMaster.isEmpty()){
-        	return false;
+			result.setSuccess(false);
         }
         
-		return true;
-		
-	
+		result.setSuccess(true);
+		return result;
 	}
 
 
