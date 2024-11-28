@@ -143,6 +143,7 @@ public class JobActionAdapter {
 		request.setAttribute("queryList", jobQueryDto.getQueriesList());
 		request.setAttribute("noOfPages", jobQueryDto.getNoOfPages());
 		request.setAttribute("currentPage", jobQueryDto.getCurrentPage());
+		request.setAttribute("studentList",jobQueryDto.getStudentList());
 		return jobQueryDto.isSuccess();
 	}
 
