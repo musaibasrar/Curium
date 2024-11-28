@@ -93,7 +93,7 @@ public class PeriodAction {
 	@GetMapping("/viewTimeTable")
 	public String viewTimeTable() {
 		
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).viewTimeTable()){
+		if(periodActionAdapter.viewTimeTable()){
 			return "timetable";
 		}
 		
