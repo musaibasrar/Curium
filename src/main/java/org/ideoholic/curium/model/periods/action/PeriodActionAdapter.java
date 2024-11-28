@@ -1,7 +1,9 @@
 package org.ideoholic.curium.model.periods.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
+import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
 import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
@@ -55,5 +57,15 @@ public class PeriodActionAdapter {
         httpSession.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
 
         return responseDto.isSuccess();
+    }
+
+    public boolean deletePeriods() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        PeriodMasterIdDto dto = new PeriodMasterIdDto();
+        dto.setPeriodMasterId(request.getParameterValues("idperiodmaster"));
+
+        ResultResponse resultResponse = periodService.deletePeriods(dto);
+        return resultResponse.isSuccess();
     }
 }
