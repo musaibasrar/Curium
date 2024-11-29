@@ -196,7 +196,7 @@ public class FeesService {
 
                         inStream.close();
                         outStream.close();
-                        ResultResponse.builder().success(true).build();;
+                        ResultResponse.builder().success(true).build();
                 } catch (Exception e) {
                         System.out.println("" + e);
                 }
