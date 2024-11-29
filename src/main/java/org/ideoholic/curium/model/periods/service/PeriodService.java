@@ -40,27 +40,28 @@ public class PeriodService {
 	}
 	
 	
-	public boolean periodConfiguration(){
+	public TimeTableResponseDto periodConfiguration(String branchId){
+		TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
 		
 		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
 		
 		try {
 	                Currentacademicyear currentYear = new YearDAO().showYear();
-	                httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+					result.setCurrentYear(currentYear.getCurrentacademicyear());
 	                
 	                subjectDetailsActionAdapter.readListOfSubjects();
 	                
 	                employeeActionAdapter.ViewAllEmployee();
 	                standardActionAdapter.viewClasses();
-	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	                request.setAttribute("periodmasterlist", periodMaster);
+	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
+					result.setPeriodMaster(periodMaster);
 		    
                 } catch (Exception e) {
-                   return false;
+                   return result;
                 }
 		
-	        
-		return true;
+	    result.setSuccess(true);
+		return result;
 		
 	}
 

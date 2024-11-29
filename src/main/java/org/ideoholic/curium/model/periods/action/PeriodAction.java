@@ -109,7 +109,7 @@ public class PeriodAction {
 	@GetMapping("/periodConfiguration")
 	public String periodConfiguration() {
 		
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).periodConfiguration()){
+		if(periodActionAdapter.periodConfiguration()){
 			return "periodmaster";
 		}
 		return error;

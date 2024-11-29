@@ -114,4 +114,14 @@ public class PeriodActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+    public boolean periodConfiguration() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        TimeTableResponseDto responseDto = periodService.periodConfiguration(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
+        request.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
+
+        return responseDto.isSuccess();
+    }
 }

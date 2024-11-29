@@ -55,9 +55,8 @@ public class JobApiActionImpl implements JobApiAction {
 	private JobService jobService;
 	@Autowired
 	private EmployeeService employeeService;
-	/*TODO uncomment after StudentService @service
-	 * @Autowired private StudentService studentService;
-	 */
+	@Autowired
+	private StudentService studentService;
 
 	@PostMapping("/download")
 	public ResponseEntity<ResultResponse> download() {
@@ -406,8 +405,8 @@ public class JobApiActionImpl implements JobApiAction {
 		TaskReportResponseDto viewStudentResponseDto = new TaskReportResponseDto();
 		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
 		viewStudentResponseDto.copyEmployeesWithSalaryResponseDto(employeesWithSalaryResponseDto);
-		//TODO remove this new after @service
-		StudentListResponseDto studentListResponseDto = new StudentService(request,null,null).viewAllStudentsList(branchId);
+
+		StudentListResponseDto studentListResponseDto = studentService.viewAllStudentsList(branchId);
 		viewStudentResponseDto.copyStudentListResponseDto(studentListResponseDto);
 		return ResponseEntity.ok(viewStudentResponseDto);
 
