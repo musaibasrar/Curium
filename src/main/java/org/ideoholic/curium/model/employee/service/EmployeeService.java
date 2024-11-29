@@ -147,19 +147,19 @@ public class EmployeeService {
 		return ResultResponse.builder().build();
 	}
 //TODO: Naming Convention error in this method, method name should start from small alphabet.
-	public ViewAllEmployeeResponseDto ViewAllEmployee(String branchId) {
-		ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = new ViewAllEmployeeResponseDto();
+	public EmployeesWithSalaryResponseDto ViewAllEmployee(String branchId) {
+		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = new EmployeesWithSalaryResponseDto();
 		
 		boolean result = false;
     try {
     	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
-        viewAllEmployeeResponseDto.setEmployeeList(list);
-        viewAllEmployeeResponseDto.setEmployeeListProcessSalary(list);
-        viewAllEmployeeResponseDto.setSuccess(true);
+    	employeesWithSalaryResponseDto.setEmployeeList(list);
+    	employeesWithSalaryResponseDto.setEmployeeListProcessSalary(list);
+    	employeesWithSalaryResponseDto.setSuccess(true);
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return viewAllEmployeeResponseDto;
+    return employeesWithSalaryResponseDto;
 }
 
 	public EmployeeDetailsResponseDto viewDetailsEmployee(String empId) {

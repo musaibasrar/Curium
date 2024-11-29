@@ -103,12 +103,12 @@ public class EmployeeActionAdapter {
     }
     public boolean ViewAllEmployee() {
 
-        ViewAllEmployeeResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
-        httpSession.setAttribute("employeeList", viewAllEmployeeResponseDto.getEmployeeList());
-        httpSession.setAttribute("employeeListProcessSalary", viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
+    	EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("employeeList", employeesWithSalaryResponseDto.getEmployeeList());
+        httpSession.setAttribute("employeeListProcessSalary", employeesWithSalaryResponseDto.getEmployeeListProcessSalary());
 
 
-        return viewAllEmployeeResponseDto.isSuccess();
+        return employeesWithSalaryResponseDto.isSuccess();
     }
     public void deleteMultiple() {
 

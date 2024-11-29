@@ -31,7 +31,7 @@ public class EmployeeApiActionImpl implements EmployeeApiAction{
     }
 
     @PostMapping("/deleteMultiple")
-    public ResponseEntity<ViewAllEmployeeResponseDto> deleteMultiple(@RequestBody EmployeeIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<EmployeesWithSalaryResponseDto> deleteMultiple(@RequestBody EmployeeIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
         employeeService.deleteMultiple(dto);
         return viewEmployee(branchId);
     }
@@ -74,8 +74,8 @@ public class EmployeeApiActionImpl implements EmployeeApiAction{
     }
 
     @RequestMapping(value = "/ViewAllEmployee", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<ViewAllEmployeeResponseDto> viewEmployee(@RequestHeader(value = "branchid") String branchId) {
-        ViewAllEmployeeResponseDto result = employeeService.ViewAllEmployee(branchId);
+    public ResponseEntity<EmployeesWithSalaryResponseDto> viewEmployee(@RequestHeader(value = "branchid") String branchId) {
+    	EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
         return ResponseEntity.ok(result);
     }
 

@@ -6,8 +6,8 @@ package org.ideoholic.curium.model.printids.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
 import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
-import org.ideoholic.curium.model.employee.dto.ViewAllEmployeeResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
@@ -80,8 +80,8 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 	}
 	
 	@GetMapping("/generateIdsEmployees")
-	public ResponseEntity<ViewAllEmployeeResponseDto> generateIdsEmployees(@RequestHeader(value = "branchid") String branchId) {
-		ViewAllEmployeeResponseDto result = employeeService.ViewAllEmployee(branchId);
+	public ResponseEntity<EmployeesWithSalaryResponseDto> generateIdsEmployees(@RequestHeader(value = "branchid") String branchId) {
+		EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
 		return ResponseEntity.ok(result);
 	}
 	

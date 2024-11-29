@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueriesDto {
-	
+public class TaskQueryDto {
+	private String queryId; 
+	private String jobQuery;
+	private String response;
+	private String queryRemarks;
 	private String[] queryIds;
 	private String[] taskIds;
 	private String jobId;
@@ -20,5 +23,7 @@ public class QueriesDto {
 	private String[] description;
 	private String[] expecteddd;
 	private String displayType;
+
+
 
 }

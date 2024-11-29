@@ -15,7 +15,7 @@ public interface EmployeeApiAction {
 
     ResponseEntity<ViewAllRelationsResponseDto> addEmployeePage(@RequestHeader(value = "branchid") String branchId);
 
-    ResponseEntity<ViewAllEmployeeResponseDto> deleteMultiple(@RequestBody EmployeeIdsDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<EmployeesWithSalaryResponseDto> deleteMultiple(@RequestBody EmployeeIdsDto dto, @RequestHeader(value = "branchid") String branchId);
 
     ResponseEntity<EmployeeDetailsResponseDto> updateEmployee(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles, @RequestPart("employeeDto") EmployeeDto employeeDto);
 
@@ -23,7 +23,7 @@ public interface EmployeeApiAction {
 
     ResponseEntity<EmployeeDetailsResponseDto> viewDetails(@RequestParam(value = "id") String empId);
 
-    ResponseEntity<ViewAllEmployeeResponseDto> viewEmployee(@RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<EmployeesWithSalaryResponseDto> viewEmployee(@RequestHeader(value = "branchid") String branchId);
 
     ResponseEntity<ResultResponse> addEmployee(@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestPart("employeeDto") EmployeeDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "branchcode") String branchCode);
 }

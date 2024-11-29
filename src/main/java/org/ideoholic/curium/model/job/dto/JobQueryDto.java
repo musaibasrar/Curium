@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class JobQueryDto {
 	private List<JobQuery> queriesList;
 	private List<Task> taskList;
+	private List<JobQuery> studentList;
 	private int noOfPages;
 	private int page;
 	private int currentPage;
