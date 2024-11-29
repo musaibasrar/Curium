@@ -12,7 +12,7 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class TimeTableViewResponseDto {
     private Periodmaster periodMaster;
-    private List<Perioddetails> periodD;
+    private List<Perioddetails> periodDetails;
     private Map<String,List<Perioddetails>> periodMap;
     private String periodMasterId;
     @Builder.Default

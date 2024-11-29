@@ -77,7 +77,7 @@ public class PeriodActionAdapter {
 
         TimeTableViewResponseDto responseDto = periodService.viewTimeTable(periodMasterId);
         request.setAttribute("timetable", responseDto.getPeriodMaster());
-        request.setAttribute("timetableperioddetails", responseDto.getPeriodD());
+        request.setAttribute("timetableperioddetails", responseDto.getPeriodDetails());
         request.setAttribute("periodmap", responseDto.getPeriodMap());
         request.setAttribute("periodMasterid", responseDto.getPeriodMasterId());
 

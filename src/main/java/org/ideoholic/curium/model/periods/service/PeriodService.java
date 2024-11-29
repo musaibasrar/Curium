@@ -142,7 +142,7 @@ public class PeriodService {
 			result.setPeriodMaster(periodMaster);
 			
 			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
-			result.setPeriodD(periodD);
+			result.setPeriodDetails(periodD);
 			
 			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
 			
