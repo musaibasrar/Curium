@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
 import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
 import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -67,5 +68,19 @@ public class PeriodActionAdapter {
 
         ResultResponse resultResponse = periodService.deletePeriods(dto);
         return resultResponse.isSuccess();
+    }
+
+    public boolean viewTimeTable() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        String periodMasterId = request.getParameter("id");
+
+        TimeTableViewResponseDto responseDto = periodService.viewTimeTable(periodMasterId);
+        request.setAttribute("timetable", responseDto.getPeriodMaster());
+        request.setAttribute("timetableperioddetails", responseDto.getPeriodDetails());
+        request.setAttribute("periodmap", responseDto.getPeriodMap());
+        request.setAttribute("periodMasterid", responseDto.getPeriodMasterId());
+
+        return responseDto.isSuccess();
     }
 }
