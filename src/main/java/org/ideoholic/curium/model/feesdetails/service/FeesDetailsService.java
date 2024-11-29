@@ -80,6 +80,7 @@ public class FeesDetailsService {
 
 	public ResultResponse exportDataForFees() {
 		
+		ResultResponse result = ResultResponse.builder().success(false).build();
 		String[] feesIds = request.getParameterValues("feesIDs");
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
@@ -97,9 +98,9 @@ public class FeesDetailsService {
 			}
 			try {
 				if (exportDataToExcel(feesMap)) {
-					ResultResponse.builder().success(true).build();
+					result = ResultResponse.builder().success(true).build();
 				} else {
-					ResultResponse.builder().success(false).build();
+					result = ResultResponse.builder().success(false).build();
 				}
 
 			} catch (Exception e) {
@@ -107,7 +108,7 @@ public class FeesDetailsService {
 			}
 		}
 
-		return ResultResponse.builder().success(false).build();
+		return result;
 	}
 	
 	
