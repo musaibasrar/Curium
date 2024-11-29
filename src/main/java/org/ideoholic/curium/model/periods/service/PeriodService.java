@@ -326,27 +326,28 @@ public class PeriodService {
 	}
 
 
-	public void updatePeriodDetails() {
-String periodMasterid = request.getParameter("id");
-request.setAttribute("periodMasterid", periodMasterid);
+	public TimeTableViewResponseDto updatePeriodDetails(String periodMasterId) {
+		TimeTableViewResponseDto result = TimeTableViewResponseDto.builder().build();
 
-		if(periodMasterid!=null){
+		result.setPeriodMasterId(periodMasterId);
+
+		if(periodMasterId !=null){
 		
-			Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterid);
-			request.setAttribute("timetable", periodMaster);
+			Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterId);
+			result.setPeriodMaster(periodMaster);
 			
-			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterid);
-			request.setAttribute("timetableperioddetails", periodD);
+			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
+			result.setPeriodDetails(periodD);
 			
-			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<String,List<Perioddetails>>();
+			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
 			
-			List<Perioddetails> periodDetailsMon = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsTue = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsWed = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsThu = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsFri = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsSat = new ArrayList<Perioddetails>();
-			List<Perioddetails> periodDetailsSun = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsMon = new ArrayList<>();
+			List<Perioddetails> periodDetailsTue = new ArrayList<>();
+			List<Perioddetails> periodDetailsWed = new ArrayList<>();
+			List<Perioddetails> periodDetailsThu = new ArrayList<>();
+			List<Perioddetails> periodDetailsFri = new ArrayList<>();
+			List<Perioddetails> periodDetailsSat = new ArrayList<>();
+			List<Perioddetails> periodDetailsSun = new ArrayList<>();
 			
 			for (Perioddetails periodDetailsSingle : periodD) {
 				
@@ -395,10 +396,10 @@ request.setAttribute("periodMasterid", periodMasterid);
 			if(!periodDetailsSun.isEmpty()){
 				periodMap.put("Sunday", periodDetailsSun);
 			}
-			request.setAttribute("periodmap", periodMap);
-			
+			result.setPeriodMap(periodMap);
 		}
-		
+		result.setSuccess(true);
+		return result;
 	}
 
 
