@@ -69,7 +69,7 @@ public class FeesDetailsAction {
 	@PostMapping("/printDataForFees")
 	public String printFeesData() {
 		
-		if(new FeesDetailsService(request, response).printDataForFees()){
+		if(feesDetailsActionAdapter.printDataForFees()){
 			return "printfeescollectiondetails";
 		}else{
 			return "error";

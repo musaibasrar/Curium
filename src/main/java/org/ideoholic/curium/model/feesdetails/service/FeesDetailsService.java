@@ -26,6 +26,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -299,14 +300,14 @@ public class FeesDetailsService {
 
 
 
-	public boolean printDataForFees() {
+	public DataForFeesResponseDto printDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
-		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
-		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
-		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));
+		DataForFeesResponseDto dataForFeesResponseDto = new DataForFeesResponseDto();
+		String[] feesIds = feesIdDetailsDto.getFeesIds();
+		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
+		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
+		String oneDay = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getOneDay());
 		
-		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
 		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
@@ -330,20 +331,19 @@ public class FeesDetailsService {
 			}
 		}
 		
-		httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-		httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
-		httpSession.setAttribute("sumoffine", fine);
-		httpSession.setAttribute("sumofmisc", misc);
-		
+		dataForFeesResponseDto.setSumOfDetailsFees(sumOfFees);
+		dataForFeesResponseDto.setSumOfOnlyFee(sumOfFees-fine-misc);
+		dataForFeesResponseDto.setSumOfFine(fine);
+		dataForFeesResponseDto.setSumOfMisc(misc);
 		if(oneDay.equalsIgnoreCase("")) {
-			httpSession.setAttribute("daterangefeescollection", "From Date: "+fromDate+"             To Date: "+toDate+"");
+			dataForFeesResponseDto.setDateRangeFeesCollection("From Date: "+fromDate+"             To Date: "+toDate+"");
 		}else {
-			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
+			dataForFeesResponseDto.setDateRangeFeesCollection("Date: "+oneDay+"");
 		}
 		
-		
-		request.setAttribute("feesmap", feesMap);
-		return true;
+		dataForFeesResponseDto.setFeesMap(feesMap);
+		dataForFeesResponseDto.setSuccess(true);
+		return dataForFeesResponseDto;
 	}
 
 
