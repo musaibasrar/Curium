@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -587,6 +588,48 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}finally {
 			HibernateUtil.closeSession();
 		}
+	}
+	
+	public List<Studentdailyattendance> getStudentAttendance(String date) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+		try {
+			transaction = session.beginTransaction();
+			studentdailyattendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"'").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentdailyattendance;
+	}
+	
+	public List<Studentdailyattendance> getStudentClassAttendance(String date, List<String> attendeeid) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and attendeeid IN (:ids)");
+			query.setParameterList("ids", attendeeid);
+			studentdailyattendance = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentdailyattendance;
+	}
+	
+	public Studentdailyattendance getStudentTodaysAttendance(String userName, LocalDate currentDate) {
+		Studentdailyattendance attendance = new Studentdailyattendance();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Studentdailyattendance  where attendeeid = '"+userName+"' and date = '"+currentDate+"'");
+			attendance = (Studentdailyattendance) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return attendance;
 	}
 
 }

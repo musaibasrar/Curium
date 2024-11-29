@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -84,6 +87,15 @@ public class UserService {
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
+			
+			if(userType[0].equalsIgnoreCase("parents")) {
+				LocalDate currentDate = LocalDate.now();
+				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
+			       if(attendance != null) {
+			       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
+			       }
+			}
+			
            result = true;
        } else {
            result = false;
