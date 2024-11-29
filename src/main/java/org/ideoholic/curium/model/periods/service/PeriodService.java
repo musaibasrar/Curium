@@ -398,7 +398,13 @@ public class PeriodService {
 			}
 			result.setPeriodMap(periodMap);
 		}
-		result.setSuccess(true);
+
+		try {
+			result.setSuccess(true);
+		} catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
+		}
 		return result;
 	}
 
