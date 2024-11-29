@@ -3,10 +3,7 @@ package org.ideoholic.curium.model.periods.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
-import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
-import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
-import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
+import org.ideoholic.curium.model.periods.dto.*;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -35,7 +32,8 @@ public class PeriodActionAdapter {
     @Autowired
     private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 
-    String BRANCHID = "branchid";
+    private String BRANCHID = "branchid";
+    private String USERID = "userloginid";
 
     public boolean viewTeacherTimeTable() {
 
@@ -82,5 +80,38 @@ public class PeriodActionAdapter {
         request.setAttribute("periodMasterid", responseDto.getPeriodMasterId());
 
         return responseDto.isSuccess();
+    }
+
+    public boolean savePeriods() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        PeriodsSaveDto dto = new PeriodsSaveDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setTotalNoOfPeriods(request.getParameter("totalperiods"));
+        dto.setDurationOfPeriodsHr(request.getParameter("periodduration"));
+        dto.setDurationOfPeriodsMin(request.getParameter("perioddurationmin"));
+        dto.setDayStartTimeHr(request.getParameter("daystarttime"));
+        dto.setDayStartTimeMin(request.getParameter("daystartminutes"));
+        dto.setDayStartAm(request.getParameter("daystartam"));
+        dto.setDayEndTimeHr(request.getParameter("dayendtime"));
+        dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
+        dto.setDayEndAm(request.getParameter("dayendam"));
+        dto.setFromClass(request.getParameter("fromclass"));
+        dto.setToClass(request.getParameter("toclass"));
+
+        dto.setPeriods(request.getParameterValues("periods"));
+        dto.setSubjects(request.getParameterValues("subject"));
+        dto.setStaff(request.getParameterValues("staff"));
+        dto.setPeriodStartTimeHr(request.getParameterValues("periodstarttimehr"));
+        dto.setPeriodStartTimeMin(request.getParameterValues("periodstarttimemin"));
+        dto.setPeriodEndTimeAm(request.getParameterValues("periodstarttimeam"));
+        dto.setPeriodEndTimeHr(request.getParameterValues("periodendtimehr"));
+        dto.setPeriodEndTimeMin(request.getParameterValues("periodendtimemin"));
+        dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
+        dto.setDays(request.getParameterValues("days"));
+
+        ResultResponse resultResponse = periodService.savePeriods(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+
+        return resultResponse.isSuccess();
     }
 }
