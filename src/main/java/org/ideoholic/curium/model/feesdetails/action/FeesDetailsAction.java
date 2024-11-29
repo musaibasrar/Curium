@@ -58,7 +58,7 @@ public class FeesDetailsAction {
 	@PostMapping("/exportDataForOtherFees")
 	public String exportOtherFeesData() {
 		
-		if(new FeesDetailsService(request, response).exportDataForOtherFees()){
+		if(feesDetailsActionAdapter.exportDataForOtherFees()){
 			return "feesexportsuccess";
 		}else{
 			return "exportfailure";
