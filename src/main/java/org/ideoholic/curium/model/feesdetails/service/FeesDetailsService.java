@@ -26,6 +26,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -78,10 +79,10 @@ public class FeesDetailsService {
 
 
 
-	public ResultResponse exportDataForFees() {
+	public ResultResponse exportDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
 		ResultResponse result = ResultResponse.builder().success(false).build();
-		String[] feesIds = request.getParameterValues("feesIDs");
+		String[] feesIds =  feesIdDetailsDto.getFeesIds();
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
@@ -188,10 +189,10 @@ public class FeesDetailsService {
 
 
 
-	public boolean exportDataForOtherFees() {
+	public ResultResponse exportDataForOtherFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
-		boolean successResult = false;
+		ResultResponse result = ResultResponse.builder().success(false).build();
+		String[] feesIds = feesIdDetailsDto.getFeesIds();
 		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
@@ -208,9 +209,9 @@ public class FeesDetailsService {
 			}
 			try {
 				if (exportOtherFeesDataToExcel(feesMap)) {
-					successResult = true;
+					result = ResultResponse.builder().success(true).build();
 				} else {
-					successResult = false;
+					result = ResultResponse.builder().success(false).build();
 				}
 
 			} catch (Exception e) {
@@ -218,7 +219,7 @@ public class FeesDetailsService {
 			}
 		}
 
-		return successResult;
+		return result;
 	}
 	
 	
