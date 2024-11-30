@@ -126,7 +126,7 @@ public class PeriodAction {
 	
 	@GetMapping("/updatePeriodDetails")
 	public String updatePeriodDetails() {
-		new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).updatePeriodDetails();
+		periodActionAdapter.updatePeriodDetails();
 		new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).getPeriodDetail();
 		standardActionAdapter.viewClasses(); 
 		return "updatetimetable";

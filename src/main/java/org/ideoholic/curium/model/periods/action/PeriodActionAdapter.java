@@ -124,4 +124,16 @@ public class PeriodActionAdapter {
 
         return responseDto.isSuccess();
     }
+
+    public void updatePeriodDetails() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        String periodMasterId = request.getParameter("id");
+
+        TimeTableViewResponseDto responseDto = periodService.updatePeriodDetails(periodMasterId);
+        request.setAttribute("periodMasterid", responseDto.getPeriodMasterId());
+        request.setAttribute("timetable", responseDto.getPeriodMaster());
+        request.setAttribute("timetableperioddetails", responseDto.getPeriodDetails());
+        request.setAttribute("periodmap", responseDto.getPeriodMap());
+    }
 }
