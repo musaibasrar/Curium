@@ -30,6 +30,8 @@ public class StudentDiaryAction {
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private StudentActionAdapter studentActionAdapter;
+	@Autowired
+	private StudentDiaryActionAdapter studentDiaryActionAdapter;
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
@@ -39,7 +41,7 @@ public class StudentDiaryAction {
 	
 	@PostMapping("/addDiary")
 	public String addDiary() {
-		new StudentDiaryservice(request, response).addDiary();
+		studentDiaryActionAdapter.addDiary();
 		return "studentdiarysaved";
 
 	}

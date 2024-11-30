@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
+import org.ideoholic.curium.model.studentdiary.dto.AddStudentDiaryDto;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryDTO;
 import org.ideoholic.curium.util.DataUtil;
@@ -32,20 +33,20 @@ public class StudentDiaryservice {
  this.httpSession = request.getSession();
   }
 
-	public void addDiary() {
+	public void addDiary(AddStudentDiaryDto addStudentDiaryDto,String branchId,String userLoginId,String currentAcademicYear) {
 		// TODO Auto-generated method stub
 		 StudentDiary diary = new StudentDiary();
          
          if(httpSession.getAttribute(BRANCHID)!=null){
         	 
-        	 diary.setSid(Integer.parseInt(request.getParameter("studentId")));
-             diary.setClasssec(request.getParameter("classandsec"));
-             diary.setMessage(request.getParameter("messagebody"));
-             diary.setSubject(request.getParameter("subject"));
-             diary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-             diary.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-             diary.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
-             diary.setCreateddate(DateUtil.indiandateParser(request.getParameter("createddate")));
+        	 diary.setSid(Integer.parseInt(addStudentDiaryDto.getStudentId()));
+             diary.setClasssec(addStudentDiaryDto.getClassAndSec());
+             diary.setMessage(addStudentDiaryDto.getMessageBody());
+             diary.setSubject(addStudentDiaryDto.getSubject());
+             diary.setBranchid(Integer.parseInt(branchId));
+             diary.setUserid(Integer.parseInt(userLoginId));
+             diary.setAcademicyear(currentAcademicYear);
+             diary.setCreateddate(DateUtil.indiandateParser(addStudentDiaryDto.getCreatedDate()));
              diary =  new StudentDiaryDAO().create(diary);
                  }
          }
