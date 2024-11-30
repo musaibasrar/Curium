@@ -136,4 +136,11 @@ public class PeriodActionAdapter {
         request.setAttribute("timetableperioddetails", responseDto.getPeriodDetails());
         request.setAttribute("periodmap", responseDto.getPeriodMap());
     }
+
+    public void getPeriodDetail() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        ResultResponse resultResponse = periodService.getPeriodDetail();
+
+    }
 }

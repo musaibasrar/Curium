@@ -408,17 +408,18 @@ public class PeriodService {
 	}
 
 
-	public void getPeriodDetail() {
-		
+	public ResultResponse getPeriodDetail() {
+		ResultResponse result = ResultResponse.builder().build();
         
         try {
         	employeeActionAdapter.ViewAllEmployee();
         	subjectDetailsActionAdapter.readListOfSubjectNames();
+			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
+			result.setSuccess(false);
 	    }
-       
-		
+		return result;
 	}
 
 
