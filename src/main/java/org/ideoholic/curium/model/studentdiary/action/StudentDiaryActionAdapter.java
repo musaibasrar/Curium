@@ -19,6 +19,8 @@ public class StudentDiaryActionAdapter {
 	    @Autowired
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    private String USERLOGINID = "userloginid";
+	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 		public void addDiary() {
 			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
@@ -28,7 +30,7 @@ public class StudentDiaryActionAdapter {
 			addStudentDiaryDto.setMessageBody(request.getParameter("messagebody"));
 			addStudentDiaryDto.setSubject(request.getParameter("subject"));
 			addStudentDiaryDto.setCreatedDate(request.getParameter("createddate"));
-			studentDiaryservice.addDiary(addStudentDiaryDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute("userloginid").toString(),httpSession.getAttribute("currentAcademicYear").toString());
+			studentDiaryservice.addDiary(addStudentDiaryDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERLOGINID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		}
 
 	
