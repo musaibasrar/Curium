@@ -330,76 +330,75 @@ public class PeriodService {
 		TimeTableViewResponseDto result = TimeTableViewResponseDto.builder().build();
 
 		result.setPeriodMasterId(periodMasterId);
-
-		if(periodMasterId !=null){
-		
-			Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterId);
-			result.setPeriodMaster(periodMaster);
-			
-			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
-			result.setPeriodDetails(periodD);
-			
-			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
-			
-			List<Perioddetails> periodDetailsMon = new ArrayList<>();
-			List<Perioddetails> periodDetailsTue = new ArrayList<>();
-			List<Perioddetails> periodDetailsWed = new ArrayList<>();
-			List<Perioddetails> periodDetailsThu = new ArrayList<>();
-			List<Perioddetails> periodDetailsFri = new ArrayList<>();
-			List<Perioddetails> periodDetailsSat = new ArrayList<>();
-			List<Perioddetails> periodDetailsSun = new ArrayList<>();
-			
-			for (Perioddetails periodDetailsSingle : periodD) {
-				
-					if("Monday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsMon.add(periodDetailsSingle);
-					}else if("Tuesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsTue.add(periodDetailsSingle);
-					}else if("Wednesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsWed.add(periodDetailsSingle);
-					}else if("Thursday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsThu.add(periodDetailsSingle);
-					}else if("Friday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsFri.add(periodDetailsSingle);
-					}else if("Saturday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsSat.add(periodDetailsSingle);
-					}else if("Sunday".equalsIgnoreCase(periodDetailsSingle.getDays())){
-						periodDetailsSun.add(periodDetailsSingle);
-					}
-					
-			}
-			
-			if(!periodDetailsMon.isEmpty()){
-				periodMap.put("Monday", periodDetailsMon);
-			}
-			
-			if(!periodDetailsTue.isEmpty()){
-				periodMap.put("Tuesday", periodDetailsTue);
-			}
-
-			if(!periodDetailsWed.isEmpty()){
-				periodMap.put("Wednesday", periodDetailsWed);
-			}
-
-			if(!periodDetailsThu.isEmpty()){
-				periodMap.put("Thursday", periodDetailsThu);
-			}
-
-			if(!periodDetailsFri.isEmpty()){
-				periodMap.put("Friday", periodDetailsFri);
-			}
-
-			if(!periodDetailsSat.isEmpty()){
-				periodMap.put("Saturday", periodDetailsSat);
-			}
-
-			if(!periodDetailsSun.isEmpty()){
-				periodMap.put("Sunday", periodDetailsSun);
-			}
-			result.setPeriodMap(periodMap);
-		}
-
 		try {
+			if(periodMasterId !=null){
+
+				Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterId);
+				result.setPeriodMaster(periodMaster);
+
+				List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
+				result.setPeriodDetails(periodD);
+
+				Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
+
+				List<Perioddetails> periodDetailsMon = new ArrayList<>();
+				List<Perioddetails> periodDetailsTue = new ArrayList<>();
+				List<Perioddetails> periodDetailsWed = new ArrayList<>();
+				List<Perioddetails> periodDetailsThu = new ArrayList<>();
+				List<Perioddetails> periodDetailsFri = new ArrayList<>();
+				List<Perioddetails> periodDetailsSat = new ArrayList<>();
+				List<Perioddetails> periodDetailsSun = new ArrayList<>();
+
+				for (Perioddetails periodDetailsSingle : periodD) {
+
+						if("Monday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsMon.add(periodDetailsSingle);
+						}else if("Tuesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsTue.add(periodDetailsSingle);
+						}else if("Wednesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsWed.add(periodDetailsSingle);
+						}else if("Thursday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsThu.add(periodDetailsSingle);
+						}else if("Friday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsFri.add(periodDetailsSingle);
+						}else if("Saturday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsSat.add(periodDetailsSingle);
+						}else if("Sunday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+							periodDetailsSun.add(periodDetailsSingle);
+						}
+
+				}
+
+				if(!periodDetailsMon.isEmpty()){
+					periodMap.put("Monday", periodDetailsMon);
+				}
+
+				if(!periodDetailsTue.isEmpty()){
+					periodMap.put("Tuesday", periodDetailsTue);
+				}
+
+				if(!periodDetailsWed.isEmpty()){
+					periodMap.put("Wednesday", periodDetailsWed);
+				}
+
+				if(!periodDetailsThu.isEmpty()){
+					periodMap.put("Thursday", periodDetailsThu);
+				}
+
+				if(!periodDetailsFri.isEmpty()){
+					periodMap.put("Friday", periodDetailsFri);
+				}
+
+				if(!periodDetailsSat.isEmpty()){
+					periodMap.put("Saturday", periodDetailsSat);
+				}
+
+				if(!periodDetailsSun.isEmpty()){
+					periodMap.put("Sunday", periodDetailsSun);
+				}
+				result.setPeriodMap(periodMap);
+			}
+
 			result.setSuccess(true);
 		} catch (Exception e){
 			e.printStackTrace();
