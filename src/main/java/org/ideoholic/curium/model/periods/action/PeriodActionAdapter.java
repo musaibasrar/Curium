@@ -143,4 +143,37 @@ public class PeriodActionAdapter {
         ResultResponse resultResponse = periodService.getPeriodDetail();
 
     }
+
+    public boolean updatenewPeriodDetails() {
+        PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter, subjectDetailsActionAdapter);
+
+        PeriodsSaveDto dto = new PeriodsSaveDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setTotalNoOfPeriods(request.getParameter("totalperiods"));
+        dto.setDayStartTimeHr(request.getParameter("daystarttime"));
+        dto.setDayStartTimeMin(request.getParameter("daystartminutes"));
+        dto.setDayStartAm(request.getParameter("daystartam"));
+        dto.setDayEndTimeHr(request.getParameter("dayendtime"));
+        dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
+        dto.setDayEndAm(request.getParameter("dayendam"));
+        dto.setPeriodMasterId(request.getParameter("periodmasterid"));
+        dto.setFromClass(request.getParameter("classsec"));
+        dto.setToClass(request.getParameter("toclass"));
+
+        dto.setPeriods(request.getParameterValues("periods"));
+        dto.setPeriodId(request.getParameterValues("periodid"));
+        dto.setSubjects(request.getParameterValues("subject"));
+        dto.setStaff(request.getParameterValues("staff"));
+        dto.setPeriodStartTimeHr(request.getParameterValues("periodstarttimehr"));
+        dto.setPeriodStartTimeMin(request.getParameterValues("periodstarttimemin"));
+        dto.setPeriodStartTimeAm(request.getParameterValues("periodstarttimeam"));
+        dto.setPeriodEndTimeHr(request.getParameterValues("periodendtimehr"));
+        dto.setPeriodEndTimeMin(request.getParameterValues("periodendtimemin"));
+        dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
+        dto.setDays(request.getParameterValues("days"));
+
+        ResultResponse resultResponse = periodService.updatenewPeriodDetails(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+
+        return resultResponse.isSuccess();
+    }
 }

@@ -423,30 +423,32 @@ public class PeriodService {
 	}
 
 
-	public boolean updatenewPeriodDetails() {
-		String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
-		String totalNoOfPeriods = DataUtil.emptyString(request.getParameter("totalperiods"));
-		String dayStartTimeHr = DataUtil.emptyString(request.getParameter("daystarttime"));
-		String dayStartTimeMin = DataUtil.emptyString(request.getParameter("daystartminutes"));
-		String dayStartAm = DataUtil.emptyString(request.getParameter("daystartam"));
-		String dayEndTimeHr = DataUtil.emptyString(request.getParameter("dayendtime"));
-		String dayEndTimeMin = DataUtil.emptyString(request.getParameter("dayendminutes"));
-		String dayEndAm = DataUtil.emptyString(request.getParameter("dayendam"));
-		String periodmasterid = DataUtil.emptyString(request.getParameter("periodmasterid"));
-		String fromClass = DataUtil.emptyString(request.getParameter("classsec"));
-		String toClass = DataUtil.emptyString(request.getParameter("toclass"));
+	public ResultResponse updatenewPeriodDetails(PeriodsSaveDto dto, String branchId, String userId) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		String academicYear = DataUtil.emptyString(dto.getAcademicYear());
+		String totalNoOfPeriods = DataUtil.emptyString(dto.getTotalNoOfPeriods());
+		String dayStartTimeHr = DataUtil.emptyString(dto.getDayStartTimeHr());
+		String dayStartTimeMin = DataUtil.emptyString(dto.getDayStartTimeMin());
+		String dayStartAm = DataUtil.emptyString(dto.getDayStartAm());
+		String dayEndTimeHr = DataUtil.emptyString(dto.getDayEndTimeHr());
+		String dayEndTimeMin = DataUtil.emptyString(dto.getDayEndTimeMin());
+		String dayEndAm = DataUtil.emptyString(dto.getDayEndAm());
+		String periodmasterid = DataUtil.emptyString(dto.getPeriodMasterId());
+		String fromClass = DataUtil.emptyString(dto.getFromClass());
+		String toClass = DataUtil.emptyString(dto.getToClass());
 		
-		String[] periods = request.getParameterValues("periods");
-		String[] periodid = request.getParameterValues("periodid");
-		String[] subjects = request.getParameterValues("subject");
-		String[] staff = request.getParameterValues("staff");
-		String[] periodStartTimeHr = request.getParameterValues("periodstarttimehr");
-		String[] periodStartTimeMin = request.getParameterValues("periodstarttimemin");
-		String[] periodStartTimeAm = request.getParameterValues("periodstarttimeam");
-		String[] periodEndTimeHr = request.getParameterValues("periodendtimehr");
-		String[] periodEndTimeMin = request.getParameterValues("periodendtimemin");
-		String[] periodEndTimeAm = request.getParameterValues("periodendtimeam");
-		String[] days = request.getParameterValues("days");
+		String[] periods = dto.getPeriods();
+		String[] periodid = dto.getPeriodId();
+		String[] subjects = dto.getSubjects();
+		String[] staff = dto.getStaff();
+		String[] periodStartTimeHr = dto.getPeriodStartTimeHr();
+		String[] periodStartTimeMin = dto.getPeriodStartTimeMin();
+		String[] periodStartTimeAm = dto.getPeriodStartTimeAm();
+		String[] periodEndTimeHr = dto.getPeriodEndTimeHr();
+		String[] periodEndTimeMin = dto.getPeriodEndTimeMin();
+		String[] periodEndTimeAm = dto.getPeriodEndTimeAm();
+		String[] days = dto.getDays();
 		
 		
 		Map<String,List<Perioddetails>> periodMap = new HashMap<String,List<Perioddetails>>();
@@ -464,8 +466,8 @@ public class PeriodService {
 				periodDetails.setSubject(subjects[getPeriod]);
 				periodDetails.setStaff(staff[getPeriod]);
 				periodDetails.setTimings(periodStartTimeHr[getPeriod]+":"+periodStartTimeMin[getPeriod]+": "+periodStartTimeAm[getPeriod]+ " To "+periodEndTimeHr[getPeriod]+":"+periodEndTimeMin[getPeriod]+" "+periodEndTimeAm[getPeriod]);
-				periodDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				periodDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+				periodDetails.setBranchid(Integer.parseInt(branchId));
+				periodDetails.setUserid(Integer.parseInt(userId));
 				getPeriod++;
 				periodList.add(periodDetails);
 			}
@@ -487,12 +489,13 @@ public class PeriodService {
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
 		periodMaster.setIdperiodmaster(Integer.parseInt(periodmasterid.toString()));
-		periodMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		periodMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		periodMaster.setBranchid(Integer.parseInt(branchId));
+		periodMaster.setUserid(Integer.parseInt(userId));
 		Set<Perioddetails> setPeriodDetails = new HashSet<>(periodDetailsList);
 		periodMaster.setPeriodDetails(setPeriodDetails);
-		return new PeriodDAO().update(periodMaster);
 
-		
+		result.setSuccess(new PeriodDAO().update(periodMaster));
+
+		return result;
 	}
 }

@@ -20,10 +20,12 @@ public class PeriodsSaveDto {
     private String dayEndTimeHr;
     private String dayEndTimeMin;
     private String dayEndAm;
+    private String periodMasterId;
     private String fromClass;
     private String toClass;
 
     private String[] periods;
+    private String[] periodId;
     private String[] subjects;
     private String[] staff;
     private String[] periodStartTimeHr;
