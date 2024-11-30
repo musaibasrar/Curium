@@ -134,7 +134,7 @@ public class PeriodAction {
 	
 	@PostMapping("/updatenewPeriodDetails")
 	public String updatenewPeriodDetails() {
-		if(new PeriodService(request, response,standardActionAdapter,employeeActionAdapter,subjectDetailsActionAdapter).updatenewPeriodDetails()) {
+		if(periodActionAdapter.updatenewPeriodDetails()) {
 		return "timetableupdatesaved";
 	}
 		return error;
