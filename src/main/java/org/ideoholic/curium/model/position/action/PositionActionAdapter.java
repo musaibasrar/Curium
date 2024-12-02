@@ -20,6 +20,7 @@ public class PositionActionAdapter {
     @Autowired
     private HttpSession httpSession;
     private String BRANCHID = "branchid";
+    private String USERID = "userloginid";
 
 
     public void deleteMultiple() {
@@ -36,5 +37,14 @@ public class PositionActionAdapter {
 
         PositionResponseDto responseDto = positionService.viewPosition(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("positionList", responseDto.getPositionList());
+    }
+
+    public void addPosition() {
+        PositionService positionService = new PositionService(request, response);
+
+        PositionDto dto = new PositionDto();
+        dto.setPosition(request.getParameter("position"));
+
+        positionService.addPosition(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
     }
 }

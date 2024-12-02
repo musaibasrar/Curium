@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PositionDto {
     private String[] positionIds;
+    private String position;
 }

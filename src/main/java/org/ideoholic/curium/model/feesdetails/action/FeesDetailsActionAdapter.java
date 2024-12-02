@@ -9,7 +9,9 @@ import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeesDetailsActionAdapter {
 	
 	    @Autowired

@@ -27,14 +27,13 @@ public class PositionService {
 		this.httpSession = request.getSession();
 	}
 
-	public void addPosition() {
+	public void addPosition(PositionDto dto, String branchId, String userId) {
 		
 		Position position = new Position();
 
-		position.setPositionname(DataUtil.emptyString(request
-				.getParameter("position")));
-		position.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-		position.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+		position.setPositionname(DataUtil.emptyString(dto.getPosition()));
+		position.setBranchid(Integer.parseInt(branchId));
+		position.setUserid(Integer.parseInt(userId));
 		if(!position.getPositionname().equalsIgnoreCase("")){
 			position = new positionDAO().create(position);
 		}
