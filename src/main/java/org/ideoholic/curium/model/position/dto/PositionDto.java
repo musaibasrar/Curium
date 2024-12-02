@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PositionIdsDto {
+public class PositionDto {
     private String[] positionIds;
 }

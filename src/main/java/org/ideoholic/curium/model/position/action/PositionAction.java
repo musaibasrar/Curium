@@ -29,7 +29,7 @@ public class PositionAction {
 
 	@GetMapping("/positionView")
 	public String viewPosition() {
-		new PositionService(request, response).viewPosition();
+		positionActionAdapter.viewPosition();
 		System.out.println("IN action's position view");
 		return "position";
 	}

@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.position.action;
 
-import org.ideoholic.curium.model.position.dto.PositionIdsDto;
+import org.ideoholic.curium.model.position.dto.PositionDto;
+import org.ideoholic.curium.model.position.dto.PositionResponseDto;
 import org.ideoholic.curium.model.position.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,22 @@ public class PositionActionAdapter {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    private String BRANCHID = "branchid";
 
 
     public void deleteMultiple() {
         PositionService positionService = new PositionService(request, response);
 
-        PositionIdsDto dto = new PositionIdsDto();
+        PositionDto dto = new PositionDto();
         dto.setPositionIds(request.getParameterValues("positionIDs"));
 
         positionService.deleteMultiple(dto);
+    }
+
+    public void viewPosition() {
+        PositionService positionService = new PositionService(request, response);
+
+        PositionResponseDto responseDto = positionService.viewPosition(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("positionList", responseDto.getPositionList());
     }
 }
