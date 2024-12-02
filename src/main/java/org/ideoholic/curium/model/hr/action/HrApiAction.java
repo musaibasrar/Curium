@@ -29,7 +29,7 @@ public interface HrApiAction {
     ResponseEntity<StaffDetailsResponseDto> getStaffDetails(@RequestBody StaffDetailsDto dto,@RequestHeader (value = "currentAcademicYear") String currentAcademicYear);
 
     @RequestMapping(value= "/deletePayHead", method= { RequestMethod.GET, RequestMethod.POST })
-    ResponseEntity<ViewAllEmployeeResponseDto> deletePayHead(@RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<EmployeesWithSalaryResponseDto> deletePayHead(@RequestHeader(value = "branchid") String branchId);
 
     @GetMapping("/printSalarySlip")
     ResponseEntity<SalarySlipResponseDto> printSalarySlip(@RequestHeader(value = "processSalaryId") String processSalaryId);
@@ -80,7 +80,7 @@ public interface HrApiAction {
     ResponseEntity<ResultResponse> saveAdvanceSalary(@RequestBody SaveAdvanceSalaryDto dto,@RequestHeader(value = "branchid") String branchId,@RequestHeader (value="userId") String userId);
 
     @GetMapping("/advanceSalary")
-    ResponseEntity<ViewAllEmployeeResponseDto> advanceSalary(@RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<EmployeesWithSalaryResponseDto> advanceSalary(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/deletePf")
     ResponseEntity<ResultResponse> deletePf(@RequestBody PfDto dto);
