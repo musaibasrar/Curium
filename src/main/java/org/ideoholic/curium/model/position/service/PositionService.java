@@ -11,6 +11,7 @@ import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
+import org.ideoholic.curium.model.position.dto.PositionIdsDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DataUtil;
 
@@ -56,8 +57,8 @@ public class PositionService {
         return result;
 	}
 
-	public void deleteMultiple() {
-		 String[] positionIds = request.getParameterValues("positionIDs");
+	public void deleteMultiple(PositionIdsDto dto) {
+		 String[] positionIds = dto.getPositionIds();
 		 if(positionIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : positionIds) {

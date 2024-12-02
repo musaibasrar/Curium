@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PositionAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
+	@Autowired
+	private PositionActionAdapter positionActionAdapter;
 
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
-		new PositionService(request, response).deleteMultiple();
+		positionActionAdapter.deleteMultiple();
 		return viewPosition();
 	}
 
