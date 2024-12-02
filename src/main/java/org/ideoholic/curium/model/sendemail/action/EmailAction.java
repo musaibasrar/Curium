@@ -27,11 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmailAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	@Autowired
-	YearActionAdapter yearActionAdapter;
+	private YearActionAdapter yearActionAdapter;
+	@Autowired
+	private EmailActionAdapter emailActionAdapter;
 
 	@PostMapping("/sendStaffSMS")
 	public String sendStaffSMS() {
@@ -44,7 +46,7 @@ public class EmailAction {
 	
 	@PostMapping("/sendAllEmail")
 	public String sendAllEmail() {
-		if (new EmailService(request, response).sendAllEmail()) {
+		if (emailActionAdapter.sendAllEmail()) {
 			return "successsms";
 		}
 		return "errorsms";
