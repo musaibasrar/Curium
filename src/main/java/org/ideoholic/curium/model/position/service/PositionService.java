@@ -1,20 +1,19 @@
 package org.ideoholic.curium.model.position.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.ideoholic.curium.model.position.dao.positionDAO;
+import org.ideoholic.curium.model.position.dto.Position;
+import org.ideoholic.curium.model.position.dto.PositionDto;
+import org.ideoholic.curium.model.position.dto.PositionResponseDto;
+import org.ideoholic.curium.util.DataUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.ideoholic.curium.model.department.dao.departmentDAO;
-import org.ideoholic.curium.model.department.dto.Department;
-import org.ideoholic.curium.model.position.dao.positionDAO;
-import org.ideoholic.curium.model.position.dto.Position;
-import org.ideoholic.curium.model.position.dto.PositionIdsDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.util.DataUtil;
-
+@Slf4j
 public class PositionService {
 
 	private HttpServletRequest request;
@@ -43,30 +42,30 @@ public class PositionService {
 
 	}
 
-	public boolean viewPosition() {
-		boolean result = false;
+	public PositionResponseDto viewPosition(String branchId) {
+		PositionResponseDto result = PositionResponseDto.builder().build();
         try {
-        	List<Position> list = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-            httpSession.setAttribute("positionList", list);
+        	List<Position> list = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
+			result.setPositionList(list);
 
-            result = true;
+            result.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            result.setSuccess(false);
         }
         return result;
 	}
 
-	public void deleteMultiple(PositionIdsDto dto) {
+	public void deleteMultiple(PositionDto dto) {
 		 String[] positionIds = dto.getPositionIds();
 		 if(positionIds!=null){
 	        List<Integer> ids = new ArrayList();
 	        for (String id : positionIds) {
-	            System.out.println("id" + id);
+				log.error("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + positionIds.length);
+			log.error("id length" + positionIds.length);
 	        new positionDAO().deleteMultiple(ids);
 		 }
 	}
