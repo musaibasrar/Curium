@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -151,9 +152,9 @@ public class StudentDiaryservice {
          }
                        return diaryResponseDto;
 	}
-	public void deleteRecord() {
+	public void deleteRecord(DairyIdsDto dairyIdsDto) {
 		// TODO Auto-generated method stub
-		String[] iddiary = request.getParameterValues("id");
+		String[] iddiary = dairyIdsDto.getIdDiary();
         if(iddiary!=null){
        List<Integer> ids = new ArrayList();
        for (String id : iddiary) {

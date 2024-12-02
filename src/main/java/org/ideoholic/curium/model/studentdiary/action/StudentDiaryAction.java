@@ -60,7 +60,7 @@ public class StudentDiaryAction {
 	}
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
-		new StudentDiaryservice(request, response).deleteRecord();
+		studentDiaryActionAdapter.deleteRecord();
 		studentDiaryActionAdapter.viewDiary();
 		return "studentviewdiary";
 	}
