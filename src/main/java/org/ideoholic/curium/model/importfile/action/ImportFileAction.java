@@ -20,19 +20,23 @@ import org.springframework.web.multipart.MultipartFile;;
 public class ImportFileAction {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 
 	@Autowired
-	HttpSession httpSession;
+	private HttpSession httpSession;
 
+	@Autowired
+	private ImportFileActionAdapter importFileActionAdapter;
+
+	private String branchId;
 
 	@RequestMapping(value = "/readFile", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String readFile(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 		try {
-			if (new ImportFileService(request, response).readFile(uploadedFiles)) {
+			if (importFileActionAdapter.readFile(uploadedFiles,branchId)) {
 				return "importfile";
 			}
 		} catch (IOException e) {

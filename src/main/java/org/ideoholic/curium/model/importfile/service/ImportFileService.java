@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -40,7 +41,7 @@ public class ImportFileService {
 
 	XSSFRow row;
 
-	public boolean readFile(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
+	public ResultResponse readFile(MultipartFile uploadedFiles,String branchId) throws FileNotFoundException, IOException {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
@@ -151,7 +152,7 @@ public class ImportFileService {
 						//parent.setAddresspermanent(row.getCell(54).getStringCellValue()+"-"+row.getCell(55).getStringCellValue()+"-"+row.getCell(56).getStringCellValue()+"-"+row.getCell(57).getStringCellValue()+"-"+row.getCell(58).getStringCellValue());
 						
 						parent.setStudent(student);
-						parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						parent.setBranchid(Integer.parseInt(branchId));
 
 						listParents.add(parent);
 
@@ -161,6 +162,6 @@ public class ImportFileService {
 
 					System.out.println("Values Inserted Successfully");
 
-		return new parentsDetailsDAO().createMultiple(listParents);
+		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents)).build();
 	}
 }
