@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.studentdiary.dto.AddStudentDiaryDto;
 import org.ideoholic.curium.model.studentdiary.service.StudentDiaryservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,18 @@ public class StudentDiaryActionAdapter {
 			request.setAttribute("diary", diaryResponseDto.getDiaryDetails());
 			request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
 			request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
+		}
+
+		public void viewDiaryParent() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
+			StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
+	        studentIdPageDto.setStudentId(request.getParameter("id"));
+	        studentIdPageDto.setPage(request.getParameter("page"));
+	        DiaryResponseDto diaryResponseDto = studentDiaryservice.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(BRANCHID).toString());
+	        request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
+	        request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
+	        request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
+			
 		}
 
 	
