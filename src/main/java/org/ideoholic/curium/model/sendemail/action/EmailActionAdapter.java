@@ -23,7 +23,6 @@ public class EmailActionAdapter {
     private HttpSession httpSession;
 
     private String BRANCHID = "branchid";
-    private String USERID = "userloginid";
 
     public boolean sendAllEmail() {
         EmailService emailService = new EmailService(request, response);
