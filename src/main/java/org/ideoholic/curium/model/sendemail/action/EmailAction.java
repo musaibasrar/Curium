@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.sendemail.service.EmailService;
+import org.ideoholic.curium.model.sendsms.action.SmsActionAdapter;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class EmailAction {
 	private YearActionAdapter yearActionAdapter;
 	@Autowired
 	private EmailActionAdapter emailActionAdapter;
+	@Autowired
+	private SmsActionAdapter smsActionAdapter;
 
 	@PostMapping("/sendStaffSMS")
 	public String sendStaffSMS() {
@@ -55,7 +58,7 @@ public class EmailAction {
 	@PostMapping("/sendNumbersSMS")
 	public String sendNumbersSMS() {
 
-		if (new SmsService(request, response).sendNumbersSMS()) {
+		if (smsActionAdapter.sendNumbersSMS()) {
 			return "successsms";
 		}
 		return "errorsms";

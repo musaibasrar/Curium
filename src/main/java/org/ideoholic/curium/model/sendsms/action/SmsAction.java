@@ -38,6 +38,8 @@ public class SmsAction {
 	YearActionAdapter yearActionAdapter;
 	@Autowired
 	private EmployeeActionAdapter employeeActionAdapter;
+	@Autowired
+	private SmsActionAdapter smsActionAdapter;
 
 	@GetMapping("/sendSMS")
 	public String sendSMS() {
@@ -65,7 +67,7 @@ public class SmsAction {
 	@PostMapping("/sendNumbersSMS")
 	public String sendNumbersSMS() {
 
-		if (new SmsService(request, response).sendNumbersSMS()) {
+		if (smsActionAdapter.sendNumbersSMS()) {
 			return "successsms";
 		}
 		return "errorsms";

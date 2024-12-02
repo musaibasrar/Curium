@@ -19,10 +19,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 
@@ -130,16 +132,15 @@ public class SmsService {
 	}
 
 	
-	public boolean sendNumbersSMS() {
-		
-		boolean result=false;
-		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")),"all");
+	public ResultResponse sendNumbersSMS(SendNumberSMSDto dto) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		String numbers = DataUtil.emptyString(dto.getNumbers());
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
 		if(resultSMS==200){
-			result = true;
+			result.setSuccess(true);
 		}
 		return result;
-		
 	}
 
 	public boolean sendStaffSMS() {
