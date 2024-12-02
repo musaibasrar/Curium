@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
@@ -51,19 +52,19 @@ public class StudentDiaryservice {
                  }
          }
 
-	public boolean viewDiary() {
+	public DiaryResponseDto viewDiary(String strPage, String branchId) {
 		// TODO Auto-generated method stub
-		 boolean result = false;
+		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
          
-         if(httpSession.getAttribute(BRANCHID)!=null){
+         if(branchId!=null){
                  try {
                 	 int page = 1;
      				int recordsPerPage = 100;
-     				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-						page = Integer.parseInt(request.getParameter("page"));
+     				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
+						page = Integer.parseInt(strPage);
 					}
                         List<Object[]> list = new StudentDiaryDAO().readListOfObjects((page - 1) * recordsPerPage,
-        						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        						recordsPerPage, Integer.parseInt(branchId));
                         
                         List<StudentDiaryDTO> diaryDetails = new ArrayList<StudentDiaryDTO>();
         	            for(Object[] diaryObject: list){
@@ -83,18 +84,19 @@ public class StudentDiaryservice {
         	            }
                         
                         
-                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(branchId));
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-    				request.setAttribute("diary", diaryDetails);
-    				request.setAttribute("noOfPages", noOfPages);
-    				request.setAttribute("currentPage", page);
-                    result = true;
+    				diaryResponseDto.setDiaryDetails(diaryDetails);
+    				diaryResponseDto.setNoOfPages(noOfPages);
+    				diaryResponseDto.setCurrentPage(page);
+    				
+    				diaryResponseDto.setSuccess(true);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    result = false;
+                    diaryResponseDto.setSuccess(false);
                 }
          }
-                       return result;
+                       return diaryResponseDto;
 	}
 	
 	
