@@ -36,7 +36,7 @@ public class PositionAction {
 
 	@PostMapping("/addPosition")
 	public String addPosition() {
-		new PositionService(request, response).addPosition();
+		positionActionAdapter.addPosition();
 		System.out.println("IN action's add position");
 		return viewPosition();
 	}
