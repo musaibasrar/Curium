@@ -25,6 +25,7 @@ import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
+import org.ideoholic.curium.model.sendsms.dto.SendStaffSMSDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 
@@ -143,16 +144,16 @@ public class SmsService {
 		return result;
 	}
 
-	public boolean sendStaffSMS() {
-		
-		boolean result=false;
+	public ResultResponse sendStaffSMS(SendStaffSMSDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
+
 		int noOfRecords = 100;
 		int offset=0;
 		
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 			String queryMain ="From Teacher as teacher where ";
 			String querySub = "";
-			String department = request.getParameter("department");
+			String department = dto.getDepartment();
 			
 			if (!department.equalsIgnoreCase("")) {
 				
@@ -162,7 +163,7 @@ public class SmsService {
 							querySub = querySub + "teacher.department = '"+department+"' AND teacher.currentemployee=1";
 					}
 					
-			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(branchId);
 
 			double totalNumbers = new SmsDAO().countNumbers(queryMain);
 			int resultSMS=0;
@@ -187,13 +188,13 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")),"staffall");
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				result = true;
+				result.setSuccess(true);
 			}
 		}
 		}

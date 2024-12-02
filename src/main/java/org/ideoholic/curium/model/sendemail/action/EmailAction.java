@@ -40,7 +40,7 @@ public class EmailAction {
 
 	@PostMapping("/sendStaffSMS")
 	public String sendStaffSMS() {
-		if (new SmsService(request, response).sendStaffSMS()) {
+		if (smsActionAdapter.sendStaffSMS()) {
 			return "successsms";
 		}
 		return "errorsms";
