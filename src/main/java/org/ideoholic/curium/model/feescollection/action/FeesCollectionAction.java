@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.user.action.UserActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,9 @@ public class FeesCollectionAction {
 		@Autowired
 		private AdminService adminService;
 
+		@Autowired
+		private UserActionAdapter userActionAdapter;
+
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
             feesCollectionActionAdapter.getFeesReport();
@@ -71,7 +75,7 @@ public class FeesCollectionAction {
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
 			feesCollectionActionAdapter.cancelFeesReceipt();
-			new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
+			userActionAdapter.searchByDate();
 			return "feesCollectionDetails";
 		}
 
