@@ -1,10 +1,12 @@
 package org.ideoholic.curium.model.user.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.SearchByDateDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
+import org.ideoholic.curium.model.user.dto.SearchByParentDto;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +58,17 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
+    }
+
+    public void advanceSearchByParents() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        SearchByParentDto dto = new SearchByParentDto();
+        dto.setFathersName(request.getParameter("fathersname"));
+        dto.setMothersName(request.getParameter("mothersname"));
+        dto.setContactNumber(request.getParameter("contactnumber"));
+
+        ResultResponse resultResponse = userService.advanceSearchByParents(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", resultResponse.getResultList());
     }
 }

@@ -1,29 +1,5 @@
 package org.ideoholic.curium.model.user.service;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
@@ -47,7 +23,22 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.dto.SearchByDateDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
+import org.ideoholic.curium.model.user.dto.SearchByParentDto;
 import org.ideoholic.curium.util.DataUtil;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.Map.Entry;
+
 @Slf4j
 public class UserService {
 
@@ -523,43 +514,47 @@ public class UserService {
         return result;
     }
 
-	public void advanceSearchByParents() {
+	public ResultResponse advanceSearchByParents(SearchByParentDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 		
-		List<Parents> searchParentsList = new ArrayList<Parents>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-		String fathersname= DataUtil.emptyString(request.getParameter("fathersname"));
-		String mothersname = DataUtil.emptyString(request.getParameter("mothersname"));
-		String contactnumber = DataUtil.emptyString(request.getParameter("contactnumber"));
-		
-		
-			String querySub = "";
-			
-			if(!fathersname.equalsIgnoreCase("")){
-				querySub = " parents.fathersname like '%"+fathersname+"%'" ;
+		List<Parents> searchParentsList = new ArrayList<>();
+		try {
+			if (branchId != null) {
+
+				String queryMain = "From Parents as parents where parents.branchid=" + Integer.parseInt(branchId) + " AND";
+				String fathersname = DataUtil.emptyString(dto.getFathersName());
+				String mothersname = DataUtil.emptyString(dto.getMothersName());
+				String contactnumber = DataUtil.emptyString(dto.getContactNumber());
+
+
+				String querySub = "";
+
+				if (!fathersname.equalsIgnoreCase("")) {
+					querySub = " parents.fathersname like '%" + fathersname + "%'";
+				}
+
+				if (!mothersname.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.mothersname like '%" + mothersname + "%'";
+				} else if (!mothersname.equalsIgnoreCase("")) {
+					querySub = querySub + " parents.mothersname like '%" + mothersname + "%'";
+				} else if (!contactnumber.equalsIgnoreCase("")) {
+					querySub = querySub + " parents.contactnumber like '%" + contactnumber + "%'";
+				}
+
+
+	 			queryMain = queryMain + querySub;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				log.error("SEARCH QUERY ***** " + queryMain);
+				searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
+
 			}
-			
-			if(!mothersname.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.mothersname like '%"+mothersname+"%'";
-			}else if(!mothersname.equalsIgnoreCase("")){
-				querySub = querySub + " parents.mothersname like '%"+mothersname+"%'";
-			}else if(!contactnumber.equalsIgnoreCase("")){
-				querySub = querySub + " parents.contactnumber like '%"+contactnumber+"%'";
-			}
-			
-			
-			
-			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
-			searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
-			
+			result.setResultList(searchParentsList);
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-			request.setAttribute("studentList", searchParentsList);
-		
-		
+		return result;
 	}
 
 	public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
