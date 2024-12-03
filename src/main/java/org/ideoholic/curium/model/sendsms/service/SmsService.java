@@ -9,7 +9,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
-import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
+import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 
@@ -130,7 +130,7 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendNumberSMSDto dto) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
@@ -141,7 +141,7 @@ public class SmsService {
 		return result;
 	}
 
-	public ResultResponse sendStaffSMS(SendNumberSMSDto dto, String branchId) {
+	public ResultResponse sendStaffSMS(SendSMSDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		int noOfRecords = 100;
