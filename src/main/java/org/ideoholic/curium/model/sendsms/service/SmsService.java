@@ -1,5 +1,21 @@
 package org.ideoholic.curium.model.sendsms.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.SMSReportResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,25 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
-import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
-import org.ideoholic.curium.model.sendsms.dto.SendStaffSMSDto;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.SMSReportResponse;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SmsService {
 	
@@ -144,7 +141,7 @@ public class SmsService {
 		return result;
 	}
 
-	public ResultResponse sendStaffSMS(SendStaffSMSDto dto, String branchId) {
+	public ResultResponse sendStaffSMS(SendNumberSMSDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		int noOfRecords = 100;

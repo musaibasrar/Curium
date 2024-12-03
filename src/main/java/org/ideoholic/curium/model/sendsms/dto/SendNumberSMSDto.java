@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class SendNumberSMSDto {
     private String numbers;
     private String messageBodyNumbers;
+    private String department;
+    private String messageBodyStaff;
 }
