@@ -82,7 +82,7 @@ public class SmsAction {
 	
 	@PostMapping("/sendSMSFeesDueReminder")
 		public String sendSMSFeesDueReminder() {
-			if (new SmsService(request, response).sendSMSFeesDueReminder()) {
+			if (smsActionAdapter.sendSMSFeesDueReminder()) {
 				return "successsms";
 			}
 			return "errorsms";

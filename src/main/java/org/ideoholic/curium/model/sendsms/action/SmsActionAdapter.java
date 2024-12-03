@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.sendsms.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class SmsActionAdapter {
@@ -48,5 +50,13 @@ public class SmsActionAdapter {
         ResultResponse resultResponse = smsService.sendStaffSMS(dto, httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse.isSuccess();
+    }
+    public boolean sendSMSFeesDueReminder() {
+        SmsService smsService = new SmsService(request,response);
+        SendSMSDto dto = new SendSMSDto();
+        dto.setStudentfeesreportlist((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
+        ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
+
+       return  result.isSuccess();
     }
 }
