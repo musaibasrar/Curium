@@ -33,6 +33,8 @@ public class UserAction {
 	private AdminService adminService;
 	@Autowired
 	private FeesCollectionActionAdapter feesCollectionActionAdapter;
+	@Autowired
+	private UserActionAdapter userActionAdapter;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -41,7 +43,7 @@ public class UserAction {
 
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
-		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).searchByDate();
+		userActionAdapter.searchByDate();
 		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 			return "feesCollectionDetailsAdmin";
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

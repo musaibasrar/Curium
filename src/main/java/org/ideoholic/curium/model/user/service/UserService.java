@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -44,8 +45,10 @@ import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.user.dto.SearchByDateDto;
+import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
 import org.ideoholic.curium.util.DataUtil;
-
+@Slf4j
 public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
@@ -559,66 +562,66 @@ public class UserService {
 		
 	}
 
-	public void searchByDate() {
-		 
-		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
-		String branchId = request.getParameter("selectedbranchid");
-		int idBranch = 0;
-                
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		
+	public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+		SearchByDateResponseDto result = SearchByDateResponseDto.builder().build();
 
-	        if(branchId!=null) {
-	        	String[] branchIdName = branchId.split(":");
-	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
-	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-	        }
-	        
-		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
-		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
-		String modeOfPayment = DataUtil.emptyString(request.getParameter("modeofpayment"));
-		
-			String querySub = "";
-			
-			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 httpSession.setAttribute("dayone", oneDay);
-				 httpSession.setAttribute("datefrom", "");
-				 httpSession.setAttribute("dateto", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
-				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
+		List<Receiptinfo> feesDetailsList = new ArrayList<>();
+		String branchId = dto.getBranchId();
+		int idBranch = 0;
+        try {
+			if(strBranchId!=null){
+
+
+				if(branchId!=null) {
+					String[] branchIdName = branchId.split(":");
+					idBranch = Integer.parseInt(branchIdName[0]);
+					result.setFeesDetailsBranchName(branchIdName[1]);
+					result.setBranchName("Branch Name:");
+				}else {
+					idBranch = Integer.parseInt(strBranchId);
+				}
+
+				String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+				String toDate= DataUtil.emptyString(dto.getToDate());
+				String fromDate = DataUtil.emptyString(dto.getFromDate());
+				String oneDay = DataUtil.emptyString(dto.getOneDay());
+				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
+
+				String querySub = "";
+
+				if(!oneDay.equalsIgnoreCase("")){
+					result.setDayOne(oneDay);
+					result.setDateFrom("");
+					result.setDateTo("");
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
+					querySub = " feesdetails.date = '"+dayOne+"'" ;
+				}
+
+				if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+					querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
+					result.setDateFrom(fromDate);
+					result.setDateTo(toDate);
+					result.setDayOne("");
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
+						!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
+					querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
+				}
+
+				if(!modeOfPayment.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				}
+
+				queryMain = queryMain+querySub;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				log.error("SEARCH QUERY ***** "+queryMain);
+				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+
 			}
-			
-			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
-				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				httpSession.setAttribute("datefrom", fromDate);
-				httpSession.setAttribute("dateto", toDate);
-				httpSession.setAttribute("dayone", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
-					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
-				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
-			}
-			
-			if(!modeOfPayment.equalsIgnoreCase("")){
-				querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
-			}
-			
-			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
-			
-	}
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
 			Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
-			
+
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
@@ -627,16 +630,22 @@ public class UserService {
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
 				feesMap.put(receiptinfo, student);
 			}
-			
-			httpSession.setAttribute("searchfeesdetailslist", feesMap);
-			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-			httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
-			httpSession.setAttribute("sumoffine", fine);
-			httpSession.setAttribute("sumofmisc", misc);
-			
+
+			result.setFeesMap(feesMap);
+			result.setSumOfFees(sumOfFees);
+			result.setSumOfOnlyFee(sumOfFees-fine-misc);
+			result.setFine(fine);
+			result.setMisc(misc);
+
 			for (Entry<Receiptinfo, Parents> entry : feesMap.entrySet()) {
-			    System.out.println("Key: " + entry.getKey().getReceiptnumber() + ", Value: " + entry.getValue().getStudent().getName());
+				log.error("Key: " + entry.getKey().getReceiptnumber() + ", Value: " + entry.getValue().getStudent().getName());
 			}
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
+		}
+		return result;
 	}
 
 	public boolean addUser(Teacher employee, String branchId) {
