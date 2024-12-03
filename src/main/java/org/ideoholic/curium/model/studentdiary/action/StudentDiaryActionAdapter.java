@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.studentdiary.dto.AddStudentDiaryDto;
@@ -53,6 +54,14 @@ public class StudentDiaryActionAdapter {
 	        request.setAttribute("studentdiaryparents", diaryResponseDto.getDiaryDetails());
 	        request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
 	        request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
+			
+		}
+
+		public void deleteRecord() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
+			DairyIdsDto dairyIdsDto = new DairyIdsDto();
+	        dairyIdsDto.setIdDiary(request.getParameterValues("id"));
+			studentDiaryservice.deleteRecord(dairyIdsDto);
 			
 		}
 
