@@ -538,7 +538,7 @@ public class FeesService {
 	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18'><br></td>"
 	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
 	   			        	}
-	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
+	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Total</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
 
 	    			        	response.getWriter().println(buffer);
 

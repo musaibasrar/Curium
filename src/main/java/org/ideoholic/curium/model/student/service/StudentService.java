@@ -589,8 +589,9 @@ public class StudentService {
 
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
 		Long grandTotal = 0l;
-
-		String[] feesAmount = request.getParameterValues("fessCat");
+		
+		//String[] feesAmount = request.getParameterValues("fessCat");
+		String[] feesAmount = request.getParameterValues("feesFullCat");
 		String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
 
@@ -1134,6 +1135,12 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
 	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
+			if (fieldName.equalsIgnoreCase("archive")) {
+					student.setArchive(DataUtil.parseInt(request.getParameter(fieldName)));
+				}
+			if (fieldName.equalsIgnoreCase("promotedyear")) {
+					student.setPromotedyear(DataUtil.emptyString(request.getParameter(fieldName)));
+				}
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1463,7 +1470,7 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		 student.setArchive(0);
+		 //student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 

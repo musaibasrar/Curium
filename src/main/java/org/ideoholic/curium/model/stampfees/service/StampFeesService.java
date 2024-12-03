@@ -199,8 +199,8 @@ public class StampFeesService {
 		Long grandTotal = 0l;
 
 		String[] feesCategoryIds = request.getParameterValues("feesIDS");
-		String[] feesAmount = request.getParameterValues("fessFullCat");
-		//String[] concession = request.getParameterValues("feesConcession");
+		String[] feesAmount = request.getParameterValues("feesFullCat");
+		String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
 		String[] feesYears = request.getParameterValues("feesYears");
 		
