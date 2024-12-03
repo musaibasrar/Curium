@@ -6,7 +6,7 @@ import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
-import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -77,9 +77,9 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 	}
 
 	@PostMapping("/viewDiaryDetails")
-	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetails(
+	public ResponseEntity<DiaryDetailsMessageResponseDto> viewDiaryDetails(
 			@RequestBody StudentIdDto studentIdDto) {
-		ViewDetailsOfDiaryMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
+		DiaryDetailsMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
 		}else {
@@ -89,9 +89,9 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 	}
 
 	@PostMapping("/viewDiaryDetailsParent")
-	public ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetailsParent(
+	public ResponseEntity<DiaryDetailsMessageResponseDto> viewDiaryDetailsParent(
 			@RequestBody StudentIdDto studentIdDto) {
-		ViewDetailsOfDiaryMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
+		DiaryDetailsMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
 		}else {

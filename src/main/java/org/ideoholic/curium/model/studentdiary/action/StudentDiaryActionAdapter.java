@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
-import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.studentdiary.dto.AddStudentDiaryDto;
@@ -73,7 +73,7 @@ public class StudentDiaryActionAdapter {
 			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			StudentIdDto studentIdDto =new StudentIdDto();
 	        studentIdDto.setStudentId(request.getParameter("id").toString());
-	        ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = studentDiaryservice.viewDetailsOfDiaryMessage(studentIdDto);
+	        DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = studentDiaryservice.viewDetailsOfDiaryMessage(studentIdDto);
 			httpSession.setAttribute("diary", viewDetailsOfDiaryMessageResponseDto.getDiaries());
 		    return viewDetailsOfDiaryMessageResponseDto.isSuccess();
 		}
