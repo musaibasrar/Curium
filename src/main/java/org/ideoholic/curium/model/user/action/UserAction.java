@@ -61,7 +61,7 @@ public class UserAction {
 
 	@PostMapping("/advanceSearchByParents")
 	public String advanceSearchByParents() {
-		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).advanceSearchByParents();
+		userActionAdapter.advanceSearchByParents();
 		return "viewAllWithParents";
 	}
 
