@@ -1,5 +1,21 @@
 package org.ideoholic.curium.model.sendsms.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.SMSReportResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,24 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
-import org.ideoholic.curium.model.sendsms.dto.SendNumberSMSDto;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.SMSReportResponse;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SmsService {
 	
@@ -132,7 +130,7 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendNumberSMSDto dto) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
@@ -143,16 +141,16 @@ public class SmsService {
 		return result;
 	}
 
-	public boolean sendStaffSMS() {
-		
-		boolean result=false;
+	public ResultResponse sendStaffSMS(SendSMSDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
+
 		int noOfRecords = 100;
 		int offset=0;
 		
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 			String queryMain ="From Teacher as teacher where ";
 			String querySub = "";
-			String department = request.getParameter("department");
+			String department = dto.getDepartment();
 			
 			if (!department.equalsIgnoreCase("")) {
 				
@@ -162,7 +160,7 @@ public class SmsService {
 							querySub = querySub + "teacher.department = '"+department+"' AND teacher.currentemployee=1";
 					}
 					
-			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(branchId);
 
 			double totalNumbers = new SmsDAO().countNumbers(queryMain);
 			int resultSMS=0;
@@ -187,13 +185,13 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")),"staffall");
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				result = true;
+				result.setSuccess(true);
 			}
 		}
 		}

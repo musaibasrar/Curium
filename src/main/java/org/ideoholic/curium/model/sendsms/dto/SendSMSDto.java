@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SendNumberSMSDto {
+public class SendSMSDto {
     private String numbers;
     private String messageBodyNumbers;
+    private String department;
+    private String messageBodyStaff;
 }
