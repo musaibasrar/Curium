@@ -48,12 +48,9 @@ public class UserActionAdapter {
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
-        httpSession.setAttribute("dayone", responseDto.getOneDay());
+        httpSession.setAttribute("dayone", responseDto.getDayOne());
         httpSession.setAttribute("datefrom", responseDto.getDateFrom());
         httpSession.setAttribute("dateto", responseDto.getDateTo());
-        httpSession.setAttribute("datefrom", responseDto.getFromDate());
-        httpSession.setAttribute("dateto", responseDto.getDateTo());
-        httpSession.setAttribute("dayone", responseDto.getOneDay());
         httpSession.setAttribute("searchfeesdetailslist", responseDto.getFeesMap());
         httpSession.setAttribute("sumofdetailsfees", responseDto.getSumOfFees());
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());

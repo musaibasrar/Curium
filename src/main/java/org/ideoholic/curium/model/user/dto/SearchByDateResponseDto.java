@@ -14,11 +14,8 @@ import java.util.Map;
 public class SearchByDateResponseDto {
     private String feesDetailsBranchName;
     private String branchName;
-    private String oneDay;
     private String dateFrom;
     private String dateTo;
-    private String fromDate;
-    private String toDate;
     private String dayOne;
     private Map<Receiptinfo, Parents> feesMap;
     private long sumOfFees;

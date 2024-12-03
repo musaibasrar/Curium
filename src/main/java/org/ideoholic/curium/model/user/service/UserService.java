@@ -590,7 +590,7 @@ public class UserService {
 				String querySub = "";
 
 				if(!oneDay.equalsIgnoreCase("")){
-					result.setOneDay(oneDay);
+					result.setDayOne(oneDay);
 					result.setDateFrom("");
 					result.setDateTo("");
 				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
@@ -599,8 +599,8 @@ public class UserService {
 
 				if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 					querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-					result.setFromDate(fromDate);
-					result.setToDate(toDate);
+					result.setDateFrom(fromDate);
+					result.setDateTo(toDate);
 					result.setDayOne("");
 				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
 						!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
