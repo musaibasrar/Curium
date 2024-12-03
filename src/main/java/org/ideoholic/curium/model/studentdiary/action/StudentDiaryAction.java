@@ -77,7 +77,7 @@ public class StudentDiaryAction {
 		}
 	@PostMapping("/ViewDiaryDetailsParent")
 	public String ViewDiaryDetailsParent() {
-		if(new StudentDiaryservice(request, response).viewDetailsOfDiaryMessage()) { 
+		if(studentDiaryActionAdapter.viewDetailsOfDiaryMessage()) { 
 
 		}
 		return "viewdiarymessagestudent";

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
 import org.ideoholic.curium.model.studentdiary.dto.AddStudentDiaryDto;
@@ -165,18 +167,15 @@ public class StudentDiaryservice {
         }
 	}
 
-	public boolean viewDetailsOfDiaryMessage() {
-		return viewDetailsOfDiaryMessage(request.getParameter("id").toString());
-		
-	}
-	
-	public boolean viewDetailsOfDiaryMessage(String studentId) {
-		boolean result = false;
-		long id = Long.parseLong(studentId);
+		public ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
+		ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new ViewDetailsOfDiaryMessageResponseDto();
+		long id = Long.parseLong(studentIdDto.getStudentId());
 		StudentDiary diary = new StudentDiaryDAO().getMessage(id);
-		httpSession.setAttribute("studentdiary", diary);
-		result = true;
-		return result;
+		viewDetailsOfDiaryMessageResponseDto.setDiaries(diary);
+		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
+
+		return viewDetailsOfDiaryMessageResponseDto;
+
 	}	
 	}
 
