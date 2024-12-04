@@ -4,6 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
 import org.ideoholic.curium.model.user.dto.SearchByParentDto;
@@ -79,5 +80,33 @@ public class UserActionAdapter {
         request.setAttribute("Backuplocation", resultResponse.getMessage());
 
         return resultResponse.isSuccess();
+    }
+
+    public void advanceSearch() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        AdvanceSearchDto dto = new AdvanceSearchDto();
+        dto.setName(request.getParameter("name"));
+        dto.setGender(request.getParameter("gender"));
+        dto.setDateOfBirth(request.getParameter("dateofbirth"));
+        dto.setAge(request.getParameter("age"));
+        dto.setAddClass(request.getParameter("addclass"));
+        dto.setAddSec(request.getParameter("addsec"));
+        dto.setAdmClassE(request.getParameter("admclassE"));
+        dto.setAdmSecE(request.getParameter("admsecE"));
+        dto.setAdmNo(request.getParameter("admnno"));
+        dto.setDateOfAdmission(request.getParameter("dateofadmission"));
+        dto.setBloodGroup(request.getParameter("bloodgroup"));
+        dto.setNationality(request.getParameter("nationality"));
+        dto.setReligion(request.getParameter("religion"));
+        dto.setCaste(request.getParameter("caste"));
+        dto.setMotherTongue(request.getParameter("motherT"));
+        dto.setCreatedDate(request.getParameter("remarks"));
+        dto.setSts(request.getParameter("sts"));
+        dto.setUId(request.getParameter("uid"));
+
+        ResultResponse resultResponse = userService.advanceSearch(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("searchStudentList", resultResponse.getResultList());
+
     }
 }

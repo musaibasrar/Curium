@@ -77,7 +77,7 @@ public class UserAction {
 
 	@PostMapping("/advanceSearch")
 	public String advanceSearch() {
-		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).advanceSearch();
+		userActionAdapter.advanceSearch();
 		return "advanceSearchResult";
 	}
 
