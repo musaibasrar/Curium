@@ -10,7 +10,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class DiaryDetailsMessageResponseDto {
     private Diary diary;
-    private StudentDiary diaries;
+    private StudentDiary studentDiary;
     private boolean success;
 
 }

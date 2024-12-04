@@ -171,7 +171,7 @@ public class StudentDiaryservice {
 		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
 		long id = Long.parseLong(studentIdDto.getStudentId());
 		StudentDiary diary = new StudentDiaryDAO().getMessage(id);
-		viewDetailsOfDiaryMessageResponseDto.setDiaries(diary);
+		viewDetailsOfDiaryMessageResponseDto.setStudentDiary(diary);
 		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
 
 		return viewDetailsOfDiaryMessageResponseDto;
