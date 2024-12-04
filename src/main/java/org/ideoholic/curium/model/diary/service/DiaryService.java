@@ -9,7 +9,7 @@ import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
-import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -175,8 +175,8 @@ public class DiaryService {
 		}
 	}
 	
-	public ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
-		ViewDetailsOfDiaryMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new ViewDetailsOfDiaryMessageResponseDto();
+	public DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
+		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
 		boolean result = false;
 		long id = Long.parseLong(studentIdDto.getStudentId());
 		Diary diary = new diaryDAO().getMessage(id);

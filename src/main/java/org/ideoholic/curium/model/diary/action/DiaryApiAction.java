@@ -4,7 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
-import org.ideoholic.curium.model.diary.dto.ViewDetailsOfDiaryMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +34,9 @@ public interface DiaryApiAction {
      ResponseEntity<String> diarySaved(); 
 		
 
-	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetails(
+	 ResponseEntity<DiaryDetailsMessageResponseDto> viewDiaryDetails(
 			@RequestBody StudentIdDto studentIdDto) ;
 
-	 ResponseEntity<ViewDetailsOfDiaryMessageResponseDto> viewDiaryDetailsParent(
+	 ResponseEntity<DiaryDetailsMessageResponseDto> viewDiaryDetailsParent(
 			@RequestBody StudentIdDto studentIdDto) ;
 }
