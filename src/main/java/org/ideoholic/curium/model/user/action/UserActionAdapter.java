@@ -88,7 +88,7 @@ public class UserActionAdapter {
         AdvanceSearchDto dto = new AdvanceSearchDto();
         dto.setName(request.getParameter("name"));
         dto.setGender(request.getParameter("gender"));
-        dto.setDateOfAdmission(request.getParameter("dateofbirth"));
+        dto.setDateOfBirth(request.getParameter("dateofbirth"));
         dto.setAge(request.getParameter("age"));
         dto.setAddClass(request.getParameter("addclass"));
         dto.setAddSec(request.getParameter("addsec"));
