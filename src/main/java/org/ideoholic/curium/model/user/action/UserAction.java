@@ -68,7 +68,7 @@ public class UserAction {
 	@PostMapping("/backup")
 	public String backup() {
 		String fileName = request.getParameter("filename");
-		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).backupData(fileName)) {
+		if (userActionAdapter.backupData(fileName)) {
 			return "BackupSuccess";
 		} else {
 			return "BackupFailed";

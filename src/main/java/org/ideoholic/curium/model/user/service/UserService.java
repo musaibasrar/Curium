@@ -452,22 +452,22 @@ public class UserService {
 		
 	}
 
-	public boolean backupData(String fileName) {
-        
-        boolean result = false;
+	public ResultResponse backupData(String fileName) {
+		ResultResponse result = ResultResponse.builder().build();
+
         try {
             Properties properties = new Properties();
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
-            System.out.println("the backup directory from input stream is " + backupDirectoryIS);
+			log.error("the backup directory from input stream is " + backupDirectoryIS);
 
 
             int processcomplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            request.setAttribute("Backuplocation", backupLocation);
+			result.setMessage(backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 
 
@@ -476,19 +476,20 @@ public class UserService {
             processcomplete = runtimeProcess.waitFor();//store the state in variable
 
             if (processcomplete == 1) {//if values equal 1 process failed
-                System.out.println("FAILED");
-                result = false;
+				log.error("FAILED");
+				result.setSuccess(false);
 
             } else if (processcomplete == 0) {//if values equal 0 process failed
-                System.out.println("success");
+				log.error("success");
 
                 //display message
-                result = true;
+				result.setSuccess(true);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+			result.setSuccess(false);
         }
         return result;
     }

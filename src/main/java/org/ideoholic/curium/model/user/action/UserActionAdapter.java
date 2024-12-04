@@ -71,4 +71,13 @@ public class UserActionAdapter {
         ResultResponse resultResponse = userService.advanceSearchByParents(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", resultResponse.getResultList());
     }
+
+    public boolean backupData(String fileName) {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        ResultResponse resultResponse = userService.backupData(fileName);
+        request.setAttribute("Backuplocation", resultResponse.getMessage());
+
+        return resultResponse.isSuccess();
+    }
 }
