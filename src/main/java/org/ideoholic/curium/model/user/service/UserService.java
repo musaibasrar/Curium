@@ -20,10 +20,7 @@ import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.model.user.dto.SearchByDateDto;
-import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
-import org.ideoholic.curium.model.user.dto.SearchByParentDto;
+import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 
 import javax.servlet.http.Cookie;
@@ -290,166 +287,172 @@ public class UserService {
 	}
 	
 
-	public void advanceSearch() {
-		
-		List<Parents> searchStudentList = new ArrayList<Parents>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"";
-		String studentname= DataUtil.emptyString(request.getParameter("name"));
-		String gender = DataUtil.emptyString(request.getParameter("gender"));
-		String dateOfBirth = DataUtil.emptyString(request.getParameter("dateofbirth"));
-		int age = DataUtil.parseInt(request.getParameter("age"));
-		
-		String addClass = request.getParameter("addclass");
-		String addSec = request.getParameter("addsec");
-		String conClassStudying = "";
-		
-		
-		if (!addClass.equalsIgnoreCase("")) {
+	public ResultResponse advanceSearch(AdvanceSearchDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
-			conClassStudying = addClass+"--" +"%";
+		List<Parents> searchStudentList = new ArrayList<>();
+		try {
+			if (branchId != null) {
+				String queryMain = "From Parents as parents where parents.branchid=" + Integer.parseInt(branchId) + "";
+				String studentname = DataUtil.emptyString(dto.getName());
+				String gender = DataUtil.emptyString(dto.getGender());
+				String dateOfBirth = DataUtil.emptyString(dto.getDateOfBirth());
+				int age = DataUtil.parseInt(dto.getAge());
 
+				String addClass = dto.getAddClass();
+				String addSec = dto.getAddSec();
+				String conClassStudying = "";
+
+
+				if (!addClass.equalsIgnoreCase("")) {
+
+					conClassStudying = addClass + "--" + "%";
+
+				}
+				if (!addSec.equalsIgnoreCase("")) {
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying + "--" + addSec + "%";
+				}
+
+
+				String classStudying = DataUtil.emptyString(conClassStudying);
+
+
+				String addClassE = dto.getAdmClassE();
+				String addSecE = dto.getAdmSecE();
+				String conClassAdmittedIn = "";
+
+				if (!addClassE.equalsIgnoreCase("")) {
+
+					conClassAdmittedIn = addClassE + "--" + "%";
+
+				}
+				if (!addSecE.equalsIgnoreCase("")) {
+					conClassAdmittedIn = addClassE;
+					conClassAdmittedIn = conClassAdmittedIn + addSecE;
+				}
+
+				String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
+				//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
+				//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
+				String admissionNo = DataUtil.emptyString(dto.getAdmNo());
+				String dateOfAdmission = DataUtil.emptyString(dto.getDateOfAdmission());
+				String bloodGroup = DataUtil.emptyString(dto.getBloodGroup());
+				String nationality = DataUtil.emptyString(dto.getNationality());
+				String religion = DataUtil.emptyString(dto.getReligion());
+				String caste = DataUtil.emptyString(dto.getCaste());
+				String motherT = DataUtil.emptyString(dto.getMotherTongue());
+				String createdDate = DataUtil.emptyString(dto.getCreatedDate());
+				String remarks = DataUtil.emptyString(dto.getRemarks());
+				String stsNumber = DataUtil.emptyString(dto.getSts());
+				String studentExternalId = DataUtil.emptyString(dto.getUId());
+				//String rte = DataUtil.emptyString(request.getParameter("rte"));
+
+				String querySub = "";
+
+				if (!studentname.equalsIgnoreCase("")) {
+					querySub = " AND parents.Student.name like '%" + studentname + "%'";
+				}
+
+				if (!classStudying.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
+				}
+
+				if (!gender.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.gender like '" + gender + "%'";
+				}
+
+				/*
+				 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+				 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
+				 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
+				 */
+
+				if (!dateOfBirth.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.dateofbirth = '" + dateOfBirth + "'";
+				}
+
+
+				if (age != 0) {
+					querySub = querySub + " AND parents.Student.age = '" + age + "'";
+				}
+
+				if (!classAdmitted.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.classadmittedin like '" + classAdmitted + "'";
+				}
+				/*
+				 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+				 * querySub = querySub +
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
+				 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
+				 */
+
+
+				if (!admissionNo.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.admissionnumber like '%" + admissionNo + "%'";
+				}
+
+				if (!dateOfAdmission.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.admissiondate = '" + dateOfAdmission + "'";
+				}
+
+				if (!bloodGroup.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.bloodgroup like '%" + bloodGroup + "%'";
+				}
+
+				if (!nationality.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.nationality like '%" + nationality + "%'";
+				}
+
+				if (!religion.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.religion like '%" + religion + "%'";
+				}
+
+				if (!caste.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.caste like '%" + caste + "%'";
+				}
+
+				if (!motherT.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.mothertongue like '%" + motherT + "%'";
+				}
+
+				if (!createdDate.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.createddate = '" + createdDate + "'";
+				}
+
+				if (!remarks.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.remarks like '%" + remarks + "%'";
+				}
+
+
+				if (!stsNumber.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.sts = '" + stsNumber + "'";
+				}
+
+
+				if (!studentExternalId.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.studentexternalid = '" + studentExternalId + "'";
+				}
+				/* *
+				 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
+				 * querySub + " parents.Student.rte = '"+rte+"'"; }else
+				 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.rte = '"+rte+"'"; }
+				 */
+
+				queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+
+			result.setResultList(searchStudentList);
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-		if (!addSec.equalsIgnoreCase("")) {
-			conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
-		}
-			
-		
-			
-			String classStudying = DataUtil.emptyString(conClassStudying);
-			
-		
-			String addClassE = request.getParameter("admclassE");
-			String addSecE = request.getParameter("admsecE");
-			String conClassAdmittedIn = "";
-			
-			if (!addClassE.equalsIgnoreCase("")) {
-
-				conClassAdmittedIn = addClassE+"--" +"%";
-
-			}
-			if (!addSecE.equalsIgnoreCase("")) {
-				conClassAdmittedIn = addClassE;
-				conClassAdmittedIn = conClassAdmittedIn+addSecE;
-			}
-			
-			String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
-			//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
-			//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
-			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));
-			String dateOfAdmission =  DataUtil.emptyString(request.getParameter("dateofadmission"));
-			String bloodGroup =  DataUtil.emptyString(request.getParameter("bloodgroup"));
-			String nationality =  DataUtil.emptyString(request.getParameter("nationality"));
-			String religion =  DataUtil.emptyString(request.getParameter("religion"));
-			String caste =  DataUtil.emptyString(request.getParameter("caste"));
-			String motherT =  DataUtil.emptyString(request.getParameter("motherT"));
-			String createdDate =  DataUtil.emptyString(request.getParameter("createddate"));
-			String remarks =  DataUtil.emptyString(request.getParameter("remarks"));
-			String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
-			String studentExternalId = DataUtil.emptyString(request.getParameter("uid"));
-			//String rte = DataUtil.emptyString(request.getParameter("rte"));
-			
-			String querySub = "";
-			
-			if(!studentname.equalsIgnoreCase("")){
-				querySub = " AND parents.Student.name like '%"+studentname+"%'" ;
-			}
-			
-			if(!classStudying.equalsIgnoreCase("")){
-				querySub = querySub +  " AND parents.Student.classstudying like '"+classStudying+"'";
-			}
-			
-			if(!gender.equalsIgnoreCase("")){
-				querySub = querySub + " AND  parents.Student.gender like '"+gender+"%'";
-			}
-			
-			/*
-			 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-			 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
-			 */
-			
-			if(!dateOfBirth.equalsIgnoreCase("")){
-				querySub = querySub + " AND parents.Student.dateofbirth = '"+dateOfBirth+"'";
-			}
-
-			
-			if(age != 0 ){
-				querySub = querySub + " AND parents.Student.age = '"+age+"'";
-			}
-			
-			if(!classAdmitted.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.Student.classadmittedin like '"+classAdmitted+"'";
-			}
-			/*
-			 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-			 * querySub = querySub +
-			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
-			 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
-			 */
-			
-			
-			if(!admissionNo.equalsIgnoreCase("") ){
-				querySub = querySub + " AND parents.Student.admissionnumber like '%"+admissionNo+"%'";
-			}
-			
-			if(!dateOfAdmission.equalsIgnoreCase("")){
-				querySub = querySub + " AND parents.Student.admissiondate = '"+dateOfAdmission+"'";
-			}
-			
-			if(!bloodGroup.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.Student.bloodgroup like '%"+bloodGroup+"%'";
-			}
-			
-			if(!nationality.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.nationality like '%"+nationality+"%'";
-			}
-			
-			if(!religion.equalsIgnoreCase("")){
-				querySub = querySub + " AND  parents.Student.religion like '%"+religion+"%'";
-			}
-			
-			if(!caste.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.caste like '%"+caste+"%'";
-			}
-			
-			if(!motherT.equalsIgnoreCase("") ){
-				querySub = querySub + " AND  parents.Student.mothertongue like '%"+motherT+"%'";
-			}
-			
-			if(!createdDate.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.createddate = '"+createdDate+"'";
-			}
-			
-			if(!remarks.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.remarks like '%"+remarks+"%'";
-			}
-			
-			
-			 if(!stsNumber.equalsIgnoreCase("")  ){
-			  querySub = querySub + " AND  parents.Student.sts = '"+stsNumber+"'"; }
-			 
-			 
-			 if(!studentExternalId.equalsIgnoreCase("")  ){
-				  querySub = querySub + " AND  parents.Student.studentexternalid = '"+studentExternalId+"'"; }
-			 /* * 
-			 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
-			 * querySub + " parents.Student.rte = '"+rte+"'"; }else
-			 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.rte = '"+rte+"'"; }
-			 */
-			
-			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-	}
-			
-			request.setAttribute("searchStudentList", searchStudentList);
-		
-		
+		return result;
 	}
 
 	public ResultResponse backupData(String fileName) {
