@@ -310,7 +310,7 @@ public class SmsService {
 	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
 		int resultSMS=0;
 
-		List<StudentFeesReport> studentFeesReportList =dto.getStudentfeesreportlist();
+		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
 
 		String numbers = null;
 					StringBuilder sbN = new StringBuilder();

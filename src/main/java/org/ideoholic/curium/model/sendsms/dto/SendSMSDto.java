@@ -18,5 +18,5 @@ public class SendSMSDto {
     private String department;
     private String messageBodyStaff;
 
-    private List<StudentFeesReport> studentfeesreportlist;
+    private List<StudentFeesReport> studentFeesReportList;
 }
