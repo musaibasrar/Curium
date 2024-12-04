@@ -11,6 +11,7 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.user.action.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -256,5 +257,18 @@ public class FeesCollectionAction {
 				/* new FeesCollectionService(request, response).getFeesReport(); */
 	            return "printfeesreport";
 	        }
+		 
+		 @PostMapping("/searchFeesCollectionDetailsClassWise")
+	        public String searchFeesCollectionDetailsClassWise() {
+	            new FeesCollectionService(request, response).getFeesCollectionDetailsClassWise();
+	            return "feesCollectionDetailsClassWise";
+	        }
+		 
+		 @PostMapping("/printDataForFees")
+			public String printFeesData() {
+				
+					return "printfeescollectiondetailsclasswise";
+				
+			}
 		 
 }
