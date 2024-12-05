@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.sendsms.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,14 @@ public class SmsActionAdapter {
         ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
 
        return  result.isSuccess();
+    }
+    public boolean SMSDeliveryReport() {
+
+        SmsService smsService = new SmsService(request,response);
+
+        SMSResponseDto result= smsService.SMSDeliveryReport();
+        request.setAttribute("smsdeliveryreport", result.getSmsDeliveryReport().get(0).getRecords());
+
+        return result.isSuccess();
     }
 }

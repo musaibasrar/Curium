@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
@@ -347,9 +348,10 @@ public class SmsService {
 		}
 
 
-	public boolean SMSDeliveryReport() {
-		
-		boolean result = false;
+	public SMSResponseDto SMSDeliveryReport() {
+
+		SMSResponseDto result = new SMSResponseDto();
+
 		int responseCode = 0;
 		List<SMSReportResponse> reportResponses = null;
 		 try {
@@ -415,8 +417,9 @@ public class SmsService {
 	        }
 		 
 		 if(responseCode==200) {
-			 result = true;
-			 request.setAttribute("smsdeliveryreport", reportResponses.get(0).getRecords());
+			 result.setSuccess(true);
+			 result.setSmsDeliveryReport(reportResponses);
+
 		 }
 		 
 		 return result;
