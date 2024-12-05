@@ -108,8 +108,8 @@ public class TeacherPerformanceService {
 			}
 					}
 		
-		teacherDetailResponseDto.setSubjectaverageList(subjectaverageList);
-		teacherDetailResponseDto.setSubjectaveragelistsize(subjectaverageList.size());
+		teacherDetailResponseDto.setSubjectAverageList(subjectaverageList);
+		teacherDetailResponseDto.setSubjectAverageListSize(subjectaverageList.size());
 		teacherDetailResponseDto.setSubjectName(subject[1]);
 		return teacherDetailResponseDto;
 	

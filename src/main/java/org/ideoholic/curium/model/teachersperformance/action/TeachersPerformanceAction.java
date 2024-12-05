@@ -40,7 +40,7 @@ public class TeachersPerformanceAction {
 	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
 	
 	@Autowired
-	TeachersPerformanceActionAdapter teachersPerformanceActionAdapter;
+	private TeachersPerformanceActionAdapter teachersPerformanceActionAdapter;
 
 	@GetMapping("/SearchTeachers")
 	public String SearchTeachers() {

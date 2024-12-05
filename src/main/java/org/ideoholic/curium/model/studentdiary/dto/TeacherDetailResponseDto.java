@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class TeacherDetailResponseDto {
 	
-	private List<SubjectAverage> subjectaverageList;
-	private int subjectaveragelistsize;
+	private List<SubjectAverage> subjectAverageList;
+	private int subjectAverageListSize;
 	private String subjectName;
 
 }

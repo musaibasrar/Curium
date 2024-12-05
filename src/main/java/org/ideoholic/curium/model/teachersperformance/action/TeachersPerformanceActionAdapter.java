@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.model.teachersperformance.service.TeacherPerformanceService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeachersPerformanceActionAdapter {
 	
 	 private HttpServletRequest request;
@@ -23,8 +25,8 @@ public class TeachersPerformanceActionAdapter {
 		teacherDetailsDto.setSubjectDetails(request.getParameter("subject"));
 		teacherDetailsDto.setAcademicYear(request.getParameter("academicyear"));
 		TeacherDetailResponseDto teacherDetailResponseDto = teacherPerformanceService.getDetailofteacher(teacherDetailsDto,httpSession.getAttribute(BRANCHID).toString());
-		request.setAttribute("subjectaveragelist", teacherDetailResponseDto.getSubjectaverageList());
-		request.setAttribute("subjectaveragelistsize", teacherDetailResponseDto.getSubjectaveragelistsize());
+		request.setAttribute("subjectaveragelist", teacherDetailResponseDto.getSubjectAverageList());
+		request.setAttribute("subjectaveragelistsize", teacherDetailResponseDto.getSubjectAverageListSize());
 		request.setAttribute("subjectName", teacherDetailResponseDto.getSubjectName());
 		
 	}
