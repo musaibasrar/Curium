@@ -124,7 +124,7 @@ public class UserActionAdapter {
         request.setAttribute("dailyexpenses", responseDto.getDailyExpensesResponseDto().getDailyExpenses());
         request.setAttribute("monthlyexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthlyExpenses());
         request.setAttribute("monthlistexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthListExpenses());
-        request.setAttribute("totalboysgirls", responseDto.getResultResponse().getResultList());
+        request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents",responseDto.getTotalStudents());

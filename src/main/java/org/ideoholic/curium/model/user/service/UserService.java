@@ -165,7 +165,7 @@ public class UserService {
 
 				//Get Boys & Girls
 				ResultResponse resultResponse = adminService.getTotalBoysGirls(branchId);
-				result.setResultResponse(resultResponse);
+				result.setBoysGirls(resultResponse.getResultList());
 
 				result.setXaxisList(xaxisList);
 				result.setYaxisList(yaxisList);
