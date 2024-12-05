@@ -7,16 +7,19 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.model.teachersperformance.service.TeacherPerformanceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TeachersPerformanceActionAdapter {
 	
+	 @Autowired
 	 private HttpServletRequest request;
+	 @Autowired
      private HttpServletResponse response;
+	 @Autowired
      private HttpSession httpSession;
      private String BRANCHID = "branchid";
-     private String academicyear = "academicyear";
 
 	public void getDetailofteacher() {
 		TeacherPerformanceService teacherPerformanceService = new TeacherPerformanceService(request, response);
