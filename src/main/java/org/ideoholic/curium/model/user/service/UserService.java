@@ -112,71 +112,81 @@ public class UserService {
 		
 	}
 
-	public void dashBoard() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			//List<Branch> branchList = new BranchDAO().readListOfObjects();
-            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            List<String> xaxisList = new LinkedList<String>() ;
-            List<String> yaxisList = new LinkedList<String>() ;
-            int totalStudents = 0;
-            String academicYear = httpSession.getAttribute("currentAcademicYear").toString();
-            // int[] test = new int[branchList.size()] ;
-            for (Classsec classstudying : classsecList) {
-        	
-		        	String classStudying = classstudying.getClassdetails();
-		    		if(!classStudying.equalsIgnoreCase("")) {
-		    		
-		    			classStudying = classStudying+"--" +"%";
-		    		
-                    List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') AND parents.Student.classstudying like '"+classStudying+"'"
-                    + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
-                    totalStudents+=student.size();
-                    xaxisList.add("\""+classstudying.getClassdetails()+"\"");
-                    if(student.size()>0) {
-                        String studentCount = Integer.toString(student.size());
-                        yaxisList.add("\""+studentCount+"\"");
-                    }else {
-                        yaxisList.add("\""+0+"\"");
-                    }
-                    
-                	}
-        	}
-        	// Total Teachers
-        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        	request.setAttribute("totalteachers", teacher.size());
-        	// End Total Teachers
-        	
-        	//Fees Details
-        	feesCollectionActionAdapter.getFeesDetailsDashBoard();
-        	//End Fees Details
-        	
-        	//Daily Expenses
-        	DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
-        	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
-        	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
-			request.setAttribute("dayone", dailyResponse.getDayOne());
-			
-			request.setAttribute("dailyadminexpenses", dailyResponse.getDailyAdminExpenses());
-			request.setAttribute("dailyexpenses", dailyResponse.getDailyExpenses());
-        		
-        	//Monthly Expenses
-			MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
-			request.setAttribute("monthlyexpenses", monthlyExpense.getMonthlyExpenses());
-			request.setAttribute("monthlistexpenses", monthlyExpense.getMonthListExpenses());
-        		
-        	//Get Boys & Girls
-			ResultResponse result = adminService.getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
-			request.setAttribute("totalboysgirls", result.getResultList());
-        	
-        request.setAttribute("studentxaxis", xaxisList);
-        request.setAttribute("studentyaxis", yaxisList);
-        request.setAttribute("totalstudents", totalStudents);
-        feesdailysearch();
-		feesmonthlysearch();
+	public DashBoardResponseDto dashBoard(SearchByDateDto dto, String branchId, String currentAcademicYear) {
+		DashBoardResponseDto result = DashBoardResponseDto.builder().build();
+
+		try {
+
+			if (branchId != null) {
+
+				//List<Branch> branchList = new BranchDAO().readListOfObjects();
+				List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+				List<String> xaxisList = new LinkedList<>();
+				List<String> yaxisList = new LinkedList<>();
+				int totalStudents = 0;
+				String academicYear = currentAcademicYear;
+				// int[] test = new int[branchList.size()] ;
+				for (Classsec classstudying : classsecList) {
+
+					String classStudying = classstudying.getClassdetails();
+					if (!classStudying.equalsIgnoreCase("")) {
+
+						classStudying = classStudying + "--" + "%";
+
+						List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') AND parents.Student.classstudying like '" + classStudying + "'"
+								+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='" + Integer.parseInt(branchId) + "' ");
+						totalStudents += student.size();
+						xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
+						if (student.size() > 0) {
+							String studentCount = Integer.toString(student.size());
+							yaxisList.add("\"" + studentCount + "\"");
+						} else {
+							yaxisList.add("\"" + 0 + "\"");
+						}
+
+					}
+				}
+				// Total Teachers
+				List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(branchId));
+				result.setTeacherSize(teacher.size());
+				// End Total Teachers
+
+				//Fees Details
+				feesCollectionActionAdapter.getFeesDetailsDashBoard(); //TODO: After FessCollection becomes @Service, use feesCollectionService.getFeesDetailsDashBoard() instead.
+				//End Fees Details
+
+				//Daily Expenses
+				DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(dto.getBranchId(), branchId);
+				result.setExpensesDateBranchName(dailyResponse.getExpensesDateBranchName());
+				result.setBranchName(dailyResponse.getBranchName());
+				result.setDayOne(dailyResponse.getDayOne());
+
+				result.setDailyAdminExpenses(dailyResponse.getDailyAdminExpenses());
+				result.setDailyExpenses(dailyResponse.getDailyExpenses());
+
+				//Monthly Expenses
+				MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(branchId, dto.getToDate(), dto.getFromDate());
+				result.setMonthlyExpenses(monthlyExpense.getMonthlyExpenses());
+				result.setMonthListExpenses(monthlyExpense.getMonthListExpenses());
+
+				//Get Boys & Girls
+				ResultResponse resultResponse = adminService.getTotalBoysGirls(branchId);
+				;
+				result.setBoysGirls(resultResponse.getResultList());
+
+				result.setXaxisList(xaxisList);
+				result.setYaxisList(yaxisList);
+				result.setTotalStudents(totalStudents);
+				feesdailysearch();
+				feesmonthlysearch();
+
+				result.setSuccess(true);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-		
+		return result;
 	}
 	
 	public void feesdailysearch() {
@@ -668,7 +678,7 @@ public class UserService {
 		
 	}
 
-	public boolean authenticateMultiUser() {
+	public boolean 	authenticateMultiUser() {
         boolean result = false;
         
         String userName =null;

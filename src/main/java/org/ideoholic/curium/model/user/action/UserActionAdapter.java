@@ -4,10 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
-import org.ideoholic.curium.model.user.dto.SearchByDateDto;
-import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
-import org.ideoholic.curium.model.user.dto.SearchByParentDto;
+import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,5 +105,28 @@ public class UserActionAdapter {
         ResultResponse resultResponse = userService.advanceSearch(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", resultResponse.getResultList());
 
+    }
+
+    public void dashBoard() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        SearchByDateDto dto = new SearchByDateDto();
+        dto.setBranchId(request.getParameter("selectedbranchid"));
+        dto.setToDate(request.getParameter("todate"));
+        dto.setFromDate(request.getParameter("fromdate"));
+
+        DashBoardResponseDto responseDto = userService.dashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("totalteachers", responseDto.getTeacherSize());
+        httpSession.setAttribute("expensesdatebranchname", responseDto.getExpensesDateBranchName());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        request.setAttribute("dayone", responseDto.getDayOne());
+        request.setAttribute("dailyadminexpenses", responseDto.getDailyAdminExpenses());
+        request.setAttribute("dailyexpenses", responseDto.getDailyExpenses());
+        request.setAttribute("monthlyexpenses", responseDto.getMonthlyExpenses());
+        request.setAttribute("monthlistexpenses", responseDto.getMonthListExpenses());
+        request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
+        request.setAttribute("studentxaxis", responseDto.getXaxisList());
+        request.setAttribute("studentyaxis", responseDto.getYaxisList());
+        request.setAttribute("totalstudents",responseDto.getTotalStudents());
     }
 }

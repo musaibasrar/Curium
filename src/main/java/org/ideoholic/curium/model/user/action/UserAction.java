@@ -83,7 +83,7 @@ public class UserAction {
 
 	@PostMapping("/dashBoard")
 	public String dashBoard() {
-		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).dashBoard();
+		userActionAdapter.dashBoard();
 		return "jspbarchart";
 	}
 
