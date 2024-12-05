@@ -27,6 +27,7 @@ public class SmsActionAdapter {
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
+    private String SMSTempType;
 
 
     public boolean sendNumbersSMS() {
@@ -66,6 +67,21 @@ public class SmsActionAdapter {
 
         SMSResponseDto result= smsService.SMSDeliveryReport();
         request.setAttribute("smsdeliveryreport", result.getSmsDeliveryReport().get(0).getRecords());
+
+        return result.isSuccess();
+    }
+    public boolean sendAllSMS() {
+
+        SmsService smsService = new SmsService(request,response);
+
+        SendSMSDto dto = new SendSMSDto();
+        dto.setAddClass(request.getParameter("addclass"));
+        dto.setAddSec(request.getParameter("addsec"));
+        dto.setSMSTempType(request.getParameter("messagebody"));
+        dto.setMessage(request.getParameter(SMSTempType+"var1")+":"+request.getParameter(SMSTempType+"var2")+":"+request.getParameter(SMSTempType+"var3")+":"+request.getParameter(SMSTempType+"var4"));
+
+        ResultResponse result = smsService.sendAllSMS(dto, httpSession.getAttribute("branchid").toString());
+
 
         return result.isSuccess();
     }

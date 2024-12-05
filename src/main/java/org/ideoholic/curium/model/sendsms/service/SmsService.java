@@ -46,17 +46,16 @@ public class SmsService {
 	}
 
 
-	public boolean sendAllSMS() {
-		
-		boolean result=false;
+	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
+
 		int noOfRecords = 100;
 		int offset=0;
 		
 		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
-			String addClass = request.getParameter("addclass");
-			String addSec = request.getParameter("addsec");
+			String addClass =dto.getAddClass();
+			String addSec = dto.getAddSec();
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
@@ -113,8 +112,8 @@ public class SmsService {
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
 						
-						String SMSTempType = request.getParameter("messagebody");
-						String message = request.getParameter(SMSTempType+"var1")+":"+request.getParameter(SMSTempType+"var2")+":"+request.getParameter(SMSTempType+"var3")+":"+request.getParameter(SMSTempType+"var4");
+						String SMSTempType = dto.getSMSTempType();
+						String message = dto.getMessage();
 						
 						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
@@ -122,11 +121,11 @@ public class SmsService {
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				result = true;
+				 ResultResponse.builder().success(true).build();
 			}
 		}
 		
-        return result;
+        return ResultResponse.builder().build();
 		
 	}
 

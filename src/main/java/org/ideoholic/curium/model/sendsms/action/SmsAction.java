@@ -58,7 +58,7 @@ public class SmsAction {
 
 	@PostMapping("/sendAllSMS")
 	public String sendAllSMS() {
-		if (new SmsService(request, response).sendAllSMS()) {
+		if (smsActionAdapter.sendAllSMS()) {
 			return "successsms";
 		}
 		return "errorsms";
