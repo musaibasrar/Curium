@@ -90,7 +90,7 @@ public class SmsAction {
 	
 	@GetMapping("/SMSDeliveryReport")
 	public String SMSDeliveryReport() {
-		if (new SmsService(request, response).SMSDeliveryReport()) {
+		if (smsActionAdapter.SMSDeliveryReport()) {
 			return "smsdeliveryreport";
 		}
 		return "error";
