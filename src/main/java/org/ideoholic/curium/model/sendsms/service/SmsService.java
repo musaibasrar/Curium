@@ -307,13 +307,12 @@ public class SmsService {
 		return responseCode;
 	}
 	
-	public boolean sendSMSFeesDueReminder() {
+	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
 		int resultSMS=0;
-		boolean result = false;
-		
-			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
-			
-				String numbers = null;
+
+		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
+
+		String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
 					if(!studentFeesReportList.isEmpty()){
@@ -340,10 +339,11 @@ public class SmsService {
 					}
 					
 			if(resultSMS==200){
-				result = true;
+				return ResultResponse.builder().success(true).build();
+
 			}
 			
-			return result;
+			return ResultResponse.builder().build();
 		}
 
 

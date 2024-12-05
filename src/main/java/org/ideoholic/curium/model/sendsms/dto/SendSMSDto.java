@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -14,4 +17,6 @@ public class SendSMSDto {
     private String messageBodyNumbers;
     private String department;
     private String messageBodyStaff;
+
+    private List<StudentFeesReport> studentFeesReportList;
 }
