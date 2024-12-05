@@ -14,8 +14,10 @@ import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.util.SubjectAverage;
 
 public class TeacherPerformanceService {
@@ -46,14 +48,15 @@ public class TeacherPerformanceService {
 	}
 
 	
-	public void getDetailofteacher() {
+	public TeacherDetailResponseDto getDetailofteacher(TeacherDetailsDto teacherDetailsDto,String branchId) {
 		
-		String[] classsec = request.getParameterValues("classesselected");
-		String subjectDetails = request.getParameter("subject");
+		TeacherDetailResponseDto teacherDetailResponseDto = new TeacherDetailResponseDto();
+		String[] classsec = teacherDetailsDto.getClasssec();
+		String subjectDetails = teacherDetailsDto.getSubjectDetails();
 		String[] subject = subjectDetails.split("--");
-		String AcademicYear = request.getParameter("academicyear");
+		String AcademicYear = teacherDetailsDto.getAcademicYear();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 		List<SubjectAverage> subjectaverageList = new ArrayList<SubjectAverage>();
 		
 		
@@ -105,47 +108,11 @@ public class TeacherPerformanceService {
 			}
 					}
 		
-		request.setAttribute("subjectaveragelist", subjectaverageList);
-		request.setAttribute("subjectaveragelistsize", subjectaverageList.size());
-		request.setAttribute("subjectName", subject[1]);
+		teacherDetailResponseDto.setSubjectaverageList(subjectaverageList);
+		teacherDetailResponseDto.setSubjectaveragelistsize(subjectaverageList.size());
+		teacherDetailResponseDto.setSubjectName(subject[1]);
+		return teacherDetailResponseDto;
 	
 	}
 
-	/*public void getDetailofteacher() {
-		//academicyear
-		Subject subject;
-		Classsec[] classsec;
-		Map<classsec, listofsids> subjectaverage=new HashMap<String, List<Integers>>();
-		subjectaverage = exam,map<classsec,averagemarks>
-		
-		List<subjectaverage> subjectaverageList ;
-		
-				foreach(list of classes) {
-			//1. list of sid based on classsec
-			//2. insert into MapClasssecSid
-		}
-		
-		
-		foreach(list of exams)
-		{
-			new subjectaverage;
-			insideloopmapclassaverage = new map<classsec,averagemarks>;
-			for(MapClasssecSid
-					{
-						classsec
-						listofstudentssid
-						//query in marks table where sid = listofstudentssid and academicyear = and sub
-						
-						calculate average
-						
-						insideloopmapclassaverage.put(classsec, average);
-					}
-			subjectaverage.set(examname);
-			subjectaverage.set(insideloopmapclassaverage);
-			
-			subjectaverageList.add(new subjectaverage);
-
-		
 	}
-	}*/
-}
