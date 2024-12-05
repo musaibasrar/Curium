@@ -640,9 +640,16 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                         <td  width="25%"  class="alignLeft" height="50" >RTE
+                        
+                        <td width="25%" class="alignLeft" height="50">School Medium of
+								Instruction</td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.instructionmediumlastschool}" />
                             </td>
-                            <td width="25%" class="tablerows" >
+                            
+                         <td  width="25%"  class="alignLeft" height="50" style="display: none;" >RTE
+                            </td>
+                            <td width="25%" class="tablerows" style="display: none;">
                                
                                 <c:if test="${(student.rte ==1)}">    
            						  <c:out default="" value="Yes" />
@@ -1002,6 +1009,14 @@ for(Cookie cookie : cookies){
                             </td>
 
 
+                        </tr>
+                        
+                        <tr>
+                            <td width="25%"   class="alignLeft" height="50" >Income Certificate No.</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${parents.fatherscaste}" />
+                                
+                            </td>
                         </tr>
                         
 

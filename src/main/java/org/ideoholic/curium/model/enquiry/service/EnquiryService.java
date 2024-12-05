@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.enquiry.service;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +29,7 @@ public class EnquiryService {
 		
 	    String name= request.getParameter("name");		
 	    String place= request.getParameter("place");	
-	    String mobile= request.getParameter("mobile");	
+	    String mobile= request.getParameter("mobileno");	
 	    String date= request.getParameter("date");
 	    httpSession.setAttribute("name", name);
 	    httpSession.setAttribute("place", place);
@@ -41,6 +43,7 @@ public class EnquiryService {
 	    enquiry.setName(name);
 	    enquiry.setAddress(place);
 	    enquiry.setMobileno(mobile);
+	    enquiry.setDateofbirth(new Date());
 	          
                 enquiry =  new enquiryDAO().create(enquiry);
                 }

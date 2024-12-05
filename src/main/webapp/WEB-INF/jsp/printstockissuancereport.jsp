@@ -221,12 +221,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/roshan/images/logo.jpg" width="150" height="80"/>
+				<img src="/roshan/images/roshan.jpg" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Curium<br><br>
+				ROSHAN EDUCATIONAL TRUST<br><br>
 				<label class="addressLine">Stock Issuance Report</label><br>
-				<label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
+				<label class="addressLineTwo">${transactionfromdateselected}${transactiontodateselected}&nbsp;&nbsp;<%-- ${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp --%>
 				</label>
 				</td>
 			</tr>
@@ -249,8 +249,9 @@
  				 		<th class=datath>Sl.No</th>
  				 		<th class="datath">Date</th>
  				 		<th class="datath">Bill No.</th>
-						<th class="datath">Issued To</th>
-						<th class="datath">Purpose</th>
+						<th class="datath">Student Name</th>
+						<th class="datath">Class</th>
+						<!-- <th class="datath">Purpose</th> -->
 						<th class="datath">Item</th>
 						<th class="datath">Qty</th>
 						<th class="datath">UOM</th>
@@ -268,8 +269,14 @@
 								<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.transactiondate}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.billno}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.issuedto}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.purpose}" /></td>
+								<td class="datatd" style="font-size: 9px;">
+								<c:set var="parts" value="${fn:split(stockissuancelist.issuedto, '_')}" />
+								<c:out value="${parts[0]}" />
+								</td>
+								<td class="datatd" style="font-size: 9px;">
+								<c:out value="${parts[1]}" />
+								</td>
+								<%-- <td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.purpose}" /></td> --%>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.itemname}" /></td>
 								<td class="datatdright" style="font-size: 9px;"><c:out value="${stockissuancelist.quantity}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.unitofmeasure}" /></td>

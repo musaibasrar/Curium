@@ -679,10 +679,11 @@ for(Cookie cookie : cookies){
 								<select name="messagebody" id="messagebody"
 									style="width: 120px">
 											<option selected></option>
-            								<!-- <option value="holiday">Holiday</option>
-            								<option value="exams">Exams</option> -->
+            								<option value="holiday">Holiday</option>
+            								<option value="exams">Exams</option>
             								<option value="festival">Festival</option>
-            								<!-- <option value="feesreminder">Fees Reminder</option> -->
+            								<option value="scienceexhibition">Science Exhibition</option>
+            								<option value="feesreminder">Fees Reminder</option>
 								</select>
 							
 							</label></td>

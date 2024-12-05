@@ -484,8 +484,8 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.studentdoc3}"/>" id="studentdoc3update" name="studentdoc3update">
                     <input type="hidden" value="<c:out value="${student.studentdoc4}"/>" id="studentdoc4update" name="studentdoc4update">
                     <input type="hidden" value="<c:out value="${student.studentdoc5}"/>" id="studentdoc5update" name="studentdoc5update">
-                    <input type="hidden" value="<c:out value="${student.archive}"/>" id="studentarchiveupdate" name="studentarchiveupdate">
-                    
+                    <input type="hidden" value="<c:out value="${student.archive}"/>" id="archive" name="archive">
+                    <input type="hidden" value="<c:out value="${student.promotedyear}"/>" id="promotedyear" name="promotedyear">
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
                     <input type="hidden" value="<c:out value="${student.leftout}"/>" id="leftout" name="leftout">
@@ -927,8 +927,24 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
+							<td class="alignLeft">Medium of Instruction</td>
+
+							<td><label> <select name="mediumofinstructionlastschool"
+									id="mediumofinstructionlastschool" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.instructionmediumlastschool}</option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
+
+							</label></td>
+							
+							<td class="alignLeft" style="display: none;">RTE &nbsp;</td>
+							<td height="30" style="display: none;">&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
@@ -1518,6 +1534,15 @@ for(Cookie cookie : cookies){
 									type="text" class="myclass" id="remarksadditional" size="30"
 									value="<c:out default="" value="${parents.remarks}" />">
 							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Income Certificate No.</td>
+
+							<td><label> <input name="fatherscaste"
+									type="text" class="myclass" id="fatherscaste" size="30"
+									value="<c:out default="" value="${parents.fatherscaste}" />">
+
+							</label></td>
+							
 						</tr>
 
 						<tr>

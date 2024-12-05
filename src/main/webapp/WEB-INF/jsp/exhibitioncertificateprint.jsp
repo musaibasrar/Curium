@@ -126,6 +126,7 @@ span{
             .bodymargin{
                 margin-left: 0px ;
                 margin-right: 0px;
+                background-image: url(/roshan/images/certificatebg.png);
             }
         }
         .card {
@@ -249,7 +250,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					For participating in Science, Arts & Craft Expo 2024
+					For participating in Parent's Orientation Program
 					</h3>
 					
 				</td>

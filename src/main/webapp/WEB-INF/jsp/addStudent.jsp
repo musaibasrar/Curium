@@ -1123,14 +1123,30 @@ $(document).ready(function() {
 
 						<tr>
 						
-							<td class="alignLeft"  >RTE
+							<td class="alignLeft"  style="display: none;">RTE
 										&nbsp;</td>
 
-									<td  >&nbsp;Yes<input
+									<td  style="display: none;">&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
+										</td>
+										
+							<td class="alignLeft">Medium of Instruction&nbsp;</td>
+
+									<td>
+											<select name="mediumofinstructionlastschool"
+												id="mediumofinstructionlastschool" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
 										</td>
 										
 							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
@@ -1718,6 +1734,15 @@ $(document).ready(function() {
 											type="text" class="myclass" id="remarksadditional" size="36"
 											style="text-transform:capitalize;"
 											>
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Income Certificate No.
+										&nbsp;</td>
+
+									<td ><label> <input
+											name="fatherscaste" type="text" class="myclass"
+											id="fatherscaste" size="36" >
+
 									</label></td>
 								</tr>
 

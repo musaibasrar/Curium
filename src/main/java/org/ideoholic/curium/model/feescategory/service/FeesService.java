@@ -538,6 +538,7 @@ public class FeesService {
 
 	        if(httpSession.getAttribute(BRANCHID)!=null){
 	        	String classname = request.getParameter("classstudying");
+	        	int branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
 	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
 	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
 	        	String searchYear = null;
@@ -550,7 +551,7 @@ public class FeesService {
 	        		searchYear = request.getParameter("yearofadmission");
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchId);
 	            httpSession.setAttribute("feescategory", feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");

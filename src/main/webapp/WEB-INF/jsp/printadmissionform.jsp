@@ -104,26 +104,26 @@ input {
     <td>3</td>
     <td>Medium For Instruction</td>
     <td>Kannada<input type="checkbox"
-		value="Kannada" name="mediumofinstruction" id="yes:Kannada"
-		${parents.student.mediumofinstruction == 'Kannada' ? 'checked' : ''} />&nbsp;
-		&nbsp;Hindi<input type="checkbox" value="Hindi" name="mediumofinstruction"
+		value="Kannada" name="instructionmediumlastschool" id="yes:Kannada"
+		${parents.student.instructionmediumlastschool == 'Kannada' ? 'checked' : ''} />&nbsp;
+		&nbsp;Hindi<input type="checkbox" value="Hindi" name="instructionmediumlastschool"
 		id="no:Hindi" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'Hindi' ? 'checked' : ''} />
+		${parents.student.instructionmediumlastschool == 'Hindi' ? 'checked' : ''} />
 		Urdu<input type="checkbox"
-		value="Urdu" name="mediumofinstruction" id="yes:Urdu"
-		${parents.student.mediumofinstruction == 'Urdu' ? 'checked' : ''} />&nbsp;
-		&nbsp;English<input type="checkbox" value="English" name="mediumofinstruction"
+		value="Urdu" name="instructionmediumlastschool" id="yes:Urdu"
+		${parents.student.instructionmediumlastschool == 'Urdu' ? 'checked' : ''} />&nbsp;
+		&nbsp;English<input type="checkbox" value="English" name="instructionmediumlastschool"
 		id="no:English" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'English' ? 'checked' : ''} />
+		${parents.student.instructionmediumlastschool == 'English' ? 'checked' : ''} />
 		Marathi<input type="checkbox"
-		value="Marathi" name="mediumofinstruction" id="yes:Marathi"
-		${parents.student.mediumofinstruction == 'Marathi' ? 'checked' : ''} />&nbsp;
-		&nbsp;Tamil<input type="checkbox" value="Tamil" name="mediumofinstruction"
+		value="Marathi" name="instructionmediumlastschool" id="yes:Marathi"
+		${parents.student.instructionmediumlastschool == 'Marathi' ? 'checked' : ''} />&nbsp;
+		&nbsp;Tamil<input type="checkbox" value="Tamil" name="instructionmediumlastschool"
 		id="no:Tamil" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'Tamil' ? 'checked' : ''} />
+		${parents.student.instructionmediumlastschool == 'Tamil' ? 'checked' : ''} />
 		Telgu<input type="checkbox"
-		value="Telgu" name="mediumofinstruction" id="yes:Telgu"
-		${parents.student.mediumofinstruction == 'Telgu' ? 'checked' : ''} /></td>
+		value="Telgu" name="instructionmediumlastschool" id="yes:Telgu"
+		${parents.student.instructionmediumlastschool == 'Telgu' ? 'checked' : ''} /></td>
   </tr>
   <tr>
     <td>4</td>
@@ -301,12 +301,22 @@ input {
   <tr>
     <td>25</td>
     <td>Sub Category</td>
-    <td><c:out default="" value="${parents.student.studentscaste}" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Caste Certificate No.:&nbsp;&nbsp;<c:out default="" value="${parents.student.studentscastecertno}" /></td>
+    <td><c:out default="" value="${parents.student.studentscaste}" /></td>
   </tr>
    <tr>
     <td>26</td>
     <td>Religion</td>
-    <td><c:out default="" value="${parents.student.religion}" />&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Income Certificate No.:&nbsp;&nbsp;<c:out value="${parents.fatherscaste}" /></td>
+    <td><c:out default="" value="${parents.student.religion}" /></td>
+  </tr>
+  <tr>
+    <td>27</td>
+    <td>Caste Certificate No.</td>
+    <td><c:out default="" value="${parents.student.studentscastecertno}" /></td>
+  </tr>
+   <tr>
+    <td>28</td>
+    <td>Income Certificate No.</td>
+    <td><c:out value="${parents.fatherscaste}" /></td>
   </tr>
   </table>
   <h3>TC not produced at the time of admission please fill the following information</h3>
@@ -317,17 +327,17 @@ input {
     <td style="width:70%"><c:out default="" value="${parents.student.studentscastecertno}" /></td>
   </tr> --%>
   <tr>
-    <td>27</td>
+    <td>29</td>
     <td>Mother's Caste Certificate No</td>
     <td><c:out default="" value="${parents.motherscastecertno}" /></td>
   </tr>
    <tr>
-    <td>28</td>
+    <td>30</td>
     <td>Father's Caste Certificate No</td>
     <td><c:out value="${parents.fatherscastecertno}" /></td>
   </tr>
   <tr>
-    <td>29</td>
+    <td>31</td>
     <td>Belong To BPL</td>
     <td>&nbsp;Yes<input
 		type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -336,17 +346,17 @@ input {
 		onclick="noCheck(this.id);" ${parents.student.belongtobpl == '0' ? 'checked' : ''}/></td>
   </tr>
   <tr>
-    <td>30</td>
+    <td>32</td>
     <td>Bhagyalaxmi Bond No</td>
     <td><c:out default="" value="${parents.student.bhagyalakshmibondnumber}" /></td>
   </tr>
    <tr>
-    <td>31</td>
+    <td>33</td>
     <td>Child with special need</td>
     <td></td>
   </tr>
   <tr>
-    <td>32</td>
+    <td>34</td>
     <td>Special Category</td>
     <td>None<input type="checkbox"
 		value="None" name="specialcategory" id="yes:None"
@@ -365,27 +375,27 @@ input {
 		${parents.student.specialcategory == 'Others' ? 'checked' : ''} />&nbsp;</td>
   </tr>
   <tr>
-    <td>33</td>
+    <td>35</td>
     <td>Pin Code</td>
     <td></td>
   </tr>
    <tr>
-    <td>34</td>
+    <td>36</td>
     <td>City/Village/Town</td>
     <td></td>
   </tr>
   <tr>
-    <td>35</td>
+    <td>37</td>
     <td>Address</td>
     <td><c:out default="" value="${parents.addresspermanent}" /></td>
   </tr>
   <tr>
-    <td>36</td>
+    <td>38</td>
     <td>Mobile Number</td>
     <td><c:out default="" value="${parents.contactnumber}" /></td>
   </tr>
    <tr>
-    <td>37</td>
+    <td>39</td>
     <td>BMTC Bus pass</td>
     <td></td>
   </tr>
