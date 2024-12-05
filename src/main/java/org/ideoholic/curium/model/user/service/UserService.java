@@ -157,22 +157,15 @@ public class UserService {
 
 				//Daily Expenses
 				DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(dto.getBranchId(), branchId);
-				result.setExpensesDateBranchName(dailyResponse.getExpensesDateBranchName());
-				result.setBranchName(dailyResponse.getBranchName());
-				result.setDayOne(dailyResponse.getDayOne());
-
-				result.setDailyAdminExpenses(dailyResponse.getDailyAdminExpenses());
-				result.setDailyExpenses(dailyResponse.getDailyExpenses());
+				result.setDailyExpensesResponseDto(dailyResponse);
 
 				//Monthly Expenses
 				MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(branchId, dto.getToDate(), dto.getFromDate());
-				result.setMonthlyExpenses(monthlyExpense.getMonthlyExpenses());
-				result.setMonthListExpenses(monthlyExpense.getMonthListExpenses());
+				result.setMonthlyExpensesResponseDto(monthlyExpense);
 
 				//Get Boys & Girls
 				ResultResponse resultResponse = adminService.getTotalBoysGirls(branchId);
-				;
-				result.setBoysGirls(resultResponse.getResultList());
+				result.setResultResponse(resultResponse);
 
 				result.setXaxisList(xaxisList);
 				result.setYaxisList(yaxisList);

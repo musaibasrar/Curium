@@ -117,14 +117,14 @@ public class UserActionAdapter {
 
         DashBoardResponseDto responseDto = userService.dashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("totalteachers", responseDto.getTeacherSize());
-        httpSession.setAttribute("expensesdatebranchname", responseDto.getExpensesDateBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
-        request.setAttribute("dayone", responseDto.getDayOne());
-        request.setAttribute("dailyadminexpenses", responseDto.getDailyAdminExpenses());
-        request.setAttribute("dailyexpenses", responseDto.getDailyExpenses());
-        request.setAttribute("monthlyexpenses", responseDto.getMonthlyExpenses());
-        request.setAttribute("monthlistexpenses", responseDto.getMonthListExpenses());
-        request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
+        httpSession.setAttribute("expensesdatebranchname", responseDto.getDailyExpensesResponseDto().getExpensesDateBranchName());
+        httpSession.setAttribute("branchname", responseDto.getDailyExpensesResponseDto().getBranchName());
+        request.setAttribute("dayone", responseDto.getDailyExpensesResponseDto().getDayOne());
+        request.setAttribute("dailyadminexpenses", responseDto.getDailyExpensesResponseDto().getDailyAdminExpenses());
+        request.setAttribute("dailyexpenses", responseDto.getDailyExpensesResponseDto().getDailyExpenses());
+        request.setAttribute("monthlyexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthlyExpenses());
+        request.setAttribute("monthlistexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthListExpenses());
+        request.setAttribute("totalboysgirls", responseDto.getResultResponse().getResultList());
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents",responseDto.getTotalStudents());
