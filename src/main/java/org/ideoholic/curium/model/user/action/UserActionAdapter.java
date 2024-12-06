@@ -153,4 +153,26 @@ public class UserActionAdapter {
 
         return responseDto.isSuccess();
     }
+
+    public boolean authenticateMultiUser() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        String branchId = request.getParameter(BRANCHID);
+
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
+        httpSession.setAttribute("username", responseDto.getUserName());
+        httpSession.setAttribute("branchid", responseDto.getBranchId());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("branchcode", responseDto.getBranchCode());
+        httpSession.setAttribute("branchaddress", responseDto.getBranchAddress());
+        httpSession.setAttribute("branchcontact", responseDto.getBranchContact());
+        httpSession.setAttribute("userType", responseDto.getUserType());
+        httpSession.setAttribute("typeOfUser", responseDto.getTypeOfUser());
+        httpSession.setAttribute("userAuth", responseDto.getUserAuth());
+        httpSession.setAttribute("superuserAuth", responseDto.getSuperUserAuth());
+        httpSession.setAttribute("userloginid", responseDto.getUserLoginId());
+
+        return responseDto.isSuccess();
+    }
 }

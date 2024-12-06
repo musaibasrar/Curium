@@ -101,7 +101,7 @@ public class UserAction {
 	@GetMapping("/multiUser")
 	public String authenticateMultiUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).authenticateMultiUser()) {
+		if (userActionAdapter.authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
