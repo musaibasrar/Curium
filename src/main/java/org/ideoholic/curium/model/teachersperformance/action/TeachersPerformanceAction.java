@@ -38,6 +38,9 @@ public class TeachersPerformanceAction {
 
 	@Autowired
 	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
+	
+	@Autowired
+	private TeachersPerformanceActionAdapter teachersPerformanceActionAdapter;
 
 	@GetMapping("/SearchTeachers")
 	public String SearchTeachers() {
@@ -49,7 +52,7 @@ public class TeachersPerformanceAction {
 	
 	@PostMapping("/searchForTeacherDetail")
 	public String searchForTeacherDetail() {
-		new TeacherPerformanceService(request, response).getDetailofteacher();
+		teachersPerformanceActionAdapter.getDetailofteacher();
 		return "performanceGraph";
 	}
 
