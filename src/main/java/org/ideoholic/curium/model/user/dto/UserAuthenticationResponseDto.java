@@ -18,6 +18,7 @@ public class UserAuthenticationResponseDto {
     private String userType;
     private String typeOfUser;
     private String userAuth;
+    private String superUserAuth;
     private Integer userLoginId;
     private String attendanceStatus;
     @Builder.Default
