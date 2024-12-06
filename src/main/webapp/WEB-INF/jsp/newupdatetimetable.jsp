@@ -378,6 +378,13 @@ for(Cookie cookie : cookies){
 												</option>
 										</c:forEach>
 										</select>
+										<select name='section' id='section'><option selected>Section</option>
+					<c:forEach items="${classdetailslist}" var="classdetailslist">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+										</c:forEach>
+										</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
 
 							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />

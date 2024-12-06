@@ -434,6 +434,8 @@ request.setAttribute("periodMasterid", periodMasterid);
 		String dayEndAm = DataUtil.emptyString(request.getParameter("dayendam"));
 		String periodmasterid = DataUtil.emptyString(request.getParameter("periodmasterid"));
 		String fromClass = DataUtil.emptyString(request.getParameter("classsec"));
+		String section = DataUtil.emptyString(request.getParameter("section"));
+		//String[] itempart = fromClass.split("-");
 		String toClass = DataUtil.emptyString(request.getParameter("toclass"));
 		
 		String[] periods = request.getParameterValues("periods");
@@ -481,7 +483,7 @@ request.setAttribute("periodMasterid", periodMasterid);
 		}
 
 		Periodmaster periodMaster = new Periodmaster();
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClass_(fromClass+"-"+section);
 		periodMaster.setAcademicyear(academicYear);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
