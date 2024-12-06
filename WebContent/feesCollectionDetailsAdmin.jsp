@@ -508,7 +508,7 @@
 		$("#datepickerfrom").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
@@ -518,7 +518,7 @@
 		$("#datepickerto").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerto").datepicker("option", "showAnim", $(this).val());

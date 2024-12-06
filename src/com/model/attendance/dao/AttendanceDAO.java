@@ -1,6 +1,7 @@
 package com.model.attendance.dao;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import com.model.attendance.dto.Staffdailyattendance;
 import com.model.attendance.dto.Studentdailyattendance;
 import com.model.attendance.dto.Weeklyoff;
 import com.model.employee.dto.Teacher;
+import com.model.mess.card.dto.Card;
 import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
@@ -364,6 +366,26 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
+				
+				//check mess card validity
+				Student student = new Student();
+				Query queryStudent = session.createQuery("from Student  where studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
+				student = (Student) queryStudent.uniqueResult();
+				
+				Query queryCard = session.createQuery("from Card where sid = "+student.getSid());
+            	Card card = (Card) queryCard.uniqueResult();
+            	
+            	String validUpto = card.getValidto().toString();
+            	 // Parse the MySQL date into a LocalDate
+                LocalDate dbDate = LocalDate.parse(validUpto);
+
+                // Get today's date
+                LocalDate today = LocalDate.now();
+                
+                if (dbDate.isBefore(today)) {
+                	return "error-Card Expired!!!";
+                }
+				
 				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
 				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();

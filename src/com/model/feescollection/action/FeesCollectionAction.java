@@ -52,7 +52,7 @@ public class FeesCollectionAction {
 
         private String searchFeesReportByUser() {
 			new FeesCollectionService(request, response).getFeesReportByUser();
-			return "feesCollectionDetails.jsp";
+			return "feescollectiondetailsbyuser.jsp";
 		}
 
 		private String searchFeesReport() {

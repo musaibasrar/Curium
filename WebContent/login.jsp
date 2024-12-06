@@ -132,6 +132,8 @@ form{
                     window.open('index_clerk.jsp','_self');
                 }else if(type=='finclerk'){
                     window.open('index_finclerk.jsp','_self');
+                }else if(type=='attendance'){
+                    window.open('index_attendance.jsp','_self');
                 }
             }
             else if(!flag1){

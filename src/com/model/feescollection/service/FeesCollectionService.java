@@ -745,9 +745,9 @@ public class FeesCollectionService {
 	        }
 	        
 		String queryMain ="From Receiptinfo as feesdetails where feesdetails.userid="+loginUserId+" and feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
-		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
+		String toDate= DataUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		String fromDate = DataUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
+		String oneDay = DataUtil.dateFromatConversionSlash(request.getParameter("oneday"));
 		
 		
 			String querySub = "";

@@ -124,6 +124,8 @@ public class DataUtil {
 	   if(ddmmyyyy!=null) {
 		   String[] dateToConvert = ddmmyyyy.split("/");
 		   date = dateToConvert[2]+"/"+dateToConvert[1]+"/"+dateToConvert[0];
+	   }else {
+		   date="";
 	   }
 	   
 	   return date;

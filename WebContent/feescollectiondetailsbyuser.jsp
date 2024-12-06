@@ -409,7 +409,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=UserProcess&action=searchByDate";
+		form1.action = "Controller?process=FeesCollection&action=searchFeesReportByUser";
 		form1.method = "POST";
 		form1.submit();
 

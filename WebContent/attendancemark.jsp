@@ -409,6 +409,10 @@
 
 	}
 	
+	window.onload = function() {
+        document.getElementById("externalIDs").focus();
+    };
+	
 </script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
