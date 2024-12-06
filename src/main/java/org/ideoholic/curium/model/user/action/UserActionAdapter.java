@@ -129,4 +129,28 @@ public class UserActionAdapter {
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents",responseDto.getTotalStudents());
     }
+
+    public boolean authenticateUser() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        UserAuthenticationDto dto = new UserAuthenticationDto();
+        dto.setUserName(request.getParameter("loginName"));
+        dto.setPassword(request.getParameter("password"));
+
+        UserAuthenticationResponseDto responseDto = userService.authenticateUser(dto);
+        httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
+        httpSession.setAttribute("username", responseDto.getUserName());
+        httpSession.setAttribute("branchid", responseDto.getBranchId());
+        httpSession.setAttribute("branchname", responseDto.getBranchName());
+        httpSession.setAttribute("branchcode", responseDto.getBranchCode());
+        httpSession.setAttribute("branchaddress", responseDto.getBranchAddress());
+        httpSession.setAttribute("branchcontact", responseDto.getBranchContact());
+        httpSession.setAttribute("userType", responseDto.getUserType());
+        httpSession.setAttribute("typeOfUser", responseDto.getTypeOfUser());
+        httpSession.setAttribute("userAuth", responseDto.getUserAuth());
+        httpSession.setAttribute("userloginid", responseDto.getUserLoginId());
+        httpSession.setAttribute("todaysAttendance", responseDto.getAttendanceStatus());
+
+        return responseDto.isSuccess();
+    }
 }

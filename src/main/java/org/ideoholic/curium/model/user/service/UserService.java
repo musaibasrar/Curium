@@ -58,10 +58,11 @@ public class UserService {
 		this.feesCollectionActionAdapter = feesCollectionActionAdapter;
 	}
 
-	public boolean authenticateUser() {
-        boolean result;
-       String userName = request.getParameter("loginName");
-       String password = request.getParameter("password");
+	public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
+		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
+
+       String userName = dto.getUserName();
+       String password = dto.getPassword();
 
        login = new UserDAO().readUniqueObject(userName, password);
 
@@ -71,20 +72,20 @@ public class UserService {
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
             }
-            httpSession.setAttribute("currentAcademicYear",academicyear);
-            httpSession.setAttribute("username",login.getUsername());
-            
-            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
-            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
-            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
-            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
-            
+			result.setAcademicYear(academicyear);
+			result.setUserName(login.getUsername());
+
+			result.setBranchId(login.getBranch().getIdbranch());
+			result.setBranchName(login.getBranch().getBranchname());
+			result.setBranchCode(login.getBranch().getBranchcode());
+			result.setBranchAddress(login.getBranch().getAddress());
+			result.setBranchContact(login.getBranch().getContact());
+
             String[] userType = login.getUsertype().split("-");
-            httpSession.setAttribute("userType", userType[0]);
-            httpSession.setAttribute("typeOfUser",userType[0]);
-            httpSession.setAttribute("userAuth", userType[0]);
-            httpSession.setAttribute("userloginid", login.getUserid());
+			result.setUserType(userType[0]);
+			result.setTypeOfUser(userType[0]);
+			result.setUserAuth(userType[0]);
+			result.setUserLoginId(login.getUserid());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
@@ -95,13 +96,13 @@ public class UserService {
 				LocalDate currentDate = LocalDate.now();
 				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
 			       if(attendance != null) {
-			       httpSession.setAttribute("todaysAttendance",attendance.getAttendancestatus());
+				   result.setAttendanceStatus(attendance.getAttendancestatus());
 			       }
 			}
 			
-           result = true;
+           result.setSuccess(true);
        } else {
-           result = false;
+           result.setSuccess(false);
        }
        return result;
    }

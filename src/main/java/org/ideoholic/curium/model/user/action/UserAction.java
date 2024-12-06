@@ -90,7 +90,7 @@ public class UserAction {
 	@PostMapping("/authenticateUser")
 	public String authenticateUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
-		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).authenticateUser()) {
+		if (userActionAdapter.authenticateUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);
