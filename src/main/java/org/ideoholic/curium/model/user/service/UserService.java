@@ -501,23 +501,22 @@ public class UserService {
         return result;
     }
 
-	public boolean ChangePassword() {
-		
-		
-        boolean result;
+	public ResultResponse ChangePassword(UserAuthenticationDto dto) {
+		ResultResponse result = ResultResponse.builder().build();
+
         Login login = new Login();
-        String currentPassword = request.getParameter("currentpassword");
-        String newPassword = request.getParameter("newpassword");
-        String ConfirmNewPassword = request.getParameter("confirmpassword");
+        String currentPassword = dto.getCurrentPassword();
+        String newPassword = dto.getNewPassword();
+        String ConfirmNewPassword = dto.getConfirmNewPassword();
         
         login = new UserDAO().readPassword(currentPassword);
         
         if (login != null && newPassword.equals(ConfirmNewPassword)) {
             login.setPassword(newPassword);  
             login = new UserDAO().update(login);
-            result = true;
+			result.setSuccess(true);
         } else {
-            result = false;
+			result.setSuccess(false);
         }
         return result;
     }

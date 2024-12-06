@@ -118,7 +118,7 @@ public class UserAction {
 
 	@PostMapping("/changePassword")
 	public String changePassword() {
-		if (new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).ChangePassword()) {
+		if (userActionAdapter.ChangePassword()) {
 			return "passwordSuccess";
 		} else {
 			return "passwordFail";

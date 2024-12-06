@@ -12,4 +12,7 @@ import lombok.NoArgsConstructor;
 public class UserAuthenticationDto {
     private String userName;
     private String password;
+    private String currentPassword;
+    private String newPassword;
+    private String ConfirmNewPassword;
 }
