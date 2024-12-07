@@ -22,6 +22,6 @@ public class SendSMSDto {
 
     private String addClass;
     private String addSec;
-    private String SMSTempType;
+    private String smsTempType;
     private String message;
 }

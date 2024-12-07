@@ -112,7 +112,7 @@ public class SmsService {
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
 						
-						String SMSTempType = dto.getSMSTempType();
+						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
 						
 						resultSMS = sendSMS(numbers,message,SMSTempType);

@@ -29,10 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SmsAction {
 
 	@Autowired
-	HttpServletRequest request;
-	@Autowired
-	HttpServletResponse response;
-	@Autowired
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
 	YearActionAdapter yearActionAdapter;
