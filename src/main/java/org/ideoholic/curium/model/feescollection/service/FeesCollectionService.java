@@ -2348,8 +2348,9 @@ public class FeesCollectionService {
 		return result;
 	  }
 	
-	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
+	public ResultResponse readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
 		// Student student = new Student();
+		ResultResponse result = ResultResponse.builder().success(false).build();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
 		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
@@ -2449,8 +2450,10 @@ public class FeesCollectionService {
 					        }
 
 					System.out.println("Values Inserted Successfully");
-
-		return new parentsDetailsDAO().createMultiple(listParents);
+					if( new parentsDetailsDAO().createMultiple(listParents)) {
+						result = ResultResponse.builder().success(true).build();
+					};		
+		return result;
 	}
 	
 	
