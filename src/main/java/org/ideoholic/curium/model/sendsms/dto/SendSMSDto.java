@@ -19,4 +19,9 @@ public class SendSMSDto {
     private String messageBodyStaff;
 
     private List<StudentFeesReport> studentFeesReportList;
+
+    private String addClass;
+    private String addSec;
+    private String smsTempType;
+    private String message;
 }

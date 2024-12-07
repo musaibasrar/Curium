@@ -69,4 +69,20 @@ public class SmsActionAdapter {
 
         return result.isSuccess();
     }
+    public boolean sendAllSMS() {
+
+        SmsService smsService = new SmsService(request,response);
+
+        SendSMSDto dto = new SendSMSDto();
+        dto.setAddClass(request.getParameter("addclass"));
+        dto.setAddSec(request.getParameter("addsec"));
+        String SMSTempType = request.getParameter("messagebody");
+        dto.setSmsTempType(SMSTempType );
+        dto.setMessage(request.getParameter(SMSTempType+"var1")+":"+request.getParameter(SMSTempType+"var2")+":"+request.getParameter(SMSTempType+"var3")+":"+request.getParameter(SMSTempType+"var4"));
+
+        ResultResponse result = smsService.sendAllSMS(dto, httpSession.getAttribute("branchid").toString());
+
+
+        return result.isSuccess();
+    }
 }

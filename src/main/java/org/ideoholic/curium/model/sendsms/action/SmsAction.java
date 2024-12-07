@@ -29,10 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SmsAction {
 
 	@Autowired
-	HttpServletRequest request;
-	@Autowired
-	HttpServletResponse response;
-	@Autowired
 	StandardActionAdapter standardActionAdapter;
 	@Autowired
 	YearActionAdapter yearActionAdapter;
@@ -58,7 +54,7 @@ public class SmsAction {
 
 	@PostMapping("/sendAllSMS")
 	public String sendAllSMS() {
-		if (new SmsService(request, response).sendAllSMS()) {
+		if (smsActionAdapter.sendAllSMS()) {
 			return "successsms";
 		}
 		return "errorsms";
