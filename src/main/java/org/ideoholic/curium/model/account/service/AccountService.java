@@ -38,7 +38,8 @@ public class AccountService {
 	}
 
 
-	public boolean saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
+	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		Financialaccountingyear financialaccountingyear = new Financialaccountingyear();
 		
@@ -47,10 +48,13 @@ public class AccountService {
 			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getToDate()));
 			financialaccountingyear.setActive(DataUtil.emptyString(accountFinancialYearDto.getActive()));
 			financialaccountingyear.setBranchid(Integer.parseInt(branchId));
-			return new AccountDAO().create(financialaccountingyear, Integer.parseInt(branchId));
-		}
 
-		return false;
+			result.setSuccess(new AccountDAO().create(financialaccountingyear, Integer.parseInt(branchId)));
+
+			return result;
+		}
+		result.setSuccess(false);
+		return result;
 	}
 
 	public CurrentFinancialYearResponseDto getCurrentFinancialYear(String branchId) {
@@ -315,7 +319,9 @@ public class AccountService {
 	}
 
 
-	public boolean deleteAccount(AccountDeleteDto accountDeleteDto) {
+	public ResultResponse deleteAccount(AccountDeleteDto accountDeleteDto) {
+		ResultResponse result = ResultResponse.builder().build();
+
 		String[] accountIds = accountDeleteDto.getAccountIds();
 		if (accountIds != null) {
 			List<Integer> balanceIds = new ArrayList<Integer>();
@@ -329,9 +335,11 @@ public class AccountService {
 					new AccountDAO().deleteMultipleAccounts(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
 				}
 			}
-			return true;
+			result.setSuccess(true);
+			return result;
 		}
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 
@@ -372,7 +380,7 @@ public class AccountService {
 	}
 
 
-	public boolean saveReceipt(AccountReceiptDto accountReceiptDto, String branchId) {
+	public ResultResponse saveReceipt(AccountReceiptDto accountReceiptDto, String branchId) {
 
 		String draccountName = DataUtil.emptyString(accountReceiptDto.getDraccountName());
 		String craccountName = DataUtil.emptyString(accountReceiptDto.getCraccountName());
@@ -403,12 +411,14 @@ public class AccountService {
 		BigDecimal crAmountReceipt = new BigDecimal(crAmount);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountReceipt+" where accountdetailsid="+Integer.parseInt(craccountName);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
-		
+		return ResultResponse
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 	}
 
 
-	public boolean savePayment(AccountPaymentDto accountPaymentDto, String branchId) {
+	public ResultResponse savePayment(AccountPaymentDto accountPaymentDto, String branchId) {
 		
 		String draccountNamePayment = DataUtil.emptyString(accountPaymentDto.getDraccountName());
 		String craccountNamePayment = DataUtil.emptyString(accountPaymentDto.getCraccountName());
@@ -438,12 +448,15 @@ public class AccountService {
 		BigDecimal crAmount = new BigDecimal(crAmountPayment);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNamePayment);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		return ResultResponse
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 		
 	}
 
 
-	public boolean saveContra(AccountContraDto accountContraDto, String branchId) {
+	public ResultResponse saveContra(AccountContraDto accountContraDto, String branchId) {
 		
 		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
 		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
@@ -473,12 +486,14 @@ public class AccountService {
 		BigDecimal crAmount = new BigDecimal(drAmountContra);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameContra);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
-		
+		return ResultResponse
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 	}
 
 
-	public boolean saveJournal(AccountJournalDto accountJournalDto, String branchId) {
+	public ResultResponse saveJournal(AccountJournalDto accountJournalDto, String branchId) {
 		
 		String draccountNameJournal = DataUtil.emptyString(accountJournalDto.getDraccountNameJournal());
 		String craccountNameJournal = DataUtil.emptyString(accountJournalDto.getCraccountNameJournal());
@@ -525,7 +540,10 @@ public class AccountService {
 			updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameJournal);
 		}
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		return ResultResponse
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 		
 	}
 
@@ -917,7 +935,8 @@ public class AccountService {
 	}
 
 
-	public boolean cancelVoucher(CancelVoucherDto cancelVoucherDto) {
+	public ResultResponse cancelVoucher(CancelVoucherDto cancelVoucherDto) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		String[] receiptIds = cancelVoucherDto.getReceiptIds();
 		String voucher = cancelVoucherDto.getVoucher();
@@ -956,24 +975,27 @@ public class AccountService {
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==2) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==3) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==4) {
 					
 					// Dr
@@ -998,7 +1020,8 @@ public class AccountService {
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return  result;
 				}
 
 				
@@ -1006,8 +1029,8 @@ public class AccountService {
 			}
 			
 		}
-		
-		return false;
+		result.setSuccess(true);
+		return result;
 	}
 
 
@@ -1162,7 +1185,8 @@ public class AccountService {
 	}
 
 
-	public boolean getIncomeStatement(IncomeStatementDto incomeStatementDto, String strBranchId) {
+	public IncomeStatementResponseDto getIncomeStatement(IncomeStatementDto incomeStatementDto, String strBranchId) {
+		IncomeStatementResponseDto result = IncomeStatementResponseDto.builder().build();
 		
 		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getFromDate()));
 		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getToDate()));
@@ -1212,39 +1236,40 @@ public class AccountService {
 						}
 					}
 		//group 1
-		request.setAttribute("income", totalIncome);
-		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		result.setIncome(totalIncome);
+		result.setIncomeLedgersAccount(incomeLedgersAccount);
 		
 		//group 2
-		request.setAttribute("expenses", totalExpense);
-		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
-		
-		request.setAttribute("incometotallabel", "TOTAL");
-		request.setAttribute("expensetotallabel", "TOTAL");
-		request.setAttribute("incometotal", totalIncome);
-		request.setAttribute("expensetotal", totalExpense);
-		
-		request.setAttribute("fromdate", fromDate);
-		request.setAttribute("todate", toDate);
+		result.setExpenses(totalExpense);
+		result.setExpenseLedgersAccount(expenseLedgersAccount);
+
+		result.setIncomeTotalLabel("TOTAL");
+		result.setExpenseTotalLabel("TOTAL");
+		result.setIncomeTotal(totalIncome);
+		result.setExpenseTotal(totalExpense);
+
+		result.setFromDate(fromDate);
+		result.setToDate(toDate);
 		
 		
 		BigDecimal profit = totalIncome.subtract(totalExpense);
 		
 		if(profit.compareTo(BigDecimal.ZERO) > 0){
-			request.setAttribute("profitlabel", "Net Profit");
-			request.setAttribute("totalprofit", profit);
+			result.setProfitLabel("Net Profit");
+			result.setTotalProfit(profit);
 		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
-			request.setAttribute("losslabel", "Net Loss");
-			request.setAttribute("totalloss", profit.negate());
+			result.setLossLabel("Net Loss");
+			result.setTotalLoss(profit.negate());
 		}
 		
 		
 	}
-		return true;
+		result.setSuccess(true);
+		return result;
 	}
 	
-	public ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto, String branchId) {
-		ResultResponse result = ResultResponse.builder().build();
+	public SearchJournalEntriesResponseDto printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto, String branchId) {
+		SearchJournalEntriesResponseDto result = SearchJournalEntriesResponseDto.builder().build();
 
 		try {
 			List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
@@ -1278,8 +1303,8 @@ public class AccountService {
 					voucherMap.put(voucherEntry, twoAccounts);
 				}
 
-				result.setResultMap(voucherMap);
-				result.setMessage(accountIdName[1]);
+				result.setLedgerTransaction(voucherMap);
+				result.setLedgerName(accountIdName[1]);
 				result.setSuccess(true);
 				return result;
 			}
@@ -1600,7 +1625,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 1, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1608,7 +1633,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 2, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1616,7 +1641,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 3, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1624,7 +1649,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 4, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 		}

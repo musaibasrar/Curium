@@ -4,6 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.account.dto.PrintSearchJournalEntriesDto;
+import org.ideoholic.curium.model.account.dto.SearchJournalEntriesResponseDto;
 import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesDto;
 import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesResponseDto;
 import org.ideoholic.curium.model.account.service.AccountService;
@@ -37,11 +38,11 @@ public class MessSuppliersApiAction {
 
         return ResponseEntity.ok().build();
     }
-    private ResultResponse printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
+    private SearchJournalEntriesResponseDto printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
         AccountService accountService = new AccountService(request, null);
 
-        ResultResponse resultResponse = accountService.printSearchJournalEntries(dto, branchId);
-        return resultResponse;
+        SearchJournalEntriesResponseDto result = accountService.printSearchJournalEntries(dto, branchId);
+        return result;
     }
 
     @PostMapping("/searchSupplierPaymentDetails")
