@@ -31,32 +31,32 @@ public class MessSuppliersApiAction {
 
 
     @PostMapping("/printSearchSupplierPaymentDetails")
-    public ResponseEntity printSearchSupplierPaymentDetails(@RequestBody PrintSearchJournalEntriesDto dto) {
+    public ResponseEntity printSearchSupplierPaymentDetails(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId) {
         //TODO: Need to fix this after annotating AccountService with Service
-        printSearchJournalEntries(dto);
+        printSearchJournalEntries(dto, branchId);
 
         return ResponseEntity.ok().build();
     }
-    private ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto dto){
+    private ResultResponse printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
         AccountService accountService = new AccountService(request, null);
 
-        ResultResponse resultResponse = accountService.printSearchJournalEntries(dto);
+        ResultResponse resultResponse = accountService.printSearchJournalEntries(dto, branchId);
         return resultResponse;
     }
 
     @PostMapping("/searchSupplierPaymentDetails")
     public ResponseEntity<ResultResponse> searchSupplierPaymentDetails(@RequestHeader(value = "branchid") String branchId, @RequestBody SearchLedgerEntriesDto dto) {
         // TODO: Need to fix this after annotating AccountService with Service.
-        searchJournalEntries(dto);
+        searchJournalEntries(dto, branchId);
 
         ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
         return ResponseEntity.ok(result);
     }
 
-    private SearchLedgerEntriesResponseDto searchJournalEntries(SearchLedgerEntriesDto searchLedgerEntriesDto){
+    private SearchLedgerEntriesResponseDto searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
         AccountService accountService = new AccountService(request, null);
 
-        SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto);
+        SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto, branchId);
         return searchLedgerEntriesResponseDto;
     }
 
