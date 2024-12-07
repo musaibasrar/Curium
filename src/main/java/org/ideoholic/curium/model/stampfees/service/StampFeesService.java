@@ -102,8 +102,21 @@ public class StampFeesService {
 		String[] addClass = request.getParameterValues("classsearch");
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
+		
+		
+		int i = 0;
+		for (String classOne : addClass) {
+			
+			if(i>0) {
+				conClassStudying.append("' OR parents.Student.classstudying = '"+classOne+"");
+			}else {
+				conClassStudying.append(classOne);
+			}
+			
+			i++;
+		}
 
-			int i = 0;
+			/*int i = 0;
 			for (String classOne : addClass) {
 				
 				if(i>0) {
@@ -113,7 +126,7 @@ public class StampFeesService {
 				}
 				
 				i++;
-			}
+			}*/
 			
 		
 		/*if (!addSec.equalsIgnoreCase("")) {

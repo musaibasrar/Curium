@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Subject Master</title>
+<title>Teacher Performance</title>
 <link rel="stylesheet" href="/dolphin/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/dolphin/css/datePicker/demos.css">
 <style type="text/css">
@@ -501,7 +501,7 @@ for(Cookie cookie : cookies){
 										Classes&nbsp;&nbsp;&nbsp;
 										</td>
 						</tr>
-										
+										<td>
 										<c:set var="myList" value="<%= new java.util.ArrayList() %>" />
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
