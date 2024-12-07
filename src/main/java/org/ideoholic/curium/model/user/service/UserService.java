@@ -507,11 +507,11 @@ public class UserService {
         Login login = new Login();
         String currentPassword = dto.getCurrentPassword();
         String newPassword = dto.getNewPassword();
-        String ConfirmNewPassword = dto.getConfirmNewPassword();
+        String confirmNewPassword = dto.getConfirmNewPassword();
         
         login = new UserDAO().readPassword(currentPassword);
         
-        if (login != null && newPassword.equals(ConfirmNewPassword)) {
+        if (login != null && newPassword.equals(confirmNewPassword)) {
             login.setPassword(newPassword);  
             login = new UserDAO().update(login);
 			result.setSuccess(true);

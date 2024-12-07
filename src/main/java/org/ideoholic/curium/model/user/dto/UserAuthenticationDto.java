@@ -14,5 +14,5 @@ public class UserAuthenticationDto {
     private String password;
     private String currentPassword;
     private String newPassword;
-    private String ConfirmNewPassword;
+    private String confirmNewPassword;
 }
