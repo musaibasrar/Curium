@@ -175,4 +175,17 @@ public class UserActionAdapter {
 
         return responseDto.isSuccess();
     }
+
+    public boolean ChangePassword() {
+        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+
+        UserAuthenticationDto dto = new UserAuthenticationDto();
+        dto.setCurrentPassword(request.getParameter("currentpassword"));
+        dto.setNewPassword(request.getParameter("newpassword"));
+        dto.setConfirmNewPassword(request.getParameter("confirmpassword"));
+
+        ResultResponse resultResponse = userService.ChangePassword(dto);
+
+        return resultResponse.isSuccess();
+    }
 }
