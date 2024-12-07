@@ -432,6 +432,40 @@
 	});
 	
 	
+	$(function() {
+		$('#chckHeadClasses').click(function() {
+			var length = $('.chcktblClasses:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktblClasses:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktblClasses:checked').attr('checked', false);
+				} else {
+					$('.chcktblClasses:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktblClasses').click(function() {
+			var length = $('.chcktblClasses:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktblClasses:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblClasses:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+	
 </script>
 
 
@@ -540,14 +574,47 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Class &nbsp;</td>
 							<td>
-							<c:forEach items="${classdetailslist}" var="classdetailslist">
+								<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHeadClasses" />All
+							</label>
+									<label>
+							
+								<c:set var="myList" value="<%= new java.util.ArrayList() %>" />
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<c:set var="dummy" value="${myList.add(classdetailslist.section)}" />
+											<%-- <c:set target="${myList}" property="add" value="${classdetailslist.section}" /> --%>
+										</c:if>
+										</c:forEach>
+										
+								<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<c:if test="${empty myList}">
+											   <input type="checkbox" class="chcktblClasses"  name="classsearch" value="${classdetailslist.classdetails}--">
+										${classdetailslist.classdetails}
+											</c:if>
+											<c:if test="${not empty myList}">
+											<c:forEach var="item" items="${myList}"><label>
+										    	<input type="checkbox" class="chcktblClasses" name="classsearch" value="${classdetailslist.classdetails}--${item}">
+										${classdetailslist.classdetails} <c:out value="${item}"/></label>
+										</c:forEach>
+											</c:if>		
+										</c:if>	
+										</c:forEach>
+										</label>
+										</td>
+						</tr>
+							
+							
+							<%-- <c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}&nbsp;&nbsp;
 										</c:if>	
 										
 							</c:forEach>
-							<%-- <label> <select name="classsearch"
+							<label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -559,7 +626,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
+							</label> <label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -571,7 +638,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select>
-							</label>
+							</label> --%>
 						</tr>
 
 						<tr>
