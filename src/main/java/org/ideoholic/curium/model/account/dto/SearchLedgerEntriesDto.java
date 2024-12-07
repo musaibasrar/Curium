@@ -9,5 +9,4 @@ public class SearchLedgerEntriesDto {
     private String[] accountIdName;
     private String fromDate;
     private String toDate;
-    private Integer branchId;
 }

@@ -8,5 +8,4 @@ public class VoucherPrintDto {
     private String toDate;
     private String nextVoucher;
     private int voucherType;
-    private Integer branchId;
 }
