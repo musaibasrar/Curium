@@ -187,7 +187,9 @@ public class AccountActionAdapter {
 		exportTrialBalanceDto.setFromDate((String) httpSession.getAttribute("fromdatetb"));
 		exportTrialBalanceDto.setToDate((String) httpSession.getAttribute("todatetb"));
 
-		return accountService.exportTrialBalance(exportTrialBalanceDto,  httpSession.getAttribute("accountdetailsbalanceMap").toString());
+		ResultResponse resultResponse = accountService.exportTrialBalance(exportTrialBalanceDto,  httpSession.getAttribute("accountdetailsbalanceMap").toString());
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean printSearchJournalEntries() {
@@ -289,13 +291,17 @@ public class AccountActionAdapter {
 	public boolean downloadTrialBalance() {
 		AccountService accountService = new AccountService(request, response);
 
-		return accountService.downloadTrialBalance();
+		ResultResponse resultResponse = accountService.downloadTrialBalance();
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean downloadVoucherTransactions() {
 		AccountService accountService = new AccountService(request, response);
 
-		return accountService.downloadVoucherTransactions();
+		ResultResponse resultResponse = accountService.downloadVoucherTransactions();
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean searchSingleLedgerEntries() {

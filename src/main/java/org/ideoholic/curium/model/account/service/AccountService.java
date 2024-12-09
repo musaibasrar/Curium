@@ -1319,9 +1319,9 @@ public class AccountService {
 	}
 	
 	
-	public boolean exportTrialBalance(ExportTrialBalanceDto exportTrialBalanceDto, Object accountDetailsBalanceMap) {
+	public ResultResponse exportTrialBalance(ExportTrialBalanceDto exportTrialBalanceDto, Object accountDetailsBalanceMap) {
+		ResultResponse result = ResultResponse.builder().build();
 
-		boolean writeSucees = false;
 		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
 		
 		DecimalFormat df = new DecimalFormat("###.##");
@@ -1454,18 +1454,19 @@ public class AccountService {
 				workbook.write(out);
 				out.close();
 				workbook.close();
-				writeSucees = true;
+				result.setSuccess(true);
 				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+		result.setSuccess(false);
+		return result;
 		// getFile(name, path);
 	}
 
 
-	public boolean downloadTrialBalance() {
-		boolean result = false;
+	public ResultResponse downloadTrialBalance() {
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx");
@@ -1497,7 +1498,7 @@ public class AccountService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}
@@ -1801,8 +1802,8 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 	}
 
 
-	public boolean downloadVoucherTransactions() {
-		boolean result = false;
+	public ResultResponse downloadVoucherTransactions() {
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/vouchertransactions.xlsx");
@@ -1834,7 +1835,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}
