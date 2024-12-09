@@ -334,7 +334,7 @@ public class FeesCollectionService {
 			transactions.setVouchertype(1);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
-			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
 			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));

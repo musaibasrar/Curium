@@ -435,6 +435,7 @@ public class FeesCollectionActionAdapter {
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setDateOfFeesDetails(request.getParameter("dateoffeesDetails"));
         dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
+        dto.setNarrationReceipt(request.getParameter("narrationreceipt"));
 
         Receiptinfo receiptinfo = feesCollectionService.add(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(USERNAME).toString());
         return receiptinfo;
