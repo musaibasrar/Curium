@@ -2450,7 +2450,7 @@ public class FeesCollectionService {
 
 					System.out.println("Values Inserted Successfully");
 
-		return new parentsDetailsDAO().createMultiple(listParents);
+		return true;
 	}
 	
 	
