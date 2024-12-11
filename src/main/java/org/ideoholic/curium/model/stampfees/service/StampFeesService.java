@@ -466,8 +466,8 @@ public class StampFeesService {
         if(httpSession.getAttribute(BRANCHID)!=null){
         	String className = request.getParameter("classsearch");
         	String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
-        	
-            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+        	String categoryYear = request.getParameter("categoryyear");
+            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,categoryYear);
             httpSession.setAttribute("feescategory", feecategoryList);
   		
     		

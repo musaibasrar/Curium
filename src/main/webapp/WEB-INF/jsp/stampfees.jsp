@@ -782,7 +782,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Student Type &nbsp;</td>
 							<td width="90%"><label> 
 								<select name="studenttype" id="studenttype"
-									style="width: 120px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option value="Active" selected>Active</option>
 										<option value="All">All</option>
 								</select>
@@ -804,7 +804,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
 								<select name="classsearch" id="classsearch"
-									style="width: 120px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;"">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -817,7 +817,7 @@ for(Cookie cookie : cookies){
 
 							</label> <label> 
 									<select name="secsearch" id="secsearch"
-									style="width: 120px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -831,6 +831,30 @@ for(Cookie cookie : cookies){
 							</label>
 						</tr>
 
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr> 
+						
+						<tr>
+							<td class="alignRightFields">Year &nbsp;</td>
+							<td width="90%"><label> <select name="categoryyear" id="categoryyear" 
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+								</select>
+
+							</label> </td>
+						</tr>
+						
 						<tr>
 							<td><br /></td>
 
