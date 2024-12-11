@@ -63,7 +63,8 @@ public class StudentService {
 		Parents parents = StudentMapper.INSTANCE.mapParent(createStudentDto);
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
-
+		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
+		
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
@@ -86,7 +87,7 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(branchCode);
+		student.setStudentexternalid(currentAcademicYear[0]);
 		student.setBranchid(Integer.parseInt(branchId));
 		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
@@ -100,7 +101,6 @@ public class StudentService {
 
 		if (parents != null) {
 			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
-			String[] currentAcademicYear = strCurrentAcademicYear.split("/");
 			String setYear = null;
 			int yoa = Integer.parseInt(yearofAdmission[0]);
 			int ca = Integer.parseInt(currentAcademicYear[0]);

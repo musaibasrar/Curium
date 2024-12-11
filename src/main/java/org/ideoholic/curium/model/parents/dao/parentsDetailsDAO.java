@@ -40,13 +40,15 @@ public class parentsDetailsDAO {
 	            Query query = session.createQuery("from Student as student order by id desc");
 	            query.setMaxResults(1);
 	            student = (Student) query.uniqueResult();
-	          
-	            if(student!=null) {
-	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", student.getSid()+1));
-	            }else {
-	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", 1));
-	            }
 	            
+	            if(student!=null) {
+	            	String UID = student.getStudentexternalid();
+		            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+		            String studentExternalId = parents.getStudent().getStudentexternalid()+""+studentSeq;
+	            	parents.getStudent().setStudentexternalid(studentExternalId);
+	            }else {
+	            	parents.getStudent().setStudentexternalid("20243081");
+	            }
 	            
 	            session.save(parents);
 
