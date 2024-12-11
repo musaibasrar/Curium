@@ -4,41 +4,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
 import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EnquiryService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 
-	
-
-	public EnquiryService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-
 
 	public CertificateResponseDto getCertificate(CertificateDto dto) {
-		CertificateResponseDto result = CertificateResponseDto.builder().build();
+		CertificateResponseDto certificateResponseDto = CertificateResponseDto.builder().success(false).build();;
 		
 	    String name= dto.getName();
 	    String place= dto.getPlace();
 	    String mobile= dto.getMobile();
 	    String date= dto.getDate();;
-		result.setName(name);
-		result.setPlace(place);
-		result.setMobile(mobile);
-		result.setDate(date);
+	    certificateResponseDto.setName(name);
+	    certificateResponseDto.setPlace(place);
+	    certificateResponseDto.setMobile(mobile);
+	    certificateResponseDto.setDate(date);
 
 	    Enquiry enquiry = new Enquiry();
         
@@ -49,8 +38,8 @@ public class EnquiryService {
 	    enquiry.setMobileno(mobile);
 	          
                 enquiry =  new enquiryDAO().create(enquiry);
-				result.setSuccess(true);
-				return result;
+                certificateResponseDto.setSuccess(true);
+				return certificateResponseDto;
                 }
 
 		}
