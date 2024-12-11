@@ -8,10 +8,14 @@ import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -483,4 +487,10 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
     }
+
+	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles);
+		return result.isSuccess();
+	}
 }
