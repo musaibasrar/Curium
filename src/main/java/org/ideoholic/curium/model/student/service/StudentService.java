@@ -87,6 +87,7 @@ public class StudentService {
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
 		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
+		
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
