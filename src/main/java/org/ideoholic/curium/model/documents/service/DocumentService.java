@@ -646,5 +646,29 @@ public class DocumentService {
 		return characterPage;
 	}
 	
+	public String generateStudyCertificate() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String bonafidePage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			bonafidePage = "studycertificateprint";
+		}
+		
+		return bonafidePage;
+	}
+
+
+	public void printArticle() {
+
+		String taluka= request.getParameter("taluka");
+		String district= request.getParameter("district");
+		request.setAttribute("taluka", taluka);
+		request.setAttribute("district", district);
+		
+	}
+	
 	
 }

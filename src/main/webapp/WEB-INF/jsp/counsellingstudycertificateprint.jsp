@@ -74,7 +74,7 @@ for(Cookie cookie : cookies){
 </td></tr>
 <tr><td><p style="font-size:25px;"><i>This is to certify that Sri / Kum <span style="width:300px"><c:out value="${studentdetailsbonafide.student.name}" /></span>    <br>
 S/o/ D/o<span style="width:300px"><c:out value="${studentdetailsbonafide.fathersname}" /></span>     has studied 
-<br>from <span style="width:150px;"><c:out value="${studentdetailsbonafide.student.classstudying}" /></span>      Standard to <span style="width:150px;"><c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>     Standard in  our  <br>
+<br>from <span style="width:150px;"><c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" /><c:out value="${itempart[0]}" /></span>      Standard to <span style="width:150px;"><c:set var="itemparts" value="${fn:split(studentdetailsbonafide.student.classadmittedin, '--')}" /><c:out value="${itemparts[0]}" /></span>     Standard in  our  <br>
 institution from <span><c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>     to <span><c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>     <br>academic  years.<br>
 The mother tongue of the candidate is <span style="width:150px;"><c:out value="${studentdetailsbonafide.student.mothertongue}" /></span>     and his /her <br>
 admission number is <span><c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>     as per the Admission <br>register of the institution.

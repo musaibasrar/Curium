@@ -28,8 +28,8 @@
     text-align:center;
 }
         </style>
-	<script type="text/javascript" src="/littleangel/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/littleangel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -42,7 +42,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -60,7 +60,7 @@ for(Cookie cookie : cookies){
 	<table align="center">
 <tr>
 <td style="text-align:center;">
-<img src="/littleangel/images/Karnatakalogo.png" width="80" height="69"/>
+<img src="/roshan/images/Karnatakalogo.png" width="80" height="69"/>
 </td>
 </tr>
 <tr>
@@ -100,20 +100,25 @@ Rules for Issue Certificate, 2013]</b>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
+This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:400px;">
 <c:out value="${studentdetailsbonafide.student.name}" />
-</span>   D/O,S/O</td>
+</span>  </td>
 </tr>
 <tr>
-<td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
+<td style="overflow-wrap:break-word;"> D/O,S/O
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:450px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in
+</td>
+</tr>
+<tr>
+<td style="text-transform: uppercase;">
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${branchname}</b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HIGH SCHOOL,</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period Noted below:-
+Taluka<b> ${taluka} </b>District <b> ${district} </b> During the Period Noted below:-
 </td>
 </tr>
 </table>
@@ -190,7 +195,7 @@ passed
 </table>	
 <table align="center">
 <tr><td>
-Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
+Place: ${district}</td><td>Name:&nbsp;&nbsp;ASMA SUHA
 </td></tr>
 <tr>
 <td>
@@ -203,9 +208,12 @@ Date:<input name="dateofcr" type="text" class="textField" style="border: none;bo
 Head of Institution 
 </td>
 </tr>
+<tr><td><br></td></tr>
+<tr><td><br></td></tr>
+<tr><td><br></td></tr>
 <tr>
 <td>
-<br><br><br><br>
+<br><br><br><br><br><br><br>
 Place:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;"></span> 
 </td><td>
 Name:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:250px;"></span> 

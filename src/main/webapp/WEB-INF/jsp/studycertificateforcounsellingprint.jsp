@@ -28,15 +28,15 @@
     text-align:center;
 }
         </style>
-	<script type="text/javascript" src="/littleangel/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/littleangel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Study Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -61,7 +61,7 @@ for(Cookie cookie : cookies){
 </table>	
 <table align="center"><tr><td><p style="font-size:30px;"><i>This is to certify that Sri / Kum <span style="width:400px"><c:out value="${studentdetailsbonafide.student.name}" /></span>    <br>
 S/o/ D/o<span style="width:400px"><c:out value="${studentdetailsbonafide.fathersname}" /></span>     has studied 
-<br>from <span><c:out value="${studentdetailsbonafide.student.classstudying}" /></span>      Standard to <span><c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>     Standard in  our  <br>
+<br>from <span><c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" /><c:out value="${itempart[0]}" /></span>      Standard to <span><c:set var="itemparts" value="${fn:split(studentdetailsbonafide.student.classadmittedin, '--')}" /><c:out value="${itemparts[0]}" /></span>     Standard in  our  <br>
 institution from <span><c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>     to <span><c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>     <br>academic  years.<br>
 The mother tongue of the candidate is <span><c:out value="${studentdetailsbonafide.student.mothertongue}" /></span>     and his /her <br>
 admission number is <span><c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>     as per the Admission <br>register of the institution.
@@ -89,7 +89,7 @@ Mobile number:</h3></td></tr>
 <td><h2>Mobile Number: </h2></td>
 </tr>
 <tr>
-              <td align="center"><a id="print" href="/littleangel/DocumentsProcess/printStudyCertificateCounselling">Print</a></td>
+              <td align="center"><a id="print" href="/roshan/DocumentsProcess/printStudyCertificateCounselling">Print</a></td>
             </tr>
 </table>
 	</form>

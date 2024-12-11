@@ -28,15 +28,34 @@
     text-align:center;
 }
         </style>
-	<script type="text/javascript" src="/littleangel/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/littleangel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
+<script>
+        $(function() {
+
+    		
+    		$(".printtcstudent").button().click(function() {
+    			printtc();
+
+    		});
+
+    		
+    					
+    	});
+        function printtc(){
+            	var form1 = document.getElementById("form1");
+        		form1.action = "/roshan/DocumentsProcess/printAricleCertificateWithInput";
+        		form1.method = "POST";
+        		form1.submit();
+            }
+        </script>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/littleangel/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -50,11 +69,11 @@ for(Cookie cookie : cookies){
 %>
 <body style="font-size:20px;">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
+	<form id="form1" method="post" class="bodymargin">
 	<table align="center">
 <tr>
 <td style="text-align:center;">
-<img src="/littleangel/images/Karnatakalogo.png" width="80" height="69"/>
+<img src="/roshan/images/Karnatakalogo.png" width="80" height="69"/>
 </td>
 </tr>
 <tr>
@@ -102,12 +121,12 @@ This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in<b> ${branchname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period Noted below:-
+<b>HIGH SCHOOL,</b>Taluka<b> <input  type="text" name="taluka" id="taluka" style="width: 100px" /> </b>District <b> <input  type="text" name="district" id="district" style="width: 100px" /> </b> During the Period Noted below:-
 </td>
 </tr>
 </table>
@@ -234,7 +253,8 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
 </td></tr>
 <tr>
-              <td align="center"><a id="print" href="/littleangel/DocumentsProcess/printArticleCertificate">Print</a></td>
+<td><button class="printtcstudent"  >Print</button></td>
+              <!-- <td align="center"><a id="print" href="/roshan/DocumentsProcess/printArticleCertificate">Print</a></td> -->
             </tr>
 </table>
 	

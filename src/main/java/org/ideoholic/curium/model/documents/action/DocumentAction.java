@@ -220,4 +220,38 @@ public class DocumentAction {
 		return "counsellingstudycertificateprint";
 	}
 	
+	@GetMapping("/studentsDetailsStudyCertificate")
+	public String studentsDetailsStudyCertificate() {
+		new StandardService(request, response).viewClasses();
+		return "studentsdetailsstudycertificate";
+	}
+	
+	@PostMapping("/searchStudentsForStudyCertificate")
+	public String searchStudentsForStudyCertificate() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentsdetailsstudycertificate";
+	}
+	
+	@PostMapping("/GenerateStudyCertificate")
+	public String generateStudyCertificate() {
+		String result = new DocumentService(request, response).generateStudyCertificate();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+
+	@GetMapping("/printStudyCertificate")
+	public String printStudyCertificate() {
+		return "studycertprint";
+	}
+	
+	@PostMapping("/printAricleCertificateWithInput")
+	public String printArticleCertificateWithInput() {
+		new DocumentService(request, response).printArticle();
+		return "articlecertificateprint";
+	}
+	
 }

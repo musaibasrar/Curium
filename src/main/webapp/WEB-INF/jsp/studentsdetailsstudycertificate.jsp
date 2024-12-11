@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Article 371</title>
+<title>Students Details Study Certificate</title>
 <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
 <style type="text/css">
@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchStudentsForBonafide() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/DocumentsProcess/searchStudentsForArticle";
+		form1.action = "/roshan/DocumentsProcess/searchStudentsForStudyCertificate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -620,7 +620,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/roshan/DocumentsProcess/GenerateArticle" method="POST">
+	<form id="form1" action="/roshan/DocumentsProcess/GenerateStudyCertificate" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Article 371 Certificate</a></li>
+					<li><a href="#tabs-1">Study Certificate</a></li>
 
 				</ul>
 				<div id="tabs-1">
