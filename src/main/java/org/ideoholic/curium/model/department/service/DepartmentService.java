@@ -7,30 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class DepartmentService {
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    private HttpSession httpSession;
-    private String BRANCHID = "branchid";
-
-    public DepartmentService(HttpServletRequest request,
-                             HttpServletResponse response) {
-
-        this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-
-    }
-
-    public void addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
+    public ResultResponse addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
 
         Department department = new Department();
         if (branchId != null) {
@@ -43,6 +33,7 @@ public class DepartmentService {
             }
 
         }
+        return ResultResponse.builder().build();
     }
 
     public DepartmentResponseDto viewDepartment(String branchId) {
@@ -60,7 +51,7 @@ public class DepartmentService {
         return departmentResponseDto;
     }
 
-    public void deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
+    public ResultResponse deleteMultiple(DeleteMultipleDto deleteMultipleDto) {
         String[] departmentIds = deleteMultipleDto.getDepartmentIds();
         if (departmentIds != null) {
 
@@ -72,8 +63,9 @@ public class DepartmentService {
 
             }
             System.out.println("id length" + departmentIds.length);
-            new departmentDAO().deleteMultiple(ids);
+          ResultResponse.builder().success(new departmentDAO().deleteMultiple(ids)).build();
         }
+        return ResultResponse.builder().build();
     }
 
 }
