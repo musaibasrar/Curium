@@ -1,5 +1,22 @@
 package org.ideoholic.curium.model.student.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -28,7 +45,18 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.*;
+import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
+import org.ideoholic.curium.model.student.dto.CreateStudentDto;
+import org.ideoholic.curium.model.student.dto.PromoteMultipleDto;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
+import org.ideoholic.curium.model.student.dto.StudentDto;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.student.dto.StudentMapper;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
@@ -36,11 +64,6 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.math.BigDecimal;
-import java.util.*;
 
 @Service
 public class StudentService {
@@ -83,11 +106,60 @@ public class StudentService {
 			e.printStackTrace();
 		}
 
-		student.setArchive(0);
-		student.setPassedout(0);
-		student.setDroppedout(0);
-		student.setLeftout(0);
-		student.setStudentexternalid(currentAcademicYear[0]);
+		// Generate External Id
+		
+		if(student.getStream().equalsIgnoreCase("Admission")) {
+			 
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+			
+			if(studentDB!=null) {
+	        	String UID = studentDB.getStudentexternalid();
+	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+	            student.setStudentexternalid(studentExternalId);
+	        }
+			
+			student.setArchive(0);
+    		student.setPassedout(0);
+    		student.setDroppedout(0);
+    		student.setLeftout(0);
+			
+		}else if(student.getStream().equalsIgnoreCase("Registration")) {
+			
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
+			
+			
+			if(studentDB!=null) {
+				String UID = studentDB.getStudentexternalid();
+				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+				student.setStudentexternalid("REG"+String.format("%04d", studentSeq));
+            }else {
+            	student.setStudentexternalid("REG"+String.format("%04d", 1));
+            }
+			student.setArchive(1);
+			student.setPassedout(1);
+			student.setDroppedout(1);
+			student.setLeftout(1);
+		}else if(student.getStream().equalsIgnoreCase("Alumni")) {
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
+			
+			if(studentDB!=null) {
+				String UID = studentDB.getStudentexternalid();
+				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+				student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
+            }else {
+            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
+            }
+			student.setPromotedyear(student.getYearofadmission());
+			student.setYearofadmission("");
+			student.setArchive(0);
+			student.setPassedout(1);
+			student.setDroppedout(0);
+			student.setLeftout(0);
+		}
+		
+		//END of Generate External ID
+		
 		student.setBranchid(Integer.parseInt(branchId));
 		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
@@ -524,12 +596,12 @@ public class StudentService {
 		return result;
 	}
 
-	public Student updateStudent(MultipartFile[] listOfFiles, StudentDto studentDto, String strBranchId, String userId) {
+	public Student updateStudent(MultipartFile[] listOfFiles, StudentDto studentDto, String strBranchId, String userId, String strCurrentAcademicYear, String branchCode) {
 		Student student = StudentMapper.INSTANCE.mapStudent(studentDto);
 		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(studentDto);
-
+		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
 		String id = studentDto.getSid().toString();
 		String pid = studentDto.getPid().toString();
 
@@ -704,6 +776,62 @@ public class StudentService {
 			student.setSpecialcategory(newcateg);
 		}
 		//student.setArchive(0);
+		
+		
+		// Generate External Id
+		
+		
+			if(!studentDto.getStream().equalsIgnoreCase(studentDto.getApplicationtype())) {
+		
+				if("Admission".equalsIgnoreCase(student.getStream())) {
+					Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+					
+					if(studentDB!=null) {
+			        	String UID = studentDB.getStudentexternalid();
+			            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+			            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+			            student.setStudentexternalid(studentExternalId);
+			        }
+					
+					student.setArchive(0);
+		    		student.setPassedout(0);
+		    		student.setDroppedout(0);
+		    		student.setLeftout(0);
+				}else if ("Registration".equalsIgnoreCase(student.getStream())) {
+					Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
+					
+					
+					if(studentDB!=null) {
+						String UID = studentDB.getStudentexternalid();
+						int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+						student.setStudentexternalid("REG"+String.format("%04d", studentSeq));
+		            }else {
+		            	student.setStudentexternalid("REG"+String.format("%04d", 1));
+		            }
+					student.setArchive(1);
+					student.setPassedout(1);
+					student.setDroppedout(1);
+					student.setLeftout(1);
+				}else if ("Alumni".equalsIgnoreCase(student.getStream())) {
+					Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
+					
+					if(studentDB!=null) {
+						String UID = studentDB.getStudentexternalid();
+						int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+						student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
+		            }else {
+		            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
+		            }
+					student.setPromotedyear(student.getYearofadmission());
+					student.setYearofadmission("");
+					student.setArchive(0);
+					student.setPassedout(1);
+					student.setDroppedout(0);
+					student.setLeftout(0);
+				}
+			}	
+		// END of Generate External ID
+				
 		student.setBranchid(Integer.parseInt(strBranchId));
 		student.setUserid(studentDto.getUserid());
 

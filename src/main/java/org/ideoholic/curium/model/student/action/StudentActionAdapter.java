@@ -226,8 +226,10 @@ public class StudentActionAdapter {
         studentDto.setStudentDoc4Update(request.getParameter("studentdoc4update"));
         studentDto.setStudentDoc5Update(request.getParameter("studentdoc5update"));
         studentDto.setStudentexternalid(request.getParameter("studentexternalid"));
+        studentDto.setApplicationtype(request.getParameter("applicationtype"));
+        studentDto.setStream(request.getParameter("stream"));
 
-        Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("branchcode").toString());
 
         String stId = student.getSid().toString();
 		int branchId = student.getBranchid();

@@ -196,22 +196,34 @@
 <script type="text/javascript">
 	
 	
-	function yesCheck(id) {
-
-		if (document.getElementById(id).checked == true) {
-			var splitId = id.split(':');
-			document.getElementById('no:'+splitId[1]).checked = false;
+		function yesCheck(id) {
+		
+			if (document.getElementById(id).checked == true) {
+				var splitId = id.split(':');
+				document.getElementById('no:'+splitId[1]).checked = false;
+				document.getElementById('maybe:'+splitId[1]).checked = false;
+			}
+		
+		}
+		function noCheck(id) {
+		
+			if (document.getElementById(id).checked == true) {
+				var splitId = id.split(':');
+				document.getElementById('yes:'+splitId[1]).checked = false;
+				document.getElementById('maybe:'+splitId[1]).checked = false;
+			}
+		
+		}
+		function maybeCheck(id) {
+		
+			if (document.getElementById(id).checked == true) {
+				var splitId = id.split(':');
+				document.getElementById('yes:'+splitId[1]).checked = false;
+				document.getElementById('no:'+splitId[1]).checked = false;
+			}
+		
 		}
 
-	}
-	function noCheck(id) {
-
-		if (document.getElementById(id).checked == true) {
-			var splitId = id.split(':');
-			document.getElementById('yes:'+splitId[1]).checked = false;
-		}
-
-	}
 	
 	 function enterOtherSpecialCategory() {
 	        var distlistitem = document.getElementById("specialcategory");
@@ -515,6 +527,7 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
                     <input type="hidden" value="<c:out value="${student.leftout}"/>" id="leftout" name="leftout">
+                    <input type="hidden" value="<c:out value="${student.stream}"/>" id="applicationtype" name="applicationtype">
                     </td>
                     </tr>
 				
@@ -523,9 +536,31 @@ for(Cookie cookie : cookies){
 					<table width="70%" border="0" align="center" id="table1">
 
 
+						
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Application Type&nbsp;</td>
+							<td>Admission<input type="checkbox"
+								value="Admission" name="stream" id="yes:at" onclick="yesCheck(this.id);"
+								${student.stream == 'Admission' ? 'checked' : ''} />&nbsp;
+								&nbsp;Registration<input type="checkbox" value="Registration" name="stream"
+								id="no:at" onclick="noCheck(this.id);"
+								${student.stream == 'Registration' ? 'checked' : ''} />&nbsp;
+								&nbsp;Alumni<input type="checkbox" value="Alumni" name="stream"
+								id="maybe:at" onclick="maybeCheck(this.id);"
+								${student.stream == 'Alumni' ? 'checked' : ''} />
+
+							</td>
+							</tr>
+							
 						<tr>
 							<td><br /></td>
 						</tr>

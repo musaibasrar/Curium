@@ -843,4 +843,27 @@ public List<Parents> getReferredList(List<Integer> sidList) {
 		 }
 		return DetailsList;
 	}
+
+public Student readUniqueStudent(String HQLquery) {
+	
+	Student student = new Student();
+    try {
+        transaction = session.beginTransaction();
+     //   Query HQLquery = session.createQuery(query);
+       // student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+        
+        Query query = session.createQuery(HQLquery);
+        query.setMaxResults(1);
+        student = (Student) query.uniqueResult();
+        
+        transaction.commit();
+    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        
+        hibernateException.printStackTrace();
+    }finally {
+		HibernateUtil.closeSession();
+	 }
+    return student;
+}
+
 }
