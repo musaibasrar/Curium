@@ -7,5 +7,4 @@ public class VoucherPrintDto {
     private String fromDate;
     private String toDate;
     private String nextVoucher;
-    private int voucherType;
 }

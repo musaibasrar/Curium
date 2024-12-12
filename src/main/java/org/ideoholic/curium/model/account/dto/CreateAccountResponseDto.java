@@ -11,4 +11,5 @@ public class CreateAccountResponseDto {
     private List accountDetailsBalance;
     private List accountGroupMaster;
     private boolean success;
+    private String message;
 }

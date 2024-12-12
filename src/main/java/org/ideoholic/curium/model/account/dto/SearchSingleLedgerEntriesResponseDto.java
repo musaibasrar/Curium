@@ -8,7 +8,7 @@ import java.util.Map;
 @Data
 @Builder
 public class SearchSingleLedgerEntriesResponseDto {
-    private Map ledgerTransaction;
+    private Map<VoucherEntrytransactions,String> ledgerTransaction;
     private String ledgerName;
     private String accountId;
     private String fromDate;
