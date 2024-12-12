@@ -37,18 +37,6 @@ public class parentsDetailsDAO {
 		 try {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
-	            Query query = session.createQuery("from Student as student order by id desc");
-	            query.setMaxResults(1);
-	            student = (Student) query.uniqueResult();
-	            
-	            if(student!=null) {
-	            	String UID = student.getStudentexternalid();
-		            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-		            String studentExternalId = parents.getStudent().getStudentexternalid()+""+studentSeq;
-	            	parents.getStudent().setStudentexternalid(studentExternalId);
-	            }else {
-	            	parents.getStudent().setStudentexternalid("20243081");
-	            }
 	            
 	            session.save(parents);
 	            transaction.commit();
