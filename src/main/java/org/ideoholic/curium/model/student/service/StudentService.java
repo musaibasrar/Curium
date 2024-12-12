@@ -115,7 +115,7 @@ public class StudentService {
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
 	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }
 			
@@ -146,9 +146,9 @@ public class StudentService {
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-				student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", studentSeq+1));
+				student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
             }else {
-            	student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", 1));
+            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
             }
 			student.setPromotedyear(student.getYearofadmission());
 			student.setYearofadmission("");
