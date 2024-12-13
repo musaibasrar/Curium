@@ -107,7 +107,7 @@ public class LibraryDAO {
 	public void updatebook(String uid, List<Integer> ids, String date) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Book set status = 'Issued' , bookHolder = '"+uid+"' , startdate = '"+date+"' where bid IN (:ids)");
+			Query query= session.createSQLQuery("update book set status = 'Issued' , bookHolder = '"+uid+"' , startdate = '"+date+"' where bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -138,7 +138,7 @@ public class LibraryDAO {
 	public void updatebook( List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Book set status = 'Available' , bookHolder = ' ' where bid IN (:ids)");
+			Query query= session.createSQLQuery("update book set status = 'Available' , bookHolder = ' ' where bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -175,7 +175,7 @@ public class LibraryDAO {
 			String shelf) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"' where bid ='"+bid+"'");
+			Query query= session.createSQLQuery("update book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"' where bid ='"+bid+"'");
 			query.executeUpdate();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
