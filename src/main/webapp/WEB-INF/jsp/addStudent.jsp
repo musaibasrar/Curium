@@ -508,6 +508,7 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -516,6 +517,16 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}
+
+	}
+	function maybeCheck(id) {
+
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('no:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -748,6 +759,24 @@ $(document).ready(function() {
 
 				<div id="fragment-1">
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
+					<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft">Application Type&nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Admission<input
+								type="checkbox" value="Admission" name="stream" id="yes:at"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
+								type="checkbox" value="Registration" name="stream" id="no:at"
+								onclick="noCheck(this.id)" />
+								&nbsp; &nbsp;Alumni<input
+								type="checkbox" value="Alumni" name="stream" id="maybe:at"
+								onclick="maybeCheck(this.id)" />
+							</td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1169,7 +1198,7 @@ $(document).ready(function() {
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Admission/PassedOut Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission"

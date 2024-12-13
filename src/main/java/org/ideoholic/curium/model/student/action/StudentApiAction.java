@@ -70,7 +70,7 @@ public interface StudentApiAction {
     ResponseEntity<ParentListResponseDto> archiveMultiple(@RequestBody StudentIdsDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId);
 
     @RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    ResponseEntity<StudentDetailsResponseDto> updateStudent(@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestPart("studentDto") StudentDto student, @RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId);
+    ResponseEntity<StudentDetailsResponseDto> updateStudent(@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestPart("studentDto") StudentDto student, @RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "branchcode") String branchCode);
 
     @PostMapping("/updateStudentDetails")
     ResponseEntity<StudentDetailsResponseDto> updateStudentDetails(@RequestParam(value = "id") String studentId, @RequestHeader(value = "branchid") String branchId);

@@ -242,6 +242,8 @@ public class StudentDto implements java.io.Serializable {
     private String classstudy;
     private String secstudying;
     private String classadm;
+    
+    private String applicationtype;
 
     public Date getCreateddate() {
         return DateUtil.indiandateParser(this.createddate);
