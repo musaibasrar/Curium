@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/alfalahschool/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alfalahschool/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/abc/css/font-awesome.css">
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/alfalahschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/alfalahschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/alfalahschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/alfalahschool/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/alfalahschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/alfalahschool/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/alfalahschool/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/alfalahschool/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -429,7 +429,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalahschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,22 +454,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -482,38 +482,38 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/alfalahschool/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				<a target="mainFrame" href="/alfalahschool/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            				 <a target="mainFrame" href="/alfalahschool/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/alfalahschool/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/alfalahschool/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -524,7 +524,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/alfalahschool/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
             			</td>
             		</tr>
                 </table>
@@ -537,43 +537,43 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            				 <a target="mainFrame" href="/alfalahschool/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            				<a target="mainFrame" href="/alfalahschool/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/alfalahschool/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            				<a target="mainFrame" href="/alfalahschool/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/alfalahschool/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/alfalahschool/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/alfalahschool/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr> -->
                 </table>
@@ -585,48 +585,48 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            				 <a target="mainFrame" href="/alfalahschool/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            				<a target="mainFrame" href="/alfalahschool/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            				 <a target="mainFrame" href="/alfalahschool/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            				 <a target="mainFrame" href="/alfalahschool/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            				<a target="mainFrame" href="/alfalahschool/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
             		<tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            				<a target="mainFrame" href="/alfalahschool/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            				 <a target="mainFrame" href="/alfalahschool/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            				<a target="mainFrame" href="/alfalahschool/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            				 <a target="mainFrame" href="/alfalahschool/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>
                 </table>
@@ -638,17 +638,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -660,22 +660,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/alfalahschool/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/alfalahschool/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/alfalahschool/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -687,7 +687,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
             			</td>
             		</tr>
                 </table>
@@ -698,12 +698,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            				 <a target="mainFrame" href="/alfalahschool/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            				 <a target="mainFrame" href="/alfalahschool/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
             			</td>
             		</tr>
                 </table>
@@ -740,27 +740,27 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/alfalahschool/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            				 <a target="mainFrame" href="/alfalahschool/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/abc/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+								<a target="mainFrame" href="/alfalahschool/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/alfalahschool/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr> -->
                 </table>
@@ -773,22 +773,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/Backup&Restore" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/alfalahschool/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/changePassword" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/alfalahschool/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/alfalahschool/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr>
                 </table>
@@ -796,17 +796,17 @@ for(Cookie cookie : cookies){
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/abc/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/abc/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/alfalahschool/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
@@ -817,22 +817,22 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            				<a target="mainFrame" href="/alfalahschool/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
             		</tr>
             	</table>
@@ -846,22 +846,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/alfalahschool/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -874,22 +874,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            				<a target="mainFrame" href="/alfalahschool/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            				 <a target="mainFrame" href="/alfalahschool/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
@@ -902,12 +902,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/alfalahschool/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            				 <a target="mainFrame" href="/alfalahschool/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
             		</tr>
             	</table>
@@ -918,12 +918,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            				 <a target="mainFrame" href="/alfalahschool/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/abc/sendemail" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/alfalahschool/sendemail" style="font-size: 12px;">Email</a>
             			</td>
             		</tr>
                 </table>
@@ -934,7 +934,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/abc/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            				<a target="mainFrame" href="/alfalahschool/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
             			</td>
             		</tr>
                 </table>
@@ -946,12 +946,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/abc/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/alfalahschool/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				     <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/abc/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+                              <a target="mainFrame" href="/alfalahschool/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>
@@ -961,13 +961,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            				 <a target="mainFrame" href="/alfalahschool/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            				 <a target="mainFrame" href="/alfalahschool/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
             			
             		</tr>
@@ -979,13 +979,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				 <a target="mainFrame" href="/alfalahschool/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>
@@ -996,13 +996,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/alfalahschool/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            				 <a target="mainFrame" href="/alfalahschool/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
             			</td>
             			
             		</tr>
@@ -1014,12 +1014,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
+            				 <a target="mainFrame" href="/alfalahschool/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            				 <a target="mainFrame" href="/alfalahschool/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
             			</td>
             		</tr>
                 </table>
@@ -1031,7 +1031,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            				 <a target="mainFrame" href="/alfalahschool/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
             			</td>
             		</tr>
                 </table>
@@ -1042,12 +1042,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
+            				 <a target="mainFrame" href="/alfalahschool/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
+            				 <a target="mainFrame" href="/alfalahschool/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
             			</td>
             		</tr>
                 </table>
@@ -1058,12 +1058,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
+            				 <a target="mainFrame" href="/alfalahschool/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
+            				 <a target="mainFrame" href="/alfalahschool/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
             			</td>
             		</tr>
                 </table>
