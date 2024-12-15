@@ -623,6 +623,28 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 							</tr>
+							
+							<tr>
+						<td>&nbsp;</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Mode of Payment &nbsp;&nbsp;</td>
+							<td ><label> <select name="modeofpayment"
+									id="modeofpayment" style="width: 240px">
+										<option selected></option>
+										<option value="Bank Transfer">Bank</option>
+										<option value="Cash">Cash</option>
+								</select>
+
+							</label></td>
+							
+						</tr>
+							
+							
 						<tr>
 						<td>&nbsp;</td>
 						</tr>

@@ -1467,6 +1467,7 @@ public boolean getRPStatement() {
 
 			String incomeLedgersRP = getLedgerAccountId("incomeledgerrp"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			String expenseLedgersRP = getLedgerAccountId("expenseledgerrp"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			String bankexpensesRP = getLedgerAccountId("bankexpensesrp"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			String[] strArray = incomeLedgersRP.split(":");
 			List<Integer> arrayIncomeLedgersRP = new ArrayList<>();
@@ -1478,6 +1479,12 @@ public boolean getRPStatement() {
 			List<Integer> arrayExpenseLedgersRP = new ArrayList<>();
 			for (String s : strArrayEx) {
 	        	arrayExpenseLedgersRP.add(Integer.parseInt(s));
+	        }
+			
+			String[] strArrayBankExpenses = bankexpensesRP.split(":");
+			List<Integer> arrayBankExpensesRP = new ArrayList<>();
+			for (String s : strArrayBankExpenses) {
+				arrayBankExpensesRP.add(Integer.parseInt(s));
 	        }
 	        
 			List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
@@ -1492,12 +1499,12 @@ public boolean getRPStatement() {
 			//Group 2
 			BigDecimal totalExpenseCash = BigDecimal.ZERO;
 			BigDecimal totalExpenseBank = BigDecimal.ZERO;
+			BigDecimal totalBankExpenses = BigDecimal.ZERO;
 			Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
 			
 			
-			
 			for (Accountdetails accountDetails : accountsDetails) {
-				
+				System.out.println("accountDetails Id "+accountDetails.getAccountdetailsid());
 				List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				
 				if(!voucherTransactions.isEmpty()) {
@@ -1532,6 +1539,10 @@ public boolean getRPStatement() {
 							totalExpenseCash = totalExpenseCash.add(totalAmountEx[0]);
 							totalExpenseBank = totalExpenseBank.add(totalAmountEx[1]);
 							expenseLedgersAccount.put(accountDetails, totalAmountEx[0].add(totalAmountEx[1]));
+							int accountId = accountDetails.getAccountdetailsid();
+							if(arrayBankExpensesRP.contains(accountId)) {
+								totalBankExpenses = totalBankExpenses.add(totalAmountEx[1]);
+							}
 							break;
 					default:
 							
@@ -1568,7 +1579,7 @@ public boolean getRPStatement() {
 		request.setAttribute("losslabel", "Net Loss");
 		request.setAttribute("totalloss", profit.negate());
 	}
-	
+	request.setAttribute("totalbankexpenses", totalBankExpenses);
 	//Calculate halqa total income
 	
 			String halqaSharePaid = getLedgerAccountId("halqasharepaid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -2626,5 +2637,79 @@ public boolean getRPStatement() {
 			System.out.println(""+e);
 		}
 		return result;
+	}
+	
+public boolean viewVouchersPayment(int voucherType) {
+
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			String collectionCategory = new feesCategoryDAO().getFeesCategoryName(voucherEntry.getFundsource());
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid())+"--"+DataUtil.emptyString(collectionCategory);
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdate"));
+  		request.setAttribute("todateselected", request.getParameter("todate"));
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public boolean viewVouchersPrintPayment(int voucherType) {
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(fromDate, toDate, financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			String collectionCategory = new feesCategoryDAO().getFeesCategoryName(voucherEntry.getFundsource());
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid())+"--"+DataUtil.emptyString(collectionCategory);
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
+		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
+		request.setAttribute("todateselected", request.getParameter("todateselected"));
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public boolean getLedgerBalance() {
+		
+		try {
+		List<Accountdetailsbalance> accountDetailsBalances = new ArrayList<Accountdetailsbalance>();
+		accountDetailsBalances = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("ledgerbalances", accountDetailsBalances);
+		return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

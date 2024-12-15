@@ -329,6 +329,15 @@
 						</tr>
 						<c:set var="sequenceCounter" value="${sequenceCounter + 1}" scope="page"/>
 					</c:forEach>
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${sequenceCounter}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="Bank Charges" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalbankexpenses}" />
+							</td>
+
+						</tr>
 				</tbody>
 			</table>
 			

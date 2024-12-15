@@ -3,6 +3,7 @@
  */
 package org.ideoholic.curium.model.feescollection.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +58,12 @@ public class feesCollectionDAO {
 			 	
 			 	//Receipts
 			 	for (VoucherEntrytransactions transactions : transactionsList) {
+			 		int crAccountId = transactions.getCraccountid();
+			 		if(crAccountId!=0 && transactions.getCramount().compareTo(BigDecimal.ZERO)>0) {
 			 		transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
 					session.save(transactions);
 					transactionsId[i]=transactions.getTransactionsid().intValue();
+			 		}
 					i++;
 				}
 			 	
