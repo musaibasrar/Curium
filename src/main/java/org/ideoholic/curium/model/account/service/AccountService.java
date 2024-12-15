@@ -2712,4 +2712,56 @@ public boolean viewVouchersPayment(int voucherType) {
 			return false;
 		}
 	}
-}
+
+	public void getDayBook() {
+		AccountService accountService = new AccountService(request, response);
+
+		String strFromDate = DateUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
+		String strToDate = DateUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		Map<VoucherEntrytransactions,String> voucherEntryTransactionsMap = new HashMap<VoucherEntrytransactions,String>();
+		
+		String toDate = null;
+		
+		if(strToDate == null) {
+			toDate = strFromDate;
+		}else {
+			toDate = strToDate;
+		}
+		
+		
+		if(httpSession.getAttribute(BRANCHID).toString()!=null) {
+			
+					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				//Group 1
+				BigDecimal totalIncome = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				//Group 2
+				BigDecimal totalExpense = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				
+				
+				List<VoucherEntrytransactions> allVoucherTransactions = new AccountDAO().getAllVoucherEntryTransactionsBetweenDates(strFromDate, toDate, branchId);
+				
+				for (VoucherEntrytransactions voucherEntrytransactions : allVoucherTransactions) {
+					String drAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getDraccountid());
+					String crAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getCraccountid());
+					
+					voucherEntryTransactionsMap.put(voucherEntrytransactions, drAccountName+":"+crAccountName);
+				}
+				
+	}
+		request.setAttribute("voucherentrytransactions", voucherEntryTransactionsMap);
+		
+	}
+}	
+	

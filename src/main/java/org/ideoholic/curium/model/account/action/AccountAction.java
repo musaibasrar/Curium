@@ -453,4 +453,10 @@ public class AccountAction {
 			return "printledgerbalance";
 		}
 	
+	@PostMapping("/daybook")
+	public String dayBook() {
+		new AccountService(request, response).getDayBook();
+		return "daybook";
+	}
+	
 }
