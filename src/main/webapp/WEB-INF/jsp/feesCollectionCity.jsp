@@ -848,6 +848,58 @@
 	            		document.getElementById("markaz_"+res[1]).value = 0;
 	            		document.getElementById(sfsid).checked = false; 
 	            	}
+            	}else if (feesCat === "Halqa Spl Income") {
+            		document.getElementById("muqami_"+res[1]).readOnly = true;
+            		document.getElementById("markaz_"+res[1]).readOnly = true;
+            		document.getElementById("city_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("halqa_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("halqa_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Iaanat Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		document.getElementById("markaz_"+res[1]).readOnly = true;
+            		document.getElementById("city_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Zakah Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		document.getElementById("markaz_"+res[1]).readOnly = true;
+            		document.getElementById("city_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Other Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		document.getElementById("markaz_"+res[1]).readOnly = true;
+            		document.getElementById("city_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
             	}else{
             	
 	            	if(payment>=1){

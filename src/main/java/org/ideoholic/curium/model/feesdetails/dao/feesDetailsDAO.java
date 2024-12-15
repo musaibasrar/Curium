@@ -276,7 +276,7 @@ public class feesDetailsDAO {
             }
     }
 
-		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
+		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher, String updateMiscDrAccount, String updateMiscCrAccount, String cancelMiscVoucher) {
 			
 			boolean result = false;
 
@@ -291,20 +291,31 @@ public class feesDetailsDAO {
                     	queryStudentFS.executeUpdate();
 					}
                     
-                    if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
+                    if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null) {
 	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
 	        			updateReceiptDr.executeUpdate();
 	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
 	        			updateReceiptCr.executeUpdate();
 	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
 	        			cancelReceiptVoucherQuery.executeUpdate();
-	        			
+                    }
+                    
+                    if(updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
 	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
 	        			updateJournalDr.executeUpdate();
 	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
 	        			updateJournalCr.executeUpdate();
 	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
 	        			cancelJournalVoucherQuery.executeUpdate();
+                    }
+                    
+                    if(updateMiscDrAccount!=null && updateMiscCrAccount!=null && cancelMiscVoucher != null) {
+	                    Query updateReceiptDr = session.createQuery(updateMiscDrAccount);
+	        			updateReceiptDr.executeUpdate();
+	        			Query updateReceiptCr = session.createQuery(updateMiscCrAccount);
+	        			updateReceiptCr.executeUpdate();
+	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelMiscVoucher);
+	        			cancelReceiptVoucherQuery.executeUpdate();
                     }
                     
                     transaction.commit();

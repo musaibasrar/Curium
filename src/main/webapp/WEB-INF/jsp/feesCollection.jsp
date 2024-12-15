@@ -835,13 +835,57 @@
             	if (feesCat === "Markaz Spl Income") {
             		document.getElementById("muqami_"+res[1]).readOnly = true;
             		document.getElementById("halqa_"+res[1]).readOnly = true;
-            		
             		if(payment>=1){
             		duePayment.value = payment;
             		document.getElementById("markaz_"+res[1]).value = payment;
             		}else if(payment<1 || isNaN(payment)){
 	            		duePayment.value = 0;
 	            		document.getElementById("markaz_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Halqa Spl Income") {
+            		document.getElementById("muqami_"+res[1]).readOnly = true;
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("halqa_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("halqa_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Iaanat Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Zakah Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
+	            		document.getElementById(sfsid).checked = false; 
+	            	}
+            	}else if (feesCat === "Other Khususi") {
+            		document.getElementById("halqa_"+res[1]).readOnly = true;
+            		
+            		if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment;
+            		}else if(payment<1 || isNaN(payment)){
+	            		duePayment.value = 0;
+	            		document.getElementById("muqami_"+res[1]).value = 0;
 	            		document.getElementById(sfsid).checked = false; 
 	            	}
             	}else{
@@ -1159,13 +1203,14 @@ for(Cookie cookie : cookies){
 							<%-- <input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})"> --%>
 							</td>
 							<td class="dataText" align="center">
-								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+								<%-- onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" --%>
+								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" style="border: none;">
 							</td>
 							<td class="dataText" align="center">
-								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" style="border: none;">
 							</td>
 							<td class="dataText" >
-								<input type="text"  value="0" id="markaz_${status.index}" name="markazamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;width: 100px;">
+								<input type="text"  value="0" id="markaz_${status.index}" name="markazamount" style="border: none;width: 100px;" readonly>
 							</td>
 							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							<!-- <td class="dataText" align="center">

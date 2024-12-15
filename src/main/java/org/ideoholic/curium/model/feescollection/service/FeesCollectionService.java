@@ -353,10 +353,11 @@ public class FeesCollectionService {
 						updateCrAccountList.add(updateCrAccountHalqa);
 						
 						//City
-						
+						double cityShare = DataUtil.parseDouble(cityPaying[Integer.parseInt(studentSfsIdamount[1])]);
+						if(cityShare>0) {
 					    if(cityPaying != null) {
 					    	
-							double cityShare = DataUtil.parseDouble(cityPaying[Integer.parseInt(studentSfsIdamount[1])]);
+							
 							int crFeesCity = getLedgerAccountId("city"+feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 							
 							VoucherEntrytransactions transactionsCity = new VoucherEntrytransactions();
@@ -381,13 +382,14 @@ public class FeesCollectionService {
 							String updateCrAccountCity="update Accountdetailsbalance set currentbalance=currentbalance+"+cityShare+" where accountdetailsid="+crFeesCity;
 							updateCrAccountList.add(updateCrAccountCity);
 					    }
-					    
+						}
 					    
 					    //Markaz
 						
+					    double markazShare = DataUtil.parseDouble(markazPaying[Integer.parseInt(studentSfsIdamount[1])]);
 					    if(markazPaying != null) {
 					    	
-							double markazShare = DataUtil.parseDouble(markazPaying[Integer.parseInt(studentSfsIdamount[1])]);
+							
 							
 							if(markazShare>0) {
 								
@@ -416,6 +418,34 @@ public class FeesCollectionService {
 							updateCrAccountList.add(updateCrAccountMarkaz);
 							
 					    }
+					    }
+					    
+					    //Direct Payment
+					    double amountPayingDirect = DataUtil.parseDouble(amountPaying[Integer.parseInt(studentSfsIdamount[1])]);
+					    if(MaqamiShare<1 && halqaShare<1 && cityShare <1 && markazShare<1 && amountPayingDirect>1) {
+					    	int crFeesDirectPayment = getLedgerAccountId(feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					    	
+							VoucherEntrytransactions transactionsDirectPayment = new VoucherEntrytransactions();
+							
+							transactionsDirectPayment.setDraccountid(drAccount);
+							transactionsDirectPayment.setCraccountid(crFeesDirectPayment);
+							transactionsDirectPayment.setDramount(new BigDecimal(amountPayingDirect));
+							transactionsDirectPayment.setCramount(new BigDecimal(amountPayingDirect));
+							transactionsDirectPayment.setVouchertype(1);
+							transactionsDirectPayment.setTransactiondate(receiptInfo.getDate());
+							transactionsDirectPayment.setEntrydate(DateUtil.todaysDate());
+							transactionsDirectPayment.setNarration(Receiptnarration+" Details: Towards Collection:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+							transactionsDirectPayment.setCancelvoucher("no");
+							transactionsDirectPayment.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+							transactionsDirectPayment.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							transactionsDirectPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+							transactionsList.add(transactionsDirectPayment);			
+							
+							String updateDrAccountDirectPayment ="update Accountdetailsbalance set currentbalance=currentbalance+"+amountPayingDirect+" where accountdetailsid="+drAccount;
+							updateDrAccountList.add(updateDrAccountDirectPayment);
+							
+							String updateCrAccountDirectPayment="update Accountdetailsbalance set currentbalance=currentbalance+"+amountPayingDirect+" where accountdetailsid="+crFeesDirectPayment;
+							updateCrAccountList.add(updateCrAccountDirectPayment);
 					    }
 				}
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
@@ -589,6 +619,7 @@ public class FeesCollectionService {
 			
 			String rid = request.getParameter("receiptid");
 			String jid = request.getParameter("journalid");
+			String miscid = request.getParameter("miscid");
 			int feesReceiptId = DataUtil.parseInt(request.getParameter("id"));
 			boolean result=false;
 			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(feesReceiptId);
@@ -597,27 +628,63 @@ public class FeesCollectionService {
 	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 			String todaysDate = formatter.format(now);
 			
-			if(rid !=null && jid !=null ) {
+			String updateReceiptDrAccount = null;
+			String updateReceiptCrAccount = null;
+			String cancelReceiptVoucher = null;
+			String updateJournalDrAccount = null;
+			String updateJournalCrAccount = null;
+			String cancelJournalVoucher = null;
+			String updateMiscDrAccount = null;
+			String updateMiscCrAccount = null;
+			String cancelMiscVoucher = null;
+			
+			if(rid !=null && jid !=null && miscid !=null ) {
 				
 				int receiptId = DataUtil.parseInt(rid);
 				int journalId = DataUtil.parseInt(jid);
-			
+				int miscId = DataUtil.parseInt(miscid);
 			// Cancel Voucher
 
+				
+				//First Partition
+				if(receiptId!=0) {
+					
+				
 				VoucherEntrytransactions receiptVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(receiptId));
 				
-			
-				String updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
-				String updateReceiptCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getCramount()+" where accountdetailsid="+receiptVoucherTransaction.getCraccountid();
-
-				String cancelReceiptVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+receiptId;
 				
-			
+				// Dr
+				Accountdetails accountDetailsReceiptDr = new AccountDAO().getAccountDetails(receiptVoucherTransaction.getDraccountid());
+				if(accountDetailsReceiptDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsReceiptDr.getAccountGroupMaster().getAccountgroupid()==5) {
+					updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
+				}else {
+					updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
+				}
+				
+				//Cr
+				
+				Accountdetails accountDetailsReceiptCr = new AccountDAO().getAccountDetails(receiptVoucherTransaction.getCraccountid());
+				
+				if(accountDetailsReceiptCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsReceiptCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsReceiptCr.getAccountGroupMaster().getAccountgroupid()==4) {
+					updateReceiptCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getCramount()+" where accountdetailsid="+receiptVoucherTransaction.getCraccountid();
+				}else {
+					updateReceiptCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptVoucherTransaction.getCramount()+" where accountdetailsid="+receiptVoucherTransaction.getCraccountid();
+				}
+				
+				cancelReceiptVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+receiptId;
+				
+				}
+				
+				
+				//Second Partition
+				
+				if(journalId!=0) {
+					
+				
 				VoucherEntrytransactions journalVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(journalId));
 				
 				// Dr
 				Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getDraccountid());
-				String updateJournalDrAccount= null;
 				if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
 					updateJournalDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getDramount()+" where accountdetailsid="+journalVoucherTransaction.getDraccountid();
 				}else {
@@ -627,7 +694,6 @@ public class FeesCollectionService {
 				//Cr
 				
 				Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getCraccountid());
-				String updateJournalCrAccount= null;
 				
 				if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
 					updateJournalCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getCramount()+" where accountdetailsid="+journalVoucherTransaction.getCraccountid();
@@ -635,15 +701,42 @@ public class FeesCollectionService {
 					updateJournalCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+journalVoucherTransaction.getCramount()+" where accountdetailsid="+journalVoucherTransaction.getCraccountid();
 				}
 				
-				String cancelJournalVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+journalId;
+				cancelJournalVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+journalId;
+				}
+				
+				// Third Partition
+				if(miscId!=0) {
+				VoucherEntrytransactions miscVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(miscid));
+				
+				// Dr
+				Accountdetails accountDetailsMiscDr = new AccountDAO().getAccountDetails(miscVoucherTransaction.getDraccountid());
+
+				if(accountDetailsMiscDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsMiscDr.getAccountGroupMaster().getAccountgroupid()==5) {
+					updateMiscDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+miscVoucherTransaction.getDramount()+" where accountdetailsid="+miscVoucherTransaction.getDraccountid();
+				}else {
+					updateMiscDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+miscVoucherTransaction.getDramount()+" where accountdetailsid="+miscVoucherTransaction.getDraccountid();
+				}
+				
+				//Cr
+				
+				Accountdetails accountDetailsMiscCr = new AccountDAO().getAccountDetails(miscVoucherTransaction.getCraccountid());
+				
+				if(accountDetailsMiscCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsMiscCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsMiscCr.getAccountGroupMaster().getAccountgroupid()==4) {
+					updateMiscCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+miscVoucherTransaction.getCramount()+" where accountdetailsid="+miscVoucherTransaction.getCraccountid();
+				}else {
+					updateMiscCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+miscVoucherTransaction.getCramount()+" where accountdetailsid="+miscVoucherTransaction.getCraccountid();
+				}
+				
+					cancelMiscVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+journalId;
+				}
 				
 			
 			// End Cancel Voucher
 			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, updateReceiptDrAccount, updateReceiptCrAccount, cancelReceiptVoucher,
-					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher);
+					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher,  updateMiscDrAccount, updateMiscCrAccount, cancelMiscVoucher);
 		}else {
 			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
-					null, null, null);
+					null, null, null, null, null, null);
 		}
 		
 			request.setAttribute("cancelreceiptresult", result);
