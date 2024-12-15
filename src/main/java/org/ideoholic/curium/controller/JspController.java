@@ -436,4 +436,9 @@ public class JspController {
 	public String voucherCancelSuccess() {
 		return "vouchercancelsuccess";
 	}
+	
+	@GetMapping("/daybook")
+	public String dayBook() {
+		return "daybook";
+	}
 }
