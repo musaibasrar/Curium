@@ -316,7 +316,7 @@ public class StudentActionAdapter {
         request.setAttribute("classadm", responseDto.getClassAdm());
         request.setAttribute("secadm", responseDto.getSecAdm());
         httpSession.setAttribute("parents", responseDto.getParents());
-        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+        httpSession.setAttribute("feesstructure", responseDto.getStudentOtherFeesStructure());
         httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
         httpSession.setAttribute("dueamount", responseDto.getDueAmount());
         httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
