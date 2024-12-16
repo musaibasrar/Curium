@@ -17,15 +17,10 @@ import java.io.IOException;
 public class AccountApiActionImpl implements AccountApiAction {
 
     @Autowired
-    private AccountActionAdapter accountActionAdapter;
-
-    @Autowired
     private YearService yearService;
 
     @Autowired
     private AccountService accountService;
-
-    public String ERRORPAGE = "error";
 
     public ResponseEntity<IncomeStatementResponseDto> incomeStatement(IncomeStatementDto dto, String branchId) {
         IncomeStatementResponseDto result = accountService.getIncomeStatement(dto, branchId);
@@ -163,7 +158,7 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateAccountResponseDto> deleteAccount(AccountDeleteDto dto, String branchId) {//Error only in IDE logs
+    public ResponseEntity<CreateAccountResponseDto> deleteAccount(AccountDeleteDto dto, String branchId) {
         CreateAccountResponseDto result = accountService.deleteAccount(dto);
         if (result.isSuccess()) {
             return createAccount(branchId);
@@ -224,7 +219,7 @@ public class AccountApiActionImpl implements AccountApiAction {
         return ResponseEntity.ok(result);
     }
 
-    public ResponseEntity<ResultResponse> downloadTrialBalance() {//Error
+    public ResponseEntity<ResultResponse> downloadTrialBalance() {
         ResultResponse result = accountService.downloadTrialBalance();
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
@@ -233,7 +228,7 @@ public class AccountApiActionImpl implements AccountApiAction {
     }
 
 
-    public ResponseEntity<ResultResponse> exportTrialBalance(ExportTrialBalanceDto dto) {//Error
+    public ResponseEntity<ResultResponse> exportTrialBalance(ExportTrialBalanceDto dto) {
         ResultResponse result = accountService.exportTrialBalance(dto);
         return ResponseEntity.ok(result);
     }
