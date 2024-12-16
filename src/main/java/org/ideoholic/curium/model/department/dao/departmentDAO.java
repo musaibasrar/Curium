@@ -74,18 +74,20 @@ public class departmentDAO {
 	}
 
 
-	public void deleteMultiple(List ids) {
+	public boolean  deleteMultiple(List ids) {
+        boolean result = false;
 		try {
             transaction = session.beginTransaction();
             Query query = session.createQuery("delete from Department where depid IN (:ids)");
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
+            result= true;
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
         }finally {
 			HibernateUtil.closeSession();
 		}
-		
+		return result;
 	}
 }

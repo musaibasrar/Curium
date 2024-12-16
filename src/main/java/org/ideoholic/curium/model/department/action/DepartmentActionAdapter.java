@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.department.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
@@ -19,17 +20,19 @@ public class DepartmentActionAdapter {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private DepartmentService departmentService;
     private String BRANCHID = "branchid";
 
-    public void addDepartment() {
-        DepartmentService departmentService = new DepartmentService(request, response);
+    public boolean addDepartment() {
         AddDepartmentDto addDepartmentDto = new AddDepartmentDto();
 
         addDepartmentDto.setDepartment(request.getParameter("department"));
-        departmentService.addDepartment(addDepartmentDto, httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse result= departmentService.addDepartment(addDepartmentDto, httpSession.getAttribute(BRANCHID).toString());
+
+        return result.isSuccess();
     }
     public boolean viewDepartment(){
-        DepartmentService departmentService = new DepartmentService(request, response);
         DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
         departmentResponseDto = departmentService.viewDepartment(httpSession.getAttribute(BRANCHID).toString());
 
@@ -37,12 +40,11 @@ public class DepartmentActionAdapter {
 
         return departmentResponseDto.isSuccess();
     }
-    public void deleteMultiple() {
-        DepartmentService departmentService = new DepartmentService(request,response);
+    public boolean deleteMultiple() {
         DeleteMultipleDto deleteMultipleDto = new DeleteMultipleDto();
         deleteMultipleDto.setDepartmentIds(request.getParameterValues("departmentIDs"));
-        departmentService.deleteMultiple(deleteMultipleDto);
-
+       ResultResponse result = departmentService.deleteMultiple(deleteMultipleDto);
+         return result.isSuccess();
     }
 
 }
