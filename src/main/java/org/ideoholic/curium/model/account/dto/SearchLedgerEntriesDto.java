@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class SearchLedgerEntriesDto {
     private String accountDetails;
-    private String[] accountIdName;
     private String fromDate;
     private String toDate;
 }

@@ -25,9 +25,8 @@ public class MessSuppliersApiAction {
     @Autowired
     private MessSuppliersService messSuppliersService;
 
-    //TODO:Request to be removed after the migration of AccountService.
     @Autowired
-    private HttpServletRequest request;
+    private AccountService accountService;
 
 
 
@@ -38,11 +37,10 @@ public class MessSuppliersApiAction {
 
         return ResponseEntity.ok().build();
     }
-    private SearchJournalEntriesResponseDto printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
-        AccountService accountService = new AccountService(request, null);
+    private ResponseEntity<SearchJournalEntriesResponseDto> printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
 
         SearchJournalEntriesResponseDto result = accountService.printSearchJournalEntries(dto, branchId);
-        return result;
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/searchSupplierPaymentDetails")
@@ -54,11 +52,10 @@ public class MessSuppliersApiAction {
         return ResponseEntity.ok(result);
     }
 
-    private SearchLedgerEntriesResponseDto searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
-        AccountService accountService = new AccountService(request, null);
+    private ResponseEntity<SearchLedgerEntriesResponseDto> searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
 
         SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto, branchId);
-        return searchLedgerEntriesResponseDto;
+        return ResponseEntity.ok(searchLedgerEntriesResponseDto);
     }
 
     @GetMapping("/supplierPaymentReport")
