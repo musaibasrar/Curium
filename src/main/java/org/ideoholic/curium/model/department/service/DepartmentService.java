@@ -30,6 +30,9 @@ public class DepartmentService {
 
             if (!department.getDepartmentname().equalsIgnoreCase("")) {
                 department = new departmentDAO().create(department);
+               return  ResultResponse.builder().success(true).build();
+
+
             }
 
         }
@@ -63,7 +66,7 @@ public class DepartmentService {
 
             }
             System.out.println("id length" + departmentIds.length);
-          ResultResponse.builder().success(new departmentDAO().deleteMultiple(ids)).build();
+          return ResultResponse.builder().success(new departmentDAO().deleteMultiple(ids)).build();
         }
         return ResultResponse.builder().build();
     }

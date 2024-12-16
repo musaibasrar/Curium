@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.department.action;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dto.AddDepartmentDto;
 import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 public class DepartmentApiActionImpl implements DepartmentApiAction {
 
     @Autowired
@@ -23,13 +25,13 @@ public class DepartmentApiActionImpl implements DepartmentApiAction {
 
     public ResponseEntity<DepartmentResponseDto> departmentView(String branchId) {
        DepartmentResponseDto result = departmentService.viewDepartment(branchId);
-        System.out.println("IN action's department view");
+         log.debug("IN action's department view");
         return ResponseEntity.ok(result);
     }
 
     public ResponseEntity<ResultResponse> addDepartment(AddDepartmentDto dto,String branchId) {
         ResultResponse result =departmentService.addDepartment(dto,branchId);
-        System.out.println("IN action's add department");
+        log.debug("IN action's add department");
         return ResponseEntity.ok(result);
     }
 
