@@ -3,29 +3,29 @@ package org.ideoholic.curium.model.library.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ideoholic.curium.model.diary.service.Diaryservice;
-import org.ideoholic.curium.model.documents.service.DocumentService;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.library.service.LibraryService;
-import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping("/LibraryProcess")
 public class LibraryAction {
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
+	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
+	
+	@Autowired
+	private LibraryActionAdapter libraryActionAdapter;
+	
+	@Autowired
+	private DocumentActionAdapter documentActionAdapter;
 	
 	public String error ="error";
 
@@ -37,71 +37,71 @@ public class LibraryAction {
 	
 	@PostMapping("/saveBook")
 	public String saveBook() {
-		new LibraryService(request, response).addBook();
+		libraryActionAdapter.addBook();
 		return "bookSave";
 
 	}
 	
 	@RequestMapping(value = "/viewbooks", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewbooks() {
-		new LibraryService(request, response).viewBooks();
+		libraryActionAdapter.viewBooks();
 		return "Viewbook";
 
 	}
 	
 	@PostMapping("/deleteRecord")
 	public String deleteRecord() {
-		new LibraryService(request, response).deleteRecord();
-		new LibraryService(request, response).viewBooks();
+		libraryActionAdapter.deleteRecord();
+		libraryActionAdapter.viewBooks();
 		return "Viewbook";
 	}
 	
 	@RequestMapping(value = "/issuebooks", method = { RequestMethod.GET, RequestMethod.POST })
 	public String issuebooks() {
-		if(new DocumentService(request, response).transferCertificate()){
-			new LibraryService(request, response).viewBooksAvailable();
-		return "issuebook";
+		if (documentActionAdapter.transferCertificate()) {
+			libraryActionAdapter.viewBooksAvailable();
+			return "issuebook";
 		}
-		 return error;
+		return error;
 	}
 	
 	@PostMapping("/bookIssuedStudent")
 	public String bookIssuedStudent() {
-		new LibraryService(request, response).updateBook();
+		libraryActionAdapter.updateBook();
 		return "bookIssued";
 
 	}
 	
 	@GetMapping("/returnbooks")
 	public String bookReturnStudent() {
-		new DocumentService(request, response).transferCertificate();
+		documentActionAdapter.transferCertificate();
 		return "bookReturn";
 
 	}
 	
 	@PostMapping("/searchbooks")
 	public String searchbooks() {
-		new LibraryService(request, response).searchstudentBook();
+		libraryActionAdapter.searchStudentBook();
 		return "bookReturn";
 
 	}
 	
 	@PostMapping("/bookReturnByStudent")
 	public String bookReturnByStudent() {
-		new LibraryService(request, response).bookReturnByStudent();
+		libraryActionAdapter.bookReturnByStudent();
 		return "bookReturnedSuccessfully";
 
 	}
 	
 	@GetMapping("/bookdetail")
 	public String bookdetail() {
-		new LibraryService(request, response).viewBookdetails();
+		libraryActionAdapter.viewBookdetails();
 		return "book_details";
 	}
 	
 	@PostMapping("/updateBookDetails")
 	public String updateEmployeeDetails() {
-		if (new LibraryService(request, response).viewBookdetails()) {
+		if (libraryActionAdapter.viewBookdetails()) {
 			return "book_update";
 		} else {
 			return "viewAll";
@@ -111,7 +111,7 @@ public class LibraryAction {
 	@PostMapping("/updateBook")
 	public String updateBook() {
 
-		new LibraryService(request, response).updateBookitems();
+		libraryActionAdapter.updateBookitems();
 		return viewbooks();
 	}
 
