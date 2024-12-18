@@ -7,15 +7,9 @@ import org.ideoholic.curium.model.enquiry.service.EnquiryService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/api/v1/EnquiryProcess")
+@RestController
 public class EnquiryApiActionImpl implements EnquiryApiAction {
 	
 	@Autowired
@@ -23,15 +17,17 @@ public class EnquiryApiActionImpl implements EnquiryApiAction {
 	@Autowired
 	private EnquiryService enquiryService;
 	
-	@GetMapping("/newEnquiry")
-	public ResponseEntity<ResultResponse> NewEnquiryDetail(@RequestHeader(value = "branchid") String branchId) {
+	
+	public ResponseEntity<ResultResponse> newEnquiryDetail(String branchId) {
 		ResultResponse result = standardService.viewClasses(branchId);
 		return ResponseEntity.ok(result);
 	}
 
-	@PostMapping("/genarateNewCertificate")
-	public ResponseEntity<CertificateResponseDto> genarateNewCertificate(@RequestBody CertificateDto dto) {
+
+	public ResponseEntity<CertificateResponseDto> genarateNewCertificate(CertificateDto dto) {
 		CertificateResponseDto result = enquiryService.getCertificate(dto);
 		return ResponseEntity.ok(result);
 	}
+
+	
 	}
