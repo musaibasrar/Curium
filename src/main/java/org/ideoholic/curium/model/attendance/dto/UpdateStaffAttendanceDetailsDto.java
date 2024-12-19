@@ -6,5 +6,4 @@ import lombok.Data;
 public class UpdateStaffAttendanceDetailsDto {
     private String[] attendanceIds;
     private String[] studentAttendanceStatus;
-    private String currentAcademicYear;
 }
