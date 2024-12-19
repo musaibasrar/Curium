@@ -9,33 +9,45 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "enquiry")
 public class Enquiry implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
+	private int branchId;
+	private int userId;
+	private String academicYear;
 	private String name;
 	private String fathername;
 	private String mothername;
 	private String admissionclass;
-	private Date dateofbirth;
 	private String address;
 	private String mobileno;
 	private String siblingstudy;
-	private String lastschool;
 	private Date createddate;
 	private String status;
 	
 	public Enquiry() {
 	}
-	public Enquiry(int id, String name, String fathername, String mothername, String admissionclass, Date dateofbirth,
-			String address, String mobileno, String siblingstudy, String lastschool) {
+
+	public Enquiry(int id, int branchId, int userId,  String academicYear, String name, String fathername, String mothername,
+			String admissionclass, 
+			String address, String mobileno, String siblingstudy,
+			 Date createddate,String status) {
 		this.id = id;
+		this.branchId = branchId;
+		this.userId = userId;
+		this.academicYear = academicYear;
 		this.name = name;
 		this.fathername = fathername;
 		this.mothername = mothername;
 		this.admissionclass = admissionclass;
-		this.dateofbirth = dateofbirth;
 		this.address = address;
 		this.mobileno = mobileno;
 		this.siblingstudy = siblingstudy;
-		this.lastschool = lastschool;
+		this.createddate = createddate;
+		this.status = status;
 	}
 	
 	@Column(name = "id")
@@ -83,14 +95,6 @@ public class Enquiry implements java.io.Serializable{
 		this.admissionclass = admissionclass;
 	}
 	
-	@Column(name = "dateofbirth", length = 45)
-	public Date getDateofbirth() {
-		return dateofbirth;
-	}
-	
-	public void setDateofbirth(Date dateofbirth) {
-		this.dateofbirth = dateofbirth;
-	}
 	
 	@Column(name = "address", length = 45)
 	public String getAddress() {
@@ -110,7 +114,7 @@ public class Enquiry implements java.io.Serializable{
 		this.mobileno = mobileno;
 	}
 	
-	@Column(name = "siblingstudy", length = 45)
+	@Column(name = "siblings", length = 45)
 	public String getSiblingstudy() {
 		return siblingstudy;
 	}
@@ -119,13 +123,50 @@ public class Enquiry implements java.io.Serializable{
 		this.siblingstudy = siblingstudy;
 	}
 	
-	@Column(name = "lastschool", length = 45)
-	public String getLastschool() {
-		return lastschool;
+	
+	@Column(name = "created", length = 45)
+	public Date getCreateddate() {
+		return createddate;
+	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
 	}
 	
-	public void setLastschool(String lastschool) {
-		this.lastschool = lastschool;
+	@Column(name = "status", length = 45)
+	public String getStatus() {
+		return status;
 	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Column(name = "branchid")
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	@Column(name = "userid")
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	@Column(name = "academicyear", length = 45)
+	public String getAcademicYear() {
+		return academicYear;
+	}
+
+	public void setAcademicYear(String academicYear) {
+		this.academicYear = academicYear;
+	}
+	
+	
     
 }
