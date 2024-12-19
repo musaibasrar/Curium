@@ -9,8 +9,8 @@ import java.util.Map;
 @Data
 @Builder
 public class SearchLedgerEntriesResponseDto {
-    private Map ledgerTransaction;
-    private String[] ledgerName;
+    private Map<VoucherEntrytransactions,String> ledgerTransaction;
+    private String ledgerName;
     private String accountId;
     private String fromDate;
     private String toDate;

@@ -4,6 +4,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.account.dto.PrintSearchJournalEntriesDto;
+import org.ideoholic.curium.model.account.dto.SearchJournalEntriesResponseDto;
 import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesDto;
 import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesResponseDto;
 import org.ideoholic.curium.model.account.service.AccountService;
@@ -24,9 +25,8 @@ public class MessSuppliersApiAction {
     @Autowired
     private MessSuppliersService messSuppliersService;
 
-    //TODO:Request to be removed after the migration of AccountService.
     @Autowired
-    private HttpServletRequest request;
+    private AccountService accountService;
 
 
 
@@ -37,11 +37,10 @@ public class MessSuppliersApiAction {
 
         return ResponseEntity.ok().build();
     }
-    private ResultResponse printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
-        AccountService accountService = new AccountService(request, null);
+    private ResponseEntity<SearchJournalEntriesResponseDto> printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
 
-        ResultResponse resultResponse = accountService.printSearchJournalEntries(dto, branchId);
-        return resultResponse;
+        SearchJournalEntriesResponseDto result = accountService.printSearchJournalEntries(dto, branchId);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/searchSupplierPaymentDetails")
@@ -53,11 +52,10 @@ public class MessSuppliersApiAction {
         return ResponseEntity.ok(result);
     }
 
-    private SearchLedgerEntriesResponseDto searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
-        AccountService accountService = new AccountService(request, null);
+    private ResponseEntity<SearchLedgerEntriesResponseDto> searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
 
         SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto, branchId);
-        return searchLedgerEntriesResponseDto;
+        return ResponseEntity.ok(searchLedgerEntriesResponseDto);
     }
 
     @GetMapping("/supplierPaymentReport")

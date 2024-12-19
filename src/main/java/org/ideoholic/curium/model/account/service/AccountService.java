@@ -10,10 +10,10 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -22,35 +22,32 @@ import java.util.*;
 import java.util.Map.Entry;
 
 @Slf4j
+@Service
 public class AccountService {
-	
-	 	private HttpServletRequest request;
+
+		@Autowired
 	    private HttpServletResponse response;
-	    private HttpSession httpSession;
-	    private String BRANCHID = "branchid";
 	    
 	    private static final int BUFFER_SIZE = 4096;
-	
-	public AccountService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
 
 
-	public boolean saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
+	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		Financialaccountingyear financialaccountingyear = new Financialaccountingyear();
 		
 		if(branchId!=null){
-			financialaccountingyear.setFinancialstartdate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getToDate()));
+			financialaccountingyear.setFinancialstartdate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getFromDate()));
 			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(accountFinancialYearDto.getToDate()));
 			financialaccountingyear.setActive(DataUtil.emptyString(accountFinancialYearDto.getActive()));
 			financialaccountingyear.setBranchid(Integer.parseInt(branchId));
-			return new AccountDAO().create(financialaccountingyear, Integer.parseInt(branchId));
-		}
 
-		return false;
+			result.setSuccess(new AccountDAO().create(financialaccountingyear, Integer.parseInt(branchId)));
+
+			return result;
+		}
+		result.setSuccess(false);
+		return result;
 	}
 
 	public CurrentFinancialYearResponseDto getCurrentFinancialYear(String branchId) {
@@ -152,9 +149,9 @@ public class AccountService {
 		return resultResponse;
 	}
 
-	public ResultResponse saveAccount(AccountDto accountDto, String branchId) {
+	public CreateAccountResponseDto saveAccount(AccountDto accountDto, String branchId) {
 
-	    ResultResponse result = null;
+		CreateAccountResponseDto result = null;
 		String newSubGroup =  DataUtil.emptyString(accountDto.getNewSubGroup());
 		String newSSGroup =  DataUtil.emptyString(accountDto.getNewSSGroup());
 		String subGroupName =  DataUtil.emptyString(accountDto.getSubGroupName());
@@ -218,7 +215,7 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(branchId));
-					result = ResultResponse.builder()
+					result = CreateAccountResponseDto.builder()
 						.message(new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance))
 						.success(true).build();
 					
@@ -276,16 +273,16 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(branchId));
-					result = ResultResponse.builder()
+					result = CreateAccountResponseDto.builder()
 						.message(new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance))
 						.success(true).build();
 		}}else {
 				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountname())) {
-					result = ResultResponse.builder()
+					result = CreateAccountResponseDto.builder()
 						.message("Error-Account Name already exists")
 						.success(false).build();
 				}else if(accountCode.equalsIgnoreCase(accountDetailsCheck.getAccountcode())) {
-					result = ResultResponse.builder()
+					result = CreateAccountResponseDto.builder()
 						.message("Error-Account Code already exists")
 						.success(false).build();
 				}
@@ -315,7 +312,9 @@ public class AccountService {
 	}
 
 
-	public boolean deleteAccount(AccountDeleteDto accountDeleteDto) {
+	public CreateAccountResponseDto deleteAccount(AccountDeleteDto accountDeleteDto) {
+		CreateAccountResponseDto result = CreateAccountResponseDto.builder().build();
+
 		String[] accountIds = accountDeleteDto.getAccountIds();
 		if (accountIds != null) {
 			List<Integer> balanceIds = new ArrayList<Integer>();
@@ -329,9 +328,11 @@ public class AccountService {
 					new AccountDAO().deleteMultipleAccounts(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
 				}
 			}
-			return true;
+			result.setSuccess(true);
+			return result;
 		}
-		return false;
+		result.setSuccess(false);
+		return result;
 	}
 
 
@@ -372,7 +373,7 @@ public class AccountService {
 	}
 
 
-	public boolean saveReceipt(AccountReceiptDto accountReceiptDto, String branchId) {
+	public CreateVoucherResponseDto saveReceipt(AccountReceiptDto accountReceiptDto, String branchId) {
 
 		String draccountName = DataUtil.emptyString(accountReceiptDto.getDraccountName());
 		String craccountName = DataUtil.emptyString(accountReceiptDto.getCraccountName());
@@ -403,12 +404,14 @@ public class AccountService {
 		BigDecimal crAmountReceipt = new BigDecimal(crAmount);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountReceipt+" where accountdetailsid="+Integer.parseInt(craccountName);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
-		
+		return CreateVoucherResponseDto
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 	}
 
 
-	public boolean savePayment(AccountPaymentDto accountPaymentDto, String branchId) {
+	public CreateVoucherResponseDto savePayment(AccountPaymentDto accountPaymentDto, String branchId) {
 		
 		String draccountNamePayment = DataUtil.emptyString(accountPaymentDto.getDraccountName());
 		String craccountNamePayment = DataUtil.emptyString(accountPaymentDto.getCraccountName());
@@ -438,12 +441,15 @@ public class AccountService {
 		BigDecimal crAmount = new BigDecimal(crAmountPayment);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNamePayment);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		return CreateVoucherResponseDto
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 		
 	}
 
 
-	public boolean saveContra(AccountContraDto accountContraDto, String branchId) {
+	public CreateVoucherResponseDto saveContra(AccountContraDto accountContraDto, String branchId) {
 		
 		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
 		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
@@ -473,12 +479,14 @@ public class AccountService {
 		BigDecimal crAmount = new BigDecimal(drAmountContra);
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameContra);
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
-		
+		return CreateVoucherResponseDto
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 	}
 
 
-	public boolean saveJournal(AccountJournalDto accountJournalDto, String branchId) {
+	public CreateVoucherResponseDto saveJournal(AccountJournalDto accountJournalDto, String branchId) {
 		
 		String draccountNameJournal = DataUtil.emptyString(accountJournalDto.getDraccountNameJournal());
 		String craccountNameJournal = DataUtil.emptyString(accountJournalDto.getCraccountNameJournal());
@@ -525,7 +533,10 @@ public class AccountService {
 			updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameJournal);
 		}
 		
-		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		return CreateVoucherResponseDto
+				.builder()
+				.success(new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount))
+				.build();
 		
 	}
 
@@ -807,12 +818,12 @@ public class AccountService {
 	}
 
 
-	public TrialBalanceResponseDto trialBalance(String strFromDate, String strToDate, String strBranchId) {
+	public TrialBalanceResponseDto trialBalance(DayBookDto dto, String strBranchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(strFromDate));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(strToDate));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(dto.getFromDate()));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(dto.getToDate()));
 		
 		if(strBranchId!=null) {
 			
@@ -917,7 +928,8 @@ public class AccountService {
 	}
 
 
-	public boolean cancelVoucher(CancelVoucherDto cancelVoucherDto) {
+	public ResultResponse cancelVoucher(CancelVoucherDto cancelVoucherDto) {
+		ResultResponse result = ResultResponse.builder().build();
 
 		String[] receiptIds = cancelVoucherDto.getReceiptIds();
 		String voucher = cancelVoucherDto.getVoucher();
@@ -956,24 +968,27 @@ public class AccountService {
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==2) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==3) {
 
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
-					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return result;
 				}else if(voucherType==4) {
 					
 					// Dr
@@ -998,7 +1013,8 @@ public class AccountService {
 					
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
-					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+					result.setSuccess(new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher));
+					return  result;
 				}
 
 				
@@ -1006,8 +1022,8 @@ public class AccountService {
 			}
 			
 		}
-		
-		return false;
+		result.setSuccess(true);
+		return result;
 	}
 
 
@@ -1133,8 +1149,8 @@ public class AccountService {
 				}
 
 				result.setLedgerTransaction(voucherMap);
-				result.setAccountId(searchLedgerEntriesDto.getAccountDetails());
-				result.setLedgerName(searchLedgerEntriesDto.getAccountIdName());
+				result.setAccountId(accountDetails);
+				result.setLedgerName(accountIdName[1]);
 				result.setFromDate(searchLedgerEntriesDto.getFromDate());
 				result.setToDate(searchLedgerEntriesDto.getToDate());
 				result.setSuccess(true);
@@ -1162,89 +1178,91 @@ public class AccountService {
 	}
 
 
-	public boolean getIncomeStatement(IncomeStatementDto incomeStatementDto, String strBranchId) {
-		
+	public IncomeStatementResponseDto getIncomeStatement(IncomeStatementDto incomeStatementDto, String strBranchId) {
+		IncomeStatementResponseDto result = IncomeStatementResponseDto.builder().build();
+
 		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getFromDate()));
 		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(incomeStatementDto.getToDate()));
-		
+
 		if(strBranchId!=null) {
-			
+
 					int branchId = Integer.parseInt(strBranchId);
 
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
 				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
-				
+
 				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
-				
+
 				//Group 1
 				BigDecimal totalIncome = BigDecimal.ZERO;
 				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
-				
-				
+
+
 				//Group 2
 				BigDecimal totalExpense = BigDecimal.ZERO;
 				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
-				
+
 				for (Accountdetails accountDetails : accountsDetails) {
-					
+
 					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(strBranchId));
-					
+
 					if(!voucherTransactions.isEmpty()) {
-					
+
 						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
-					
+
 						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
-	
+
 						switch(groupId){
-						
-						case 4: 
+
+						case 4:
 								totalIncome = totalIncome.add(totalAmount);
 								incomeLedgersAccount.put(accountDetails, totalAmount);
 								break;
-						case 5: 
+						case 5:
 								totalExpense = totalExpense.add(totalAmount);
 								expenseLedgersAccount.put(accountDetails, totalAmount);
 								break;
 						default:
-								
+
 						}
-						
+
 						}
 					}
 		//group 1
-		request.setAttribute("income", totalIncome);
-		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
-		
+		result.setIncome(totalIncome);
+		result.setIncomeLedgersAccount(incomeLedgersAccount);
+
 		//group 2
-		request.setAttribute("expenses", totalExpense);
-		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
-		
-		request.setAttribute("incometotallabel", "TOTAL");
-		request.setAttribute("expensetotallabel", "TOTAL");
-		request.setAttribute("incometotal", totalIncome);
-		request.setAttribute("expensetotal", totalExpense);
-		
-		request.setAttribute("fromdate", fromDate);
-		request.setAttribute("todate", toDate);
-		
-		
+		result.setExpenses(totalExpense);
+		result.setExpenseLedgersAccount(expenseLedgersAccount);
+
+		result.setIncomeTotalLabel("TOTAL");
+		result.setExpenseTotalLabel("TOTAL");
+		result.setIncomeTotal(totalIncome);
+		result.setExpenseTotal(totalExpense);
+
+		result.setFromDate(fromDate);
+		result.setToDate(toDate);
+
+
 		BigDecimal profit = totalIncome.subtract(totalExpense);
-		
+
 		if(profit.compareTo(BigDecimal.ZERO) > 0){
-			request.setAttribute("profitlabel", "Net Profit");
-			request.setAttribute("totalprofit", profit);
+			result.setProfitLabel("Net Profit");
+			result.setTotalProfit(profit);
 		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
-			request.setAttribute("losslabel", "Net Loss");
-			request.setAttribute("totalloss", profit.negate());
+			result.setLossLabel("Net Loss");
+			result.setTotalLoss(profit.negate());
 		}
-		
-		
+
+
 	}
-		return true;
+		result.setSuccess(true);
+		return result;
 	}
 	
-	public ResultResponse printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto, String branchId) {
-		ResultResponse result = ResultResponse.builder().build();
+	public SearchJournalEntriesResponseDto printSearchJournalEntries(PrintSearchJournalEntriesDto printSearchJournalEntriesDto, String branchId) {
+		SearchJournalEntriesResponseDto result = SearchJournalEntriesResponseDto.builder().build();
 
 		try {
 			List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
@@ -1278,8 +1296,8 @@ public class AccountService {
 					voucherMap.put(voucherEntry, twoAccounts);
 				}
 
-				result.setResultMap(voucherMap);
-				result.setMessage(accountIdName[1]);
+				result.setLedgerTransaction(voucherMap);
+				result.setLedgerName(accountIdName[1]);
 				result.setSuccess(true);
 				return result;
 			}
@@ -1294,14 +1312,12 @@ public class AccountService {
 	}
 	
 	
-	public boolean exportTrialBalance(ExportTrialBalanceDto exportTrialBalanceDto, Object accountDetailsBalanceMap) {
-
-		boolean writeSucees = false;
-		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+	public ResultResponse exportTrialBalance(ExportTrialBalanceDto exportTrialBalanceDto) {
+		ResultResponse result = ResultResponse.builder().build();
 		
 		DecimalFormat df = new DecimalFormat("###.##");
-		
-		accountBalanceMap = (Map<Accountdetails, BigDecimal>) accountDetailsBalanceMap;
+		Map<String, TrailBalanceDto> trailBalanceDto = exportTrialBalanceDto.getTrailBalanceDto();
+
 		String creditAllAcc = exportTrialBalanceDto.getCreditAllAcc();
 		String debitAllAcc = exportTrialBalanceDto.getDebitAllAcc();
 		String fromDate = exportTrialBalanceDto.getFromDate();
@@ -1324,32 +1340,34 @@ public class AccountService {
 					new Object[] { "Particulars", "Debit","Credit"});
 			int i = 1;
 			
-			for (Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
-				
+			for (Entry<String, TrailBalanceDto> accBal : trailBalanceDto.entrySet()) {
+
 				String dr = "";
 				String cr = "";
+				Accountdetails key = accBal.getValue().getAccountDetails();
+				BigDecimal value = accBal.getValue().getAmount();
 				
 						
-				if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 1 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 5) {
+				if(key.getAccountGroupMaster().getAccountgroupid() == 1 || key.getAccountGroupMaster().getAccountgroupid() == 5) {
 					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						dr = df.format(accBal.getValue());
+					if(value.compareTo(BigDecimal.ONE)==0 || value.compareTo(BigDecimal.ONE)==1) {
+						dr = df.format(value);
 						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						cr = df.format(accBal.getValue().negate());
+					}else if(value.compareTo(BigDecimal.ONE)<1) {
+						cr = df.format(value.negate());
 					}
-				}else if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 2 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 3 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 4) {
+				}else if(key.getAccountGroupMaster().getAccountgroupid() == 2 || key.getAccountGroupMaster().getAccountgroupid() == 3 || key.getAccountGroupMaster().getAccountgroupid() == 4) {
 					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						cr = df.format(accBal.getValue());
+					if(value.compareTo(BigDecimal.ONE)==0 || value.compareTo(BigDecimal.ONE)==1) {
+						cr = df.format(value);
 						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						dr = df.format(accBal.getValue().negate());
+					}else if(value.compareTo(BigDecimal.ONE)<1) {
+						dr = df.format(value.negate());
 					}
 				}
 				
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
+						new Object[] { DataUtil.emptyString(key.getAccountname()),  dr ,
 								 cr });
 				i++;
 			}
@@ -1429,18 +1447,19 @@ public class AccountService {
 				workbook.write(out);
 				out.close();
 				workbook.close();
-				writeSucees = true;
+				result.setSuccess(true);
 				
 		} catch (Exception e) {
 			e.printStackTrace();
+			result.setSuccess(false);
 		}
-		return writeSucees;
+		return result;
 		// getFile(name, path);
 	}
 
 
-	public boolean downloadTrialBalance() {
-		boolean result = false;
+	public ResultResponse downloadTrialBalance() {
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx");
@@ -1472,7 +1491,7 @@ public class AccountService {
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}
@@ -1600,7 +1619,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 1, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1608,7 +1627,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 2, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1616,7 +1635,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 3, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 
@@ -1624,7 +1643,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			ResultResponse resultResponse = exportVoucher(exportVoucherDto, 4, branchId);
 			if(resultResponse.isSuccess()){
-				exportVoucherDto.setNextVoucher(nextVoucher);
+				resultResponse.setMessage(nextVoucher);
 				return resultResponse;
 			}
 		}
@@ -1776,8 +1795,8 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 	}
 
 
-	public boolean downloadVoucherTransactions() {
-		boolean result = false;
+	public ResultResponse downloadVoucherTransactions() {
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/vouchertransactions.xlsx");
@@ -1809,7 +1828,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}
@@ -1817,16 +1836,16 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 	}
 
 
-	public DayBookDto getDayBook(String strFromDate, String strToDate, String strBranchId) {
+	public DayBookResponseDto getDayBook(DayBookDto dto, String strBranchId) {
 
 		
 		String toDate = null;
 		Map<VoucherEntrytransactions,String> voucherEntryTransactionsMap = new HashMap<VoucherEntrytransactions,String>();
 		
-		if(strToDate == null) {
-			toDate = strFromDate;
+		if(dto.getToDate() == null) {
+			toDate = dto.getFromDate();
 		}else {
-			toDate = strToDate;
+			toDate = dto.getToDate();
 		}
 		
 		
@@ -1851,7 +1870,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				
 				
 				
-				List<VoucherEntrytransactions> allVoucherTransactions = new AccountDAO().getAllVoucherEntryTransactionsBetweenDates(strFromDate, toDate, branchId);
+				List<VoucherEntrytransactions> allVoucherTransactions = new AccountDAO().getAllVoucherEntryTransactionsBetweenDates(dto.getFromDate(), toDate, branchId);
 				
 				for (VoucherEntrytransactions voucherEntrytransactions : allVoucherTransactions) {
 					String drAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getDraccountid());
@@ -1861,7 +1880,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				}
 				
 	}
-			return DayBookDto
+			return DayBookResponseDto
 					.builder()
 					.voucherEntryTransactions(voucherEntryTransactionsMap)
 					.success(true)

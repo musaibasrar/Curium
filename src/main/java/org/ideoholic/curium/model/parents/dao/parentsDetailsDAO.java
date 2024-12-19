@@ -37,20 +37,7 @@ public class parentsDetailsDAO {
 		 try {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
-	            Query query = session.createQuery("from Student as student order by id desc");
-	            query.setMaxResults(1);
-	            student = (Student) query.uniqueResult();
-	          
-	            if(student!=null) {
-	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", student.getSid()+1));
-	            }else {
-	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", 1));
-	            }
-	            
-	            
 	            session.save(parents);
-
-
 	            transaction.commit();
 	           
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

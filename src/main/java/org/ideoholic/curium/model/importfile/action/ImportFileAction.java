@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.importfile.service.ImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ImportFileAction {
 
 	@Autowired
 	private ImportFileActionAdapter importFileActionAdapter;
+	
+	@Autowired
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
 	private String branchId;
 
@@ -49,7 +53,7 @@ public class ImportFileAction {
 	 @RequestMapping(value = "/readFileFees", method = RequestMethod.POST, consumes = "multipart/form-data")
 		public String readFileForFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 			try {
-				if (new FeesCollectionService(request, response,null).readFileForFees(uploadedFiles)) {
+				if (feesCollectionActionAdapter.readFileForFees(uploadedFiles)) {
 					return "importfile";
 				}
 			} catch (IOException e) {

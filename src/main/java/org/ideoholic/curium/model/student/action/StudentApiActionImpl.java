@@ -139,8 +139,8 @@ public class StudentApiActionImpl implements StudentApiAction{
         return viewAll(page, branchId);
     }
 
-    public ResponseEntity<StudentDetailsResponseDto> updateStudent(MultipartFile[] uploadedFiles, StudentDto student, String studentId, String branchId, String userId) {
-        studentService.updateStudent(uploadedFiles, student, branchId, userId);
+    public ResponseEntity<StudentDetailsResponseDto> updateStudent(MultipartFile[] uploadedFiles, StudentDto student, String studentId, String branchId, String userId, String branchCode) {
+        studentService.updateStudent(uploadedFiles, student, branchId,studentId, userId, branchCode);
         return viewStudent(studentId, branchId);
     }
 

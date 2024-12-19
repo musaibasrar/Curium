@@ -20,4 +20,5 @@ public class AddFeesCollectionDto {
     private String academicYear;
     private String dateOfFeesDetails;
     private String classAndSecDetails;
+    private String narrationReceipt;
 }

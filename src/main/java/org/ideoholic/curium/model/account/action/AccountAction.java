@@ -219,6 +219,7 @@ public class AccountAction {
 		
     }
 
+	@GetMapping("/updateYear")
 	public String updateYear() {
 		 yearActionAdapter.updateYear();
 	            return "academicyear";

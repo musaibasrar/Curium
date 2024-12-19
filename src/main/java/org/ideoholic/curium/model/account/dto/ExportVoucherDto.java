@@ -7,6 +7,5 @@ import lombok.Data;
 public class ExportVoucherDto {
     private String fromDate;
     private String toDate;
-    private int voucherType;
     private String nextVoucher;
 }
