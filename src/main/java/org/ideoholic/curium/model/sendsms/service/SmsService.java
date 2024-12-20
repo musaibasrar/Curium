@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.sendsms.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
@@ -13,6 +14,8 @@ import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,20 +33,16 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
+@Slf4j
+@Service
 public class SmsService {
-	
-	 private HttpServletRequest request;
+	    @Autowired
 	    private HttpServletResponse response;
-	    private HttpSession httpSession;
+	    @Autowired
+		private HttpSession httpSession;
 	    
-	private static DecimalFormat df2 = new DecimalFormat(".##");
+	 //private static DecimalFormat df2 = new DecimalFormat(".##");
 	 private static final Logger logger = LogManager.getLogger(SmsService.class);
-	
-	public SmsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
 
 
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {

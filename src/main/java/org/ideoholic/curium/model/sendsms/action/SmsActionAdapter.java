@@ -18,19 +18,18 @@ public class SmsActionAdapter {
 
     @Autowired
     private HttpServletRequest request;
-
     @Autowired
     private HttpServletResponse response;
-
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private SmsService smsService;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
 
 
     public boolean sendNumbersSMS() {
-        SmsService smsService = new SmsService(request, response);
 
         SendSMSDto dto = new SendSMSDto();
         dto.setNumbers(request.getParameter("numbers"));
@@ -42,7 +41,6 @@ public class SmsActionAdapter {
     }
 
     public boolean sendStaffSMS() {
-        SmsService smsService = new SmsService(request, response);
 
         SendSMSDto dto = new SendSMSDto();
         dto.setDepartment(request.getParameter("department"));
@@ -53,7 +51,7 @@ public class SmsActionAdapter {
         return resultResponse.isSuccess();
     }
     public boolean sendSMSFeesDueReminder() {
-        SmsService smsService = new SmsService(request,response);
+
         SendSMSDto dto = new SendSMSDto();
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
         ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
@@ -62,8 +60,6 @@ public class SmsActionAdapter {
     }
     public boolean SMSDeliveryReport() {
 
-        SmsService smsService = new SmsService(request,response);
-
         SMSResponseDto result= smsService.SMSDeliveryReport();
         request.setAttribute("smsdeliveryreport", result.getSmsDeliveryReport().get(0).getRecords());
 
@@ -71,7 +67,6 @@ public class SmsActionAdapter {
     }
     public boolean sendAllSMS() {
 
-        SmsService smsService = new SmsService(request,response);
 
         SendSMSDto dto = new SendSMSDto();
         dto.setAddClass(request.getParameter("addclass"));
