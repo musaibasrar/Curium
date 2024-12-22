@@ -1,396 +1,155 @@
-<%-- 
-    Document   : Marks Sheet
-    Created on : Nov 29 2021, 09:22 PM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
 <head>
+<meta charset="UTF-8">
+<title>Marks Sheet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<style type="text/css">
-<!--
-.headerText {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: center;
-}
+<style>
+  .headerText, .headerTextLeft, .dataTextBold, .dataTextBoldLeft, .dataTextBoldCenter, .addressLine, .dataText {
+    font-family: Tahoma;
+    font-size: 14px;
+    color: black;
+  }
 
-.headerTextLeft {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: left;
-}
+  .dataTextBold {
+    font-weight: bold;
+  }
 
-.dataTextBold {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
+  .dataTextBoldCenter {
+    font-size: 16px;
+  }
 
-.dataTextBoldLeft {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: left;
-}
-
-.dataTextBoldCenter {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataText {
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
--->
-
-span{
-    display:inline-block;
-    border-bottom:2px solid black;
-    padding-bottom:1px;
-    width: 300px;
-    font-weight: normal;
-}
-</style>
-
-
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
-    
-    <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 10px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  1cm;
-             margin-right: 1cm;
-             margin-bottom: 1cm;
-             margin-top: 1cm;
-             size: auto;
-        }
-
-        @media screen {
-            .fontsize { font-size: 10px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-        
-        .subjectdetails{
-        	border: 1px solid black;
-    		text-align: left;
-   		    padding: 8px;
-        }
-        
-        .nosubjectdetails{
-        	border: 0px;
-    		text-align: left;
-   		    padding: 8px;
-        }
-        
-         .namedetails{
-        	border: 0px solid #dddddd;
-    		text-align: left;
-   		    padding: 4px;
-        }
-         .namedetailscenter{
-        	border: 0px solid #dddddd;
-    		text-align: right;
-   		    padding: 8px;
-        }
-        
-        .datatable {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.datatd, .datath {
-    border: 1px solid #000000;
+  .datatable, .datath, .datatd {
+    border: 1px solid #000;
     text-align: left;
     padding: 8px;
-}
+  }
 
-    </style>
-		
-	<title> </title>
-        
+  .datatable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  @media print {
+    .fontsize {
+      font-size: 10px;
+      font-weight: bold;
+      font-family: 'Times New Roman';
+    }
+    .header, .hide {
+      visibility: hidden;
+    }
+    .bodymargin {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @page {
+    margin-left: 1cm;
+    margin-right: 1cm;
+    margin-bottom: 1cm;
+    margin-top: 1cm;
+    size: auto;
+  }
+
+  @media screen {
+    .fontsize {
+      font-size: 10px;
+      font-weight: bold;
+      font-family: 'Times New Roman';
+    }
+    .bodymargin {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .subjectdetails {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .nosubjectdetails {
+    border: 0;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .namedetails {
+    border: 0 solid #ddd;
+    text-align: left;
+    padding: 4px;
+  }
+
+  .namedetailscenter {
+    border: 0 solid #ddd;
+    text-align: right;
+    padding: 8px;
+  }
+
+  .highlight {
+    color: #1E90FF;
+  }
+
+  .highlight-orange {
+    color: #FF914D;
+  }
+</style>
 </head>
-  <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
-                        <c:forEach items="${markssheetlist}" var="Parents">
-                        
-                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-
-
-			<%-- <table style="border-collapse: collapse;width: 70%;float: left">
-											
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <c:forEach var="splt" items="${fn:split(Parents.parents.student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach>
-                                </td>
-                                
-                             </tr>
-                             
-                             
-                             <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.parents.student.admissionnumber}"/></td>
-                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
-                            </tr>
-                            
-                           <!-- <tr>
-                            <td><br></td>
-                            </tr> -->
-                            
-                            </table>
-                             
-                            <table style=" border-collapse: collapse;width: 30%;float: left">
-                            	<tr>
-                            		<td>
-                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
-                            		</td>
-                            	</tr>
-                            
-                            </table>
-                            --%>
-                            <!-- <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-               					 <tr>
-                   					 <td colspan="4" ></td>
-                				</tr>
-           					 </TABLE> -->
-           					 	<%-- <c:set var = "beginloop" value = "0"/>
-           					 	<c:set var = "endloop" value = "4"/>
-           					 	<c:forEach begin="0" end="${endloop}" step="1">
-           					 		
-           					 			<table style=" border-collapse: collapse;width: 100%;">
-                            	<thead>
-                            	<tr style="border: 1px solid black;text-align: center;">
-                            	<c:forEach items="${Parents.exammarks}" var="exammarks" begin="${beginloop}" end= "${endloop}" step="1">
-                            		<th><c:out value="${exammarks.examName}"/></th>
-                            	</c:forEach>
-                            	</tr>
-                            	</thead>
-                            	
-                            	<tbody>
-                            	
-                             	<tr>
-                             	<c:forEach items="${Parents.exammarks}" var="exammarks" begin="${beginloop}" end= "${endloop}" step="1">
-                                <td>
-                                	<table style=" border-collapse: collapse;width: 100%;border: 1px solid black;">
-											<c:forEach items="${exammarks.subMarks}" var="submarks" >
-	                                	<tr style="border: 1px solid black;">
-	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}(${dateParts[1]})</td>
-	                                	</tr>
-	                                </c:forEach>
-	                                		<tr style="border-top: 1px solid black;">
-	                                			<td style="border: 1px solid black;text-align: left;">Total Marks Obtained</td>
-	                                			<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-	                                		</tr>
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;">Total Marks</td>
-                            					<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-	                                		</tr>
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;">Percentage</td>
-                            					<td style="border: 1px solid black;text-align: left;">
-                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
-	                                		</tr>	
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;"></td>
-	                                		</tr>                                	
-	                                	</table>
-                                </td>
-                               </c:forEach>
-                                </tr>
-                                 
-                       
-                   				 </tbody>
-                            </table>
-                            		<c:set var = "beginloop" value = "${beginloop+5}"/>
-           					 	<c:set var = "endloop" value = "${endloop+5}"/>
-           					 	<br>
-           					 	</c:forEach> --%>
-           					 	
-           					 	<c:forEach items="${Parents.exammarks}" var="exammarks">
-           					 	
-           					 	<table style=" border-collapse: collapse;width: 40%;" align="center">
-                            	<thead>
-                            	<tr style="border: 1px solid black;text-align: center;">
-                            		<th style="font-size: 50px;"><c:out value="${exammarks.examName}"/></th>
-                            	</tr>
-                            	</thead>
-                            	
-                            	<tbody>
-                            	
-                             	<tr>
-                             	
-                                <td>
-                                	<table style=" border-collapse: collapse;width: 100%;border: 1px solid black;">
-											<c:forEach items="${exammarks.subMarks}" var="submarks" >
-	                                	<tr style="border: 1px solid black;">
-	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-	                                		<td style="border: 1px solid black;text-align: left;font-size:40px;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;font-size:40px;">${dateParts[0]}(${dateParts[1]})</td>
-	                                	</tr>
-	                                </c:forEach>
-	                                		<tr style="border-top: 1px solid black;">
-	                                			<td style="border: 1px solid black;text-align: left;color: #FF914D;font-size:40px;">Total Marks Obtained</td>
-	                                			<td style="border: 1px solid black;text-align: left;color: #FF914D;font-size:40px;">${exammarks.totalMarksObtained}</td>
-	                                		</tr>
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;color: #FFCC00;font-size:40px;">Total Marks</td>
-                            					<td style="border: 1px solid black;text-align: left;color: #FFCC00;font-size:40px;">${exammarks.totalMarks}</td>
-	                                		</tr>
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;color: #90CCB8;font-size:40px;">Percentage</td>
-                            					<td style="border: 1px solid black;text-align: left;color: #90CCB8;font-size:40px;">
-                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
-	                                		</tr>	
-	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;color: #243664;font-size:40px;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;color: #243664;font-size:40px;"></td>
-	                                		</tr>                                	
-	                                	</table>
-                                </td>
-                               
-                                </tr>
-                                 
-                       
-                   				 </tbody>
-                            </table>
-                            </c:forEach>
-                            <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-inside:avoid; border-collapse: collapse;">
-
-						<tr>
-							<td><br></td>
-						</tr>
-		</TABLE>
-		</div>
-		<br><br><br>
-                                 
-                        </c:forEach>
-			
-	</form>
-	
-	
+<form method="post" class="bodymargin">
+  <c:forEach items="${markssheetlist}" var="Parents">
+    <div class="card mb-4">
+      <div class="card-body">
+        <c:forEach items="${Parents.exammarks}" var="exammarks">
+          <h3 class="text-center mb-4"><c:out value="${exammarks.examName}"/></h3>
+          <table class="datatable table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">Subject</th>
+                <th class="text-center">Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach items="${exammarks.subMarks}" var="submarks">
+                <tr>
+                  <td class="text-left"><c:out value="${submarks.key}"/></td>
+                  <td class="text-left"><c:out value="${fn:split(submarks.value,'_')[0]}"/> (<c:out value="${fn:split(submarks.value,'_')[1]}"/>)</td>
+                </tr>
+              </c:forEach>
+              <tr>
+                <td class="highlight-orange">Total Marks Obtained</td>
+                <td class="highlight-orange"><c:out value="${exammarks.totalMarksObtained}"/></td>
+              </tr>
+              <tr>
+                <td class="highlight">Total Marks</td>
+                <td class="highlight"><c:out value="${exammarks.totalMarks}"/></td>
+              </tr>
+              <tr>
+                <td class="highlight">Percentage</td>
+                <td class="highlight"><fmt:formatNumber value="${exammarks.percentage}" type="number" maxFractionDigits="1"/></td>
+              </tr>
+              <tr>
+                <td class="highlight">Remarks</td>
+                <td class="highlight"></td>
+              </tr>
+            </tbody>
+          </table>
+        </c:forEach>
+        <br><br><br>
+      </div>
+    </div>
+  </c:forEach>
+</form>
 </body>
 </html>

@@ -14,123 +14,116 @@
 
 <style>
  .headerText {
-                border-radius:3px;
-                font-family: Tahoma;
-                font-size: 16px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: bold;
-                width: auto ;
-                height: 18px;
-                vertical-align: middle;
-                text-align: center;
+                font-family: Tahoma, sans-serif;
+            font-size: 14px;
+            background-color: #4b6a84;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: center;
 	     }
 .dataText {
-                border-radius:3px;
-                font-family: Tahoma;
-                color: #4b6a84;
-                font-size: 16px;
-                letter-spacing: normal;
-                text-align: center;
-                background-color: #E3EFFF;
+               font-family: Tahoma, sans-serif;
+            color: #4b6a84;
+            font-size: 14px;
+            background-color: #E3EFFF;
+            text-align: center;
 
             }
             
             .fees-label {
-            font-size: 16px;
+            font-size: 14px;
+            font-weight: bold;
         }
             
-#myTable tr:nth-child(even) td {
-  background-color: #e5e5e5; 
-  border : 2px solid;
-}
+ .card {
+            margin-bottom: 1rem;
+        }
 
-#myTable tr:nth-child(odd) td {
-  background-color: #ffffff;
-  border : 2px solid;
-}
+        @media (max-width: 576px) {
+            .fees-label {
+                font-size: 12px;
+            }
 
-#myTable2 tr:nth-child(even) td {
-  background-color: #e5e5e5; 
-  border : 2px solid;
-}
+            .headerText,
+            .dataText {
+                font-size: 12px;
+            }
 
-#myTable2 tr:nth-child(odd) td {
-  background-color: #ffffff;
-  border : 2px solid;
-}
+            h4 {
+                font-size: 1.25rem;
+            }
 
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 0rem;
-}
+            .card-body {
+                padding: 0.5rem;
+            }
+        }
 </style>
 </head>
 <body>
- <div class="container" style="margin-left: 0px;margin-right: 0px;">       
-    <!--Fees Structure-->
-    <h4 class="text-left">Fees Structure<%-- &nbsp;UID: <c:out value="${student.studentexternalid}" /> --%></h4>
-    <div class="card mb-2" style="width: 360px;padding:0.25rem;">
+ <div class="container-fluid p-3">
+        <!-- Fees Structure -->
+        <h4 class="text-center mb-3">Fees Structure</h4>
+    <div class="card">
         <div class="card-body">
             <div class="row text-center">
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #ff914d">Academic Year: ${currentAcademicYear}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #0cc0df">Total fees: Rs. ${totalfees}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #00BF63">Total fees paid: Rs. ${sumoffees}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #ff3131">Due Amount: Rs. ${dueamount}</label>
-                </div>
+                <div class="col-6 mb-2">
+                        <label class="fees-label text-warning">Academic Year: ${currentAcademicYear}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-primary">Total Fees: Rs. ${totalfees}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-success">Fees Paid: Rs. ${sumoffees}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-danger">Due Amount: Rs. ${dueamount}</label>
+                    </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered" id="myTable">
+            <div class="table-responsive">
+            
+            		<table class="table table-bordered" id="myTable">
                         <thead class="thead-light">
                             <tr>
                                 <th class="headerText">Fees Category</th>
-                                <!-- <th class="headerText">Fees Amount</th>
-                                <th class="headerText">Total Installments</th> -->
                                 <th class="headerText">Fees Amount</th>
                                 <th class="headerText">Fees Paid</th>
                                 <th class="headerText">Due Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${feesstructure}" var="feesstructure">  
+                            <c:forEach items="${feesstructure}" var="feesstructure">
                                 <tr>
-                                    <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
-                                   <%--  <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> --%>
-                                    <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.feesamount - feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff}"/></td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feescategory.feescategoryname}" />
+                                    </td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feesamount}" />
+                                    </td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feespaid}" />
+                                    </td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feesamount - feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff}" />
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </div>
     <!--End Fees Structure--> 
 
     <!--Fees Detail-->
-    <h4 class="text-left">Fees Detail</h4>
-    <div class="card mb-2" style="width: 360px;padding:0.25rem;">
-        <div class="card-body">
-            
-            <div class="row">
-                <div class="col-12">
+    
+    <h4 class="text-center mb-3">Fees Detail</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
                     <table class="table table-bordered" id="myTable2">
                         <thead class="thead-light">
                             <tr>
-                                <th class="headerText">Date of fees</th>
+                                <th class="headerText">Date of Fees</th>
                                 <th class="headerText">Receipt Number</th>
                                 <th class="headerText">Total Amount</th>
                                 <th class="headerText">View Details</th>
@@ -139,10 +132,12 @@
                         <tbody>
                             <c:forEach items="${receiptinfo}" var="receiptinfo">
                                 <tr>
-                                    <td class="dataText"><c:out value="${receiptinfo.date}"/></td>
-                                    <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></td>
-                                    <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.date}" /></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
+                                    <td class="dataText">
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -151,69 +146,69 @@
             </div>
         </div>
     </div>
-    
-    
     <!-- Other Fees -->
-    <div class="card mb-2" style="width: 360px;padding:0.25rem;">
+    
+     <h4 class="text-center mb-3">Other Fees Structure</h4>
+    <div class="card">
         <div class="card-body">
             <div class="row text-center">
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #ff914d">Academic Year: ${currentAcademicYear}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #0cc0df">Total fees: Rs. ${othertotalfees}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #00BF63">Total fees paid: Rs. ${othersumoffees}</label>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <label class="fees-label" style="color: #ff3131">Due Amount: Rs. ${otherdueamount}</label>
-                </div>
+                <div class="col-6 mb-2">
+                        <label class="fees-label text-warning">Academic Year: ${currentAcademicYear}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-primary">Total Fees: Rs. ${othertotalfees}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-success">Fees Paid: Rs. ${othersumoffees}</label>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="fees-label text-danger">Due Amount: Rs. ${otherdueamount}</label>
+                    </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered" id="myTable">
+            <div class="table-responsive">
+            
+            		<table class="table table-bordered" id="myTable">
                         <thead class="thead-light">
                             <tr>
                                 <th class="headerText">Fees Category</th>
                                 <!-- <th class="headerText">Fees Amount</th>
-                                <th class="headerText">Total Installments</th>
-                                <th class="headerText">Fees Amount</th>
                                 <th class="headerText">Fees Paid</th>
                                 <th class="headerText">Due Amount</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${otherfeesstructure}" var="feesstructure">  
+                            <c:forEach items="${otherfeesstructure}" var="feesstructure">
                                 <tr>
-                                    <td class="dataText"><c:out value="${feesstructure.otherfeescategory.feescategoryname}"/></td>
-                                   <%--  <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> 
-                                    <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
-                                    <td class="dataText"><c:out value="${feesstructure.feesamount - feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff}"/></td>
-                                	--%>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.otherfeescategory.feescategoryname}" />
+                                    </td>
+                                    <%-- <td class="dataText">
+                                        <c:out value="${feesstructure.amount}" />
+                                    </td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feespaid}" />
+                                    </td>
+                                    <td class="dataText">
+                                        <c:out value="${feesstructure.feesamount - feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff}" />
+                                    </td> --%>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </div>
-    <!--End Fees Structure--> 
-
+    
     <!--Fees Detail-->
-    <h4 class="text-left">Fees Detail</h4>
-    <div class="card mb-2" style="width: 360px;padding:0.25rem;">
-        <div class="card-body">
-            
-            <div class="row">
-                <div class="col-12">
+    
+     <h4 class="text-center mb-3">Fees Detail</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
                     <table class="table table-bordered" id="myTable2">
                         <thead class="thead-light">
                             <tr>
-                                <th class="headerText">Date of fees</th>
+                                <th class="headerText">Date of Fees</th>
                                 <th class="headerText">Receipt Number</th>
                                 <th class="headerText">Total Amount</th>
                                 <th class="headerText">View Details</th>
@@ -222,10 +217,12 @@
                         <tbody>
                             <c:forEach items="${otherreceiptinfo}" var="receiptinfo">
                                 <tr>
-                                    <td class="dataText"><c:out value="${receiptinfo.date}"/></td>
-                                    <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></td>
-                                    <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                    <td class="dataText"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.date}" /></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
+                                    <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
+                                    <td class="dataText">
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
