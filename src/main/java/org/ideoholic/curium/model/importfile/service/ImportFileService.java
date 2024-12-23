@@ -19,9 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +47,7 @@ public class ImportFileService {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
+		List<Login> listParentLogin = new ArrayList<Login>();
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
 					XSSFWorkbook workbookRead = new XSSFWorkbook(uploadedFiles.getInputStream());
@@ -122,8 +125,8 @@ public class ImportFileService {
 						//student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
 						student.setUserid(Integer.parseInt(row.getCell(45).getStringCellValue()));
 						student.setPassedout(Integer.parseInt(row.getCell(46).getStringCellValue()));
-						student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
-						student.setPromotedyear(row.getCell(48).getStringCellValue());
+						student.setBhagyalakshmibondnumber(row.getCell(49).getStringCellValue());
+						student.setYearofadmission(row.getCell(48).getStringCellValue());
 
 						student.setBranchid(2);
 						student.setArchive(0);
@@ -131,7 +134,6 @@ public class ImportFileService {
 						student.setDroppedout(0);
 						student.setLeftout(0);
 						//student.setStudentexternalid(row.getCell(1).getStringCellValue());
-						student.setLeftout(0);
 
 						parent.setFathersname(row.getCell(25).getStringCellValue());
 						//parent.setProfession(row.getCell(26).getStringCellValue());
@@ -162,7 +164,18 @@ public class ImportFileService {
 					}
 
 					System.out.println("Values Inserted Successfully");
-
-		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents)).build();
+					
+					for (Parents parent : listParents) {
+						Login login= new Login();
+						Branch branch = new Branch();
+						login.setUsername(parent.getStudent().getStudentexternalid());
+						login.setPassword(parent.getContactnumber());
+						branch.setIdbranch(parent.getBranchid());
+						login.setBranch(branch);
+						login.setUsertype("parents");
+						listParentLogin.add(login);
+					}
+					
+		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
 	}
 }

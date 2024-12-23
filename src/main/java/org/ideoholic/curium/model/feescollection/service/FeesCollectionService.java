@@ -2373,8 +2373,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                    String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2382,8 +2382,10 @@ public class FeesCollectionService {
 					        List<List<Row>> groupedRowsArray = new ArrayList<>(groupedData.values());
 					        
 					        // Print or use the grouped data as needed
+					        int i=1;
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
+					            System.out.println("Number: " + i);
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2445,12 +2447,12 @@ public class FeesCollectionService {
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
 						        Receiptinfo receiptinfo = feesCollectionService.addImport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
-					            
+					            i++;
 					        }
 
 					System.out.println("Values Inserted Successfully");
-
-		return new parentsDetailsDAO().createMultiple(listParents);
+					//new parentsDetailsDAO().createMultiple(listParents);
+		return true;
 	}
 	
 	
