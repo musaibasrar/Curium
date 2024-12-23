@@ -103,19 +103,23 @@ form{
 	
 	</style>
 	
-	     <script type="text/javascript">
-            
-
-            function redirect(){
-                
-                var form1=document.getElementById("form1");
-                form1.action="/vision/UserProcess/authenticate";
-                form1.submit();
-            }
-        </script>
-        
 </head>
-   
+   <%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
       
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="">
                 
