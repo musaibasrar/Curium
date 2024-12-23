@@ -203,7 +203,7 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-chart" height="200"></canvas>
+             		<canvas id="student-chart" height="300"></canvas>
              	</div>
              	
             	<div class="col" align="center">
@@ -350,8 +350,8 @@ for(Cookie cookie : cookies){
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: finalstep+20,
-                                stepSize: 20,
+                                max: finalstep+40,
+                                stepSize: 40,
                                 fontColor: "Black"
                                }
                         
