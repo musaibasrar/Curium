@@ -564,7 +564,7 @@ public class UserService {
 		return result;
 	}
 
-	public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+	public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, Object dayOne, Object dateFrom, Object dateTo) {
 		SearchByDateResponseDto result = SearchByDateResponseDto.builder().build();
 
 		List<Receiptinfo> feesDetailsList = new ArrayList<>();
@@ -595,18 +595,18 @@ public class UserService {
 					result.setDayOne(oneDay);
 					result.setDateFrom("");
 					result.setDateTo("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-					querySub = " feesdetails.date = '"+dayOne+"'" ;
-				}
+					querySub = " feesdetails.date = '"+oneDay+"'" ;
+				}else if( dayOne!= null ) {
+					querySub = " feesdetails.date = '"+dayOne.toString()+"'" ;
+ 				}
 
 				if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 					querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 					result.setDateFrom(fromDate);
 					result.setDateTo(toDate);
 					result.setDayOne("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-						!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-					querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
+				}else if(dateFrom!=null && dateTo!=null) {
+							querySub = " feesdetails.date between '"+dateFrom.toString()+"' AND '"+dateTo.toString()+"'";
 				}
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
