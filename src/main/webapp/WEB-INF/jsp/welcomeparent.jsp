@@ -107,13 +107,13 @@ for(Cookie cookie : cookies){
         					 <c:choose>
                                 <c:when test="${todaysAttendance eq 'P'}">
                                     <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
-									src="/abc/images/studentattendance.svg" width="40" height="40"
+									src="/demov2/images/studentattendance.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:when>
                                 <c:otherwise>
                                     <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
-									src="/abc/images/studentabsent.svg" width="40" height="40"
+									src="/demov2/images/studentabsent.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:otherwise>
