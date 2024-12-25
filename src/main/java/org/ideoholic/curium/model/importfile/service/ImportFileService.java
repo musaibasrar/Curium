@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -42,7 +43,7 @@ public class ImportFileService {
 
 	XSSFRow row;
 
-	public boolean readFile(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
+	public ResultResponse readFile(MultipartFile uploadedFiles,String branchId) throws FileNotFoundException, IOException {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
@@ -175,6 +176,7 @@ public class ImportFileService {
 						listParentLogin.add(login);
 					}
 					
-		return new parentsDetailsDAO().createMultiple(listParents,listParentLogin);
+					return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
+		
 	}
 }
