@@ -9,4 +9,5 @@ public class StudentsAttendanceDto {
     private String[] attendanceIds;
     private String[] studentAttendanceStatus;
     private Date dateofAttendance;
+    private String attendanceClass;
 }
