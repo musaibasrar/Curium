@@ -40,7 +40,7 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
     public ResponseEntity<ResultResponse> downloadStaffAttendance() {
         ResultResponse result = attendanceService.downloadFileStaff();
         if (result.isSuccess()) {
-            ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
         }
         throw new CustomResponseException(CustomErrorMessage.EXPORTFAILURE);
 
@@ -191,7 +191,6 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
                 return ResponseEntity.ok(result);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         throw new CustomResponseException(CustomErrorMessage.ERROR);
