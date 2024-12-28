@@ -59,7 +59,7 @@ public class SmsApiActionImpl implements SmsApiAction {
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
-        throw new CustomResponseException(CustomErrorMessage.ERROR);
+        throw new CustomResponseException(CustomErrorMessage.SENDSMSMERROR);
     }
 
     public ResponseEntity<ResultResponse> sendAllSMS(SendSMSDto dto,String branchId) {

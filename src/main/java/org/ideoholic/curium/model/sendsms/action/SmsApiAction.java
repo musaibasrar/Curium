@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 
-@RequestMapping("/api/v1//SMSProcess")
+@RequestMapping("/api/v1//sMSProcess")
 public interface SmsApiAction {
 
     @GetMapping("/sendSMS")

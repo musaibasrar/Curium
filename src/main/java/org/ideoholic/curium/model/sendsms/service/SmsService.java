@@ -58,7 +58,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -209,7 +209,7 @@ public class SmsService {
 	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-	        	
+
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
@@ -297,11 +297,11 @@ public class SmsService {
 			// print result
 			logger.info(response.toString());
 		} else {
-			logger.info("POST request not worked");
+			logger.error("POST request not worked");
 		}}}
 		catch (Exception e)
 		{
-		logger.info("Error SMS "+e);
+		logger.error("Error SMS "+e);
 		}
 		return responseCode;
 	}
