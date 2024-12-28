@@ -22,9 +22,11 @@ public class FeesDetailsActionAdapter {
 
 	    @Autowired
 	    private HttpSession httpSession;
+	    
+	    @Autowired
+	    private FeesDetailsService feesDetailsService;
 
 		public boolean exportDataForFees() {
-			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			ResultResponse resultResponse = feesDetailsService.exportDataForFees(feesIdDetailsDto);
@@ -32,7 +34,6 @@ public class FeesDetailsActionAdapter {
 			}
 
 		public boolean exportDataForOtherFees() {
-			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			ResultResponse resultResponse = feesDetailsService.exportDataForOtherFees(feesIdDetailsDto);
@@ -40,7 +41,6 @@ public class FeesDetailsActionAdapter {
 		}
 
 		public boolean printDataForFees() {
-			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			feesIdDetailsDto.setFromDate(request.getParameter("fromdate"));

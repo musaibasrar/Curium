@@ -34,7 +34,9 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeesDetailsService {
 	
 	 	private HttpServletRequest request;
@@ -43,13 +45,6 @@ public class FeesDetailsService {
 	    private String BRANCHID = "branchid";
 	    private String USERID = "userid";
 	
-	public FeesDetailsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-       this.response = response;
-       this.httpSession = request.getSession();
-	}
-
-
 
 	public Feesdetails addFeesDetails() {
 		

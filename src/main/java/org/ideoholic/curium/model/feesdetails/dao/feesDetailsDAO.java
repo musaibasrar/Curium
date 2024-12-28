@@ -100,9 +100,10 @@ public class feesDetailsDAO {
                     Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
                     feesdetails = (Receiptinfo) query.uniqueResult();
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                } catch (Exception hibernateException) { logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
+                    transaction.rollback();
                 }finally {
         			HibernateUtil.closeSession();
         		}
