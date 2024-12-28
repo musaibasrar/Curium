@@ -25,6 +25,7 @@ public class StudentDiaryActionAdapter {
 
 	    @Autowired
 	    private HttpSession httpSession;
+	    
 	    private String BRANCHID = "branchid";
 	    private String USERLOGINID = "userloginid";
 	    private String CURRENTACADEMICYEAR = "currentAcademicYear";

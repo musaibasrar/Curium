@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -107,7 +108,7 @@ public class StudentService {
 
 		// Generate External Id
 		
-		if(student.getStream().equalsIgnoreCase("Admission")) {
+		if("Admission".equalsIgnoreCase(student.getStream())) {
 			 
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
 			
@@ -116,6 +117,8 @@ public class StudentService {
 	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
+	        } else {
+	        	student.setStudentexternalid(branchCode+""+String.format("%04d", 1));
 	        }
 			
 			student.setArchive(0);
@@ -123,7 +126,7 @@ public class StudentService {
     		student.setDroppedout(0);
     		student.setLeftout(0);
 			
-		}else if(student.getStream().equalsIgnoreCase("Registration")) {
+		}else if("Registration".equalsIgnoreCase(student.getStream())) {
 			
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
 			
@@ -139,7 +142,7 @@ public class StudentService {
 			student.setPassedout(1);
 			student.setDroppedout(1);
 			student.setLeftout(1);
-		}else if(student.getStream().equalsIgnoreCase("Alumni")) {
+		}else if("Alumni".equalsIgnoreCase(student.getStream())) {
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
 			
 			if(studentDB!=null) {
@@ -155,7 +158,9 @@ public class StudentService {
 			student.setPassedout(1);
 			student.setDroppedout(0);
 			student.setLeftout(0);
-		}
+		} else {
+			student.setStudentexternalid(branchCode+""+String.format("%06d", ThreadLocalRandom.current().nextInt(1000000)));
+        }
 		
 		//END of Generate External ID
 		
