@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.std.dto.StdOfClassDto;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,7 @@ public class StandardApiAction {
     }
 
     @PostMapping("/searchByClass")
-    public ResponseEntity<ResultResponse> searchByClass(@RequestBody StdOfClassDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
+    public ResponseEntity<ResultResponse> searchByClass(@RequestBody StdOfClassDto dto, @RequestHeader(value = Constants.BRANCHID) String branchId, @RequestHeader(value = Constants.CURRENTACADEMICYEAR) String currentAcademicYear) {
         ResultResponse result = standardService.searchByClass(dto, branchId, currentAcademicYear);
         return ResponseEntity.ok(result);
     }
@@ -103,19 +104,19 @@ public class StandardApiAction {
 
 
     @PostMapping("/deleteClassHierarchy")
-    public ResponseEntity<ClassesHierarchyDto> deleteClassHierarchy(@RequestBody ClassIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ClassesHierarchyDto> deleteClassHierarchy(@RequestBody ClassIdsDto dto, @RequestHeader(value = Constants.BRANCHID) String branchId) {
         standardService.deleteClassHierarchy(dto, branchId);
         return classHierarchy(branchId);
     }
 
     @PostMapping("/addClassHierarchy")
-    public ResponseEntity<ClassesHierarchyDto> addClassHierarchy(@RequestBody UpperLowerClassDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userid") String userId) {
+    public ResponseEntity<ClassesHierarchyDto> addClassHierarchy(@RequestBody UpperLowerClassDto dto, @RequestHeader(value = Constants.BRANCHID) String branchId, @RequestHeader(value = Constants.USERID) String userId) {
         standardService.addClassHierarchy(dto, branchId, userId);
         return classHierarchy(branchId);
     }
 
     @GetMapping("/classHierarchy")
-    public ResponseEntity<ClassesHierarchyDto> classHierarchy(@RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ClassesHierarchyDto> classHierarchy(@RequestHeader(value = Constants.BRANCHID) String branchId) {
         ClassesHierarchyDto classesHierarchyDto = new ClassesHierarchyDto();
         ResultResponse result = standardService.viewClasses(branchId);
         classesHierarchyDto.setClasssecList(result.getResultList());
@@ -125,7 +126,7 @@ public class StandardApiAction {
     }
 
     @GetMapping("/promoteClass")
-    public ResponseEntity<ResultResponse> promoteClass(@RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ResultResponse> promoteClass(@RequestHeader(value = Constants.BRANCHID) String branchId) {
         ResultResponse result = standardService.viewClasses(branchId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
@@ -134,7 +135,7 @@ public class StandardApiAction {
     }
 
     @PostMapping("/deleteClass")
-    public ResponseEntity<ResultResponse> deleteClass(@RequestBody ClassIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ResultResponse> deleteClass(@RequestBody ClassIdsDto dto, @RequestHeader(value = Constants.BRANCHID) String branchId) {
         ResultResponse result = standardService.deleteClasses(dto, branchId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
@@ -143,7 +144,7 @@ public class StandardApiAction {
     }
 
     @GetMapping("/viewClasses")
-    public ResponseEntity<ResultResponse> viewClasses(@RequestParam(value = "branchid") String branchId) {
+    public ResponseEntity<ResultResponse> viewClasses(@RequestParam(value = Constants.BRANCHID) String branchId) {
         ResultResponse result = standardService.viewClasses(branchId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
@@ -152,7 +153,7 @@ public class StandardApiAction {
     }
 
     @PostMapping("/createClass")
-    public ResponseEntity<ResultResponse> createClass(@RequestBody ClassDto classDto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId) {
+    public ResponseEntity<ResultResponse> createClass(@RequestBody ClassDto classDto, @RequestHeader(value = Constants.BRANCHID) String branchId, @RequestHeader(value = Constants.USERID) String userId) {
         ResultResponse result = standardService.createClass(classDto, branchId, userId);
         if(result.isSuccess()) {
             return ResponseEntity.ok(result);
