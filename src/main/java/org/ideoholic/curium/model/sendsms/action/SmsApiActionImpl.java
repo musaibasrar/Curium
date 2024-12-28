@@ -3,28 +3,21 @@
  */
 package org.ideoholic.curium.model.sendsms.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
-import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
-import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSResponseDto;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Musaib_2
@@ -36,10 +29,13 @@ public class SmsApiActionImpl implements SmsApiAction {
 
     @Autowired
     private StandardService standardService;
+    
     @Autowired
     private YearService yearService;
+    
     @Autowired
     private EmployeeService employeeService;
+    
     @Autowired
     private SmsService smsService;
 
@@ -92,7 +88,7 @@ public class SmsApiActionImpl implements SmsApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<SMSResponseDto> SMSDeliveryReport() {
+    public ResponseEntity<SMSResponseDto> smsDeliveryReport() {
         SMSResponseDto result = smsService.SMSDeliveryReport();
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
