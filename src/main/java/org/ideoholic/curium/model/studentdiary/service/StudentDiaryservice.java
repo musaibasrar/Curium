@@ -21,7 +21,9 @@ import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryDTO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentDiaryservice {
 	  private HttpServletRequest request;
       private HttpServletResponse response;
@@ -32,11 +34,6 @@ public class StudentDiaryservice {
        */
       private static final int BUFFER_SIZE = 4096;
   
-  public StudentDiaryservice(HttpServletRequest request, HttpServletResponse response) {
-          this.request = request;
- this.response = response;
- this.httpSession = request.getSession();
-  }
 
 	public void addDiary(AddStudentDiaryDto addStudentDiaryDto,String branchId,String userLoginId,String currentAcademicYear) {
 		// TODO Auto-generated method stub
