@@ -58,8 +58,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	private StudentService studentService;
 
 	@PostMapping("/applyConcession")
-	public ResponseEntity<StudentIdDto> applyConcession(@RequestBody ConcessionDto concessionDto) {
-		StudentIdDto studentIdDto = feesService.applyConcession(concessionDto);
+	public ResponseEntity<StudentIdDto> applyConcession(@RequestBody ConcessionDto concessionDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId) {
+		StudentIdDto studentIdDto = feesService.applyConcession(concessionDto, currentAcademicYear, branchId, userId);
 		return ResponseEntity.ok(studentIdDto);
 	}
 
