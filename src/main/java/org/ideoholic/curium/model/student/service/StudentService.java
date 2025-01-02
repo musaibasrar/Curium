@@ -304,8 +304,8 @@ public class StudentService {
 				if (fieldName.equalsIgnoreCase("studentscastecertno")) {
 					student.setStudentscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
-				if (fieldName.equalsIgnoreCase("studentscaste")) {
-					student.setStudentscaste(DataUtil.emptyString(request.getParameter(fieldName)));
+				if (fieldName.equalsIgnoreCase("caste")) {
+					student.setCaste(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
 				if (fieldName.equalsIgnoreCase("socialcategory")) {
 					student.setSocialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
@@ -1274,7 +1274,7 @@ public class StudentService {
 
 				}
 
-				if (fieldName.equalsIgnoreCase("caste")) {
+				if (fieldName.equalsIgnoreCase("studentscaste")) {
 					student.setCaste(DataUtil.emptyString(request.getParameter(fieldName)));
 				}
 

@@ -60,6 +60,7 @@ public interface StudentMapper {
     @Mapping(target = "admissiondate", expression = "java(DateUtil.indiandateParser(studentDto.getDateofadmission()))")
     @Mapping(target = "createddate", expression = "java(DateUtil.indiandateParser(studentDto.getCreateddate()))")
     @Mapping(target = "mothertongue", source = "motherT")
+    @Mapping(target = "caste", source = "caste")
     @Mapping(target = "crecorddate", expression = "java(DateUtil.indiandateParser(studentDto.getDateofcr()))")
     @Mapping(target = "placeofbirth", source = "place")
     @Mapping(target = "nooftc", source = "tcno")

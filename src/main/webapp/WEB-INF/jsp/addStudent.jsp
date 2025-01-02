@@ -999,7 +999,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td class="alignLeft">Students Caste &nbsp;</td>
-							<td ><label> <input name="studentscaste"
+							<td ><label> <input name="caste"
 							style="text-transform:capitalize;"
 									type="text" class="myclass" id="studentscaste" size="36">
 

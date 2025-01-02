@@ -49,7 +49,7 @@ public class StudentDto {
 	private String previouschooladdress;
 	private String urbanrural;
 	private String studentscastecertno;
-	private String studentscaste;
+	//private String studentscaste;
 	private String socialcategory;
 	private Integer belongtobpl;
 	private String bplcardno;
