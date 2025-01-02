@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML>
 
 <html>
@@ -407,7 +408,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/UserProcess/searchByDate";
+		form1.action = "/gnyanganga/FeesCollection/searchFeesCollectionDetailsClassWise";
 		form1.method = "POST";
 		form1.submit();
 
@@ -415,11 +416,11 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/gnyanganga/FeesDetails/printDataForFees";
+		form1.action = "/gnyanganga/FeesCollection/printDataForFees";
 		form1.method = "POST";
 		form1.submit();
-	}
-	
+}
+
 	
 	$(function() {
 
@@ -428,6 +429,16 @@
 			searchByDate();
 		});
 		$("#effect").hide();
+		
+		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
 
 	});
 	
@@ -444,17 +455,6 @@
              return false;
 
          });
-         
- 		$("#print").button({
-            icons:{
-                primary: "ui-icon-print"
-            }
-        }).click(function(){
-            printRecords();
-            return false;
-
-        });
- 		
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -497,7 +497,6 @@
 	 function checkFieldsButton() {
 		 
 			
-			var oneday = document.getElementById('datepicker').value;
 			var fromdate = document.getElementById('datepickerfrom').value;
 			var todate = document.getElementById('datepickerto').value;
 			
@@ -512,18 +511,9 @@
 		}
 
 	 
-	 function checkFieldsTo() {
-		 
-			
-				document.getElementById('datepicker').value = "";
-				
-				
-			}
 
 	 
 	 function checkFieldsFrom() {
-		 
-		 document.getElementById('datepicker').value = "";
 		 document.getElementById('datepickerto').value = "";
 		}
 	 
@@ -570,21 +560,46 @@
 </script>
 
 
-	<script type="text/javascript">
-					
-					var cancelreceipt = '<c:out default="" value="${cancelreceiptresult}"/>';
-		            
-		            if(cancelreceipt == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            	 });
-		            	 }else if(cancelreceipt == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            		 });
-		            	 }
-            
-        </script>
+        
+        <script>
+var xmlHttp;
+    var count;
+    function searchfeecategory() {
+		var classsearch=document.getElementById('classsearch').value;
+		var yoa=document.getElementById('yearofadmission').value;
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/gnyanganga/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
+			xmlHttp.send(null);
+		
+	}
+    
+	function stateChanged() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+    
+</script>
         
 </head>
 <%
@@ -625,20 +640,84 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						
+						
 						<tr>
-							<td width="20%" class="alignRight">Date: &nbsp;</td>
-							<td width="28%"><label> <input name="oneday"
-									type="text" class="textField" id="datepicker" size="36"
-									onfocus="checkFields()" value="${dayone}" autocomplete="false"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
+							<td width="20%" class="alignRight">Class &nbsp;</td>
+							<td width="20%"><label> 
+								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
 
-						<tr>
-							<td><br /></td>
+							</label> <label style="visibility: hidden;"> 
+									<select name="secsearch" id="secsearch"
+									style="width: 120px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
+							</label>
 						</tr>
+						
+							<tr>
+							<td><br /></td>
+
+						</tr>
+					
+					
 						<tr>
-						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
+                    
+                        <td width="20%" class="alignRight">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        
+                        	<td  width="20%">
+                        	   <label>
+                                         <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<option>2023/24</option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										</select>
+                              </label>
+                        </td>
+                        
+                    </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    <tr>
+							<td width="20%" class="alignRight">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							<br/>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							</td>
+							
 						</tr>
 						
 						<tr>
@@ -654,7 +733,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
-									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									value="${dateto}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
@@ -665,6 +744,27 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
+						
+						<!-- <tr>
+							<td width="20%" class="alignRight">Mode of Payment &nbsp;&nbsp;</td>
+							<td ><label> <select name="modeofpayment"
+									id="modeofpayment" style="width: 240px">
+										<option selected></option>
+										<option value="Bank Transfer">Bank</option>
+										<option value="Cash">Cash</option>
+								</select>
+
+							</label></td>
+							
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr> -->
 						
 						<!-- <tr>
 							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
@@ -715,40 +815,46 @@ for(Cookie cookie : cookies){
 
 				<thead>
                         <tr>
-                            <th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Fee</th>
-                            <th title="click to sort" class="headerText">Fine</th>
-                            <th title="click to sort" class="headerText">Misc</th>
-                            <th title="click to sort" class="headerText">Grand Total</th>
-                            <th title="click to sort" class="headerText">View Details</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
-
-
+                            <!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+                            <!-- <th title="click to sort" class="headerText">Date of fees</th> -->
+                            <th title="click to sort" class="headerText">Student Name</th>
+                            <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Details</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${FeesCollectionDetailsClassWise}" var="feesdetails">
 
-                              <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <%-- <td class="dataText"><input type="checkbox" checked="checked"
+								id="<c:out value="1"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.paymenttype}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/gnyanganga/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/gnyanganga/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
-
+								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td> --%>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.classstudying}"/></td>
+                                 <td  class="dataText">
+                                <c:forEach items="${feesdetails.feescollection}" var="feescollection">
+                                	<c:set var="splt" value="${fn:split(feescollection,':')}"/>
+                                	<table>
+										<tr>
+											<td>
+												Receipt No: <c:out value="${splt[2]}" />&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td>
+												Date: <c:out value="${splt[3]}" />&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td>
+												Fees Category: <c:out value="${splt[0]}" />&nbsp;&nbsp;&nbsp;
+											</td>
+											<td>
+												Amount: <c:out value="${splt[1]}" />&nbsp;&nbsp;&nbsp;
+											</td>
+										</tr>
+									</table>
+									<hr />
+                                </c:forEach>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -764,8 +870,8 @@ for(Cookie cookie : cookies){
 							</label> -->
 							<input value="Print" style="width: 35px;"
 							id="print"/>
-						<input value="Export"
-							type="submit" id="export"/></td>
+						<!-- <input value="Export"
+							type="submit" id="export"/> --></td>
 							
 							
 

@@ -271,7 +271,7 @@
     
     function saveReceipt(){
     	
-    	if(document.getElementById("dramount").vlaue == 0 || document.getElementById("cramountsecond").value == 0){
+    	if(document.getElementById("dramount").value == 0 || document.getElementById("cramountsecond").value == 0){
       	  alert('Voucher with zero amount cannot be saved!');
         }else if(document.getElementById("dramount").value != document.getElementById("cramountsecond").value){
         	alert('Credits must be equal to Debits.');
@@ -291,7 +291,7 @@
     
     function savePayment(){
     	
-    	if(document.getElementById("dramountpayment").vlaue == 0 || document.getElementById("cramountpaymentsecond").value == 0){
+    	if(document.getElementById("dramountpayment").value == 0 || document.getElementById("cramountpaymentsecond").value == 0){
         	  alert('Voucher with zero amount cannot be saved!');
           }else if(document.getElementById("dramountpayment").value != document.getElementById("cramountpaymentsecond").value){
           	alert('Credits must be equal to Debits.'); 	

@@ -610,4 +610,10 @@ public class JspController {
 	public String getFeesReportBusFees() {
 		return "feesreportbusfees";
 	}
+	
+	@GetMapping("/printfeescollectiondetailsclasswise")
+	public String getPrintFeesCollectionDetailsClassWise() {
+		return "printfeescollectiondetailsclasswise";
+	}
+	
 }

@@ -405,4 +405,23 @@ public class feesCollectionDAO {
 		}
 	}
 
+	public List<Feescollection> getFeesCollectionDetails(String queryMain) {
+		List<Feescollection> feesDetails = new ArrayList<Feescollection>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            feesDetails = (java.util.List<Feescollection>) HQLquery.list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }
+        finally {
+			HibernateUtil.closeSession();
+		 }
+        return feesDetails;
+	}
+
 }

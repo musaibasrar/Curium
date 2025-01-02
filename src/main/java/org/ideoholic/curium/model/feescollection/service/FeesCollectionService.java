@@ -37,6 +37,7 @@ import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesCollectionClassWiseReport;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
@@ -969,7 +970,7 @@ public class FeesCollectionService {
 				
 				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
 				String feesDetails = "";
-				String concessionFeesDetails = "";
+				String concessionFeesDetails = " ";
 				Long dueAmount = 0l;
 				Long totalAmount = 0l;
 				
@@ -991,6 +992,7 @@ public class FeesCollectionService {
 								 DataUtil.emptyString(studentFeesReport.getParents().getFathersname()),
 								 DataUtil.emptyString(studentFeesReport.getParents().getContactnumber()),
 								 DataUtil.emptyString(feesDetails),
+								 concessionFeesDetails,
 								 String.valueOf(dueAmount),
 								 String.valueOf(totalAmount) });
 				i++;
@@ -2100,6 +2102,141 @@ public class FeesCollectionService {
 		}
 		return true;
 	}
+
+	public void getFeesCollectionDetailsClassWise() {
+		
+		
+		String academicYear = request.getParameter("academicyear");
+		String[] feesCat = request.getParameterValues("feescategory");
+		List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+		List<Feescollection> feeCollectionList = new ArrayList<Feescollection>();
+		List<StudentFeesCollectionClassWiseReport> studentFeesCollectionClassWiseReportList = new ArrayList<StudentFeesCollectionClassWiseReport>();
+		//Get Students
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String[] addClass = request.getParameterValues("classsearch");
+		StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (String classOne : addClass) {
+				
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+				
+				i++;
+			}
+		
+		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String querySub = "";
+
+		if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		//End Students
+		
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+			for (Parents parents : searchStudentList) {
+				
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+				
+				long id = parents.getStudent().getSid();
+				
+				List<Integer> feesCatList = new ArrayList<>(); 
+				for (String feescat : feesCat) {
+					feesCatList.add(Integer.parseInt(feescat));
+				}
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				
+				if (feesstructure.size() > 0) {
+					
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesstructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
+			}
+		
+			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+		}
+		
+		
+		/// **************************************************************************** ///
+		
+
+		for (StudentFeesReport studentFeesStructureDetails : studentFeesReportList) {
+			
+			
+			String queryMain ="From Feescollection as feescollection where feescollection.sid="+studentFeesStructureDetails.getParents().getStudent().getSid()+" and feescollection.branchid="+studentFeesStructureDetails.getParents().getStudent().getBranchid()+" AND";
+			String toDate= DataUtil.emptyString(request.getParameter("todate"));
+			String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+			
+				String querySub = "";
+				
+				if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+					querySub = " feescollection.date between '"+fromDate+"' AND '"+toDate+"'";
+					httpSession.setAttribute("datefrom", fromDate);
+					httpSession.setAttribute("dateto", toDate);
+					httpSession.setAttribute("dayone", "");
+				}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
+						!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
+					querySub = " feescollection.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
+				}
+				
+				queryMain = queryMain+querySub;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				System.out.println("SEARCH QUERY ***** "+queryMain);
+				feeCollectionList = new feesCollectionDAO().getFeesCollectionDetails(queryMain);
+				
+				if(!feeCollectionList.isEmpty()) {
+					Receiptinfo  receiptInfo = new feesCollectionDAO().getReceiptInfoDetails(feeCollectionList.get(0).getReceiptnumber());
+					StudentFeesCollectionClassWiseReport studentFeesCollectionClassWiseReport = new StudentFeesCollectionClassWiseReport();
+					List<String> fcList = new ArrayList<String>();
+					
+					if(receiptInfo.getCancelreceipt()==0) {
+						
+						for (Feescollection feesCollectionSingle : feeCollectionList) {
+							List<Studentfeesstructure> feesStructureList = studentFeesStructureDetails.getStudentFeesStructure();
+							Feescollection fc = new Feescollection();
+							for (Studentfeesstructure feesStructureSingle : feesStructureList) {
+								int feeCollSid = feesCollectionSingle.getSfsid();
+								int feesStructureSid = feesStructureSingle.getSfsid();
+								
+								
+								if(feeCollSid==feesStructureSid) {
+									fcList.add(feesStructureSingle.getFeescategory().getFeescategoryname()+":"+feesCollectionSingle.getAmountpaid()+":"+feesCollectionSingle.getReceiptnumber()+":"+feesCollectionSingle.getDate());
+								}
+							}
+							
+						}
+					}
+					studentFeesCollectionClassWiseReport.setParents(studentFeesStructureDetails.getParents());
+					studentFeesCollectionClassWiseReport.setFeescollection(fcList);
+					studentFeesCollectionClassWiseReportList.add(studentFeesCollectionClassWiseReport);
+				}
+			
+		}
+		
+			httpSession.setAttribute("FeesCollectionDetailsClassWise", studentFeesCollectionClassWiseReportList);
+		
+	  }
 
 }
 

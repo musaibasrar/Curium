@@ -574,9 +574,6 @@ public class UserService {
 			
 			if(!modeOfPayment.equalsIgnoreCase("")){
 				querySub = querySub +" AND feesdetails.paymenttype = '"+modeOfPayment+"'" ;
-				 httpSession.setAttribute("modeofpayment", modeOfPayment);
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("modeofpayment")))) {
-				querySub = querySub +" AND feesdetails.paymenttype = '"+(String) httpSession.getAttribute("modeofpayment")+"'" ;
 			}
 			
 			queryMain = queryMain+querySub;
@@ -588,7 +585,7 @@ public class UserService {
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
-			Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+			Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
@@ -596,7 +593,7 @@ public class UserService {
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
-				feesMap.put(student, receiptinfo);
+				feesMap.put(receiptinfo, student);
 			}
 			
 			httpSession.setAttribute("searchfeesdetailslist", feesMap);

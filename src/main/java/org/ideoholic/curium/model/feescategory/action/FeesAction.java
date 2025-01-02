@@ -247,6 +247,14 @@ public class FeesAction {
 		new FeesService(request, response).searchOtherFeesWaiveofforConcessionReport("concession");
 		return "otherfeesconcessionreport";
 	}
+	
+	
+	@GetMapping("/feesCollectionDetailsClassWise")
+	public String feesCollectionDetailsClassWise() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
+		return "feesCollectionDetailsClassWise";
+	}
 
 
 }

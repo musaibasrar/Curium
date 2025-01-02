@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Fees Collection Details Category Report</title>
+<title>Print Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -101,7 +101,7 @@
 
 .datatd, .datath {
     border: 1px solid #000000;
-    text-align: center;
+    text-align: left;
     padding: 8px;
 }
 
@@ -225,22 +225,22 @@
 
 
 <body style="text-align: center" class="bodymargin">
+<fmt:setLocale value="en_IN" scope="session"/>
 	<form method="post" class="bodymargin">
-	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/gnyanganga/images/gnyanganga.jpg" width="70" height="80"/>
+				<img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Income Report</label><br>
-				<label class="addressLineTwo">From: ${datefrom}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${dateto}</label><br>
+				<label class="addressLine">Fees Collection Details Report</label><br>
+				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
 	</table>
 
-			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -252,80 +252,74 @@
             <thead>
  				 <tr>
  				 		<th class=datath>Sl.No.</th>
- 				 		<th class=datath>Fees Category</th>
-						<th class="datath">Fees Amount</th>
+ 				 		<th class=datath>Student Name</th>
+						<th class="datath">Class</th>
+						<th class="datath">Details</th>
  				 </tr>
  			 </thead>
- 		 
 			<tbody>
-					<fmt:setLocale value="en_IN" scope="session"/>
-					<c:set var="total" value="${0}" />
-					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap" varStatus="status">
-					
+					<c:forEach items="${FeesCollectionDetailsClassWise}" var="feesdetails" varStatus="status">
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feeCategoryCollectionMap.key}" />
+							<td class="datatd"><c:out value="${ffeesdetails.parents.student.name}" />
 							</td>
-							<td class="datatd" style="text-align: right;">
-							<fmt:formatNumber type="currency"  value="${feeCategoryCollectionMap.value}" />
+							<td class="datatd"><c:out	value="${feesdetails.parents.student.classstudying}" /></td>
+							<td class="datatd">
 							
-							<c:set var="total" value="${total + feeCategoryCollectionMap.value}" />
+							<c:forEach items="${feesdetails.feescollection}" var="feescollection">
+                                	<c:set var="splt" value="${fn:split(feescollection,':')}"/>
+                                	<table>
+										<tr>
+											<td>
+												Receipt No: <c:out value="${splt[2]}" />&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td>
+												Date: <c:out value="${splt[3]}" />&nbsp;&nbsp;&nbsp;	
+												 <%-- <fmt:formatDate type="date" value="${splt[3]}" pattern="dd/MM/yyyy"/> --%>
+											</td>
+											<td>
+												Fees Category: <c:out value="" />&nbsp;&nbsp;&nbsp;
+											</td>
+											<td>
+												Amount: <c:out value="${splt[1]}" />&nbsp;&nbsp;&nbsp;
+											</td>
+										</tr>
+									</table>
+									<hr />
+                                </c:forEach>
+							
 							</td>
-					</tr>
+						</tr>
 						
 					</c:forEach>
-					<tr>
-						<td class="datatd">
+					<%-- <tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Total</b>
+							</label> 
 							</td>
-						<td class="datatd">Total Fees Paid by Cash - Fees</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByCashSingle}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
+							</b>
+							</label>
 							</td>
-						<td class="datatd">Total Fees Paid by Bank - Fees</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByBankSingle}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Fees Paid by Cash - Bus Fees</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByCashSingleBusFees}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Fees Paid by Bank - Bus Fees</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesByBankSingleBusFees}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Other Fees Paid by Cash</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbycashotherfees}" /></td>
-					</tr>
-					<tr>
-						<td class="datatd">
-							</td>
-						<td class="datatd">Total Other Fees Paid by Bank</td>
-						<td class="datatd" style="text-align: right;"><fmt:formatNumber type="currency"  value="${feesbybankotherfees}" /></td>
-					</tr>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="datatd">
-							</td>
-							<td class="datatd" style="text-align: right;font-weight: bold;">Total
-							</td>
-							<td class="datatd" style="text-align: right;font-weight: bold;">
-							<fmt:formatNumber type="currency"  value="${total}" />
-							</td>
-					</tr>
+					</tr> --%>
 			</tbody>
 				</table>
-			<br>
+			
+				<br>
+			
 			
 				
 			<div style="page-break-inside: avoid;" align="center">
