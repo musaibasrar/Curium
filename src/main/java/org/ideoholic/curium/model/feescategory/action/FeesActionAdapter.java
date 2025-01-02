@@ -62,7 +62,7 @@ public class FeesActionAdapter {
 			concessionDto.setRequestParams(allRequestParameters);
 
 		
-			StudentIdDto studentIdDto = feesService.applyConcession(concessionDto);
+			StudentIdDto studentIdDto = feesService.applyConcession(concessionDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 			 String studentId = studentIdDto.getStudentId();
 			 return studentId;
 			 

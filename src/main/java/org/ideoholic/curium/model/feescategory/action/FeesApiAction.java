@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface FeesApiAction {
 
-	 ResponseEntity<StudentIdDto> applyConcession(@RequestBody ConcessionDto concessionDto); 
+	 ResponseEntity<StudentIdDto> applyConcession(@RequestBody ConcessionDto concessionDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId); 
 
 	 ResponseEntity<String> printFeesWaiveoffReport(); 
 
