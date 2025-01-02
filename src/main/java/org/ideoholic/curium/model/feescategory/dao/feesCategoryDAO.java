@@ -174,7 +174,7 @@ public class feesCategoryDAO {
 		}
 	}
 
-	public void applyConcession(List<Concession> concessionList, String sid) {
+	public void applyConcession(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
 		
 		try {
 			transaction = session.beginTransaction();
@@ -184,6 +184,40 @@ public class feesCategoryDAO {
 				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
 				queryAcademicFees.executeUpdate();
 			}
+			
+			
+			
+			
+			//accounts
+			for (VoucherEntrytransactions transactions : transactionsReverseList) {
+				session.save(transactions);
+			}
+			
+			for (VoucherEntrytransactions transactions : transactionsApplyList) {
+				session.save(transactions);
+			}
+			
+			for (String updateDrAccountReverse : updateDrAccountReverseList) {
+				Query queryAccountsReverse = session.createQuery(updateDrAccountReverse);
+				queryAccountsReverse.executeUpdate();
+			}
+			
+			for (String updateCrAccountReverse : updateCrAccountReverseList) {
+				Query queryAccountsReverse = session.createQuery(updateCrAccountReverse);
+				queryAccountsReverse.executeUpdate();
+			}
+			
+			for (String updateDrAccountApply : updateDrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
+			for (String updateCrAccountApply : updateCrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
+			
 			transaction.commit();
 		} catch (Exception hibernateException) {
 			transaction.rollback(); 
