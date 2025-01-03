@@ -152,7 +152,7 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 
-							<!-- <td>
+							 <td>
 								<a target="mainFrame"
 								href="/greatindiaacademy/AccountProcess/createVoucher"> <img
 									src="/greatindiaacademy/images/createvoucher.svg" width="18" height="18"
@@ -160,7 +160,14 @@ for(Cookie cookie : cookies){
 									Create Voucher
 								</a>
 							</td>
-
+							
+							
+							<td ><a target="mainFrame"
+								href="/greatindiaacademy/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/greatindiaacademy/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Admin Expense
+							</a></td>
+							<!--
 							<td ><a target="mainFrame" href="/greatindiaacademy/feesCollectionDetails"><img  alt="Fees Details" src="/greatindiaacademy/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
 
@@ -173,12 +180,6 @@ for(Cookie cookie : cookies){
 							<td ><a target="leftFrame" href="/greatindiaacademy/leftsettings_officeadmin">
 									<img alt="Settings" src="/greatindiaacademy/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/greatindiaacademy/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/greatindiaacademy/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
 							</a></td>
 
 							<td ><a target="mainFrame" href="/greatindiaacademy/sendsms"><img

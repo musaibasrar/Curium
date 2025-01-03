@@ -746,19 +746,6 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataText"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
-							
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
-							<td class="dataText"><c:out
-										value="${Parents.student.studentexternalid}" /></a></td>	
 							<td class="dataText"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>

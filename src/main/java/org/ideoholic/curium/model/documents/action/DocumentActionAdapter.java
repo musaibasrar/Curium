@@ -66,6 +66,7 @@ public class DocumentActionAdapter {
 		ParentListResponseDto studentListAaResponseDto = documentService
 				.admissionAbstract(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListaa", studentListAaResponseDto.getParentsList());
+		request.setAttribute("classdetailslist", studentListAaResponseDto.getClasssecList());
 		return studentListAaResponseDto.isSuccess();
 	}
 

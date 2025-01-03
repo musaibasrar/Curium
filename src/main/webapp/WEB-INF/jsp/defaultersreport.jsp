@@ -718,23 +718,8 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
 								<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
-										<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${studentfeesreportlist.parents.student.classstudying}" /></td>

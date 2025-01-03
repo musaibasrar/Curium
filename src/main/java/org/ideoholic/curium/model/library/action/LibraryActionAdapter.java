@@ -89,7 +89,7 @@ public class LibraryActionAdapter {
 
 		BooksResponseDto response = libraryService.searchstudentBook(
 				BooksRequestDto.builder()
-				.transactionDate(request.getParameter("studentexternalid"))
+				.studentExternalId(request.getParameter("studentexternalid"))
 				.build());
 
 		request.setAttribute("bookslist", response.getBooksList());

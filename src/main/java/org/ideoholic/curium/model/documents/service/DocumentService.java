@@ -53,7 +53,7 @@ public class DocumentService {
 
 	@Autowired
 	private StandardService standardService;
-
+	@Autowired
 	private HttpServletResponse response;
 	
 	
@@ -325,7 +325,7 @@ public class DocumentService {
 				e.printStackTrace();
 			}
 		}
-		studentListAaResponseDto.setSuccess(false);
+		
 		return studentListAaResponseDto;
 	
 	}

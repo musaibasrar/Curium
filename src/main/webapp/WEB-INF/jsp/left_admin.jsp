@@ -714,22 +714,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alirfan/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alirfan/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alirfan/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alirfan/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
             			</td>
             		</tr>
                 </table>
@@ -991,7 +991,7 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
-             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+           <!--   <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -1007,7 +1007,7 @@ for(Cookie cookie : cookies){
             			
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
