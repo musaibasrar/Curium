@@ -36,7 +36,7 @@ public interface FeesApiAction {
 
 	 ResponseEntity<ResultResponse> feesConcessionReport(@RequestHeader(value = "branchid") String branchId);
 
-	ResponseEntity<StudentIdDto> waiveOffFees(@RequestBody ConcessionDto concessionDto );
+	ResponseEntity<StudentIdDto> waiveOffFees(@RequestBody ConcessionDto concessionDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId );
 
 	ResponseEntity<FeescategoryDetailDto> feesReport(@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 

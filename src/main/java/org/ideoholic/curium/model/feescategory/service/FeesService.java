@@ -299,7 +299,7 @@ public class FeesService {
 	 * }
 	 */
     
-    public StudentIdDto waiveOffFees(ConcessionDto concessionDto) {
+    public StudentIdDto waiveOffFees(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
         
     	StudentIdDto studentIdDto = new StudentIdDto();
         String[] idfeescategory = concessionDto.getSfsid();
@@ -307,6 +307,9 @@ public class FeesService {
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
+        List<VoucherEntrytransactions> transactionsApplyList = new ArrayList<VoucherEntrytransactions>();
+        List<String> updateDrAccountApplyList = new ArrayList<String>();
+        List<String> updateCrAccountApplyList = new ArrayList<String>();
         
         String studentId = concessionDto.getId();
         
@@ -326,9 +329,44 @@ public class FeesService {
                             con.setConcessionOld(concessionDto.getRequestParams().get("waiveoff:"+Integer.valueOf(test[0])));
                             con.setConcession(dueAmount);
                             concessionList.add(con);
+                            
+                            
+                          //Accounts
+                    		//Pass J.V. : credit the Fees as income & debit the cash
+                    		
+                            //Apply New Concession
+                            BigDecimal grandTotalConcessionApply = new BigDecimal(con.getConcession());
+                            if(grandTotalConcessionApply.compareTo(BigDecimal.ZERO)==1) {
+                    		int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
+                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));;
+                    		
+                    		VoucherEntrytransactions transactionsApply = new VoucherEntrytransactions();
+                    		
+                    		transactionsApply.setDraccountid(drAccount);
+                    		transactionsApply.setCraccountid(crFees);
+                    		transactionsApply.setDramount(grandTotalConcessionApply);
+                    		transactionsApply.setCramount(grandTotalConcessionApply);
+                    		transactionsApply.setVouchertype(4);
+                    		transactionsApply.setTransactiondate(DateUtil.todaysDate());
+                    		transactionsApply.setEntrydate(DateUtil.todaysDate());
+                    		transactionsApply.setNarration("Towards Fees Waiveoff");
+                    		transactionsApply.setCancelvoucher("no");
+                    		transactionsApply.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                    		transactionsApply.setBranchid(Integer.parseInt(branchId));
+                    		transactionsApply.setUserid(Integer.parseInt(userId));
+                    		
+                    		String updateDrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+drAccount;
+
+                    		String updateCrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+crFees;
+                    		
+                    		updateDrAccountApplyList.add(updateDrAccountApply);
+                    		updateCrAccountApplyList.add(updateCrAccountApply);
+                    		transactionsApplyList.add(transactionsApply);
+                            }
+                    		// End J.V
                         
                }
-           new feesCategoryDAO().waiveOffFees(concessionList,studentId);
+           new feesCategoryDAO().waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }

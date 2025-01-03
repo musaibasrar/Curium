@@ -93,7 +93,7 @@ public class FeesActionAdapter {
 			concessionDto.setRequestParams(allRequestParameters);
 
 		
-			StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto);
+			StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 			 String studentId = studentIdDto.getStudentId();
 			 return studentId;
 

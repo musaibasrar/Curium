@@ -98,8 +98,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	}
 
 	@PostMapping("/waiveOffFees")
-	public ResponseEntity<StudentIdDto> waiveOffFees(@RequestBody ConcessionDto concessionDto ) {
-		StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto);
+	public ResponseEntity<StudentIdDto> waiveOffFees(@RequestBody ConcessionDto concessionDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear, @RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userloginid") String userId ) {
+		StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto, currentAcademicYear, branchId, userId);
 		return ResponseEntity.ok(studentIdDto);
 	}
 

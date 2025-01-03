@@ -154,7 +154,7 @@ public class feesCategoryDAO {
 	 * }finally { HibernateUtil.closeSession(); } }
 	 */
 	
-	public void waiveOffFees(List<Concession> concessionList, String sid) {
+	public void waiveOffFees(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
 		
 		try {
 			transaction = session.beginTransaction();
@@ -164,6 +164,23 @@ public class feesCategoryDAO {
 				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
 				queryAcademicFees.executeUpdate();
 			}
+			
+			//accounts
+			
+			for (VoucherEntrytransactions transactions : transactionsApplyList) {
+				session.save(transactions);
+			}
+			
+			for (String updateDrAccountApply : updateDrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
+			for (String updateCrAccountApply : updateCrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
 			transaction.commit();
 		} catch (Exception hibernateException) {
 			transaction.rollback(); 
