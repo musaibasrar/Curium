@@ -117,6 +117,7 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	<div style="border:1px solid black;">
 		<br>
 		<table align="center">
 			
@@ -199,7 +200,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His Date of Birth is &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+					<span style="font-weight: bold;text-transform: capitalize;"><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/> </span>
 					and Religion is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:200px;"> <c:out value="${studentdetailsbonafide.student.religion}" /></span></h3>
 				</td>
 			</tr>
@@ -241,6 +242,7 @@ for(Cookie cookie : cookies){
               <td align="center"><a id="print" href="/gnyanganga/DocumentsProcess/printStudyCertificate">Print</a></td>
             </tr>
 		</TABLE>
+		</div>
 	</form>
 </body>
 </html>
