@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RequestMapping("/api/v1/StudentDiaryProcess")
+@RequestMapping("/api/v1/studentDiaryProcess")
 public interface StudentDiaryApiAction {
 	
 	@GetMapping("/getdiarystudent")
@@ -34,9 +34,14 @@ public interface StudentDiaryApiAction {
 	public ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId, @RequestParam(value="page")
 	String page);
 	
-	@RequestMapping(value = "/viewDiaryStudentParent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto,
-			@RequestHeader(value = "branchid") String branchId);
+	@GetMapping(value = "/viewDiaryStudentParent")
+	  public ResponseEntity<DiaryResponseDto> viewDiaryStudentParentGet(@RequestParam(value="page") String page, @RequestParam(value="studentId") String studentId,
+	      @RequestHeader(value = "branchid") String branchId);
+	
+	@PostMapping(value = "/viewDiaryStudentParent")
+	  public ResponseEntity<DiaryResponseDto> viewDiaryStudentParentPost(@RequestBody StudentIdPageDto studentIdPageDto,
+	      @RequestHeader(value = "branchid") String branchId);
+	
 	@PostMapping("/deleteRecord")
 	public ResponseEntity<DiaryResponseDto>  deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,@RequestParam(value="page")
 	String page,
@@ -45,8 +50,9 @@ public interface StudentDiaryApiAction {
 	@PostMapping("/diarySaved")
 	public ResponseEntity<String> diarySaved();
 	
-	@PostMapping("/ViewDiaryDetails")
+	@PostMapping("/viewDiaryDetails")
 	public ResponseEntity<DiaryDetailsMessageResponseDto> ViewDiaryDetails(@RequestBody StudentIdDto studentIdDto) ;
-	@PostMapping("/ViewDiaryDetailsParent")
+	
+	@PostMapping("/viewDiaryDetailsParent")
 	public ResponseEntity<DiaryDetailsMessageResponseDto> ViewDiaryDetailsParent(@RequestBody StudentIdDto studentIdDto);
 }

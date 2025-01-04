@@ -72,7 +72,7 @@ public class DiaryActionAdapter {
     }
     public boolean viewDetailsOfDiaryMessage() {
         StudentIdDto studentIdDto =new StudentIdDto();
-        studentIdDto.setStudentId(request.getParameter("id").toString());
+        studentIdDto.setDiaryId(request.getParameter("id").toString());
         DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
         httpSession.setAttribute("diary", viewDetailsOfDiaryMessageResponseDto.getDiary());
         return viewDetailsOfDiaryMessageResponseDto.isSuccess();

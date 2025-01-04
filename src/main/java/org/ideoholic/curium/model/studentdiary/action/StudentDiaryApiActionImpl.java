@@ -33,14 +33,12 @@ public class StudentDiaryApiActionImpl implements StudentDiaryApiAction {
     @Autowired
     private StudentService studentService;
 	
-	@GetMapping("/getdiarystudent")
 	public ResponseEntity<ParentListResponseDto> getdiarystudent(@RequestParam(value="page")
 	String page,@RequestHeader(value = "branchid") String branchId) {
 		ParentListResponseDto result = studentService.viewAllStudentsParents(page,branchId);
 		return ResponseEntity.ok(result);
 	}
 	
-	@PostMapping("/addDiary")
 	public ResponseEntity addDiary(@RequestBody AddStudentDiaryDto addStudentDiaryDto,
 			@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,
@@ -51,20 +49,28 @@ public class StudentDiaryApiActionImpl implements StudentDiaryApiAction {
 	}
 	
 	
-	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId, @RequestParam(value="page")
 	String page) {
 		DiaryResponseDto result = studentDiaryservice.viewDiary(branchId, page);
 		return ResponseEntity.ok(result);
 	}
 	
-	@RequestMapping(value = "/viewDiaryStudentParent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto,
-			@RequestHeader(value = "branchid") String branchId) {
-		DiaryResponseDto result = studentDiaryservice.viewDiaryParent(studentIdPageDto, branchId);
-		return ResponseEntity.ok(result);
-	}
-	@PostMapping("/deleteRecord")
+	  public ResponseEntity<DiaryResponseDto> viewDiaryStudentParentGet(@RequestParam(value="page") String page, @RequestParam(value="studentId") String studentId,
+	      @RequestHeader(value = "branchid") String branchId) {
+	        StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
+	        studentIdPageDto.setPage(page);
+	        studentIdPageDto.setStudentId(studentId);
+	        
+	    DiaryResponseDto result = studentDiaryservice.viewDiaryParent(studentIdPageDto, branchId);
+	    return ResponseEntity.ok(result);
+	  }
+
+	  public ResponseEntity<DiaryResponseDto> viewDiaryStudentParentPost(@RequestBody StudentIdPageDto studentIdPageDto,
+	      @RequestHeader(value = "branchid") String branchId) {
+	    DiaryResponseDto result = studentDiaryservice.viewDiaryParent(studentIdPageDto, branchId);
+	    return ResponseEntity.ok(result);
+	  }
+	
 	public ResponseEntity<DiaryResponseDto>  deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,@RequestParam(value="page")
 	String page,
 	@RequestHeader(value = "branchid") String branchId) {
@@ -72,11 +78,11 @@ public class StudentDiaryApiActionImpl implements StudentDiaryApiAction {
 		DiaryResponseDto result = studentDiaryservice.viewDiary(page,branchId);
 		return ResponseEntity.ok(result);
 	}
-	@PostMapping("/diarySaved")
+	
 	public ResponseEntity<String> diarySaved() {
 		return ResponseEntity.ok("viewdiarystudent");
 	}
-	@PostMapping("/ViewDiaryDetails")
+	
 	public ResponseEntity<DiaryDetailsMessageResponseDto> ViewDiaryDetails(@RequestBody StudentIdDto studentIdDto) {
 		DiaryDetailsMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if(result.isSuccess()) {
@@ -86,7 +92,7 @@ public class StudentDiaryApiActionImpl implements StudentDiaryApiAction {
 		throw new CustomResponseException(CustomErrorMessage.ERROR);
 		}
 		}
-	@PostMapping("/ViewDiaryDetailsParent")
+	
 	public ResponseEntity<DiaryDetailsMessageResponseDto> ViewDiaryDetailsParent(@RequestBody StudentIdDto studentIdDto) {
 		DiaryDetailsMessageResponseDto result = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
 		if(result.isSuccess()) { 
