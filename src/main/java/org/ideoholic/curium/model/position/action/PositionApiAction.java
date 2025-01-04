@@ -7,7 +7,7 @@ import org.ideoholic.curium.util.Constants;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/positionProcess")
+@RequestMapping("/api/v1/positionProcess")
 public interface PositionApiAction {
 
     @PostMapping("/deleteMultiple")
