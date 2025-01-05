@@ -106,16 +106,49 @@ public class StudentService {
 		}
 
 		// Generate External Id
-		
-		if(student.getStream().equalsIgnoreCase("Admission")) {
+		String applicationType = DataUtil.emptyString(student.getStream()); 
+		if(applicationType.equalsIgnoreCase("Admission")) {
 			 
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
 			
 			if(studentDB!=null) {
-	        	String UID = studentDB.getStudentexternalid();
-	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
-	            student.setStudentexternalid(studentExternalId);
+				
+				
+
+				String yearOfAdmission = student.getYearofadmission();
+
+				// Generate "yoa" by removing the century part and concatenating the parts
+				String yoa = yearOfAdmission.replace("/", "").substring(2);
+
+				if (student != null) {
+				    String lastUID = studentDB.getStudentexternalid();
+				    String studentExtId;
+
+				    if (lastUID != null && lastUID.contains("-")) {
+				        // Handle standard format (e.g., "2526-012")
+				        String[] partsLastUID = lastUID.split("-");
+				        String lastUIDYear = partsLastUID[0];
+				        int lastUIDNumber = Integer.parseInt(partsLastUID[1]);
+
+				        // Check if the year matches and increment the number or reset to 1
+				        int newUIDNumber = (yoa.equals(lastUIDYear)) ? lastUIDNumber + 1 : 1;
+
+				        // Generate the new student external ID
+				        studentExtId = yoa + "-" + String.format("%03d", newUIDNumber);
+				    } else {
+				        // Handle non-standard format (e.g., "1800")
+				        studentExtId = yoa + "-001";
+				    }
+
+				    // Set the new student external ID
+				    student.setStudentexternalid(studentExtId);
+				}
+				/*
+				 * String UID = studentDB.getStudentexternalid(); int studentSeq =
+				 * Integer.parseInt(UID.substring(UID.length() - 4))+1; String studentExternalId
+				 * = branchCode+""+String.format("%04d", studentSeq);
+				 * student.setStudentexternalid(studentExternalId);
+				 */
 	        }
 			
 			student.setArchive(0);
@@ -123,7 +156,7 @@ public class StudentService {
     		student.setDroppedout(0);
     		student.setLeftout(0);
 			
-		}else if(student.getStream().equalsIgnoreCase("Registration")) {
+		}else if(applicationType.equalsIgnoreCase("Registration")) {
 			
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
 			
@@ -139,7 +172,7 @@ public class StudentService {
 			student.setPassedout(1);
 			student.setDroppedout(1);
 			student.setLeftout(1);
-		}else if(student.getStream().equalsIgnoreCase("Alumni")) {
+		}else if(applicationType.equalsIgnoreCase("Alumni")) {
 			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
 			
 			if(studentDB!=null) {
@@ -153,6 +186,11 @@ public class StudentService {
 			student.setYearofadmission("");
 			student.setArchive(0);
 			student.setPassedout(1);
+			student.setDroppedout(0);
+			student.setLeftout(0);
+		}else {
+			student.setArchive(0);
+			student.setPassedout(0);
 			student.setDroppedout(0);
 			student.setLeftout(0);
 		}
@@ -786,10 +824,43 @@ public class StudentService {
 					Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
 					
 					if(studentDB!=null) {
-			        	String UID = studentDB.getStudentexternalid();
-			            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-			            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
-			            student.setStudentexternalid(studentExternalId);
+						
+						
+
+						String yearOfAdmission = student.getYearofadmission();
+
+						// Generate "yoa" by removing the century part and concatenating the parts
+						String yoa = yearOfAdmission.replace("/", "").substring(2);
+
+						if (student != null) {
+						    String lastUID = studentDB.getStudentexternalid();
+						    String studentExtId;
+
+						    if (lastUID != null && lastUID.contains("-")) {
+						        // Handle standard format (e.g., "2526-012")
+						        String[] partsLastUID = lastUID.split("-");
+						        String lastUIDYear = partsLastUID[0];
+						        int lastUIDNumber = Integer.parseInt(partsLastUID[1]);
+
+						        // Check if the year matches and increment the number or reset to 1
+						        int newUIDNumber = (yoa.equals(lastUIDYear)) ? lastUIDNumber + 1 : 1;
+
+						        // Generate the new student external ID
+						        studentExtId = yoa + "-" + String.format("%03d", newUIDNumber);
+						    } else {
+						        // Handle non-standard format (e.g., "1800")
+						        studentExtId = yoa + "-001";
+						    }
+
+						    // Set the new student external ID
+						    student.setStudentexternalid(studentExtId);
+						}
+						/*
+						 * String UID = studentDB.getStudentexternalid(); int studentSeq =
+						 * Integer.parseInt(UID.substring(UID.length() - 4))+1; String studentExternalId
+						 * = branchCode+""+String.format("%04d", studentSeq);
+						 * student.setStudentexternalid(studentExternalId);
+						 */
 			        }
 					
 					student.setArchive(0);
@@ -817,9 +888,9 @@ public class StudentService {
 					if(studentDB!=null) {
 						String UID = studentDB.getStudentexternalid();
 						int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-						student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
+						student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", studentSeq+1));
 		            }else {
-		            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
+		            	student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", 1));
 		            }
 					student.setPromotedyear(student.getYearofadmission());
 					student.setYearofadmission("");

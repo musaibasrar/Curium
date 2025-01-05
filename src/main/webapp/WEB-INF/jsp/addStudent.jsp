@@ -766,10 +766,10 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td  class="alignLeft">Application Type&nbsp;</td>
+							<td  class="alignLeft">Application Type*&nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Admission<input
 								type="checkbox" value="Admission" name="stream" id="yes:at"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
+								onclick="yesCheck(this.id);" checked/>&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
 								onclick="noCheck(this.id)" />
 								&nbsp; &nbsp;Alumni<input
@@ -883,7 +883,7 @@ $(document).ready(function() {
 						<tr>
 
 
-							<td class="alignLeft">Studying in Class&nbsp;</td>
+							<td class="alignLeft">Studying in Class*&nbsp;</td>
 							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>

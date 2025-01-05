@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdap
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.model.user.service.UserService;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -158,8 +159,12 @@ public class UserActionAdapter {
         UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         String branchId = request.getParameter(BRANCHID);
-
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        String superUserAuth = null;
+        if(httpSession.getAttribute("superuserAuth")!=null) {
+        	superUserAuth = DataUtil.emptyString(httpSession.getAttribute("superuserAuth").toString());
+        }
+        
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), superUserAuth, branchId);
         httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
         httpSession.setAttribute("username", responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
