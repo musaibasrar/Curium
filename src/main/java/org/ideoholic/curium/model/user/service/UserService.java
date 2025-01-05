@@ -540,7 +540,7 @@ public class UserService {
 					querySub = " parents.fathersname like '%" + fathersname + "%'";
 				}
 
-				if (!mothersname.equalsIgnoreCase("")) {
+				if (!mothersname.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 					querySub = querySub + " AND parents.mothersname like '%" + mothersname + "%'";
 				} else if (!mothersname.equalsIgnoreCase("")) {
 					querySub = querySub + " parents.mothersname like '%" + mothersname + "%'";
