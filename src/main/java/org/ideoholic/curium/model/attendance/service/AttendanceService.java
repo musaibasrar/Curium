@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -54,6 +55,10 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
+import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -426,21 +431,26 @@ public class AttendanceService {
 			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 			
 			List<Student> newStudentList = new ArrayList<Student>();
+			List<Parents> newParentsList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
 			
 			Date searchdate = DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance"));
 			Timestamp timestamp = new Timestamp(searchdate.getTime());
 			for (Student student : searchStudentList) {
 
+				Parents parents = new Parents();
+				parents = new parentsDetailsDAO().readUniqueObject(student.getSid());
 				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), timestamp,student.getStudentexternalid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
 						newStudentList.add(student);
+						newParentsList.add(parents);
 						newStudentDailyAttendance.add(studentDailyAttendance);
 					
 				}
 			}
 
 			request.setAttribute("StudentListAttendance", newStudentList);
+			request.setAttribute("ParentListAttendance", newParentsList);
 			request.setAttribute("StudentDailyAttendanceDate", newStudentDailyAttendance);
 			request.setAttribute("searchedDate", DateUtil.dateParserUpdateStd(request.getParameter("dateofattendance")));
 			
@@ -713,8 +723,14 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			queryMain = queryMain + querySub;
 			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+			Map<Student,Parents> searchStudentListMap = new LinkedHashMap<Student,Parents>();
+			for (Student student : searchStudentList) {
+				Parents parents = new Parents();
+				parents = new parentsDetailsDAO().readUniqueObject(student.getSid());
+				searchStudentListMap.put(student, parents);
+			}
 
-			request.setAttribute("StudentListAttendance", searchStudentList);
+			request.setAttribute("StudentListAttendance", searchStudentListMap);
 			request.setAttribute("attendanceclass", conClassStudying.replace("--"," ").replace("%", ""));
 			request.setAttribute("attendanceclasssearch", addClass);
 			
