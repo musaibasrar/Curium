@@ -32,7 +32,7 @@ public class StudentDiaryApiActionImpl implements StudentDiaryApiAction {
 
 	public ResponseEntity addDiary(AddStudentDiaryDto addStudentDiaryDto, String branchId, String currentAcademicYear,
 			String userLoginId) {
-		studentDiaryservice.addDiary(addStudentDiaryDto, branchId, userLoginId, currentAcademicYear);
+		studentDiaryservice.addDiary(addStudentDiaryDto, branchId, currentAcademicYear, userLoginId);
 		return ResponseEntity.ok().build();
 
 	}

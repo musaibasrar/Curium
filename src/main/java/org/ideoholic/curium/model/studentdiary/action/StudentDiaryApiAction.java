@@ -26,8 +26,8 @@ public interface StudentDiaryApiAction {
 	@PostMapping("/addDiary")
 	public ResponseEntity addDiary(@RequestBody AddStudentDiaryDto addStudentDiaryDto,
 			@RequestHeader(value = "branchid") String branchId,
-			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,
-			@RequestHeader(value = "userloginid") String userLoginId);
+			@RequestHeader(value = "userloginid") String userLoginId,
+			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
 	
 	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
