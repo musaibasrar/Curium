@@ -4,13 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -21,28 +17,21 @@ import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryDTO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentDiaryservice {
-	  private HttpServletRequest request;
-      private HttpServletResponse response;
-      private HttpSession httpSession;
-      private String BRANCHID = "branchid";
+	  
       /**
        * Size of a byte buffer to read/write file
        */
       private static final int BUFFER_SIZE = 4096;
   
-  public StudentDiaryservice(HttpServletRequest request, HttpServletResponse response) {
-          this.request = request;
- this.response = response;
- this.httpSession = request.getSession();
-  }
 
 	public void addDiary(AddStudentDiaryDto addStudentDiaryDto,String branchId,String userLoginId,String currentAcademicYear) {
-		// TODO Auto-generated method stub
 		 StudentDiary diary = new StudentDiary();
          
-         if(httpSession.getAttribute(BRANCHID)!=null){
+         if(branchId!=null){
         	 
         	 diary.setSid(Integer.parseInt(addStudentDiaryDto.getStudentId()));
              diary.setClasssec(addStudentDiaryDto.getClassAndSec());
@@ -57,7 +46,6 @@ public class StudentDiaryservice {
          }
 
 	public DiaryResponseDto viewDiary(String strPage, String branchId) {
-		// TODO Auto-generated method stub
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
          
          if(branchId!=null){
@@ -155,7 +143,6 @@ public class StudentDiaryservice {
                        return diaryResponseDto;
 	}
 	public void deleteRecord(DairyIdsDto dairyIdsDto) {
-		// TODO Auto-generated method stub
 		String[] iddiary = dairyIdsDto.getIdDiary();
         if(iddiary!=null){
        List<Integer> ids = new ArrayList();
