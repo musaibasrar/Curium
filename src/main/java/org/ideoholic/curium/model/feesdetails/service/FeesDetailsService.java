@@ -46,27 +46,22 @@ public class FeesDetailsService {
 	    private String USERID = "userid";
 	
 
-	public Feesdetails addFeesDetails() {
+	public Feesdetails addFeesDetails(FeesIdDetailsDto feesIdDetailsDto,String branchid,String userId, String currentyear) {
 		
 		Feesdetails feesdetails = new Feesdetails();
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(branchid!=null){
 			// Setting the fees details
-			String sid = request.getParameter("studentId");
+			String sid = feesIdDetailsDto.getStudentId();
 			feesdetails.setSid(DataUtil.parseInt(sid));
-			feesdetails.setDateoffees(DataUtil.emptyString(request
-					.getParameter("dateoffees")));
-			feesdetails.setAmountpercat(DataUtil.emptyString(request
-					.getParameter("feesTotalAmount")));
-			feesdetails.setGrandtotal(DataUtil.emptyString(request
-					.getParameter("grandTotalAmount")));
-			feesdetails.setMiscamount(DataUtil.emptyString(request
-					.getParameter("miscellanousamount")));
-			feesdetails.setBalamount(DataUtil.emptyString(request
-					.getParameter("balanceamount")));
-			String currentYear = (String) httpSession.getAttribute("currentYear");
+			feesdetails.setDateoffees(DataUtil.emptyString(feesIdDetailsDto.getDateoffees()));
+			feesdetails.setAmountpercat(DataUtil.emptyString(feesIdDetailsDto.getFeesTotalAmount()));
+			feesdetails.setGrandtotal(DataUtil.emptyString(feesIdDetailsDto.getGrandTotalAmount()));
+			feesdetails.setMiscamount(DataUtil.emptyString(feesIdDetailsDto.getMiscellanousamount()));
+			feesdetails.setBalamount(DataUtil.emptyString(feesIdDetailsDto.getBalanceamount()));
+			String currentYear = (String) currentyear;
 			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
-			feesdetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			feesdetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			feesdetails.setBranchid(Integer.parseInt(branchid));
+			feesdetails.setUserid(Integer.parseInt(userId));
 			feesdetails = new feesDetailsDAO().create(feesdetails);
 		}
 		
