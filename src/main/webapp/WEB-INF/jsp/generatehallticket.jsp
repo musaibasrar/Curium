@@ -566,7 +566,7 @@ for(Cookie cookie : cookies){
 						Class &nbsp;&nbsp;&nbsp;&nbsp;
 							 <label> <select name="class" id="class"
 									style="width: 180px">
-										<option selected>${selectedclass}</option>
+										<%-- <option selected>${selectedclass}</option> --%>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 											<option value="${classdetailslist.classdetails}" >
@@ -575,6 +575,18 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										</c:forEach>
 								</select> 
+							</label>
+							<label> <select name="addsec" id="addsec" style="width: 70px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
 							</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							OR

@@ -681,48 +681,64 @@
 
 	});
 	
-
-	
 	   function checkDate(){
-			  var toDate = document.getElementById('todateofattendance').value;
-			  var fromDate = document.getElementById('fromdateofattendance').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(toDate);
-			  var fDate = new Date(fromDate);
-			  
-			if(toDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the To Date is lesser than or equals to current Date.");
-			    document.getElementById('todateofattendance').value = '';
-			    return false;
-			  }else if(sDate < fDate){
-				  alert("Please ensure that the To Date is greater than or equals to from Date.");
-				    document.getElementById('todateofattendance').value = '';
-				    return false;  
-			  }else if(fromDate== '' || toDate== ''){
-			    	alert("Enter the valid dates");
-			    }
+		   
+		   var toDateStr = document.getElementById('todateofattendance').value;
+		    var fromDateStr = document.getElementById('fromdateofattendance').value;
+		    var currentDate = new Date();
+		    
+		    // Function to parse 'dd/MM/yyyy' format into Date object
+		    function parseDate(dateStr) {
+		        var parts = dateStr.split('/');
+		        return new Date(parts[2], parts[1] - 1, parts[0]); // Note: month is 0-based in JavaScript Date
+		    }
+		    
+		    var sDate = parseDate(toDateStr);
+		    var fDate = parseDate(fromDateStr);
+
+		    if (toDateStr !== '' && sDate > currentDate) {
+		        alert("Please ensure that the To Date is lesser than or equals to current Date.");
+		        document.getElementById('todateofattendance').value = '';
+		        return false;
+		    } else if (sDate < fDate) {
+		        alert("Please ensure that the To Date is greater than or equals to from Date.");
+		        document.getElementById('todateofattendance').value = '';
+		        return false;
+		    } else if (fromDateStr === '' || toDateStr === '') {
+		        alert("Enter the valid dates");
+		        return false;
+		    }
+		    return true;
 	   }
 	   
 	   function checkDateGraph(){
-			  var toDate = document.getElementById('tomonthlyattendance').value;
-			  var fromDate = document.getElementById('frommonthlyattendance').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(toDate);
-			  var fDate = new Date(fromDate);
-			  
-			if(toDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the To Date is lesser than or equals to current Date.");
-			    document.getElementById('tomonthlyattendance').value = '';
-			    return false;
-			  }else if(sDate < fDate){
-				  alert("Please ensure that the To Date is greater than or equals to from Date.");
-				    document.getElementById('tomonthlyattendance').value = '';
-				    return false;  
-			  }else if(fromDate== '' || toDate== ''){
-			    	alert("Enter the valid dates");
+			    var toDateStr = document.getElementById('tomonthlyattendance').value;
+			    var fromDateStr = document.getElementById('frommonthlyattendance').value;
+			    var currentDate = new Date();
+			    
+			    // Function to parse 'dd/MM/yyyy' format into Date object
+			    function parseDate(dateStr) {
+			        var parts = dateStr.split('/');
+			        return new Date(parts[2], parts[1] - 1, parts[0]); // Note: month is 0-based in JavaScript Date
 			    }
+			    
+			    var sDate = parseDate(toDateStr);
+			    var fDate = parseDate(fromDateStr);
+
+			    if (toDateStr !== '' && sDate > currentDate) {
+			        alert("Please ensure that the To Date is lesser than or equals to current Date.");
+			        document.getElementById('tomonthlyattendance').value = '';
+			        return false;
+			    } else if (sDate < fDate) {
+			        alert("Please ensure that the To Date is greater than or equals to from Date.");
+			        document.getElementById('tomonthlyattendance').value = '';
+			        return false;
+			    } else if (fromDateStr === '' || toDateStr === '') {
+			        alert("Enter the valid dates");
+			        return false;
+			    }
+			    return true;
+
 	   }
 	   
 	function updateRecords(){
@@ -1021,7 +1037,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText"><input type="checkbox" checked
 								id="<c:out value="${attendanceList.attendanceid}"/>" class="chcktbl"
 								name="attandanceIDs"
 								value="<c:out value="${attendanceList.attendanceid},${status.index}"/>" /></td>

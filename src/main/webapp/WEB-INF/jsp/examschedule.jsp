@@ -580,12 +580,38 @@ for(Cookie cookie : cookies){
 						
 						<td  width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										Classes&nbsp;&nbsp;&nbsp;
-							<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:set var="myList" value="<%= new java.util.ArrayList() %>" />
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<c:set var="dummy" value="${myList.add(classdetailslist.section)}" />
+											<%-- <c:set target="${myList}" property="add" value="${classdetailslist.section}" /> --%>
+										</c:if>
+										</c:forEach>
+										<c:forEach items="${classdetailslist}" var="classdetailslist"><tr><td style="font-weight: bold;">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<c:if test="${empty myList}">
+											   <input type="checkbox"  name="classesselected" value="${classdetailslist.classdetails}--">
+										${classdetailslist.classdetails}
+											</c:if>
+											<c:if test="${not empty myList}">
+											<c:forEach var="item" items="${myList}"><label>
+										    	<input type="checkbox"  name="classesselected" value="${classdetailslist.classdetails}--${item}">
+										${classdetailslist.classdetails} <c:out value="${item}"/></label>
+										</c:forEach>
+											</c:if>		
+										</c:if>	
+										<br/></td>
+						</tr>
+							</c:forEach>
+							
+							<%-- <c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										<input type="checkbox"  name="classesselected" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}
 										</c:if>	
-							</c:forEach>
+							</c:forEach> --%>
 						</td>
 						</tr>
 						

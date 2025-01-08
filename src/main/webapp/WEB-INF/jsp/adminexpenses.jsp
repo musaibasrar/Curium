@@ -203,7 +203,6 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
@@ -354,15 +353,36 @@
 	src="/alfalahschool/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-		$('#myTable').dataTable({
+		
+
+        $('#myTable').dataTable( {
+            "sScrollY": "380px",
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bStateSave": false,
+            "bProcessing": false,
+            "bServerSide": false,
+            "bAutoWidth": false,
+            "iDisplayLength": 2000,
+            "aoColumnDefs":[
+                { 'bSortable': false, 'aTargets': [ 0 ] }
+            ]
+            
+        } );
+    
+        
+		/* $('#myTable').dataTable({
 			"sScrollY" : "380px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
-		});
+		}); */
 	});
 </script>
 <script type="text/javascript">

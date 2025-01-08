@@ -38,5 +38,10 @@ public class EmployeeDto {
     private String employeedoc4delete;
     private String employeedoc5delete;
     private String branchId;
-
+    private String category;
+	private String subcategory;
+	private String group;
+	private String shift;
+	private String timing;
+	
 }

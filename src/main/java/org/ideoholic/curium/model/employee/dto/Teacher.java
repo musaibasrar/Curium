@@ -52,6 +52,12 @@ public class Teacher implements java.io.Serializable {
 	private String employeedoc3;
 	private String employeedoc4;
 	private String employeedoc5;
+	private String category;
+	private String subcategory;
+	private String group;
+	private String shift;
+	private String timing;
+	
 
 	
 	
@@ -69,7 +75,7 @@ public class Teacher implements java.io.Serializable {
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
 			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid,String employeephoto,
-			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate
+			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate, String category,String subcategory,String group,String shift,String timing
 ) {
 		this.teachername = teachername;
 		this.designation = designation;
@@ -100,6 +106,11 @@ public class Teacher implements java.io.Serializable {
 		this.employeedoc4 = employeedoc4;
 		this.employeedoc5 = employeedoc5;
 		this.joiningdate = joiningdate;
+		this.category = category;
+		this.subcategory = subcategory;
+		this.group = group;
+		this.shift = shift;
+		this.timing = timing;
 	}
 
 	@Id
@@ -368,5 +379,45 @@ public class Teacher implements java.io.Serializable {
 
 	public void setEmployeedoc5(String employeedoc5) {
 		this.employeedoc5 = employeedoc5;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+	public String getTiming() {
+		return timing;
+	}
+
+	public void setTiming(String timing) {
+		this.timing = timing;
 	}
 }

@@ -2405,8 +2405,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                	String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2415,7 +2415,7 @@ public class FeesCollectionService {
 					        
 					        // Print or use the grouped data as needed
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2481,9 +2481,11 @@ public class FeesCollectionService {
 					        }
 
 					System.out.println("Values Inserted Successfully");
-					if( new parentsDetailsDAO().createMultiple(listParents)) {
-						result = ResultResponse.builder().success(true).build();
-					};		
+					result = ResultResponse.builder().success(true).build();
+					/*
+					 * if( new parentsDetailsDAO().createMultiple(listParents,null)) { result =
+					 * ResultResponse.builder().success(true).build(); };
+					 */		
 		return result;
 	}
 	
@@ -2567,7 +2569,7 @@ public class FeesCollectionService {
 			BigDecimal onlyTotalFee = new BigDecimal(receiptInfo.getTotalamount()-receiptInfo.getFine()-receiptInfo.getMisc());	
 				
 			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
-			int drAccount = 0;
+			int drAccount = 1;
 			
 			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
 				drAccount = getLedgerAccountId(userName+Integer.parseInt(branchId));

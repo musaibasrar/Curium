@@ -332,19 +332,34 @@
 	src="/alfalahschool/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="/alfalahschool/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
-	});
-</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            	$('#myTable').dataTable({
+                "sScrollY": "380px",
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#addMarks").button({
+                icons: {
+                    primary: "ui-icon-trash"
+                }
+            });
+
+            $('#addMarks').click(function () {
+                var filter = $('.dataTables_filter input').val();
+                if (filter) {
+                    alert('Please clear the search filter before submitting.');
+                } else {
+                    checkMandatoryandSubmit();
+                }
+            });
+        });
+    </script>
 <script type="text/javascript">
 	function select(id, name) {
 		var clipEffect = 'blind';
@@ -388,12 +403,7 @@
 	});
 	
 	$(function() {
-		$("#addMarks").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
-		
+	
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -492,7 +502,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/alfalahschool/MarksDetailsProcess/addMarks" method="POST">
+	<form id="form1" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -697,7 +707,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><input value="Add Marks"
-							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" onmouseover="checkMandatory();"/>
+							type="button" id="addMarks" onmouseover="checkMandatory();"/>
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

@@ -86,7 +86,7 @@ public class ExamDetailsActionAdapter {
 
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
         examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
-        examScheduleDto.setClassH(request.getParameter("class"));
+        examScheduleDto.setClassH(request.getParameter("class")+"--"+request.getParameter("addsec"));
         examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
