@@ -713,7 +713,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Class&nbsp;</td>
 							<td width="70%">
                                         <label>  <select name="fromclass" id="fromclass"  required
-									style="width: 220px">
+									style="width: 180px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -724,6 +724,18 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
+							<label> <select name="addsec" id="addsec" style="width: 70px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label>
 							</td>
 						</tr>
 						
