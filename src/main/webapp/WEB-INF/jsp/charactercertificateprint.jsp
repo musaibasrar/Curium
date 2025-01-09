@@ -154,7 +154,7 @@ for(Cookie cookie : cookies){
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	${branchname}</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	${branchaddress}</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">${branchcontact}</h6>
+				<h6 style="margin-top:0px; margin-bottom:0px;"> ${branchcontact}</h6>
 				</td>
 			</tr>
 		

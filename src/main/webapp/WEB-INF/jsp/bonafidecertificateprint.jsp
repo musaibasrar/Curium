@@ -91,12 +91,20 @@ span{
     padding-bottom:1px;
     width: 300px;
     font-weight: normal;
+    text-align: center;
 }
 </style>
 	<script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
-</head>
+            <script>
+        function printAndHide() {
+            document.getElementById('print').innerText = ''; // Make text invisible
+            window.print();
+        }
+    </script>
+     
+ </head>
 <%
 //allow access only if session exists
 String user = null;
@@ -126,24 +134,33 @@ for(Cookie cookie : cookies){
 			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/alfalahschool/images/alfalahschool.png">
 			</td>
 				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
+					<h1 style="margin-bottom:0px;">Al-Falah Islamic School</h1>
+					<h6 style="margin-bottom:0px;margin-top:0px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(Inspiring the Generation)</h6>
+					<h4 style="margin-top:0px;">Managed by : Al-Falah Educational Trust Ahmedabad</h4>
+					<%-- ${branchname},${branchaddress},${branchcontact} --%>
 				</td>
 			</tr>
-			</table>
-			
-		<table>
 			<tr>
-			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
-			
+			<td colspan="2">Near BaagBaan Residency, Oppt. Reliance Petrol pump, Rakhial, Ahmedabaad - 23</td>
 			</tr>
-			
+			<tr>
+			<td colspan="2">Email: admin@alfalah.co.in&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mob:8347475751</td>
+			</tr>
+			</table>
+			<hr>
+			<table align="center">
+			<tr>
+			<td> Sr. No. 2024-25/104 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+			<td> Date:&emsp; <input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
+			</tr>
+			<tr>
+			<td> School Dise: 24071200248 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+			<td> GR 860</td>
+			</tr>
+			</table>
+		<table align="center">
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
@@ -163,7 +180,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
+					<h3 style="font-weight: normal;">&emsp;&emsp;&emsp;&emsp;&emsp;This is to certify that Mr./Ms.&nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
@@ -174,9 +191,9 @@ for(Cookie cookie : cookies){
 			<tr>
 				
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
+					<h3 style="font-weight: normal;" >Son/Daughter of
+					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					is/ was a bonafide student of 
 					</span>
 					
 					</h3>
@@ -190,14 +207,12 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+				<h3 style="font-weight: normal;" >class <span style="font-weight: bold;text-transform: capitalize;width:50px;">	<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
-					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+
+								</span> of this 
+					 School/College for academic year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span> His date of birth as per 
 					</h3>
 					
 				</td>
@@ -213,19 +228,36 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
+					  School recorded in the General Register is 
 					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
+					in words</h3>
 					
 				</td>
 				
 
 			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				<span style="font-weight: bold;text-transform: capitalize;width: 400px;">${dobinword}</span>
+			    </h3>
 			<td></td>
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				Address: <c:out value="${studentdetailsbonafide.addresspermanent}" />
+				</h3>
 		</table>
 		
 
@@ -234,26 +266,34 @@ for(Cookie cookie : cookies){
 
 			<tr>
 			<td>
+			 <img src="data:image;base64,<c:out value="${studentdetailsbonafide.student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+			<td>&nbsp;
 			<br>
-			<br><br><br></td>
+			&nbsp;
+			<br>
+			&nbsp;
+			<br>
+			
+			&nbsp;
+			<br>
+			&nbsp;Al-Falah Islamic School
+			<br>
+			&nbsp;
+			<br>
+			&nbsp;
+			<br>
+			Authorised Signotry</td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
-		</tr>
 		
-			<tr>
-              <td align="center"><a id="print" href="/alfalahschool/DocumentsProcess/printBonafide">Print</a></td>
-            </tr>
+		
+			<!-- <tr>
+              <td align="center"><button id="print" type="button"  onclick="printAndHide()">
+                                    print </button>     
+</td>
+            </tr> -->
 		</TABLE>
+		<button id="print" type="button"  onclick="printAndHide()">
+                                    print </button>
 	</form>
 </body>
 </html>

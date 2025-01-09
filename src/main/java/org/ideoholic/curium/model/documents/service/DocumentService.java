@@ -200,7 +200,7 @@ public class DocumentService {
 	}
 
 
-		private String generateDate(Date dateofbirth) {
+		public String generateDate(Date dateofbirth) {
 		// TODO Auto-generated method stub
 
 		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);

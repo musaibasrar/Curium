@@ -70,9 +70,10 @@ public class StudentActionAdapter {
 
         BonafideGenerationResponseDto responseDto = studentService.generateBonafide(dto);
         httpSession.setAttribute("studentdetailsbonafide", responseDto.getParents());
-
+        request.setAttribute("dobinword", responseDto.getDateOfBirthInWord());
         return responseDto;
     }
+    
 
     public void viewfeesStructurePerYear() {
 
