@@ -96,7 +96,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeHr(request.getParameter("dayendtime"));
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
-        dto.setFromClass(request.getParameter("fromclass"));
+        dto.setFromClass(request.getParameter("fromclass")+"--"+request.getParameter("addsec"));
         dto.setToClass(request.getParameter("toclass"));
 
         dto.setPeriods(request.getParameterValues("periods"));
@@ -104,7 +104,7 @@ public class PeriodActionAdapter {
         dto.setStaff(request.getParameterValues("staff"));
         dto.setPeriodStartTimeHr(request.getParameterValues("periodstarttimehr"));
         dto.setPeriodStartTimeMin(request.getParameterValues("periodstarttimemin"));
-        dto.setPeriodEndTimeAm(request.getParameterValues("periodstarttimeam"));
+        dto.setPeriodStartTimeAm(request.getParameterValues("periodstarttimeam"));
         dto.setPeriodEndTimeHr(request.getParameterValues("periodendtimehr"));
         dto.setPeriodEndTimeMin(request.getParameterValues("periodendtimemin"));
         dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
@@ -157,7 +157,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
         dto.setPeriodMasterId(request.getParameter("periodmasterid"));
-        dto.setFromClass(request.getParameter("classsec"));
+        dto.setFromClass(request.getParameter("classsec")+"--"+request.getParameter("addsec"));
         dto.setToClass(request.getParameter("toclass"));
 
         dto.setPeriods(request.getParameterValues("periods"));

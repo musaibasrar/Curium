@@ -1184,7 +1184,7 @@ $(document).ready(function() {
 							</label></td>
 						</tr>
 
-<tr>
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -1261,6 +1261,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 					
+					</table>
 						<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td>
@@ -1563,7 +1564,7 @@ $(document).ready(function() {
 							</table>
 
 						</div>
-
+				</div>
 
 
 						<div id="fragment-3">

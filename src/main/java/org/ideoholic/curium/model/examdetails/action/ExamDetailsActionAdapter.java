@@ -115,7 +115,7 @@ public class ExamDetailsActionAdapter {
         printPreviewHallTicketDto.setAdmNo(request.getParameter("admno"));
         printPreviewHallTicketDto.setStudentName(request.getParameter("studentName"));
         printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
-        printPreviewHallTicketDto.setClassStudying(request.getParameter("class"));
+        printPreviewHallTicketDto.setClassStudying(request.getParameter("classandsec"));
 
         HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());

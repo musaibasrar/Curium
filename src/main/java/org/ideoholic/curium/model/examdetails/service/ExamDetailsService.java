@@ -216,7 +216,7 @@ public class ExamDetailsService {
         result.setSelectedclass(classH);
         result.setSelectedexam(exam);
         result.setSelectedstudentname(studentName);
-        result.setSelectedclassandsec(classAdmno);
+        result.setSelectedclassandsec(classH);
         result.setSelectedadmissionno(examScheduleDto.getClassAdmno());
 
 
@@ -256,7 +256,7 @@ public class ExamDetailsService {
             List<Parents> studentList = new ArrayList<>();
             List<Examschedule> examscheduleList = new ArrayList<>();
             String classStudying = DataUtil.emptyString(printPreviewHallTicketDto.getClassStudying());
-            classStudying = classStudying + "--" + "%";
+            //classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
                 studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");

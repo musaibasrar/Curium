@@ -450,7 +450,6 @@ public class PeriodService {
 		String[] periodEndTimeAm = dto.getPeriodEndTimeAm();
 		String[] days = dto.getDays();
 		
-		
 		Map<String,List<Perioddetails>> periodMap = new HashMap<String,List<Perioddetails>>();
 		List<Perioddetails> periodDetailsList = new ArrayList<Perioddetails>();
 		int getPeriod=0;
