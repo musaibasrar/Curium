@@ -11,7 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
 <head>
 
 <style type="text/css">
@@ -53,7 +53,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: left;
 }
@@ -89,92 +89,20 @@ span{
     display:inline-block;
     border-bottom:2px solid black;
     padding-bottom:1px;
-    width: 250px;
+    width: 300px;
     font-weight: normal;
+    text-align: center;
 }
 </style>
-
-
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
-    
-    <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-             size: auto;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style>
-        <title>Bonafide Print</title>
-        <script type="text/javascript">
+	<script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <title>Bonafide Certificate</title>
+         <script type="text/javascript">
              window.onload = function(){
             	 window.print();
              }
         </script>
-
+        
 </head>
 <%
 //allow access only if session exists
@@ -193,9 +121,10 @@ for(Cookie cookie : cookies){
 }
 %>
 <body style="text-align: center" class="bodymargin">
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-		<br><br>
+		<br>
+		
 		<table align="center">
 			
 			
@@ -204,24 +133,33 @@ for(Cookie cookie : cookies){
 			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/alfalahschool/images/alfalahschool.png">
 			</td>
 				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
+					<h1 style="margin-bottom:0px;">Al-Falah Islamic School</h1>
+					<h6 style="margin-bottom:0px;margin-top:0px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(Inspiring the Generation)</h6>
+					<h4 style="margin-top:0px;">Managed by : Al-Falah Educational Trust Ahmedabad</h4>
+					<%-- ${branchname},${branchaddress},${branchcontact} --%>
 				</td>
 			</tr>
-			</table>
-			
-		<table align="center" style="padding-left: 30px;padding-right: 20px;">
 			<tr>
-			<td class="dataTextBoldLeft">
-			<br>
-				<%-- Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
-			
+			<td colspan="2">Near BaagBaan Residency, Oppt. Reliance Petrol pump, Rakhial, Ahmedabaad - 23</td>
 			</tr>
-			
+			<tr>
+			<td colspan="2">Email: admin@alfalah.co.in&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mob:8347475751</td>
+			</tr>
+			</table>
+			<hr>
+			<table align="center">
+			<tr>
+			<td> Sr. No. 2024-25/104 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+			<td> Date:&emsp; <input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
+			</tr>
+			<tr>
+			<td> School Dise: 24071200248 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+			<td> GR 860</td>
+			</tr>
+			</table>
+		<table align="center">
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
@@ -241,9 +179,8 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
+					<h3 style="font-weight: normal;">&emsp;&emsp;&emsp;&emsp;&emsp;This is to certify that Mr./Ms. &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -253,28 +190,11 @@ for(Cookie cookie : cookies){
 			<tr>
 				
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
-					is/ was a student of this School/College.
-					 
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
+					<h3 style="font-weight: normal;" >Son/Daughter of
+					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					is/ was a bonafide student of 
 					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					
 					</h3>
 				</td>
 			
@@ -286,9 +206,12 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+				<h3 style="font-weight: normal;" >class <span style="font-weight: bold;text-transform: capitalize;width:50px;">	<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+
+								</span> of this 
+					 School/College for academic year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span> His date of birth as per 
 					</h3>
 					
 				</td>
@@ -299,10 +222,15 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 			<tr>
-				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
-				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
-					</h3>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+					  School recorded in the General Register is 
+					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+					in words</h3>
+					
 				</td>
 				
 
@@ -311,31 +239,54 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				<span style="font-weight: bold;text-transform: capitalize;width: 400px;">${dobinword}</span>
+			    </h3>
 			<td></td>
 			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+				Address: <c:out value="${studentdetailsbonafide.addresspermanent}" />
+				</h3>
 		</table>
 		
 
-		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
+		<TABLE id="dataTable" width="100%" border="0"
+			style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
 			<td>
+			 <img src="data:image;base64,<c:out value="${studentdetailsbonafide.student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+			<td>&nbsp;
 			<br>
-			<br><br><br></td>
+			&nbsp;
+			<br>
+			&nbsp;
+			<br>
+			
+			&nbsp;
+			<br>
+			&nbsp;Al-Falah Islamic School
+			<br>
+			&nbsp;
+			<br>
+			&nbsp;
+			<br>
+			Authorised Signotry</td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
-		</tr>
+		
+		
+			
 		</TABLE>
 	</form>
-	
-	
 </body>
 </html>
