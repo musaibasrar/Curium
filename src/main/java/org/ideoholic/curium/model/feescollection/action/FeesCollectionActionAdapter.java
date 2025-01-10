@@ -442,12 +442,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("grandTotal", result.getGrandTotal()+" "+"Only");
         httpSession.setAttribute("feesdetails", result.getFeesdetails());
 
-//        DetailsResponseDto responseDto = feesCollectionService.preview(receiptInfo, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
-//        httpSession.setAttribute("student", responseDto.getStudent());
-//        request.setAttribute("recieptdate", responseDto.getReceiptDate());
-//        request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
-//        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
-     return result;
+        return result;
     }
 
     public Otherreceiptinfo addother() {
@@ -474,11 +469,6 @@ public class FeesCollectionActionAdapter {
 
     public OtherPreviewResponseDto otherpreview() {
 
-//        DetailsResponseDto responseDto = feesCollectionService.otherpreview(receiptInfo, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
-//        httpSession.setAttribute("student", responseDto.getStudent());
-//        request.setAttribute("recieptdate", responseDto.getReceiptDate());
-//        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
-//        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         PreviewDto dto = new PreviewDto();
         dto.setSid(Long.parseLong(request.getParameter("sid")));
         dto.setId(Integer.parseInt(request.getParameter("id")));
@@ -496,7 +486,7 @@ public class FeesCollectionActionAdapter {
 
 	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
 		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles,
-                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute("username").toString()
+                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString()
         );
 		return result.isSuccess();
 	}

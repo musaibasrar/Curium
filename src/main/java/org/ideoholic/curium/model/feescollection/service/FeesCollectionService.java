@@ -2322,7 +2322,7 @@ public class FeesCollectionService {
 		// Student student = new Student();
 		ResultResponse result = ResultResponse.builder().success(false).build();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
-		List<Parents> listParents = new ArrayList<Parents>();
+		List<Parents> listParents = new ArrayList<>();
 		XSSFRow row;
 		log.debug("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
@@ -2428,7 +2428,7 @@ public class FeesCollectionService {
 	
 	public Receiptinfo addImport(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName) {
 		
-		List<Feescollection> feescollection = new ArrayList<Feescollection>();
+		List<Feescollection> feescollection = new ArrayList<>();
 		Receiptinfo receiptInfo =new Receiptinfo();
 		boolean createFeesCollection = false;
 		if(currentAcademicYear!=null){

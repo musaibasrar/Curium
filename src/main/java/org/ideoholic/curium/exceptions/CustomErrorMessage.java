@@ -21,7 +21,9 @@ public enum CustomErrorMessage {
 	SENDSMSMERROR(113,"unable to send sms"),
 	ERRORSMS(114, "errorsms"),
 	INVALID_CREDENTIALS(115,"usernameOrPasswordFail"),
-	BACKUPFAILED(116,"BackupFailed");
+	BACKUPFAILED(116,"BackupFailed"),
+    IMPORTFAILURE(117,"importFailure");
+
 	private final int code;
 	private final String message;
 

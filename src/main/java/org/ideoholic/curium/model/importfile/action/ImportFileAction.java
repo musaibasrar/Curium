@@ -35,16 +35,13 @@ public class ImportFileAction {
 	@Autowired
 	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
-	private String branchId;
-
 	@RequestMapping(value = "/readFile", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String readFile(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 		try {
-			if (importFileActionAdapter.readFile(uploadedFiles,branchId)) {
+			if (importFileActionAdapter.readFile(uploadedFiles)) {
 				return "importfile";
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "importsuccess";
@@ -57,7 +54,6 @@ public class ImportFileAction {
 					return "importfile";
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return "importsuccess";
