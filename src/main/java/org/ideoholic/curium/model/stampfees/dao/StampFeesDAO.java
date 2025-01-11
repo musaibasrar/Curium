@@ -158,12 +158,12 @@ public class StampFeesDAO {
 			
 			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 				
-				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.fetchSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.fetchSid()+"' and idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();
@@ -242,12 +242,12 @@ public class StampFeesDAO {
 			
 			for (Studentotherfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 				
-				Query query = session.createQuery("from Studentotherfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.otherfeescategory.idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Query query = session.createQuery("from Studentotherfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.fetchSid()+"' and sfs.otherfeescategory.idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentotherfeesstructure feesStructure = (Studentotherfeesstructure) query.uniqueResult();
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.fetchSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();

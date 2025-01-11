@@ -79,8 +79,8 @@ public class feesCollectionDAO {
 				if(feescollectionList!=null) {
 					
 					for (Feescollection singleFeescollection :  feescollectionList) {
-						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
-						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						singleFeescollection.setReceiptInfo(receiptInfo);
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
 						query.executeUpdate();
 						 session.save(singleFeescollection);
 					}
@@ -268,8 +268,8 @@ public class feesCollectionDAO {
 				session.save(receiptInfo);
 
 			for (Otherfeescollection singleFeescollection :  feescollectionList) {
-				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
-				Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+				singleFeescollection.setReceiptInfo(receiptInfo);
+				Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
 				query.executeUpdate();
 				 session.save(singleFeescollection);
 			}
@@ -433,8 +433,8 @@ public class feesCollectionDAO {
 				if(feescollectionList!=null) {
 					
 					for (Feescollection singleFeescollection :  feescollectionList) {
-						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
-						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						singleFeescollection.setReceiptInfo(receiptInfo);
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
 						query.executeUpdate();
 						 session.save(singleFeescollection);
 					}

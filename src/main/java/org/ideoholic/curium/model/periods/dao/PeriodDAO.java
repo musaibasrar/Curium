@@ -43,7 +43,7 @@ public class PeriodDAO {
 			for (Entry<String, List<Perioddetails>> entry : periodMap.entrySet())
 			{
 				for (Perioddetails perioddetails : entry.getValue()) {
-					perioddetails.setPeriodmasterid(periodMaster.getIdperiodmaster());
+					perioddetails.setPeriodMaster(periodMaster);
 					perioddetails.setDays(entry.getKey());
 					session.save(perioddetails);
 				}

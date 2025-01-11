@@ -266,7 +266,7 @@ public class PeriodService {
 			
 			for (Perioddetails perioddetails : periodDetailsList) {
 				
-				Periodmaster periodMaster = new PeriodDAO().getTimeTable(perioddetails.getPeriodmasterid().toString());
+				Periodmaster periodMaster = new PeriodDAO().getTimeTable(perioddetails.getPeriodMaster().getIdperiodmaster().toString());
 				
 				if("monday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();

@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0
 
@@ -11,6 +9,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,14 +29,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_accountdetailsbalance")
 public class Accountdetailsbalance implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountdetailsbalanceid", unique = true, nullable = false)
 	private Integer accountdetailsbalanceid;
-
-	@Column(name = "accountdetailsid")
-	private Integer accountdetailsid;
 
 	@Column(name = "openingbalance", precision = 20, scale = 4)
 	private BigDecimal openingbalance;
@@ -45,8 +42,9 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	@Column(name = "currentbalance", precision = 20, scale = 4)
 	private BigDecimal currentbalance;
 
-	@Column(name = "financialid")
-	private Integer financialid;
+	@ManyToOne
+	@JoinColumn(name = "financialid", referencedColumnName = "financialid")
+	private Financialaccountingyear financialAccountingYear;
 
 	@Column(name = "crdr", length = 40)
 	private String crdr;
@@ -59,9 +57,9 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	private Accountdetails accountDetails;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

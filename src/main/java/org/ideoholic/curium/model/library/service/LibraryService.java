@@ -41,7 +41,7 @@ public class LibraryService {
 			book.setPublisher(bookDto.getPublisher());
 			book.setIsbn(bookDto.getIsbn());
 			book.setStatus(bookDto.getStatus());
-			book.setBookHolder(bookDto.getBookHolder());
+			book.setBookholder(bookDto.getBookHolder());
 			book.setShelf(bookDto.getShelf());
 			book.setBookname(bookDto.getBookname());
 			book = new LibraryDAO().create(book);

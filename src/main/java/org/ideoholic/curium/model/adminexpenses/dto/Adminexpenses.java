@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.adminexpenses.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 24 Mar, 2015 1:00:53 PM by Hibernate Tools 4.0.0
 
@@ -10,10 +8,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,13 +31,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "adminexpenses")
 public class Adminexpenses implements java.io.Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAdminExpenses", unique = true, nullable = false)
 	private Integer idAdminExpenses;
 
-	@Column(name = "item description", length = 500)
+	@Column(name = "itemdescription", length = 500)
 	private String itemdescription;
 
 	@Column(name = "priceofitem")
@@ -50,28 +51,31 @@ public class Adminexpenses implements java.io.Serializable {
 	@Column(name = "vno")
 	private Integer vno;
 
+	@Size(max = 500)
 	@Column(name = "paidto")
 	private String paidto;
 
+	@Size(max = 30)
 	@Column(name = "chequeno")
 	private String chequeno;
 
 	@Column(name = "voucherstatus", length = 500)
 	private String voucherstatus;
 
-	@Column(name = "branchid")
-	private int branchid;
-
+	@Size(max = 10)
 	@Column(name = "paymenttype")
 	private String paymenttype;
 
 	@Column(name = "bankname")
 	private String bankname;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "chequedate")
 	private Date chequedate;
 
-	@Column(name = "userid")
-	private int userid;
+	@Column(name = "branchid")
+	private Integer branchid;
 
+	@Column(name = "userid")
+	private Integer userid;
 }

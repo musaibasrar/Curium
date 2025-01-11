@@ -1,11 +1,13 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,13 +24,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_accountgroupmaster")
 public class Accountgroupmaster implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountgroupid", unique = true, nullable = false)
 	private Integer accountgroupid;
 
 	@Column(name = "accountgroupname", nullable = false, length = 150)
 	private String accountgroupname;
+	
+    @OneToMany(mappedBy = "accountGroupMaster")
+    private List<Accountsubgroupmaster> accountsubgroupmasterList;
 
+	@OneToMany(mappedBy = "accountGroupMaster")
+	private List<Accountdetails> accountdetailsList;
 }

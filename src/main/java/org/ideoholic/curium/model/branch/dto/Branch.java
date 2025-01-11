@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.branch.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 // default package
 // Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0
@@ -8,8 +8,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.user.dto.Login;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +30,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "branch")
 public class Branch implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idbranch", unique = true, nullable = false)
 	private Integer idbranch;
 
@@ -44,4 +49,6 @@ public class Branch implements java.io.Serializable {
 	@Column(name = "contact", length = 200)
 	private String contact;
 
+	@OneToMany(mappedBy = "branch")
+	private List<Login> loginList;
 }

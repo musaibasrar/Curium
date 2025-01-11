@@ -1,13 +1,15 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,26 +26,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_accountssubgroupmaster")
 public class Accountssgroupmaster implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ssgroupmasterid", unique = true, nullable = false)
 	private Integer ssgroupmasterid;
 
 	@Column(name = "ssgroupname", length = 100)
 	private String ssgroupname;
 
-	@Column(name = "subgroupmasterid")
-	private Integer subgroupmasterid;
-
 	@ManyToOne
 	@JoinColumn(name = "subgroupmasterid")
 	private Accountsubgroupmaster accountSubGroupMaster;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
+
+	@OneToMany(mappedBy = "accountSSGroupMaster")
+	private List<Accountdetails> accountdetailsList;
 
 }

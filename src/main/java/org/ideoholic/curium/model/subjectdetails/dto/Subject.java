@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.subjectdetails.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 // default package
 // Generated 15 Aug, 2016 12:22:36 AM by Hibernate Tools 4.0.0
@@ -8,8 +8,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.marksdetails.dto.Marks;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,9 +29,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "subject")
 public class Subject implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "subid", unique = true, nullable = false)
 	private Integer subid;
 
@@ -37,22 +42,24 @@ public class Subject implements java.io.Serializable {
 	@Column(name = "subjectid")
 	private Integer subjectid;
 
-	@Column(name = "minmarks")
-	private float minmarks;
+	@Column(name = "minmarks", precision = 12)
+	private Float minmarks;
 
-	@Column(name = "maxmarks")
-	private float maxmarks;
-
-	@Column(name = "branchid")
-	private int branchid;
+	@Column(name = "maxmarks", precision = 12)
+	private Float maxmarks;
 
 	@Column(name = "examname", length = 150)
 	private String examname;
 
-	@Column(name = "examclass", length = 150)
+	@Column(name = "examclass", length = 50)
 	private String examclass;
 
-	@Column(name = "userid")
-	private int userid;
+	@OneToMany(mappedBy = "subject")
+	private List<Marks> marksList;
 
+	@Column(name = "branchid")
+	private Integer branchid;
+
+	@Column(name = "userid")
+	private Integer userid;
 }
