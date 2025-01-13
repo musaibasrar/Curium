@@ -19,20 +19,14 @@ import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.util.SubjectAverage;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeacherPerformanceService {
-	 private HttpServletRequest request;
-     private HttpServletResponse response;
      private HttpSession httpSession;
      private String BRANCHID = "branchid";
-     private String academicyear = "academicyear";
      
-	public TeacherPerformanceService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-	       this.response = response;
-	       this.httpSession = request.getSession();
-	}
-
+	
 	public boolean readListOfSubjects() {
 		boolean result = false;
 	    try {
@@ -72,7 +66,7 @@ public class TeacherPerformanceService {
 				String querySub = "";
 
 					querySub = querySub + " parents.Student.classstudying = '"
-							+ classOne + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+							+ classOne + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;

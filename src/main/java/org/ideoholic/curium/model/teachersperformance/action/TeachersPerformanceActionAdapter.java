@@ -19,10 +19,11 @@ public class TeachersPerformanceActionAdapter {
      private HttpServletResponse response;
 	 @Autowired
      private HttpSession httpSession;
+	 @Autowired
+     private TeacherPerformanceService teacherPerformanceService;
      private String BRANCHID = "branchid";
 
 	public void getDetailofteacher() {
-		TeacherPerformanceService teacherPerformanceService = new TeacherPerformanceService(request, response);
 		TeacherDetailsDto teacherDetailsDto = new TeacherDetailsDto();
 		teacherDetailsDto.setClasssec(request.getParameterValues("classesselected"));
 		teacherDetailsDto.setSubjectDetails(request.getParameter("subject"));
