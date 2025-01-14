@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Time Table</title>
+        <title>Student Details</title>
 
         <script type="text/javascript" language="JavaScript" src="/alfalahschool/js/motionpack.js"></script>
         <link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -372,26 +372,25 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
-									<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
-								<select name='classsec' id='classsec'><option selected>${itemparts[0]}</option>
-									<c:forEach items="${classdetailslist}" var="classdetailslist">
+					<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
+					Class<select name="classsec" id="classsec"><option selected>${itemparts[0]}</option>
+					<c:forEach items="${classdetailslist}" var="classdetailslist">
+					                               <c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
 													<c:out value="${classdetailslist.classdetails}" />
 												</option>
+													</c:if>
 										</c:forEach>
 										</select>
-										<label> <select name="addsec" id="addsec" style="width: 70px;">
-										<option selected>${itemparts[1]}</option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
+										Section<select name="section" id="section"><option selected>${itemparts[1]}</option>
+					<c:forEach items="${classdetailslist}" var="classdetailslist">
+					                            <c:if test="${(classdetailslist.section != '')}">
 												<option value="${classdetailslist.section}">
 													<c:out value="${classdetailslist.section}" />
 												</option>
-											</c:if>
+												</c:if>
 										</c:forEach>
-								</select>
-							</label>
+										</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
 
 							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />
