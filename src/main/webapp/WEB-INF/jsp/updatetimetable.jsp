@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Time Table</title>
+        <title>Student Details</title>
 
         <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
         <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -371,11 +371,24 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;<select name='classsec' id='classsec'><option selected>${timetable.class_}</option>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
+					<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
+					Class<select name="classsec" id="classsec"><option selected>${itemparts[0]}</option>
 					<c:forEach items="${classdetailslist}" var="classdetailslist">
+					                               <c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
 													<c:out value="${classdetailslist.classdetails}" />
 												</option>
+													</c:if>
+										</c:forEach>
+										</select>
+										Section<select name="section" id="section"><option selected>${itemparts[1]}</option>
+					<c:forEach items="${classdetailslist}" var="classdetailslist">
+					                            <c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+												</c:if>
 										</c:forEach>
 										</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>

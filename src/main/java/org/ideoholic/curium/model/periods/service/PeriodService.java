@@ -486,7 +486,7 @@ public class PeriodService {
 		}
 
 		Periodmaster periodMaster = new Periodmaster();
-		periodMaster.setClass_(fromClass+"");
+		periodMaster.setClass_(fromClass[0]+"--"+toClass);
 		periodMaster.setAcademicyear(academicYear);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
