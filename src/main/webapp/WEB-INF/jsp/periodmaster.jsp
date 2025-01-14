@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Period Master</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alfalahschool/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -317,42 +317,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/alfalahschool/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/alfalahschool/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/alfalahschool/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/alfalahschool/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/alfalahschool/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -378,7 +378,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/alfalahschool/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -427,7 +427,7 @@
 	            }
 	        })
 	        .click(function() {
-	            deleteRow('dataTableNew');
+	            deleteRow('duplicateTable');
 	            return false;
 	        }); 
 	        
@@ -506,7 +506,7 @@
 		        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>"; */
 		        newCol +=col1;
 	        }
-	        var colA="<th class='timeth'><label><select name='days' id='days' style='width: 60px'><option selected value='monday'>MON</option><option value='tuesday'>TUE</option><option value='wednesday'>WED</option><option value='thursday'>THU</option><option value='friday'>FRI</option><option value='saturday'>SAT</option><option value='sunday'>SUN</option></select></label></th>";
+	        var colA="<th class='timeth'><label><select name='days' id='days' style='width: 60px'><option selected value='Monday'>Monday</option><option value='Tuesday'>Tuesday</option><option value='Wednesday'>Wednesday</option><option value='Thursday'>Thursay</option><option value='Friday'>Friday</option><option value='Saturday'>Saturday</option><option value='Sunday'>Sunday</option></select></label></th>";
 	        var newRow = $("<tr class='trClass'>"+colA+newCol+"</tr>");
 	        $(function() {
 	            $("#dataTableNew").find('thead').append(newRow);
@@ -535,7 +535,7 @@
 	    let periodendtimehrs = [];
 	    let periodendtimemins = [];
 	    let periodendtimeams = [];
-	    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]; // Add your days array here
+	    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; // Add your days array here
 
 	    // Collect data as before
 	    $("select[name='periods']").each(function() { periods.push($(this).val()); });
@@ -726,7 +726,7 @@
 		
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/abc/PeriodProcess/savePeriods";
+			form1.action = "/alfalahschool/PeriodProcess/savePeriods";
 			form1.method = "POST";
 			form1.submit();
 		  }
@@ -778,7 +778,7 @@
 	
 	function deleteRecord(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/PeriodProcess/deletePeriods";
+		form1.action = "/alfalahschool/PeriodProcess/deletePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -790,7 +790,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalahschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -911,22 +911,25 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Class&nbsp;</td>
-							<td width="70%">
-                                        <label>  <select name="fromclass" id="fromclass"  required
-									style="width: 220px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label> 
-							</td>
-						</tr>
+    <td class="alignRightFields">Class & Section&nbsp;</td>
+    <td width="70%">
+        <c:forEach items="${classdetailslist}" var="classdetails">
+            <!-- Check if the current item is a class -->
+            <c:if test="${classdetails.classdetails != ''}">
+                <c:forEach items="${classdetailslist}" var="sectiondetails">
+                    <!-- Check if the current item is a section -->
+                    <c:if test="${sectiondetails.section != ''}">
+                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                            <input type="checkbox" name="fromclass" value="${classdetails.classdetails}--${sectiondetails.section}">
+                            ${classdetails.classdetails} ${sectiondetails.section}
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                </c:forEach>
+            </c:if>
+        </c:forEach>
+    </td>
+
+</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -1041,198 +1044,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						<!-- <tr>
-							<td class="alignRightFields">Total Number Of Breaks&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="totalbreaks" id="totalbreaks" onchange="getBreaks();"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-								</select>
-
-							</label> 
-							
-							</td>
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr1">
-							<td class="alignRightFields">Break 1 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter1" id="breakafter1"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="breakduration1" id="breakduration1"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="breakduration1nmin" id="breakduration1nmin"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr2">
-							<td class="alignRightFields">Break 2 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter2" id="breakafter2"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="breakduration2" id="breakduration2"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="periodduration2min" id="periodduration2min"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr3">
-							<td class="alignRightFields">Break 3 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter3" id="breakafter3"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="periodduration3" id="periodduration3"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="periodduration3min" id="periodduration3min"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr> -->
 							<tr>
 
 							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">&nbsp;&nbsp;&nbsp;
@@ -1325,16 +1136,16 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Classes<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/alfalahschool/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Day Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/alfalahschool/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Day End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/alfalahschool/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Total No Of Periods<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/abc/css/dataTable/images/sort_both.png" /></th>
+							src="/alfalahschool/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
@@ -1345,7 +1156,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/abc/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/alfalahschool/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
 							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>

@@ -64,10 +64,13 @@ public class PeriodService {
 		return result;
 		
 	}
-
+	
 	public ResultResponse savePeriods(PeriodsSaveDto dto, String branchId, String userId) {
 		ResultResponse result = ResultResponse.builder().build();
 		
+		String[] classesPeriodCat = dto.getFromClass();
+		
+		for (String periodCat : classesPeriodCat) {
 		String academicYear = DataUtil.emptyString(dto.getAcademicYear());
 		String totalNoOfPeriods = DataUtil.emptyString(dto.getTotalNoOfPeriods());
 		String durationOfPeriodsHr = DataUtil.emptyString(dto.getDurationOfPeriodsHr());
@@ -78,7 +81,7 @@ public class PeriodService {
 		String dayEndTimeHr = DataUtil.emptyString(dto.getDayEndTimeHr());
 		String dayEndTimeMin = DataUtil.emptyString(dto.getDayEndTimeMin());
 		String dayEndAm = DataUtil.emptyString(dto.getDayEndAm());
-		String fromClass = DataUtil.emptyString(dto.getFromClass());
+		//String fromClass = DataUtil.emptyString(dto.getFromClass());
 		String toClass = DataUtil.emptyString(dto.getToClass());
 		
 		String[] periods = dto.getPeriods();
@@ -91,7 +94,6 @@ public class PeriodService {
 		String[] periodEndTimeMin = dto.getPeriodEndTimeMin();
 		String[] periodEndTimeAm = dto.getPeriodEndTimeAm();
 		String[] days = dto.getDays();
-		
 		
 		Map<String,List<Perioddetails>> periodMap = new HashMap<>();
 		int getPeriod=0;
@@ -116,7 +118,7 @@ public class PeriodService {
 		List<Perioddetails> periodDetailsList = new ArrayList<>();
 		Periodmaster periodMaster = new Periodmaster();
 		periodMaster.setAcademicyear(academicYear);
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClass_(periodCat);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
@@ -125,7 +127,7 @@ public class PeriodService {
 		periodMaster.setUserid(Integer.parseInt(userId));
 
 		result.setSuccess(new PeriodDAO().save(periodMaster,periodMap));
-
+		}
 		return result;
 	}
 
@@ -435,9 +437,10 @@ public class PeriodService {
 		String dayEndTimeMin = DataUtil.emptyString(dto.getDayEndTimeMin());
 		String dayEndAm = DataUtil.emptyString(dto.getDayEndAm());
 		String periodmasterid = DataUtil.emptyString(dto.getPeriodMasterId());
-		String fromClass = DataUtil.emptyString(dto.getFromClass());
+		//String fromClass = DataUtil.emptyString(dto.getFromClass());
 		String toClass = DataUtil.emptyString(dto.getToClass());
 		
+		String[] fromClass = dto.getFromClass();
 		String[] periods = dto.getPeriods();
 		String[] periodid = dto.getPeriodId();
 		String[] subjects = dto.getSubjects();
@@ -483,7 +486,7 @@ public class PeriodService {
 		}
 
 		Periodmaster periodMaster = new Periodmaster();
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClass_(fromClass[0]);
 		periodMaster.setAcademicyear(academicYear);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
@@ -498,4 +501,7 @@ public class PeriodService {
 
 		return result;
 	}
+
+
+	
 }
