@@ -245,8 +245,11 @@ for(Cookie cookie : cookies){
                         
               <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">
 				<table align="center">
-					<tr>
+					<tr><td rowspan="3" align="center"><img src="/shatabdi/images/shatabdi.png" width="42" height="50"/></td>
 						<td style="font-family: bold;">REPORT CARD</td>
+					</tr>
+					<tr>
+						<td style="font-family: bold;font-size:40px;">${branchname},&nbsp;&nbsp;Gaya</td>
 					</tr>
 					<tr>
 						<td style="font-family: bold;">
