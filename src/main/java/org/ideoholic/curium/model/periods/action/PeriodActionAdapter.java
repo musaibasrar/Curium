@@ -96,7 +96,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeHr(request.getParameter("dayendtime"));
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
-        dto.setFromClass(request.getParameter("fromclass")+"--"+request.getParameter("addsec"));
+        dto.setFromClass(request.getParameterValues("fromclass"));
         dto.setToClass(request.getParameter("toclass"));
 
         dto.setPeriods(request.getParameterValues("periods"));
