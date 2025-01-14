@@ -461,6 +461,13 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     	<tr>
+							<td width="25%"  class="alignLeft" height="50">Application Type&nbsp;</td>
+							<td width="25%" class="tablerows">
+								<c:out default="" value="${student.stream}" />
+							</td>
+							</tr>
+                    
+                    	<tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
