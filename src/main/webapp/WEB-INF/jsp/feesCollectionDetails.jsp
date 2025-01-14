@@ -682,8 +682,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">Collection Head</th>
                             <th title="click to sort" class="headerText">Distribution</th>
+                            <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">View Details</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
+                            <th title="click to sort" class="headerText">Cancel</th>
 
 
                         </tr>
@@ -707,6 +708,7 @@ for(Cookie cookie : cookies){
                                 </c:forEach>
                                 </td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.contributiondivision}"/></a></td>
+                                <td  class="dataText" style="text-align: left;"><c:out value="${feesdetails.value.narration}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>&miscid=<c:out value='${feesdetails.value.misc}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 

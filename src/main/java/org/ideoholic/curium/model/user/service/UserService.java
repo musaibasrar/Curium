@@ -607,6 +607,7 @@ public class UserService {
 
 				List<VoucherEntrytransactions> voucherList = new AccountDAO().getVoucherEntryTransactions(voucherIds);
 				String division = "";
+				String narration = "";
 				for (VoucherEntrytransactions voucher : voucherList) {
 					
 					if(!division.equalsIgnoreCase("")) {
@@ -615,7 +616,11 @@ public class UserService {
 						division = voucher.getDramount().toString();
 					}
 					
+					narration = voucher.getNarration();
+					
+					
 				}
+				receiptinfo.setNarration(narration);
 				receiptinfo.setContributiondivision(division);
 				receiptinfo.setFeesCategory(feeCatList);
 				

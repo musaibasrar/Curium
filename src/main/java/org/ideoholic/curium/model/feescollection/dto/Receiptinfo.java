@@ -49,6 +49,7 @@ public class Receiptinfo implements java.io.Serializable {
 			new HashSet<Feescollection>(0);
 	private List<String> feesCategory;
 	private String contributiondivision;
+	private String narration;
 	
 	public Receiptinfo() {
 	}
@@ -240,5 +241,13 @@ public class Receiptinfo implements java.io.Serializable {
 
 	public void setContributiondivision(String contributiondivision) {
 		this.contributiondivision = contributiondivision;
+	}
+
+	public String getNarration() {
+		return narration;
+	}
+
+	public void setNarration(String narration) {
+		this.narration = narration;
 	}
 }

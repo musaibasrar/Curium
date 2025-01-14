@@ -75,7 +75,8 @@ public class DataUtil {
             return 0.0;
         }
         else{
-            return Double.parseDouble(src);
+        	String sanitizedSrc = src.replace(",", "");
+            return Double.parseDouble(sanitizedSrc);
         }
 
     }

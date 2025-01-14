@@ -733,7 +733,8 @@
            			changeYear : true,
            			changeMonth : true,
            			dateFormat: 'dd/mm/yy',
-           			yearRange: "-50:+1"
+           			yearRange: "-2:+0",
+           			maxDate: new Date()
            		});
            		$("#anim").change(function() {
            			$("#dateoffeesDetails").datepicker("option", "showAnim", $(this).val());

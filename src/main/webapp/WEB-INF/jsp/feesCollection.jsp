@@ -730,7 +730,8 @@
            			changeYear : true,
            			changeMonth : true,
            			dateFormat: 'dd/mm/yy',
-           			yearRange: "-50:+1"
+           			yearRange: "-2:+0",
+           			maxDate: new Date()
            		});
            		$("#anim").change(function() {
            			$("#dateoffeesDetails").datepicker("option", "showAnim", $(this).val());
@@ -1137,7 +1138,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" >Donor Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
-                        <td class="alignLeft" >Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="bookreceiptno" id="bookreceiptno" class="myclass" onblur="checkDuplicate()"/>
+                        <td class="alignLeft" >Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="bookreceiptno" id="bookreceiptno" class="myclass" onblur="checkDuplicate()" required/>
                         <div id="bookreceiptnodiv"></div>
                         </td>
                         <td class="alignLeft" style="display: none;">Class & SEC : &nbsp;&nbsp;&nbsp;

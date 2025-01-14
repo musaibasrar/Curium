@@ -1063,6 +1063,7 @@ for(Cookie cookie : cookies){
                             
                             <th title="click to sort" class="headerText">Date</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Receipt Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                              
@@ -1078,6 +1079,7 @@ for(Cookie cookie : cookies){
                                 
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.bookreceiptno}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/jihtel/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
