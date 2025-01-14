@@ -708,27 +708,27 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td><br></td>
 						</tr>
+						
 						<tr>
-						
-						<td class="alignRightFields">Class &nbsp;
-							</td>
+    <td class="alignRightFields">Class & Section&nbsp;</td>
+    <td width="70%">
+        <c:forEach items="${classdetailslist}" var="classdetails">
+            <!-- Check if the current item is a class -->
+            <c:if test="${classdetails.classdetails != ''}">
+                <c:forEach items="${classdetailslist}" var="sectiondetails">
+                    <!-- Check if the current item is a section -->
+                    <c:if test="${sectiondetails.section != ''}">
+                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                            <input type="checkbox" name="fromclass" value="${classdetails.classdetails}-${sectiondetails.section}">
+                            ${classdetails.classdetails} ${sectiondetails.section}
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                </c:forEach>
+            </c:if>
+        </c:forEach>
+    </td>
 
-							<td width="70%">
-							 <label> 
-							 
-							 <c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</c:if>	
-							</c:forEach>
-							
-							</label>
-							</td>
-							
-						</tr>
-						
+</tr>
 						<tr>
 							<td><br /></td>
 
