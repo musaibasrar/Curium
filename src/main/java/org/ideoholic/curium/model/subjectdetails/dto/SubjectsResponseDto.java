@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class SubjectsResponseDto {
-    private List<Subject> list;
+    private List<Subject> subjects;
     private boolean success;
 }

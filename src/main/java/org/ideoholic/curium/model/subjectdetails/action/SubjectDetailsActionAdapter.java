@@ -26,7 +26,7 @@ public class SubjectDetailsActionAdapter {
     public boolean readListOfSubjects() {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
-        httpSession.setAttribute("listSubject", result.getList());
+        httpSession.setAttribute("listSubject", result.getSubjects());
         return result.isSuccess();
     }
     public boolean addSubject() {
@@ -73,7 +73,7 @@ public class SubjectDetailsActionAdapter {
     public void readListOfSubjectNames() {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
-        httpSession.setAttribute("listSubjectNames", result.getList());
+        httpSession.setAttribute("listSubjectNames", result.getSubjects());
     }
 
 }

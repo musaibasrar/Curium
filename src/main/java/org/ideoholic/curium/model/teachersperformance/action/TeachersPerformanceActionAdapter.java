@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.model.teachersperformance.service.TeacherPerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,14 @@ public class TeachersPerformanceActionAdapter {
 		request.setAttribute("subjectaveragelistsize", teacherDetailResponseDto.getSubjectAverageListSize());
 		request.setAttribute("subjectName", teacherDetailResponseDto.getSubjectName());
 		
+	}
+	
+	public boolean readListOfSubjects() {
+		
+		SubjectsResponseDto result = teacherPerformanceService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
+		 httpSession.setAttribute("listSubject", result.getSubjects());
+		 return result.isSuccess();
+
 	}
 
 }

@@ -17,28 +17,27 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.util.SubjectAverage;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherPerformanceService {
-     private HttpSession httpSession;
-     private String BRANCHID = "branchid";
      
 	
-	public boolean readListOfSubjects() {
+	public SubjectsResponseDto readListOfSubjects(String branchid) {
+		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
 		boolean result = false;
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-	        httpSession.setAttribute("listSubject", list);
-
-	        result = true;
+	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchid));
+	    	subjectsResponseDto.setSubjects(list);
+	    	subjectsResponseDto.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        result = false;
+	        subjectsResponseDto.setSuccess(false);
 	    }
-		return result;
+		return subjectsResponseDto;
 	}
 
 	
