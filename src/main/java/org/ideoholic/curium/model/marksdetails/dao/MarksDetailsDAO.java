@@ -197,7 +197,7 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : examRankList) {
-					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear='"+examrank.getAcademicyear()+"' and branchid = "+examrank.getBranchid()+"");
+					Query query = session.createQuery("From ExamRank where sid="+examrank.fetchSid()+" and examid="+examrank.fetchExamid()+" and academicyear='"+examrank.getAcademicyear()+"' and branchid = "+examrank.getBranchid()+"");
 					ExamRank results = (ExamRank) query.uniqueResult();
 					if(results==null) {
 						session.save(examrank);	

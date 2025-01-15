@@ -1,12 +1,16 @@
 package org.ideoholic.curium.model.pudetails.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.student.dto.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +29,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "pudetails")
 public class Pudetails implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idpudetails")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idpudetails", unique = true, nullable = false)
 	private Integer idpudetails;
 
 	@Column(name = "exampassedappearance")
@@ -61,7 +66,10 @@ public class Pudetails implements java.io.Serializable {
 	@Column(name = "pumediuminstruction", length = 45)
 	private String pumediuminstruction;
 
+	@OneToMany(mappedBy = "pudetails")
+	private List<Student> studentList;
+
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

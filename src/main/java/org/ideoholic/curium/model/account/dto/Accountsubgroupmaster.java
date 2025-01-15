@@ -1,13 +1,16 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +27,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_accountsubgroupmaster")
 public class Accountsubgroupmaster implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountsubgroupmasterid", unique = true, nullable = false)
 	private Integer accountsubgroupmasterid;
 
@@ -40,10 +44,16 @@ public class Accountsubgroupmaster implements java.io.Serializable {
 	@JoinColumn(name = "accountgroupid")
 	private Accountgroupmaster accountGroupMaster;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountSubGroupMaster")
+	private List<Accountssgroupmaster> accAccountssubgroupmasterList;
+
+	@OneToMany(mappedBy = "accountSubGroupMaster")
+	private List<Accountdetails> accountdetailsList;
+
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

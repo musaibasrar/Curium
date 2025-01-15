@@ -1,13 +1,12 @@
 package org.ideoholic.curium.model.subjectdetails.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 15 Aug, 2016 12:22:36 AM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -24,9 +23,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "subjectmaster")
 public class Subjectmaster implements java.io.Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "subjectid", unique = true, nullable = false)
 	private Integer subjectid;
 
@@ -34,9 +34,9 @@ public class Subjectmaster implements java.io.Serializable {
 	private String subjectname;
 
 	@Column(name = "branchid")
-	private int branchid;
-
+	private Integer branchid;
+	
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

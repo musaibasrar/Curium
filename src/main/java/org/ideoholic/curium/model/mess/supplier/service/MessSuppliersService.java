@@ -186,7 +186,7 @@ public class MessSuppliersService {
 				} else {
 					accountDetailsBalance.setCrdr("Dr");
 				}
-				accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
+				accountDetailsBalance.setFinancialAccountingYear(financialyear);
 				accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
 				accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 				accountDetailsBalance.setEnteredon(new Date());
@@ -197,9 +197,7 @@ public class MessSuppliersService {
 			}
 		} catch (Exception e) {
 			log.error("Error in createLedgerForSupplierAndSave: ", e);
-			result.setSuccess(false);
 			result.setName("An error occurred while creating ledger: " + e.getMessage());
-
 			// You might want to set some error state in the result object here
 		}
 		

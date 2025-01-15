@@ -167,7 +167,7 @@ public class ExamDetailsDAO {
 
 	public Exams getExamDetails(Integer examid) {
 		
-		Exams exam = new Exams();
+		Exams exam = null;
 		try {
 
 			transaction = session.beginTransaction();

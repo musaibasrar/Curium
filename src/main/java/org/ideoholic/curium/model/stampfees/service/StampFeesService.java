@@ -219,7 +219,7 @@ public class StampFeesService {
 			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
 			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 			Feescategory feescategory = new Feescategory();
-			studentfeesstructure.setSid(Integer.valueOf(id));
+			studentfeesstructure.setStudent(new studentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
 			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setFeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
@@ -352,7 +352,7 @@ public class StampFeesService {
 
 			Studentotherfeesstructure studentfeesstructure = new Studentotherfeesstructure();   
 			OtherFeecategory feescategory = new OtherFeecategory();
-			studentfeesstructure.setSid(Integer.valueOf(id));
+			studentfeesstructure.setStudent(new studentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
 			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
 			studentfeesstructure.setOtherfeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));

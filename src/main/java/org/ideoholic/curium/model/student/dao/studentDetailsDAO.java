@@ -73,7 +73,7 @@ public class studentDetailsDAO {
 			 * "commonregion");
 			 */
 			Query query = session
-					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -120,7 +120,7 @@ public class studentDetailsDAO {
 	}
 
 	public Student readUniqueObject(long id) {
-		Student student = new Student();
+		Student student = null;
 		try {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
@@ -440,12 +440,12 @@ public class studentDetailsDAO {
 			
 			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 					
-					Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+					Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.fetchSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.fetchIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 					Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 					if(feesStructure != null){
 						
 						Query queryUpdate = session
-								.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+								.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.fetchIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.fetchSid()+"' and academicyear = '"+currentYear+"'");
 						
 						
 						queryUpdate.executeUpdate();
@@ -770,12 +770,12 @@ public class studentDetailsDAO {
 		}
 	}
 	
-	public List<Studentotherfeesstructure> getStudentOtherFeesStructureDetails(int sfsid) {
-		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
+	public Studentotherfeesstructure getStudentOtherFeesStructureDetails(int sfsid) {
+		Studentotherfeesstructure studentFeesStructure = new Studentotherfeesstructure();
 
 		try {
 			transaction = session.beginTransaction();
-			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
+			studentFeesStructure = (Studentotherfeesstructure) session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").uniqueResult();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -795,7 +795,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			Query query = session
-					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			results = query.list();
 			transaction.commit();
 

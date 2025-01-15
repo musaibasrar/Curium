@@ -53,7 +53,7 @@ public class DiaryService {
 			diary.setClasssec(DataUtil.emptyString(classString));
 			diary.setMessage(addDiaryDto.getMessageBody());
 			diary.setSubject(addDiaryDto.getSubject());
-			diary.setBranchid(branchId);
+			diary.setBranchid(Integer.parseInt(branchId));
 			diary.setUserid(Integer.parseInt(userLoginId));
 			diary.setAcademicyear(currentAcademicYear);
 			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
@@ -85,7 +85,7 @@ public class DiaryService {
 					diary.setId((Integer) diaryObject[0]);
 					diary.setClasssec((String) diaryObject[1]);
 					diary.setAcademicyear((String) diaryObject[2]);
-					diary.setBranchid((String) diaryObject[3]);
+					diary.setBranchid(Integer.parseInt((String) diaryObject[3]));
 					diary.setSubject((String) diaryObject[4]);
 					diary.setMessage((String) diaryObject[5]);
 					diary.setStartdate((Date) diaryObject[6]);
@@ -136,7 +136,7 @@ public class DiaryService {
 					diary.setId((Integer) diaryObject[0]);
 					diary.setClasssec((String) diaryObject[1]);
 					diary.setAcademicyear((String) diaryObject[2]);
-					diary.setBranchid((String) diaryObject[3]);
+					diary.setBranchid(Integer.parseInt((String) diaryObject[3]));
 					diary.setSubject((String) diaryObject[4]);
 					diary.setMessage((String) diaryObject[5]);
 					diary.setStartdate((Date) diaryObject[6]);

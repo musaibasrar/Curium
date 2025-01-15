@@ -112,7 +112,7 @@ public class MarksDetailsService {
 			Set mapSet = mapOfMarks.entrySet();
 			Iterator mapIterator = mapSet.iterator();
 
-			int examid = Integer.parseInt(examidName[0]);
+			Exams exams = new ExamDetailsDAO().getExamDetails(Integer.parseInt(examidName[0]));
 			int subid = Integer.parseInt(subject);
 			List<Marks> marksList = new ArrayList<Marks>();
 			
@@ -124,12 +124,12 @@ public class MarksDetailsService {
 				Map.Entry mapEntry = (Entry) mapIterator.next();
 
 				Marks marks = new Marks();
-				marks.setExamid(examid);
-				marks.setSubid(subjectDetails.getSubid());
+				marks.setExam(exams);
+				marks.setSubject(subjectDetails);
 				
 				float mymark= Float.parseFloat((String) mapEntry.getValue());
 				float subjectPercentage = ((float)mymark / maxMarks) * 100;
-				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(branchId),examid,classSelected);
+				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(branchId),exams.getExid(),classSelected);
 				int subPercentage = (int) Math.floor(subjectPercentage);
 				
 				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
@@ -141,7 +141,7 @@ public class MarksDetailsService {
 					
 				}
 				
-				marks.setSid((int) mapEntry.getKey());
+				marks.setStudent(new studentDetailsDAO().readUniqueObject((int) mapEntry.getKey()));
 				marks.setMarksobtained(mymark);
 				String currentYear = currentAcademicYear;
 				marks.setAcademicyear(currentYear);
@@ -488,8 +488,9 @@ public class MarksDetailsService {
 
 			}
 
-			int examid = Integer.parseInt(exam);
+			Exams exams = new ExamDetailsDAO().getExamDetails(Integer.parseInt(exam));
 			int subid = Integer.parseInt(subject);
+			Subject subjectDetails =  new SubjectDetailsDAO().getSubjectDetails(subid);
 			List<Marks> marksList = new ArrayList<Marks>();
 
 			for (Entry<Integer, Map<Integer, String>> entry : mapOfMarksid.entrySet()) {
@@ -505,9 +506,9 @@ public class MarksDetailsService {
 
 					Marks marks = new Marks();
 					marks.setMarksid(marksID);
-					marks.setExamid(examid);
-					marks.setSubid(subid);
-					marks.setSid(studentId);
+					marks.setExam(exams);
+					marks.setSubject(subjectDetails);
+					marks.setStudent(new studentDetailsDAO().readUniqueObject(studentId));
 					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = strCurrentAcademicYear;
 					String currentYear = currentAcademicYear;
@@ -1544,8 +1545,8 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 						}
 						examMarksList.add(examMarks);
 						
-						examrank.setSid(Integer.parseInt(studentIds[i]));
-						examrank.setExamid(examsList.getExid());
+						examrank.setStudent(new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i])));
+						examrank.setExams(examsList);
 						examrank.setMarksobtained(totalObtainedMarks);
 						examrank.setAcademicyear(currentAcademicYear);
 						examrank.setBranchid(Integer.parseInt(branchId));

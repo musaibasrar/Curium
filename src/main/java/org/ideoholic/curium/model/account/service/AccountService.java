@@ -210,7 +210,7 @@ public class AccountService {
 					}else{
 						accountDetailsBalance.setCrdr("Dr");
 					}
-					accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
+					accountDetailsBalance.setFinancialAccountingYear(financialyear);
 					accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
@@ -257,7 +257,7 @@ public class AccountService {
 				accountDetails.setAccountcode(accountCode);
 				accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
 				accountDetails.setAccountGroupMaster(accountGroupMaster);
-				accountDetails.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
+				accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
 				accountDetails.setBranchid(Integer.parseInt(branchId));
 				
 					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(branchId));
@@ -268,7 +268,7 @@ public class AccountService {
 					}else{
 						accountDetailsBalance.setCrdr("Dr");
 					}
-					accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
+					accountDetailsBalance.setFinancialAccountingYear(financialyear);
 					accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
