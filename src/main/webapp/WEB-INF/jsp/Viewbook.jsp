@@ -459,9 +459,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Author&nbsp;</th>
 						<th title="click to sort" class="headerText">Publisher&nbsp;</th>
 						<th title="click to sort" class="headerText">isbn</th>
-						<th title="click to sort" class="headerText">Status</th>
-						<th title="click to sort" class="headerText">Shelf</th>
-						<th title="click to sort" class="headerText">Book Holder</th>
+						<th title="click to sort" class="headerText">Available Quantity</th>
+						<th title="click to sort" class="headerText">Issued Quantity</th>
+					    <th title="click to sort" class="headerText">Shelf</th>
 					</tr>
 				</thead>
 
@@ -480,9 +480,9 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${book.author}" /></td>
 							<td class="dataText"><c:out value="${book.publisher}" /></td>
 							<td class="dataText"><c:out value="${book.isbn}" /></td>
-							<td class="dataText"><c:out value="${book.status}" /></td>
+							<td class="dataText"><c:out value="${book.availableQty}" /></td>
+							<td class="dataText"><c:out value="${book.issuedQty}" /></td>
 							<td class="dataText"><c:out value="${book.shelf}" /></td>
-							<td class="dataText"><c:out value="${book.bookHolder}" /></td>
 						</tr>
 					</c:forEach>
 
