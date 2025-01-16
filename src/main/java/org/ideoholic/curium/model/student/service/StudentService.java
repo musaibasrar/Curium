@@ -444,7 +444,8 @@ public class StudentService {
 				result.setTotalMiscAmount(totalMiscAmount);
 				result.setSuccess(true);
 			}
-			standardService.viewClasses(branchId);
+			ResultResponse classsec = standardService.viewClasses(branchId);
+			result.setClassSec(classsec.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
