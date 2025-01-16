@@ -258,6 +258,7 @@ public class StudentActionAdapter {
         httpSession.setAttribute("totalfineamount", responseDto.getTotalFineAmount());
         httpSession.setAttribute("totalmiscamount", responseDto.getTotalMiscAmount());
         httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
+        httpSession.setAttribute("classdetailslist", responseDto.getClassSec());
 
         return responseDto.isSuccess();
     }
