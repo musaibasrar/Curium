@@ -9,7 +9,6 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dto.Classsec;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
@@ -38,5 +37,4 @@ public class StudentDetailsResponseDto {
     private List<Otherreceiptinfo> otherReceiptInfo;
     private List<Studentotherfeesstructure> studentOtherFeesStructure;
     private List<Classsec> classSec;
-    private Map<Receiptinfo,String> receiptNarrationMap;
 }
