@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.teachersperformance.dto;
 
 import java.util.List;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
@@ -26,6 +27,11 @@ public class ExamSubectResponseDto {
 
 	public  void copyExamsListResponseDto(ExamsListResponseDto examsListResponseDto) {
 		exams = examsListResponseDto.getExams();
+	}
+
+	public void copyClassSec(ResultResponse result) {
+		classSecs = result.getResultList();
+		
 	}
 
 }

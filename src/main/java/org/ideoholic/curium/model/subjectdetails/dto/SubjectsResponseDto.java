@@ -5,9 +5,12 @@ import lombok.Data;
 
 import java.util.List;
 
+import org.ideoholic.curium.model.std.dto.Classsec;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class SubjectsResponseDto {
     private List<Subject> subjects;
     private boolean success;
+    private List<Classsec> classSecs;
 }

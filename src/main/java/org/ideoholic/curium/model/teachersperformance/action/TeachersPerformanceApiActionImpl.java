@@ -1,5 +1,8 @@
 package org.ideoholic.curium.model.teachersperformance.action;
 
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.exceptions.CustomErrorMessage;
+import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -35,10 +38,17 @@ public class TeachersPerformanceApiActionImpl implements TeachersPerformanceApiA
 
 	public ResponseEntity<ExamSubectResponseDto> SearchTeachers(String branchId) {
 		ExamSubectResponseDto examSubectResponseDto = new ExamSubectResponseDto();
-		standardService.viewClasses(branchId);
+		ResultResponse result = standardService.viewClasses(branchId);
+		if(!result.isSuccess())
+		throw new CustomResponseException(CustomErrorMessage.ERROR);
+		examSubectResponseDto.copyClassSec(result);
 		SubjectsResponseDto subjectsResponseDto = subjectDetailsService.readListOfSubjectNames(branchId);
+		if(!subjectsResponseDto.isSuccess())
+		throw new CustomResponseException(CustomErrorMessage.ERROR);
 		examSubectResponseDto.copySubjectsResponseDto(subjectsResponseDto);
 		ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);
+		if(!examsListResponseDto.isSuccess())
+		throw new CustomResponseException(CustomErrorMessage.ERROR);
 		examSubectResponseDto.copyExamsListResponseDto(examsListResponseDto);
 		return ResponseEntity.ok(examSubectResponseDto);
 	}
