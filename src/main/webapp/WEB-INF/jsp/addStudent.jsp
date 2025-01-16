@@ -19,6 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add Student</title>
 <link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/alfalahschool/css/validation/jquery.ketchup.css">
