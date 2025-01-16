@@ -566,6 +566,57 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
+							<td width="16%" class="alignRight">Group&nbsp;</td>
+
+							<td width="28%"><label> <select name="group"
+									id="group" style="width: 210px" onchange="dropdownclass()">
+										<option selected>${employee.group}</option>
+										<option>Boys</option>
+										<option>Girls</option>
+										<option>Care Taker</option>
+										<option>Office</option>
+
+								</select>
+
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Shift &nbsp;</td>
+
+							<td width="28%"><label> <select name="shift"
+									id="shift" style="width: 210px;">
+										<option selected>
+											<c:out default="" value="${employee.shift}" />
+										</option>
+										<option>Day</option>
+										<option>Night</option>
+										<option>Morning</option>
+										<option>Noon</option>
+
+								</select>
+
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						
+						<td width="16%" class="alignRight">Timings&nbsp;</td>
+
+							<td align="left"><label> <input name="timings"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.timing}" />"
+									id="timings" size="30">
+
+							</label></td>
 
 							<td width="16%" class="alignRight">Current Employee &nbsp;</td>
 

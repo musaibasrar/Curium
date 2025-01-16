@@ -99,12 +99,6 @@
         <property name="employeedoc5" type="string">
             <column name="employeedoc5" />
             </property>
-             <property name="category" type="string">
-            <column name="category" />
-            </property>
-             <property name="subcategory" type="string">
-            <column name="subcategory" />
-            </property>
              <property name="group" type="string">
             <column name="group" />
             </property>

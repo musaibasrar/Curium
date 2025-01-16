@@ -659,7 +659,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Department &nbsp;</td>
+							<td class="alignRight">Category &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="department" id="department"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
@@ -677,7 +677,7 @@ for(Cookie cookie : cookies){
 								</select></label></td>
 
 
-							<td class="alignRight">Designation &nbsp;</td>
+							<td class="alignRight">Sub Category &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="designation" id="designation"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
@@ -720,6 +720,41 @@ for(Cookie cookie : cookies){
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td class="alignRight">Group &nbsp;</td>
+							<td align="left"><label>
+									<select name="group" id="group"
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Boys</option>
+										<option>Girls</option>
+										<option>Care Taker</option>
+										<option>Office</option>
+								</select></label></td>
+
+
+							<td class="alignRight">Shift &nbsp;</td>
+							<td><label>
+									<select name="shift" id="shift"
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Day</option>
+										<option>Night</option>
+										<option>Morning</option>
+										<option>Noon</option>
+								</select>
+							</label></td>
+
+
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -734,8 +769,16 @@ for(Cookie cookie : cookies){
 									id="salary" size="36" onblur="validateName();">
 									onkeyup="check(this.value);" 
 							</label></td> -->
+							<td class="alignRight">Timings &nbsp;</td>
+							<td align="left"><label> <input
+									name="timings" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="timings" size="36" onblur="validateName();">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
+
 							<td class="alignRight">Current Employee &nbsp;</td>
-							<td class="alignLeft">&nbsp;Yes<input
+							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="currentemployee" id="no:employee"

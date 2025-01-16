@@ -424,13 +424,13 @@ for(Cookie cookie : cookies){
                         
                         
                         <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Department</td>
+                        <td width="25%"   class="alignLeft" height="50" >Category</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.department}" />
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Designation</td>
+                            <td width="25%"   class="alignLeft" height="50" >Sub Category</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.designation}" />
                             </td>
@@ -452,6 +452,27 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
+                        	<td width="25%"   class="alignLeft" height="50" >Group</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.group}" />
+                            </td>
+                            
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Shift</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.shift}" />
+                            </td>
+                           
+                           
+                        
+                        </tr>
+                        
+                        <tr>
+                        
+                      		<td width="25%"   class="alignLeft" height="50" >Timings</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.timing}" />
+                            </td>
                          
                             <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
                             
