@@ -1,13 +1,12 @@
 package org.ideoholic.curium.model.hr.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 19 Apr, 2018 11:15:02 AM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,14 +28,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_leavedetails")
 public class Leavedetails implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idleavedetails", unique = true, nullable = false)
 	private Integer idleavedetails;
-
-	@Column(name = "idleavetypemaster")
-	private Integer idleavetypemaster;
 
 	@Column(name = "idteacher")
 	private Integer idteacher;
@@ -49,16 +46,16 @@ public class Leavedetails implements java.io.Serializable {
 	private Leavetypemaster leaveTypeMaster;
 
 	@ManyToOne
-	@JoinColumn(name = "idteacher")
+	@JoinColumn(name = "teacherid", referencedColumnName = "tid")
 	private Teacher teacher;
 
 	@Column(name = "academicyear", length = 45)
 	private String academicyear;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

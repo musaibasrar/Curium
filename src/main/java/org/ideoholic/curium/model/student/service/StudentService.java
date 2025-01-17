@@ -228,7 +228,7 @@ public class StudentService {
 					String[] concession = dto.getConcession();
 					String[] totalInstallments = dto.getTotalInstallments();
 
-					List<Integer> ids = new ArrayList();
+					List<Integer> ids = new ArrayList<>();
 					listOfacademicfessstructure.clear();
 					for (String id : studentIds) {
 						System.out.println("id" + id);
@@ -253,7 +253,7 @@ public class StudentService {
 							
 							Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
 							Feescategory feescategory = new Feescategory();
-							studentfeesstructure.setSid(Integer.valueOf(id));
+							studentfeesstructure.setStudent(new studentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
 							feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIdsdiv[0]));
 							studentfeesstructure.setFeescategory(feescategory);
 							studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[Integer.parseInt(feesCategoryIdsdiv[1])]));

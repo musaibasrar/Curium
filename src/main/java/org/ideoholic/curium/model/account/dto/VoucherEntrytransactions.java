@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 7 Mar, 2018 10:58:19 AM by Hibernate Tools 4.0.0
 
@@ -11,10 +9,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,9 +30,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_voucherentrytransactions")
 public class VoucherEntrytransactions implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "transactionsid", unique = true, nullable = false)
 	private Integer transactionsid;
 
@@ -55,15 +56,18 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	@Column(name = "transactiondate", length = 10)
 	private Date transactiondate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "entrydate", length = 10)
 	private Date entrydate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "vouchercancellationdate", length = 10)
 	private Date vouchercancellationdate;
 
 	@Column(name = "narration", length = 500)
 	private String narration;
 
+	@NotNull
 	@Column(name = "financialyear")
 	private int financialyear;
 
@@ -75,53 +79,4 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
-
-	public int getFinancialyear() {
-		return financialyear;
-	}
-
-	public void setFinancialyear(int financialyear) {
-		this.financialyear = financialyear;
-	}
-
-	public String getCancelvoucher() {
-		return cancelvoucher;
-	}
-
-	public void setCancelvoucher(String cancelvoucher) {
-		this.cancelvoucher = cancelvoucher;
-	}
-
-	public Date getEntrydate() {
-		return entrydate;
-	}
-
-	public void setEntrydate(Date entrydate) {
-		this.entrydate = entrydate;
-	}
-
-	public Date getVouchercancellationdate() {
-		return vouchercancellationdate;
-	}
-
-	public void setVouchercancellationdate(Date vouchercancellationdate) {
-		this.vouchercancellationdate = vouchercancellationdate;
-	}
-
-	@Column(name = "branchid")
-	public int getBranchid() {
-		return branchid;
-	}
-
-	public void setBranchid(int branchid) {
-		this.branchid = branchid;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 }

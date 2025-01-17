@@ -441,7 +441,7 @@ public class FeesService {
 				
 				for (Studentfeesstructure fees : listStudentsFeesStructure) {
 					
-					int feeSid = fees.getSid();
+					int feeSid = fees.fetchSid();
 					int sid = parents.getStudent().getSid();
 						
 					if(feeSid == sid) {

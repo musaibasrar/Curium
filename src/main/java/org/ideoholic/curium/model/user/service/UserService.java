@@ -629,7 +629,7 @@ public class UserService {
 				fine = fine + receiptinfo.getFine();
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
-				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.fetchSid());
 				feesMap.put(receiptinfo, student);
 			}
 

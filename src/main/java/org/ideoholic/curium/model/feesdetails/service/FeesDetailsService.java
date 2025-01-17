@@ -52,7 +52,7 @@ public class FeesDetailsService {
 		if(branchid!=null){
 			// Setting the fees details
 			String sid = feesIdDetailsDto.getStudentId();
-			feesdetails.setSid(DataUtil.parseInt(sid));
+			feesdetails.setStudent(new studentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid)));
 			feesdetails.setDateoffees(DataUtil.emptyString(feesIdDetailsDto.getDateoffees()));
 			feesdetails.setAmountpercat(DataUtil.emptyString(feesIdDetailsDto.getFeesTotalAmount()));
 			feesdetails.setGrandtotal(DataUtil.emptyString(feesIdDetailsDto.getGrandTotalAmount()));
@@ -83,7 +83,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -193,7 +193,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -310,7 +310,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();

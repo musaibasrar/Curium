@@ -1,16 +1,17 @@
 package org.ideoholic.curium.model.account.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 15 Feb, 2018 11:56:25 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,9 +30,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "acc_financialaccountingyear")
 public class Financialaccountingyear implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "financialid", unique = true, nullable = false)
 	private Integer financialid;
 
@@ -51,5 +53,8 @@ public class Financialaccountingyear implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
+	
+    @OneToMany(mappedBy = "financialAccountingYear")
+    private List<Accountdetailsbalance> accountdetailsbalanceList;
 
 }

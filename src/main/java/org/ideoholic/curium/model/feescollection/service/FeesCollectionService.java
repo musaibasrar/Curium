@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,6 +76,7 @@ import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FeesCollectionService {
@@ -303,11 +305,11 @@ public class FeesCollectionService {
 		//End Payment Details
 		
 		if(studentSfsIds!=null || miscAmount!=0 || fineAmount!=0){
-			
+			Student student = new studentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid));
 			// create receipt information
 			receiptInfo.setAcademicyear(dto.getAcademicYear());
 			receiptInfo.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
-			receiptInfo.setSid(DataUtil.parseInt(sid));
+			receiptInfo.setStudent(student);
 			receiptInfo.setBranchid(Integer.parseInt(branchId));
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails());
@@ -318,9 +320,14 @@ public class FeesCollectionService {
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
-					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
+					
+					List<Studentfeesstructure> studentFeesStructure = new studentDetailsDAO().getStudentFeesStructureDetails(DataUtil.parseInt(studentSfsIdamount[0]));
+					if(!CollectionUtils.isEmpty(studentFeesStructure)) {
+						feesCollect.setStudentFeeStructure(studentFeesStructure.get(0));
+					}
+					
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
-					feesCollect.setSid(DataUtil.parseInt(sid));
+					feesCollect.setStudent(student);
 					feesCollect.setFine(Long.parseLong("0"));
 					feesCollect.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
 					feesCollect.setAcademicyear(dto.getAcademicYear());
@@ -458,12 +465,12 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
-				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
-			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
+			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.fetchSid());
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setReceiptInfo(receiptInfo);
@@ -482,13 +489,13 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
-				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
-			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
-			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
+			Student student = new studentDetailsDAO().readUniqueObject(rinfo.fetchSid());
+			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
 			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);
@@ -502,7 +509,7 @@ public class FeesCollectionService {
 			result.setGrandTotal(grandTotal+" "+"Only");
 			result.setSuccess(true);
 			
-			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
+			getFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear());
 		}
 		return result;
 	}
@@ -519,7 +526,7 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
-				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
@@ -532,7 +539,7 @@ public class FeesCollectionService {
 			result.setDuplicate("duplicate");
 			result.setSuccess(true);
 
-			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
+			getFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear());
 			
 		}
 		return result;
@@ -1337,11 +1344,11 @@ public class FeesCollectionService {
 		//End Payment Details
 
 		if(studentSfsIds!=null){
-
+			Student student = new studentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid));
 			// create receipt information
 			receiptInfo.setAcademicyear(dto.getAcademicYear());
 			receiptInfo.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
-			receiptInfo.setSid(DataUtil.parseInt(sid));
+			receiptInfo.setStudent(student);
 			receiptInfo.setBranchid(Integer.parseInt(branchId));
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails());
@@ -1357,9 +1364,9 @@ public class FeesCollectionService {
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Otherfeescollection feesCollect = new Otherfeescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
-					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
+					feesCollect.setOtherFeesStructure(new studentDetailsDAO().getStudentOtherFeesStructureDetails(DataUtil.parseInt(studentSfsIdamount[0])));
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
-					feesCollect.setSid(DataUtil.parseInt(sid));
+					feesCollect.setStudent(student);
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
 					feesCollect.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
 					feesCollect.setAcademicyear(dto.getAcademicYear());
@@ -1456,12 +1463,12 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
-			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
+			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.fetchSid());
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setOtherReceiptInfo(receiptInfo);
@@ -1480,13 +1487,13 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
-			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
-			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
+			Student student = new studentDetailsDAO().readUniqueObject(rinfo.fetchSid());
+			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
 			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);
@@ -1500,7 +1507,7 @@ public class FeesCollectionService {
 			result.setGrandTotal(grandTotal+" "+"Only");
 			result.setSuccess(true);
 
-			getOtherFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
+			getOtherFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear());
 		}
 		return result;
 	}
@@ -1653,7 +1660,7 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
@@ -1666,7 +1673,7 @@ public class FeesCollectionService {
 			result.setDuplicate("duplicate");
 			result.setSuccess(true);
 
-			getOtherFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
+			getOtherFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear());
 			
 		}
 		return result;
@@ -1943,7 +1950,7 @@ public class FeesCollectionService {
 				Map<String,Long> feeCatMap = new HashMap<String, Long>();
 
 				for (Feescollection feescollectionSingle : setFeesCollection) {
-					List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
+					List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 					//feeCategoryFeeCollectionMap.get(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
 					//feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 					
@@ -2010,7 +2017,7 @@ public class FeesCollectionService {
 			Set<Otherfeescollection> setFeesCollectionOtherFees = receiptinfo.getFeesCollectionRecords();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollectionOtherFees) {
-				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
+				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				//feeCategoryFeeCollectionMap.get(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
 				//feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 
@@ -2092,7 +2099,7 @@ public class FeesCollectionService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 				}
@@ -2525,12 +2532,12 @@ public class FeesCollectionService {
 		//End Payment Details
 		
 		if(studentSfsIds!=null || miscAmount!=0 || fineAmount!=0){
-			
+			Student student = new studentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid));
 			// create receipt information
 			receiptInfo.setBranchreceiptnumber(dto.getChequeBankName());
 			receiptInfo.setAcademicyear(dto.getAcademicYear());
 			receiptInfo.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
-			receiptInfo.setSid(DataUtil.parseInt(sid));
+			receiptInfo.setStudent(student);
 			receiptInfo.setBranchid(Integer.parseInt(branchId));
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails().replace("—", "--"));
@@ -2542,9 +2549,9 @@ public class FeesCollectionService {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
 					Studentfeesstructure studentSFS = new feesCollectionDAO().getStudentFeesStructure(sid, studentSfsIds[i],currentAcademicYear);
-					feesCollect.setSfsid(studentSFS.getSfsid());
+					feesCollect.setStudentFeeStructure(studentSFS);
 					feesCollect.setAmountpaid((long)(DataUtil.parseDouble(amountPaying[i])));
-					feesCollect.setSid(DataUtil.parseInt(sid));
+					feesCollect.setStudent(student);
 					feesCollect.setFine(Long.parseLong("0"));
 					feesCollect.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
 					feesCollect.setAcademicyear(dto.getAcademicYear());

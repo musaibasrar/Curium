@@ -242,7 +242,7 @@ public class feesDetailsDAO {
 						 * createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
 						 * +branchId+")") .list();
 						 */
-                        Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                        Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
                         results= (List<Object[]>)q.list();
                         transaction.commit();
 
@@ -288,7 +288,7 @@ public class feesDetailsDAO {
 	                    query.executeUpdate();
                     
                     for (Feescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	queryStudentFS.executeUpdate();
 					}
                     
@@ -332,7 +332,7 @@ public class feesDetailsDAO {
 	                    query.executeUpdate();
                     
                     for (Feescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	queryStudentFS.executeUpdate();
 					}
                     
@@ -379,7 +379,7 @@ public class feesDetailsDAO {
 	                    query.executeUpdate();
                     
                     for (Otherfeescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	queryStudentFS.executeUpdate();
 					}
                     

@@ -30,7 +30,7 @@ public class SubjectDetailsService {
 
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchId));
-	        result.setList(list);
+	        result.setSubjects(list);
 
 			result.setSuccess(true);
 	    } catch (Exception e) {
@@ -108,7 +108,7 @@ public class SubjectDetailsService {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-			result.setList(list);
+			result.setSubjects(list);
 			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
