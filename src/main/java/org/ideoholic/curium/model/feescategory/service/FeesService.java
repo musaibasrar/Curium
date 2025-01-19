@@ -925,4 +925,30 @@ public class FeesService {
            throw new IllegalArgumentException("Fees category for the given student does not exist");
            
    }
+		
+		public ParentListResponseDto viewAllStudentsListOtherFees(String branchid) {
+			ParentListResponseDto parentResponseDto = new ParentListResponseDto();
+			try {
+				List<Object[]> list = new feesDetailsDAO().readListOfStudentsOtherFees(Integer.parseInt(branchid));
+
+				List<Parents> parentDetails = new ArrayList<Parents>();
+				for (Object[] parentdetails : list) {
+					Parents parent = new Parents();
+					Student student = new Student();
+					student.setSid((Integer) parentdetails[0]);
+					student.setName((String) parentdetails[1]);
+					student.setClassstudying((String) parentdetails[2]);
+					student.setStudentexternalid((String) parentdetails[3]);
+					student.setAdmissionnumber((String) parentdetails[4]);
+					parent.setFathersname((String) parentdetails[5]);
+					parent.setStudent(student);
+					parentDetails.add(parent);
+				}
+				parentResponseDto.setParentsList(parentDetails);
+				parentResponseDto.setSuccess(true);
+			} catch (Exception e) {
+				parentResponseDto.setSuccess(false);
+			}
+			return parentResponseDto;
+		}
 }
