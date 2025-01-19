@@ -19,22 +19,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Book</title>
-<link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alirfan/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alfalahschool/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/alirfan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/alfalahschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/alfalahschool/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
+	src="/alfalahschool/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/alfalahschool/css/datePicker/demos.css">
 
 
 
@@ -245,10 +245,10 @@
 
 
 
-<script type="text/javascript" src="/alirfan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/alfalahschool/js/datetimepicker_css.js"></script>
 
-<script src="/alirfan/JavaScript/actb.js"></script>
-<script src="/alirfan/JavaScript/common.js"></script>
+<script src="/alfalahschool/JavaScript/actb.js"></script>
+<script src="/alfalahschool/JavaScript/common.js"></script>
 
 
 
@@ -295,10 +295,11 @@
 <script type="text/javascript">
 	function saveBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alirfan/LibraryProcess/saveBook";
+		if(form1.checkValidity()) {
+		form1.action = "/alfalahschool/LibraryProcess/saveBook";
 		form1.method = "POST";
 		form1.submit();
-
+		}
 	}
 	$(function() {
 
@@ -316,7 +317,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalahschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -356,9 +357,9 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Book Name &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Book Name* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="bookname"
-											type="text" class="myclass" id="bookname" 
+											type="text" class="myclass" id="bookname" required
 											/>
 							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -366,9 +367,9 @@ for(Cookie cookie : cookies){
 							
 						
 						
-						<td style="font-weight: bold;color: #325F6D;">Subject &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Subject* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="subject"
-											type="text" class="myclass" id="subject" 
+											type="text" class="myclass" id="subject" required 
 											/>
 							</label></td>
 							
@@ -380,17 +381,17 @@ for(Cookie cookie : cookies){
 						
 					<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Author &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Author* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="author"
-											type="text" class="myclass" id="author" 
+											type="text" class="myclass" id="author" required
 											/>
 							</label></td>
 							
 						
 						
-						<td style="font-weight: bold;color: #325F6D;">Publisher &nbsp;</td>
+						<td style="font-weight: bold;color: #325F6D;">Publisher* &nbsp;</td>
 							<td style="font-weight: bold"><label> <input  name="publisher"
-											type="text" class="myclass" id="publisher" 
+											type="text" class="myclass" id="publisher" required
 											/>
 							</label></td>
 							
@@ -422,18 +423,20 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Status &nbsp;</td>
-							<td style="font-weight: bold"> <label> <select name="status" class="myclass" style="width:185px;height:32px;"
-									id="status" >
-										<option selected></option>
-										<option>Available</option>
-										<option>Issued</option>
-								</select></td>
-							
-												
+						<td style="font-weight: bold;color: #325F6D;">Available Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="availableQty"
+											type="text" class="myclass" id="isbn" 
+											/>
+							</label></td>
+						<td style="font-weight: bold;color: #325F6D;">Issued Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input  name="issuedQty"
+											type="text" class="myclass" id="shelfe" 
+											/>
+							</label></td>
 						
 							
 						</tr>
+
 						
 						 <tr>
 							<td><br/></td>

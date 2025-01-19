@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.library.dto;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,31 +14,30 @@ public class Book implements java.io.Serializable{
 	private String author;
 	private String publisher;
 	private String isbn;
-	private String status;
-	private String bookHolder;
+	private int availableQty;
+	private int issuedQty;
 	private String shelf;
-	private Date startdate;
-	private Date enddate;
-	private String noofdays;
 	
 	public Book() {
 	}
 
-	public Book(int bid, String bookname, String subject, String author, String publisher, String isbn, String status, String bookHolder,
-			String shelf,Date startdate, Date enddate,String noofdays) {
+	
+
+	public Book(int bid, String bookname, String subject, String author, String publisher, String isbn,
+			int availableQty, int issuedQty, String shelf) {
+		super();
 		this.bid = bid;
 		this.bookname = bookname;
 		this.subject = subject;
 		this.author = author;
 		this.publisher = publisher;
 		this.isbn = isbn;
-		this.status = status;
-		this.bookHolder = bookHolder;
+		this.availableQty = availableQty;
+		this.issuedQty = issuedQty;
 		this.shelf = shelf;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.noofdays = noofdays;
 	}
+
+
 
 	@Column(name = "bid")
 	public int getBid() {
@@ -97,22 +94,24 @@ public class Book implements java.io.Serializable{
 		this.isbn = isbn;
 	}
 
-	@Column(name = "status", length = 50)
-	public String getStatus() {
-		return status;
+	
+	 @Column(name = "availableqty")
+	public int getAvailableQty() {
+		return availableQty;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setAvailableQty(int availableQty) {
+		this.availableQty = availableQty;
 	}
 
-	@Column(name = "bookholder", length = 100)
-	public String getBookHolder() {
-		return bookHolder;
+
+	 @Column(name = "issuedqty")
+	public int getIssuedQty() {
+		return issuedQty;
 	}
 
-	public void setBookHolder(String bookHolder) {
-		this.bookHolder = bookHolder;
+	public void setIssuedQty(int issuedQty) {
+		this.issuedQty = issuedQty;
 	}
 
 	@Column(name = "shelf",length = 100)
@@ -124,34 +123,6 @@ public class Book implements java.io.Serializable{
 		this.shelf = shelf;
 	}
 
-	@Column(name = "startdate")
-	public Date getStartdate() {
-		return startdate;
-	}
-
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
-
-	@Column(name = "enddate")
-	public Date getEnddate() {
-		return enddate;
-	}
-
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-
-	@Column(name = "noofdays",length = 20)
-	public String getNoofdays() {
-		return noofdays;
-	}
-
-	public void setNoofdays(String noofdays) {
-		this.noofdays = noofdays;
-	}
-	
-	
 	
 
 }
