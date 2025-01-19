@@ -19,22 +19,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Book</title>
-<link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alirfan/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/alirfan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 
 
@@ -245,10 +245,10 @@
 
 
 
-<script type="text/javascript" src="/alirfan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
-<script src="/alirfan/JavaScript/actb.js"></script>
-<script src="/alirfan/JavaScript/common.js"></script>
+<script src="/vision/JavaScript/actb.js"></script>
+<script src="/vision/JavaScript/common.js"></script>
 
 
 
@@ -295,7 +295,7 @@
 <script type="text/javascript">
 	function saveBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alirfan/LibraryProcess/saveBook";
+		form1.action = "/vision/LibraryProcess/saveBook";
 		form1.method = "POST";
 		form1.submit();
 
@@ -331,7 +331,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -443,15 +443,18 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Status &nbsp;</td>
-							<td style="font-weight: bold"> <label> <select name="status" class="myclass" style="width:185px;height:32px;"
-									id="status" >
-										<option selected></option>
-										<option>Available</option>
-										<option>Issued</option>
-								</select></td>
-							
-												
+						<td style="font-weight: bold;color: #325F6D;">Available Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="availableQty"
+									type="text" class="myclass"
+									value="<c:out default="" value="${book.availableQty}" />"
+									id="availableQty" >
+							</label></td>
+						<td style="font-weight: bold;color: #325F6D;">Issued Qty. &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="issuedQty"
+									type="text" class="myclass"
+									value="<c:out default="" value="${book.issuedQty}" />"
+									id="issuedQty" >
+							</label></td>
 						
 							
 						</tr>
@@ -503,14 +506,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/alirfan/LibraryProcess/viewbooks";
+								form1.action = "/vision/LibraryProcess/viewbooks";
 								form1.submit();
 							}
 
 							function updateBookDetail() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/alirfan/LibraryProcess/updateBook";
+								form1.action = "/vision/LibraryProcess/updateBook";
 								form1.submit();
 							}
 							</script>
