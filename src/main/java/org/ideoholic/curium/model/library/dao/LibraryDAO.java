@@ -12,6 +12,8 @@ import org.hibernate.query.Query;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.library.dto.Book;
+import org.ideoholic.curium.model.library.dto.BookHistory;
+import org.ideoholic.curium.model.library.dto.BookIssue;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -104,10 +106,10 @@ public class LibraryDAO {
 
 	}
 
-	public void updatebook(String uid, List<Integer> ids, String date) {
+	public void updatebookAfterIssue(List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update book set status = 'Issued' , bookHolder = '"+uid+"' , startdate = '"+date+"' where bid IN (:ids)");
+			Query query= session.createSQLQuery("update Book set issuedQty = issuedQty + 1  where bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -135,10 +137,10 @@ public class LibraryDAO {
         }
 	}
 
-	public void updatebook( List<Integer> ids) {
+	public void updatebookAfterReturn( List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update book set status = 'Available' , bookHolder = ' ' where bid IN (:ids)");
+			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -187,9 +189,127 @@ public class LibraryDAO {
 		
 	}
 
+	public List<BookHistory> readListOfBookHistory() {
+		List<BookHistory> results = new ArrayList<BookHistory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<BookHistory>) session.createQuery("From BookHistory").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+
+	public BookHistory add(BookHistory bookHistory) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(bookHistory);
+			transaction.commit();
+
+		} catch (Exception hibernateException) {
+			transaction.rollback();
+			logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+			return bookHistory;
+		}
+	}
+
+	public void deleteBookHistoryRecord(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from BookHistory as book where book.id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}
+
+	public BookIssue add(BookIssue bookIssue) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(bookIssue);
+			transaction.commit();
+
+		} catch (Exception hibernateException) {
+			transaction.rollback();
+			logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+			return bookIssue;
+		}
+	}
+
+	public void updatebookissueAfterReturn(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from BookIssue as book where book.id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}	
 	
+	public void updatebook(String uid, List<Integer> ids, String date) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set status = 'Issued' , bookHolder = '"+uid+"' , startdate = '"+date+"' where bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
 	
 
-	
+	public void updatebook( List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set status = 'Available' , bookHolder = ' ' where bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
 
 }
