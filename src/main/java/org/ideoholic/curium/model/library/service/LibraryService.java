@@ -1,8 +1,8 @@
 package org.ideoholic.curium.model.library.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +13,13 @@ import org.ideoholic.curium.model.library.dao.LibraryDAO;
 import org.ideoholic.curium.model.library.dto.Book;
 import org.ideoholic.curium.model.library.dto.BookDto;
 import org.ideoholic.curium.model.library.dto.BookHistory;
+import org.ideoholic.curium.model.library.dto.BookIssue;
+import org.ideoholic.curium.model.library.dto.BooksHistoryRequestDto;
+import org.ideoholic.curium.model.library.dto.BooksHistoryResponseDto;
 import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.model.library.dto.BooksResponseDto;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
 
 public class LibraryService {
@@ -44,23 +49,11 @@ public class LibraryService {
 			book.setIssuedQty(bookDto.getIssuedqty());
 			book.setShelf(bookDto.getShelf());
 			book.setBookname(bookDto.getBookname());
+			book.setBranchid(Integer.parseInt(branchId));
 			book = new LibraryDAO().create(book);
 			return ResultResponse.builder().success(true).build();
 		}
 		return ResultResponse.builder().success(false).build();
-	}
-
-	public void viewBooks() {
-
-		if (httpSession.getAttribute(BRANCHID) != null) {
-			try {
-				List<Book> list = new LibraryDAO().readListOfBook();
-				httpSession.setAttribute("book", list);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
 	}
 
 	public BooksResponseDto viewBooks(String branchId) {
@@ -68,7 +61,7 @@ public class LibraryService {
 
 		if (branchId != null) {
 			try {
-				List<Book> list = new LibraryDAO().readListOfBook();
+				List<Book> list = new LibraryDAO().readListOfBook(branchId);
 				result.setBooksList(list);
 				result.setSuccess(true);
 			} catch (Exception e) {
@@ -84,7 +77,6 @@ public class LibraryService {
 		if (idbook != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idbook) {
-				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 			}
 			new LibraryDAO().deleteRecord(ids);
@@ -99,7 +91,7 @@ public class LibraryService {
 		
 		if (branchId != null) {
 			try {
-				List<Book> list = new LibraryDAO().readListOfBook();
+				List<Book> list = new LibraryDAO().readListOfBook(branchId);
 				List<Book> availableList = new ArrayList<>();
 				List<Book> issuedList = new ArrayList<>();
 				for (Book book : list) {
@@ -130,14 +122,41 @@ public class LibraryService {
 
 		String uid = booksListDto.getStudentExternalId();
 		// String dates=request.getParameter("transactiondate");
-		String date = DateUtil.dateFromatConversionSlash(booksListDto.getTransactionDate());
 		String[] bids = booksListDto.getBookIds();
+		String[] bookNames = booksListDto.getBookName();
+		List<BookHistory> bookHistoryList = new ArrayList<BookHistory>();
+		List<BookIssue> bookIssueList = new ArrayList<BookIssue>();
+		
 		if (bids != null) {
 			List<Integer> ids = new ArrayList<>();
+			int i=0;
 			for (String id : bids) {
 				ids.add(Integer.valueOf(id));
+				BookHistory bookHistory = new BookHistory();
+				bookHistory.setBid(id);
+				bookHistory.setBookName(bookNames[i]);
+				bookHistory.setStudentName(booksListDto.getStudentName());
+				bookHistory.setUid(uid);
+				bookHistory.setIssueDate(booksListDto.getIssueDate());
+				bookHistory.setExpectedReturnDate(booksListDto.getExpectedReturnDate());
+				bookHistory.setStudentName(booksListDto.getStudentName());
+				bookHistory.setSid(booksListDto.getStudentId());
+				bookHistoryList.add(bookHistory);
+				
+				BookIssue bookIssue = new BookIssue();
+				bookIssue.setBookId(Integer.parseInt(id));
+				bookIssue.setReturned("No");
+				bookIssue.setBookHolder(uid);
+				bookIssue.setSid(Integer.parseInt(booksListDto.getStudentId()));
+				bookIssue.setStudentName(booksListDto.getStudentName());
+				bookIssue.setBookName(bookNames[i]);
+				bookIssue.setStartDate(booksListDto.getIssueDate());
+				bookIssue.setEndDate(booksListDto.getExpectedReturnDate());
+				bookIssueList.add(bookIssue);
+				i++;
 			}
-			new LibraryDAO().updatebook(uid, ids, date);
+			//new LibraryDAO().updatebook(uid, ids, date);
+			new LibraryDAO().updatebookAfterIssue(ids,bookHistoryList,bookIssueList);
 			return ResultResponse.builder().success(true).build();
 		}
 
@@ -149,10 +168,20 @@ public class LibraryService {
 		BooksResponseDto result = BooksResponseDto.builder().build();
 		
 		String sid = booksListDto.getStudentExternalId();
-		List<Book> list = new LibraryDAO().readListOfBook(sid);
-		System.out.println(list);
+		List<BookIssue> list = new LibraryDAO().readListOfBooksIssued(sid);
+		List<BookIssue> booksList = new ArrayList<BookIssue>();
+		for (BookIssue bookIssue : list) {
+			int totalDays = 0;
+			Date todaysDate = new Date();
+			Date issueDate = bookIssue.getStartDate();
+			 long difference = todaysDate.getTime() - issueDate.getTime();
+		       float daysBetween = (difference / (1000*60*60*24));
+		       totalDays= (int) daysBetween;
+		       bookIssue.setNoOfDays(totalDays);
+		       booksList.add(bookIssue);
+		}
 
-		result.setBooksList(list);
+		result.setBooksIssuedList(booksList);
 		result.setStudentNameDetails(booksListDto.getAdmNo());
 		result.setAdmnoDetails(booksListDto.getAdmissionNumber());
 		result.setClassAndSecDetails(booksListDto.getClassAndSec());
@@ -166,11 +195,21 @@ public class LibraryService {
 		String[] bids = booksListDto.getBookIds();
 		
 		if (bids != null) {
-			List<Integer> ids = new ArrayList<>();
-			for (String id : bids) {
-				ids.add(Integer.valueOf(id));
+			List<Integer> bookIds = new ArrayList<>();
+			List<Integer> bookIssueIds = new ArrayList<>();
+			List<Integer> NoOfDays = new ArrayList<>();
+			String[] bIssueIds = booksListDto.getBookIssueIds();
+			String[] bIds = booksListDto.getBookIds();
+			String[] NoDays = booksListDto.getNoOfDays();
+			int i=0;
+			for (String bookIssueId : bIssueIds) {
+				bookIssueIds.add(Integer.parseInt(bookIssueId));
+				bookIds.add(Integer.parseInt(bIds[i]));
+				NoOfDays.add(Integer.parseInt(NoDays[i]));
+				i++;
 			}
-			 new LibraryDAO().updatebook(ids);
+			
+			 new LibraryDAO().updateBookOnReturn(bookIds,bookIssueIds,NoOfDays,booksListDto.getExpectedReturnDate());
 			 return ResultResponse.builder().success(true).build();
 		}
 		return ResultResponse.builder().build();
@@ -204,12 +243,12 @@ public class LibraryService {
 			String publisher = bookDto.getPublisher();
 			String isbn = bookDto.getIsbn();
 			int availableQty = bookDto.getAvailableqty();
-			int issueQty = bookDto.getIssuedqty();
+			int issuedQty = bookDto.getIssuedqty();
 			String shelf = bookDto.getShelf();
 			String uid = bookDto.getStudentExternalId();
 			String date = DateUtil.dateFromatConversionSlash(bookDto.getTransactionDate());
 
-			new LibraryDAO().updatebookdetail(bid, bookname, subject, author, publisher, isbn, shelf);
+			new LibraryDAO().updatebookdetail(bid, bookname, subject, author, publisher, isbn, shelf, availableQty, issuedQty);
 			result.setSuccess(true);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -234,33 +273,18 @@ public class LibraryService {
 
 	}
 
-	public void updateBookitems() {
-		Book book = new Book();
-		int bid = Integer.parseInt(request.getParameter("bid"));
-		String bookname = request.getParameter("bookname");
-		String subject = request.getParameter("subject");
-		String author = request.getParameter("author");
-		String publisher = request.getParameter("publisher");
-		String isbn = request.getParameter("isbn");
-		String status = request.getParameter("status");
-		String shelf = request.getParameter("shelf");
-		String uid = request.getParameter("studentexternalid");
-		// String dates=request.getParameter("transactiondate");
-		String date = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondate"));
-
-		new LibraryDAO().updatebookdetail(bid, bookname, subject, author, publisher, isbn, shelf);
-	}
-
-	public void getBookHistory() {
-
+	public BooksHistoryResponseDto getBookHistory(BooksHistoryRequestDto dto) {
+		BooksHistoryResponseDto result = BooksHistoryResponseDto.builder().build();
 		if (httpSession.getAttribute(BRANCHID) != null) {
 			try {
-				List<BookHistory> list = new LibraryDAO().readListOfBookHistory();
-				httpSession.setAttribute("bookhistory", list);
+				List<BookHistory> list = new LibraryDAO().readListOfBookHistory(dto.getDateOfIssueFrom(),dto.getDateOfIssueTo());
+				result.setBooksHistoryList(list);
+				result.setSuccess(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		return result;
 	}
 
 	public void deleteBookHistory() {
@@ -274,5 +298,19 @@ public class LibraryService {
 			new LibraryDAO().deleteBookHistoryRecord(ids);
 		}
 	}
+
+	public ResultResponse getActiveStudentsWithParents(String branchid) {
+		
+		if (branchid != null) {
+		try {
+			List<Parents> list = new studentDetailsDAO()
+					.getStudentsList("from Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.Student.branchid = " + Integer.parseInt(branchid));
+			return ResultResponse.builder().success(true).resultList(list).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	return ResultResponse.builder().success(false).build();}
 
 }
