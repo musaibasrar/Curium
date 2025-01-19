@@ -310,17 +310,43 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
+            			</td>
+            		</tr>
             		
                 </table>
             </div>
             
             
-              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		
+            	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/feessummary" style="font-size: 12px;">Fees Summary</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/vision/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
@@ -328,6 +354,25 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/vision/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
+            			</td>
+            		</tr>
+            		
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
             			</td>
             		</tr>
             		
@@ -354,38 +399,31 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/otherfeesReport" style="font-size: 12px;">Bus Fees Report</a>
             			</td>
             		</tr>
-                </table>
-            </div> -->
-            
-            
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/vision/otherfeesCollectionDetails" style="font-size: 12px;">Bus Fees Collection Details</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/vision/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Bus Fees Receipts</a>
             			</td>
             		</tr>
                 </table>
             </div>
-            
-            
-             <!--  <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
 
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -393,7 +431,17 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Marks Card</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
             			</td>
             		</tr>
             		<tr>
@@ -401,55 +449,27 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr>
-                </table>
-            </div>
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-              <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
             			</td>
             		</tr>
                 </table>
@@ -482,6 +502,7 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
+             
             
             </div>
                    

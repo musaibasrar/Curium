@@ -132,79 +132,28 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/vision/images/visionheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/vision/left_feescollector"><img
-									src="/vision/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
-							
+							<td><a target="leftFrame" href="/vision/left_feescollector"> <img
+									src="/vision/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
+							</a></td>
+
 							<td><a target="mainFrame"
 								href="/vision/FeesProcess/feesCollect"> <img
 									src="/vision/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 							
-							<td>
-							<a target="leftFrame" href="/vision/reports_feescollector"><img
+							<td ><a target="mainFrame"
+								href="/vision/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
+							</a></td>
+
+							<td >
+								<a target="leftFrame" href="/vision/reports_feescollector"><img
 									src="/vision/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
-							</td>
-
-							<!-- <td>
-								<a target="mainFrame"
-								href="/vision/AccountProcess/createVoucher"> <img
-									src="/vision/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<td ><a target="mainFrame" href="/vision/feesCollectionDetails"><img  alt="Fees Details" src="/vision/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
-
-							<td><a target="mainFrame"
-								href="/vision/StudentProcess/addNew"> <img
-									src="/vision/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/vision/leftsettings_officeadmin">
-									<img alt="Settings" src="/vision/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/vision/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><a target="mainFrame" href="/vision/sendsms"><img
-									src="/vision/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a>
-								<a target="leftFrame" href="/vision/reports_officeadmin"><img
-									src="/vision/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							
-							</td>
-
-							<td ><a target="mainFrame"
-								href="/vision/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/vision/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td> -->
-							
-							<!-- <td ><a target="mainFrame"
-								href="/vision/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/vision/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/vision/UserProcess/logout"><img

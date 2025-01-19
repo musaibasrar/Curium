@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Other Fees Collection Details</title>
+<title>Print Bus Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -234,7 +234,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Other Fees Collection Details Report</label><br>
+				<label class="addressLine">Bus Fees Collection Details Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>

@@ -53,7 +53,24 @@ public class ImportFileAction {
 	 @RequestMapping(value = "/readFileFees", method = RequestMethod.POST, consumes = "multipart/form-data")
 		public String readFileForFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 			try {
-				if (feesCollectionActionAdapter.readFileForFees(uploadedFiles)) {
+				if (new FeesCollectionService(request, response,null).readFileForOtherFees(uploadedFiles)) {
+					return "importfile";
+				}
+				/*
+				 * if (feesCollectionActionAdapter.readFileForFees(uploadedFiles)) { return
+				 * "importfile"; }
+				 */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "importsuccess";
+		}
+	 
+	 @RequestMapping(value = "/readFileOtherFees", method = RequestMethod.POST, consumes = "multipart/form-data")
+		public String readFileForOtherFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
+			try {
+				if (new FeesCollectionService(request, response,null).readFileForOtherFees(uploadedFiles)) {
 					return "importfile";
 				}
 			} catch (IOException e) {

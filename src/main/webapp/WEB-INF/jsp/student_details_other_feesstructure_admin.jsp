@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details Other Fees Structure</title>
+        <title>Student Details Bus Fees Structure</title>
 
         <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
         <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -465,7 +465,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Other Fees Structure</a></h3>
+                <h3><a href="#">Bus Fees Structure</a></h3>
 
                 <div>
 

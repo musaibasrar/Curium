@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Other feescollection</title>
+<title>Bus Feescollection</title>
 <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
 
@@ -860,7 +860,7 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Other Fees Collection</a></li>
+					<li><a href="#fragment-1">Bus Fees Collection</a></li>
 				</ul>
 
 			<div id="fragment-1">

@@ -326,10 +326,10 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/vision/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>-->
-            		<!-- this is other fees reports -->
+            		<!-- this is Bus Fees reports -->
             	<!-- 	<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/otherfeesReport" style="font-size: 12px;">Bus Fees Report</a>
             			</td>
             		</tr>
             		<tr>

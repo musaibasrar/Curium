@@ -704,11 +704,11 @@ for(Cookie cookie : cookies){
 						<td class="dataText">${feesbybank}</td>
 					</tr>
 					<tr>
-						<td class="dataText">Total Other Fees Paid by Cash</td>
+						<td class="dataText">Total Bus Fees Paid by Cash</td>
 						<td class="dataText">${feesbycashotherfees}</td>
 					</tr>
 					<tr>
-						<td class="dataText">Total Other Fees Paid by Bank</td>
+						<td class="dataText">Total Bus Fees Paid by Bank</td>
 						<td class="dataText">${feesbybankotherfees}</td>
 					</tr>
 				

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Other Fees Report</title>
+<title>Bus Fees Report</title>
 <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
@@ -508,7 +508,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Other Fees Report</a></li>
+					<li><a href="#tabs-1">Bus Fees Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -566,7 +566,7 @@ for(Cookie cookie : cookies){
                     </tr>
 
                     		<tr>
-							<td style="font-weight: bold;color:#325F6D">Other Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Bus Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
@@ -628,7 +628,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Other Fees Report</td>
+					<td class="headerTD">Bus Fees Report</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

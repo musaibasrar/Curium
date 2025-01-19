@@ -162,9 +162,9 @@ for(Cookie cookie : cookies){
             </div>
         </div>
     </div>
-    <!-- Other Fees -->
+    <!-- Bus Fees -->
     
-     <h4 class="text-center mb-3">Other Fees Structure</h4>
+     <h4 class="text-center mb-3">Bus Fees Structure</h4>
     <div class="card">
         <div class="card-body">
             <div class="row text-center">

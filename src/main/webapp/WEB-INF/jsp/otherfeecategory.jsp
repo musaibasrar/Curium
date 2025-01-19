@@ -1,5 +1,5 @@
 <%--
-    Document   : other fees category
+    Document   : Bus Fees category
     Created on : Dec 23, 2016, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Other FeeCategory</title>
+<title>Bus FeeCategory</title>
 <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">

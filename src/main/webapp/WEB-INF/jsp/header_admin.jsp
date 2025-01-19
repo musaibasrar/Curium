@@ -142,6 +142,12 @@ for(Cookie cookie : cookies){
 									src="/vision/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
+							
+							<td ><a target="mainFrame"
+								href="/vision/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
+							</a></td>
 
 							<td>
 								<a target="mainFrame"
@@ -164,12 +170,6 @@ for(Cookie cookie : cookies){
 							<td ><a target="leftFrame" href="/vision/leftsettings">
 									<img alt="Settings" src="/vision/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/vision/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
 							</a></td>
 
 							<td ><!-- <a target="mainFrame" href="/vision/sendsms"><img

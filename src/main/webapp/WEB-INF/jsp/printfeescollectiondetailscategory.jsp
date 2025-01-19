@@ -294,7 +294,7 @@
 			
 			<table width="100%" style="border-collapse: collapse;">
 				<tr>
-					<label class="addressLine">Other Fees</label><br>
+					<label class="addressLine">Bus Fees</label><br>
 				</tr>
 			</table>
 
@@ -536,7 +536,7 @@
 			
 				<table width="100%" style="border-collapse: collapse;">
 				<tr style="text-align: center;">
-					<label class="addressLine">Break-up Bank Other Fees</label><br>
+					<label class="addressLine">Break-up Bank Bus Fees</label><br>
 				</tr>
 			</table>
 			
