@@ -25,13 +25,16 @@
             <column name="isbn" length="200" />
         </property>
                 <property name="availableQty" type="int">
-            <column name="availableQty" length="50" />
+            <column name="availableqty"/>
         </property>
         <property name="issuedQty" type="int">
-            <column name="issuedQty" length="50" />
+            <column name="issuedqty" />
         </property>
         <property name="shelf" type="string">
             <column name="shelf" length="100"/>
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
         
     </class>

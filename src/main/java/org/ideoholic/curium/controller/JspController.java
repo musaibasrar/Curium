@@ -626,4 +626,9 @@ public class JspController {
 		return "daybook";
 	}
 	
+	@GetMapping("/bookhistory")
+	public String getbookhistory() {
+		return "bookhistory";
+	}
+	
 }
