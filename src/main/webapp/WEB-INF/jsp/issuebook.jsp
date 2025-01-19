@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Book</title>
-<link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -446,17 +446,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/alirfan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/alirfan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -549,113 +549,29 @@
 		});
 	});
 	$(function() {
-		$("#transactiondate").datepicker({
+		$("#issuedate").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange: "-50:+0"
+			yearRange: "-1:+0"
 		});
 		$("#anim").change(function() {
-			$("#transactiondate").datepicker("option", "showAnim", $(this).val());
+			$("#issuedate").datepicker("option", "showAnim", $(this).val());
+		});
+		$("#expectedreturndate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-1:+0"
+		});
+		$("#anim").change(function() {
+			$("#expectedreturndate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
-<script type="text/javascript" src="/alirfan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-
-	function saveissueentry() {
-		var form1 = document.getElementById("form1");
-		
-		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessItemsMoveProcess&action=saveStockMove";
-			form1.method = "POST";
-			form1.submit();
-		}
-		
-
-	}
 	
-	function cancelRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function printRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function approveRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function rejectRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	$(function() {
-
-		$("#tabs").tabs();
-		
-		$("#saveissueentry").button().click(function() {
-			 $('#myTable').dataTable().fnFilter('');
-			saveissueentry();
-		});
-		$("#saveissueentry2").button().click(function() {
-			 $('#myTable').dataTable().fnFilter('');
-			saveissueentry();
-		});
-		$("#effect").hide();
-
-	});
-	
-	function selectAllRow(tableID){
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        if(rowCount==1){
-            var row = table.rows[0];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=false;
-            alert('No records to select');
-        }
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=true;
-        }
-    }
-	
-	
-	function calculate(value2) {
-
- 	    	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
- 	        var issueQuantity=document.getElementById("issuequantity_"+value2).value;
- 	        
- 	        if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
- 	      		document.getElementById("errormessage_"+value2).style.display = '';
- 	      	  document.getElementById("issuequantity_"+value2).value='';
- 	        }
- 	        
- 	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<=parseFloat(availableQuantity,10)){
- 	        	document.getElementById("errormessage_"+value2).style.display = 'none';
- 	      	  document.getElementById("item_id_"+value2).checked = true;  
- 	        }else{
- 	      	  document.getElementById("item_id_"+value2).checked = false;
- 	        }
- 			
-    }
-	 
 	$(function() {
 
 		$("#tabs").tabs();
@@ -664,46 +580,6 @@
    
 	 $(function(){
 		 
-		
-         $("#cancel").button({
-             icons:{
-                 primary: "ui-icon-cancel"
-             }
-         }).click(function(){
-             cancelRecords();
-             return false;
-
-         });
-         
-         $("#print").button({
-             icons:{
-                 primary: "ui-icon-print"
-             }
-         }).click(function(){
-             printRecords();
-             return false;
-
-         });
-         
-         $("#approve").button({
-             icons:{
-                 primary: "ui-icon-check"
-             }
-         }).click(function(){
-             approveRecords();
-             return false;
-
-         });
-         
-         $("#reject").button({
-             icons:{
-                 primary: "ui-icon-closethick"
-             }
-         }).click(function(){
-             rejectRecords();
-             return false;
-
-         });
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -760,22 +636,6 @@
             alert(e);
         }
     }
-     
-     function writeNumber(number){
-    	 var val = number.id;
-    	 var res = val.split("_")
-    	 document.getElementById("issuequantity_"+res[1]).value += res[0];
-    	 return false;
-     }
-     
-     function deleteNumber(number){
-    	 
-    	 var issueQuantity = document.getElementById("issuequantity_"+number.id).value;
-    	 var newQuantity = issueQuantity.slice(0,-1);
-    	 document.getElementById("issuequantity_"+number.id).value = newQuantity;
-    	 
-     }
-    
 </script>
 
 
@@ -906,7 +766,7 @@
         <script type="text/javascript">
 	function issueBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alirfan/LibraryProcess/bookIssuedStudent";
+		form1.action = "/vision/LibraryProcess/bookIssuedStudent";
 		form1.method = "POST";
 		form1.submit();
 
@@ -928,7 +788,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1017,10 +877,23 @@ for(Cookie cookie : cookies){
 							
 						</tr>
 						
-						
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+						<td class="alignRight">Expected Return Date&nbsp;</td>
+							<td><label> <input type="text"  name="expectedreturndate"
+									class="myclass" style="font-size: 14px;width:137px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="expectedreturndate" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							<tr>
+							<td><br /></td>
+	
+							</tr>
 					</table>
 					</div>
 					<div align="left" style="padding-left:20px;">
@@ -1040,6 +913,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Author</th>
 						<th title="click to sort" class="headerText">Publisher</th>
 						<th title="click to sort" class="headerText">isbn</th>
+						<th title="click to sort" class="headerText">Available Qty.</th>
+						<th title="click to sort" class="headerText">Issued Qty.</th>
 						<th title="click to sort" class="headerText">Shelf</th>
 							</tr>
 						</thead>
@@ -1049,11 +924,13 @@ for(Cookie cookie : cookies){
 						   <c:forEach items="${availablebooklist}" var="bookslist" varStatus="status">
            							<tr>
            								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslist.bid}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslist.bid}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname_${bookslist.bid}" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.subject}" /><input type="hidden" name="subject" value=" <c:out value="${bookslist.subject}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.author}" /><input type="hidden" name="author" value=" <c:out value="${bookslist.author}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.publisher}" /><input type="hidden" name="publisher" value=" <c:out value="${bookslist.publisher}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out  value="${bookslist.isbn}" /><input type="hidden" name="isbn" value=" <c:out value="${bookslist.isbn}"/>"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslist.availableQty}" /><input type="hidden" name="availableQty" value=" <c:out value="${bookslist.availableQty}"/>"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslist.issuedQty}" /><input type="hidden" name="issuedQty" value=" <c:out value="${bookslist.issuedQty}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out  value="${bookslist.shelf}" /></td>
                 					</tr>
 								
@@ -1090,6 +967,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Author</th>
 						<th title="click to sort" class="headerText">publisher</th>
 						<th title="click to sort" class="headerText">isbn</th>
+						<th title="click to sort" class="headerText">Available Qty.</th>
+						<th title="click to sort" class="headerText">Issued Qty.</th>
+						<th title="click to sort" class="headerText">Shelf</th>
 					</tr>
 				</thead>
 
@@ -1104,6 +984,9 @@ for(Cookie cookie : cookies){
 						  <td class="dataTextLeft"><c:out value="${booklist.author}" /></td>
 						  <td class="dataTextLeft"><c:out value="${booklist.publisher}" /></td>
 						  <td class="dataTextLeft"><c:out value="${booklist.isbn}" /></td>
+						  <td class="dataTextLeft"><c:out value="${booklist.availableQty}" /></td>
+					      <td class="dataTextLeft"><c:out value="${booklist.issuedQty}" /></td>
+					       <td class="dataTextLeft"><c:out  value="${booklist.shelf}" /></td>
 						</tr>
 					</c:forEach>
 
