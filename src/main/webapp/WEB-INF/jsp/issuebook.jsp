@@ -827,7 +827,7 @@
             </c:forEach>
         ];
         $(function() {
-            $( "#admno").autocomplete({
+            $( "#studentname").autocomplete({
                 source: students,
                 minLength: 1,
                 change:function(event,ui){
@@ -970,10 +970,10 @@ for(Cookie cookie : cookies){
 					
 						<tr>
 						<td class="alignRight">Date&nbsp;</td>
-							<td><label> <input type="text"  name="transactiondate"
+							<td><label> <input type="text"  name="issuedate"
 									class="myclass" style="font-size: 14px;width:137px;"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="transactiondate" autocomplete="false"
+									id="issuedate" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 							
@@ -988,7 +988,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 							<td  class="alignRight">Student Name &nbsp;</td>
-							<td ><input  type="text" name="admno" id="admno" class="myclass" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+							<td ><input  type="text" name="studentname" id="studentname" class="myclass" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
 							
 							<td class="alignRight">Father Name&nbsp;</td>
 							<td ><label>
@@ -1040,7 +1040,6 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Author</th>
 						<th title="click to sort" class="headerText">Publisher</th>
 						<th title="click to sort" class="headerText">isbn</th>
-						<th title="click to sort" class="headerText">Status</th>
 						<th title="click to sort" class="headerText">Shelf</th>
 							</tr>
 						</thead>
@@ -1050,12 +1049,11 @@ for(Cookie cookie : cookies){
 						   <c:forEach items="${availablebooklist}" var="bookslist" varStatus="status">
            							<tr>
            								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslist.bid}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslist.bid}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname_${bookslist.bid}" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.subject}" /><input type="hidden" name="subject" value=" <c:out value="${bookslist.subject}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.author}" /><input type="hidden" name="author" value=" <c:out value="${bookslist.author}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.publisher}" /><input type="hidden" name="publisher" value=" <c:out value="${bookslist.publisher}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out  value="${bookslist.isbn}" /><input type="hidden" name="isbn" value=" <c:out value="${bookslist.isbn}"/>"/> </td>
-									      <td class="dataTextLeft"><c:out  value="${bookslist.status}" /> </td>
 									      <td class="dataTextLeft"><c:out  value="${bookslist.shelf}" /></td>
                 					</tr>
 								
@@ -1092,9 +1090,6 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Author</th>
 						<th title="click to sort" class="headerText">publisher</th>
 						<th title="click to sort" class="headerText">isbn</th>
-						<th title="click to sort" class="headerText">status</th>
-						<th title="click to sort" class="headerText">Book Holder</th>
-						<th title="click to sort" class="headerText">Start Date</th>
 					</tr>
 				</thead>
 
@@ -1109,9 +1104,6 @@ for(Cookie cookie : cookies){
 						  <td class="dataTextLeft"><c:out value="${booklist.author}" /></td>
 						  <td class="dataTextLeft"><c:out value="${booklist.publisher}" /></td>
 						  <td class="dataTextLeft"><c:out value="${booklist.isbn}" /></td>
-						  <td class="dataTextLeft"><c:out value="${booklist.status}" /></td>
-						  <td class="dataTextLeft"><c:out value="${booklist.bookHolder}" /></td>
-						  <td class="dataTextLeft"><c:out value="${booklist.startdate}" /></td>
 						</tr>
 					</c:forEach>
 
