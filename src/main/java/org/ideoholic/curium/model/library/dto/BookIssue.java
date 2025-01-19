@@ -27,7 +27,7 @@ public class BookIssue implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "accountdetailsid", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer id;
 
 	
