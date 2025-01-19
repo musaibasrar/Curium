@@ -399,23 +399,25 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                           <td width="25%"  class="alignLeft" height="50" >Status
+                           <td width="25%"  class="alignLeft" height="50" >Available Qty.
                             </td>
                             <td width="25%"  class="tablerows">
-                                <c:out default="" value="${book.status}" />
+                                <c:out default="" value="${book.availableQty}" />
                             </td>
+                            <td width="25%"  class="alignLeft" height="50">Issued Qty.</td>
+                            <td width="25%" class="tablerows" >
+                             <c:out default="" value="${book.issuedQty}" />
+                            </td>
+
+                        </tr>
+                        
+                        <%-- <tr>
                             <td width="25%"  class="alignLeft" height="50">Current Book Holder UID</td>
                             <td width="25%" class="tablerows" >
                              <c:out default="" value="${book.bookHolder}" />
                             </td>
 
-                        </tr>
-                        
-                        
-                                                
-                        
-                       
-                        
+                        </tr> --%>
                         
                         
                         <tr>
