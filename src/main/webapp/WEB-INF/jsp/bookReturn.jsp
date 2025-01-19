@@ -1,7 +1,7 @@
 <%-- 
-    Document   : feescollection
+    Document   : Book Return
     Created on : Jul 24, 2012, 4:07:26 PM
-    Author     : Administrator
+    Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,29 +17,31 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book Return</title>
-        <link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alfalahschool/css/graph/jquery.jqplot.css">
-        <link rel="stylesheet" href="/alfalahschool/css/datePicker/demos.css">
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+        
+        
         <style type="text/css">
             <!--
             .labelCss {
@@ -305,49 +307,6 @@
         </script>
                 <script type="text/javascript">
             $(function() {
-                $( "#tabs" ).tabs();
-                
-                $("#amountpaying").keypress(function (e) {
-       		     //if the letter is not digit then display error and don't type anything
-       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-       		               return false;
-       		    }
-       		   });
-                
-                
-                $("#fine").keypress(function (e) {
-       		     //if the letter is not digit then display error and don't type anything
-       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-       		               return false;
-       		    }
-       		   });
-                
-                
-               /*  $("#submitbtn").button().click(function(){
-                  	 $( "#dialogpaymentmethod" ).dialog( "open" );
-                       return false;
-
-                   });
-                   
-                   $(function() {
-                       $( "#dialogpaymentmethod" ).dialog({
-                           autoOpen: false,
-                           height: 230,
-                           width: 550,
-                           modal: true,
-                           buttons: {
-                               OK: function() {
-                               	
-                               			submitfees(document.getElementById("cashpayment"),document.getElementById("banktransfer"),
-                               					document.getElementById("chequetransfer"), document.getElementById("ackno"), 
-                               			document.getElementById("transferdate"), document.getElementById("transferbankname"),
-                               			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"));
-                                   		$( this ).dialog( "close" );
-                            		   }
-                           }
-                       });
-                   }); */
-                   
                    $("#transferdate").datepicker({
            			changeYear : true,
            			changeMonth : true,
@@ -358,188 +317,16 @@
            			$("#transferdate").datepicker("option", "showAnim", $(this).val());
            		});
                    
-                   $("#chequedate").datepicker({
-           			changeYear : true,
-           			changeMonth : true,
-           			dateFormat: 'dd/mm/yy',
-           			yearRange: "-50:+0"
-           		});
-           		$("#anim").change(function() {
-           			$("#chequedate").datepicker("option", "showAnim", $(this).val());
-           		});
-                   
             });
 
- function submitfees(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname){
-            	
-            	var paymentmethodvalue = '';
-            	var cashpaymentvalue = '';
-            	var acknovalue = '';
-            	var transferdatevalue = '';
-            	var transferbanknamevalue = '';
-            	var chequenovalue = '';
-            	var chequedatevalue = '';
-            	var chequebanknamevalue = '';
-            	
-            	if(banktransfer.checked == true ){
-            		paymentmethodvalue = 'banktransfer';
-            	}
-            	
-            	if(chequetransfer.checked == true){
-            		paymentmethodvalue = 'chequetransfer';
-            	}
-            	
-            	if(cashpayment.checked == true){
-            		paymentmethodvalue = 'cashpayment';
-            	}
-            	
-            	if(ackno!=null){
-            		acknovalue = ackno.value;
-            	}
-            	
-            	if(transferdate!=null){
-            		transferdatevalue = transferdate.value;
-            	}
-            	
-            	if(transferbankname!=null){
-            		transferbanknamevalue = transferbankname.value;
-            	}
-            	if(chequeno!=null){
-            		chequenovalue = chequeno.value;
-            	}
-            	if(chequedate!=null){
-            		chequedatevalue = chequedate.value;
-            	}
-            	if(chequebankname!=null){
-            		chequebanknamevalue = chequebankname.value;
-            	}
-            	
-            	var form1 = document.getElementById("form1");
-        		form1.action="/alfalahschool/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
-        		form1.method = "POST";
-        		form1.submit();
-        		
-            }
             
-            function getstampfees(){
+            function getbooks(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/alfalahschool/LibraryProcess/searchbooks";
+        		form1.action="/vision/LibraryProcess/searchbooks";
         		form1.method = "POST";
         		form1.submit();
             }
             
-            function checkWithDueAmount(duePayment,sfsid){
-            	
-            	var str = duePayment.id;
-            	var res = str.split("_");
-            	
-            	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
-            	var payment = parseInt(duePayment.value,10);
-            	document.getElementById(sfsid).checked = true; 
-            	
-            	if(payment<=9 && payment>=1){
-            		duePayment.value = payment;
-            	}
-            	
-            	if(payment>dueAmount){
-            		duePayment.value = 0;
-            		document.getElementById(sfsid).checked = false; 
-            		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
-            	}
-            	
-            	if(payment<1 || isNaN(payment)){
-            		duePayment.value = 0;
-            		document.getElementById(sfsid).checked = false; 
-            	}
-            	
-            	
-            }
-            
-            
-		function checkFineAmount(duePayment,finemiscid){
-            	
-            	var fineAmount = parseInt(document.getElementById("fineamount").value);
-            	
-            	if(fineAmount<1 || isNaN(fineAmount)){
-            		document.getElementById("fineamount").value = 0;
-            		document.getElementById(finemiscid).checked = false;
-            	 }else{
-            		 document.getElementById("fineamount").value = fineAmount;
-            		 document.getElementById(finemiscid).checked = true;
-            	 }
-            	
-            }
-		
-		function checkMiscAmount(duePayment,finemiscid){
-        	
-        	
-        	var miscAmount = parseInt(document.getElementById("miscamount").value);
-        	
-        	if(miscAmount<1 || isNaN(miscAmount)){
-        		document.getElementById("miscamount").value = 0;
-        		document.getElementById(finemiscid).checked = false;
-        	 }else{
-        		 document.getElementById("miscamount").value = miscAmount;
-        		 document.getElementById(finemiscid).checked = true;
-        	 }
-        	
-        }
-            
- function selectPayment(id){
-            	
-            	
-            	if(id == 'cashpayment'){
-            		
-            		
-            		document.getElementById('onlinechequeack').style.display = "none";
-            		document.getElementById('onlinechequedate').style.display = "none";
-            		document.getElementById('onlinechequebank').style.display = "none";
-            		
-            		document.getElementById('onlinetransferack').style.display = "none";
-            		document.getElementById('onlinetransferdate').style.display = "none";
-            		document.getElementById('onlinetransferbank').style.display = "none";
-            		
-            		document.getElementById('ackno').style.display = '';
-            		document.getElementById('transferdate').style.display = '';
-            		document.getElementById('transferbankname').style.display = '';
-            		document.getElementById('chequeno').style.display = '';
-            		document.getElementById('chequedate').style.display = '';
-            		document.getElementById('chequebankname').style.display = '';
-            		
-            			
-            	}else if(id == 'banktransfer'){
-            		
-            		
-            		document.getElementById('onlinechequeack').style.display = "none";
-            		document.getElementById('onlinechequedate').style.display = "none";
-            		document.getElementById('onlinechequebank').style.display = "none";
-            		
-            		document.getElementById('onlinetransferack').style.display = '';
-            		document.getElementById('onlinetransferdate').style.display = '';
-            		document.getElementById('onlinetransferbank').style.display = '';
-            		
-            		
-            		document.getElementById('chequeno').style.display = '';
-            		document.getElementById('chequedate').style.display = '';
-            		document.getElementById('chequebankname').style.display = '';
-            		
-            		
-            	}else if(id == 'chequetransfer'){
-            		
-            		document.getElementById('onlinechequeack').style.display = '';
-            		document.getElementById('onlinechequedate').style.display = '';
-            		document.getElementById('onlinechequebank').style.display = '';
-            		
-            		document.getElementById('onlinetransferack').style.display = "none";
-            		document.getElementById('onlinetransferdate').style.display = "none";
-            		document.getElementById('onlinetransferbank').style.display = "none";
-            		
-            		document.getElementById('ackno').style.display = '';
-            		document.getElementById('transferdate').style.display = '';
-            		document.getElementById('transferbankname').style.display = '';
-            	}
-            	
-            }
             
         </script>
          <script type="text/javascript">
@@ -607,7 +394,7 @@
                 }
             })
             .click(function() {
-            	 getstampfees();
+            	 getbooks();
                  //addRow();
                 return false;
             });
@@ -620,7 +407,12 @@
             .click(function() {
                 deleteRow('dataTable');
                 return false;
-            });            
+            });      
+            
+            $("#tabs").tabs();
+    		$("#submitbtn").button().click(function() {
+    			returnBook();
+    		});
 
         });
         $('#selectAll').click(function () {
@@ -639,26 +431,34 @@
                 }
             }
         });
+        
+        function returnBook() {
+    		var form1 = document.getElementById("form1");
+    		form1.action = "/vision/LibraryProcess/bookReturnByStudent";
+    		form1.method = "POST";
+    		form1.submit();
+
+    	}
+        
         </script>
         
         <script type="text/javascript">
-	function returnBook() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/alfalahschool/LibraryProcess/bookReturnByStudent";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	$(function() {
-
-		$("#tabs").tabs();
-		$("#submitbtn").button().click(function() {
-			returnBook();
-		});
-		//$("#effect").hide();
-
-	});
 	
+	
+	
+	$(function() {
+		$("#returndate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-1:+0"
+		});
+		$("#anim").change(function() {
+			$("#returndate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+	});
+		
 	</script>
         
     </head>
@@ -666,7 +466,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfalahschool/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -680,7 +480,13 @@ for(Cookie cookie : cookies){
 %>
     <body>
         <form id="form1" method="post">
-            
+            <%
+			java.text.DateFormat df = new java.text.SimpleDateFormat(
+					"dd/MM/yyyy");
+		
+		%>
+		
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
             <div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Book Return</a></li>
@@ -766,8 +572,11 @@ for(Cookie cookie : cookies){
 						<td><br></td>
                     </tr>
                     <tr>
-                    <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
-                        
+                    <td class="alignLeft" style="width: 45%">Return Date&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  name="returndate"
+									class="myclass" style="font-size: 14px;width:137px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="returndate" autocomplete="false"
+									data-validate="validate(required)"> </td>
                         <td class="alignLeft">UID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="returnuid" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
                         
                     </tr>
@@ -782,13 +591,13 @@ for(Cookie cookie : cookies){
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${classandsecDetails}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
+<%-- 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
 													<c:out value="${classdetailslist.classdetails}" />
 												</option>
 											</c:if>
-										</c:forEach>
+										</c:forEach> --%>
 								</select>
                         
                         </td>
@@ -810,7 +619,7 @@ for(Cookie cookie : cookies){
                     <tr>
 								<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<th title="click to sort" class="headerText">Book Id</th>
+						<!-- <th title="click to sort" class="headerText">Book Id</th> -->
 						<th title="click to sort" class="headerText">Date of Issue</th>
 						<th title="click to sort" class="headerText">Total Days</th>
 							</tr>
@@ -821,10 +630,10 @@ for(Cookie cookie : cookies){
 						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
            							<tr>
            								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /> </td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+									      <%-- <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /> </td> --%>
 									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /></td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
                 					</tr>
 								
 							</c:forEach> 
