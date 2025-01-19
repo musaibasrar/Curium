@@ -443,15 +443,18 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td style="font-weight: bold;color: #325F6D;">Status &nbsp;</td>
-							<td style="font-weight: bold"> <label> <select name="status" class="myclass" style="width:185px;height:32px;"
-									id="status" >
-										<option selected></option>
-										<option>Available</option>
-										<option>Issued</option>
-								</select></td>
-							
-												
+						<td style="font-weight: bold;color: #325F6D;">Available Quantity &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="availableQty"
+									type="text" class="myclass"
+									value="<c:out default="" value="${book.availableQty}" />"
+									id="availableQty" >
+							</label></td>
+						<td style="font-weight: bold;color: #325F6D;">Issued Qty. &nbsp;</td>
+							<td style="font-weight: bold"><label> <input name="issuedQty"
+									type="text" class="myclass"
+									value="<c:out default="" value="${book.issuedQty}" />"
+									id="issuedQty" >
+							</label></td>
 						
 							
 						</tr>
