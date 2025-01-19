@@ -24,6 +24,7 @@ public class BooksResponseDto {
 	private String classAndSecDetails;
 	private String studentIdDetails;
 	private String dateOfFeesDetails;
+	private List<BookIssue> booksIssuedList;
 	
     @Builder.Default
     private boolean success = false;

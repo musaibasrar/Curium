@@ -1,15 +1,14 @@
 package org.ideoholic.curium.model.library.action;
 
-import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -25,9 +24,7 @@ public class LibraryAction {
     @Autowired
     private LibraryActionAdapter libraryActionAdapter;
 
-    @Autowired
-    private DocumentActionAdapter documentActionAdapter;
-
+    
     public String error ="error";
 
 
@@ -59,7 +56,7 @@ public class LibraryAction {
 
     @RequestMapping(value = "/issuebooks", method = { RequestMethod.GET, RequestMethod.POST })
     public String issuebooks() {
-        if (documentActionAdapter.transferCertificate()) {
+        if (libraryActionAdapter.getActiveStudentsWithParents()) {
             libraryActionAdapter.viewBooksAvailable();
             return "issuebook";
         }
@@ -75,7 +72,7 @@ public class LibraryAction {
 
     @GetMapping("/returnbooks")
     public String bookReturnStudent() {
-        documentActionAdapter.transferCertificate();
+    	libraryActionAdapter.getActiveStudentsWithParents();
         return "bookReturn";
 
     }
@@ -115,4 +112,16 @@ public class LibraryAction {
         libraryActionAdapter.updateBookitems();
         return viewbooks();
     }
+    
+    @PostMapping("/searchBookHistory")
+	public String bookHistory() {
+    	libraryActionAdapter.getBookHistory();
+		return "bookhistory";
+	}
+	
+	@PostMapping("/deleteBookHistory")
+	public String deleteBookHistory() {
+		//libraryActionAdapter.deleteBookHistory();
+		return "bookhistory";
+	}
 }
