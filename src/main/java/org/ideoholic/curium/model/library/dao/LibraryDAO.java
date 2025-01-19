@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.library.dao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,11 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.library.dto.Book;
 import org.ideoholic.curium.model.library.dto.BookHistory;
 import org.ideoholic.curium.model.library.dto.BookIssue;
+import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -75,7 +73,7 @@ public class LibraryDAO {
 			
 			
 			Query query = session
-					.createQuery("delete from Book as book where book.bid IN (:ids)");
+					.createQuery("delete from Book as book where issuedqty=0 and book.bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			
 			query.executeUpdate();
@@ -89,12 +87,12 @@ public class LibraryDAO {
 		
 	}
 
-	public List<Book> readListOfBook() {
+	public List<Book> readListOfBook(String branchId) {
 		List<Book> results = new ArrayList<Book>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Book>) session.createQuery("From Book").list();
+            results = (List<Book>) session.createQuery("From Book where branchid="+branchId+"").list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
@@ -106,12 +104,21 @@ public class LibraryDAO {
 
 	}
 
-	public void updatebookAfterIssue(List<Integer> ids) {
+	public void updatebookAfterIssue(List<Integer> ids, List<BookHistory> bookHistoryList, List<BookIssue> bookIssueList) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Book set issuedQty = issuedQty + 1  where bid IN (:ids)");
+			Query query= session.createSQLQuery("update book set issuedqty = issuedqty + 1  where bid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
+			
+			for (BookIssue bookIssue : bookIssueList) {
+				session.save(bookIssue);
+			}
+			
+			for (BookHistory bookHistory : bookHistoryList) {
+				session.save(bookHistory);
+			}
+			
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -121,12 +128,12 @@ public class LibraryDAO {
 		
 	}
 
-	public List<Book> readListOfBook(String sid) {
-		List<Book> results = new ArrayList<Book>();
+	public List<BookIssue> readListOfBooksIssued(String sid) {
+		List<BookIssue> results = new ArrayList<BookIssue>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Book>) session.createQuery("From Book where bookHolder='"+sid+"'").list();
+            results = (List<BookIssue>) session.createQuery("From BookIssue where bookHolder='"+sid+"'").list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
@@ -174,10 +181,10 @@ public class LibraryDAO {
 	}
 
 	public void updatebookdetail(int bid, String bookname, String subject, String author, String publisher, String isbn,
-			String shelf) {
+			String shelf, int availableQty, int issuedQty) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"' where bid ='"+bid+"'");
+			Query query= session.createSQLQuery("update book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"', availableqty='"+availableQty+"', issuedqty='"+issuedQty+"' where bid ='"+bid+"'");
 			query.executeUpdate();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
@@ -189,12 +196,12 @@ public class LibraryDAO {
 		
 	}
 
-	public List<BookHistory> readListOfBookHistory() {
+	public List<BookHistory> readListOfBookHistory(Date fromDate, Date toDate) {
 		List<BookHistory> results = new ArrayList<BookHistory>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<BookHistory>) session.createQuery("From BookHistory").list();
+            results = (List<BookHistory>) session.createQuery("From BookHistory where issueDate between '"+fromDate+"' and '"+toDate+"'").list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
@@ -297,12 +304,18 @@ public class LibraryDAO {
 	}
 	
 
-	public void updatebook( List<Integer> ids) {
+	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,Date returnDate) {
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update book set status = 'Available' , bookHolder = ' ' where bid IN (:ids)");
-			query.setParameterList("ids", ids);
+			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
+			query.setParameterList("ids", bookIds);
 			query.executeUpdate();
+			
+			Query queryBookIssue = session.createSQLQuery("UPDATE bookissue SET noofdays = :totalDays, returned = 'Yes',actualreturndate='"+returnDate+"' WHERE id = :bookId");
+		    queryBookIssue.setParameter("totalDays", noOfDays);
+		    queryBookIssue.setParameter("bookId", bookIssueIds);
+			queryBookIssue.executeUpdate();
+				
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
