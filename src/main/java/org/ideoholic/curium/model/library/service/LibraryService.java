@@ -138,7 +138,7 @@ public class LibraryService {
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setUid(uid);
 				bookHistory.setIssueDate(booksListDto.getIssueDate());
-				bookHistory.setExpectedReturnDate(booksListDto.getExpectedReturnDate());
+				bookHistory.setExpectedReturnDate(DateUtil.datePars(booksListDto.getExpectedReturnDate()));
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setSid(booksListDto.getStudentId());
 				bookHistoryList.add(bookHistory);
@@ -151,7 +151,7 @@ public class LibraryService {
 				bookIssue.setStudentName(booksListDto.getStudentName());
 				bookIssue.setBookName(bookNames[i]);
 				bookIssue.setStartDate(booksListDto.getIssueDate());
-				bookIssue.setEndDate(booksListDto.getExpectedReturnDate());
+				bookIssue.setEndDate(DateUtil.datePars(booksListDto.getExpectedReturnDate()));
 				bookIssueList.add(bookIssue);
 				i++;
 			}

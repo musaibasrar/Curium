@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.library.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,10 +11,6 @@ import org.ideoholic.curium.model.library.dto.BooksHistoryResponseDto;
 import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.model.library.dto.BooksResponseDto;
 import org.ideoholic.curium.model.library.service.LibraryService;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.util.Constants;
-import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,7 +83,7 @@ public class LibraryActionAdapter {
 				BooksRequestDto.builder()
 				.studentExternalId(request.getParameter("studentexternalid"))
 				.issueDate(DateUtil.indiandateParser(request.getParameter("issuedate")))
-				.expectedReturnDate(DateUtil.indiandateParser(request.getParameter("expectedreturndate")))
+				.expectedReturnDate(DateUtil.dateFromatConversionSlash(request.getParameter("expectedreturndate")))
 				.bookIds(request.getParameterValues("bookissueid"))
 				.bookName(request.getParameterValues("bookname"))
 				.studentName(request.getParameter("studentname"))
@@ -125,7 +119,7 @@ public class LibraryActionAdapter {
 				.bookIds(request.getParameterValues("bookid"))
 				.bookIssueIds(request.getParameterValues("bookissueid"))
 				.noOfDays(request.getParameterValues("noofdays"))
-				.expectedReturnDate(DateUtil.indiandateParser(request.getParameter("returndate")))
+				.expectedReturnDate(DateUtil.dateFromatConversionSlash(request.getParameter("returndate")))
 				.build()).isSuccess();
 		
 	}
@@ -166,11 +160,11 @@ public class LibraryActionAdapter {
 
 		BooksHistoryResponseDto response = libraryService.getBookHistory(
 				BooksHistoryRequestDto.builder()
-				.dateOfIssueFrom(DateUtil.indiandateParser(request.getParameter("fromdate")))
-				.dateOfIssueTo(DateUtil.indiandateParser(request.getParameter("todate")))
+				.dateOfIssueFrom(DateUtil.dateFromatConversionSlash(request.getParameter("fromdate")))
+				.dateOfIssueTo(DateUtil.dateFromatConversionSlash(request.getParameter("todate")))
 				.build());
 
-		request.setAttribute("bookslist", response.getBooksHistoryList());
+		request.setAttribute("bookhistorylist", response.getBooksHistoryList());
 		return response.isSuccess();
 		
 	}
@@ -178,7 +172,7 @@ public class LibraryActionAdapter {
 	public boolean getActiveStudentsWithParents() {
 
 		LibraryService libraryService = new LibraryService(request, response);
-		ResultResponse resultResponse = libraryService.getActiveStudentsWithParents(httpSession.getAttribute(Constants.BRANCHID).toString());
+		ResultResponse resultResponse = libraryService.getActiveStudentsWithParents(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListtc", resultResponse.getResultList());
 		return resultResponse.isSuccess();
 	}

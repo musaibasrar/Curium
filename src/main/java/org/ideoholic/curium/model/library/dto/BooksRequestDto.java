@@ -19,7 +19,7 @@ public class BooksRequestDto {
 	private String classAndSec;
 	private String studentId;
 	private Date issueDate;
-	private Date expectedReturnDate;
+	private String expectedReturnDate;
 	private String[] bookIds;
 	private String[] bookIssueIds;
 	private String[] bookName;
