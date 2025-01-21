@@ -97,26 +97,26 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <div class="col-6" id="f1">
      <i class="fa-solid fa-graduation-cap"></i>
-     <a target="mainFrame" href="/abc/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Profile</h5></a>
+     <a target="mainFrame" href="/sneha/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Profile</h5></a>
      
     </div> 
     
      
     <div class="col-6" id="f3">
     <i class="fa-solid fa-book"></i>
-     <a target="mainFrame" href="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Diary</h5></a>
+     <a target="mainFrame" href="/sneha/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Diary</h5></a>
     </div>
     
   </div> 
   <div class="row">
     <div class="col-6" id="f4">
       <i class="fas fa-money-check-alt"></i>
-     <a target="mainFrame" href="/abc/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Fees</h5></a>
+     <a target="mainFrame" href="/sneha/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Fees</h5></a>
     </div> 
    
     <div class="col-6" id="f6">
     <i class="fas fa-check-circle"></i>
-     <a target="mainFrame" href="/abc/MarksDetailsProcess/generateReportParent?id=${username}" style="font-size: 12px;">
+     <a target="mainFrame" href="/sneha/MarksDetailsProcess/generateReportParent?id=${username}" style="font-size: 12px;">
      <h5>Progress Report</h5></a>
     </div>
   </div>
