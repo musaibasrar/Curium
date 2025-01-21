@@ -196,7 +196,7 @@ public class LibraryDAO {
 		
 	}
 
-	public List<BookHistory> readListOfBookHistory(Date fromDate, Date toDate) {
+	public List<BookHistory> readListOfBookHistory(String fromDate, String toDate) {
 		List<BookHistory> results = new ArrayList<BookHistory>();
         try {
             
@@ -304,7 +304,7 @@ public class LibraryDAO {
 	}
 	
 
-	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,Date returnDate) {
+	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,String returnDate) {
 		try {
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
