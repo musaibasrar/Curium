@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class BooksHistoryRequestDto {
 	private String studentExternalId;
 	private String studentName;
-	private Date dateOfIssueFrom;
-	private Date dateOfIssueTo;
+	private String dateOfIssueFrom;
+	private String dateOfIssueTo;
 }
