@@ -523,18 +523,16 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<th title="click to sort" class="headerText">Student Name</th>
 						<th title="click to sort" class="headerText">UID&nbsp;</th>
+						<th title="click to sort" class="headerText">Student Name</th>
 						<th title="click to sort" class="headerText">Issue Date&nbsp;</th>
-						<th title="click to sort" class="headerText">Expected Return Date</th>
-						<th title="click to sort" class="headerText">Actual Return Date</th>
-						<th title="click to sort" class="headerText">Sid</th>
+						<!-- <th title="click to sort" class="headerText">Expected Return Date</th> -->
 					</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${bookhistory}" var="book">
+					<c:forEach items="${bookhistorylist}" var="book">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -542,14 +540,12 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${book.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${book.id}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/alfalahschool/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
-							<td class="dataText"><c:out value="${book.bookName}" /></td>
-							<td class="dataText"><c:out value="${book.studentName}" /></td>
+							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
 							<td class="dataText"><c:out value="${book.uid}" /></td>
+							<td class="dataText"><c:out value="${book.studentName}" /></td>
 							<td class="dataText"><c:out value="${book.issueDate}" /></td>
-							<td class="dataText"><c:out value="${book.expectedReturnDate}" /></td>
-							<td class="dataText"><c:out value="${book.actualReturnDate}" /></td>
-							<td class="dataText"><c:out value="${book.sid}" /></td>
+							<%-- <td class="dataText"><c:out value="${book.expectedReturnDate}" /></td> --%>
+							<%-- <td class="dataText"><c:out value="${book.sid}" /></td> --%>
 						</tr>
 					</c:forEach>
 
