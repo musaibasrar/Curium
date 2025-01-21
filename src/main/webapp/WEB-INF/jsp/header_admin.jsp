@@ -188,12 +188,14 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<td ><a target="mainFrame"
+							<c:if test="${(username != 'akmal')}">
+								<td ><a target="mainFrame"
 								href="/lilyrose/dashboardloader"><img
 									alt="Dash Board" src="/lilyrose/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
+							</c:if>
 								
 							<td ><a target="_parent"
 								href="/lilyrose/UserProcess/logout"><img
