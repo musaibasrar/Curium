@@ -791,7 +791,7 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">UDISE Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -815,11 +815,11 @@ $(document).ready(function() {
 							</label></td>
 
 							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="Male" name="gender" id="yes:male"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+							<td  height="30" class="alignLeft">&nbsp;Female<input checked
 								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />
+								onclick="noCheck(this.id)" />Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />
 
 							</td>
 
@@ -843,7 +843,7 @@ $(document).ready(function() {
 							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
-							<td><label> <input
+							<td><label> <input readonly
 									name="age" type="text" class="myclass" id="age" size="36"
 									>
 							</label></td>
@@ -966,7 +966,7 @@ $(document).ready(function() {
 							</label></td>
 
 
-							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+							<!-- <td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td> 
 
 							<td><label> <select name="nationality"
 									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
@@ -975,8 +975,22 @@ $(document).ready(function() {
 										<option>Other</option>
 								</select>
 
-							</label></td>
+							</label></td>-->
+					
+							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td ><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="disabilitychild" size="36">
 
+							</label>
+							
+							<select name="nationality" 
+									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;display: none;" onchange="dropdown()">
+										<option selected>Indian</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select></td>
 
 						</tr>
 
@@ -1088,7 +1102,7 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td class="alignLeft" >Bag No.&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
@@ -1108,7 +1122,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						
 						<tr>
 							<td class="alignLeft" >Special Category&nbsp;</td>
@@ -1151,6 +1165,8 @@ $(document).ready(function() {
 										<option>Marathi</option>
 										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>Bengali</option>
+										<option>Oriya</option>
 								</select>
 							</label>
 							</td>
@@ -1163,16 +1179,12 @@ $(document).ready(function() {
 								</tr>
 
 						<tr>
-						
-							<td class="alignLeft"  >RTE
-										&nbsp;</td>
-
-									<td  >&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" />
-										</td>
+							<td class="alignLeft">DND Date &nbsp;</td>
+							<td ><label> <input name="crecorddate"
+									type="text"
+									class="myclass" id="datepickerDND" size="36"
+									data-validate="validate(required)">
+							</label></td>
 										
 							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
 							<td ><label> <input name="remarks"
@@ -1243,8 +1255,17 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-										
+						<!-- <tr>
+								<td class="alignLeft"  >RTE
+										&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+												
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td ><label> <input name="crecorddate"
 									type="text"
@@ -1257,7 +1278,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 
 
 						<div>
@@ -1572,9 +1593,9 @@ $(document).ready(function() {
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Name &nbsp;</td>
 									<td><label> <input
-											name="mothersname" type="text" class="myclass" id="name" required
+											name="mothersname" type="text" class="myclass" id="name" 
 											style="text-transform:capitalize;"
 											size="36"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
