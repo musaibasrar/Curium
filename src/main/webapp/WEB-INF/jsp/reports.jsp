@@ -336,7 +336,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/lilyrose/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
-            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/lilyrose/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/lilyrose/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>

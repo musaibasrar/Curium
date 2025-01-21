@@ -216,6 +216,18 @@ public class FeesCollectionAction {
 	        private String feesSummaryReport() {
 	        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
 	            return "feessummaryreport";
-			}	 
+			}
+		 
+		 @PostMapping("/searchFeesDueHeadWiseReport")
+	        public String searchFeesDueHeadWiseReport() {
+			 new FeesCollectionService(request, response).getFeesReport();
+	            return "feesdueheadwisereport";
+	        }
+		 
+		 @PostMapping("/printFeesDueHeadWiseReport")
+	        private String printFeesDueHeadWiseReport() {
+			 new FeesCollectionService(request, response).printFeesDueHeadWiseReport();
+	            return "printfeesdueheadwisereport";
+			}
 		 
 }

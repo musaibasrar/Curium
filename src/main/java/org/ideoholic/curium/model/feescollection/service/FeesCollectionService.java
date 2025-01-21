@@ -1798,6 +1798,31 @@ public class FeesCollectionService {
 		return writeSucees;
 		// getFile(name, path);
 	}
+
+	public void printFeesDueHeadWiseReport() {
+
+		boolean writeSucees = false;
+		
+			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			
+			// Creating an excel file
+			int i = 1;
+			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+				
+				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
+				String feesDetails = "";
+				Long dueAmount = 0l;
+				Long totalAmount = 0l;
+				
+				for (Studentfeesstructure studentFee : sfs) {
+					Long feesDue = studentFee.getFeesamount()-studentFee.getFeespaid() - studentFee.getConcession() - studentFee.getWaiveoff();
+					Long feesTotal = studentFee.getFeesamount() - studentFee.getConcession() - studentFee.getWaiveoff();
+					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
+					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
+					feesDetails=feesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+				}
+			}
+	}
 }
 
 
