@@ -530,6 +530,56 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
+            			</td>
+            			            		
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/greatindiaacademy/incomestatement" style="font-size: 12px;">Income Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+            
             <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -582,6 +632,28 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            
+            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+             -->
             
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -748,6 +820,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            			</td>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
@@ -761,6 +838,34 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
             
+            
+           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div> -->
             
             <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
@@ -790,6 +895,23 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
             
+           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div> -->
             
             <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -869,6 +991,23 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
+           <!--   <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            			</td>
+            			
+            		</tr>
+                </table>
+            </div> -->
             
             <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -886,6 +1025,49 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            
+             <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Case</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Caveat</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
+            			</td>
+            		</tr>
+                </table>
+            </div> -->
             
             </div>
                    

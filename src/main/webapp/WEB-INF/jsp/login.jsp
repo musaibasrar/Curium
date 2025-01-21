@@ -142,6 +142,8 @@ form{
                 	window.open('/greatindiaacademy/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/greatindiaacademy/index_parents','_self');
+                }else if(type=='feescollectoradmin'){
+                    window.open('/greatindiaacademy/index_feescollectoradmin','_self');
                 }
             }
             else if(!flag1){

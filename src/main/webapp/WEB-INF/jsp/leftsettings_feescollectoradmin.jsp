@@ -387,6 +387,11 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/greatindiaacademy/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <div >
+                <a target="mainFrame" href="/greatindiaacademy/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+            </div>
+            
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/greatindiaacademy/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
