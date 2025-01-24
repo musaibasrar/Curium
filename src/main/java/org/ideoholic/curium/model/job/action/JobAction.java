@@ -108,7 +108,7 @@ public class JobAction {
 
         try {
         	jobActionAdapter.viewQueryDetails();
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

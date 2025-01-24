@@ -418,7 +418,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/abc/PersonalProcess/viewAll" modelAttribute="student"
+	<form action="/global/PersonalProcess/viewAll" modelAttribute="student"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">

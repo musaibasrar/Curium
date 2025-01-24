@@ -118,21 +118,21 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;width: 170px;">
-								<a target="mainFrame" href="/abc/welcomeparent" ><img src="/abc/images/curiumheader.png" width="90" height="30"/></a>
+								<a target="mainFrame" href="/global/welcomeparent" ><img src="/global/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/global/images/global/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="left" style="padding-left:40px;">
  
-                                                         <a target="mainFrame" href="/abc/welcomeparent" style="display: inline-flex; align-items: center;">
-     <img src="/abc/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+                                                         <a target="mainFrame" href="/global/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="/global/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
      <strong style="font-size: 18px;">Home</strong>
  </a>&nbsp;&nbsp;
  
                                                           <a target="_parent"
-                                                                 href="/abc/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
-                                                                         src="/abc/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 href="/global/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="/global/images/logout.svg" width="22" height="22" alt="Log Out" 
                                                                  /><strong style="font-size: 17px;">Logout</strong></a></td>
 						</tr>
 

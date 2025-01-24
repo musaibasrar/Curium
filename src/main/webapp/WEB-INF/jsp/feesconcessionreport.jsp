@@ -592,10 +592,10 @@ for(Cookie cookie : cookies){
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/abc/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
+									href="/global/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.studentexternalid}" /></a></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/abc/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
+									href="/global/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>

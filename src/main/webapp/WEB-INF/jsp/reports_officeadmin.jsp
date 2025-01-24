@@ -490,7 +490,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
+            				 <a target="mainFrame" href="/global/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
             			</td>
             		</tr>
             		

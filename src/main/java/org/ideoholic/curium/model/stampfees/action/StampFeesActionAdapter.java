@@ -20,6 +20,8 @@ public class StampFeesActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	@Autowired
+	private StampFeesService stampFeesService;
 	
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
