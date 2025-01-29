@@ -21,27 +21,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class TaskReportResponseDto {
-	
-	private List<Teacher> employeeList;
+
+    private List<Teacher> employeeList;
     private List<Teacher> employeeListProcessSalary;
-    private boolean success=false;
     private List<Student> studentList;
-	private List<Parents> parentDetails;
+    private List<Parents> parentDetails;
 
+    @Builder.Default
+    private boolean success = false;
 
-	
+    public void copyStudentListResponseDto(StudentListResponseDto studentListResponseDto) {
+        studentList = studentListResponseDto.getStudentList();
+        parentDetails = studentListResponseDto.getParentDetails();
 
-	public void copyStudentListResponseDto(StudentListResponseDto studentListResponseDto) {
-		studentList = studentListResponseDto.getStudentList();
-		parentDetails = studentListResponseDto.getParentDetails();
-		
-	}
+    }
 
-	public void copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto) {
-		employeeList = employeesWithSalaryResponseDto.getEmployeeList();
-		employeeListProcessSalary = employeesWithSalaryResponseDto.getEmployeeListProcessSalary();
-		success = employeesWithSalaryResponseDto.isSuccess();	}
-
-	
+    public void copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto) {
+        employeeList = employeesWithSalaryResponseDto.getEmployeeList();
+        employeeListProcessSalary = employeesWithSalaryResponseDto.getEmployeeListProcessSalary();
+        success = employeesWithSalaryResponseDto.isSuccess();
+    }
 
 }
