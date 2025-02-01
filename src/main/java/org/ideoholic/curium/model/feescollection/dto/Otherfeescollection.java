@@ -53,7 +53,7 @@ public class Otherfeescollection implements java.io.Serializable {
 	@JoinColumn(name = "sfsid", referencedColumnName = "sfsid", nullable = false)
 	@ManyToOne(optional = false)
 	private Studentotherfeesstructure otherFeesStructure;
-
+	
 	@JoinColumn(name = "sid", referencedColumnName = "sid", nullable = false)
 	@ManyToOne(optional = false)
 	private Student student;

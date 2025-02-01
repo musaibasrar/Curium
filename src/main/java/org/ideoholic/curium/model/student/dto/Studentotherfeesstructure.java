@@ -67,5 +67,9 @@ public class Studentotherfeesstructure implements java.io.Serializable {
 		}
 		return 0;
 	}
+	
+	public Integer getSfsid() {
+	    return sfsid;
+	}
 
 }

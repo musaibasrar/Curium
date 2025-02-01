@@ -124,7 +124,7 @@ public class DocumentService {
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
-				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+				 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 transferCertificateResponseDto.setReason(leavingReason); 
@@ -162,7 +162,7 @@ public class DocumentService {
 		 }
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
-			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+			 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 			 transferCertificateResponseDto.setReason(leavingReason); 
@@ -297,7 +297,7 @@ public class DocumentService {
 
 			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
 
-			String getStudentInfo = "from Parents as parents where parents.Student.sid=" + studentId;
+			String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
 			parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			tcResponseDto.setParents(parents);
 			tcResponseDto.setTc(tc);
@@ -799,7 +799,7 @@ public class DocumentService {
 		String characterPage = null;
 		
 		if(studentIds!=null){
-			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			parentDto = new ParentDto();
 			parentDto.setParents(parents);
@@ -815,7 +815,7 @@ public class DocumentService {
 			String bonafidePage = null;
 			
 			if(studentIds!=null){
-				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+				String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
 				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				parentDto = new ParentDto();
 				parentDto.setParents(parents);

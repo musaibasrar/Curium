@@ -61,7 +61,7 @@ public class Parents implements java.io.Serializable {
 	@Column(name = "noofdependents")
 	private Integer noofdependents;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "sid", referencedColumnName = "sid", unique = true, nullable = false)
 	private Student student;
 

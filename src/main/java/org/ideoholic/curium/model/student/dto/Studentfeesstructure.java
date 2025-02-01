@@ -42,6 +42,7 @@ public class Studentfeesstructure implements java.io.Serializable {
 	@Column(name = "sfsid", unique = true, nullable = false)
 	private Integer sfsid;
 
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sid", referencedColumnName = "sid", nullable = false)
 	private Student student;
 

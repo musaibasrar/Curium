@@ -40,7 +40,7 @@ public class PrintIdsDAO {
 	            //System.out.println("In DAO with id " + personalIds);
 	            transaction = session.beginTransaction();
 	                    int sid = Integer.valueOf(id);
-	                    Query query = session.createQuery("From Parents as parents where parents.Student.sid=" + sid);
+	                    Query query = session.createQuery("from Parents as parents where parents.student.sid=" + sid);
 	                    parentsDetails = (Parents) query.uniqueResult();
 	            transaction.commit();
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

@@ -42,7 +42,9 @@ public class UserDAO {
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+       }catch (Exception hibernateException) {
+    	   transaction.rollback();
+    	   logger.error(hibernateException);
            System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{

@@ -1169,7 +1169,7 @@ public class StudentService {
 		String bonafidePage = null;
 
 		if(studentIds!=null){
-			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			result.setParents(parents);
 			result.setSuccess(true);

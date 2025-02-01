@@ -55,7 +55,7 @@ public class parentsDetailsDAO {
             //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from Parents as parents where parents.Student.sid=" + id);
+            Query query = session.createQuery("from Parents as parents where parents.student.sid=" + id);
             parents = (Parents) query.uniqueResult();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

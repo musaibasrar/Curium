@@ -267,7 +267,7 @@ public class studentDetailsDAO {
 			
 			
 			Query query = session
-					.createQuery("delete from Parents as parents where parents.Student.sid IN (:ids)");
+					.createQuery("delete from Parents as parents where parents.student.sid IN (:ids)");
 			query.setParameterList("ids", ids);
 			Query query2 = session
 					.createQuery("delete from Student where sid IN (:ids)");
@@ -475,7 +475,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"'");
+					.createQuery("from Studentfeesstructure sfs where sfs.student.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"'");
 			
 			results = query.list();
 			transaction.commit();
@@ -684,7 +684,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.Feescategory.idfeescategory IN (:feescat)");
+					.createQuery("from Studentfeesstructure sfs where sfs.student.sid = '"+id+"' and sfs.feescategory.idfeescategory IN (:feescat)");
 			query.setParameterList("feescat", feesCat);
 			results = query.list();
 			transaction.commit();
@@ -832,7 +832,7 @@ public List<Parents> getReferredList(List<Integer> sidList) {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.sid IN (:ids)");
+					.createQuery("from Parents as parents where parents.student.sid IN (:ids)");
 			query.setParameterList("ids", sidList);
 			DetailsList = query.list();
 			transaction.commit();
