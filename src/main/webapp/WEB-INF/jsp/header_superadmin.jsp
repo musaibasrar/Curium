@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/dolphin/css/bootstrap.min.css">
+        <script src="/dolphin/js/jquery.min.js"></script>
+        <script src="/dolphin/js/bootstrap.min.js"></script>
+        <script src="/dolphin/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/UserProcess/logout";
+                form1.action="/dolphin/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/dolphin/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/abc/welcome" ><img src="/abc/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/dolphin/welcome" ><img src="/dolphin/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/abc/images/abcheader.png"
+							<!-- <td align="left"><img src="/dolphin/images/dolphinheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/abc/left_superadmin"> <img
-									src="/abc/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/dolphin/left_superadmin"> <img
+									src="/dolphin/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/abc/FeesProcess/feesCollect"> <img
-									src="/abc/images/feescollect.svg" width="18" height="18"
+								href="/dolphin/FeesProcess/feesCollect"> <img
+									src="/dolphin/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/abc/AccountProcess/createVoucher"> <img
-									src="/abc/images/createvoucher.svg" width="18" height="18"
+								href="/dolphin/AccountProcess/createVoucher"> <img
+									src="/dolphin/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/abc/feesCollectionDetails"><img  alt="Fees Details" src="/abc/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/dolphin/feesCollectionDetails"><img  alt="Fees Details" src="/dolphin/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/abc/StudentProcess/addNew"> <img
-									src="/abc/images/student_header.svg" width="18" height="18"
+								href="/dolphin/StudentProcess/addNew"> <img
+									src="/dolphin/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/abc/leftsettings">
-									<img alt="Settings" src="/abc/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/dolphin/leftsettings">
+									<img alt="Settings" src="/dolphin/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/abc/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/abc/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/dolphin/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/dolphin/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/abc/sendsms"><img
-									src="/abc/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/dolphin/sendsms"><img
+									src="/dolphin/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/abc/reports"><img
-									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/dolphin/reports"><img
+									src="/dolphin/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/abc/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/abc/images/students.svg" width="18"
+								href="/dolphin/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/dolphin/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/abc/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/abc/images/dashboard.svg" width="18"
+								href="/dolphin/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/dolphin/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/abc/UserProcess/logout"><img
-									src="/abc/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/dolphin/UserProcess/logout"><img
+									src="/dolphin/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>
