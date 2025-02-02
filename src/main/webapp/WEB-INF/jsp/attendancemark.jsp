@@ -619,15 +619,9 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td><br /></td>
 
-						</tr>
-
-						<tr>
-
-							<tdclass="alignRight"></td>
-							<td>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+							<td class="alignRight"></td>
+							<td><button id="search">Search</button>
 							</td>
 						</tr>
 
@@ -635,10 +629,14 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
 									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
 							</label></td>
