@@ -477,7 +477,7 @@ for(Cookie cookie : cookies){
             
             
 			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+			 <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -500,11 +500,7 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/sneha/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/sneha/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr> -->
+            		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/sneha/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
@@ -521,7 +517,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr> -->
                 </table>
-            </div>
+            </div>            
             
             <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
