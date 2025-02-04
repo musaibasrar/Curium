@@ -131,27 +131,25 @@ public class MultiTenantConnectionProviderImpl
 
 	private HikariDataSource getHikariDataSourceFromLocalData() {
 		HikariDataSource dataSource = new HikariDataSource();
-		do {
-			try {
-				String localJdbcUrl = "jdbc:mariadb://localhost:3306/" + TenantContext.getCurrentTenant();
-				log.trace("Static Driver URL:{}", localJdbcUrl);
-				// Set JDBC properties
-				dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-				dataSource.setJdbcUrl(localJdbcUrl);
-				dataSource.addDataSourceProperty("user", "root");
-				dataSource.addDataSourceProperty("password", "root");
+		try {
+			String localJdbcUrl = "jdbc:mariadb://localhost:3306/" + TenantContext.getCurrentTenant();
+			log.trace("Static Driver URL:{}", localJdbcUrl);
+			// Set JDBC properties
+			dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
+			dataSource.setJdbcUrl(localJdbcUrl);
+			dataSource.addDataSourceProperty("user", "root");
+			dataSource.addDataSourceProperty("password", "root");
 
-				dataSource.setConnectionTimeout(30000); // Time before a connection is considered a timeout
-				dataSource.setIdleTimeout(300000); // Time before idle connection is candidate for closure
-				dataSource.setMaxLifetime(600000); // Max lifetime of a connection in the pool
-				dataSource.setMaximumPoolSize(10); // Max number of connections allowed in the pool
-				dataSource.setMinimumIdle(5); // Minimum number of idle connections in the pool
-				dataSource.setAutoCommit(false);
-			} catch (Exception e) {
-				log.error("Static Hikari Driver loading failed", e.getMessage());
-				e.printStackTrace();
-			}
-		} while (dataSource.isClosed());
+			dataSource.setConnectionTimeout(30000); // Time before a connection is considered a timeout
+			dataSource.setIdleTimeout(600000); // Time before idle connection is candidate for closure
+			dataSource.setMaxLifetime(1800000); // Max lifetime of a connection in the pool
+			dataSource.setMaximumPoolSize(20); // Max number of connections allowed in the pool
+			dataSource.setMinimumIdle(10); // Minimum number of idle connections in the pool
+			dataSource.setAutoCommit(false);
+		} catch (Exception e) {
+			log.error("Static Hikari Driver loading failed", e.getMessage());
+			e.printStackTrace();
+		}
 		return dataSource;
 	}
 

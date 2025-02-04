@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
@@ -15,6 +12,9 @@ import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 public class UserDAO {
 	 Session session = null;
@@ -268,5 +268,10 @@ public class UserDAO {
 			HibernateUtil.closeSession();
 		 }
         return feesDetails;
+	}
+	
+	private void rollback() {
+		// Roll back the transaction manually
+		TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 	}
 }
