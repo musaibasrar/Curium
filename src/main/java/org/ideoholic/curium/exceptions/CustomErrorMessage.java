@@ -18,8 +18,8 @@ public enum CustomErrorMessage {
 	BONAFIDEFAILURE(110,"bonafidefailure"),
     FAILUREPROMOTE(111, "promotefailure"),
     FEEDBACKTHANKYOUFAIL(112,"feedbackthankyoufail"),
-	SENDSMSMERROR(113,"unable to send sms");
-
+	SENDSMSMERROR(113,"unable to send sms"),
+	ERRORSMS(114, "errorsms");
 	private final int code;
 	private final String message;
 

@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendemail.dao.EmailDAO;
 import org.ideoholic.curium.model.sendemail.dto.SendAllEmailDto;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Properties;
 @Slf4j
+@Service
 public class EmailService {
 	
 	    private HttpServletRequest request;
@@ -25,12 +27,6 @@ public class EmailService {
 	    private HttpSession httpSession;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
-
-	public EmailService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
 
 
 	public ResultResponse sendAllEmail(SendAllEmailDto dto, String branchId) {
@@ -49,7 +45,7 @@ public class EmailService {
 				String conClassStudying = "";
 
 				if (addClass.contains("ALL")) {
-					querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+					querySub = querySub + "parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 				} else {
 					if (!addClass.equalsIgnoreCase("")) {
 
@@ -64,7 +60,7 @@ public class EmailService {
 					String classStudying = DataUtil.emptyString(conClassStudying);
 
 					if (!classStudying.equalsIgnoreCase("")) {
-						querySub = querySub + "parents.Student.classstudying like '" + classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid=" + Integer.parseInt(branchId);
+						querySub = querySub + "parents.student.classstudying like '" + classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid=" + Integer.parseInt(branchId);
 					}
 				}
 
