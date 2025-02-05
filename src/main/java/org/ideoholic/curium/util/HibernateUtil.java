@@ -51,15 +51,40 @@ public class HibernateUtil {
 			// Other Hibernate properties (dialect, hbm2ddl, etc.)
 			configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
 			configuration.setProperty("hibernate.show_sql", "true");
+			// Uncomment if you want Hibernate to manage schema updates
 			// configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 
 			// Build the SessionFactory
 			configuration.configure();
 			sessionFactory = configuration.buildSessionFactory();
 		} catch (Exception ex) {
-			// Log the exception.
-			logger.error("Initial SessionFactory creation failed." + ex);
+			// Log the exception if session factory creation fails
+			logger.error("Initial SessionFactory creation failed:", ex);
 			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+	/**
+	 * Get the SessionFactory for Hibernate sessions.
+	 *
+	 * @return the SessionFactory object.
+	 */
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	/**
+	 * Safely closes the current session if open.
+	 */
+	public static void closeSession() {
+		org.hibernate.Session session = getSessionFactory().getCurrentSession();
+		if (session != null && session.isOpen()) {
+			try {
+				session.close();
+				if(session.isConnected()) session.disconnect();
+			} catch (Exception e) {
+				logger.error("Failed to close session", e);
+			}
 		}
 	}
 
@@ -67,23 +92,8 @@ public class HibernateUtil {
 	 *
 	 * @return
 	 */
-	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	/**
-	 *
-	 */
-	public static void closeSession() {
-		sessionFactory.getCurrentSession().close();
-	}
-
-	/**
-	 *
-	 * @return
-	 */
 	public static Session openSession() {
-		return Session.getInstance(getSessionFactory().openSession());
+		return openCurrentSession();
 	}
 
 	/**
@@ -93,7 +103,6 @@ public class HibernateUtil {
 	public static Session openCurrentSession() {
 		if (getSessionFactory().getCurrentSession().isOpen()) {
 			return Session.getInstance(getSessionFactory().getCurrentSession());
-
 		} else {
 			return Session.getInstance(getSessionFactory().openSession());
 		}
