@@ -108,7 +108,8 @@ public class SmsService {
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				 ResultResponse.builder().success(true).build();
+				return  ResultResponse.builder().success(true).build();
+				 
 			}
 		}
 		
@@ -119,8 +120,8 @@ public class SmsService {
 	
 	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
 		ResultResponse result = ResultResponse.builder().build();
-
 		String numbers = DataUtil.emptyString(dto.getNumbers());
+		log.info("Numbers are *** "+numbers);
 		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
 		if(resultSMS==200){
 			result.setSuccess(true);
