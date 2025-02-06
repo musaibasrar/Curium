@@ -788,7 +788,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				  
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
-        				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
+        				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
             			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");

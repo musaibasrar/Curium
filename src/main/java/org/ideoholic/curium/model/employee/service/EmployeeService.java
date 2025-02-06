@@ -31,8 +31,12 @@ public class EmployeeService {
 
 	@Autowired
 	private HttpServletRequest request;
+
 	@Autowired
     private HttpServletResponse response;
+
+	@Autowired
+	private UserService userService;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -137,7 +141,7 @@ public class EmployeeService {
 		employee.setBranchid(Integer.parseInt(branchId));
 
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response,null,null,null).addUser(employee, branchId)){
+			if(userService.addUser(employee, branchId)){
 				return ResultResponse.builder().success(true).build();
 			}else{
 				new EmployeeDAO().delete(employee);

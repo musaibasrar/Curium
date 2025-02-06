@@ -99,6 +99,14 @@ public class FeesCollectionService {
 		this.smsService = smsService;
 	}
 
+	public FeesCollectionService(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession, StandardService standardService, SmsService smsService) {
+		this.request = request;
+		this.response = response;
+		this.httpSession = httpSession;
+		this.standardService = standardService;
+		this.smsService = smsService;
+	}
+
 	public Feescollection add(Feesdetails feesdetails) {
 
 		Feescollection feescollection = new Feescollection();
@@ -707,7 +715,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -719,8 +727,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -780,7 +788,7 @@ public class FeesCollectionService {
 
 		if (strBranchId != null) {
 
-			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
+			String queryMain = "From Parents as parents where parents.student.branchid="+Integer.parseInt(strBranchId)+" AND ";
 			ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(Constants.BRANCHID).toString());
 	        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 			// standardActionAdapter.viewClasses();
@@ -793,7 +801,7 @@ public class FeesCollectionService {
 			for (Classsec classOne : classList) {
 
 				if (i > 0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne.getClassdetails() + "--" + "%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '" + classOne.getClassdetails() + "--" + "%");
 				} else {
 					conClassStudying.append(classOne.getClassdetails() + "--" + "%");
 				}
@@ -805,9 +813,9 @@ public class FeesCollectionService {
 			String querySub = "";
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying	+ "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 "
-						+ " order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying	+ "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 "
+						+ " order by parents.student.admissionnumber ASC";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
@@ -864,7 +872,7 @@ public class FeesCollectionService {
 		if(strBranchId!=null){
 		
 
-	        if(branchId!=null) {
+	        if(branchId!=null && branchId.contains(":")) {
 	        	String[] branchIdName = branchId.split(":");
 	        	idBranch = Integer.parseInt(branchIdName[0]);
 				result.setBranchIdName(branchIdName[1]);
@@ -1138,7 +1146,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -1150,8 +1158,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -1532,7 +1540,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -1544,8 +1552,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -2137,7 +2145,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -2149,8 +2157,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -2321,7 +2329,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -2333,8 +2341,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -2648,5 +2656,3 @@ public class FeesCollectionService {
 	}
 
 }
-
-

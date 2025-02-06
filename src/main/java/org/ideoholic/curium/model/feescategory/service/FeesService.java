@@ -404,16 +404,16 @@ public class FeesService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
+				querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " AND parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -893,8 +893,8 @@ public class FeesService {
 		public SearchStudentResponseDto getDndReport(String branchid) {
 
 			SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
-			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(branchid)+" AND";
-			String querySub = " parents.Student.archive = 0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND crecorddate is not null order by parents.Student.crecorddate DESC";
+			String queryMain = "From Parents as parents where parents.student.branchid="+Integer.parseInt(branchid)+" AND";
+			String querySub = " parents.student.archive = 0 AND parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND crecorddate is not null order by parents.student.crecorddate DESC";
 			queryMain = queryMain + querySub;
 
 			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);

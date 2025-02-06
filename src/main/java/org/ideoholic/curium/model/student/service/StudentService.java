@@ -1053,8 +1053,8 @@ public class StudentService {
 		if (studentIds != null) {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(branchId)+" AND";
-					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
+					String queryMain = "From Parents as parents where parents.student.branchid="+Integer.parseInt(branchId)+" AND";
+					String querySub = " parents.student.id = "+id+" order by parents.student.admissionnumber ASC";
 					queryMain = queryMain + querySub;
 
 					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
