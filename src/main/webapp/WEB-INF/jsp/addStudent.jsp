@@ -961,7 +961,7 @@ $(document).ready(function() {
 									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<option>Islam</option>
-										<option>Hinduism</option>
+										<option>Hindu</option>
 										<option>Christianity</option>
 										<option>jainism</option>
 										<option>sikhism</option>
