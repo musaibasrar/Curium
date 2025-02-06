@@ -280,9 +280,10 @@ public class FeesCollectionActionAdapter {
         ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 
-        ClassesHierarchyDto dto = new ClassesHierarchyDto();
-        dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
-        dto.setClasssecList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
+        ClassesHierarchyDto dto = ClassesHierarchyDto.builder()
+            .selectedBranchId(request.getParameter("selectedbranchid"))
+            .classsecList((List<Classsec>)httpSession.getAttribute("classdetailslist"))
+            .build();
 
         FeesDashboardResponseDto responseDto = feesCollectionService.getFeesDetailsDashBoard(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         request.setAttribute("totalFeesAmountDashBoard", responseDto.getTotalFeesAmount());

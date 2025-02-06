@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
+import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
@@ -30,16 +32,11 @@ public class UserActionAdapter {
     @Autowired
     private HttpSession httpSession;
     @Autowired
-    private StandardActionAdapter standardActionAdapter;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private FeesCollectionActionAdapter feesCollectionActionAdapter;
+    private UserService userService;
 
     public void searchByDate() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
-        SearchByDateDto dto  = new SearchByDateDto();
+        SearchByDateDto dto = new SearchByDateDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
         dto.setToDate(request.getParameter("todate"));
         dto.setFromDate(request.getParameter("fromdate"));
@@ -60,7 +57,6 @@ public class UserActionAdapter {
     }
 
     public void advanceSearchByParents() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         SearchByParentDto dto = new SearchByParentDto();
         dto.setFathersName(request.getParameter("fathersname"));
@@ -72,7 +68,6 @@ public class UserActionAdapter {
     }
 
     public boolean backupData(String fileName) {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         ResultResponse resultResponse = userService.backupData(fileName);
         request.setAttribute("Backuplocation", resultResponse.getMessage());
@@ -81,7 +76,6 @@ public class UserActionAdapter {
     }
 
     public void advanceSearch() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         AdvanceSearchDto dto = new AdvanceSearchDto();
         dto.setName(request.getParameter("name"));
@@ -109,7 +103,6 @@ public class UserActionAdapter {
     }
 
     public void dashBoard() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         SearchByDateDto dto = new SearchByDateDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -118,21 +111,26 @@ public class UserActionAdapter {
 
         DashBoardResponseDto responseDto = userService.dashBoard(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         request.setAttribute("totalteachers", responseDto.getTeacherSize());
-        httpSession.setAttribute("expensesdatebranchname", responseDto.getDailyExpensesResponseDto().getExpensesDateBranchName());
-        httpSession.setAttribute("branchname", responseDto.getDailyExpensesResponseDto().getBranchName());
-        request.setAttribute("dayone", responseDto.getDailyExpensesResponseDto().getDayOne());
-        request.setAttribute("dailyadminexpenses", responseDto.getDailyExpensesResponseDto().getDailyAdminExpenses());
-        request.setAttribute("dailyexpenses", responseDto.getDailyExpensesResponseDto().getDailyExpenses());
-        request.setAttribute("monthlyexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthlyExpenses());
-        request.setAttribute("monthlistexpenses", responseDto.getMonthlyExpensesResponseDto().getMonthListExpenses());
+        DailyExpensesResponseDto dailyExpenses = responseDto.getDailyExpensesResponseDto();
+        if (dailyExpenses != null) {
+            httpSession.setAttribute("expensesdatebranchname", dailyExpenses.getExpensesDateBranchName());
+            httpSession.setAttribute("branchname", dailyExpenses.getBranchName());
+            request.setAttribute("dayone", dailyExpenses.getDayOne());
+            request.setAttribute("dailyadminexpenses", dailyExpenses.getDailyAdminExpenses());
+            request.setAttribute("dailyexpenses", dailyExpenses.getDailyExpenses());
+        }
+        MonthlyExpensesResponseDto monthlyExpenses = responseDto.getMonthlyExpensesResponseDto();
+        if (monthlyExpenses != null) {
+            request.setAttribute("monthlyexpenses", monthlyExpenses.getMonthlyExpenses());
+            request.setAttribute("monthlistexpenses", monthlyExpenses.getMonthListExpenses());
+        }
         request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
-        request.setAttribute("totalstudents",responseDto.getTotalStudents());
+        request.setAttribute("totalstudents", responseDto.getTotalStudents());
     }
 
     public boolean authenticateUser() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         UserAuthenticationDto dto = new UserAuthenticationDto();
         dto.setUserName(request.getParameter("loginName"));
@@ -156,7 +154,6 @@ public class UserActionAdapter {
     }
 
     public boolean authenticateMultiUser() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         String branchId = request.getParameter(Constants.BRANCHID);
 
@@ -178,7 +175,6 @@ public class UserActionAdapter {
     }
 
     public boolean ChangePassword() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
 
         UserAuthenticationDto dto = new UserAuthenticationDto();
         dto.setCurrentPassword(request.getParameter("currentpassword"));

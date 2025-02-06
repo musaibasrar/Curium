@@ -356,26 +356,26 @@ public class DocumentService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%'";
+				querySub = " parents.student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
+				querySub = querySub + " AND parents.student.classstudying like '" + classStudying + "'";
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "'";
+				querySub = querySub + " parents.student.classstudying like '" + classStudying + "'";
 			}
 
 			if (!admissionNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.admissionnumber = '" + admissionNumber + "'";
+				querySub = querySub + " AND parents.student.admissionnumber = '" + admissionNumber + "'";
 			} else if (!admissionNumber.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.admissionnumber = '" + admissionNumber + "'";
+				querySub = querySub + " parents.student.admissionnumber = '" + admissionNumber + "'";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
 				queryMain = queryMain + querySub
-						+ " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+						+ " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="
 						+ Integer.parseInt(branchid)
-						+ " order by parents.Student.admissionnumber ASC";
+						+ " order by parents.student.admissionnumber ASC";
 				System.out.println("QUERY*********** " + queryMain);
 				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			}
@@ -395,7 +395,7 @@ public class DocumentService {
 		if (studentIdsDto.getStudentIds() != null) {
 			for (String id : studentIdsDto.getStudentIds()) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
+					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.student.id = "+id+" order by parents.student.admissionnumber ASC";
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
@@ -671,7 +671,7 @@ public class DocumentService {
 		
 		if(branchid!=null){
 		
-		String queryMain = "From Parents as parents where parents.Student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND ";
+		String queryMain = "From Parents as parents where parents.student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND ";
 		String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
 		String[] addClass = studentNameSearchDto.getClassSearch();
 		//String addSec = request.getParameter("secsearch");
@@ -681,7 +681,7 @@ public class DocumentService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -699,16 +699,16 @@ public class DocumentService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
+			querySub = " parents.student.name like '%" + studentname + "%' and parents.student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " AND (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -731,7 +731,7 @@ public class DocumentService {
 
 		if (branchid != null) {
 
-			String queryMain = "From Parents as parents where parents.Student.promotedyear != '" + currentAcademicYear
+			String queryMain = "From Parents as parents where parents.student.promotedyear != '" + currentAcademicYear
 					+ "' AND ";
 			String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
 			String[] addClass = studentNameSearchDto.getClassSearch();
@@ -742,7 +742,7 @@ public class DocumentService {
 			for (String classOne : addClass) {
 
 				if (i > 0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne + "--" + "%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '" + classOne + "--" + "%");
 				} else {
 					conClassStudying.append(classOne + "--" + "%");
 				}
@@ -759,18 +759,18 @@ public class DocumentService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="
+				querySub = " parents.student.name like '%" + studentname + "%' and parents.student.branchid="
 						+ Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND (parents.Student.classstudying like '" + classStudying
-						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
-						+ " order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " AND (parents.student.classstudying like '" + classStudying
+						+ "') AND parents.student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.student.admissionnumber ASC";
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '" + classStudying
-						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
-						+ " order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '" + classStudying
+						+ "') AND parents.student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.student.admissionnumber ASC";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {

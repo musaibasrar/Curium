@@ -117,12 +117,10 @@ public class StandardApiAction {
 
     @GetMapping("/classHierarchy")
     public ResponseEntity<ClassesHierarchyDto> classHierarchy(@RequestHeader(value = Constants.BRANCHID) String branchId) {
-        ClassesHierarchyDto classesHierarchyDto = new ClassesHierarchyDto();
-        ResultResponse result = standardService.viewClasses(branchId);
-        classesHierarchyDto.setClasssecList(result.getResultList());
-        result = standardService.viewClassHierarchy(branchId);
-        classesHierarchyDto.setClassHierarchy(result.getResultList());
-        return ResponseEntity.ok(classesHierarchyDto);
+        return ResponseEntity.ok(ClassesHierarchyDto.builder()
+            .classsecList(standardService.viewClasses(branchId).getResultList())
+            .classHierarchy(standardService.viewClassHierarchy(branchId).getResultList())
+            .build());
     }
 
     @GetMapping("/promoteClass")

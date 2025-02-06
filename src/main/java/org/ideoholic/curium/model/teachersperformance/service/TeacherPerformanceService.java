@@ -64,8 +64,8 @@ public class TeacherPerformanceService {
 				String queryMain = "From Parents as parents where";
 				String querySub = "";
 
-					querySub = querySub + " parents.Student.classstudying = '"
-							+ classOne + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+					querySub = querySub + " parents.student.classstudying = '"
+							+ classOne + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;
