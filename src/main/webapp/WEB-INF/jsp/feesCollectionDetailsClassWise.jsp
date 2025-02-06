@@ -803,9 +803,9 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
-					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
-					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${totalFeesCollectedFeesCollectionDetailsClassWise}
+					<%-- &nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees} --%>
 					
 					</td>
 				</tr>

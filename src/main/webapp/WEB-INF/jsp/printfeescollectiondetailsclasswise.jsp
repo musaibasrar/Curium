@@ -294,14 +294,14 @@
 						</tr>
 						
 					</c:forEach>
-					<%-- <tr>
+					<tr>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<!-- <td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
+					<td class="dataText"></td> 
+					<td class="dataText"></td>-->
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 									Total</b>
@@ -310,11 +310,11 @@
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
+								<fmt:formatNumber type="currency"  value="${totalFeesCollectedFeesCollectionDetailsClassWise}" /> 
 							</b>
 							</label>
 							</td>
-					</tr> --%>
+					</tr>
 			</tbody>
 				</table>
 			

@@ -2111,6 +2111,7 @@ public class FeesCollectionService {
 		List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
 		List<Feescollection> feeCollectionList = new ArrayList<Feescollection>();
 		List<StudentFeesCollectionClassWiseReport> studentFeesCollectionClassWiseReportList = new ArrayList<StudentFeesCollectionClassWiseReport>();
+		Long totalFeesCollected = 0l;
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -2221,6 +2222,7 @@ public class FeesCollectionService {
 								
 								
 								if(feeCollSid==feesStructureSid) {
+									totalFeesCollected = totalFeesCollected+feesCollectionSingle.getAmountpaid();
 									fcList.add(feesStructureSingle.getFeescategory().getFeescategoryname()+":"+feesCollectionSingle.getAmountpaid()+":"+feesCollectionSingle.getReceiptnumber()+":"+feesCollectionSingle.getDate());
 								}
 							}
@@ -2233,7 +2235,7 @@ public class FeesCollectionService {
 				}
 			
 		}
-		
+			httpSession.setAttribute("totalFeesCollectedFeesCollectionDetailsClassWise", totalFeesCollected);
 			httpSession.setAttribute("FeesCollectionDetailsClassWise", studentFeesCollectionClassWiseReportList);
 		
 	  }
