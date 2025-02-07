@@ -567,7 +567,7 @@ for(Cookie cookie : cookies){
                         </tr>
 										
 					<tr>
-                            <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
+                            <td width="25%"   class="alignLeft" height="50" >Permanent Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>

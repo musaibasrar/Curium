@@ -99,14 +99,23 @@
         <property name="employeedoc5" type="string">
             <column name="employeedoc5" />
             </property>
-             <property name="group" type="string">
-            <column name="group" />
+             <property name="groupname" type="string">
+            <column name="groupname" />
             </property>
              <property name="shift" type="string">
             <column name="shift" />
             </property>
             <property name="timing" type="string">
             <column name="timing" />
+            </property>
+            <property name="category" type="string">
+            <column name="category" />
+            </property>
+            <property name="subcategory" type="string">
+            <column name="subcategory" />
+            </property>
+             <property name="loginid" type="string">
+            <column name="loginid" />
             </property>
     </class>
 </hibernate-mapping>

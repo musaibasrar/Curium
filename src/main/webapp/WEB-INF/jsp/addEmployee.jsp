@@ -272,7 +272,7 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
@@ -659,7 +659,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Category &nbsp;</td>
+							<td class="alignRight">Department&nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="department" id="department"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
@@ -677,7 +677,7 @@ for(Cookie cookie : cookies){
 								</select></label></td>
 
 
-							<td class="alignRight">Sub Category &nbsp;</td>
+							<td class="alignRight">Designation&nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="designation" id="designation"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
@@ -692,6 +692,38 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
+								</select></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight">Category &nbsp;</td>
+							<td class="alignLeft"><label>
+									<select name="category" id="category"
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>School</option>
+									    <option>Trust</option>
+
+								</select></label></td>
+
+
+							<td class="alignRight">Sub Category &nbsp;</td>
+							<td class="alignLeft"><label>
+									<select name="subcategory" id="subcategory"
+									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Educare</option>
+										<option>Management</option>
+										<option>Pre-primary</option>
+										<option>Primary</option>
 								</select></td>
 
 						</tr>

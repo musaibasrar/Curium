@@ -244,7 +244,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
@@ -532,7 +532,44 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
+					<tr>
+							<td width="16%" class="alignRight">Category&nbsp;</td>
 
+							<td width="28%"><label> <select name="category"
+									id="department" style="width: 210px" onchange="dropdownclass()">
+										<option selected>${employee.category}</option>
+									    <option>School</option>
+									    <option>Trust</option>
+								</select>
+
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Sub-Category &nbsp;</td>
+
+							<td width="28%"><label> <select name="subcategory"
+									id="subcategory" style="width: 210px;">
+										<option selected>
+											<c:out default="" value="${employee.subcategory}" />
+										</option>
+											<option>Educare</option>
+											<option>Management</option>
+											<option>Pre-primary</option>
+											<option>Primary</option>
+								</select>
+
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
 
 
 						<tr>
@@ -570,7 +607,7 @@ for(Cookie cookie : cookies){
 
 							<td width="28%"><label> <select name="group"
 									id="group" style="width: 210px" onchange="dropdownclass()">
-										<option selected>${employee.group}</option>
+										<option selected>${employee.groupname}</option>
 										<option>Boys</option>
 										<option>Girls</option>
 										<option>Care Taker</option>

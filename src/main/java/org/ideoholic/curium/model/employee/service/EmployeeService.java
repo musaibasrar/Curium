@@ -49,6 +49,8 @@ public class EmployeeService {
 		                	employee.setQualification(DataUtil.emptyString(employeeDto.getQualification()));
 		                	employee.setDepartment(DataUtil.emptyString(employeeDto.getDepartment()));
 		                	employee.setDesignation(DataUtil.emptyString(employeeDto.getDesignation()));
+		                	employee.setCategory(DataUtil.emptyString(employeeDto.getCategory()));
+		                	employee.setSubcategory(DataUtil.emptyString(employeeDto.getSubcategory()));
 		                	employee.setSalary(DataUtil.emptyString(employeeDto.getSalary()));
 		                	employee.setRemarks(DataUtil.emptyString(employeeDto.getRemarks()));
 		                	employee.setCurrentemployee(DataUtil.emptyString(employeeDto.getCurrentEmployee()));
@@ -56,6 +58,12 @@ public class EmployeeService {
 		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
 		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
 							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
+							
+							employee.setCategory(DataUtil.emptyString(employeeDto.getCategory()));
+							employee.setSubcategory(DataUtil.emptyString(employeeDto.getSubcategory()));
+							employee.setGroupname(DataUtil.emptyString(employeeDto.getGroupname()));
+							employee.setShift(DataUtil.emptyString(employeeDto.getShift()));
+							employee.setTiming(DataUtil.emptyString(employeeDto.getTiming()));
 		                //End Bank Details
 
 			// Process form file field (input type="file")
@@ -168,7 +176,7 @@ public class EmployeeService {
 	        try {
 	            long id = Long.parseLong(empId);
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            Login employeeLogin = new UserDAO().getUserDetails(employee.getLoginid());
 	           
 	            if (employee.getTid() != null) {
 	            	employeeDetailsResponseDto.setEmployee(employee);
@@ -243,6 +251,12 @@ public class EmployeeService {
 			employeedoc3delete = DataUtil.emptyString(employeeDto.getEmployeedoc3delete());
 			employeedoc4delete = DataUtil.emptyString(employeeDto.getEmployeedoc4delete());
 			employeedoc5delete = DataUtil.emptyString(employeeDto.getEmployeedoc5delete());
+			
+			employee.setCategory(DataUtil.emptyString(employeeDto.getCategory()));
+			employee.setSubcategory(DataUtil.emptyString(employeeDto.getSubcategory()));
+			employee.setGroupname(DataUtil.emptyString(employeeDto.getGroupname()));
+			employee.setShift(DataUtil.emptyString(employeeDto.getShift()));
+			employee.setTiming(DataUtil.emptyString(employeeDto.getTiming()));
 
 		// Process form file field (input type="file")
 		if (listOfFiles != null && listOfFiles.length != 0) {

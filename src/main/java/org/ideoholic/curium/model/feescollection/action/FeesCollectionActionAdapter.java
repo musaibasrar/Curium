@@ -114,6 +114,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("classandsecDetails", responseDto.getClassAndSecDetails());
         request.setAttribute("studentIdDetails", responseDto.getStudentIdDetails());
         request.setAttribute("dateoffeesDetails", responseDto.getDateOfFeesDetails());
+        request.setAttribute("fathernameDetails", request.getParameter("fathername"));
     }
 
     public void getFeesDetails() {

@@ -653,7 +653,7 @@ public class UserService {
 	public boolean addUser(Teacher employee, String branchId) {
 		
 		Login user = new Login();
-		user.setUsername(employee.getTeacherexternalid());
+		user.setUsername(employee.getLoginid());
 		final String ALPHA_NUMERIC_STRING = "RSTUABCDJKL6789MNOPQRSTUVWXYZ012345EFGHI";
 		int count =4;
 		StringBuilder builder = new StringBuilder();

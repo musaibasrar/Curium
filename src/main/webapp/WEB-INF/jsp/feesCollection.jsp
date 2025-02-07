@@ -494,6 +494,7 @@
        			  $( "#studentName").val( ui.item.name );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#admissionno").val( ui.item.admissionno );
+       			$( "#fathername").val( ui.item.fathername );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -942,7 +943,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td style="width: 45%;" class="alignLeft">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
+                        <td class="alignLeft">Father Name:&nbsp;&nbsp;&nbsp;<input  type="text" name="fathername" id="fathername" class="myclass" /></td>
                     </tr>
                     
                     <tr>
@@ -984,7 +985,7 @@ for(Cookie cookie : cookies){
                                     </label>
                         
                         </td>
-                        
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                     </tr>
                     
                     <tr>
@@ -1008,15 +1009,15 @@ for(Cookie cookie : cookies){
 						<td><br></td>
                     </tr>
                     <tr>
-                    <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
+                    <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;<input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
+                        <td class="alignLeft">Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
                         
                     </tr>
                     
                     <tr>
                     
-                        <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
+                        <td class="alignLeft" style="width: 45%">Student Name:  &nbsp;&nbsp;<input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
                         <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
@@ -1033,6 +1034,9 @@ for(Cookie cookie : cookies){
                         
                         </td>
                         
+                    </tr>
+                    <tr>
+                    <td class="alignLeft" style="width: 45%">Father Name:  &nbsp;&nbsp;<input  type="text" name="fathernameDetails" id="fathernameDetails" readonly value="${fathernameDetails}" class="myclass" /> </td>
                     </tr>
                     <tr>
 						<td><br></td>

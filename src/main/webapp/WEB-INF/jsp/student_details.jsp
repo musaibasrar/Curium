@@ -983,7 +983,7 @@ for(Cookie cookie : cookies){
 					</tr>
 					
 					<tr>
-                            <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
+                            <td width="25%"   class="alignLeft" height="50" >Permanent Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>
@@ -1173,8 +1173,8 @@ for(Cookie cookie : cookies){
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button id="print" >Print</button>
+                               <!--  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="print" >Print</button> -->
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
 

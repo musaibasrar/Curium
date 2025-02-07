@@ -47,6 +47,11 @@ public class EmployeeActionAdapter {
         employeeDto.setBankName(request.getParameter("bankname"));
         employeeDto.setBankIFSC(request.getParameter("bankifsc"));
         employeeDto.setAccNo(request.getParameter("accno"));
+        employeeDto.setCategory(request.getParameter("category"));
+        employeeDto.setSubcategory(request.getParameter("subcategory"));
+        employeeDto.setGroupname(request.getParameter("group"));
+        employeeDto.setShift(request.getParameter("shift"));
+        employeeDto.setTiming(request.getParameter("timings"));
         ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("branchcode").toString());
         return resultResponse.isSuccess();
     }
@@ -94,6 +99,11 @@ public class EmployeeActionAdapter {
         employeeDto.setEmployeedoc3delete(request.getParameter("employeedoc3delete"));
         employeeDto.setEmployeedoc4delete(request.getParameter("employeedoc4delete"));
         employeeDto.setEmployeedoc5delete(request.getParameter("employeedoc5delete"));
+        employeeDto.setCategory(request.getParameter("category"));
+        employeeDto.setSubcategory(request.getParameter("subcategory"));
+        employeeDto.setGroupname(request.getParameter("group"));
+        employeeDto.setShift(request.getParameter("shift"));
+        employeeDto.setTiming(request.getParameter("timings"));
         employeeDto.setBranchId(request.getParameter("branchid"));
 
         Teacher employee = employeeService.updateEmployee(listOfFiles,employeeDto);

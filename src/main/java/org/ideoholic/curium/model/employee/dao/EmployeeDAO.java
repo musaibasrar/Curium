@@ -44,13 +44,14 @@ public class EmployeeDAO {
 		 	
 		 	if(queryList.size()>0) {
 		 		String tEId = queryList.get(0).getTeacherexternalid();
-		 		employee.setTeacherexternalid(String.format("%02d",Integer.parseInt(tEId)+1));
+		 		employee.setTeacherexternalid(String.format("%03d",Integer.parseInt(tEId)+1));
 		 		
 				/*
 				 * String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) :
 				 * tEId; employee.setTeacherexternalid(externalId+String.format("%02d",Integer.
 				 * parseInt(externalIdNo)+1));
 				 */
+		 		employee.setLoginid("TR"+externalId+String.format("%03d",Integer.parseInt(tEId)+1));
 		 	}else {
 		 		employee.setTeacherexternalid(externalId+String.format("%02d",1));
 		 	}

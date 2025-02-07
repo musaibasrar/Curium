@@ -368,6 +368,14 @@ for(Cookie cookie : cookies){
                     <td style="width: 200px;border: 0px;"></td>
                     </tr>
                     
+                   	 <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Emp. Code</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.teacherexternalid}" />
+                            </td>
+                        </tr>
+                    
                         <tr>
 
                             <td width="25%"  class="alignLeft" height="50">Name</td>
@@ -424,15 +432,31 @@ for(Cookie cookie : cookies){
                         
                         
                         <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Category</td>
+                        <td width="25%"   class="alignLeft" height="50" >Department</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.department}" />
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Sub Category</td>
+                            <td width="25%"   class="alignLeft" height="50" >Designation</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.designation}" />
+                            </td>
+                           
+                           
+                        
+                        </tr>
+                        
+                        <tr>
+                        <td width="25%"   class="alignLeft" height="50" >Category</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.category}" />
+                            </td>
+                            
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Sub Category</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.subcategory}" />
                             </td>
                            
                            
@@ -454,7 +478,7 @@ for(Cookie cookie : cookies){
                         <tr>
                         	<td width="25%"   class="alignLeft" height="50" >Group</td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.group}" />
+                                <c:out default="" value="${employee.groupname}" />
                             </td>
                             
                             
@@ -632,7 +656,7 @@ for(Cookie cookie : cookies){
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Date of Leaving&nbsp;</td>
                             <td width="25%" class="tablerows"  style="text-transform:uppercase">
-                            <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.leavingdate}"/>
+                            <fmt:formatDate pattern="dd/mm/yyyy" value="${employee.leavingdate}"/>
                             </td>
                         </tr>
                         

@@ -1270,7 +1270,7 @@ $(document).ready(function() {
 								</tr>
 								<tr>
 									<td>
-									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Parent Details</h5>
+									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Parent's Details</h5>
 									<br /></td>
 								</tr>
 

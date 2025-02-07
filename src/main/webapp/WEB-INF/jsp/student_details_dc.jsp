@@ -741,6 +741,19 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
+                         <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Father's Aadhar No</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fatherscastecertno}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Aadhar No
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.motherscastecertno}" />
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >
@@ -777,7 +790,7 @@ for(Cookie cookie : cookies){
 					</tr>
 					
 					<tr>
-                            <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
+                            <td width="25%"   class="alignLeft" height="50" >Permanent Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>
@@ -791,17 +804,17 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         <tr>
-                            <td width="25%"   class="alignLeft" height="50" >Number Of Dependents</td>
+                            <td width="25%"   class="alignLeft" height="50" >Notes</td>
                             <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${parents.noofdependents}" />
+                                 <c:out default="" value="${parents.remarks}" />
                                 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">Notes
+                           <%--  <td  width="25%"  class="alignLeft" height="50">Notes
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
                                 
-                            </td>
+                            </td> --%>
 
 
                         </tr>
