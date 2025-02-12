@@ -28,12 +28,6 @@ public class UserAction {
 	@Autowired
 	private HttpSession httpSession;
 	@Autowired
-	private StandardActionAdapter standardActionAdapter;
-	@Autowired
-	private AdminService adminService;
-	@Autowired
-	private FeesCollectionActionAdapter feesCollectionActionAdapter;
-	@Autowired
 	private UserActionAdapter userActionAdapter;
 	@Autowired
 	private UserService userService;
