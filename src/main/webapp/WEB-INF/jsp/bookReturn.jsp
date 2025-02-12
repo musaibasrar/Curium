@@ -16,31 +16,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fees Collection</title>
-        <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alirfan/css/graph/jquery.jqplot.css">
+        <title>Book Return</title>
+        <link rel="stylesheet" href="/alfalahschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alfalahschool/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/alfalahschool/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
-        <script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/alfalahschool/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -416,7 +415,7 @@
             	}
             	
             	var form1 = document.getElementById("form1");
-        		form1.action="/alirfan/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.action="/alfalahschool/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
         		form1.method = "POST";
         		form1.submit();
         		
@@ -424,7 +423,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/alirfan/LibraryProcess/searchbooks";
+        		form1.action="/alfalahschool/LibraryProcess/searchbooks";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -645,7 +644,7 @@
         <script type="text/javascript">
 	function returnBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alirfan/LibraryProcess/bookReturnByStudent";
+		form1.action = "/alfalahschool/LibraryProcess/bookReturnByStudent";
 		form1.method = "POST";
 		form1.submit();
 
@@ -667,7 +666,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alfalahschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -811,11 +810,9 @@ for(Cookie cookie : cookies){
                     <tr>
 								<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<th title="click to sort" class="headerText">Subject</th>
-						<th title="click to sort" class="headerText">Author</th>
-						<th title="click to sort" class="headerText">Publisher</th>
-						<th title="click to sort" class="headerText">isbn</th>
+						<th title="click to sort" class="headerText">Book Id</th>
 						<th title="click to sort" class="headerText">Date of Issue</th>
+						<th title="click to sort" class="headerText">Total Days</th>
 							</tr>
                 </thead>
 
@@ -823,13 +820,11 @@ for(Cookie cookie : cookies){
 
 						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
            							<tr>
-           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.bid}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.bid}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookname}" /> </td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.subject}" /> </td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.author}" /></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.publisher}" /> </td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.isbn}" /> </td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startdate}" /></td>
+           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /></td>
                 					</tr>
 								
 							</c:forEach> 
