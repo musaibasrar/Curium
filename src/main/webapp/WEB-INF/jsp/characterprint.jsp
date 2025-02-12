@@ -136,7 +136,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/oasis/images/oasis.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/oasis/images/oasis.png">
 			</td>
 				<td >
 					<br>
