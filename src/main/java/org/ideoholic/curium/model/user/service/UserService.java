@@ -45,7 +45,8 @@ import java.util.Map.Entry;
 @Slf4j
 @Service
 public class UserService {
-
+	
+	@Autowired
     private AdminService adminService;
 
     @Autowired
