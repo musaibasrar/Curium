@@ -39,6 +39,12 @@ public class MarksDetailsAction {
 		standardActionAdapter.viewClasses();
 		return "progressreport";
 	}
+	
+	@GetMapping("/finalExamReport")
+		public String finalExamReport() {
+			standardActionAdapter.viewClasses();
+			return "finalexamreport";
+		}
 
 	@PostMapping("/getStudentGraph")
 	public String getStudentGraph() {
@@ -59,10 +65,25 @@ public class MarksDetailsAction {
 		return "progressreport";
 	}
 	
+	@PostMapping("/searchForFinalReport")
+	public String searchForFinalReport() {
+		marksDetailsActionAdapter.Search();
+		return "finalexamreport";
+	}
+
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (marksDetailsActionAdapter.generateReport()) {
 			return "markssheet";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/generatefinalexamReport")
+	public String generatefinalexamReport() {
+		if (marksDetailsActionAdapter.generateFinalExamReport()) {
+			return "finalexammarkssheet";
 		} else {
 			return "error";
 		}

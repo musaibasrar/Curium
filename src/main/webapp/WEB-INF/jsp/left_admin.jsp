@@ -928,7 +928,7 @@ for(Cookie cookie : cookies){
 				     </tr>
 				     <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/abc/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+                              <a target="mainFrame" href="/global/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>
