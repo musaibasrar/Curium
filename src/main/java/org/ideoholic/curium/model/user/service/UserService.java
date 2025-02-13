@@ -24,6 +24,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -45,7 +46,7 @@ import java.util.Map.Entry;
 @Slf4j
 @Service
 public class UserService {
-	
+
 	@Autowired
     private AdminService adminService;
 
@@ -56,10 +57,12 @@ public class UserService {
     private SmsService smsService;
 
     @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
     private HttpServletRequest request;
     @Autowired
     private HttpServletResponse response;
-
     @Autowired
     private HttpSession httpSession;
 
@@ -77,7 +80,7 @@ public class UserService {
         String userName = dto.getUserName();
         String password = dto.getPassword();
 
-        Login login = new UserDAO().readUniqueObject(userName, password);
+        Login login = userDAO.readUniqueObject(userName, password);
 
         if (login != null) {
             Currentacademicyear currentAcademicYear = new YearDAO().showYear();
@@ -122,8 +125,11 @@ public class UserService {
 
     public void logOutUser() {
         httpSession.invalidate();
-        new UserDAO().sessionClose();
-
+        try {
+            HibernateUtil.closeSession();
+        }catch(Exception ex){
+            log.error(ex.getMessage(), ex);
+        }
     }
 
     public DashBoardResponseDto dashBoard(SearchByDateDto dto, String branchId, String currentAcademicYear) {
@@ -237,7 +243,7 @@ public class UserService {
         for (Date date = start.getTime(); start.before(end); start.add(Calendar.DAY_OF_MONTH, +1), date = start.getTime()) {
             todaysDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
             String querySub = " feesdetails.date = '" + todaysDate + "'";
-            feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+            feesDetailsList = userDAO.getReceiptDetailsList(queryMain + querySub);
             BigDecimal sumOfFees = BigDecimal.ZERO;
             for (Receiptinfo receiptinfo : feesDetailsList) {
                 BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
@@ -291,7 +297,7 @@ public class UserService {
             toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
             String querySub;
             querySub = " feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
-            feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+            feesDetailsList = userDAO.getReceiptDetailsList(queryMain + querySub);
             BigDecimal sumOfFees = BigDecimal.ZERO;
             for (Receiptinfo receiptinfo : feesDetailsList) {
                 BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
@@ -495,11 +501,11 @@ public class UserService {
         String newPassword = dto.getNewPassword();
         String confirmNewPassword = dto.getConfirmNewPassword();
 
-        Login login = new UserDAO().readPassword(currentPassword);
+        Login login = userDAO.readPassword(currentPassword);
 
         if (login != null && newPassword.equals(confirmNewPassword)) {
             login.setPassword(newPassword);
-            login = new UserDAO().update(login);
+            login = userDAO.update(login);
             result.setSuccess(true);
         } else {
             result.setSuccess(false);
@@ -600,7 +606,7 @@ public class UserService {
                 queryMain = queryMain + querySub;
                 /*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
                 log.error("SEARCH QUERY ***** " + queryMain);
-                feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+                feesDetailsList = userDAO.getReceiptDetailsList(queryMain);
 
             }
             long sumOfFees = 0L;
@@ -650,7 +656,7 @@ public class UserService {
         branch.setIdbranch(Integer.parseInt(branchId));
         user.setBranch(branch);
 
-        return new UserDAO().addUser(user);
+        return userDAO.addUser(user);
 
     }
 
@@ -672,7 +678,7 @@ public class UserService {
 
         if (userName != null) {
             int branchId = Integer.parseInt(strBranchId);
-            Login login = new UserDAO().getLoginDetails(userName, branchId);
+            Login login = userDAO.getLoginDetails(userName, branchId);
 
             if (login != null) {
 

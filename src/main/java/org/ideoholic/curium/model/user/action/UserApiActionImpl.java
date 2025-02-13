@@ -57,7 +57,7 @@ public class UserApiActionImpl implements UserApiAction {
     public ResponseEntity<UserAuthenticationResponseDto> authenticateUser(UserAuthenticationDto dto) {
         UserAuthenticationResponseDto result = userService.authenticateUser(dto);
         if (!result.isSuccess()) {
-            throw new CustomResponseException(CustomErrorMessage.PASSWORDFAIL);
+            throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
         }
         return ResponseEntity.ok(result);
 
@@ -66,7 +66,7 @@ public class UserApiActionImpl implements UserApiAction {
     public ResponseEntity<UserAuthenticationResponseDto> authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
         UserAuthenticationResponseDto result = userService.authenticateMultiUser(strUserName, strSuperUserAuth, strBranchId);
         if (!result.isSuccess()) {
-            throw new CustomResponseException(CustomErrorMessage.PASSWORDFAIL);
+            throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
         }
         return ResponseEntity.ok(result);
     }
@@ -81,7 +81,7 @@ public class UserApiActionImpl implements UserApiAction {
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         } else {
-            throw new CustomResponseException(CustomErrorMessage.PASSWORDFAIL);
+            throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
         }
     }
 }
