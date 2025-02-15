@@ -203,4 +203,24 @@ public class ExamDetailsDAO {
 		}
 
 	}
+
+
+
+	public Exams readDetailsOfExams(String examName) {
+		Exams exam = new Exams();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query =  session.createQuery("From Exams where examname="+"examName");
+			exam = (Exams) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+		} finally {
+				HibernateUtil.closeSession();
+			return exam;
+		}
+
+	}
 }

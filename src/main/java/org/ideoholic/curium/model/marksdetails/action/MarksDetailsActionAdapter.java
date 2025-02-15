@@ -75,6 +75,20 @@ public class MarksDetailsActionAdapter {
 
         return responseDto.isSuccess();
     }
+    
+    public boolean generateFinalExamReport() {
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+        dto.setExamName(request.getParameter("examname"));
+       
+        GenerateReportResponseDto responseDto = marksDetailsService.generateFinalExamReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+        request.setAttribute("examname", responseDto.getExamName());
+        return responseDto.isSuccess();
+    }
 
     public boolean generateReportParent() {
 
