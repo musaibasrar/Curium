@@ -289,5 +289,10 @@ public class FeesCollectionAction {
 					}
 					
 				}
+			 
+			 @PostMapping("/printFeesReportDue")
+		        private String printFeesReportDue() {
+		            return "printfeesdueheadwisereport";
+				}
 		 
 }

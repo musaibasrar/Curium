@@ -176,6 +176,7 @@ public class MarksDetailsService {
 		String addSec = request.getParameter("secsearch");
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
+		String currentAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString();
 
 		if (!addClass.equalsIgnoreCase("")) {
 
@@ -196,9 +197,9 @@ public class MarksDetailsService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " parents.Student.classstudying like '" + classStudying
-					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and (parents.Student.promotedyear='" + currentAcademicYear + "' or parents.Student.yearofadmission='" + currentAcademicYear + "')";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and (parents.Student.promotedyear='" + currentAcademicYear + "' or parents.Student.yearofadmission='" + currentAcademicYear + "') AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
@@ -595,7 +596,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)

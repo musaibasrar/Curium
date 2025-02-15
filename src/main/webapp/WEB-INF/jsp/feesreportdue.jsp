@@ -381,6 +381,14 @@
 		form1.submit();
 
 	}
+	
+	function printFeesReportDue() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/shatabdi/FeesCollection/printFeesReportDue";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 
 	$(function() {
 
@@ -390,6 +398,12 @@
 		
 		$("#sendsms").button().click(function() {
 			sendSMS();
+			return false;
+
+		});
+		
+		$("#print").button().click(function() {
+			printFeesReportDue();
 			return false;
 
 		});
@@ -775,14 +789,27 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 					
-					<td  class="footerTD" colspan="2" >
-					 <input value="Export"
+					<td class="footerTD" colspan="3"> &nbsp;
+							
+							<input value="Print" style="width: 35px;"
+							id="print"/>
+							
+						<input value="Export"
+							type="submit" id="export"/>
+							
+							<input value="SMS" style="width: 75px;"
+							id="sendsms"/>
+							
+							</td>
+					
+					<!-- <td  class="footerTD" colspan="2" >
+					 			<input value="Export"
 							type="submit" id="export"/>
 							
 							<button id="sendsms">Send SMS Reminder</button>
-							</td>
+							</td> -->
 													
-						<td class="footerTD" colspan="7" >
+						<td class="footerTD" colspan="5" >
 						 
 						<%-- Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
