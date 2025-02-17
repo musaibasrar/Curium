@@ -44,6 +44,7 @@ public class MessSuppliersApiActionImpl implements MessSuppliersApiAction{
     public ResponseEntity<ResultResponse> searchSupplierPaymentDetails(SearchLedgerEntriesDto dto, String branchId) {
         SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(dto, branchId);
         ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
+        searchLedgerEntriesResponseDto.setMessSuppliersList(result.getResultList());
         return ResponseEntity.ok(result);
     }
 
