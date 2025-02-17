@@ -20,7 +20,7 @@ public enum CustomErrorMessage {
     FEEDBACKTHANKYOUFAIL(112,"feedbackthankyoufail"),
 	SENDSMSMERROR(113,"unable to send sms"),
 	ERRORSMS(114, "errorsms"),
-	PASSWORDFAIL(115,"passwordFail"),
+	INVALID_CREDENTIALS(115,"usernameOrPasswordFail"),
 	BACKUPFAILED(116,"BackupFailed");
 	private final int code;
 	private final String message;

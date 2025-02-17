@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -64,8 +65,10 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @Service
 public class StudentService {
 	@Autowired
@@ -231,7 +234,7 @@ public class StudentService {
 					List<Integer> ids = new ArrayList<>();
 					listOfacademicfessstructure.clear();
 					for (String id : studentIds) {
-						System.out.println("id" + id);
+						log.debug("id" + id);
 						academicfessstructure = new Academicfeesstructure();
 						academicfessstructure.setSid(Integer.valueOf(id));
 						academicfessstructure.setAcademicyear(setYear);
@@ -610,7 +613,7 @@ public class StudentService {
 		String id = studentDto.getSid().toString();
 		String pid = studentDto.getPid().toString();
 
-		System.out.println("THE ID IS: " + id + "," + pid);
+		log.debug("THE ID IS: " + id + "," + pid);
 
 		int studentId = DataUtil.parseInt(id);
 		int parentsId = DataUtil.parseInt(pid);
@@ -676,7 +679,7 @@ public class StudentService {
 				if (!fileName.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentpic(saveFile);
@@ -694,7 +697,7 @@ public class StudentService {
 				if (!studentdoc1.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc1(saveFile);
@@ -711,7 +714,7 @@ public class StudentService {
 				if (!studentdoc2.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc2(saveFile);
@@ -728,7 +731,7 @@ public class StudentService {
 				if (!studentdoc3.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc3(saveFile);
@@ -744,7 +747,7 @@ public class StudentService {
 				if (!studentdoc4.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc4(saveFile);
@@ -760,7 +763,7 @@ public class StudentService {
 				if (!studentdoc5.equalsIgnoreCase("")) {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					log.debug("ecncoded value is " + new String(bytesEncoded ));
 					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc5(saveFile);
@@ -786,7 +789,7 @@ public class StudentService {
 		// Generate External Id
 		
 		
-			if(!studentDto.getStream().equalsIgnoreCase(studentDto.getApplicationtype())) {
+			if(StringUtils.hasLength(studentDto.getStream()) && !studentDto.getStream().equalsIgnoreCase(studentDto.getApplicationtype())) {
 		
 				if("Admission".equalsIgnoreCase(student.getStream())) {
 					Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
@@ -930,7 +933,7 @@ public class StudentService {
 				String[] iddetailsarray = id.split(":");
 				ids.add(Integer.valueOf(iddetailsarray[0]));
 			}
-			System.out.println("id length" + studentIds.length);
+			log.debug("id length" + studentIds.length);
 			new studentDetailsDAO().restoreMultiple(ids);
 		}
 	}
@@ -1214,7 +1217,7 @@ public class StudentService {
 			outStream.close();
 			result.setSuccess(true);
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error(e.getMessage(), e);
 		}
 		return result;
 	}

@@ -1,0 +1,20 @@
+package org.ideoholic.curium.model.user.dao;
+
+import org.ideoholic.curium.model.user.dto.Login;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface LoginRepository extends JpaRepository<Login, Integer> {
+    List<Login> findByUsernameAndPassword(String username, String password);
+
+    List<Login> findByUsername(String username);
+
+    List<Login> findByPassword(String password);
+
+    List<Login> findByUserid(int userid);
+
+    @Query("FROM Login as login where login.branch=:branchId and login.username=:userName")
+    List<Login> findByBranchIdAndUserName(int branchId, String userName);
+}
