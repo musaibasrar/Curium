@@ -179,7 +179,7 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td><img src="/scholar/images/scholar.jpg" width="121" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -367,18 +367,19 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
+		<br>
 		<div style="border: 1px solid;border-radius: 15px">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td><img src="/scholar/images/scholar.jpg" width="121" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -567,7 +568,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>

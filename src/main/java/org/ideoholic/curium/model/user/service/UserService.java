@@ -80,6 +80,20 @@ public class UserService {
 			result.setBranchCode(login.getBranch().getBranchcode());
 			result.setBranchAddress(login.getBranch().getAddress());
 			result.setBranchContact(login.getBranch().getContact());
+			
+			  switch (login.getBranch().getIdbranch()) {
+				case 2:
+					result.setSubBranchName("SES Pre and Primary");
+					break;
+				case 3:
+					result.setSubBranchName("SES High School");
+					break;
+				case 4:
+					result.setSubBranchName("SES Beed Bypass");
+					break;
+				default:
+					break;
+				}
 
             String[] userType = login.getUsertype().split("-");
 			result.setUserType(userType[0]);
@@ -720,6 +734,20 @@ public class UserService {
 			result.setUserAuth(userType[0]);
 			result.setSuperUserAuth("superAdmin");
 			result.setUserLoginId(login.getUserid());
+			
+			switch (login.getBranch().getIdbranch()) {
+			case 2:
+				result.setSubBranchName("SES Pre and Primary");
+				break;
+			case 3:
+				result.setSubBranchName("SES High School");
+				break;
+			case 4:
+				result.setSubBranchName("SES Beed Bypass");
+				break;
+			default:
+				break;
+			}
             
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);

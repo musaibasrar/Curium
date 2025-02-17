@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Appointments</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -327,42 +327,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/scholar/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/scholar/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/scholar/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/scholar/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -376,20 +376,20 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/scholar/js/datetimepicker_css.js"></script>
 
 
 	<script type="text/javascript">
 		function completeAppointment() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/abc/AppointmentProcess/completeAppointments";
+			form1.action = "/scholar/AppointmentProcess/completeAppointments";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function cancelAppointment() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/abc/AppointmentProcess/cancelAppointments";
+			form1.action = "/scholar/AppointmentProcess/cancelAppointments";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -419,7 +419,7 @@
 		        		  } else {
 		        		    x.style.display = "none";
 		        		    var form1 = document.getElementById("form1");
-		        			form1.action = "/abc/AppointmentProcess/viewAllAppointments";
+		        			form1.action = "/scholar/AppointmentProcess/viewAllAppointments";
 		        			form1.method = "POST";
 		        			form1.submit();
 		        		  }
@@ -499,7 +499,7 @@
 	 
 	   function viewStudentDetails(sid,branchid){
            var form1=document.getElementById("form1");
-          form1.action="/abc/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
+          form1.action="/scholar/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
           form1.submit();
           
           //window.location.reload();
@@ -508,7 +508,7 @@
 	   function updateAppointment(){
      	  
        	var form1 = document.getElementById("form1");
-   		form1.action = "/abc/AppointmentProcess/updateAppointment";
+   		form1.action = "/scholar/AppointmentProcess/updateAppointment";
    		form1.method = "POST";
    		form1.submit();
        }
@@ -537,7 +537,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -630,7 +630,7 @@ for(Cookie cookie : cookies){
                 <div align="center">
 		             <%--For displaying Previous link except for the 1st page --%>
 		                <c:if test="${currentPage != 1}">
-		                    <td><a style="color: #4B6A84;font-size: 12px" href="/abc/AppointmentProcess/viewAllAppointments&page=${currentPage - 1}">Previous</a></td>
+		                    <td><a style="color: #4B6A84;font-size: 12px" href="/scholar/AppointmentProcess/viewAllAppointments&page=${currentPage - 1}">Previous</a></td>
 		                </c:if>
 		
 		                <%--For displaying Page numbers.
@@ -646,7 +646,7 @@ for(Cookie cookie : cookies){
 		                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
 		                                </c:when>
 		                                <c:otherwise>
-		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/abc/AppointmentProcess/viewAllAppointments&page=${i}">${i}</a></td>
+		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/scholar/AppointmentProcess/viewAllAppointments&page=${i}">${i}</a></td>
 		                                </c:otherwise>
 		                            </c:choose>
 		                            
@@ -659,7 +659,7 @@ for(Cookie cookie : cookies){
 		
 		                <%--For displaying Next link --%>
 		                <c:if test="${currentPage lt noOfPages}">
-		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/abc/AppointmentProcess/viewAllAppointments&page=${currentPage + 1}">Next</a></td>
+		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/scholar/AppointmentProcess/viewAllAppointments&page=${currentPage + 1}">Next</a></td>
 		                </c:if>
                 </div>
 		</div>

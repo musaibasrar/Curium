@@ -21,6 +21,7 @@ public class UserAuthenticationResponseDto {
     private String superUserAuth;
     private Integer userLoginId;
     private String attendanceStatus;
+    private String subBranchName;
     @Builder.Default
     private boolean success = false;
 }

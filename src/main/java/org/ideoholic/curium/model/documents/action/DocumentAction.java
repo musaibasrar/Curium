@@ -88,7 +88,9 @@ public class DocumentAction {
 
 	@GetMapping("/printBonafide")
 	public String printBonafide() {
-		return "bonafideprint";
+		if(documentActionAdapter.printBonafide()){
+			return "bonafideprint";
+		}
 	}
 
 	@GetMapping("/studentsDetailsBonafide")

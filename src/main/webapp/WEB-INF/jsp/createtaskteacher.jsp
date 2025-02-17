@@ -26,15 +26,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/scholar/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/scholar/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/scholar/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/scholar/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.button.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -160,7 +160,7 @@
         <script type="text/javascript">
             function deleteRecords(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/StudentProcess/archiveMultiple";
+                form1.action="/scholar/StudentProcess/archiveMultiple";
                form1.submit();
            }
             function filter2 (phrase, _id)
@@ -252,7 +252,7 @@
             
             function saveTask(){
                 var form1=document.getElementById("form1");
-               form1.action="/abc/JobProcess/addTask";
+               form1.action="/scholar/JobProcess/addTask";
                form1.submit();
             }
             
@@ -445,7 +445,7 @@
 						var appointmentDate = appointmentdate.value;
 						var appointmentTime = appointmenttime.value;
 		            	var form1 = document.getElementById("form1");
-		        		form1.action = "/abc/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
+		        		form1.action = "/scholar/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
 		        		form1.method = "POST";
 		        		form1.submit();
 		            }
@@ -455,7 +455,7 @@
 					var assignto = assignto.value;					
 					var form1 = document.getElementById("form1");
 					
-		    		form1.action = "/abc/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
+		    		form1.action = "/scholar/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
 		    		form1.method = "POST";
 		    		form1.submit();
 		        }
@@ -518,7 +518,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

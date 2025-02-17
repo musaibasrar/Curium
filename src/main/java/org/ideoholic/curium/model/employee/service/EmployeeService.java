@@ -133,7 +133,11 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
-		employee.setTeacherexternalid(branchCode);
+		if(Integer.parseInt(branchId)==2) {
+			employee.setTeacherexternalid(branchCode);
+		}else if(Integer.parseInt(branchId)==3) {
+			employee.setTeacherexternalid("3"+branchCode);
+		}
 		employee.setBranchid(Integer.parseInt(branchId));
 
 		if(new EmployeeDAO().create(employee)){

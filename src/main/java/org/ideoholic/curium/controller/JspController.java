@@ -626,4 +626,9 @@ public class JspController {
 		return "daybook";
 	}
 	
+	@GetMapping("/feesCollectionDetailsAdmin")
+	public String feesCollectionDetailsAdmin() {
+		return "feesCollectionDetailsAdmin";
+	}
+	
 }

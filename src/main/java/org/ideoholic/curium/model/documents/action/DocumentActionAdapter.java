@@ -197,5 +197,10 @@ public class DocumentActionAdapter {
 		ResultResponse resultResponse=documentService.downlaodFile();
 		return resultResponse.isSuccess();
 	}
+	
+	public boolean printBonafide() {
+		request.setAttribute("birthdate", request.getParameter("birthdate"));
+		return true;
+	}
 
 }

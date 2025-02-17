@@ -151,7 +151,8 @@ public class UserActionAdapter {
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
         httpSession.setAttribute("todaysAttendance", responseDto.getAttendanceStatus());
-
+        httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        
         return responseDto.isSuccess();
     }
 
@@ -173,7 +174,8 @@ public class UserActionAdapter {
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute("superuserAuth", responseDto.getSuperUserAuth());
         httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
-
+        httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        
         return responseDto.isSuccess();
     }
 

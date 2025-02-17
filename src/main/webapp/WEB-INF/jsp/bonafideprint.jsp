@@ -180,7 +180,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -201,7 +201,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/abc/images/abc.png">
+			<img border="0" style="vertical-align: text-bottom;height: 152px;width: 100px;" alt="logo" src="/scholar/images/scholar.png">
 			</td>
 				<td >
 					<br>
@@ -287,10 +287,9 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+					 as per School record is
+					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span> as per ${birthdate}
 					</h3>
-					
 				</td>
 				
 
@@ -327,7 +326,8 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 			<tr>
-			<td></td>
+			<td ><input name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;text-align:center;"
+									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
 			</tr>
 		<tr>
 			<td style="padding-left: 10px;">Date</td>	
