@@ -25,7 +25,7 @@ public class UserApiActionImpl implements UserApiAction {
         return ResponseEntity.ok("sessiontimeout");
     }
 
-    public ResponseEntity<SearchByDateResponseDto> searchByDate(SearchByDateDto dto, String strBranchId, Object dayOne, Object dateFrom, Object dateTo) {
+    public ResponseEntity<SearchByDateResponseDto> searchByDate(SearchByDateDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
         SearchByDateResponseDto result = userService.searchByDate(dto, strBranchId, dayOne, dateFrom, dateTo);
         return ResponseEntity.ok(result);
     }

@@ -5,11 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
-import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
 import org.ideoholic.curium.model.user.dto.DashBoardResponseDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateDto;
@@ -42,8 +39,12 @@ public class UserActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
+        
+        String dayOne = httpSession.getAttribute("dayone") == null ? null : httpSession.getAttribute("dayone").toString();
+        String dayFrom = httpSession.getAttribute("datefrom") == null ? null : httpSession.getAttribute("dayone").toString();;
+        String dateTo = httpSession.getAttribute("dateto") == null ? null : httpSession.getAttribute("dayone").toString();;
 
-        SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
+        SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), dayOne, dayFrom, dateTo);
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());

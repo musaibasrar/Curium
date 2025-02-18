@@ -1,6 +1,29 @@
 package org.ideoholic.curium.model.user.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -15,33 +38,26 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.*;
+import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
+import org.ideoholic.curium.model.user.dto.DashBoardResponseDto;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.user.dto.SearchByDateDto;
+import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
+import org.ideoholic.curium.model.user.dto.SearchByParentDto;
+import org.ideoholic.curium.model.user.dto.UserAuthenticationDto;
+import org.ideoholic.curium.model.user.dto.UserAuthenticationResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.Map.Entry;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -51,28 +67,18 @@ public class UserService {
     private AdminService adminService;
 
     @Autowired
-    private StandardService standardService;
-
-    @Autowired
-    private SmsService smsService;
+    private FeesCollectionService feesCollectionService;
 
     @Autowired
     private UserDAO userDAO;
 
     @Autowired
     private HttpServletRequest request;
+
     @Autowired
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
-
-    //TODO: After FessCollection becomes @Service, Autowire this and remove the postConstruct method
-    private FeesCollectionService feesCollectionService;
-
-    @PostConstruct
-    private void postConstruct() {
-        feesCollectionService = new FeesCollectionService(request, response, httpSession, standardService, smsService);
-    }
 
     public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
         UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
@@ -554,7 +560,7 @@ public class UserService {
         return result;
     }
 
-    public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, Object dayOne, Object dateFrom, Object dateTo) {
+    public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
         SearchByDateResponseDto result = SearchByDateResponseDto.builder().build();
 
         List<Receiptinfo> feesDetailsList = new ArrayList<>();
