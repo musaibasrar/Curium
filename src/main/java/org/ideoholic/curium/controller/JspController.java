@@ -625,6 +625,11 @@ public class JspController {
 	public String getDayBook() {
 		return "daybook";
 	}
+
+	@GetMapping("/bookhistory")
+	public String getbookhistory() {
+		return "bookhistory";
+	}
 	
 	@GetMapping("/feesCollectionDetailsAdmin")
 	public String feesCollectionDetailsAdmin() {
