@@ -5,25 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ideoholic.curium.model.std.dto.Classsec;
-
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class FeesDashboardResponseDto {
-    private Long totalFeesAmount;
-    private Long totalPaidAmount;
-    private Long totalDueAmount;
-    private String branchIdName;
+public class CancelFeesReceiptResponseDto {
+    private String feesDetailsBranchName;
     private String branchName;
-    private Long sumOfFeesDaily;
-    private Long sumOfFeesMonthly;
-    private String currentMonth;
-    private List<Classsec> classsecList;
+    private long sumOfFees;
 
     @Builder.Default
     private boolean success = false;

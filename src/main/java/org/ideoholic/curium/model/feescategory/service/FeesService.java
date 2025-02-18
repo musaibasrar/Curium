@@ -138,10 +138,10 @@ public class FeesService {
         }
 
 
-		public ParentListResponseDto viewAllStudentsList(String branchid) {
+		public ParentListResponseDto viewAllStudentsList(String branchId) {
 			ParentListResponseDto parentResponseDto = new ParentListResponseDto();
 			try {
-				List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(branchid));
+				List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for (Object[] parentdetails : list) {

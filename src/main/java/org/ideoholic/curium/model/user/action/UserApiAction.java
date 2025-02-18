@@ -25,7 +25,7 @@ public interface UserApiAction {
 	public ResponseEntity<String> sessionTimeOut();
 
 	@PostMapping("/searchByDate")
-	public ResponseEntity<SearchByDateResponseDto> searchByDate(@RequestBody SearchByDateDto dto, @RequestHeader(value = Constants.BRANCHID) String strBranchId, @RequestHeader(value = "dayOne") Object dayOne, @RequestHeader(value = "dateFrom") Object dateFrom, @RequestHeader(value = "dateTo") Object dateTo);
+	public ResponseEntity<SearchByDateResponseDto> searchByDate(@RequestBody SearchByDateDto dto, @RequestHeader(value = Constants.BRANCHID) String strBranchId, @RequestHeader(value = "dayOne") String dayOne, @RequestHeader(value = "dateFrom") String dateFrom, @RequestHeader(value = "dateTo") String dateTo);
 
 	@PostMapping("/advanceSearchByParents")
 	public ResponseEntity<ResultResponse> advanceSearchByParents(@RequestBody SearchByParentDto dto, @RequestHeader(value = Constants.BRANCHID) String branchId);
@@ -43,7 +43,7 @@ public interface UserApiAction {
 	public ResponseEntity<UserAuthenticationResponseDto> authenticateUser(@RequestBody UserAuthenticationDto dto);
 	
 	@GetMapping("/multiUser")
-	public ResponseEntity<UserAuthenticationResponseDto> authenticateMultiUser(@RequestHeader(value = Constants.USERNAME) String strUserName, @RequestHeader(value = "superuserAuth") String strSuperUserAuth, @RequestHeader(value = Constants.BRANCHID) String strBranchId);
+	public ResponseEntity<UserAuthenticationResponseDto> authenticateMultiUser(@RequestHeader(value = Constants.USERNAME) String strUserName, @RequestHeader(value = Constants.SUPER_USER_AUTH) String strSuperUserAuth, @RequestHeader(value = Constants.BRANCHID) String strBranchId);
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity logOutUser();
