@@ -18,210 +18,62 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@RestController
 @RequestMapping({ "/api/v1/messSuppliersProcess", "/api/v1/supplierBalance" })
-public class MessSuppliersApiAction {
+public interface MessSuppliersApiAction {
     
-    @Autowired
-    private MessSuppliersService messSuppliersService;
-
-    @Autowired
-    private AccountService accountService;
-
-
 
     @PostMapping("/printSearchSupplierPaymentDetails")
-    public ResponseEntity printSearchSupplierPaymentDetails(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId) {
-        //TODO: Need to fix this after annotating AccountService with Service
-        printSearchJournalEntries(dto, branchId);
-
-        return ResponseEntity.ok().build();
-    }
-    private ResponseEntity<SearchJournalEntriesResponseDto> printSearchJournalEntries(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId){
-
-        SearchJournalEntriesResponseDto result = accountService.printSearchJournalEntries(dto, branchId);
-        return ResponseEntity.ok(result);
-    }
-
+    public ResponseEntity printSearchSupplierPaymentDetails(@RequestBody PrintSearchJournalEntriesDto dto, @RequestHeader(value = "branchid") String branchId);
+    
+    
     @PostMapping("/searchSupplierPaymentDetails")
-    public ResponseEntity<ResultResponse> searchSupplierPaymentDetails(@RequestHeader(value = "branchid") String branchId, @RequestBody SearchLedgerEntriesDto dto) {
-        // TODO: Need to fix this after annotating AccountService with Service.
-        searchJournalEntries(dto, branchId);
-
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
-        return ResponseEntity.ok(result);
-    }
-
-    private ResponseEntity<SearchLedgerEntriesResponseDto> searchJournalEntries(@RequestBody SearchLedgerEntriesDto searchLedgerEntriesDto, @RequestHeader(value = "branchid") String branchId){
-
-        SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto, branchId);
-        return ResponseEntity.ok(searchLedgerEntriesResponseDto);
-    }
-
+    public ResponseEntity<ResultResponse> searchSupplierPaymentDetails(@RequestBody SearchLedgerEntriesDto dto,@RequestHeader(value = "branchid") String branchId);
+   
     @GetMapping("/supplierPaymentReport")
-    public ResponseEntity<ResultResponse> supplierPaymentReport(@RequestHeader(value = "branchid") String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
-        return ResponseEntity.ok(result);
-    }
+    public ResponseEntity<ResultResponse> supplierPaymentReport(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/printSuppliersBalance")
-    public ResponseEntity<ResultResponse> printSuppliersBalance(@RequestHeader(value = "branchid") String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
-        return ResponseEntity.ok(result);
-    }
+    public ResponseEntity<ResultResponse> printSuppliersBalance(@RequestHeader(value = "branchid") String branchId);
 
     @GetMapping("/balanceSuppliers")
-    public ResponseEntity<ResultResponse> balanceSuppliers(@RequestHeader(value = "branchid") String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
-        return ResponseEntity.ok(result);
-    }
+    public ResponseEntity<ResultResponse> balanceSuppliers(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/printSupplierPayment")
-    public ResponseEntity<SupplierPaymentDto> printSupplierPayment(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-    }
+    public ResponseEntity<SupplierPaymentDto> printSupplierPayment(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page);
 
     @PostMapping("/cancelCheque")
-    public ResponseEntity<SupplierPaymentDto> cancelCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse cancelChequeResult = messSuppliersService.cancelCheque(dto, branchId, userId);
-        paymentDto.setResult(cancelChequeResult.isSuccess());
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-
-    }
+    public ResponseEntity<SupplierPaymentDto> cancelCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page);
+       
 
     @PostMapping("/clearedCheque")
-    public ResponseEntity<SupplierPaymentDto> clearedCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse cancelChequeResult = messSuppliersService.clearedCheque(dto, branchId, userId);
-        paymentDto.setResult(cancelChequeResult.isSuccess());
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-
-    }
-
+    public ResponseEntity<SupplierPaymentDto> clearedCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page);
+       
     @PostMapping("/deliveredCheque")
-    public ResponseEntity<SupplierPaymentDto> deliveredCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse cancelChequeResult = messSuppliersService.deliveredCheque(dto, branchId);
-        paymentDto.setResult(cancelChequeResult.isSuccess());
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-    }
+    public ResponseEntity<SupplierPaymentDto> deliveredCheque(@RequestBody ChequeDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page);
+       
 
     @PostMapping("/issueCheque")
-    public ResponseEntity<SupplierPaymentDto> issueCheque(@RequestBody ChequeDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse cancelChequeResult = messSuppliersService.issueCheque(dto, branchId, userId);
-        paymentDto.setResult(cancelChequeResult.isSuccess());
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-    }
-
+    public ResponseEntity<SupplierPaymentDto> issueCheque(@RequestBody ChequeDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestParam(value = "page") String page);
+       
     //TODO : This need refactoring in order to return JSON Response.
     @GetMapping("/getSupplierBalance")
-    public ResponseEntity getSupplierBalance(@RequestHeader(value = "supplierid") String supplierId) {
-        try {
-            messSuppliersService.getSupplierBalance(supplierId);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return ResponseEntity.ok().build();
-    }
+    public ResponseEntity getSupplierBalance(@RequestHeader(value = "supplierid") String supplierId);
 
     @GetMapping("/paymentSuppliers")
-    public ResponseEntity<SupplierPaymentDto> paymentSuppliers(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
-        SupplierPaymentDto paymentDto = new SupplierPaymentDto();
-
-        ResultResponse suppliersDetailsResult = messSuppliersService.viewSuppliersDetails(branchId);
-        paymentDto.setMessSuppliersList(suppliersDetailsResult.getResultList());
-
-        PaymentDetailsResponseDto suppliersPaymentResult = messSuppliersService.viewSuppliersPaymentDetails(page, branchId);
-        paymentDto.setSupplierPaymentlist(suppliersPaymentResult.getSupplierPaymentList());
-        paymentDto.setNoOfPages(suppliersPaymentResult.getNoOfPages());
-        paymentDto.setPage(suppliersPaymentResult.getPage());
-
-        return ResponseEntity.ok(paymentDto);
-    }
-
+    public ResponseEntity<SupplierPaymentDto> paymentSuppliers(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page);
+       
     @PostMapping("/deleteSuppliers")
-    public ResponseEntity<ResultResponse> deleteSuppliers(@RequestBody MessIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
-        messSuppliersService.deleteMultipleSuppliers(dto);
-        return viewSuppliers(branchId);
-    }
+    public ResponseEntity<ResultResponse> deleteSuppliers(@RequestBody MessIdsDto dto, @RequestHeader(value = "branchid") String branchId);
+       
 
     @PostMapping("/updateSuppliers")
-    public ResponseEntity<ResultResponse> updateSuppliers(@RequestBody MessIdsDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ResultResponse> updateSuppliers(@RequestBody MessIdsDto dto, @RequestHeader(value = "branchid") String branchId);
 
-        messSuppliersService.updateSuppliers(dto);
-        return viewSuppliers(branchId);
-    }
 
     @GetMapping("/viewSuppliers")
-    public ResponseEntity<ResultResponse> viewSuppliers(@RequestHeader(value = "branchid") String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
-        if(result.isSuccess()){
-            return ResponseEntity.ok(result);
-        }
-        else
-            throw new CustomResponseException(CustomErrorMessage.ERROR);
-    }
+    public ResponseEntity<ResultResponse> viewSuppliers(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/addSuppliers")
-    public ResponseEntity<SuppliersDetailsResponseDto> addSuppliers(@RequestBody SuppliersDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId) {
+    public ResponseEntity<SuppliersDetailsResponseDto> addSuppliers(@RequestBody SuppliersDetailsDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId);
 
-        SuppliersDetailsResponseDto responseDto = messSuppliersService.addSupplierDetails(dto, branchId, userId);
-        ResultResponse result = viewSuppliers(branchId).getBody();
-        responseDto.setMessSuppliersList(result.getResultList());
-
-        return ResponseEntity.ok(responseDto);
-    }
-}
+       }
