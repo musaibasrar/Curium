@@ -16,6 +16,20 @@
 
 <style type="text/css">
 <!--
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/lilyrose/images/lilyrose.jpg") no-repeat center;
+    background-size: contain;
+    opacity: 0.1; /* Adjust transparency */
+    z-index: -1;
+}
+
+
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
@@ -62,7 +76,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -236,12 +250,13 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
                         <c:forEach items="${studentList}" var="Parents">
                         
+                                                
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         
                         <table width="100%" style="border-collapse: collapse;">
 					
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					<td class="dataTextBoldCenter" style="width: 100%;font-size:25px;">Hall Ticket<br>${examname}
 					</td>
 				</tr>
 				<tr>
@@ -256,18 +271,18 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
-         <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+         <table style="page-break-inside: avoid; border-collapse: collapse; width: 100%;">
                         		
 			<tr>
-				<td><img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
-				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<td style="width: 20%; text-align: left; vertical-align: middle;"><img src="/lilyrose/images/lilyrose.jpg" width="100" height="100"/></td>
+				<td style="width: 60%; text-align: center; vertical-align: middle;">
+				<label style="color:red" class="dataTextBoldCenter" style="text-transform: uppercase;font-size:35px;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 15px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 15px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine" style="font-size: 15px;">${branchaddress}</label><br>
+				<label class="addressLine" style="font-size: 15px;">Contact: ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+				<td style="width: 20%; text-align: right; vertical-align: middle;"><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
 		</table>
 
@@ -282,19 +297,20 @@ for(Cookie cookie : cookies){
 			<table style=" border-collapse: collapse;width: 100%;">
 											
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <td class="namedetails" style="font-size:20px;"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;color:red"><c:out value="${Parents.student.name}"/></label></td>
+                                <td class="namedetails" style="font-size:20px;"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label style="color:red;">
                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
-							</c:forEach>
+							</c:forEach></label>
                                 </td>
                                 
                              </tr>
                              
                              
                              <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
+				<td class="namedetails" style="font-size:20px;"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;color:red"><c:out value="${Parents.fathersname}"/></label></td>	
+                                <td class="namedetails" style="font-size:20px;"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
@@ -307,23 +323,23 @@ for(Cookie cookie : cookies){
                             </table>
                             
                             <table style=" border-collapse: collapse;width: 100%;">
-                            	<thead>
+                            	<thead style="background-color:#ac988d;">
                             	<tr>
-                            	<th class="subjectdetails">Date</th>
-                            	<th class="subjectdetails">Day</th>
-                            	<th class="subjectdetails">Subject</th>
-                            	<th class="subjectdetails">Time</th>
-                            	<th class="subjectdetails">Examiner's Sign</th>
+                            	<th class="subjectdetails" style="font-size:25px;">Date</th>
+                            	<th class="subjectdetails" style="font-size:25px;">Day</th>
+                            	<th class="subjectdetails" style="font-size:25px;">Subject</th>
+                            	<th class="subjectdetails" style="font-size:25px;">Time</th>
+                            	<th class="subjectdetails" style="font-size:25px;">Examiner's Sign</th>
                             	</tr>
                             	</thead>
                             	<tbody>
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
-                                <td class="subjectdetails"></td>
+                                <td class="subjectdetails" style="font-size:25px;"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
+                                <td class="subjectdetails" style="font-size:25px;"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
+                                <td class="subjectdetails" style="font-size:25px;"><c:out value="${examschedulelist.subject}"/></td>
+                                <td class="subjectdetails" style="font-size:25px;"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
+                                <td class="subjectdetails" style="font-size:25px;"></td>
                                 </tr>
                                  </c:forEach>
                        
@@ -338,23 +354,43 @@ for(Cookie cookie : cookies){
 							<td><br><br><br></td>
 						</tr> -->
 						<tr>
-							<td></td>
+							<td><br></td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
+						<tr>
+						<td><br></td>
+						</tr>
 				<tr>
 				<td></td>
-				<td align="left">Accountant</td>	
-					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+				<td align="left" style="font-size:25px;">Class Teacher</td>	
+					<td align="centre" style="font-size:25px;">&emsp;</td>
+					<td align="centre" style="font-size:25px;">Head Master</td>
 					</tr>
                     
 		</TABLE>
+		 <table style="text-align:left;font-size:25px;">
+                        <tr>
+                        <td>Note:</td>
+                        </tr>
+                         <tr>
+                        <td>1) Make your child to memorize the given revision daily. </td>
+                        </tr>
+                         <tr>
+                        <td>2) In case postponed exam continues as per schedule,</td>
+                        </tr>
+                         <tr>
+                        <td>postponed paper will be after exam</td>
+                        </tr>
+                        
+                        </table>  
 		</div>
 		<br>
-                                 
+                               
                         </c:forEach>
+                        
+                       
 			
 	</form>
 	
