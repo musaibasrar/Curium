@@ -502,7 +502,7 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
 					<li><a href="#tabs-4">Additional Details</a></li>
-					<li><a href="#tabs-6">Bank Details</a></li>
+					<!-- <li><a href="#tabs-6">Bank Details</a></li> -->
 				</ul>
 
 
@@ -879,7 +879,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-							<tr>
+							<%-- <tr>
 								<td class="alignLeft">Belong to BPL &nbsp;</td>
 								<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -904,9 +904,9 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Bhagyalakshmi Bond Number
 								&nbsp;</td>
 								<td>
 										<input
@@ -1010,8 +1010,31 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
+						<tr>
+							<td class="alignLeft">Referred By
+								&nbsp;</td>
+								<td>
+										<input
+									name="crecord" type="text" class="myclass" value="${student.crecord}"
+									id="crecord" size="30">
 
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Concession Approved By<br> (Name & Reason)*&nbsp;</td>
+							<td><label> <input
+									name="subsequentprogress" type="text" class="myclass" value="${student.subsequentprogress}"
+									id="subsequentprogress" size="30">
 
+							</label></td>
+						</tr>
+												
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td><label> <input name="createddate"
@@ -1077,13 +1100,108 @@ for(Cookie cookie : cookies){
 							
 						<tr>
 
-							<td></td>
+							<td><br/></td>
 
 						</tr>
 						<tr>
 
-							<td></td>
+							<td><br/></td>
 
+						</tr>
+						
+						<tr>
+
+							<td class="alignLeft">2 Copies of Birth Certificate &nbsp;</td>
+							<td height="30">
+									Yes<input	type="radio" value="1" name="bankname"  ${student.bankname == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="bankname" ${student.bankname == '0' ? 'checked' : ''}/>
+							</td>
+
+							<td class="alignLeft" style="padding-left: 20px;">2 Copies of Aadhar Card&nbsp;</td>
+
+							<td align="left">
+								Yes<input	type="radio" value="1" name="bankifsc"  ${student.bankifsc == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="bankifsc" ${student.bankifsc == '0' ? 'checked' : ''}/>
+							</label></td>
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr>
+
+							<td class="alignLeft">2 Passport Size Photograph (Student)&nbsp;</td>
+							<td height="30">
+									Yes<input	type="radio" value="1" name="accno"  ${student.accno == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="accno" ${student.accno == '0' ? 'checked' : ''}/>
+							</td>
+
+							<td class="alignLeft" style="padding-left: 20px;">2 Passport Size Photograph (Father)&nbsp;</td>
+
+							<td align="left">
+								Yes<input	type="radio" value="1" name="bankbranch"  ${student.bankbranch == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="bankbranch" ${student.bankbranch == '0' ? 'checked' : ''}/>
+							</label></td>
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr>
+
+							<td class="alignLeft">Passport Size Photograph (Mother)&nbsp;</td>
+							<td height="30">
+									Yes<input	type="radio" value="1" name="urbanrural"  ${student.urbanrural == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="urbanrural" ${student.urbanrural == '0' ? 'checked' : ''}/>
+							</td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Cast (If Applicable)&nbsp;</td>
+
+							<td align="left">
+								Yes<input	type="radio" value="1" name="semester"  ${student.semester == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="semester" ${student.semester == '0' ? 'checked' : ''}/>
+							</label></td>
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+
+							<td class="alignLeft">Leaving Certificate (TC)&nbsp;</td>
+							<td height="30">
+									Yes<input	type="radio" value="1" name="belongtobpl"  ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;
+									No<input type="radio" value="0" name="belongtobpl" ${student.belongtobpl == '0' ? 'checked' : ''}/>
+							</td>
+							</tr>
+							
+							
+							<tr>
+							<td></td>
+						</tr>
+						<tr>
+
+							<td></td>
 						</tr>
 
 						<tr>
@@ -1727,10 +1845,10 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied&nbsp;</td>
-							<td><label> <input name="subsequentprogress"
+							<td><label> <input name="bplcardno"
 									type="text" class="myclass" style="text-transform:capitalize;"
-									value="<c:out default="" value="${student.subsequentprogress}" />"
-									id="subsequentprogress" size="30" data-validate="validate(required)">
+									value="<c:out default="" value="${student.bplcardno}" />"
+									id="bplcardno" size="30" data-validate="validate(required)">
 
 							</label></td>
 
@@ -1842,7 +1960,7 @@ for(Cookie cookie : cookies){
 
 				</div>
 				
-				<div id="tabs-6">
+				<%-- <div id="tabs-6">
 
 							<div>
 								<table width="30%" align="center">
@@ -1934,7 +2052,7 @@ for(Cookie cookie : cookies){
 
 							</div>
 
-						</div>
+						</div> --%>
 	
 						</div>
 						</div>

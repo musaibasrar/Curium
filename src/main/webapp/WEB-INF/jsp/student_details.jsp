@@ -579,7 +579,7 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
-                        <tr>
+                        <%-- <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
                             </td>
                             <td width="25%" class="tablerows" >
@@ -598,7 +598,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.bplcardno}" />
                             </td>                        
                         
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Bag No.
@@ -699,7 +699,122 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
+                        <tr>
+                        
+                         <td  width="25%"  class="alignLeft" height="50" >Referred By
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.crecord}" />
+                                
+                            </td>
+   
+                            <td  width="25%"  class="alignLeft" height="50">Concession Approved By<br> (Name & Reason)*
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.subsequentprogress}" />
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
+                        
+                         <td  width="25%"  class="alignLeft" height="50" >2 Copies of Birth Certificate
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.bankname =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.bankname == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+           						 
+                            </td>
+   
+                            <td  width="25%"  class="alignLeft" height="50">2 Copies of Aadhar Card
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:if test="${(student.bankifsc =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.bankifsc == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
+                        
+                         <td  width="25%"  class="alignLeft" height="50" >2 Passport Size Photograph (Student)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.accno =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.accno == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+           						 
+                            </td>
+   
+                            <td  width="25%"  class="alignLeft" height="50">Passport Size Photograph (Father)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:if test="${(student.bankbranch =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.bankbranch == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
+                        
+                         <td  width="25%"  class="alignLeft" height="50" >Passport Size Photograph (Mother)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.urbanrural =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.urbanrural == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+           						 
+                            </td>
+   
+                            <td  width="25%"  class="alignLeft" height="50">Cast (If Applicable)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:if test="${(student.semester =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.semester == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                
+                            </td>
+                        </tr>
+                        
                          <tr>
+                         <td  width="25%"  class="alignLeft" height="50">Leaving Certificate (TC)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:if test="${(student.belongtobpl =='1')}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.belongtobpl == '0')}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                
+                            </td>
                             <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
                             <td width="25%" class="tablerows">
@@ -823,7 +938,7 @@ for(Cookie cookie : cookies){
                             
                             <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.subsequentprogress}" />
+                                <c:out default="" value="${student.bplcardno}" />
                             </td>
                         </tr>
                         
