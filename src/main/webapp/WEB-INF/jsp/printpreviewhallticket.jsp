@@ -76,7 +76,7 @@ body::before {
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 25px;
+	font-size: 40px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -274,7 +274,7 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid; border-collapse: collapse; width: 100%;">
                         		
 			<tr>
-				<td style="width: 20%; text-align: left; vertical-align: middle;"><img src="/lilyrose/images/lilyrose.jpg" width="100" height="100"/></td>
+				<td style="width: 20%; text-align: left; vertical-align: middle;"><img src="/lilyrose/images/lilyrose.jpg" width="110" height="110"/></td>
 				<td style="width: 60%; text-align: center; vertical-align: middle;">
 				<label style="color:red" class="dataTextBoldCenter" style="text-transform: uppercase;font-size:35px;">${branchname}</label><br>
 				<label class="addressLine" style="font-size: 15px;">Preprimary | Primary | High School<br></label>
@@ -330,7 +330,7 @@ for(Cookie cookie : cookies){
                             	<th class="subjectdetails" style="font-size:25px;">Day</th>
                             	<th class="subjectdetails" style="font-size:25px;">Subject</th>
                             	<th class="subjectdetails" style="font-size:25px;">Time</th>
-                            	<th class="subjectdetails" style="font-size:25px;">Examiner's Sign</th>
+                            	<th class="subjectdetails" style="font-size:17px;">Examiner's<br> Sign</th>
                             	</tr>
                             	</thead>
                             	<tbody>
@@ -339,7 +339,7 @@ for(Cookie cookie : cookies){
                                 <td class="subjectdetails" style="font-size:25px;"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
                                 <td class="subjectdetails" style="font-size:25px;"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
                                 <td class="subjectdetails" style="font-size:25px;"><c:out value="${examschedulelist.subject}"/></td>
-                                <td class="subjectdetails" style="font-size:25px;"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
+                                <td class="subjectdetails" style="font-size:20px;"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails" style="font-size:25px;"></td>
                                 </tr>
                                  </c:forEach>
@@ -351,11 +351,11 @@ for(Cookie cookie : cookies){
                             <TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
-						<!-- <tr>
+						<tr>
 							<td><br><br><br></td>
 						</tr>
 						<tr>
-							<td><br></td> -->
+							<td><br></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -363,12 +363,12 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td><br></td>
 						</tr>
-				<!-- <tr>
+				<tr>
 				<td></td>
 				<td align="left" style="font-size:25px;">Class Teacher</td>	
 					<td align="centre" style="font-size:25px;">&emsp;</td>
 					<td align="centre" style="font-size:25px;">Head Master</td>
-					</tr> -->
+					</tr>
                     
 		</TABLE>
 		 <table style="text-align:left;font-size:25px;">
