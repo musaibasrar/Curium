@@ -280,7 +280,8 @@ for(Cookie cookie : cookies){
 				<label class="addressLine" style="font-size: 15px;">Preprimary | Primary | High School<br></label>
 				<label class="addressLine" style="font-size: 15px;">Recognised by Govt of Karnataka<br></label>
 				<label class="addressLine" style="font-size: 15px;">${branchaddress}</label><br>
-				<label class="addressLine" style="font-size: 15px;">Contact: ${branchcontact}</label>
+				<label class="addressLine" style="font-size: 15px;">Contact:<c:set var="splitArray" value="${fn:split(branchcontact, ',')}" />
+				 ${splitArray[1]}</label>
 				</td>
 				<td style="width: 20%; text-align: right; vertical-align: middle;"><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -352,9 +353,9 @@ for(Cookie cookie : cookies){
 
 						<!-- <tr>
 							<td><br><br><br></td>
-						</tr> -->
+						</tr>
 						<tr>
-							<td><br></td>
+							<td><br></td> -->
 							<td></td>
 							<td></td>
 							<td></td>
@@ -362,12 +363,12 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td><br></td>
 						</tr>
-				<tr>
+				<!-- <tr>
 				<td></td>
 				<td align="left" style="font-size:25px;">Class Teacher</td>	
 					<td align="centre" style="font-size:25px;">&emsp;</td>
 					<td align="centre" style="font-size:25px;">Head Master</td>
-					</tr>
+					</tr> -->
                     
 		</TABLE>
 		 <table style="text-align:left;font-size:25px;">
@@ -378,10 +379,16 @@ for(Cookie cookie : cookies){
                         <td>1) Make your child to memorize the given revision daily. </td>
                         </tr>
                          <tr>
-                        <td>2) In case postponed exam continues as per schedule,</td>
+                        <td>2) In case postponed, exam continues as per schedule,</td>
                         </tr>
                          <tr>
                         <td>postponed paper will be after exam</td>
+                        </tr>
+                         <tr>
+                        <td>3)Holidays are from 21/03/2025 March to 31/05/2025 May</td>
+                        </tr>
+                         <tr>
+                        <td>4)Parent-Teacher meeting will be on 5/04/2025 April </td>
                         </tr>
                         
                         </table>  
