@@ -16,18 +16,7 @@
 
 <style type="text/css">
 <!--
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("/lilyrose/images/lilyrose.jpg") no-repeat center;
-    background-size: contain;
-    opacity: 0.1; /* Adjust transparency */
-    z-index: -1;
-}
+
 
 
 .headerText {
@@ -219,7 +208,32 @@ span{
     padding: 8px;
 }
 
+
+
     </style>
+     <style>
+     .background-div {
+    position: relative;
+    //width: 400px;
+    //height: 300px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+} 
+
+.background-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/lilyrose/images/lilyrose.jpg') no-repeat center;
+    background-size: contain;
+    opacity: 0.1; /* Adjust opacity as needed */
+    z-index: -1; /* Keep it behind the content */
+}
+    
+  </style>
 	<script type="text/javascript">
                        
 		window.onload = function(){
@@ -251,7 +265,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${studentList}" var="Parents">
                         
                                                 
-                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+                        <div class="background-div" style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         
                         <table width="100%" style="border-collapse: collapse;">
 					
