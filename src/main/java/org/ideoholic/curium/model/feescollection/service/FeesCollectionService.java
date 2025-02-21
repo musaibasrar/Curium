@@ -294,10 +294,10 @@ public class FeesCollectionService {
 				
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
-				paymentType = "Bank Transfer";
+				paymentType = "Bank Transfer - ACK. No.:"+ackNo;
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
 				chequeNoVoucherNarration = " cheque number: "+chequeNo+" , Amount clearance date: "+chequeDate;
-				paymentType = "Cheque";
+				paymentType = "Cheque- cheque No: "+chequeNo;
 			}
 				
 		//End Payment Details

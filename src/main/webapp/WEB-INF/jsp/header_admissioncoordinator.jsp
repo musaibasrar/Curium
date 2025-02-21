@@ -143,6 +143,7 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
+							<td>
 								<a target="leftFrame" href="/scholar/reports_admissioncoordinator"><img
 									src="/scholar/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		

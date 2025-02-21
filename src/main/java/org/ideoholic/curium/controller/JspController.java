@@ -636,4 +636,24 @@ public class JspController {
 		return "feesCollectionDetailsAdmin";
 	}
 	
+
+	@GetMapping("/index_admissioncoordinator")
+	public String getIndexAdmissionCoordinator() {
+		return "index_admissioncoordinator";
+	}
+	
+	@GetMapping("/left_admissioncoordinator")
+	public String getLeftAdmissionCoordinator() {
+		return "left_admissioncoordinator";
+	}
+	
+	@GetMapping("/header_admissioncoordinator")
+	public String getHeaderAdmissionCoordinator() {
+		return "header_admissioncoordinator";
+	}
+	
+	@GetMapping("/reports_admissioncoordinator")
+	public String getReportsAdmissionCoordinator() {
+		return "reports_admissioncoordinator";
+	}
 }

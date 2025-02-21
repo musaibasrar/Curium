@@ -22,6 +22,7 @@ public class SearchByDateResponseDto {
     private long sumOfOnlyFee;
     private long fine;
     private long misc;
+    private String feesCollectorName;
     @Builder.Default
     private boolean success = false;
 }

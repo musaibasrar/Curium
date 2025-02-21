@@ -602,6 +602,8 @@ public class UserService {
 				String fromDate = DataUtil.emptyString(dto.getFromDate());
 				String oneDay = DataUtil.emptyString(dto.getOneDay());
 				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
+				String feesCollectorWithId = DataUtil.emptyString(dto.getFeesCollector());
+				String[] feesCollector = feesCollectorWithId.split(":");
 
 				String querySub = "";
 
@@ -625,6 +627,11 @@ public class UserService {
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
 					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				}
+				
+				if(!feesCollector[0].equalsIgnoreCase("")){
+					querySub = querySub +" AND feesdetails.userid = '"+feesCollector[0]+"'" ;
+					result.setFeesCollectorName(feesCollector[1]);
 				}
 
 				queryMain = queryMain+querySub;
@@ -685,7 +692,7 @@ public class UserService {
 		
 	}
 
-	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
+	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strBranchId) {
 		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
         
@@ -697,9 +704,10 @@ public class UserService {
         		userName = strUserName;
 	        }
         
-        	if(strSuperUserAuth!=null) {
-	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
-	        }
+			/*
+			 * if(strSuperUserAuth!=null) { superUserAuth =
+			 * DataUtil.emptyString(strSuperUserAuth); }
+			 */
         
         if(userName != null) {
         	int branchId = Integer.parseInt(strBranchId);

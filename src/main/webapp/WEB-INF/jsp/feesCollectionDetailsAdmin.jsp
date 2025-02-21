@@ -666,6 +666,46 @@ for(Cookie cookie : cookies){
 						<td>&nbsp;</td>
 						</tr>
 						
+						<tr>
+							<td width="20%" class="alignRight">Mode of Payment &nbsp;&nbsp;</td>
+							<td ><label> <select name="modeofpayment"
+									id="modeofpayment" style="width: 240px">
+										<option selected></option>
+										<option value="Bank Transfer">Bank</option>
+										<option value="Cash">Cash</option>
+								</select>
+
+							</label></td>
+							
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;Select User</td>
+							<td ><label> <select name="feescollector"
+									id="feescollector" style="width: 240px">
+										<option selected></option>
+										<c:if test="${branchid eq 2}">
+											<option value="11:Imran">Imran</option>
+											<option value="13:Sameer">Sameer</option>
+										</c:if>
+										<c:if test="${branchid eq 3}">
+											<option value="12:Imran">Imran</option>
+											<option value="14:Sameer">Sameer</option>
+										</c:if>
+										<c:if test="${branchid eq 4}">
+											<option value="15:Inayat">Inayat</option>
+										</c:if>
+										
+								</select>
+							</label></td>
+							
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
 						<!-- <tr>
 							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
 							<td ><label> <select name="selectedbranchid"
@@ -706,6 +746,10 @@ for(Cookie cookie : cookies){
 					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
+					<c:if test="${feescollectorname != null}">
+    							<label style="color: #EB6000;">User :</label>${feescollectorname}
+							</c:if>
+							<input type="hidden" name="feescollectorname" id="feescollectorname" value="${feescollectorname}"> 
 					
 					</td>
 				</tr>

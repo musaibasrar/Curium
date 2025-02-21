@@ -45,7 +45,8 @@ public class UserActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
-
+        dto.setFeesCollector(request.getParameter("feescollector"));
+        
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
@@ -57,6 +58,7 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
+        httpSession.setAttribute("feescollectorname", responseDto.getFeesCollectorName());
     }
 
     public void advanceSearchByParents() {
@@ -161,7 +163,7 @@ public class UserActionAdapter {
 
         String branchId = request.getParameter(Constants.BRANCHID);
 
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute(Constants.USERNAME).toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute(Constants.USERNAME).toString(), branchId);
         httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getAcademicYear());
         httpSession.setAttribute(Constants.USERNAME, responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
