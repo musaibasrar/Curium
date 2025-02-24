@@ -17,4 +17,9 @@ public class QueryUtil {
 	public List findByClassLimitedTo(String query, Class clazz, int limit) {
 		return entityManager.createQuery(query, clazz).setMaxResults(limit).getResultList();
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List runGivenQuery(String query, Class clazz) {
+		return entityManager.createQuery(query, clazz).getResultList();
+	}
 }
