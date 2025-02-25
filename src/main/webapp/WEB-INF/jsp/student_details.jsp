@@ -1041,11 +1041,11 @@ for(Cookie cookie : cookies){
                         
                         <tr>
 
-                            <td width="25%"  class="alignLeft" height="50">Father's Qualification</td>
+                            <td width="25%"  class="alignLeft" height="50">Father's Occupation</td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${parents.fathersqualification}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Qualification
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Occupation
                             </td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${parents.mothersqualification}" />

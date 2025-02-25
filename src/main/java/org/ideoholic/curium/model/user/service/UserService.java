@@ -626,7 +626,7 @@ public class UserService {
 				}
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
-					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+					querySub = querySub+" and feesdetails.paymenttype like '"+modeOfPayment+"%'" ;
 				}
 				
 				if(!feesCollector[0].equalsIgnoreCase("")){

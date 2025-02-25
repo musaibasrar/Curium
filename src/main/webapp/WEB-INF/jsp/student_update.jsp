@@ -1544,14 +1544,14 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Father's Qualification</td>
+							<td class="alignLeft">Father's Occupation</td>
 							<td><label> <input
 									name="fathersqualification" type="text" class="myclass" id="fathersqualification"
 									size="30" style="text-transform: capitalize;"
 									value="<c:out default="" value="${parents.fathersqualification}" />">
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Mother's Qualification;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Mother's Occupation</td>
 							<td ><label> <input
 									name="mothersqualification" type="text" class="myclass" id="mothersqualification"
 									size="30" style="text-transform:capitalize;"
