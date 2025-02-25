@@ -17,11 +17,14 @@ import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DiaryService {
 	private String BRANCHID = "branchid";
+	@Autowired
+	private diaryDAO diarysDAO;
 	/**
 	 * Size of a byte buffer to read/write file
 	 */
@@ -59,7 +62,7 @@ public class DiaryService {
 			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
 			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
 			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
-			diary = new diaryDAO().create(diary);
+			diary = diarysDAO.create(diary);
 		}
 	}
 
@@ -95,7 +98,7 @@ public class DiaryService {
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = diarysDAO.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiary(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
@@ -146,7 +149,7 @@ public class DiaryService {
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = diarysDAO.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiaryparents(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
@@ -171,7 +174,7 @@ public class DiaryService {
 				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 			}
-			new diaryDAO().deleteRecord(ids);
+			diarysDAO.deleteRecord(ids);
 		}
 	}
 	
@@ -179,7 +182,7 @@ public class DiaryService {
 		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
 		boolean result = false;
 		long id = Long.parseLong(studentIdDto.getDiaryId());
-		Diary diary = new diaryDAO().getMessage(id);
+		Diary diary = diarysDAO.getMessage(id);
 		viewDetailsOfDiaryMessageResponseDto.setDiary(diary);
 		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
 
