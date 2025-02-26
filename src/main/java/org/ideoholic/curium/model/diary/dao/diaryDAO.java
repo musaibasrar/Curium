@@ -111,26 +111,18 @@ public class diaryDAO {
 		}
 	}
 
+	@Transactional
 	public void deleteRecord(List<Integer> ids) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
-		// TODO Auto-generated method stub
+		
 		try {
-			transaction = session.beginTransaction();
+			diaryRepo.deleteAllById(ids);
 			
-			
-			Query query = session
-					.createQuery("delete from Diary as diary where diary.id IN (:ids)");
-			query.setParameterList("ids", ids);
-			
-			query.executeUpdate();
-			
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(),hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}	
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
+		}
+	
 	}
 
 	public Diary getMessage(long id) {
