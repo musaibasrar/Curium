@@ -7,7 +7,7 @@ import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/v1//departmentProcess")
+@RequestMapping("/api/v1/departmentProcess")
 public interface DepartmentApiAction {
     @PostMapping("/deleteMultiple")
     public ResponseEntity<ResultResponse> deleteMultiple(@RequestBody DeleteMultipleDto dto);
