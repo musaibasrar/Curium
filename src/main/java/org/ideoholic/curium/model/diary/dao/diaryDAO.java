@@ -2,16 +2,12 @@ package org.ideoholic.curium.model.diary.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dao.YearRepository;
 import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
@@ -125,47 +121,21 @@ public class diaryDAO {
 	
 	}
 
+	@Transactional
 	public Diary getMessage(long id) {
 		Diary diary = new Diary();
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+		Long did = new Long(id);
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from Diary as diary where diary.id="
-							+ id);
-			diary = (Diary) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(),hibernateException);
-			
-			hibernateException.printStackTrace();
+			Optional<Diary> diarymsg = diaryRepo.findById(did.intValue());
+			diary = diarymsg.orElse(null);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}finally {
 			HibernateUtil.closeSession();
 		 }
 		return diary;
 	}
-	/*public Diary getMessage(String id) {
-		Diary diary = new Diary();
-		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from Diary as diary where diary.id="
-							+ id);
-			diary = (Diary) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		 }
-		return diary;
-	}*/
-
+	
 }
