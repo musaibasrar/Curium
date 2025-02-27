@@ -578,13 +578,16 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">UDISE Number &nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"
 											id="sts" size="30" value="${student.sts}">
 
 									</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -714,41 +717,11 @@ for(Cookie cookie : cookies){
 							
 							</td>
 
+						<td class="alignLeft" style="padding-left: 20px;">Sponsored By &nbsp;</td>
+							<td ><label> <input name="guardiandetails" style="text-transform:capitalize;"
+									type="text" class="myclass" id="guardiandetails" size="36">
+							</label></td>
 
-
-							<td class="alignLeft" style="padding-left: 20px;">Admitted in class &nbsp;</td>
-
-							<td>
-							<label> 
-								<select name="classadm" id="classadm" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${classadm}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label> <label> 
-									<select name="secadm" id="secadm"
-									style="width: 75px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${secadm}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-							</select>
-							</label>
-							
-							
-							
-							</td>
 						</tr>
 
 
@@ -777,7 +750,14 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
+
+							</label></td>
+							<%-- <td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
 
 							<td><label> <select name="nationality"
 									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
@@ -786,46 +766,26 @@ for(Cookie cookie : cookies){
 										<option>Other</option>
 								</select>
 
+							</label></td> --%>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+
+
+
+						<tr>
+
+						<td class="alignLeft">Students Caste &nbsp;</td>
+								<td><label> <input name="studentscaste"
+									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
+
 							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-
-
-							<td class="alignLeft">Religion &nbsp;</td>
-
-							<td><%-- <label> <input name="religion"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.religion}" />"
-									id="religion" size="30">
-
-							</label> --%>
-							
-							<label> <select name="religion" onblur="validateNameContact();"
-									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected>${student.religion}</option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-							
-							
-							</td>
-
 
 							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
 
@@ -851,165 +811,6 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-						<tr>
-								<td class="alignLeft">Students Caste &nbsp;</td>
-								<td><label> <input name="studentscaste"
-									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
-
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
-							</label></td>
-
-							</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						
-						
-							<tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
-								<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
-								&nbsp;</td>
-							<td><label> <input
-									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
-									id="bplcardno" size="30">
-
-							</label></td>
-						
-						</tr>
-						
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Bag No.
-								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-												
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td class="alignLeft">Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.specialcategory}</option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td id="newcateg" style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
-									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
-
-							<td align="left">
-							
-							<label>
-							<select name="mothertongue" onblur="validateNameContact();"
-									id="mothertongue" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected>${student.mothertongue}</option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
-							</label>
-							
-							</td>
-
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
-							</td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-							</tr>
-							
-							
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
 
 
 						<tr>
@@ -1072,6 +873,15 @@ for(Cookie cookie : cookies){
 							<td><label> <input name="crecorddate"
 									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
 									id="datepickerDND" size="30" data-validate="validate(required)">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
 							</label></td>
 						</tr>
 							
@@ -1270,6 +1080,154 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br /></td>
 								</tr>
+							
+								<tr>
+							<td class="alignLeft">Religion &nbsp;</td>
+
+							<td><%-- <label> <input name="religion"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.religion}" />"
+									id="religion" size="30">
+
+							</label> --%>
+							
+							<label> <select name="religion" onblur="validateNameContact();"
+									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
+										<option selected>${student.religion}</option>
+										<option>Islam</option>
+										<option>Hinduism</option>
+										<option>Christianity</option>
+										<option>jainism</option>
+										<option>sikhism</option>
+								</select>
+
+							</label>
+							
+							
+							</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
+
+							</label></td>
+
+							</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						
+							<tr>
+								<td class="alignLeft">Belong to BPL &nbsp;</td>
+								<td height="30">&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+								&nbsp;</td>
+							<td><label> <input
+									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
+									id="bplcardno" size="30">
+
+							</label></td>
+						
+						</tr>
+						
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+
+						<tr>
+							<td class="alignLeft">Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.specialcategory}</option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td id="newcateg" style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
+									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
+
+							<td align="left">
+							
+							<label>
+							<select name="mothertongue" onblur="validateNameContact();"
+									id="mothertongue" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
+										<option selected>${student.mothertongue}</option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+								</select>
+							</label>
+							
+							</td>
+
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						<%-- <tr>
+
+							<td class="alignLeft">RTE &nbsp;</td>
+							<td height="30">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
+							</td>
+
+							
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr> --%>
+								
 
 								<tr>
 									<td class="alignLeft">Class on leaving&nbsp;</td>
@@ -1452,7 +1410,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
+						<td class="alignLeft">Father's Aadhar No.</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1460,7 +1418,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No.</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
@@ -1475,7 +1433,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 
-							<td class="alignLeft">Guardian's <br>name & address</td>
+							<td class="alignLeft">Sponsored By</td>
 
 							<td><label> <input name="guardiandetails"
 									type="text" class="myclass" id="guardiandetails" size="30" style="text-transform:capitalize;"
@@ -1653,6 +1611,51 @@ for(Cookie cookie : cookies){
 										<td><br /></td>
 									</tr>
 									
+						<tr>
+							<td class="alignLeft">Admitted in class &nbsp;</td>
+
+							<td>
+							<label> 
+								<select name="classadm" id="classadm" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classadm}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+							</label> <label> 
+									<select name="secadm" id="secadm"
+									style="width: 75px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${secadm}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+							</select>
+							</label>
+							
+							
+							
+							</td>			
+									
+									
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+									<tr>
+
+										<td><br /></td>
+									</tr>
 						<tr>
 							<td class="alignLeft">Transfer certificate No.</td>
 

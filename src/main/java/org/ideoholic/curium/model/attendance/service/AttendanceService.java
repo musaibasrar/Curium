@@ -1010,7 +1010,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			 		        float daysBetween = (difference / (1000*60*60*24));
 			 		        
 			 		        	for(int j=0; j<daysBetween; j++) {
-			 		        		row.createCell(i).setCellValue("NA");
+			 		        		row.createCell(i).setCellValue("");//NA
 			 				    	sheet.autoSizeColumn(i);
 			 				    	i++;
 			 		        	}
@@ -1031,7 +1031,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			    if(i<numberOfDays) {
 			    	
 	 		        	for(int j=i; j<=numberOfDays; j++) {
-	 		        		row.createCell(i).setCellValue("NA");
+	 		        		row.createCell(i).setCellValue("");//NA
 	 				    	sheet.autoSizeColumn(i);
 	 				    	i++;
 	 		        	}

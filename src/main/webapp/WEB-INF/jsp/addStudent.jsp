@@ -835,8 +835,8 @@ $(document).ready(function() {
 
 						<tr>
 						<tr>
-							<td class="alignLeft">Date Of Birth &nbsp;</td>
-							<td ><label> <input name="dateofbirth"
+							<td class="alignLeft">Date Of Birth* &nbsp;</td>
+							<td ><label> <input name="dateofbirth" required
 									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
@@ -908,32 +908,10 @@ $(document).ready(function() {
 										</c:forEach>
 								</select>
 							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Admitted in Class &nbsp;
-							</td>
-
-							<td ><label> <select name="admclassE"
-									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
-									>
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Sponsored By &nbsp;</td>
+							<td ><label> <input name="guardiandetails" style="text-transform:capitalize;"
+									type="text" class="myclass" id="guardiandetails" size="36">
 							</label></td>
 
 						</tr>
@@ -1002,39 +980,12 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
+							<td class="alignLeft">Students Caste &nbsp;</td>
+							<td ><label> <input name="studentscaste"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" id="studentscaste" size="36">
 
-
-							<td class="alignLeft">Religion &nbsp;</td>
-
-							<td >
-								<!-- <label> <input name="religion"
-									type="text" class="myclass" id="religion" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="religion"
-									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-
-							</td>
-
-
-
-							<!-- <td class="alignRight">Caste &nbsp;</td>
-							<td ><label> <input name="caste"
-									type="text" class="myclass" id="caste" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label></td> -->
+							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
 								Certificate No.&nbsp;</td>
@@ -1052,154 +1003,9 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td class="alignLeft">Students Caste &nbsp;</td>
-							<td ><label> <input name="studentscaste"
-							style="text-transform:capitalize;"
-									type="text" class="myclass" id="studentscaste" size="36">
-
-							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
-							<td>&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
-								&nbsp;</td>
-							<td ><label> <input
-									name="bplcardno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<!-- <tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
-							</td>
-							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td ><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="disabilitychild" size="36">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr> -->
 						
-						<tr>
-							<td class="alignLeft" >Special Category&nbsp;</td>
 
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td  id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
-									style="text-transform:capitalize;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
-							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
-							<td >
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="motherT"
-									 id="motherT"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-										<option>Bengali</option>
-										<option>Oriya</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-						<tr>
-							<td class="alignLeft">DND Date &nbsp;</td>
-							<td ><label> <input name="crecorddate"
-									type="text"
-									class="myclass" id="datepickerDND" size="36"
-									data-validate="validate(required)">
-							</label></td>
-										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
-									style="text-transform:capitalize;"
-									>
-							</label></td>
-						</tr>
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
@@ -1252,9 +1058,6 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 						<!-- <tr>
 								<td class="alignLeft"  >RTE
 										&nbsp;</td>
@@ -1283,11 +1086,6 @@ $(document).ready(function() {
 
 						<div>
 							<table width="100%">
-								<tr>
-
-									<td><br /></td>
-								</tr>
-
 								<tr>
 
 									<td align="center"><a class="nexttab"
@@ -1442,6 +1240,148 @@ $(document).ready(function() {
 								<tr>
 									<td><br /></td>
 								</tr>
+								
+								<tr>
+							<td class="alignLeft">Religion &nbsp;</td>
+
+							<td >
+								<!-- <label> <input name="religion"
+									type="text" class="myclass" id="religion" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="religion"
+									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Islam</option>
+										<option>Hinduism</option>
+										<option>Christianity</option>
+										<option>jainism</option>
+										<option>sikhism</option>
+								</select>
+
+							</label>
+
+							</td>
+
+							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
+							<td>&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" />
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+								&nbsp;</td>
+							<td ><label> <input
+									name="bplcardno" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bplcardno" size="36">
+
+							</label></td>
+						</tr>	
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<!-- <tr>
+							<td class="alignLeft" >Bag No.&nbsp;</td>
+								<td><input
+									name="bhagyalakshmibondnumber" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
+							</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td ><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="disabilitychild" size="36">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr> -->
+						
+						<tr>
+							<td class="alignLeft" >Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>None</option>
+										<option></option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td  id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
+									style="text-transform:capitalize;"
+									placeholder="Add Other Category" />
+							</label></td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
+							<td >
+								<!-- <label> <input name="motherT"
+									type="text" class="textField" id="motherT" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="motherT"
+									 id="motherT"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+										<option>Bengali</option>
+										<option>Oriya</option>
+								</select>
+							</label>
+							</td>
+						</tr>
+						<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
 
 								<tr>
 									<td class="alignLeft">Class on leaving&nbsp;</td>
@@ -1761,7 +1701,7 @@ $(document).ready(function() {
 
 								<td ><label> <textarea
 											name="permanentaddress" type="text" 
-											id="permanentaddress" rows="4" cols="40"
+											id="permanentaddress" rows="4" cols="36"
 											style="text-transform:capitalize;"
 											></textarea>
 
@@ -1771,7 +1711,7 @@ $(document).ready(function() {
 								<td class="alignLeft" style="padding-left: 20px;">Temporary Address &nbsp;</td>
 								<td ><label> <textarea
 											name="temporaryaddress" type="text"  style="text-transform:capitalize;"
-											id="temporaryaddress" rows="4" cols="40"></textarea>
+											id="temporaryaddress" rows="4" cols="36"></textarea>
 								</label></td>
 								</tr>
 
@@ -1849,6 +1789,46 @@ $(document).ready(function() {
 
 										<td><br /></td>
 									</tr>
+
+									<tr>
+									
+									<td  class="alignLeft">Admitted in Class &nbsp;
+							</td>
+
+							<td ><label> <select name="admclassE"
+									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
+									>
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label></td>
+							
+									</tr>
+									
+									<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 
 									<tr>
 							<td class="alignLeft">Transfer
@@ -2130,6 +2110,27 @@ $(document).ready(function() {
 						 <tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td class="alignLeft">DND Date &nbsp;</td>
+							<td ><label> <input name="crecorddate"
+									type="text"
+									class="myclass" id="datepickerDND" size="36"
+									data-validate="validate(required)">
+							</label></td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+						</tr>
+
+<tr>
+							<td><br /></td>
+						</tr>
+						
 							
 						
 							<tr>
