@@ -51,7 +51,7 @@ public class UserAction {
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
 			return "feesCollectionDetailsAdmin";
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
-			return "feesCollectionDetailsAdmin";
+			return "feesCollectionDetails";
 		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 			return "feesCollectionDetails";
 		} else {

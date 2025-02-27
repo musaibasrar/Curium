@@ -142,6 +142,8 @@ form{
                 	window.open('/jrs/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/jrs/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/jrs/index_principal','_self');
                 }
             }
             else if(!flag1){

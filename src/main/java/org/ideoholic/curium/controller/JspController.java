@@ -631,4 +631,24 @@ public class JspController {
 		return "bookhistory";
 	}
 	
+	@GetMapping("/index_principal")
+	public String getIndexPrincipal() {
+		return "index_principal";
+	}
+	
+	@GetMapping("/header_principal")
+	public String getHeaderPrincipal() {
+		return "header_principal";
+	}
+	
+	@GetMapping("/left_principal")
+	public String getLeftPrincipal() {
+		return "left_principal";
+	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsPrincipal() {
+		return "reports_principal";
+	}
+	
 }
