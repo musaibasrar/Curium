@@ -37,16 +37,18 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Slf4j
 @Service
 public class HrService {
 	@Autowired
 	private HttpServletResponse response;
+	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private YearDAO yearDao;
+	
 	public LeaveTypeResponseDto leaveType(String branchId) {
         LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
 
@@ -114,7 +116,7 @@ public class HrService {
 	public LeavesDetailsResponseDto viewLeavesDetails(String id) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 		try {
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 
 			result.setCurrentAcademicYear(currentYear);
 
@@ -432,7 +434,7 @@ public class HrService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+				Currentacademicyear currentAcademicYear = yearDao.showYear();
 				
 					List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacherid)));
 					if(staffAttendanceMaster != null && !staffAttendanceMaster.isEmpty() && staffAttendanceMaster.get(0).getWeeklyoff() == null){

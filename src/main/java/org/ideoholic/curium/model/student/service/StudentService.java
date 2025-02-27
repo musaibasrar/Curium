@@ -18,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -68,13 +67,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Service
 public class StudentService {
 	@Autowired
 	private HttpServletResponse response;
+	
 	@Autowired
 	private StandardService standardService;
+	
+	@Autowired
+	private YearDAO yearDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -370,7 +376,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -466,7 +472,7 @@ public class StudentService {
 			Parents parents = new parentsDetailsDAO().readploginUniqueObject(studentId);
 
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
@@ -549,7 +555,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -1310,7 +1316,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());

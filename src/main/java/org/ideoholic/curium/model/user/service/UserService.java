@@ -71,6 +71,9 @@ public class UserService {
 
     @Autowired
     private UserDAO userDAO;
+    
+    @Autowired
+    private YearDAO yearDao;
 
     @Autowired
     private HttpServletRequest request;
@@ -89,7 +92,7 @@ public class UserService {
         Login login = userDAO.readUniqueObject(userName, password);
 
         if (login != null) {
-            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            Currentacademicyear currentAcademicYear = yearDao.showYear();
             String academicyear = "";
             if (currentAcademicYear != null) {
                 academicyear = currentAcademicYear.getCurrentacademicyear();
@@ -695,7 +698,7 @@ public class UserService {
                         httpSession.removeAttribute(element);
                 }
 
-                Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+                Currentacademicyear currentAcademicYear = yearDao.showYear();
                 String academicyear = "";
                 if (currentAcademicYear != null) {
                     academicyear = currentAcademicYear.getCurrentacademicyear();
