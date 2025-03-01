@@ -13,7 +13,9 @@ import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Pageable;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,27 +40,19 @@ public class diaryDAO {
         } 
 		 return diary;
 	}
-	@SuppressWarnings({ "finally", "unchecked" })
-	public  List<Object[]>  readListOfObjects(int offset, int noOfRecords, int branchId) {
-		// TODO Auto-generated method stub
-		List<Object[]> results = new ArrayList<Object[]>();
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+    @Transactional
+	public  List<Diary>  readListOfObjects(int offset, int noOfRecords, int branchId) {
+		List<Diary> results = new ArrayList<>();
+		
         try {
-            
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.userid from Diary d where  branchid="+branchId);
-            query.setFirstResult(offset);
-			query.setMaxResults(noOfRecords);
-			results = query.list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(),hibernateException);
-            
+			
+        	Pageable pageable = PageRequest.of(offset, noOfRecords);
+        	 results = diaryRepo.findByBranchid(branchId, pageable).toList();
+        } catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
-        }
+            throw hibernateException;        } 
+        return results;
 	}
 	//readListOfParentObjects
 	@SuppressWarnings({ "finally", "unchecked" })
