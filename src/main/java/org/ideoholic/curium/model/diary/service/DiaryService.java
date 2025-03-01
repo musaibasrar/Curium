@@ -99,26 +99,8 @@ public class DiaryService {
 				if (!"".equalsIgnoreCase(DataUtil.emptyString(studentIdPageDto.getPage()))) {
 					page = Integer.parseInt(studentIdPageDto.getPage());
 				}
-				List<Object[]> list = diarysDao.readListOfParentObjects((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(branchId), classsec);
-
-				List<Diary> diaryDetails = new ArrayList<Diary>();
-				for (Object[] diaryObject : list) {
-					Diary diary = new Diary();
-
-					diary.setId((Integer) diaryObject[0]);
-					diary.setClasssec((String) diaryObject[1]);
-					diary.setAcademicyear((String) diaryObject[2]);
-					diary.setBranchid(Integer.parseInt((String) diaryObject[3]));
-					diary.setSubject((String) diaryObject[4]);
-					diary.setMessage((String) diaryObject[5]);
-					diary.setStartdate((Date) diaryObject[6]);
-					diary.setEnddate((Date) diaryObject[7]);
-					diary.setCreateddate((Date) diaryObject[8]);
-					diaryDetails.add(diary);
-				}
-
-
+				List<Diary> diaryDetails = diarysDao.readListOfParentObjects((page - 1) * recordsPerPage,
+					 recordsPerPage, Integer.parseInt(branchId), classsec);
 				int noOfRecords = diarysDao.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiaryparents(diaryDetails);
