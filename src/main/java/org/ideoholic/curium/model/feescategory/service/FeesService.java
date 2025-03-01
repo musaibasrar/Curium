@@ -54,6 +54,9 @@ public class FeesService {
         
 			@Autowired
             private HttpServletResponse response;
+			
+			@Autowired
+			private YearDAO yearDao;
             /**
              * Size of a byte buffer to read/write file
              */
@@ -429,7 +432,7 @@ public class FeesService {
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = yearDao.showYear();
 			searchFeesResponseDto.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 			
 			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, currentYear.getCurrentacademicyear(), searchCriteria);

@@ -22,6 +22,9 @@ import java.util.Map.Entry;
 @Service
 public class PeriodService {
 
+	@Autowired
+	private YearDAO yearDao;
+	
     @Autowired
     private StandardService standardService;
 
@@ -35,7 +38,7 @@ public class PeriodService {
         TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
 
         try {
-            Currentacademicyear currentYear = new YearDAO().showYear();
+            Currentacademicyear currentYear = yearDao.showYear();
             result.setCurrentYear(currentYear.getCurrentacademicyear());
 
             SubjectsResponseDto subjects = subjectDetailsService.readListOfSubjects(branchId);
@@ -225,7 +228,7 @@ public class PeriodService {
 
         if (branchId != null) {
 
-            Currentacademicyear currentYear = new YearDAO().showYear();
+            Currentacademicyear currentYear = yearDao.showYear();
             result.setCurrentYear(currentYear.getCurrentacademicyear());
 
             periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
