@@ -55,21 +55,12 @@ public class diaryDAO {
             } 
         return results;
 	}
-	//readListOfParentObjects
     @Transactional
 	public  List<Diary>  readListOfParentObjects(int offset, int noOfRecords, int branchId, String classsec) {
 		List<Diary> results = new ArrayList<>();
         try {
-            
-			/*
-			 * Query query = session.
-			 * createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.userid from Diary d where  branchid="
-			 * +branchId+" and classsec='"+classsec+"'"); query.setFirstResult(offset);
-			 * query.setMaxResults(noOfRecords);
-			 */
 			Pageable pageable = PageRequest.of(offset, noOfRecords);
 			results = diaryRepo.findByBranchidAndClasssec(branchId, classsec, pageable).toList();
-			//results = query.list();
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
