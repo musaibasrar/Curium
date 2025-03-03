@@ -2500,7 +2500,7 @@ public boolean getRPStatement() {
 					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
 			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
 			headerData2.put("Header",
-					new Object[] { "Sl No.","Voucher No","Dr Account -- Cr Account","Narration","Amount"});
+					new Object[] { "Sl No.","Voucher No","Date","Dr Account -- Cr Account","Narration","Amount"});
 			//"Sl.No", "Voucher No", 
 			int i = 1;
 			
@@ -2508,7 +2508,7 @@ public boolean getRPStatement() {
 				
 				//Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),
 				data.put(Integer.toString(i),
-						new Object[] { Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),accBal.getValue().toString(),
+						new Object[] { Integer.toString(i),Integer.toString(accBal.getKey().getTransactionsid()),accBal.getKey().getTransactiondate(),accBal.getValue().toString(),
 								accBal.getKey().getNarration(), df.format(accBal.getKey().getDramount())});
 				i++;
 				total = total.add(accBal.getKey().getDramount());
@@ -2564,7 +2564,7 @@ public boolean getRPStatement() {
 			
 			data.clear();
 			data.put(Integer.toString(1),
-					new Object[] { "","","","Total",  df.format(total)});
+					new Object[] { "","","","","Total",  df.format(total)});
 			
 			Set<String> keyset2 = data.keySet();
 			for (String key : keyset2) {
