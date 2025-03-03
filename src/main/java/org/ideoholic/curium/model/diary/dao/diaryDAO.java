@@ -51,30 +51,22 @@ public class diaryDAO {
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;        } 
+            throw hibernateException;       
+            } 
         return results;
 	}
-	//readListOfParentObjects
-	@SuppressWarnings({ "finally", "unchecked" })
-	public  List<Object[]>  readListOfParentObjects(int offset, int noOfRecords, int branchId, String classsec) {
-		List<Object[]> results = new ArrayList<Object[]>();
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+    @Transactional
+	public  List<Diary>  readListOfParentObjects(int offset, int noOfRecords, int branchId, String classsec) {
+		List<Diary> results = new ArrayList<>();
         try {
-            
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.userid from Diary d where  branchid="+branchId+" and classsec='"+classsec+"'");
-            query.setFirstResult(offset);
-			query.setMaxResults(noOfRecords);
-			results = query.list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(),hibernateException);
-            
+			Pageable pageable = PageRequest.of(offset, noOfRecords);
+			results = diaryRepo.findByBranchidAndClasssec(branchId, classsec, pageable).toList();
+        } catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
+            throw hibernateException;       
         }
+        return results;
 	}
 	@SuppressWarnings({ "finally", "unchecked" })
 	public int getNoOfRecords(int branchId) {
