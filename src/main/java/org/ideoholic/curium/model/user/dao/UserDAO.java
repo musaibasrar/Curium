@@ -46,6 +46,7 @@ public class UserDAO {
            log.error(hibernateException.getMessage(), hibernateException);
            log.debug("In user-dao null pointer exception {}", hibernateException.getMessage());
            hibernateException.printStackTrace();
+           throw hibernateException;
        }
        return login;
     }
@@ -96,6 +97,7 @@ public class UserDAO {
 	        }
 	}
 
+	@Transactional
 	public Login readPassword(String currentPassword) {
        Login login = null;
        try{
@@ -107,16 +109,19 @@ public class UserDAO {
        }catch (Exception hibernateException) {
            log.error(hibernateException.getMessage(), hibernateException);
            hibernateException.printStackTrace();
+           throw hibernateException;
        }
         return login;
    }
 
+	@Transactional
 	public Login update(Login login) {
         try {
             loginRepo.save(login);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
+            throw hibernateException;
         }
         return login;
    }
@@ -144,6 +149,7 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public boolean addUser(Login user) {
 		try {
 			int userid = 1;
@@ -156,14 +162,15 @@ public class UserDAO {
            }
            user.setUserid(userid);
            loginRepo.save(user);
-           return true;
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
+            throw hibernateException;
 		 }
-		return false;
+		return true;
 	}
 
+	@Transactional
 	public Login getUserDetails(String teacherexternalid) {
 		Login user = new Login();
 		try {
@@ -175,10 +182,12 @@ public class UserDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return user;
 	}
 	
+	@Transactional
 	public Login getLoginDetails(String userName, int branchId) {
         Login login = null;
        try{
@@ -190,10 +199,12 @@ public class UserDAO {
        }catch (Exception hibernateException) {
            log.error(hibernateException.getMessage(), hibernateException);
            hibernateException.printStackTrace();
+           throw hibernateException;
        }
         return login;
     }
 
+	@Transactional
 	public Login getUniqueObject(int userid) {
         Login login = null;
        try{
@@ -206,6 +217,7 @@ public class UserDAO {
            log.error(hibernateException.getMessage(), hibernateException);
            log.error("In userdao null pointer exception", hibernateException);
            hibernateException.printStackTrace();
+           throw hibernateException;
        }
         return login;
     }

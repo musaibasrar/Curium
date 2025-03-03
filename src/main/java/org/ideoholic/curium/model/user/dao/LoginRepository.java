@@ -15,6 +15,6 @@ public interface LoginRepository extends JpaRepository<Login, Integer> {
 
     List<Login> findByUserid(int userid);
 
-    @Query("FROM Login as login where login.branch=:branchId and login.username=:userName")
-    List<Login> findByBranchIdAndUserName(int branchId, String userName);
+    @Query("FROM Login as login where login.branch.idbranch=:branchId and login.username=:userName")
+    List<Login> findByBranchIdAndUserName(Integer branchId, String userName);
 }
