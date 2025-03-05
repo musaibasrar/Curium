@@ -26,6 +26,7 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class StampFeesService {
 
-	
+	@Autowired
+    private AccountDAO accountDao;
+
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -254,7 +257,7 @@ public class StampFeesService {
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration("Towards Fees Stamp");
 		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+		transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(branchid));
 		transactions.setUserid(Integer.parseInt(userid));
 		

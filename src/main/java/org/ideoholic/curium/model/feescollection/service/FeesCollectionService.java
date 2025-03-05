@@ -55,6 +55,9 @@ public class FeesCollectionService {
 
 	@Autowired
 	private SmsService smsService;
+	
+	@Autowired
+    private AccountDAO accountDao;
 
 	@Autowired
 	private HttpServletResponse response;
@@ -293,7 +296,7 @@ public class FeesCollectionService {
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));
 			transactions.setUserid(Integer.parseInt(userId));
 			
@@ -319,7 +322,7 @@ public class FeesCollectionService {
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
 			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactionsIncome.setCancelvoucher("no");
-			transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactionsIncome.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactionsIncome.setBranchid(Integer.parseInt(branchId));
 			transactionsIncome.setUserid(Integer.parseInt(userId));
 			
@@ -487,7 +490,7 @@ public class FeesCollectionService {
 			
 			// Cancel Voucher
 
-				VoucherEntrytransactions receiptVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(receiptId));
+				VoucherEntrytransactions receiptVoucherTransaction = accountDao.getVoucherDetails(String.valueOf(receiptId));
 				
 			
 				String updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
@@ -496,10 +499,10 @@ public class FeesCollectionService {
 				String cancelReceiptVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+receiptId;
 				
 			
-				VoucherEntrytransactions journalVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(journalId));
+				VoucherEntrytransactions journalVoucherTransaction = accountDao.getVoucherDetails(String.valueOf(journalId));
 				
 				// Dr
-				Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getDraccountid());
+				Accountdetails accountDetailsDr = accountDao.getAccountDetails(journalVoucherTransaction.getDraccountid());
 				String updateJournalDrAccount;
 				if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
 					updateJournalDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getDramount()+" where accountdetailsid="+journalVoucherTransaction.getDraccountid();
@@ -509,7 +512,7 @@ public class FeesCollectionService {
 				
 				//Cr
 				
-				Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getCraccountid());
+				Accountdetails accountDetailsCr = accountDao.getAccountDetails(journalVoucherTransaction.getCraccountid());
 				String updateJournalCrAccount= null;
 				
 				if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
@@ -1331,7 +1334,7 @@ public class FeesCollectionService {
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));
 			transactions.setUserid(Integer.parseInt(userId));
 
@@ -1357,7 +1360,7 @@ public class FeesCollectionService {
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
 			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactionsIncome.setCancelvoucher("no");
-			transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactionsIncome.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactionsIncome.setBranchid(Integer.parseInt(branchId));
 			transactionsIncome.setUserid(Integer.parseInt(userId));
 
@@ -1666,7 +1669,7 @@ public class FeesCollectionService {
 			
 			// Cancel Voucher
 
-				VoucherEntrytransactions receiptVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(receiptId));
+				VoucherEntrytransactions receiptVoucherTransaction = accountDao.getVoucherDetails(String.valueOf(receiptId));
 				
 			
 				String updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
@@ -1675,10 +1678,10 @@ public class FeesCollectionService {
 				String cancelReceiptVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+receiptId;
 				
 			
-				VoucherEntrytransactions journalVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(journalId));
+				VoucherEntrytransactions journalVoucherTransaction = accountDao.getVoucherDetails(String.valueOf(journalId));
 				
 				// Dr
-				Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getDraccountid());
+				Accountdetails accountDetailsDr = accountDao.getAccountDetails(journalVoucherTransaction.getDraccountid());
 				String updateJournalDrAccount= null;
 				if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
 					updateJournalDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getDramount()+" where accountdetailsid="+journalVoucherTransaction.getDraccountid();
@@ -1688,7 +1691,7 @@ public class FeesCollectionService {
 				
 				//Cr
 				
-				Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getCraccountid());
+				Accountdetails accountDetailsCr = accountDao.getAccountDetails(journalVoucherTransaction.getCraccountid());
 				String updateJournalCrAccount= null;
 				
 				if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
@@ -2527,7 +2530,7 @@ public class FeesCollectionService {
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));
 			transactions.setUserid(Integer.parseInt(userId));
 			
@@ -2553,7 +2556,7 @@ public class FeesCollectionService {
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
 			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactionsIncome.setCancelvoucher("no");
-			transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactionsIncome.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactionsIncome.setBranchid(Integer.parseInt(branchId));
 			transactionsIncome.setUserid(Integer.parseInt(userId));
 			

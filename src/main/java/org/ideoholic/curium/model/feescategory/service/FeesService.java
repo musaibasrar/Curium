@@ -39,7 +39,6 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -57,6 +56,9 @@ public class FeesService {
 			
 			@Autowired
 			private YearDAO yearDao;
+			
+			@Autowired
+		    private AccountDAO accountDao;
             /**
              * Size of a byte buffer to read/write file
              */
@@ -245,7 +247,7 @@ public class FeesService {
                           		transactions.setEntrydate(DateUtil.todaysDate());
                           		transactions.setNarration("Towards Reversal of Fees Stamp");
                           		transactions.setCancelvoucher("no");
-                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+                          		transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
                           		transactions.setBranchid(Integer.parseInt(branchid));
                           		transactions.setUserid(Integer.parseInt(userid));
 
@@ -354,7 +356,7 @@ public class FeesService {
                     		transactionsApply.setEntrydate(DateUtil.todaysDate());
                     		transactionsApply.setNarration("Towards Fees Waiveoff");
                     		transactionsApply.setCancelvoucher("no");
-                    		transactionsApply.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                    		transactionsApply.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
                     		transactionsApply.setBranchid(Integer.parseInt(branchId));
                     		transactionsApply.setUserid(Integer.parseInt(userId));
                     		
@@ -525,7 +527,7 @@ public class FeesService {
                         		transactionsReverse.setEntrydate(DateUtil.todaysDate());
                         		transactionsReverse.setNarration("Towards Fees Stamp");
                         		transactionsReverse.setCancelvoucher("no");
-                        		transactionsReverse.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                        		transactionsReverse.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
                         		transactionsReverse.setBranchid(Integer.parseInt(branchId));
                         		transactionsReverse.setUserid(Integer.parseInt(branchId));
                         		
@@ -557,7 +559,7 @@ public class FeesService {
                     		transactionsApply.setEntrydate(DateUtil.todaysDate());
                     		transactionsApply.setNarration("Towards Fees Concession");
                     		transactionsApply.setCancelvoucher("no");
-                    		transactionsApply.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                    		transactionsApply.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
                     		transactionsApply.setBranchid(Integer.parseInt(branchId));
                     		transactionsApply.setUserid(Integer.parseInt(userId));
                     		
