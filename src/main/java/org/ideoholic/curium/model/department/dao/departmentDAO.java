@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.hibernate.HibernateException;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +27,7 @@ public class departmentDAO {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-	@SuppressWarnings("finally")
+
 	@Transactional
     public Department create(Department department) {
 
@@ -44,25 +45,23 @@ public class departmentDAO {
 	}
 
 
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Department> readListOfObjects(int branchId) {
+
+	@Transactional
+    public List<Department> readListOfObjects(int branchId) {
 		
 		List<Department> results = new ArrayList<Department>();
-        Transaction transaction =  null;
-        Session session = HibernateUtil.openCurrentSession();
         try {
             
-            transaction = session.beginTransaction();
-            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback();
+            results = departmentRepository.findByBranchId(branchId);
+        } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
+            throw hibernateException;
         }
+
+            return results;
+
 	}
 
 
