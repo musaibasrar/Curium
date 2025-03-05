@@ -52,7 +52,7 @@ public class departmentDAO {
 		List<Department> results = new ArrayList<Department>();
         try {
             
-            results = departmentRepository.finadAllDepartment(branchId);
+            results = departmentRepository.findByBranchId(branchId);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             
