@@ -68,29 +68,19 @@ public class diaryDAO {
         }
         return results;
 	}
-	@SuppressWarnings({ "finally", "unchecked" })
+	
+	@Transactional
 	public int getNoOfRecords(int branchId) {
-		// TODO Auto-generated method stub
 		List<Diary> results = new ArrayList<Diary>();
-		int noOfRecords = 0;
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+		Long noOfRecords = 0L;
 		try {
-			transaction = session.beginTransaction();
+			noOfRecords = diaryRepo.countByBranchid(branchId);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;   
 
-						Query query = session.createQuery("select count(*) from Diary where branchid="+branchId);
-			noOfRecords = Integer.parseInt(query.uniqueResult().toString()); 
-			
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(),hibernateException);
-			
-			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return noOfRecords;
-		}
+		} 		return noOfRecords.intValue();
 	}
 
 	@Transactional
