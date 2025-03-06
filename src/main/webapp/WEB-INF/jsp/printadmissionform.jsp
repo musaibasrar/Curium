@@ -53,7 +53,7 @@ input {
 
 <form method="post"  enctype="multipart/form-data">
 
-	<div align="center">
+	<div align="center">&emsp;&emsp;&emsp;&emsp;
 		<img alt="Govt Of Karnataka" src="/roshan/images/roshan.png">
 	</div>
 <div align="center" style= "width:70%;float:left;">
@@ -413,11 +413,11 @@ input {
 
 	<h3>For Office Use Only</h3>
 		<label for="enrollmentno">Student Enrollment Number:</label>
-        <input type="text" name="enrollmentno">
+        <input type="text" name="enrollmentno" value="${parents.student.admissionnumber}">
         <label for="admissiondate">Admission Date:</label>
         <input type="text" name="admissiondate" value="<fmt:formatDate value="${parents.student.admissiondate}" pattern="dd/MM/yyyy"/>">
         <label for="U-Dise">U-Dise Code:</label>
-        <input type="text" name="U-Dise"></br>
+        <input type="text" name="U-Dise" value = "${branchcode}"></br>
         <label for="bankaccount">Student/Parent Bank Account Number:</label>
         <input type="text" name="bankaccount" size="172" value="${parents.student.accno}"></br>
         <label for="IFSC">Bank IFSC Code:</label>
