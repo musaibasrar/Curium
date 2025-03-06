@@ -194,7 +194,7 @@ public class MessItemsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From MessInvoiceDetails as invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid = "+branchId+" order by invoicedetails.invoicedate DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("From MessInvoiceDetails as invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid = "+branchId+" and invoicedetails.suppliersid != 0  order by invoicedetails.invoicedate DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
@@ -462,5 +462,35 @@ public class MessItemsDAO {
         }
         return results;
 }
+
+
+
+	public List<MessInvoiceDetails> getInvoiceDetailsPaginationOpeningStock(int offset,
+			int noOfRecords, int branchId) {
+		
+		List<MessInvoiceDetails> results = new ArrayList<MessInvoiceDetails>();
+
+		try {
+			
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From MessInvoiceDetails as invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid = "+branchId+" and invoicedetails.suppliersid = 0  order by invoicedetails.invoicedate DESC").setCacheable(true).setCacheRegion("commonregion");
+			query.setFirstResult(offset);   
+			query.setMaxResults(noOfRecords);
+			results = query.getResultList();
+			
+			transaction.commit();
+			
+
+		} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			
+			System.out.println("Exception is "+hibernateException);
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 	
 }

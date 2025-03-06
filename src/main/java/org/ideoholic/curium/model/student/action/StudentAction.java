@@ -325,5 +325,14 @@ public class StudentAction {
 			return "viewAll";
 		}
 	}
-
+	
+	@RequestMapping(value = "/generateBill", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String addStudentGenerateBill(@ModelAttribute("student") CreateStudentDto student,
+			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		if (studentActionAdapter.addStudent(student, uploadedFiles)) {
+			return "billgenerateredirect";
+		} else {
+			return "notSaved";
+		}
+	}
 }
