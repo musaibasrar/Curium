@@ -16,16 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class YearDAO {
 	
-	
 	@Autowired
     private YearRepository yearRepo;
 
     @Autowired
     private QueryUtil queryUtil;
 
-
     @Transactional
-	@SuppressWarnings("finally")
 	public String create(Currentacademicyear currentacademicyear) {
 		String error = null;
 		try {
