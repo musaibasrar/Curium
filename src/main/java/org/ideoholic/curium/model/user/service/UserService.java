@@ -606,7 +606,10 @@ public class UserService {
 					result.setDateTo(toDate);
 					result.setDayOne("");
 				}else if(dateFrom!=null && dateTo!=null) {
-							querySub = " feesdetails.date between '"+dateFrom.toString()+"' AND '"+dateTo.toString()+"'";
+					if(!dateFrom.toString().equalsIgnoreCase("") &&  !dateTo.toString().equalsIgnoreCase("")) {
+						querySub = " feesdetails.date between '"+dateFrom.toString()+"' AND '"+dateTo.toString()+"'";
+					}
+							
 				}
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
