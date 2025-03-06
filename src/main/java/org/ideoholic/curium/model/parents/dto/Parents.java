@@ -19,6 +19,8 @@ import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.student.dto.Student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -99,6 +101,7 @@ public class Parents implements java.io.Serializable {
 	@Column(name = "motherscaste", length = 15)
 	private String motherscaste;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "parent")
 	private List<Appointment> appointmentList;
 
