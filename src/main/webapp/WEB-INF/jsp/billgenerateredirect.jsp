@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Saved
+    Document   : notSaved
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Save success</title>
+        <title>JSP Page</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -64,9 +64,9 @@
 
                 });
 
-            function ViewAll(){
+            function redirect(){
                 var form1=document.getElementById("form1");
-                form1.action="/nortuntrading/StudentProcess/viewAll";
+                form1.action="/nortuntrading/MessItemsMoveProcess/issueItems";
                 form1.submit();
             }
         </script>
@@ -87,15 +87,12 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" >
-        <form id="form1" action="/nortuntrading/"  method="post">
+    <body background="/images/bg.jpg" onload="redirect();">
+        <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Customer Added Successfully</p>
+          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Redirecting to Bill, please wait...</p>
         <p class="style1">
-          
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
         </p></td>
       </tr>
     </table>
