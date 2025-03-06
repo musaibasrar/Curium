@@ -4,8 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.*;
+import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
@@ -48,7 +50,22 @@ public class MessItemsService {
 		 result.setSuccess(true);
 		return result;
 	}
-
+	
+	
+	  public ResultResponse viewItemOrderDetails(String branchId) {
+	  
+	  ResultResponse result = ResultResponse.builder().success(false).build();
+	  
+	  List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
+	  
+	  if(branchId!=null)
+	  { 
+		  messStockAvailabilityList = new MessItemsDAO().getItemsStockAvailability();
+		  }
+	  result.setResultList(messStockAvailabilityList); result.setSuccess(true);
+	  return result; 
+	  }
+	 
 
 	public ItemDetailsResponseDto addItemDetails(ItemDetailsDto dto, String branchId, String userId) {
 		
@@ -288,6 +305,47 @@ public class MessItemsService {
 			return resultResponse;
 		}
 
+	public ResultResponse savePurchaseOrder(PurchaseDto dto, String branchId, String branchCode, String userId) {
+		ResultResponse resultResponse = ResultResponse.builder().build();
+			
+			if(branchId!=null){
+					String[] itemIds = dto.getItemIds();
+					String[] itemsName = dto.getItemsName();
+					String[] uom = dto.getUom();
+					String[] itemsQuantity = dto.getItemsQuantity();
+					String supplierid = dto.getSupplierId();
+					String[] supplieridledgerid = supplierid.split(":");
+					int sum = 0;
+					//String invoicedate = dto.getInvoiceDate();
+					List<PurchaseOrder> purchaseOrderList = new ArrayList<PurchaseOrder>();
+					PoMaster poMaster = new PoMaster();
+					
+					if(itemIds!=null) {
+						for(int i=0; i < itemIds.length ; i++){
+							PurchaseOrder purchaseOrder = new PurchaseOrder();
+							purchaseOrder.setItemId(Integer.parseInt(itemIds[i]));
+							purchaseOrder.setInvoiceDate(DateUtil.indiandateParser(dto.getPurchaseDate()));
+							purchaseOrder.setSupplierName(itemsName[i]);
+							purchaseOrder.setUom(uom[i]);
+							purchaseOrder.setQuantity(itemsQuantity[i]);
+							purchaseOrderList.add(purchaseOrder);
+							sum = sum + Integer.parseInt(itemsQuantity[i]);
+					}
+						poMaster.setEntryDate(DateUtil.indiandateParser(dto.getPurchaseDate()));
+						poMaster.setBranchId(Integer.parseInt(branchId));
+						poMaster.setSupplierId(Integer.parseInt(supplieridledgerid[0]));
+						poMaster.setTotalQuantityOrdered(sum);
+						poMaster.setTotalItem(itemIds.length);
+						poMaster.setExternalId(branchCode);
+						resultResponse.setSuccess(true);
+					}
+					resultResponse.setSuccess(new MessItemsDAO().addNewOrderDetail(purchaseOrderList,poMaster));
+			}
+			
+					return resultResponse;
+			
+
+			}
 
 		public InvoiceDetailsResponseDto getInvoiceDetails(String strPage, String branchId) {
 		InvoiceDetailsResponseDto result = InvoiceDetailsResponseDto.builder().success(false).build();
@@ -326,6 +384,50 @@ public class MessItemsService {
 			return result;
 		}
 
+		/*
+		 * public InvoiceDetailsResponseDto getInvoiceOrderDetails(String strPage,
+		 * String branchId) { InvoiceDetailsResponseDto result =
+		 * InvoiceDetailsResponseDto.builder().success(false).build();
+		 * 
+		 * //String pages = "1"; if(branchId!=null){ try { int page = 1; int
+		 * recordsPerPage = 50; if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage)))
+		 * { page = Integer.parseInt(strPage); }
+		 * 
+		 * List<MessInvoiceDetails> invoicelist = new
+		 * MessItemsDAO().getInvoiceDetailsPagination((page - 1) * recordsPerPage,
+		 * recordsPerPage, Integer.parseInt(branchId));
+		 * 
+		 * Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new
+		 * LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
+		 * 
+		 * for (MessInvoiceDetails messInvoiceDetails : invoicelist) { MessSuppliers
+		 * messSuppliers = new MessSuppliers(); messSuppliers = new
+		 * MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
+		 * invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers); }
+		 * result.setInvoiceSuppliersMap(invoiceSuppliersMap);
+		 * 
+		 * int noOfRecords = new
+		 * MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(branchId)); int noOfPages
+		 * = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+		 * result.setNoOfPages(noOfPages); result.setCurrentPage(page);
+		 * result.setSuccess(true); } catch (Exception e) { e.printStackTrace(); } }
+		 * 
+		 * return result; }
+		 */
+
+
+		public InvoiceDetailsResponseDto getInvoiceOrderDetails() {
+			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
+			List<PoMaster> invoicelist = new MessItemsDAO().getPurchaseOrderMasterDetails();
+			Map<PoMaster,MessSuppliers> poMasterMap = new LinkedHashMap<PoMaster,MessSuppliers>();
+			for (PoMaster messInvoiceDetails : invoicelist) {
+				MessSuppliers messSuppliers = new MessSuppliers();
+				messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSupplierId());
+				poMasterMap.put(messInvoiceDetails, messSuppliers);
+			}
+			invoiceDetailsResponseDto.setPoMasterMap(poMasterMap);
+			return invoiceDetailsResponseDto;
+		}
 
 		public ResultResponse cancelPurchase(InvoiceIdsDto dto) {
 		ResultResponse result = ResultResponse.builder().success(true).build();
@@ -599,135 +701,27 @@ public class MessItemsService {
 					.build();
 		}
 
+		public InvoiceDetailsResponseDto getParticularInvoice(PurchaseDto purchaseDto) {
+			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
 
-		public ResultResponse saveOpeningStock(PurchaseDto dto, String branchId, String userId) {
-			ResultResponse resultResponse = ResultResponse.builder().build();
+			//List<PurchaseOrder> purchaseOrderList = new MessItemsDAO().getParticularInvoice(purchaseDto.getExternalId());
+			List<PurchaseOrder> purchaseOrderList = new MessStockEntryDAO().getPurchaseMRVDetails(purchaseDto.getExternalId());
+			invoiceDetailsResponseDto.setPurchaseOrderList(purchaseOrderList);
+			return invoiceDetailsResponseDto;
 			
-			if(branchId!=null){
-				
-				
-					//String itemsTotal = request.getParameter("itemsTotalAmount");
-					String itemsTotal = dto.getItemsTotal();
-					BigDecimal itemsTotalAmount = new BigDecimal(itemsTotal);
-					itemsTotalAmount = itemsTotalAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-					
-					String[] itemIds = dto.getItemIds();
-					String[] itemsName = dto.getItemsName();
-					String[] itemsQuantity = dto.getItemsQuantity();
-					String[] salesPrice = dto.getSalesPrice();
-					String[] batchNo = dto.getBatchNo();
-					String[] lineTotal = dto.getLineTotal();
-					String sup = dto.getSupplierId();
-					String randomString =  DataUtil.generateString(8);
-					String[] purchasePrice = dto.getPurchasePrice();
-					String[] sgst = dto.getStateGst();
-					String[] cgst = dto.getCenterGst();
+		}
 
-					//Invoice Details
-					MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
-					messInvoiceDetails.setBranchid(Integer.parseInt(branchId));
-					messInvoiceDetails.setExternalid("MRV");
-					messInvoiceDetails.setInvoicedate(DateUtil.indiandateParser(dto.getInvoiceDate()));
-					messInvoiceDetails.setEntrydate(DateUtil.todaysDate());
-					messInvoiceDetails.setInvoicetotal(itemsTotalAmount.floatValue());
-					messInvoiceDetails.setSupplierreferenceno(randomString+":"+dto.getSupplierReferenceNo());
-					messInvoiceDetails.setSuppliersid(0);
-					messInvoiceDetails.setStatus("ACTIVE");
-					
-					List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
-					
-					if(itemIds!=null) {
-						
-						for(int i=0; i < itemIds.length ; i++){
-							
-
-							MessStockEntry messStockEntry = new MessStockEntry();
-							
-							messStockEntry.setItemid(Integer.parseInt(itemIds[i]));
-							messStockEntry.setExternalid(itemsName[i]+"_"+salesPrice[i]);
-							messStockEntry.setBatchno(batchNo[i]);
-							messStockEntry.setReceiveddate(DateUtil.indiandateParser(dto.getItemEntryDate()));
-							messStockEntry.setItemunitprice(Float.parseFloat(purchasePrice[i]));
-							messStockEntry.setBranchid(Integer.parseInt(branchId));
-							messStockEntry.setQuantity(Float.parseFloat(itemsQuantity[i]));
-							messStockEntry.setAvailablequantity(Float.parseFloat(itemsQuantity[i]));
-							messStockEntry.setMessinvoicedetails(messInvoiceDetails);
-							messStockEntry.setSgst(Float.parseFloat(sgst[i]));
-							messStockEntry.setStatus("ACTIVE");
-							messStockEntry.setUserid(Integer.parseInt(userId));
-							
-							messStockEntryList.add(messStockEntry);
-						
-					}
-						
-							//Pass J.V. : credit the supplier debit the stock account
-							int openingStockLedgerId = getLedgerAccountId("openingstockitemaccountid"+Integer.parseInt(branchId));
-							int stockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
-							
-							VoucherEntrytransactions transactions = new VoucherEntrytransactions();
-							
-							transactions.setDraccountid(stockLedgerId);
-							transactions.setCraccountid(openingStockLedgerId);
-							transactions.setDramount(itemsTotalAmount);
-							transactions.setCramount(itemsTotalAmount);
-							transactions.setVouchertype(1);
-							transactions.setTransactiondate(DateUtil.indiandateParser(dto.getInvoiceDate()));
-							transactions.setEntrydate(DateUtil.todaysDate());
-							transactions.setNarration("Towards Opening Stock Entry");
-							transactions.setCancelvoucher("no");
-							transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
-							transactions.setBranchid(Integer.parseInt(branchId));
-							transactions.setUserid(Integer.parseInt(userId));
-							
-							String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+stockLedgerId;
-
-							String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+openingStockLedgerId;
-							
-							//End J.V
-							boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
-							resultResponse.setSuccess(result);
-							}
-					}
-				resultResponse.setSuccess(true);
-				return resultResponse;
-			}
-
-
-		public InvoiceDetailsResponseDto getInvoiceDetailsOpeningStock(String strPage, String branchId) {
-		InvoiceDetailsResponseDto result = InvoiceDetailsResponseDto.builder().success(false).build();
-
-			//String pages = "1";
-			if(branchId!=null){
-				try {
-					int page = 1;
-					int recordsPerPage = 50;
-						if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
-							page = Integer.parseInt(strPage);
-						}
-
-					List<MessInvoiceDetails> invoicelist = new MessItemsDAO().getInvoiceDetailsPaginationOpeningStock((page - 1) * recordsPerPage,
-							recordsPerPage, Integer.parseInt(branchId));
-					
-					Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
-					
-					for (MessInvoiceDetails messInvoiceDetails : invoicelist) {
-						MessSuppliers messSuppliers = new MessSuppliers();
-						messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
-						invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers);
-					}
-					result.setInvoiceSuppliersMap(invoiceSuppliersMap);
-					
-					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(branchId));
-					int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-					result.setNoOfPages(noOfPages);
-					result.setCurrentPage(page);
-					result.setSuccess(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+		public void cancelPurchaseOrder(PurchaseDto purchaseDto) {
+			String[] itemIds = purchaseDto.getItemIds();
+			if (itemIds != null) {
+				List<Integer> ids = new ArrayList();
+				for (String id : itemIds) {
+					System.out.println("id" + id);
+					ids.add(Integer.valueOf(id));
 				}
+				new MessItemsDAO().cancelPurchaseOrder(ids);
 			}
 			
-			return result;
 		}
 
 }
