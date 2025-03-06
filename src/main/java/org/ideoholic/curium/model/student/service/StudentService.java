@@ -111,8 +111,8 @@ public class StudentService {
 				setYear = createStudentDto.getYearofadmission();
 			}
 
-			stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
-			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
+			//stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
+			//createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			result.setSuccess(true);
 			return result;
 		}
@@ -323,36 +323,25 @@ public class StudentService {
 				result.setSuccess(false);
 			} else {
 				result.setStudent(parents.getStudent());
-				String classStudying = parents.getStudent().getClassstudying();
-				if (!classStudying.equalsIgnoreCase("")) {
-					String[] classParts = classStudying.split("--");
-					result.setClassStudying(classStudying);
-					result.setClassParts(classParts[0]);
-					result.setSecStudying("");
-					if(classParts.length>1) {
-						result.setSecStudying(classParts[1]);
-					}
-
-				} else {
-					result.setClassStudying(classStudying);
-					result.setSecStudying("");
-				}
-
-				String classAdmitted = parents.getStudent().getClassadmittedin();
-
-				if (!classAdmitted.equalsIgnoreCase("")) {
-
-					String[] classAdmittedParts = classAdmitted.split("--");
-					result.setClassAdm(classAdmittedParts[0]);
-					result.setSecAdm("");
-					if(classAdmittedParts.length>1) {
-						result.setSecAdm(classAdmittedParts[1]);
-					}
-
-				} else {
-					result.setClassAdm(classAdmitted);
-					result.setSecAdm("");
-				}
+				/*
+				 * String classStudying = parents.getStudent().getClassstudying(); if
+				 * (!classStudying.equalsIgnoreCase("")) { String[] classParts =
+				 * classStudying.split("--"); result.setClassStudying(classStudying);
+				 * result.setClassParts(classParts[0]); result.setSecStudying("");
+				 * if(classParts.length>1) { result.setSecStudying(classParts[1]); }
+				 * 
+				 * } else { result.setClassStudying(classStudying); result.setSecStudying(""); }
+				 * 
+				 * String classAdmitted = parents.getStudent().getClassadmittedin();
+				 * 
+				 * if (!classAdmitted.equalsIgnoreCase("")) {
+				 * 
+				 * String[] classAdmittedParts = classAdmitted.split("--");
+				 * result.setClassAdm(classAdmittedParts[0]); result.setSecAdm("");
+				 * if(classAdmittedParts.length>1) { result.setSecAdm(classAdmittedParts[1]); }
+				 * 
+				 * } else { result.setClassAdm(classAdmitted); result.setSecAdm(""); }
+				 */
 
 				//httpSession.setAttribute("feesdetails", feesdetails);
 
@@ -852,8 +841,11 @@ public class StudentService {
 					student.setAdmissionnumber((String)parentdetails[2]);
 					student.setName((String)parentdetails[3]);
 					student.setClassstudying((String)parentdetails[4]);
-					parent.setFathersname((String)parentdetails[5]);
-					parent.setMothersname((String)parentdetails[6]);
+					student.setReligion((String)parentdetails[5]);
+					student.setRemarks((String)parentdetails[6]);
+					student.setSts((String)parentdetails[7]);
+					parent.setFathersname((String)parentdetails[8]);
+					parent.setMothersname((String)parentdetails[9]);
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}
