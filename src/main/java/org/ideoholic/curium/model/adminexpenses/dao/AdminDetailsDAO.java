@@ -3,63 +3,44 @@ package org.ideoholic.curium.model.adminexpenses.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javax.transaction.Transactional;
 
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class AdminDetailsDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	Transaction transaction1;
-	SessionFactory sessionFactory;
+
+	@Autowired
+	private AdminExpensesRepository adminExpensesRepo;
 	
-	private static final Logger logger = LogManager.getLogger(AdminDetailsDAO.class);
-
-	public AdminDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
-
-	@SuppressWarnings("finally")
+	@Transactional
 	public Adminexpenses create(Adminexpenses adminexpenses) {
 		try {
-			// this.session = sessionFactory.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(adminexpenses);
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+			adminexpenses = adminExpensesRepo.save(adminexpenses);
+		} catch (Exception hibernateException) { 
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return adminexpenses;
 		}
+		return adminexpenses;
 	}
-
-	
 
 
 	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Adminexpenses> readListOfExpenses(String branchId) {
 		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
 
-		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+		Transaction transaction = null;
+		try{
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			results = (List<Adminexpenses>) session.createQuery("From Adminexpenses where branchid="+branchId)
@@ -67,7 +48,7 @@ public class AdminDetailsDAO {
 			System.out.println("Adminexpenses " + results.size());
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -81,49 +62,35 @@ public class AdminDetailsDAO {
 
 
 	public void deleteMultiple(List ids) {
-		
-
-		try {
+		Transaction transaction = null;
+		try{
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update Adminexpenses set voucherstatus='CANCELLED' where idAdminExpenses IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
 		}
 
-	
-		
-	/*	try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from Adminexpenses where idAdminExpenses IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}*/
-
 	}
 
 	public List<Adminexpenses> searchExpensesbydate(String queryMain) {
 		
-		java.util.List<Adminexpenses> adminExpenses = new ArrayList<Adminexpenses>();
-        try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+		List<Adminexpenses> adminExpenses = new ArrayList<Adminexpenses>();
+		Transaction transaction = null;
+		try{
+			Session session = HibernateUtil.openCurrentSession();
 
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
-            adminExpenses = (java.util.List<Adminexpenses>) HQLquery.list();
+            adminExpenses = (List<Adminexpenses>) HQLquery.list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -137,10 +104,9 @@ public class AdminDetailsDAO {
 		
 
 			Adminexpenses results = new Adminexpenses();
-
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				
 				Query query = session
@@ -149,7 +115,7 @@ public class AdminDetailsDAO {
 
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -161,14 +127,16 @@ public class AdminDetailsDAO {
 	}
 
 	public void rejectVoucher(List ids) {
-		try {
+		Transaction transaction = null;
+		try{
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update Adminexpenses set voucherstatus='rejected' where idAdminExpenses IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -177,22 +145,21 @@ public class AdminDetailsDAO {
 	}
 
 	public void approveVoucher(List ids) {
-		try {
+		Transaction transaction = null;
+		try{
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update Adminexpenses set voucherstatus='approved' where idAdminExpenses IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
 		}
 
 	}
-
-	
-	
 
 }
