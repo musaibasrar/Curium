@@ -34,6 +34,8 @@ import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -280,36 +282,47 @@ public class Student implements java.io.Serializable {
 	@Column(name = "promotedyear", length = 10)
 	private String promotedyear;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "attendee")
 	private List<Studentdailyattendance> studentDailyAttendanceList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Studentotherfeesstructure> studentFeesStructureList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	private List<Feesdetails> feeFeesDetailsList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	private List<ExamRank> examRankList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Studentfeesstructure> feeStudentFeesStructureList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	private List<Parents> parentsList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Feescollection> feesCollectionList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Otherfeescollection> otherFeesCollectionList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Receiptinfo> receiptInfoList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "student")
 	private List<Marks> marksList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Otherreceiptinfo> otherreceiptinfoList;
 

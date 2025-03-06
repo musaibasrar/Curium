@@ -53,6 +53,9 @@ public class DocumentService {
 
 	@Autowired
 	private StandardService standardService;
+	
+	@Autowired
+	private DocumentDAO documentDAO;
 
 	private HttpServletResponse response;
 	
@@ -122,7 +125,7 @@ public class DocumentService {
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
-			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
+			 Transfercertificate transferCertificate = documentDAO.getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
@@ -157,7 +160,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
+					transferCertificateString = documentDAO.generateTransferCertificate(tc);
 			}
 		 }
 		 
@@ -295,7 +298,7 @@ public class DocumentService {
 			Parents parents = new Parents();
 			Transfercertificate tc = new Transfercertificate();
 
-			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
+			tc = documentDAO.getTransferCertificateDetails(studentId);
 
 			String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
 			parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
