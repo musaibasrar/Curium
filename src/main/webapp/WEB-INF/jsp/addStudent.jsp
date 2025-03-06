@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Student</title>
+<title>Add Customer</title>
 <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/nortuntrading/css/validation/jquery.ketchup.css">
 
@@ -397,7 +397,12 @@
 			addStudent();
 
 		});
+		
+		$("#saveandbill").button().click(function() {
+			generateBill();
 
+		});
+		
 		$(".cancel").button().click(function() {
 			Cancel();
 
@@ -735,13 +740,13 @@ $(document).ready(function() {
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<li><a href="#fragment-1">Customer's Details</a></li>
+					<!-- <li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<li><a href="#fragment-7">Stamp Fee</a></li> -->
 				</ul>
 
 
@@ -755,20 +760,14 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td class="alignLeft">Admission Number* &nbsp;</td>
 							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
-									<td ><label> <input
-											name="sts" type="text" class="myclass" size="36"
-											style="text-transform:capitalize;"
-											id="sts" size="36">
-
-									</label></td>
+							
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -778,15 +777,28 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
+							<td class="alignLeft">Customer Name* &nbsp;</td>
 							<td ><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" required
 									style="text-transform:capitalize;"
 									required>
-							</label></td>
+							</label>
+							
+							<input name="fathersname" type="hidden" class="myclass"	style="text-transform:capitalize;" value="." id="fathersname" size="36">
+							<input name="mothersname" type="hidden" class="myclass" id="name"  value="." style="text-transform:capitalize;" size="36"> 
+											
+											</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">TRN&nbsp;</td>
+									<td ><label> <input
+											name="sts" type="text" class="myclass" size="36"
+											style="text-transform:capitalize;"
+											id="sts" size="36">
 
-							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Male<input
+									</label></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
+							<td  height="30" class="alignLeft" style="display: none;">&nbsp;Male<input
 								type="checkbox" value="Male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="no:male"
@@ -803,14 +815,54 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+						
+										<td class="alignLeft">Contact Number &nbsp;</td>
 
-						<tr>
-						<tr>
+							<td >
+								<label>
+									<input name="religion"
+									type="text" class="myclass" id="religion" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label>
+
+							</td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Address &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+						</tr>
+
+					<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						
+
+						<tr style="display: none;">
+						
+						<td class="alignLeft">RTE
+										&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+										
 							<td class="alignLeft">Date Of Birth &nbsp;</td>
 							<td ><label> <input name="dateofbirth"
 									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
 									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+									>
 							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
@@ -821,16 +873,16 @@ $(document).ready(function() {
 
 
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
 
-						<tr>
+						<tr style="display: none;">
 
 							<td  class="alignLeft">Place Of Birth, Tq,
 								Dist.&nbsp;</td>
@@ -842,20 +894,20 @@ $(document).ready(function() {
 							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
 							<td ><label><input name="dateofadmission" autocomplete="false"
 									type="text" class="myclass" id="dateofadmission" size="36"
-									data-validate="validate(required)"> </label></td>
+									> </label></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
-							<td ><label> <select name="addclass" required
+							<td ><label> <select name="addclass" 
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -909,14 +961,14 @@ $(document).ready(function() {
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td  class="alignLeft">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
@@ -951,14 +1003,14 @@ $(document).ready(function() {
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 
 
 							<td class="alignLeft">Religion &nbsp;</td>
@@ -969,8 +1021,8 @@ $(document).ready(function() {
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
-							</label> --> <label> <select name="religion"
-									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+							</label> --> <label> <select name="religionone"
+									id="religionone" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<option>Islam</option>
 										<option>Hinduism</option>
@@ -1003,13 +1055,13 @@ $(document).ready(function() {
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td class="alignLeft">Students Caste &nbsp;</td>
 							<td ><label> <input name="studentscaste"
 							style="text-transform:capitalize;"
@@ -1029,13 +1081,13 @@ $(document).ready(function() {
 
 							</label></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
 							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -1053,13 +1105,13 @@ $(document).ready(function() {
 
 							</label></td>
 						</tr>	
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td class="alignLeft" >Bag No.&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
@@ -1074,14 +1126,14 @@ $(document).ready(function() {
 
 							</label></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td class="alignLeft" >Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
@@ -1126,14 +1178,14 @@ $(document).ready(function() {
 							</label>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
-						<tr>
+						<tr style="display: none;">
 						
 							<td class="alignLeft"  >RTE
 										&nbsp;</td>
@@ -1146,27 +1198,27 @@ $(document).ready(function() {
 										</td>
 										
 							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
+							<td ><label> <input name="remarksone"
+									type="text" class="myclass" id="remarksone" size="36"
 									style="text-transform:capitalize;"
 									>
 							</label></td>
 						</tr>
 
-<tr>
+<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="36"
-									data-validate="validate(required)">
+									>
 							</label></td>
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -1208,19 +1260,19 @@ $(document).ready(function() {
                         </td>
 							
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 										
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td ><label> <input name="crecorddate"
 									type="text"
 									class="myclass" id="datepickerDND" size="36"
-									data-validate="validate(required)">
+									>
 							</label></td>
 						</tr>
 						<tr>
@@ -1233,19 +1285,19 @@ $(document).ready(function() {
 
 						<div>
 							<table width="100%">
-								<tr>
+								<tr style="display: none;">
 
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Next</a></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 
 									<td><br /></td>
 								</tr>
@@ -1253,6 +1305,8 @@ $(document).ready(function() {
 								<tr>
 									<td align="center">
 
+										<button id="saveandbill" class="save">Save & Generate Bill</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 										<button id="savestudents" class="save" name="savestudent">Save</button>
 
@@ -1269,7 +1323,7 @@ $(document).ready(function() {
 
 
 
-						<div id="fragment-3">
+						<div id="fragment-3" style="display: none;">
 							<table width="100%" border="0" align="center">
 								<tr>
 									<td><label style="font-size: 16px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg files</label><br><br><br><br></td>
@@ -1384,7 +1438,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-4">
+						<div id="fragment-4" style="display: none;">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1413,7 +1467,7 @@ $(document).ready(function() {
 									<td><label> <input
 											name="dateofleaving" type="text" class="myclass" autocomplete="false"
 											id="dateofleaving" size="36"
-											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
+											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1461,7 +1515,7 @@ $(document).ready(function() {
 											<input
 											name="dateoftcissued" type="text" class="myclass" autocomplete="false"
 											id="dateoftcissued" size="36" placeholder="Date of Transfer Certificate"
-											data-validate="validate(required)">
+											>
 									</label></td>
 								</tr>
 								<tr>
@@ -1525,7 +1579,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-2">
+						<div id="fragment-2" style="display: none;">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1537,15 +1591,15 @@ $(document).ready(function() {
 								<tr>
 									<td class="alignLeft">Father's Name* &nbsp;</td>
 									<td ><label> <input
-											name="fathersname" type="text" class="myclass" required
+											name="fathersnameone" type="text" class="myclass" 
 											style="text-transform:capitalize;"
 											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
+											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
 									<td><label> <input
-											name="mothersname" type="text" class="myclass" id="name" required
+											name="mothersnameone" type="text" class="myclass" id="name" 
 											style="text-transform:capitalize;"
 											size="36"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
@@ -1650,7 +1704,7 @@ $(document).ready(function() {
 									<td class="alignLeft">Contact Number* &nbsp;</td>
 
 									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
+											name="contactnumber" type="text" class="myclass" 
 											style="text-transform:capitalize;"
 											id="contactnumber" size="36" maxlength="10" minlength="10">
 
@@ -1791,7 +1845,7 @@ $(document).ready(function() {
 							</table>
 						</div>
 						
-						<div id="fragment-5">
+						<div id="fragment-5" style="display: none;">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -1967,7 +2021,7 @@ $(document).ready(function() {
 
 						</div>
 						
-						<div id="fragment-6">
+						<div id="fragment-6" style="display: none;">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -2057,7 +2111,7 @@ $(document).ready(function() {
 
 						</div>
 						
-						<div id="fragment-7">
+						<div id="fragment-7" style="display: none;">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2144,6 +2198,15 @@ $(document).ready(function() {
 								  }
 							}
 
+							function generateBill() {
+								var form1 = document.getElementById("form1");
+								if(form1.checkValidity()) {
+									form1.savestudent.disabled = true;
+									form1.action = "/nortuntrading/StudentProcess/generateBill";
+									form1.submit();
+								  }
+							}
+							
 							function Cancel() {
 								var form1 = document.getElementById("form1");
 								form1.action = "/nortuntrading/StudentProcess/viewAll";

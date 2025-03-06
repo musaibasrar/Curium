@@ -632,11 +632,8 @@ for(Cookie cookie : cookies){
 									<td><label> <select name="unitofmeasure"
 									id="unitofmeasure" style="font-size: 14px;" class="dropdownlist" required>
 										<option selected></option>
-										<option>Kilogram</option>
-										<option>Litre</option>
-										<option>Piece</option>
-										<option>Box</option>
-										<option>Packet</option>
+										<option>Meters</option>
+										<option>Pieces</option>
 										
 								</select></label></td>
 								
@@ -707,12 +704,8 @@ for(Cookie cookie : cookies){
                                  <select name="updateunitofmeasure_<c:out value="${messstock.messitems.id}"/>"
 									id="updateunitofmeasure" style="width: 100px;height: 20px;background-color: #E3EFFF;border-style: none;color: #4B6A84;" >
 										<option selected>${messstock.messitems.unitofmeasure}</option>
-										<option>Kilogram</option>
-										<option>Litre</option>
-										<option>Piece</option>
-										<option>Box</option>
-										<option>Carton</option>
-										<option>Packet</option>
+										<option>Meters</option>
+										<option>Pieces</option>
 								</select>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">

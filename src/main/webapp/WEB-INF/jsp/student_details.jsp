@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details</title>
+        <title>Customer Details</title>
 
         <script type="text/javascript" language="JavaScript" src="/nortuntrading/js/motionpack.js"></script>
         <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -313,10 +313,9 @@
             $(function() {
 
                 $(".accordion").accordion({
-                    collapsible: true,
-                    navigation: true,
-                    active: false,
-                    autoHeight: false});
+                    collapsible: false,
+                    active: 0,
+                    heightStyle: "content"});
                 $("#accordion1").accordion({
                     collapsible: true,
                     navigation: true,
@@ -439,19 +438,19 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Student Details</a></h3>
+                <h3><a href="#">Customer Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
                     
                     
-                    <tr>
+                    <tr style="display: none;">
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
                     
-                    	<tr>
+                    	<tr style="display: none;">
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
@@ -472,13 +471,35 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.gender}" />
+                            <td width="25%" class="alignLeft" height="50">TRN
+								</td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.sts}" />
                             </td>
                         </tr>
                         <tr>
+                        <td  width="25%"  class="alignLeft" height="50" >Contact Number
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.religion}" />
+                            </td>
+                           <td  width="25%"  class="alignLeft" height="50">Address
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.remarks}" />
+                                
+                            </td>
+                         
+                        </tr>
+                        <tr style="display: none;">
+                        
+                        	 <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.studentscastecertno}" />
+                            </td>
+                            
+                            
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
@@ -491,7 +512,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.age}" />
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="display: none;">
                             <td width="25%"  class="alignLeft" height="50" >Place of birth, Tq, Dist.</td>
                             <td width="25%"  class="tablerows" >
                               <c:out default="" value="${student.placeofbirth}" />
@@ -504,7 +525,7 @@ for(Cookie cookie : cookies){
                         </tr>  
                         
                           
-                        <tr>
+                        <tr style="display: none;">
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
@@ -523,7 +544,7 @@ for(Cookie cookie : cookies){
                         
                         
                         
-                         <tr>
+                         <tr style="display: none;">
                             <td  width="25%"  class="alignLeft" height="50">Blood Group
                             </td>
                             <td width="25%" class="tablerows">
@@ -537,7 +558,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                         <td  width="25%"  class="alignLeft" height="50" >Religion
                             </td>
                             <td width="25%" class="tablerows" >
@@ -558,7 +579,7 @@ for(Cookie cookie : cookies){
                             </td>
                          
                         </tr>
-                        <tr>
+                        <tr style="display: none;">
                          <td  width="25%"  class="alignLeft" height="50" >Students Caste
                             </td>
                             <td width="25%" class="tablerows" >
@@ -572,7 +593,7 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                          <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
                             </td>
                             <td width="25%" class="tablerows" >
@@ -593,7 +614,7 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                          <td  width="25%"  class="alignLeft" height="50" >Bag No.
                             </td>
                             <td width="25%" class="tablerows" >
@@ -606,7 +627,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.disabilitychild}" />
                             </td>                        
                         </tr>
-                        <tr>
+                        <tr style="display: none;">
                         <td  width="25%"  class="alignLeft" height="50" >Special Category
                             </td>
                             <td width="25%" class="tablerows" >
@@ -619,7 +640,7 @@ for(Cookie cookie : cookies){
                             </td>                           
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                         
                          <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
@@ -642,7 +663,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                         
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
@@ -659,7 +680,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                                                 
-                        <tr>
+                        <tr style="display: none;">
                             <td  width="25%"  class="alignLeft" height="50" >Class of leaving
                             </td>
                             <td width="25%" class="tablerows" >
@@ -675,7 +696,7 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
-                        <tr>
+                        <tr style="display: none;">
                             <td  width="25%"  class="alignLeft" height="50" >Reason for leaving
                             </td>
                             <td width="25%" class="tablerows" >
@@ -692,7 +713,7 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
-                         <tr>
+                         <tr style="display: none;">
                             <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
                             <td width="25%" class="tablerows">
@@ -719,7 +740,7 @@ for(Cookie cookie : cookies){
     </div>
     
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <div class="accordion" style="width: 100%;height: 100%;display: none;">
 		
                 <h3><a href="#">Documents</a></h3>
                 <div>
@@ -774,7 +795,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    	<div class="accordion" style="width: 100%;height: 100%">
+    	<div class="accordion" style="width: 100%;height: 100%;display: none;">
 		
                 <h3><a href="#">Previous School Details</a></h3>
                 <div>
@@ -851,7 +872,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <div class="accordion" style="width: 100%;height: 100%;display: none;">
 		
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
@@ -897,7 +918,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-            <div id="accordion1" style="width: 100%;height: 100%">
+            <div id="accordion1" style="width: 100%;height: 100%;display: none;">
 
                 <h3><a href="#">Parent's Details</a></h3>
                 <div>
@@ -1031,7 +1052,7 @@ for(Cookie cookie : cookies){
 
 
             </div>
-              <div id="accordion2" style="width: 100%;height: 100%">
+              <div id="accordion2" style="width: 100%;height: 100%;display: none;">
 
                 <h3><a href="#">Fees Details</a></h3>
                 
@@ -1086,7 +1107,7 @@ for(Cookie cookie : cookies){
 
 
             </div>
-            <div id="accordion3" style="width: 100%;height: 100%">
+            <div id="accordion3" style="width: 100%;height: 100%;display: none;">
 
                 <h3><a href="#">Fees Structure</a></h3>
                 
@@ -1166,8 +1187,8 @@ for(Cookie cookie : cookies){
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button id="print" >Print</button>
+                               <!--  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="print" >Print</button> -->
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
 

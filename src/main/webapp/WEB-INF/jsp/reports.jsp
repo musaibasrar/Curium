@@ -292,7 +292,7 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             
              
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Customers</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -300,171 +300,10 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/nortuntrading/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
-            			</td>
-            		</tr>
-            		
                 </table>
             </div>
             
-            
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/feessummary" style="font-size: 12px;">Fees Summary</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/nortuntrading/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/nortuntrading/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/nortuntrading/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/nortuntrading/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -507,6 +346,7 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
+            
             
             <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -553,18 +393,16 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
-             <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
-            
+              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
-            
             	<table style=" border-collapse: collapse;width: 100%">
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
+            				 <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
-            		
-            	</table>
+                </table>
             </div>
             
             <h5 class="sideaccordian">
@@ -583,66 +421,7 @@ for(Cookie cookie : cookies){
 			</table>
 		</div>
 		
-		<!-- <h5 class="sideaccordian">
-			<a href="#">Tasks</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/nortuntrading/JobProcess/taskReport"
-						style="font-size: 12px;">Tasks Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
 		
-		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
-
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-		
-          <!--   <h5 class="sideaccordian">
-			<a href="#">Appointments</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/nortuntrading/AppointmentProcess/appointmentReport"
-						style="font-size: 12px;">Appointments Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
-             <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-            
             </div>
                    
             

@@ -338,78 +338,12 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 style="font-size: 12px"><a href="#">General</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/nortuntrading/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/nortuntrading/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
-                <a target="mainFrame" href="/nortuntrading/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
-
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/nortuntrading/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/nortuntrading/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/nortuntrading/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/nortuntrading/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
-            </div>
-            
-              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
-            <div>
-				<a target="mainFrame" href="/nortuntrading/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
-            <div>
-                
-                <a target="mainFrame" href="/nortuntrading/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/nortuntrading/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
-            </div>
 
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/nortuntrading/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/nortuntrading/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/nortuntrading/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
-            
-              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
-            <div>
-                <a target="mainFrame" href="/nortuntrading/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/nortuntrading/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
-            </div> -->
             
             </div>
             
