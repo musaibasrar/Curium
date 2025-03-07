@@ -11,59 +11,44 @@ import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class AppointmentDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	SessionFactory sessionFactory;
-	
-	private static final Logger logger = LogManager.getLogger(AppointmentDAO.class);
 
-	public AppointmentDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+	@Autowired
+	private AppointmentRepository appoinmentRepo;
 
+	public String addAppointment(Appointment appointment) {
+		String resultString = null;
+		try {
 
-		public String addAppointment(Appointment appointment) {
-		
-			String resultString = null;
-			try {
-					transaction = session.beginTransaction();
-					
-		
-					 Query queryAppointment = session.createQuery("from Appointment where branchid = "+appointment.getBranchid()+" order by id DESC");
-					 	List<Appointment> appointmentList = queryAppointment.list();
-					 	
-					 	if(appointmentList.size() > 0) {
-					 		String appNo = appointmentList.get(0).getExternalid();
-					 		String splitAppNo = appNo.substring(2);
-					 		
-					 		if(Integer.parseInt(splitAppNo) < 1000) {
-					 			appointment.setExternalid("AP"+String.format("%03d", Integer.parseInt(splitAppNo)+1));
-					 		}else {
-					 			appointment.setExternalid("AP"+String.format("%03d", 1));
-					 		}
-					 	}else {
-					 		appointment.setExternalid("AP"+String.format("%03d", 1));
-					 	}
-					 	
-					 	
-					session.save(appointment);
-					transaction.commit();
-					resultString = appointment.getExternalid();
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
-				e.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
+			List<Appointment> appointmentList = appoinmentRepo.findByBranchidOrderByIdDesc(appointment.getBranchid());
+
+			if (appointmentList.size() > 0) {
+				String appNo = appointmentList.get(0).getExternalid();
+				String splitAppNo = appNo.substring(2);
+
+				if (Integer.parseInt(splitAppNo) < 1000) {
+					appointment.setExternalid("AP" + String.format("%03d", Integer.parseInt(splitAppNo) + 1));
+				} else {
+					appointment.setExternalid("AP" + String.format("%03d", 1));
+				}
+			} else {
+				appointment.setExternalid("AP" + String.format("%03d", 1));
 			}
-			return resultString;
+			appointment = appoinmentRepo.save(appointment);
+			resultString = appointment.getExternalid();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
+		return resultString;
+	}
 
 
 		public List<Appointment> readListOfObjectsPagination(int offset,
@@ -71,7 +56,9 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 
-			try {
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				
 				transaction = session.beginTransaction();
 				Query query = session.createQuery("From Appointment as appointment where appointment.branchid = "+branchId+" order by appointment.id desc").setCacheable(true).setCacheRegion("commonregion");
@@ -81,7 +68,7 @@ public class AppointmentDAO {
 				transaction.commit();
 				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 
 			} finally {
@@ -93,19 +80,19 @@ public class AppointmentDAO {
 		public int getNoOfRecords(int branchId) {
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -119,19 +106,19 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where status != 'Cancelled'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -145,7 +132,9 @@ public class AppointmentDAO {
 		public boolean completeAppointments(List<Integer> appointmentIdsList) {
 			
 			boolean result = false;
-			try {
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : appointmentIdsList) {
@@ -155,7 +144,7 @@ public class AppointmentDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -167,7 +156,9 @@ public class AppointmentDAO {
 		public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
 			
 			List<Appointment> result = new ArrayList<Appointment>();
-			try {
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : appointmentIdsList) {
@@ -180,7 +171,7 @@ public class AppointmentDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -193,19 +184,19 @@ public class AppointmentDAO {
 
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				Query query = session.createQuery("From Appointment where (appointmentdate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion");
 				results = query.getResultList();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -222,19 +213,19 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Completed'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -249,19 +240,19 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Scheduled' ").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -276,19 +267,19 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Completed' and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -303,19 +294,19 @@ public class AppointmentDAO {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 
 				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Scheduled'  and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -330,11 +321,13 @@ public class AppointmentDAO {
 			
 	        List<Appointment> results = new ArrayList<Appointment>();
 	        
-	        try {
+			Transaction transaction = null;
+			try{
+					Session session = HibernateUtil.openCurrentSession();
 	                transaction = session.beginTransaction();
 	                results = (List<Appointment>) session.createQuery(query).setCacheable(true).setCacheRegion("commonregion").list();
 	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
 
@@ -347,7 +340,9 @@ public class AppointmentDAO {
 		public boolean updateAppointments(List<Appointment> appointmentList) {
 			
 			boolean result = false;
-			try {
+			Transaction transaction = null;
+			try{
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				
 					for (Appointment appointment : appointmentList) {
@@ -357,7 +352,7 @@ public class AppointmentDAO {
 					
 					transaction.commit();
 					result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();

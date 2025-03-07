@@ -34,11 +34,17 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class AppointmentService {
 
 	@Autowired
 	private HttpServletResponse response;
+	
+	@Autowired
+	private AppointmentDAO appointmentDao;
 	
 	 private static final int BUFFER_SIZE = 4096;
 
@@ -52,7 +58,7 @@ public class AppointmentService {
 		String[] pidContact = studentId[0].split(":");
 		String[] apptDate = appointmentDate.split("-");
 		String appointmentDateParent = apptDate[2]+"/"+apptDate[1]+"/"+apptDate[0];
-		System.out.println("Date "+appointmentDateParent);
+		log.debug("Date "+appointmentDateParent);
 		
 
 		if(branchId != null){
@@ -92,7 +98,7 @@ public class AppointmentService {
 						    meridian = "PM";
 						  }
 				appointment.setAppointmenttime(outputStartTime+" "+meridian);		  
-				String resultQuery = new AppointmentDAO().addAppointment(appointment);
+				String resultQuery = appointmentDao.addAppointment(appointment);
 				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
 				
 				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
@@ -120,10 +126,10 @@ public class AppointmentService {
 					if (!"".equalsIgnoreCase(DataUtil.emptyString(String.valueOf(viewAllAppointmentsDto.getPage())))) {
 						page = viewAllAppointmentsDto.getPage();
 					}
-				List<Appointment> list = new AppointmentDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
+				List<Appointment> list = appointmentDao.readListOfObjectsPagination((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId));
 					viewAllAppoinmentsResponseDto.setStudentList(list);
-				int noOfRecords = new AppointmentDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = appointmentDao.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				    viewAllAppoinmentsResponseDto.setAppointmentList(list);
 				    viewAllAppoinmentsResponseDto.setNoOfPages(noOfPages);
@@ -147,7 +153,7 @@ public class AppointmentService {
 				appointmentIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new AppointmentDAO().completeAppointments(appointmentIdsList);
+			result = appointmentDao.completeAppointments(appointmentIdsList);
 			 return ResultResponse.builder().success(result).build();
 
 		}
@@ -165,7 +171,7 @@ public class AppointmentService {
 				appointmentIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new AppointmentDAO().cancelAppointments(appointmentIdsList);
+			result = appointmentDao.cancelAppointments(appointmentIdsList);
 			String sendCancelAppointmentSMS = new DataUtil().getPropertiesValue("sendcancelappointmentsms");
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCancelAppointmentSMS)) {
 				for (Appointment appointment : result) {
@@ -201,7 +207,7 @@ public class AppointmentService {
 	    String toDate = new SimpleDateFormat("yyyy-MM-dd").format(dateTo);
 	    
 	    
-	    return new AppointmentDAO().getNoOfRecordsMonthly(fromDate, toDate);
+	    return appointmentDao.getNoOfRecordsMonthly(fromDate, toDate);
 }
 
 	public AppointmentResponseDto generateAppointmentsReport(GenerateAppointmentsReportDto generateAppointmentsReportDto) {
@@ -230,7 +236,7 @@ public class AppointmentService {
 		}else {
 			appointmentResponseDto.setStudentSelected("");
 		}
-		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+subQuery);
+		appointmentList = appointmentDao.generateAppointmentsReport(queryMain+subQuery);
 		appointmentResponseDto.setAppointmentList(appointmentList);
 
 		appointmentResponseDto.setTransactionFromDateSelected(generateAppointmentsReportDto.getFromDate());
@@ -278,7 +284,7 @@ public class AppointmentService {
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
 			String querySub = "";
 			querySub = " ap.createddate between '"+fromDate+"' and '"+toDate+"'";
-			AppointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain+querySub);
+			AppointmentList = appointmentDao.generateAppointmentsReport(queryMain+querySub);
 			
 			totalAppointments.add("\"" + AppointmentList.size() + "\"");
 			//Date Format
@@ -400,7 +406,7 @@ public class AppointmentService {
 			outStream.close();
 			
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.debug("" + e);
 			return ResultResponse.builder().success(false).build();
 		}
 		return ResultResponse.builder().success(true).build();
@@ -411,7 +417,7 @@ public class AppointmentService {
 		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 
-		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain);
+		appointmentList = appointmentDao.generateAppointmentsReport(queryMain);
 		return ResultResponse.builder().resultList(appointmentList).success(true).build();
 	}
 
@@ -456,7 +462,7 @@ public class AppointmentService {
 				 }
 				 appointmentList.add(appt);
 			}
-			result = new AppointmentDAO().updateAppointments(appointmentList);
+			result = appointmentDao.updateAppointments(appointmentList);
 			return ResultResponse.builder().success(result).build();
 		}
 
