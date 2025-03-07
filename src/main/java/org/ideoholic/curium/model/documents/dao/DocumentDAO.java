@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DocumentDAO {
 	
 	@Autowired
-    private DocumentRepository documentRepo;
+    private TransferCertificateRepository TransferCertificateRepo;
 
     @Autowired
     private QueryUtil queryUtil;
@@ -23,7 +23,7 @@ public class DocumentDAO {
 	public String generateTransferCertificate(Transfercertificate tc) {
 		String status = "false";
 		try {
-			documentRepo.save(tc);
+			TransferCertificateRepo.save(tc);
 			status = "true";
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -40,7 +40,7 @@ public class DocumentDAO {
 		Transfercertificate tc = new Transfercertificate();
 		
 		try {
-			tc = documentRepo.findBySid(studentId);
+			tc = TransferCertificateRepo.findBySid(studentId);
 		}  catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
