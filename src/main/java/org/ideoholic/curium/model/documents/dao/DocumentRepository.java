@@ -4,5 +4,5 @@ import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DocumentRepository extends JpaRepository<Transfercertificate, Integer>{
-
+	 Transfercertificate findBySid(int sid);
 }
