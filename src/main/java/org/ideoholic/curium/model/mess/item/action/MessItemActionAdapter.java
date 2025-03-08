@@ -233,4 +233,32 @@ public class MessItemActionAdapter {
 		messItemsService.cancelPurchaseOrder(purchaseDto);
 		
 	}
+	
+	public void saveOpeningStock() {
+        PurchaseDto dto = new PurchaseDto();
+        dto.setItemsTotal(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+        dto.setItemIds(request.getParameterValues("itemids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setItemsQuantity(request.getParameterValues("itemsquantity"));
+        dto.setSalesPrice(request.getParameterValues("price"));
+        dto.setBatchNo(request.getParameterValues("batchno"));
+        dto.setLineTotal(request.getParameterValues("linetotal"));
+        dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
+        dto.setStateGst(request.getParameterValues("sgst"));
+        dto.setItemEntryDate(request.getParameter("itementrydate"));
+        dto.setInvoiceDate(request.getParameter("invoicedate"));
+        dto.setSupplierReferenceNo("OpeningBalance");
+        
+        ResultResponse resultResponse = messItemsService.saveOpeningStock(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsreceived", resultResponse.isSuccess());
+    }
+
+	public void getInvoiceDetailsOpeningStock() {
+        String page = request.getParameter("page");
+
+        InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceDetailsOpeningStock(page, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("invoicelist", responseDto.getInvoiceSuppliersMap());
+        request.setAttribute("noOfPages", responseDto.getNoOfPages());
+        request.setAttribute("currentPage", responseDto.getCurrentPage());
+    }
 }

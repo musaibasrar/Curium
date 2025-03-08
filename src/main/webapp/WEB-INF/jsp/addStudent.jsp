@@ -759,6 +759,25 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr style="display: none;">
+							<td  class="alignLeft">Application Type&nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Admission<input
+								type="checkbox" value="Admission" name="stream" id="yes:at"
+								onclick="yesCheck(this.id);" checked/>&nbsp; &nbsp;Registration<input
+								type="checkbox" value="Registration" name="stream" id="no:at"
+								onclick="noCheck(this.id)" />
+								&nbsp; &nbsp;Alumni<input
+								type="checkbox" value="Alumni" name="stream" id="maybe:at"
+								onclick="maybeCheck(this.id)" />
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 						<tr style="display: none;">
 							<td class="alignLeft">Admission Number* &nbsp;</td>

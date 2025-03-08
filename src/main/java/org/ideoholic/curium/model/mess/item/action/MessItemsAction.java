@@ -173,5 +173,19 @@ public class MessItemsAction {
 		return "purchaseorder";
 	}
 
+	@GetMapping("/openingStock")
+	public String openingStock() {
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
+	
+	@PostMapping("/saveOpeningStock")
+	public String saveOpeningStock() {
+		messItemActionAdapter.saveOpeningStock();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
 
 }

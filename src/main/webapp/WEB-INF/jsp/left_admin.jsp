@@ -464,6 +464,25 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
+            
+                        <h5 class="sideaccordian" ><a href="#">Customer</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/nortuntrading/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/nortuntrading/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            
 
 		 <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
@@ -503,23 +522,6 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Customer</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/nortuntrading/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
             
             <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               

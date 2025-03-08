@@ -546,7 +546,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td class="alignLeft">Application Type&nbsp;</td>
 							<td>Admission<input type="checkbox"
 								value="Admission" name="stream" id="yes:at" onclick="yesCheck(this.id);"
