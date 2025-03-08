@@ -3,7 +3,6 @@ package org.ideoholic.curium.model.documents.dao;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
-import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 public class DocumentDAO {
 	
 	@Autowired
-    private TransferCertificateRepository TransferCertificateRepo;
+    private TransferCertificateRepository transferCertificateRepo;
 
-    @Autowired
-    private QueryUtil queryUtil;
-	
 	@Transactional 
 	public String generateTransferCertificate(Transfercertificate tc) {
 		String status = "false";
 		try {
-			TransferCertificateRepo.save(tc);
+			transferCertificateRepo.save(tc);
 			status = "true";
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -34,13 +30,12 @@ public class DocumentDAO {
 	}
 
 
-
 	@Transactional 
 	public Transfercertificate getTransferCertificateDetails(int studentId) {
 		Transfercertificate tc = new Transfercertificate();
 		
 		try {
-			tc = TransferCertificateRepo.findBySid(studentId);
+			tc = transferCertificateRepo.findBySid(studentId);
 		}  catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -48,5 +43,4 @@ public class DocumentDAO {
 		}
 		return tc;
 	}
-	
 }

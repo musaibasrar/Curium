@@ -3,9 +3,8 @@ package org.ideoholic.curium.model.appointment.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -23,6 +22,7 @@ public class AppointmentDAO {
 	@Autowired
 	private AppointmentRepository appoinmentRepo;
 
+	@Transactional
 	public String addAppointment(Appointment appointment) {
 		String resultString = null;
 		try {
