@@ -75,11 +75,15 @@ public class UserService {
     @Autowired
     private YearDAO yearDao;
 
+	@Autowired
+	private AttendanceDAO attendanceDao;
+	
     @Autowired
     private HttpServletRequest request;
 
     @Autowired
     private HttpServletResponse response;
+    
     @Autowired
     private HttpSession httpSession;
 
@@ -119,7 +123,7 @@ public class UserService {
 
             if (userType[0].equalsIgnoreCase("parents")) {
                 LocalDate currentDate = LocalDate.now();
-                Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName, currentDate);
+                Studentdailyattendance attendance = attendanceDao.getStudentTodaysAttendance(userName, currentDate);
                 if (attendance != null) {
                     result.setAttendanceStatus(attendance.getAttendancestatus());
                 }

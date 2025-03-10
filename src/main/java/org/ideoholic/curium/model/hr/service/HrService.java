@@ -49,6 +49,9 @@ public class HrService {
 	@Autowired
 	private YearDAO yearDao;
 	
+	@Autowired
+	private AttendanceDAO attendanceDao;
+	
 	public LeaveTypeResponseDto leaveType(String branchId) {
         LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
 
@@ -436,7 +439,7 @@ public class HrService {
 				}
 				Currentacademicyear currentAcademicYear = yearDao.showYear();
 				
-					List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacherid)));
+					List<Attendancemaster> staffAttendanceMaster = attendanceDao.getAttendanceMasterDetails(Integer.toString((teacherid)));
 					if(staffAttendanceMaster != null && !staffAttendanceMaster.isEmpty() && staffAttendanceMaster.get(0).getWeeklyoff() == null){
 						return 0;
 					}
@@ -447,7 +450,7 @@ public class HrService {
 					for (String weekOffS : weeklyOffString) {
 						staffWeeklyOffList.add(Integer.parseInt(weekOffS));
 					}
-					List<Weeklyoff> staffWeekOff = new AttendanceDAO().readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
+					List<Weeklyoff> staffWeekOff = attendanceDao.readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
 					for (Weeklyoff weeklyoff : staffWeekOff) {
 						if(weeklyoff.getWeeklyoffday().equalsIgnoreCase(new SimpleDateFormat("EEEE").format(date))){
 							staffWeeklyOff = true;
@@ -460,7 +463,7 @@ public class HrService {
 						for (String singleHoliday : holidayString) {
 							staffHolidayList.add(Integer.parseInt(singleHoliday));
 						}
-						List<Holidaysmaster> staffHolidays = new AttendanceDAO().readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
+						List<Holidaysmaster> staffHolidays = attendanceDao.readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
 						for (Holidaysmaster holidaysmaster : staffHolidays) {
 							Date fromDateHm = holidaysmaster.getFromdate();
 							Date toDateHm = holidaysmaster.getTodate();
