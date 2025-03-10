@@ -57,4 +57,7 @@ public class PurchaseOrder implements java.io.Serializable {
 	
 	@Column(name = "uom",length = 45)
 	private String uom;
+	
+	@Column(name = "branchid")
+	private int branchId;
 }
