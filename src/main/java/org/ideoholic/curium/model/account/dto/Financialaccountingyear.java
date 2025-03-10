@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,6 +56,7 @@ public class Financialaccountingyear implements java.io.Serializable {
 	@Column(name = "userid")
 	private int userid;
 	
+	@JsonIgnore
     @OneToMany(mappedBy = "financialAccountingYear")
     private List<Accountdetailsbalance> accountdetailsbalanceList;
 

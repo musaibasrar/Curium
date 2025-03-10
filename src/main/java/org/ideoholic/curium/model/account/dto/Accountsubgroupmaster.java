@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,16 +39,18 @@ public class Accountsubgroupmaster implements java.io.Serializable {
 	@Column(name = "accountsubgroupname", length = 100)
 	private String accountsubgroupname;
 
-	@Column(name = "accountgroupmasterid")
-	private Integer accountgroupid;
+	//@Column(name = "accountgroupmasterid")
+	//private Integer accountgroupid;
 
 	@ManyToOne
 	@JoinColumn(name = "accountgroupid")
 	private Accountgroupmaster accountGroupMaster;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountSubGroupMaster")
 	private List<Accountssgroupmaster> accAccountssubgroupmasterList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "accountSubGroupMaster")
 	private List<Accountdetails> accountdetailsList;
 
