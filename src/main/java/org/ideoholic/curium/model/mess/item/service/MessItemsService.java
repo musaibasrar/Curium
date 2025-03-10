@@ -314,7 +314,7 @@ public class MessItemsService {
 					String[] uom = dto.getUom();
 					String[] itemsQuantity = dto.getItemsQuantity();
 					String supplierid = dto.getSupplierId();
-					String[] supplieridledgerid = supplierid.split(":");
+					String[] supplierDetails = supplierid.split(":");
 					int sum = 0;
 					//String invoicedate = dto.getInvoiceDate();
 					List<PurchaseOrder> purchaseOrderList = new ArrayList<PurchaseOrder>();
@@ -325,15 +325,16 @@ public class MessItemsService {
 							PurchaseOrder purchaseOrder = new PurchaseOrder();
 							purchaseOrder.setItemId(Integer.parseInt(itemIds[i]));
 							purchaseOrder.setInvoiceDate(DateUtil.indiandateParser(dto.getPurchaseDate()));
-							purchaseOrder.setSupplierName(itemsName[i]);
+							purchaseOrder.setSupplierName(supplierDetails[0]);
 							purchaseOrder.setUom(uom[i]);
 							purchaseOrder.setQuantity(itemsQuantity[i]);
+							purchaseOrder.setBranchId(Integer.parseInt(branchId));
 							purchaseOrderList.add(purchaseOrder);
 							sum = sum + Integer.parseInt(itemsQuantity[i]);
 					}
 						poMaster.setEntryDate(DateUtil.indiandateParser(dto.getPurchaseDate()));
 						poMaster.setBranchId(Integer.parseInt(branchId));
-						poMaster.setSupplierId(Integer.parseInt(supplieridledgerid[0]));
+						poMaster.setSupplierId(Integer.parseInt(supplierDetails[0]));
 						poMaster.setTotalQuantityOrdered(sum);
 						poMaster.setTotalItem(itemIds.length);
 						poMaster.setExternalId(branchCode);
@@ -416,7 +417,7 @@ public class MessItemsService {
 		 */
 
 
-		public InvoiceDetailsResponseDto getInvoiceOrderDetails() {
+		public InvoiceDetailsResponseDto getPurchaseOrderDetails() {
 			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
 			List<PoMaster> invoicelist = new MessItemsDAO().getPurchaseOrderMasterDetails();
 			Map<PoMaster,MessSuppliers> poMasterMap = new LinkedHashMap<PoMaster,MessSuppliers>();
@@ -701,11 +702,11 @@ public class MessItemsService {
 					.build();
 		}
 
-		public InvoiceDetailsResponseDto getParticularInvoice(PurchaseDto purchaseDto) {
+		public InvoiceDetailsResponseDto getPurchaseOrderById(PurchaseDto purchaseDto) {
 			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
 
 			//List<PurchaseOrder> purchaseOrderList = new MessItemsDAO().getParticularInvoice(purchaseDto.getExternalId());
-			List<PurchaseOrder> purchaseOrderList = new MessStockEntryDAO().getPurchaseMRVDetails(purchaseDto.getExternalId());
+			List<PurchaseOrder> purchaseOrderList = new MessStockEntryDAO().getPurchaseOrderById(purchaseDto.getExternalId());
 			invoiceDetailsResponseDto.setPurchaseOrderList(purchaseOrderList);
 			return invoiceDetailsResponseDto;
 			
@@ -853,6 +854,137 @@ public class MessItemsService {
 			}
 			
 			return result;
+		}
+
+
+		public ResultResponse savePurchaseFromPO(PurchaseDto dto, String branchId, String userId) {
+	ResultResponse resultResponse = ResultResponse.builder().build();
+		
+		if(branchId!=null){
+			
+			
+				//String itemsTotal = request.getParameter("itemsTotalAmount");
+				String itemsTotal = dto.getItemsTotal();
+				BigDecimal itemsTotalAmount = new BigDecimal(itemsTotal);
+				itemsTotalAmount = itemsTotalAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+				
+				String[] itemIds = dto.getItemIds();
+				String[] itemsName = dto.getItemsName();
+				String[] itemsQuantity = dto.getItemsQuantity();
+				String[] salesPrice = dto.getSalesPrice();
+				String[] batchNo = dto.getBatchNo();
+				String[] lineTotal = dto.getLineTotal();
+				String sup = dto.getSupplierId();
+				String[] supplieridledgerid = sup.split(":");
+				String randomString =  DataUtil.generateString(8);
+				String[] purchasePrice = dto.getPurchasePrice();
+				String[] sgst = dto.getStateGst();
+				String[] cgst = dto.getCenterGst();
+
+				//Invoice Details
+				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
+				messInvoiceDetails.setBranchid(Integer.parseInt(branchId));
+				messInvoiceDetails.setExternalid("MRV");
+				messInvoiceDetails.setInvoicedate(DateUtil.indiandateParser(dto.getInvoiceDate()));
+				messInvoiceDetails.setEntrydate(DateUtil.todaysDate());
+				messInvoiceDetails.setInvoicetotal(itemsTotalAmount.floatValue());
+				messInvoiceDetails.setSupplierreferenceno(randomString+":"+dto.getSupplierReferenceNo());
+				messInvoiceDetails.setSuppliersid(DataUtil.parseInt(supplieridledgerid[0]));
+				messInvoiceDetails.setStatus("ACTIVE");
+				
+				List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
+				
+				if(itemIds!=null) {
+					
+					for(int i=0; i < itemIds.length ; i++){
+						
+
+						MessStockEntry messStockEntry = new MessStockEntry();
+						
+						messStockEntry.setItemid(Integer.parseInt(itemIds[i]));
+						messStockEntry.setExternalid(itemsName[i]+"_"+salesPrice[i]);
+						messStockEntry.setBatchno(batchNo[i]);
+						messStockEntry.setReceiveddate(DateUtil.indiandateParser(dto.getItemEntryDate()));
+						messStockEntry.setItemunitprice(Float.parseFloat(purchasePrice[i]));
+						messStockEntry.setBranchid(Integer.parseInt(branchId));
+						messStockEntry.setQuantity(Float.parseFloat(itemsQuantity[i]));
+						messStockEntry.setAvailablequantity(Float.parseFloat(itemsQuantity[i]));
+						messStockEntry.setMessinvoicedetails(messInvoiceDetails);
+						messStockEntry.setSgst(Float.parseFloat(sgst[i]));
+						messStockEntry.setCgst(Float.parseFloat(cgst[i]));
+						messStockEntry.setStatus("ACTIVE");
+						messStockEntry.setUserid(Integer.parseInt(userId));
+						
+						messStockEntryList.add(messStockEntry);
+					
+				}
+					
+						//Pass J.V. : credit the supplier debit the stock account
+						int supplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
+						int stockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(branchId));
+						
+						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+						
+						transactions.setDraccountid(stockLedgerId);
+						transactions.setCraccountid(supplierLedgerId);
+						transactions.setDramount(itemsTotalAmount);
+						transactions.setCramount(itemsTotalAmount);
+						transactions.setVouchertype(1);
+						transactions.setTransactiondate(DateUtil.indiandateParser(dto.getInvoiceDate()));
+						transactions.setEntrydate(DateUtil.todaysDate());
+						transactions.setNarration("Towards New Stock Entry");
+						transactions.setCancelvoucher("no");
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setBranchid(Integer.parseInt(branchId));
+						transactions.setUserid(Integer.parseInt(userId));
+						
+						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+stockLedgerId;
+
+						String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+supplierLedgerId;
+						
+						
+						//Pass J.V to book transportation charges
+						
+						int drTransportationExpense = getLedgerAccountId("transportationexpenses"+Integer.parseInt(branchId));
+						int crSupplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
+						String transportationCharges = dto.getTransportationCharges();
+						
+						if(new BigDecimal(transportationCharges).compareTo(BigDecimal.ZERO) > 0) {
+						
+						VoucherEntrytransactions transactionTC = new VoucherEntrytransactions();
+						
+						transactionTC.setDraccountid(drTransportationExpense);
+						transactionTC.setCraccountid(crSupplierLedgerId);
+						transactionTC.setDramount(new BigDecimal(transportationCharges));
+						transactionTC.setCramount(new BigDecimal(transportationCharges));
+						transactionTC.setVouchertype(4);
+						transactionTC.setTransactiondate(DateUtil.indiandateParser(dto.getInvoiceDate()));
+						transactionTC.setEntrydate(DateUtil.todaysDate());
+						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+randomString+":"+dto.getSupplierReferenceNo());
+						transactionTC.setCancelvoucher("no");
+						transactionTC.setBranchid(Integer.parseInt(branchId));
+						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionTC.setUserid(Integer.parseInt(userId));
+
+						// Dr
+						BigDecimal totalAmount = new BigDecimal(transportationCharges);
+						String updateTransportationDrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+drTransportationExpense;
+							
+						//Cr
+						String updateTransportationCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+crSupplierLedgerId;
+						
+						//End J.V
+						boolean result = new MessItemsDAO().addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount,dto.getExternalId());
+						resultResponse.setSuccess(result);
+						}else {
+							boolean result = new MessItemsDAO().addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null,dto.getExternalId());
+							resultResponse.setSuccess(result);
+						}
+				}
+				
+			}
+			resultResponse.setSuccess(true);
+			return resultResponse;
 		}
 		
 
