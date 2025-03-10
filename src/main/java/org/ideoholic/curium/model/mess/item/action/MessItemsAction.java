@@ -107,7 +107,7 @@ public class MessItemsAction {
 	@PostMapping("/savePurchaseOrder")
 	public String savePurchaseOrder() {
 		messItemActionAdapter.savePurchaseOrder();
-		messItemActionAdapter.getInvoiceOrderDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
 		return "purchaseorder";
 	}
 
@@ -145,9 +145,9 @@ public class MessItemsAction {
 	
 	@GetMapping("/purchaseOrder")
 	public String purchaseOrder() {
-		messSuppliersActionAdapter.viewSuppliersOrderDetails();
-		messItemActionAdapter.viewItemOrderDetails();
-		messItemActionAdapter.getInvoiceOrderDetails();
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
 		return "purchaseorder";
 	}
 
@@ -156,12 +156,12 @@ public class MessItemsAction {
 		return "addsuppliers";
 	}
 	
-	@GetMapping("/particularOrderDetail")
-	public String particularOrderDetail() {
-		messItemActionAdapter.getParticularInvoice();
-		messSuppliersActionAdapter.viewSuppliersOrderDetails();
-		messItemActionAdapter.viewItemOrderDetails();
-		messItemActionAdapter.getInvoiceOrderDetails();
+	@GetMapping("/receivePurchaseOrder")
+	public String receivePurchaseOrder() {
+		messItemActionAdapter.getPurchaseOrderById();
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
 		return "particularpurchasedetail";
 	}
 	
@@ -169,9 +169,32 @@ public class MessItemsAction {
 	public String cancelPurchaseOrder() {
 
 		messItemActionAdapter.cancelPurchaseOrder();
-		messItemActionAdapter.getInvoiceOrderDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
 		return "purchaseorder";
 	}
 
+	@GetMapping("/openingStock")
+	public String openingStock() {
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
+	
+	@PostMapping("/saveOpeningStock")
+	public String saveOpeningStock() {
+		messItemActionAdapter.saveOpeningStock();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
+	
+	@PostMapping("/savePurchaseFromPO")
+	public String savePurchaseFromPO() {
+		messItemActionAdapter.savePurchaseFromPO();
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetails();
+		return "purchase";
+	}
 
 }
