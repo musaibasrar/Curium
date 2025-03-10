@@ -48,7 +48,7 @@ public class MessStockEntryActionAdapter {
         String supplierName = request.getParameter("suppliername");
         String invoiceDate = request.getParameter("entrydate");
 
-        MessStockEntryResponseDto responseDto = messStockEntryService.getPurchaseMRVDetails(invoiceDetailsId, supplierName, invoiceDate, httpSession.getAttribute(BRANCHID).toString());
+        MessStockEntryResponseDto responseDto = messStockEntryService.getPurchaseOrderById(invoiceDetailsId, supplierName, invoiceDate, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("suppliername", responseDto.getSupplierName());
         request.setAttribute("entrydate", responseDto.getInvoiceDate());
 		

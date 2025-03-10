@@ -1035,7 +1035,7 @@ for(Cookie cookie : cookies){
 							<td>
 								<select name="supplierid" id="supplierid" class="dropdownlist" style="font-size: 14px;" required>
 										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
-											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}">${messsupplierslist.name}</option>
+											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}:${messsupplierslist.name}">${messsupplierslist.name}</option>
 										</c:forEach>
 								</select>
 							</td>
@@ -1122,6 +1122,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Serial No.</th>
+						<th title="click to sort" class="headerText">P.O. No.</th>
 						<th title="click to sort" class="headerText">Supplier Id</th>
 						<th title="click to sort" class="headerText">Supplier Name</th>
 						<th title="click to sort" class="headerText">Status</th>
@@ -1132,18 +1133,18 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${invoicelist}" var="invoicelist" varStatus="status">
+					<c:forEach items="${polist}" var="polist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							
 							
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}"/>"/></td>
+                          <td class="dataText"><input type="checkbox" id = "<c:out value="${polist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${polist.key.id}"/>"/></td>
 						  <td class="dataText">${status.index+1}</td>
-						  <td class="dataText"><c:out value="${invoicelist.key.id}" /></td>
-						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
-						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.externalId}"/>','<c:out value="${invoicelist.key.entryDate}"/>','<c:out value="${invoicelist.value.name}"/>')">View Detail</a></td>
-						  <td class="dataText"><a href="/abc/MessItemsProcess/particularOrderDetail?id=<c:out value='${invoicelist.key.externalId}'/>">Receive</a></td>
-						  
+						  <td class="dataText"><c:out value="${polist.key.externalId}" /></td>
+						  <td class="dataText"><c:out value="${polist.key.id}" /></td>
+						  <td class="dataText"><c:out value="${polist.value.name}" /></td>
+						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${polist.key.externalId}"/>','<c:out value="${polist.key.entryDate}"/>','<c:out value="${polist.value.name}"/>')">View Detail</a></td>
+						  <td class="dataText"><a href="/abc/MessItemsProcess/receivePurchaseOrder?id=<c:out value='${polist.key.externalId}'/>">Receive</a></td>
 						</tr>
 					</c:forEach>
 

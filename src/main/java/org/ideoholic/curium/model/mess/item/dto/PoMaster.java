@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "po_master")
+@Table(name = "mess_pomaster")
 public class PoMaster implements java.io.Serializable {
 	
 	/**
@@ -48,5 +48,8 @@ public class PoMaster implements java.io.Serializable {
 	
 	@Column(name = "totalquantityordered")
 	private int totalQuantityOrdered;
+	
+	@Column(name = "totalquantityreceived")
+	private int totalQuantityReceived;
 
 }

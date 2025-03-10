@@ -159,7 +159,7 @@ public class MessStockEntryService {
 	}
 
 
-	public MessStockEntryResponseDto getPurchaseMRVDetails(String strInvoiceDetailsId, 
+	public MessStockEntryResponseDto getPurchaseOrderById(String strInvoiceDetailsId, 
 			String supplierName, String invoiceDate, String branchId) throws IOException {
 		MessStockEntryResponseDto responseDto = MessStockEntryResponseDto.builder().build();
 
@@ -171,7 +171,7 @@ public class MessStockEntryService {
 			responseDto.setInvoiceDate(invoiceDate);
 			
 			List<PurchaseOrder> purchaseOrderList = new ArrayList<PurchaseOrder>();
-			purchaseOrderList = new MessStockEntryDAO().getPurchaseMRVDetails(strInvoiceDetailsId);
+			purchaseOrderList = new MessStockEntryDAO().getPurchaseOrderById(strInvoiceDetailsId);
 			//List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
 			
 			/*

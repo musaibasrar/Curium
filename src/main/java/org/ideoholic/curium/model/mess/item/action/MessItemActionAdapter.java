@@ -89,21 +89,6 @@ public class MessItemActionAdapter {
         else return "error";
     }
     
-	
-	  public String viewItemOrderDetails() { 
-	 
-	  ResultResponse resultResponse = messItemsService.viewItemOrderDetails(httpSession.getAttribute(BRANCHID).toString());
-	  request.setAttribute("messstockavailabilitylist",resultResponse.getResultList());
-	  
-	  if(resultResponse.isSuccess())
-	  {
-		  return "additems";
-		  }
-	  else return "error";
-	  }
-	 
-
-
     public void deleteMultipleItems() {
         MessIdsDto dto = new MessIdsDto();
         dto.setMessIds(request.getParameterValues("messitemsids"));
@@ -194,9 +179,9 @@ public class MessItemActionAdapter {
 	 * request.setAttribute("currentPage", responseDto.getCurrentPage()); }
 	 */
 
-    public void getInvoiceOrderDetails() {
-    	InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceOrderDetails();
-    	request.setAttribute("invoicelist", responseDto.getPoMasterMap());
+    public void getPurchaseOrderDetails() {
+    	InvoiceDetailsResponseDto responseDto = messItemsService.getPurchaseOrderDetails();
+    	request.setAttribute("polist", responseDto.getPoMasterMap());
     }
 
     public void generateStockIssuanceReport() {
@@ -220,10 +205,12 @@ public class MessItemActionAdapter {
         request.setAttribute("stocklist", resultResponse.getResultList());
     }
 
-	public void getParticularInvoice() {
+	public void getPurchaseOrderById() {
 		PurchaseDto purchaseDto = new PurchaseDto();
 		purchaseDto.setExternalId(request.getParameter("id"));
-		InvoiceDetailsResponseDto invoiceDetailsResponseDto = messItemsService.getParticularInvoice(purchaseDto);
+		InvoiceDetailsResponseDto invoiceDetailsResponseDto = messItemsService.getPurchaseOrderById(purchaseDto);
+		request.setAttribute("ponumber", request.getParameter("id"));
+		request.setAttribute("supplierid", invoiceDetailsResponseDto.getPurchaseOrderList().get(0).getSupplierName());
 		request.setAttribute("purchasedetail", invoiceDetailsResponseDto.getPurchaseOrderList());
 	}
 
@@ -233,4 +220,54 @@ public class MessItemActionAdapter {
 		messItemsService.cancelPurchaseOrder(purchaseDto);
 		
 	}
+	
+	public void saveOpeningStock() {
+        PurchaseDto dto = new PurchaseDto();
+        dto.setItemsTotal(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+        dto.setItemIds(request.getParameterValues("itemids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setItemsQuantity(request.getParameterValues("itemsquantity"));
+        dto.setSalesPrice(request.getParameterValues("price"));
+        dto.setBatchNo(request.getParameterValues("batchno"));
+        dto.setLineTotal(request.getParameterValues("linetotal"));
+        dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
+        dto.setStateGst(request.getParameterValues("sgst"));
+        dto.setItemEntryDate(request.getParameter("itementrydate"));
+        dto.setInvoiceDate(request.getParameter("invoicedate"));
+        dto.setSupplierReferenceNo("OpeningBalance");
+        
+        ResultResponse resultResponse = messItemsService.saveOpeningStock(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsreceived", resultResponse.isSuccess());
+    }
+
+	public void getInvoiceDetailsOpeningStock() {
+        String page = request.getParameter("page");
+
+        InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceDetailsOpeningStock(page, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("invoicelist", responseDto.getInvoiceSuppliersMap());
+        request.setAttribute("noOfPages", responseDto.getNoOfPages());
+        request.setAttribute("currentPage", responseDto.getCurrentPage());
+    }
+
+	public void savePurchaseFromPO() {
+        PurchaseDto dto = new PurchaseDto();
+        dto.setItemsTotal(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+        dto.setItemIds(request.getParameterValues("itemids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setItemsQuantity(request.getParameterValues("itemsquantity"));
+        dto.setSalesPrice(request.getParameterValues("price"));
+        dto.setBatchNo(request.getParameterValues("batchno"));
+        dto.setLineTotal(request.getParameterValues("linetotal"));
+        dto.setSupplierId(request.getParameter("supplierid"));
+        dto.setPurchasePrice(request.getParameterValues("purchaseprice"));
+        dto.setStateGst(request.getParameterValues("sgst"));
+        dto.setCenterGst(request.getParameterValues("cgst"));
+        dto.setItemEntryDate(request.getParameter("itementrydate"));
+        dto.setInvoiceDate(request.getParameter("invoicedate"));
+        dto.setSupplierReferenceNo(request.getParameter("supplierreferenceno"));
+        dto.setTransportationCharges(request.getParameter("transportationcharges"));
+        dto.setExternalId(request.getParameter("ponumber"));
+        ResultResponse resultResponse = messItemsService.savePurchaseFromPO(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsreceived", resultResponse.isSuccess());
+    }
 }

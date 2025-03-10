@@ -159,11 +159,11 @@ public class MessStockEntryDAO {
 
 
 
-	public List<PurchaseOrder> getPurchaseMRVDetails(String invoiceDetailsId) {
+	public List<PurchaseOrder> getPurchaseOrderById(String invoiceDetailsId) {
 		 List<PurchaseOrder> results = new ArrayList<PurchaseOrder>();
 	        try {
 	                transaction = session.beginTransaction();
-	                results = (List<PurchaseOrder>) session.createQuery("From PurchaseOrder mse where  mse.externalId = '"+invoiceDetailsId+"' ").setCacheable(true).setCacheRegion("commonregion").list();
+	                results = (List<PurchaseOrder>) session.createQuery("From PurchaseOrder po where  po.externalId = '"+invoiceDetailsId+"' and po.receivedQuantity < po.quantity").setCacheable(true).setCacheRegion("commonregion").list();
 	                transaction.commit();
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	                
