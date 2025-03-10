@@ -584,4 +584,91 @@ public class MessItemsDAO {
 		
 	}
 	
+	public List<MessInvoiceDetails> getInvoiceDetailsPaginationOpeningStock(int offset,
+			int noOfRecords, int branchId) {
+		
+		List<MessInvoiceDetails> results = new ArrayList<MessInvoiceDetails>();
+
+		try {
+			
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From MessInvoiceDetails as invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid = "+branchId+" and invoicedetails.suppliersid = 0  order by invoicedetails.invoicedate DESC").setCacheable(true).setCacheRegion("commonregion");
+			query.setFirstResult(offset);   
+			query.setMaxResults(noOfRecords);
+			results = query.getResultList();
+			
+			transaction.commit();
+			
+
+		} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			
+			System.out.println("Exception is "+hibernateException);
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+
+
+	public boolean addNewStockFromPO(List<MessStockEntry> messStockEntryList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount, VoucherEntrytransactions transactionTC, String updateTransportationDrAccount, String updateTransportationCrAccount, String poNumber) {
+		 
+				boolean result = false; 
+		try {
+	            //this.session = sessionFactory.openCurrentSession();
+	            transaction = session.beginTransaction();
+				session.save(transactions);
+				int totalQty = 0;
+				Query query = session.createQuery(updateDrAccount);
+				query.executeUpdate();
+				Query query1 = session.createQuery(updateCrAccount);
+				query1.executeUpdate();
+				
+				if(transactionTC != null) {
+					session.save(transactionTC);
+					Query queryDrTc = session.createQuery(updateTransportationDrAccount);
+					queryDrTc.executeUpdate();
+					Query queryCrTc = session.createQuery(updateTransportationCrAccount);
+					queryCrTc.executeUpdate();
+				}
+				
+	            
+	            for (MessStockEntry messStockEntry : messStockEntryList) {
+	            	session.save(messStockEntry);
+					/*
+					 * Query queryUpdateMessStock = session.
+					 * createQuery("update MessStockEntry set externalid= concat(externalid,'_"
+					 * +messStockEntry.getId()+"') where id="+messStockEntry.getId());
+					 * queryUpdateMessStock.executeUpdate();
+					 */
+					Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock+'"+messStockEntry.getQuantity()+"' where itemid="+messStockEntry.getItemid());
+					queryStockAvailability.executeUpdate();
+					Query queryInvoice = session.createQuery("update MessInvoiceDetails set voucherid= '"+transactions.getTransactionsid()+"' where id="+messStockEntry.getMessinvoicedetails().getId());
+					queryInvoice.executeUpdate();
+					
+					Query queryInvoicePO = session.createQuery("update PurchaseOrder set receivedquantity= '"+messStockEntry.getQuantity()+"' where itemid="+messStockEntry.getItemid()+" and externalid='"+poNumber+"'");
+					queryInvoicePO.executeUpdate();
+					
+					totalQty = (int) (totalQty+messStockEntry.getQuantity());
+				}
+	            
+	            Query queryInvoicePO = session.createQuery("update PoMaster set totalquantityreceived= '"+totalQty+"' where externalid='"+poNumber+"' ");
+				queryInvoicePO.executeUpdate();
+	            
+	            transaction.commit();
+	            result = true;
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+		
+		 return result;
+	}
+
+	
 }

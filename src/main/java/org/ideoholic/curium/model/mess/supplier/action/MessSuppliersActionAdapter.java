@@ -36,18 +36,6 @@ public class MessSuppliersActionAdapter {
 
         return resultResponse.isSuccess();
     }
-    
-
-    
-	
-	  public boolean viewSuppliersOrderDetails() {
-	  
-	  ResultResponse resultResponse = messSuppliersService.viewSuppliersOrderDetails(httpSession.getAttribute(BRANCHID).toString()); request.setAttribute("messsupplierslist",
-	  resultResponse.getResultList());
-	  
-	  return resultResponse.isSuccess(); }
-	 
-
 
     public void viewBalanceSuppliers() {
         ResultResponse resultResponse = messSuppliersService.viewBalanceSuppliers(httpSession.getAttribute(BRANCHID).toString());
