@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,9 +36,11 @@ public class Accountgroupmaster implements java.io.Serializable {
 	@Column(name = "accountgroupname", nullable = false, length = 150)
 	private String accountgroupname;
 	
+	@JsonIgnore
     @OneToMany(mappedBy = "accountGroupMaster")
     private List<Accountsubgroupmaster> accountsubgroupmasterList;
 
+    @JsonIgnore
 	@OneToMany(mappedBy = "accountGroupMaster")
 	private List<Accountdetails> accountdetailsList;
 }

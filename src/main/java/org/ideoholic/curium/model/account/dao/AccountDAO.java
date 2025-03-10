@@ -28,6 +28,12 @@ public class AccountDAO {
 	
 	@Autowired
 	private FinancialAccountingYearRepository finAccountRepo;
+	
+	@Autowired
+	private AccountDetailsRepository accountDetailsRepo;
+	
+	@Autowired
+	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
 
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
@@ -120,21 +126,17 @@ public class AccountDAO {
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public String saveNewAccount(Accountdetails accountDetails, Accountdetailsbalance accountDetailsBalance) {
 		String result = "false";
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(accountDetails);
-			session.save(accountDetailsBalance);
-			transaction.commit();
+			accountDetailsRepo.save(accountDetails);
+			accountDetailsBalanceRepo.save(accountDetailsBalance);
 			result = "true";
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-			System.out.println("error "+hb);
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return result;
 		
