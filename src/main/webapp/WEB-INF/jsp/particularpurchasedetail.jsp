@@ -597,8 +597,8 @@
         var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
         var col6="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
         var col7="<td class='dataTextInActive'><input type='text' value='0'  name='purchaseprice' id=purchaseprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col8="<td class='dataTextInActive'><input type='text' value='0'  name='sgst' id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col9="<td class='dataTextInActive'><input type='text' value='0'  name='cgst' id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col8="<td class='dataTextInActive'><input type='text' value='0'  name='sgst' id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/><input type='hidden' value='0'  name='cgst' id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        /* var col9="<td class='dataTextInActive'><input type='text' value='0'  name='cgst' id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>"; */
         var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
         var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
@@ -983,14 +983,43 @@ for(Cookie cookie : cookies){
 				<br>
 				<table  style="margin-left: auto;margin-right: auto;">
 						
+						
+						<tr>
+							<td class="alignRight">P.O. Number &nbsp;</td>
+							<td>
+								<input type="text" id="ponumber" name="ponumber" value="${ponumber}" class="textfieldvalues" style="font-size: 14px;" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+	
+							</tr>
+						<tr>
+						
 						<tr>
 							<td class="alignRight">Supplier &nbsp;</td>
 							<td>
 								<select name="supplierid" id="supplierid" class="dropdownlist" style="font-size: 14px;" required>
-										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
+										<%-- <c:forEach items="${messsupplierslist}" var="messsupplierslist">
 											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}">${messsupplierslist.name}</option>
-										</c:forEach>
-								</select>
+										</c:forEach> --%>
+									<c:forEach items="${messsupplierslist}" var="messsupplierslist">
+										<c:if
+											test="${supplierid == messsupplierslist.id}">
+											<option
+												value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}"
+												selected="selected">${messsupplierslist.name}</option>
+										</c:if>
+									</c:forEach>
+									<c:forEach items="${messsupplierslist}" var="messsupplierslist">
+										<c:if
+											test="${supplierid != messsupplierslist.id}">
+											<option
+												value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}">
+												${messsupplierslist.name}</option>
+										</c:if>
+									</c:forEach>
+							</select>
 							</td>
 							
 							<td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
@@ -1020,7 +1049,7 @@ for(Cookie cookie : cookies){
 					<div align="center">
 						<p>
 						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
-						<label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
+						<!-- <label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label> --></p>
 						
 									
 					</div>
@@ -1040,10 +1069,10 @@ for(Cookie cookie : cookies){
 								<th class="headerText">Quantity</th>
 								<th class="headerText">Sales Price</th>
 								<th class="headerText">Purchase Price</th>
-								<th class="headerText">SGST</th>
-								<th class="headerText">CGST</th>
+								<th class="headerText">VAT</th>
+								<!-- <th class="headerText">CGST</th> -->
 								<th class="headerText">Total</th>
-								<th class="headerText">Total (Incl. GST)</th>
+								<th class="headerText">Total (Incl. VAT)</th>
 							</tr>
 						</thead>
 
@@ -1051,14 +1080,21 @@ for(Cookie cookie : cookies){
 						<c:forEach items="${purchasedetail}" var="purchasedetail" varStatus="status">
 						<tr>
 						<td class="dataTextInActive"><input type="checkbox" id = "<c:out value="${purchasedetail.itemId}"/>" class = "chcktbl" checked name="itemids"  value="<c:out value="${purchasedetail.itemId}"/>"/></td>
-						<td class="dataTextInActive"><input type="text" value="${purchasedetail.supplierName}" name="itemsname"   class="textfieldvalues" style='font-size: 14px;'/></td>
+						<td class="dataTextInActive">
+									<c:forEach items="${messstockavailabilitylist}" var="messstockavailabilitylist">
+										<c:if test="${purchasedetail.itemId == messstockavailabilitylist.messitems.id}">
+											<input type="text" value="${messstockavailabilitylist.messitems.name}" name="itemsname"   class="textfieldvalues" style='font-size: 14px;'/>
+										</c:if>
+									</c:forEach>
+						</td>
 						<td class="dataTextInActive"><input type="text"   class="textfieldvalues" name="batchno" style='font-size: 14px;'/></td>
 						<td class="dataTextInActive"><input  value="${purchasedetail.uom}"   name='itemsunitofmeasure'    class='textfieldvaluesshorts' style='font-size: 14px;' readonly/>
-						<td class="dataTextInActive"><input type="text" value="${purchasedetail.quantity}" name="itemsquantity" class='textfieldvaluesshorts' id="items_quantity_${status.index+1}" onkeyup="calculate(${status.index+1})" style='font-size: 14px;'/></td>
+						<td class="dataTextInActive"><input type="text" value="${purchasedetail.quantity-purchasedetail.receivedQuantity}" name="itemsquantity" class='textfieldvaluesshorts' id="items_quantity_${status.index+1}" onkeyup="calculate(${status.index+1})" style='font-size: 14px;'/></td>
 						<td class="dataTextInActive"><input type="text" value='0'  name="price"  class='textfieldvaluesshorts' style='font-size: 14px;'/></td>
                         <td class="dataTextInActive"><input type="text" value='0'  name="purchaseprice" id="purchaseprice_${status.index+1}" class='textfieldvaluesshorts' onkeyup="calculate(${status.index+1})" style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/></td>
-        				<td class="dataTextInActive"><input type="text" value='0'  name="sgst"  class='textfieldvaluesshorts' id="sgst_${status.index+1}" style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/></td>
-       					 <td class="dataTextInActive"><input type="text" value='0'  name="cgst" id="cgst_${status.index+1}"  class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/></td>
+        				<td class="dataTextInActive"><input type="text" value='0'  name="sgst"  class='textfieldvaluesshorts' id="sgst_${status.index+1}" style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/>
+        				<input type="hidden" value='0'  name="cgst" id="cgst_${status.index+1}"  class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/></td>
+       					<%-- <td class="dataTextInActive"><input type="hidden" value='0'  name="cgst" id="cgst_${status.index+1}"  class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup="calculate(${status.index+1})"/></td> --%>
        					<td class="dataTextInActive"><input type="text" class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id="totalpricewithoutgst_${status.index+1}" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>
        					 <td class="dataTextInActive"><input type="text" class='linetotalAmount' value='0'  name="linetotal" id="linetotal_${status.index+1}"  style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>
 						</tr>
@@ -1068,26 +1104,26 @@ for(Cookie cookie : cookies){
 							
 							<tr>
 
- 								<td colspan="9" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
+ 								<td colspan="8" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
 							</tr>
 
 							<tr>
 
-								<td colspan="10" align="right" style="font-weight: bold;">Total(Incl. GST)&nbsp;&nbsp;</td>
+								<td colspan="9" align="right" style="font-weight: bold;">Total(Incl. VAT)&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" onkeyup="calculateTransportationCharges();"/></td>
 							</tr>
 							<tr>
 
-								<td colspan="10" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
+								<td colspan="9" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="transportationcharges" id="transportationcharges" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" onkeyup="calculateTransportationCharges();" value="0" /></td>
 							</tr>
 							<tr>
 
-								<td colspan="10" align="right" style="font-weight: bold;">Grand Total(Incl. GST)&nbsp;&nbsp;</td>
+								<td colspan="9" align="right" style="font-weight: bold;">Grand Total(Incl. VAT)&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
 							</tr>
@@ -1126,7 +1162,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-	<c:forEach items="${invoicelist}" var="invoicelist" varStatus="status">
+	<c:forEach items="${polist}" var="invoicelist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							
@@ -1136,7 +1172,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${invoicelist.key.id}" /></td>
 						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
 						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.externalId}"/>','<c:out value="${invoicelist.key.entryDate}"/>','<c:out value="${invoicelist.value.name}"/>')">View Detail</a></td>
-						  <td class="dataText"><a href="/abc/MessItemsProcess/particularOrderDetail?id=<c:out value='${invoicelist.key.externalId}'/>">Receive</a></td>
+						  <td class="dataText"><a href="/abc/MessItemsProcess/receivePurchaseOrder?id=<c:out value='${invoicelist.key.externalId}'/>">Receive</a></td>
 						  
 						</tr>
 					</c:forEach>
