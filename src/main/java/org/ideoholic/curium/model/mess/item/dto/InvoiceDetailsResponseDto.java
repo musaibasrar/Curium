@@ -19,9 +19,4 @@ public class InvoiceDetailsResponseDto {
     private int currentPage;
     private List<Parents> parentsList;
     private boolean success;
-    private List<PoMaster> invoiceList;
-    private List<PurchaseOrder> purchaseList;
-    private List<PurchaseOrder> purchaseOrderList;
-    private PurchaseOrder purchaseOrder;
-	private Map<PoMaster, MessSuppliers> poMasterMap;
 }
