@@ -43,7 +43,7 @@ public class AttendanceDAO {
 	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
 		try{
-			holidayMaster = holidayMasterRepo.findByAcademicyearAndBranchid();
+			holidayMaster = holidayMasterRepo.findByAcademicyearAndBranchid(currentAcademicYear,branchId);
 		}catch (Exception e) { 
 			log.error(e.getMessage(), e);
 			throw e;

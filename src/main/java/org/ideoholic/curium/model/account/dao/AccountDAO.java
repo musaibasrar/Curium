@@ -218,27 +218,19 @@ public class AccountDAO {
 		return accountDetails;
 	}
 	
+	@Transactional
 	public boolean deleteMultipleAccounts(List<Integer> balanceIds, List<Integer> accountdetailsIds) {
-		
-		Transaction transaction = null;
+		boolean result;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid IN (:balanceids)");
-			query.setParameterList("balanceids", balanceIds);
-			Query query2 = session.createQuery("delete from Accountdetails where accountdetailsid IN (:accountids)");
-			query2.setParameterList("accountids", accountdetailsIds);
-			query.executeUpdate();
-			query2.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetailsBalanceRepo.deleteAllById(balanceIds);
+			accountDetailsRepo.deleteAllById(accountdetailsIds);
+			result = true;
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		
-		return false;
+		return result;
 	}
 
 	public boolean saveVoucher(VoucherEntrytransactions transactions) {
