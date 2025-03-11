@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HolidaysMasterRepository extends JpaRepository<Holidaysmaster, Integer> {
 
-	List<Holidaysmaster> findByAcademicyearAndBranchid();
+	List<Holidaysmaster> findByAcademicyearAndBranchid(String academicyear, int branchid);
 
 }
