@@ -84,6 +84,9 @@ public class StudentService {
 	@Autowired
     private AccountDAO accountDao;
 	
+	@Autowired
+	private UserDAO userDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -217,7 +220,7 @@ public class StudentService {
 		branch.setIdbranch(branchid);
 		login.setBranch(branch);
 		login.setUsertype("parents");
-		new UserDAO().addUser(login);
+		userDao.addUser(login);
 	}
 
 

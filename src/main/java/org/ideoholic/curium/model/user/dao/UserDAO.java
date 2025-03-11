@@ -153,9 +153,10 @@ public class UserDAO {
 	public boolean addUser(Login user) {
 		try {
 			int userid = 1;
-           user = loginRepo.save(user);
+			List<Login> loginList = queryUtil.findByClassLimitedTo("select l from Login as l order by l.userid", Login.class, 1);
 
-           List<Login> loginList = queryUtil.findByClassLimitedTo("select l from Login order by l.userid", Login.class, 1);
+			user = loginRepo.save(user);
+
            if(!CollectionUtils.isEmpty(loginList)){
         	   Login last = loginList.get(0);
                userid = last.getUserid()+1;

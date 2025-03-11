@@ -5,6 +5,7 @@ package org.ideoholic.curium.model.sendemail.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
+import org.ideoholic.curium.exceptions.CustomMessageResponseException;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.service.YearService;
@@ -44,7 +45,7 @@ public class EmailApiActionImpl implements EmailApiAction {
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
 		}
-		throw new CustomResponseException(CustomErrorMessage.ERRORSMS);
+		throw new CustomMessageResponseException(result.getMessage());
 	}
 
 	public ResponseEntity<ResultResponse> sendNumbersSMS(SendSMSDto dto) {

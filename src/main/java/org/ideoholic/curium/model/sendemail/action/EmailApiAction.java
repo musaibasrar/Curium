@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 
-@RequestMapping("/api/v1/EmailProcess")
+@RequestMapping("/api/v1/emailProcess")
 public interface EmailApiAction {
 
 

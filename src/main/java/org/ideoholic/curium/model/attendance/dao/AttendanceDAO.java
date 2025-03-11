@@ -61,7 +61,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -79,7 +79,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		}finally {

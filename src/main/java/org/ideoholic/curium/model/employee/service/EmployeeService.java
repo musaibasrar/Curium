@@ -21,22 +21,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class EmployeeService {
 
 	@Autowired
-	private HttpServletRequest request;
-
-	@Autowired
-    private HttpServletResponse response;
+	private UserDAO userDao;
 
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private departmentDAO departmentDAO;
 
@@ -174,7 +171,7 @@ public class EmployeeService {
 	        try {
 	            long id = Long.parseLong(empId);
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
 	            	employeeDetailsResponseDto.setEmployee(employee);
@@ -492,7 +489,7 @@ public class EmployeeService {
 
 	        try {
 	            Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
 					result.setEmployee(employee);
