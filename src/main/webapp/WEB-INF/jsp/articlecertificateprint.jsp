@@ -137,8 +137,12 @@ Reference of Document
 &nbsp;&nbsp;&nbsp;1
 </td>
 <td class="borderset" style="text-align:center;">
-<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classadmittedin,'--')}">
 						    		${splt} 
+								</c:forEach>
+								to
+<c:forEach var="splts" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splts} 
 								</c:forEach>
 </td>
 <td class="borderset" style="text-align:center;">
@@ -146,6 +150,7 @@ From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafi
 
 </td>
 <td class="borderset">
+${studentdetailsbonafide.student.admissionnumber}
 </td>
 </tr>
 </table>
@@ -174,39 +179,30 @@ Reference of Document
 &nbsp;&nbsp;&nbsp;1
 </td>
 <td class="borderset" style="text-align:center;">
-<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+<%-- <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
-								</c:forEach>
+								</c:forEach> --%>
+								SSLC
 </td>
 <td class="borderset" style="text-align:center;">
-${currentAcademicYear}
+${studentdetailsbonafide.student.promotedyear}
 </td>
 <td class="borderset" style="text-align:center;">
 passed
 </td>
 <td class="borderset">
+${studentdetailsbonafide.student.admissionnumber}
 </td>
 </tr>
 </table>	
 <table align="center">
+<tr><td><br></td></tr>
 <tr><td>
 Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
 </td></tr>
 <tr><td>
 <br>
 </td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
 </tr>
 <tr>
 <td><br></td>
