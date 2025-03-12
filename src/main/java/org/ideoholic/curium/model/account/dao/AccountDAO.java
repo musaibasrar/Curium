@@ -54,22 +54,16 @@ public class AccountDAO {
 		return result;
 	}
 
+	@Transactional
 	public Financialaccountingyear getCurrentFinancialYear(int branchId) {
 		Financialaccountingyear financialYear = new Financialaccountingyear();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from Financialaccountingyear where active = 'yes' and branchid="+branchId);
-			financialYear = (Financialaccountingyear) query.uniqueResult();
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); log.error(hb.getMessage(), hb);
-			System.out.println("error "+hb);
-		}finally {
-			HibernateUtil.closeSession();
+			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		
 		return financialYear;
 	}
 
