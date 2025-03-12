@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
   <table width="100%">
   <tr align="center">
   <td colspan="2" style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:white;text-shadow: 2px 2px 2px black;font-family:serif;">FUTURE STAR ENGLISH </p></td>
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:white;text-shadow: 2px 2px 2px black;font-family:serif;">FUTURE STARS ENGLISH </p></td>
     </tr>
     <tr>
     <td colspan="2" style="text-align:center;padding:0px;">

@@ -179,7 +179,7 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/futurestars/images/futurestars.jpg" width="72" height="80"/></td>
+				<td><img src="/futurestars/images/futurestars.jpg" width="82" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -203,7 +203,7 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student's
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
@@ -225,7 +225,7 @@
 			<td></td>
 			</tr>
 			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Father's
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
