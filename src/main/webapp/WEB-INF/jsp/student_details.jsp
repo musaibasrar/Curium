@@ -603,7 +603,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Bhagyalaxmi Bond No.
+                         <td  width="25%"  class="alignLeft" height="50" >Admission No. (Second)
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />

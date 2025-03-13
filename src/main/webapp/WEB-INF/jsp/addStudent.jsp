@@ -1060,7 +1060,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bhagyalaxmi Bond No.&nbsp;</td>
+							<td class="alignLeft" >Admission No. (Second)&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"

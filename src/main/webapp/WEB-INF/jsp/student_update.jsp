@@ -872,7 +872,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bhagyalaxmi Bond No.
+							<td class="alignLeft">Admission No. (Second)
 								&nbsp;</td>
 								<td>
 										<input
