@@ -2,26 +2,11 @@ package org.ideoholic.curium.model.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.hibernate.HibernateException;
-import org.ideoholic.curium.exceptions.CustomResponseException;
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.department.dto.Department;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.transaction.Transactional;
-
-import static org.apache.poi.ss.util.CellRangeAddress.valueOf;
 
 @Slf4j
 @Component
