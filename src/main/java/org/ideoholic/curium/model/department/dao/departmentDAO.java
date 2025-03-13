@@ -21,6 +21,8 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
+import static org.apache.poi.ss.util.CellRangeAddress.valueOf;
+
 @Slf4j
 @Component
 public class departmentDAO {
@@ -64,24 +66,17 @@ public class departmentDAO {
 
 	}
 
-
-	public boolean  deleteMultiple(List ids) {
+    @Transactional
+	public boolean  deleteMultiple(List<Integer> ids) {
         boolean result = false;
-        Transaction transaction =  null;
-        Session session = HibernateUtil.openCurrentSession();
 		try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Department where depid IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-            result= true;
-        } catch (Exception hibernateException) { transaction.rollback();
+            departmentRepository.deleteAllById(ids);
+            result = true;
+        } catch (Exception hibernateException) { ;
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
+            throw hibernateException;
+        }
 		return result;
 	}
 }
