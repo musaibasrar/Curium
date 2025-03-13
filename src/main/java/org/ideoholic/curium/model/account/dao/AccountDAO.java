@@ -36,10 +36,10 @@ public class AccountDAO {
 	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
 	
 	@Autowired
-	private AccountgroupmasterRepository accountgroupmasterRepo;
+	private AccountGroupMasterRepository accountgroupmasterRepo;
 	
 	@Autowired
-	private AccountsubgroupmasterRepository accountsubgroupmasterRepo;
+	private AccountSubGroupMasterRepository accountsubgroupmasterRepo;
 
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
