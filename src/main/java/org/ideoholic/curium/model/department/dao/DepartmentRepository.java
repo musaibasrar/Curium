@@ -11,4 +11,5 @@ import java.util.List;
 public interface DepartmentRepository extends JpaRepository<Department,Integer> {
     @Query("From Department where branchid=:branchId")
     List<Department> findByBranchId(int branchId);
+
 }
