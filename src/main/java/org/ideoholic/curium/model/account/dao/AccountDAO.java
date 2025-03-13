@@ -36,7 +36,10 @@ public class AccountDAO {
 	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
 	
 	@Autowired
-	private AccountgroupmasterRepository accountgroupmasterRepo;
+	private AccountGroupMasterRepository accountgroupmasterRepo;
+	
+	@Autowired
+	private AccountSubGroupMasterRepository accountsubgroupmasterRepo;
 
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
@@ -84,22 +87,18 @@ public class AccountDAO {
 		return accountGroupMaster;
 	}
 
+	@Transactional
 	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId, int branchId) {
 		
 		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
-		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			Accountgroupmaster accountGroupMaster=accountgroupmasterRepo.findById(accountGroupMasterId).orElse(null);
+			accountSubGroupMaster = accountsubgroupmasterRepo.findByAccountGroupMasterAndBranchid(accountGroupMaster, branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		
 		return accountSubGroupMaster;
 	}
 
