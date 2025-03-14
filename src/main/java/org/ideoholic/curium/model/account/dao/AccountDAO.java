@@ -144,19 +144,16 @@ public class AccountDAO {
 		return financialYear;
 	}
 
+	@Transactional
 	public String saveAccountBalance(Accountdetailsbalance accountDetailsBalance) {
 		String result = "false";
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(accountDetailsBalance);
-			transaction.commit();
+			accountDetailsBalanceRepo.save(accountDetailsBalance);
 			result = "true";
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return result;
 	}
