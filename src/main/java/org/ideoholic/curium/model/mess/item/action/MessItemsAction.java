@@ -103,6 +103,13 @@ public class MessItemsAction {
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
+	
+	@PostMapping("/savePurchaseOrder")
+	public String savePurchaseOrder() {
+		messItemActionAdapter.savePurchaseOrder();
+		messItemActionAdapter.getInvoiceOrderDetails();
+		return "purchaseorder";
+	}
 
 	@PostMapping("/deleteItems")
 	public String deleteItems() {
@@ -135,10 +142,36 @@ public class MessItemsAction {
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
+	
+	@GetMapping("/purchaseOrder")
+	public String purchaseOrder() {
+		messSuppliersActionAdapter.viewSuppliersOrderDetails();
+		messItemActionAdapter.viewItemOrderDetails();
+		messItemActionAdapter.getInvoiceOrderDetails();
+		return "purchaseorder";
+	}
 
 	@GetMapping("/addsuppliers")
 	public String addSuppliers() {
 		return "addsuppliers";
 	}
+	
+	@GetMapping("/particularOrderDetail")
+	public String particularOrderDetail() {
+		messItemActionAdapter.getParticularInvoice();
+		messSuppliersActionAdapter.viewSuppliersOrderDetails();
+		messItemActionAdapter.viewItemOrderDetails();
+		messItemActionAdapter.getInvoiceOrderDetails();
+		return "particularpurchasedetail";
+	}
+	
+	@PostMapping("/cancelPurchaseOrder")
+	public String cancelPurchaseOrder() {
+
+		messItemActionAdapter.cancelPurchaseOrder();
+		messItemActionAdapter.getInvoiceOrderDetails();
+		return "purchaseorder";
+	}
+
 
 }
