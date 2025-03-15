@@ -66,7 +66,7 @@ public class AdminService {
 	public ResultResponse viewAllExpenses(String branchId) {
 		List<Adminexpenses> list;
 		try {
-			list = adminDetailsDao.readListOfExpenses(branchId);
+			list = adminDetailsDao.readListOfExpenses(Integer.parseInt(branchId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResultResponse.builder().success(false).build();
