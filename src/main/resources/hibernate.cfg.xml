@@ -11,8 +11,8 @@
 
 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.password">mysql</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vision</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/abc</property>
 		<property name="hibernate.connection.username">root</property>
 
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -128,5 +128,6 @@
 		<mapping resource="mappings/PurchaseOrder.hbm.xml"/> 
 		<mapping resource="mappings/PoMaster.hbm.xml"/> 
 		<mapping resource="mappings/MessStockMoveInfo.hbm.xml"/> 
+		<mapping resource="mappings/mess/MessTaxInvoice.hbm.xml"/> 
 	</session-factory>
 </hibernate-configuration>
