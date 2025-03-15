@@ -34,28 +34,23 @@ public class AdminDetailsDAO {
 	}
 
 
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Adminexpenses> readListOfExpenses(String branchId) {
+	@Transactional
+	public List<Adminexpenses> readListOfExpenses(Integer branchId) {
 		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
 
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
+		try {
 
-			results = (List<Adminexpenses>) session.createQuery("From Adminexpenses where branchid="+branchId)
-					.list();
-			System.out.println("Adminexpenses " + results.size());
-			transaction.commit();
+			results =adminExpensesRepo.findByBranchId(branchId);
 
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
 			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 
 	
