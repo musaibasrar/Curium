@@ -762,6 +762,53 @@ public class MessStockMoveService {
 		new MessStockMoveDAO().updateDue(id, dueAmount);
 		
 	}
+
+	public BillResponseDto getBillReceiptDetail(StockMoveDto stockMoveDto, String branchId) {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		String[] batchno = stockMoveDto.getBatchNo();
+		String[] itemsName = stockMoveDto.getItemsName();
+		String[] issueQuantity = stockMoveDto.getIssueQuantity();
+		String[] itemUnitPrice = stockMoveDto.getItemUintPrice();
+		String[] sgst = stockMoveDto.getStateGst();
+		String[] cgst = stockMoveDto.getCenterGst();
+	    String itemsGrandTotalAmountWOGST = stockMoveDto.getItemsGrandTotalAmountWOGST();
+		double sumSgst = 0;
+		double sumCgst = 0;
+	    List<Bill> billList = new ArrayList<Bill>();
+	    List<MessTaxInvoice> messTaxInvoiceList = new ArrayList<MessTaxInvoice>();
+		
+		for(int i=0; i < batchno.length ; i++){
+
+			Bill bill = new Bill();
+			sumSgst = sumSgst + Double.parseDouble(sgst[i]);
+			sumCgst = sumCgst + Double.parseDouble(cgst[i]);
+			MessTaxInvoice messTaxInvoice = new MessTaxInvoice();
+			messTaxInvoice.setTransactiondate(DateUtil.indiandateParser(stockMoveDto.getTransactionDate()));
+			messTaxInvoice.setStatus("ACTIVE");
+			messTaxInvoice.setBranchid(Integer.parseInt(branchId));
+			messTaxInvoice.setIssuedto(stockMoveDto.getIssuedto());
+			messTaxInvoice.setQuotationid(Integer.parseInt(stockMoveDto.getQuotationId()));
+			bill.setItemname(itemsName[i]);
+			bill.setBatchno(batchno[i]);
+			bill.setQuantity(Float.parseFloat(issueQuantity[i]));
+			bill.setSalesprice(Float.parseFloat(itemUnitPrice[i]));
+			messTaxInvoiceList.add(messTaxInvoice);
+			billList.add(bill);
+	}
+		billResponseDto.setBillList(billList);
+		billResponseDto.setItemsGrandTotalAmountWOGST(itemsGrandTotalAmountWOGST);
+		billResponseDto.setSumCgst(sumCgst);
+		billResponseDto.setSumSgst(sumSgst);
+		new MessStockMoveDAO().messTaxInvoiceSave(messTaxInvoiceList);
+		return billResponseDto;
+	}
+
+	public BillResponseDto getTaxInvoiceDetail() {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		List<MessTaxInvoice> messTaxInvoice = new MessStockMoveDAO().getTaxInvoiceDetail();
+		billResponseDto.setMessTaxInvoice(messTaxInvoice);
+				return billResponseDto;
+	}
 	
 	
 }

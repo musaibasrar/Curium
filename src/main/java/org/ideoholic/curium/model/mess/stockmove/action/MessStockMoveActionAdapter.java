@@ -166,4 +166,28 @@ public class MessStockMoveActionAdapter {
 		messStockMoveService.updateDue(stockMoveIdsDto);
 		
 	}
+
+	public void getBillDetail() {
+		StockMoveDto stockMoveDto = new StockMoveDto();
+		stockMoveDto.setBatchNo(request.getParameterValues("batchno"));
+		stockMoveDto.setItemsName(request.getParameterValues("itemsname"));
+		stockMoveDto.setIssueQuantity(request.getParameterValues("issuequantity"));
+		stockMoveDto.setItemUintPrice(request.getParameterValues("itemunitprice"));
+		stockMoveDto.setItemsGrandTotalAmountWOGST(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+		stockMoveDto.setTransactionDate(request.getParameter("transactiondate"));
+		stockMoveDto.setIssuedto(request.getParameter("issuedto"));
+		stockMoveDto.setQuotationId(request.getParameter("quotationid"));
+		stockMoveDto.setStateGst(request.getParameterValues("sgst"));
+		stockMoveDto.setCenterGst(request.getParameterValues("cgst"));
+		BillResponseDto billResponseDto = messStockMoveService.getBillReceiptDetail(stockMoveDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("billdetail", billResponseDto.getBillList());
+		request.setAttribute("itemsGrandTotalAmountWithoutGST", billResponseDto.getItemsGrandTotalAmountWOGST());
+		request.setAttribute("sumcgst", billResponseDto.getSumCgst());
+		request.setAttribute("sumsgst", billResponseDto.getSumSgst());
+	}
+
+	public void generateTaxInvoiceReport() {
+		BillResponseDto billResponseDto = messStockMoveService.getTaxInvoiceDetail();
+		request.setAttribute("invoicereport", billResponseDto.getMessTaxInvoice());
+	}
 }
