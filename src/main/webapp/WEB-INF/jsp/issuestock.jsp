@@ -843,7 +843,9 @@
                      			document.getElementById("transferdate"), document.getElementById("transferbankname"),
                      			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"), 
                      			document.getElementById("totalcashamount"), document.getElementById("totalbanktransferamount"),
-                     			document.getElementById("totalchequetransferamount"),document.getElementById("itemsGrandTotalAmount"),document.getElementById("itemsGrandTotalAmountWithoutGST"));
+                     			document.getElementById("totalchequetransferamount"),document.getElementById("itemsGrandTotalAmount"),
+                     			document.getElementById("itemsGrandTotalAmountWithoutGST"),
+                     			document.getElementById("itemsGrandNetDueAmount"));
                          		$( this ).dialog( "close" );
                   		   }
                  }
@@ -875,7 +877,7 @@
    
 	
 	function generatebill(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname,totalcashamount,totalbanktransferamount,
-			totalchequetransferamount,itemsgrandtotalamount,itemsGrandTotalAmountWithoutGST){
+			totalchequetransferamount,itemsgrandtotalamount,itemsGrandTotalAmountWithoutGST,itemsGrandNetDueAmount){
     	
     	var paymentmethodbanktransfer = '';
     	var paymentmethodchequetransfer = '';
@@ -892,17 +894,19 @@
     	var totalchequetransferamountvalue = '';
     	var itemsgrandtotalamountvalue = '';
     	var itemsTotalAmountWithoutGST='';
+    	var itemsGrandNetDueAmountvalue='';
     	
     	itemsgrandtotalamountvalue = itemsgrandtotalamount.value;
     	totalcashamountvalue = totalcashamount.value;
     	totalbanktransferamountvalue = totalbanktransferamount.value;
     	totalchequetransferamountvalue = totalchequetransferamount.value;
+    	itemsGrandNetDueAmountvalue = itemsGrandNetDueAmount.value;
     	
     	var sum = (parseFloat(totalcashamountvalue)+parseFloat(totalbanktransferamountvalue)+parseFloat(totalchequetransferamountvalue)).toFixed(2);
     	var grandtotal = parseFloat(itemsgrandtotalamountvalue);
     	itemsTotalAmountWithoutGST = parseFloat(itemsGrandTotalAmountWithoutGST.value);
     	
-    	if(parseFloat(sum) == parseFloat(grandtotal))
+    	if(parseFloat(sum) <= parseFloat(grandtotal))
     		
     		{
     	
@@ -941,7 +945,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/abc/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.action="/abc/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"&itemsGrandNetDueAmount="+itemsGrandNetDueAmountvalue+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1370,6 +1374,28 @@
 		            }
 		        	
         </script>
+      <script>
+    function getAmount() {
+        // Get input values and parse them as numbers
+        var gTotal = parseFloat(document.getElementById("itemsGrandTotalAmount").value) || 0;
+        var cashAmount = parseFloat(document.getElementById("totalcashamount").value) || 0;
+        var bankAmount = parseFloat(document.getElementById("totalbanktransferamount").value) || 0;
+        var chequeAmount = parseFloat(document.getElementById("totalchequetransferamount").value) || 0;
+
+        // Calculate total paid
+        var totalPaid = cashAmount + bankAmount + chequeAmount;
+
+        // Calculate due amount
+        var dueAmount = gTotal - totalPaid;
+        var dueAmountString = dueAmount.toFixed(2).toString();
+
+        // Update the output fields
+        document.getElementById('itemsGrandNetTotalAmount').value = totalPaid.toFixed(2);
+        document.getElementById('itemsGrandNetDueAmount').value = dueAmount.toFixed(2);
+       // document.getElementById('itemsGrandNetDueAmount').value = dueAmountString;
+    }
+</script>
+        
 
 </head>
 <%
@@ -1541,11 +1567,25 @@ for(Cookie cookie : cookies){
 	
 				<table style="width: auto;height: auto;">
 					<tr>
+					        <td>
+           		 				Net Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetTotalAmount" id="itemsGrandNetTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 				</tr>
+           		 				<tr>
            		 			<td>
-           		 				Grand Total: &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				Due Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 			   </tr>
+           		 				<tr>
+           		 			<td>
+           		 				Grand Total:</td><td> &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
            		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
            		 				<br>
-           		 			</td>	
+           		 			</td>
            		 			
            		 			
            		 		</tr>
@@ -1578,7 +1618,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 						
 							<td>
-								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
+								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
 							</td>
 							
 						</tr>
@@ -1590,7 +1630,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 								Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="text" name="totalbanktransferamount" id="totalbanktransferamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;"/>														
+								<input type="text" name="totalbanktransferamount" id="totalbanktransferamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;"/>														
 							</td>
 							
 						</tr>
@@ -1638,7 +1678,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 						
 							<td>
-								Amount &nbsp;&nbsp;&nbsp;<input type="text" name="totalchequetransferamount" id="totalchequetransferamount" value="0" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0"/>														
+								Amount &nbsp;&nbsp;&nbsp;<input type="text" name="totalchequetransferamount" id="totalchequetransferamount" onkeyup="getAmount()" value="0" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0"/>														
 							</td>
 							
 						</tr>
