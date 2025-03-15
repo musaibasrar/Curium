@@ -10,7 +10,9 @@ import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.MessStockMoveInfo;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
@@ -145,7 +147,7 @@ public class MessStockMoveDAO {
 			String updateDrAccount, String updateCrAccount, VoucherEntrytransactions transactionsIncomeCash,VoucherEntrytransactions transactionsIncomeBank,
 			VoucherEntrytransactions transactionsIncomeCheque,
 			String updateDrAccountIncomeCash, String updateCrAccountIncomeCash, String updateDrAccountIncomeBank, String updateCrAccountIncomeBank,
-			String updateDrAccountIncomeCheque, String updateCrAccountIncomeCheque) {
+			String updateDrAccountIncomeCheque, String updateCrAccountIncomeCheque, MessStockMoveInfo messStockMoveInfo ) {
 		 
 		boolean result = false;
 		int billNo = 0;
@@ -206,6 +208,7 @@ public class MessStockMoveDAO {
 			
 			for (MessStockMove messStockMove : messStockMovesList) {
 	        	
+				messStockMove.setExternalid(String.format("%04d",billNo));
 				session.save(messStockMove);
 	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 	        	queryUpdateMessStock.executeUpdate();
@@ -220,6 +223,28 @@ public class MessStockMoveDAO {
 				Query queryInvoiceDetails = session.createQuery("update MessInvoiceDetails set status = 'MOVED' where id = '"+messStockEntry.getMessinvoicedetails().getId()+"'");
 				queryInvoiceDetails.executeUpdate();
 			}
+			//String branchreceiptnumber = null;
+			/*if(student!=null) {
+	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", student.getSid()+1));
+	            }else {
+	            	parents.getStudent().setStudentexternalid(parents.getStudent().getStudentexternalid()+String.format("%04d", 1));
+	            }
+			 * */
+			
+			
+			Query queryMessStockMoveInfo = session.createQuery("from MessStockMoveInfo ORDER BY id DESC");
+			queryMessStockMoveInfo.setMaxResults(1);
+			MessStockMoveInfo msmi = (MessStockMoveInfo) queryMessStockMoveInfo.uniqueResult();
+			int msmiBRN = 0;
+			if(msmi!=null) {
+				msmiBRN = msmi.getReceiptnumber() + 1;
+			}else {
+				msmiBRN = 1;
+			}
+			
+					messStockMoveInfo.setBranchreceiptnumber(String.format("%04d",msmiBRN));
+					session.save(messStockMoveInfo);
+			 
 	        
 	        transaction.commit();
 	        result = true;
@@ -435,6 +460,42 @@ return result;
 				HibernateUtil.closeSession();
 			return results;
 		}
+	}
+
+
+
+	public List<MessStockMoveInfo> getTotalDue() {
+		List<MessStockMoveInfo> results = new ArrayList<MessStockMoveInfo>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from MessStockMoveInfo");
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return results;
+	}
+
+
+
+	public void updateDue(int id, Long dueAmount) {
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session
+					.createQuery("update MessStockMoveInfo set due = '"+dueAmount+"'  where receiptnumber = '"+id+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		
 	}
 	
 }
