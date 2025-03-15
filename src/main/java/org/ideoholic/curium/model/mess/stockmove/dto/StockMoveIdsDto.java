@@ -8,4 +8,6 @@ import java.util.Map;
 public class StockMoveIdsDto {
     private String[] stockMoveIds;
     private Map<String, String> requestParams;
+    private String duePaid;
+    private String dueId;
 }
