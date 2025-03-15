@@ -42,6 +42,21 @@ public class MessSuppliersService {
 				 .success(true)
 				 .build();
 	}
+	
+	
+	
+	  public ResultResponse viewSuppliersOrderDetails(String branchId) {
+	  
+	  List<MessSuppliers> messSuppliersList = new ArrayList<MessSuppliers>();
+	  
+	  if(branchId!=null)
+	  { 
+		  messSuppliersList = new MessSuppliersDAO().getSupplierDetails();
+	  }
+	  
+	  return ResultResponse .builder() .resultList(messSuppliersList)
+	  .success(true) .build(); }
+	 
 
 
 	public SuppliersDetailsResponseDto addSupplierDetails(SuppliersDetailsDto dto, String branchId, String userId) {

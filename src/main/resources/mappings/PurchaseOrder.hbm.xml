@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.mess.item.dto.PurchaseOrder" table="purchaseorder">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="itemId" type="int">
+            <column name="itemid"  />
+        </property>
+        <property name="externalId" type="string">
+            <column name="externalid" length="45"  />
+        </property>
+                <property name="invoicedetailsId" type="int">
+            <column name="invoicedetailsid"  />
+        </property>
+        <property name="userId" type="int">
+            <column name="userid"  />
+        </property>
+         <property name="supplierName" type="string">
+            <column name="suppliername" length="100" />
+        </property>
+         <property name="quantity" type="string">
+            <column name="quantity" length="45" />
+        </property>
+        <property name="receivedQuantity" type="string">
+            <column name="receivedquantity" length="45" />
+        </property>
+        <property name="invoiceDate" type="date">
+            <column name="invoicedate" length="10"  />
+        </property>
+         <property name="uom" type="string">
+            <column name="uom" length="45"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

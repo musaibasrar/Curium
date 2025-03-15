@@ -12,5 +12,8 @@ public class MessStockEntryResponseDto {
    private String invoiceTotal;
    private String supplierName;
    private String invoiceDate;
+   private String studentName;
+   private String branchReceiptNumber;
+   private String dueAmount;
    private boolean success;
 }
