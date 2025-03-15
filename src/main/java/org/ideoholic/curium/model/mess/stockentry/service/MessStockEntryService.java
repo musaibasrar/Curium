@@ -205,7 +205,7 @@ public class MessStockEntryService {
 		        				"							<td><br /></td>" + 
 		        				"							</tr>" + 
 		        				"						<tr>" + 
-		        				"						<td class='alignRight'>Invoice Date&nbsp;</td>" + 
+		        				"						<td class='alignRight'>P.O.Date&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'> "+invoiceDate+"</td>" + 
 									/*
 									 * "						<td class='alignRight'>Grand Total&nbsp;</td>" +
