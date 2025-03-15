@@ -1040,9 +1040,9 @@ for(Cookie cookie : cookies){
 								</select>
 							</td>
 							
-							<td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
+							<!-- <td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
 							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;">
-							</td>
+							</td> -->
 							
 						</tr>
 						<tr>
