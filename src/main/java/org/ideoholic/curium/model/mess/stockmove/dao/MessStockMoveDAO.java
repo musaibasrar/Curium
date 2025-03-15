@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.mess.item.dto.MessStockMoveInfo;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessTaxInvoice;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
@@ -496,6 +497,46 @@ return result;
 			HibernateUtil.closeSession();
 		 }
 		
+	}
+
+
+
+	public void messTaxInvoiceSave(List<MessTaxInvoice> messTaxInvoiceList) {
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            for (MessTaxInvoice messTaxInvoice : messTaxInvoiceList) {
+            session.save(messTaxInvoice);
+            transaction.commit();
+            }
+           
+        } catch (Exception hibernateException) { transaction.rollback();
+        logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+		
+	}
+
+
+
+	public List<MessTaxInvoice> getTaxInvoiceDetail() {
+		List<MessTaxInvoice> results = new ArrayList<MessTaxInvoice>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from MessTaxInvoice");
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return results;
 	}
 	
 }
