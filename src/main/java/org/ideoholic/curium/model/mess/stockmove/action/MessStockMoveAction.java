@@ -108,12 +108,20 @@ public class MessStockMoveAction {
     	return "duereport";
     }
 	
-	@GetMapping("/getDueReport")
-	public String getDueReport() {
+	@GetMapping("/getUnpaidReport")
+	public String getUnpaidReport() {
 		    	
 		standardActionAdapter.viewClasses();
     	
     	return "duereport";
+    }
+	
+	@GetMapping("/getDueReport")
+	public String getDueReport() {
+		    	
+		messStockMoveActionAdapter.getDuesList();
+    	
+    	return "dueslist";
     }
 	
 	
@@ -126,6 +134,14 @@ public class MessStockMoveAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+	
+	@PostMapping("/paydue")
+	public String paydue() {
+		    	
+    	messStockMoveActionAdapter.paydue();
+    	
+    	return getDueReport();
     }
 
 }

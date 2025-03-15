@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.mess.item.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,14 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.PoMaster;
+import org.ideoholic.curium.model.mess.item.dto.PurchaseOrder;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -462,5 +467,121 @@ public class MessItemsDAO {
         }
         return results;
 }
+
+
+	@SuppressWarnings("finally")
+	public boolean addNewOrderDetail(List<PurchaseOrder> orderList, PoMaster poMaster) {
+		boolean result = false;
+		PoMaster poMasterExtid = new PoMaster();
+		String externalId = null;
+		
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            
+            Query query = session.createQuery("from PoMaster as poMaster order by id desc");
+            query.setMaxResults(1);
+            poMasterExtid = (PoMaster) query.uniqueResult();
+            
+            if(poMasterExtid!=null) {
+        		// order.setExternalId(order.getExternalId()+String.format("%04d", poMaster.getId()+1));
+            	externalId = poMaster.getExternalId()+String.format("%05d", poMasterExtid.getId()+1);
+             }else {
+            	 externalId = poMaster.getExternalId()+String.format("%05d",1);
+             }
+            poMaster.setExternalId(externalId);
+            session.save(poMaster);
+            
+            for (PurchaseOrder order : orderList) {
+            	 order.setExternalId(externalId);
+            	session.save(order);
+			}
+            transaction.commit();
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
+
+
+
+	public List<PoMaster> getPurchaseOrderMasterDetails() {
+		List<PoMaster> results = new ArrayList<PoMaster>();
+        try {
+                transaction = session.beginTransaction();
+                results = (List<PoMaster>) session.createQuery("From PoMaster").setCacheable(true).setCacheRegion("commonregion").list();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+	}
+
+
+
+	public List<PurchaseOrder> getParticularInvoice(String externalId) {
+		List<PurchaseOrder> results = new ArrayList<PurchaseOrder>();
+	        try {
+	                transaction = session.beginTransaction();
+	                results = (List<PurchaseOrder>)session.createQuery("From PurchaseOrder mse where externalId = '"+externalId+"'");
+	                transaction.commit();
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	                
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+	        return results;
+	}
+
+
+
+	public boolean addPoMasteDetail(PoMaster poMaster) {
+		boolean result = false;
+		try {
+			 //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(poMaster);
+            transaction.commit();	
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
+
+
+
+	public void cancelPurchaseOrder(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from PoMaster as poMaster where poMaster.id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}
 	
 }
