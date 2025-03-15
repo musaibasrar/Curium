@@ -88,6 +88,21 @@ public class MessItemActionAdapter {
         }
         else return "error";
     }
+    
+	
+	  public String viewItemOrderDetails() { 
+	 
+	  ResultResponse resultResponse = messItemsService.viewItemOrderDetails(httpSession.getAttribute(BRANCHID).toString());
+	  request.setAttribute("messstockavailabilitylist",resultResponse.getResultList());
+	  
+	  if(resultResponse.isSuccess())
+	  {
+		  return "additems";
+		  }
+	  else return "error";
+	  }
+	 
+
 
     public void deleteMultipleItems() {
         MessIdsDto dto = new MessIdsDto();
@@ -138,6 +153,19 @@ public class MessItemActionAdapter {
         ResultResponse resultResponse = messItemsService.savePurchase(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
         request.setAttribute("itemsreceived", resultResponse.isSuccess());
     }
+    
+    public void savePurchaseOrder() {
+        PurchaseDto dto = new PurchaseDto();
+        dto.setItemIds(request.getParameterValues("itemids"));
+        dto.setItemsName(request.getParameterValues("itemsname"));
+        dto.setUom(request.getParameterValues("itemsunitofmeasure"));
+        dto.setItemsQuantity(request.getParameterValues("itemsquantity"));
+        dto.setPurchaseDate(request.getParameter("invoicedate"));
+        dto.setSupplierId(request.getParameter("supplierid"));
+
+        ResultResponse resultResponse = messItemsService.savePurchaseOrder(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("itemsreceived", resultResponse.isSuccess());
+    }
 
     public void cancelPurchase() {InvoiceIdsDto dto = new InvoiceIdsDto();
         dto.setInvoiceId(request.getParameterValues("invoiceid"));
@@ -152,6 +180,23 @@ public class MessItemActionAdapter {
         request.setAttribute("invoicelist", responseDto.getInvoiceSuppliersMap());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", responseDto.getCurrentPage());
+    }
+    
+	/*
+	 * public void getInvoiceOrderDetails() { String page =
+	 * request.getParameter("page");
+	 * 
+	 * InvoiceDetailsResponseDto responseDto =
+	 * messItemsService.getInvoiceOrderDetails(page,
+	 * httpSession.getAttribute(BRANCHID).toString());
+	 * request.setAttribute("invoicelist", responseDto.getInvoiceSuppliersMap());
+	 * request.setAttribute("noOfPages", responseDto.getNoOfPages());
+	 * request.setAttribute("currentPage", responseDto.getCurrentPage()); }
+	 */
+
+    public void getInvoiceOrderDetails() {
+    	InvoiceDetailsResponseDto responseDto = messItemsService.getInvoiceOrderDetails();
+    	request.setAttribute("invoicelist", responseDto.getPoMasterMap());
     }
 
     public void generateStockIssuanceReport() {
@@ -174,4 +219,18 @@ public class MessItemActionAdapter {
         ResultResponse resultResponse = messItemsService.getCurrentStockToIssue();
         request.setAttribute("stocklist", resultResponse.getResultList());
     }
+
+	public void getParticularInvoice() {
+		PurchaseDto purchaseDto = new PurchaseDto();
+		purchaseDto.setExternalId(request.getParameter("id"));
+		InvoiceDetailsResponseDto invoiceDetailsResponseDto = messItemsService.getParticularInvoice(purchaseDto);
+		request.setAttribute("purchasedetail", invoiceDetailsResponseDto.getPurchaseOrderList());
+	}
+
+	public void cancelPurchaseOrder() {
+		PurchaseDto purchaseDto = new PurchaseDto();
+		purchaseDto.setItemIds(request.getParameterValues("invoiceid"));
+		messItemsService.cancelPurchaseOrder(purchaseDto);
+		
+	}
 }
