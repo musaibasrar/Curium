@@ -12,7 +12,7 @@ public interface MessStockMoveApiAction {
 
     ResponseEntity<StockMoveCancelDto> issueItems(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page);
 
-    ResponseEntity<StockMoveSaveDto> saveStockMove(@RequestBody StockMoveDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "username") String userName,  @RequestParam(value = "page") String page);
+    ResponseEntity<StockMoveSaveDto> saveStockMove(@RequestBody StockMoveDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "username") String userName,  @RequestParam(value = "page") String page, @RequestHeader(value = "branchcode") String branchCode);
 
     ResponseEntity<StockMoveResponseDto> billsReport(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page);
 
