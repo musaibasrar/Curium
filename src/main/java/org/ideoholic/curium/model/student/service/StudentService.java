@@ -110,7 +110,7 @@ public class StudentService {
 		
 		if("Admission".equalsIgnoreCase(student.getStream())) {
 			 
-			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where stream='Admission' order by sid desc");
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
@@ -128,7 +128,7 @@ public class StudentService {
 			
 		}else if("Registration".equalsIgnoreCase(student.getStream())) {
 			
-			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where stream='Registration' order by sid desc");
 			
 			
 			if(studentDB!=null) {
@@ -142,9 +142,8 @@ public class StudentService {
 			student.setPassedout(1);
 			student.setDroppedout(1);
 			student.setLeftout(1);
-		}else if("Alumni".equalsIgnoreCase(student.getStream())) {
-			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
-			
+		}else if(student.getStream().equalsIgnoreCase("Alumni")) {
+			Student studentDB = new studentDetailsDAO().readUniqueStudent("From Student where stream='Alumni' order by sid desc");
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
