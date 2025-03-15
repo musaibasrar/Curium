@@ -33,4 +33,5 @@ public class StockMoveDto {
     private String issuedto;
     private String itemsTotalAmount;
     private String itemsGrandNetDueAmount;
+    private String quotationId;
 }
