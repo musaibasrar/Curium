@@ -40,6 +40,9 @@ public class AccountDAO {
 	
 	@Autowired
 	private AccountSubGroupMasterRepository accountsubgroupmasterRepo;
+	
+	@Autowired
+	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
@@ -213,21 +216,18 @@ public class AccountDAO {
 		return result;
 	}
 
+	@Transactional
 	public boolean saveVoucher(VoucherEntrytransactions transactions) {
-		
-		Transaction transaction = null;
+		boolean result = false;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(transactions);
-			transaction.commit();
-			return true;
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			voucherEntryTransactionsRepo.save(transactions);
+			result = true;
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 	
 	public boolean saveVoucherwithAccUpdate(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
