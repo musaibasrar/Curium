@@ -1,8 +1,12 @@
 package org.ideoholic.curium.model.student.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
@@ -12,10 +16,6 @@ import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class StudentActionAdapter {
@@ -100,5 +100,22 @@ public class StudentActionAdapter {
         request.setAttribute("studentList", responseDto.getList());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", responseDto.getPage());
+    }
+    
+    public void viewOtherFeesStructurePerYear() {
+        StudentService studentService = new StudentService(request, response, standardActionAdapter);
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentId(request.getParameter("id"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+
+        OtherFeesDetailsResponseDto responseDto = studentService.viewOtherFeesStructurePerYear(dto);
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("feesstructure", responseDto.getOtherFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
 }

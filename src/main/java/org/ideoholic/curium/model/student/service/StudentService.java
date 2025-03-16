@@ -1,5 +1,25 @@
 package org.ideoholic.curium.model.student.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,6 +36,7 @@ import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
@@ -27,19 +48,20 @@ import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.*;
+import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.StudentDto;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.student.dto.StudentMapper;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.math.BigDecimal;
-import java.util.*;
 
 public class StudentService {
 
@@ -1650,7 +1672,9 @@ public class StudentService {
 
 					student.setStudentpic(saveFile);
 
-				} else{
+				} else if(studentpicdelete!=null) {
+					student.setStudentpic(null);
+				}else{
 
 					student.setStudentpic(studentPicUpdate);
 				}
@@ -2312,5 +2336,42 @@ public class StudentService {
 		return result;
 	}
 	//end of otherview of student
+
+		public OtherFeesDetailsResponseDto viewOtherFeesStructurePerYear(StudentIdDto dto) {
+		OtherFeesDetailsResponseDto result = OtherFeesDetailsResponseDto.builder().build();
+
+		try {
+
+			long id = Long.parseLong(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
+
+			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
+			result.setReceiptInfo(rinfo);
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+
+			long totalSum = 0l;
+			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+
+			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				totalFeesAmount = totalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentotherfeesstructureSingle.getConcession();
+			}
+			result.setOtherFeesStructure(otherfeesstructure);
+			result.setTotalSum(totalSum);
+			result.setDueAmount(totalFeesAmount-totalSum);
+			result.setTotalFeesAmount(totalFeesAmount);
+			result.setAcademicPerYear(academicYear);
+			result.setTotalFeesConcession(totalFeesConcession);
+			result.setSuccess(true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
