@@ -569,7 +569,12 @@ public class UserService {
 			}
 			
 			if(!modeOfPayment.equalsIgnoreCase("")){
-				querySub = querySub +" AND feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				if(modeOfPayment.equalsIgnoreCase("Cash")) {
+					querySub = querySub +" AND feesdetails.paymenttype = 'Cash'" ;
+				}else if (modeOfPayment.equalsIgnoreCase("Bank Transfer")) {
+					querySub = querySub +" AND (feesdetails.paymenttype = 'Bank Transfer' OR  feesdetails.paymenttype = 'Cheque')" ;
+				}
+				
 			}
 			
 			if(!feesCollector[0].equalsIgnoreCase("")){

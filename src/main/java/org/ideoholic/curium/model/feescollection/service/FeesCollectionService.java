@@ -2004,12 +2004,18 @@ public class FeesCollectionService {
 			            if(cashOrBank.contains("Cash")) {
 			            	 if (feesCategoryName.contains("tuition fee")) {
 				                    tuitionFeesCash += amountPaid;
+				                }else if (feesCategoryName.contains("tc charges")) {
+				                    tcChargesCash += amountPaid;
 				                } 
-						}else if(cashOrBank.contains("Bank")) {
+						}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 							 if (feesCategoryName.contains("tuition fee")) {
 								 tuitionFeesBank += amountPaid;
-				                } 
+				                } else if (feesCategoryName.contains("tc charges")) {
+				                    tcChargesCash += amountPaid;
+				                }
 						}
+			            
+			            
 			            
 			        }
 				}
@@ -2017,7 +2023,7 @@ public class FeesCollectionService {
 				String cashOrBank = receiptinfo.getPaymenttype();
 				if(cashOrBank.contains("Cash")) {
 					totalFeesByCash += receiptinfo.getTotalamount();
-				}else if(cashOrBank.contains("Bank")) {
+				}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 					totalFeesByBank += receiptinfo.getTotalamount();
 				}
 			}
@@ -2094,7 +2100,7 @@ public class FeesCollectionService {
 		                }else {
 		                	transportationFeesCash += amountPaid;
 		                }
-		            } else if (cashOrBank.contains("Bank")) {
+		            } else if (cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 		                if (feesCategoryName.contains("tc charges")) {
 		                    tcChargesBank += amountPaid;
 		                } else if (feesCategoryName.contains("library")) {
@@ -2115,7 +2121,7 @@ public class FeesCollectionService {
 			String cashOrBank = receiptinfo.getPaymenttype();
 			if(cashOrBank.contains("Cash")) {
 				totalFeesByCashOtherFees += receiptinfo.getTotalamount();
-			}else if(cashOrBank.contains("Bank")) {
+			}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 				totalFeesByBankOtherFees += receiptinfo.getTotalamount();
 			}
 		}

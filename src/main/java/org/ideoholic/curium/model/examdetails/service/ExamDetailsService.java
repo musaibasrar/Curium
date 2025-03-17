@@ -193,7 +193,7 @@ public class ExamDetailsService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("currentYear").toString());
 			 httpSession.setAttribute("examschedule", exams);
 			if(exams == null){
 				result=false;
