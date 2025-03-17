@@ -292,7 +292,7 @@ for(Cookie cookie : cookies){
 								        </tr>
 								    </thead>
 								</table>
-								<table width="35%" border="0" style="border-color: #4b6a84;float: left;">
+								<table width="42%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
 								                <th style="border: 1px solid black;font-size: 18px;">Term 1</th>
@@ -300,7 +300,7 @@ for(Cookie cookie : cookies){
 								            </tr>
 								        </thead>
 								</table>
-								<table width="35%" border="0" style="border-color: #4b6a84;float: left;">
+								<table width="42%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
 								                <th style="border: 1px solid black;font-size: 18px;">Term 2</th>
@@ -308,14 +308,7 @@ for(Cookie cookie : cookies){
 								            </tr>
 								        </thead>
 								</table>
-								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
-								        <thead>
-								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <th style="border: 1px solid black;font-size: 18px;">Over All</th>
-								                <!-- <th style="border: 1px solid black;">Grade</th> -->
-								            </tr>
-								        </thead>
-								</table>
+								
 					
 					<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
@@ -335,11 +328,8 @@ for(Cookie cookie : cookies){
 								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
 								                            </tr>
 								                        </c:forEach>
-								                        <tr style="border-top: 1px solid black;font-size: 18px;">
+								                        <!-- <tr style="border-top: 1px solid black;font-size: 18px;">
 								                            <td style="border: 1px solid black;text-align: left;">Total</td>
-								                        </tr>
-								                        <!-- <tr style="border: 1px solid black;">
-								                            <td style="border: 1px solid black;text-align: left;">Total Marks</td>
 								                        </tr> -->
 								                    </table>
 								                </td>
@@ -351,22 +341,22 @@ for(Cookie cookie : cookies){
 								<%-- <c:set var = "beginloop" value = "0"/>
 								<c:set var = "endloop" value = "2"/>
 								<c:forEach begin="0" end="${endloop}" step="1"> --%>
-								    <table width="35%" border="0" style="border-color: #4b6a84;float: left;">
+								    <table width="42%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "3" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
 								                    <th style="border: 1px solid black;font-size: 12px;">
 								                    <c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
 								                    <c:out value="${examParts[1]}"/></th>
 								                </c:forEach>
-								                <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/40)</th>
+								                <!-- <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/40)</th> -->
 								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
 								        
 								        <tbody>
 								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "3" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -376,81 +366,31 @@ for(Cookie cookie : cookies){
 								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;font-size: 18px;">
+								                            <%-- <tr style="border-top: 1px solid black;font-size: 18px;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
 								                            </tr> --%>
 								                        </table>
 								                    </td>
 								                </c:forEach>
-								                <c:forEach items="${Parents.finaltermmarks}" var="finaltermmarks" begin="0" end= "0" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-											                        <!-- <tr>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Marks</td>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Grade</td>
-											               			</tr> -->
-								                            <c:forEach items="${finaltermmarks.subMarks}" var="finaltermsubmarks" >
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
-								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
-								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
-								                                </tr>
-								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.totalMarksObtained}</td>
-								                            </tr>
-								                            <!-- <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">0</td>
-								                            </tr> -->
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								                <%-- <c:forEach items="${Parents.finaltermmarks}" var="finaltermmarks" begin="0" end= "0" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-											                        <!-- <tr>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Marks</td>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Grade</td>
-											               			</tr> -->
-								                            <c:forEach items="${finaltermmarks.subMarks}" var="finaltermsubmarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td>
-								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.resultclass}</td>
-								                            </tr>
-								                        </table>
-								                    </td>
-								                </c:forEach> --%>
 								            </tr>
 								        </tbody>
 								    </table>
 								    
-								    <table width="35%" border="0" style="border-color: #4b6a84;float: left;">
+								    <table width="42%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "7" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="6" end= "11" step="1">
 								                    <th style="border: 1px solid black;font-size: 12px;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
 								                    <c:out value="${examParts[1]}"/></th>
 								                </c:forEach>
-								                <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/60)</th>
+								               <!--  <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/60)</th> -->
 								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
 								        
 								        <tbody>
 								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "7" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="6" end= "11" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -460,127 +400,9 @@ for(Cookie cookie : cookies){
 								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;font-size: 18px;">
+								                            <%-- <tr style="border-top: 1px solid black;font-size: 18px;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
 								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								                <c:forEach items="${Parents.finaltermmarks}" var="finaltermmarks" begin="1" end= "1" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-											                        <!-- <tr>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Marks</td>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Grade</td>
-											               			</tr> -->
-								                            <c:forEach items="${finaltermmarks.subMarks}" var="finaltermsubmarks" >
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
-								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
-								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
-								                                </tr>
-								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.totalMarksObtained}</td>
-								                            </tr>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								                <%-- <c:forEach items="${Parents.finaltermmarks}" var="finaltermmarks" begin="1" end= "1" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-											                        <!-- <tr>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Marks</td>
-											               			<td style="border: 1px solid black;text-align: center;font-weight: bold;">Grade</td>
-											               			</tr> -->
-								                            <c:forEach items="${finaltermmarks.subMarks}" var="finaltermsubmarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td>
-								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.resultclass}</td>
-								                            </tr>
-								                            <!-- <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">0</td>
-								                            </tr> -->
-								                        </table>
-								                    </td>
-								                </c:forEach> --%>
-								            </tr>
-								        </tbody>
-								    </table>
-								    
-								    <!-- Over All -->
-								    <table width="15%" border="0" style="border-color: #4b6a84;float: left;">
-								        <thead>
-								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
-								                    <th style="border: 1px solid black;font-size: 12px;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
-								                    <th style="border: 1px solid black;font-size: 12px;">%<br>&nbsp;</th>
-								                <th style="border: 1px solid black;font-size: 12px;">Grade</th>
-								                </c:forEach>
-								            </tr>
-								        </thead>
-								        
-								        <tbody>
-								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                             <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                             <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <td style="border: 1px solid black;text-align: left;">
-								                                    <fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${dateParts[0]}" /></td>
-								                                </tr>
-								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">
-								                                	<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${exammarks.percentage}" />
-								                                </td>
-								                            </tr>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                             <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
-								                            </tr>
-								                            
 								                        </table>
 								                    </td>
 								                </c:forEach>
@@ -595,177 +417,103 @@ for(Cookie cookie : cookies){
 							<td style="background-color:#A9A9A9;text-align:left"></td>
 						</tr>		
 					</table>			    
-								<table width="20%" border="0" style="border-color: #4b6a84;float: left;">
+								
+						<!-- Over All -->
+								    					    
+								   <div style="display: flex; justify-content: center;">
+    <!-- New Table for Grand Total, Term 1 + Term 2, and Final Grade -->
+    <table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;"><c:out value="Subject"/></th>
+								            <th style="border: 1px solid black;"><c:out value=""/></th>
 								        </tr>
 								    </thead>
-								    
-								    <tbody>
-								        <tr>
-								            <c:forEach items="${Parents.otherexammarks}" var="otherexammarks" begin="0" end="0" step="1">
-								                <td>
-								                    <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                        <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                            <tr style="border: 1px solid black;">
-								                                <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-								                            </tr>
-								                        </c:forEach>
-								                        <!-- <tr style="border: 1px solid black;">
-								                            <td style="border: 1px solid black;text-align: left;">Total Marks</td>
-								                        </tr> -->
-								                    </table>
-								                </td>
-								            </c:forEach>
-								        </tr>
-								    </tbody>
 								</table>
-								    
-								    <table width="40%" border="0" style="border-color: #4b6a84;float: left;">
+								<table width="27%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.otherexammarks}" var="otherexammarks" begin="0" end= "0" step="1">
-								                    <th style="border: 1px solid black;">
-								                    <c:set var="examParts" value="${fn:split(otherexammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
-								                </c:forEach>
-								                <th style="border: 1px solid black;">Marks Obtained(100/40)</th>
-								                <th style="border: 1px solid black;">Grade</th>
+								                <th style="border: 1px solid black;font-size: 18px;">
+								                Grand Total<br>
+								                Term 1 + Term 2</th>
+								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
-								        
-								        <tbody>
-								            <tr>
-								                <c:forEach items="${Parents.otherexammarks}" var="otherexammarks" begin="0" end= "0" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                           <%--  <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.resultclass}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								            </tr>
-								        </tbody>
-								    </table>
-								    
-								    
-								    <table width="40%" border="0" style="border-color: #4b6a84;float: left;">
+								</table>
+								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.otherexammarks}" var="otherexammarks" begin="1" end= "1" step="1">
-								                    <th style="border: 1px solid black;"><c:set var="examParts" value="${fn:split(otherexammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
-								                </c:forEach>
-								                <th style="border: 1px solid black;">Marks Obtained(100/60)</th>
-								                <th style="border: 1px solid black;">Grade</th>
+								                <th style="border: 1px solid black;font-size: 18px;">Final Grade</th>
+								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
-								        
-								        <tbody>
-								            <tr>
-								                <c:forEach items="${Parents.otherexammarks}" var="otherexammarks" begin="1" end= "1" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                           <%--  <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${otherexammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${otherexammarks.resultclass}</td>
-								                            </tr> --%>
-								                           <%--  <tr style="border: 1px solid black;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								            </tr>
-								        </tbody>
-								    </table>
+								</table>
+</div>
+
+<div style="display: flex; justify-content: center;">
+    <table width="15%" border="0" style="border-color: #4b6a84;">
+        <thead>
+            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
+                <th style="border: 1px solid black;font-size: 14px;"><c:out value="Subject"/>&nbsp;</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
+                    <td>
+                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
+                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
+                                <tr style="border: 1px solid black;font-size: 18px;">
+                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+                                    <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
+                                </tr>
+                            </c:forEach>
+                            <!-- <tr style="border-top: 1px solid black;font-size: 18px;">
+                                <td style="border: 1px solid black;text-align: left;">Total</td>
+                            </tr> -->
+                        </table>
+                    </td>
+                </c:forEach>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table width="42%" border="0" style="border-color: #4b6a84;">
+        <thead>
+            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
+                <c:forEach items="${Parents.finaltermmarks}" var="exammarks" begin="0" end= "4" step="1">
+                    <th style="border: 1px solid black;font-size: 12px;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
+                    <c:out value="${examParts[1]}"/></th>
+                </c:forEach>
+               <!--  <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/60)</th> -->
+                <!-- <th style="border: 1px solid black;">Grade</th> -->
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <c:forEach items="${Parents.finaltermmarks}" var="exammarks" begin="0" end= "4" step="1">
+                    <td>
+                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
+                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
+                                <tr style="border: 1px solid black;font-size: 18px;">
+                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
+                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
+                                    <c:if test="${not empty dateParts[1]}">
+    											<td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
+									</c:if>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </td>
+                </c:forEach>
+            </tr>
+        </tbody>
+    </table>
+</div>
+								    
+								    
 								    
 								    
 
@@ -888,10 +636,10 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td></td>
 					<td align="left">
-					Place:&nbsp;Ratlam<br><br>
-					Date:&nbsp;03/04/2024</td>	
+					Place:&nbsp;<br><br>
+					Date:&nbsp;</td>	
 					<td align="centre">Signature<br><br>Class Teacher</td>
-					<td align="centre">Signature<br><br>Head Mistress</td>
+					<td align="centre">Signature<br><br>H.M</td>
 				</tr>
                     
 		</TABLE>
