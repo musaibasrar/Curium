@@ -184,6 +184,11 @@ public class MessStockMoveActionAdapter {
 		request.setAttribute("itemsGrandTotalAmountWithoutGST", billResponseDto.getItemsGrandTotalAmountWOGST());
 		request.setAttribute("sumcgst", billResponseDto.getSumCgst());
 		request.setAttribute("sumsgst", billResponseDto.getSumSgst());
+		request.setAttribute("studentname", billResponseDto.getStudentName());
+		request.setAttribute("noinwords", billResponseDto.getNoInWords());
+		request.setAttribute("totalcgst", billResponseDto.getTotalCgst());
+		request.setAttribute("totalsgst", billResponseDto.getTotalSgst());
+		request.setAttribute("grandtotal", billResponseDto.getGrandTotal());
 	}
 
 	public void generateTaxInvoiceReport() {

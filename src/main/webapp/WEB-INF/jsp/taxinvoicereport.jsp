@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>View Diary</title>
+<title>Tax Invoice Report</title>
 <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 <style type="text/css">

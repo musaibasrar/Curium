@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -795,10 +796,22 @@ public class MessStockMoveService {
 			messTaxInvoiceList.add(messTaxInvoice);
 			billList.add(bill);
 	}
+	    double totalCgst = ((Double.parseDouble(itemsGrandTotalAmountWOGST))*sumCgst)/100;
+	    double totalSgst = ((Double.parseDouble(itemsGrandTotalAmountWOGST))*sumSgst)/100;
+	    double grandTotal = (Double.parseDouble(itemsGrandTotalAmountWOGST)) + totalCgst + totalSgst;
+	    String noInWords = convertDoubleToWords(grandTotal);
+	    billResponseDto.setGrandTotal(grandTotal);
+	    billResponseDto.setTotalCgst(totalCgst);
+	    billResponseDto.setTotalSgst(totalSgst);
+	    billResponseDto.setNoInWords(noInWords);
 		billResponseDto.setBillList(billList);
 		billResponseDto.setItemsGrandTotalAmountWOGST(itemsGrandTotalAmountWOGST);
 		billResponseDto.setSumCgst(sumCgst);
 		billResponseDto.setSumSgst(sumSgst);
+		String studentNameArray = stockMoveDto.getIssuedto();
+		String[] parts = studentNameArray.split("_");
+		String firstName = parts[0];
+		billResponseDto.setStudentName(firstName);
 		new MessStockMoveDAO().messTaxInvoiceSave(messTaxInvoiceList);
 		return billResponseDto;
 	}
@@ -809,6 +822,47 @@ public class MessStockMoveService {
 		billResponseDto.setMessTaxInvoice(messTaxInvoice);
 				return billResponseDto;
 	}
+	
+	 private static final String[] units = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
+             "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+
+private static final String[] tens = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+
+// Convert integer part to words
+public static String convertToWords(int num) {
+if (num == 0) return "Zero";
+
+if (num < 20) return units[num];
+
+if (num < 100) return tens[num / 10] + (num % 10 != 0 ? " " + units[num % 10] : "");
+
+if (num < 1000) return units[num / 100] + " Hundred" + (num % 100 != 0 ? " " + convertToWords(num % 100) : "");
+
+if (num < 1000000) return convertToWords(num / 1000) + " Thousand" + (num % 1000 != 0 ? " " + convertToWords(num % 1000) : "");
+
+return "Number too large!";
+}
+
+public static String convertDoubleToWords(double number) {
+DecimalFormat df = new DecimalFormat("#.##");
+String numStr = df.format(number);
+
+String[] parts = numStr.split("\\.");
+int integerPart = Integer.parseInt(parts[0]);
+
+String result = convertToWords(integerPart);
+
+// If decimal part exists, process it
+if (parts.length > 1) {
+result += " Point";
+for (char c : parts[1].toCharArray()) {
+result += " " + units[Character.getNumericValue(c)];
+}
+}
+
+return result;
+}
+
 	
 	
 }

@@ -1468,8 +1468,8 @@ for(Cookie cookie : cookies){
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td class="alignRight">Quotation Id&nbsp;</td>
-							<td><label> <input type="text"  name="quotationid"
+							<td class="alignRight">Quotation Id*&nbsp;</td>
+							<td><label> <input type="text"  name="quotationid" required
 									class="textField" style="font-size: 14px;"
 									id="quotationid" autocomplete="false">
 							</label></td>

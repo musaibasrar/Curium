@@ -16,5 +16,10 @@ public class BillResponseDto {
 	 private double sumSgst;
 	 private double sumCgst;
 	 private List<MessTaxInvoice> messTaxInvoice;
+	 private String studentName;
+	 private String noInWords;
+	 private double grandTotal;
+	 private double totalCgst;
+	 private double totalSgst;
 
 }
