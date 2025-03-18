@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface AdminExpensesRepository extends JpaRepository<Adminexpenses, Integer> {
 
-    @Query(("From Adminexpenses where branchid=:branchId"))
+    @Query("From Adminexpenses where branchid=:branchId")
     List<Adminexpenses> findByBranchId(Integer branchId);
+
 }

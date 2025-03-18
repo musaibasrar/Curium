@@ -98,7 +98,7 @@ public class MultiTenantConnectionProviderImpl
 
 	// Method to create a DataSource, customize it as per your requirements
 	private DataSource createDataSource(String tenant) {
-		return getHikariDataSource(tenant);
+		return getHikariDataSourceFromLocalData();
 	}
 
 	private HikariDataSource getHikariDataSource(String tenant) {
@@ -132,13 +132,15 @@ public class MultiTenantConnectionProviderImpl
 	private HikariDataSource getHikariDataSourceFromLocalData() {
 		HikariDataSource dataSource = new HikariDataSource();
 		try {
-			String localJdbcUrl = "jdbc:mariadb://localhost:3306/" + TenantContext.getCurrentTenant();
+			String localJdbcUrl = "jdbc:mariadb://localhost:3306/"
+					+ TenantContext.getCurrentTenant()
+					+ "?useGSSAPIAuthentication=false&disableSsl=true&enableTcpKeepAlive=true&allowPublicKeyRetrieval=true&useSSL=false";
 			log.trace("Static Driver URL:{}", localJdbcUrl);
 			// Set JDBC properties
 			dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 			dataSource.setJdbcUrl(localJdbcUrl);
 			dataSource.addDataSourceProperty("user", "root");
-			dataSource.addDataSourceProperty("password", "root");
+			dataSource.addDataSourceProperty("password", "test");
 
 			dataSource.setConnectionTimeout(30000); // Time before a connection is considered a timeout
 			dataSource.setIdleTimeout(600000); // Time before idle connection is candidate for closure
