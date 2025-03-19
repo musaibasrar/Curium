@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,17 @@ public class AccountDAO {
 	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
 	
 	@Autowired
-	private AccountGroupMasterRepository accountgroupmasterRepo;
+	private AccountGroupMasterRepository accountGroupMasterRepo;
 	
 	@Autowired
-	private AccountSubGroupMasterRepository accountsubgroupmasterRepo;
+	private AccountSubGroupMasterRepository accountSubGroupMasterRepo;
 	
 	@Autowired
 	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
+	
+	@Autowired
+    private QueryUtil queryUtil;
+
 
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
@@ -65,7 +70,7 @@ public class AccountDAO {
 
 	@Transactional
 	public Financialaccountingyear getCurrentFinancialYear(int branchId) {
-		Financialaccountingyear financialYear = new Financialaccountingyear();
+		Financialaccountingyear financialYear;
 		try{
 			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		}catch (Exception hibernateException) { 
@@ -78,9 +83,9 @@ public class AccountDAO {
 
 	@Transactional
 	public List<Accountgroupmaster> getListAccountGroupMaster(int branchId) {
-		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
+		List<Accountgroupmaster> accountGroupMaster;
 		try{
-			accountGroupMaster = accountgroupmasterRepo.findAll();
+			accountGroupMaster = accountGroupMasterRepo.findAll();
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -93,10 +98,10 @@ public class AccountDAO {
 	@Transactional
 	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId, int branchId) {
 		
-		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
+		List<Accountsubgroupmaster> accountSubGroupMaster;
 		try{
-			Accountgroupmaster accountGroupMaster=accountgroupmasterRepo.findById(accountGroupMasterId).orElse(null);
-			accountSubGroupMaster = accountsubgroupmasterRepo.findByAccountGroupMasterAndBranchid(accountGroupMaster, branchId);
+			Accountgroupmaster accountGroupMaster= accountGroupMasterRepo.findById(accountGroupMasterId).orElse(null);
+			accountSubGroupMaster = accountSubGroupMasterRepo.findByAccountGroupMasterAndBranchid(accountGroupMaster, branchId);
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -108,7 +113,7 @@ public class AccountDAO {
 	@Transactional
 	public Accountsubgroupmaster createSubGroup(Accountsubgroupmaster accountSubGroupMaster) {
 		try{
-			accountsubgroupmasterRepo.save(accountSubGroupMaster);
+			accountSubGroupMasterRepo.save(accountSubGroupMaster);
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -161,22 +166,15 @@ public class AccountDAO {
 		return result;
 	}
 
+	
 	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(List<Integer> accountIds, int branchId) {
-
-		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
-		Transaction transaction = null;
+		List<Accountdetailsbalance> accountDetails;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
-			query.setParameterList("accountIds", accountIds);
-			accountDetails = query.getResultList();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsBalanceRepo.findAllByBranchIdAndAccountIdsIn(branchId, accountIds);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
 		
 		return accountDetails;
@@ -186,7 +184,7 @@ public class AccountDAO {
 	public List<Accountdetailsbalance> getAccountdetailsbalance(int branchId) {
 
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
+
 		try{
 			accountDetails = accountDetailsBalanceRepo.findByBranchid(branchId);
 		}catch (Exception hibernateException) {
@@ -194,7 +192,7 @@ public class AccountDAO {
 			hibernateException.printStackTrace();;
 			throw hibernateException;
 		}
-		
+
 		return accountDetails;
 	}
 	
