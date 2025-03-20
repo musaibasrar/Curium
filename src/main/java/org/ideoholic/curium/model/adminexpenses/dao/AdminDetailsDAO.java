@@ -59,11 +59,15 @@ public class AdminDetailsDAO {
 	
 
 	@Transactional
-	public void deleteMultiple(List ids) {
+	public void deleteMultiple(List<Integer> ids) {
 
 		try{
-
-			adminExpensesRepo.deleteAllById(ids);
+			List<Adminexpenses> adminExpenses = adminExpensesRepo.findAllById(ids);
+			for(Adminexpenses adminExpense: adminExpenses) {
+				adminExpense.setVoucherstatus("CANCELLED");
+				adminExpensesRepo.save(adminExpense);
+			}
+			//adminExpensesRepo.deleteAllById(ids);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
