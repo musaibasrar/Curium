@@ -58,21 +58,20 @@ public class AdminDetailsDAO {
 
 	
 
+	@Transactional
+	public void deleteMultiple(List<Integer> ids) {
 
-	public void deleteMultiple(List ids) {
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update Adminexpenses set voucherstatus='CANCELLED' where idAdminExpenses IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			List<Adminexpenses> adminExpenses = adminExpensesRepo.findAllById(ids);
+			for(Adminexpenses adminExpense: adminExpenses) {
+				adminExpense.setVoucherstatus("CANCELLED");
+				adminExpensesRepo.save(adminExpense);
+			}
+			//adminExpensesRepo.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 
 	}
