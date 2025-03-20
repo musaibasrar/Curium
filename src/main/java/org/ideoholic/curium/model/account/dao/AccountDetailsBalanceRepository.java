@@ -19,4 +19,7 @@ public interface AccountDetailsBalanceRepository extends JpaRepository<Accountde
 	List<Accountdetailsbalance> findAllByBranchIdAndAccountIdsIn(@Param("branchId")int branchId, @Param("accountIds")List<Integer> accountIds);
 
     List<Accountdetailsbalance> findByBranchid(int branchid);
+    
+    List<Accountdetailsbalance> findByAccountdetailsidInAndBranchid(List<Integer> accountdetailsid, int branchid);
+    
 }

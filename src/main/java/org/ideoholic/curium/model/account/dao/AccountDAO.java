@@ -242,21 +242,12 @@ public class AccountDAO {
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			
-			Query query = session
-					.createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids) and branchid="+branchId);
-			query.setParameterList("ids", accountIds);
-			accountDetailsBalance = query.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetailsBalance = accountDetailsBalanceRepo.findByAccountdetailsidInAndBranchid(accountIds, branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 		return accountDetailsBalance;
