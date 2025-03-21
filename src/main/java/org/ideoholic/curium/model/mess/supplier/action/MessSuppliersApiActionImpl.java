@@ -57,13 +57,13 @@ public class MessSuppliersApiActionImpl implements MessSuppliersApiAction{
 
     @PostMapping("/printSuppliersBalance")
     public ResponseEntity<ResultResponse> printSuppliersBalance( String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
+        ResultResponse result = messSuppliersService.viewBalanceSuppliers(branchId);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/balanceSuppliers")
     public ResponseEntity<ResultResponse> balanceSuppliers( String branchId) {
-        ResultResponse result = messSuppliersService.viewSuppliersDetails(branchId);
+        ResultResponse result = messSuppliersService.viewBalanceSuppliers(branchId);
         return ResponseEntity.ok(result);
     }
 

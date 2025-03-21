@@ -1,13 +1,13 @@
 package org.ideoholic.curium.model.account.dao;
 
+import java.util.List;
+
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface AccountDetailsBalanceRepository extends JpaRepository<Accountdetailsbalance, Integer>{
@@ -20,6 +20,8 @@ public interface AccountDetailsBalanceRepository extends JpaRepository<Accountde
 
     List<Accountdetailsbalance> findByBranchid(int branchid);
     
-    List<Accountdetailsbalance> findByAccountdetailsidInAndBranchid(List<Integer> accountdetailsid, int branchid);
+    List<Accountdetailsbalance> findByAccountDetailsInAndBranchid(List<Accountdetails> accountdetailsid, int branchid);
+    Accountdetailsbalance findByAccountDetails(Accountdetails accountDetails);
+    
     
 }
