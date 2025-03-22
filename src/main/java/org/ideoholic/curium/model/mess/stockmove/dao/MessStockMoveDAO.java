@@ -507,10 +507,10 @@ return result;
             transaction = session.beginTransaction();
             for (MessTaxInvoice messTaxInvoice : messTaxInvoiceList) {
             session.save(messTaxInvoice);
-            transaction.commit();
             }
-           
-        } catch (Exception hibernateException) { transaction.rollback();
+            transaction.commit();
+        } catch (Exception hibernateException) { 
+        	transaction.rollback();
         logger.error(hibernateException);
             
             hibernateException.printStackTrace();

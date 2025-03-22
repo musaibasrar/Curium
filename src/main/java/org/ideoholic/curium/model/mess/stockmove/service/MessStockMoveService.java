@@ -778,11 +778,11 @@ public class MessStockMoveService {
 	    List<Bill> billList = new ArrayList<Bill>();
 	    List<MessTaxInvoice> messTaxInvoiceList = new ArrayList<MessTaxInvoice>();
 		
-		for(int i=0; i < batchno.length ; i++){
+		for(int i=0; i < itemsName.length ; i++){
 
 			Bill bill = new Bill();
-			sumSgst = sumSgst + Double.parseDouble(sgst[i]);
-			sumCgst = sumCgst + Double.parseDouble(cgst[i]);
+			sumSgst = sumSgst + (Double.parseDouble(issueQuantity[i])*Double.parseDouble(itemUnitPrice[i])*Double.parseDouble(sgst[i]))/100;
+			sumCgst = sumCgst + (Double.parseDouble(issueQuantity[i])*Double.parseDouble(itemUnitPrice[i])*Double.parseDouble(cgst[i]))/100;
 			MessTaxInvoice messTaxInvoice = new MessTaxInvoice();
 			messTaxInvoice.setTransactiondate(DateUtil.indiandateParser(stockMoveDto.getTransactionDate()));
 			messTaxInvoice.setStatus("ACTIVE");
@@ -796,13 +796,11 @@ public class MessStockMoveService {
 			messTaxInvoiceList.add(messTaxInvoice);
 			billList.add(bill);
 	}
-	    double totalCgst = ((Double.parseDouble(itemsGrandTotalAmountWOGST))*sumCgst)/100;
-	    double totalSgst = ((Double.parseDouble(itemsGrandTotalAmountWOGST))*sumSgst)/100;
-	    double grandTotal = (Double.parseDouble(itemsGrandTotalAmountWOGST)) + totalCgst + totalSgst;
+	    double grandTotal = (Double.parseDouble(itemsGrandTotalAmountWOGST)) + sumSgst + sumCgst;
 	    String noInWords = convertDoubleToWords(grandTotal);
 	    billResponseDto.setGrandTotal(grandTotal);
-	    billResponseDto.setTotalCgst(totalCgst);
-	    billResponseDto.setTotalSgst(totalSgst);
+	    billResponseDto.setTotalCgst(sumCgst);
+	    billResponseDto.setTotalSgst(sumSgst);
 	    billResponseDto.setNoInWords(noInWords);
 		billResponseDto.setBillList(billList);
 		billResponseDto.setItemsGrandTotalAmountWOGST(itemsGrandTotalAmountWOGST);

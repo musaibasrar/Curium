@@ -159,20 +159,8 @@ public class MessStockMoveAction {
 	
 	@PostMapping("/saveStockMoveInvoiceTax")
 	public String saveStockMoveInvoiceTax() {
-
-		//messStockMoveActionAdapter.saveStockMove();
-		
 		messStockMoveActionAdapter.getBillDetail();
-		
-		messItemActionAdapter.getCurrentStockToIssue();
-		 
-    	messStockMoveActionAdapter.viewStockEntryDetails();
-    	
-    	messStockMoveActionAdapter.viewStockMoveDetails();
-    	//Get Student
-    	studentActionAdapter.viewAllStudentsParents();
     	return "billreceipt";
-
 	}
 	
 	@GetMapping("/generateTaxInvoiceReport")
