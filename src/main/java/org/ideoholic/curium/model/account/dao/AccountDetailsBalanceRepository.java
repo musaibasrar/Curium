@@ -20,8 +20,10 @@ public interface AccountDetailsBalanceRepository extends JpaRepository<Accountde
 
     List<Accountdetailsbalance> findByBranchid(int branchid);
     
+
     List<Accountdetailsbalance> findByAccountDetailsInAndBranchid(List<Accountdetails> accountdetailsid, int branchid);
     Accountdetailsbalance findByAccountDetails(Accountdetails accountDetails);
     
+
     
 }

@@ -242,6 +242,7 @@ public class AccountDAO {
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+
 		try {
 			List<Accountdetails> accountdetailslist = new ArrayList<Accountdetails>();
 			for(Integer accountId : accountIds) {
@@ -250,6 +251,7 @@ public class AccountDAO {
 			}
 			
 			accountDetailsBalance = accountDetailsBalanceRepo.findByAccountDetailsInAndBranchid(accountdetailslist, branchId);
+
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
