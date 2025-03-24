@@ -242,8 +242,16 @@ public class AccountDAO {
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		try{
-			accountDetailsBalance = accountDetailsBalanceRepo.findByAccountdetailsidInAndBranchid(accountIds, branchId);
+
+		try {
+			List<Accountdetails> accountdetailslist = new ArrayList<Accountdetails>();
+			for(Integer accountId : accountIds) {
+				Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
+				accountdetailslist.add(accountdetails);
+			}
+			
+			accountDetailsBalance = accountDetailsBalanceRepo.findByAccountDetailsInAndBranchid(accountdetailslist, branchId);
+
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -253,19 +261,18 @@ public class AccountDAO {
 		return accountDetailsBalance;
 	}
 
+	@Transactional
 	public void updateAccountCurrentBalance(BigDecimal currentBalance, Integer accountId) {
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
+			Accountdetailsbalance accountdetailsbalance = accountDetailsBalanceRepo.findByAccountDetails(accountdetails);
+			accountdetailsbalance.setCurrentbalance(currentBalance);
+			accountDetailsBalanceRepo.save(accountdetailsbalance);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 	}
