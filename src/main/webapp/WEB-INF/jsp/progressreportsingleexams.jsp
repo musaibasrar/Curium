@@ -515,9 +515,9 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td>
 						</tr>
-
-
-				<tr>
+						
+						
+						<tr>
 							<td><br /></td>
 						</tr>
 
@@ -534,15 +534,27 @@ for(Cookie cookie : cookies){
 								<button id="search">Search</button>
 							</td>
 						</tr>
-						
-						
 						<tr>
 							<td><br /></td>
 
 						</tr>
 						
 						
+						<tr>
+							<td><br /></td>
 
+						</tr>
+
+
+						<tr>
+							<td class="alignRightFields">Exam &nbsp;</td>
+							<td width="70%">
+							<c:forEach items="${listExam}" var="listExamlist">
+										<input type="checkbox"  name="examslist" value="${listExamlist.exid}">
+										${listExamlist.examname}&nbsp;&nbsp;
+							</c:forEach>
+							</td>
+						</tr>
 						
 
 
