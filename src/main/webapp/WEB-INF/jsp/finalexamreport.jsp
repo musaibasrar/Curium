@@ -385,7 +385,7 @@
 	});
 	
 	$(function() {
-		$("#generatereport").button({
+		$("#generatefinalexamreport").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}

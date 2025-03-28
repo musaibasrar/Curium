@@ -1218,7 +1218,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
