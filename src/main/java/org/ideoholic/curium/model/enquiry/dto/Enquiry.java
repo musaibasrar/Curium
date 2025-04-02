@@ -48,7 +48,7 @@ public class Enquiry implements java.io.Serializable{
     @Column(name = "mobileno", length = 45)
     private String mobileno;
     
-    @Column(name = "siblingstudy", length = 300)
+    @Column(name = "siblings", length = 300)
     private String siblingstudy;
     
     @Column(name = "status", length = 45)
@@ -58,7 +58,7 @@ public class Enquiry implements java.io.Serializable{
     private String academicYear;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "createddate")
+	@Column(name = "created")
 	private Date createddate;
 
 	@Column(name = "branchid")
