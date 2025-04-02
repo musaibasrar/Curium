@@ -60,7 +60,7 @@ public class JobDAO {
 			try {
 				
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From JobQuery as query where query.branchid = "+branchId+" order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
+				Query query = session.createQuery("From JobQuery as query where query.branchid = "+branchId+" order by query.id desc");
 				query.setFirstResult(offset);   
 				query.setMaxResults(noOfRecords);
 				results = query.getResultList();
@@ -84,8 +84,7 @@ public class JobDAO {
 				// HibernateUtil.getSessionFactory().openCurrentSession();
 				transaction = session.beginTransaction();
 
-				results = (List<JobQuery>) session.createQuery("From JobQuery where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-						.list();
+				results = (List<JobQuery>) session.createQuery("From JobQuery where branchid="+branchId).list();
 				noOfRecords = results.size();
 				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
