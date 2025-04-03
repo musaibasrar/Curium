@@ -79,7 +79,7 @@ table th, table td {
 }
 
 table th {
-     background-color:skyblue;
+     background-color:blue;
      color:white;
 }
 
@@ -133,13 +133,13 @@ footer p {
      <c:forEach items="${markssheetlist}" var="Parents">
        <header style="display: flex; align-items: center; gap: 15px;">
     <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/global/images/global${branchid}.png">
-    <div style="background-color:skyblue;color:white;border-radius:10px;">
+    <div style="background-color:blue;color:white;border-radius:10px;">
         <h1>${branchname}</h1>
         <h2>English Medium School With Shoba-E-Hifz and IIT Foundation Course</h2>
        
     </div>
 </header>
- <h3 align="center">Marks Card ${examname} (${currentAcademicYear})</h3>
+ <h3 align="center">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
         <section class="student-info">
     <div class="student-details">
         <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
