@@ -1229,7 +1229,7 @@ public class MarksDetailsService {
 										
 										if( marksObtained < minMarks) {
 											
-											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"/F");
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 											

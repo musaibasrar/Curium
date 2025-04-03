@@ -236,7 +236,7 @@ for(Cookie cookie : cookies){
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td style="padding-left: 200px;"><img src="/global/images/global.jpg" width="72" height="80"/></td>
+				<td style="padding-left: 200px;"><img src="/global/images/global${branchid}.jpg" width="72" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label>
@@ -321,7 +321,15 @@ for(Cookie cookie : cookies){
 	                                	<tr style="border: 1px solid black;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
+	                                		<c:choose>
+											        <c:when test="${submarks.key == 'Drawing'}">
+            										<td style="border: 1px solid black;text-align: left;">${dateParts[2]}</td>
+        										</c:when>
+        										<c:otherwise>
+            										<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
+        										</c:otherwise>
+    										</c:choose>
+	                                		
 	                                	</tr>
 	                                </c:forEach>
 	                                		<tr style="border-top: 1px solid black;">
