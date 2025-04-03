@@ -345,21 +345,17 @@ public class AccountDAO {
 		return voucherEntrytransactions;
 	}
 
+	@Transactional
 	public String getAccountName(Integer accountid) {
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
+			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
 			accountName = accountDetails.getAccountname();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return accountName;
 	}
