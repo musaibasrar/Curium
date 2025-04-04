@@ -95,30 +95,22 @@ public class AdminDetailsDAO {
         return adminExpenses;
 	}
 
-	public Adminexpenses readExpenses(int expensesIds, String  branchId) {
-		
+	@Transactional
+	public Adminexpenses readExpenses(int expensesIds, Integer  branchId) {
 
 			Adminexpenses results = new Adminexpenses();
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				
-				Query query = session
-						.createQuery("From Adminexpenses where idAdminExpenses='"+expensesIds+"' and branchid="+branchId);
-				results = (Adminexpenses) query.uniqueResult();
 
-				transaction.commit();
+				results = adminExpensesRepo.findByExpenseId(expensesIds,branchId);
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return results;
 			}
-			
+			return results;
 	}
 
 	public void rejectVoucher(List ids) {
