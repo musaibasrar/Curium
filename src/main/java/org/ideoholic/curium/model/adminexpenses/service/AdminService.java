@@ -287,7 +287,7 @@ public class AdminService {
 
 	public Adminexpenses printVoucher(ExpensesIdDto expenseiddto, String branchId) {
         try {
-        	Adminexpenses adminExpense = adminDetailsDao.readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),branchId);
+        	Adminexpenses adminExpense = adminDetailsDao.readExpenses(Integer.parseInt(expenseiddto.getExpensesIds()[0]),Integer.parseInt(branchId));
            return adminExpense; 
         } catch (Exception e) {
             e.printStackTrace();
