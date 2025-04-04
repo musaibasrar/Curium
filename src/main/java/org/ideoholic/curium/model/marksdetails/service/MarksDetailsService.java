@@ -1653,7 +1653,8 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 						examMarks.setTotalMarks(totalMarks);
 						examMarks.setTotalMarksObtained(totalObtainedMarks);
 						double d = (totalObtainedMarks*100.0)/totalMarks;
-						examMarks.setPercentage(d);
+						double cent = Math.round(d * 100.0) / 100.0;
+						examMarks.setPercentage(cent);
 						examMarks.setSubMarks(subMarks);
 						//here
                         int mypercent= (int)Math.round(d);

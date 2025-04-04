@@ -134,12 +134,11 @@ footer p {
        <header style="display: flex; align-items: center; gap: 15px;">
     <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/global/images/global${branchid}.png">
     <div style="background-color:blue;color:white;border-radius:10px;">
-        <h1>${branchname}</h1>
-        <h2>English Medium School With Shoba-E-Hifz and IIT Foundation Course</h2>
-       
+        <h1 style="text-transform:Uppercase;">${branchname},BIDAR</h1>
     </div>
 </header>
- <h3 align="center">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
+ <h3 align="center" style="margin-bottom:0px;">English Medium School With Shoba-E-Hifz and IIT Foundation Course</h3>
+ <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
         <section class="student-info">
     <div class="student-details">
         <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
@@ -148,7 +147,7 @@ footer p {
         <p><strong style="color:red">Section:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
         <p><strong style="color:red">Roll No.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
     </div>
-    <img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/>
+    <%-- <img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/> --%>
 </section>        <table>
             <thead>
                 <tr>
