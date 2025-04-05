@@ -112,21 +112,25 @@ public class AdminDetailsDAO {
 			}
 			return results;
 	}
-
-	public void rejectVoucher(List ids) {
-		Transaction transaction = null;
+    @Transactional
+	public void rejectVoucher(List<Integer> ids) {
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update Adminexpenses set voucherstatus='rejected' where idAdminExpenses IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+
+			for (Integer id : ids) {
+
+				Adminexpenses result = adminExpensesRepo.findById(id).orElse(null);
+                if(result!=null){
+					result.setVoucherstatus("rejected");
+					adminExpensesRepo.save(result);
+				}
+			}
+
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+	        throw hibernateException;
 		}
 
 	}
