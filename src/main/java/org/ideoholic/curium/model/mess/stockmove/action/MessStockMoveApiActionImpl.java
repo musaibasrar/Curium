@@ -90,10 +90,10 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
     }
 
     @PostMapping("/saveStockMove")
-    public ResponseEntity<StockMoveSaveDto> saveStockMove(@RequestBody StockMoveDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "username") String userName,  @RequestParam(value = "page") String page) {
+    public ResponseEntity<StockMoveSaveDto> saveStockMove(@RequestBody StockMoveDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userloginid") String userId, @RequestHeader(value = "username") String userName,  @RequestParam(value = "page") String page, @RequestHeader(value = "branchcode") String branchCode) {
         StockMoveSaveDto stockMoveSaveDto = new StockMoveSaveDto();
 
-        MoveStockResponseDto stockMoveResult = messStockMoveService.saveStockMove(dto, branchId, userId, userName);
+        MoveStockResponseDto stockMoveResult = messStockMoveService.saveStockMove(dto, branchId, userId, userName, page, branchCode);
         stockMoveSaveDto.setBillList(stockMoveResult.getBillList());
         stockMoveSaveDto.setBillDetailsTransactionDate(stockMoveResult.getBillDetailsTransactionDate());
         stockMoveSaveDto.setBillDetailsStudentName(stockMoveResult.getBillDetailsStudentName());
