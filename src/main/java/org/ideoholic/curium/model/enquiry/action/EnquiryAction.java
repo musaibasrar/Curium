@@ -34,4 +34,28 @@ public class EnquiryAction {
 		new EnquiryService(request, response).getCertificate(); 
 		return "newcertificatepreview";
 	}
+	
+	@GetMapping("/enquiry")
+	public String enquiry() {
+		return "enquiryform";
+	}
+	
+	@PostMapping("/addEnquiryForm")
+	public String addEnquiryForm() {
+		new EnquiryService(request, response).addEnquiryForm(); 
+		return "enquiryformprint";
+	}
+	
+	@GetMapping("/viewEnquiry")
+	public String viewEnquiry() {
+		new EnquiryService(request, response).viewEnquiry(); 
+		return "viewenquirylist";
+	}
+	
+	@GetMapping("/getStudentEnquiryform")
+	public String getStudentEnquiryform() {
+		new EnquiryService(request, response).getStudentEnquiry(); 
+		return "studentenquiryformprint";
+	}
+
 	}

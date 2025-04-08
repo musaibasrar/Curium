@@ -19,6 +19,9 @@ public class Enquiry implements java.io.Serializable{
 	private String mobileno;
 	private String siblingstudy;
 	private String lastschool;
+	private Date createddate;
+	private String status;
+	
 	public Enquiry() {
 	}
 	public Enquiry(int id, String name, String fathername, String mothername, String admissionclass, Date dateofbirth,

@@ -940,12 +940,27 @@ for(Cookie cookie : cookies){
              <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
+            	            		
             		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/roshan/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/roshan/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		
+            			<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/roshan/EnquiryProcess/newCertificate" style="font-size: 12px;">Exhibition Certificate</a>
             			</td>
             			
-            		</tr>
+            		</tr> 
+            		
             	            		            		
                 </table>
             </div>

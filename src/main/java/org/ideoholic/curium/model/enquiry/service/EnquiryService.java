@@ -1,13 +1,16 @@
 package org.ideoholic.curium.model.enquiry.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
+import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
+import org.ideoholic.curium.util.DateUtil;
 
 public class EnquiryService {
 	private HttpServletRequest request;
@@ -45,8 +48,91 @@ public class EnquiryService {
 	    enquiry.setMobileno(mobile);
 	    enquiry.setDateofbirth(new Date());
 	          
-                enquiry =  new enquiryDAO().create(enquiry);
-                }
+        enquiry =  new enquiryDAO().create(enquiry);
+        }
+
+
+
+	public void addEnquiryForm() {
+       
+		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		String name= request.getParameter("name");		
+	    String gender= request.getParameter("gender");	
+	    String caste= request.getParameter("caste");	
+	    String placeOfBirth= request.getParameter("placeofbirth");
+	    String surName= request.getParameter("surname");		
+	    String previousClassPassed= request.getParameter("previousclasspass");	
+	    String previousSchoolName= request.getParameter("previousschoolname");	
+	    String religion= request.getParameter("religion");
+	    String fathername= request.getParameter("fathername");		
+	    String fatherQualification= request.getParameter("fatherqualification");	
+	    String mothername= request.getParameter("mothername");	
+	    String motherQualification= request.getParameter("motherqualification");
+	    String admissionclass= request.getParameter("classadmittedin");		
+	    String brothereducation= request.getParameter("brothereducation");	
+	    String sistereducation= request.getParameter("sistereducation");	
+	    String occupation= request.getParameter("occupation");
+	    Date dateofbirth= DateUtil.indiandateParser(request.getParameter("dateofbirth"));		
+	    String address= request.getParameter("address");	
+	    String mobileno= request.getParameter("mobileno");
+	    admissionEnquiry.setName(name);
+	    admissionEnquiry.setGender(gender);
+	    admissionEnquiry.setCaste(caste);
+	    admissionEnquiry.setPlaceOfBirth(placeOfBirth);
+	    admissionEnquiry.setSurName(surName);
+	    admissionEnquiry.setPreviousClassPassed(previousClassPassed);
+	    admissionEnquiry.setPreviousSchoolName(previousSchoolName);
+	    admissionEnquiry.setReligion(religion);
+	    admissionEnquiry.setFathername(fathername);
+	    admissionEnquiry.setFatherQualification(fatherQualification);
+	    admissionEnquiry.setMothername(mothername);
+	    admissionEnquiry.setMotherQualification(motherQualification);
+	    admissionEnquiry.setAdmissionclass(admissionclass);
+	    admissionEnquiry.setBrothereducation(brothereducation);
+	    admissionEnquiry.setSistereducation(sistereducation);
+	    admissionEnquiry.setOccupation(occupation);
+	    admissionEnquiry.setDateofbirth(dateofbirth);
+	    admissionEnquiry.setAddress(address);
+	    admissionEnquiry.setMobileno(mobileno);
+	    new enquiryDAO().add(admissionEnquiry);
+	    request.setAttribute("name", name);
+	    request.setAttribute("gender", gender);
+	    request.setAttribute("caste", caste);
+	    request.setAttribute("placeOfBirth", placeOfBirth);
+	    request.setAttribute("surname", surName);
+	    request.setAttribute("previousclasspassed", previousClassPassed);
+	    request.setAttribute("previousschoolname", previousSchoolName);
+	    request.setAttribute("religion", religion);
+	    request.setAttribute("fathername", fathername);
+	    request.setAttribute("fatherqualification", fatherQualification);
+	    request.setAttribute("mothername", mothername);
+	    request.setAttribute("motherqualification", motherQualification);
+	    request.setAttribute("admissionclass", admissionclass);
+	    request.setAttribute("brothereducation", brothereducation);
+	    request.setAttribute("sistereducation", sistereducation);
+	    request.setAttribute("occupation", occupation);
+	    request.setAttribute("dateofbirth", request.getParameter("dateofbirth"));
+	    request.setAttribute("address", address);
+	    request.setAttribute("mobileno", mobileno);
+	    
+	}
+
+
+
+	public void viewEnquiry() {
+		List<AdmissionEnquiry> admissionEnquiryList = new enquiryDAO().viewEnquiryList();
+		request.setAttribute("admissionEnquiryList", admissionEnquiryList);
+		
+	}
+
+
+
+	public void getStudentEnquiry() {
+		int id= Integer.parseInt(request.getParameter("id"));
+		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentEnquiry(id);
+		request.setAttribute("admissionEnquiry", admissionEnquiry);
+		
+	}
 	   
 		}
 
