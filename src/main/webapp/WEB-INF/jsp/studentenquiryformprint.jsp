@@ -136,7 +136,7 @@
             </tr>
             
             <tr>
-                <td>Nature of Profession/occupation:</td><td colspan="3">${admissionEnquiry.occupation}</td>
+                <td>Nature of Profession/occupation:</td><td>${admissionEnquiry.occupation}</td><td>Academic Year:</td><td>${admissionEnquiry.academicYear}</td>
             </tr>
             <tr>
                 <td><br></td>

@@ -118,7 +118,7 @@
                 <td>Elder/Younger brother Education:</td><td><input type="text" name="brothereducation" /></td><td>Elder/Younger Sister Education:</td><td><input type="text" name="sistereducation" /></td>
             </tr>
             <tr>
-                <td>Nature of Profession/occupation:</td><td colspan="3"><input type="text" name="occupation" /></td>
+                <td>Nature of Profession/occupation:</td><td><input type="text" name="occupation" /></td><td>Academic Year:</td><td><input type="text" name="academicyear" /></td>
             </tr>
             <tr>
                 <td>Permanent Address:</td><td colspan="3"><textarea name="address"></textarea></td>

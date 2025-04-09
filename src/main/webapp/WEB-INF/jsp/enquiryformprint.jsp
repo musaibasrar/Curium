@@ -151,7 +151,7 @@
             </tr>
             
             <tr>
-                <td>Nature of Profession/occupation:</td><td colspan="3">${occupation}</td>
+                <td>Nature of Profession/occupation:</td><td>${occupation}</td><td>Academic Year:</td><td>${academicyear}</td>
             </tr>
             <tr>
                 <td><br></td>

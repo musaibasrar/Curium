@@ -13,6 +13,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	private int id;
 	private String name;
 	private String gender;
+	private String academicYear;
 	private String caste;
 	private String placeOfBirth;
 	private String surName;
@@ -39,7 +40,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 			String previousClassPassed, String previousSchoolName, String religion, String fathername,
 			String fatherQualification, String mothername, String motherQualification, String admissionclass,
 			String brothereducation, String sistereducation, String occupation, Date dateofbirth, String address,
-			String mobileno) {
+			String mobileno, String academicYear) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,6 +62,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 		this.dateofbirth = dateofbirth;
 		this.address = address;
 		this.mobileno = mobileno;
+		this.academicYear = academicYear;
 	}
 
 
@@ -256,5 +258,19 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
+
+
+	@Column(name = "academicyear", length = 45) 
+	public String getAcademicYear() {
+		return academicYear;
+	}
+
+
+	public void setAcademicYear(String academicYear) {
+		this.academicYear = academicYear;
+	}
+	
+	
+
 	
 }
