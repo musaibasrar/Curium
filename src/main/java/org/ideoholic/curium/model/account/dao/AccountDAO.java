@@ -407,17 +407,13 @@ public class AccountDAO {
 	public VoucherEntrytransactions getVoucherDetails(String id) {
 		
 		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from VoucherEntrytransactions where transactionsid='"+id+"'");
-			voucherTransactions = (VoucherEntrytransactions) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			int vid = Integer.parseInt(id);
+			voucherTransactions = voucherEntryTransactionsRepo.findByTransactionsid(vid);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return voucherTransactions;
 	}
