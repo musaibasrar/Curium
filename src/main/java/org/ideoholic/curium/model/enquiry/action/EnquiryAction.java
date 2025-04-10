@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.enquiry.service.EnquiryService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,12 @@ public class EnquiryAction {
 	public String getStudentEnquiryform() {
 		new EnquiryService(request, response).getStudentEnquiry(); 
 		return "studentenquiryformprint";
+	}
+	
+	@PostMapping("/updateEnquiryDetails")
+	public String updateEmployeeDetails() {
+		new EnquiryService(request, response).getStudentEnquiry(); 
+			return "enquiry_update";
 	}
 
 	}

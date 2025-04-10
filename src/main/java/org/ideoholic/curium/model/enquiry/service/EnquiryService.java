@@ -74,7 +74,8 @@ public class EnquiryService {
 	    String occupation= request.getParameter("occupation");
 	    String academicyear= request.getParameter("academicyear");
 	    Date dateofbirth= DateUtil.indiandateParser(request.getParameter("dateofbirth"));		
-	    String address= request.getParameter("address");	
+	    String address= request.getParameter("address");
+	    String notes= request.getParameter("notes");
 	    String mobileno= request.getParameter("contactno");
 	    admissionEnquiry.setName(name);
 	    admissionEnquiry.setGender(gender);
@@ -96,6 +97,7 @@ public class EnquiryService {
 	    admissionEnquiry.setAddress(address);
 	    admissionEnquiry.setMobileno(mobileno);
 	    admissionEnquiry.setAcademicYear(academicyear);
+	    admissionEnquiry.setNotes(notes);
 	    new enquiryDAO().add(admissionEnquiry);
 	    request.setAttribute("name", name);
 	    request.setAttribute("gender", gender);
@@ -117,6 +119,7 @@ public class EnquiryService {
 	    request.setAttribute("address", address);
 	    request.setAttribute("mobileno", mobileno);
 	    request.setAttribute("academicyear", academicyear);
+	    request.setAttribute("notes", notes);
 	    
 	}
 

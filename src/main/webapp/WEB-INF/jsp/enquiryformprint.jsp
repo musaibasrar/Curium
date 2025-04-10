@@ -70,6 +70,7 @@
 		});
 	});
 	</script>
+		
 	<title>Print Enquiry Form</title>
     </head>
    <body>
@@ -158,7 +159,7 @@
             </tr>
             
             <tr>
-                <td>Permanent Address:</td><td colspan="3">${address}</td>
+                <td>Permanent Address:</td><td>${address}</td><td>Notes:</td><td>${notes}</td>
             </tr>
             <tr>
                 <td><br></td>
@@ -177,7 +178,7 @@
                 <tr>
                     <td align="center">
 
-                        <button onclick="window.print()">Print</button>
+                        <button onclick="window.print()">Print</button> 
 
                         
                     </td>

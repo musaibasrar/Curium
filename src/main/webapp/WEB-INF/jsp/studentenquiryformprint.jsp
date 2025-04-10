@@ -55,9 +55,47 @@
 		});
 	});
 	</script>
+	
+	                            <script type="text/javascript">
+                                $(function() {
+                                   
+                                    $( "#modify" )
+                                    .button()
+                                    .click(function() {
+                                        updateEnquiryForm();
+
+                                    });
+                                   
+                                });
+                            </script>
+	        <script type="text/javascript">
+            
+            function updateEnquiryForm(){
+               
+                var form1=document.getElementById("form1");
+                form1.action="/roshan/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
+                form1.submit();
+            }
+            
+            function typeofrelation(){
+                var listitem = document.getElementById("subscriber");
+                var listitemtext = listitem.options[listitem.selectedIndex].text;
+                alert(listitemtext);
+                
+                if(listitemtext=="1"){
+                    document.getElementById("typeofrelation").value="subscriber";
+                    
+                }
+            }
+            
+      
+        </script>
+
+	
 	<title>Print Enquiry Form</title>
     </head>
    <body>
+    <form  method="post" id="form1">
         <table  align="center"  style="text-align: center;">
             <tr>
                 <td style="font-weight: bold;font-size: 30px;">
@@ -143,7 +181,7 @@
             </tr>
             
             <tr>
-                <td>Permanent Address:</td><td colspan="3">${admissionEnquiry.address}</td>
+                <td>Permanent Address:</td><td>${admissionEnquiry.address}</td><td>Notes:</td><td>${admissionEnquiry.notes}</td>
             </tr>
             <tr>
                 <td><br></td>
@@ -162,7 +200,7 @@
                 <tr>
                     <td align="center">
 
-                        <button onclick="window.print()">Print</button>
+                        <button onclick="window.print()">Print</button> <!--  <button id="modify">Modify</button> -->
 
                         
                     </td>
@@ -172,5 +210,6 @@
             </table>
 
         </div>
+        </form>
     </body>
     </html>
