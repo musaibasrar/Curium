@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
 
 public class EnquiryService {
@@ -137,6 +138,59 @@ public class EnquiryService {
 		int id= Integer.parseInt(request.getParameter("id"));
 		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentEnquiry(id);
 		request.setAttribute("admissionEnquiry", admissionEnquiry);
+		
+	}
+
+
+
+	public void updateEnquiry() {
+		
+		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		int id= Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String academicYear = request.getParameter("academicyear");
+		String caste = request.getParameter("caste");
+		String placeOfBirth = request.getParameter("placeofbirth");
+		String surName = request.getParameter("surname");
+		String previousClassPassed = request.getParameter("previousclasspass");
+		String previousSchoolName = request.getParameter("previousschoolname");
+		String religion = request.getParameter("religion");
+		String fathername = request.getParameter("fathername");
+		String fatherQualification = request.getParameter("fatherqualification");
+		String mothername = request.getParameter("mothername");
+		String motherQualification = request.getParameter("motherqualification");
+		String admissionclass = request.getParameter("admissionclass");
+		String brothereducation = request.getParameter("brothereducation");
+	    String sistereducation = request.getParameter("sistereducation");
+		String occupation = request.getParameter("occupation");
+		Date dateofbirth = DateUtil.dateParserdd(request.getParameter("dateofbirth"));
+		String address = request.getParameter("address");
+		String mobileno = request.getParameter("mobileno");
+		String notes = request.getParameter("notes");
+		admissionEnquiry.setId(id);
+		admissionEnquiry.setName(name);
+	    admissionEnquiry.setGender(gender);
+	    admissionEnquiry.setCaste(caste);
+	    admissionEnquiry.setPlaceOfBirth(placeOfBirth);
+	    admissionEnquiry.setSurName(surName);
+	    admissionEnquiry.setPreviousClassPassed(previousClassPassed);
+	    admissionEnquiry.setPreviousSchoolName(previousSchoolName);
+	    admissionEnquiry.setReligion(religion);
+	    admissionEnquiry.setFathername(fathername);
+	    admissionEnquiry.setFatherQualification(fatherQualification);
+	    admissionEnquiry.setMothername(mothername);
+	    admissionEnquiry.setMotherQualification(motherQualification);
+	    admissionEnquiry.setAdmissionclass(admissionclass);
+	    admissionEnquiry.setBrothereducation(brothereducation);
+	    admissionEnquiry.setSistereducation(sistereducation);
+	    admissionEnquiry.setOccupation(occupation);
+	    admissionEnquiry.setDateofbirth(dateofbirth);
+	    admissionEnquiry.setAddress(address);
+	    admissionEnquiry.setMobileno(mobileno);
+	    admissionEnquiry.setAcademicYear(academicYear);
+	    admissionEnquiry.setNotes(notes);
+	    new enquiryDAO().update(admissionEnquiry);
 		
 	}
 	   

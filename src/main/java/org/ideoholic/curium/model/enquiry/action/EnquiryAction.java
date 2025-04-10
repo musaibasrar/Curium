@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/EnquiryProcess")
@@ -47,7 +48,7 @@ public class EnquiryAction {
 		return "enquiryformprint";
 	}
 	
-	@GetMapping("/viewEnquiry")
+	@RequestMapping(value = "/viewEnquiry", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewEnquiry() {
 		new EnquiryService(request, response).viewEnquiry(); 
 		return "viewenquirylist";
@@ -63,6 +64,12 @@ public class EnquiryAction {
 	public String updateEmployeeDetails() {
 		new EnquiryService(request, response).getStudentEnquiry(); 
 			return "enquiry_update";
+	}
+	
+	@PostMapping("/updateEnquiryFormDetails")
+	public String updateEnquiryFormDetails() {
+		new EnquiryService(request, response).updateEnquiry(); 
+			return "updatesuccessful";
 	}
 
 	}

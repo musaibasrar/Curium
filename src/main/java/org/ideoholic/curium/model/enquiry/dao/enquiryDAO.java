@@ -94,5 +94,19 @@ public class enquiryDAO {
 		}
 		return admissionEnquiry;
 	}
+	public void update(AdmissionEnquiry admissionEnquiry) {
+		try {
+            transaction = session.beginTransaction();
+            session.update(admissionEnquiry);
+            transaction.commit();
+        } catch (Exception hibernateException) { 
+        	transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+		
+	}
 
 }
