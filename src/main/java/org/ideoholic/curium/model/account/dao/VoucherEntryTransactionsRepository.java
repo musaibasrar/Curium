@@ -12,4 +12,6 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 	 @Query("FROM VoucherEntrytransactions v WHERE v.financialyear = :financialYear AND v.cancelvoucher = 'yes' AND v.branchid = :branchId ORDER BY v.transactionsid ASC")
 	 List<VoucherEntrytransactions> findCancelledVoucherEntryTransactions(@Param("financialYear")Integer financialYear, @Param("branchId")Integer branchId);
 
+	 VoucherEntrytransactions findByTransactionsid(Integer transactionsid);
+	 
 }
