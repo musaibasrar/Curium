@@ -13,6 +13,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	private int id;
 	private String name;
 	private String gender;
+	private String academicYear;
 	private String caste;
 	private String placeOfBirth;
 	private String surName;
@@ -30,6 +31,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	private Date dateofbirth;
 	private String address;
 	private String mobileno;
+	private String notes;
 	
 	public AdmissionEnquiry() {
 	}
@@ -39,7 +41,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 			String previousClassPassed, String previousSchoolName, String religion, String fathername,
 			String fatherQualification, String mothername, String motherQualification, String admissionclass,
 			String brothereducation, String sistereducation, String occupation, Date dateofbirth, String address,
-			String mobileno) {
+			String mobileno, String academicYear, String notes) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,6 +63,8 @@ public class AdmissionEnquiry implements java.io.Serializable{
 		this.dateofbirth = dateofbirth;
 		this.address = address;
 		this.mobileno = mobileno;
+		this.academicYear = academicYear;
+		this.notes = notes;
 	}
 
 
@@ -118,7 +122,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 		this.dateofbirth = dateofbirth;
 	}
 	
-	@Column(name = "address", length = 45)
+	@Column(name = "address", length = 1000)
 	public String getAddress() {
 		return address;
 	}
@@ -256,5 +260,30 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
+
+
+	@Column(name = "academicyear", length = 45) 
+	public String getAcademicYear() {
+		return academicYear;
+	}
+
+
+	public void setAcademicYear(String academicYear) {
+		this.academicYear = academicYear;
+	}
+
+
+	@Column(name = "notes", length = 1000)
+	public String getNotes() {
+		return notes;
+	}
+
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	
+	
+
 	
 }

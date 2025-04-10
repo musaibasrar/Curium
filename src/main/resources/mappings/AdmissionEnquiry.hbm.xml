@@ -56,11 +56,17 @@
         <property name="occupation" type="java.lang.String">
             <column name="occupation" />
         </property>
+         <property name="academicYear" type="java.lang.String">
+            <column name="academicyear" />
+        </property>
           <property name="dateofbirth" type="date">
             <column name="dateofbirth" length="10" />
         </property>
          <property name="address" type="java.lang.String">
             <column name="address" />
+        </property>
+        <property name="notes" type="java.lang.String">
+            <column name="notes" />
         </property>
          <property name="mobileno" type="java.lang.String">
             <column name="mobileno" />

@@ -70,6 +70,7 @@
 		});
 	});
 	</script>
+		
 	<title>Print Enquiry Form</title>
     </head>
    <body>
@@ -151,14 +152,14 @@
             </tr>
             
             <tr>
-                <td>Nature of Profession/occupation:</td><td colspan="3">${occupation}</td>
+                <td>Nature of Profession/occupation:</td><td>${occupation}</td><td>Academic Year:</td><td>${academicyear}</td>
             </tr>
             <tr>
                 <td><br></td>
             </tr>
             
             <tr>
-                <td>Permanent Address:</td><td colspan="3">${address}</td>
+                <td>Permanent Address:</td><td>${address}</td><td>Notes:</td><td>${notes}</td>
             </tr>
             <tr>
                 <td><br></td>
@@ -177,7 +178,7 @@
                 <tr>
                     <td align="center">
 
-                        <button onclick="window.print()">Print</button>
+                        <button onclick="window.print()">Print</button> 
 
                         
                     </td>
