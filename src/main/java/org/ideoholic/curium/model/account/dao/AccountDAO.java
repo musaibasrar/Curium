@@ -461,17 +461,12 @@ public class AccountDAO {
 
 	public Accountdetails getAccountDetails(int accountid) {
 		Accountdetails accountDetails = new Accountdetails();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return accountDetails;
 	}
