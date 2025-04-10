@@ -8,9 +8,14 @@ import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,31 +55,25 @@ public class AppointmentDAO {
 		return resultString;
 	}
 
-
+        @Transactional
 		public List<Appointment> readListOfObjectsPagination(int offset,
 				int noOfRecords, int branchId) {
 			
 			List<Appointment> results = new ArrayList<Appointment>();
 
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				
-				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Appointment as appointment where appointment.branchid = "+branchId+" order by appointment.id desc").setCacheable(true).setCacheRegion("commonregion");
-				query.setFirstResult(offset);   
-				query.setMaxResults(noOfRecords);
-				results = query.getResultList();
-				transaction.commit();
-				
+//
+				int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
+				Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
+				Page<Appointment> page = appoinmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
+				return page.getContent();
 
-			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return results;
+ 				throw hibernateException;
 			}
+
 		}
 		
 		public int getNoOfRecords(int branchId) {

@@ -67,7 +67,6 @@ public class AdminDetailsDAO {
 				adminExpense.setVoucherstatus("CANCELLED");
 				adminExpensesRepo.save(adminExpense);
 			}
-			//adminExpensesRepo.deleteAllById(ids);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
