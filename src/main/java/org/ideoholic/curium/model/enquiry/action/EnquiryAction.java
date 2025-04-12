@@ -4,9 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.documents.service.DocumentService;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.enquiry.service.EnquiryService;
+import org.ideoholic.curium.model.std.action.StandardAction;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +38,19 @@ public class EnquiryAction {
 	
 	@GetMapping("/enquiry")
 	public String enquiry() {
+		new StandardService(request, response).viewClasses();
 		return "enquiryform";
 	}
 	
-	@PostMapping("/addEnquiryForm")
-	public String addEnquiryForm() {
-		new EnquiryService(request, response).addEnquiryForm(); 
-		return "enquiryformprint";
+	@PostMapping("/saveEnquiryForm")
+	public String saveEnquiryForm() {
+		if(new EnquiryService(request, response).saveEnquiryForm()) {
+			new EnquiryService(request, response).getStudentLastEnquiry();
+			return "studentenquiryformprint";
+		}else {
+			return "error";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/viewEnquiry", method = { RequestMethod.GET, RequestMethod.POST })
@@ -68,8 +73,18 @@ public class EnquiryAction {
 	
 	@PostMapping("/updateEnquiryFormDetails")
 	public String updateEnquiryFormDetails() {
-		new EnquiryService(request, response).updateEnquiry(); 
-			return "updatesuccessful";
+		if(new EnquiryService(request, response).updateEnquiry()) {
+			new StandardService(request, response).viewClasses();
+			return "updatesuccessful";	
+		}
+		return "error";
 	}
+	
+	@PostMapping("/deleteEnquiry")
+	public String deleteEnquiry() {
+		new EnquiryService(request, response).deleteEnquiry(); 
+			return viewEnquiry();
+	}
+	
 
 	}

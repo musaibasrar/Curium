@@ -48,12 +48,13 @@ public class enquiryDAO {
         }
 	}
     
-	public void add(AdmissionEnquiry admissionEnquiry) {
+	public boolean add(AdmissionEnquiry admissionEnquiry) {
+		boolean result = false;
 		try {
             transaction = session.beginTransaction();
             session.save(admissionEnquiry);
             transaction.commit();
-            
+            result=true;
         } catch (Exception hibernateException) { transaction.rollback();
         logger.error(hibernateException);
             
@@ -61,6 +62,7 @@ public class enquiryDAO {
         } finally {
     			HibernateUtil.closeSession();
         }
+		return result;
 	}
 	
 	@SuppressWarnings({ "finally", "unchecked" })
@@ -94,11 +96,13 @@ public class enquiryDAO {
 		}
 		return admissionEnquiry;
 	}
-	public void update(AdmissionEnquiry admissionEnquiry) {
+	public boolean update(AdmissionEnquiry admissionEnquiry) {
+		boolean result = false;
 		try {
             transaction = session.beginTransaction();
             session.update(admissionEnquiry);
             transaction.commit();
+            result = true;
         } catch (Exception hibernateException) { 
         	transaction.rollback(); logger.error(hibernateException);
             
@@ -106,7 +110,44 @@ public class enquiryDAO {
         } finally {
     			HibernateUtil.closeSession();
         }
+		return result;
+	}
+	public boolean deleteEnquiry(List<Integer> ids) {
+		boolean result =false;
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from AdmissionEnquiry where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return result;
+	}
+	public AdmissionEnquiry getStudentLastEnquiry() {
+		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from AdmissionEnquiry order by id desc");
+			query.setMaxResults(1);
+			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return admissionEnquiry;
 	}
 
 }

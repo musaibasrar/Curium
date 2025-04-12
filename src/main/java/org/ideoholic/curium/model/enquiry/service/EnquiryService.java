@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.enquiry.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
 
 public class EnquiryService {
@@ -18,15 +20,11 @@ public class EnquiryService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 
-	
-
 	public EnquiryService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
 	}
-
-
 
 	public void getCertificate() {
 		
@@ -52,9 +50,7 @@ public class EnquiryService {
         enquiry =  new enquiryDAO().create(enquiry);
         }
 
-
-
-	public void addEnquiryForm() {
+	public boolean saveEnquiryForm() {
        
 		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 		String name= request.getParameter("name");		
@@ -99,7 +95,7 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(mobileno);
 	    admissionEnquiry.setAcademicYear(academicyear);
 	    admissionEnquiry.setNotes(notes);
-	    new enquiryDAO().add(admissionEnquiry);
+	    
 	    request.setAttribute("name", name);
 	    request.setAttribute("gender", gender);
 	    request.setAttribute("caste", caste);
@@ -122,17 +118,15 @@ public class EnquiryService {
 	    request.setAttribute("academicyear", academicyear);
 	    request.setAttribute("notes", notes);
 	    
+	    return new enquiryDAO().add(admissionEnquiry);
+	    
 	}
-
-
 
 	public void viewEnquiry() {
 		List<AdmissionEnquiry> admissionEnquiryList = new enquiryDAO().viewEnquiryList();
 		request.setAttribute("admissionEnquiryList", admissionEnquiryList);
 		
 	}
-
-
 
 	public void getStudentEnquiry() {
 		int id= Integer.parseInt(request.getParameter("id"));
@@ -141,9 +135,7 @@ public class EnquiryService {
 		
 	}
 
-
-
-	public void updateEnquiry() {
+	public boolean updateEnquiry() {
 		
 		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 		int id= Integer.parseInt(request.getParameter("id"));
@@ -190,9 +182,25 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(mobileno);
 	    admissionEnquiry.setAcademicYear(academicYear);
 	    admissionEnquiry.setNotes(notes);
-	    new enquiryDAO().update(admissionEnquiry);
+	    return new enquiryDAO().update(admissionEnquiry);
 		
 	}
-	   
-		}
 
+	public void deleteEnquiry() {
+		String[] enquiryIds = request.getParameterValues("id");
+		if (enquiryIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : enquiryIds) {
+				ids.add(Integer.parseInt(id));
+			}
+			boolean result = new enquiryDAO().deleteEnquiry(ids);
+			request.setAttribute("deletesuccess", result);
+	}
+	}
+
+	public void getStudentLastEnquiry() {
+		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentLastEnquiry();
+		request.setAttribute("admissionEnquiry", admissionEnquiry);
+	}
+	   
+	}

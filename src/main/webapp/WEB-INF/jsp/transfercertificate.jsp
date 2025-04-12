@@ -525,7 +525,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td style="width: 45%">Father Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fathername" id="fathername" style="width: 200px" /></td>
-                    <td >Mother Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
+                    <td >Mother's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
                     </tr>
                     
                     

@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Cancelled Receipts
-    Created on : Apr 16, 2019, 11:13:28 AM
+    Document   : View Enquiries
+    Created on : Apr 12, 2025, 8:20:28 AM
     Author     : Musaib
 --%>
 
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>View Enquiries</title>
 <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
 <link rel="stylesheet" href="/roshan/css/font-awesome.css">
@@ -350,7 +350,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -405,23 +405,6 @@
 </script>
 <script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchByDate() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/FeesCollection/viewCancelledReceipts";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	$(function() {
-
-		$("#tabs").tabs();
-		$("#search").button().click(function() {
-			searchByDate();
-		});
-		$("#effect").hide();
-
-	});
-	
 	 $(function(){
 		 $("#export").button({
 				
@@ -466,55 +449,9 @@
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
          });
-         
-         $( "#go" )
-         .button()
-         
-
      });
 	 
 
-	 function checkFieldsButton() {
-		 
-			
-			var oneday = document.getElementById('datepicker').value;
-			var fromdate = document.getElementById('datepickerfrom').value;
-			var todate = document.getElementById('datepickerto').value;
-			
-			if(oneday == "" && fromdate == "" && todate == ""){
-				alert("Please enter the search criteria");
-			}
-		
-			if(fromdate > todate ){
-				alert('"To date" should be greater than "From date"');
-			}
-			
-		}
-
-	 
-	 function checkFieldsTo() {
-		 
-			
-				document.getElementById('datepicker').value = "";
-				
-				
-			}
-
-	 
-	 function checkFieldsFrom() {
-		 
-		 document.getElementById('datepicker').value = "";
-		 document.getElementById('datepickerto').value = "";
-		}
-	 
-	 
-	 function checkFields() {
-
-			document.getElementById('datepickerfrom').value = "";
-			document.getElementById('datepickerto').value = "";
-			
-			
-		}
 </script>
 <script>
 	$(function() {
@@ -566,6 +503,23 @@
             
         </script>
         
+        <script type="text/javascript">
+					
+					var deletealert='<c:out default="" value="${deletesuccess}"/>';
+		            
+		            if(deletealert == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).html("Enquiry(ies) Deleted Successfully");
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(deletealert == "false"){
+		            	  $(function(){
+		            		  $( "div.failure" ).html("Enquiry(ies) Deletion Failed");
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+        </script>
+        
 </head>
 <%
 //allow access only if session exists
@@ -584,106 +538,15 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1"
-		>
+	<form id="form1" action="/roshan/EnquiryProcess/deleteEnquiry" method="post">
+	
+		<div class="alert-box success"></div>
+		<div class="alert-box failure"></div>
 		
-		<div class="alert-box success">Receipt undo cancellation is successful!!!</div>
-		<div class="alert-box failure">Receipt undo cancellation failed, Please try again!!!</div>
-		
-		
-		<!-- <div style="height: 28px">
-			<button id="add">Search Fees Collection Details</button>
-			<br />
-		</div> -->
-
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Dates</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-						<tr>
-							<td width="20%" class="alignRight">Date: &nbsp;</td>
-							<td width="28%"><label> <input name="oneday"
-									type="text" class="textField" id="datepicker" size="36"
-									onfocus="checkFields()" value="${dayonecancel}" autocomplete="false"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
-							<td ><label> <input name="fromdate"
-									type="text" class="textField" id="datepickerfrom" size="36"
-									onfocus="checkFieldsFrom()" value="${datefromcancel}" autocomplete="false"
-									data-validate="validate(required)">
-							</label></td>
-							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
-							<td ><label> <input name="todate"
-									type="text" class="textField" id="datepickerto" size="36"
-									onfocus="checkFieldsTo()" value="${datetocancel}" autocomplete="false"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-						
-						<tr>
-						<td>&nbsp;</td>
-						</tr>
-						<tr>
-						<td>&nbsp;</td>
-						</tr>
-						
-						<!-- <tr>
-							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
-							<td ><label> <select name="selectedbranchid"
-									id="selectedbranchid" style="width: 240px" required>
-										<option selected></option>
-										<option value="2:Boys High School">Boys High School</option>
-										<option value="3:Girls High School">Girls High School</option>
-										<option value="4:P.U. College">P.U. College</option>
-										<option value="5:Degree College">Degree College</option>
-								</select>
-
-							</label></td>
-							
-						</tr>
-							
-						<tr>
-						<td>&nbsp;</td>
-						</tr>
-						
-						<tr>
-						<td>&nbsp;</td>
-						</tr> -->
-					</table>
-					<table id="table2" width="100%" border="0" align="center">
-						<tr>
-							<td align="center">
-								<button onmouseover="checkFieldsButton();" id="search">Search</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Enquiry List Detail</td>
+					<td class="headerTD">Enquiries</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -696,8 +559,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Mother Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Class</th>
-						<th title="click to sort" class="headerText">Previous School nName</th>
+						<th title="click to sort" class="headerText">Previous School Name</th>
 						<th title="click to sort" class="headerText">Address</th>
+						<th title="click to sort" class="headerText">Academic Year</th>
 					</tr>
 				</thead>
 
@@ -717,6 +581,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${admissionEnquiryList.admissionclass}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.previousSchoolName}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.address}" /></td>
+							<td class="dataText"><c:out value="${admissionEnquiryList.academicYear}" /></td>
 						</tr>
 					</c:forEach>
 
@@ -733,7 +598,7 @@ for(Cookie cookie : cookies){
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
 							</label> -->
-						<input value="Enquiry List"
+						<input value="Delete"
 							type="submit" id="export"/> </td>
 							
 							
