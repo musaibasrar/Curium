@@ -485,16 +485,12 @@ public class AccountDAO {
 
 	public List<Accountdetails> getAccountdetails(int branchId) {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			accountDetails =  session.createQuery("from Accountdetails where branchid = "+branchId+" order by accountcode ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsRepo.findByBranchidOrderByAccountcodeAsc(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
