@@ -75,30 +75,21 @@ public class AppointmentDAO {
 			}
 
 		}
-		
+		@Transactional
 		public int getNoOfRecords(int branchId) {
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
 
-				results = (List<Appointment>) session.createQuery("From Appointment where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-								+ noOfRecords);
-				transaction.commit();
+				noOfRecords =  appoinmentRepo.countByBranchid(branchId);
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
 			}
+				return noOfRecords;
+
 		}
 		
 		public int getNoOfRecords() {

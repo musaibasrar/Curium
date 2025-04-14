@@ -13,4 +13,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	List<Appointment> findByBranchidOrderByIdDesc(int branchid);
 
 	Page<Appointment> findByBranchidOrderByIdDesc(int branchId, Pageable pageable);
+
+	int countByBranchid( int branchId);
+
 }
