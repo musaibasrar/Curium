@@ -517,6 +517,7 @@ public class AccountDAO {
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public Accountssgroupmaster createSSGroup(Accountssgroupmaster accountSSGroupMaster) {
 		try{
 			accountssgroupmasterRepository.save(accountSSGroupMaster);
