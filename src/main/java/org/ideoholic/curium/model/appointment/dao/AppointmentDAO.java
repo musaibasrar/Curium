@@ -86,6 +86,7 @@ public class AppointmentDAO {
 				log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
 			}
 				return noOfRecords;
