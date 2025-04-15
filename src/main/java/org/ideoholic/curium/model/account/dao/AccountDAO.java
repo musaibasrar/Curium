@@ -46,6 +46,9 @@ public class AccountDAO {
 	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 	
 	@Autowired
+	private AccountssgroupmasterRepository accountssgroupmasterRepository;
+	
+	@Autowired
     private QueryUtil queryUtil;
 
 
@@ -514,17 +517,14 @@ public class AccountDAO {
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public Accountssgroupmaster createSSGroup(Accountssgroupmaster accountSSGroupMaster) {
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(accountSSGroupMaster);
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountssgroupmasterRepository.save(accountSSGroupMaster);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountSSGroupMaster;
 	}
