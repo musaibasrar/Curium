@@ -38,7 +38,7 @@ public class feesCollectionDAO {
 
 	@SuppressWarnings("finally")
 	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
-			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome, VoucherEntrytransactions transactionsVAT, String updateDrAccountVAT, String updateCrAccountVAT) {
 		 
 		boolean result = false;
 		try {
@@ -61,6 +61,15 @@ public class feesCollectionDAO {
 				queryAccounts.executeUpdate();
 				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
 				queryqueryAccounts1.executeUpdate();
+				//
+				
+				//VAT
+				transactionsVAT.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsVAT);
+				Query queryAccountsVAT = session.createQuery(updateDrAccountVAT);
+				queryAccountsVAT.executeUpdate();
+				Query queryqueryAccountsVAT = session.createQuery(updateCrAccountVAT);
+				queryqueryAccountsVAT.executeUpdate();
 				//
 				
 				// J.V

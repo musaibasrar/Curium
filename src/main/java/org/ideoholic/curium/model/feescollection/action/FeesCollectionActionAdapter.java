@@ -464,11 +464,12 @@ public class FeesCollectionActionAdapter {
     public void preview(Receiptinfo receiptInfo) {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
 
-        DetailsResponseDto responseDto = feesCollectionService.preview(receiptInfo, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        DetailsResponseDto responseDto = feesCollectionService.preview(receiptInfo, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHNAME).toString());
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        httpSession.setAttribute("qrcode", responseDto.getQrCode());
     }
 
     public Otherreceiptinfo addother() {

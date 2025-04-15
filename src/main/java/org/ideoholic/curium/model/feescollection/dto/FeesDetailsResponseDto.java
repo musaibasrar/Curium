@@ -18,10 +18,10 @@ import java.util.List;
 public class FeesDetailsResponseDto {
     private List<Receiptinfo> receiptInfo;
     private List<Studentfeesstructure> feesStructure;
-    private long totalSum;
-    private long totalFeesAmount;
-    private long dueAmount;
-    private long totalFeesConcession;
+    private double totalSum;
+    private double totalFeesAmount;
+    private double dueAmount;
+    private double totalFeesConcession;
     private String academicPerYear;
     private String currentAcademicYear;
     private List<Studentotherfeesstructure> otherFeesStructure;

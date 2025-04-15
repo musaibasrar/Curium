@@ -287,6 +287,20 @@
                 jQuery.each(column2,function(){
                     sum += parseFloat($(this).val());
                 });
+                
+                if(sum>=1){
+            		var vat = (sum * 5) / 100;
+                	if(vat<1 || isNaN(vat)){
+                		document.getElementById("miscamount").value = 0;
+                		miscamount=0;
+                		document.getElementById("misc").checked = false;
+                	 }else{
+                		 document.getElementById("miscamount").value = vat;
+                		 miscamount=vat;
+                		 document.getElementById("misc").checked = true;
+                	 }
+            	}
+                
                 totalSum=sum+fineamount+miscamount;
                 $('#grandTotalAmount').val(totalSum);
 
@@ -307,6 +321,18 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
+                    if(sum>=1){
+                		var vat = (sum * 5) / 100;
+                    	if(vat<1 || isNaN(vat)){
+                    		document.getElementById("miscamount").value = 0;
+                    		miscamount=0;
+                    		document.getElementById("misc").checked = false;
+                    	 }else{
+                    		 document.getElementById("miscamount").value = vat;
+                    		 miscamount=vat;
+                    		 document.getElementById("misc").checked = true;
+                    	 }
+                	}
                     totalSum=sum+fineamount+miscamount;
                     $('#grandTotalAmount').val(totalSum);
 
@@ -320,7 +346,20 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
+                    if(sum>=1){
+                		var vat = (sum * 5) / 100;
+                    	if(vat<1 || isNaN(vat)){
+                    		document.getElementById("miscamount").value = 0;
+                    		miscamount=0;
+                    		document.getElementById("misc").checked = false;
+                    	 }else{
+                    		 document.getElementById("miscamount").value = vat;
+                    		 miscamount=vat;
+                    		 document.getElementById("misc").checked = true;
+                    	 }
+                	}
                     totalSum=sum+miscamount+fineamount;
+                    
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").keyup(function(){
@@ -332,9 +371,22 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
+                    if(sum>=1){
+                		var vat = (sum * 5) / 100;
+                    	if(vat<1 || isNaN(vat)){
+                    		document.getElementById("miscamount").value = 0;
+                    		miscamount=0;
+                    		document.getElementById("misc").checked = false;
+                    	 }else{
+                    		 document.getElementById("miscamount").value = vat;
+                    		 miscamount=vat;
+                    		 document.getElementById("misc").checked = true;
+                    	 }
+                	}
                     totalSum=sum+fineamount+miscamount;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
                     $('#grandTotalAmount').val();
+                   
                 });
                 $("#myTable").keyup(function(){
                 	var fineamount=parseFloat($("#fineamount").val());
@@ -349,7 +401,20 @@
                     jQuery.each(finep,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum+fineamount+miscamount;
+                    if(sum>=1){
+                		var vat = (sum * 15) / 100;
+                    	if(vat<1 || isNaN(vat)){
+                    		document.getElementById("miscamount").value = 0;
+                    		miscamount=0;
+                    		document.getElementById("misc").checked = false;
+                    	 }else{
+                    		 document.getElementById("miscamount").value = vat;
+                    		 miscamount=vat;
+                    		 document.getElementById("misc").checked = true;
+                    	 }
+                	}
+                    
+                    totalSum=sum+miscamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").click(function(){
@@ -361,9 +426,23 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
+                    if(sum>=1){
+                		var vat = (sum * 5) / 100;
+                    	if(vat<1 || isNaN(vat)){
+                    		document.getElementById("miscamount").value = 0;
+                    		miscamount=0;
+                    		document.getElementById("misc").checked = false;
+                    	 }else{
+                    		 document.getElementById("miscamount").value = vat;
+                    		 miscamount=vat;
+                    		 document.getElementById("misc").checked = true;
+                    	 }
+                	}
                     totalSum=sum+fineamount+miscamount;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
+                    
                     $('#grandTotalAmount').val(totalSum);
+                   
                 });
 
 
@@ -790,30 +869,64 @@
             }
             
             function checkWithDueAmount(duePayment,sfsid){
-            	
             	var str = duePayment.id;
             	var res = str.split("_");
             	
             	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
             	var payment = parseInt(duePayment.value,10);
-            	document.getElementById(sfsid).checked = true; 
             	
-            	if(payment<=9 && payment>=1){
-            		duePayment.value = payment;
+            	// Only proceed with validation if there's a value
+            	if(payment > 0) {
+            		if(payment<=9 && payment>=1){
+            			duePayment.value = payment;
+            		}
+            		
+            		if(payment>dueAmount){
+            			duePayment.value = 0;
+            			document.getElementById(sfsid).checked = false; 
+            			alert('Amount Due to be paid must be equals to Due Amount');
+            		}
+            		
+            		if(payment<1 || isNaN(payment)){
+            			duePayment.value = 0;
+            			document.getElementById(sfsid).checked = false; 
+            		}
+            	}
+            }
+            
+            function checkPayingAmountwithTotalAmountcheckWithDueAmount(duePayment,sfsid){
+            	var str = duePayment.id;
+            	var res = str.split("_");
+            	
+            	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
+            	var payment = parseInt(duePayment.value,10);
+            	
+            	// Prevent validation if value is being cleared
+            	if(payment === 0) {
+            		document.getElementById(sfsid).checked = false;
+            		return false;
             	}
             	
             	if(payment>dueAmount){
             		duePayment.value = 0;
             		document.getElementById(sfsid).checked = false; 
-            		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
+            		alert('Amount Due to be paid must be equals to Due Amount');
+            		return false;
+            	}else if(payment<dueAmount){
+            		duePayment.value = 0;
+            		document.getElementById(sfsid).checked = false; 
+            		alert('Amount Due to be paid must be equals to Due Amount');
+            		return false;
             	}
             	
             	if(payment<1 || isNaN(payment)){
             		duePayment.value = 0;
-            		document.getElementById(sfsid).checked = false; 
+            		document.getElementById(sfsid).checked = false;
+            		return false;
             	}
             	
-            	
+            	document.getElementById(sfsid).checked = true;
+            	return true;
             }
             
             
@@ -1072,7 +1185,7 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="text" class="amountpaying" value="${0}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})" onblur="checkPayingAmountwithTotalAmountcheckWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<!-- <input type="hidden" id="fine" value="0" class="fine" name="fine" > -->
 							</td>
 							<!-- <td class="dataText" align="center">
@@ -1091,7 +1204,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine')"/>
+							<input type="text" class="fine" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine')"/>
 							</td>
 						</tr>
 						
@@ -1101,7 +1214,7 @@ for(Cookie cookie : cookies){
 								id="misc" 
 								name="misc" 
 								value="1"></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">Miscellaneous</td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">VAT</td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							
 							</td>
@@ -1123,7 +1236,7 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamountpy_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpayingpy_${status.index}" name="amountpayingpy" disabled="disabled" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="text" class="amountpaying" value="0" id="amountpayingpy_${status.index}" name="amountpayingpy" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<!-- <input type="hidden" id="fine" value="0" class="fine" name="fine" > -->
 							</td>
 							<!-- <td class="dataText" align="center">

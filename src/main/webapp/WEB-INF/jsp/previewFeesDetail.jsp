@@ -208,7 +208,7 @@ for(Cookie cookie : cookies){
                 <tbody>
                     <c:forEach items="${feescatmap}" var="feescatmap">
                         <tr>
-                            <td align="center"><c:out value="${feescatmap.key}" /></td>
+                            <td align="center"><c:out value="${eescatmap.key.feescategory.feescategoryname}" /></td>
                             <td align="center"><c:out value="${feescatmap.value}" /></td>
                         </tr>
                     </c:forEach>

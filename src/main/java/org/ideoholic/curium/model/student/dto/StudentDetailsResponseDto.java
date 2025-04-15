@@ -24,12 +24,12 @@ public class StudentDetailsResponseDto {
     private String secAdm;
     private Parents parents;
     private List<Studentfeesstructure> feesStructure;
-    private long dueAmount;
-    private long totalSum;
-    private long totalFineAmount;
-    private long totalMiscAmount;
-    private long totalFeesAmount;
-    private long totalFeesConcession;
+    private double dueAmount;
+    private double totalSum;
+    private double totalFineAmount;
+    private double totalMiscAmount;
+    private double totalFeesAmount;
+    private double totalFeesConcession;
     private String academicPerYear;
     private String currentAcademicYear;
     private boolean resultFromService;

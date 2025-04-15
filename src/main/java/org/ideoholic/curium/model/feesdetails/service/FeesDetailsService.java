@@ -301,9 +301,9 @@ public class FeesDetailsService {
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
 		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
-		long sumOfFees = 0l;
-		long fine = 0l;
-		long misc = 0l;
+		double sumOfFees = 0l;
+		double fine = 0l;
+		double misc = 0l;
 
 		if (feesIds != null) {
 			for (String id : feesIds) {

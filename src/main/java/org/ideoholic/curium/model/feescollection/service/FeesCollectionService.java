@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.feescollection.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,12 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,6 +29,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -76,6 +81,13 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class FeesCollectionService {
 
@@ -275,8 +287,9 @@ public class FeesCollectionService {
 		
 		String sid = dto.getStudentId();
 		String[] amountPaying = dto.getAmountPaying();
-		Long fineAmount = DataUtil.parseLong(dto.getFineAmount());
-		Long miscAmount = DataUtil.parseLong(dto.getMiscAmount());
+		double fineAmount = DataUtil.parseLong(dto.getFineAmount());
+		//Long miscAmount = DataUtil.parseLong(dto.getMiscAmount());
+		double miscAmount = 0l;
 		String[] studentSfsIds = dto.getStudentSfsIds();
 		
 		
@@ -311,7 +324,7 @@ public class FeesCollectionService {
 			receiptInfo.setBranchid(Integer.parseInt(branchId));
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails());
-			Long grantTotal = 0l;
+			Long grandTotal = 0l;
 			
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */
 			if(studentSfsIds!=null) {
@@ -330,13 +343,15 @@ public class FeesCollectionService {
 					feescollection.add(feesCollect);
 					
 					String[] totalAmount = studentSfsIds[i].split("_");
-					grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
+					grandTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 				}
 			}
 				receiptInfo.setPaymenttype(paymentType);
 				receiptInfo.setFine(fineAmount);
+				double vat = (double)15/100;
+				miscAmount=(double) (vat * grandTotal);
 				receiptInfo.setMisc(miscAmount);
-				receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
+				receiptInfo.setTotalamount(grandTotal+fineAmount+(fineAmount*0.15)+miscAmount);
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
@@ -376,6 +391,44 @@ public class FeesCollectionService {
 			
 			// End Receipt
 			
+			
+			//Pass VAT Entry : Credit the vat & debit the cash
+			
+			double vatEntry = receiptInfo.getMisc();	
+				
+			int vatEntryAccount = getLedgerAccountId("vat"+Integer.parseInt(branchId));
+			int drAccountVAT = 0;
+			
+			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
+				drAccountVAT = getLedgerAccountId(userName+Integer.parseInt(branchId));
+			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+				drAccountVAT = getLedgerAccountId(transferBankname+Integer.parseInt(branchId));
+			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+				drAccountVAT = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
+			} 
+			
+			
+			VoucherEntrytransactions transactionsVAT = new VoucherEntrytransactions();
+			
+			transactionsVAT.setDraccountid(drAccountVAT);
+			transactionsVAT.setCraccountid(vatEntryAccount);
+			transactionsVAT.setDramount(BigDecimal.valueOf(vatEntry));
+			transactionsVAT.setCramount(BigDecimal.valueOf(vatEntry));
+			transactionsVAT.setVouchertype(1);
+			transactionsVAT.setTransactiondate(receiptInfo.getDate());
+			transactionsVAT.setEntrydate(DateUtil.todaysDate());
+			transactionsVAT.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactionsVAT.setCancelvoucher("no");
+			transactionsVAT.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactionsVAT.setBranchid(Integer.parseInt(branchId));
+			transactionsVAT.setUserid(Integer.parseInt(userId));
+			
+			String updateDrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+drAccountVAT;
+
+			String updateCrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+vatEntryAccount;
+			
+			// End VAT Entry
+			
 			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
 			
 			int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(branchId));
@@ -402,7 +455,7 @@ public class FeesCollectionService {
 			
 			// End J.V
 			  
-			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome,transactionsVAT,updateDrAccountVAT,updateCrAccountVAT);
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());
@@ -426,7 +479,7 @@ public class FeesCollectionService {
 			request.setAttribute("receiptinfo",rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 			
-			long totalSum = 0l;
+			double totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount()-receiptInfoSingle.getMisc()-receiptInfoSingle.getFine();
 			}
@@ -448,22 +501,40 @@ public class FeesCollectionService {
 		}
 	}
 
-	public DetailsResponseDto preview(Receiptinfo receiptInfo, String currentAcademicYear) {
+	public DetailsResponseDto preview(Receiptinfo receiptInfo, String currentAcademicYear, String branchName) {
 		DetailsResponseDto result = DetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
 		
 			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(receiptInfo.getReceiptnumber());
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentfeesstructure,Long> feeCatMap = new HashMap<Studentfeesstructure, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
+			
+			// Generate QR code as per ZATA rule
+	        String timestamp = new SimpleDateFormat("YYYY-MM-DD").format(receiptDate);
+	        String invoiceTotal = receiptInfo.getTotalamount().toString();
+	        String vatAmount = String.format("%.2f", receiptInfo.getMisc());
+
+	        // Generate TLV Encoded Data
+	        String tlvData = generateTLV(branchName, "310141531500003", timestamp, invoiceTotal, vatAmount);
+
+	        // Convert TLV to Base64
+	        String base64Encoded = Base64.getEncoder().encodeToString(tlvData.getBytes(StandardCharsets.UTF_8));
+
+	        // Generate QR Code as Base64 string
+	        String qrCodeBase64 = generateQRCode(base64Encoded);
+			
+			
+			//End Generating QR code
+			result.setQrCode(qrCodeBase64);
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setReceiptInfo(receiptInfo);
@@ -479,11 +550,11 @@ public class FeesCollectionService {
 		if(currentAcademicYear!=null){
             Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(strReceiptNumber));
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentfeesstructure,Long> feeCatMap = new HashMap<Studentfeesstructure, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -499,7 +570,29 @@ public class FeesCollectionService {
 			result.setUserLogin(userLogin);
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
-			result.setGrandTotal(grandTotal+" "+"Only");
+			String totalStr = rinfo.getTotalamount().toString();
+			int dotIndex = totalStr.indexOf('.');
+
+			// Get digits after decimal (max 2 digits)
+			String gTotalAfterDecimal = (dotIndex >= 0 && dotIndex < totalStr.length() - 1)
+			    ? totalStr.substring(dotIndex + 1)
+			    : "00";
+
+			// Pad with zero if only one digit (e.g., "4" becomes "40")
+			if (gTotalAfterDecimal.length() == 1) {
+			    gTotalAfterDecimal += "0";
+			} else if (gTotalAfterDecimal.length() > 2) {
+			    gTotalAfterDecimal = gTotalAfterDecimal.substring(0, 2); // limit to 2 digits
+			}
+
+			// Format only if > 0
+			if (Integer.parseInt(gTotalAfterDecimal) > 0) {
+			    gTotalAfterDecimal = " and " + gTotalAfterDecimal + "/100";
+			} else {
+			    gTotalAfterDecimal = "";
+			}
+			
+			result.setGrandTotal(grandTotal+gTotalAfterDecimal+" "+"Only");
 			result.setSuccess(true);
 			
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
@@ -516,11 +609,11 @@ public class FeesCollectionService {
 			 
 			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(receiptNo);
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentfeesstructure,Long> feeCatMap = new HashMap<Studentfeesstructure, Long>();
 
 			for (Feescollection feescollectionSingle : setFeesCollection) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
@@ -652,7 +745,7 @@ public class FeesCollectionService {
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 			
 	}
-			long sumOfFees = 0l;
+			Double sumOfFees = 0.0;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
@@ -762,9 +855,9 @@ public class FeesCollectionService {
 	public FeesDashboardResponseDto getFeesDetailsDashBoard(ClassesHierarchyDto dto, String strBranchId, String currentAcademicYear) {
 		FeesDashboardResponseDto result = FeesDashboardResponseDto.builder().build();
 
-		Long totalFeesAmount = 0l;
-		Long totalPaidAmount = 0l;
-		Long totalDueAmount = 0l;
+		Double totalFeesAmount = 0.0;
+		Double totalPaidAmount = 0.0;
+		Double totalDueAmount = 0.0;
 		
 
 		// Get Students
@@ -907,12 +1000,12 @@ public class FeesCollectionService {
 			feesDetailsListMonthly = new UserDAO().getReceiptDetailsList(queryMainMonthly);
 			
 				}
-			long sumOfFeesDaily = 0l;
+			Double sumOfFeesDaily = 0.0;
 			for (Receiptinfo receiptinfo : feesDetailsListDaily) {
 				sumOfFeesDaily = sumOfFeesDaily + receiptinfo.getTotalamount();
 			}
 			
-			long sumOfFeesMonthly = 0l;
+			Double sumOfFeesMonthly = 0.0;
 			for (Receiptinfo receiptinfo : feesDetailsListMonthly) {
 				sumOfFeesMonthly = sumOfFeesMonthly + receiptinfo.getTotalamount();
 			}
@@ -964,7 +1057,7 @@ public class FeesCollectionService {
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 			
-			long totalSum = 0l;
+			double totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
 			}
@@ -1241,7 +1334,7 @@ public class FeesCollectionService {
 			result.setReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 
-			long totalSum = 0l;
+			double totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
 			}
@@ -1453,11 +1546,11 @@ public class FeesCollectionService {
 
 			Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(receiptInfo.getReceiptnumber());
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentotherfeesstructure,Long> feeCatMap = new HashMap<Studentotherfeesstructure, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1465,7 +1558,7 @@ public class FeesCollectionService {
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setOtherReceiptInfo(receiptInfo);
-			result.setFeeCatMap(feeCatMap);
+			result.setOtherFeeCatMap(feeCatMap);
 			result.setSuccess(true);
 		}
 		return result;
@@ -1477,11 +1570,11 @@ public class FeesCollectionService {
 		if(currentAcademicYear!=null){
             Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(Integer.parseInt(receiptNumber));
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentotherfeesstructure,Long> feeCatMap = new HashMap<Studentotherfeesstructure, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1492,7 +1585,7 @@ public class FeesCollectionService {
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setOtherReceiptInfo(rinfo);
-			result.setFeeCatMap(feeCatMap);
+			result.setOtherFeeCatMap(feeCatMap);
 			result.setDuplicate(duplicate);
 			result.setUserLogin(userLogin);
 			NumberToWord toWord = new NumberToWord();
@@ -1629,7 +1722,7 @@ public class FeesCollectionService {
 			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
 			
 	}
-			long sumOfFees = 0l;
+			double sumOfFees = 0l;
 			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
@@ -1650,11 +1743,11 @@ public class FeesCollectionService {
 			 
 			Otherreceiptinfo rinfo = new feesCollectionDAO().getOtherReceiptInfoDetails(receiptNo);
 			Set<Otherfeescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<String,Long> feeCatMap = new HashMap<String, Long>();
+			Map<Studentotherfeesstructure,Long> feeCatMap = new HashMap<Studentotherfeesstructure, Long>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
 				List<Studentotherfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
@@ -1662,7 +1755,7 @@ public class FeesCollectionService {
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
 			result.setOtherReceiptInfo(rinfo);
-			result.setFeeCatMap(feeCatMap);
+			result.setOtherFeeCatMap(feeCatMap);
 			result.setDuplicate("duplicate");
 			result.setSuccess(true);
 
@@ -1865,7 +1958,7 @@ public class FeesCollectionService {
 		String branchId = dto.getBranchId();
 		int idBranch = 0;
                
-		Map<String, Long> feeCategoryCollectionMapReport = new LinkedHashMap<String, Long>();
+		Map<String, Double> feeCategoryCollectionMapReport = new LinkedHashMap<String, Double>();
 
 		if(strBranchId!=null){
 		
@@ -1921,13 +2014,13 @@ public class FeesCollectionService {
 			//End Other Fees Details
 
 	}
-			long sumOfFees = 0l;
-			long fine = 0l;
-			long misc = 0l;
-			long feesByCash = 0;
-			long feesByBank = 0;
-			long feesByCashOtherFees = 0;
-			long feesByBankOtherFees = 0;
+			double sumOfFees = 0l;
+			double fine = 0l;
+			double misc = 0l;
+			double feesByCash = 0;
+			double feesByBank = 0;
+			double feesByCashOtherFees = 0;
+			double feesByBankOtherFees = 0;
 
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
@@ -1935,7 +2028,7 @@ public class FeesCollectionService {
 				misc = misc + receiptinfo.getMisc();
 			}
 			
-			Map<String, Long> feeCategoryCollectionMap = new LinkedHashMap<String, Long>();
+			Map<String, Double> feeCategoryCollectionMap = new LinkedHashMap<String, Double>();
 			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				
@@ -1951,7 +2044,7 @@ public class FeesCollectionService {
 			            if (feeCategoryCollectionMap.containsKey(studentfeesSingle.getFeescategory().getFeescategoryname())) {
 			            	feeCategoryCollectionMap.put(studentfeesSingle.getFeescategory().getFeescategoryname(), feeCategoryCollectionMap.get(studentfeesSingle.getFeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
 			            } else {
-			            	feeCategoryCollectionMap.put(studentfeesSingle.getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+			            	feeCategoryCollectionMap.put(studentfeesSingle.getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid().doubleValue());
 			            }
 			        }
 				}
@@ -1984,7 +2077,7 @@ public class FeesCollectionService {
 			}
 		}
 
-		for (Map.Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {
+		for (Map.Entry<String, Double> entry : feeCategoryCollectionMap.entrySet()) {
 
 			feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
 			/*
@@ -2003,7 +2096,7 @@ public class FeesCollectionService {
 			sumOfFeesOtherFees = sumOfFeesOtherFees + receiptinfo.getTotalamount();
 		}
 
-		Map<String, Long> otherFeeCategoryCollectionMap = new LinkedHashMap<String, Long>();
+		Map<String, Double> otherFeeCategoryCollectionMap = new LinkedHashMap<String, Double>();
 
 		for (Otherreceiptinfo receiptinfo : otherFeesDetailsList) {
 
@@ -2018,7 +2111,7 @@ public class FeesCollectionService {
 		            if (otherFeeCategoryCollectionMap.containsKey(studentfeesSingle.getOtherfeescategory().getFeescategoryname())) {
 		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), otherFeeCategoryCollectionMap.get(studentfeesSingle.getOtherfeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
 		            } else {
-		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid().doubleValue());
 		            }
 		        }
 			}
@@ -2031,7 +2124,7 @@ public class FeesCollectionService {
 			}
 		}
 
-		for (Map.Entry<String, Long> entry : otherFeeCategoryCollectionMap.entrySet()) {
+		for (Map.Entry<String, Double> entry : otherFeeCategoryCollectionMap.entrySet()) {
 			feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
 			}
 		//feeCategoryCollectionMapReport.put("Other Fee", otherFees);
@@ -2085,7 +2178,7 @@ public class FeesCollectionService {
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(dto.getFromDate());
 		String oneDay = DataUtil.dateFromatConversionDashToSlash(dto.getOneDay());
 		
-		long sumOfFees = 0l;
+		double sumOfFees = 0l;
 		
 		if (feesIds != null) {
 			for (String id : feesIds) {
@@ -2282,7 +2375,7 @@ public class FeesCollectionService {
 			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
 			
 	}
-			long sumOfFees = 0l;
+			double sumOfFees = 0l;
 			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
@@ -2481,9 +2574,10 @@ public class FeesCollectionService {
 					        }
 
 					System.out.println("Values Inserted Successfully");
-					if( new parentsDetailsDAO().createMultiple(listParents)) {
-						result = ResultResponse.builder().success(true).build();
-					};		
+					/*
+					 * if( new parentsDetailsDAO().createMultiple(listParents)) { result =
+					 * ResultResponse.builder().success(true).build(); };
+					 */		
 		return result;
 	}
 	
@@ -2497,8 +2591,8 @@ public class FeesCollectionService {
 		
 		String sid = dto.getStudentId();
 		String[] amountPaying = dto.getAmountPaying();
-		Long fineAmount = DataUtil.parseLong(dto.getFineAmount());
-		Long miscAmount = DataUtil.parseLong(dto.getMiscAmount());
+		Double fineAmount = DataUtil.parseDouble(dto.getFineAmount());
+		Double miscAmount = DataUtil.parseDouble(dto.getMiscAmount());
 		String[] studentSfsIds = dto.getStudentSfsIds();
 		
 		
@@ -2639,7 +2733,41 @@ public class FeesCollectionService {
 		}
 		return receiptInfo;
 	}
+	
+	 // Generate TLV encoded data
+    private static String generateTLV(String seller, String vat, String timestamp, String total, String vatAmount) {
+        return encodeTLV(1, seller) + encodeTLV(2, vat) + encodeTLV(3, timestamp) + 
+               encodeTLV(4, total) + encodeTLV(5, vatAmount);
+    }
 
+    // TLV Encoding (Tag-Length-Value)
+    private static String encodeTLV(int tag, String value) {
+        byte[] valueBytes = value.getBytes(StandardCharsets.UTF_8);
+        return (char) tag + "" + (char) valueBytes.length + value;
+    }
+
+    // Generate QR Code
+    private static String generateQRCode(String data) {
+    	try {
+            int width = 300;
+            int height = 300;
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            Map<EncodeHintType, Object> hints = new HashMap<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
+            BitMatrix bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, width, height, hints);
+            BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
+
+            // Convert BufferedImage to Base64
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(qrImage, "png", outputStream);
+            return Base64.getEncoder().encodeToString(outputStream.toByteArray());
+
+        } catch (WriterException | java.io.IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 
 

@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class FeesDashboardResponseDto {
-    private Long totalFeesAmount;
-    private Long totalPaidAmount;
-    private Long totalDueAmount;
+    private Double totalFeesAmount;
+    private Double totalPaidAmount;
+    private Double totalDueAmount;
     private String branchIdName;
     private String branchName;
-    private long sumOfFeesDaily;
-    private long sumOfFeesMonthly;
+    private Double sumOfFeesDaily;
+    private Double sumOfFeesMonthly;
     private String currentMonth;
     @Builder.Default
     private boolean success = false;

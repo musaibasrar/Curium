@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dto.Login;
 
 import java.util.Map;
@@ -21,11 +23,13 @@ public class DetailsResponseDto {
     private String receiptDate;
     private Receiptinfo receiptInfo;
     private Otherreceiptinfo otherReceiptInfo;
-    private Map<String,Long> feeCatMap;
+    private Map<Studentfeesstructure,Long> feeCatMap;
+    private Map<Studentotherfeesstructure,Long> otherFeeCatMap;
     private String duplicate;
     private String grandTotal;
     private Login userLogin;
     private Parents parents;
+    private String qrCode;
     @Builder.Default
     private boolean success = false;
 

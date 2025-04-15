@@ -14,8 +14,8 @@
         <property name="date" type="date">
             <column name="date" length="10" />
         </property>
-        <property name="totalamount" type="java.lang.Long">
-            <column name="totalamount" precision="10" scale="0" />
+        <property name="totalamount" type="java.lang.Double">
+            <column name="totalamount" precision="10" scale="2" />
         </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="15" />
@@ -44,11 +44,11 @@
         <property name="journalvoucher" type="int">
             <column name="journalvoucher" />
         </property>
-        <property name="fine" type="java.lang.Long">
-            <column name="fine" precision="10" scale="0" />
+        <property name="fine" type="java.lang.Double">
+            <column name="fine" precision="10" scale="2" />
         </property>
-        <property name="misc" type="java.lang.Long">
-            <column name="misc" precision="10" scale="0" />
+        <property name="misc" type="java.lang.Double">
+            <column name="misc" precision="10" scale="2" />
         </property>
        
         <!-- inverse="true" -->

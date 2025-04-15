@@ -19,11 +19,11 @@ public class FeesCategoryResponseDto {
     private String dayOne;
     private String dateFrom;
     private String dateTo;
-    private Map<String, Long> feeCategoryCollectionMapReport;
-    private long feesByCash;
-    private long feesByBank;
-    private long feesByCashOtherFees;
-    private long feesByBankOtherFees;
+    private Map<String, Double> feeCategoryCollectionMapReport;
+    private double feesByCash;
+    private double feesByBank;
+    private double feesByCashOtherFees;
+    private double feesByBankOtherFees;
     private boolean success;
 
 }

@@ -18,10 +18,10 @@ public class SearchByDateResponseDto {
     private String dateTo;
     private String dayOne;
     private Map<Receiptinfo, Parents> feesMap;
-    private long sumOfFees;
-    private long sumOfOnlyFee;
-    private long fine;
-    private long misc;
+    private double sumOfFees;
+    private double sumOfOnlyFee;
+    private double fine;
+    private double misc;
     @Builder.Default
     private boolean success = false;
 }

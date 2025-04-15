@@ -376,9 +376,9 @@ public class StudentService {
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 
-			long totalSum = 0l;
-			long totalFineAmount = 0l;
-			long totalMiscAmount = 0l;
+			double totalSum = 0.0;
+			double totalFineAmount = 0.0;
+			double totalMiscAmount = 0.0;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount()-receiptInfoSingle.getFine()-receiptInfoSingle.getMisc();
 				totalFineAmount = receiptInfoSingle.getFine();
@@ -469,7 +469,7 @@ public class StudentService {
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
-			long totalSum = 0l;
+			double totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
 			}
@@ -1017,7 +1017,7 @@ public class StudentService {
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 
-			long totalSum = 0l;
+			double totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
 			}

@@ -619,9 +619,9 @@ public class UserService {
 				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 
 			}
-			long sumOfFees = 0l;
-			long fine = 0l;
-			long misc = 0l;
+			double sumOfFees = 0l;
+			double fine = 0l;
+			double misc = 0l;
 			Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 
 			for (Receiptinfo receiptinfo : feesDetailsList) {
@@ -671,7 +671,7 @@ public class UserService {
 		
 	}
 
-	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
+	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strBranchId) {
 		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
         
@@ -681,10 +681,6 @@ public class UserService {
         
         	if(strUserName!=null) {
         		userName = strUserName;
-	        }
-        
-        	if(strSuperUserAuth!=null) {
-	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
 	        }
         
         if(userName != null) {

@@ -6,4 +6,5 @@ public interface Constants {
     String USERNAME = "username";
     String USERAUTH = "userAuth";
     String CURRENTACADEMICYEAR = "currentAcademicYear";
+    String BRANCHNAME = "branchname";
 }

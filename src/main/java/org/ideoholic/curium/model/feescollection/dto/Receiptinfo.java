@@ -29,7 +29,7 @@ public class Receiptinfo implements java.io.Serializable {
 	private Integer receiptnumber;
 	private int sid;
 	private Date date;
-	private Long totalamount;
+	private Double totalamount;
 	private String academicyear;
 	private int branchid;
 	private int cancelreceipt;
@@ -39,8 +39,8 @@ public class Receiptinfo implements java.io.Serializable {
 	private String classsec;
 	private Integer receiptvoucher;
 	private Integer journalvoucher;
-	private Long fine;
-	private Long misc;
+	private double fine;
+	private double misc;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Feescollection> feesCollectionRecords =
@@ -53,7 +53,7 @@ public class Receiptinfo implements java.io.Serializable {
 		this.sid = sid;
 	}
 
-	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, Long fine, Long misc,
+	public Receiptinfo(int sid, Date date, Double totalamount, String academicyear, double fine, double misc,
 			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec,
 			Integer receiptvoucher, Integer journalvoucher) {
 		this.sid = sid;
@@ -104,11 +104,11 @@ public class Receiptinfo implements java.io.Serializable {
 	}
 
 	@Column(name = "totalamount", precision = 10, scale = 0)
-	public Long getTotalamount() {
+	public Double getTotalamount() {
 		return this.totalamount;
 	}
 
-	public void setTotalamount(Long totalamount) {
+	public void setTotalamount(Double totalamount) {
 		this.totalamount = totalamount;
 	}
 
@@ -195,19 +195,19 @@ public class Receiptinfo implements java.io.Serializable {
 		this.journalvoucher = journalvoucher;
 	}
 
-	public Long getFine() {
+	public Double getFine() {
 		return fine;
 	}
 
-	public void setFine(Long fine) {
+	public void setFine(Double fine) {
 		this.fine = fine;
 	}
 
-	public Long getMisc() {
+	public double getMisc() {
 		return misc;
 	}
 
-	public void setMisc(Long misc) {
+	public void setMisc(Double misc) {
 		this.misc = misc;
 	}
 }

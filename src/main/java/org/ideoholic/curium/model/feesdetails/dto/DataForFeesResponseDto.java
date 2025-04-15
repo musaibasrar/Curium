@@ -11,10 +11,10 @@ import lombok.Data;
 public class DataForFeesResponseDto {
 	
 	private Map<Receiptinfo,Parents> feesMap;
-	private long sumOfDetailsFees;
-	private long sumOfOnlyFee;
-	private long sumOfFine;
-	private long sumOfMisc;
+	private double sumOfDetailsFees;
+	private double sumOfOnlyFee;
+	private double sumOfFine;
+	private double sumOfMisc;
 	private String dateRangeFeesCollection;
 	private boolean success;
 
