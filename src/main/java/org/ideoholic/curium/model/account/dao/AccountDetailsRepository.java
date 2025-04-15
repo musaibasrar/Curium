@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface AccountDetailsRepository extends JpaRepository<Accountdetails, Integer>{
 
 	List<Accountdetails> findByBranchidOrderByAccountcodeAsc(int branchid);
+	
+	List<Accountdetails> findByBranchid(int branchid);
 
 }
