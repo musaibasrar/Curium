@@ -456,8 +456,15 @@ public class FeesCollectionActionAdapter {
         dto.setDateOfFeesDetails(request.getParameter("dateoffeesDetails"));
         dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
         dto.setNarrationReceipt(request.getParameter("narrationreceipt"));
+        String misc = request.getParameter("misc");
+        int applyVAT = 0;
+        if(misc!=null) {
+        	applyVAT = Integer.parseInt(request.getParameter("misc"));
+        }
+        
 
-        Receiptinfo receiptinfo = feesCollectionService.add(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
+        Receiptinfo receiptinfo = feesCollectionService.add(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString(),applyVAT);
+        httpSession.setAttribute("applyVAT", applyVAT);
         return receiptinfo;
     }
 

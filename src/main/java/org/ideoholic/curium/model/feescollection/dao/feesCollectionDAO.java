@@ -64,12 +64,14 @@ public class feesCollectionDAO {
 				//
 				
 				//VAT
-				transactionsVAT.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
-				session.save(transactionsVAT);
-				Query queryAccountsVAT = session.createQuery(updateDrAccountVAT);
-				queryAccountsVAT.executeUpdate();
-				Query queryqueryAccountsVAT = session.createQuery(updateCrAccountVAT);
-				queryqueryAccountsVAT.executeUpdate();
+				if(updateDrAccountVAT!=null) {
+					transactionsVAT.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+					session.save(transactionsVAT);
+					Query queryAccountsVAT = session.createQuery(updateDrAccountVAT);
+					queryAccountsVAT.executeUpdate();
+					Query queryqueryAccountsVAT = session.createQuery(updateCrAccountVAT);
+					queryqueryAccountsVAT.executeUpdate();
+				}
 				//
 				
 				// J.V

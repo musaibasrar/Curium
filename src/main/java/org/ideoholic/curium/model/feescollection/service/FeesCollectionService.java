@@ -278,7 +278,7 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public Receiptinfo add(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName) {
+	public Receiptinfo add(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName, int applyVAT) {
 		
 		List<Feescollection> feescollection = new ArrayList<Feescollection>();
 		Receiptinfo receiptInfo =new Receiptinfo();
@@ -348,10 +348,16 @@ public class FeesCollectionService {
 			}
 				receiptInfo.setPaymenttype(paymentType);
 				receiptInfo.setFine(fineAmount);
-				double vat = (double)15/100;
-				miscAmount=(double) (vat * grandTotal);
-				receiptInfo.setMisc(miscAmount);
-				receiptInfo.setTotalamount(grandTotal+fineAmount+(fineAmount*0.15)+miscAmount);
+				if(applyVAT==1) {
+					double vat = (double)15/100;
+					miscAmount=(double) (vat * grandTotal);
+					receiptInfo.setMisc(miscAmount);
+					receiptInfo.setTotalamount(grandTotal+fineAmount+(fineAmount*0.15)+miscAmount);
+				}else if(applyVAT==0) {
+					receiptInfo.setMisc((double) 0l);
+					receiptInfo.setTotalamount(grandTotal+fineAmount);
+				}
+				
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
@@ -393,11 +399,15 @@ public class FeesCollectionService {
 			
 			
 			//Pass VAT Entry : Credit the vat & debit the cash
-			
+			String updateDrAccountVAT=null;
+			String updateCrAccountVAT=null;
+			int drAccountVAT = 0;
+			VoucherEntrytransactions transactionsVAT = new VoucherEntrytransactions();
+			if(applyVAT==1) {
+				
 			double vatEntry = receiptInfo.getMisc();	
 				
 			int vatEntryAccount = getLedgerAccountId("vat"+Integer.parseInt(branchId));
-			int drAccountVAT = 0;
 			
 			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
 				drAccountVAT = getLedgerAccountId(userName+Integer.parseInt(branchId));
@@ -406,9 +416,6 @@ public class FeesCollectionService {
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
 				drAccountVAT = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
 			} 
-			
-			
-			VoucherEntrytransactions transactionsVAT = new VoucherEntrytransactions();
 			
 			transactionsVAT.setDraccountid(drAccountVAT);
 			transactionsVAT.setCraccountid(vatEntryAccount);
@@ -423,10 +430,11 @@ public class FeesCollectionService {
 			transactionsVAT.setBranchid(Integer.parseInt(branchId));
 			transactionsVAT.setUserid(Integer.parseInt(userId));
 			
-			String updateDrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+drAccountVAT;
+			updateDrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+drAccountVAT;
 
-			String updateCrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+vatEntryAccount;
+			updateCrAccountVAT="update Accountdetailsbalance set currentbalance=currentbalance+"+vatEntry+" where accountdetailsid="+vatEntryAccount;
 			
+			}
 			// End VAT Entry
 			
 			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue

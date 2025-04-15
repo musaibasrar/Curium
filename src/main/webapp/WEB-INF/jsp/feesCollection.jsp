@@ -278,32 +278,28 @@
              * Comment
              */
             function calculateGrandTotal() {
-            	 var fineamount=parseFloat($("#fineamount").val());
-                 var miscamount=parseFloat($("#miscamount").val());
-                 var sum = 0.0;
-                 var totalSum=0.0;
-            	var sum = 0.0;
-                var column2 = $('.feesAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
+                var fineamount = parseFloat($("#fineamount").val() || 0);
+                var miscamount = parseFloat($("#miscamount").val() || 0);
+                var sum = 0.0;
+                
+                // Sum up all fees amounts from amountpaying fields
+                var amountpaying = $('.amountpaying');
+                jQuery.each(amountpaying, function() {
+                    sum += parseFloat($(this).val() || 0);
                 });
                 
-                if(sum>=1){
-            		var vat = (sum * 5) / 100;
-                	if(vat<1 || isNaN(vat)){
-                		document.getElementById("miscamount").value = 0;
-                		miscamount=0;
-                		document.getElementById("misc").checked = false;
-                	 }else{
-                		 document.getElementById("miscamount").value = vat;
-                		 miscamount=vat;
-                		 document.getElementById("misc").checked = true;
-                	 }
-            	}
+                // Add fine amount if checkbox is checked
+                if ($("#fine").is(":checked")) {
+                    sum += fineamount;
+                }
                 
-                totalSum=sum+fineamount+miscamount;
-                $('#grandTotalAmount').val(totalSum);
-
+                // Add VAT amount only if checkbox is checked
+                if ($("#misc").is(":checked")) {
+                    sum += miscamount;
+                }
+                
+                // Update grand total with 2 decimal places
+                $('#grandTotalAmount').val(sum.toFixed(2));
             }
             
             
@@ -322,7 +318,7 @@
                         sum += parseFloat($(this).val());
                     });
                     if(sum>=1){
-                		var vat = (sum * 5) / 100;
+                		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
                     		miscamount=0;
@@ -347,7 +343,7 @@
                         sum += parseFloat($(this).val());
                     });
                     if(sum>=1){
-                		var vat = (sum * 5) / 100;
+                		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
                     		miscamount=0;
@@ -372,7 +368,7 @@
                         sum += parseFloat($(this).val());
                     });
                     if(sum>=1){
-                		var vat = (sum * 5) / 100;
+                		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
                     		miscamount=0;
@@ -427,7 +423,7 @@
                         sum += parseFloat($(this).val());
                     });
                     if(sum>=1){
-                		var vat = (sum * 5) / 100;
+                		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
                     		miscamount=0;
@@ -445,6 +441,31 @@
                    
                 });
 
+                // Add click handler for VAT checkbox
+                $("#misc").click(function() {
+                    if (!this.checked) {
+                        // If unchecked, set VAT amount to 0
+                        $("#miscamount").val(0);
+                        // Recalculate grand total
+                        calculateGrandTotal();
+                    } else {
+                        // If checked, recalculate VAT
+                        checkMiscAmount(null, 'misc');
+                    }
+                });
+
+                // Add click handler for Fine checkbox
+                $("#fine").click(function() {
+                    if (!this.checked) {
+                        // If unchecked, set fine amount to 0
+                        $("#fineamount").val(0);
+                        // Recalculate grand total
+                        calculateGrandTotal();
+                    } else {
+                        // If checked, recalculate fine
+                        checkFineAmount(null, 'fine');
+                    }
+                });
 
             });
             /**
@@ -944,19 +965,32 @@
             	
             }
 		
-		function checkMiscAmount(duePayment,finemiscid){
-        	
-        	
-        	var miscAmount = parseInt(document.getElementById("miscamount").value);
-        	
-        	if(miscAmount<1 || isNaN(miscAmount)){
-        		document.getElementById("miscamount").value = 0;
-        		document.getElementById(finemiscid).checked = false;
-        	 }else{
-        		 document.getElementById("miscamount").value = miscAmount;
-        		 document.getElementById(finemiscid).checked = true;
-        	 }
-        	
+		function checkMiscAmount(duePayment, finemiscid) {
+            var totalAmount = 0;
+            
+            // Calculate total from fees amounts
+            var column2 = $('.feesAmount');
+            jQuery.each(column2, function() {
+                totalAmount += parseFloat($(this).val() || 0);
+            });
+            
+            // Add fine amount if any
+            var fineAmount = parseFloat($("#fineamount").val() || 0);
+            totalAmount += fineAmount;
+            
+            // Calculate VAT (15%) only if total amount is greater than 0 and checkbox is checked
+            var miscAmount = 0;
+            if (totalAmount > 0 && $("#misc").is(":checked")) {
+                miscAmount = (totalAmount * 15) / 100;
+                // Round to 2 decimal places
+                miscAmount = Math.round(miscAmount * 100) / 100;
+            }
+            
+            // Update misc amount field
+            $("#miscamount").val(miscAmount);
+            
+            // Recalculate grand total
+            calculateGrandTotal();
         }
             
  function selectPayment(id){
@@ -1287,7 +1321,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
                         <td colspan="4" align="right"><b>Grand Total&nbsp;&nbsp;</b></td>
-                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
+                        <td align="center"><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>
             </TABLE>
