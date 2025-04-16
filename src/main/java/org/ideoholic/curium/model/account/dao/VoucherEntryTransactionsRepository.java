@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -13,5 +14,9 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 	 List<VoucherEntrytransactions> findCancelledVoucherEntryTransactions(@Param("financialYear")Integer financialYear, @Param("branchId")Integer branchId);
 
 	 VoucherEntrytransactions findByTransactionsid(Integer transactionsid);
+	 
+	    @Modifying
+	    @Query("UPDATE VoucherEntrytransactions v SET v.cancelvoucher = 'yes' WHERE v.transactionsid = :id")
+	    int cancelVoucher(@Param("id") int id);
 	 
 }

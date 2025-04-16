@@ -438,23 +438,20 @@ public class AccountDAO {
 		return false;
 	}
 
+	@Transactional
 	public boolean cancelVoucher(String id) {
-		
-		Transaction transaction = null;
+		boolean result = false;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			 int transactionId = Integer.parseInt(id);
+			voucherEntryTransactionsRepo.cancelVoucher(transactionId);
+			result = true;
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
 		
+		return result;
 	}
 
 	public Accountdetails getAccountDetails(int accountid) {
