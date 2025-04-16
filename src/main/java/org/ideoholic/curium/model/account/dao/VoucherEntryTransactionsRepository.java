@@ -14,4 +14,7 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 
 	 VoucherEntrytransactions findByTransactionsid(Integer transactionsid);
 	 
+	    @Query("UPDATE VoucherEntrytransactions v SET v.cancelvoucher = 'yes' WHERE v.transactionsid = :id")
+	    int cancelVoucher(@Param("id") int id);
+	 
 }
