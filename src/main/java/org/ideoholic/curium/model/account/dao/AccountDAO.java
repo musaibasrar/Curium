@@ -529,20 +529,17 @@ public class AccountDAO {
 		return accountSSGroupMaster;
 	}
 
+	@Transactional
 	public List<Accountdetails> getLedgerAccountdetails(int branchId) {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetails as accdetails where accdetails.branchid="+branchId).list();
-			transaction.commit();																						   											
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsRepo.findByBranchid(branchId);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
