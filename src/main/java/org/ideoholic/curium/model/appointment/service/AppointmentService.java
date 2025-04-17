@@ -123,7 +123,7 @@ public class AppointmentService {
 			try {
 				int page = 1;
 				int recordsPerPage = 500;
-					if (!"".equalsIgnoreCase(DataUtil.emptyString(String.valueOf(viewAllAppointmentsDto.getPage())))) {
+					if (!"".equalsIgnoreCase(DataUtil.emptyString(String.valueOf(viewAllAppointmentsDto.getPage()))) && viewAllAppointmentsDto.getPage()!= 0) {
 						page = viewAllAppointmentsDto.getPage();
 					}
 				List<Appointment> list = appointmentDao.readListOfObjectsPagination((page - 1) * recordsPerPage,
