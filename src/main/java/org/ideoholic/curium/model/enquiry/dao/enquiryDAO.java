@@ -4,10 +4,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.ideoholic.curium.model.diary.dto.Diary;
+import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class enquiryDAO {
 	Session session = null;
@@ -42,6 +47,106 @@ public class enquiryDAO {
     			HibernateUtil.closeSession();
             return enquiry;
         }
+	}
+	public void add(AdmissionEnquiry admissionEnquiry) {
+		
+		try {
+            transaction = session.beginTransaction();
+            session.save(admissionEnquiry);
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback();
+        logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+		
+	}
+	public AdmissionEnquiry getStudentLastEnquiry() {
+AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from AdmissionEnquiry order by id desc");
+			query.setMaxResults(1);
+			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return admissionEnquiry;
+	}
+	
+	@SuppressWarnings({ "finally", "unchecked" })
+	public List<AdmissionEnquiry> viewEnquiryList() {
+		List<AdmissionEnquiry> results = new ArrayList<AdmissionEnquiry>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+	public AdmissionEnquiry getStudentEnquiry(int id) {
+AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from AdmissionEnquiry where id="+id);
+			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult(); 
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return admissionEnquiry;
+	}
+	public void update(AdmissionEnquiry admissionEnquiry) {
+
+		try {
+            transaction = session.beginTransaction();
+            session.update(admissionEnquiry);
+            transaction.commit();
+        } catch (Exception hibernateException) { 
+        	transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+		
+	}
+	public boolean deleteEnquiry(List<Integer> ids) {
+		boolean result =false;
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from AdmissionEnquiry where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return result;
+		
 	}
 
 }
