@@ -37,6 +37,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
@@ -203,7 +204,7 @@ public class MarksDetailsService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listSubjectNames", subjectList);
 
 		// get the list for all the midterms
@@ -406,7 +407,7 @@ public class MarksDetailsService {
 
 	public void getSubjectExams() {
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listSubject", subjectList);
 
 		// get the list for all the midterms

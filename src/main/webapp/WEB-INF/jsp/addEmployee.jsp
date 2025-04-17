@@ -714,7 +714,7 @@ for(Cookie cookie : cookies){
 							
 
 							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/YYYY"/>"
+							<td><label> <input name="joiningdate" 
 										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">

@@ -46,7 +46,7 @@ public class ExamDetailsAction {
 		
 		new ExamDetailsService(request, response).getExamScheduleDetails();
 		new ExamDetailsService(request, response).readListOfExams();
-		new SubjectDetailsService(request, response).readListOfSubjects();
+//		new SubjectDetailsService(request, response).readListOfSubjects();
 		
 		return "generatehallticket";
 	}
@@ -62,9 +62,10 @@ public class ExamDetailsAction {
 		result = new StandardService(request, response).viewClasses();
 		if (!result) 
 			return error;
-		result = new SubjectDetailsService(request, response).readListOfSubjects();
-		if (!result) 
-			return error;
+		/*
+		 * result = new SubjectDetailsService(request, response).readListOfSubjects();
+		 * if (!result) return error;
+		 */
 		result = new YearService(request, response).getYear();
 		if (!result) 
 			return error;

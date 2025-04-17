@@ -202,7 +202,7 @@ public class MarksDetailsDAO {
 					if(results==null) {
 						session.save(examrank);	
 					}else {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 					}
 					
@@ -274,7 +274,7 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : listExamRank) {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 				}
 	        	result = true;

@@ -124,13 +124,13 @@ public class SubjectDetailsDAO {
 		
 	}
 
-	public List<Subject> readListOfSubjectNames(int branchId) {
+	public List<Subjectmaster> readListOfSubjectNames(int branchId) {
 		
-		List<Subject> results = new ArrayList<Subject>();
+		List<Subjectmaster> results = new ArrayList<Subjectmaster>();
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subjectmaster where branchid="+branchId)
+			results = (List<Subjectmaster>) session.createQuery("From Subjectmaster where branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -164,7 +164,7 @@ public class SubjectDetailsDAO {
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subjectmaster where branchid="+branchId)
+			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

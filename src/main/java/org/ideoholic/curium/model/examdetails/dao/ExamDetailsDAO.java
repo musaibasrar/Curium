@@ -107,7 +107,7 @@ public class ExamDetailsDAO {
 
 
 
-	public List<Examschedule> readListOfExamSchedule(int branchId) {
+	public List<Examschedule> readListOfExamSchedule(int branchId,String currentYear) {
 		
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
@@ -115,7 +115,7 @@ public class ExamDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId)
+			results = (List<Examschedule>) session.createQuery("From Examschedule where academicyear='"+currentYear+"' and branchid = "+branchId)
 					.list();
 			transaction.commit();
 
