@@ -48,12 +48,13 @@ public class enquiryDAO {
             return enquiry;
         }
 	}
-	public void add(AdmissionEnquiry admissionEnquiry) {
-		
+	public boolean add(AdmissionEnquiry admissionEnquiry) {
+		boolean result = false;
 		try {
             transaction = session.beginTransaction();
             session.save(admissionEnquiry);
             transaction.commit();
+            result = true;
         } catch (Exception hibernateException) { transaction.rollback();
         logger.error(hibernateException);
             
@@ -61,14 +62,15 @@ public class enquiryDAO {
         } finally {
     			HibernateUtil.closeSession();
         }
+		return result;
 		
 	}
-	public AdmissionEnquiry getStudentLastEnquiry() {
+	public AdmissionEnquiry getStudentLastEnquiry(int branchId) {
 AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from AdmissionEnquiry order by id desc");
+			Query query = session.createQuery("from AdmissionEnquiry where branchid="+branchId+" order by id desc");
 			query.setMaxResults(1);
 			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult();
 			transaction.commit();
@@ -81,12 +83,12 @@ AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 	}
 	
 	@SuppressWarnings({ "finally", "unchecked" })
-	public List<AdmissionEnquiry> viewEnquiryList() {
+	public List<AdmissionEnquiry> viewEnquiryList(int branchId) {
 		List<AdmissionEnquiry> results = new ArrayList<AdmissionEnquiry>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry").list();
+            results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry where branchid="+branchId).list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
@@ -97,7 +99,7 @@ AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
         }
 	}
 	public AdmissionEnquiry getStudentEnquiry(int id) {
-AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+    AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
 		
 		try {
 			transaction = session.beginTransaction();
