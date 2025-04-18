@@ -6,6 +6,12 @@
 <column name="id"/>
 <generator class="identity"/>
 </id>
+<property name="branchId" type="java.lang.Integer">
+<column name="branchid"/>
+</property>
+<property name="userId" type="java.lang.Integer">
+<column name="userid"/>
+</property>
 <property name="name" type="java.lang.String">
 <column name="name"/>
 </property>
