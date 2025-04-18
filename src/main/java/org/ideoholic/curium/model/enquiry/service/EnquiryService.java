@@ -73,7 +73,7 @@ public class EnquiryService {
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
 	    
-	    new enquiryDAO().add(admissionEnquiry);
+	    boolean result = new enquiryDAO().add(admissionEnquiry);
 	    
 	    admissionEnquiryResponseDto.setName(admissionEnquiryDto.getName());
 	    admissionEnquiryResponseDto.setGender(admissionEnquiryDto.getGender());
@@ -103,19 +103,19 @@ public class EnquiryService {
 	}
 
 
-	public AdmissionEnquiryResponseDto getStudentLastEnquiry() {
+	public AdmissionEnquiryResponseDto getStudentLastEnquiry(String branchId) {
         
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentLastEnquiry();
+		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentLastEnquiry(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiry(admissionEnquiry);
 		return admissionEnquiryResponseDto;
 	}
 
 
-	public AdmissionEnquiryResponseDto viewEnquiry() {
+	public AdmissionEnquiryResponseDto viewEnquiry(String branchId) {
   
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		List<AdmissionEnquiry> admissionEnquiryList = new enquiryDAO().viewEnquiryList();
+		List<AdmissionEnquiry> admissionEnquiryList = new enquiryDAO().viewEnquiryList(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiryList(admissionEnquiryList);
 		return admissionEnquiryResponseDto;
 	}
