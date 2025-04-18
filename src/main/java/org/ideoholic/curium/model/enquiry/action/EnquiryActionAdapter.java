@@ -21,6 +21,13 @@ public class EnquiryActionAdapter {
 
     @Autowired
     private EnquiryService enquiryService;
+    
+	
+	  @Autowired
+	  private HttpSession httpSession;
+	  
+	  private String BRANCHID = "branchid";
+	 
 
 
     public void getCertificate() {
@@ -93,7 +100,7 @@ public class EnquiryActionAdapter {
 
 	public void getStudentLastEnquiry() {
 		
-		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.getStudentLastEnquiry();
+		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.getStudentLastEnquiry(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("admissionEnquiry", admissionEnquiryResponseDto.getAdmissionEnquiry());
        		
 	}
@@ -101,7 +108,7 @@ public class EnquiryActionAdapter {
 
 	public void viewEnquiry() {
 
-		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.viewEnquiry();
+		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.viewEnquiry(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("admissionEnquiryList", admissionEnquiryResponseDto.getAdmissionEnquiryList());
 		
 	}
