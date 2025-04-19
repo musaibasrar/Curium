@@ -16,14 +16,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "admissionenquiry")
 public class AdmissionEnquiry implements java.io.Serializable{
-	
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -34,9 +31,9 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	private int branchId;
 	
 	@Column(name = "userid")
-	private int userid;
+	private int userId;
 	
-	@Column(name = "name", length = 45)
+	@Column(name = "name", length = 200)
 	private String name;
 	
 	@Column(name = "gender", length = 45)
@@ -48,13 +45,13 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	@Column(name = "caste", length = 45)
 	private String caste;
 	
-	@Column(name = "placeofbirth", length = 45)
+	@Column(name = "placeofbirth", length = 100)
 	private String placeOfBirth;
 	
 	@Column(name = "surname", length = 45)
 	private String surName;
-	
-	@Column(name = "reviousclasspassed", length = 45)
+	                
+	@Column(name = "previousclasspassed", length = 45)
 	private String previousClassPassed;
 	
 	@Column(name = "previousschoolname", length = 45)
