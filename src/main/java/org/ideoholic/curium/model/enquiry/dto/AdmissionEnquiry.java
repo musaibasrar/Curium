@@ -34,7 +34,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	private int branchId;
 	
 	@Column(name = "userid")
-	private int userid;
+	private int userId;
 	
 	@Column(name = "name", length = 45)
 	private String name;
@@ -54,7 +54,7 @@ public class AdmissionEnquiry implements java.io.Serializable{
 	@Column(name = "surname", length = 45)
 	private String surName;
 	
-	@Column(name = "reviousclasspassed", length = 45)
+	@Column(name = "previousclasspassed", length = 45)
 	private String previousClassPassed;
 	
 	@Column(name = "previousschoolname", length = 45)
