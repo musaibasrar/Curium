@@ -62,7 +62,7 @@ public class AppointmentDAO {
 			List<Appointment> results = new ArrayList<Appointment>();
 
 			try{
-//
+
 				int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
 				Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
 				Page<Appointment> page = appoinmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
@@ -119,27 +119,28 @@ public class AppointmentDAO {
 			}
 		}
 
-
+        @Transactional
 		public boolean completeAppointments(List<Integer> appointmentIdsList) {
 			
-			boolean result = false;
-			Transaction transaction = null;
+			boolean result;
+
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				
-				for (Integer appId : appointmentIdsList) {
-					Query query = session.createQuery("update Appointment set status = 'Completed' where id="+appId+"");
-					query.executeUpdate();
+
+				List<Appointment> appointments = appoinmentRepo.findAllById(appointmentIdsList);
+				for (Appointment appointment : appointments) {
+
+					appointment.setStatus("Completed");
+					appoinmentRepo.save(appointment);
 				}
 				
-				transaction.commit();
+
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+
+				throw hibernateException;
+			}
 			return result;
 		}
 

@@ -90,13 +90,13 @@ public class AppointmentApiAction {
 	@PostMapping("/cancelAppointments")
 	private ResponseEntity<ViewAllAppoinmentsResponseDto> cancelAppointments(@RequestBody CancelAppointmentsDto cancelAppointmentsDto, @RequestHeader(value="branchId") String branchId) {
 		appointmentService.cancelAppointments(cancelAppointmentsDto);
-		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 	}
 
 	@PostMapping("/completeAppointments")
 	private ResponseEntity<ViewAllAppoinmentsResponseDto> completeAppointments(@RequestBody CompleteAppointmentsDto completeAppointmentsDto, @RequestHeader(value="branchId") String branchId) {
 		appointmentService.completeAppointments(completeAppointmentsDto);
-		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 	}
 
 	@RequestMapping(value = "/viewAllAppointments", method = { RequestMethod.GET, RequestMethod.POST })
@@ -125,7 +125,7 @@ public class AppointmentApiAction {
 	private ResponseEntity<ViewAllAppoinmentsResponseDto> updateAppointment(@RequestBody UpdateAppointmentDto updateAppointmentDto, @RequestHeader(value="branchId") String branchId) {
 		ResultResponse result = appointmentService.updateAppointment(updateAppointmentDto);
 		if (result.isSuccess()) {
-			return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+			return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);
 		}
