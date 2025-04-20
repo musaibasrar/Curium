@@ -251,13 +251,13 @@ public class feesCategoryDAO {
 
 	}
 	
-	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear)
+	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear, String branchId)
 	{
 		List <Feescategory> result= new ArrayList();
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"'");
+					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
 			result=query.list();
 			transaction.commit();
 

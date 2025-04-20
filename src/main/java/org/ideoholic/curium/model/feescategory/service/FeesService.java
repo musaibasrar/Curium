@@ -583,7 +583,7 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
@@ -723,7 +723,7 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
