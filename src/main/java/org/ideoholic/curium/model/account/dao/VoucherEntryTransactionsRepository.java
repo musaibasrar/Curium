@@ -18,5 +18,8 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 	    @Modifying
 	    @Query("UPDATE VoucherEntrytransactions v SET v.cancelvoucher = 'yes' WHERE v.transactionsid = :id")
 	    int cancelVoucher(@Param("id") int id);
+	    
+	    @Query("SELECT CASE WHEN count(v) > 0 THEN true ELSE false END FROM VoucherEntrytransactions v WHERE v.draccountid = :accountId OR v.craccountid = :accountId")
+	    boolean existsByDraccountidOrCraccountid(Integer accountId);
 	 
 }

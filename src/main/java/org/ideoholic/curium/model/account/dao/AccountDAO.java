@@ -360,30 +360,18 @@ public class AccountDAO {
 	}
 
 
+	@Transactional
 	public boolean checkInTransactions(Integer accountId) {
-		
+		boolean result = false;
 		VoucherEntrytransactions rTransactions = new VoucherEntrytransactions();
-		
-		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-
-			Query receipt = session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			rTransactions = (VoucherEntrytransactions) receipt.uniqueResult();
-			transaction.commit();
-
-			if(rTransactions != null){
-				return true;
-			}
-			
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			result = voucherEntryTransactionsRepo.existsByDraccountidOrCraccountid(accountId);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 
 	public boolean deleteMultipleAccounts(Integer balanceId, Integer accountId) {
