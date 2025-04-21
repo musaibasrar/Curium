@@ -123,7 +123,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/abc/images/abc.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 151px;" alt="logo" src="/skps/images/skps.png">
 			</td>
 				<td >
 					<br>
@@ -238,7 +238,7 @@ for(Cookie cookie : cookies){
 
 			
 			<tr>
-              <td align="center"><a id="print" href="/abc/DocumentsProcess/printStudyCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/skps/DocumentsProcess/printStudyCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>
