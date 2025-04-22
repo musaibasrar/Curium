@@ -454,6 +454,7 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	@Transactional
 	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
 		try{
