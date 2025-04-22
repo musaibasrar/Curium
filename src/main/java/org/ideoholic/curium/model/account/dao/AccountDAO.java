@@ -280,20 +280,19 @@ public class AccountDAO {
 		
 	}
 
+	@Transactional
 	public List<Accountdetailsbalance> getAccountdetailsbalanceBankCash(int branchId) {
 		
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
 		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (1) and branchid="+branchId).list();
-			transaction.commit();																						   											
-		}catch (Exception hb) { transaction.rollback(); log.error(hb.getMessage(), hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsBalanceRepo.findBankCashAccountDetailsByBranch(branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
+		
 		}
 		return accountDetails;
 	}

@@ -25,5 +25,10 @@ public interface AccountDetailsBalanceRepository extends JpaRepository<Accountde
     Accountdetailsbalance findByAccountDetails(Accountdetails accountDetails);
     
 
+    @Query("SELECT a FROM Accountdetailsbalance a " +
+            "WHERE a.accountDetails.accountGroupMaster.accountgroupid IN (1) " +
+            "AND a.branchid = :branchId")
+     List<Accountdetailsbalance> findBankCashAccountDetailsByBranch(@Param("branchId") int branchId);
+
     
 }
