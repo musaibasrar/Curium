@@ -119,6 +119,10 @@ public class StudentService {
 	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
 	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
+	        }else {
+	        	int studentSeq = 1;
+	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+	            student.setStudentexternalid(studentExternalId);
 	        }
 			
 			student.setArchive(0);
