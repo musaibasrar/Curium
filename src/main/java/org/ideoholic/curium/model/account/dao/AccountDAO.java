@@ -454,19 +454,15 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	@Transactional
 	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails = accountDetailsRepo.findAccountDetails(accountName, accountCode, branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
