@@ -170,7 +170,7 @@ for(Cookie cookie : cookies){
 					</tr>
 					<tr><td><br></td></tr>
 					<tr>
-					<td>
+					<td style="text-align: left;">
 					 Mr./Ms.<span style="font-weight: bold;text-transform: capitalize;width: 370px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					S/O,D/O
 					 </td></tr>
@@ -220,7 +220,7 @@ for(Cookie cookie : cookies){
 					</span>
 					</td></tr>
 					<tr><td><br></td></tr>
-					<tr><td>
+					<tr><td style="text-align: left;">
 					and he/she belongs to the caste &emsp;<span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
 					</span>&emsp;and his/her place of birth

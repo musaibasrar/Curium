@@ -25,6 +25,7 @@ public class FeesDetailsResponseDto {
     private String academicPerYear;
     private String currentAcademicYear;
     private List<Studentotherfeesstructure> otherFeesStructure;
+    private List<Otherreceiptinfo> otherReceiptInfo;
     @Builder.Default
     private boolean success = false;
 }

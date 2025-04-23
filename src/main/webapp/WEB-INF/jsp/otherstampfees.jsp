@@ -768,6 +768,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Admission Year</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
 						<th title="click to sort" class="headerText">Admission Type</th>
 					</tr>
@@ -793,6 +794,9 @@ for(Cookie cookie : cookies){
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
 									</c:forEach>
+									</td>
+									<td class="dataText"><c:out
+									value="${Parents.student.yearofadmission}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 						 	<td class="dataText">
