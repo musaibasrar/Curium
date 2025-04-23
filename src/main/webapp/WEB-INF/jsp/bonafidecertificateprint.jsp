@@ -193,7 +193,7 @@ for(Cookie cookie : cookies){
 							<c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" />
 					<span style="font-weight: bold;width: 70px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${itempart[0]} 
-					</span>Div <span style="font-weight: bold;width: 70px;">
+					</span>&nbsp;&nbsp;Div <span style="font-weight: bold;width: 70px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${itempart[1]} 
 					</span>
 					in the </td></tr>
@@ -205,7 +205,7 @@ for(Cookie cookie : cookies){
 					<td class="dataTextBoldLeft"  >
 					year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
 					in the general register is <span style="font-weight: bold;width: 120px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.dateofbirth} 
+								&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/> 
 					</span></td>
 					</tr>
 					
@@ -223,7 +223,7 @@ for(Cookie cookie : cookies){
 					<tr><td>
 					and he/she belongs to the caste &emsp;<span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;${studentdetailsbonafide.student.caste} 
-					</span>&emsp;and his place of birth
+					</span>&emsp;and his/her place of birth
 					</td></tr>
 					<tr><td><br></td></tr>
 					<tr><td>
