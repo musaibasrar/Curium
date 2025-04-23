@@ -13,9 +13,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>View Book</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<title>Book History</title>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,46 +296,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "340px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
@@ -345,74 +344,94 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
 
-		$("#effect").show();
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+
+		$("#tabs").tabs();
+
+		$("#search").button().click(function() {
+			searchBookHistory();
+		});
+		$("#effect").hide();
+	});
+	
 		
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
 
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	$(function() {
+		$("#fromdate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+		$("#anim").change(function() {
+			$("#fromdate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+		$("#todate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+		$("#anim").change(function() {
+			$("#todate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+		 $("#delete").button({
+		        icons:{
+		            primary: "ui-icon-trash"
+		        }
+		    }).click(function(){
+		        deleteBookHistory();
+		        return false;
+
+		    });
+		
+	});
+
+    
+	function searchBookHistory(){
+	    
+	    var form1=document.getElementById("form1");
+	    form1.action="/vision/LibraryProcess/searchBookHistory";
+	    form1.method = "POST";
+	   form1.submit();
+	    
 	}
-	
-</script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
-<script type="text/javascript">
-$(function(){
-    $("#delete").button({
-        icons:{
-            primary: "ui-icon-trash"
-        }
-    }).click(function(){
-        deleteBookHistory();
-        return false;
-
-    });
-    function deleteBookHistory(){
-        
-        var form1=document.getElementById("form1");
-        form1.action="/abc/LibraryProcess/deleteBookHistory";
-        form1.method = "POST";
-       form1.submit();
-        
-    }
+	function deleteBookHistory(){
+	    
+	    var form1=document.getElementById("form1");
+	    form1.action="/vision/LibraryProcess/deleteBookHistory";
+	    form1.method = "POST";
+	   form1.submit();
+	    
+	}
 
 	
-	//chechbox
-	  $('#chckHead').click(function () {
-             var length = $('.chcktbl:checked').length;
-             var trLength=$('.trClass').length;
-             if(length>0){
-                 $('.chcktbl:checked').attr('checked', false);
-                 this.checked=false;
 
-             }
-             else{
-                 if (this.checked == false) {
-                     $('.chcktbl:checked').attr('checked', false);
-                 }
-                 else {
-                     $('.chcktbl:not(:checked)').attr('checked', true);
-                 }
-
-             }
-
-         });
-         $('.chcktbl').click(function () {
-             var length = $('.chcktbl:checked').length;
-             var trLength=$('.trClass').length;
-             alert(tdLength);
-             if (length > trLength) {
-
-                 $('.chcktbl:not(:checked)').attr('disabled', true);
-             }
-             else {
-                 $('.chcktbl:not(:checked)').attr('disabled', false);
-             }
-         });
-});
-         
 
 </script>
 
@@ -425,7 +444,7 @@ $(function(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -439,7 +458,56 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1">
+	
+	<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
+		</div>
 
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Enter Dates</a></li>
+
+				</ul>
+				<div id="tabs-1">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td width="20%" class="alignRight">From Date&nbsp;</td>
+							<td width="28%"><label> <input name="fromdate" autocomplete="off"
+									type="text" 
+									class="textField" id="fromdate" size="36" 
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td width="20%" class="alignRight">To Date&nbsp;</td>
+							<td width="28%"><label> <input name="todate" autocomplete="off"
+									type="text" 
+									class="textField" id="todate" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Search</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 	
 
 		<div style="overflow: hidden">
@@ -474,7 +542,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${book.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${book.id}"/>" /></td>
-							<%-- <td class="dataText"><a class="dataTextInActive" href="/abc/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	 --%>
+							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
 							<td class="dataText"><c:out value="${book.bookName}" /></td>
 							<td class="dataText"><c:out value="${book.studentName}" /></td>
 							<td class="dataText"><c:out value="${book.uid}" /></td>
@@ -491,8 +559,8 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="delete">Delete record</button>
-							</td>
+						<!-- <td class="footerTD" colspan="2"><button id="delete">Delete record</button>
+							</td> -->
 							
 
 					</tr>
