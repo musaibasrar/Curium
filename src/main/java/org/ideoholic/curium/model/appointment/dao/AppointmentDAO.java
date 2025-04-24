@@ -144,31 +144,24 @@ public class AppointmentDAO {
 			return result;
 		}
 
-
+		@Transactional
 		public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
 			
-			List<Appointment> result = new ArrayList<Appointment>();
-			Transaction transaction = null;
+			List<Appointment> appointments = appoinmentRepo.findAllById(appointmentIdsList);
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				
-				for (Integer appId : appointmentIdsList) {
-					Appointment app = new Appointment();
-					Query query = session.createQuery("update Appointment set status = 'Cancelled' where id="+appId+"");
-					query.executeUpdate();
-					Query queryApp = session.createQuery("from Appointment where id="+appId+"");
-					app = (Appointment) queryApp.uniqueResult();
-					result.add(app);
+
+				for(Appointment appointment : appointments){
+					appointment.setStatus("Cancelled");
+					appoinmentRepo.save(appointment);
+
 				}
 				
-				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
-			return result;
+			 	throw hibernateException;
+			}
+			return appointments;
 		}
 
 
