@@ -160,7 +160,19 @@ public class StampFeesDAO {
 				
 				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
-				if(feesStructure != null){
+				
+				if(feesStructure == null){
+					session.save(studentfeesstructure);
+					//accounts
+					
+					session.save(transactions);
+					Query queryAccounts = session.createQuery(updateDrAccount);
+					queryAccounts.executeUpdate();
+					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+					queryqueryAccounts1.executeUpdate();
+				}
+				
+				/*if(feesStructure != null){
 					
 					Query queryUpdate = session
 							.createQuery("update Studentfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and academicyear = '"+currentYear+"'");
@@ -169,16 +181,10 @@ public class StampFeesDAO {
 					queryUpdate.executeUpdate();
 				}else if(feesStructure == null){
 					session.save(studentfeesstructure);
-				}
+				}*/
 		}
 			
-			//accounts
-			
-			session.save(transactions);
-			Query queryAccounts = session.createQuery(updateDrAccount);
-			queryAccounts.executeUpdate();
-			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-			queryqueryAccounts1.executeUpdate();
+		
 			
 
 			transaction.commit();
