@@ -17,7 +17,7 @@ public class EventDAO {
     private static final Logger logger = LogManager.getLogger(EventDAO.class);
     
     @SuppressWarnings("unchecked")
-    public List<Event> getEvents(LocalDateTime start, LocalDateTime end) {
+    public List<Event> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
         List<Event> events = new ArrayList<>();
         Session session = null;
         Transaction transaction = null;
@@ -29,7 +29,7 @@ public class EventDAO {
             String queryString = "FROM Event as event";
             
             if (start != null && end != null) {
-                queryString += " WHERE event.startDateTime BETWEEN :start AND :end";
+                queryString += " WHERE event.startDateTime BETWEEN :start AND :end AND event.branchid = :branchid";
             }
             
             queryString += " ORDER BY event.startDateTime ASC";
@@ -39,6 +39,7 @@ public class EventDAO {
             if (start != null && end != null) {
                 query.setParameter("start", start);
                 query.setParameter("end", end);
+                query.setParameter("branchid", Integer.parseInt(branchId));
             }
             
             events = query.list();
