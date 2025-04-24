@@ -11,6 +11,12 @@ public class Event implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column
+    private int branchid;
+    
+    @Column
+    private int userid;
+    
     @Column(nullable = false)
     private String title;
     
@@ -49,8 +55,25 @@ public class Event implements java.io.Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
 
-    public String getTitle() {
+    public int getBranchid() {
+		return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getTitle() {
         return title;
     }
 
