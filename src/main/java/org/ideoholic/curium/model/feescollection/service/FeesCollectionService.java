@@ -342,7 +342,7 @@ public class FeesCollectionService {
 			
 			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccount;
 
-			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFees;
+			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+crFees;
 			
 			// End Receipt
 			
@@ -366,7 +366,7 @@ public class FeesCollectionService {
 			transactionsIncome.setBranchid(Integer.parseInt(branchId));
 			transactionsIncome.setUserid(Integer.parseInt(userId));
 			
-			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
+			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
 
 			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFeesIncome;
 			
@@ -2565,7 +2565,7 @@ public class FeesCollectionService {
 			
 			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccount;
 
-			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFees;
+			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+crFees;
 			
 			// End Receipt
 			
@@ -2589,7 +2589,7 @@ public class FeesCollectionService {
 			transactionsIncome.setBranchid(Integer.parseInt(branchId));
 			transactionsIncome.setUserid(Integer.parseInt(userId));
 			
-			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
+			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
 
 			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFeesIncome;
 			
