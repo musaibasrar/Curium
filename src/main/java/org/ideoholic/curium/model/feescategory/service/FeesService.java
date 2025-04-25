@@ -697,14 +697,8 @@ public class FeesService {
 	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
 	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
 	        	String searchYear = null;
-	        	int yoa = Integer.parseInt(yearofAdmission[0]);
-	        	int ca = Integer.parseInt(currentAcademicYear[0]);
 	        	
-	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = httpSession.getAttribute("currentAcademicYear").toString();
-	        	}else if (yoa > ca) {
-	        		searchYear = request.getParameter("yearofadmission");
-	        	}
+	        	searchYear = request.getParameter("yearofadmission");
 	        	
 	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
 	            httpSession.setAttribute("feescategory", feecategoryList);
@@ -743,11 +737,11 @@ public class FeesService {
 	    		}else {
 
 	    		        try {
-	    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
+	    		        		String buffer = "<input name='balance'  type='hidden' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
 	    			        	response.getWriter().println(buffer);
 
 	    		        } catch (Exception e) {
-	    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+	    		            out.write("<input name='balance'  type='hidden' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
 	    		        } finally {
 	    		            out.flush();
 	    		            out.close();
@@ -845,4 +839,32 @@ public class FeesService {
 			
 						
 		}
+		
+		public boolean readListOfStudentsOtherFees() {
+
+            boolean result = false;
+            try {
+                    List<Object[]> list = new feesDetailsDAO().readListOfStudentsOtherFees(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                    
+                    List<Parents> parentDetails = new ArrayList<Parents>();
+                    for(Object[] parentdetails: list){
+                    	Parents parent = new Parents();
+                    	Student student = new Student();
+                        student.setSid((Integer)parentdetails[0]);
+                        student.setName((String)parentdetails[1]);
+                        student.setClassstudying((String)parentdetails[2]);
+                        student.setStudentexternalid((String)parentdetails[3]);
+                        student.setAdmissionnumber((String)parentdetails[4]);
+                        parent.setFathersname((String)parentdetails[5]);
+                        parent.setStudent(student);
+                        parentDetails.add(parent);
+                    }
+                    
+                    request.setAttribute("studentListFeesCollection", parentDetails);
+                    result = true;
+            } catch (Exception e) {
+                    result = false;
+            }
+            return result;
+    }
 }

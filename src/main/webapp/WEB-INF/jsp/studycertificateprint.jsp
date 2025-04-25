@@ -149,7 +149,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
+					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <%-- <c:out value="${studentdetailsbonafide.student.admissionnumber}" /> --%></span>
 					</h3>
 				</td>
 			</tr>
@@ -217,8 +217,8 @@ for(Cookie cookie : cookies){
 			<td class="dataTextBoldLeft">
 			<br><br>
 				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;font-weight: bold;font-size: 16px;"
+					size="12" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
 			
 			</tr>
 			<tr>

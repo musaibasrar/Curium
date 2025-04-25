@@ -768,7 +768,7 @@ for(Cookie cookie : cookies){
 									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
 										<option selected>${student.religion}</option>
 										<option>Islam</option>
-										<option>Hinduism</option>
+										<option>Hindu</option>
 										<option>Christianity</option>
 										<option>jainism</option>
 										<option>sikhism</option>
@@ -789,7 +789,8 @@ for(Cookie cookie : cookies){
 
 							</label></td>
  --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+ 							<td class="alignLeft" style="padding-left: 20px;">Students Caste<br>
+								Certificate No.&nbsp;</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
 									id="studentscastecertno" size="30">
@@ -814,6 +815,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>${student.socialcategory}</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>
