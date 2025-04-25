@@ -285,7 +285,6 @@ public class AccountDAO {
 		
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
-		Transaction transaction = null;
 		try{
 			accountDetails = accountDetailsBalanceRepo.findBankCashAccountDetailsByBranch(branchId);
 		}catch (Exception hibernateException) { 
@@ -535,22 +534,18 @@ public class AccountDAO {
 		return accountDetails;
 	}
 	
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherDetailsByNarration(String supplierreferenceno) {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
-			voucherTransactions = query.list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
+			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationLike(supplierreferenceno);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;		
+			}
 		return voucherTransactions;
 	}
 	
