@@ -21,5 +21,8 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 	    
 	    @Query("SELECT CASE WHEN count(v) > 0 THEN true ELSE false END FROM VoucherEntrytransactions v WHERE v.draccountid = :accountId OR v.craccountid = :accountId")
 	    boolean existsByDraccountidOrCraccountid(Integer accountId);
+	    
+	    @Query("SELECT v FROM VoucherEntrytransactions v WHERE v.narration LIKE %:supplierReferenceNo%")
+	    List<VoucherEntrytransactions> findByNarrationContaining(@Param("supplierReferenceNo") String supplierReferenceNo);
 	 
 }
