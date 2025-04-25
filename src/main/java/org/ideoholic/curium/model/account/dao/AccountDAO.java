@@ -540,7 +540,7 @@ public class AccountDAO {
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		
 		try{
-			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationContaining(supplierreferenceno);
+			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationLike(supplierreferenceno);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();;
