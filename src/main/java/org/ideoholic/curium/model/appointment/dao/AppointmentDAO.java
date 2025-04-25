@@ -92,31 +92,22 @@ public class AppointmentDAO {
 				return noOfRecords;
 
 		}
-		
+		@Transactional
 		public int getNoOfRecords() {
 			
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
+				Long activeAppointments = appoinmentRepo.countByStatusNot("Cancelled");
+				noOfRecords = activeAppointments.intValue();
 
-				results = (List<Appointment>) session.createQuery("From Appointment where status != 'Cancelled'").setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-								+ noOfRecords);
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
 			}
+				return noOfRecords;
+
 		}
 
         @Transactional
