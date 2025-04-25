@@ -521,19 +521,16 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<Accountdetails> getAccountdetailsIncomeExpense(int branchId) {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();												  	
-			accountDetails =  session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetails =  accountDetailsRepo.findIncomeAndExpenseAccountsByBranchId(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
