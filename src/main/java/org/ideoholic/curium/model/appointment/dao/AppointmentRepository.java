@@ -16,4 +16,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
 	int countByBranchid( int branchId);
 
+	Long countByStatusNot(String status);
 }

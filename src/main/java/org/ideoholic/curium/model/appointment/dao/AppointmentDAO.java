@@ -95,14 +95,10 @@ public class AppointmentDAO {
 		@Transactional
 		public int getNoOfRecords() {
 			
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
 			try{
-
-				for(Appointment appointment : results){
-					appointment.setStatus("Cancelled");
-					noOfRecords = Integer.parseInt(appoinmentRepo.save(appointment).toString());
-				}
+				Long activeAppointments = appoinmentRepo.countByStatusNot("Cancelled");
+				noOfRecords = activeAppointments.intValue();
 
 			} catch (Exception hibernateException) {
 				log.error(hibernateException.getMessage(), hibernateException);
