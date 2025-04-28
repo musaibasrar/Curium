@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
@@ -186,9 +187,8 @@ public class StampFeesService {
 		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
 		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 		
-		String feesTotalAmount = stampFeesDto.getFeesTotalAmount();
 		Long grandTotal = 0l;
-
+		
 		String[] feesCategoryIds = stampFeesDto.getFeesCategoryIds();
 		String[] feesAmount = stampFeesDto.getFeesAmount();
 		String[] concession = stampFeesDto.getConcession();
@@ -197,44 +197,50 @@ public class StampFeesService {
 		
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
+			
 		for (String id : studentIds) {
+			Long totalFeesAmount = 0l;
+			for(int i=0; i < feesCategoryIds.length ; i++){
+			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
+			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+			
+			//check whether the fees category is already stamped 
+			Studentfeesstructure result = new StampFeesDAO().getStudentFeesStructure(Integer.parseInt(id),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
+			// END
+			
+			if(result==null) {
+				
+				Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+				Feescategory feescategory = new Feescategory();
+				studentfeesstructure.setSid(Integer.valueOf(id));
+				feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
+				studentfeesstructure.setFeescategory(feescategory);
+				studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
+				studentfeesstructure.setFeespaid((long) 0);
+				studentfeesstructure.setWaiveoff((long) 0);
+				studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+				studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
+				studentfeesstructure.setBranchid(Integer.parseInt(branchid));
+				studentfeesstructure.setUserid(Integer.parseInt(userid));
+				studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+				listOfstudentfeesstructure.add(studentfeesstructure);
+				
+				totalFeesAmount = totalFeesAmount+ Long.parseLong(feesAmount[feesCatIndex]);
+			}
+		
+		}
+			
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(feesYears[0]);
 			academicfessstructure.setUserid(Integer.parseInt(userid));
-			academicfessstructure.setTotalfees(feesTotalAmount);
-			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+			academicfessstructure.setTotalfees(totalFeesAmount.toString());
 			academicfessstructure.setBranchid(Integer.parseInt(branchid));
 			academicfessstructure.setUserid(Integer.parseInt(userid));
 			
 			listOfacademicfessstructure.add(academicfessstructure);
-			// ids.add(Integer.valueOf(id));
-
-		}
-		
-		for (String id : studentIds) {
-
-			for(int i=0; i < feesCategoryIds.length ; i++){
-			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
-			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
-			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
-			Feescategory feescategory = new Feescategory();
-			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
-			studentfeesstructure.setFeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
-			studentfeesstructure.setFeespaid((long) 0);
-			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
-			studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
-			studentfeesstructure.setBranchid(Integer.parseInt(branchid));
-			studentfeesstructure.setUserid(Integer.parseInt(userid));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
-			listOfstudentfeesstructure.add(studentfeesstructure);
-		}
 			
-
-			
+			grandTotal = grandTotal + totalFeesAmount;
 		}
 		
 		//Accounts
