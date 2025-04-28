@@ -98,7 +98,7 @@ public class StudentAction {
 			return "student_details_feesstructure_admin";
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("accountant")) {
 			return "student_details_feesstructure_admin";
-		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("clerk")) {
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
 			return "student_details_feesstructure_admin";
 		}else {
 			return "student_details_feesstructure";

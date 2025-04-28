@@ -541,12 +541,12 @@ public class studentDetailsDAO {
 		}
 	}
 
-	public boolean updateStudent(Student student) {
+	public boolean updateStudent(Student student,String studentStatus) {
 		
 		try {
 			transaction = session.beginTransaction();
 			Query queryUpdate = session
-					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"'  where sid = '"+student.getSid()+"'");
+					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"',"+studentStatus+"='1'  where sid = '"+student.getSid()+"'");
 			queryUpdate.executeUpdate();
 			transaction.commit();
 			return true;

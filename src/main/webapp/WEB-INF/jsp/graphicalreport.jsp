@@ -593,7 +593,50 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td class="alignRightFields">Exam Class &nbsp;</td>
+							<td width="12%" align="left"><label> <select name="examclass"
+									id="examclass" style="width: 130px;border-radius: 4px;background: white;height: 20px;">
+										<option selected>${classselected}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
+						<tr>
+							<td class="alignRightFields">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="12%" align="left">
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 130px;border-radius: 4px;background: white;height: 20px;" >
+										<option></option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										<option>2027/28</option>
+										<option>2028/29</option>
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
+							<td><br /></td>
+						</tr>
 						
 					</table>
 					
