@@ -76,13 +76,13 @@ public class MarksDetailsDAO {
 		}
 	}
 		
-		public List<Marks> readListOfMarks(Integer id) {
+		public List<Marks> readListOfMarks(Integer id, String academicYear) {
 			List<Marks> results = new ArrayList<Marks>();
 			try {
 
 				transaction = session.beginTransaction();
 				Query query = session
-						.createQuery("From Marks where sid IN (:ids)");
+						.createQuery("From Marks where academicyear='"+academicYear+"' and sid IN (:ids)");
 				query.setParameter("ids", id);
 				/*query.setParameter("subject", subject);
 				query.setParameter("exam", exam);*/

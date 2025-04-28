@@ -475,7 +475,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
+									name="namesearch" type="text" class="myclass" id="namesearch" style="width: 256px;border-radius: 4px;background: white;height: 18px;"
 									size="40">
 							</label></td>
 							
@@ -490,7 +490,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 128px;">
+									id="classsearch" style="width: 128px;border-radius: 4px;background: white;height: 20px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -502,7 +502,7 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 128px;">
+									style="width: 128px;border-radius: 4px;background: white;height: 20px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -541,13 +541,52 @@ for(Cookie cookie : cookies){
 
 						</tr>
 						
-						
-
-						
-
-
+						<tr>
+							<td><br /></td>
+						</tr>
 						
 						<tr>
+							<td class="alignRightFields">Exam Class &nbsp;</td>
+							<td width="12%" align="left"><label> <select name="examclass"
+									id="examclass" style="width: 130px;border-radius: 4px;background: white;height: 20px;">
+										<option selected>${classselected}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="12%" align="left">
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 130px;border-radius: 4px;background: white;height: 20px;" >
+										<option></option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										<option>2027/28</option>
+										<option>2028/29</option>
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
 							<td><br /></td>
 						</tr>
 						
@@ -596,8 +635,8 @@ for(Cookie cookie : cookies){
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
-							<input type="hidden" id="examclass" name="examclass"
-								value="<c:out value="${Parents.student.classstudying}"/>" />
+							<%-- <input type="hidden" id="examclass" name="examclass"
+								value="<c:out value="${Parents.student.classstudying}"/>" /> --%>
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>

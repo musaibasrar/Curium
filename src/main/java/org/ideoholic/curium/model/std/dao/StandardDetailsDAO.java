@@ -116,7 +116,7 @@ public class StandardDetailsDAO {
         List<Classhierarchy> classHierarchyList = new ArrayList<Classhierarchy>();
         try {
             transaction = session.beginTransaction();
-            classHierarchyList = session.createQuery("From Classhierarchy where branchid="+branchid).list();
+            classHierarchyList = session.createQuery("From Classhierarchy where branchid='"+branchid+"' order by  idclasshierarchy asc").list();
             transaction.commit();
         } catch (Exception hibernateException) { 
         	transaction.rollback(); 

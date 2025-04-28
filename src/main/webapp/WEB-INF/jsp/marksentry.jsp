@@ -537,7 +537,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 120px;">
+									id="classsearch" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${classselected}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -550,7 +550,7 @@ for(Cookie cookie : cookies){
 									</label>
 							 <label> 
 									<select name="secsearch" id="secsearch"
-									style="width: 110px;">
+									style="width: 110px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -590,10 +590,31 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td width="30%" class="alignRight">Exam Class &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft"><label> <select name="classsearchselected"
+									id="classsearchselected" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classselected}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="subject" id="subject"
-									style="width: 240px" ">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listSubjectNames}" var="listSubject">
@@ -618,7 +639,7 @@ for(Cookie cookie : cookies){
 						<td width="30%" class="alignRight">Exam &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="exam" id="exam"
-									style="width: 240px">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listExam}" var="listExam">
@@ -633,6 +654,29 @@ for(Cookie cookie : cookies){
 								</select></td>
 						</tr>
 						
+												<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td  width="30%" class="alignRight">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="16%" height="30" class="alignLeft">
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;" >
+										<option></option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										<option>2027/28</option>
+										<option>2028/29</option>
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -660,14 +704,12 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Admission Type</th>
+						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Marks</th>
-
-
-
 					</tr>
 				</thead>
 
@@ -676,19 +718,31 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
+							<td class="dataText"><input type="checkbox" checked
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 							</td>
+							<td class="dataText">
+						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
+						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
+						 		 <c:choose>
+                                <c:when test="${classstudying[0] == classadmitted[0]}">
+                                   <c:out value="New Admission" />
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="Old Admission" />
+                                </c:otherwise>
+                            </c:choose>
+						 	</td>
+						 	<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"

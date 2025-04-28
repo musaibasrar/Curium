@@ -254,7 +254,9 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td style="font-family: bold;">
 						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
-						Academic Year: ${dataSubParts[0]}-${dataSubParts[1]}</td>
+						<%-- Academic Year: ${dataSubParts[0]}-${dataSubParts[1]} --%>
+						Academic Year: ${academicyear}
+						</td>
 					</tr>
 				</table>
 
@@ -275,7 +277,7 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">DOB</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">Attendance</p></td>
 								<td colspan="4" style="text-align: left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.sts}</p>
-								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${examclass}<%-- ${Parents.parents.student.classstudying} --%></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.remarks}</p></td>
 							<%-- <td colspan="2" style="text-align:left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.admissionnumber}</p>

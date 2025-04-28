@@ -658,6 +658,30 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td class="alignRightFields">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="16%" height="30" class="alignLeft">
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;" >
+										<option></option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										<option>2027/28</option>
+										<option>2028/29</option>
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 
 							<td width="30%" class="alignRight"></td>
 

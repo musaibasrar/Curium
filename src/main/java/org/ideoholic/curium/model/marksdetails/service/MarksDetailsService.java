@@ -69,7 +69,7 @@ public class MarksDetailsService {
 		String[] studentsMarks = request.getParameterValues("studentMarks");
 		String[] examidName = request.getParameter("exam").split("__");
 		String subject = request.getParameter("subject");
-		String classSelected = request.getParameter("classsearch");
+		String classSelected = request.getParameter("classsearchselected");
 		System.out.println("the subject id is " + subject + ", and exam id is " + examidName[0]);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
@@ -140,7 +140,7 @@ public class MarksDetailsService {
 				
 				marks.setSid((int) mapEntry.getKey());
 				marks.setMarksobtained(mymark);
-				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+				String currentYear = request.getParameter("academicyear");;
 				marks.setAcademicyear(currentYear);
 				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				marks.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
@@ -294,6 +294,7 @@ public class MarksDetailsService {
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = request.getParameterValues("examclass");
 			String[] exCl = examClass[0].split("--");
+			String academicYear = request.getParameter("academicyear");
 				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
@@ -302,7 +303,7 @@ public class MarksDetailsService {
 					
 					ExamsDetails examsD = new ExamsDetails();
 							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
-									httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+									academicYear);
 							List<String> subjectAppeared = new LinkedList<String>();
 							List<Float> marksScored = new LinkedList<Float>();
 							examsD.setExamName("\""+exams.getExamname()+"\"");
@@ -338,6 +339,7 @@ public class MarksDetailsService {
 
 		String addClass = request.getParameter("classsearch");
 		String addSec = request.getParameter("secsearch");
+		String academicYear = request.getParameter("academicyear");
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
 
@@ -392,7 +394,7 @@ public class MarksDetailsService {
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),academicYear);
 			for (Marks marks : singleMarksDetails) {
 				int subId = marks.getSubid();
 				if ( subId == subjectDetailsId && marks.getExamid() == Integer.parseInt(examIdName[0])) {
@@ -551,6 +553,7 @@ public class MarksDetailsService {
 			
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String examC = request.getParameter("examclass");
+			String academicYear = request.getParameter("academicyear");
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
@@ -627,7 +630,7 @@ public class MarksDetailsService {
 					float marksObtainedSubjectAllExams = 0;
 					float totalMarksObtainedSubjectAllExams = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),academicYear,exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
 					
 					for (Marks marks : marksDetailsList) {
@@ -1178,7 +1181,8 @@ public class MarksDetailsService {
 			
 			request.setAttribute("endloop", endLoop+1);
 			request.setAttribute("markssheetlist", marksSheetList);
-			
+			request.setAttribute("examclass", examClass[0]);
+			request.setAttribute("academicyear", academicYear);
 			/*for (MarksSheet marksSheet2 : marksSheetList) {
 				
 				for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {
@@ -1482,6 +1486,7 @@ public boolean generateRankReport() {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
 			String[] studentIds = request.getParameterValues("studentIDs");
+			String academicYear = request.getParameter("academicyear");
 			List<Integer> studentsIds = new ArrayList<Integer>();
 			String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
@@ -1509,7 +1514,7 @@ public boolean generateRankReport() {
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),academicYear,exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
 					
 					
@@ -2130,6 +2135,7 @@ public boolean generateReportSingleExams() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String examC = request.getParameter("examclass");
 		String[] examClass = examC.split("--");
+		String academicYear = request.getParameter("academicyear");
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -2152,7 +2158,7 @@ public boolean generateReportSingleExams() {
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
 				
-				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),academicYear,exam.getExid());
 				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
 				
 				
@@ -2248,7 +2254,8 @@ public boolean generateReportSingleExams() {
 		
 		request.setAttribute("endloop", endLoop+1);
 		request.setAttribute("markssheetlist", marksSheetList);
-		
+		request.setAttribute("examclass", examClass[0]);
+		request.setAttribute("academicyear", academicYear);
 		/*for (MarksSheet marksSheet2 : marksSheetList) {
 			
 			for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {
