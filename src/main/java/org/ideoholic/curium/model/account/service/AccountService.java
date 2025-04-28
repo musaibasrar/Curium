@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -1655,5 +1656,34 @@ public boolean searchSingleLedgerEntries() {
 		return false;
 	
 		
+	}
+
+
+	public boolean getDayBook() {
+
+		
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		Map<VoucherEntrytransactions,String> voucherEntryTransactionsMap = new HashMap<VoucherEntrytransactions,String>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			
+					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<VoucherEntrytransactions> allVoucherTransactions = new AccountDAO().getAllVoucherEntryTransactionsBetweenDates(fromDate, toDate, branchId);
+				
+				for (VoucherEntrytransactions voucherEntrytransactions : allVoucherTransactions) {
+					String drAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getDraccountid());
+					String crAccountName = new AccountDAO().getAccountName(voucherEntrytransactions.getCraccountid());
+					
+					voucherEntryTransactionsMap.put(voucherEntrytransactions, drAccountName+":"+crAccountName);
+				}
+				List<Map.Entry<VoucherEntrytransactions, String>> entryList = new ArrayList<>(voucherEntryTransactionsMap.entrySet());
+				entryList.sort(Comparator.comparing(entry -> entry.getKey().getTransactionsid()));
+
+				request.setAttribute("voucherentrytransactions", voucherEntryTransactionsMap);
+				
+	}
+			return true;
 	}
 }

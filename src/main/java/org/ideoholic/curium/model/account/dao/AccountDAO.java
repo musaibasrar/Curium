@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.account.dto.Accountdetails;
@@ -323,7 +324,7 @@ public class AccountDAO {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
 			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and financialyear='"+financialYear+"'and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -367,11 +368,13 @@ public class AccountDAO {
 		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
+			System.out.println(" account ID is ******************************"+accountid);
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 			accountName = accountDetails.getAccountname();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			System.out.println(" account Name is "+accountName);
+		} catch (HibernateException e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -615,5 +618,20 @@ public class AccountDAO {
 		}
 		return voucherTransactions;
 	}
+
+	public List<VoucherEntrytransactions> getAllVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int branchId) {
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}		
+		return voucherEntrytransactions;
+	}
+
 
 }

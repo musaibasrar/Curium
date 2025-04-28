@@ -386,4 +386,12 @@ public class AccountAction {
 		}
 		return "exportfailure";
 		}
+	
+	@PostMapping("/daybook")
+	public String dayBook() {
+		if (new AccountService(request, response).getDayBook()) {
+			return "daybook";
+		}
+		return ERRORPAGE;
+	}
 }

@@ -571,4 +571,9 @@ public class JspController {
 	public String getBusFeesCollectionDetails() {
 		return "busfeesCollectionDetails";
 	}
+	
+	@GetMapping("/daybook")
+	public String getDayBook() {
+		return "daybook";
+	}
 }

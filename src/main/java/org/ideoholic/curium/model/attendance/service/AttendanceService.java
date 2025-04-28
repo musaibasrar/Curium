@@ -747,6 +747,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				studentDailyAttendance.setDate(new Date());
 				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
