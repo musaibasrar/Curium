@@ -361,7 +361,7 @@ public class FeesCollectionService {
 			transactions.setCraccountid(crFees);
 			transactions.setDramount(onlyTotalFee);
 			transactions.setCramount(onlyTotalFee);
-			transactions.setVouchertype(1);
+			transactions.setVouchertype(4);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
@@ -387,7 +387,7 @@ public class FeesCollectionService {
 			transactionsIncome.setCraccountid(crFeesIncome);
 			transactionsIncome.setDramount(onlyTotalFee);
 			transactionsIncome.setCramount(onlyTotalFee);
-			transactionsIncome.setVouchertype(4);
+			transactionsIncome.setVouchertype(1);
 			transactionsIncome.setTransactiondate(receiptInfo.getDate());
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
 			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
