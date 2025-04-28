@@ -132,37 +132,16 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/bright/images/brightheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/bright/left_feescollector"><img
-									src="/bright/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
-							
+							<td><a target="leftFrame" href="/bright/left_feescollector"> <img
+									src="/bright/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
+							</a></td>
+
 							<td><a target="mainFrame"
 								href="/bright/FeesProcess/feesCollect"> <img
 									src="/bright/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
-							
-							<td>
-							<a target="leftFrame" href="/bright/reports_feescollector"><img
-									src="/bright/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							</td>
-
-							<!-- <td>
-								<a target="mainFrame"
-								href="/bright/AccountProcess/createVoucher"> <img
-									src="/bright/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<td ><a target="mainFrame" href="/bright/feesCollectionDetails"><img  alt="Fees Details" src="/bright/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
 
 							<td><a target="mainFrame"
 								href="/bright/StudentProcess/addNew"> <img
@@ -170,42 +149,18 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/bright/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/bright/leftsettings">
 									<img alt="Settings" src="/bright/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/bright/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/bright/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><a target="mainFrame" href="/bright/sendsms"><img
-									src="/bright/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a>
-								<a target="leftFrame" href="/bright/reports_officeadmin"><img
-									src="/bright/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							
-							</td>
 
 							<td ><a target="mainFrame"
 								href="/bright/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/bright/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
-							</a></td> -->
+							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/bright/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/bright/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
-								
 							<td ><a target="_parent"
 								href="/bright/UserProcess/logout"><img
 									src="/bright/images/logout.svg" width="18" height="18" alt="Log Out" 

@@ -117,7 +117,7 @@ public class StudentService {
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
 	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+currentAcademicYear[0]+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }
 			

@@ -785,7 +785,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
+							<td class="alignLeft">Admission Number &nbsp;</td>
 							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
@@ -1144,10 +1144,11 @@ $(document).ready(function() {
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
 										<option>Kannada</option>
+										<option>Malayalam</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
 										<option>Marathi</option>
 										<option>Telugu</option>
 										<option>Tamil</option>

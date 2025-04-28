@@ -216,7 +216,8 @@ public class StudentAction {
 			} else if (branchId.equalsIgnoreCase("5")) {
 				return "student_details";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
-				return "student_details_withoutmodify";
+				//return "student_details_withoutmodify";
+				return "student_details";
 			}
 			return "student_details";
 		} else {
