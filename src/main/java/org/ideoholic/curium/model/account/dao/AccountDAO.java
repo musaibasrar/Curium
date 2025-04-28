@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.account.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
@@ -296,19 +298,18 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherEntryTransactions(String fromDate, String toDate, Integer financialYear, int branchId, int voucherType) {
 		
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and financialyear='"+financialYear+"'and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			e.printStackTrace();
-		}	finally {
-			HibernateUtil.closeSession();
+			Date fromdate = DateUtil.indiandateParser(fromDate);
+			Date todate = DateUtil.indiandateParser(toDate);
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findVoucherEntries(fromdate, todate, financialYear, branchId, voucherType);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}	
 		return voucherEntrytransactions;
 	}
