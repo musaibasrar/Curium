@@ -144,7 +144,7 @@ public class StampFeesDAO {
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Academicfeesstructure set totalfees = '"+academicfeesStructure.getTotalfees()+"'  where sid = '"+academicfeesStructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Academicfeesstructure set totalfees = totalfees+'"+academicfeesStructure.getTotalfees()+"'  where sid = '"+academicfeesStructure.getSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();
@@ -158,7 +158,18 @@ public class StampFeesDAO {
 			
 			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 				
-				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+					session.save(studentfeesstructure);
+					
+					//accounts
+					
+					session.save(transactions);
+					Query queryAccounts = session.createQuery(updateDrAccount);
+					queryAccounts.executeUpdate();
+					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+					queryqueryAccounts1.executeUpdate();
+				
+				/*
+				 	Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 				
 				if(feesStructure == null){
@@ -171,8 +182,7 @@ public class StampFeesDAO {
 					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
 					queryqueryAccounts1.executeUpdate();
 				}
-				
-				/*if(feesStructure != null){
+				 * if(feesStructure != null){
 					
 					Query queryUpdate = session
 							.createQuery("update Studentfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and academicyear = '"+currentYear+"'");
@@ -271,7 +281,21 @@ public class StampFeesDAO {
 		}
 	}
 
-	
-	
+	public Studentfeesstructure getStudentFeesStructure(int sid, int feesCategoryId, String academicYear) {
+		
+		Studentfeesstructure feesStructure = new Studentfeesstructure();
+		try {
+			transaction = session.beginTransaction();
+			
+			Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+sid+"' and sfs.Feescategory.idfeescategory = '"+feesCategoryId+"' and sfs.academicyear = '"+academicYear+"'");
+			feesStructure = (Studentfeesstructure) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+			return feesStructure;
+		}
+	}
 
 }
