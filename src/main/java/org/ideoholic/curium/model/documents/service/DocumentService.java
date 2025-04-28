@@ -109,17 +109,18 @@ public class DocumentService {
 		String datecert = DataUtil.emptyString(request.getParameter("datecert"));
 		String Remarks = DataUtil.emptyString(request.getParameter("Remarks"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
+		String studentStatus = DataUtil.emptyString(request.getParameter("studentstatus"));
+		
 		int tcno = 348;
 		int bookno = 0;
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
+		 //boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 Transfercertificate tcLastRow = new DocumentDAO().getTCLastRow();
 		 if(tcLastRow != null) {
 			tcno = tcLastRow.getTcid()+1;
 			bookno = tcLastRow.getBookno()+1;
 		 }
-		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
@@ -226,10 +227,10 @@ public class DocumentService {
 					student.setNotcissued(1);
 					//+student.setNooftc(1);
 					tc.setNoofissues(1);
-					new studentDetailsDAO().updateStudent(student);
-					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
+					//new studentDetailsDAO().updateStudent(student,studentStatus);
+					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc,student,studentStatus);
 			}
-		 }
+		 
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
