@@ -208,44 +208,49 @@ public class StampFeesService {
 		
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
+				
 		for (String id : studentIds) {
-			academicfessstructure = new Academicfeesstructure();
-			academicfessstructure.setSid(Integer.valueOf(id));
-			academicfessstructure.setAcademicyear(feesYears[0]);
-			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			academicfessstructure.setTotalfees(feesTotalAmount);
-			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
-			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
-			
-			listOfacademicfessstructure.add(academicfessstructure);
-			// ids.add(Integer.valueOf(id));
-
-		}
-		
-		for (String id : studentIds) {
-
+			Long totalFeesAmount = 0l;
 			for(int i=0; i < feesCategoryIds.length ; i++){
 			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
 			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
-			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
-			Feescategory feescategory = new Feescategory();
-			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
-			studentfeesstructure.setFeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
-			studentfeesstructure.setFeespaid((long) 0);
-			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
-			studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
-			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
-			listOfstudentfeesstructure.add(studentfeesstructure);
+			
+			//check whether the fees category is already stamped 
+			Studentfeesstructure result = new StampFeesDAO().getStudentFeesStructure(Integer.parseInt(id),Integer.parseInt(feesCatAndIndex[0]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			// END
+			
+			if(result==null) {
+				
+				Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+				Feescategory feescategory = new Feescategory();
+				studentfeesstructure.setSid(Integer.valueOf(id));
+				feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
+				studentfeesstructure.setFeescategory(feescategory);
+				studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
+				studentfeesstructure.setFeespaid((long) 0);
+				studentfeesstructure.setWaiveoff((long) 0);
+				studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+				studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
+				studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+				studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+				listOfstudentfeesstructure.add(studentfeesstructure);
+				
+				totalFeesAmount = totalFeesAmount+ Long.parseLong(feesAmount[feesCatIndex]);
+			}
+		
 		}
 			
-
+			academicfessstructure = new Academicfeesstructure();
+			academicfessstructure.setSid(Integer.valueOf(id));
+			academicfessstructure.setAcademicyear(feesYears[0]);
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			academicfessstructure.setTotalfees(totalFeesAmount.toString());
+			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
+			listOfacademicfessstructure.add(academicfessstructure);
+			
+			grandTotal = grandTotal + totalFeesAmount;
 		}
 		
 		//Accounts
