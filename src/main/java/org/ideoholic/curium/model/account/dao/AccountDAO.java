@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
 import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
@@ -51,9 +48,6 @@ public class AccountDAO {
 	
 	@Autowired
 	private AccountssgroupmasterRepository accountssgroupmasterRepository;
-	
-	@PersistenceContext
-    private EntityManager entityManager;
 	
 	@Autowired
     private QueryUtil queryUtil;
