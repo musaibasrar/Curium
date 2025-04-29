@@ -368,12 +368,10 @@ public class AccountDAO {
 		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
-			System.out.println(" account ID is ******************************"+accountid);
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 			accountName = accountDetails.getAccountname();
-			System.out.println(" account Name is "+accountName);
 		} catch (HibernateException e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {

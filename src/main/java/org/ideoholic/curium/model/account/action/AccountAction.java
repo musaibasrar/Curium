@@ -47,8 +47,13 @@ public class AccountAction {
 
 	@PostMapping("/searchLedgerEntries")
 	public String searchLedgerEntries() {
+		String reportType = DataUtil.emptyString(request.getParameter("onlydrcr"));
 		new AccountService(request, response).searchJournalEntries();
 		new AccountService(request, response).getAllLedgers();
+		
+		if(!reportType.equalsIgnoreCase("")) {
+			return "generalledgerreportrp";
+		}
 		return "generalledgerreport";
 	}
 
@@ -382,7 +387,12 @@ public class AccountAction {
 	@PostMapping("/voucherPrintGeneralLedger")
 	private String voucherPrintGeneralLedger() {
 		if (new AccountService(request, response).voucherPrintGeneralLedger()) {
-			return "voucherprintgeneralledger";
+			
+			String reportType = DataUtil.emptyString(request.getParameter("onlydrcr"));
+			if(!reportType.equalsIgnoreCase("")) {
+				return "voucherprintgeneralledgerrp";
+			}
+			return "generalledgerreport";
 		}
 		return "exportfailure";
 		}

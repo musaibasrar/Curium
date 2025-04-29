@@ -1031,6 +1031,7 @@ public class AccountService {
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
 		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
 		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		String onlydrcr = DataUtil.emptyString(request.getParameter("onlydrcr"));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;
@@ -1056,7 +1057,7 @@ public class AccountService {
 		request.setAttribute("accountid", accountDetails);
 		request.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
 		request.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
-		
+		request.setAttribute("onlydrcrselected", onlydrcr);
 		return true;
 		
 		}
@@ -1163,6 +1164,7 @@ public class AccountService {
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
 		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
 		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		String onlydrcr = DataUtil.emptyString(request.getParameter("onlydrcr"));
 		
 		if (httpSession.getAttribute(BRANCHID) != null) {
 
@@ -1192,7 +1194,7 @@ public class AccountService {
 			request.setAttribute("ledgername", accountIdName[1]);
 			request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
 			request.setAttribute("todateselected", request.getParameter("todateselected"));
-
+			request.setAttribute("onlydrcrselected", onlydrcr);
 			return true;
 
 		}
@@ -1647,7 +1649,7 @@ public boolean searchSingleLedgerEntries() {
 			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
 			voucherMap.put(voucherEntry, twoAccounts);
 		}
-		
+		request.setAttribute("onlydrcr", request.getParameter("onlydrcr"));
 		request.setAttribute("vouchertransactions", voucherMap);
 		
 		return true;

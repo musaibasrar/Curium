@@ -644,98 +644,130 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
 						<th title="click to sort" class="headerText">Narration</th>
-						<th title="click to sort" class="headerText">Debits&nbsp;</th>
-						<th title="click to sort" class="headerText">Credits&nbsp;</th>
+
+						<c:choose>
+							<c:when test="${onlydrcrselected == 'Debit'}">
+								<th title="click to sort" class="headerText">Debits&nbsp;</th>
+							</c:when>
+							<c:when test="${onlydrcrselected == 'Credit'}">
+								<th title="click to sort" class="headerText">Credits&nbsp;</th>
+							</c:when>
+							<c:otherwise>
+								<th title="click to sort" class="headerText">Debits&nbsp;</th>
+								<th title="click to sort" class="headerText">Credits&nbsp;</th>
+							</c:otherwise>
+						</c:choose>
+
 					</tr>
 				</thead>
 
 				<tbody>
-				<fmt:setLocale value="en_IN" scope="session"/>
+					<fmt:setLocale value="en_IN" scope="session" />
+					<c:set var="vouchertotal" value="${0}" />
 					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
+						<c:set var="ledgername"
+							value="${fn:split(ledgertransactions.value,':')}"></c:set>
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${ledgertransactions.key.transactionsid}"/>" class="chcktbl"
-								name="transactionids"
-								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
-								
-							</td>
-							<td class="dataTextInActive"><c:out value="${ledgertransactions.key.transactionsid}" />
-							</td>
-							<td class="dataText"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
-							<td class="dataText">
-							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
-							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							 <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
-							
-							<c:if test="${ledgername[1] == 'Dr'}">
-								
-								<td class="dataText"></td>
-								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
-								<td class="dataTextRight">
-									<fmt:formatNumber type="number"  maxFractionDigits = "2" value="${ledgertransactions.key.cramount}" />
-								</td>
-								
-							</c:if>
-							
-							<c:if test="${ledgername[1] == 'Cr'}">
-								
-								<td class="dataTextRight">
-									<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-									<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${ledgertransactions.key.dramount}" />
-								</td>
-								
-								<td class="dataText"></td>
-							</c:if>
-						</tr>
+						<!-- Show entry only if matches selected type -->
+						<c:choose>
+							<c:when
+								test="${onlydrcrselected == 'Debit' and ledgername[1] == 'Cr'}">
+								<!-- Show Debit entry -->
+								<tr class="trClass">
+									<td class="dataText"><input type="checkbox"
+										id="${ledgertransactions.key.transactionsid}" class="chcktbl"
+										name="transactionids"
+										value="${ledgertransactions.key.transactionsid}" /></td>
+									<td class="dataTextInActive">${ledgertransactions.key.transactionsid}</td>
+									<td class="dataText">${ledgertransactions.key.transactiondate}</td>
+									<td class="dataText">${ledgername[0]}</td>
+									<td class="dataText">${ledgertransactions.key.narration}</td>
+									<td class="dataTextRight">
+									<c:set var="vouchertotal" value="${vouchertotal + vouchertransactions.key.dramount}" />
+									<c:set var="drtotal"
+											value="${drtotal + ledgertransactions.key.dramount}" /> <fmt:formatNumber
+											type="number" maxFractionDigits="2"
+											value="${ledgertransactions.key.dramount}" /></td>
+								</tr>
+							</c:when>
+
+							<c:when
+								test="${onlydrcrselected == 'Credit' and ledgername[1] == 'Dr'}">
+								<!-- Show Credit entry -->
+								<tr class="trClass">
+									<td class="dataText"><input type="checkbox"
+										id="${ledgertransactions.key.transactionsid}" class="chcktbl"
+										name="transactionids"
+										value="${ledgertransactions.key.transactionsid}" /></td>
+									<td class="dataTextInActive">${ledgertransactions.key.transactionsid}</td>
+									<td class="dataText">${ledgertransactions.key.transactiondate}</td>
+									<td class="dataText">${ledgername[0]}</td>
+									<td class="dataText">${ledgertransactions.key.narration}</td>
+									<td class="dataTextRight">
+									<c:set var="vouchertotal" value="${vouchertotal + vouchertransactions.key.cramount}" />
+									<c:set var="crtotal"
+											value="${crtotal + ledgertransactions.key.cramount}" /> <fmt:formatNumber
+											type="number" maxFractionDigits="2"
+											value="${ledgertransactions.key.cramount}" /></td>
+								</tr>
+							</c:when>
+
+							<c:when test="${empty onlydrcrselected}">
+								<!-- Show both Credit and Debit entries -->
+								<tr class="trClass">
+									<td class="dataText"><input type="checkbox"
+										id="${ledgertransactions.key.transactionsid}" class="chcktbl"
+										name="transactionids"
+										value="${ledgertransactions.key.transactionsid}" /></td>
+									<td class="dataTextInActive">${ledgertransactions.key.transactionsid}</td>
+									<td class="dataText">${ledgertransactions.key.transactiondate}</td>
+									<td class="dataText">${ledgername[0]}</td>
+									<td class="dataText">${ledgertransactions.key.narration}</td>
+									<c:choose>
+										<c:when test="${ledgername[1] == 'Dr'}">
+											<td class="dataText"></td>
+											<td class="dataTextRight"><c:set var="crtotal"
+													value="${crtotal + ledgertransactions.key.cramount}" /> <fmt:formatNumber
+													type="number" maxFractionDigits="2"
+													value="${ledgertransactions.key.cramount}" /></td>
+										</c:when>
+										<c:when test="${ledgername[1] == 'Cr'}">
+											<td class="dataTextRight"><c:set var="drtotal"
+													value="${drtotal + ledgertransactions.key.dramount}" /> <fmt:formatNumber
+													type="number" maxFractionDigits="2"
+													value="${ledgertransactions.key.dramount}" /></td>
+											<td class="dataText"></td>
+										</c:when>
+									</c:choose>
+								</tr>
+							</c:when>
+						</c:choose>
 					</c:forEach>
+				</tbody>
+				<tfoot>
 					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-						<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
+					<c:choose>
+							<c:when test="${onlydrcrselected == 'Debit'}">
+								<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>Total:&nbsp;
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
 							</label> 
 							</td>
-							<td class="dataTextRight">
-							<label style="color: #eb6000"><b>
+							</c:when>
+							<c:when test="${onlydrcrselected == 'Credit'}">
+								<td class="dataTextRight">
+							<label style="color: #eb6000"><b>Total:&nbsp;
 							<fmt:formatNumber type="currency"  value="${crtotal}" /></b>
 							</label>
 							</td>
-					</tr>
-					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Balance</b>
-							</label> 
-							</td>
+							</c:when>
+							<c:otherwise>
+								<th title="click to sort" class="headerText">Debits&nbsp;</th>
+								<th title="click to sort" class="headerText">Credits&nbsp;</th>
+							</c:otherwise>
+						</c:choose>
 							
-							<td class="dataTextRight">
-								<label style="color: #eb6000"><b>
-							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
-                                </c:when>
-                                <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
-                                </c:otherwise>
-                            </c:choose>
-							</b>
-							</label>
-							</td>
 					</tr>
-				</tbody>
-				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><button id="print">Print</button> <button id="printvoucher">Print Voucher</button>
 							</td>
