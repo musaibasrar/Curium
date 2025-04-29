@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
@@ -49,6 +51,9 @@ public class AccountDAO {
 	
 	@Autowired
 	private AccountssgroupmasterRepository accountssgroupmasterRepository;
+	
+	@PersistenceContext
+    private EntityManager entityManager;
 	
 	@Autowired
     private QueryUtil queryUtil;
@@ -403,26 +408,25 @@ public class AccountDAO {
 		return voucherTransactions;
 	}
 
+	@Transactional
 	public boolean updateAccountsWithVoucherCancel(String updateDrAccount, String updateCrAccount, String cancelVoucher) {
-		
-		Transaction transaction = null;
+		boolean result = false;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query updateDr = session.createQuery(updateDrAccount);
-			updateDr.executeUpdate();
-			Query updateCr = session.createQuery(updateCrAccount);
-			updateCr.executeUpdate();
-			Query cancelVoucherQuery = session.createQuery(cancelVoucher);
-			cancelVoucherQuery.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			
+			    queryUtil.runUpdateQuery(updateDrAccount);
+
+			    queryUtil.runUpdateQuery(updateCrAccount);
+
+			    queryUtil.runUpdateQuery(cancelVoucher);
+
+	            result= true;
+				
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 
 	@Transactional

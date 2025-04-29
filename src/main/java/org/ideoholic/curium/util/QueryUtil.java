@@ -22,4 +22,8 @@ public class QueryUtil {
 	public List runGivenQuery(String query, Class clazz) {
 		return entityManager.createQuery(query, clazz).getResultList();
 	}
+	
+	public void runUpdateQuery(String query) {
+		 entityManager.createQuery(query).executeUpdate();
+	}
 }
