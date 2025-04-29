@@ -3,12 +3,14 @@ package org.ideoholic.curium.model.appointment.dao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -159,19 +161,11 @@ public class AppointmentDAO {
 		@Transactional
 		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
 
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
 			try{
 
-				//Query query = session.createQuery("From Appointment where (appointmentdate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion");
-//				results = query.getResultList();
-//				noOfRecords = results.size();
-//				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-//								+ noOfRecords);
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate start = LocalDate.parse(fromDate, formatter);
-				LocalDate end = LocalDate.parse(toDate, formatter);
-
+				Date start = DateUtil.indiandateParser(fromDate);
+				Date end = DateUtil.indiandateParser(toDate);
 				noOfRecords = (int) appointmentRepo.countByAppointmentdateBetweenAndStatusNotCancelled(start, end);
 			} catch (Exception hibernateException) {
 				log.error(hibernateException.getMessage(), hibernateException);
@@ -181,8 +175,6 @@ public class AppointmentDAO {
 
 			}
 				return noOfRecords;
-
-		
 					
 		}
 
