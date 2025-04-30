@@ -21,4 +21,5 @@ public class AddFeesCollectionDto {
     private String dateOfFeesDetails;
     private String classAndSecDetails;
     private String narrationReceipt;
+    private String[] feeCategoryName;
 }

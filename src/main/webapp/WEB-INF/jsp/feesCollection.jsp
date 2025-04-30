@@ -317,7 +317,7 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    if(sum>=1){
+                   /*  if(sum>=1){
                 		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
@@ -329,7 +329,8 @@
                     		 document.getElementById("misc").checked = true;
                     	 }
                 	}
-                    totalSum=sum+fineamount+miscamount;
+                    totalSum=sum+fineamount+miscamount; */
+                    totalSum=sum+fineamount;
                     $('#grandTotalAmount').val(totalSum);
 
                 });
@@ -342,7 +343,7 @@
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    if(sum>=1){
+                    /* if(sum>=1){
                 		var vat = (sum * 15) / 100;
                     	if(vat<1 || isNaN(vat)){
                     		document.getElementById("miscamount").value = 0;
@@ -354,8 +355,8 @@
                     		 document.getElementById("misc").checked = true;
                     	 }
                 	}
-                    totalSum=sum+miscamount+fineamount;
-                    
+                    totalSum=sum+miscamount+fineamount; */
+                    totalSum=sum+fineamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").keyup(function(){
@@ -385,32 +386,39 @@
                    
                 });
                 $("#myTable").keyup(function(){
-                	var fineamount=parseFloat($("#fineamount").val());
-                    var miscamount=parseFloat($("#miscamount").val());
+                    var fineamount = parseFloat($("#fineamount").val());
+                    var miscamount = parseFloat($("#miscamount").val());
                     var sum = 0.0;
-                    var totalSum=0.0;
+                    var totalSum = 0.0;
                     var amountp = $('.amountpaying');
-                    jQuery.each(amountp,function(){
-                        sum += parseFloat($(this).val());
+                    jQuery.each(amountp, function(){
+                        sum += parseFloat($(this).val() || 0);
                     });
-                    var finep = $('.fine');
-                    jQuery.each(finep,function(){
-                        sum += parseFloat($(this).val());
+
+                    // Calculate VAT only on Tuition Fees
+                    var tuitionSum = 0.0;
+                    jQuery.each(amountp, function() {
+                        var row = $(this).closest('tr');
+                        var feesCategory = row.find('td:eq(1)').text().trim().toLowerCase();
+                        if (feesCategory.includes('tuition fees')) {
+                            tuitionSum += parseFloat($(this).val() || 0);
+                        }
                     });
-                    if(sum>=1){
-                		var vat = (sum * 15) / 100;
-                    	if(vat<1 || isNaN(vat)){
-                    		document.getElementById("miscamount").value = 0;
-                    		miscamount=0;
-                    		document.getElementById("misc").checked = false;
-                    	 }else{
-                    		 document.getElementById("miscamount").value = vat;
-                    		 miscamount=vat;
-                    		 document.getElementById("misc").checked = true;
-                    	 }
-                	}
-                    
-                    totalSum=sum+miscamount;
+
+                    var vat = 0.0;
+                    if (tuitionSum >= 1) {
+                        vat = (tuitionSum * 15) / 100;
+                        vat = Math.round(vat * 100) / 100;
+                        $("#miscamount").val(vat);
+                        miscamount = vat;
+                        $("#misc").prop("checked", true);
+                    } else {
+                        $("#miscamount").val(0);
+                        miscamount = 0;
+                        $("#misc").prop("checked", false);
+                    }
+
+                    totalSum = sum + miscamount + fineamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").click(function(){
@@ -967,28 +975,30 @@
 		
 		function checkMiscAmount(duePayment, finemiscid) {
             var totalAmount = 0;
-            
-            // Calculate total from fees amounts
-            var column2 = $('.feesAmount');
-            jQuery.each(column2, function() {
-                totalAmount += parseFloat($(this).val() || 0);
+
+            // Calculate total only from tuition fees amounts
+            var amountpaying = $('.amountpaying');
+            jQuery.each(amountpaying, function() {
+                // Get the corresponding fees category name
+                var row = $(this).closest('tr');
+                var feesCategory = row.find('td:eq(1)').text().trim().toLowerCase();
+
+                // Only add amount if it's a tuition fee (case-insensitive, robust)
+                if (feesCategory.includes('tuition fees')) {
+                    totalAmount += parseFloat($(this).val() || 0);
+                }
             });
-            
-            // Add fine amount if any
-            var fineAmount = parseFloat($("#fineamount").val() || 0);
-            totalAmount += fineAmount;
-            
+
             // Calculate VAT (15%) only if total amount is greater than 0 and checkbox is checked
             var miscAmount = 0;
             if (totalAmount > 0 && $("#misc").is(":checked")) {
                 miscAmount = (totalAmount * 15) / 100;
-                // Round to 2 decimal places
                 miscAmount = Math.round(miscAmount * 100) / 100;
             }
-            
+
             // Update misc amount field
             $("#miscamount").val(miscAmount);
-            
+
             // Recalculate grand total
             calculateGrandTotal();
         }
@@ -1213,7 +1223,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /><input name="feescategoryname" type="hidden" id="feescategoryname" value="${studentfeesdetails.key.feescategory.feescategoryname}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>

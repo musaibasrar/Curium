@@ -287,6 +287,7 @@ public class FeesCollectionService {
 		
 		String sid = dto.getStudentId();
 		String[] amountPaying = dto.getAmountPaying();
+		String[] feesCat = dto.getFeeCategoryName();
 		double fineAmount = DataUtil.parseLong(dto.getFineAmount());
 		//Long miscAmount = DataUtil.parseLong(dto.getMiscAmount());
 		double miscAmount = 0l;
@@ -325,6 +326,7 @@ public class FeesCollectionService {
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails());
 			Long grandTotal = 0l;
+			Long grandTotalVAT = 0l;
 			
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */
 			if(studentSfsIds!=null) {
@@ -344,15 +346,20 @@ public class FeesCollectionService {
 					
 					String[] totalAmount = studentSfsIds[i].split("_");
 					grandTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
+					
+					String feesCatName = feesCat[Integer.parseInt(studentSfsIdamount[1])];
+					if(feesCatName.contains("Tuition")) {
+						grandTotalVAT+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
+					}
 				}
 			}
 				receiptInfo.setPaymenttype(paymentType);
 				receiptInfo.setFine(fineAmount);
 				if(applyVAT==1) {
 					double vat = (double)15/100;
-					miscAmount=(double) (vat * grandTotal);
+					miscAmount=(double) (vat * grandTotalVAT);
 					receiptInfo.setMisc(miscAmount);
-					receiptInfo.setTotalamount(grandTotal+fineAmount+(fineAmount*0.15)+miscAmount);
+					receiptInfo.setTotalamount(grandTotal+fineAmount+miscAmount);
 				}else if(applyVAT==0) {
 					receiptInfo.setMisc((double) 0l);
 					receiptInfo.setTotalamount(grandTotal+fineAmount);

@@ -457,6 +457,7 @@ public class FeesCollectionActionAdapter {
         dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
         dto.setNarrationReceipt(request.getParameter("narrationreceipt"));
         String misc = request.getParameter("misc");
+        dto.setFeeCategoryName(request.getParameterValues("feescategoryname"));
         int applyVAT = 0;
         if(misc!=null) {
         	applyVAT = Integer.parseInt(request.getParameter("misc"));

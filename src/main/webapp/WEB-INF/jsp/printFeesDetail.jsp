@@ -247,13 +247,23 @@
             	<tr>
                     <td>
 	                    <c:set var="fullName" value="${feescatmap.key.feescategory.feescategoryname}" />
-						<c:set var="arabicText" value="${fn:substringAfter(fullName, '/')}"/>
-						<c:set var="englishText" value="${fn:substringBefore(fullName, '/')}" />
-						<span>${englishText}</span> /
-						<span style="font-family: 'Amiri', 'Noto Naskh Arabic', serif;">
-    						${arabicText}
-						</span>
-                    </td>
+
+							<c:choose>
+								<c:when test="${fn:contains(fullName, '/')}">
+									<c:set var="arabicText"
+										value="${fn:substringAfter(fullName, '/')}" />
+									<c:set var="englishText"
+										value="${fn:substringBefore(fullName, '/')}" />
+									<span>${englishText}</span> /
+     										   <span style="font-family: 'Amiri', 'Noto Naskh Arabic', serif;">
+										${arabicText} </span>
+								</c:when>
+								<c:otherwise>
+									<span>${fullName}</span>
+								</c:otherwise>
+							</c:choose>
+
+						</td>
                     <td>${feescatmap.key.feesamount}
                     <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
                     </td>
@@ -265,9 +275,22 @@
                     </td>
                     <td>
                     	
-                    <c:if test="${applyVAT==1}">	
-                    <fmt:formatNumber value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    <c:set var="itemVatTotal" value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+                    <c:if test="${applyVAT==1}">
+
+								<c:choose>
+									<c:when	test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
+										<fmt:formatNumber
+											value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}"
+											type="number" maxFractionDigits="2" minFractionDigits="2" />
+										<c:set var="itemVatTotal"
+											value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+									</c:when>
+									<c:otherwise>
+           								0.00
+        							</c:otherwise>
+								</c:choose>
+
+								
                     </c:if>
                     
                     <c:if test="${applyVAT==0}">
@@ -277,8 +300,18 @@
                     </td>
                     <td>
                     	<c:if test="${applyVAT==1}">
-                    		<fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    	
+                    		<c:choose>
+									<c:when
+										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
+										<fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
                     		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+									</c:when>
+									<c:otherwise>
+           								<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+        							</c:otherwise>
+								</c:choose>
                     	</c:if>	
                     	
                     	<c:if test="${applyVAT==0}">
@@ -300,11 +333,12 @@
 					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
 					</td>
 					<td>
-					<fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" />
+					0.00
+					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine + (recieptinfo.fine *0.15)}
-					<c:set var="itemTotalNet" value="${itemTotalNet + (recieptinfo.fine + (recieptinfo.fine *0.15))}" />
+					<td>${recieptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
@@ -433,13 +467,23 @@
             	<tr>
                     <td>
 	                    <c:set var="fullName" value="${feescatmap.key.feescategory.feescategoryname}" />
-						<c:set var="arabicText" value="${fn:substringAfter(fullName, '/')}"/>
-						<c:set var="englishText" value="${fn:substringBefore(fullName, '/')}" />
-						<span>${englishText}</span> /
-						<span style="font-family: 'Amiri', 'Noto Naskh Arabic', serif;">
-    						${arabicText}
-						</span>
-                    </td>
+
+							<c:choose>
+								<c:when test="${fn:contains(fullName, '/')}">
+									<c:set var="arabicText"
+										value="${fn:substringAfter(fullName, '/')}" />
+									<c:set var="englishText"
+										value="${fn:substringBefore(fullName, '/')}" />
+									<span>${englishText}</span> /
+     										   <span style="font-family: 'Amiri', 'Noto Naskh Arabic', serif;">
+										${arabicText} </span>
+								</c:when>
+								<c:otherwise>
+									<span>${fullName}</span>
+								</c:otherwise>
+							</c:choose>
+
+						</td>
                     <td>${feescatmap.key.feesamount}
                     <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
                     </td>
@@ -450,13 +494,51 @@
                     <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (feescatmap.key.feesamount-feescatmap.key.concession)}" />
                     </td>
                     <td>
-                    <fmt:formatNumber value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    <c:set var="itemVatTotal" value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+                    	
+                    <c:if test="${applyVAT==1}">
+
+								<c:choose>
+									<c:when	test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
+										<fmt:formatNumber
+											value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}"
+											type="number" maxFractionDigits="2" minFractionDigits="2" />
+										<c:set var="itemVatTotal"
+											value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+									</c:when>
+									<c:otherwise>
+           								0.00
+        							</c:otherwise>
+								</c:choose>
+
+								
+                    </c:if>
+                    
+                    <c:if test="${applyVAT==0}">
+                    <c:set var="itemVatTotal" value="${0}" />
+                    </c:if>
+                    
                     </td>
                     <td>
-                    <fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    <c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
-</td>
+                    	<c:if test="${applyVAT==1}">
+                    	
+                    		<c:choose>
+									<c:when
+										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
+										<fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+									</c:when>
+									<c:otherwise>
+           								<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+        							</c:otherwise>
+								</c:choose>
+                    	</c:if>	
+                    	
+                    	<c:if test="${applyVAT==0}">
+                    		<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+                    	</c:if>
+					</td>
                 </tr>
             	
             	</c:forEach>
@@ -471,11 +553,12 @@
 					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
 					</td>
 					<td>
-					<fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" />
+					0.00
+					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine + (recieptinfo.fine *0.15)}
-					<c:set var="itemTotalNet" value="${itemTotalNet + (recieptinfo.fine + (recieptinfo.fine *0.15))}" />
+					<td>${recieptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
