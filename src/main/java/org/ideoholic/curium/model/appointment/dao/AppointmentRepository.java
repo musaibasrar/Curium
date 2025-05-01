@@ -22,8 +22,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	Long countByStatusNot(String status);
 
 	@Query("SELECT COUNT(a) FROM Appointment a WHERE a.appointmentdate BETWEEN :fromDate AND :toDate AND a.status <> 'Cancelled'")
-	long countByAppointmentdateBetweenAndStatusNotCancelled(
+	long countByDate(
 			@Param("fromDate") Date fromDate,
 			@Param("toDate") Date toDate
 	);
+
+	Long countByStatus(String status);
 }
