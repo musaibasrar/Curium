@@ -1,14 +1,17 @@
 package org.ideoholic.curium.model.appointment.dao;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 public class AppointmentDAO {
 
 	@Autowired
-	private AppointmentRepository appoinmentRepo;
+	private AppointmentRepository appointmentRepo;
 
 	@Transactional
 	public String addAppointment(Appointment appointment) {
 		String resultString = null;
 		try {
 
-			List<Appointment> appointmentList = appoinmentRepo.findByBranchidOrderByIdDesc(appointment.getBranchid());
+			List<Appointment> appointmentList = appointmentRepo.findByBranchidOrderByIdDesc(appointment.getBranchid());
 
 			if (appointmentList.size() > 0) {
 				String appNo = appointmentList.get(0).getExternalid();
@@ -46,7 +49,7 @@ public class AppointmentDAO {
 			} else {
 				appointment.setExternalid("AP" + String.format("%03d", 1));
 			}
-			appointment = appoinmentRepo.save(appointment);
+			appointment = appointmentRepo.save(appointment);
 			resultString = appointment.getExternalid();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -65,7 +68,7 @@ public class AppointmentDAO {
 
 				int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
 				Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
-				Page<Appointment> page = appoinmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
+				Page<Appointment> page = appointmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
 				return page.getContent();
 
 			} catch (Exception hibernateException) {
@@ -80,7 +83,7 @@ public class AppointmentDAO {
 			int noOfRecords = 0;
 			try{
 
-				noOfRecords =  appoinmentRepo.countByBranchid(branchId);
+				noOfRecords =  appointmentRepo.countByBranchid(branchId);
 
 			} catch (Exception hibernateException) {
 				log.error(hibernateException.getMessage(), hibernateException);
@@ -97,7 +100,7 @@ public class AppointmentDAO {
 			
 			int noOfRecords = 0;
 			try{
-				Long activeAppointments = appoinmentRepo.countByStatusNot("Cancelled");
+				Long activeAppointments = appointmentRepo.countByStatusNot("Cancelled");
 				noOfRecords = activeAppointments.intValue();
 
 			} catch (Exception hibernateException) {
@@ -117,11 +120,11 @@ public class AppointmentDAO {
 
 			try{
 
-				List<Appointment> appointments = appoinmentRepo.findAllById(appointmentIdsList);
+				List<Appointment> appointments = appointmentRepo.findAllById(appointmentIdsList);
 				for (Appointment appointment : appointments) {
 
 					appointment.setStatus("Completed");
-					appoinmentRepo.save(appointment);
+					appointmentRepo.save(appointment);
 				}
 				
 
@@ -138,12 +141,12 @@ public class AppointmentDAO {
 		@Transactional
 		public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
 			
-			List<Appointment> appointments = appoinmentRepo.findAllById(appointmentIdsList);
+			List<Appointment> appointments = appointmentRepo.findAllById(appointmentIdsList);
 			try{
 
 				for(Appointment appointment : appointments){
 					appointment.setStatus("Cancelled");
-					appoinmentRepo.save(appointment);
+					appointmentRepo.save(appointment);
 
 				}
 				
@@ -155,32 +158,23 @@ public class AppointmentDAO {
 			return appointments;
 		}
 
-
+		@Transactional
 		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
 
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
 
-				Query query = session.createQuery("From Appointment where (appointmentdate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion");
-				results = query.getResultList();
-				noOfRecords = results.size();
-				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-								+ noOfRecords);
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+				Date start = DateUtil.indiandateParser(fromDate);
+				Date end = DateUtil.indiandateParser(toDate);
+				noOfRecords = (int) appointmentRepo.countByAppointmentdateBetweenAndStatusNotCancelled(start, end);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
 			}
-		
+				return noOfRecords;
 					
 		}
 
