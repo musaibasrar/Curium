@@ -14,17 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class BooksResponseDto {
-	private Book book;
-	private List<Book> booksList;
-	private List<Book> availableList;
-	private List<Book> issuedList;
-	private String studentNameDetails;
-	private String admnoDetails;
-	private String classAndSecDetails;
-	private String studentIdDetails;
-	private String dateOfFeesDetails;
-	private List<BookIssue> booksIssuedList;
+public class BooksHistoryResponseDto {
+	private List<BookHistory> booksHistoryList;
 	
     @Builder.Default
     private boolean success = false;
