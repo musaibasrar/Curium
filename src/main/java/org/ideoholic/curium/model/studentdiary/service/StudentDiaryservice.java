@@ -17,10 +17,14 @@ import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryDTO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentDiaryservice {
+	
+	@Autowired
+	private StudentDiaryDAO studentDiaryDAO;
 	  
       /**
        * Size of a byte buffer to read/write file
@@ -41,7 +45,7 @@ public class StudentDiaryservice {
              diary.setUserid(Integer.parseInt(userLoginId));
              diary.setAcademicyear(currentAcademicYear);
              diary.setCreateddate(DateUtil.indiandateParser(addStudentDiaryDto.getCreatedDate()));
-             diary =  new StudentDiaryDAO().create(diary);
+             diary =  studentDiaryDAO.create(diary);
                  }
          }
 
@@ -76,7 +80,7 @@ public class StudentDiaryservice {
         	            }
                         
                         
-                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(branchId));
+                    int noOfRecords = studentDiaryDAO.getNoOfRecords(Integer.parseInt(branchId));
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     				diaryResponseDto.setDiaryDetails(diaryDetails);
     				diaryResponseDto.setNoOfPages(noOfPages);
@@ -129,7 +133,7 @@ public class StudentDiaryservice {
                         
                         
                         
-                    int noOfRecords = new StudentDiaryDAO().getNoOfRecords(Integer.parseInt(branchId),student.getSid());
+                    int noOfRecords = studentDiaryDAO.getNoOfRecords(Integer.parseInt(branchId),student.getSid());
     				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     				diaryResponseDto.setDiaryDetails(diaryDetails);
     				diaryResponseDto.setNoOfPages(noOfPages);
@@ -150,14 +154,14 @@ public class StudentDiaryservice {
            System.out.println("id" + id);
            ids.add(Integer.valueOf(id));
        }
-       new StudentDiaryDAO().deleteRecord(ids);
+       studentDiaryDAO.deleteRecord(ids);
         }
 	}
 
 		public DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
 		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
 		long id = Long.parseLong(studentIdDto.getStudentId());
-		StudentDiary diary = new StudentDiaryDAO().getMessage(id);
+		StudentDiary diary = studentDiaryDAO.getMessage(id);
 		viewDetailsOfDiaryMessageResponseDto.setStudentDiary(diary);
 		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
 
