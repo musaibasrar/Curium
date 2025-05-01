@@ -122,15 +122,8 @@
 		<mapping resource="mappings/JobQuery.hbm.xml"/>
 		<mapping resource="mappings/Task.hbm.xml"/>
 		<mapping resource="mappings/Enquiry.hbm.xml"/> 
-    	<mapping resource="mappings/Book.hbm.xml"/>
-    	<mapping resource="mappings/BookIssue.hbm.xml"/>
-    	<mapping resource="mappings/BookHistory.hbm.xml"/>
-		<mapping resource="mappings/PurchaseOrder.hbm.xml"/> 
-		<mapping resource="mappings/PoMaster.hbm.xml"/> 
-		<mapping resource="mappings/MessStockMoveInfo.hbm.xml"/> 
-		<mapping resource="mappings/mess/MessTaxInvoice.hbm.xml"/> 
-		<mapping resource="mappings/AdmissionEnquiry.hbm.xml"/> 
-    	<mapping resource="mappings/Events.hbm.xml"/>
-    	<mapping resource="mappings/SubSubject.hbm.xml"/>
+        <mapping resource="mappings/Book.hbm.xml"/>
+        <mapping resource="mappings/Sponsor.hbm.xml"></mapping>
+        
 	</session-factory>
 </hibernate-configuration>
