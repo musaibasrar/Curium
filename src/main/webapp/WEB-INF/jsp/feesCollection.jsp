@@ -400,7 +400,7 @@
                     jQuery.each(amountp, function() {
                         var row = $(this).closest('tr');
                         var feesCategory = row.find('td:eq(1)').text().trim().toLowerCase();
-                        if (feesCategory.includes('tuition fees')) {
+                        if (feesCategory.includes('tuition')) {
                             tuitionSum += parseFloat($(this).val() || 0);
                         }
                     });
