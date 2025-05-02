@@ -6,6 +6,7 @@ import lombok.Data;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sponsor.dto.Sponsor;
 import org.ideoholic.curium.model.std.dto.Classsec;
 
 import java.util.List;
@@ -37,4 +38,5 @@ public class StudentDetailsResponseDto {
     private List<Otherreceiptinfo> otherReceiptInfo;
     private List<Studentotherfeesstructure> studentOtherFeesStructure;
     private List<Classsec> classSec;
-}
+    private List<Sponsor> sponsor;
+ }

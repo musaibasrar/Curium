@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
 import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
@@ -69,6 +70,13 @@ public class SponsorActionAdapter {
 	    sponsorDto.setAddress( request.getParameter("address"));
 	    SponsorResponseDto sponsorResponseDto = sponsorService.updateSponsor(sponsorDto);
 	    return sponsorResponseDto.isSuccess();
+		
+	}
+
+	public boolean viewSponsor() {
+		ResultResponse resultResponse = sponsorService.viewSponsor(httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("sponsorlist", resultResponse.getResultList());
+        return resultResponse.isSuccess();
 		
 	}
 

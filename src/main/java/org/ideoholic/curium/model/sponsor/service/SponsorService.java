@@ -3,13 +3,17 @@ package org.ideoholic.curium.model.sponsor.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sponsor.dao.SponsorDao;
 import org.ideoholic.curium.model.sponsor.dto.Sponsor;
 import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
 import org.ideoholic.curium.model.sponsor.dto.SponsorResponseDto;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.springframework.stereotype.Service;
@@ -97,6 +101,15 @@ public class SponsorService {
 		result = new SponsorDao().updateSponsor(sponsor);	
 	    sponsorResponseDto.setSuccess(result);	
 		return sponsorResponseDto;
+	}
+
+	public ResultResponse viewSponsor(String branchId) {
+		if (branchId != null) {
+			List<Sponsor> sponsorList = new SponsorDao().viewSponsor(Integer.parseInt(branchId));
+			return ResultResponse.builder().resultList(sponsorList).success(true).build();
+		}
+
+		return ResultResponse.builder().success(false).build();
 	}
 
 }
