@@ -39,7 +39,8 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -827,19 +828,41 @@ public class FeesService {
 	        if(branchid!=null){
 	        	String[] yearofAdmission = yearofAdmissionStr.split("/");
 	        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
-	        	String searchYear = null;
-	        	int yoa = Integer.parseInt(yearofAdmission[0]);
-	        	int ca = Integer.parseInt(currentAcademicYear[0]);
+	        	String searchYear = yearofAdmissionStr;
+	        	String searchClassName = null;
 	        	
-	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = currentAcademicYearStr;
-	        	}else if (yoa > ca) {
-	        		searchYear = yearofAdmissionStr;
-	        	}
+	            
+	        	int diff = Integer.parseInt(currentAcademicYear[0])-Integer.parseInt(yearofAdmission[0]);
+	        	//Get the Class for yearofadmission
+	        	List<Classhierarchy> classHierarchyList = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(branchid));
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
-	            feescategoryResponseDto.setFeescategory(feecategoryList);
+	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
+	        	int j=0;
+	        	for (Classhierarchy classHierarchy : classHierarchyList) {
+	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		j++;
+				}
 
+	        	 int classIndex = -1;
+
+	             for (int i = 0; i < classHierarchyArray.length; i++) {
+	                 if (classHierarchyArray[i].equals(classname)) {
+	                	 classIndex = i;
+	                     break;
+	                 }
+	             }
+	             
+	             if(diff>0) {
+	            	 searchClassName = classHierarchyArray[classIndex-diff];
+	             }else {
+	            	 searchClassName = classname;
+	             }
+	        	
+	             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(searchClassName,searchYear,branchid);
+		         feescategoryResponseDto.setFeescategory(feecategoryList);
+		         feescategoryResponseDto.setFeesDueSearchYear(searchYear);
+		         feescategoryResponseDto.setFeesDueSearchClass(searchClassName);
+	            
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
