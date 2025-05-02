@@ -234,6 +234,7 @@
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
 				<label class="addressLine">Fees Report</label><br>
+				 Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}
 				</td>
 			</tr>
 	</table>
