@@ -29,6 +29,8 @@ import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
@@ -694,15 +696,42 @@ public class FeesService {
 
 	        if(httpSession.getAttribute(BRANCHID)!=null){
 	        	String classname = request.getParameter("classstudying");
+	        	String searchClassName = null;
 	        	String[] yearofAdmission = request.getParameter("yearofadmission").split("/");
 	        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
 	        	String searchYear = null;
 	        	
 	        	searchYear = request.getParameter("yearofadmission");
+	        	int diff = Integer.parseInt(currentAcademicYear[0])-Integer.parseInt(yearofAdmission[0]);
+	        	//Get the Class for yearofadmission
+	        	List<Classhierarchy> classHierarchyList = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
-	            httpSession.setAttribute("feescategory", feecategoryList);
+	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
+	        	int j=0;
+	        	for (Classhierarchy classHierarchy : classHierarchyList) {
+	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		j++;
+				}
 
+	        	 int classIndex = -1;
+
+	             for (int i = 0; i < classHierarchyArray.length; i++) {
+	                 if (classHierarchyArray[i].equals(classname)) {
+	                	 classIndex = i;
+	                     break;
+	                 }
+	             }
+	             if(diff>0) {
+	            	 searchClassName = classHierarchyArray[classIndex-diff];
+	             }else {
+	            	 searchClassName = classname;
+	             }
+	        	
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(searchClassName,searchYear);
+	            httpSession.setAttribute("feescategory", feecategoryList);
+	            httpSession.setAttribute("feesduesearchyear", searchYear);
+	            httpSession.setAttribute("feesduesearchclass", searchClassName);
+	            
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");

@@ -442,7 +442,7 @@
 var xmlHttp;
     var count;
     function searchfeecategory() {
-		var classsearch=document.getElementById('classsearchfeescat').value;
+		var classsearch=document.getElementById('classsearch').value;
 		var yoa=document.getElementById('yearofadmission').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
@@ -454,7 +454,7 @@ var xmlHttp;
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET", "/gnyanganga/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
-			document.getElementById('classsearch').value=classsearch;
+		
 	}
     
 	function stateChanged() {
@@ -608,67 +608,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
-								<select name="classsearchfeescat" id="classsearchfeescat" onchange="searchfeecategory()"
-									style="width: 120px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label style="visibility: hidden;"> 
-									<select name="secsearchfeescat" id="secsearchfeescat"
-									style="width: 120px;">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-							</label>
-						</tr>
-						
-							<tr>
-							<td><br /></td>
-
-						</tr>
-					
-					
-						<tr>
-                    
-                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
-                        
-                        	<td>
-                        	   <label>
-                                         <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
-									style="width: 120px">
-										<option selected>${currentAcademicYear}</option>
-										<option>2023/24</option>
-										<option>2024/25</option>
-										<option>2025/26</option>
-										<option>2026/27</option>
-										</select>
-                              </label>
-                        </td>
-                        
-                    </tr>
-                    
-                     <tr>
-						<td><br></td>
-                    </tr>
-                    
-                    <tr>
-							<td class="alignRightFields">Current Class &nbsp;</td>
-							<td width="90%"><label> 
-								<select name="classsearch" id="classsearch"
+								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
 									style="width: 120px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -700,9 +640,33 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+					
+					
+						<tr>
+                    
+                        <td style="font-weight: bold;color:#325F6D">Academic Year &nbsp;</td> 
+                        
+                        	<td>
+                        	   <label>
+                                         <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<option>2023/24</option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										</select>
+                              </label>
+                        </td>
+                        
+                    </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
                     
                     <tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Fees Category &nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
@@ -748,7 +712,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						
                     
 					</table>
 					
@@ -784,7 +747,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Search result Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -871,7 +834,7 @@ for(Cookie cookie : cookies){
 							type="submit" id="export"/></td>
 													
 						<td class="footerTD" colspan="7" >
-						 
+						 Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}&nbsp;&nbsp;&nbsp;
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
