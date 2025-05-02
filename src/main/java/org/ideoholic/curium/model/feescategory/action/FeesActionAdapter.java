@@ -195,6 +195,8 @@ public class FeesActionAdapter {
     	String yearofAdmission = request.getParameter("yearofadmission");
     	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+    	httpSession.setAttribute("feesduesearchyear", feescategoryResponseDto.getFeesDueSearchYear());
+    	httpSession.setAttribute("feesduesearchclass", feescategoryResponseDto.getFeesDueSearchClass());
 	}
 
 	public void getDndReport() {

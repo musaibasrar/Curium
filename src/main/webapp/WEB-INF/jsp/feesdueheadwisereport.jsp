@@ -644,7 +644,7 @@ for(Cookie cookie : cookies){
 					
 						<tr>
                     
-                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        <td style="font-weight: bold;color:#325F6D">Academic Year &nbsp;</td> 
                         
                         	<td>
                         	   <label>
@@ -666,7 +666,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Fees Category &nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
@@ -747,7 +747,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Search result Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -833,7 +833,7 @@ for(Cookie cookie : cookies){
 							type="submit" id="export"/></td>
 													
 						<td class="footerTD" colspan="7" >
-						 
+						 Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}&nbsp;&nbsp;&nbsp;
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
