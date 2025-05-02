@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.sponsor.action.SponsorActionAdapter;
 import org.ideoholic.curium.model.stampfees.action.StampFeesActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
@@ -41,6 +42,8 @@ public class StudentAction {
 	private StampFeesActionAdapter stampFeesActionAdapter;
 	@Autowired
 	private StudentActionAdapter studentActionAdapter;
+	@Autowired
+	private SponsorActionAdapter sponsorActionAdapter;
 
 	@PostMapping("/multiClassSearch")
 	public String multiClassSearch() {
@@ -63,6 +66,7 @@ public class StudentAction {
 	@GetMapping("/addNew")
 	public String addNew() {
 		standardActionAdapter.viewClasses();
+		sponsorActionAdapter.viewSponsor();
 		ResultResponse result = studentActionAdapter.addNew();
 		if(result.isSuccess()){
 			return result.getMessage();

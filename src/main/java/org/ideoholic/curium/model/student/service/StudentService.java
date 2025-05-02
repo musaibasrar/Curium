@@ -44,6 +44,7 @@ import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.sponsor.service.SponsorService;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -74,6 +75,8 @@ public class StudentService {
 	private HttpServletResponse response;
 	@Autowired
 	private StandardService standardService;
+	@Autowired
+	private SponsorService sponsorService;
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -479,7 +482,9 @@ public class StudentService {
 				result.setSuccess(true);
 			}
 			ResultResponse classsec = standardService.viewClasses(branchId);
+			ResultResponse sponsor = sponsorService.viewSponsor(branchId);
 			result.setClassSec(classsec.getResultList());
+			result.setSponsor(sponsor.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);

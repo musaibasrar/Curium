@@ -1784,12 +1784,19 @@ $(document).ready(function() {
 
 								<tr>
 
-									<td class="alignLeft">Guardian's Name &
-										Address &nbsp;</td>
-									<td ><label> <input name="guardian"
-											type="text" class="myclass" id="guardian" size="36"
-											style="text-transform:capitalize;"
-											>
+									<td class="alignLeft">Sponsor Name 
+										 &nbsp;</td>
+									<td ><label> <select name="guardian" required
+									id="guardian" style="width: 224px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+										<option selected></option>
+										<c:forEach items="${sponsorlist}" var="sponsorlist">
+											<c:if test="${(sponsorlist.name != '')}">
+												<option value="${sponsorlist.name}">
+													<c:out value="${sponsorlist.name}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
 									</label></td>
 
 
