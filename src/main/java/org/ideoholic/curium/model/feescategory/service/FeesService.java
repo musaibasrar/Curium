@@ -14,10 +14,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
@@ -40,30 +39,28 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeesService {
         
-            private HttpServletRequest request;
+			@Autowired
             private HttpServletResponse response;
-            private HttpSession httpSession;
-            private String BRANCHID = "branchid";
-            private String USERID = "userloginid";
             /**
              * Size of a byte buffer to read/write file
              */
             private static final int BUFFER_SIZE = 4096;
         
-        public FeesService(HttpServletRequest request, HttpServletResponse response) {
-                this.request = request;
-       this.response = response;
-       this.httpSession = request.getSession();
-        }
+			
 
 
         public FeescategoryResponseDto viewFees(String branchid,String currentAcademicYear ) {
@@ -160,7 +157,7 @@ public class FeesService {
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}
-				parentResponseDto.setList(parentDetails);
+				parentResponseDto.setParentsList(parentDetails);
 				parentResponseDto.setSuccess(true);
 			} catch (Exception e) {
 				parentResponseDto.setSuccess(false);
@@ -169,8 +166,7 @@ public class FeesService {
 		}
 
 
-        public boolean downlaodFile() {
-                boolean result = false;
+        public ResultResponse downlaodFile() {
                 try {
 
                         File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx");
@@ -202,15 +198,15 @@ public class FeesService {
 
                         inStream.close();
                         outStream.close();
-                        result = true;
+                        ResultResponse.builder().success(true).build();
                 } catch (Exception e) {
                         System.out.println("" + e);
                 }
-                return result;
+                return ResultResponse.builder().success(false).build();
         }
 
 
-        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid) {
+        public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid,String userid) {
                 
         	     StudentIdDto studentIdDto = new StudentIdDto();
                  String[] idfeescategory = concessionDto.getSfsid();
@@ -247,9 +243,9 @@ public class FeesService {
                           		transactions.setEntrydate(DateUtil.todaysDate());
                           		transactions.setNarration("Towards Reversal of Fees Stamp");
                           		transactions.setCancelvoucher("no");
-                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-                          		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                          		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+                          		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+                          		transactions.setBranchid(Integer.parseInt(branchid));
+                          		transactions.setUserid(Integer.parseInt(userid));
 
                           		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+sfs.get(0).getFeesamount()+" where accountdetailsid="+crAccount;
 
@@ -275,7 +271,7 @@ public class FeesService {
     	StudentListResponseDto studentListResponseDto = new StudentListResponseDto();
         try {
                 List<Student> list = new feesDetailsDAO().readListOfAllBranchStudents();
-                studentListResponseDto.setStudentListFeesCollection(list);
+                studentListResponseDto.setStudentList(list);
         } catch (Exception e) {
         }
         return studentListResponseDto;
@@ -297,14 +293,14 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "/noblewisdom/StudentProcess/ViewFeesStructure&id="+studentId; }
+	 * "/vision/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 
 	 * }
 	 */
     
-    public StudentIdDto waiveOffFees(ConcessionDto concessionDto) {
+    public StudentIdDto waiveOffFees(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
         
     	StudentIdDto studentIdDto = new StudentIdDto();
         String[] idfeescategory = concessionDto.getSfsid();
@@ -312,6 +308,9 @@ public class FeesService {
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
+        List<VoucherEntrytransactions> transactionsApplyList = new ArrayList<VoucherEntrytransactions>();
+        List<String> updateDrAccountApplyList = new ArrayList<String>();
+        List<String> updateCrAccountApplyList = new ArrayList<String>();
         
         String studentId = concessionDto.getId();
         
@@ -331,9 +330,44 @@ public class FeesService {
                             con.setConcessionOld(concessionDto.getRequestParams().get("waiveoff:"+Integer.valueOf(test[0])));
                             con.setConcession(dueAmount);
                             concessionList.add(con);
+                            
+                            
+                          //Accounts
+                    		//Pass J.V. : credit the Fees as income & debit the cash
+                    		
+                            //Apply New Concession
+                            BigDecimal grandTotalConcessionApply = new BigDecimal(con.getConcession());
+                            if(grandTotalConcessionApply.compareTo(BigDecimal.ZERO)==1) {
+                    		int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
+                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));;
+                    		
+                    		VoucherEntrytransactions transactionsApply = new VoucherEntrytransactions();
+                    		
+                    		transactionsApply.setDraccountid(drAccount);
+                    		transactionsApply.setCraccountid(crFees);
+                    		transactionsApply.setDramount(grandTotalConcessionApply);
+                    		transactionsApply.setCramount(grandTotalConcessionApply);
+                    		transactionsApply.setVouchertype(4);
+                    		transactionsApply.setTransactiondate(DateUtil.todaysDate());
+                    		transactionsApply.setEntrydate(DateUtil.todaysDate());
+                    		transactionsApply.setNarration("Towards Fees Waiveoff");
+                    		transactionsApply.setCancelvoucher("no");
+                    		transactionsApply.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                    		transactionsApply.setBranchid(Integer.parseInt(branchId));
+                    		transactionsApply.setUserid(Integer.parseInt(userId));
+                    		
+                    		String updateDrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+drAccount;
+
+                    		String updateCrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+crFees;
+                    		
+                    		updateDrAccountApplyList.add(updateDrAccountApply);
+                    		updateCrAccountApplyList.add(updateCrAccountApply);
+                    		transactionsApplyList.add(transactionsApply);
+                            }
+                    		// End J.V
                         
                }
-           new feesCategoryDAO().waiveOffFees(concessionList,studentId);
+           new feesCategoryDAO().waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
@@ -432,7 +466,7 @@ public class FeesService {
 	}
 
 
-	public StudentIdDto applyConcession(ConcessionDto concessionDto) {
+	public StudentIdDto applyConcession(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
 		
 		StudentIdDto studentIdDto = new StudentIdDto();
         String[] idfeescategory = concessionDto.getSfsid();
@@ -440,7 +474,12 @@ public class FeesService {
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
-        
+        List<VoucherEntrytransactions> transactionsReverseList = new ArrayList<VoucherEntrytransactions>();
+        List<VoucherEntrytransactions> transactionsApplyList = new ArrayList<VoucherEntrytransactions>();
+        List<String> updateDrAccountReverseList = new ArrayList<String>();
+        List<String> updateCrAccountReverseList = new ArrayList<String>();
+        List<String> updateDrAccountApplyList = new ArrayList<String>();
+        List<String> updateCrAccountApplyList = new ArrayList<String>();
         String studentId = concessionDto.getId();
         
         if(idfeescategory!=null){
@@ -460,10 +499,80 @@ public class FeesService {
                             con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
                             con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
                             concessionList.add(con);
+                            
+                            
+                            
+                            //Accounts
+                    		//Pass J.V. : credit the Fees as income & debit the cash
+                    		
+                            
+                            //Reverse Old Concession
+                            BigDecimal grandTotalConcessionReverse = new BigDecimal(con.getConcessionOld());
+                            if(grandTotalConcessionReverse.compareTo(BigDecimal.ZERO)==1) {
+                            	int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
+                        		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
+                        		
+                        		VoucherEntrytransactions transactionsReverse = new VoucherEntrytransactions();
+                        		
+                        		transactionsReverse.setDraccountid(drAccount);
+                        		transactionsReverse.setCraccountid(crFees);
+                        		transactionsReverse.setDramount(grandTotalConcessionReverse);
+                        		transactionsReverse.setCramount(grandTotalConcessionReverse);
+                        		transactionsReverse.setVouchertype(4);
+                        		transactionsReverse.setTransactiondate(DateUtil.todaysDate());
+                        		transactionsReverse.setEntrydate(DateUtil.todaysDate());
+                        		transactionsReverse.setNarration("Towards Fees Stamp");
+                        		transactionsReverse.setCancelvoucher("no");
+                        		transactionsReverse.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                        		transactionsReverse.setBranchid(Integer.parseInt(branchId));
+                        		transactionsReverse.setUserid(Integer.parseInt(branchId));
+                        		
+                        		String updateDrAccountReverse="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionReverse+" where accountdetailsid="+drAccount;
+
+                        		String updateCrAccountReverse="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionReverse+" where accountdetailsid="+crFees;
+                        		
+                        		updateDrAccountReverseList.add(updateDrAccountReverse);
+                        		updateCrAccountReverseList.add(updateCrAccountReverse);
+                        		transactionsReverseList.add(transactionsReverse);
+                            }
+                            
+                            //
+                            
+                            //Apply New Concession
+                            BigDecimal grandTotalConcessionApply = new BigDecimal(con.getConcession());
+                            if(grandTotalConcessionApply.compareTo(BigDecimal.ZERO)==1) {
+                    		int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
+                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));;
+                    		
+                    		VoucherEntrytransactions transactionsApply = new VoucherEntrytransactions();
+                    		
+                    		transactionsApply.setDraccountid(drAccount);
+                    		transactionsApply.setCraccountid(crFees);
+                    		transactionsApply.setDramount(grandTotalConcessionApply);
+                    		transactionsApply.setCramount(grandTotalConcessionApply);
+                    		transactionsApply.setVouchertype(4);
+                    		transactionsApply.setTransactiondate(DateUtil.todaysDate());
+                    		transactionsApply.setEntrydate(DateUtil.todaysDate());
+                    		transactionsApply.setNarration("Towards Fees Concession");
+                    		transactionsApply.setCancelvoucher("no");
+                    		transactionsApply.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+                    		transactionsApply.setBranchid(Integer.parseInt(branchId));
+                    		transactionsApply.setUserid(Integer.parseInt(userId));
+                    		
+                    		String updateDrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+drAccount;
+
+                    		String updateCrAccountApply="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionApply+" where accountdetailsid="+crFees;
+                    		
+                    		updateDrAccountApplyList.add(updateDrAccountApply);
+                    		updateCrAccountApplyList.add(updateCrAccountApply);
+                    		transactionsApplyList.add(transactionsApply);
+                            }
+                    		// End J.V
                         }
                         
                }
-           new feesCategoryDAO().applyConcession(concessionList,studentId);
+                
+           new feesCategoryDAO().applyConcession(concessionList,studentId,transactionsReverseList,transactionsApplyList,updateDrAccountReverseList,updateCrAccountReverseList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
@@ -719,19 +828,41 @@ public class FeesService {
 	        if(branchid!=null){
 	        	String[] yearofAdmission = yearofAdmissionStr.split("/");
 	        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
-	        	String searchYear = null;
-	        	int yoa = Integer.parseInt(yearofAdmission[0]);
-	        	int ca = Integer.parseInt(currentAcademicYear[0]);
+	        	String searchYear = yearofAdmissionStr;
+	        	String searchClassName = null;
 	        	
-	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = currentAcademicYearStr;
-	        	}else if (yoa > ca) {
-	        		searchYear = yearofAdmissionStr;
-	        	}
+	            
+	        	int diff = Integer.parseInt(currentAcademicYear[0])-Integer.parseInt(yearofAdmission[0]);
+	        	//Get the Class for yearofadmission
+	        	List<Classhierarchy> classHierarchyList = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(branchid));
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
-	            feescategoryResponseDto.setFeescategory(feecategoryList);
+	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
+	        	int j=0;
+	        	for (Classhierarchy classHierarchy : classHierarchyList) {
+	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		j++;
+				}
 
+	        	 int classIndex = -1;
+
+	             for (int i = 0; i < classHierarchyArray.length; i++) {
+	                 if (classHierarchyArray[i].equals(classname)) {
+	                	 classIndex = i;
+	                     break;
+	                 }
+	             }
+	             
+	             if(diff>0) {
+	            	 searchClassName = classHierarchyArray[classIndex-diff];
+	             }else {
+	            	 searchClassName = classname;
+	             }
+	        	
+	             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(searchClassName,searchYear,branchid);
+		         feescategoryResponseDto.setFeescategory(feecategoryList);
+		         feescategoryResponseDto.setFeesDueSearchYear(searchYear);
+		         feescategoryResponseDto.setFeesDueSearchClass(searchClassName);
+	            
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");

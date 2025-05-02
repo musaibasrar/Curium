@@ -21,5 +21,7 @@ public class FeescategoryResponseDto {
 		
 	private List<Feescategory> feescategory;
 	private List<Parents> searchStudentList;
+	private String feesDueSearchYear;
+	private String feesDueSearchClass;
 	private boolean success;
 }
