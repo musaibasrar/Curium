@@ -442,7 +442,7 @@
 var xmlHttp;
     var count;
     function searchfeecategory() {
-		var classsearch=document.getElementById('classsearch').value;
+		var classsearch=document.getElementById('classsearchfeescat').value;
 		var yoa=document.getElementById('yearofadmission').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
@@ -454,7 +454,7 @@ var xmlHttp;
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET", "/gnyanganga/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
-		
+			document.getElementById('classsearch').value=classsearch;
 	}
     
 	function stateChanged() {
@@ -608,7 +608,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
-								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
+								<select name="classsearchfeescat" id="classsearchfeescat" onchange="searchfeecategory()"
 									style="width: 120px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -621,7 +621,7 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label> <label style="visibility: hidden;"> 
-									<select name="secsearch" id="secsearch"
+									<select name="secsearchfeescat" id="secsearchfeescat"
 									style="width: 120px;">
 										<option selected></option>
 
@@ -664,6 +664,42 @@ for(Cookie cookie : cookies){
                      <tr>
 						<td><br></td>
                     </tr>
+                    
+                    <tr>
+							<td class="alignRightFields">Current Class &nbsp;</td>
+							<td width="90%"><label> 
+								<select name="classsearch" id="classsearch"
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
+
+							</label> <label style="visibility: hidden;"> 
+									<select name="secsearch" id="secsearch"
+									style="width: 120px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>
+										</c:forEach>
+								</select>
+							</label>
+						</tr>
+						
+							<tr>
+							<td><br /></td>
+
+						</tr>
                     
                     <tr>
 							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -712,6 +748,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						
                     
 					</table>
 					
