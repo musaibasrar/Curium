@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -144,29 +146,19 @@ public class StudentDiaryDAO {
 		}
 	}
 
+	 @Transactional
 	public void deleteRecord(List<Integer> ids) {
-		Session session = null;
-	    Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
+			studentDiaryRepo.deleteAllById(ids);
 			
-			
-			Query query = session
-					.createQuery("delete from StudentDiary as diary where diary.id IN (:ids)");
-			query.setParameterList("ids", ids);
-			
-			query.executeUpdate();
-			
-			transaction.commit();
-		} catch (Exception hibernateException) { 
+		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-		}finally {
-			HibernateUtil.closeSession();
-		}	
+		}
 	}
 
+	 @Transactional
 	public StudentDiary getMessage(long id) {
 		StudentDiary diary = new StudentDiary();
 		Long did = new Long(id);
