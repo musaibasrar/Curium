@@ -197,31 +197,22 @@ public class AppointmentDAO {
 
 		}
 
-
+ 		@Transactional
 		public int getNoOfRecordsIncompleteAppointments() {
 			
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
 
-				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Scheduled' ").setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-								+ noOfRecords);
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
+				Long result = appointmentRepo.countByStatus("Scheduled");
+				noOfRecords = result.intValue();
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
+				throw  hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
 			}
+				return noOfRecords;
+
 		}
 
 
