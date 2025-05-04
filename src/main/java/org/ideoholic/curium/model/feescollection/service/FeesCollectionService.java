@@ -699,13 +699,31 @@ public class FeesCollectionService {
 				
 				String cancelJournalVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+journalId;
 				
+				// cancel VAT
+				String updateVATDrAccount = null;
+				String updateVATCrAccount = null;
+				String cancelVATVoucher = null;
+				
+				if(journalId-receiptId>0) {
+					int VATId = receiptId+1;
+					VoucherEntrytransactions voucherTransactionVAT = new AccountDAO().getVoucherDetails(String.valueOf(VATId));
+					
+					
+					updateVATDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransactionVAT.getDramount()+" where accountdetailsid="+voucherTransactionVAT.getDraccountid();
+					updateVATCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransactionVAT.getCramount()+" where accountdetailsid="+voucherTransactionVAT.getCraccountid();
+
+					cancelVATVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+VATId;
+					
+				}
+				
+				//END Cancel Voucher
 			
 			// End Cancel Voucher
 			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, updateReceiptDrAccount, updateReceiptCrAccount, cancelReceiptVoucher,
-					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher);
+					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher, updateVATDrAccount, updateVATCrAccount, cancelVATVoucher);
 		}else {
 			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
-					null, null, null);
+					null, null, null, null, null, null);
 		}
 
 			resultResponse.setSuccess(result);

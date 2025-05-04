@@ -277,7 +277,7 @@ public class feesDetailsDAO {
             }
     }
 
-		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
+		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher, String updateVATDrAccount, String updateVATCrAccount, String cancelVATVoucher) {
 			
 			boolean result = false;
 
@@ -306,6 +306,15 @@ public class feesDetailsDAO {
 	        			updateJournalCr.executeUpdate();
 	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
 	        			cancelJournalVoucherQuery.executeUpdate();
+                    }
+                    
+                    if(updateVATDrAccount!=null && updateVATCrAccount!=null && cancelVATVoucher!=null) {
+                    	Query updateVATDr = session.createQuery(updateVATDrAccount);
+                    	updateVATDr.executeUpdate();
+	        			Query updateVATCr = session.createQuery(updateVATCrAccount);
+	        			updateVATCr.executeUpdate();
+	        			Query cancelVAT = session.createQuery(cancelVATVoucher);
+	        			cancelVAT.executeUpdate();
                     }
                     
                     transaction.commit();
