@@ -117,10 +117,12 @@ public class StudentService {
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
 	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+currentAcademicYear[0]+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
-	        } else {
-	        	student.setStudentexternalid(branchCode+""+String.format("%04d", 1));
+			}else {
+	        	int studentSeq = 1;
+	            String studentExternalId = branchCode+currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+	            student.setStudentexternalid(studentExternalId);
 	        }
 			
 			student.setArchive(0);
