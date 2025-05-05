@@ -129,5 +129,6 @@
 		<mapping resource="mappings/PoMaster.hbm.xml"/> 
 		<mapping resource="mappings/MessStockMoveInfo.hbm.xml"/> 
 		<mapping resource="mappings/mess/MessTaxInvoice.hbm.xml"/> 
+		<mapping resource="mappings/AdmissionEnquiry.hbm.xml"/> 
 	</session-factory>
 </hibernate-configuration>
