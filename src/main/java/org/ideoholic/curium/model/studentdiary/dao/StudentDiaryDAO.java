@@ -89,29 +89,21 @@ public class StudentDiaryDAO {
             return results;
         }
 	}
-	@SuppressWarnings({ "finally", "unchecked" })
+	
+	@Transactional
 	public int getNoOfRecords(int branchId, int sid) {
-		Session session = null;
-	    Transaction transaction = null;
 		List<StudentDiary> results = new ArrayList<StudentDiary>();
 		int noOfRecords = 0;
 		try {
-			transaction = session.beginTransaction();
-
-						Query query = session.createQuery("select count(*) from StudentDiary where branchid="+branchId+" and sid='"+sid+"'");
-			noOfRecords = Integer.parseInt(query.uniqueResult().toString()); 
-			
-			transaction.commit();
+			noOfRecords = studentDiaryRepo.countByBranchidAndSid(branchId, sid);
 
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            throw hibernateException;   
 
-		} finally {
-				HibernateUtil.closeSession();
-			return noOfRecords;
-		}
+		} 
+		return noOfRecords;
 	}
 	
 	@SuppressWarnings({ "finally", "unchecked" })
