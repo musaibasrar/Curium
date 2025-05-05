@@ -681,8 +681,8 @@ for(Cookie cookie : cookies){
                             <td width="30%"></td>
                             <td>
                                 <button id="modify" type="submit">Modify</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button id="cancel" >Cancel</button>
+                               <!--  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="cancel" >Cancel</button> -->
                             </td>
                         </tr>
           </table>

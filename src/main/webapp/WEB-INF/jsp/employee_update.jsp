@@ -204,35 +204,21 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
+			
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 	$(function() {
-		$("#datepickeradmn").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#datepickeradmn" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(
-				function() {
-					$("#datepickeradmn").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	$(function() {
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -335,6 +321,7 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${employee.employeedoc3}"/>" id="employeedoc3update" name="employeedoc3update">
                     <input type="hidden" value="<c:out value="${employee.employeedoc4}"/>" id="employeedoc4update" name="employeedoc4update">
                     <input type="hidden" value="<c:out value="${employee.employeedoc5}"/>" id="employeedoc5update" name="employeedoc5update">
+                    <input type="hidden" value="<c:out value="${employee.loginid}"/>" id="loginid" name="loginid">
                     </td>
                     </tr>
 				
@@ -424,11 +411,15 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
-										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
-									class="textField" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+							
+							 <c:if test="${not empty employee.dateofjoining}">
+            <fmt:formatDate var="formattedDate" value="${employee.dateofjoining}" pattern="dd/MM/yyyy" />
+        </c:if>
+        <input name="dateofjoining" type="text" value="${formattedDate}" class="textField" id="datepicker" size="30">
+        
+										<%-- <input name="dateofjoining"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
+									class="textField" id="datepicker" size="30"> --%>
 							
 						<%-- 	<input name="dateofjoining"
 									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd-MM-yyyy"/>" 
@@ -586,10 +577,8 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
 										<input name="joiningdate"
-									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
-									class="textField" id="datepickerCD" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
+									class="textField" id="datepickerCD" size="30">
 						<tr>
 
 							<td></td>
@@ -988,30 +977,6 @@ for(Cookie cookie : cookies){
 
 
 						</form>
-						<script>
-							$(function() {
-								$("#datepicker").datepicker({
-									changeYear : true,
-									changeMonth : true
-								});
-								$("#anim").change(
-										function() {
-											$("#datepicker").datepicker(
-													"option", "showAnim",
-													$(this).val());
-										});
-								$("#entryDate").datepicker({
-									changeYear : true,
-									changeMonth : true
-								});
-								$("#anim").change(
-										function() {
-											$("#datepicker").datepicker(
-													"option", "showAnim",
-													$(this).val());
-										});
-							});
-						</script>
 
 						<script type="text/javascript">
 							function cancel() {

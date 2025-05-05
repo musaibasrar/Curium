@@ -43,5 +43,6 @@ public class EmployeeDto {
 	private String groupname;
 	private String shift;
 	private String timing;
+	private String loginId;
 	
 }

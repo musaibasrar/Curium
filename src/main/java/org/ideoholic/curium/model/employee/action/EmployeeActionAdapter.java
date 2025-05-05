@@ -105,6 +105,7 @@ public class EmployeeActionAdapter {
         employeeDto.setShift(request.getParameter("shift"));
         employeeDto.setTiming(request.getParameter("timings"));
         employeeDto.setBranchId(request.getParameter("branchid"));
+        employeeDto.setLoginId(request.getParameter("loginid"));
 
         Teacher employee = employeeService.updateEmployee(listOfFiles,employeeDto);
 

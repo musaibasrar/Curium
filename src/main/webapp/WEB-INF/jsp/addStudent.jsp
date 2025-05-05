@@ -753,7 +753,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<!-- <li><a href="#fragment-7">Stamp Fee</a></li> -->
 				</ul>
 
 
@@ -1528,7 +1528,44 @@ $(document).ready(function() {
 								<tr>
 									<td><br /></td>
 								</tr> -->
+								<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+					
 							</table>
+							
+							
+							<table style="width: auto;height: auto;" align="center">
+								<tr>
+									<td>
+									<br /></td>
+								</tr>
+								<tr>
+									<td>
+									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Stamp Fee</h5>
+									<br /></td>
+								</tr>
+							<tr>
+							<!-- <td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td> -->
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							</td>
+							
+						</tr>
+					
+				</table>
 
 						<div>
 							<table width="100%">
@@ -2094,7 +2131,7 @@ $(document).ready(function() {
 
 						</div>
 						
-						<div id="fragment-7">
+<!-- 						<div id="fragment-7">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2158,7 +2195,7 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div>
+				</div> -->
 					</table>
 				</div>
 

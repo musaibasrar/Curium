@@ -257,6 +257,7 @@ public class EmployeeService {
 			employee.setGroupname(DataUtil.emptyString(employeeDto.getGroupname()));
 			employee.setShift(DataUtil.emptyString(employeeDto.getShift()));
 			employee.setTiming(DataUtil.emptyString(employeeDto.getTiming()));
+			employee.setLoginid(DataUtil.emptyString(employeeDto.getLoginId()));
 
 		// Process form file field (input type="file")
 		if (listOfFiles != null && listOfFiles.length != 0) {
