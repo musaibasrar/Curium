@@ -122,8 +122,8 @@
 		<mapping resource="mappings/JobQuery.hbm.xml"/>
 		<mapping resource="mappings/Task.hbm.xml"/>
 		<mapping resource="mappings/Enquiry.hbm.xml"/> 
-    	<mapping resource="mappings/Book.hbm.xml"/>
-    	<mapping resource="mappings/BookIssue.hbm.xml"/>
-    	<mapping resource="mappings/BookHistory.hbm.xml"/>
+	    <mapping resource="mappings/Book.hbm.xml"/>
+  		<mapping resource="mappings/BookIssue.hbm.xml"/>
+        <mapping resource="mappings/BookHistory.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
