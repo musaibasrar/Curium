@@ -332,6 +332,56 @@
 	
 }
 </style>
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #attendancereport, #attendancereport * {
+    visibility: visible;
+  }
+   #attendancereport {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    margin: 0;
+  } 
+ 
+}
+</style>
+<style>
+@media print {
+    #attendancereport h1,
+    #attendancereport h3 {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    
+}
+</style>
+
+<!-- <style>
+@media print {
+    .print-hide {
+        display: none !important;
+    }
+}
+</style> -->
+
+<script>
+$(function() {
+
+	$("#print").button().click(function() {
+		printMyTable();
+	});
+});
+function printMyTable() {
+  window.print();
+}
+</script>
+
 <link rel="stylesheet" href="/shatabdi/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -493,7 +543,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/shatabdi/StampFeesProcess/applyFees" method="POST">
+	<form id="form1"  method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -583,6 +633,11 @@ for(Cookie cookie : cookies){
 						</tr>
 
 					</table>
+					                                <div id="attendancereport" class="alignRightFields">
+					                                <h1 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchname}</h1>
+					                                <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					                                &emsp;&emsp;
+					                                Attendance Report</h3>
 								                    <table id="mytable"  style="border-collapse: collapse;width: 50%;border: 2px solid black;margin-left:215px;">
 								                    <thead>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Class</td>
@@ -600,6 +655,16 @@ for(Cookie cookie : cookies){
 								                        </c:forEach>
 								                        </tbody>
 								                    </table>
+								                                       
+								                    </div>
+								                    <table>
+								                    <tr></tr><br></td></tr>
+								                    <tr><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <button id="print">Print Table</button>
+								                     </td></tr>
+								                     </table>
+								
+								                    
 				</div>
 			</div>
 		</div>
