@@ -32,24 +32,17 @@ public class StudentDiaryDAO {
   
    
 
-	@SuppressWarnings("finally")
+	@Transactional
 	public StudentDiary create(StudentDiary diary) {
-		Session session = null;
-	    Transaction transaction = null;
 		try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(diary);
-            transaction.commit();
+			studentDiaryRepo.save(diary);
             
-        } catch (Exception hibernateException) { 
+        }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-        } finally {
-    			HibernateUtil.closeSession();
-            return diary;
-        }
+        } 
+		 return diary;
 	}
 	@SuppressWarnings({ "finally", "unchecked" })
 	public  List<Object[]>  readListOfObjects(int offset, int noOfRecords, int branchId) {
