@@ -4,5 +4,6 @@ import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentDiaryRepository extends JpaRepository<StudentDiary, Integer> {
+	int countByBranchidAndSid(int branchid, int sid);
 
 }
