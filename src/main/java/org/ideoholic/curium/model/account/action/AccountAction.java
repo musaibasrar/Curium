@@ -404,4 +404,10 @@ public class AccountAction {
 		}
 		return ERRORPAGE;
 	}
+	
+	@PostMapping("/exportLedgerReports")
+	private String exportLedgerReports() {
+    	new AccountService(request, response).exportLedgerReports();
+        return "trialbalanceexportsuccess";
+	}
 }

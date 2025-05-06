@@ -415,6 +415,16 @@
              return false;
 
          });
+		 
+		 $("#export").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             exportLedgerReports();
+             return false;
+
+         });
 	});
 
 	$(function() {
@@ -479,6 +489,12 @@
 	});
 
 
+	function exportLedgerReports(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/shatabdi/AccountProcess/exportLedgerReports";
+		form1.method = "POST";
+		form1.submit();
+	}
 </script>
 
 
@@ -738,6 +754,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><button id="print">Print</button> <button id="printvoucher">Print Voucher</button>
+						<button id="export">Export</button>
 							</td>
 							
 

@@ -37,6 +37,8 @@ import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -1687,5 +1689,150 @@ public boolean searchSingleLedgerEntries() {
 				
 	}
 			return true;
+	}
+
+
+	public void exportLedgerReports() {
+		boolean writeSucees = false;
+		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+		
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		accountBalanceMap = (Map<Accountdetails, BigDecimal>) httpSession.getAttribute("accountdetailsbalanceMap");
+		String creditAllAcc = httpSession.getAttribute("credittotal").toString();
+		String debitAllAcc = httpSession.getAttribute("debittotal").toString();
+		String fromDate = (String) httpSession.getAttribute("fromdatetb");
+		String toDate = (String) httpSession.getAttribute("todatetb");
+		
+		try {
+
+			// Creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("Ledger Reports");
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "Ledger Reports"});
+			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
+			headerData1.put("Header",
+					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
+			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
+			headerData2.put("Header",
+					new Object[] { "Accounts Description", "Debit","Credit"});
+			int i = 1;
+			
+			for (Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
+				
+				String dr = "";
+				String cr = "";
+				
+						
+				if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 1 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 5) {
+					
+					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
+						dr = df.format(accBal.getValue());
+						
+					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
+						cr = df.format(accBal.getValue().negate());
+					}
+				}else if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 2 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 3 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 4) {
+					
+					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
+						cr = df.format(accBal.getValue());
+						
+					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
+						dr = df.format(accBal.getValue().negate());
+					}
+				}
+				
+				data.put(Integer.toString(i),
+						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
+								 cr });
+				i++;
+			}
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 1;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow1 = sheet.createRow(1);
+			Object[] objArrHeader1 = headerData1.get("Header");
+			int cellnum11 = 1;
+			for (Object obj : objArrHeader1) {
+				Cell cell = headerRow1.createCell(cellnum11++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow2 = sheet.createRow(2);
+			Object[] objArrHeader2 = headerData2.get("Header");
+			int cellnum12 = 0;
+			for (Object obj : objArrHeader2) {
+				Cell cell = headerRow2.createCell(cellnum12++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Set<String> keyset = data.keySet();
+			int rownum = 3;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+			rownum++;
+			
+			data.clear();
+			data.put(Integer.toString(1),
+					new Object[] { "Total",  debitAllAcc ,
+							creditAllAcc });
+			
+			Set<String> keyset2 = data.keySet();
+			for (String key : keyset2) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx"));
+				workbook.write(out);
+				out.close();
+				workbook.close();
+				writeSucees = true;
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// getFile(name, path);
+		
 	}
 }
