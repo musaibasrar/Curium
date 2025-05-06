@@ -832,10 +832,9 @@ public class AccountService {
 			
 			int branchId = Integer.parseInt(strBranchId);
 
-				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = accountDao.getAccountdetails(branchId);
+				List<Accountdetails> accountsDetails = accountDao.getAccountdetails(branchId);
 				
-				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<>();
 				
 				BigDecimal debitAllAcc = BigDecimal.ZERO;
 				BigDecimal creditAllAcc = BigDecimal.ZERO;
@@ -914,9 +913,15 @@ public class AccountService {
 			int crAccountid = voucherTransaction.getCraccountid();
 			int acccountId = accountDetails.getAccountdetailsid(); 
 			if(drAccountid == acccountId) {
-				debitAcc = debitAcc.add(voucherTransaction.getDramount());
+				BigDecimal augend = voucherTransaction.getDramount();
+				if(augend != null) {
+					debitAcc = debitAcc.add(augend);
+				}
 			}else if(crAccountid == acccountId) {
-				creditAcc = creditAcc.add(voucherTransaction.getCramount());
+				BigDecimal augend = voucherTransaction.getCramount();
+				if(augend != null) {
+					creditAcc = creditAcc.add(augend);
+				}
 			}
 		}
 	
@@ -1191,19 +1196,16 @@ public class AccountService {
 
 					int branchId = Integer.parseInt(strBranchId);
 
-				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = accountDao.getAccountdetailsIncomeExpense(branchId);
-
-				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				List<Accountdetails> accountsDetails = accountDao.getAccountdetailsIncomeExpense(branchId);
 
 				//Group 1
 				BigDecimal totalIncome = BigDecimal.ZERO;
-				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				List<LedgerAccBalanceDto> incomeLedgersAccount = new ArrayList<>();
 
 
 				//Group 2
 				BigDecimal totalExpense = BigDecimal.ZERO;
-				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				List<LedgerAccBalanceDto> expenseLedgersAccount = new ArrayList<>();
 
 				for (Accountdetails accountDetails : accountsDetails) {
 
@@ -1219,11 +1221,17 @@ public class AccountService {
 
 						case 4:
 								totalIncome = totalIncome.add(totalAmount);
-								incomeLedgersAccount.put(accountDetails, totalAmount);
+								incomeLedgersAccount.add(LedgerAccBalanceDto.builder()
+										.accountdetails(accountDetails)
+										.balance(totalAmount)
+									.build());
 								break;
 						case 5:
 								totalExpense = totalExpense.add(totalAmount);
-								expenseLedgersAccount.put(accountDetails, totalAmount);
+								expenseLedgersAccount.add(LedgerAccBalanceDto.builder()
+										.accountdetails(accountDetails)
+										.balance(totalAmount)
+									.build());
 								break;
 						default:
 
