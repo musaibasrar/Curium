@@ -432,6 +432,12 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/shatabdi/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shatabdi/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
+            			</td>
+            		</tr>
+            		
                 </table>
             </div>
             
