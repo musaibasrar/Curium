@@ -468,9 +468,11 @@
 	
 	function searchStudentAttendanceDetailsMark() {
 		var form1 = document.getElementById("form1");
+		if(form1.checkValidity()) {
 		form1.action = "/shatabdi/AttendanceProcess/searchStudentAttendanceDetailsMark";
 		form1.method = "POST";
 		form1.submit();
+		}
 
 	}
 	
@@ -482,7 +484,15 @@
 	
 	$(function() {
 		$("#update").button().click(function() {
-			updateRecords();
+			
+			var filter = $('.dataTables_filter input').val();
+	         if (filter) {
+	             alert('Please clear the search filter before submitting.');
+	         } else {
+	        	 updateRecords();
+	         }
+	         
+			
 			return false;
 
 		});
@@ -630,7 +640,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
+							<td width="70%"><label> <select name="classsearch" required
 									id="classsearch" style="width: 90px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -642,7 +652,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
+							</label> <label> <select name="secsearch" id="secsearch" required
 									style="width: 50px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
