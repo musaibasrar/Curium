@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.appointment.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	);
 
 	Long countByStatus(String status);
+
+	Long countByStatusAndCreateddate(String status, Date createddate);
 }

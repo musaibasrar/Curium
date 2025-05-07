@@ -215,31 +215,20 @@ public class AppointmentDAO {
 
 		}
 
-
+		@Transactional
 		public int getNoOfRecordsTodayCompletedAppointments() {
 			
-			List<Appointment> results = new ArrayList<Appointment>();
 			int noOfRecords = 0;
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
+				Long result = appointmentRepo.countByStatusAndCreateddate("Completed",new Date());
+				noOfRecords = result.intValue();
+			} catch (Exception hibernateException) {
 
-				results = (List<Appointment>) session.createQuery("From Appointment where status = 'Completed' and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-								+ noOfRecords);
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
+				throw hibernateException;
 			}
+				return noOfRecords;
 		}
 
 
