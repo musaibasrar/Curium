@@ -540,7 +540,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${book.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${book.id}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
+							<td class="dataText"><a class="dataTextInActive" href="/alfalahschool/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
 							<td class="dataText"><c:out value="${book.uid}" /></td>
 							<td class="dataText"><c:out value="${book.studentName}" /></td>
 							<td class="dataText"><c:out value="${book.issueDate}" /></td>
