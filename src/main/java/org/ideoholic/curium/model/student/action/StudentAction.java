@@ -342,4 +342,18 @@ public class StudentAction {
 		}
 	}
 
+	@PostMapping("/otherFeesStructurePerYear")
+	public String otherFeesStructurePerYear() {
+		studentActionAdapter.viewOtherFeesStructurePerYear();
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "student_details_other_feesstructure_admin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_other_feesstructure_admin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_other_feesstructure";
+		} else {
+			return "student_details_other_feesstructure";
+		}
+	}
+	
 }
