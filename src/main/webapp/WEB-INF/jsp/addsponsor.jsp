@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Add Employee
+    Document   : Add Sponsor
     Created on : Jun 17, 2013, 4:17:40 PM
-    Author     : CPEDUR1P5
+    Author     : Musaib
 --%>
 
 
@@ -478,7 +478,7 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				
 				<ul>
-					<li><a href="#tabs-1">Sponsor Details</a></li>
+					<li><a href="#tabs-1">Add Sponsor</a></li>
 				</ul>
 
 				<div id="tabs-1">
@@ -531,55 +531,11 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-									
-									
 								<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td></td><td></td>
-									<td>
+									<td colspan="6" align="center">
 										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
 
 									</td>

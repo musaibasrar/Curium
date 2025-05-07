@@ -68,6 +68,8 @@ public class SponsorActionAdapter {
 	    sponsorDto.setContact(request.getParameter("contact"));
 	    sponsorDto.setNotes(request.getParameter("notes"));
 	    sponsorDto.setAddress( request.getParameter("address"));
+	    sponsorDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	    sponsorDto.setUserId(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 	    SponsorResponseDto sponsorResponseDto = sponsorService.updateSponsor(sponsorDto);
 	    return sponsorResponseDto.isSuccess();
 		

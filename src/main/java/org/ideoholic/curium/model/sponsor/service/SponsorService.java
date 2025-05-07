@@ -93,11 +93,16 @@ public class SponsorService {
 		String contact = sponsorDto.getContact();
 		String address = sponsorDto.getAddress();
 		String notes = sponsorDto.getNotes();
+		int userId = sponsorDto.getUserId();
+		int branchId = sponsorDto.getBranchId();
+		
 		sponsor.setId(Integer.parseInt(id));
 		sponsor.setName(name);
 		sponsor.setContact(contact);
 		sponsor.setAddress(address);
 		sponsor.setNotes(notes);
+		sponsor.setUserid(userId);
+		sponsor.setBranchid(branchId);
 		result = new SponsorDao().updateSponsor(sponsor);	
 	    sponsorResponseDto.setSuccess(result);	
 		return sponsorResponseDto;

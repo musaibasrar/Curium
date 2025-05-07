@@ -532,53 +532,9 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-																		
 								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td></td><td></td>
-									<td>
+									
+									<td colspan="6" align="center">
 										<button id="update" class="update" onmouseover="validateNameContact();">Update</button>
 
 									</td>
