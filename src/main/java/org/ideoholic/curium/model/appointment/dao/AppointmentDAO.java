@@ -220,19 +220,15 @@ public class AppointmentDAO {
 			
 			int noOfRecords = 0;
 			try{
-
-				Long result = appointmentRepo.countByStatus("Completed");
+				Long result = appointmentRepo.countByStatusAndCreateddate("Completed",new Date());
 				noOfRecords = result.intValue();
-
 			} catch (Exception hibernateException) {
 
 				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 				throw hibernateException;
-
 			}
 				return noOfRecords;
-
 		}
 
 
