@@ -308,7 +308,7 @@ public class AccountDAO {
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (1) and branchid="+branchId).list();
+			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSSGroupMaster.ssgroupmasterid IN (1,2) and branchid="+branchId).list();
 			transaction.commit();																						   											
 		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
