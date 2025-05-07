@@ -716,6 +716,49 @@ $(document).ready(function() {
                 } );
             } );
         </script>
+        
+        <script type="text/javascript">
+
+    var xmlHttp;
+    var count;
+    function checkDuplicate() {
+
+		var selected=document.getElementById('admnno').value;
+			
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/jrs/StudentProcess/checkDuplicate?admissionnumber="+selected,true);
+			xmlHttp.send(null);
+	}
+    
+	function stateChanged() {
+
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("admnnodiv").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+	
+
+</script>
 </head>
 <%
 	//allow access only if session exists
@@ -747,12 +790,12 @@ $(document).ready(function() {
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<!-- <li><a href="#fragment-2">Parent's Details</a></li> -->
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<!-- <li><a href="#fragment-7">Stamp Fee</a></li> -->
 				</ul>
 
 
@@ -786,11 +829,11 @@ $(document).ready(function() {
 
 						<tr>
 							<td class="alignLeft">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" 
+							<td ><label> <input name="admnno" onblur="checkDuplicate()"
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
-							</label></td>
+							</label><div id="admnnodiv"></div></td>
 							<td class="alignLeft" style="padding-left: 20px;">UDISE Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
@@ -909,53 +952,7 @@ $(document).ready(function() {
 								</select>
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Sponsored By &nbsp;</td>
-							<td ><label> <input name="guardiandetails" style="text-transform:capitalize;"
-									type="text" class="myclass" id="guardiandetails" size="36">
-							</label></td>
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td  class="alignLeft">Blood Group &nbsp;</td>
-
-							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>A +ve</option>
-										<option>B +ve</option>
-										<option>AB +ve</option>
-										<option>O +ve</option>
-										<option>A -ve</option>
-										<option>B -ve</option>
-										<option>AB -ve</option>
-										<option>O -ve</option>
-
-
-								</select>
-
-							</label></td>
-
-
-							<!-- <td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td> 
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>Indian</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
-
-							</label></td>-->
-					
-							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+								<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhaar No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1007,9 +1004,28 @@ $(document).ready(function() {
 
 						
 						<tr>
+						
+							<td  class="alignLeft">Blood Group &nbsp;</td>
+
+							<td><label> <select name="bloodgroup"
+									id="bloodgroup" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>A +ve</option>
+										<option>B +ve</option>
+										<option>AB +ve</option>
+										<option>O +ve</option>
+										<option>A -ve</option>
+										<option>B -ve</option>
+										<option>AB -ve</option>
+										<option>O -ve</option>
+
+
+								</select>
+
+							</label></td>
 										
-							<td class="alignLeft">Created Date &nbsp;</td>
-							<td ><label> <input name="createddate"
+							<td class="alignLeft" style="display: none;">Created Date &nbsp;</td>
+							<td style="display: none;"><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="36"
@@ -1082,7 +1098,308 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr> -->
+						
+						</table>
+						
+						<table style="width: auto;height: auto;" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td>
+									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Parent's Details</h5>
+									<br /></td>
+								</tr>
 
+								<tr>
+									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											required> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Name &nbsp;</td>
+									<td><label> <input
+											name="mothersname" type="text" class="myclass" id="name" 
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td class="alignLeft">Father's Qualification
+										&nbsp;</td>
+									<td ><label> <input
+											name="fathersqualification" type="text" class="myclass"
+											id="fathersqualification" 
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's
+										Qualification&nbsp;</td>
+									<td><label> <input
+											name="mothersqualification" type="text" class="myclass"
+											id="mothersqualification"
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td class="alignLeft">Father's Aadhar No
+										&nbsp;</td>
+									<td><label> <input
+											name="fatherscastecertno" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fatherscastecertno" size="36">
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
+										&nbsp;</td>
+									<td ><label> <input
+											name="motherscastecertno" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="motherscastecertno" size="36">
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td class="alignLeft">Sponsored By 
+										 &nbsp;</td>
+									<td ><label> <select name="guardian" required
+									id="guardian" style="width: 224px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+										<option selected></option>
+										<c:forEach items="${sponsorlist}" var="sponsorlist">
+											<c:if test="${(sponsorlist.name != '')}">
+												<option value="${sponsorlist.id}">
+													<c:out value="${sponsorlist.name}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Annual Income &nbsp;</td>
+
+									<td ><label> <input
+											name="parentsannualincome" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="parentsannualincome" size="36"
+											onkeyup="numberWithCommas(this);">
+
+									</label></td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td class="alignLeft">Contact Number* &nbsp;</td>
+
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td class="alignLeft">Email &nbsp;</td>
+
+									<td ><label> <input name="email"
+											type="email" class="myclass" id="email" size="36"
+											>
+
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Number Of Dependents
+										&nbsp;</td>
+
+									<td ><label> <input
+											name="noofdependents" type="text" class="myclass"
+											id="noofdependents" size="36" >
+
+									</label></td>
+
+
+								</tr>
+
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+								<td class="alignLeft">Permanent Address &nbsp;</td>
+
+								<td ><label> <textarea
+											name="permanentaddress" type="text" 
+											id="permanentaddress" rows="4" cols="36"
+											style="text-transform:capitalize;"
+											></textarea>
+
+								</label></td>
+
+
+								<td class="alignLeft" style="padding-left: 20px;">Temporary Address &nbsp;</td>
+								<td ><label> <textarea
+											name="temporaryaddress" type="text"  style="text-transform:capitalize;"
+											id="temporaryaddress" rows="4" cols="36"></textarea>
+								</label></td>
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td class="alignLeft">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+							</table>
+
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">DND Date &nbsp;</td>
+							<td ><label> <input name="crecorddate"
+									type="text"
+									class="myclass" id="datepickerDND" size="36"
+									data-validate="validate(required)">
+							</label></td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+						</tr>
+
+<tr>
+							<td><br /></td>
+						</tr>
+						
+							
+						
+							<!-- <tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr> -->
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+				</table>
 
 						<div>
 							<table width="100%">
@@ -1114,7 +1431,7 @@ $(document).ready(function() {
 							</table>
 
 						</div>
-
+				</div>
 
 
 						<div id="fragment-3">
@@ -1129,7 +1446,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Aadhaar</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1139,7 +1456,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Father Aadhaar</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1149,7 +1466,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Mother Aadhaar</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1159,7 +1476,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">T.C.</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1169,7 +1486,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">B.P.L Card</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
@@ -1515,7 +1832,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-2">
+						<%-- <div id="fragment-2">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1786,11 +2103,10 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 							</table>
-						</div>
+						</div>  --%>
 						
 						<div id="fragment-5">
 
-							<div>
 								<table style="width: auto;height: auto;" align="center">
 									<tr>
 
@@ -1999,14 +2315,10 @@ $(document).ready(function() {
 										<td><br /></td>
 									</tr>
 								</table>
-
-							</div>
-
 						</div>
 						
 						<div id="fragment-6">
 
-							<div>
 								<table style="width: auto;height: auto;" align="center">
 									<tr>
 
@@ -2089,12 +2401,9 @@ $(document).ready(function() {
 										<td><br /></td>
 									</tr>
 								</table>
-
-							</div>
-
 						</div>
 						
-						<div id="fragment-7">
+						<!-- <div id="fragment-7">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2179,14 +2488,9 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div>
-					</table>
-				</div>
-
-
-			</div>
+				</div>  -->
 		</div>
-
+</div>
 
 
 
