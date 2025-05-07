@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,10 +27,12 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.StudentDetailsDto;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
@@ -1385,5 +1388,43 @@ public class StudentService {
 		return result;
 	}
 	//end of otherview of student
+
+	public ResultResponse checkAdmissionNumber(String branchId, String admissionNumber) throws IOException{
+		ResultResponse resultResponse = null;
+		Parents parent = new Parents();
+		
+		if(branchId!=null){
+			
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/xml");
+			response.setHeader("Cache-Control", "no-cache");
+
+			parent = new parentsDetailsDAO().readParentDetails(Integer.parseInt(branchId),admissionNumber);
+				
+				 try {
+			        	
+			        	if(parent!=null){
+			        		String buffer = "<label style='color:red;'>Alert: Duplicate Admission No.</label>";
+				        	response.getWriter().println(buffer);
+			        	}else{
+			        		String buffer = "";
+				        	response.getWriter().println(buffer);
+			        	}
+			        	
+			        } catch (Exception e) {
+			            out.write("<label></label>");
+			        } finally {
+			            out.flush();
+			            out.close();
+			        }
+				 
+		}
+		resultResponse = ResultResponse
+				.builder()
+				.success(true)
+				.build();
+
+		return resultResponse;
+	}
 
 }

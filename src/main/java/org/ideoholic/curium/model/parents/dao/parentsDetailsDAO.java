@@ -138,4 +138,22 @@ public class parentsDetailsDAO {
 	        }
 	}
 
+		public Parents readParentDetails(int branchId, String admissionNumber) {
+			Parents parents = new Parents();
+	        try {
+	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+	            transaction = session.beginTransaction();
+	            Query query = session.createQuery("from Parents as parents where parents.Student.admissionnumber='"+admissionNumber+"' and parents.Student.branchid="+branchId+"");
+	            parents = (Parents) query.uniqueResult();
+	            transaction.commit();
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        }finally {
+				HibernateUtil.closeSession();
+			}
+	        return parents;
+		}	
+
 }

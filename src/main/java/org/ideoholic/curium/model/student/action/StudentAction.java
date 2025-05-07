@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.student.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -327,6 +329,16 @@ public class StudentAction {
 			}
 		} else {
 			return "viewAll";
+		}
+	}
+	
+	@GetMapping("/checkDuplicate")
+	public void checkDuplicate() {
+		try {
+			studentActionAdapter.checkDuplicate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

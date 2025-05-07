@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -331,4 +333,11 @@ public class StudentActionAdapter {
 
         return response.isSuccess();
     }
+
+	public void checkDuplicate() throws IOException {
+		String admissionNumber = request.getParameter("admissionnumber");
+
+		ResultResponse resultResponse = studentService.checkAdmissionNumber(httpSession.getAttribute(BRANCHID).toString(), admissionNumber);
+		
+	}
 }
