@@ -13,10 +13,13 @@ import org.hibernate.query.Query;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
+import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryProjection;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +31,6 @@ public class StudentDiaryDAO {
 	
 	@Autowired
 	private StudentDiaryRepository studentDiaryRepo;
-   
-  
-   
 
 	@Transactional
 	public StudentDiary create(StudentDiary diary) {
@@ -66,28 +66,20 @@ public class StudentDiaryDAO {
             return results;
         }
 	}
-	//readListOfParentObjects
-	@SuppressWarnings({ "finally", "unchecked" })
-	public  List<Object[]>  readListOfParentObjects(int offset, int noOfRecords, int branchId, int sid) {
-		Session session = null;
-	    Transaction transaction = null;
-		List<Object[]> results = new ArrayList<Object[]>();
+ 
+	@Transactional
+	public  List<StudentDiaryProjection>  readListOfParentObjects(int offset, int noOfRecords, int branchId, int sid) {
+	    List<StudentDiaryProjection> results = new ArrayList<>();
         try {
-            
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.sid,s.name,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.createddate,d.userid from StudentDiary d JOIN Student s ON d.sid=s.sid where  d.branchid="+branchId+" and d.sid='"+sid+"'");
-            query.setFirstResult(offset);
-			query.setMaxResults(noOfRecords);
-			results = query.list();
-            transaction.commit();
+        	
+        	Pageable pageable = PageRequest.of(offset, noOfRecords);
+			results = studentDiaryRepo.findByBranchIdAndSid(branchId, sid, pageable).toList();
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
+            throw hibernateException;       
         }
+        return results;
 	}
 	
 	@Transactional
