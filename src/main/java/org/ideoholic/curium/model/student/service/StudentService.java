@@ -36,6 +36,7 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
@@ -1384,5 +1385,42 @@ public class StudentService {
 		return result;
 	}
 	//end of otherview of student
+
+		public OtherFeesDetailsResponseDto viewOtherFeesStructurePerYear(StudentIdDto dto) {
+		OtherFeesDetailsResponseDto result = OtherFeesDetailsResponseDto.builder().build();
+
+		try {
+
+			long id = Long.parseLong(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
+
+			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
+			result.setReceiptInfo(rinfo);
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+
+			long totalSum = 0l;
+			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+
+			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				totalFeesAmount = totalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentotherfeesstructureSingle.getConcession();
+			}
+			result.setOtherFeesStructure(otherfeesstructure);
+			result.setTotalSum(totalSum);
+			result.setDueAmount(totalFeesAmount-totalSum);
+			result.setTotalFeesAmount(totalFeesAmount);
+			result.setAcademicPerYear(academicYear);
+			result.setTotalFeesConcession(totalFeesConcession);
+			result.setSuccess(true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
