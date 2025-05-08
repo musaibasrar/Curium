@@ -66,7 +66,7 @@ public class StudentDiaryDAO {
         try {
         	
         	Pageable pageable = PageRequest.of(offset, noOfRecords);
-			results = studentDiaryRepo.findByBranchIdAndSid(branchId, sid, pageable).toList();
+			results = studentDiaryRepo.findByBranchIdAndSid(branchId, sid, pageable);
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
