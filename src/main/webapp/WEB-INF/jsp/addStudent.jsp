@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/peace/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/peace/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/peace/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/peace/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/peace/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/peace/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/peace/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/peace/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/peace/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/peace/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/peace/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/peace/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/peace/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/peace/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/peace/JavaScript/actb.js"></script>
+<script src="/peace/JavaScript/common.js"></script>
 
 
 
@@ -585,7 +585,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/peace/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -721,7 +721,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+		response.sendRedirect("/peace/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -785,7 +785,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
+							<td class="alignLeft">Admission Number&nbsp;</td>
 							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
@@ -883,7 +883,7 @@ $(document).ready(function() {
 						<tr>
 
 
-							<td class="alignLeft">Studying in Class&nbsp;</td>
+							<td class="alignLeft">Studying in Class*&nbsp;</td>
 							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
@@ -2168,14 +2168,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/abc/StudentProcess/AddStudent";
+									form1.action = "/peace/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/StudentProcess/viewAll";
+								form1.action = "/peace/StudentProcess/viewAll";
 								form1.submit();
 							}
 
