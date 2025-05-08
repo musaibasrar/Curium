@@ -18,7 +18,7 @@ public interface StudentDiaryRepository extends JpaRepository<StudentDiary, Inte
 	           "d.message AS message, d.createddate AS createddate, d.userid AS userid " +
 	           "FROM StudentDiary d JOIN Student s ON d.sid = s.sid " +
 	           "WHERE d.branchid = :branchId AND d.sid = :sid")
-	    Page<StudentDiaryProjection> findByBranchIdAndSid(@Param("branchId") int branchId,
+	    List<StudentDiaryProjection> findByBranchIdAndSid(@Param("branchId") int branchId,
 	                                                      @Param("sid") int sid,
 	                                                      Pageable pageable);
 	 
