@@ -44,27 +44,20 @@ public class StudentDiaryDAO {
         } 
 		 return diary;
 	}
-	@SuppressWarnings({ "finally", "unchecked" })
-	public  List<Object[]>  readListOfObjects(int offset, int noOfRecords, int branchId) {
-		Session session = null;
-	    Transaction transaction = null;
-		List<Object[]> results = new ArrayList<Object[]>();
+	
+	@Transactional
+	public  List<StudentDiaryProjection>  readListOfObjects(int offset, int noOfRecords, int branchId) {
+	    List<StudentDiaryProjection> results = new ArrayList<>();
         try {
-            
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.sid,s.name,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.createddate,d.userid from StudentDiary d JOIN Student s ON d.sid=s.sid where  d.branchid="+branchId+" order by d.createddate DESC");
-            query.setFirstResult(offset);
-			query.setMaxResults(noOfRecords);
-			results = query.list();
-            transaction.commit();
+        	
+        	Pageable pageable = PageRequest.of(offset / noOfRecords, noOfRecords); // Page index is zero-based
+        	results = studentDiaryRepo.findDiaryByBranchId(branchId, pageable);
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
+            throw hibernateException;       
         }
+        return results;
 	}
  
 	@Transactional

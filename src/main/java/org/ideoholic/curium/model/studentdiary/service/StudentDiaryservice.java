@@ -60,23 +60,23 @@ public class StudentDiaryservice {
      				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
 						page = Integer.parseInt(strPage);
 					}
-                        List<Object[]> list = new StudentDiaryDAO().readListOfObjects((page - 1) * recordsPerPage,
+                        List<StudentDiaryProjection> list = studentDiaryDAO.readListOfObjects((page - 1) * recordsPerPage,
         						recordsPerPage, Integer.parseInt(branchId));
                         
                         List<StudentDiaryDTO> diaryDetails = new ArrayList<StudentDiaryDTO>();
-        	            for(Object[] diaryObject: list){
+        	            for(StudentDiaryProjection diaryObject: list){
         	            	StudentDiaryDTO diary = new StudentDiaryDTO();
         	            	
-        	            	diary.setId((Integer)diaryObject[0]);
-        	            	diary.setSid((Integer)diaryObject[1]);
-        	            	diary.setStudentName((String)diaryObject[2]);
-        	                diary.setClasssec((String)diaryObject[3]);
-        	                diary.setAcademicyear((String)diaryObject[4]);
-        	                diary.setBranchid((Integer)diaryObject[5]);
-        	                diary.setSubject((String)diaryObject[6]);
-        	                diary.setMessage((String)diaryObject[7]);
-        	                diary.setCreateddate((Date)diaryObject[8]);
-        	                diary.setUserid((Integer)diaryObject[9]);
+        	            	diary.setId(diaryObject.getId());
+        	            	diary.setSid(diaryObject.getSid());
+        	            	diary.setStudentName(diaryObject.getName());
+        	                diary.setClasssec(diaryObject.getClasssec());
+        	                diary.setAcademicyear(diaryObject.getAcademicyear());
+        	                diary.setBranchid(diaryObject.getBranchid());
+        	                diary.setSubject(diaryObject.getSubject());
+        	                diary.setMessage(diaryObject.getMessage());
+        	                diary.setCreateddate(diaryObject.getCreateddate());
+        	                diary.setUserid(diaryObject.getUserid());
         	                diaryDetails.add(diary);
         	            }
                         
