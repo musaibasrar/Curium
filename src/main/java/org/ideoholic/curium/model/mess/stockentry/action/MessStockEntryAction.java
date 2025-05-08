@@ -48,6 +48,26 @@ public class MessStockEntryAction {
 		}
 
 	}
+	
+	@GetMapping("/purchaseMrvDetails")
+	public void purchaseMrvDetails() {
+		try {
+			messStockEntryActionAdapter.getPurchaseMRVDetails();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@GetMapping("/dueMrvDetails")
+	public void dueMrvDetails() {
+		try {
+			messStockEntryActionAdapter.getDueMRVDetails();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@PostMapping("/savePurchase")
 	public String savePurchase() {
