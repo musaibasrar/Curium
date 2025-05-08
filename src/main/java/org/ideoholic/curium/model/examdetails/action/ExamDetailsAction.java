@@ -61,7 +61,7 @@ public class ExamDetailsAction {
 
         examDetailsActionAdapter.getExamScheduleDetails();
         examDetailsActionAdapter.readListOfExams();
-        subjectDetailsActionAdapter.readListOfSubjects();
+        //subjectDetailsActionAdapter.readListOfSubjects();
 
         return "generatehallticket";
     }
@@ -77,9 +77,9 @@ public class ExamDetailsAction {
         result = standardActionAdapter.viewClasses();
         if (!result)
             return error;
-        result = subjectDetailsActionAdapter.readListOfSubjects();
+        /*result = subjectDetailsActionAdapter.readListOfSubjects();
         if (!result)
-            return error;
+            return error;*/
         result = yearActionAdapter.getYear();
         if (!result)
             return error;

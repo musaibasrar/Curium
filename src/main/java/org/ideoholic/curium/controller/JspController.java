@@ -631,4 +631,9 @@ public class JspController {
 		return "bookhistory";
 	}
 	
+	@GetMapping("/attendancemarkselectdate")
+	public String getAttendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
+	
 }

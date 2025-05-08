@@ -364,14 +364,15 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
-				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+				session.save(studentDailyAttendance);
+				/*Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
 				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);
 				}else{
 					return "error-Can't Mark the attendance twice!!!";
-				}
+				}*/
 			}
 			
 			transaction.commit();

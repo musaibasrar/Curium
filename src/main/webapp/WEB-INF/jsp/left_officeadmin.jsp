@@ -469,7 +469,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/dolphin/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/dolphin/attendancemarkselectdate" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>

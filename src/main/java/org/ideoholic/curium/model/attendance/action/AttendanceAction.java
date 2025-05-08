@@ -293,4 +293,14 @@ public class AttendanceAction {
 		return "attendancesummaryreport";
 	}
 	
+	
+	@PostMapping("/searchStudentAttendanceDetailsMarkSelectedDate")
+	public String searchStudentAttendanceDetailsMarkSelectedDate() {
+		
+		if (attendanceActionAdapter.searchStudentAttendanceDetailsMarkSelectedDate()) {
+			standardActionAdapter.viewClasses();
+			return "attendancemark";
+		}
+		return errorPage;
+	}
 }

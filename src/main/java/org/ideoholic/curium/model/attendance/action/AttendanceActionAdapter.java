@@ -106,7 +106,7 @@ public class AttendanceActionAdapter {
         request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
         request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
         request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
-
+        request.setAttribute("dateofattendanceselected", request.getParameter("dateofattendance"));
         return attendanceDetailsMarkResponseDto.isSuccess();
     }
 
@@ -330,5 +330,10 @@ public class AttendanceActionAdapter {
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
         attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
+    }
+
+	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
+		request.setAttribute("dateofattendanceselected", request.getParameter("dateofattendancemark"));
+        return true;
     }
 }
