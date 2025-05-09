@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.teachersperformance.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
@@ -23,11 +25,9 @@ public class TeacherPerformanceDAO {
 	
 	@Autowired 
 	private ExamsRepository examsRepo;
+
 	
-	
-
-
-
+	@Transactional
 	public List<Exams> getExamsList(int branchid) {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
