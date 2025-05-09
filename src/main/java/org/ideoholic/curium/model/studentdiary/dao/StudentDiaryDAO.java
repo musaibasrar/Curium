@@ -6,12 +6,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryProjection;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -91,29 +86,18 @@ public class StudentDiaryDAO {
 		return noOfRecords;
 	}
 	
-	@SuppressWarnings({ "finally", "unchecked" })
+	 @Transactional
 	public int getNoOfRecords(int branchId) {
-		Session session = null;
-	    Transaction transaction = null;
-		List<StudentDiary> results = new ArrayList<StudentDiary>();
 		int noOfRecords = 0;
 		try {
-			transaction = session.beginTransaction();
-
-						Query query = session.createQuery("select count(*) from StudentDiary where branchid="+branchId+" ");
-			noOfRecords = Integer.parseInt(query.uniqueResult().toString()); 
-			
-			transaction.commit();
+			noOfRecords = studentDiaryRepo.countByBranchid(branchId);
 
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-
-		} finally {
-				HibernateUtil.closeSession();
-			return noOfRecords;
 		}
+		return noOfRecords;
 	}
 
 	 @Transactional

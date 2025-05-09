@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface StudentDiaryRepository extends JpaRepository<StudentDiary, Integer> {
 	int countByBranchidAndSid(int branchid, int sid);
+	int countByBranchid(int branchid);
 	 @Query("SELECT d.id AS id, d.sid AS sid, s.name AS name, d.classsec AS classsec, " +
 	           "d.academicyear AS academicyear, d.branchid AS branchid, d.subject AS subject, " +
 	           "d.message AS message, d.createddate AS createddate, d.userid AS userid " +
