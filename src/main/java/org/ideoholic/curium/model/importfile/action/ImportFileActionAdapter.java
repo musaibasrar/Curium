@@ -16,9 +16,9 @@ import java.io.IOException;
 public class ImportFileActionAdapter {
 
     @Autowired
-    private static HttpServletRequest request;
+    private HttpServletRequest request;
     @Autowired
-    private static HttpServletResponse response;
+    private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
 
