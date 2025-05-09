@@ -22,7 +22,7 @@ public class TeacherPerformanceDAO {
 	
 	
 	@Autowired 
-	private TeacherPerformanceRepository teacherPerformanceRepo;
+	private ExamsRepository examsRepo;
 	
 	
 
@@ -32,7 +32,7 @@ public class TeacherPerformanceDAO {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
 			
-			results = teacherPerformanceRepo.findByBranchid(branchid);
+			results = examsRepo.findByBranchid(branchid);
 
 
 		} catch (Exception hibernateException) { 
