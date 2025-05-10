@@ -1444,6 +1444,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	
 	public void attendanceSummaryReport() {
 		String date = DateUtil.dateFromatConversionSlash(request.getParameter("attendancedate").toString());
+		Date attdate = DateUtil.indiandateParser(request.getParameter("attendancedate"));
 		int present = 0;
 		int absent = 0;
 		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().readStudentAttendance(date);
@@ -1457,6 +1458,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		}
 		request.setAttribute("present", present);
 		request.setAttribute("absent", absent);
+		request.setAttribute("attendancedate", attdate);
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	    List<Classsec> secList = new ArrayList<Classsec>();
 	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();

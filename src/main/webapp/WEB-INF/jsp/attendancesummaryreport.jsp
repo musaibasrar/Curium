@@ -636,8 +636,8 @@ for(Cookie cookie : cookies){
 					                                <div id="attendancereport" class="alignRightFields">
 					                                <h1 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchname}</h1>
 					                                <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-					                                &emsp;&emsp;
-					                                Attendance Report</h3>
+					                                
+					                                Attendance Report &emsp;Date: &nbsp;&nbsp; <fmt:formatDate value="${attendancedate}" pattern="dd/MM/yyyy"/></h3>
 								                    <table id="mytable"  style="border-collapse: collapse;width: 50%;border: 2px solid black;margin-left:215px;">
 								                    <thead>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Class</td>
