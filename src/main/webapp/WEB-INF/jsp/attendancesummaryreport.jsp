@@ -655,7 +655,9 @@ for(Cookie cookie : cookies){
 								                        </c:forEach>
 								                        </tbody>
 								                    </table>
-								                                       
+								                         <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Present: &emsp;${present}&emsp;&emsp;&emsp;Absent:&emsp;${absent}
+					                                
+					                                </h3>               
 								                    </div>
 								                    <table>
 								                    <tr></tr><br></td></tr>
