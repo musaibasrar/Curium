@@ -18,8 +18,8 @@ public class BookDto {
 	private String author;
 	private String publisher;
 	private String isbn;
-	private String status;
-	private String bookHolder;
+	private int availableqty;
+	private int issuedqty;
 	private String shelf;
 	private Date startdate;
 	private Date enddate;
