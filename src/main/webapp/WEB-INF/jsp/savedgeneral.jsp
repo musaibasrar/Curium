@@ -1,18 +1,17 @@
 <%-- 
-    Document   : Report card Save success
+    Document   : Saved
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Book Save success</title>
+        <title>Save success</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -89,13 +88,14 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="/images/bg.jpg" >
-        <form id="form1" action="/abc/LibraryProcess/viewbooks"  method="post">
+        <form id="form1" action="/abc/"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Book Saved successfully<c:out value="${reportcardpath}"></c:out></p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Operation Completed Successfully</p>
         <p class="style1">
-            <input type="submit" id="view" value="View Book" >
-            
+          
+            <input type="button" id="view" value="View All " onClick="ViewAll()">
+            <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
         </p></td>
       </tr>
     </table>

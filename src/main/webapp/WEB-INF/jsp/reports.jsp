@@ -312,22 +312,22 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
+            				 <a target="mainFrame" href="/abc/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
+            				 <a target="mainFrame" href="/abc/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
+            				 <a target="mainFrame" href="/abc/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
+            				 <a target="mainFrame" href="/abc/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
             			</td>
             		</tr>
             		
@@ -533,7 +533,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/bookhistory" style="font-size: 12px;">Books Issue Report</a>
+            				 <a target="mainFrame" href="/abc/bookhistory" style="font-size: 12px;">Books Issue Report</a>
             			</td>
             		</tr>
             		

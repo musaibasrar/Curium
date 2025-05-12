@@ -2017,7 +2017,7 @@ $(document).ready(function() {
 										<td><br /></td>
 									</tr>
 						
-						<tr>
+						<!-- <tr>
 							<td class="alignLeft" >Bank IFSC Code&nbsp;</td>
 							<td><label> <input name="bankifsc" type="text" class="myclass" id="bankifsc" size="36"
 									style="text-transform:capitalize;"
@@ -2026,7 +2026,7 @@ $(document).ready(function() {
 						</tr>
 								<tr>
 										<td><br /></td>
-								</tr>
+								</tr> -->
 						<tr>
 							<td class="alignLeft" >Account No. &nbsp;</td>
 							<td><label> <input name="accno" type="text" class="myclass" id="accno" size="36"
