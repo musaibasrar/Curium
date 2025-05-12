@@ -37,6 +37,7 @@ import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferStatus;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.examdetails.dto.HallTicketInfoDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -824,4 +825,24 @@ public class DocumentService {
 			
 			return parentDto;
 		}
+		 
+		 public ResultResponse addHallTicketInfo(HallTicketInfoDto hallTicketInfoDto) {
+			 
+		 		Map<Integer, String> mapOfHallTicket = new HashMap<Integer, String>();
+		 		String[] blockNos = hallTicketInfoDto.getBlockNos();
+		 		String[] seatNos = hallTicketInfoDto.getSeatNos();
+		 		boolean result = false;
+		 		if (hallTicketInfoDto != null) {
+		 			
+		 			int i=0;
+		 			for (String sid : hallTicketInfoDto.getStudentIds()) {
+		 				String blockAndSeat = blockNos[i]+":"+seatNos[i];
+		 				mapOfHallTicket.put(Integer.parseInt(sid), blockAndSeat);
+		 				i++;
+		 				System.out.println("Here i am "+i);
+		 			}
+		 			result = new DocumentDAO().addHallTicketInfo(mapOfHallTicket);
+		 		}
+		 		return ResultResponse.builder().success(result).build();
+		 	}
 }

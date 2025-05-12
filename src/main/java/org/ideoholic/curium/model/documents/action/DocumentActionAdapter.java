@@ -14,6 +14,7 @@ import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.examdetails.dto.HallTicketInfoDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.Constants;
@@ -196,6 +197,16 @@ public class DocumentActionAdapter {
 	public boolean downlaodFile() {
 		ResultResponse resultResponse=documentService.downlaodFile();
 		return resultResponse.isSuccess();
+	}
+
+	public boolean addHallTicketInfo() {
+			HallTicketInfoDto hallTicketInfoDto = new HallTicketInfoDto();
+			
+			hallTicketInfoDto.setStudentIds(request.getParameterValues("studentIDs"));
+			hallTicketInfoDto.setBlockNos(request.getParameterValues("blocknos"));
+			hallTicketInfoDto.setSeatNos(request.getParameterValues("seatnos"));
+			ResultResponse resultResponse=documentService.addHallTicketInfo(hallTicketInfoDto);
+			return resultResponse.isSuccess();
 	}
 
 }

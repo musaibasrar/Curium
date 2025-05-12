@@ -210,4 +210,26 @@ public class DocumentAction {
 		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/hallticketinfo")
+ 	public String marksEntry() {
+		standardActionAdapter.viewClasses();
+ 		return "hallticketinfo";
+ 	}
+ 	
+ 	@PostMapping("/searchStudentsForHallTicketInfo")
+ 	public String searchStudentsForHallTicketInfo() {
+ 		stampFeesActionAdapter.advanceSearch();
+ 		return "hallticketinfo";
+ 	}
+ 	
+ 	@PostMapping("/addHallTicketInfo")
+ 	public String addHallTicketInfo() {
+ 		if(documentActionAdapter.addHallTicketInfo()) {
+ 			return "savedgeneral";
+ 		}else {
+ 			return "error";
+ 		}
+ 		
+ 	}
 }
