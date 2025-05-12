@@ -7,21 +7,21 @@
 <html>
     <head>
     <title>Update Enquiry Form</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 
 <style>
    td{
@@ -232,7 +232,7 @@
 	
 	function updateEnquiryForm(){
 		var form1=document.getElementById("form1");
-		form1.action="/vision/EnquiryProcess/updateEnquiryFormDetails?id=<c:out value='${admissionEnquiry.id}'/>";
+		form1.action="/abc/EnquiryProcess/updateEnquiryFormDetails?id=<c:out value='${admissionEnquiry.id}'/>";
 		form1.submit();
 	}
 	
@@ -304,7 +304,7 @@
 						<tr>
 							<td class="alignLeft">Date of Birth</td>
 							<td><input name="dateofbirth" type="text" class="myclass" id="datepicker" size="20" autocomplete="false" onchange="CalculateAge(this)" data-validate="validate(required)" value="${admissionEnquiry.dateofbirth}"></td>
-							<td class="alignLeft" style="padding-left: 20px;">Caste</td>
+							<td class="alignLeft" style="padding-left: 20px;">Enquiry Date</td>
 							<td><input type="text" name="caste" value="${admissionEnquiry.caste}" class="myclass"/></td>
 						</tr>
 						<tr>
@@ -432,7 +432,7 @@
 						<tr>
 							<td class="alignLeft">Permanent Address</td>
 							<td><textarea name="address" class="myclass">${admissionEnquiry.address}</textarea></td>
-							<td class="alignLeft" style="padding-left: 20px;">Notes</td>
+							<td class="alignLeft" style="padding-left: 20px;">Fees</td>
 							<td><textarea name="notes" class="myclass">${admissionEnquiry.notes}</textarea></td>
 						</tr>
 						<tr>

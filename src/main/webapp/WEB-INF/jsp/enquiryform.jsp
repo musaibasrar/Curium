@@ -31,22 +31,22 @@
 	font-weight: bold;
     }
 </style>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -250,7 +250,7 @@
 <script type="text/javascript">
 	function saveEnquiryForm() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/EnquiryProcess/saveEnquiryForm";
+		form1.action = "/abc/EnquiryProcess/saveEnquiryForm";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -272,10 +272,10 @@
 	}
 </script>
 
-	<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+	<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
 
-	<script src="/vision/JavaScript/actb.js"></script>
-	<script src="/vision/JavaScript/common.js"></script>
+	<script src="/abc/JavaScript/actb.js"></script>
+	<script src="/abc/JavaScript/common.js"></script>
 
 
 
@@ -374,7 +374,7 @@
 		//allow access only if session exists
 		String user = null;
 		if (session.getAttribute("userAuth") == null) {
-			response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+			response.sendRedirect("/abc/UserProcess/sessionTimeOut");
 		} else
 			user = (String) session.getAttribute("userAuth");
 		String userName = null;
@@ -407,7 +407,7 @@
 						</tr>
 						<tr>
 							<td class="alignLeft">Name of the child</td>
-							<td><input type="text" name="name" class="myclass"/></td>
+							<td><input type="text" name="name" class="myclass" required/></td>
 							<td class="alignLeft" style="padding-left: 20px;">Gender</td>
 							<td>Male<input type="checkbox" value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input type="checkbox" value="Female" name="gender" id="no:male" onclick="noCheck(this.id)" /></td>
 						</tr>
@@ -420,7 +420,7 @@
 						<tr>
 							<td class="alignLeft">Date of Birth</td>
 							<td><input name="dateofbirth" type="text" class="myclass" id="datepicker" size="20" autocomplete="false" onchange="CalculateAge(this)" data-validate="validate(required)"></td>
-							<td class="alignLeft" style="padding-left: 20px;">Caste</td>
+							<td class="alignLeft" style="padding-left: 20px;">Enquiry Date</td>
 							<td><input type="text" name="caste" class="myclass"/></td>
 						</tr>
 						<tr>
@@ -546,7 +546,7 @@
 						<tr>
 							<td class="alignLeft">Permanent Address</td>
 							<td><textarea name="address" class="myclass"></textarea></td>
-							<td class="alignLeft" style="padding-left: 20px;">Notes</td>
+							<td class="alignLeft" style="padding-left: 20px;">Fees</td>
 							<td><textarea name="notes" class="myclass"></textarea></td>
 						</tr>
 						<tr>

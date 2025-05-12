@@ -72,7 +72,8 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(admissionEnquiryDto.getMobileno());
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
-	    
+	    admissionEnquiry.setBranchId(admissionEnquiryDto.getBranchId());
+	    admissionEnquiry.setUserId(admissionEnquiryDto.getUserId());
 	    boolean result = new enquiryDAO().add(admissionEnquiry);
 	    
 	    admissionEnquiryResponseDto.setName(admissionEnquiryDto.getName());
@@ -97,7 +98,7 @@ public class EnquiryService {
 	    admissionEnquiryResponseDto.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiryResponseDto.setNotes(admissionEnquiryDto.getNotes());
 	    
-	    admissionEnquiryResponseDto.setSuccess(true);
+	    admissionEnquiryResponseDto.setSuccess(result);
 	    
 		return admissionEnquiryResponseDto;
 	}
@@ -157,6 +158,8 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(admissionEnquiryDto.getMobileno());
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
+	    admissionEnquiry.setBranchId(admissionEnquiryDto.getBranchId());
+	    admissionEnquiry.setUserId(admissionEnquiryDto.getUserId());
 	    new enquiryDAO().update(admissionEnquiry);
 	    admissionEnquiryResponseDto.setSuccess(true);
 	    return admissionEnquiryResponseDto;
