@@ -2,6 +2,8 @@ package org.ideoholic.curium.model.printids.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.mess.card.dto.Card;
@@ -24,6 +26,7 @@ public class PrintIdsDAO {
 	@Autowired
 	private ParentsRepository parentsRepository;
 
+	@Transactional
 	public Parents printMultipleIds(String id) {
 		 Parents parentsDetails = new Parents();
 			       try {
