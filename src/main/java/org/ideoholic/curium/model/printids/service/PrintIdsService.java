@@ -18,12 +18,14 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PrintIdsService {
 
-
+    @Autowired
+    private PrintIdsDAO printIdsDAO;
 	
 	public SearchStudentResponseDto searchDetails(SearchStudentDto searchStudentDto,String branchid) {
 		
@@ -92,7 +94,7 @@ public class PrintIdsService {
               
                System.out.println("Value of i is " + i);
                int sid = Integer.valueOf(id);
-               parentsDetails = new PrintIdsDAO().printMultipleIds(id);
+               parentsDetails = printIdsDAO.printMultipleIds(id);
                
                //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
@@ -231,7 +233,7 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
          }
         
         if(cardList.size()>0) {
-        	success = new PrintIdsDAO().updateCardValidity(cardList);
+        	success = printIdsDAO.updateCardValidity(cardList);
         }
         }
         
