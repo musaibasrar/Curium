@@ -1,16 +1,17 @@
 package org.ideoholic.curium.model.account.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
@@ -19,14 +20,15 @@ public class AccountActionAdapter {
     @Autowired
     private HttpServletRequest request;
 
-    @Autowired
-    private HttpServletResponse response;
-
 	@Autowired
 	private HttpSession httpSession;
 
+	@Autowired
+	private AccountService accountService;
+			
+	String BRANCHID = "branchid";
+
     public boolean saveAccount() {
-	AccountService accountService = new AccountService(request, response);
 
 	AccountDto accountDto = new AccountDto();
 	accountDto.setNewSubGroup(request.getParameter("newsubgroup"));
@@ -37,7 +39,7 @@ public class AccountActionAdapter {
 	accountDto.setAccountName(request.getParameter("accountname"));
 	accountDto.setAccountCode(request.getParameter("accountcode"));
 
-	ResultResponse response = accountService.saveAccount(accountDto);
+		CreateAccountResponseDto response = accountService.saveAccount(accountDto, httpSession.getAttribute(BRANCHID).toString());
 	if (response == null) {
 	    return false;
 	}
@@ -48,17 +50,17 @@ public class AccountActionAdapter {
     }
 
 	public boolean deleteAccount(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountDeleteDto accountDeleteDto = new AccountDeleteDto();
 		accountDeleteDto.setAccountIds(request.getParameterValues("accountids"));
 
-		return accountService.deleteAccount(accountDeleteDto);
+		CreateAccountResponseDto resultResponse = accountService.deleteAccount(accountDeleteDto);
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean saveReceipt(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountReceiptDto accountReceiptDto = new AccountReceiptDto();
 		accountReceiptDto.setDraccountName(request.getParameter("accountname"));
 		accountReceiptDto.setCraccountName(request.getParameter("accountnamesecond"));
@@ -68,22 +70,24 @@ public class AccountActionAdapter {
 		accountReceiptDto.setReceiptDate(request.getParameter("dateofreceipt"));
 		accountReceiptDto.setReceiptNarration(request.getParameter("receiptnarration"));
 
-		return accountService.saveReceipt(accountReceiptDto);
+		CreateVoucherResponseDto resultResponse = accountService.saveReceipt(accountReceiptDto, httpSession.getAttribute(BRANCHID).toString());
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean cancelVoucher(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		CancelVoucherDto cancelVoucherDto = new CancelVoucherDto();
 		cancelVoucherDto.setReceiptIds(request.getParameterValues("transactionids"));
 		cancelVoucherDto.setVoucher(request.getParameter("voucher"));
 
-		return accountService.cancelVoucher(cancelVoucherDto);
+		ResultResponse resultResponse = accountService.cancelVoucher(cancelVoucherDto);
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean saveJournal(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountJournalDto accountJournalDto = new AccountJournalDto();
 		accountJournalDto.setDraccountNameJournal(request.getParameter("accountnamejournal"));
 		accountJournalDto.setCraccountNameJournal(request.getParameter("accountnamejournalsecond"));
@@ -93,12 +97,13 @@ public class AccountActionAdapter {
 		accountJournalDto.setJournalDate(request.getParameter("dateofjournal"));
 		accountJournalDto.setJournalNarration(request.getParameter("journalnarration"));
 
-		return accountService.saveJournal(accountJournalDto);
+		CreateVoucherResponseDto resultResponse = accountService.saveJournal(accountJournalDto, httpSession.getAttribute(BRANCHID).toString());
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean saveContra(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountContraDto accountContraDto = new AccountContraDto();
 		accountContraDto.setDraccountName(request.getParameter("accountnamecontra"));
 		accountContraDto.setCraccountName(request.getParameter("accountnamecontrasecond"));
@@ -108,12 +113,13 @@ public class AccountActionAdapter {
 		accountContraDto.setContraDate(request.getParameter("dateofcontra"));
 		accountContraDto.setContraNarration(request.getParameter("contranarration"));
 
-		return accountService.saveContra(accountContraDto);
+		CreateVoucherResponseDto resultResponse = accountService.saveContra(accountContraDto, httpSession.getAttribute(BRANCHID).toString());
+
+		return resultResponse.isSuccess();
 	}
 
 	public boolean savePayment(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountPaymentDto accountPaymentDto = new AccountPaymentDto();
 		accountPaymentDto.setDraccountName(request.getParameter("accountnamepayment"));
 		accountPaymentDto.setCraccountName(request.getParameter("accountnamepaymentsecond"));
@@ -123,89 +129,110 @@ public class AccountActionAdapter {
 		accountPaymentDto.setPaymentDate(request.getParameter("dateofpayment"));
 		accountPaymentDto.setPaymentNarration(request.getParameter("paymentnarration"));
 
-		return accountService.savePayment(accountPaymentDto);
+		CreateVoucherResponseDto resultResponse = accountService.savePayment(accountPaymentDto, httpSession.getAttribute(BRANCHID).toString());
 
+		return resultResponse.isSuccess();
 	}
 
 	public boolean saveFinancialYear(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		AccountFinancialYearDto financialYearDto = new AccountFinancialYearDto();
 		financialYearDto.setFromDate(request.getParameter("fromdate"));
 		financialYearDto.setToDate(request.getParameter("todate"));
 		financialYearDto.setActive(request.getParameter("active"));
-		financialYearDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
+		ResultResponse resultResponse = accountService.saveFinancialYear(financialYearDto, httpSession.getAttribute(BRANCHID).toString());
 
-		return accountService.saveFinancialYear(financialYearDto);
+		return resultResponse.isSuccess();
 	}
 
 	public boolean getIncomeStatement(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		IncomeStatementDto incomeStatementDto = new IncomeStatementDto();
 		incomeStatementDto.setFromDate(request.getParameter("fromdate"));
 		incomeStatementDto.setToDate(request.getParameter("todate"));
-		incomeStatementDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-		return accountService.getIncomeStatement(incomeStatementDto);
+		IncomeStatementResponseDto responseDto =  accountService.getIncomeStatement(incomeStatementDto, httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("income", responseDto.getIncome());
+		request.setAttribute("incomeledgersaccount", responseDto.getIncomeLedgersAccount());
+		request.setAttribute("expensesledgersaccount", responseDto.getExpenseLedgersAccount());
+		request.setAttribute("expenses", responseDto.getExpenses());
+		request.setAttribute("incometotallabel", responseDto.getIncomeTotalLabel());
+		request.setAttribute("expensetotallabel", responseDto.getExpenseTotalLabel());
+		request.setAttribute("incometotal", responseDto.getIncomeTotal());
+		request.setAttribute("expensetotal", responseDto.getExpenseTotal());
+		request.setAttribute("fromdate", responseDto.getFromDate());
+		request.setAttribute("todate", responseDto.getToDate());
+		request.setAttribute("profitlabel", responseDto.getProfitLabel());
+		request.setAttribute("totalprofit", responseDto.getTotalProfit());
+		request.setAttribute("losslabel", responseDto.getLossLabel());
+		request.setAttribute("totalloss", responseDto.getTotalLoss());
 
+		return responseDto.isSuccess();
 	}
 
 	public boolean exportTrialBalance(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		ExportTrialBalanceDto exportTrialBalanceDto = new ExportTrialBalanceDto();
 		exportTrialBalanceDto.setCreditAllAcc(httpSession.getAttribute("credittotal").toString());
 		exportTrialBalanceDto.setDebitAllAcc(httpSession.getAttribute("debittotal").toString());
 		exportTrialBalanceDto.setFromDate((String) httpSession.getAttribute("fromdatetb"));
 		exportTrialBalanceDto.setToDate((String) httpSession.getAttribute("todatetb"));
+		Map<String, TrailBalanceDto> trailBalanceDto = new LinkedHashMap<String, TrailBalanceDto>();
+		Map<Accountdetails, BigDecimal> accountBalanceMap = (Map<Accountdetails, BigDecimal >)httpSession.getAttribute("accountdetailsbalanceMap");
+		String account = "account";
+		int count = 1;
 
-		return accountService.exportTrialBalance(exportTrialBalanceDto);
-	}
+		for (Map.Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
+			trailBalanceDto.put(account+count++, TrailBalanceDto.builder()
+					.accountDetails(accBal.getKey())
+					.amount(accBal.getValue())
+					.build());
 
-	public boolean printSearchJournalEntries() {
-		AccountService accountService = new AccountService(request, response);
-
-		PrintSearchJournalEntriesDto printSearchJournalEntriesDto = new PrintSearchJournalEntriesDto();
-		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
-		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
-		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
-		printSearchJournalEntriesDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-
-		ResultResponse resultResponse = accountService.printSearchJournalEntries(printSearchJournalEntriesDto);
-		if (resultResponse.isSuccess()){
-			Map resultMap = resultResponse.getResultMap();
-			request.setAttribute("ledgertransactions", resultResponse.getResultMap());
-			request.setAttribute("ledgername", resultResponse.getMessage());
-			request.setAttribute("fromdateselected", printSearchJournalEntriesDto.getFromDate());
-			request.setAttribute("todateselected", printSearchJournalEntriesDto.getToDate());
 		}
+		exportTrialBalanceDto.setTrailBalanceDto(trailBalanceDto);
+		ResultResponse resultResponse = accountService.exportTrialBalance(exportTrialBalanceDto);
 
 		return resultResponse.isSuccess();
 	}
 
-	public boolean viewVouchersPrint(){
-		AccountService accountService = new AccountService(request, response);
+	public boolean printSearchJournalEntries() {
+	
+		PrintSearchJournalEntriesDto printSearchJournalEntriesDto = new PrintSearchJournalEntriesDto();
+		printSearchJournalEntriesDto.setAccountDetails(request.getParameter("accountidselected"));
+		printSearchJournalEntriesDto.setFromDate(request.getParameter("fromdateselected"));
+		printSearchJournalEntriesDto.setToDate(request.getParameter("todateselected"));
 
+		SearchJournalEntriesResponseDto responseDto = accountService.printSearchJournalEntries(printSearchJournalEntriesDto, httpSession.getAttribute(BRANCHID).toString());
+		if (responseDto.isSuccess()){
+			Map resultMap = responseDto.getLedgerTransaction();
+			request.setAttribute("ledgertransactions", responseDto.getLedgerTransaction());
+			request.setAttribute("ledgername", responseDto.getLedgerName());
+			request.setAttribute("fromdateselected", responseDto.getFromDate());
+			request.setAttribute("todateselected", responseDto.getToDate());
+		}
+
+		return responseDto.isSuccess();
+	}
+
+	public boolean viewVouchersPrint(){
+	
 		VoucherPrintDto voucherPrintDto = new VoucherPrintDto();
 		voucherPrintDto.setFromDate(request.getParameter("fromdateselected"));
 		voucherPrintDto.setToDate(request.getParameter("todateselected"));
 		voucherPrintDto.setNextVoucher(request.getParameter("voucher"));
-		voucherPrintDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-		VoucherPrintResponseDto voucherPrintResponseDto = accountService.viewVouchersPrint(voucherPrintDto);
+		VoucherPrintResponseDto voucherPrintResponseDto = accountService.viewVouchersPrint(voucherPrintDto, httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("vouchertransactions", voucherPrintResponseDto.getVoucherTransactions());
 		request.setAttribute("vouchertype", voucherPrintResponseDto.getVoucherType());
 		request.setAttribute("fromdateselected", voucherPrintResponseDto.getFromDateSelected());
 		request.setAttribute("todateselected", voucherPrintResponseDto.getToDateSelected());
 
-		return accountService.viewVouchersPrint(voucherPrintDto).isSuccess();
+		return accountService.viewVouchersPrint(voucherPrintDto, httpSession.getAttribute(BRANCHID).toString()).isSuccess();
 	}
 
 	public boolean viewVouchers(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		ViewNextVoucherDto viewNextVoucherDto = new ViewNextVoucherDto();
 		viewNextVoucherDto.setFromDate(request.getParameter("fromdate"));
 		viewNextVoucherDto.setToDate(request.getParameter("todate"));
@@ -223,15 +250,13 @@ public class AccountActionAdapter {
 	}
 
 	public boolean searchJournalEntries(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		SearchLedgerEntriesDto searchLedgerEntriesDto = new SearchLedgerEntriesDto();
 		searchLedgerEntriesDto.setAccountDetails(request.getParameter("accountid"));
 		searchLedgerEntriesDto.setFromDate(request.getParameter("fromdate"));
 		searchLedgerEntriesDto.setToDate(request.getParameter("todate"));
-		searchLedgerEntriesDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-		SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto);
+		SearchLedgerEntriesResponseDto searchLedgerEntriesResponseDto = accountService.searchJournalEntries(searchLedgerEntriesDto, httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("ledgertransactions", searchLedgerEntriesResponseDto.getLedgerTransaction());
 		request.setAttribute("ledgername", searchLedgerEntriesResponseDto.getLedgerName());
 		request.setAttribute("accountid", searchLedgerEntriesResponseDto.getAccountId());
@@ -242,49 +267,45 @@ public class AccountActionAdapter {
 	}
 
 	public boolean getAllLedgers() {
-		AccountService accountService = new AccountService(request, response);
-		Integer branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
-		ResultResponse resultResponse = accountService.getAllLedgers(branchId);
+			ResultResponse resultResponse = accountService.getAllLedgers(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("ledgeraccountdetails", resultResponse.getResultList());
 
 		return resultResponse.isSuccess();
 	}
 
 	public boolean exportVoucher(){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		ExportVoucherDto exportVoucherDto = new ExportVoucherDto();
 		exportVoucherDto.setNextVoucher(request.getParameter("voucher"));
 		exportVoucherDto.setFromDate(request.getParameter("fromdateselected"));
 		exportVoucherDto.setToDate(request.getParameter("todateselected"));
-		exportVoucherDto.setBranchId(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
-		ResultResponse resultResponse =accountService.exportVoucher(exportVoucherDto);
-		request.setAttribute("vouchertype", exportVoucherDto.getNextVoucher());
+		ResultResponse resultResponse =accountService.exportVoucher(exportVoucherDto, httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("vouchertype", resultResponse.getMessage());
 
 		return resultResponse.isSuccess();
 	}
 
 	public boolean downloadTrialBalance() {
-		AccountService accountService = new AccountService(request, response);
+	
+		ResultResponse resultResponse = accountService.downloadTrialBalance();
 
-		return accountService.downloadTrialBalance();
+		return resultResponse.isSuccess();
 	}
 
 	public boolean downloadVoucherTransactions() {
-		AccountService accountService = new AccountService(request, response);
+	
+		ResultResponse resultResponse = accountService.downloadVoucherTransactions();
 
-		return accountService.downloadVoucherTransactions();
+		return resultResponse.isSuccess();
 	}
 
 	public boolean searchSingleLedgerEntries() {
-		AccountService accountService = new AccountService(request, response);
-
+	
 		String accountIds = request.getParameter("accountid");
-		String branchId = httpSession.getAttribute("branchid").toString();
 		String ledgerName = request.getParameter("ledgername");
 
-		SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntriesResponseDto = accountService.searchSingleLedgerEntries(accountIds, branchId, ledgerName);
+		SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntriesResponseDto = accountService.searchSingleLedgerEntries(accountIds, httpSession.getAttribute(BRANCHID).toString(), ledgerName);
 		request.setAttribute("ledgertransactions", searchSingleLedgerEntriesResponseDto.getLedgerTransaction());
 		request.setAttribute("ledgername", searchSingleLedgerEntriesResponseDto.getLedgerName());
 		request.setAttribute("accountid", searchSingleLedgerEntriesResponseDto.getAccountId());
@@ -295,24 +316,19 @@ public class AccountActionAdapter {
 	}
 
 	public boolean viewCancelledVouchers() {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
-
-		ResultResponse resultResponse = accountService.viewCancelledVouchers(branchId);
+	
+		ResultResponse resultResponse = accountService.viewCancelledVouchers(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("cancelledvouchertransactions", resultResponse.getResultMap());
 
 		return resultResponse.isSuccess();
 	}
 	public void viewVouchers(int voucherType){
-		AccountService accountService = new AccountService(request, response);
-
+	
 		String fromDate = request.getParameter("fromdate");
 		String toDate = request.getParameter("todate");
-		Integer branchId = Integer.parseInt(httpSession.getAttribute("branchid").toString());
 		String nextVoucher = request.getParameter("voucher");
 
-		ViewNextVoucherResponseDto viewNextVoucherResponseDto = accountService.viewVouchers(voucherType, branchId, fromDate, toDate, nextVoucher);
+		ViewNextVoucherResponseDto viewNextVoucherResponseDto = accountService.viewVouchers(voucherType, httpSession.getAttribute(BRANCHID).toString(), fromDate, toDate, nextVoucher);
 		request.setAttribute("vouchertransactions", viewNextVoucherResponseDto.getVoucherTransactions());
 		request.setAttribute("vouchertype", viewNextVoucherResponseDto.getVoucherType());
 		request.setAttribute("fromdateselected", viewNextVoucherResponseDto.getFromDateSelected());
@@ -322,11 +338,8 @@ public class AccountActionAdapter {
 	}
 
 	public boolean balanceSheet() {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
-
-		BalanceSheetResponseDto balanceSheetResponseDto = accountService.balanceSheet(branchId);
+	
+		BalanceSheetResponseDto balanceSheetResponseDto = accountService.balanceSheet(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("liabilities", balanceSheetResponseDto.getLiabilities());
 		request.setAttribute("liabilitiesLedgeraccount", balanceSheetResponseDto.getLiabilitiesLedgerAccount());
 		request.setAttribute("reserves", balanceSheetResponseDto.getReserves());
@@ -341,11 +354,8 @@ public class AccountActionAdapter {
 	}
 
 	public boolean createVoucher() {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
-
-		CreateVoucherResponseDto createVoucherResponseDto = accountService.createVoucher(branchId);
+	
+		CreateVoucherResponseDto createVoucherResponseDto = accountService.createVoucher(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("accountdetailsbalanceexbc", createVoucherResponseDto.getAccountDetailsBalance());
 		request.setAttribute("accountdetailsbalanceexpacc", createVoucherResponseDto.getAccountDetailsBalanceExpenses());
 		request.setAttribute("accountdetailsbalancecontra",createVoucherResponseDto.getAccountDetailsBalanceBankCash());
@@ -357,35 +367,28 @@ public class AccountActionAdapter {
 	}
 
 	public void getSSGroupNames() throws IOException {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
+	
 		String strAccountSubGroupMasterId = request.getParameter("subgroupname");
 
-		ResultResponse resultResponse = accountService.getSSGroupNames(branchId, strAccountSubGroupMasterId);
+		ResultResponse resultResponse = accountService.getSSGroupNames(httpSession.getAttribute(BRANCHID).toString(), strAccountSubGroupMasterId);
 		if(resultResponse != null && resultResponse.getResultList() != null){
 			request.setAttribute("accountssgroupmaster", resultResponse.getResultList());
 		}
 	}
 
 	public void getSubGroupNames() throws IOException {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
+	
 		String strAccountGroupMasterId = request.getParameter("groupname");
 
-		ResultResponse resultResponse = accountService.getSubGroupNames(branchId, strAccountGroupMasterId);
+		ResultResponse resultResponse = accountService.getSubGroupNames(httpSession.getAttribute(BRANCHID).toString(), strAccountGroupMasterId);
 		if(resultResponse != null && resultResponse.getResultList() != null){
 			request.setAttribute("accountsubgroupmaster", resultResponse.getResultList());
 		}
 	}
 
 	public boolean createAccount() {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
-
-		CreateAccountResponseDto createAccountResponseDto = accountService.createAccount(branchId);
+	
+		CreateAccountResponseDto createAccountResponseDto = accountService.createAccount(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("accountgroupmaster", createAccountResponseDto.getAccountGroupMaster());
 		request.setAttribute("accountdetailsbalance", createAccountResponseDto.getAccountDetailsBalance());
 
@@ -393,11 +396,8 @@ public class AccountActionAdapter {
 	}
 
 	public boolean getCurrentFinancialYear() {
-		AccountService accountService = new AccountService(request, response);
-
-		String branchId = httpSession.getAttribute("branchid").toString();
-
-		CurrentFinancialYearResponseDto currentFinancialYearResponseDto = accountService.getCurrentFinancialYear(branchId);
+	
+		CurrentFinancialYearResponseDto currentFinancialYearResponseDto = accountService.getCurrentFinancialYear(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("currentfinancialaccountingyearfrom", currentFinancialYearResponseDto.getFinancialStartDate());
 		request.setAttribute("currentfinancialaccountingyearto", currentFinancialYearResponseDto.getFinancialEndDate());
 
@@ -405,13 +405,12 @@ public class AccountActionAdapter {
 	}
 
 	public boolean trialBalance() {
-		AccountService accountService = new AccountService(request, response);
 
-		String strFromDate = request.getParameter("fromdate");
-		String strToDate = request.getParameter("todate");
-		String strBranchId = httpSession.getAttribute("branchid").toString();
+		DayBookDto dto = new DayBookDto();
+		dto.setFromDate(request.getParameter("fromdate"));
+		dto.setToDate(request.getParameter("todate"));
 
-		TrialBalanceResponseDto trialBalanceResponseDto = accountService.trialBalance(strFromDate, strToDate, strBranchId);
+		TrialBalanceResponseDto trialBalanceResponseDto = accountService.trialBalance(dto, httpSession.getAttribute(BRANCHID).toString());
 		httpSession.setAttribute("accountdetailsbalanceMap", trialBalanceResponseDto.getAccountDetailsBalanceMap());
 		httpSession.setAttribute("credittotal", trialBalanceResponseDto.getCreditTotal());
 		httpSession.setAttribute("debittotal", trialBalanceResponseDto.getDebitTotal());
@@ -419,5 +418,17 @@ public class AccountActionAdapter {
 		httpSession.setAttribute("todatetb", trialBalanceResponseDto.getToDate());
 
 		return trialBalanceResponseDto.isSuccess();
+	}
+	
+	public boolean getDayBook(){
+
+		DayBookDto dto = new DayBookDto();
+		dto.setFromDate(DateUtil.dateFromatConversionSlash(request.getParameter("fromdate")));
+		dto.setToDate(DateUtil.dateFromatConversionSlash(request.getParameter("todate")));
+		
+		DayBookResponseDto dayBookDtoOutput = accountService.getDayBook(dto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("voucherentrytransactions", dayBookDtoOutput.getVoucherEntryTransactions());
+		
+		return dayBookDtoOutput.isSuccess();
 	}
 }
