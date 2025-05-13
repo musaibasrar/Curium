@@ -155,6 +155,7 @@ public class AccountActionAdapter {
 		IncomeStatementResponseDto responseDto =  accountService.getIncomeStatement(incomeStatementDto, httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("income", responseDto.getIncome());
 		request.setAttribute("incomeledgersaccount", responseDto.getIncomeLedgersAccount());
+		request.setAttribute("expensesledgersaccount", responseDto.getExpenseLedgersAccount());
 		request.setAttribute("expenses", responseDto.getExpenses());
 		request.setAttribute("incometotallabel", responseDto.getIncomeTotalLabel());
 		request.setAttribute("expensetotallabel", responseDto.getExpenseTotalLabel());
