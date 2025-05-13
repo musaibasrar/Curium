@@ -2,57 +2,48 @@ package org.ideoholic.curium.model.printids.dao;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.parents.dao.ParentsRepository;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class PrintIdsDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	SessionFactory sessionFactory;
 	
-	private static final Logger logger = LogManager.getLogger(PrintIdsDAO.class);
 
-	public PrintIdsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+	@Autowired
+	private ParentsRepository parentsRepository;
 
-
+	@Transactional
 	public Parents printMultipleIds(String id) {
 		 Parents parentsDetails = new Parents();
-	        
-	       try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-	            //System.out.println("In DAO with id " + personalIds);
-	            transaction = session.beginTransaction();
+			       try {
 	                    int sid = Integer.valueOf(id);
-	                    Query query = session.createQuery("from Parents as parents where parents.student.sid=" + sid);
-	                    parentsDetails = (Parents) query.uniqueResult();
-	            transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-	            
+	                    parentsDetails = parentsRepository.findByStudentSid(sid);
+	        } catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
 	            hibernateException.printStackTrace();
-	        } finally {
-				HibernateUtil.closeSession();
-			}	      
+	            throw hibernateException;
+	        }       
 	        return parentsDetails;
 	}
 	
 public boolean updateCardValidity(List<Card> cardList) {
+	 Session session = null;
+	 Transaction transaction = null;
+
 		
 		boolean result = false;
 		try {
@@ -67,8 +58,10 @@ public boolean updateCardValidity(List<Card> cardList) {
 			
 			transaction.commit();
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}finally {
 			HibernateUtil.closeSession();
 		 }
@@ -78,6 +71,9 @@ public boolean updateCardValidity(List<Card> cardList) {
 
 public Teacher printMultipleIdsEmployee(String id) {
 	Teacher teacherDetails = new Teacher();
+	 Session session = null;
+	 Transaction transaction = null;
+
     
     try {
          transaction = session.beginTransaction();
@@ -85,9 +81,10 @@ public Teacher printMultipleIdsEmployee(String id) {
                  Query query = session.createQuery("From Teacher as teacher where teacher.tid=" + sid);
                  teacherDetails = (Teacher) query.uniqueResult();
          transaction.commit();
-     } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-         
-         hibernateException.printStackTrace();
+     } catch (Exception hibernateException) { 
+     	log.error(hibernateException.getMessage(), hibernateException);
+        hibernateException.printStackTrace();
+        throw hibernateException;
      } finally {
 			HibernateUtil.closeSession();
 		}	      

@@ -26,4 +26,6 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 	@Query("SELECT parents FROM Parents AS parents WHERE parents.student.classstudying LIKE :classStudying AND parents.student.archive=0 AND parents.student.passedout=0 "
 			+ "AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.branchid=:branchId AND email IS NOT NULL AND email <> ''")
 	Page<Parents> getParentsWithEmailForGivenClass(@Param("classStudying") String classStudying, @Param("branchId") String branchId, Pageable pageable);
+
+	 Parents findByStudentSid(@Param("sid") Integer sid);
 }
