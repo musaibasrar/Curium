@@ -32,6 +32,9 @@ public class AttendanceDAO {
 	@Autowired
 	private HolidaysMasterRepository holidayMasterRepo;
 	
+	@Autowired
+	private WeeklyoffRepository weeklyoffRepo;
+	
 	public List<Teacher> readListOfObjects() {
 		// TODO Auto-generated method stub
 		return null;
@@ -62,22 +65,16 @@ public class AttendanceDAO {
 		}
 	}
 
+	@Transactional
 	public boolean saveWeeklyOff(Weeklyoff weeklyOff) {
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(weeklyOff);
-			transaction.commit();
+			weeklyoffRepo.save(weeklyOff);
 			return true;
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+		} catch (Exception hibernateException) { 
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
-		return false;
 	}
 
 	public boolean deleteMultiple(List<Integer> holidayIds) {
