@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.printids.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,9 @@ public class PrintIdsDAO {
 
 	@Autowired
 	private ParentsRepository parentsRepository;
+	
+	@Autowired
+	private TeacherRepository teacherRepository;
 
 	@Transactional
 	public Parents printMultipleIds(String id) {
@@ -68,26 +72,17 @@ public boolean updateCardValidity(List<Card> cardList) {
 		return result;
 	}
 
-
+@Transactional
 public Teacher printMultipleIdsEmployee(String id) {
 	Teacher teacherDetails = new Teacher();
-	 Session session = null;
-	 Transaction transaction = null;
-
-    
     try {
-         transaction = session.beginTransaction();
                  int sid = Integer.valueOf(id);
-                 Query query = session.createQuery("From Teacher as teacher where teacher.tid=" + sid);
-                 teacherDetails = (Teacher) query.uniqueResult();
-         transaction.commit();
+                 teacherDetails = teacherRepository.findById(sid).orElse(null);
      } catch (Exception hibernateException) { 
      	log.error(hibernateException.getMessage(), hibernateException);
         hibernateException.printStackTrace();
         throw hibernateException;
-     } finally {
-			HibernateUtil.closeSession();
-		}	      
+     } 	      
      return teacherDetails;
 }
 
