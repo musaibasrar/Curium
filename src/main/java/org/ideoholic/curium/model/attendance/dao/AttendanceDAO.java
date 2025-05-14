@@ -77,24 +77,16 @@ public class AttendanceDAO {
 		}
 	}
 
+	@Transactional
 	public boolean deleteMultiple(List<Integer> holidayIds) {
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Holidaysmaster as holidaysmaster where holidaysmaster.shid IN (:holidayIds)");
-			query.setParameterList("holidayIds", holidayIds);
-			query.executeUpdate();
-			transaction.commit();
+		try {
+			holidayMasterRepo.deleteAllById(holidayIds);
 			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
-		
-		return false;
 	}
 
 	@SuppressWarnings("unchecked")
