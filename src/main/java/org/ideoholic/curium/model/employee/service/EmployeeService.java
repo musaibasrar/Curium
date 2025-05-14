@@ -36,6 +36,9 @@ public class EmployeeService {
 	
 	@Autowired
 	private departmentDAO departmentDAO;
+	
+	@Autowired
+	private PrintIdsDAO printIdsDAO;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -447,7 +450,7 @@ public class EmployeeService {
 	          
 	           System.out.println("Value of i is " + i);
 	           int sid = Integer.valueOf(id);
-	           teacherDetails = new PrintIdsDAO().printMultipleIdsEmployee(id);
+	           teacherDetails = printIdsDAO.printMultipleIdsEmployee(id);
 	           
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
