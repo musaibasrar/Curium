@@ -9,8 +9,6 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
@@ -52,22 +50,16 @@ public class AttendanceDAO {
 		return holidayMaster;
 	}
 
+	@Transactional
 	public boolean saveHolidays(Holidaysmaster holidayMaster) {
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(holidayMaster);
-			transaction.commit();
+		try {
+			holidayMasterRepo.save(holidayMaster);
 			return true;
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
-		return false;
 	}
 
 	public boolean saveWeeklyOff(Weeklyoff weeklyOff) {
