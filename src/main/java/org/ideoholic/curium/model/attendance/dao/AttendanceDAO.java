@@ -89,21 +89,16 @@ public class AttendanceDAO {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Weeklyoff> readListOfWeekOff(String academicYear, int branchId) {
 			List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
-			Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				weeklyOff = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and branchid="+branchId).list();
-				transaction.commit();
-			}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+				weeklyOff = weeklyoffRepo.findByAcademicyearAndBranchid(academicYear, branchId);
+			}catch (Exception e) {
+				log.error(e.getMessage(), e);
 				e.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
+				throw e;
 			}
-			
 		return weeklyOff;
 	}
 
