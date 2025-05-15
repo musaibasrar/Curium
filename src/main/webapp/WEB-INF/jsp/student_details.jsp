@@ -466,7 +466,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">STS Number
+                        <td width="25%" class="alignLeft" height="50">G.R. Number
 								</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.sts}" />
