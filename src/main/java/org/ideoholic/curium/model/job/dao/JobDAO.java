@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.job.dto.JobQuery;
@@ -25,14 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 public class JobDAO {
 	
 	@Autowired
-	JobQueryRepository jobQueryRepository;
+	private JobQueryRepository jobQueryRepository;
 	Session session = null;
 	
 	Transaction transaction = null;
 	
 	SessionFactory sessionFactory;
 	
-	private static final Logger logger = LogManager.getLogger(JobDAO.class);
 
 	public JobDAO() {
 		session = HibernateUtil.openCurrentSession();
@@ -44,7 +41,7 @@ public class JobDAO {
 			String queryNo = null;
 		
 			try {
-				jobQueryRepository.save(query);
+				query = jobQueryRepository.save(query);
 				queryNo=query.getExternalid()+":"+query.getId();
 			}catch (Exception hibernateException) { 
 	        	log.error(hibernateException.getMessage(), hibernateException);
@@ -70,7 +67,7 @@ public class JobDAO {
 				transaction.commit();
 				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 
 			} finally {
@@ -89,11 +86,11 @@ public class JobDAO {
 
 				results = (List<JobQuery>) session.createQuery("From JobQuery where branchid="+branchId).list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -115,11 +112,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -146,7 +143,7 @@ public class JobDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -168,7 +165,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -189,7 +186,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -208,7 +205,7 @@ public class JobDAO {
 					parentQuery = (JobQuery) query.uniqueResult();
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -228,7 +225,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -258,7 +255,7 @@ public class JobDAO {
 				transaction.commit();
 				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 
 			} finally {
@@ -284,11 +281,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where teacher.tid='"+tid+"' and branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -311,11 +308,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where (createddate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -340,11 +337,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'Completed'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -367,11 +364,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'To Do'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -394,11 +391,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'Completed' and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -421,11 +418,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where (status = 'Assigned' or status = 'In Progress') and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -444,7 +441,7 @@ public class JobDAO {
 	                transaction = session.beginTransaction();
 	                results = (List<JobQuery>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
 	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
 
@@ -466,7 +463,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -488,7 +485,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -508,7 +505,7 @@ public class JobDAO {
 				
 				transaction.commit();
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -529,11 +526,11 @@ public class JobDAO {
 				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'In Progress'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
-				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -559,8 +556,10 @@ public class JobDAO {
 				}
 				transaction.commit();
 				result = "true";
-				} catch (Exception e) { transaction.rollback(); logger.error(e);
-					e.printStackTrace();
+				} catch (Exception hibernateException) { 
+		        	log.error(hibernateException.getMessage(), hibernateException);
+		            hibernateException.printStackTrace();
+		            throw hibernateException;   
 				}finally {
 					HibernateUtil.closeSession();
 			}
@@ -577,7 +576,7 @@ public class JobDAO {
 	                transaction = session.beginTransaction();
 	                results = (List<Task>) session.createQuery("from Task where jobid="+jobId+"").list();
 	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
 
@@ -602,7 +601,7 @@ public class JobDAO {
 				transaction.commit();
 				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 
 			} finally {
@@ -625,7 +624,7 @@ public class JobDAO {
 				noOfRecords = results.size();
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -657,7 +656,7 @@ public class JobDAO {
 				transaction.commit();
 				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 
 			} finally {
@@ -677,7 +676,7 @@ public class JobDAO {
 				noOfRecords = results.size();
 				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
 
@@ -707,7 +706,7 @@ public class JobDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -737,7 +736,7 @@ public class JobDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -765,7 +764,7 @@ public class JobDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -793,7 +792,7 @@ public class JobDAO {
 				}
 				
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -810,7 +809,7 @@ public class JobDAO {
 	                transaction = session.beginTransaction();
 	                results = (List<Task>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
 	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
 
@@ -829,7 +828,7 @@ public class JobDAO {
 	                transaction = session.beginTransaction();
 	                results = (List<JobQuery>) session.createQuery("from JobQuery where id="+jobId+"").list();
 	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
 
