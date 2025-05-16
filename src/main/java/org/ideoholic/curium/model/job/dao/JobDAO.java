@@ -1,30 +1,35 @@
 package org.ideoholic.curium.model.job.dao;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
+@Component
 public class JobDAO {
+	
+	@Autowired
+	JobQueryRepository jobQueryRepository;
 	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
+	
 	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
+	
 	SessionFactory sessionFactory;
 	
 	private static final Logger logger = LogManager.getLogger(JobDAO.class);
@@ -33,20 +38,18 @@ public class JobDAO {
 		session = HibernateUtil.openCurrentSession();
 	}
 
-
+	    @Transactional
 		public String addQuery(JobQuery query) {
 			
 			String queryNo = null;
 		
 			try {
-					transaction = session.beginTransaction();
-					session.save(query);
-					transaction.commit();
-					queryNo=query.getExternalid()+":"+query.getId();
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
-				e.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
+				jobQueryRepository.save(query);
+				queryNo=query.getExternalid()+":"+query.getId();
+			}catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
 			}
 			return queryNo;
 		}
