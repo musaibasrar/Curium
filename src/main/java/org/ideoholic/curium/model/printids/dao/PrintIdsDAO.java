@@ -29,6 +29,9 @@ public class PrintIdsDAO {
 	
 	@Autowired
 	private TeacherRepository teacherRepository;
+	
+	@Autowired
+	private CardRepository cardRepo;
 
 	@Transactional
 	public Parents printMultipleIds(String id) {
@@ -44,31 +47,28 @@ public class PrintIdsDAO {
 	        return parentsDetails;
 	}
 	
-public boolean updateCardValidity(List<Card> cardList) {
-	 Session session = null;
-	 Transaction transaction = null;
-
+	@Transactional	
+    public boolean updateCardValidity(List<Card> cardList) {
 		
 		boolean result = false;
-		try {
-			transaction = session.beginTransaction();
+		 try {
+	            for (Card card : cardList) {
+	            	Optional<Card> cardDetail = cardRepo.findById(card.getSid());
+	                if (cardDetail.isPresent()) {
+	                    Card existingCard = cardDetail.get();
+	                    existingCard.setValidfrom(card.getValidfrom());
+	                    existingCard.setValidto(card.getValidto());
+	                    cardRepo.save(existingCard);
+	                }
+	            }
+	            result = true;;
+	        }
 			
-			for (Card card : cardList) {
-				
-				Query query = session.createQuery("update Card set validfrom = '"+DateUtil.dateParseryyyymmdd(card.getValidfrom())+"', validto = '"+DateUtil.dateParseryyyymmdd(card.getValidto())+"' where sid="+card.getSid()+"");
-				query.executeUpdate();
-				
-			}
-			
-			transaction.commit();
-			result = true;
-		} catch (Exception hibernateException) { 
+		catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-		}finally {
-			HibernateUtil.closeSession();
-		 }
+		}
 		return result;
 	}
 
