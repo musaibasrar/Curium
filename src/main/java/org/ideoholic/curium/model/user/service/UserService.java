@@ -100,6 +100,19 @@ public class UserService {
 			       }
 			}
 			
+			//get the Previous Year List
+			String[] parts = academicyear.split("/");
+			int startYear = Integer.parseInt(parts[0]);
+
+			List<String> academicYears = new ArrayList<>();
+			for (int i = 0; i < 4; i++) {
+			    int year1 = startYear - i;
+			    int year2 = year1 + 1;
+			    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+			}
+			result.setPreviousAcademicYears(academicYears);
+			// end
+			
            result.setSuccess(true);
        } else {
            result.setSuccess(false);
