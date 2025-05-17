@@ -751,11 +751,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/scholar/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/scholar/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
             
