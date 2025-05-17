@@ -672,6 +672,47 @@ for(Cookie cookie : cookies){
                                         </td>
                                     </tr>
                                 </table>
+                                
+                                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+									<tr>
+		               		<td width="26%"  class="alignRight" style="text-align: center;font-size:20px;">
+                                    
+                                    Fees Collection Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                            </tr>
+                            </table>
+                                
+                                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+                    <thead>
+                        <tr  >
+                            
+                            <th title="click to sort" class="headerText">Date of fees</th>
+                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">View Details</th>
+                             
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${receiptinfo}" var="receiptinfo">
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                
+                                <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/scholar/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                 
+
+                            </tr>
+                        </c:forEach>
+                        
+                        
+                    </tbody>
+                   
+                </table>
                     
 
                 </div>
