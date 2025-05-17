@@ -13,6 +13,9 @@ import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,28 +55,22 @@ public class JobDAO {
 		}
 
 
+	    @Transactional
 		public List<JobQuery> readListOfObjectsPagination(int offset,
 				int noOfRecords, int branchId) {
 			
 			List<JobQuery> results = new ArrayList<JobQuery>();
 
 			try {
-				
-				transaction = session.beginTransaction();
-				Query query = session.createQuery("From JobQuery as query where query.branchid = "+branchId+" order by query.id desc");
-				query.setFirstResult(offset);   
-				query.setMaxResults(noOfRecords);
-				results = query.getResultList();
-				transaction.commit();
-				
-
-			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return results;
+				 Pageable pageable = PageRequest.of(offset, noOfRecords); 
+			     Page<JobQuery> page = jobQueryRepository.findByBranchidOrderByIdDesc(branchId, pageable);
+			     results = page.getContent();
+			}catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
 			}
+			return results;
 		}
 		
 		public int getNoOfRecords(int branchId) {
