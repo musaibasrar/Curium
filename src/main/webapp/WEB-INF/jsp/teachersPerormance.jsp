@@ -480,11 +480,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear"
 									style="width: 140px">
 										<option selected value="${currentAcademicYear}">${currentAcademicYear}(Current Year)</option>
-										<option value="2018/19">2018/19</option>
-										<option value="2019/20">2019/20</option>
-										<option value="2019/20">2020/21</option>
-										<option value="2019/20">2021/22</option>
-										<option value="2019/20">2022/23</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 
