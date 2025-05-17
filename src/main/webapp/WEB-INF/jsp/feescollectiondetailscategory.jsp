@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -715,7 +716,7 @@ for(Cookie cookie : cookies){
 					<tr>
 							<td class="dataText" style="text-align: right;">Total
 							</td>
-							<td class="dataText" style="text-align: right;font-weight: bold;">
+							<td class="dataText" style="text-align: center;font-weight: bold;">
 							<fmt:formatNumber type="currency"  value="${total}" />
 							</td>
 					</tr>
