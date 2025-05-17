@@ -63,6 +63,8 @@ public class JobService {
     private HttpServletResponse response;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private JobDAO jobDAO;
 	private static final int BUFFER_SIZE = 4096;
 
 	
@@ -130,7 +132,7 @@ public class JobService {
 			//String externalId = Integer.toString(year).concat("_").concat(Integer.toString(month+1)).concat("_");
 			query.setExternalid(queryTitle);
 
-			String resultQuery = new JobDAO().addQuery(query);
+			String resultQuery = jobDAO.addQuery(query);
 
 
 			if(resultQuery!=null) {
