@@ -154,6 +154,7 @@ public class UserActionAdapter {
         httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
         httpSession.setAttribute("todaysAttendance", responseDto.getAttendanceStatus());
         httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
         
         return responseDto.isSuccess();
     }
