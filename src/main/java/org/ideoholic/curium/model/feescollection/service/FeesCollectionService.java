@@ -1959,7 +1959,7 @@ public class FeesCollectionService {
 				String cashOrBank = receiptinfo.getPaymenttype();
 				if(cashOrBank.contains("Cash")) {
 					feesByCash = feesByCash+receiptinfo.getTotalamount();
-				}else if(cashOrBank.contains("Bank")) {
+				}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 					feesByBank = feesByBank+receiptinfo.getTotalamount();
 				}
 			}
@@ -2026,7 +2026,7 @@ public class FeesCollectionService {
 			String cashOrBank = receiptinfo.getPaymenttype();
 			if(cashOrBank.contains("Cash")) {
 				feesByCashOtherFees = feesByCash+receiptinfo.getTotalamount();
-			}else if(cashOrBank.contains("Bank")) {
+			}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 				feesByBankOtherFees = feesByBank+receiptinfo.getTotalamount();
 			}
 		}
