@@ -1,50 +1,42 @@
 package org.ideoholic.curium.model.user.service;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
-import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.Map.Entry;
+
+@Slf4j
 public class UserService {
 
 	private StandardActionAdapter standardActionAdapter;
@@ -66,10 +58,11 @@ public class UserService {
 		this.feesCollectionActionAdapter = feesCollectionActionAdapter;
 	}
 
-	public boolean authenticateUser() {
-        boolean result;
-       String userName = request.getParameter("loginName");
-       String password = request.getParameter("password");
+	public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
+		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
+
+       String userName = dto.getUserName();
+       String password = dto.getPassword();
 
        login = new UserDAO().readUniqueObject(userName, password);
 
@@ -79,28 +72,50 @@ public class UserService {
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
             }
-            httpSession.setAttribute("currentAcademicYear",academicyear);
-            httpSession.setAttribute("username",login.getUsername());
-            
-            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
-            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
-            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
-            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
-            
+			result.setAcademicYear(academicyear);
+			result.setUserName(login.getUsername());
+
+			result.setBranchId(login.getBranch().getIdbranch());
+			result.setBranchName(login.getBranch().getBranchname());
+			result.setBranchCode(login.getBranch().getBranchcode());
+			result.setBranchAddress(login.getBranch().getAddress());
+			result.setBranchContact(login.getBranch().getContact());
+
             String[] userType = login.getUsertype().split("-");
-            httpSession.setAttribute("userType", userType[0]);
-            httpSession.setAttribute("typeOfUser",userType[0]);
-            httpSession.setAttribute("userAuth", userType[0]);
-            httpSession.setAttribute("userloginid", login.getUserid());
+			result.setUserType(userType[0]);
+			result.setTypeOfUser(userType[0]);
+			result.setUserAuth(userType[0]);
+			result.setUserLoginId(login.getUserid());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
-           result = true;
+			
+			if(userType[0].equalsIgnoreCase("parents")) {
+				LocalDate currentDate = LocalDate.now();
+				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
+			       if(attendance != null) {
+				   result.setAttendanceStatus(attendance.getAttendancestatus());
+			       }
+			}
+			
+			//get the Previous Year List
+			String[] parts = academicyear.split("/");
+			int startYear = Integer.parseInt(parts[0]);
+
+			List<String> academicYears = new ArrayList<>();
+			for (int i = 0; i < 4; i++) {
+			    int year1 = startYear - i;
+			    int year2 = year1 + 1;
+			    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+			}
+			result.setPreviousAcademicYears(academicYears);
+			// end
+			
+           result.setSuccess(true);
        } else {
-           result = false;
+           result.setSuccess(false);
        }
        return result;
    }
@@ -111,70 +126,74 @@ public class UserService {
 		
 	}
 
-	public void dashBoard() {
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			//List<Branch> branchList = new BranchDAO().readListOfObjects();
-            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-            List<String> xaxisList = new LinkedList<String>() ;
-            List<String> yaxisList = new LinkedList<String>() ;
-            int totalStudents = 0;
-            // int[] test = new int[branchList.size()] ;
-            for (Classsec classstudying : classsecList) {
-        	
-		        	String classStudying = classstudying.getClassdetails();
-		    		if(!classStudying.equalsIgnoreCase("")) {
-		    		
-		    			classStudying = classStudying+"--" +"%";
-		    		
-                    List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
-                    + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
-                    totalStudents+=student.size();
-                    xaxisList.add("\""+classstudying.getClassdetails()+"\"");
-                    if(student.size()>0) {
-                        String studentCount = Integer.toString(student.size());
-                        yaxisList.add("\""+studentCount+"\"");
-                    }else {
-                        yaxisList.add("\""+0+"\"");
-                    }
-                    
-                	}
-        	}
-        	// Total Teachers
-        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        	request.setAttribute("totalteachers", teacher.size());
-        	// End Total Teachers
-        	
-        	//Fees Details
-        	feesCollectionActionAdapter.getFeesDetailsDashBoard();
-        	//End Fees Details
-        	
-        	//Daily Expenses
-        	DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(request.getParameter("selectedbranchid"), httpSession.getAttribute(BRANCHID).toString());
-        	httpSession.setAttribute("expensesdatebranchname", dailyResponse.getExpensesDateBranchName());
-        	httpSession.setAttribute("branchname", dailyResponse.getBranchName());
-			request.setAttribute("dayone", dailyResponse.getDayOne());
-			
-			request.setAttribute("dailyadminexpenses", dailyResponse.getDailyAdminExpenses());
-			request.setAttribute("dailyexpenses", dailyResponse.getDailyExpenses());
-        		
-        	//Monthly Expenses
-			MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(httpSession.getAttribute(BRANCHID).toString(), request.getParameter("todate"), request.getParameter("fromdate"));
-			request.setAttribute("monthlyexpenses", monthlyExpense.getMonthlyExpenses());
-			request.setAttribute("monthlistexpenses", monthlyExpense.getMonthListExpenses());
-        		
-        	//Get Boys & Girls
-			ResultResponse result = adminService.getTotalBoysGirls(httpSession.getAttribute(BRANCHID).toString());
-			request.setAttribute("totalboysgirls", result.getResultList());
-        	
-        request.setAttribute("studentxaxis", xaxisList);
-        request.setAttribute("studentyaxis", yaxisList);
-        request.setAttribute("totalstudents", totalStudents);
-        feesdailysearch();
-		feesmonthlysearch();
+	public DashBoardResponseDto dashBoard(SearchByDateDto dto, String branchId, String currentAcademicYear) {
+		DashBoardResponseDto result = DashBoardResponseDto.builder().build();
+
+		try {
+
+			if (branchId != null) {
+
+				//List<Branch> branchList = new BranchDAO().readListOfObjects();
+				List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+				List<String> xaxisList = new LinkedList<>();
+				List<String> yaxisList = new LinkedList<>();
+				int totalStudents = 0;
+				String academicYear = currentAcademicYear;
+				// int[] test = new int[branchList.size()] ;
+				for (Classsec classstudying : classsecList) {
+
+					String classStudying = classstudying.getClassdetails();
+					if (!classStudying.equalsIgnoreCase("")) {
+
+						classStudying = classStudying + "--" + "%";
+
+						List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') AND parents.Student.classstudying like '" + classStudying + "'"
+								+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='" + Integer.parseInt(branchId) + "' ");
+						totalStudents += student.size();
+						xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
+						if (student.size() > 0) {
+							String studentCount = Integer.toString(student.size());
+							yaxisList.add("\"" + studentCount + "\"");
+						} else {
+							yaxisList.add("\"" + 0 + "\"");
+						}
+
+					}
+				}
+				// Total Teachers
+				List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(branchId));
+				result.setTeacherSize(teacher.size());
+				// End Total Teachers
+
+				//Fees Details
+				feesCollectionActionAdapter.getFeesDetailsDashBoard(); //TODO: After FessCollection becomes @Service, use feesCollectionService.getFeesDetailsDashBoard() instead.
+				//End Fees Details
+
+				//Daily Expenses
+				DailyExpensesResponseDto dailyResponse = adminService.dailyExpenses(dto.getBranchId(), branchId);
+				result.setDailyExpensesResponseDto(dailyResponse);
+
+				//Monthly Expenses
+				MonthlyExpensesResponseDto monthlyExpense = adminService.getMonthlyExpenses(branchId, dto.getToDate(), dto.getFromDate());
+				result.setMonthlyExpensesResponseDto(monthlyExpense);
+
+				//Get Boys & Girls
+				ResultResponse resultResponse = adminService.getTotalBoysGirls(branchId);
+				result.setBoysGirls(resultResponse.getResultList());
+
+				result.setXaxisList(xaxisList);
+				result.setYaxisList(yaxisList);
+				result.setTotalStudents(totalStudents);
+				feesdailysearch();
+				feesmonthlysearch();
+
+				result.setSuccess(true);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-		
+		return result;
 	}
 	
 	public void feesdailysearch() {
@@ -285,184 +304,190 @@ public class UserService {
 	}
 	
 
-	public void advanceSearch() {
-		
-		List<Parents> searchStudentList = new ArrayList<Parents>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"";
-		String studentname= DataUtil.emptyString(request.getParameter("name"));
-		String gender = DataUtil.emptyString(request.getParameter("gender"));
-		String dateOfBirth = DataUtil.emptyString(request.getParameter("dateofbirth"));
-		int age = DataUtil.parseInt(request.getParameter("age"));
-		
-		String addClass = request.getParameter("addclass");
-		String addSec = request.getParameter("addsec");
-		String conClassStudying = "";
-		
-		
-		if (!addClass.equalsIgnoreCase("")) {
+	public ResultResponse advanceSearch(AdvanceSearchDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 
-			conClassStudying = addClass+"--" +"%";
+		List<Parents> searchStudentList = new ArrayList<>();
+		try {
+			if (branchId != null) {
+				String queryMain = "From Parents as parents where parents.branchid=" + Integer.parseInt(branchId) + "";
+				String studentname = DataUtil.emptyString(dto.getName());
+				String gender = DataUtil.emptyString(dto.getGender());
+				String dateOfBirth = DataUtil.emptyString(dto.getDateOfBirth());
+				int age = DataUtil.parseInt(dto.getAge());
 
+				String addClass = dto.getAddClass();
+				String addSec = dto.getAddSec();
+				String conClassStudying = "";
+
+
+				if (!addClass.equalsIgnoreCase("")) {
+
+					conClassStudying = addClass + "--" + "%";
+
+				}
+				if (!addSec.equalsIgnoreCase("")) {
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying + "--" + addSec + "%";
+				}
+
+
+				String classStudying = DataUtil.emptyString(conClassStudying);
+
+
+				String addClassE = dto.getAdmClassE();
+				String addSecE = dto.getAdmSecE();
+				String conClassAdmittedIn = "";
+
+				if (!addClassE.equalsIgnoreCase("")) {
+
+					conClassAdmittedIn = addClassE + "--" + "%";
+
+				}
+				if (!addSecE.equalsIgnoreCase("")) {
+					conClassAdmittedIn = addClassE;
+					conClassAdmittedIn = conClassAdmittedIn + addSecE;
+				}
+
+				String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
+				//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
+				//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
+				String admissionNo = DataUtil.emptyString(dto.getAdmNo());
+				String dateOfAdmission = DataUtil.emptyString(dto.getDateOfAdmission());
+				String bloodGroup = DataUtil.emptyString(dto.getBloodGroup());
+				String nationality = DataUtil.emptyString(dto.getNationality());
+				String religion = DataUtil.emptyString(dto.getReligion());
+				String caste = DataUtil.emptyString(dto.getCaste());
+				String motherT = DataUtil.emptyString(dto.getMotherTongue());
+				String createdDate = DataUtil.emptyString(dto.getCreatedDate());
+				String remarks = DataUtil.emptyString(dto.getRemarks());
+				String stsNumber = DataUtil.emptyString(dto.getSts());
+				String studentExternalId = DataUtil.emptyString(dto.getUId());
+				//String rte = DataUtil.emptyString(request.getParameter("rte"));
+
+				String querySub = "";
+
+				if (!studentname.equalsIgnoreCase("")) {
+					querySub = " AND parents.Student.name like '%" + studentname + "%'";
+				}
+
+				if (!classStudying.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
+				}
+
+				if (!gender.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.gender like '" + gender + "%'";
+				}
+
+				/*
+				 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+				 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
+				 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
+				 */
+
+				if (!dateOfBirth.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.dateofbirth = '" + dateOfBirth + "'";
+				}
+
+
+				if (age != 0) {
+					querySub = querySub + " AND parents.Student.age = '" + age + "'";
+				}
+
+				if (!classAdmitted.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.classadmittedin like '" + classAdmitted + "'";
+				}
+				/*
+				 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+				 * querySub = querySub +
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
+				 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
+				 */
+
+
+				if (!admissionNo.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.admissionnumber like '%" + admissionNo + "%'";
+				}
+
+				if (!dateOfAdmission.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.admissiondate = '" + dateOfAdmission + "'";
+				}
+
+				if (!bloodGroup.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.Student.bloodgroup like '%" + bloodGroup + "%'";
+				}
+
+				if (!nationality.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.nationality like '%" + nationality + "%'";
+				}
+
+				if (!religion.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.religion like '%" + religion + "%'";
+				}
+
+				if (!caste.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.caste like '%" + caste + "%'";
+				}
+
+				if (!motherT.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.mothertongue like '%" + motherT + "%'";
+				}
+
+				if (!createdDate.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.createddate = '" + createdDate + "'";
+				}
+
+				if (!remarks.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.remarks like '%" + remarks + "%'";
+				}
+
+
+				if (!stsNumber.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.sts = '" + stsNumber + "'";
+				}
+
+
+				if (!studentExternalId.equalsIgnoreCase("")) {
+					querySub = querySub + " AND  parents.Student.studentexternalid = '" + studentExternalId + "'";
+				}
+				/* *
+				 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
+				 * querySub + " parents.Student.rte = '"+rte+"'"; }else
+				 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
+				 * " parents.Student.rte = '"+rte+"'"; }
+				 */
+
+				queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+
+			result.setResultList(searchStudentList);
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-		if (!addSec.equalsIgnoreCase("")) {
-			conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
-		}
-			
-		
-			
-			String classStudying = DataUtil.emptyString(conClassStudying);
-			
-		
-			String addClassE = request.getParameter("admclassE");
-			String addSecE = request.getParameter("admsecE");
-			String conClassAdmittedIn = "";
-			
-			if (!addClassE.equalsIgnoreCase("")) {
-
-				conClassAdmittedIn = addClassE+"--" +"%";
-
-			}
-			if (!addSecE.equalsIgnoreCase("")) {
-				conClassAdmittedIn = addClassE;
-				conClassAdmittedIn = conClassAdmittedIn+addSecE;
-			}
-			
-			String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
-			//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
-			//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
-			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));
-			String dateOfAdmission =  DataUtil.emptyString(request.getParameter("dateofadmission"));
-			String bloodGroup =  DataUtil.emptyString(request.getParameter("bloodgroup"));
-			String nationality =  DataUtil.emptyString(request.getParameter("nationality"));
-			String religion =  DataUtil.emptyString(request.getParameter("religion"));
-			String caste =  DataUtil.emptyString(request.getParameter("caste"));
-			String motherT =  DataUtil.emptyString(request.getParameter("motherT"));
-			String createdDate =  DataUtil.emptyString(request.getParameter("createddate"));
-			String remarks =  DataUtil.emptyString(request.getParameter("remarks"));
-			String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
-			String studentExternalId = DataUtil.emptyString(request.getParameter("uid"));
-			//String rte = DataUtil.emptyString(request.getParameter("rte"));
-			
-			String querySub = "";
-			
-			if(!studentname.equalsIgnoreCase("")){
-				querySub = " AND parents.Student.name like '%"+studentname+"%'" ;
-			}
-			
-			if(!classStudying.equalsIgnoreCase("")){
-				querySub = querySub +  " AND parents.Student.classstudying like '"+classStudying+"'";
-			}
-			
-			if(!gender.equalsIgnoreCase("")){
-				querySub = querySub + " AND  parents.Student.gender like '"+gender+"%'";
-			}
-			
-			/*
-			 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-			 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
-			 */
-			
-			if(!dateOfBirth.equalsIgnoreCase("")){
-				querySub = querySub + " AND parents.Student.dateofbirth = '"+dateOfBirth+"'";
-			}
-
-			
-			if(age != 0 ){
-				querySub = querySub + " AND parents.Student.age = '"+age+"'";
-			}
-			
-			if(!classAdmitted.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.Student.classadmittedin like '"+classAdmitted+"'";
-			}
-			/*
-			 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-			 * querySub = querySub +
-			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
-			 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
-			 */
-			
-			
-			if(!admissionNo.equalsIgnoreCase("") ){
-				querySub = querySub + " AND parents.Student.admissionnumber like '%"+admissionNo+"%'";
-			}
-			
-			if(!dateOfAdmission.equalsIgnoreCase("")){
-				querySub = querySub + " AND parents.Student.admissiondate = '"+dateOfAdmission+"'";
-			}
-			
-			if(!bloodGroup.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.Student.bloodgroup like '%"+bloodGroup+"%'";
-			}
-			
-			if(!nationality.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.nationality like '%"+nationality+"%'";
-			}
-			
-			if(!religion.equalsIgnoreCase("")){
-				querySub = querySub + " AND  parents.Student.religion like '%"+religion+"%'";
-			}
-			
-			if(!caste.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.caste like '%"+caste+"%'";
-			}
-			
-			if(!motherT.equalsIgnoreCase("") ){
-				querySub = querySub + " AND  parents.Student.mothertongue like '%"+motherT+"%'";
-			}
-			
-			if(!createdDate.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.createddate = '"+createdDate+"'";
-			}
-			
-			if(!remarks.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND  parents.Student.remarks like '%"+remarks+"%'";
-			}
-			
-			
-			 if(!stsNumber.equalsIgnoreCase("")  ){
-			  querySub = querySub + " AND  parents.Student.sts = '"+stsNumber+"'"; }
-			 
-			 
-			 if(!studentExternalId.equalsIgnoreCase("")  ){
-				  querySub = querySub + " AND  parents.Student.studentexternalid = '"+studentExternalId+"'"; }
-			 /* * 
-			 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
-			 * querySub + " parents.Student.rte = '"+rte+"'"; }else
-			 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
-			 * " parents.Student.rte = '"+rte+"'"; }
-			 */
-			
-			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-	}
-			
-			request.setAttribute("searchStudentList", searchStudentList);
-		
-		
+		return result;
 	}
 
-	public boolean backupData(String fileName) {
-        
-        boolean result = false;
+	public ResultResponse backupData(String fileName) {
+		ResultResponse result = ResultResponse.builder().build();
+
         try {
             Properties properties = new Properties();
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
-            System.out.println("the backup directory from input stream is " + backupDirectoryIS);
+			log.error("the backup directory from input stream is " + backupDirectoryIS);
 
 
             int processcomplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            request.setAttribute("Backuplocation", backupLocation);
+			result.setMessage(backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 
 
@@ -471,143 +496,150 @@ public class UserService {
             processcomplete = runtimeProcess.waitFor();//store the state in variable
 
             if (processcomplete == 1) {//if values equal 1 process failed
-                System.out.println("FAILED");
-                result = false;
+				log.error("FAILED");
+				result.setSuccess(false);
 
             } else if (processcomplete == 0) {//if values equal 0 process failed
-                System.out.println("success");
+				log.error("success");
 
                 //display message
-                result = true;
+				result.setSuccess(true);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+			result.setSuccess(false);
         }
         return result;
     }
 
-	public boolean ChangePassword() {
-		
-		
-        boolean result;
+	public ResultResponse ChangePassword(UserAuthenticationDto dto) {
+		ResultResponse result = ResultResponse.builder().build();
+
         Login login = new Login();
-        String currentPassword = request.getParameter("currentpassword");
-        String newPassword = request.getParameter("newpassword");
-        String ConfirmNewPassword = request.getParameter("confirmpassword");
+        String currentPassword = dto.getCurrentPassword();
+        String newPassword = dto.getNewPassword();
+        String confirmNewPassword = dto.getConfirmNewPassword();
         
         login = new UserDAO().readPassword(currentPassword);
         
-        if (login != null && newPassword.equals(ConfirmNewPassword)) {
+        if (login != null && newPassword.equals(confirmNewPassword)) {
             login.setPassword(newPassword);  
             login = new UserDAO().update(login);
-            result = true;
+			result.setSuccess(true);
         } else {
-            result = false;
+			result.setSuccess(false);
         }
         return result;
     }
 
-	public void advanceSearchByParents() {
+	public ResultResponse advanceSearchByParents(SearchByParentDto dto, String branchId) {
+		ResultResponse result = ResultResponse.builder().build();
 		
-		List<Parents> searchParentsList = new ArrayList<Parents>();
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-		String fathersname= DataUtil.emptyString(request.getParameter("fathersname"));
-		String mothersname = DataUtil.emptyString(request.getParameter("mothersname"));
-		String contactnumber = DataUtil.emptyString(request.getParameter("contactnumber"));
-		
-		
-			String querySub = "";
-			
-			if(!fathersname.equalsIgnoreCase("")){
-				querySub = " parents.fathersname like '%"+fathersname+"%'" ;
+		List<Parents> searchParentsList = new ArrayList<>();
+		try {
+			if (branchId != null) {
+
+				String queryMain = "From Parents as parents where parents.branchid=" + Integer.parseInt(branchId) + " AND";
+				String fathersname = DataUtil.emptyString(dto.getFathersName());
+				String mothersname = DataUtil.emptyString(dto.getMothersName());
+				String contactnumber = DataUtil.emptyString(dto.getContactNumber());
+
+
+				String querySub = "";
+
+				if (!fathersname.equalsIgnoreCase("")) {
+					querySub = " parents.fathersname like '%" + fathersname + "%'";
+				}
+
+				if (!mothersname.equalsIgnoreCase("")) {
+					querySub = querySub + " AND parents.mothersname like '%" + mothersname + "%'";
+				} else if (!mothersname.equalsIgnoreCase("")) {
+					querySub = querySub + " parents.mothersname like '%" + mothersname + "%'";
+				} else if (!contactnumber.equalsIgnoreCase("")) {
+					querySub = querySub + " parents.contactnumber like '%" + contactnumber + "%'";
+				}
+
+
+	 			queryMain = queryMain + querySub;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				log.error("SEARCH QUERY ***** " + queryMain);
+				searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
+
 			}
-			
-			if(!mothersname.equalsIgnoreCase("")  ){
-				querySub = querySub + " AND parents.mothersname like '%"+mothersname+"%'";
-			}else if(!mothersname.equalsIgnoreCase("")){
-				querySub = querySub + " parents.mothersname like '%"+mothersname+"%'";
-			}else if(!contactnumber.equalsIgnoreCase("")){
-				querySub = querySub + " parents.contactnumber like '%"+contactnumber+"%'";
-			}
-			
-			
-			
-			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
-			searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
-			
+			result.setResultList(searchParentsList);
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
 		}
-			request.setAttribute("studentList", searchParentsList);
-		
-		
+		return result;
 	}
 
-	public void searchByDate() {
-		 
-		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
-		String branchId = request.getParameter("selectedbranchid");
+	public SearchByDateResponseDto searchByDate(SearchByDateDto dto, String strBranchId, Object dayOne, Object dateFrom, Object dateTo) {
+		SearchByDateResponseDto result = SearchByDateResponseDto.builder().build();
+
+		List<Receiptinfo> feesDetailsList = new ArrayList<>();
+		String branchId = dto.getBranchId();
 		int idBranch = 0;
-                
-		if(httpSession.getAttribute(BRANCHID)!=null){
-		
+        try {
+			if(strBranchId!=null){
 
-	        if(branchId!=null) {
-	        	String[] branchIdName = branchId.split(":");
-	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
-	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-	        }
-	        
-		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
-		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
-		String modeOfPayment = DataUtil.emptyString(request.getParameter("modeofpayment"));
-		
-			String querySub = "";
-			
-			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 httpSession.setAttribute("dayone", oneDay);
-				 httpSession.setAttribute("datefrom", "");
-				 httpSession.setAttribute("dateto", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
-				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
+
+				if(branchId!=null) {
+					String[] branchIdName = branchId.split(":");
+					idBranch = Integer.parseInt(branchIdName[0]);
+					result.setFeesDetailsBranchName(branchIdName[1]);
+					result.setBranchName("Branch Name:");
+				}else {
+					idBranch = Integer.parseInt(strBranchId);
+				}
+
+				String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+				String toDate= DataUtil.emptyString(dto.getToDate());
+				String fromDate = DataUtil.emptyString(dto.getFromDate());
+				String oneDay = DataUtil.emptyString(dto.getOneDay());
+				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
+
+				String querySub = "";
+
+				if(!oneDay.equalsIgnoreCase("")){
+					result.setDayOne(oneDay);
+					result.setDateFrom("");
+					result.setDateTo("");
+					querySub = " feesdetails.date = '"+oneDay+"'" ;
+				}else if( dayOne!= null ) {
+					querySub = " feesdetails.date = '"+dayOne.toString()+"'" ;
+ 				}
+
+				if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+					querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
+					result.setDateFrom(fromDate);
+					result.setDateTo(toDate);
+					result.setDayOne("");
+				}else if(dateFrom!=null && dateTo!=null) {
+					if(!dateFrom.toString().equalsIgnoreCase("") &&  !dateTo.toString().equalsIgnoreCase("")) {
+						querySub = " feesdetails.date between '"+dateFrom.toString()+"' AND '"+dateTo.toString()+"'";
+					}
+							
+				}
+
+				if(!modeOfPayment.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				}
+
+				queryMain = queryMain+querySub;
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				log.error("SEARCH QUERY ***** "+queryMain);
+				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+
 			}
-			
-			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
-				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				httpSession.setAttribute("datefrom", fromDate);
-				httpSession.setAttribute("dateto", toDate);
-				httpSession.setAttribute("dayone", "");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
-					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
-				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
-			}
-			
-			if(!modeOfPayment.equalsIgnoreCase("")){
-				querySub = querySub+ " And feesdetails.paymenttype = '"+modeOfPayment+"'" ;
-			}
-			
-			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
-			
-	}
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
 			Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
-			
+
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
@@ -616,12 +648,22 @@ public class UserService {
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
 				feesMap.put(receiptinfo, student);
 			}
-			
-			httpSession.setAttribute("searchfeesdetailslist", feesMap);
-			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-			httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
-			httpSession.setAttribute("sumoffine", fine);
-			httpSession.setAttribute("sumofmisc", misc);
+
+			result.setFeesMap(feesMap);
+			result.setSumOfFees(sumOfFees);
+			result.setSumOfOnlyFee(sumOfFees-fine-misc);
+			result.setFine(fine);
+			result.setMisc(misc);
+
+			for (Entry<Receiptinfo, Parents> entry : feesMap.entrySet()) {
+				log.error("Key: " + entry.getKey().getReceiptnumber() + ", Value: " + entry.getValue().getStudent().getName());
+			}
+			result.setSuccess(true);
+		}catch (Exception e){
+			e.printStackTrace();
+			result.setSuccess(false);
+		}
+		return result;
 	}
 
 	public boolean addUser(Teacher employee, String branchId) {
@@ -645,23 +687,24 @@ public class UserService {
 		
 	}
 
-	public boolean authenticateMultiUser() {
-        boolean result = false;
+	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
+		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
+
         
         String userName =null;
         String superUserAuth = null;
 
         
-        	if(httpSession.getAttribute("username")!=null) {
-        		userName = httpSession.getAttribute("username").toString();
+        	if(strUserName!=null) {
+        		userName = strUserName;
 	        }
         
-        	if(httpSession.getAttribute("superuserAuth")!=null) {
-	        	superUserAuth = DataUtil.emptyString(httpSession.getAttribute("superuserAuth").toString());	
+        	if(strSuperUserAuth!=null) {
+	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
 	        }
         
         if(userName != null) {
-        	int branchId = Integer.parseInt(request.getParameter("branchid").toString());
+        	int branchId = Integer.parseInt(strBranchId);
         	login = new UserDAO().getLoginDetails(userName, branchId);
 
        if (login != null) {
@@ -678,30 +721,30 @@ public class UserService {
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
             }
-            httpSession.setAttribute("currentAcademicYear",academicyear);
-            httpSession.setAttribute("username",login.getUsername());
-            
-            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
-            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
-            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
-            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+			result.setAcademicYear(academicyear);
+			result.setUserName(login.getUsername());
+
+			result.setBranchId(login.getBranch().getIdbranch());
+			result.setBranchName(login.getBranch().getBranchname());
+			result.setBranchCode(login.getBranch().getBranchcode());
+			result.setBranchAddress(login.getBranch().getAddress());
+			result.setBranchContact(login.getBranch().getContact());
             
             String[] userType = login.getUsertype().split("-");
-            httpSession.setAttribute("userType", userType[0]);
-            httpSession.setAttribute("typeOfUser",userType[0]);
-            httpSession.setAttribute("userAuth", userType[0]);
-            httpSession.setAttribute("superuserAuth", "superAdmin");
-            httpSession.setAttribute("userloginid", login.getUserid());
+			result.setUserType(userType[0]);
+			result.setTypeOfUser(userType[0]);
+			result.setUserAuth(userType[0]);
+			result.setSuperUserAuth("superAdmin");
+			result.setUserLoginId(login.getUserid());
             
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
-           result = true;
+		    result.setSuccess(true);
        } else {
-           result = false;
+		   result.setSuccess(false);
        }
         }
        return result;
