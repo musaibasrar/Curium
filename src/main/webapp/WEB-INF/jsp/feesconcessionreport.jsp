@@ -495,7 +495,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36">
+									size="16">
 							</label></td>
 							
 						</tr>
@@ -503,7 +503,7 @@ for(Cookie cookie : cookies){
 						<tr style="display: none;" id="classsearchtr">
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td><label> <select name="classsearch"
-									id="classsearch" style="width: 235px">
+									id="classsearch" style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -530,6 +530,32 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+                    
+                        <td class="alignRightFields">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                        	<td>
+                        	   <label>
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+										
+								</select>
+
+							</label> 
+                                    </label>
+                        
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr>
 							<td><br /></td>
 
 						</tr>
