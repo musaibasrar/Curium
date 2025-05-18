@@ -74,5 +74,8 @@ public class Studentfeesstructure implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
+	
+	@Column(name = "concessionnotes", length = 200)
+	private String concessionnotes;
 
 }
