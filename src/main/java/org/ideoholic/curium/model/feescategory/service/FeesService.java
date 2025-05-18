@@ -430,10 +430,9 @@ public class FeesService {
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
-			Currentacademicyear currentYear = new YearDAO().showYear();
-			searchFeesResponseDto.setCurrentYearFromService(currentYear.getCurrentacademicyear());
+			searchFeesResponseDto.setCurrentYearFromService(searchStudentDto.getAcademicyear());
 			
-			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, currentYear.getCurrentacademicyear(), searchCriteria);
+			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, searchStudentDto.getAcademicyear(), searchCriteria);
 			
 			
 			for (Parents parents : searchStudentList) {
