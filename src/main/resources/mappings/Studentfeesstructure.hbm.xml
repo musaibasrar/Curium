@@ -38,6 +38,9 @@
          <property name="userid" type="int">
 	 			<column name="userid" />
 			</property>
+			<property name="concessionnotes" type="string">
+            <column name="concessionnotes" length="200" />
+        </property>
         <many-to-one name="Feescategory" class="org.ideoholic.curium.model.feescategory.dto.Feescategory" lazy="false"
             column="idfeescategory" />
     </class>
