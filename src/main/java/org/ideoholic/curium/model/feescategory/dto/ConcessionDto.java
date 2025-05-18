@@ -17,4 +17,5 @@ public class ConcessionDto {
 	private String[] sfsid;
 	private String id;
 	private Map<String, String> requestParams;
+	private String[] concessionReason;
 }
