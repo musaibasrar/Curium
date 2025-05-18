@@ -472,7 +472,6 @@ public class FeesService {
         String[] idfeescategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
-        List<String> consession = new ArrayList<String>();
         List<Concession> concessionList = new ArrayList<Concession>();
         List<VoucherEntrytransactions> transactionsReverseList = new ArrayList<VoucherEntrytransactions>();
         List<VoucherEntrytransactions> transactionsApplyList = new ArrayList<VoucherEntrytransactions>();
@@ -498,6 +497,7 @@ public class FeesService {
                             con.setFeescatid(Integer.valueOf(test[1]));
                             con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
                             con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
+                            con.setConcessionNotes(concessionDto.getRequestParams().get("concessionnotes:"+Integer.valueOf(test[0])));
                             concessionList.add(con);
                             
                             
