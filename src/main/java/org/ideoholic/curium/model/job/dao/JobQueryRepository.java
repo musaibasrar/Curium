@@ -10,5 +10,7 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	Page<JobQuery> findByBranchidOrderByIdDesc(int branchid, Pageable pageable);
 	
 	int countByBranchid(int branchId);
+	
+	int countByStatusNot(String status);
 
 }
