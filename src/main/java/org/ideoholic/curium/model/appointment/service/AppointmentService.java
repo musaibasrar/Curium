@@ -231,7 +231,7 @@ public class AppointmentService {
 		}
 
 		if(!studentId.isEmpty()) {
-			subQuery = subQuery + "and ap.parent.Student.sid = '"+studentId+"'";
+			subQuery = subQuery + "and ap.parent.student.sid = '"+studentId+"'";
 			appointmentResponseDto.setStudentSelected(studentName);
 		}else {
 			appointmentResponseDto.setStudentSelected("");
@@ -414,7 +414,7 @@ public class AppointmentService {
 
 	public ResultResponse generateAppointmentsReportForClient(StudentIdDto studentIdDto) {
 		String studentId = studentIdDto.getStudentId();
-		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
+		String queryMain = "from Appointment ap where ap.parent.student.sid = '"+studentId+"' ";
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 
 		appointmentList = appointmentDao.generateAppointmentsReport(queryMain);
