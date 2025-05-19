@@ -89,7 +89,7 @@ public class JobDAO {
 			return noOfRecords;
 		}
 		
-		
+	    @Transactional
 		public int getNoOfRecords() {
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
