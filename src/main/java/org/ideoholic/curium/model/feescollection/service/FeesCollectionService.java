@@ -19,15 +19,18 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -523,12 +526,35 @@ public class FeesCollectionService {
 		
 			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(receiptInfo.getReceiptnumber());
 			Set<Feescollection> setFeesCollection = rinfo.getFeesCollectionRecords();
-			Map<Studentfeesstructure,Long> feeCatMap = new HashMap<Studentfeesstructure, Long>();
+			
+			List<Feescollection> sortedFeesCollection = new ArrayList<>(setFeesCollection);
+			sortedFeesCollection.sort(Comparator.comparing(Feescollection::getFeecollectionid));
 
-			for (Feescollection feescollectionSingle : setFeesCollection) {
+			// Convert back to LinkedHashSet to preserve insertion (sorted) order
+			Set<Feescollection> sortedSet = new LinkedHashSet<>(sortedFeesCollection);
+			
+			Map<Studentfeesstructure,Long> feeCategoryMap = new LinkedHashMap<Studentfeesstructure, Long>();
+			String[] categoryName = new String[setFeesCollection.size()];
+			int i=0;
+			for (Feescollection feescollectionSingle : sortedSet) {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
-				feeCatMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
+				feeCategoryMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
+				String[] tokens = studentfeesstructure.get(0).getFeescategory().getFeescategoryname().split("[/ ]"); // Split by both / and space
+				categoryName[i] = tokens.length > 2 ? tokens[2] : "";
+				i++;
 			}
+			
+			Map<Studentfeesstructure, Long> feeCatMap = 
+					feeCategoryMap.entrySet()
+				             .stream()
+				             .sorted(Comparator.comparing(e -> e.getKey().getFeescategory().getIdfeescategory()))
+				             .collect(Collectors.toMap(
+				                 Map.Entry::getKey,
+				                 Map.Entry::getValue,
+				                 (e1, e2) -> e1,
+				                 LinkedHashMap::new
+				             ));
+			
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
@@ -554,6 +580,7 @@ public class FeesCollectionService {
 			result.setReceiptDate(reDate);
 			result.setReceiptInfo(receiptInfo);
 			result.setFeeCatMap(feeCatMap);
+			result.setFeesMonth(categoryName);
 			result.setSuccess(true);
 		}
 		return result;

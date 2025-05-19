@@ -478,6 +478,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         httpSession.setAttribute("qrcode", responseDto.getQrCode());
+        httpSession.setAttribute("feesMonth", responseDto.getFeesMonth());
     }
 
     public Otherreceiptinfo addother() {

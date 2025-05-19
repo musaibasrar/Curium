@@ -30,6 +30,7 @@ public class DetailsResponseDto {
     private Login userLogin;
     private Parents parents;
     private String qrCode;
+    private String[] feesMonth;
     @Builder.Default
     private boolean success = false;
 
