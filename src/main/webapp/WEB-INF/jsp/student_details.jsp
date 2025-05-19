@@ -466,10 +466,10 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">STS Number
+                        <td width="25%" class="alignLeft" height="50">Iqama No.
 								</td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.sts}" />
+                                <c:out default="" value="${student.bhagyalakshmibondnumber}" />
                             </td>
                             
                         </tr>
@@ -735,7 +735,7 @@ for(Cookie cookie : cookies){
                     
                         <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student Iqama" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc1.jpg" href="/daralmajd/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
@@ -744,7 +744,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student Passport" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc2.jpg" href="/daralmajd/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
@@ -753,7 +753,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student Birth Certificate" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc3.jpg" href="/daralmajd/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
@@ -762,7 +762,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Parent Iqama" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc4.jpg" href="/daralmajd/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
@@ -771,7 +771,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Parent Passport" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc5.jpg" href="/daralmajd/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
@@ -936,18 +936,18 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.mothersqualification}" />
                             </td>
                         </tr>
-                        <%-- <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Father's Iqama No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Iqama No
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />
                             </td>
-                        </tr> --%>
+                        </tr>
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >

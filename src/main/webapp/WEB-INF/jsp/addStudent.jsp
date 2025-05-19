@@ -785,17 +785,17 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
+							<td class="alignLeft">Admission Number &nbsp;</td>
 							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Iqama No. &nbsp;</td>
 									<td ><label> <input
-											name="sts" type="text" class="myclass" size="36"
+											name="bhagyalakshmibondnumber" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
-											id="sts" size="36">
+											id="bhagyalakshmibondnumber" size="36">
 
 									</label></td>
 						</tr>
@@ -1337,8 +1337,8 @@ $(document).ready(function() {
 								<tr>
 									<td><br /></td>
 								</tr>
-								<!-- <tr>
-									<td class="alignLeft">Father's Aadhar No
+								<tr>
+									<td class="alignLeft">Father's Iqama No
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
@@ -1346,7 +1346,7 @@ $(document).ready(function() {
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Iqama No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
@@ -1588,7 +1588,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Iqama</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1598,7 +1598,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Passport</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1608,7 +1608,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Birth Certificate</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1618,7 +1618,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Parent's Iqama</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1628,7 +1628,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Parent's Passport</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
