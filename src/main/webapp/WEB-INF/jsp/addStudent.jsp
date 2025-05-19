@@ -747,7 +747,7 @@ $(document).ready(function() {
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<!-- <li><a href="#fragment-2">Parent's Details</a></li> -->
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
@@ -768,7 +768,7 @@ $(document).ready(function() {
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Admission<input
-								type="checkbox" value="Admission" name="stream" id="yes:at"
+								type="checkbox" value="Admission" name="stream" id="yes:at" checked
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
 								onclick="noCheck(this.id)" />
@@ -972,7 +972,17 @@ $(document).ready(function() {
 									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
 										<option selected>Indian</option>
 										<option>Indian</option>
+										<option>Egyptian</option>
+										<option>Algerian</option>
+										<option>Sudanese</option>
+										<option>Tanzanian</option>
+										<option>Tunisian</option>
+										<option>Somali</option>
+										<option>Nigerian</option>
+										<option>Namibian</option>
+										<option>Libyan</option>
 										<option>Other</option>
+										
 								</select>
 
 							</label></td>
@@ -987,18 +997,18 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<!-- <tr>
 
 
 							<td class="alignLeft">Religion &nbsp;</td>
 
 							<td >
-								<!-- <label> <input name="religion"
+								<label> <input name="religion"
 									type="text" class="myclass" id="religion" size="36"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
-							</label> --> <label> <select name="religion"
+							</label> <label> <select name="religion"
 									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<option>Islam</option>
@@ -1014,13 +1024,13 @@ $(document).ready(function() {
 
 
 
-							<!-- <td class="alignRight">Caste &nbsp;</td>
+							<td class="alignRight">Caste &nbsp;</td>
 							<td ><label> <input name="caste"
 									type="text" class="myclass" id="caste" size="36"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
-							</label></td> -->
+							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
 								Certificate No.&nbsp;</td>
@@ -1135,12 +1145,12 @@ $(document).ready(function() {
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 							<td >
-								<!-- <label> <input name="motherT"
+								<label> <input name="motherT"
 									type="text" class="textField" id="motherT" size="36"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
-							</label> --> <label> <select name="motherT"
+							</label> <label> <select name="motherT"
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -1187,7 +1197,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
@@ -1258,7 +1268,275 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+					</table>
+					
+					
+					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td>
+									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Parent's Details</h5>
+									
+									<br /></td>
+								</tr>
 
+								<tr>
+									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											required> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+									<td><label> <input
+											name="mothersname" type="text" class="myclass" id="name" required
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td class="alignLeft">Father's Qualification
+										&nbsp;</td>
+									<td ><label> <input
+											name="fathersqualification" type="text" class="myclass"
+											id="fathersqualification" 
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's
+										Qualification&nbsp;</td>
+									<td><label> <input
+											name="mothersqualification" type="text" class="myclass"
+											id="mothersqualification"
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<!-- <tr>
+									<td class="alignLeft">Father's Aadhar No
+										&nbsp;</td>
+									<td><label> <input
+											name="fatherscastecertno" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fatherscastecertno" size="36">
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
+										&nbsp;</td>
+									<td ><label> <input
+											name="motherscastecertno" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="motherscastecertno" size="36">
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr> -->
+
+								<tr>
+
+									<td class="alignLeft">Guardian's Name &
+										Address &nbsp;</td>
+									<td ><label> <input name="guardian"
+											type="text" class="myclass" id="guardian" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Annual Income &nbsp;</td>
+
+									<td ><label> <input
+											name="parentsannualincome" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="parentsannualincome" size="36"
+											onkeyup="numberWithCommas(this);">
+
+									</label></td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td class="alignLeft">Contact Number* &nbsp;</td>
+
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td class="alignLeft">Email &nbsp;</td>
+
+									<td ><label> <input name="email"
+											type="email" class="myclass" id="email" size="36"
+											>
+
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Number Of Dependents
+										&nbsp;</td>
+
+									<td ><label> <input
+											name="noofdependents" type="text" class="myclass"
+											id="noofdependents" size="36" >
+
+									</label></td>
+
+
+								</tr>
+
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+								<td class="alignLeft">Permanent Address &nbsp;</td>
+
+								<td ><label> <textarea
+											name="permanentaddress" type="text" 
+											id="permanentaddress" rows="4" cols="40"
+											style="text-transform:capitalize;"
+											></textarea>
+
+								</label></td>
+
+
+								<td class="alignLeft" style="padding-left: 20px;">Temporary Address &nbsp;</td>
+								<td ><label> <textarea
+											name="temporaryaddress" type="text"  style="text-transform:capitalize;"
+											id="temporaryaddress" rows="4" cols="40"></textarea>
+								</label></td>
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td class="alignLeft">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+
+								<tr align="center">
+									<td class="alignRight">&nbsp;</td>
+									<td align="center"><a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<!-- <tr align="center">
+									<td class="alignRight">&nbsp;</td>
+									<td align="center">
+										<button id="savetwo"  class="save" name="savestudent">Save</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="canceltwo" class="cancel">Cancel</button>
+									</td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr> -->
+							</table>
 
 						<div>
 							<table width="100%">
@@ -1295,7 +1573,7 @@ $(document).ready(function() {
 							</table>
 
 						</div>
-
+				</div>
 
 
 						<div id="fragment-3">
@@ -1554,7 +1832,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-2">
+						<!-- <div id="fragment-2">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1569,14 +1847,14 @@ $(document).ready(function() {
 											name="fathersname" type="text" class="myclass" required
 											style="text-transform:capitalize;"
 											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
+											required> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
 									<td><label> <input
 											name="mothersname" type="text" class="myclass" id="name" required
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 
@@ -1598,7 +1876,7 @@ $(document).ready(function() {
 											name="fathersqualification" type="text" class="myclass"
 											id="fathersqualification" 
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's
@@ -1607,7 +1885,7 @@ $(document).ready(function() {
 											name="mothersqualification" type="text" class="myclass"
 											id="mothersqualification"
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 
@@ -1818,7 +2096,7 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 							</table>
-						</div>
+						</div> -->
 						
 						<div id="fragment-5">
 
@@ -2151,10 +2429,6 @@ $(document).ready(function() {
 					
 				</table>
 				</div>
-					</table>
-				</div>
-
-
 			</div>
 		</div>
 

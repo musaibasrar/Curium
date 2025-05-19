@@ -544,19 +544,19 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                        <tr>
+                        <%-- <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Religion
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                  <%--           
+                            
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
- --%>
+
                                       
                             <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
@@ -647,7 +647,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
                         
@@ -936,7 +936,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.mothersqualification}" />
                             </td>
                         </tr>
-                        <tr>
+                        <%-- <tr>
                             <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
@@ -947,7 +947,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />
                             </td>
-                        </tr>
+                        </tr> --%>
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >

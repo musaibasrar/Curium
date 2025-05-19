@@ -799,17 +799,17 @@ for(Cookie cookie : cookies){
 
 
 
-						<tr>
+						<%-- <tr>
 
 
 							<td class="alignLeft">Religion &nbsp;</td>
 
-							<td><%-- <label> <input name="religion"
+							<td><label> <input name="religion"
 									type="text" class="myclass"
 									value="<c:out default="" value="${student.religion}" />"
 									id="religion" size="30">
 
-							</label> --%>
+							</label>
 							
 							<label> <select name="religion" onblur="validateNameContact();"
 									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
@@ -827,7 +827,7 @@ for(Cookie cookie : cookies){
 							</td>
 
 
-							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
+							<td width="16%" class="alignRight">Caste &nbsp;</td>
 
 							<td align="left"><label> <input name="caste"
 									type="text" class="myclass"
@@ -835,7 +835,7 @@ for(Cookie cookie : cookies){
 									id="caste" size="30">
 
 							</label></td>
- --%>
+
  							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
@@ -947,7 +947,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td id="newcateg" style="display: none;"><label> <input
 									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
-									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
+									value= "${student.newcategory}"placeholder="Add Other Category" />
 							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
@@ -1008,7 +1008,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 
 
 
@@ -1451,7 +1451,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 						<td class="alignLeft">Father's Caste <br> Certificate No</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
@@ -1472,7 +1472,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 							<td class="alignLeft">Guardian's <br>name & address</td>
