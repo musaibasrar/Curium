@@ -73,28 +73,20 @@ public class JobDAO {
 			return results;
 		}
 		
+	    @Transactional
 		public int getNoOfRecords(int branchId) {
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
-
-				results = (List<JobQuery>) session.createQuery("From JobQuery where branchid="+branchId).list();
-				noOfRecords = results.size();
+				noOfRecords = jobQueryRepository.countByBranchid(branchId);
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
-			}
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
+			return noOfRecords;
 		}
 		
 		
