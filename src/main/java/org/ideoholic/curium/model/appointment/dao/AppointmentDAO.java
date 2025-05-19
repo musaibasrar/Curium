@@ -9,9 +9,11 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class AppointmentDAO {
 
 	@Autowired
 	private AppointmentRepository appointmentRepo;
+
+	@Autowired
+	private QueryUtil queryUtil;
 
 	@Transactional
 	public String addAppointment(Appointment appointment) {
@@ -251,23 +256,21 @@ public class AppointmentDAO {
 
 		}
 
-
+		@Transactional
 		public List<Appointment> generateAppointmentsReport(String query) {
 			
 	        List<Appointment> results = new ArrayList<Appointment>();
 	        
-			Transaction transaction = null;
 			try{
-					Session session = HibernateUtil.openCurrentSession();
-	                transaction = session.beginTransaction();
-	                results = (List<Appointment>) session.createQuery(query).setCacheable(true).setCacheRegion("commonregion").list();
-	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+
+				results = queryUtil.runGivenQuery(query, Appointment.class);
+
+	        } catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 	                
 	                hibernateException.printStackTrace();
+					throw hibernateException;
 
-	        } finally {
-	    			HibernateUtil.closeSession();
 	        }
 	        return results;
 }
