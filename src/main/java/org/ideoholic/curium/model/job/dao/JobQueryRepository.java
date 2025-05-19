@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	
 	Page<JobQuery> findByBranchidOrderByIdDesc(int branchid, Pageable pageable);
+	
+	int countByBranchid(int branchId);
 
 }
