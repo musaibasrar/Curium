@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
 	</div> -->
 	
 	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 218px;" alt="ideoholic" src="/scholargroup/images/scholargroup${branchid}.png"></h2>
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/scholargroup/images/scholargroup${branchid}.png"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">
@@ -111,12 +111,18 @@ for(Cookie cookie : cookies){
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:when>
-                                <c:otherwise>
+                                <c:when test="${todaysAttendance eq 'A'}">
+                                    <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
+									src="/scholargroup/images/studentattendance.svg" width="40" height="40"
+									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
+									</a>
+                                </c:when>
+                                <%-- <c:otherwise>
                                     <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
 									src="/scholargroup/images/studentabsent.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
-                                </c:otherwise>
+                                </c:otherwise> --%>
                             </c:choose>
         					</td>
         				</tr>
