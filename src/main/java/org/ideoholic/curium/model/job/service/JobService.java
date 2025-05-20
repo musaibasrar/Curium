@@ -205,7 +205,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().completeQueries(QueryIdsList, userId);
+			result = jobDAO.completeQueries(QueryIdsList, userId);
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
