@@ -79,9 +79,9 @@ for(Cookie cookie : cookies){
     
 			    <frame   src="/scholargroup/header_superadmin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
-            <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/scholargroup/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/scholargroup/welcome" name="mainFrame" scrolling="yes" />
+            <frameset  cols="*" frameborder="0" border="0" framespacing="0">
+               <!--  <frame  src="/scholargroup/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   /> -->
+                <frame src="/scholargroup/welcomesuperadmin" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

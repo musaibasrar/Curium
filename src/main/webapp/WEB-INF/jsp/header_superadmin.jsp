@@ -130,12 +130,12 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/scholargroup/images/scholargroupheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/scholargroup/left_superadmin"> <img
+							<td><a target="mainFrame" href="/scholargroup/welcomesuperadmin"> <img
 									src="/scholargroup/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
-							<td><a target="mainFrame"
+							<!-- <td><a target="mainFrame"
 								href="/scholargroup/FeesProcess/feesCollect"> <img
 									src="/scholargroup/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
@@ -150,8 +150,8 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/scholargroup/feesCollectionDetails"><img  alt="Fees Details" src="/scholargroup/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
+							<td ><a target="mainFrame" href="/scholargroup/feesCollectionDetails"><img  alt="Fees Details" src="/scholargroup/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td>
 
 							<td><a target="mainFrame"
 								href="/scholargroup/StudentProcess/addNew"> <img
@@ -170,10 +170,10 @@ for(Cookie cookie : cookies){
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/scholargroup/sendsms"><img
+							<td ><a target="mainFrame" href="/scholargroup/sendsms"><img
 									src="/scholargroup/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
-							</a> -->
+							</a>
 								<a target="leftFrame" href="/scholargroup/reports"><img
 									src="/scholargroup/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
@@ -193,7 +193,7 @@ for(Cookie cookie : cookies){
 									alt="Dash Board" src="/scholargroup/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td>
+									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/scholargroup/UserProcess/logout"><img

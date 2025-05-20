@@ -77,7 +77,7 @@ for(Cookie cookie : cookies){
 %>
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
-		   <c:if test="${(userType == 'admin')}">
+		   <c:if test="${(userType == 'admin' || userType == 'superadmin' )}">
 			    <frame   src="/scholargroup/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 

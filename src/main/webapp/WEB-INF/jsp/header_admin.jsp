@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -132,12 +135,27 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/scholargroup/images/scholargroupheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/scholargroup/left_admin"> <img
-									src="/scholargroup/images/home.svg" width="18" height="18" 
-									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
-							</a></td>
 
-							<td><a target="mainFrame"
+				<c:choose>
+					<c:when test="${userType == 'superadmin'}">
+						<td><a target="mainFrame"
+							href="/scholargroup/welcomesuperadmin"> <img
+								src="/scholargroup/images/home.svg" width="18" height="18"
+								alt="Home" style="vertical-align: bottom; font-size: 144px;" />
+								Home
+						</a></td>
+					</c:when>
+					<c:when test="${userType == 'admin'}">
+						<td><a target="leftFrame" href="/scholargroup/left_admin">
+								<img src="/scholargroup/images/home.svg" width="18" height="18"
+								alt="Home" style="vertical-align: bottom; font-size: 144px;" />
+								Home
+						</a></td>
+					</c:when>
+				</c:choose>
+
+
+				<td><a target="mainFrame"
 								href="/scholargroup/FeesProcess/feesCollect"> <img
 									src="/scholargroup/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
