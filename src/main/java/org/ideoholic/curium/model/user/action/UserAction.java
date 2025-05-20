@@ -103,8 +103,10 @@ public class UserAction {
 		// ModelAndView model = new ModelAndView("/");
 		if (userActionAdapter.authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
+			model.addAttribute("branchlogin_success", true);
 		} else {
 			model.addAttribute("login_success", false);
+			model.addAttribute("branchlogin_success", false);
 		}
 		return "login";
 	}

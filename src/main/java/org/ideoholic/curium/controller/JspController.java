@@ -631,4 +631,9 @@ public class JspController {
 		return "bookhistory";
 	}
 	
+	@GetMapping("/welcomesuperadmin")
+	public String getWelcomeSuperAdmin() {
+		return "welcomesuperadmin";
+	}
+	
 }
