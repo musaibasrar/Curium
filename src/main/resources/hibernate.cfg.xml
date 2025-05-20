@@ -12,7 +12,7 @@
 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">mysql</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/abc</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/scholargroup</property>
 		<property name="hibernate.connection.username">root</property>
 
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -30,14 +30,15 @@
 		<property name="hibernate.connection.username">schoolschool</property>
 		<property name="hibernate.default_schema">schoolschool</property>
 		 -->
-
-		<property name="hibernate.c3p0.min_size">5</property>
-		<property name="hibernate.c3p0.max_size">20</property>
-		<property name="hibernate.c3p0.timeout">3000</property>
-		<property name="hibernate.c3p0.max_statements">50</property>
-		<property name="hibernate.c3p0.idle_test_period">300</property>
-
-
+		 
+		 <property name="hibernate.c3p0.min_size">20</property>            <!-- Minimum 20 connections always in the pool -->
+		 <property name="hibernate.c3p0.max_size">100</property>           <!-- Up to 100 connections if demand increases -->
+  	 	 <property name="hibernate.c3p0.timeout">600</property>            <!-- Close idle connections after 10 minutes -->
+		 <property name="hibernate.c3p0.max_statements">200</property>     <!-- Cache 200 prepared statements -->
+		 <property name="hibernate.c3p0.idle_test_period">300</property>   <!-- Test idle connections every 5 minutes -->
+		 <property name="hibernate.c3p0.acquire_increment">5</property>    <!-- Acquire 5 connections at a time when needed -->
+		 <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>  <!-- Ensure connections are valid -->
+		 
 
 		<!-- Query Cache -->
 		<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
