@@ -58,7 +58,7 @@ public class PeriodService {
 	                Currentacademicyear currentYear = new YearDAO().showYear();
 	                httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
 	                
-	                subjectDetailsActionAdapter.readListOfSubjects();
+	                subjectDetailsActionAdapter.readListOfSubjectNames();
 	                
 	                employeeActionAdapter.ViewAllEmployee();
 	                standardActionAdapter.viewClasses();
