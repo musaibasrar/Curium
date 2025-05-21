@@ -47,7 +47,6 @@ public class UserActionAdapter {
 
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());
         httpSession.setAttribute("datefrom", responseDto.getDateFrom());
         httpSession.setAttribute("dateto", responseDto.getDateTo());
@@ -118,7 +117,6 @@ public class UserActionAdapter {
         DashBoardResponseDto responseDto = userService.dashBoard(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("totalteachers", responseDto.getTeacherSize());
         httpSession.setAttribute("expensesdatebranchname", responseDto.getDailyExpensesResponseDto().getExpensesDateBranchName());
-        httpSession.setAttribute("branchname", responseDto.getDailyExpensesResponseDto().getBranchName());
         request.setAttribute("dayone", responseDto.getDailyExpensesResponseDto().getDayOne());
         request.setAttribute("dailyadminexpenses", responseDto.getDailyExpensesResponseDto().getDailyAdminExpenses());
         request.setAttribute("dailyexpenses", responseDto.getDailyExpensesResponseDto().getDailyExpenses());
