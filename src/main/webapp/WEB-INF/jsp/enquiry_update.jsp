@@ -444,8 +444,8 @@
 						<tr>
 							<td class="alignLeft">Contact No</td>
 							<td><input type="text" name="contactno" value="${admissionEnquiry.mobileno}" class="myclass"/></td>
-							<td class="alignLeft" style="padding-left: 20px;">Parent Sig</td>
-							<td><input type="text" name="parentsign" class="myclass"/></td>
+							<!-- <td class="alignLeft" style="padding-left: 20px;">Parent Sig</td>
+							<td><input type="text" name="parentsign" class="myclass"/></td> -->
 						</tr>
 						<tr>
 							<td><br /></td>

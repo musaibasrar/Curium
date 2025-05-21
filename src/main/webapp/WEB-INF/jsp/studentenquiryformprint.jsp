@@ -429,8 +429,8 @@
 						<tr>
 							<td class="alignLeft">Contact No</td>
 							<td>${mobileno}</td>
-							<td class="alignLeft" style="padding-left: 20px;">Parent Sig</td>
-							<td>${placeOfBirth}</td>
+							<%-- <td class="alignLeft" style="padding-left: 20px;">Parent Sig</td>
+							<td>${placeOfBirth}</td> --%>
 						</tr>
 						<tr>
 							<td><br /></td>
