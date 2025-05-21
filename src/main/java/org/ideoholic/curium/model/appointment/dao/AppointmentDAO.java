@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -274,26 +275,28 @@ public class AppointmentDAO {
 	        }
 	        return results;
 }
-
+        @Transactional
 		public boolean updateAppointments(List<Appointment> appointmentList) {
 			
 			boolean result = false;
-			Transaction transaction = null;
+
 			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				
-					for (Appointment appointment : appointmentList) {
-						Query query = session.createQuery("update Appointment set appointmentstarttime = '"+appointment.getAppointmentstarttime()+"', appointmentendtime='"+appointment.getAppointmentendtime()+"', totaltime='"+appointment.getTotaltime()+"' where id="+appointment.getId()+"");
-						query.executeUpdate();
+
+				for (Appointment appointment : appointmentList) {
+
+					Optional<Appointment> optional = appointmentRepo.findById(appointment.getId());
+					if (optional.isPresent()) {
+						Appointment existingAppointment = optional.get();
+						existingAppointment.setAppointmentstarttime(appointment.getAppointmentstarttime());
+						existingAppointment.setAppointmentendtime(appointment.getAppointmentendtime());
+						existingAppointment.setTotaltime(appointment.getTotaltime());
+						result = true;
 					}
-					
-					transaction.commit();
-					result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
+				}
+			} catch (Exception hibernateException) {
+						log.error(hibernateException.getMessage(), hibernateException);
+						hibernateException.printStackTrace();
+						throw hibernateException;
 			 }
 			return result;
 		}

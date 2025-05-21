@@ -122,7 +122,7 @@ public class AppointmentApiAction {
 	}
 
 	@PostMapping("/updateAppointment")
-	private ResponseEntity<ViewAllAppoinmentsResponseDto> updateAppointment(@RequestBody UpdateAppointmentDto updateAppointmentDto, @RequestHeader(value="branchId") String branchId) {
+	private ResponseEntity<ViewAllAppoinmentsResponseDto> updateAppointment(@RequestBody UpdateAppointmentDto updateAppointmentDto, @RequestHeader(value="branchid") String branchId) {
 		ResultResponse result = appointmentService.updateAppointment(updateAppointmentDto);
 		if (result.isSuccess()) {
 			return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
