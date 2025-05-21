@@ -290,9 +290,12 @@ public class AppointmentDAO {
 						existingAppointment.setAppointmentstarttime(appointment.getAppointmentstarttime());
 						existingAppointment.setAppointmentendtime(appointment.getAppointmentendtime());
 						existingAppointment.setTotaltime(appointment.getTotaltime());
-						result = true;
+						appointmentRepo.save(existingAppointment);
+
 					}
+
 				}
+				result = true;
 			} catch (Exception hibernateException) {
 						log.error(hibernateException.getMessage(), hibernateException);
 						hibernateException.printStackTrace();
