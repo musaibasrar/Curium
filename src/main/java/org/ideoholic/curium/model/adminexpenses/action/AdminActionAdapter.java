@@ -83,7 +83,6 @@ public class AdminActionAdapter {
 		AdminExpenseResponseDto adminExpenseResponseDto = adminService.searchExpensesbydate(adminexpensesdto, httpSession.getAttribute("branchid").toString());
 
 		httpSession.setAttribute("expensesdatebranchname", adminExpenseResponseDto.getExpensesdatebranchname());
-		httpSession.setAttribute("branchname", adminExpenseResponseDto.getBranchname());
 		request.setAttribute("dayone", adminExpenseResponseDto.getDayone());
 		request.setAttribute("datefrom", adminExpenseResponseDto.getDatefrom());
 		request.setAttribute("dateto", adminExpenseResponseDto.getDateto());
