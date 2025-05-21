@@ -68,7 +68,6 @@ public class FeesCollectionActionAdapter {
 
         CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getFeesDetailsList());
         httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
         httpSession.setAttribute("dayonecancel", responseDto.getDayOneCancel());
@@ -226,7 +225,6 @@ public class FeesCollectionActionAdapter {
 
         CancelledReceiptsResponseDto responseDto = feesCollectionService.searchOtherFeesCollection(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOneCancel());
         httpSession.setAttribute("datefrom", responseDto.getDateFromCancel());
         httpSession.setAttribute("dateto", responseDto.getDateToCancel());
@@ -272,7 +270,6 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("totalPaidAmountDashBoard", responseDto.getTotalPaidAmount());
         request.setAttribute("totalDueAmountDashBoard", responseDto.getTotalDueAmount());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getBranchIdName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("sumOfFeesDaily", responseDto.getSumOfFeesDaily());
         httpSession.setAttribute("sumOfFeesMonthly", responseDto.getSumOfFeesMonthly());
         httpSession.setAttribute("Currentmonth", responseDto.getCurrentMonth());
@@ -341,7 +338,6 @@ public class FeesCollectionActionAdapter {
 
         CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledOtherFeesReceipts(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayonecancel", responseDto.getDayOneCancel());
         httpSession.setAttribute("datefromcancel", responseDto.getDateFromCancel());
         httpSession.setAttribute("datetocancel", responseDto.getDateToCancel());
@@ -363,7 +359,6 @@ public class FeesCollectionActionAdapter {
 
         FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
-        httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());
         httpSession.setAttribute("datefrom", responseDto.getDateFrom());
         httpSession.setAttribute("dateto", responseDto.getDateTo());
