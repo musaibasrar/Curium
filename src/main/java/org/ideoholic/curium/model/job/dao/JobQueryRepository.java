@@ -24,4 +24,7 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    @Query("UPDATE JobQuery j SET j.status = 'Completed', j.updateddate = :updatedDate, j.updateduserid = :userId WHERE j.id IN :ids")
 	    void markQueriesAsCompleted(@Param("ids") List<Integer> ids, @Param("userId") int userId, @Param("updatedDate") Date updatedDate);
 
+	    @Modifying
+	    @Query("UPDATE JobQuery jq SET jq.status = 'Cancelled', jq.updateduserid = :userId, jq.updateddate = CURRENT_DATE WHERE jq.id IN :queryIds")
+	    int cancelQueries(@Param("queryIds") List<Integer> queryIds, @Param("userId") int userId);
 }
