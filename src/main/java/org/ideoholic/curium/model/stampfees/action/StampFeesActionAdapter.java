@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
@@ -63,7 +64,7 @@ public class StampFeesActionAdapter {
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
 		stampFeesDto.setFeesCategoryIds(request.getParameterValues("feesIDS"));
-		stampFeesDto.setFeesAmount(request.getParameterValues("fessFullCat"));
+		stampFeesDto.setFeesAmount(request.getParameterValues("feesFullCat"));
 		stampFeesDto.setConcession(request.getParameterValues("feesConcession"));
 		stampFeesDto.setTotalInstallments(request.getParameterValues("feesCount"));
 		stampFeesDto.setFeesYears(request.getParameterValues("feesYears"));
@@ -76,8 +77,9 @@ public class StampFeesActionAdapter {
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
-		SearchStudentResponseDto searchStudentResponseDto = stampFeesService.otheradvanceSearch(searchStudentDto,httpSession.getAttribute(BRANCHID).toString());
-		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
+		OtherFeesCategoryResponseDto otherFeescategoryResponseDto = stampFeesService.otheradvanceSearch(searchStudentDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		request.setAttribute("searchStudentList", otherFeescategoryResponseDto.getSearchStudentList());
+		httpSession.setAttribute("otherfeescategory", otherFeescategoryResponseDto.getOtherFeesCategory());
 	}
 
 	public void advanceSearchForStampFees() {
