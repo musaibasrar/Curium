@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
@@ -318,9 +319,10 @@ public class StampFeesService {
 		}
 	
 	public void addotherFeesStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
-
+		
 		if(currentAcademicYear!=null){
 		String[] studentIds = stampFeesDto.getStudentIds();
+		Long totalFeesAmount = 0l;
 		if(studentIds!=null){
 			Academicotherfeesstructure academicfessstructure = new Academicotherfeesstructure();
 		List<Academicotherfeesstructure> listOfacademicfessstructure = new ArrayList<Academicotherfeesstructure>();
@@ -354,22 +356,28 @@ public class StampFeesService {
 
 		for (String id : studentIds) {
 
+			
 			for(int i=0; i < feesCategoryIds.length ; i++){
 
+			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
+			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+				
 			Studentotherfeesstructure studentfeesstructure = new Studentotherfeesstructure();   
 			OtherFeecategory feescategory = new OtherFeecategory();
 			studentfeesstructure.setSid(Integer.valueOf(id));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setOtherfeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(feesYears[i]);
+			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+			studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
 			studentfeesstructure.setBranchid(Integer.parseInt(branchid));
 			studentfeesstructure.setUserid(Integer.parseInt(userid));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
+			
+			totalFeesAmount = totalFeesAmount+ Long.parseLong(feesAmount[feesCatIndex]);
 		}
 
 
@@ -383,11 +391,20 @@ public class StampFeesService {
 		}
 	}
 	
-	public SearchStudentResponseDto otheradvanceSearch(SearchStudentDto searchStudentDto,String branchid) {
-		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+	public OtherFeesCategoryResponseDto otheradvanceSearch(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear) {
+		OtherFeesCategoryResponseDto otherFeescategoryResponseDto = new OtherFeesCategoryResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
 		if(branchid!=null){
+			
+			String className = searchStudentDto.getClassSearch();
+        	
+            List<OtherFeecategory> otherFeecategoryList= new feesCategoryDAO().getOtherFeeCategory(className,currentAcademicYear,branchid);
+            otherFeescategoryResponseDto.setOtherFeesCategory(otherFeecategoryList);
+  		
+    		
+    		
+    		// Get Student Details
 
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -423,10 +440,11 @@ public class StampFeesService {
 			queryMain = queryMain + querySub;
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
+		otherFeescategoryResponseDto.setSearchStudentList(searchStudentList);
 
 	}
-		searchStudentResponseDto.setSearchStudentList(searchStudentList);
-		return searchStudentResponseDto;
+		
+		return otherFeescategoryResponseDto;
 	}
 
 	public FeescategoryResponseDto advanceSearchForStampFees(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear){
