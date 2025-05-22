@@ -328,7 +328,7 @@ public class feesCategoryDAO {
 		try {
 			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
-				Query query = session.createQuery("update Studentotherfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Query query = session.createQuery("update Studentotherfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
 				query.executeUpdate();
 				Query queryAcademicFees = session.createQuery("update Academicotherfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
 				queryAcademicFees.executeUpdate();
@@ -399,6 +399,47 @@ public class feesCategoryDAO {
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean createOtherFeescategory(List<OtherFeecategory> feesCategoryList) {
+		boolean result = false;
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            for (OtherFeecategory feescategory : feesCategoryList) {
+            	session.save(feescategory);
+			}
+            transaction.commit();
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
+
+	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
+
+		List <OtherFeecategory> result= new ArrayList();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
 		}
 	}
 

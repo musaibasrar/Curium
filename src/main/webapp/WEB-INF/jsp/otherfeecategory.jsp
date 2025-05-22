@@ -453,13 +453,22 @@ for(Cookie cookie : cookies){
 						<tr></tr>
 						<tr>
 
-						<td width="16%" class="alignRight">From Class &nbsp;
+						<td width="16%" class="alignRight">Class &nbsp;
 							</td>
 
 							<td width="8%">
 							 <label> 
-								<select name="fromclass" id="fromclass"
-									style="width: 120px;border-radius: 4px;background: white;height: 28px;">
+							 
+							 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+							
+								<%-- <select name="fromclass" id="fromclass"
+									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -468,14 +477,14 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:if>	
 										</c:forEach>
-								</select>
-
+								</select> --%>
+								
 							</label>
-							&nbsp;<label style="font-weight: bold;color:#325F85">To Class &nbsp;</label>
-
+							&nbsp;<label style="font-weight: bold;color:#325F85;display: none;">To Class &nbsp;</label>
+							
 							<label>
 							<select name="toclass" id="toclass"
-									style="width: 120px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 120px;display: none;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 													<c:if test="${(classdetailslist.classdetails != '')}">
@@ -486,7 +495,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label>
-
+							
 							</td>
 
 						</tr>
