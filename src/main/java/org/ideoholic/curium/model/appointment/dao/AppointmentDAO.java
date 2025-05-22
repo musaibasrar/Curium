@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -63,239 +64,252 @@ public class AppointmentDAO {
 		return resultString;
 	}
 
-        @Transactional
-		public List<Appointment> readListOfObjectsPagination(int offset,
-				int noOfRecords, int branchId) {
-			
-			List<Appointment> results = new ArrayList<Appointment>();
+	@Transactional
+	public List<Appointment> readListOfObjectsPagination(int offset,
+														 int noOfRecords, int branchId) {
 
-			try{
+		List<Appointment> results = new ArrayList<Appointment>();
 
-				int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
-				Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
-				Page<Appointment> page = appointmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
-				return page.getContent();
+		try {
 
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
- 				throw hibernateException;
-			}
+			int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
+			Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
+			Page<Appointment> page = appointmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
+			return page.getContent();
 
-		}
-		@Transactional
-		public int getNoOfRecords(int branchId) {
-			int noOfRecords = 0;
-			try{
-
-				noOfRecords =  appointmentRepo.countByBranchid(branchId);
-
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-				throw hibernateException;
-
-			}
-				return noOfRecords;
-
-		}
-		@Transactional
-		public int getNoOfRecords() {
-			
-			int noOfRecords = 0;
-			try{
-				Long activeAppointments = appointmentRepo.countByStatusNot("Cancelled");
-				noOfRecords = activeAppointments.intValue();
-
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-				throw hibernateException;
-
-			}
-				return noOfRecords;
-
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
 
-        @Transactional
-		public boolean completeAppointments(List<Integer> appointmentIdsList) {
-			
-			boolean result;
+	}
 
-			try{
+	@Transactional
+	public int getNoOfRecords(int branchId) {
+		int noOfRecords = 0;
+		try {
 
-				List<Appointment> appointments = appointmentRepo.findAllById(appointmentIdsList);
-				for (Appointment appointment : appointments) {
+			noOfRecords = appointmentRepo.countByBranchid(branchId);
 
-					appointment.setStatus("Completed");
-					appointmentRepo.save(appointment);
-				}
-				
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 
-				result = true;
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
+			hibernateException.printStackTrace();
+			throw hibernateException;
 
-				throw hibernateException;
-			}
-			return result;
 		}
+		return noOfRecords;
 
-		@Transactional
-		public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
-			
+	}
+
+	@Transactional
+	public int getNoOfRecords() {
+
+		int noOfRecords = 0;
+		try {
+			Long activeAppointments = appointmentRepo.countByStatusNot("Cancelled");
+			noOfRecords = activeAppointments.intValue();
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+
+		}
+		return noOfRecords;
+
+	}
+
+	@Transactional
+	public boolean completeAppointments(List<Integer> appointmentIdsList) {
+
+		boolean result;
+
+		try {
+
 			List<Appointment> appointments = appointmentRepo.findAllById(appointmentIdsList);
-			try{
+			for (Appointment appointment : appointments) {
 
-				for(Appointment appointment : appointments){
-					appointment.setStatus("Cancelled");
-					appointmentRepo.save(appointment);
-
-				}
-				
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			 	throw hibernateException;
+				appointment.setStatus("Completed");
+				appointmentRepo.save(appointment);
 			}
-			return appointments;
+
+
+			result = true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
+		return result;
+	}
 
-		@Transactional
-		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
+	@Transactional
+	public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
 
-			int noOfRecords = 0;
-			try{
+		List<Appointment> appointments = appointmentRepo.findAllById(appointmentIdsList);
+		try {
 
-				Date start = DateUtil.indiandateParser(fromDate);
-				Date end = DateUtil.indiandateParser(toDate);
-				noOfRecords = (int) appointmentRepo.countByDate(start, end);
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-				throw hibernateException;
+			for (Appointment appointment : appointments) {
+				appointment.setStatus("Cancelled");
+				appointmentRepo.save(appointment);
 
 			}
-				return noOfRecords;
-					
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
+		return appointments;
+	}
 
-        @Transactional
-		public int getNoOfRecordsCompletedAppointments() {
-			
-			int noOfRecords = 0;
-			try{
+	@Transactional
+	public int getNoOfRecordsMonthly(String fromDate, String toDate) {
 
-				Long result = appointmentRepo.countByStatus("Completed");
-				noOfRecords = result.intValue();
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-				throw hibernateException;
+		int noOfRecords = 0;
+		try {
 
-			}
-				return noOfRecords;
+			Date start = DateUtil.indiandateParser(fromDate);
+			Date end = DateUtil.indiandateParser(toDate);
+			noOfRecords = (int) appointmentRepo.countByDate(start, end);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 
-		}
-
- 		@Transactional
-		public int getNoOfRecordsIncompleteAppointments() {
-			
-			int noOfRecords = 0;
-			try{
-
-				Long result = appointmentRepo.countByStatus("Scheduled");
-				noOfRecords = result.intValue();
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-				throw  hibernateException;
-
-			}
-				return noOfRecords;
+			hibernateException.printStackTrace();
+			throw hibernateException;
 
 		}
+		return noOfRecords;
 
-		@Transactional
-		public int getNoOfRecordsTodayCompletedAppointments() {
-			
-			int noOfRecords = 0;
-			try{
-				Long result = appointmentRepo.countByStatusAndCreateddate("Completed",new Date());
-				noOfRecords = result.intValue();
-			} catch (Exception hibernateException) {
+	}
 
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-				throw hibernateException;
-			}
-				return noOfRecords;
-		}
+	@Transactional
+	public int getNoOfRecordsCompletedAppointments() {
 
-		@Transactional
-		public int getNoOfRecordsTodayIncompleteAppointments() {
-			
-			int noOfRecords = 0;
-			Transaction transaction = null;
-			try{
+		int noOfRecords = 0;
+		try {
 
-				Long result = appointmentRepo.countByStatusAndCreateddate("Scheduled",new Date());
-				noOfRecords = result.intValue();
+			Long result = appointmentRepo.countByStatus("Completed");
+			noOfRecords = result.intValue();
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 
-			} catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-				throw hibernateException;
-
-			}
-				return noOfRecords;
+			hibernateException.printStackTrace();
+			throw hibernateException;
 
 		}
+		return noOfRecords;
 
-		@Transactional
-		public List<Appointment> generateAppointmentsReport(String query) {
-			
-	        List<Appointment> results = new ArrayList<Appointment>();
-	        
-			try{
+	}
 
-				results = queryUtil.runGivenQuery(query, Appointment.class);
+	@Transactional
+	public int getNoOfRecordsIncompleteAppointments() {
 
-	        } catch (Exception hibernateException) {
-				log.error(hibernateException.getMessage(), hibernateException);
-	                
-	                hibernateException.printStackTrace();
-					throw hibernateException;
+		int noOfRecords = 0;
+		try {
 
-	        }
-	        return results;
+			Long result = appointmentRepo.countByStatus("Scheduled");
+			noOfRecords = result.intValue();
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+
+		}
+		return noOfRecords;
+
+	}
+
+	@Transactional
+	public int getNoOfRecordsTodayCompletedAppointments() {
+
+		int noOfRecords = 0;
+		try {
+			Long result = appointmentRepo.countByStatusAndCreateddate("Completed", new Date());
+			noOfRecords = result.intValue();
+		} catch (Exception hibernateException) {
+
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		return noOfRecords;
+	}
+
+	@Transactional
+	public int getNoOfRecordsTodayIncompleteAppointments() {
+
+		int noOfRecords = 0;
+		Transaction transaction = null;
+		try {
+
+			Long result = appointmentRepo.countByStatusAndCreateddate("Scheduled", new Date());
+			noOfRecords = result.intValue();
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+
+		}
+		return noOfRecords;
+
+	}
+
+	@Transactional
+	public List<Appointment> generateAppointmentsReport(String query) {
+
+		List<Appointment> results = new ArrayList<Appointment>();
+
+		try {
+
+			results = queryUtil.runGivenQuery(query, Appointment.class);
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			throw hibernateException;
+
+		}
+		return results;
+	}
+
+	@Transactional
+	public boolean updateAppointments(List<Appointment> appointmentList) {
+
+		boolean result = false;
+
+		try {
+
+			appointmentList.forEach(appointment -> {
+
+				appointmentRepo.findById(appointment.getId()).ifPresent(existingAppointment -> {
+
+					existingAppointment.setAppointmentstarttime(appointment.getAppointmentstarttime());
+					existingAppointment.setAppointmentendtime(appointment.getAppointmentendtime());
+					existingAppointment.setTotaltime(appointment.getTotaltime());
+
+					appointmentRepo.save(existingAppointment);
+
+				});
+			});
+			result = true;
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			throw hibernateException;
+
+		}
+		return result;
+	}
+
 }
 
-		public boolean updateAppointments(List<Appointment> appointmentList) {
-			
-			boolean result = false;
-			Transaction transaction = null;
-			try{
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				
-					for (Appointment appointment : appointmentList) {
-						Query query = session.createQuery("update Appointment set appointmentstarttime = '"+appointment.getAppointmentstarttime()+"', appointmentendtime='"+appointment.getAppointmentendtime()+"', totaltime='"+appointment.getTotaltime()+"' where id="+appointment.getId()+"");
-						query.executeUpdate();
-					}
-					
-					transaction.commit();
-					result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
-			return result;
-		}
 
-}
+
