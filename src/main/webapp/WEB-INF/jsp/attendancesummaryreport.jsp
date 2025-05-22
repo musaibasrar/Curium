@@ -662,7 +662,7 @@ for(Cookie cookie : cookies){
 								                    <table>
 								                    <tr></tr><br></td></tr>
 								                    <tr><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-								                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <button id="print">Print Table</button>
+								                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <button id="print">Print</button>
 								                     </td></tr>
 								                     </table>
 								
