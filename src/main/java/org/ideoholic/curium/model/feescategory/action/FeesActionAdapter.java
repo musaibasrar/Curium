@@ -155,9 +155,8 @@ public class FeesActionAdapter {
 	public void addOtherFeesParticular() {
 		FeesService feesService = new FeesService(request, response);
 		OtherFeecategoryDto otherFeecategoryDto = new OtherFeecategoryDto();
+		otherFeecategoryDto.setFromClass(request.getParameterValues("fromclass"));
 		otherFeecategoryDto.setFeesCategory(request.getParameter("feescategory"));
-		otherFeecategoryDto.setFromClass(request.getParameter("fromclass"));
-		otherFeecategoryDto.setToClass(request.getParameter("toclass"));
 		otherFeecategoryDto.setAmount(request.getParameter("amount"));
 		otherFeecategoryDto.setCategoryYearOf(request.getParameter("categoryyearof"));
 		feesService.addOtherFeesParticular(otherFeecategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
