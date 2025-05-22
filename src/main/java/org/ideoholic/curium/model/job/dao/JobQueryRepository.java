@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.job.dao;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,6 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	int countByStatusNot(String status);
 	
 	    @Modifying
-	    @Query("UPDATE JobQuery j SET j.status = 'Completed', j.updateddate = :updatedDate, j.updateduserid = :userId WHERE j.id IN :ids")
-	    void markQueriesAsCompleted(@Param("ids") List<Integer> ids, @Param("userId") int userId, @Param("updatedDate") Date updatedDate);
-
+	    @Query("UPDATE JobQuery j SET j.status = :status, j.updateddate = :updatedDate, j.updateduserid = :userId WHERE j.id IN :ids")
+	    void updateJobStatus(@Param("ids") List<Integer> ids, @Param("status") String status, @Param("userId") int userId, @Param("updatedDate") Date updatedDate);
 }

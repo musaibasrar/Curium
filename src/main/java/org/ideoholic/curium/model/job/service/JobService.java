@@ -233,7 +233,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().cancelQueries(QueryIdsList, userId);
+			result = jobDAO.cancelQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 		}
        return searchStudentResponseDto;

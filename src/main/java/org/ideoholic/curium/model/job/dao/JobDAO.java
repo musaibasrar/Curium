@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.job.dao;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,9 +114,8 @@ public class JobDAO {
 		public List<JobQuery> completeQueries(List<Integer> queryIdsList, int userId) {
 			
 			List<JobQuery> result = new ArrayList<JobQuery>();
-			Date currentDate = Date.from(Instant.now());
 			try {
-				jobQueryRepository.markQueriesAsCompleted(queryIdsList, userId, currentDate);
+				jobQueryRepository.updateJobStatus(queryIdsList, "Completed", userId, Date.from(Instant.now()));
 				result = jobQueryRepository.findAllById(queryIdsList);
 			} catch (Exception hibernateException) { 
 	        	log.error(hibernateException.getMessage(), hibernateException);
@@ -128,24 +126,18 @@ public class JobDAO {
 		}
 
 
+	    @Transactional
 		public boolean cancelQueries(List<Integer> queryIdsList, int userId) {
 			
 			boolean result = false;
 			try {
-				transaction = session.beginTransaction();
-				
-				for (Integer appId : queryIdsList) {
-					Query query = session.createQuery("update JobQuery set status = 'Cancelled',  updateduserid= "+userId+", updateddate=CURDATE()  where id="+appId+"");
-					query.executeUpdate();
-				}
-				
-				transaction.commit();
+				jobQueryRepository.updateJobStatus(queryIdsList, "Cancelled", userId, Date.from(Instant.now()));
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			}
 			return result;
 		}
 		
