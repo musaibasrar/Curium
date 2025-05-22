@@ -133,7 +133,8 @@ public class JobDAO {
 			
 			boolean result = false;
 			try {
-				jobQueryRepository.cancelQueries(queryIdsList, userId);
+				//jobQueryRepository.cancelQueries(queryIdsList, userId);
+				jobQueryRepository.updateJobStatus(queryIdsList, "Cancelled", userId, Date.from(Instant.now()));
 				result = true;
 			} catch (Exception hibernateException) { 
 	        	log.error(hibernateException.getMessage(), hibernateException);
