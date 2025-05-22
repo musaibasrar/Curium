@@ -646,7 +646,7 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 
-						<tr>
+						<!-- <tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
@@ -666,7 +666,7 @@ for(Cookie cookie : cookies){
 					
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
@@ -709,43 +709,61 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 					</table>
-					<div class="alignRightFields">
-						Fees Category:
-						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
-						<input
-									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
-									size="36"">
-					</div>
-					<TABLE id="dataTable" width="100%" border="0">
-						<thead>
-							<tr>
-								<td class="headerText"><INPUT type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /></td>
-								<td class="headerText">Fees Category</td>
-								<td class="headerText">Academic Year</td>
-								<td class="headerText">Fees Amount</td>
-								<td class="headerText">No.of installments in a Year</td>
-								<td class="headerText">Fees Total Amount</td>
-
-
-
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-						<tfoot>
-							<tr>
-
-								<td colspan="4" align="right">Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
-							</tr>
-
-						</tfoot>
-					</TABLE>
+					
+					<div style="overflow:scroll;width:750px; height: 250px;">
+						<c:set var="feesInitialTotal" value="0" />
+							<table id="dataTable">
+							
+							<thead>
+								<tr>
+									<td style="padding-right: 30px;font-weight: bold;color:#eb6000">Fees Category</td>
+									<td style="padding-right: 20px;font-weight: bold;color:#eb6000">class</td>
+									<td style="padding-right: 100px;font-weight: bold;color:#eb6000">Fees Amount</td>
+    		        			    <td style="padding-right: 40px;font-weight: bold;color:#eb6000">No.of installments in a Year</td>
+    		        			    <td style="font-weight: bold;color:#eb6000">Fees Total Amount</td>
+    		        			</tr>
+    		        		</thead>
+    		        			<tr>
+    		        				<td>
+    		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
+    		        				 		<input  type="checkbox" id = "chckHeadStamp" onchange="toggleFeesCount(this)"/>All
+										</label>
+									</td>
+    		        			</tr>
+    		        		
+   			        			<c:forEach items="${otherfeescategory}" var="feescategory" varStatus="status">
+   			        			
+   			        			<tr>
+											<td><label class="labelClass"
+												style="font-weight: bold; color: #325F6D"> <input
+													type="checkbox" name="feesIDS"
+													id="feesIDS_${status.index+1}" class="chcktblStamp" checked="checked"
+													value="${feescategory.idfeescategory}_${status.index}"
+													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
+													size="18"> ${feescategory.feescategoryname} :
+											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
+												id="fees_status_${status.index+1}" value="not set" /> <input
+												name="currentyear" type="hidden" value="${currentYear}"
+												class="myclass" id="currentyear"> <input
+												class="feesYear" type="hidden"
+												value="${feescategory.academicyear}" name="feesYears"
+												id="fees_year_${status.index+1}" readonly /></td>
+												<td> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}
+   			        				</label> <input type="hidden" value="0" name="feesConcession" id="feesConcession_${status.index+1}" />
+   			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
+   			        				
+   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="feesCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
+   			        				<td> <input	type="text" value="1" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
+   			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
+   			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + feescategory.amount}" />
+   			        				</td>
+   			        				
+   			        			</tr>
+   			        			
+   			        			</c:forEach>
+   			        				
+   			        		 <tfoot><tr><td colspan="4" align="right">Total</td><td align="center"><input type="text" name="feesTotalAmount" id=feesTotalAmount value="${feesInitialTotal}" /></td></tr></table>
+   			        		 </div>
 
 				</div>
 			</div>
