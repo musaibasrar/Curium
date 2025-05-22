@@ -126,9 +126,9 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 	}
 
 	@PostMapping("/othersearch")
-	public ResponseEntity<SearchStudentResponseDto> othersearch(@RequestBody SearchStudentDto searchStudentDto,
-			@RequestHeader(value = "branchid") String branchId) {
-		SearchStudentResponseDto result = stampFeesService.otheradvanceSearch(searchStudentDto, branchId);
+	public ResponseEntity<OtherFeesCategoryResponseDto> othersearch(@RequestBody SearchStudentDto searchStudentDto,
+			@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
+		OtherFeesCategoryResponseDto result = stampFeesService.otheradvanceSearch(searchStudentDto, branchId,currentAcademicYear);
 		return ResponseEntity.ok(result);
 	}
 
