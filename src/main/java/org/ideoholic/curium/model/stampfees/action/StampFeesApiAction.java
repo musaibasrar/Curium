@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.stampfees.action;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.stampfees.dto.FeesDetailsDto;
 import org.ideoholic.curium.model.stampfees.dto.OtherFeesDetailsDto;
 import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
@@ -35,7 +36,7 @@ public interface StampFeesApiAction {
 	
 	 ResponseEntity<OtherFeesDetailsDto> showOtherFeesDetails(@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
-	 ResponseEntity<SearchStudentResponseDto> othersearch(@RequestBody SearchStudentDto searchStudentDto,@RequestHeader(value = "branchid") String branchId); 
+	 ResponseEntity<OtherFeesCategoryResponseDto> othersearch(@RequestBody SearchStudentDto searchStudentDto,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear); 
 	
 	 ResponseEntity<FeescategoryResponseDto> advanceSearchForStampFees(@RequestBody SearchStudentDto searchStudentDto,@RequestHeader(value = "branchid") String branchId,
 				@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
