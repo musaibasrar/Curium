@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class OtherFeecategoryDto {
 	
 	private String feesCategory;
-	private String fromClass;
-	private String toClass;
+	private String[] fromClass;
 	private String amount;
 	private String categoryYearOf;
 
