@@ -158,7 +158,7 @@ public class UserActionAdapter {
 
         String branchId = request.getParameter(BRANCHID);
 
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), branchId);
         httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
         httpSession.setAttribute("username", responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
@@ -171,7 +171,6 @@ public class UserActionAdapter {
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute("superuserAuth", responseDto.getSuperUserAuth());
         httpSession.setAttribute("userloginid", responseDto.getUserLoginId());
-        httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
         httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
         httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
         return responseDto.isSuccess();
