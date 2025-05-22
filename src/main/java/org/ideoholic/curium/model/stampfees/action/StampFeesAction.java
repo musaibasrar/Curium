@@ -56,7 +56,7 @@ public class StampFeesAction {
 
 	@GetMapping("/showFeesDetails")
 	public String showFeesDetails() {
-		feesActionAdapter.viewFees();
+		//feesActionAdapter.viewFees();
 		yearActionAdapter.getYear();
 		standardActionAdapter.viewClasses();
 		return "stampfees";
@@ -86,7 +86,7 @@ public class StampFeesAction {
 	
 	@GetMapping("/showOtherFeesDetails")
 	public String showOtherFeesDetails() {
-		feesActionAdapter.viewOtherFees();
+		//feesActionAdapter.viewOtherFees();
 		yearActionAdapter.getYear();
 		standardActionAdapter.viewClasses();
 		return "otherstampfees";
