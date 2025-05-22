@@ -491,7 +491,7 @@
 
 	function exportLedgerReports(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/AccountProcess/exportLedgerReports";
+		form1.action = "/shatabdi/AccountProcess/exportGeneralLedgerReport";
 		form1.method = "POST";
 		form1.submit();
 	}

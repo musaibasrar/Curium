@@ -405,9 +405,17 @@ public class AccountAction {
 		return ERRORPAGE;
 	}
 	
-	@PostMapping("/exportLedgerReports")
+	@PostMapping("/exportGeneralLedgerReport")
 	private String exportLedgerReports() {
-    	new AccountService(request, response).exportLedgerReports();
-        return "trialbalanceexportsuccess";
+    	new AccountService(request, response).exportLedgerReport();
+        return "generalledgerexportsuccess";
 	}
+	
+	@PostMapping("/downloadGeneralLedgerReport")
+	private String downloadGeneralLedgerReport() {
+		if (new AccountService(request, response).downloadGeneralLedgerReport()) {
+			return "generalledgerexportsuccess";
+		}
+		return "exportfailure";
+		}
 }

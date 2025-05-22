@@ -1692,17 +1692,24 @@ public boolean searchSingleLedgerEntries() {
 	}
 
 
-	public void exportLedgerReports() {
+	public void exportLedgerReport() {
 		boolean writeSucees = false;
-		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
 		
+		String[] transactionIds = request.getParameterValues("transactionids");
+		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
+		String[] accountIdName = accountDetails.split(":");
+		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
 		DecimalFormat df = new DecimalFormat("###.##");
 		
-		accountBalanceMap = (Map<Accountdetails, BigDecimal>) httpSession.getAttribute("accountdetailsbalanceMap");
-		String creditAllAcc = httpSession.getAttribute("credittotal").toString();
-		String debitAllAcc = httpSession.getAttribute("debittotal").toString();
-		String fromDate = (String) httpSession.getAttribute("fromdatetb");
-		String toDate = (String) httpSession.getAttribute("todatetb");
+		 List<Integer> transactionIdList = Arrays.stream(transactionIds)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(transactionIdList);
 		
 		try {
 
@@ -1712,42 +1719,50 @@ public boolean searchSingleLedgerEntries() {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Ledger Reports"});
+					new Object[] { "Ledger Report"});
 			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
 			headerData1.put("Header",
 					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
 			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
 			headerData2.put("Header",
-					new Object[] { "Accounts Description", "Debit","Credit"});
+					new Object[] { "Date", "Particulars", "Voucher Type", "Voucher No.", "Debit","Credit"});
 			int i = 1;
 			
-			for (Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
-				
+			for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
+				String accountName = null;
 				String dr = "";
 				String cr = "";
 				
-						
-				if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 1 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 5) {
-					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						dr = df.format(accBal.getValue());
-						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						cr = df.format(accBal.getValue().negate());
-					}
-				}else if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 2 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 3 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 4) {
-					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						cr = df.format(accBal.getValue());
-						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						dr = df.format(accBal.getValue().negate());
-					}
+				if(voucherTransaction.getDraccountid() == accountId) {
+					accountName = new AccountDAO().getAccountName(voucherTransaction.getDraccountid())+":Dr";
+					dr=df.format(voucherTransaction.getDramount());
+				}else if(voucherTransaction.getCraccountid() == accountId) {
+					accountName = new AccountDAO().getAccountName(voucherTransaction.getCraccountid())+":Cr";
+					cr=df.format(voucherTransaction.getCramount());
+				}
+
+				
+				int voucherT = voucherTransaction.getVouchertype();
+				String voucherType = null;
+
+				switch(voucherT) {
+				case 1:
+					voucherType="Receipt";
+						break;
+				case 2:
+					voucherType="Payment";
+					break;
+				case 3:
+					voucherType="Contra";
+					break;
+				case 4:
+					voucherType="Journal";
+					break;
 				}
 				
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
-								 cr });
+						new Object[] { DateUtil.dateParserTally(voucherTransaction.getTransactiondate()),  accountName+":"+voucherTransaction.getNarration() ,
+								voucherType,  voucherTransaction.getTransactionsid().toString(),dr,cr});
 				i++;
 			}
 			
@@ -1800,9 +1815,9 @@ public boolean searchSingleLedgerEntries() {
 			rownum++;
 			
 			data.clear();
-			data.put(Integer.toString(1),
+			/*data.put(Integer.toString(1),
 					new Object[] { "Total",  debitAllAcc ,
-							creditAllAcc });
+							creditAllAcc });*/
 			
 			Set<String> keyset2 = data.keySet();
 			for (String key : keyset2) {
@@ -1822,7 +1837,7 @@ public boolean searchSingleLedgerEntries() {
 				}
 			}
 			
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/generalledgerreport.xlsx"));
 				workbook.write(out);
 				out.close();
 				workbook.close();
@@ -1834,5 +1849,46 @@ public boolean searchSingleLedgerEntries() {
 		
 		// getFile(name, path);
 		
+	}
+
+
+	public boolean downloadGeneralLedgerReport() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/generalledgerreport.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"generalledgerreport.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println(""+e);
+		}
+		return result;
 	}
 }

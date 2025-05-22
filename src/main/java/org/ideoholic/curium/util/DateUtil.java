@@ -460,5 +460,19 @@ public static String dateFromatConversionSlash(String ddmmyyyy) {
 	   return date;
 }
 
+public static String dateParserTally(Date date) {
+	
+	String datefinal = null;
+	try {
+		SimpleDateFormat dateformatter = new SimpleDateFormat("dd.MM.YYYY");
+
+		datefinal = dateformatter.format(date);
+		System.out.println("datefinal "+datefinal);
+	} catch (Exception e) {
+			e.printStackTrace();
+	}
+	return datefinal;
+}
+
 
 }
