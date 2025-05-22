@@ -648,24 +648,27 @@ public class FeesService {
 	   
 	   public void addOtherFeesParticular(OtherFeecategoryDto otherFeecategoryDto,String branchid,String userloginid) {
 
-           OtherFeecategory ofeescategory = new OtherFeecategory();
-
            if(branchid!=null){
+        	   
 
-                   ofeescategory.setFeescategoryname(DataUtil.emptyString(otherFeecategoryDto.getFeesCategory()));
-                   if(!DataUtil.emptyString(otherFeecategoryDto.getFromClass()).equalsIgnoreCase("ALL") && !DataUtil.emptyString(otherFeecategoryDto.getToClass()).equalsIgnoreCase("ALL")){
-                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass())+"-"+DataUtil.emptyString(otherFeecategoryDto.getToClass()));
-                   }else{
-                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass()));
+           	
+           	String[] classesOtherFeesCat = otherFeecategoryDto.getFromClass();
+           	List<OtherFeecategory> feesOtherCategoryList = new ArrayList<OtherFeecategory>();
+           	
+           	for (String feeCat : classesOtherFeesCat) {
+           		OtherFeecategory otherFeescategorynew = new OtherFeecategory();
+           		otherFeescategorynew.setFeescategoryname(DataUtil.emptyString(otherFeecategoryDto.getFeesCategory()));
+           		otherFeescategorynew.setParticularname(DataUtil.emptyString(feeCat)+"--");
+           		otherFeescategorynew.setAmount(DataUtil.parseInt(otherFeecategoryDto.getAmount()));
+           		otherFeescategorynew.setBranchid(Integer.parseInt(branchid));
+           		otherFeescategorynew.setUserid(Integer.parseInt(userloginid));
+           		otherFeescategorynew.setAcademicyear(DataUtil.emptyString(otherFeecategoryDto.getCategoryYearOf()));
+                   if(!otherFeescategorynew.getFeescategoryname().equalsIgnoreCase("") && !otherFeescategorynew.getParticularname().equalsIgnoreCase("") && otherFeescategorynew.getAmount() != 0 ){
+                	   feesOtherCategoryList.add(otherFeescategorynew);
                    }
-
-                   ofeescategory.setAmount(DataUtil.parseInt(otherFeecategoryDto.getAmount()));
-                   ofeescategory.setBranchid(Integer.parseInt(branchid));
-                   ofeescategory.setUserid(Integer.parseInt(userloginid));
-                   ofeescategory.setAcademicyear(otherFeecategoryDto.getCategoryYearOf());
-                   if(!ofeescategory.getFeescategoryname().equalsIgnoreCase("") && !ofeescategory.getParticularname().equalsIgnoreCase("") && ofeescategory.getAmount() != 0 ){
-                           ofeescategory =  new feesCategoryDAO().createOtherFeeCategory(ofeescategory);
-                   }
+           		}
+           		boolean result =  new feesCategoryDAO().createOtherFeescategory(feesOtherCategoryList);
+                
            }
    }
 	   
@@ -783,6 +786,7 @@ public class FeesService {
 	                            con.setFeescatid(Integer.valueOf(test[1]));
 	                            con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
 	                            con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
+	                            con.setConcessionNotes(concessionDto.getRequestParams().get("concessionnotes:"+Integer.valueOf(test[0])));
 	                            concessionList.add(con);
 	                        }
 
