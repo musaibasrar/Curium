@@ -36,8 +36,10 @@ import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 
+@Service
 public class TaskService {
 
 	private HttpServletRequest request;
