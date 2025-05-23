@@ -35,7 +35,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 
 public class TaskService {
@@ -43,6 +43,8 @@ public class TaskService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	@Autowired
+	 private JobDAO jobDAO;
 	private static final int BUFFER_SIZE = 4096;
 
 	public TaskService(HttpServletRequest request, HttpServletResponse response) {
@@ -202,8 +204,7 @@ public class TaskService {
 			for (String ids : queryIds) {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
-			
-			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
+			result = jobDAO.inProgressQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		

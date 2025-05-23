@@ -252,7 +252,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
+			result = jobDAO.inProgressQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 			
 		}
