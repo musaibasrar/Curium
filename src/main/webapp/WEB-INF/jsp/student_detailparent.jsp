@@ -399,7 +399,7 @@ padding:1 rem;
             <hr class="studenthr">
               <div class="row mb-2">
               <div class="col-6">
-                <p class="mb-0"style="font-weight:normal;color:#FF5733;">Father's Caste Certificate No.</p>
+                <p class="mb-0"style="font-weight:normal;color:#FF5733;">Father's Aadhaar No.</p>
               </div>
               <div class="col-6">
                 <p class="mb-0" style="font-weight: bold;color: #0f304f;"><c:out value="${parents.fatherscastecertno}" /></p>
@@ -409,7 +409,7 @@ padding:1 rem;
               <hr class="studenthr">
               <div class="row mb-2">
               <div class="col-6">
-                <p class="mb-0"style="font-weight:normal;color:#FF5733;">Mother's Caste</p>
+                <p class="mb-0"style="font-weight:normal;color:#FF5733;">Mother's Aadhaar No</p>
               </div>
               <div class="col-6">
                 <p class="mb-0" style="font-weight: bold;color: #0f304f;"><c:out default="" value="${parents.motherscastecertno}" /></p>

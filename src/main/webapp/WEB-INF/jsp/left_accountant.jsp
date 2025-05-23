@@ -1,6 +1,6 @@
 <%-- 
-Document   : reports
-Created on : Nov 8, 2021, 09:50:11 PM
+Document   : left
+Created on : Jan 4, 2012, 3:41:11 PM
 Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@ Author     : Musaib
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reports</title>
+        <title>Left</title>
         <script language="JavaScript" src="/greatindiaacademy/js/motionpack.js"></script>
         <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
@@ -27,8 +27,168 @@ Author     : Musaib
         <link href="/greatindiaacademy/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/greatindiaacademy/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/greatindiaacademy/css/font-awesome.css">
-        
-        
+        <script type="text/javascript">
+            var get;
+            function getdata1() {
+                var startHour, startMin;
+                var tDate = new Date();
+                startHour = tDate.getHours();
+                startMin = tDate.getMinutes();
+
+                if (typeof XMLHttpRequest != "undefined") {
+                    get = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    get = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                get.onreadystatechange = processdata;
+                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
+                get.send(null);
+
+            }
+
+            function processdata() {
+                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
+                if (get.readyState == 4)
+                {
+                    if (get.status == 200) {
+                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
+                        var visitNodes = visits.getElementsByTagName("Visit");
+                        for (var i = 0; i < visitNodes.length; i++) {
+                            var visit = visitNodes[i];
+
+                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
+                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
+                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+
+                            $(function() {
+                                $('#Notification').jnotifyAddMessage({
+                                    text: link,
+                                    permanent: false,
+                                    disappearTime: 30000
+                                });
+
+                            });
+
+                        }
+
+
+                        setTimeout('getdata1();', 60000);
+
+
+                    }
+                }
+
+            }
+            /**
+             * Comment
+             */
+            var getExpiringStockCount;
+            function getExpiringStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getExpiringStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                getExpiringStockCount.onreadystatechange = processExpiringStockData;
+                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
+                getExpiringStockCount.send(null);
+
+            }
+           
+            var getDepletingStockCount;
+            function getDepletingStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getDepletingStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                getDepletingStockCount.onreadystatechange = processDepletingStockData;
+                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
+                getDepletingStockCount.send(null);
+
+            }
+            function processDepletingStockData() {
+
+                if (getDepletingStockCount.readyState == 4)
+                {
+                    if (getDepletingStockCount.status == 200) {
+                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
+                        var depletingStockCount = count.childNodes[0].nodeValue;
+                        var depletingStock = document.getElementById("depletingStock");
+                        depletingStock.innerHTML = " " + depletingStockCount;
+                        setTimeout('getDepletingStock();', 60000);
+
+
+                    }
+                }
+
+            }
+
+        </script>
+        <script type="text/javascript">
+            var req;
+
+
+            function count() {
+
+                var idField = document.getElementById("userid");
+                var url = "AppointmentController";
+                if (typeof XMLHttpRequest != "undefined") {
+                    req = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                reload(req);
+                //req.open("POST", url, true);
+
+                //req.send();
+                /*req.onreadystatechange = function()
+                 {
+                 if (req.readyState==4)
+                 {
+                 if (req.status==200){
+                 
+                 var count = req.responseXML.getElementsByTagName("count")[0];
+                 var childCount=count.childNodes[0].nodeValue;
+                 var mdiv = document.getElementById("n1");
+                 mdiv.innerHTML=childCount;
+                 mdiv.style.visible='block';
+                 
+                 }
+                 }
+                 }*/
+
+
+
+            }
+            function handleRequest() {
+                if (req.readyState == 4)
+                {
+                    if (req.status == 200) {
+
+                        var count = req.responseXML.getElementsByTagName("count")[0];
+                        var childCount = count.childNodes[0].nodeValue;
+                        var mdiv = document.getElementById("n1");
+                        mdiv.innerHTML = childCount;
+                        mdiv.style.visible = 'block';
+
+                    }
+                }
+                setTimeout(function() {
+                    reload(req);
+                }, 100);
+            }
+
+
+
+        </script>
         <style>
 
             .noti_Container {
@@ -286,393 +446,183 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
-            
-             
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
-            
-            
+			
               <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/feessummary" style="font-size: 12px;">Fees Summary</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				<a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/greatindiaacademy/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/greatindiaacademy/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
+            		
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
             			</td>
             		</tr>
                 </table>
             </div>
+            
+            
             
             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/greatindiaacademy/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/greatindiaacademy/daybook" style="font-size: 12px;">Day Book</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
+            			            		
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/greatindiaacademy/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
+            
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Library</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/bookhistory" style="font-size: 12px;">Books Issue Report</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
             
-            <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
-            			</td>
-            		</tr>
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            				<a target="mainFrame" href="/greatindiaacademy/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+        	
+        	<div style="padding-left: 0px;padding-right: 0px;">
             
-            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+            
+            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+              
+              <div style="padding-left: 0px;padding-right: 0px;">
             
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/greatindiaacademy/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
             </div>
-             <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
             
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
-            
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
+            				 <a target="mainFrame" href="/greatindiaacademy/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
-            		
-            	</table>
-            </div>
-            
-            <h5 class="sideaccordian">
-			<a href="#">Assignment</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/JobProcess/queryReport"
-						style="font-size: 12px;">Assignment Report</a>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-		<!-- <h5 class="sideaccordian">
-			<a href="#">Tasks</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/JobProcess/taskReport"
-						style="font-size: 12px;">Tasks Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
-		
-		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
-
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-		
-          <!--   <h5 class="sideaccordian">
-			<a href="#">Appointments</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/AppointmentProcess/appointmentReport"
-						style="font-size: 12px;">Appointments Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
-             <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
+                </table>
             </div>
             
             </div>

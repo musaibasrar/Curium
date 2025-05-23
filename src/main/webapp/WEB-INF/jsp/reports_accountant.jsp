@@ -291,48 +291,6 @@ for(Cookie cookie : cookies){
 
         <div id="container" style="width: 95%" >
             
-             
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
             
             
               <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
@@ -426,64 +384,6 @@ for(Cookie cookie : cookies){
             </div>
             
             
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
-            			</td>
-            		</tr> -->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -525,18 +425,6 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/greatindiaacademy/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
             			</td>
             		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Library</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/bookhistory" style="font-size: 12px;">Books Issue Report</a>
-            			</td>
-            		</tr>
-            		
                 </table>
             </div>
             
@@ -583,95 +471,6 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/greatindiaacademy/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
-            	</table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-            
-            <h5 class="sideaccordian">
-			<a href="#">Assignment</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/JobProcess/queryReport"
-						style="font-size: 12px;">Assignment Report</a>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-		<!-- <h5 class="sideaccordian">
-			<a href="#">Tasks</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/JobProcess/taskReport"
-						style="font-size: 12px;">Tasks Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
-		
-		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
-
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-		
-          <!--   <h5 class="sideaccordian">
-			<a href="#">Appointments</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/greatindiaacademy/AppointmentProcess/appointmentReport"
-						style="font-size: 12px;">Appointments Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
-             <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/greatindiaacademy/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
-            			</td>
-            		</tr>
-            		
             	</table>
             </div>
             

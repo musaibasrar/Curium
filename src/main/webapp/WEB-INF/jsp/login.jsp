@@ -144,6 +144,8 @@ form{
                 	window.open('/greatindiaacademy/index_parents','_self');
                 }else if(type=='feescollectoradmin'){
                     window.open('/greatindiaacademy/index_feescollectoradmin','_self');
+                }else if(type=='accountant'){
+                    window.open('/greatindiaacademy/index_accountant','_self');
                 }
             }
             else if(!flag1){

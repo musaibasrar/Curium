@@ -138,6 +138,8 @@ form{
                 	window.open('/greatindiaacademy/index_officeadmin','_self');
                 }else if(type=='marksentry'){
                 	window.open('/greatindiaacademy/index_marksentry','_self');
+                }else if(type=='accountant'){
+                    window.open('/greatindiaacademy/index_accountant','_self');
                 }
             }
             else if(!flag1){

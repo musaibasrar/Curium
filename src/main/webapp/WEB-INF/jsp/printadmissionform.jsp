@@ -308,12 +308,12 @@ input {
   </tr>
   <tr>
     <td>28</td>
-    <td>Mother's Caste Certificate No</td>
+    <td>Mother's Aadhaar No</td>
     <td><c:out default="" value="${parents.motherscastecertno}" /></td>
   </tr>
    <tr>
     <td>29</td>
-    <td>Father's Caste Certificate No</td>
+    <td>Father's Aadhaar No</td>
     <td><c:out value="${parents.fatherscastecertno}" /></td>
   </tr>
   <tr>
