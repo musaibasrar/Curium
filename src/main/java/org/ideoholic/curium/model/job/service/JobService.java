@@ -268,7 +268,7 @@ public class JobService {
 			try {
 				int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
 
-				JobQuery jobQuery = new JobDAO().viewQueryDetails(queryId);
+				JobQuery jobQuery = jobDAO.viewQueryDetails(queryId);
 				result.setMessage(jobQuery.getResponse());
 				result.setSuccess(true);
 

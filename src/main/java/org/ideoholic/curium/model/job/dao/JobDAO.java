@@ -163,21 +163,16 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public JobQuery viewQueryDetails(int queryId) {
-			
 			JobQuery parentQuery = new JobQuery();
 			try {
-				transaction = session.beginTransaction();
-				
-					Query query = session.createQuery("from JobQuery where id="+queryId+"");
-					parentQuery = (JobQuery) query.uniqueResult();
-				
-				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+				parentQuery = jobQueryRepository.findById(queryId).orElse(null);
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			}
 			return parentQuery;
 		}
 
