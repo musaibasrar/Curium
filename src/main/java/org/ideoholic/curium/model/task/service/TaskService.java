@@ -42,18 +42,16 @@ import org.ideoholic.curium.model.job.dto.JobQuery;
 @Service
 public class TaskService {
 
+    @Autowired
 	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private HttpSession httpSession;
 	@Autowired
-	 private JobDAO jobDAO;
-	private static final int BUFFER_SIZE = 4096;
+	private HttpServletResponse response;
+	@Autowired
+	private HttpSession httpSession;
 
-	public TaskService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+	@Autowired
+	private JobDAO jobDAO;
+	private static final int BUFFER_SIZE = 4096;
 
 	public boolean addQuery() {
 		
