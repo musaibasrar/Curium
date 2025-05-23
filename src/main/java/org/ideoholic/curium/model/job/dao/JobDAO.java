@@ -141,24 +141,19 @@ public class JobDAO {
 			return result;
 		}
 		
+	    @Transactional
 		public boolean inProgressQueries(List<Integer> queryIdsList, int userId) {
 			
 			boolean result = false;
 			try {
-				transaction = session.beginTransaction();
-				
-				for (Integer appId : queryIdsList) {
-					Query query = session.createQuery("update JobQuery set status = 'In Progress', updateduserid= "+userId+", updateddate=CURDATE()   where id="+appId+"");
-					query.executeUpdate();
-				}
-				
-				transaction.commit();
+				jobQueryRepository.updateJobStatus(queryIdsList, "In Progress", userId, Date.from(Instant.now()));
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+			}  catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+	            }
+
 			return result;
 		}
 
