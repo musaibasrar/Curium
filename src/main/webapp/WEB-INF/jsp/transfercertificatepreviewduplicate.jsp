@@ -168,9 +168,9 @@ margin-top:0px;
         float:right;
         }
     </style>
-	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/cambridge/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
@@ -184,7 +184,7 @@ margin-top:0px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -518,9 +518,9 @@ for(Cookie cookie : cookies){
 			
 			<tr>
                         <td align="center">
-                      <a>  <button id="print" type="button" style="background-image: url(/abc/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                      <a>  <button id="print" type="button" style="background-image: url(/cambridge/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                      loading.style.visibility = 'visible'" class="hide"></button> </a>
-                      <!--   <a id="print" href="/abc/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a>--></td>
+                      <!--   <a id="print" href="/cambridge/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a>--></td>
                    
                     </tr>
                     

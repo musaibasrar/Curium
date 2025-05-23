@@ -15,12 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
 
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
+        <script type="text/javascript" src="/cambridge/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.datepicker.js"></script>
   
         <style type="text/css">
             <!--
@@ -217,8 +217,8 @@
                 height: auto;
                 display: inline;
             }
-            .style1 { <link rel="stylesheet" href="/abc/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-		<script src="/abc/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+            .style1 { <link rel="stylesheet" href="/cambridge/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+		<script src="/cambridge/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
             }
@@ -280,7 +280,7 @@
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
         		
         		var form1 = document.getElementById("form1");
-                form1.action = "/abc/AccountProcess/saveReceipt";
+                form1.action = "/cambridge/AccountProcess/saveReceipt";
                 form1.submit();	
         	}
         	
@@ -299,7 +299,7 @@
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
         		  var form1 = document.getElementById("form1");
-              	  form1.action = "/abc/AccountProcess/savePayment";
+              	  form1.action = "/cambridge/AccountProcess/savePayment";
               	  form1.submit();
         	  
         	  }
@@ -318,7 +318,7 @@
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
-          form1.action = "/abc/AccountProcess/saveContra";
+          form1.action = "/cambridge/AccountProcess/saveContra";
           form1.submit();
     	  }
       }
@@ -335,7 +335,7 @@
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
-             form1.action = "/abc/AccountProcess/saveJournal";
+             form1.action = "/cambridge/AccountProcess/saveJournal";
              form1.submit();
         	}
         }
@@ -540,7 +540,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
