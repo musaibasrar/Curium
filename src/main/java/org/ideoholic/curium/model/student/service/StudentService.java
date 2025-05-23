@@ -458,10 +458,10 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("bankname")) {
 		                	student.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
-		                if (fieldName.equalsIgnoreCase("bankifsc")) {
+		                if (fieldName.equalsIgnoreCase("apaar")) {
 		                	student.setBankifsc(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
-		                if (fieldName.equalsIgnoreCase("accno")) {
+		                if (fieldName.equalsIgnoreCase("penno")) {
 		                	student.setAccno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                //End Bank Details
@@ -1336,10 +1336,10 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("bankname")) {
 		                	student.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
-		                if (fieldName.equalsIgnoreCase("bankifsc")) {
+		                if (fieldName.equalsIgnoreCase("apaar")) {
 		                	student.setBankifsc(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
-		                if (fieldName.equalsIgnoreCase("accno")) {
+		                if (fieldName.equalsIgnoreCase("penno")) {
 		                	student.setAccno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		              //End Bank Details

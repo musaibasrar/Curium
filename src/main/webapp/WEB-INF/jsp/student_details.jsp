@@ -482,6 +482,22 @@ for(Cookie cookie : cookies){
                             </td>
                             
                         </tr>
+                        
+                        <tr>
+                         
+                            <td  width="25%"  class="alignLeft" height="50">P.E.N. No
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.accno}" />
+                            </td>
+                            
+                        <td width="25%" class="alignLeft" height="50"> APAAR ID
+								</td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.bankifsc}" />
+                            </td>
+                            
+                        </tr>
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
@@ -846,7 +862,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    <div class="accordion" style="width: 100%;height: 100%">
+   <%--  <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
@@ -890,7 +906,7 @@ for(Cookie cookie : cookies){
                         
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
             <div id="accordion1" style="width: 100%;height: 100%">
 

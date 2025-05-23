@@ -558,6 +558,30 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
+
+
+							<td class="alignLeft">P.E.N. No.&nbsp;</td>
+							<td ><label> <input name="penno"
+									type="text" class="myclass" required
+									value="<c:out default="" value="${student.accno}" />"
+									id="admnno" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID &nbsp;</td>
+
+									<td width="16%"><label> <input
+											name="apaar" type="text" class="myclass"
+											id="sts" size="30" value="${student.bankifsc}">
+
+									</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 							<td class="alignLeft">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"

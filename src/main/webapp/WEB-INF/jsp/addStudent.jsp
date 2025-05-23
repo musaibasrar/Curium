@@ -728,8 +728,8 @@ $(document).ready(function() {
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<!-- <li><a href="#fragment-6">Bank Details</a></li> -->
+					<li><a href="#fragment-6">Stamp Fee</a></li>
 				</ul>
 
 
@@ -775,6 +775,29 @@ $(document).ready(function() {
 
 									</label></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">P.E.N. No. &nbsp;</td>
+							<td ><label> <input name="penno" 
+									type="text" class="myclass" id="admnno" size="36"
+									style=" text-transform: capitalize;">
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID &nbsp;</td>
+									<td ><label> <input
+											name="apaar" type="text" class="myclass" size="36"
+											style="text-transform:capitalize;"
+											id="sts" size="36">
+
+									</label></td>
+						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1972,7 +1995,7 @@ $(document).ready(function() {
 
 						</div>
 						
-						<div id="fragment-6">
+						<!-- <div id="fragment-6">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -2061,8 +2084,8 @@ $(document).ready(function() {
 							</div>
 
 						</div>
-						
-						<div id="fragment-7">
+						 -->
+						<div id="fragment-6">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
