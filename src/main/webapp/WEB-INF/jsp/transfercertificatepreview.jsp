@@ -252,6 +252,21 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;P.E.N. No. &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.accno}" /></span>
+					APAAR ID &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${studentdetails.student.bankifsc}" /></span>
+					<%-- TC no. &nbsp;&nbsp;
+					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:250px;"><c:out value="${tcno}" /> </span> --%>
+					</h3>
+				</td>
+			
+			
+			
+			</tr>
+			<tr>
+			
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the pupil &nbsp;&nbsp;
 					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:750px;"> <c:out value="${studentdetails.student.name}" /></span>
