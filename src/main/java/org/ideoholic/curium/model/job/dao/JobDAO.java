@@ -167,7 +167,7 @@ public class JobDAO {
 		public JobQuery viewQueryDetails(int queryId) {
 			JobQuery parentQuery = new JobQuery();
 			try {
-				parentQuery = jobQueryRepository.findById(queryId).orElse(null);
+				parentQuery = jobQueryRepository.findById(queryId).orElse(new JobQuery());
 			} catch (Exception hibernateException) { 
 	        	log.error(hibernateException.getMessage(), hibernateException);
 	            hibernateException.printStackTrace();
