@@ -201,6 +201,12 @@
         <property name="studentdoc5" type="string">
             <column name="studentdoc5" />
         </property>
+         <property name="studentdoc6" type="string">
+            <column name="studentdoc6" />
+        </property>
+         <property name="studentdoc7" type="string">
+            <column name="studentdoc7" />
+        </property>
         <property name="yearofadmission" type="string">
             <column name="yearofadmission" length="10" />
         </property>  

@@ -91,13 +91,42 @@ public class StudentService {
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
-				for (MultipartFile fileItem : listOfFiles) {
+			 for (int i = 1; i < listOfFiles.length; i++) {
+				 	MultipartFile fileItem = listOfFiles[i];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 					if (!fileName.equalsIgnoreCase("")) {
 						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 						String saveFile = new String(bytesEncoded);
-						student.setStudentpic(saveFile);
+						
+						 switch (i) {
+						 	case 0:
+			                    student.setStudentpic(saveFile);
+			                    break;
+			                case 1:
+			                    student.setStudentdoc1(saveFile);
+			                    break;
+			                case 2:
+			                    student.setStudentdoc2(saveFile);
+			                    break;
+			                case 3:
+			                    student.setStudentdoc3(saveFile);
+			                    break;
+			                case 4:
+			                    student.setStudentdoc4(saveFile);
+			                    break;
+			                case 5:
+			                    student.setStudentdoc5(saveFile);
+			                    break;
+			                case 6:
+			                    student.setStudentdoc6(saveFile);
+			                    break;
+			                case 7:
+			                    student.setStudentdoc7(saveFile);
+			                    break;
+			                default:
+			                    break;
+			            }
 					}
 				}
 			}
@@ -114,7 +143,8 @@ public class StudentService {
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
-	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
+	            int studentSeq =  Integer.parseInt(numbersOnly)+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        } else {
@@ -653,12 +683,16 @@ public class StudentService {
 		String studentDoc3Update = studentDto.getStudentDoc3Update();
 		String studentDoc4Update = studentDto.getStudentDoc4Update();
 		String studentDoc5Update = studentDto.getStudentDoc5Update();
+		String studentDoc6Update = studentDto.getStudentDoc6Update();
+		String studentDoc7Update = studentDto.getStudentDoc7Update();
 		String studentPicDelete = studentDto.getStudentPicDelete();
 		String studentdoc1delete = studentDto.getStudentDoc1Delete();
 		String studentdoc2delete = studentDto.getStudentDoc2Delete();
 		String studentdoc3delete = studentDto.getStudentDoc3Delete();
 		String studentdoc4delete = studentDto.getStudentDoc4Delete();
 		String studentdoc5delete = studentDto.getStudentDoc5Delete();
+		String studentdoc6delete = studentDto.getStudentDoc6Delete();
+		String studentdoc7delete = studentDto.getStudentDoc7Delete();
 
 		String dropdowncateg = studentDto.getSpecialcategory();
 		String newcateg = studentDto.getNewcategory();
@@ -769,6 +803,38 @@ public class StudentService {
 					student.setStudentdoc5(null);
 				}else {
 					student.setStudentdoc5(studentDoc5Update);
+				}
+				
+				MultipartFile fileItem6 = listOfFiles[6];
+				String studentdoc6 = (DataUtil.emptyString(fileItem6.getOriginalFilename()));
+				if (!studentdoc6.equalsIgnoreCase("")) {
+					// Resize the image
+					byte[]   bytesEncoded = Base64.encodeBase64(fileItem6.getBytes());
+					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					String saveFile = new String(bytesEncoded);
+
+					student.setStudentdoc6(saveFile);
+
+				} else if(studentdoc6delete!=null) {
+					student.setStudentdoc6(null);
+				}else {
+					student.setStudentdoc6(studentDoc6Update);
+				}
+				
+				MultipartFile fileItem7 = listOfFiles[7];
+				String studentdoc7 = (DataUtil.emptyString(fileItem7.getOriginalFilename()));
+				if (!studentdoc7.equalsIgnoreCase("")) {
+					// Resize the image
+					byte[]   bytesEncoded = Base64.encodeBase64(fileItem7.getBytes());
+					System.out.println("ecncoded value is " + new String(bytesEncoded ));
+					String saveFile = new String(bytesEncoded);
+
+					student.setStudentdoc7(saveFile);
+
+				} else if(studentdoc7delete!=null) {
+					student.setStudentdoc7(null);
+				}else {
+					student.setStudentdoc7(studentDoc7Update);
 				}
 			}
 

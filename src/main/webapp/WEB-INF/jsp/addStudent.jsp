@@ -1493,7 +1493,7 @@ $(document).ready(function() {
 									</label></td>
 								</tr>
 
-								<tr>
+								<!-- <tr>
 									<td><br /></td>
 								</tr>
 
@@ -1518,7 +1518,7 @@ $(document).ready(function() {
 								<tr>
 									<td><br /></td>
 								</tr>
-								<!-- <tr align="center">
+								<tr align="center">
 									<td class="alignRight">&nbsp;</td>
 									<td align="center">
 										<button id="savetwo"  class="save" name="savestudent">Save</button>
@@ -1618,7 +1618,7 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Parent's Iqama</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Father's Iqama</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1628,8 +1628,26 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Parent's Passport</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Father's Passport</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+								</tr>
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Mother's Iqama</label><br /> <input type="file" name="fileToUpload"
+										id="studentdoc6" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+								</tr>
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Mother's Passport</label><br /> <input type="file" name="fileToUpload"
+										id="studentdoc7" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
 

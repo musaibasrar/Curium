@@ -133,6 +133,8 @@ public class CreateStudentDto {
 	private String studentDoc3Update;
 	private String studentDoc4Update;
 	private String studentDoc5Update;
+	private String studentDoc6Update;
+	private String studentDoc7Update;
 	private String studentexternalid;
 	private Integer passedout;
 	private Integer leftout;
@@ -151,6 +153,8 @@ public class CreateStudentDto {
 	private String studentDoc3Delete;
 	private String studentDoc4Delete;
 	private String studentDoc5Delete;
+	private String studentDoc6Delete;
+	private String studentDoc7Delete;
 
 	//Private method stampFees.
 	private String[] feesCategory;

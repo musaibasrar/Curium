@@ -521,6 +521,8 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.studentdoc3}"/>" id="studentdoc3update" name="studentdoc3update">
                     <input type="hidden" value="<c:out value="${student.studentdoc4}"/>" id="studentdoc4update" name="studentdoc4update">
                     <input type="hidden" value="<c:out value="${student.studentdoc5}"/>" id="studentdoc5update" name="studentdoc5update">
+                    <input type="hidden" value="<c:out value="${student.studentdoc6}"/>" id="studentdoc6update" name="studentdoc6update">
+                    <input type="hidden" value="<c:out value="${student.studentdoc7}"/>" id="studentdoc7update" name="studentdoc7update">
                     
                     <input type="hidden" value="<c:out value="${student.archive}"/>" id="archive" name="archive">
                     <input type="hidden" value="<c:out value="${student.promotedyear}"/>" id="promotedyear" name="promotedyear">
@@ -1203,6 +1205,30 @@ for(Cookie cookie : cookies){
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc5" onchange="Upload()" accept="image/*" >
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="studentdoc6delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc6}"/>" alt="Parent Passport" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="fileToUpload" id="studentdoc6" onchange="Upload()" accept="image/*" >
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="studentdoc7delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc7}"/>" alt="Parent Passport" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="fileToUpload" id="studentdoc7" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
 				</table>

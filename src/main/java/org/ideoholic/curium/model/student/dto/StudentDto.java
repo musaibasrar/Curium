@@ -135,6 +135,10 @@ public class StudentDto implements java.io.Serializable {
     private String studentdoc4;
 
     private String studentdoc5;
+    
+    private String studentdoc6;
+    
+    private String studentdoc7;
 
     private String lastcourse;
     private Integer totalmarks;
@@ -224,6 +228,8 @@ public class StudentDto implements java.io.Serializable {
     private String studentDoc3Update;
     private String studentDoc4Update;
     private String studentDoc5Update;
+    private String studentDoc6Update;
+    private String studentDoc7Update;
     private String annualincome;
     private String subjectspart1;
     private String subjectspart2;
@@ -238,6 +244,8 @@ public class StudentDto implements java.io.Serializable {
     private String newcategory;
 
     private String studentDoc5Delete;
+    private String studentDoc6Delete;
+    private String studentDoc7Delete;
 
     private String classstudy;
     private String secstudying;

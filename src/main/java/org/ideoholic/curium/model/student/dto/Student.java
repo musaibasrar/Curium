@@ -243,6 +243,12 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "studentdoc5")
 	private String studentdoc5;
+	
+	@Column(name = "studentdoc6")
+	private String studentdoc6;
+	
+	@Column(name = "studentdoc7")
+	private String studentdoc7;
 
 	private String lastcourse;
 	private Integer totalmarks;

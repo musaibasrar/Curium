@@ -217,12 +217,16 @@ public class StudentActionAdapter {
         studentDto.setStudentDoc3Delete(request.getParameter("studentdoc3delete"));
         studentDto.setStudentDoc4Delete(request.getParameter("studentdoc4delete"));
         studentDto.setStudentDoc5Delete(request.getParameter("studentdoc5delete"));
+        studentDto.setStudentDoc5Delete(request.getParameter("studentdoc6delete"));
+        studentDto.setStudentDoc5Delete(request.getParameter("studentdoc7delete"));
         studentDto.setStudentPicUpdate(request.getParameter("studentpicupdate"));
         studentDto.setStudentDoc1Update(request.getParameter("studentdoc1update"));
         studentDto.setStudentDoc2Update(request.getParameter("studentdoc2update"));
         studentDto.setStudentDoc3Update(request.getParameter("studentdoc3update"));
         studentDto.setStudentDoc4Update(request.getParameter("studentdoc4update"));
         studentDto.setStudentDoc5Update(request.getParameter("studentdoc5update"));
+        studentDto.setStudentDoc5Update(request.getParameter("studentdoc6update"));
+        studentDto.setStudentDoc5Update(request.getParameter("studentdoc7update"));
         studentDto.setStudentexternalid(request.getParameter("studentexternalid"));
         studentDto.setApplicationtype(request.getParameter("applicationtype"));
         studentDto.setStream(request.getParameter("stream"));
