@@ -16,34 +16,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/greatindiaacademy/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/greatindiaacademy/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/cambridge/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/cambridge/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
+        <script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -300,7 +300,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/greatindiaacademy/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="/cambridge/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
@@ -374,7 +374,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/greatindiaacademy/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -738,7 +738,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/greatindiaacademy/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -747,7 +747,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc2.jpg" href="/greatindiaacademy/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -756,7 +756,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/greatindiaacademy/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -765,7 +765,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc4.jpg" href="/greatindiaacademy/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -774,7 +774,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/greatindiaacademy/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
                     </table>
@@ -937,12 +937,12 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Aadhaar No</td>
+                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Aadhaar No
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />
@@ -1070,9 +1070,9 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/greatindiaacademy/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/cambridge/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -1190,13 +1190,13 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/greatindiaacademy/StudentProcess/viewAll";
+                form1.action="/cambridge/StudentProcess/viewAll";
                 form1.submit();
             }
             
             function Print(){
                 var form1=document.getElementById("form1");
-                form1.action="/greatindiaacademy/StudentProcess/printAdmissionForm";
+                form1.action="/cambridge/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>

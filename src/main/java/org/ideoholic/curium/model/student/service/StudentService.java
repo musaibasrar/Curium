@@ -89,16 +89,39 @@ public class StudentService {
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(createStudentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(createStudentDto);
 		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
+		
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
-				for (MultipartFile fileItem : listOfFiles) {
+				for (int i = 1; i < listOfFiles.length; i++) {
+					MultipartFile fileItem = listOfFiles[i];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 					if (!fileName.equalsIgnoreCase("")) {
 						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 						String saveFile = new String(bytesEncoded);
-						student.setStudentpic(saveFile);
+						 switch (i) {
+						 	case 0:
+			                    student.setStudentpic(saveFile);
+			                    break;
+			                case 1:
+			                    student.setStudentdoc1(saveFile);
+			                    break;
+			                case 2:
+			                    student.setStudentdoc2(saveFile);
+			                    break;
+			                case 3:
+			                    student.setStudentdoc3(saveFile);
+			                    break;
+			                case 4:
+			                    student.setStudentdoc4(saveFile);
+			                    break;
+			                case 5:
+			                    student.setStudentdoc5(saveFile);
+			                    break;
+			                default:
+			                    break;
+			            }
 					}
 				}
 			}
@@ -115,12 +138,13 @@ public class StudentService {
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
-	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
+	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }else {
 	        	int studentSeq = 1;
-	            String studentExternalId = currentAcademicYear[0]+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }
 			
@@ -151,9 +175,9 @@ public class StudentService {
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-				student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", studentSeq+1));
+				student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
             }else {
-            	student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", 1));
+            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
             }
 			student.setPromotedyear(student.getYearofadmission());
 			student.setYearofadmission("");
