@@ -16,34 +16,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/noblewisdom/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/noblewisdom/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/cambridge/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/cambridge/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
+        <script type="text/javascript" src="/cambridge/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -300,20 +300,11 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/noblewisdom/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="/cambridge/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
-            function typeofrelation(){
-                var listitem = document.getElementById("subscriber");
-                var listitemtext = listitem.options[listitem.selectedIndex].text;
-                alert(listitemtext);
-                
-                if(listitemtext=="1"){
-                    document.getElementById("typeofrelation").value="subscriber";
-                    
-                }
-            }
+
             
       
         </script>
@@ -383,7 +374,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -398,7 +389,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
-        <form  method="post" id="form1">
+        <form  method="post" id="form1" modelAttribute="studentDto" enctype="multipart/form-data">
 
             <div>
                 <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
@@ -460,6 +451,13 @@ for(Cookie cookie : cookies){
                     </td>
                     </tr>
                     
+                  	  <tr>
+							<td width="25%"  class="alignLeft" height="50">Application Type&nbsp;</td>
+							<td width="25%" class="tablerows">
+								<c:out default="" value="${student.stream}" />
+							</td>
+							</tr>
+							
                     	<tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
@@ -517,7 +515,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
-						    ${splt} 
+						    ${splt}
 							</c:forEach>
                                <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>
@@ -740,7 +738,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/noblewisdom/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -749,7 +747,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc2.jpg" href="/noblewisdom/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -758,7 +756,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/noblewisdom/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -767,7 +765,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc4.jpg" href="/noblewisdom/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -776,7 +774,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/noblewisdom/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
                     </table>
@@ -1074,7 +1072,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/noblewisdom/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/cambridge/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -1192,13 +1190,13 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/noblewisdom/StudentProcess/viewAll";
+                form1.action="/cambridge/StudentProcess/viewAll";
                 form1.submit();
             }
             
             function Print(){
                 var form1=document.getElementById("form1");
-                form1.action="/noblewisdom/StudentProcess/printAdmissionForm";
+                form1.action="/cambridge/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>
