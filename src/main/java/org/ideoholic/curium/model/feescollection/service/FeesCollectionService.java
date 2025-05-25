@@ -500,6 +500,11 @@ public class FeesCollectionService {
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			result.setGrandTotal(grandTotal+" "+"Only");
+			
+			VoucherEntrytransactions voucherEntryTransaction = new AccountDAO().getVoucherDetails(rinfo.getReceiptvoucher().toString());
+			String[] narration = voucherEntryTransaction.getNarration().split(":");
+			result.setNarration(narration[0]);
+			
 			result.setSuccess(true);
 			
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
