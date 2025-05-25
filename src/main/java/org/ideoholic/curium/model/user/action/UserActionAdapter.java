@@ -173,8 +173,9 @@ public class UserActionAdapter {
         httpSession.setAttribute("typeOfUser", responseDto.getTypeOfUser());
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute("superuserAuth", responseDto.getSuperUserAuth());
-        httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
-
+        httpSession.setAttribute("userloginid", responseDto.getUserLoginId());
+        httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
         return responseDto.isSuccess();
     }
 
