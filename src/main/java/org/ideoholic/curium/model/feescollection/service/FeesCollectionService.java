@@ -479,7 +479,7 @@ public class FeesCollectionService {
 				getFeesDetails(sid,dto.getAcademicYear());
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				smsService.sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				//smsService.sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
@@ -557,7 +557,7 @@ public class FeesCollectionService {
 			
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
-			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
+			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
 			
 			// Generate QR code as per ZATA rule
 	        String timestamp = new SimpleDateFormat("YYYY-MM-DD").format(receiptDate);
@@ -576,11 +576,42 @@ public class FeesCollectionService {
 			
 			//End Generating QR code
 			result.setQrCode(qrCodeBase64);
-			result.setStudent(student);
+			result.setStudent(parents.getStudent());
 			result.setReceiptDate(reDate);
 			result.setReceiptInfo(receiptInfo);
 			result.setFeeCatMap(feeCatMap);
 			result.setFeesMonth(categoryName);
+			
+			
+			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
+			result.setParents(parents);
+			result.setUserLogin(userLogin);
+			
+			NumberToWord toWord = new NumberToWord();
+			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
+			String totalStr = rinfo.getTotalamount().toString();
+			int dotIndex = totalStr.indexOf('.');
+
+			// Get digits after decimal (max 2 digits)
+			String gTotalAfterDecimal = (dotIndex >= 0 && dotIndex < totalStr.length() - 1)
+			    ? totalStr.substring(dotIndex + 1)
+			    : "00";
+
+			// Pad with zero if only one digit (e.g., "4" becomes "40")
+			if (gTotalAfterDecimal.length() == 1) {
+			    gTotalAfterDecimal += "0";
+			} else if (gTotalAfterDecimal.length() > 2) {
+			    gTotalAfterDecimal = gTotalAfterDecimal.substring(0, 2); // limit to 2 digits
+			}
+
+			// Format only if > 0
+			if (Integer.parseInt(gTotalAfterDecimal) > 0) {
+			    gTotalAfterDecimal = " and " + gTotalAfterDecimal + "/100";
+			} else {
+			    gTotalAfterDecimal = "";
+			}
+			
+			result.setGrandTotal(grandTotal+gTotalAfterDecimal+" "+"Only");
 			result.setSuccess(true);
 		}
 		return result;

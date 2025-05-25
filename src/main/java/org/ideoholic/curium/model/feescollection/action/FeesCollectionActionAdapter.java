@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
 import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
 import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
@@ -153,7 +154,9 @@ public class FeesCollectionActionAdapter {
         String receiptNumber = request.getParameter("id");
         String duplicate = request.getParameter("duplicate");
 
-        DetailsResponseDto responseDto = feesCollectionService.previewDetails(receiptNumber, duplicate, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        //DetailsResponseDto responseDto = feesCollectionService.previewDetails(receiptNumber, duplicate, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(receiptNumber));
+        DetailsResponseDto responseDto = feesCollectionService.preview(rinfo, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHNAME).toString());
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
@@ -161,6 +164,8 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
+        httpSession.setAttribute("qrcode", responseDto.getQrCode());
+        httpSession.setAttribute("feesMonth", responseDto.getFeesMonth());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
     }
 

@@ -233,7 +233,7 @@ www.daralmajdschool.com</div>
 			</tr>
 			<tr>
 				<td><span class="info-label"><span class="info-label">Fees For Term(s) <!-- <span class="arabic">اسم الطالب</span></span> -->
-				</span>/td>
+				</span></td>
 				<td>:&nbsp;&nbsp;<span>
 				<c:forEach items="${feesMonth}" var="feemonth" varStatus="status">
 					${feemonth}<c:if test="${!status.last}">, </c:if>
