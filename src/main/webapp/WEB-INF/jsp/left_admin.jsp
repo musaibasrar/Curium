@@ -716,22 +716,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            				 <a target="mainFrame" href="/daralmajd/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            				 <a target="mainFrame" href="/daralmajd/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            				 <a target="mainFrame" href="/daralmajd/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            				 <a target="mainFrame" href="/daralmajd/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
             			</td>
             		</tr>
             		
@@ -825,12 +825,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
+            				 <a target="mainFrame" href="/daralmajd/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
+            				 <a target="mainFrame" href="/daralmajd/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
             			</td>
             		</tr>
             		<tr>
@@ -840,7 +840,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
+            				 <a target="mainFrame" href="/daralmajd/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
             			</td>
             		</tr>
             		<tr>
@@ -1010,13 +1010,13 @@ for(Cookie cookie : cookies){
             	
             	<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/daralmajd/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            				 <a target="mainFrame" href="/daralmajd/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
             			</td>
             			
             		</tr>
