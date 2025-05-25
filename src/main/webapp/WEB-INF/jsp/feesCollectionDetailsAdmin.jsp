@@ -704,7 +704,7 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
-					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total VAT :</label>Rs. ${sumofmisc}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
 					
 					</td>
@@ -722,7 +722,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Receipt No.</th>
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
-                            <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">VAT</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>

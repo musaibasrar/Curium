@@ -101,9 +101,9 @@
                 }
             }
         </style>
-        <script type="text/javascript" src="/demov2/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/demov2/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/demov2/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/daralmajd/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/daralmajd/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/daralmajd/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -119,7 +119,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-    response.sendRedirect("/demov2/UserProcess/sessionTimeOut");
+    response.sendRedirect("/daralmajd/UserProcess/sessionTimeOut");
 } else {
     user = (String) session.getAttribute("userAuth");
 }
@@ -168,7 +168,7 @@ if (cookies != null) {
                 <tbody>
                     <c:forEach items="${feescatmap}" var="feescatmap">
                         <tr>
-                            <td><c:out value="${feescatmap.key}" /></td>
+                            <td><c:out value="${feescatmap.key.feescategory.feescategoryname}" /></td>
                             <td><c:out value="${feescatmap.value}" /></td>
                         </tr>
                     </c:forEach>
@@ -179,7 +179,7 @@ if (cookies != null) {
                         <td class="totalAmount"><c:out value="${recieptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/demov2/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/daralmajd/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>

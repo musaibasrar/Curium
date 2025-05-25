@@ -91,7 +91,8 @@ public class FeesCollectionAction {
 		@GetMapping("/ViewDetails")
         public String ViewDetails() {
                 //new FeesCollectionService(request, response).preview();
-                feesCollectionActionAdapter.previewFeesDetails();
+                //feesCollectionActionAdapter.previewFeesDetails();
+				feesCollectionActionAdapter.previewDetails();
                 //return "previewFeesDetail";
                 return "previewFeesReceiptDetail";
         }
