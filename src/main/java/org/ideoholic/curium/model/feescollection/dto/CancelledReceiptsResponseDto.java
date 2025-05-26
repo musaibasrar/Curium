@@ -23,7 +23,7 @@ public class CancelledReceiptsResponseDto {
     private String dateToCancel;
     private List<Receiptinfo> feesDetailsList;
     private List<Otherreceiptinfo> otherfeesDetailsList;
-    private Map<Parents,Otherreceiptinfo> feesMap;
+    private Map<Otherreceiptinfo,Parents> feesMap;
     private long sumOfFees;
     @Builder.Default
     private boolean success = false;
