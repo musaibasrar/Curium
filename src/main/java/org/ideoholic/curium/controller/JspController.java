@@ -631,4 +631,9 @@ public class JspController {
 		return "bookhistory";
 	}
 	
+	@GetMapping("/printOtherFeesDetail")
+	public String getPrintOtherFeesDetail() {
+		return "printOtherFeesDetail";
+	}
+	
 }
