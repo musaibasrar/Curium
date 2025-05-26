@@ -1635,10 +1635,16 @@ public class FeesCollectionService {
 			
 	}
 			long sumOfFees = 0l;
+			
+			Map<Otherreceiptinfo,Parents> feesMap = new HashMap<Otherreceiptinfo,Parents>();
+
 			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+				Parents student = new Parents();
+				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				feesMap.put(receiptinfo, student);
 			}
-
+			result.setFeesMap(feesMap);
 			result.setOtherfeesDetailsList(feesDetailsList);
 			result.setSumOfFees(sumOfFees);
 			result.setSuccess(true);
@@ -2085,7 +2091,7 @@ public class FeesCollectionService {
 		String[] feesIds = dto.getFeesIds();
 		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
+		Map<Otherreceiptinfo,Parents> feesMap = new HashMap<Otherreceiptinfo,Parents>();
 		String toDate= DataUtil.dateFromatConversionDashToSlash(dto.getToDate());
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(dto.getFromDate());
 		String oneDay = DataUtil.dateFromatConversionDashToSlash(dto.getOneDay());
@@ -2098,7 +2104,7 @@ public class FeesCollectionService {
 					
 					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
+					feesMap.put(receiptInfo, student);
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 				}
 
