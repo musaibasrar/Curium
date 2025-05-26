@@ -178,7 +178,7 @@ public class FeesCollectionAction {
 					 * if("5".equalsIgnoreCase(branchId)) { return "printFeesDetail"; } }
 					 */
 
-	                return "printFeesDetail";
+	                return "printOtherFeesDetail";
         }
 	  
 	  @PostMapping("/feesAddother")	

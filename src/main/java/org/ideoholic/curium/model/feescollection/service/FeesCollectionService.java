@@ -153,7 +153,7 @@ public class FeesCollectionService {
 		
 	}
 
-	public StampFeeResponseDto getStampFees(StampFeesDto dto, String currentAcademicYear) {
+	public StampFeeResponseDto getStampFees(StampFeeDto dto, String currentAcademicYear) {
 		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
 		if(currentAcademicYear!=null){
@@ -334,7 +334,7 @@ public class FeesCollectionService {
 			transactions.setVouchertype(4);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
-			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
 			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));
@@ -580,7 +580,7 @@ public class FeesCollectionService {
 		return resultResponse;
 	}
 
-	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId, String dayOne, String dayOneCancel, String dateFromCancel, String dateToCancel) {
+	public CancelledReceiptsResponseDto viewCancelledReceipts(CancelledReceiptsDto dto, String strBranchId) {
 		CancelledReceiptsResponseDto result = CancelledReceiptsResponseDto.builder().build();
 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
@@ -612,8 +612,6 @@ public class FeesCollectionService {
 				 result.setDayOneCancel(oneDay);
 				 result.setDateFromCancel("");
 				 result.setDateToCancel("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOneCancel+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
@@ -622,9 +620,6 @@ public class FeesCollectionService {
 				result.setDateToCancel(toDate);
 				 result.setDayOneCancel("");
 				
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFromCancel)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateToCancel)) ) {
-				querySub = " feesdetails.date between '"+dateFromCancel+"' AND '"+dateToCancel+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1161,7 +1156,7 @@ public class FeesCollectionService {
 		return result;
 	  }
 	
-	public StampFeeResponseDto getotherStampFees(StampFeesDto dto, String currentAcademicYear) {
+	public StampFeeResponseDto getotherStampFees(StampFeeDto dto, String currentAcademicYear) {
 		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
 		if(currentAcademicYear!=null){
@@ -1215,12 +1210,12 @@ public class FeesCollectionService {
 			//Currentacademicyear currentYear = new YearDAO().showYear();
 			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 
-			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
-			result.setOtherReceiptInfo(rinfo);
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
+			result.setReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 
 			long totalSum = 0l;
-			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
+			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
 			}
 
@@ -1608,19 +1603,15 @@ public class FeesCollectionService {
 			
 	}
 			long sumOfFees = 0l;
-			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
-				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
-			}
 			
 			Map<Otherreceiptinfo,Parents> feesMap = new HashMap<Otherreceiptinfo,Parents>();
-			
+
 			for (Otherreceiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				Parents student = new Parents();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
 				feesMap.put(receiptinfo, student);
 			}
-			
 			result.setFeesMap(feesMap);
 			result.setOtherfeesDetailsList(feesDetailsList);
 			result.setSumOfFees(sumOfFees);
@@ -1845,7 +1836,7 @@ public class FeesCollectionService {
 		// getFile(name, path);
 	}
 
-	public FeesCategoryResponseDto getFeesCollectionCategory(FeesCategoryDto dto, String strBranchId, String dayOne, String dateFrom, String dateTo) {
+	public FeesCategoryResponseDto getFeesCollectionCategory(FeesCategoryDto dto, String strBranchId) {
 		FeesCategoryResponseDto result = FeesCategoryResponseDto.builder().build();
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
@@ -1870,28 +1861,14 @@ public class FeesCollectionService {
 		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 		String toDate= DataUtil.emptyString(dto.getToDate());
 		String fromDate = DataUtil.emptyString(dto.getFromDate());
-		String oneDay = DataUtil.emptyString(dto.getOneDay());
 		
 		
 			String querySub = "";
-			
-			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 result.setDayOne(oneDay);
-				 result.setDateFrom("");
-				 result.setDateTo("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-				querySub = " feesdetails.date = '"+dayOne+"'" ;
-			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 				result.setDateFrom(fromDate);
 				result.setDateTo(toDate);
-				result.setDayOne("");
-			}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-					!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-				querySub = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -1909,23 +1886,10 @@ public class FeesCollectionService {
 
 				String querySubOtherFees = "";
 
-				if(!oneDayOtherFees.equalsIgnoreCase("")){
-					querySub = " feesdetails.date = '"+oneDayOtherFees+"'" ;
-					result.setDayOne(oneDayOtherFees);
-					result.setDateFrom("");
-					result.setDateTo("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dayOne))) {
-					querySubOtherFees = " feesdetails.date = '"+dayOne+"'" ;
-				}
-
 				if(!fromDateOtherFees.equalsIgnoreCase("")  && !toDateOtherFees.equalsIgnoreCase("")){
 					querySubOtherFees = " feesdetails.date between '"+fromDateOtherFees+"' AND '"+toDateOtherFees+"'";
 					result.setDateFrom(fromDateOtherFees);
 					result.setDateTo(toDateOtherFees);
-					result.setDayOne("");
-				}else if(!"".equalsIgnoreCase(DataUtil.emptyString(dateFrom)) &&
-						!"".equalsIgnoreCase(DataUtil.emptyString(dateTo)) ) {
-					querySubOtherFees = " feesdetails.date between '"+dateFrom+"' AND '"+dateTo+"'";
 				}
 
 				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
@@ -2395,12 +2359,12 @@ public class FeesCollectionService {
 		return result;
 	  }
 	
-	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
+	public ResultResponse readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
 		// Student student = new Student();
+		ResultResponse result = ResultResponse.builder().success(false).build();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
 		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
-		boolean result = false;
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
@@ -2421,8 +2385,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                    String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2430,8 +2394,10 @@ public class FeesCollectionService {
 					        List<List<Row>> groupedRowsArray = new ArrayList<>(groupedData.values());
 					        
 					        // Print or use the grouped data as needed
+					        int i=1;
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
+					            System.out.println("Number: " + i);
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2472,7 +2438,7 @@ public class FeesCollectionService {
 					     	        }
 					            }
 					            AddFeesCollectionDto dto = new AddFeesCollectionDto();
-					            dto.setChequeBankName(Double.toString(group.get(0).getCell(0).getNumericCellValue()));
+					            dto.setChequeBankName(group.get(0).getCell(0).getStringCellValue());
 					            String[] studentDetails = group.get(0).getCell(1).getStringCellValue().split("_");
 						        dto.setStudentId(studentDetails[2]);
 						        String[] amountPaying = amountPayingClub.split("_");
@@ -2493,12 +2459,12 @@ public class FeesCollectionService {
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
 						        Receiptinfo receiptinfo = feesCollectionService.addImport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
-					            result = true;
+					            i++;
 					        }
 
 					System.out.println("Values Inserted Successfully");
-					
-					return result;
+						result = ResultResponse.builder().success(true).build();
+		return result;
 	}
 	
 	
@@ -2639,7 +2605,206 @@ public class FeesCollectionService {
 			
 			// End J.V
 			  
-			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			createFeesCollection = new feesCollectionDAO().createReceiptFromImport(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			
+			if(createFeesCollection) {
+				getFeesDetails(sid,dto.getAcademicYear());
+				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
+				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
+				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+			}
+			
+		}
+		}
+		return receiptInfo;
+	}
+	
+	public boolean readFileForOtherFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
+		// Student student = new Student();
+		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
+		List<Parents> listParents = new ArrayList<Parents>();
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+		XSSFRow row;
+		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
+
+					XSSFWorkbook workbookRead = new XSSFWorkbook(uploadedFiles.getInputStream());
+					XSSFSheet spreadsheetRead = workbookRead.getSheetAt(0);
+		
+					Iterator<Row> rowIterator = spreadsheetRead.iterator();
+					int rowTotal = spreadsheetRead.getLastRowNum();
+					
+					 Map<String, List<Row>> groupedData = new HashMap<>();
+
+				            // Assuming the first row is the header
+				            if (rowIterator.hasNext()) {
+				                rowIterator.next();
+				            }
+
+				            while (rowIterator.hasNext()) {
+				                row = (XSSFRow) rowIterator.next();
+				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
+				                if (receiptCell != null) {
+				                    String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
+				                }
+				            }
+				            
+				            // Convert to array (or list of arrays)
+					        List<List<Row>> groupedRowsArray = new ArrayList<>(groupedData.values());
+					        
+					        // Print or use the grouped data as needed
+					        int i=1;
+					        for (List<Row> group : groupedRowsArray) {
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
+					            System.out.println("Number: " + i);
+					            String amountPayingClub = null;
+					            String sfsId = null;
+					            
+					            for (Row row1 : group) {
+					            	 for (Cell cell : row1) {
+					            		  int cellIndex = cell.getColumnIndex();
+					     	            switch (cell.getCellType()) {
+					     	                case STRING:
+					     	                    System.out.print(cell.getStringCellValue() + "\t");
+					     	                   if(cellIndex==4 && sfsId==null){
+						     	                	 String[] sfsIdName = cell.getStringCellValue().split("_");
+						     	                	 sfsId = sfsIdName[0];
+						     	                   }else if(cellIndex==4 && sfsId!=null){
+						     	                	  String[] sfsIdName = cell.getStringCellValue().split("_");
+						     	                	  sfsId = sfsId+"_"+sfsIdName[0];
+						     	                   }
+					     	                    break;
+					     	                case NUMERIC:
+					     	                    System.out.print(cell.getNumericCellValue() + "\t");
+					     	                    
+					     	                   if(cellIndex==3 && amountPayingClub==null){
+						     	                	  amountPayingClub = Double.toString(cell.getNumericCellValue());
+						     	                   }else if(cellIndex==3 && amountPayingClub!=null){
+						     	                	  amountPayingClub = amountPayingClub+"_"+Double.toString(cell.getNumericCellValue());
+						     	                   }
+					     	                   
+					     	                    break;
+					     	                case BOOLEAN:
+					     	                    System.out.print(cell.getBooleanCellValue() + "\t");
+					     	                    break;
+					     	                case FORMULA:
+					     	                    System.out.print(cell.getCellFormula() + "\t");
+					     	                    break;
+					     	                default:
+					     	                    System.out.print("UNKNOWN\t");
+					     	                    break;
+					     	            }
+					     	        }
+					            }
+					            AddFeesCollectionDto dto = new AddFeesCollectionDto();
+					            dto.setChequeBankName(group.get(0).getCell(0).getStringCellValue());
+					            String[] studentDetails = group.get(0).getCell(1).getStringCellValue().split("_");
+						        dto.setStudentId(studentDetails[2]);
+						        String[] amountPaying = amountPayingClub.split("_");
+						        dto.setAmountPaying(amountPaying);
+						        dto.setFineAmount("0");
+						        dto.setMiscAmount("0");
+						        String[] sfsIds = sfsId.split("_");
+						        dto.setStudentSfsIds(sfsIds);
+						        String abc = group.get(0).getCell(2).getStringCellValue();
+						        dto.setDateOfFeesDetails(group.get(0).getCell(2).getStringCellValue());
+						        dto.setClassAndSecDetails(studentDetails[1]);
+						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
+						        dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
+						        dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
+						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
+						        dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
+						        dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
+						        //dto.setChequeBankName(request.getParameter("chequebankname"));
+						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
+					            
+						        Otherreceiptinfo receiptinfo = feesCollectionService.addImportOtherFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+					            i++;
+					        }
+
+					System.out.println("Values Inserted Successfully");
+
+		return true;
+	}
+	
+	public Otherreceiptinfo addImportOtherFees(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName) {
+		
+		List<Otherfeescollection> feescollection = new ArrayList<Otherfeescollection>();
+		Otherreceiptinfo receiptInfo =new Otherreceiptinfo();
+		boolean createFeesCollection = false;
+		if(currentAcademicYear!=null){
+		
+		String sid = dto.getStudentId();
+		String[] amountPaying = dto.getAmountPaying();
+		Long fineAmount = DataUtil.parseLong(dto.getFineAmount());
+		Long miscAmount = DataUtil.parseLong(dto.getMiscAmount());
+		String[] studentSfsIds = dto.getStudentSfsIds();
+		
+		
+		//Get Payment Details
+		String paymentMethod = dto.getPaymentMethod();
+		String ackNo = dto.getAckNo();
+		String ackNoVoucherNarration = "";
+		String transferDate = dto.getTransferDate();
+		String transferBankname = dto.getTransferBankName();
+		String chequeNo = dto.getChequeNo();
+		String chequeNoVoucherNarration = "";
+		String chequeDate = dto.getChequeDate();
+		String chequeBankname = dto.getChequeBankName();
+		String paymentType = "Cash";
+				
+			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
+				paymentType = "Bank Transfer";
+			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+				chequeNoVoucherNarration = " cheque number: "+chequeNo+" , Amount clearance date: "+chequeDate;
+				paymentType = "Cheque";
+			}
+				
+		//End Payment Details
+		
+		if(studentSfsIds!=null || miscAmount!=0 || fineAmount!=0){
+			
+			// create receipt information
+			receiptInfo.setBranchreceiptnumber(dto.getChequeBankName());
+			receiptInfo.setAcademicyear(dto.getAcademicYear());
+			receiptInfo.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
+			receiptInfo.setSid(DataUtil.parseInt(sid));
+			receiptInfo.setBranchid(Integer.parseInt(branchId));
+			receiptInfo.setUserid(Integer.parseInt(userId));
+			receiptInfo.setClasssec(dto.getClassAndSecDetails().replace("—", "--"));
+			Long grantTotal = 0l;
+			
+			/* new feesCollectionDAO().createReceipt(receiptInfo); */
+			if(studentSfsIds!=null) {
+				for (int i = 0; i < studentSfsIds.length; i++) {
+					Otherfeescollection feesCollect = new Otherfeescollection();
+					String[] studentSfsIdamount = studentSfsIds[i].split("_");
+					Studentotherfeesstructure studentSFS = new feesCollectionDAO().getStudentOtherFeesStructure(sid, studentSfsIds[i],currentAcademicYear);
+					feesCollect.setSfsid(studentSFS.getSfsid());
+					feesCollect.setAmountpaid((long)(DataUtil.parseDouble(amountPaying[i])));
+					feesCollect.setSid(DataUtil.parseInt(sid));
+					feesCollect.setFine(Long.parseLong("0"));
+					feesCollect.setDate(DateUtil.indiandateParser(dto.getDateOfFeesDetails()));
+					feesCollect.setAcademicyear(dto.getAcademicYear());
+					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
+					feesCollect.setBranchid(Integer.parseInt(branchId));
+					feesCollect.setUserid(Integer.parseInt(userId));
+					feescollection.add(feesCollect);
+					
+					grantTotal+=(long)(DataUtil.parseDouble(amountPaying[i]));
+				}
+			}
+				receiptInfo.setPaymenttype(paymentType);
+				receiptInfo.setFine(fineAmount);
+				receiptInfo.setMisc(miscAmount);
+				receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
+				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
+				
+			
+			  
+			createFeesCollection = new feesCollectionDAO().createOtherReceiptFromImport(receiptInfo,feescollection);
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());
