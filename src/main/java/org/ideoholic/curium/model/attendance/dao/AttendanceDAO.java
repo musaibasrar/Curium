@@ -122,7 +122,7 @@ public class AttendanceDAO {
 		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
 		try{
 
-			weeklyOff = weeklyoffRepo.findByAcademicyear(academicYear);
+			weeklyOff = weeklyoffRepo.findByAcademicyearAndWidIn(academicYear,weeklyOffList);
 
 		}catch (Exception e) {
 

@@ -13,5 +13,4 @@ public interface WeeklyoffRepository extends JpaRepository<Weeklyoff, Integer> {
 
 	List<Weeklyoff> findByAcademicyearAndBranchidAndWidIn(String academicYear, int branchid, List<Integer> weeklyOffIds);
 
-	List<Weeklyoff> findByAcademicyear(String academicYear );
-}
+	List<Weeklyoff> findByAcademicyearAndWidIn(String academicYear, List<Integer> weeklyOffIds);}
