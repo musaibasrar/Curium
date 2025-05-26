@@ -569,7 +569,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
+                            <th title="click to sort" class="headerText">Delivery Status&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
@@ -591,10 +591,11 @@ for(Cookie cookie : cookies){
                                 <td class="dataText">
                                 <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
                                 <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
-                                name="concession:${feesstructure.sfsid}" class="concession"
+                                name="concession:${feesstructure.sfsid}" class="concession" readonly
                                 value="${feesstructure.concession}"></td>
                                 <td class="dataText">
-	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
+                                	<textarea name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" rows="4" cols="50">${feesstructure.concessionnotes}</textarea>
+	                                <!-- <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" > -->		
                                 </td>
                                 <td class="dataText">
 
@@ -622,9 +623,9 @@ for(Cookie cookie : cookies){
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="waiveoff">Waive Off</button>
-
+-->
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="applyconcession">Apply Concession</button>  -->
+                                             <button id="applyconcession">Update</button>  
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/abc/printstudentdetailsfeesstructure'">Print</button>

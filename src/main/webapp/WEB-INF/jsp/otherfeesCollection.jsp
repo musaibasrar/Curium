@@ -987,11 +987,12 @@ for(Cookie cookie : cookies){
                 </thead>
 
 				<tbody>
+					<c:set var="grandTotal" value="${0}" />
 					<c:forEach items="${studentotherfeesdetails}" var="studentfeesdetails" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2" checked
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
@@ -1001,7 +1002,8 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<c:set var="grandTotal" value="${grandTotal + studentfeesdetails.value}" />
+							<input type="text" class="amountpaying" value="${studentfeesdetails.value}" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<!-- <td class="dataText" align="center">
@@ -1015,7 +1017,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
                         <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
-                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
+                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="${grandTotal}" readonly /></b></td>
                     </tr>
                 </tfoot>
 			</table>
