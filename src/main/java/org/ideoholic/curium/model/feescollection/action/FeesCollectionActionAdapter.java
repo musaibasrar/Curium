@@ -231,7 +231,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("dayone", responseDto.getDayOneCancel());
         httpSession.setAttribute("datefrom", responseDto.getDateFromCancel());
         httpSession.setAttribute("dateto", responseDto.getDateToCancel());
-        httpSession.setAttribute("searchotherfeesdetailslist", responseDto.getOtherfeesDetailsList());
+        httpSession.setAttribute("searchotherfeesdetailslist", responseDto.getFeesMap());
         httpSession.setAttribute("sumofotherdetailsfees", responseDto.getSumOfFees());
     }
 
