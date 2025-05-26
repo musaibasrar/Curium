@@ -35,21 +35,23 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 
+@Service
 public class TaskService {
 
+    @Autowired
 	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
+	@Autowired
 	private HttpSession httpSession;
-	private static final int BUFFER_SIZE = 4096;
 
-	public TaskService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+	@Autowired
+	private JobDAO jobDAO;
+	private static final int BUFFER_SIZE = 4096;
 
 	public boolean addQuery() {
 		
@@ -202,8 +204,7 @@ public class TaskService {
 			for (String ids : queryIds) {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
-			
-			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
+			result = jobDAO.inProgressQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		
