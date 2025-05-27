@@ -570,9 +570,8 @@
         }
     }
 </script>
-
 <script>
-var xmlHttp;
+	var xmlHttp;
     var count;
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
@@ -610,6 +609,23 @@ var xmlHttp;
 	}
     
 </script>
+
+<script>
+
+function searchOtherFeecategory() {
+    var addClass = document.getElementById('addclass').value;
+    var yoa = document.getElementById('yearofadmission').value;
+
+    var xmlHttpof = new XMLHttpRequest();
+    xmlHttpof.onreadystatechange = function () {
+        if (xmlHttpof.readyState === 4 && xmlHttpof.status === 200) {
+            document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
+        }
+    };
+    xmlHttpof.open("GET", "/abc/FeesProcess/searchOtherFeecategory?classstudying=" + addClass + "&yearofadmission=" + yoa, true);
+    xmlHttpof.send(null);
+}
+</script>
 <script>
 $(function() {
 	$('#chckHead').click(function() {
@@ -635,6 +651,34 @@ $(function() {
 			$('.chcktbl:not(:checked)').attr('disabled', true);
 		} else {
 			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+
+$(function() {
+	$('#chckHeadOtherFees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktblotherfees:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktblotherfees:checked').attr('checked', false);
+			} else {
+				$('.chcktblotherfees:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktblotherfees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		alert(tdLength);
+		if (length > trLength) {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', false);
 		}
 	});
 });
@@ -666,6 +710,33 @@ function calculateGrandTotal() {
     
     $('#feesTotalAmount').val(sum);
 }
+
+function calculateOtherFees(value2) {
+	var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+	//alert("hii", value2);
+	 var feesCat=document.getElementById("hiddenOtherFees_amount_"+value2).value;
+	 //alert("hii", value2);
+     var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+     var final1=document.getElementById("hiddenotherFees_full_amount_"+value2);
+     	
+     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+     	//feesConcession (direct amount)
+        final1.value=feesCat*feesCount;
+     	//final1.value=feesCat;
+         calculateOtherFeesGrandTotal();
+   
+}
+function calculateOtherFeesGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.otherFeesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#otherFeesTotalAmount').val(sum);
+}
 $(document).ready(function() {
     
     
@@ -691,6 +762,32 @@ $(document).ready(function() {
         });
         
         $('#feesTotalAmount').val(sum);
+       
+    });
+    
+    
+    $("#dataTableOtherFees").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
+        
+    });
+    $("#dataTableOtherFees").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
        
     });
 });
@@ -753,6 +850,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<li><a href="#fragment-8">Other Stamp Fee</a></li>
 				</ul>
 
 
@@ -885,7 +983,7 @@ $(document).ready(function() {
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1202,7 +1300,7 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
@@ -2047,7 +2145,9 @@ $(document).ready(function() {
 								<tr>
 								<td></td>
 								<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -2114,7 +2214,9 @@ $(document).ready(function() {
 							<tr>
 								<td></td>
 								<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -2133,6 +2235,72 @@ $(document).ready(function() {
 											<button id="saveseven" class="save" name="savestudent">Save</button>
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
+				
+				<div id="fragment-8">
+						
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Other Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHeadOtherFees" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="otherFeescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveeight" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="canceleight" class="cancel">Cancel</button>
 										</td>
 									</tr>
 									<tr>
