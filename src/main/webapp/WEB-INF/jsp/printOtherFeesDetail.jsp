@@ -457,14 +457,14 @@
                 </tr>
             </TABLE>
 
-		<%-- <TABLE id="dataTable" width="100%" border="0"
+		 <TABLE id="dataTable" width="100%" border="0"
 			style="border-collapse: collapse;">
 
 
 			<tr>
-
+				<td class="headerText">Sl.No.</td>
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<!-- <td class="headerText">Fees Amount</td> -->
 				
 
 			</tr>
@@ -477,35 +477,17 @@
 			</tr>
 
 
-			<c:forEach items="${feescatmap}" var="feescatmap">
+			<c:forEach items="${feescatmap}" var="feescatmap" varStatus="status">
 				<tr>
+					<td class="dataText"><c:out
+							value="${status.index+1}" /></td>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${feescatmap.value}" /></td>
-					
-					Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td>
+					<%-- <td class="dataText">Rs. <c:out
+							value="${feescatmap.value}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
-			<c:if test="${receiptinfo.fine > 0}">
-				<tr>
-					<td class="dataText"><c:out
-							value="Fine" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${receiptinfo.fine}" /></td>
-				</tr>
-			</c:if>
-				
-			<c:if test="${receiptinfo.misc > 0}">	
-				<tr>
-					<td class="dataText"><c:out
-							value="Misc" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${receiptinfo.misc}" /></td>
-				</tr>
-			</c:if>
-			</table> --%>
+			</table>
 			
 			
 			<TABLE width="100%" border="0">

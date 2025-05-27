@@ -269,7 +269,7 @@ public class feesCollectionDAO {
 
 			for (Otherfeescollection singleFeescollection :  feescollectionList) {
 				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
-				Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+				Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+",concessionnotes='Delivered' where sfsid="+singleFeescollection.getSfsid());
 				query.executeUpdate();
 				 session.save(singleFeescollection);
 			}
