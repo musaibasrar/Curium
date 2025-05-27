@@ -187,7 +187,7 @@ public class TaskService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new JobDAO().cancelQueries(QueryIdsList, userId);
+			result = jobDAO.cancelQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		

@@ -160,7 +160,7 @@ public class JobDAO {
 
 		@Transactional
 		public JobQuery viewQueryDetails(int queryId) {
-			JobQuery parentQuery = new JobQuery();
+			JobQuery parentQuery = null;
 			try {
 				parentQuery = jobQueryRepository.findById(queryId).orElse(new JobQuery());
 			} catch (Exception hibernateException) { 
@@ -173,15 +173,14 @@ public class JobDAO {
 
 
 		public boolean updateQueries(String queryId, String parentQuery, String response, int userId) {
-			
 			boolean result = false;
 			try {
 				transaction = session.beginTransaction();
 				
-					Query query = session.createQuery("update JobQuery set query = '"+parentQuery+"', response='"+response+"', updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
-					query.executeUpdate();
-				
-				transaction.commit();
+				Query query = session.createQuery("update JobQuery set query = '"+parentQuery+"', response='"+response+"', updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
+				query.executeUpdate();
+			
+			transaction.commit();
 				result = true;
 			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
@@ -337,30 +336,23 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public int getNoOfRecordsTodayResolvedQueries() {
 			
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
-
-				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'Completed' and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
+				noOfRecords = jobQueryRepository.countByStatusAndCreateddate("Completed", Date.from(Instant.now()));
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
-				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
+			}  catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
 				return noOfRecords;
-			}
+			
 		}
 
 
