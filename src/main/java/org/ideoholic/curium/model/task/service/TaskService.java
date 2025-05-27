@@ -187,7 +187,7 @@ public class TaskService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new JobDAO().cancelQueries(QueryIdsList, userId);
+			result = jobDAO.cancelQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		
@@ -284,7 +284,7 @@ public class TaskService {
 			boolean result = false;
 			JobQuery = JobQuery.replace("'", "''");
 			response = response.replace("'", "''");
-			result = new JobDAO().updateQueries(queryId, JobQuery, response, userId);
+			result = jobDAO.updateQueries(queryId, JobQuery, response, userId);
 			request.setAttribute("querystatus",result);
 		}
 
