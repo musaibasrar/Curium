@@ -951,4 +951,80 @@ public class FeesService {
            throw new IllegalArgumentException("Fees category for the given student does not exist");
            
    }
+
+
+		public OtherFeesCategoryResponseDto getOtherFeeCategory(String classname,String yearofAdmissionStr,String currentAcademicYearStr,String branchid)  throws IOException{
+
+			OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = new OtherFeesCategoryResponseDto();
+		        if(branchid!=null){
+		        	String[] yearofAdmission = yearofAdmissionStr.split("/");
+		        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
+		        	String searchYear = null;
+		        	int yoa = Integer.parseInt(yearofAdmission[0]);
+		        	int ca = Integer.parseInt(currentAcademicYear[0]);
+		        	
+		        	if(yoa == ca || yoa < ca) {
+		        		searchYear = currentAcademicYearStr;
+		        	}else if (yoa > ca) {
+		        		searchYear = yearofAdmissionStr;
+		        	}
+		        	
+		            List<OtherFeecategory> feecategoryList= new feesCategoryDAO().getOtherFeeCategory(classname,searchYear,branchid);
+		            otherFeesCategoryResponseDto.setOtherFeesCategory(feecategoryList);
+
+		            Locale indiaLocale = new Locale("en", "IN");
+		    		PrintWriter out = response.getWriter(); 
+		    		response.setContentType("text/xml");
+		            response.setHeader("Cache-Control", "no-cache");
+
+		    		if(feecategoryList.size() > 0) {
+
+		    		        try {
+		    		        	String buffer = "<div style='overflow:scroll;width:750px; height: 250px;'><table id='dataTableOtherFees'><thead><tr>"
+		    		        			+ "   			        				                            <td style='padding-right: 30px;font-weight: bold;color:#eb6000'>Fees Category</td>"
+		    		        			+ "   			        											<td style='padding-right: 20px;font-weight: bold;color:#eb6000'>class</td>	"
+		    		        			+ "																	<td style='padding-right: 100px;font-weight: bold;color:#eb6000'>Fees Amount</td>"
+		    		        			+ "   			        											<td style='padding-right: 40px;font-weight: bold;color:#eb6000'>No.of installments in a Year</td>"
+		    		        			+ "																	<td style='font-weight: bold;color:#eb6000'>Fees Total Amount</td></tr>"
+		    		        			+ "   			        										</thead>";
+		   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
+		   		        		buffer = buffer +  "<option></option>";*/
+		   			        	for(int i =0; i<feecategoryList.size();i++){
+		   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
+		   			        				+ "									 type='checkbox' name='otherFeesCategory' class='chcktblotherfees' value="+feecategoryList.get(i).getIdfeescategory()+"--"+i+""
+		   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
+		   			        				+ "							</label> &nbsp;&nbsp;&nbsp;&nbsp;<input type='hidden' value='0' name='otherFeesConcession' id='otherFeesConcession_"+i+"' /> <input type='hidden' class='otherFeesId' name='otherFeesIDS' id=otherFees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='otherFeesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='otherFessCat'  id=hiddenOtherFees_amount_"+i+" size='18'/></td><td> <input"
+		   			        						+ "   			     type='text' value='0' name='otherFeesCount' id='otherFeesCount_"+i+"'"
+		   			        						+ "   			        				+ \"								onclick='calculateOtherFees("+i+")' onkeyup='calculateOtherFees("+i+")' size='18' required><br></td>"
+		   			        						+ "<td> <input class='otherFeesFullAmount' type='text' value='0' name='otherFeesFullCat' id='hiddenotherFees_full_amount_"+i+"' size='18'></td></tr>";
+		   			        	}
+		   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Total</td><td align='center'><input type='text' name='otherFeesTotalAmount' id='otherFeesTotalAmount' value='0' /></td></tr></table></div>";
+
+		    			        	response.getWriter().println(buffer);
+
+		    		        } catch (Exception e) {
+		    		            out.write("<input name='otherfeescategoryempty'  type='text' class='textfieldvalues' id='otherfeescategoryempty'  style='font-size: 14px;' readonly>");
+		    		        } finally {
+		    		            out.flush();
+		    		            out.close();
+		    		        }
+		    		}else {
+
+		    		        try {
+		    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
+		    			        	response.getWriter().println(buffer);
+
+		    		        } catch (Exception e) {
+		    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+		    		        } finally {
+		    		            out.flush();
+		    		            out.close();
+		    		        }
+		    		}
+
+
+		        }
+		        return otherFeesCategoryResponseDto;
+		    }
 }
