@@ -290,7 +290,7 @@ public class JobService {
 		boolean result = false;
 		jobQuery = jobQuery.replace("'", "''");
 		response = response.replace("'", "''");
-		result = jobDAO.updateQueries(queryId, jobQuery, response, userId);
+		result = new JobDAO().updateQueries(queryId, jobQuery, response, userId);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}

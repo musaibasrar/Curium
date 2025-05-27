@@ -172,7 +172,6 @@ public class JobDAO {
 		}
 
 
-		@Transactional
 		public boolean updateQueries(String queryId, String parentQuery, String response, int userId) {
 			boolean result = false;
 			try {
@@ -343,7 +342,7 @@ public class JobDAO {
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				noOfRecords = jobQueryRepository.countByStatusCompletedAndCreatedDate(Date.from(Instant.now()));
+				noOfRecords = jobQueryRepository.countByStatusAndCreateddate("Completed", Date.from(Instant.now()));
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
 

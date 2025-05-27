@@ -284,7 +284,7 @@ public class TaskService {
 			boolean result = false;
 			JobQuery = JobQuery.replace("'", "''");
 			response = response.replace("'", "''");
-			result = jobDAO.updateQueries(queryId, JobQuery, response, userId);
+			result = new JobDAO().updateQueries(queryId, JobQuery, response, userId);
 			request.setAttribute("querystatus",result);
 		}
 
