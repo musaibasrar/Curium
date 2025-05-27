@@ -39,6 +39,7 @@ import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -212,6 +213,7 @@ public class StudentService {
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
+			new feesDetailsDAO().stampOtherFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
 			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			result.setSuccess(true);
 			return result;
