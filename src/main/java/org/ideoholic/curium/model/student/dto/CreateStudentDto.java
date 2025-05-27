@@ -158,5 +158,12 @@ public class CreateStudentDto {
 	private String[] feesAmount;
 	private String[] concession;
 	private String[] totalInstallments;
+	
+	//Private method otherstampFees.
+		private String[] otherFeesCategory;
+		private String otherFeesTotalAmount;
+		private String[] otherFeesAmount;
+		private String[] otherFeesConcession;
+		private String[] otherTotalInstallments;
 
 }
