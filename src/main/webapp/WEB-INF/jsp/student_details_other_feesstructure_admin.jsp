@@ -7,36 +7,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details Other Fees Structure</title>
+        <title>Student Details Bus Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/noblewisdom/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/noblewisdom/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -394,26 +394,25 @@
             function searchFeesStructure() {
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
-                
-                form1.action = "/noblewisdom/StudentProcess/otherFeesStructurePerYear?id="+id;
+                form1.action = "/vision/StudentProcess/otherFeesStructurePerYear?id="+id;
                 form1.submit();
             }
             
             function deleteRecord() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/noblewisdom/FeesProcess/deleteOtherFeesCategory";
+                form1.action = "/vision/FeesProcess/deleteOtherFeesCategory";
                 form1.submit();
             }
             
             function waiveOff() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/noblewisdom/FeesProcess/waiveOffFees";
+                form1.action = "/vision/FeesProcess/waiveOffFees";
                 form1.submit();
             }
             
             function applyConcession() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/noblewisdom/FeesProcess/applyotherConcession";
+                form1.action = "/vision/FeesProcess/applyotherConcession";
                 form1.submit();
             }
             
@@ -436,7 +435,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -465,7 +464,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Other Fees Structure</a></h3>
+                <h3><a href="#">Bus Fees Structure</a></h3>
 
                 <div>
 
@@ -628,8 +627,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button> 
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/noblewisdom/printstudentdetailsfeesstructure'">Print</button>
-
+                                             <button id="print" onclick="window.location.href='/vision/printstudentdetailsotherfeesstructure'">Print</button>
                                         </td>
 
                                     </tr>
@@ -682,7 +680,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/noblewisdom/StudentProcess/ViewAll";
+                form1.action="/vision/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>
