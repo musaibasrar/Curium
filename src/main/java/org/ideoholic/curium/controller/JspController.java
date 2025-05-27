@@ -631,29 +631,13 @@ public class JspController {
 		return "bookhistory";
 	}
 	
-	@GetMapping("/header_accountant")
-	public String getHeaderAccountant() {
-		return "header_accountant";
+	@GetMapping("/printOtherFeesDetail")
+	public String getPrintOtherFeesDetail() {
+		return "printOtherFeesDetail";
 	}
 	
-	@GetMapping("/index_accountant")
-	public String getIndexAccountant() {
-		return "index_accountant";
+	@GetMapping("/printstudentdetailsotherfeesstructure")
+	public String getPrintstudentdetailsotherfeesstructure() {
+		return "printstudentdetailsotherfeesstructure";
 	}
-	
-	@GetMapping("/left_accountant")
-	public String getLeftAccountant() {
-		return "left_accountant";
-	}
-	
-	@GetMapping("/leftsettings_accountant")
-	public String getLeftSettingsAccountant() {
-		return "leftsettings_accountant";
-	}
-	
-	@GetMapping("/reports_accountant")
-	public String getReportsAccountant() {
-		return "reports_accountant";
-	}
-	
 }
