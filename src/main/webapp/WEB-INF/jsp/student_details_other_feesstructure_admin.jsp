@@ -628,7 +628,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Update</button> 
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/abc/printstudentdetailsfeesstructure'">Print</button>
+                                             <button id="print" onclick="window.location.href='/abc/printstudentdetailsotherfeesstructure'">Print</button>
 
                                         </td>
 
