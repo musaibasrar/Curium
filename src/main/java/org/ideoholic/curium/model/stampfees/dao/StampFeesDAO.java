@@ -263,7 +263,7 @@ public class StampFeesDAO {
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentotherfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"' where idfeescategory='"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"' and  sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();
