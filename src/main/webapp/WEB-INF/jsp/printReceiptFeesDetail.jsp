@@ -179,12 +179,12 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/vision/images/vision.jpg" width="121" height="80"/></td>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				<label class="addressLine">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
@@ -235,7 +235,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
@@ -367,8 +367,9 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/vision/images/visionpaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
+		<!-- <td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -379,12 +380,12 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/vision/images/vision.jpg" width="121" height="80"/></td>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
@@ -434,7 +435,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
@@ -568,8 +569,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/vision/images/visionpaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

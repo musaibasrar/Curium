@@ -21,20 +21,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/presidency/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/presidency/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/presidency/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/presidency/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/presidency/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -228,9 +228,9 @@
 </style>
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script type="text/javascript" src="/presidency/js/datetimepicker_css.js"></script>
+<script src="/presidency/JavaScript/actb.js"></script>
+<script src="/presidency/JavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -522,7 +522,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -617,7 +617,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 							<td class="alignRight">Date Of Birth &nbsp;</td>
-							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
+							<td><label> <input name="dateofjoining" value=""
 										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="myclass" id="datepicker" size="36"
 									data-validate="validate(required)">
@@ -714,7 +714,7 @@ for(Cookie cookie : cookies){
 							
 
 							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/YYYY"/>"
+							<td><label> <input name="joiningdate" value=""
 										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">
@@ -1021,13 +1021,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/EmployeeProcess/addEmployee";
+								form1.action = "/presidency/EmployeeProcess/addEmployee";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/EmployeeProcess/viewAllEmployee";
+								form1.action = "/presidency/EmployeeProcess/viewAllEmployee";
 								form1.submit();
 							}
 
