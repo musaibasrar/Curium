@@ -172,21 +172,18 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public boolean updateQueries(String queryId, String parentQuery, String response, int userId) {
+			int qid = Integer.parseInt(queryId); 
 			boolean result = false;
 			try {
-				transaction = session.beginTransaction();
-				
-				Query query = session.createQuery("update JobQuery set query = '"+parentQuery+"', response='"+response+"', updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
-				query.executeUpdate();
-			
-			transaction.commit();
+				jobQueryRepository.updateJobQuery(qid, parentQuery, response, userId, Date.from(Instant.now()));
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+	            }
 			return result;
 		}
 

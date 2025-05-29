@@ -24,4 +24,12 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    void updateJobStatus(@Param("ids") List<Integer> ids, @Param("status") String status, @Param("userId") int userId, @Param("updatedDate") Date updatedDate);
 
 	    int countByStatusAndCreateddate(String status, Date createdDate);
+	    
+	    @Modifying
+	    @Query("UPDATE JobQuery jq SET jq.query = :parentQuery, jq.response = :response, jq.updateddate = :updatedDate, jq.updateduserid = :userId WHERE jq.id = :queryId")
+	    int updateJobQuery(@Param("queryId") int queryId,
+	                       @Param("parentQuery") String parentQuery,
+	                       @Param("response") String response,
+	                       @Param("userId") int userId,
+	                       @Param("updatedDate") Date updatedDate);
 }
