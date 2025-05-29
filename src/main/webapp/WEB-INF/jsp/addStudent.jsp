@@ -1044,7 +1044,7 @@ $(document).ready(function() {
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;">Roll No.
 								&nbsp;</td>
 							<td ><label> <input
 									name="bplcardno" type="text" class="myclass"

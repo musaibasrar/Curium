@@ -262,8 +262,6 @@
 	height: 27px;
 	vertical-align: text-top;
 	text-align: center;
-	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -313,8 +311,6 @@
 .headerTD {
 	border-radius: 6px;
 	background-color: #4b6a84;
-	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -350,7 +346,6 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/presidency/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/presidency/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -364,8 +359,6 @@
 <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="/presidency/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/presidency/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -510,16 +503,18 @@
 
 <script type="text/javascript">
 					
-					var attedanceresult='<c:out default="" value="${attedanceresult}"/>';
+					var attedanceresult='<c:out default="" value="${attendanceresult}"/>';
 					var splitMessage = attedanceresult.split('-');
-					
+					alert(attedanceresult);
 		            if(attedanceresult.includes("success")){
 		            	 $(function(){
+		            		 alert('success');
 		            		 $( "div.success" ).html(splitMessage[1]);
 		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            	 });
 		            	 }else if(attedanceresult.includes("error")){
 		            	  $(function(){
+		            		  alert('error');
 		            		 $( "div.failure" ).html(splitMessage[1]);
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            		 });

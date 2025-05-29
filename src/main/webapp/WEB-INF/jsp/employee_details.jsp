@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Employee Details</title>
 
         <script type="text/javascript" language="JavaScript" src="/presidency/js/motionpack.js"></script>
         <link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">

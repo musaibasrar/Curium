@@ -85,25 +85,30 @@ public class ImportFileService {
 
 							}
 						}
-						student.setAdmissionnumber(row.getCell(0).getStringCellValue());
-						//student.setSts(row.getCell(1).getStringCellValue());
-						student.setStudentexternalid(row.getCell(1).getStringCellValue());
+						//student.setAdmissionnumber(row.getCell(0).getStringCellValue());
+						student.setSts(row.getCell(1).getStringCellValue());
+						student.setStudentexternalid(row.getCell(0).getStringCellValue());
 						student.setName(row.getCell(2).getStringCellValue());
-						//student.setGender(row.getCell(3).getStringCellValue());
-						/*
-						 * student.setDateofbirth(DateUtil.simpleDateParser(
-						 * (row.getCell(16).getStringCellValue()) + "/" +
-						 * (row.getCell(17).getStringCellValue()) + "/" +
-						 * (row.getCell(18).getStringCellValue())));
-						 */
-						//student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
-						//student.setPlaceofbirth(row.getCell(6).getRawValue());
-						student.setAdmissiondate(DateUtil.simpleDateParser(
-								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
-										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(48).getStringCellValue());
+						student.setGender(row.getCell(3).getStringCellValue());
 						
-						student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
+							student.setDateofbirth(DateUtil.simpleDateParser(
+						  (row.getCell(16).getStringCellValue()) + "/" +
+						  (row.getCell(17).getStringCellValue()) + "/" +
+						  (row.getCell(18).getStringCellValue())));
+						 
+						student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
+						//student.setPlaceofbirth(row.getCell(6).getRawValue());
+						/*student.setAdmissiondate(DateUtil.simpleDateParser(
+								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
+										+ "/" + (row.getCell(21).getStringCellValue())));*/
+						Cell cellSection = row.getCell(50);
+						String section = "";
+						if (cellSection != null) {
+				            section = cellSection.getStringCellValue();
+				        }
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+section);
+						
+						//student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
 						//student.setBloodgroup(row.getCell(9).getStringCellValue());
 						student.setMothertongue(row.getCell(10).getStringCellValue());
 						student.setReligion(row.getCell(11).getStringCellValue());
@@ -123,9 +128,9 @@ public class ImportFileService {
 						// student.setPercentage(row.getCell(41).getStringCellValue());
 						//student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
 						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
-						student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
+						//student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
 						//student.setSts(row.getCell(49).getStringCellValue());
-
+						student.setBplcardno(row.getCell(47).getStringCellValue());
 						student.setBranchid(2);
 						student.setArchive(0);
 						student.setPassedout(0);
@@ -140,7 +145,7 @@ public class ImportFileService {
 						parent.setContactnumber(row.getCell(28).getStringCellValue());
 						//parent.setParentsannualincome(row.getCell(29).getStringCellValue());
 						// parent.setEmergencycontactno(row.getCell(30).getStringCellValue());
-						//parent.setAddresspermanent(row.getCell(31).getStringCellValue());
+						parent.setAddresspermanent(row.getCell(31).getStringCellValue());
 						//parent.setAddresstemporary(row.getCell(32).getStringCellValue());
 						//student.setGuardiandetails(row.getCell(33).getStringCellValue());
 						//parent.setRemarks(row.getCell(34).getStringCellValue());
