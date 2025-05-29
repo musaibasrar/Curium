@@ -446,7 +446,7 @@ public class AccountService {
 	public boolean saveContra(AccountContraDto accountContraDto) {
 		
 		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
-		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCraccountName());
 		String contraVoucher = DataUtil.emptyString(accountContraDto.getContraVoucher());
 		String drAmountContra = DataUtil.emptyString(accountContraDto.getDrAmountContra());
 		String crAmountContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
