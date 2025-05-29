@@ -452,7 +452,7 @@ public class AccountService {
 	public CreateVoucherResponseDto saveContra(AccountContraDto accountContraDto, String branchId) {
 		
 		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
-		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
+		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCraccountName());
 		String contraVoucher = DataUtil.emptyString(accountContraDto.getContraVoucher());
 		String drAmountContra = DataUtil.emptyString(accountContraDto.getDrAmountContra());
 		String crAmountContra = DataUtil.emptyString(accountContraDto.getCrAmountContra());
