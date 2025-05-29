@@ -310,7 +310,7 @@ public class JobService {
 					page = Integer.parseInt(strPage);
 				}
 
-				List<JobQuery> list = new JobDAO().readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
+				List<JobQuery> list = jobDAO.readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId), employee.getTid());
 				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWise(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
