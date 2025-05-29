@@ -51,6 +51,9 @@ public class JobQuery implements java.io.Serializable {
 
 	@Column(name = "response", length = 500)
 	private String response;
+	
+	@Column(name = "query", length = 500)
+	private String query;
 
 	@Column(name = "createduserid")
 	private Integer createduserid;
