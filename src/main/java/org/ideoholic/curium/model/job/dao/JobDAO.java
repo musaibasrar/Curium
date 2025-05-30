@@ -222,33 +222,23 @@ public class JobDAO {
 			return noOfRecords;
 		}
 
-
+		@Transactional
 		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
 
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
-
-				results = (List<JobQuery>) session.createQuery("From JobQuery where (createddate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'").setCacheable(true).setCacheRegion("commonregion")
-						.list();
+				results = jobQueryRepository.findByCreateddateBetweenAndStatusNot(fromDate, toDate, "Cancelled");
 				noOfRecords = results.size();
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
-				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
-			}
-		
-					
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
+			return noOfRecords;
 		}
 
 

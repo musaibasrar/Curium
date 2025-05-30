@@ -350,7 +350,7 @@ public class JobService {
 
 
 		httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
-		return new JobDAO().getNoOfRecordsMonthly(fromDate, toDate);
+		return jobDAO.getNoOfRecordsMonthly(fromDate, toDate);
 	}
 
 	public ReportResponseDto generateQueriesReport(ReportDto reportDto) {
