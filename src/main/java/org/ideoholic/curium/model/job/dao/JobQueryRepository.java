@@ -35,4 +35,7 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    @Query("SELECT jq FROM JobQuery jq WHERE jq.branchid = :branchId AND jq.teacher.tid = :tid ORDER BY jq.id DESC")
 	    List<JobQuery> findByBranchIdAndTeacherTid(@Param("branchId") int branchId, @Param("tid") int tid, Pageable pageable);
+	    
+	    @Query("SELECT COUNT(j) FROM JobQuery j WHERE j.teacher.tid = :tid AND j.branchid = :branchId")
+	    int countByTeacherIdAndBranchId(@Param("tid") int tid, @Param("branchId") int branchId);
 }

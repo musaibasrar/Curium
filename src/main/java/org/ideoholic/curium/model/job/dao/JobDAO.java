@@ -205,35 +205,21 @@ public class JobDAO {
 			return results;
 		}
 
-
+		@Transactional
 		public int getNoOfRecordsDepartmentWise(int branchId, int tid) {
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
-				/*
-				 * Query queryDepartment =
-				 * session.createQuery("From Department as dep where dep.departmentname = '"
-				 * +department+"'").setCacheable(true).setCacheRegion("commonregion");
-				 * Department dep = (Department) queryDepartment.uniqueResult();
-				 */
-				results = (List<JobQuery>) session.createQuery("From JobQuery where teacher.tid='"+tid+"' and branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
+				noOfRecords = jobQueryRepository.countByTeacherIdAndBranchId(tid, branchId);
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
-				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
-			}
+			}  catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
+			return noOfRecords;
 		}
 
 
