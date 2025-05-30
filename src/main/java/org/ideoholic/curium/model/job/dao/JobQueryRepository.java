@@ -32,4 +32,7 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	                       @Param("response") String response,
 	                       @Param("userId") int userId,
 	                       @Param("updatedDate") Date updatedDate);
+	    
+	    @Query("SELECT jq FROM JobQuery jq WHERE jq.branchid = :branchId AND jq.teacher.tid = :tid ORDER BY jq.id DESC")
+	    List<JobQuery> findByBranchIdAndTeacherTid(@Param("branchId") int branchId, @Param("tid") int tid, Pageable pageable);
 }
