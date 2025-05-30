@@ -528,8 +528,8 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: left" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
 							<td class="dataText" style="text-align: right" width="30%"><c:out value="${expensesledgersaccount.value}" /></td>
 
 						</tr>
@@ -602,8 +602,8 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: left" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
 							<td class="dataText" style="text-align: right" width="30%"><c:out value="${incomeledgersaccount.value}" /></td>
 
 						</tr>
