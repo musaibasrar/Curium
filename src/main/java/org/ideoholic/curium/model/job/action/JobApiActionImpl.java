@@ -435,6 +435,12 @@ public class JobApiActionImpl implements JobApiAction {
 		return ResponseEntity.ok().build();
 
 	}
+	
+	@GetMapping("/viewMonthly")
+	public ResponseEntity getJobQueryMonthly() {
+		Integer result = jobService.getNoOfRecordsMonthly();
+		return ResponseEntity.ok(result);
+	}
 
 		
 }

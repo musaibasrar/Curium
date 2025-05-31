@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.task.dto.Task;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -224,11 +225,12 @@ public class JobDAO {
 
 		@Transactional
 		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
-
+            Date fromdate = new DateUtil().dateParserdd(fromDate);
+            Date todate = new DateUtil().dateParserdd(toDate);
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				results = jobQueryRepository.findByCreateddateBetweenAndStatusNot(fromDate, toDate, "Cancelled");
+				results = jobQueryRepository.findByCreateddateBetweenAndStatusNot(fromdate, todate, "Cancelled");
 				noOfRecords = results.size();
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);

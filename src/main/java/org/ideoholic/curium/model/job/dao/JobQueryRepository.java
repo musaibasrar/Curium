@@ -39,5 +39,5 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    @Query("SELECT COUNT(j) FROM JobQuery j WHERE j.teacher.tid = :tid AND j.branchid = :branchId")
 	    int countByTeacherIdAndBranchId(@Param("tid") int tid, @Param("branchId") int branchId);
 	    
-	    List<JobQuery> findByCreateddateBetweenAndStatusNot(String fromDate, String toDate, String status);
+	    List<JobQuery> findByCreateddateBetweenAndStatusNot(Date fromDate, Date toDate, String status);
 }
