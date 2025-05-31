@@ -34,7 +34,10 @@ public class AttendanceDAO {
 	
 	@Autowired
 	private WeeklyoffRepository weeklyoffRepo;
-	
+
+	@Autowired
+	private AttendanceMasterRepository attendanceMasterRepo;
+
 	public List<Teacher> readListOfObjects() {
 		// TODO Auto-generated method stub
 		return null;
@@ -176,23 +179,20 @@ public class AttendanceDAO {
 		return holidayMaster;
 	}
 
+	@Transactional
 	public boolean addAttendanceMaster(Attendancemaster attendanceMaster) {
 
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(attendanceMaster);
-			transaction.commit();
+		try {
+			attendanceMasterRepo.save(attendanceMaster);
 			return true;
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-				e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+			throw e;
 
+		}
+
+	}
 	public boolean addAttendanceMaster(List<Attendancemaster> attendanceMasterList) {
 		Transaction transaction = null;
 		try{
