@@ -225,8 +225,8 @@ public class JobDAO {
 
 		@Transactional
 		public int getNoOfRecordsMonthly(String fromDate, String toDate) {
-            Date fromdate = new DateUtil().dateParserdd(fromDate);
-            Date todate = new DateUtil().dateParserdd(toDate);
+            Date fromdate =  DateUtil.dateParserdd(fromDate);
+            Date todate = DateUtil.dateParserdd(toDate);
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
