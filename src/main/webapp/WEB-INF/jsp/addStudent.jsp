@@ -622,7 +622,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/abc/FeesProcess/searchOtherFeecategory?classstudying=" + addClass + "&yearofadmission=" + yoa, true);
+    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying=" + addClass + "&yearofadmission=" + yoa, true);
     xmlHttpof.send(null);
 }
 </script>
