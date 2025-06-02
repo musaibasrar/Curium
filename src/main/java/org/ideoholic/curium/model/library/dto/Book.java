@@ -17,6 +17,7 @@ public class Book implements java.io.Serializable{
 	private int availableQty;
 	private int issuedQty;
 	private String shelf;
+	private int branchid;
 	
 	public Book() {
 	}
@@ -24,7 +25,7 @@ public class Book implements java.io.Serializable{
 	
 
 	public Book(int bid, String bookname, String subject, String author, String publisher, String isbn,
-			int availableQty, int issuedQty, String shelf) {
+			int availableQty, int issuedQty, String shelf, int branchid) {
 		super();
 		this.bid = bid;
 		this.bookname = bookname;
@@ -35,6 +36,7 @@ public class Book implements java.io.Serializable{
 		this.availableQty = availableQty;
 		this.issuedQty = issuedQty;
 		this.shelf = shelf;
+		this.branchid = branchid;
 	}
 
 
@@ -121,6 +123,18 @@ public class Book implements java.io.Serializable{
 
 	public void setShelf(String shelf) {
 		this.shelf = shelf;
+	}
+
+
+
+	public int getBranchid() {
+		return branchid;
+	}
+
+
+
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
 	}
 
 	
