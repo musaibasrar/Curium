@@ -250,7 +250,7 @@ public class JobDAO {
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				noOfRecords = jobQueryRepository.countCompletedQueries("Completed");
+				noOfRecords = jobQueryRepository.countByStatus("Completed");
 
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);

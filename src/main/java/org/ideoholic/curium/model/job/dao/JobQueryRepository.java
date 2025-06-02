@@ -41,6 +41,6 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    List<JobQuery> findByCreateddateBetweenAndStatusNot(Date fromDate, Date toDate, String status);
 	    
-	    @Query("SELECT COUNT(j) FROM JobQuery j WHERE j.status = :status")
-	    int countCompletedQueries(@Param("status") String status);
+	    int countByStatus(String status);
+	    
 }
