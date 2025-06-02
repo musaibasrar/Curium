@@ -43,4 +43,7 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    int countByStatus(String status);
 	    
+	    @Query("SELECT j FROM JobQuery j WHERE (j.status = 'Assigned' OR j.status = 'In Progress') AND j.createddate = createdDate")
+	    List<JobQuery> findTodayUnresolvedQueries(@Param("createdDate") Date createdDate);
+	    
 }
