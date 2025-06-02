@@ -160,13 +160,7 @@ public class StampFeesDAO {
 				
 					session.save(studentfeesstructure);
 					
-					//accounts
 					
-					session.save(transactions);
-					Query queryAccounts = session.createQuery(updateDrAccount);
-					queryAccounts.executeUpdate();
-					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-					queryqueryAccounts1.executeUpdate();
 				
 				/*
 				 	Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
@@ -174,7 +168,6 @@ public class StampFeesDAO {
 				
 				if(feesStructure == null){
 					session.save(studentfeesstructure);
-					
 					//accounts
 					
 					session.save(transactions);
@@ -192,17 +185,18 @@ public class StampFeesDAO {
 					queryUpdate.executeUpdate();
 				}else if(feesStructure == null){
 					session.save(studentfeesstructure);
-					
-					//accounts
-					
-					session.save(transactions);
-					Query queryAccounts = session.createQuery(updateDrAccount);
-					queryAccounts.executeUpdate();
-					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-					queryqueryAccounts1.executeUpdate();
 				}*/
 		}
 			
+			//accounts
+			
+			session.save(transactions);
+			Query queryAccounts = session.createQuery(updateDrAccount);
+			queryAccounts.executeUpdate();
+			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+			queryqueryAccounts1.executeUpdate();
+			
+
 			transaction.commit();
 			System.out.println("in add3");
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
