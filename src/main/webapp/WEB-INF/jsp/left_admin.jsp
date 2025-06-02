@@ -699,6 +699,7 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/lilyrose/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
             			</td>
             		</tr>
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/lilyrose/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
