@@ -244,30 +244,23 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public int getNoOfRecordsResolvedQueries() {
 			
 			List<JobQuery> results = new ArrayList<JobQuery>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
+				noOfRecords = jobQueryRepository.countCompletedQueries("Completed");
 
-				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'Completed'").setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
-				transaction.commit();
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
-				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
-			}
+			}catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
+			return noOfRecords;
 		}
 
 
