@@ -15,7 +15,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
+        <title>Student Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/lilyrose/js/motionpack.js"></script>
         <link rel="stylesheet" href="/lilyrose/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -260,6 +260,25 @@
 
             }
             -->
+            .dataTextBoldCenter {
+	font-weight: normal;
+	font-family: bolder;
+	color: black;
+	font-size: 18px;
+	letter-spacing: normal;
+	text-align: center;
+	margin:0px;
+	font-family: impact;
+	//font-family: arial black;
+}
+
+.addressLine{
+	font-weight: normal;
+	font-family: ariel;
+	font-size: 9px;
+	letter-spacing: normal;
+	text-align: center;
+}
         </style>
         <script type="text/javascript">
 
@@ -320,8 +339,7 @@
                                 });
                             </script>
 
-    </head>
-      <%
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -338,22 +356,7 @@ for(Cookie cookie : cookies){
 }
 %>
 
-    <!-- <style type="text/css">
-         
-         @media print {
-     body { font-size: 25px }
-     .hide { visibility: hidden }
-       }
-       
-   @media screen {
-     body { font-size: 13px }
-   }
-   
-         
-         
-     </style> -->
-
-    <style type="text/css">
+   <style type="text/css">
 
         @media print {
             .fontsize { font-size: 15px ;
@@ -388,11 +391,19 @@ for(Cookie cookie : cookies){
                 margin-right: 0px;
             }
         }
-        .card {
+ /*        .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    width: 8.5cm;
+    height: 13cm;
+    border-radius: 25px;
+    background: blue;
+} */
+
+       .card {
     width: 5.5cm;
     height: 8.5cm;
+    background: #FEE12B;
 }
 
 .card:hover {
@@ -400,104 +411,163 @@ for(Cookie cookie : cookies){
 }
 
 .container {
-    padding: 2px 16px;
+    padding: 1px 16px;
 }
+
+
+ .tableidcard {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        width: 310px;
+      }
+      .tdidcard {
+        font-size: 16px;
+      }
+      
+/* .containerschoolname {
+		padding: 2px 5px;
+} */
     </style>
 
+<style>
+    /* CSS to display tables side by side */
+    .table-container {
+      display: flex;
+      margin-bottom: 20px; /* Add a gap between table sets */
+    }
+    
+    .table-container table {
+     // margin-right: 20px;
+    }
+    
+    /* CSS for table styling */
+    table {
+      border-collapse: collapse;
+      width: 300px;
+    }
+    
+    th, td {
+      border: none; /* Remove borders */
+     // padding: 8px;
+    }
+    
+    .vertical-line {
+      border-left: 2px solid #350c76; /* Add a vertical line */
+    }
+  </style>
+    </head>
+     
 
     <body class="bodymargin">
        
         <form action="/lilyrose/" method="post" id="form1" class="bodymargin">
-
-           
-            <div>
-
-
-
-                <table cellpadding="2"  border="0">
-
-                        <c:set var="iInitial" value="${iInitial}"/>
-                        <c:set var="limit" value="1"/>
+			
+			
+	     <c:set var="iInitial" value="${iInitial}"/>
+         <c:set var="limit" value="1"/>
                         
-                    <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
                         %>
+			<c:if test="${limit < iInitial}">
+			<div class="card" style="background-image: url('/lilyrose/images/bgimage.png');background-repeat:no-repeat;background-color: #FEE12B; width: 5.5cm; height: 8.5cm;border: 1px solid;border-radius: 5px;">
+  <div class="table-container" style="padding-left: 10px;margin-bottom:0px;padding-bottom:0px;">
+   <!--  <table style="width: 50%;margin-bottom:0px;padding-bottom:0px;margin-left:16px;">
+   <tr>
+        <td>&emsp;&emsp;
+          <img src="/lilyrose/images/lilyrose.png" width="80" height="80"/>
+        </td>
+      </tr>
+    </table> -->
+    
+    <table align="center" style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:0px;">
+    <tr><td><br></td></tr>
+  <tr><td class="dataTextBoldCenter" style="text-transform: uppercase;color:red; text-align:center;">
+${branchname}
+</td></tr>
+<tr><td  style="font-size:10px;text-align:center;">
+Pre-Primary, Primary & High School
+</td></tr>
+<tr><td style="font-size:10px;text-align:center;">
+Noor Khan Taleem, Bidar-585401
+</td></tr>
+<tr><td style="font-size:10px;text-align:center;">
+Phone-9986547599
+</td></tr>
+<tr><td style="font-size:10px;text-align:center;">
+IDENTITY CARD
+</td></tr>
+				<tr><td>
+				
+				</td>  </tr>
+</table>
+  </div>
 
-                        <tr>
-                            <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-                         <div class="card">
-  								<img src="/lilyrose/images/lilyrose.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
-                            
-                            </td>
-                            <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/lilyrose/images/lilyrose.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
-						 <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/lilyrose/images/lilyrose.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
-                            </c:if>
-                        </tr>
-                        <% i = i + 1;%>
+  <div class="table-container" style="padding-left: 10px;margin-top:0px;padding-top:0px;">
+  
+    <table style="border-collapse: collapse;margin-top:0px;">
+     <td style="padding-bottom:0px;text-align:center;">
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:80px;width:70px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
+        </td>
+  <tr>
+    <td style="padding-top: 5px;margin:0px;">Name&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td> --%>
+  </tr>
+  <tr>
+    <td style="padding: 0px;margin:0px;">Father's Name&nbsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td> --%>
+  </tr>
+  <tr>
+    <td style="padding: 0;margin:0;">Mother's Name&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td> --%>
+  </tr>
+  <tr>
+    <td style="padding: 0;margin:0;">Class&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;: <%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td> --%>
+  </tr>
+  <tr>
+    <td style="padding: 0;margin:0;">Phone&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+<%--     <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td> --%>
+  </tr>
+  <tr>
+    <td style="padding: 0;">Address&emsp;&emsp;&emsp;&emsp;:<label style="padding: 0;text-align:right;"><%= request.getSession().getAttribute("address" + i + "") %></label></td>
+<%--     <td style="padding: 0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td> --%>
+  </tr>
+   <tr>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/lilyrose/images/signlilyrose.jpeg" alt="Sign lilyrose" width="60" height="25"></td>
+  </tr>
+  <tr>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HEADMISTRESS</td>
+  </tr>
+</table>
+    
+  </div>
+</div>
+
+  </c:if>
+   <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-                </table>
-
-                <table  width="70%"  id="table11" align="left">
+                   <table  width="70%"  id="table11" align="left">
                     <tr>
                         <td width="30%"> 
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/lilyrose/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
                     </tr>
 
-                </table>
-
-            </div>
-
-
-
-
-
-
-
-
-
+                </table>     
         </form>
     </body>
 </html>
