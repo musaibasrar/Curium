@@ -667,6 +667,10 @@ public class FeesCollectionService {
 			}
 			
 			result.setGrandTotal(grandTotal+gTotalAfterDecimal+" "+"Only");
+			
+			VoucherEntrytransactions voucherEntryTransaction = new AccountDAO().getVoucherDetails(rinfo.getReceiptvoucher().toString());
+			String[] narration = voucherEntryTransaction.getNarration().split(":");
+			result.setNarration(narration[0]);
 			result.setSuccess(true);
 			
 			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());

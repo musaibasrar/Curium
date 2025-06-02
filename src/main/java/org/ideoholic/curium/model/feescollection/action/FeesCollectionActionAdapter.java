@@ -167,6 +167,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("qrcode", responseDto.getQrCode());
         httpSession.setAttribute("feesMonth", responseDto.getFeesMonth());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
+        request.setAttribute("narrationreceipt", responseDto.getNarration());
     }
 
     public void getotherStampFees() {
@@ -479,6 +480,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         httpSession.setAttribute("qrcode", responseDto.getQrCode());
         httpSession.setAttribute("feesMonth", responseDto.getFeesMonth());
+        request.setAttribute("narrationreceipt", responseDto.getNarration());
     }
 
     public Otherreceiptinfo addother() {

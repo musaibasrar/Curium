@@ -31,6 +31,7 @@ public class DetailsResponseDto {
     private Parents parents;
     private String qrCode;
     private String[] feesMonth;
+    private String narration;
     @Builder.Default
     private boolean success = false;
 
