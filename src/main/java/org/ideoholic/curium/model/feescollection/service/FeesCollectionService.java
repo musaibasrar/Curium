@@ -613,6 +613,7 @@ public class FeesCollectionService {
 			
 			result.setGrandTotal(grandTotal+gTotalAfterDecimal+" "+"Only");
 			result.setSuccess(true);
+			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 		}
 		return result;
 	}

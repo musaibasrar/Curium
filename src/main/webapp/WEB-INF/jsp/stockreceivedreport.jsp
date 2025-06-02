@@ -633,7 +633,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${messstockentrylist.itemunitprice}" /></td>
 						  <td class="dataText">
 						  <c:set var="itemTotal" value="${itemTotal + messstockentrylist.itemunitprice * messstockentrylist.quantity}" />
-						  <fmt:setLocale value="en_IN" scope="request"/>
+						  <fmt:setLocale value="en_SA" scope="request"/>
 							<fmt:formatNumber type="currency"  value="${messstockentrylist.itemunitprice * messstockentrylist.quantity}" />
 						  </td>
 						</tr>
@@ -644,7 +644,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>Grand Total:
-							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:setLocale value="en_SA" scope="request"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
 							</label> 
 							</td>

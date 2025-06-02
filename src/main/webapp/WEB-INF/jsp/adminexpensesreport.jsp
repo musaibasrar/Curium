@@ -703,7 +703,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Transaction Date</th>
 						<th title="click to sort" class="headerText">Bank Name</th>
 						<th title="click to sort" class="headerText">Status</th>	
-						<th title="click to sort" class="headerText">Amount (Rs.)</th>
+						<th title="click to sort" class="headerText">Amount (SR.)</th>
 					</tr>
 				</thead>
 
@@ -735,7 +735,7 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							
 							<td class="dataTextInActive" style="text-align: right">TOTAL&nbsp;&nbsp;&nbsp;
-							 	<fmt:setLocale value="en_IN" scope="request"/>
+							 	<fmt:setLocale value="en_SA" scope="request"/>
 								<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${sumofexpenses}" />
 							</td>
 						</tr>

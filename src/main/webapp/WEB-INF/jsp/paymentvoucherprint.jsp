@@ -230,8 +230,8 @@
 			<td></td>
 			</tr>
 			<tr>
-				<td class="dataTextBoldLeft" style="text-align: left;" >Amount (Rs.):</td>
-				<td align="left">Rs. <c:out	value="${adminexpenses.priceofitem}" />	</td>
+				<td class="dataTextBoldLeft" style="text-align: left;" >Amount (SR.):</td>
+				<td align="left">SR. <c:out	value="${adminexpenses.priceofitem}" />	</td>
 			</tr>
 
 			<tr>

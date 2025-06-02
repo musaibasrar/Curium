@@ -559,7 +559,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>Grand Total:
-							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:setLocale value="en_SA" scope="request"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
 							</label> 
 							</td>

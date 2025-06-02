@@ -288,7 +288,7 @@
 							<td align="right">
 							<label style="font-weight: bold;">
 							Grand Total: 
-							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:setLocale value="en_SA" scope="request"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" />
 							</label>
 							</td>

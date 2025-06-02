@@ -155,6 +155,17 @@
         min-width: 160px;
         margin-right: 25px;
     }
+    .headerText {
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 8px;
+	color: black;
+	font-weight: normal;
+	width: auto;
+	height: 12px;
+	vertical-align: middle;
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -389,7 +400,33 @@ www.daralmajdschool.com</div>
         <div class="amount-in-words">
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
+<TABLE width="100%" border="0">
+			 <tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
 
+			<tr>
+				<td class="headerText">
+					Total Fees: SR. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : SR.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : SR.  ${dueamount} 
+				</td>
+				
+			</tr> 
+			
+			<tr>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">
@@ -631,7 +668,33 @@ www.daralmajdschool.com</div>
         <div class="amount-in-words">
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
+<TABLE width="100%" border="0">
+			 <tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
 
+			<tr>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
+			</tr> 
+			
+			<tr>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">

@@ -70,13 +70,13 @@
                         <label class="fees-label text-warning">Academic Year: ${currentAcademicYear}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-primary">Total Fees: Rs. ${totalfees}</label>
+                        <label class="fees-label text-primary">Total Fees: SR. ${totalfees}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-success">Fees Paid: Rs. ${sumoffees}</label>
+                        <label class="fees-label text-success">Fees Paid: SR. ${sumoffees}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-danger">Due Amount: Rs. ${dueamount}</label>
+                        <label class="fees-label text-danger">Due Amount: SR. ${dueamount}</label>
                     </div>
             </div>
             <div class="table-responsive">
@@ -156,13 +156,13 @@
                         <label class="fees-label text-warning">Academic Year: ${currentAcademicYear}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-primary">Total Fees: Rs. ${othertotalfees}</label>
+                        <label class="fees-label text-primary">Total Fees: SR. ${othertotalfees}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-success">Fees Paid: Rs. ${othersumoffees}</label>
+                        <label class="fees-label text-success">Fees Paid: SR. ${othersumoffees}</label>
                     </div>
                     <div class="col-6 mb-2">
-                        <label class="fees-label text-danger">Due Amount: Rs. ${otherdueamount}</label>
+                        <label class="fees-label text-danger">Due Amount: SR. ${otherdueamount}</label>
                     </div>
             </div>
             <div class="table-responsive">

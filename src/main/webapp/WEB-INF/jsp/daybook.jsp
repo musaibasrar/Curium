@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
 				<tbody>
 						<c:set var="sum" value="0" />	
 						<c:set var="counter" value="1" />	
-						<fmt:setLocale value="en_IN" scope="session"/>	
+						<fmt:setLocale value="en_SA" scope="session"/>	
 							
 					<c:forEach items="${voucherentrytransactions}" var="ledgersaccount" varStatus="status">
 						

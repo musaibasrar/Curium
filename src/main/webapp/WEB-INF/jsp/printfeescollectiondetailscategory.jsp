@@ -258,7 +258,7 @@
  			 </thead>
  		 
 			<tbody>
-					<fmt:setLocale value="en_IN" scope="session"/>
+					<fmt:setLocale value="en_SA" scope="session"/>
 					<c:set var="total" value="${0}" />
 					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap" varStatus="status">
 					
@@ -316,7 +316,7 @@
  			 </thead>
  		 
 			<tbody>
-					<fmt:setLocale value="en_IN" scope="session"/>
+					<fmt:setLocale value="en_SA" scope="session"/>
 					<c:set var="othertotal" value="${0}" />
 					<c:forEach items="${otherFeeCategoryCollectionMapCons}" var="otherFeeCategoryCollectionMapCons" varStatus="status">
 					

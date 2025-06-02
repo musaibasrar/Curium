@@ -285,13 +285,13 @@
 						  <td class="datatd"><c:out value="${stockissuancelist.purpose}" /></td>
 						  <td class="datatd">
 						  <c:set var="itemTotal" value="${itemTotal + stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
-						  <fmt:setLocale value="en_IN" scope="session"/>
+						  <fmt:setLocale value="en_SA" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
 						  </td>
 						  <td class="datatd">
 						  <c:set var="itemSalesPrice" value="${stockissuancelist.purpose}" />
 						  <c:set var="itemTotalSales" value="${itemTotalSales + itemSalesPrice * stockissuancelist.quantity}" />
-						  <fmt:setLocale value="en_IN" scope="session"/>
+						  <fmt:setLocale value="en_SA" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemSalesPrice * stockissuancelist.quantity}" />
 						  </td>
 						</tr>
@@ -304,11 +304,11 @@
 						<tr>
 							<td align="right">
 							<label style="color: #eb6000"><b>Purchase Total:
-							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:setLocale value="en_SA" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" />&nbsp;&nbsp;&nbsp;</b>
 							</label> 
 							<label style="color: #eb6000"><b>Sales Total:
-							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:setLocale value="en_SA" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotalSales}" /></b>
 							</label> 
 							</td>
@@ -321,7 +321,7 @@
 						<tr>
 							<td align="right" >
 								<label style="color: #eb6000"><b>Profit:
-							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:setLocale value="en_SA" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotalSales-itemTotal}" /></b>
 							</label> 
 							</td>

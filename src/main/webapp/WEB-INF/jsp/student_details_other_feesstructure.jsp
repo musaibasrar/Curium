@@ -551,11 +551,11 @@ for(Cookie cookie : cookies){
                                 </table>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total Fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total Fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total Fees : SR. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees paid : SR.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Due : </h>
-                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total Fees Concession : Rs.  ${totalfeesconcession}</h>
+                <h class="dataTextDueFees"> SR.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees Concession : SR.  ${totalfeesconcession}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 

@@ -592,7 +592,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-				<fmt:setLocale value="en_IN" scope="session"/>
+				<fmt:setLocale value="en_SA" scope="session"/>
 					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"

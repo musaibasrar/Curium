@@ -703,7 +703,7 @@ public class FeesService {
 	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
-	            Locale indiaLocale = new Locale("en", "IN");
+	            Locale indiaLocale = new Locale("en", "SA");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
 	            response.setHeader("Cache-Control", "no-cache");
@@ -866,7 +866,7 @@ public class FeesService {
 		         feescategoryResponseDto.setFeesDueSearchYear(searchYear);
 		         feescategoryResponseDto.setFeesDueSearchClass(searchClassName);
 	            
-	            Locale indiaLocale = new Locale("en", "IN");
+	            Locale indiaLocale = new Locale("en", "SA");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
 	            response.setHeader("Cache-Control", "no-cache");

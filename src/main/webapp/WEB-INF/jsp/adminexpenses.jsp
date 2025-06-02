@@ -639,7 +639,7 @@ for(Cookie cookie : cookies){
 							<td><br><br></td>
 						</tr>
 						<tr>
-							<td  class="alignRight">Amount (Rs.) &nbsp;</td>
+							<td  class="alignRight">Amount (SR.) &nbsp;</td>
 							<td ><label> <input id="price"
 									name="price" type="text" class="textField" 
 									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
@@ -772,7 +772,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher #</th>
 						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Amount (Rs.)</th>
+						<th title="click to sort" class="headerText">Amount (SR.)</th>
 						<th title="click to sort" class="headerText">Party Name</th>
 						<th title="click to sort" class="headerText">Being</th>
 						<th title="click to sort" class="headerText">Payment Type</th>

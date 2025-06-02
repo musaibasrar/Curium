@@ -225,7 +225,7 @@
 
 
 <body style="text-align: center" class="bodymargin">
-<fmt:setLocale value="en_IN" scope="session"/>
+<fmt:setLocale value="en_SA" scope="session"/>
 	<form method="post" class="bodymargin">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>

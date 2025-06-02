@@ -263,7 +263,7 @@
  			 </thead>
  		 
 			<tbody>
-			<fmt:setLocale value="en_IN" scope="session"/>
+			<fmt:setLocale value="en_SA" scope="session"/>
                     	<c:set var="vouchertotal" value="${0}" />
 					<c:forEach items="${vouchertransactions}" var="vouchertransactions" varStatus="status">
 

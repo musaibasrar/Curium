@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
 				</thead>
 				
 				<tbody>	
-				<fmt:setLocale value="en_IN" scope="session"/>
+				<fmt:setLocale value="en_SA" scope="session"/>
 					<c:set var="total" value="${0}" />
 					<c:forEach items="${feeCategoryCollectionMap}" var="feeCategoryCollectionMap">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
