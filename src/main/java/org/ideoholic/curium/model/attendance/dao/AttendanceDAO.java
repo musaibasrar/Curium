@@ -216,7 +216,7 @@ public class AttendanceDAO {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
 		try{
 
-			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeIdBranchId(attendeeId,branchId);
+			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeidBranchid(attendeeId,branchId);
 
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
