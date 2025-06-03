@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-    <script src="/abc/js/jquery.min.js"></script>
-    <script src="/abc/js/bootstrap.min.js"></script>
-    <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/littleflower/css/bootstrap.min.css">
+    <script src="/littleflower/js/jquery.min.js"></script>
+    <script src="/littleflower/js/bootstrap.min.js"></script>
+    <script src="/littleflower/js/popper.min.js"></script>
         
 <style>
  .headerText {
