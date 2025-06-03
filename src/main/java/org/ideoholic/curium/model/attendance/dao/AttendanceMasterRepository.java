@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AttendanceMasterRepository extends JpaRepository<Attendancemaster, Integer> {
 
-    List<Attendancemaster> findByAttendeeIdBranchId(String attendeeId, int branchId);
+    List<Attendancemaster> findByAttendeeIdBranchId(String attendeeId, int branchid);
 }
