@@ -43,6 +43,6 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    int countByStatus(String status);
 	    
-	    List<JobQuery> findByStatusInAndCreatedDate(List<String> status, Date createdDate);
+	    List<JobQuery>  findByStatusInAndCreateddate(List<String> status, Date createdDate);
 	    
 }

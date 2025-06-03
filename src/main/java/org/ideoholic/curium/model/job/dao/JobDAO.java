@@ -311,7 +311,7 @@ public class JobDAO {
 			int noOfRecords = 0;
 			try {
 
-				results = jobQueryRepository.findByStatusInAndCreatedDate(Arrays.asList("Assigned", "In Progress"), Date.from(Instant.now()));
+				results = jobQueryRepository.findByStatusInAndCreateddate(Arrays.asList("Assigned", "In Progress"), Date.from(Instant.now()));
 				noOfRecords = results.size();
 				log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 								+ noOfRecords);
