@@ -225,19 +225,16 @@ public class AttendanceDAO {
 		}
 		return studentAttendanceMaster;
 	}
-	
+
+	@Transactional
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId) {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentAttendanceMaster = session.createQuery("From Attendancemaster where attendeeid = "+attendeeId+"").list();
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeId(attendeeId);
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
 		return studentAttendanceMaster;
 	}

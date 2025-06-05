@@ -8,4 +8,6 @@ import java.util.List;
 public interface AttendanceMasterRepository extends JpaRepository<Attendancemaster, Integer> {
 
     List<Attendancemaster> findByAttendeeidBranchid(String attendeeId, int branchid);
+
+    List<Attendancemaster> findByAttendeeId(String attendeeId);
 }
