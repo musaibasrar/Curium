@@ -263,4 +263,13 @@ public class FeesAction {
 		feesActionAdapter.viewFees();
 		return "feesreportdue";
 	}
+	
+	@GetMapping("/searchOtherFeecategory")
+	public void searchOtherFeeCategory() {
+			try {
+				feesActionAdapter.getOtherFeeCategory();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 }

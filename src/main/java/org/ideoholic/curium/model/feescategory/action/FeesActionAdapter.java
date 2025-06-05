@@ -222,5 +222,12 @@ public class FeesActionAdapter {
 		ResultResponse resultResponse = feesService.downlaodFile();
 		return resultResponse.isSuccess();
 	}
+
+	public void getOtherFeeCategory()  throws IOException{
+		String classname = request.getParameter("classstudying");
+    	String yearofAdmission = request.getParameter("yearofadmission");
+    	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+    	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
+	}
 	
 }
