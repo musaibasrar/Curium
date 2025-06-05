@@ -777,8 +777,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
-					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			String dateOfAttendance = DateUtil.dateParserddMMYYYY(attendanceDto.getDateofAttendance());		
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList,dateOfAttendance);
 			result.setMessage(res);
 			
 				if(res!=null) {

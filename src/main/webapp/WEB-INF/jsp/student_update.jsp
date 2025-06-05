@@ -559,6 +559,14 @@ for(Cookie cookie : cookies){
 								${student.stream == 'Alumni' ? 'checked' : ''} />
 
 							</td>
+							<td class="alignLeft" style="padding-left: 20px;">P.E.N No. &nbsp;</td>
+
+									<td width="16%"><label> <input
+											name="sts" type="text" class="myclass"
+											id="sts" size="30" value="${student.sts}">
+
+									</label></td>
+							
 							</tr>
 							
 						<tr>
@@ -578,22 +586,8 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">UDISE Number &nbsp;</td>
-
-									<td width="16%"><label> <input
-											name="sts" type="text" class="myclass"
-											id="sts" size="30" value="${student.sts}">
-
-									</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Name &nbsp;</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
@@ -601,8 +595,17 @@ for(Cookie cookie : cookies){
 									value="<c:out value="${student.name}" />" class="myclass"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<%-- <tr>
+							
 
-							<td class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+							<td class="alignLeft" >Gender &nbsp;</td>
 
 							<td>Male<input type="checkbox"
 								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
@@ -611,7 +614,7 @@ for(Cookie cookie : cookies){
 								id="no:male" onclick="noCheck(this.id);"
 								${student.gender == 'Female' ? 'checked' : ''} />
 
-							</td>
+							</td> 
 
 
 						</tr>
@@ -621,7 +624,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+							--%>
 
 
 						<tr>
@@ -716,10 +719,12 @@ for(Cookie cookie : cookies){
 							</label>
 							
 							</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
 
-						<td class="alignLeft" style="padding-left: 20px;">Sponsored By &nbsp;</td>
-							<td ><label> <input name="guardiandetails" style="text-transform:capitalize;"
-									type="text" class="myclass" id="guardiandetails" size="36">
 							</label></td>
 
 						</tr>
@@ -730,6 +735,38 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+						<td class="alignLeft">Students Caste &nbsp;</td>
+								<td><label> <input name="studentscaste"
+									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
+
+							</label></td>
+
+							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
+
+							<td align="left"><label> <input name="caste"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.caste}" />"
+									id="caste" size="30">
+
+							</label></td>
+ --%>
+ 							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br> Certificate No.</td>
+							<td><label> <input
+									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
+									id="studentscastecertno" size="30">
+
+							</label></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
 							<td><br /></td>
 						</tr>
 						
@@ -750,76 +787,6 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label></td>
-							
-							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
-
-							</label></td>
-							<%-- <td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>${student.nationality }</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
-
-							</label></td> --%>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-
-						<td class="alignLeft">Students Caste &nbsp;</td>
-								<td><label> <input name="studentscaste"
-									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
-
-							</label></td>
-
-							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
-
-							<td align="left"><label> <input name="caste"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.caste}" />"
-									id="caste" size="30">
-
-							</label></td>
- --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
-							<td><label> <input
-									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
-									id="studentscastecertno" size="30">
-
-							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td class="alignLeft">Created Date &nbsp;</td>
-							<td><label> <input name="createddate"
-									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="myclass"
-									id="datepickerCD" size="30" data-validate="validate(required)">
-							</label></td>
-							
 							
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
@@ -858,41 +825,65 @@ for(Cookie cookie : cookies){
 							</label> 
 							
 							</td>
-
-							</tr>
 							
-							<tr>
+							
+							<%-- <td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+
+							<td><label> <select name="nationality"
+									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
+										<option selected>${student.nationality }</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select>
+
+							</label></td> --%>
+						</tr>
+
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 
 							<td><br /></td>
 						</tr>
+
 						<tr>
-							<td class="alignLeft">DND Date &nbsp;</td>
-							<td><label> <input name="crecorddate"
-									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
-									id="datepickerDND" size="30" data-validate="validate(required)">
-							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-						</tr>
 							
-						<tr>
+							<td  class="alignLeft" style="padding-left: 20px;">Student Type &nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Residential
+							
+							<input type="checkbox"
+								value="Residential" name="urbanrural" id="yes:st" onclick="yesCheck(this.id);"
+								${student.urbanrural == 'Residential' ? 'checked' : ''} />&nbsp;
+								&nbsp;
+								
+								Day Scholar<input type="checkbox" value="Day Scholar" name="urbanrural"
+								id="no:st" onclick="noCheck(this.id);"
+								${student.urbanrural == 'Day Scholar' ? 'checked' : ''} />
 
-							<td></td>
+							</td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Transport Opted &nbsp;</td>
+							<td  height="30" class="alignLeft">
+									Yes<input type="checkbox"
+								value="Yes" name="caste" id="no:to" onclick="noCheck(this.id)"
+								${student.caste == 'Yes' ? 'checked' : ''} />&nbsp;
+								&nbsp;No<input type="checkbox" value="No" name="caste"
+								id="yes:to" onclick="yesCheck(this.id);"
+								${student.caste == 'No' ? 'checked' : ''} />
+							</td>
+							
 
-						</tr>
-						<tr>
+							<td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
+							<td  height="30" class="alignLeft" style="display: none;">&nbsp;Female<input checked
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />
 
-							<td></td>
+							</td>
+
 
 						</tr>
 

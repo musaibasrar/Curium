@@ -790,12 +790,12 @@ $(document).ready(function() {
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
-					<!-- <li><a href="#fragment-2">Parent's Details</a></li> -->
+					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
-					<!-- <li><a href="#fragment-7">Stamp Fee</a></li> -->
+					<li><a href="#fragment-7">Stamp Fee</a></li>
 				</ul>
 
 
@@ -819,6 +819,14 @@ $(document).ready(function() {
 								type="checkbox" value="Alumni" name="stream" id="maybe:at"
 								onclick="maybeCheck(this.id)" />
 							</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">P.E.N No &nbsp;</td>
+									<td ><label> <input
+											name="sts" type="text" class="myclass" size="36"
+											style="text-transform:capitalize;"
+											id="sts" size="36">
+
+									</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -834,13 +842,13 @@ $(document).ready(function() {
 									style=" text-transform: capitalize;">
 
 							</label><div id="admnnodiv"></div></td>
-							<td class="alignLeft" style="padding-left: 20px;">UDISE Number &nbsp;</td>
-									<td ><label> <input
-											name="sts" type="text" class="myclass" size="36"
-											style="text-transform:capitalize;"
-											id="sts" size="36">
-
-									</label></td>
+							
+							<td class="alignLeft"  style="padding-left: 20px;">Student Name* &nbsp;</td>
+							<td ><label> <input
+									name="name" type="text" class="myclass" id="name" size="36" required
+									style="text-transform:capitalize;"
+									required>
+							</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -849,33 +857,6 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
-							<td ><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" required
-									style="text-transform:capitalize;"
-									required>
-							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Female<input checked
-								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />Male<input
-								type="checkbox" value="Male" name="gender" id="yes:male"
-								onclick="yesCheck(this.id);" />
-
-							</td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
 						<tr>
 						<tr>
 							<td class="alignLeft">Date Of Birth* &nbsp;</td>
@@ -1074,6 +1055,47 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Student Type &nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Residential<input checked
+								type="checkbox" value="Residential" name="urbanrural" id="no:st"
+								onclick="noCheck(this.id)" />Day Scholar<input
+								type="checkbox" value="Day Scholar" name="urbanrural" id="yes:st"
+								onclick="yesCheck(this.id);" />
+
+							</td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Transport Opted &nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Yes<input checked
+								type="checkbox" value="Yes" name="caste" id="no:to"
+								onclick="noCheck(this.id)" />No<input
+								type="checkbox" value="No" name="caste" id="yes:to"
+								onclick="yesCheck(this.id);" />
+
+							</td>
+							
+
+							<td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
+							<td  height="30" class="alignLeft" style="display: none;">&nbsp;Female<input checked
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />
+
+							</td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
 						<!-- <tr>
 								<td class="alignLeft"  >RTE
 										&nbsp;</td>
@@ -1101,246 +1123,9 @@ $(document).ready(function() {
 						
 						</table>
 						
-						<table style="width: auto;height: auto;" border="0" align="center" id="table1">
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td>
-									<h5  class="alignLeft" style="color: #FF914D;font-weight:bold;font-size: 22px;text-decoration: underline;">Parent's Details</h5>
-									<br /></td>
-								</tr>
+						
 
-								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
-									<td ><label> <input
-											name="fathersname" type="text" class="myclass" required
-											style="text-transform:capitalize;"
-											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Name &nbsp;</td>
-									<td><label> <input
-											name="mothersname" type="text" class="myclass" id="name" 
-											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-
-								</tr>
-
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td class="alignLeft">Father's Qualification
-										&nbsp;</td>
-									<td ><label> <input
-											name="fathersqualification" type="text" class="myclass"
-											id="fathersqualification" 
-											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-									<td class="alignLeft" style="padding-left: 20px;">Mother's
-										Qualification&nbsp;</td>
-									<td><label> <input
-											name="mothersqualification" type="text" class="myclass"
-											id="mothersqualification"
-											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td class="alignLeft">Father's Aadhar No
-										&nbsp;</td>
-									<td><label> <input
-											name="fatherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="fatherscastecertno" size="36">
-									</label></td>
-
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
-										&nbsp;</td>
-									<td ><label> <input
-											name="motherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="motherscastecertno" size="36">
-									</label></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-
-									<td class="alignLeft">Sponsored By 
-										 &nbsp;</td>
-									<td ><label> <select name="guardian" required
-									id="guardian" style="width: 224px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
-										<option selected></option>
-										<c:forEach items="${sponsorlist}" var="sponsorlist">
-											<c:if test="${(sponsorlist.name != '')}">
-												<option value="${sponsorlist.id}">
-													<c:out value="${sponsorlist.name}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-									</label></td>
-
-
-
-									<td class="alignLeft" style="padding-left: 20px;">Annual Income &nbsp;</td>
-
-									<td ><label> <input
-											name="parentsannualincome" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="parentsannualincome" size="36"
-											onkeyup="numberWithCommas(this);">
-
-									</label></td>
-
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-
-									<td class="alignLeft">Contact Number* &nbsp;</td>
-
-									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
-											style="text-transform:capitalize;"
-											id="contactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-
-
-
-									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
-										&nbsp;</td>
-
-									<td><label> <input
-											name="cocontactnumber" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="cocontactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-
-									<td class="alignLeft">Email &nbsp;</td>
-
-									<td ><label> <input name="email"
-											type="email" class="myclass" id="email" size="36"
-											>
-
-									</label></td>
-
-									<td class="alignLeft" style="padding-left: 20px;">Number Of Dependents
-										&nbsp;</td>
-
-									<td ><label> <input
-											name="noofdependents" type="text" class="myclass"
-											id="noofdependents" size="36" >
-
-									</label></td>
-
-
-								</tr>
-
-								<tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-								<td class="alignLeft">Permanent Address &nbsp;</td>
-
-								<td ><label> <textarea
-											name="permanentaddress" type="text" 
-											id="permanentaddress" rows="4" cols="36"
-											style="text-transform:capitalize;"
-											></textarea>
-
-								</label></td>
-
-
-								<td class="alignLeft" style="padding-left: 20px;">Temporary Address &nbsp;</td>
-								<td ><label> <textarea
-											name="temporaryaddress" type="text"  style="text-transform:capitalize;"
-											id="temporaryaddress" rows="4" cols="36"></textarea>
-								</label></td>
-								</tr>
-
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-
-									<td class="alignLeft">Notes &nbsp;</td>
-									<td ><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="36"
-											style="text-transform:capitalize;"
-											>
-									</label></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-							</table>
-
-						<table style="width: auto;height: auto;" align="center">
+						<!-- <table style="width: auto;height: auto;" align="center">
 								
 							<tr>
 							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -1384,7 +1169,7 @@ $(document).ready(function() {
 						
 							
 						
-							<!-- <tr>
+							<tr>
 								<td></td>
 								<td align="left">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1394,12 +1179,12 @@ $(document).ready(function() {
 										href="#">Previous</a></td>
 								</tr>
 								<tr><td><br></td></tr>
-								<tr> -->
+								<tr>
 								<tfoot>
 					
 				</tfoot>
 								</tr>
-				</table>
+				</table> -->
 
 						<div>
 							<table width="100%">
@@ -1832,7 +1617,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<%-- <div id="fragment-2">
+						 <div id="fragment-2">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -2049,7 +1834,7 @@ $(document).ready(function() {
 								</tr>
 
 
-								<tr>
+								<!-- <tr>
 
 									<td class="alignLeft">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -2066,7 +1851,7 @@ $(document).ready(function() {
 
 								<tr>
 									<td><br /></td>
-								</tr>
+								</tr> -->
 
 
 
@@ -2103,7 +1888,7 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 							</table>
-						</div>  --%>
+						</div>
 						
 						<div id="fragment-5">
 
@@ -2403,7 +2188,7 @@ $(document).ready(function() {
 								</table>
 						</div>
 						
-						<!-- <div id="fragment-7">
+						 <div id="fragment-7">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2488,7 +2273,7 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div>  -->
+				</div> 
 		</div>
 </div>
 

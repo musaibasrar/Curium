@@ -356,7 +356,7 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList, String dateOfAttendance) {
 		
 		String result = null;
 		
@@ -365,7 +365,7 @@ public class AttendanceDAO {
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= '"+dateOfAttendance+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);

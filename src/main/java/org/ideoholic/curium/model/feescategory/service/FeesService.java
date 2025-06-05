@@ -632,7 +632,7 @@ public class FeesService {
 	    			        	response.getWriter().println(buffer);
 
 	    		        } catch (Exception e) {
-	    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+	    		            out.write("");
 	    		        } finally {
 	    		            out.flush();
 	    		            out.close();
