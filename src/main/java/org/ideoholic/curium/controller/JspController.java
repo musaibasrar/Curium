@@ -656,4 +656,14 @@ public class JspController {
 	public String getReportsAdmissionCoordinator() {
 		return "reports_admissioncoordinator";
 	}
+	
+	@GetMapping("/printOtherFeesDetail")
+	public String getPrintOtherFeesDetail() {
+		return "printOtherFeesDetail";
+	}
+	
+	@GetMapping("/printstudentdetailsotherfeesstructure")
+	public String getPrintstudentdetailsotherfeesstructure() {
+		return "printstudentdetailsotherfeesstructure";
+	}
 }
