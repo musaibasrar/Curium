@@ -402,4 +402,25 @@ public class feesCategoryDAO {
 		}
 	}
 
+	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
+
+		List <OtherFeecategory> result= new ArrayList();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
+		}
+	}
+
 }
