@@ -572,6 +572,20 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50">Application Status
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.gender}" />
+                            </td>
+                                  <td  width="25%"  class="alignLeft" height="50">Remarks
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.remarks}" />
+                                
+                            </td>                     
+                        </tr>
+                        
+                        <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Class of leaving
                             </td>
                             <td width="25%" class="tablerows" >

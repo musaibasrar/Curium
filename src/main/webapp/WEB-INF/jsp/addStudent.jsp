@@ -719,8 +719,8 @@ $(document).ready(function() {
         
         <script type="text/javascript">
 
-    var xmlHttp;
-    var count;
+    var xmlHttpDuplicate;
+    var countDuplicate;
     function checkDuplicate() {
 
 		var selected=document.getElementById('admnno').value;
@@ -729,15 +729,15 @@ $(document).ready(function() {
 				 xmlHttp = new XMLHttpRequest();
 	            
 	         } else if (window.ActiveXObject) {
-	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	        	 xmlHttpDuplicate = new ActiveXObject("Microsoft.XMLHTTP");
 	             
 	         }
-			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/jrs/StudentProcess/checkDuplicate?admissionnumber="+selected,true);
-			xmlHttp.send(null);
+			xmlHttpDuplicate.onreadystatechange = stateChangedDuplicate;
+			xmlHttpDuplicate.open("GET", "/jrs/StudentProcess/checkDuplicate?admissionnumber="+selected,true);
+			xmlHttpDuplicate.send(null);
 	}
     
-	function stateChanged() {
+	function stateChangedDuplicate() {
 
 		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 			document.getElementById("admnnodiv").innerHTML = xmlHttp.responseText;
@@ -1062,10 +1062,10 @@ $(document).ready(function() {
 						<tr>
 							
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Student Type &nbsp;</td>
+							<td  class="alignLeft">Student Type &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Residential<input checked
 								type="checkbox" value="Residential" name="urbanrural" id="no:st"
-								onclick="noCheck(this.id)" />Day Scholar<input
+								onclick="noCheck(this.id)" />&nbsp; &nbsp;Day Scholar<input
 								type="checkbox" value="Day Scholar" name="urbanrural" id="yes:st"
 								onclick="yesCheck(this.id);" />
 
@@ -1074,25 +1074,36 @@ $(document).ready(function() {
 							<td  class="alignLeft" style="padding-left: 20px;">Transport Opted &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Yes<input checked
 								type="checkbox" value="Yes" name="caste" id="no:to"
-								onclick="noCheck(this.id)" />No<input
+								onclick="noCheck(this.id)" />&nbsp; &nbsp;No<input
 								type="checkbox" value="No" name="caste" id="yes:to"
 								onclick="yesCheck(this.id);" />
 
 							</td>
-							
-
-							<td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft" style="display: none;">&nbsp;Female<input checked
-								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />Male<input
-								type="checkbox" value="Male" name="gender" id="yes:male"
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td  class="alignLeft" >Application Status &nbsp;</td>
+							<td  height="30" class="alignLeft" >&nbsp;Registered<input checked
+								type="checkbox" value="Registered" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />&nbsp; &nbsp;Approved<input
+								type="checkbox" value="Approved" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Rejected<input
+								type="checkbox" value="Rejected" name="gender" id="maybe:male"
 								onclick="yesCheck(this.id);" />
 
 							</td>
-
-
+							
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
 						</tr>
-						<tr>
+
+<tr>
 							<td><br /></td>
 						</tr>
 
@@ -2212,7 +2223,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<!-- <tr>
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td ><label> <input name="crecorddate"
 									type="text"
@@ -2230,7 +2241,7 @@ $(document).ready(function() {
 
 <tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						
 							
 						

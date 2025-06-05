@@ -850,7 +850,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Student Type &nbsp;</td>
+							<td  class="alignLeft" >Student Type &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Residential
 							
 							<input type="checkbox"
@@ -873,26 +873,43 @@ for(Cookie cookie : cookies){
 								id="yes:to" onclick="yesCheck(this.id);"
 								${student.caste == 'No' ? 'checked' : ''} />
 							</td>
-							
+						</tr>
 
-							<td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft" style="display: none;">&nbsp;Female<input checked
-								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />Male<input
-								type="checkbox" value="Male" name="gender" id="yes:male"
-								onclick="yesCheck(this.id);" />
+						<tr>
+
+							<td><br /></td>
+
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+							
+							<td  class="alignLeft">Application Status &nbsp;</td>
+							<td  height="30" class="alignLeft">
+							
+							Registered<input type="checkbox"
+								value="Registered" name="gender" id="yes:male" onclick="yesCheck(this.id);"
+								${student.stream == 'Registered' ? 'checked' : ''} />&nbsp;
+								&nbsp;Approved<input type="checkbox" value="Approved" name="gender"
+								id="no:male" onclick="noCheck(this.id);"
+								${student.stream == 'Approved' ? 'checked' : ''} />&nbsp;
+								&nbsp;Rejected<input type="checkbox" value="Rejected" name="gender"
+								id="maybe:male" onclick="maybeCheck(this.id);"
+								${student.stream == 'Rejected' ? 'checked' : ''} />
+
+							<td  class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td  height="30" class="alignLeft" > <input
+									name="remarks" type="text" class="myclass" value="${student.remarks}"
+									id="remarks" size="30">
 
 							</td>
 
 
 						</tr>
-
-						<tr>
-
-							<td></td>
-
-						</tr>
-
 
 
 					</table>

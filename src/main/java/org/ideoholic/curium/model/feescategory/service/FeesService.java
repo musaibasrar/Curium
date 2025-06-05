@@ -628,7 +628,7 @@ public class FeesService {
 	    		}else {
 
 	    		        try {
-	    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
+	    		        		String buffer = "";
 	    			        	response.getWriter().println(buffer);
 
 	    		        } catch (Exception e) {
@@ -784,11 +784,11 @@ public class FeesService {
 	    		}else {
 
 	    		        try {
-	    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value='0' style='font-size: 14px;' readonly>";
+	    		        		String buffer = "";
 	    			        	response.getWriter().println(buffer);
 
 	    		        } catch (Exception e) {
-	    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+	    		            out.write("");
 	    		        } finally {
 	    		            out.flush();
 	    		            out.close();
