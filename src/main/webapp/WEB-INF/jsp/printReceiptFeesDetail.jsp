@@ -235,7 +235,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
@@ -367,8 +367,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/scholar/images/scholarpaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -434,7 +434,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${recieptdate}" />
 				</td>
 				
 				<td></td>
@@ -568,8 +568,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/scholar/images/scholarpaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label>
+		Date&nbsp;:&nbsp;${recieptdate}<br>${narrationreceipt}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
