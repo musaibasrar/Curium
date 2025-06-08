@@ -893,13 +893,13 @@ for(Cookie cookie : cookies){
 							
 							Registered<input type="checkbox"
 								value="Registered" name="gender" id="yes:male" onclick="yesCheck(this.id);"
-								${student.stream == 'Registered' ? 'checked' : ''} />&nbsp;
+								${student.gender == 'Registered' ? 'checked' : ''} />&nbsp;
 								&nbsp;Approved<input type="checkbox" value="Approved" name="gender"
 								id="no:male" onclick="noCheck(this.id);"
-								${student.stream == 'Approved' ? 'checked' : ''} />&nbsp;
+								${student.gender == 'Approved' ? 'checked' : ''} />&nbsp;
 								&nbsp;Rejected<input type="checkbox" value="Rejected" name="gender"
 								id="maybe:male" onclick="maybeCheck(this.id);"
-								${student.stream == 'Rejected' ? 'checked' : ''} />
+								${student.gender == 'Rejected' ? 'checked' : ''} />
 
 							<td  class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
 							<td  height="30" class="alignLeft" > <input
@@ -1555,7 +1555,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<%-- <tr>
 							
 							<td class="alignLeft">Notes</td>
 							<td><label> <input name="remarksadditional"
@@ -1570,7 +1570,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 
 						
 	

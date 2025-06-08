@@ -921,12 +921,12 @@ for(Cookie cookie : cookies){
                                  <c:out default="" value="${parents.noofdependents}" />
                                 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">Notes
+                          <%--   <td  width="25%"  class="alignLeft" height="50">Notes
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
                                 
-                            </td>
+                            </td> --%>
 
 
                         </tr>
