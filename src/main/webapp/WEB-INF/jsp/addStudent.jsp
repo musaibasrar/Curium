@@ -796,6 +796,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<li><a href="#fragment-8">Other Stamp Fee</a></li>
 				</ul>
 
 
@@ -2284,7 +2285,74 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div> 
+				</div>
+				
+				<div id="fragment-8">
+						
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Other Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHeadOtherFees" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="otherFeescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveeight" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="canceleight" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
+				 
 		</div>
 </div>
 

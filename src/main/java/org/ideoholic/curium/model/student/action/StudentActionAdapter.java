@@ -271,7 +271,7 @@ public class StudentActionAdapter {
         httpSession.setAttribute("resultfromservice", responseDto.isSuccess());
         httpSession.setAttribute("classdetailslist", responseDto.getClassSec());
         httpSession.setAttribute("sponsorlist", responseDto.getSponsor());
-
+        request.setAttribute("receiptinfonarration", responseDto.getReceiptNarrationMap());
         return responseDto.isSuccess();
     }
 

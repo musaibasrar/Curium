@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.sponsor.dto.Sponsor;
 import org.ideoholic.curium.model.std.dto.Classsec;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -39,4 +40,5 @@ public class StudentDetailsResponseDto {
     private List<Studentotherfeesstructure> studentOtherFeesStructure;
     private List<Classsec> classSec;
     private List<Sponsor> sponsor;
- }
+    private Map<Receiptinfo,String> receiptNarrationMap;
+}
