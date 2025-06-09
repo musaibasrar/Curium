@@ -132,43 +132,37 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/littleflower/images/littleflowerheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/littleflower/left_feescollector"><img
-									src="/littleflower/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
+							<td><a target="leftFrame" href="/littleflower/left_reception"> <img
+									src="/littleflower/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
+							</a></td>
+
 							
 							<td><a target="mainFrame"
-								href="/littleflower/FeesProcess/feesCollect"> <img
-									src="/littleflower/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+								href="/littleflower/StudentProcess/addNew"> <img
+									src="/littleflower/images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
-							
-							<td>
-								<a target="mainFrame"
-								href="/littleflower/AccountProcess/createVoucher"> <img
-									src="/littleflower/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-							
-							<td ><a target="mainFrame"
-								href="/littleflower/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/littleflower/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-							
-							<td>
-							<a target="leftFrame" href="/littleflower/reports_feescollector"><img
+
+								<a target="leftFrame" href="/littleflower/reports_reception"><img
 									src="/littleflower/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/littleflower/reports_officeadmin"><img
+									src="/littleflower/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
+							
 							</td>
 
+							<td ><a target="mainFrame"
+								href="/littleflower/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/littleflower/images/students.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+								View Students
+							</a></td>
 							
-								
 							<td ><a target="_parent"
 								href="/littleflower/UserProcess/logout"><img
 									src="/littleflower/images/logout.svg" width="18" height="18" alt="Log Out" 

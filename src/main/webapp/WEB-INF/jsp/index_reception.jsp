@@ -74,7 +74,7 @@ for(Cookie cookie : cookies){
 %>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/littleflower/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/littleflower/header_reception"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/littleflower/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />

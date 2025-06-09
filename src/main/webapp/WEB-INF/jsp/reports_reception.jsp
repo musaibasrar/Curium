@@ -287,7 +287,7 @@ for(Cookie cookie : cookies){
             <div id="clock" class="headerTD"></div>
         </form> -->
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label>
+        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> 
         <br><c:choose>
 					    <c:when test="${branchid == 2}">
 						Little Flower Public School
@@ -295,7 +295,7 @@ for(Cookie cookie : cookies){
 					    <c:when test="${branchid == 3}">
 						Little Flower Pre Primary School
 					    </c:when>
-					</c:choose> </div>
+					</c:choose></div>
 
         <div id="container" style="width: 95%" >
             
@@ -343,97 +343,6 @@ for(Cookie cookie : cookies){
             </div>
             
             
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/feessummary" style="font-size: 12px;">Fees Summary</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/littleflower/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/littleflower/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/littleflower/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
              <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -443,23 +352,15 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/littleflower/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            		<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
             			</td>
-            		</tr>
+            			</tr>
                 </table>
             </div>
             
-
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -487,50 +388,6 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/littleflower/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/littleflower/daybook" style="font-size: 12px;">Day Book</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/littleflower/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
             			</td>
             		</tr>
                 </table>
@@ -599,52 +456,6 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
-             <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
-            			</td>
-            		</tr>
-            		
-            	</table>
-            </div>
-            
-            <h5 class="sideaccordian">
-			<a href="#">Assignment</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/littleflower/JobProcess/queryReport"
-						style="font-size: 12px;">Assignment Report</a>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-		<!-- <h5 class="sideaccordian">
-			<a href="#">Tasks</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/littleflower/JobProcess/taskReport"
-						style="font-size: 12px;">Tasks Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
 		
 		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
 
@@ -660,21 +471,6 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
 		
-          <!--   <h5 class="sideaccordian">
-			<a href="#">Appointments</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/littleflower/AppointmentProcess/appointmentReport"
-						style="font-size: 12px;">Appointments Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
              <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">

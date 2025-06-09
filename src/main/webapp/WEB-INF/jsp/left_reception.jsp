@@ -16,7 +16,7 @@ Author     : Musaib
         <script language="JavaScript" src="/littleflower/js/motionpack.js"></script>
         <link rel="stylesheet" href="/littleflower/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/littleflower/css/datePicker/demos.css">
-
+		
         <script type="text/javascript" src="/littleflower/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.core.js"></script>
         <script src="/littleflower/js/datePicker/ui/jquery.ui.widget.js"></script>
@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/littleflower/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/littleflower/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/littleflower/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-
+		<link rel="stylesheet" href="/littleflower/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -99,24 +99,7 @@ Author     : Musaib
                 getExpiringStockCount.send(null);
 
             }
-            function processExpiringStockData() {
-
-                if (getExpiringStockCount.readyState == 4)
-                {
-                    if (getExpiringStockCount.status == 200) {
-                        var count = getExpiringStockCount.responseXML.getElementsByTagName("ExpiringStockCount")[0];
-                        var expiringStockCount = count.childNodes[0].nodeValue;
-                        var expiringStock = document.getElementById("expiringStock");
-                        expiringStock.innerHTML = " " + expiringStockCount;
-
-                        setTimeout('getExpiringStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
+           
             var getDepletingStockCount;
             function getDepletingStock() {
                 if (typeof XMLHttpRequest != "undefined") {
@@ -257,8 +240,8 @@ Author     : Musaib
                 color:#cfe0ea;;
             }
             a:hover{
-                text-decoration:none;
-                color:#FFFFFF;
+                text-decoration:underline;
+                color:#EB6000;
             }
             h1{
                 font-size:140%;
@@ -294,6 +277,21 @@ Author     : Musaib
                 height: 22px;
             }
 
+.sideaccordian{
+		
+		font-size: 12px;
+		/* border: 0px; */
+		border-radius: 5px;
+		/* border-bottom:  1px solid #010d1c !important; */
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+.ui-widget-content {
+    border: 1px solid #b6cfe2;
+    background: #ffffff;
+    color: #222222;
+}
 
 
         </style>
@@ -444,91 +442,323 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-        <form name="theClock">
+       <!--  <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
-        </form>
-        <%-- <div class="headerTD">Welcome <c:out default="" value="${executive}"/> </div> --%>
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        </form> -->
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label>
+	<br><c:choose>
+					    <c:when test="${branchid == 2}">
+						Little Flower Public School
+					    </c:when>
+					    <c:when test="${branchid == 3}">
+						Little Flower Pre Primary School
+					    </c:when>
+					</c:choose></div>
 
-        <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/littleflower/feesstructure" >Fees Structure</a><br/>
-                
-
-            </div>
-            <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/littleflower/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/littleflower/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/littleflower/PositionProcess/positionView" >Add Position</a>
-
-            </div> -->
-
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
-            
-            <div>
-            	<a target="mainFrame" href="/littleflower/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/littleflower/FeesProcess/feesCollect" >Fees Collect</a><br/>
-                
-
-            </div> 
-            
-            <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/AdminProcess/viewAllExpenses" >Expenses</a><br/>
-
-
-            </div> -->
-            
-            <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/AdvanceSearch" >Search</a><br/>
-
-
-            </div>
-			<!--
-            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/Promotion" >Promotions</a><br/>
-
-
-            </div> -->
-
-            <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
-            <div>
-                <a target="mainFrame" href="/littleflower/StudentProcess/archiveViewAll" >Archive Students</a><br/>
-
-
-            </div> -->
-
-            <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
-            <div>
-            	<a target="mainFrame" href="/littleflower/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/littleflower/YearProcess/updateYear" >Academic year</a><br/>
-                
-
-            </div> -->
-            
-
-            <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
-            <div >
-               <!--  <a target="mainFrame" href="/littleflower/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/littleflower/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/littleflower/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/littleflower/feesCollectionDetails" >Fees Collection Details</a><br/>
+        <div id="container" style="width: 95%" >
+            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-           <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
-            <div >
-                <a target="mainFrame" href="/littleflower/studentsdetailsreports" >Student Details</a><br/>
-                
-            </div>  -->
+            
+			
+            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
             
             
+            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+            
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            			</td>
+            		</tr>
+            		
+                </table>
+            </div>
+               
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/Backup&Restore" style="font-size: 12px;">Backup</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/changePassword" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+          
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/sendemail" style="font-size: 12px;">Email</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="/littleflower/importfile" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				     <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="mainFrame" href="/littleflower/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+				        </td>
+				     </tr>
+				 </table>
+            </div> -->
+             <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            			</td>
+            			
+            		</tr>
+            		
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            			</td>
+            			
+            		</tr>
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            	<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            	
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            			</td>
+            			
+            		</tr> -->
+                </table>
+            </div>
+            
+            </div>
                    
             
             <!-- END -->
@@ -536,11 +766,6 @@ for(Cookie cookie : cookies){
        
         <script type="text/javascript">
             $(document).ready(function() {
-
-                // For jNotify Inizialization
-                // Parameter:
-                // oneAtTime : true if you want show only one message for time
-                // appendType: 'prepend' if you want to add message on the top of stack, 'append' otherwise
 
                 $('#Notification')
                         .jnotifyInizialize({

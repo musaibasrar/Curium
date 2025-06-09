@@ -446,7 +446,15 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+	<div class="headerTD" style="width: 95%;height:auto;" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label>
+	<br><c:choose>
+					    <c:when test="${branchid == 2}">
+						Little Flower Public School
+					    </c:when>
+					    <c:when test="${branchid == 3}">
+						Little Flower Pre Primary School
+					    </c:when>
+					</c:choose> </div>
 
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
@@ -492,7 +500,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
+            				 <a target="mainFrame" href="/littleflower/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>

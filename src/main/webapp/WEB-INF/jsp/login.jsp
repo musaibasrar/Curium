@@ -133,13 +133,13 @@ form{
                 }else if(type=='admin'){
                     window.open('/littleflower/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/littleflower/index_feescollector','_self');
+                    window.open('/littleflower/index_feescollector','_self'); // Fee and accounts , hallticket , id cards  , certificates
                 }else if(type=='officeadmin'){
-                	window.open('/littleflower/index_officeadmin','_self');
+                	window.open('/littleflower/index_officeadmin','_self');//Stock (books and uniform) and fee
                 }else if(type=='teacher'){
                 	window.open('/littleflower/index_teacher','_self');
-                }else if(type=='marksentry'){
-                	window.open('/littleflower/index_marksentry','_self');
+                }else if(type=='reception'){
+                	window.open('/littleflower/index_reception','_self'); //Admission and SMS , hallticket , Id cards attendance , certificates
                 }else if(type=='parents'){
                 	window.open('/littleflower/index_parents','_self');
                 }

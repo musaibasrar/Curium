@@ -137,7 +137,7 @@ form{
                 }else if(type=='officeadmin'){
                 	window.open('/littleflower/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/littleflower/index_marksentry','_self');
+                	window.open('/littleflower/index_reception','_self');
                 }
             }
             else if(!flag1){

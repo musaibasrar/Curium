@@ -141,34 +141,6 @@ for(Cookie cookie : cookies){
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
-							<td>
-								<a target="mainFrame"
-								href="/littleflower/AccountProcess/createVoucher"> <img
-									src="/littleflower/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<!-- <td ><a target="mainFrame" href="/littleflower/feesCollectionDetails"><img  alt="Fees Details" src="/littleflower/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
-
-							<td><a target="mainFrame"
-								href="/littleflower/StudentProcess/addNew"> <img
-									src="/littleflower/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/littleflower/leftsettings_officeadmin">
-									<img alt="Settings" src="/littleflower/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/littleflower/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/littleflower/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
 
 							<td ><!-- <a target="mainFrame" href="/littleflower/sendsms"><img
 									src="/littleflower/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
@@ -181,20 +153,6 @@ for(Cookie cookie : cookies){
 							
 							</td>
 
-							<td ><a target="mainFrame"
-								href="/littleflower/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/littleflower/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td>
-							
-							<!-- <td ><a target="mainFrame"
-								href="/littleflower/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/littleflower/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
-								
 							<td ><a target="_parent"
 								href="/littleflower/UserProcess/logout"><img
 									src="/littleflower/images/logout.svg" width="18" height="18" alt="Log Out" 
