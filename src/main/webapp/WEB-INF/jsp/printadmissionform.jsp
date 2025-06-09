@@ -54,16 +54,15 @@ input {
 <form method="post"  enctype="multipart/form-data">
 
 	<div align="center">
-		<img alt="Govt Of Karnataka" src="/hira/images/Karnatakalogo.png">
+		<img alt="Govt Of Karnataka" src="/hira/images/hira.png"  width="120" height="119" >
 	</div>
-
-<h2>GOVERNMENT OF KARNATAKA</h2>
-<h4>STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4>
-<div class="schoolname">
+<h1 align="center">HIRA PUBLIC SCHOOL</h1>
+<h4 align="center" style="margin:0px;">STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4>
+<div align="center" class="schoolname">
 <label for="schoolname">School Name and Location:</label>
   ${branchname}&nbsp;&nbsp;${branchaddress}
  </div>
-<h3>Admission Detail For Higher Class</h3>
+<h3 align="center" style="margin:0px;">Admission Detail For Higher Class</h3>
 <table>	
   <tr>
     <td>1</td>

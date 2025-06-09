@@ -463,7 +463,7 @@ for(Cookie cookie : cookies){
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:22px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
    </table>
@@ -516,7 +516,7 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
   </tr>
 </table>
 
