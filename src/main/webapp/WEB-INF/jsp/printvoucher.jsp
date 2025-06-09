@@ -229,7 +229,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/skps/images/skps.png" width="150" height="80"/>
+				<img src="/futurestars/images/futurestars.png" width="80" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br>

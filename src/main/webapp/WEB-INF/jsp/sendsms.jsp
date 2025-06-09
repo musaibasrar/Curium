@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SEND SMS</title>
-<link rel="stylesheet" href="/skps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/skps/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/futurestars/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/skps/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/skps/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/skps/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/skps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/skps/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/skps/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/skps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/skps/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/futurestars/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/futurestars/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/futurestars/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/futurestars/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/skps/css/datePicker/demos.css">
+	src="/futurestars/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
 
 
 
@@ -288,10 +288,10 @@
 
 
 
-<script type="text/javascript" src="/skps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
 
-<script src="/skps/JavaScript/actb.js"></script>
-<script src="/skps/JavaScript/common.js"></script>
+<script src="/futurestars/JavaScript/actb.js"></script>
+<script src="/futurestars/JavaScript/common.js"></script>
 
 
 
@@ -636,7 +636,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -736,6 +736,7 @@ for(Cookie cookie : cookies){
             								<option value="festival">Festival</option>
             								<option value="scienceexhibition">Science Exhibition</option>
             								<option value="feesreminder">Fees Reminder</option>
+            								<option value="examsresult">Exams Result</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
@@ -799,6 +800,16 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
 								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+    							
+    							<div class="examsresult box">
+    								<span style="font-size: 16px;">Dear Parents, We would like to inform you that the Result of </span> <span style="font-weight: bold;color: red">Class</span>  <span style="font-size: 16px;">will be on</span> <span style="font-weight: bold;color: red">Date</span>
+								<br><br>
+								<label style="color: red;">Class:&nbsp;</label>&nbsp;<input type="text" id="examsexamsresultvar1" name="examsresultvar1" maxlength="30" value="Exams">
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsexamsresultvar2" name="examsexamsresultvar2" maxlength="30">
+								<input type="hidden" id="examsvar3" name="examsvar3" maxlength="30">
+								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
     							</div>
 							
 							</td>
@@ -1035,19 +1046,19 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function sendSMSAll() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/skps/SMSProcess/sendAllSMS";
+								form1.action = "/futurestars/SMSProcess/sendAllSMS";
 								form1.submit();
 							}
 							
 							function sendSMSNumbers() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/skps/SMSProcess/sendNumbersSMS";
+								form1.action = "/futurestars/SMSProcess/sendNumbersSMS";
 								form1.submit();
 							}
 							
 							function sendSMSStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/skps/SMSProcess/sendStaffSMS";
+								form1.action = "/futurestars/SMSProcess/sendStaffSMS";
 								form1.submit();
 							}
 							

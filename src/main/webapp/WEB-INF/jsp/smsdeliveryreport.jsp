@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SMS Delivery Report</title>
-<link rel="stylesheet" href="/skps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/skps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/skps/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/skps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/futurestars/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/skps/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/skps/js/bootstrap.min.js"></script>
-<!-- <script src="/skps/js/jquery.min.js"></script> -->
+	<!-- <link href="/futurestars/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/futurestars/js/bootstrap.min.js"></script>
+<!-- <script src="/futurestars/js/jquery.min.js"></script> -->
 
 
-<link href="/skps/css/select2.min.css" rel="stylesheet" />
-<script src="/skps/js/select2.min.js"></script>
+<link href="/futurestars/css/select2.min.css" rel="stylesheet" />
+<script src="/futurestars/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,7 +501,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/skps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {

@@ -63,7 +63,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -78,12 +78,12 @@ for(Cookie cookie : cookies){
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
 		   <c:if test="${(userType == 'admin')}">
-			    <frame   src="/skps/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/futurestars/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/skps/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/skps/welcome" name="mainFrame" scrolling="yes" />
+                <frame  src="/futurestars/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/futurestars/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

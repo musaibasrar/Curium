@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/skps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/skps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/skps/css/datePicker/demos.css">
+        <script language="JavaScript" src="/futurestars/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/skps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/skps/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/skps/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/skps/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/futurestars/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/futurestars/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/futurestars/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/skps/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/futurestars/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/futurestars/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/skps/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/skps/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/skps/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/futurestars/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/futurestars/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/futurestars/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/futurestars/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/skps/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/skps/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/futurestars/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/futurestars/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/futurestars/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/futurestars/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/futurestars/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/skps/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/futurestars/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/skps/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/skps/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/futurestars/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/futurestars/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/skps/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/skps/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/skps/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/skps/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/futurestars/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/futurestars/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/futurestars/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/futurestars/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/skps/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/futurestars/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

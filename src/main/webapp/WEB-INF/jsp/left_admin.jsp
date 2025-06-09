@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/skps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/skps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/skps/css/datePicker/demos.css">
+        <script language="JavaScript" src="/futurestars/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/skps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/skps/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/skps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/skps/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/skps/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/skps/css/font-awesome.css">
+        <script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/futurestars/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/futurestars/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/futurestars/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/futurestars/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/futurestars/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -429,7 +429,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,22 +454,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/futurestars/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/futurestars/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -482,38 +482,38 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/futurestars/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				<a target="mainFrame" href="/futurestars/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            				 <a target="mainFrame" href="/futurestars/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/futurestars/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/futurestars/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/futurestars/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/futurestars/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -524,7 +524,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/futurestars/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
             			</td>
             		</tr>
                 </table>
@@ -537,43 +537,43 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            				 <a target="mainFrame" href="/futurestars/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            				<a target="mainFrame" href="/futurestars/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/futurestars/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            				<a target="mainFrame" href="/futurestars/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/futurestars/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/futurestars/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/futurestars/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/futurestars/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr> -->
                 </table>
@@ -585,48 +585,48 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            				 <a target="mainFrame" href="/futurestars/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            				<a target="mainFrame" href="/futurestars/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            				 <a target="mainFrame" href="/futurestars/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            				 <a target="mainFrame" href="/futurestars/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            				<a target="mainFrame" href="/futurestars/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
             		<tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            				<a target="mainFrame" href="/futurestars/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            				 <a target="mainFrame" href="/futurestars/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            				<a target="mainFrame" href="/futurestars/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            				 <a target="mainFrame" href="/futurestars/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>
                 </table>
@@ -638,17 +638,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -660,22 +660,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/futurestars/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/futurestars/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            				 <a target="mainFrame" href="/futurestars/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/futurestars/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -687,7 +687,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            				 <a target="mainFrame" href="/futurestars/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
             			</td>
             		</tr>
                 </table>
@@ -698,12 +698,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            				 <a target="mainFrame" href="/futurestars/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            				 <a target="mainFrame" href="/futurestars/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
             			</td>
             		</tr>
                 </table>
@@ -714,22 +714,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            				 <a target="mainFrame" href="/futurestars/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            				 <a target="mainFrame" href="/futurestars/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            				 <a target="mainFrame" href="/futurestars/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            				 <a target="mainFrame" href="/futurestars/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
             			</td>
             		</tr>
             		
@@ -741,27 +741,27 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/futurestars/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            				 <a target="mainFrame" href="/futurestars/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/skps/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+								<a target="mainFrame" href="/futurestars/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/futurestars/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr> -->
                 </table>
@@ -774,22 +774,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/Backup&Restore" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/futurestars/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/changePassword" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/futurestars/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/futurestars/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/futurestars/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr>
                 </table>
@@ -797,17 +797,17 @@ for(Cookie cookie : cookies){
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/skps/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/skps/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/skps/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/skps/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/skps/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/skps/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/skps/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/futurestars/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
@@ -818,32 +818,32 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            				<a target="mainFrame" href="/futurestars/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
             		</tr>
             	</table>
@@ -857,22 +857,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/futurestars/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/futurestars/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -885,22 +885,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            				 <a target="mainFrame" href="/futurestars/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            				 <a target="mainFrame" href="/futurestars/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            				<a target="mainFrame" href="/futurestars/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            				 <a target="mainFrame" href="/futurestars/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
@@ -913,12 +913,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/futurestars/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            				 <a target="mainFrame" href="/futurestars/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
             		</tr>
             	</table>
@@ -929,12 +929,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            				 <a target="mainFrame" href="/futurestars/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/skps/sendemail" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/futurestars/sendemail" style="font-size: 12px;">Email</a>
             			</td>
             		</tr>
                 </table>
@@ -945,7 +945,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/skps/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            				<a target="mainFrame" href="/futurestars/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
             			</td>
             		</tr>
                 </table>
@@ -957,12 +957,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/skps/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/futurestars/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				     <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/skps/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+                              <a target="mainFrame" href="/futurestars/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>
@@ -972,13 +972,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            				 <a target="mainFrame" href="/futurestars/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            				 <a target="mainFrame" href="/futurestars/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
             			
             		</tr>
@@ -990,13 +990,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            				 <a target="mainFrame" href="/futurestars/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				 <a target="mainFrame" href="/futurestars/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>
@@ -1007,13 +1007,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/futurestars/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            				 <a target="mainFrame" href="/futurestars/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
             			</td>
             			
             		</tr>
@@ -1025,12 +1025,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
+            				 <a target="mainFrame" href="/futurestars/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            				 <a target="mainFrame" href="/futurestars/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
             			</td>
             		</tr>
                 </table>
@@ -1042,7 +1042,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            				 <a target="mainFrame" href="/futurestars/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
             			</td>
             		</tr>
                 </table>
@@ -1053,12 +1053,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
+            				 <a target="mainFrame" href="/futurestars/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
+            				 <a target="mainFrame" href="/futurestars/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
             			</td>
             		</tr>
                 </table>
@@ -1069,12 +1069,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/skps/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
+            				 <a target="mainFrame" href="/futurestars/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/skps/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
+            				 <a target="mainFrame" href="/futurestars/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
             			</td>
             		</tr>
                 </table>

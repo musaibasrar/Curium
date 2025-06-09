@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/skps/css/bootstrap.min.css">
-        <script src="/skps/js/jquery.min.js"></script>
-        <script src="/skps/js/bootstrap.min.js"></script>
-        <script src="/skps/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/futurestars/css/bootstrap.min.css">
+        <script src="/futurestars/js/jquery.min.js"></script>
+        <script src="/futurestars/js/bootstrap.min.js"></script>
+        <script src="/futurestars/js/popper.min.js"></script>
 
 <style>
  .headerText {
@@ -136,7 +136,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/skps/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/futurestars/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -221,7 +221,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/skps/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/futurestars/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>

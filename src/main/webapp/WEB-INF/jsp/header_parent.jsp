@@ -7,10 +7,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/skps/css/bootstrap.min.css">
-        <script src="/skps/js/jquery.min.js"></script>
-        <script src="/skps/js/bootstrap.min.js"></script>
-        <script src="/skps/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/futurestars/css/bootstrap.min.css">
+        <script src="/futurestars/js/jquery.min.js"></script>
+        <script src="/futurestars/js/bootstrap.min.js"></script>
+        <script src="/futurestars/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -85,7 +85,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/skps/UserProcess/logout";
+                form1.action="/futurestars/UserProcess/logout";
                 form1.submit();
             }
 
@@ -95,7 +95,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -118,21 +118,21 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;width: 170px;">
-								<a target="mainFrame" href="/skps/welcomeparent" ><img src="/skps/images/curiumheader.png" width="90" height="30"/></a>
+								<a target="mainFrame" href="/futurestars/welcomeparent" ><img src="/futurestars/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/skps/images/skps/header.png"
+							<!-- <td align="left"><img src="/futurestars/images/futurestars/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="left" style="padding-left:40px;">
  
-                                                         <a target="mainFrame" href="/skps/welcomeparent" style="display: inline-flex; align-items: center;">
-     <img src="/skps/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+                                                         <a target="mainFrame" href="/futurestars/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="/futurestars/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
      <strong style="font-size: 18px;">Home</strong>
  </a>&nbsp;&nbsp;
  
                                                           <a target="_parent"
-                                                                 href="/skps/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
-                                                                         src="/skps/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 href="/futurestars/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="/futurestars/images/logout.svg" width="22" height="22" alt="Log Out" 
                                                                  /><strong style="font-size: 17px;">Logout</strong></a></td>
 
 

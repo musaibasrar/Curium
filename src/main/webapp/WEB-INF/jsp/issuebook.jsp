@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Book</title>
-<link rel="stylesheet" href="/skps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/skps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/futurestars/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/futurestars/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -446,17 +446,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/skps/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/skps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/futurestars/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/skps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/futurestars/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/skps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/futurestars/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -569,7 +569,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/skps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/futurestars/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	$(function() {
@@ -766,7 +766,7 @@
         <script type="text/javascript">
 	function issueBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/skps/LibraryProcess/bookIssuedStudent";
+		form1.action = "/futurestars/LibraryProcess/bookIssuedStudent";
 		form1.method = "POST";
 		form1.submit();
 
@@ -788,7 +788,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/skps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/futurestars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
