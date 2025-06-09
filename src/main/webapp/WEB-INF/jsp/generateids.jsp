@@ -612,7 +612,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td class="footerTD" colspan="2"><input 
 							type="submit" value="Print Preview"  id="printpreview" />
-							<button id="printbackpreview">Print Back Preview</button>
+							<button id="printbackpreview" value="Print Back Preview"></button>
 							</td>
 							
 
