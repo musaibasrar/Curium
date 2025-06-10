@@ -154,6 +154,11 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 							
+							<td ><a target="leftFrame" href="/littleflower/leftsettings_feescollector">
+									<img alt="Settings" src="/littleflower/images/settings.svg" width="18"
+									height="18" style="vertical-align: bottom;" />Master Settings
+							</a></td>
+							
 							<td ><a target="mainFrame"
 								href="/littleflower/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/littleflower/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
