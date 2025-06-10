@@ -388,10 +388,11 @@ public class JobService {
 			reportResponseDto.setStaffSelected("");
 		}
 
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain+subQuery);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain+subQuery);
 		reportResponseDto.setJobQueryList(JobQueryList);
 		reportResponseDto.setTransactionFromDateSelected("From:"+request.getParameter("transactiondatefrom"));
 		reportResponseDto.setTransactionToDateSelected("To:"+request.getParameter("transactiondateto"));
+		reportResponseDto.setSuccess(true);
 		return reportResponseDto;
 
 	}
@@ -435,7 +436,7 @@ public class JobService {
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
 			String querySub = "";
 			querySub = " pq.createddate between '"+fromDate+"' and '"+toDate+"'";
-			JobQueryList = new JobDAO().generateQueriesReport(queryMain+querySub);
+			JobQueryList = jobDAO.generateQueriesReport(queryMain+querySub);
 
 			totalQueries.add("\"" + JobQueryList.size() + "\"");
 			//Date Format
@@ -587,7 +588,7 @@ public class JobService {
 		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain);
 
 		httpSession.setAttribute("queryList", JobQueryList);
 	}

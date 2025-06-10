@@ -14,6 +14,7 @@ import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class JobDAO {
 	
 	@Autowired
 	private JobQueryRepository jobQueryRepository;
+	@Autowired
+	private QueryUtil queryUtil;
 	Session session = null;
 	
 	Transaction transaction = null;
@@ -324,22 +327,18 @@ public class JobDAO {
 			return noOfRecords;
 		}
 
-
+		@Transactional
 		public List<JobQuery> generateQueriesReport(String parentQuery) {
 			
 	        List<JobQuery> results = new ArrayList<JobQuery>();
 	        
 	        try {
-	                transaction = session.beginTransaction();
-	                results = (List<JobQuery>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
-	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-	                
-	                hibernateException.printStackTrace();
-
-	        } finally {
-	    			HibernateUtil.closeSession();
-	        }
+	        	    results = queryUtil.runGivenQuery(parentQuery, JobQuery.class);
+	        }  catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+	        } 
 	        return results;
 }
 
