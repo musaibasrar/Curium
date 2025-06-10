@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>DUPLICATE FEES RECEIPT</title>
+<title>Duplicate FEES RECIEPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -183,8 +183,8 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
@@ -289,7 +289,7 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<c:if test="${recieptinfo.fine > 0}">
+				<c:if test="${recieptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
@@ -367,15 +367,19 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/fathima/images/fathimapaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
+		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
-		<div style="border: 1px solid;border-radius: 15px">
-		
+		<br>
+		<br>
+		<br>
+		<br>
+		<%--<div style="border: 1px solid;border-radius: 15px">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
@@ -384,10 +388,10 @@
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
 		</table>
+		
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -485,7 +489,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> 
 				</tr>
 			</c:forEach>
 			
@@ -506,7 +510,6 @@
 							value="${recieptinfo.misc}" /></td>
 				</tr>
 			</c:if>
-			
 			</table>
 			
 			
@@ -529,7 +532,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<tr>
+			 <tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -547,7 +550,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr>
+			</tr> 
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -568,12 +571,13 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/fathima/images/fathimapaytm.jpeg" width="70" height="65"/></td> -->
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
+		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
-		</div>
+		</div> --%>
 	</form>
 	
 	</div>
