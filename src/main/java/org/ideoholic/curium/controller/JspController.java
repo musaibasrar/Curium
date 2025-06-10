@@ -636,4 +636,13 @@ public class JspController {
 		return "welcomesuperadmin";
 	}
 	
+	@GetMapping("/printOtherFeesDetail")
+	public String getPrintOtherFeesDetail() {
+		return "printOtherFeesDetail";
+	}
+	
+	@GetMapping("/printstudentdetailsotherfeesstructure")
+	public String getPrintstudentdetailsotherfeesstructure() {
+		return "printstudentdetailsotherfeesstructure";
+	}
 }
