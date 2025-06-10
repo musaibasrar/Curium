@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/scholargroup/welcome" ><img src="/scholargroup/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/scholargroup/welcomesuperadmin" ><img src="/scholargroup/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/scholargroup/images/scholargroupheader.png"

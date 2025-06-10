@@ -126,34 +126,31 @@ for(Cookie cookie : cookies){
 						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
 						<tr style="height: 45px;">
-							
-									<td style="padding-left: 20px;">
+						
+						<c:choose>
+					<c:when test="${userType == 'superadmin'}">
+						<td style="padding-left: 20px;">
+								<a target="mainFrame" href="/scholargroup/welcomesuperadmin" >
+								<img src="/scholargroup/images/curiumheader.png" width="112" height="41"/>
+								</a>
+								</td>
+					</c:when>
+					<c:when test="${userType == 'admin'}">
+						<td style="padding-left: 20px;">
 								<a target="mainFrame" href="/scholargroup/welcome" >
 								<img src="/scholargroup/images/curiumheader.png" width="112" height="41"/>
 								</a>
 								</td>
+					</c:when>
+				</c:choose>
 								
 							<!-- <td align="left"><img src="/scholargroup/images/scholargroupheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-
-				<c:choose>
-					<c:when test="${userType == 'superadmin'}">
-						<td><a target="mainFrame"
-							href="/scholargroup/welcomesuperadmin"> <img
-								src="/scholargroup/images/home.svg" width="18" height="18"
-								alt="Home" style="vertical-align: bottom; font-size: 144px;" />
-								Home
-						</a></td>
-					</c:when>
-					<c:when test="${userType == 'admin'}">
-						<td><a target="leftFrame" href="/scholargroup/left_admin">
+				<td><a target="leftFrame" href="/scholargroup/left_admin">
 								<img src="/scholargroup/images/home.svg" width="18" height="18"
 								alt="Home" style="vertical-align: bottom; font-size: 144px;" />
 								Home
 						</a></td>
-					</c:when>
-				</c:choose>
-
 
 				<td><a target="mainFrame"
 								href="/scholargroup/FeesProcess/feesCollect"> <img
