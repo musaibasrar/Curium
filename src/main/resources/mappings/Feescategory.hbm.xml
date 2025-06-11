@@ -26,5 +26,8 @@
 			<property name="academicyear" type="string">
             <column name="academicyear" length="20" />
         </property>
+         <property name="totalinstallments" type="int">
+	 			<column name="totalinstallments" />
+			</property>
     </class>
 </hibernate-mapping>
