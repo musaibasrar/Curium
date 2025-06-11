@@ -17,4 +17,5 @@ public class FeesCategoryDto {
 		private String feesCategory;
 		private String amount;
 		private String categoryYear;
+		private int totalInstallments;
 }
