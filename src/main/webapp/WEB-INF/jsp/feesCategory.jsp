@@ -564,7 +564,19 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr></tr>
+						
+						<tr>
+							<td width="10%" class="alignRight">Total Installments &nbsp;</td>
+							<td width="70%"><label> <input name="totalinstallments" style="width: 210px;border-radius: 4px;background: white;height: 28px;"
+									type="number" class="textField" id="totalinstallments" required size="30">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
 
+						<tr></tr>
 
 						<tr>
 							<td width="10%" class="alignRight">Year &nbsp;</td>
@@ -636,6 +648,10 @@ for(Cookie cookie : cookies){
 							alt=" " style="position: relative; top: 4px;"
 							src="/greatindiaacademy/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
+						<th title="click to sort" class="headerText">Total Installments<img
+							alt=" " style="position: relative; top: 4px;"
+							src="/scholargroup/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
 						<th title="click to sort" class="headerText">Year<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/greatindiaacademy/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
@@ -657,6 +673,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
+							<td class="dataText"><c:out value="${fees.totalinstallments}" /></td>
 							<td class="dataText"><c:out value="${fees.academicyear}" /></td>
 						</tr>
 					</c:forEach>
