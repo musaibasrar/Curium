@@ -52,4 +52,8 @@ public class Feescategory implements java.io.Serializable {
 	private int userid;
 
 	private String academicyear;
+	
+	@Column(name = "totalinstallments")
+	private int totalinstallments;
+
 }
