@@ -139,6 +139,7 @@ public class FeesActionAdapter {
 		feesCategoryDto.setFeesCategory(request.getParameter("feescategory"));
 		feesCategoryDto.setAmount(request.getParameter("amount"));
 		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
+		feesCategoryDto.setTotalInstallments(Integer.parseInt(request.getParameter("totalinstallments")));
 		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
 	}
 
