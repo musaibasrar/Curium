@@ -2,13 +2,18 @@ package org.ideoholic.curium.model.feescollection.action;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
 import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
 import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
@@ -30,6 +35,7 @@ import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +58,9 @@ public class FeesCollectionActionAdapter {
     
     @Autowired
 	private SmsService smsService;
+    
+    @Autowired
+	private FeesService feesService;
 
     public void getFeesReport() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
@@ -452,7 +461,26 @@ public class FeesCollectionActionAdapter {
         dto.setDateOfFeesDetails(request.getParameter("dateoffeesDetails"));
         dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
         dto.setNarrationReceipt(request.getParameter("narrationreceipt"));
-
+        
+       
+		ConcessionDto concessionDto = new ConcessionDto();
+		concessionDto.setSfsid(request.getParameterValues("sfsidconcession"));
+		concessionDto.setId(request.getParameter("studentIdDetails"));
+		Map<String, String> allRequestParameters = new HashMap<>();
+			Enumeration<String> enumeration = request.getParameterNames();
+			while (enumeration.hasMoreElements()) {
+				String fieldName = enumeration.nextElement();
+				String fieldValue = request.getParameter(fieldName);
+				allRequestParameters.put(fieldName, fieldValue);
+			}
+		concessionDto.setRequestParams(allRequestParameters);
+		String[] selectedConcessions = request.getParameterValues("sfsidconcession");
+		if(selectedConcessions!=null && selectedConcessions.length>0) {
+			StudentIdDto studentIdDto = feesService.applyConcession(concessionDto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+			String studentId = studentIdDto.getStudentId();
+		}
+		
+		 
         Receiptinfo receiptinfo = feesCollectionService.add(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
         return receiptinfo;
     }
