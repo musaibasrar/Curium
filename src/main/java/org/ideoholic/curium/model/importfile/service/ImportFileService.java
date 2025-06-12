@@ -169,7 +169,7 @@ public class ImportFileService {
 						Login login= new Login();
 						Branch branch = new Branch();
 						login.setUsername(parent.getStudent().getStudentexternalid());
-						login.setPassword("scholargroup");
+						login.setPassword(parent.getContactnumber());
 						branch.setIdbranch(parent.getBranchid());
 						login.setBranch(branch);
 						login.setUsertype("parents");
