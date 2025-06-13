@@ -654,18 +654,18 @@
         var col4="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
  	   	var col5="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
  	    var col6="<td class='dataTextInActive'><input type='text' value='0'  name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/><input type='hidden' name='purchaseprice' id=purchaseprice_"+rowCount+" value='' /></td>";
- 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col8="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col9="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
- 	    var col10="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	   	var col12="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
- 	    var col13="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
+ 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/><input type='hidden' value='0'   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    /* var col8="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>"; */
+ 	    var col8="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
+ 	    var col9="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	   	var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col12="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
         /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+col13+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -1471,7 +1471,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td> -->
 							
-							<td class="alignRight">Student&nbsp;</td>
+							<td class="alignRight">Customer&nbsp;</td>
 							<td>
 								<div class="container">
 										<div class="row">
@@ -1512,12 +1512,12 @@ for(Cookie cookie : cookies){
 								<th class="headerText">Available Quantity</th>
 								<th class="headerText">Unit of Measure</th>
 								<th class="headerText">Unit Price</th>
-								<th class="headerText">SGST Price</th>
-								<th class="headerText">CGST Price</th>
+								<th class="headerText">VAT</th>
+								<!-- <th class="headerText">CGST Price</th> -->
 								<th class="headerText">Issue Quantity</th>
-								<th class="headerText">Total GST</th>
-								<th class="headerText">Total (Excl. GST)</th>
-								<th class="headerText">Total (Incl. GST)</th>
+								<th class="headerText">Total VAT</th>
+								<th class="headerText">Total (Excl. VAT)</th>
+								<th class="headerText">Total (Incl. VAT)</th>
 								<th class="headerText">Add</th>
 							</tr>
 						</thead>
