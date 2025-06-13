@@ -942,7 +942,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Student Name</th>
+						<th title="click to sort" class="headerText">Customer Name</th>
 						<th title="click to sort" class="headerText">Branch Receipt Number&nbsp;</th>
 						<th title="click to sort" class="headerText">Academic Year</th>
 						<th title="click to sort" class="headerText">Due Amount&nbsp;</th>

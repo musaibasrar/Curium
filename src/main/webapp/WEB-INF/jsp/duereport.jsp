@@ -591,9 +591,9 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th title="click to sort" class="headerText">Sl. No.</th>
-						<th title="click to sort" class="headerText">Student Name</th>
-						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">Father Name</th>
+						<th title="click to sort" class="headerText">Customer Name</th>
+					<!-- 	<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Father Name</th> -->
 					</tr>
 				</thead>
 
@@ -603,8 +603,8 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText">${status.index+1}</td>
 						  <td class="dataText" style="text-align: left">${studentsduelist.student.name}</td>
-						  <td class="dataText" style="text-align: left">${studentsduelist.student.classstudying}</td>
-						  <td class="dataText" style="text-align: left">${studentsduelist.fathersname}</td>
+						  <%-- <td class="dataText" style="text-align: left">${studentsduelist.student.classstudying}</td>
+						  <td class="dataText" style="text-align: left">${studentsduelist.fathersname}</td> --%>
 						</tr>
 					</c:forEach>
 
