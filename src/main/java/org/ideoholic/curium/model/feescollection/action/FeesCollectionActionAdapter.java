@@ -8,10 +8,14 @@ import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -66,7 +70,7 @@ public class FeesCollectionActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
 
-        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("dayonecancel").toString(), httpSession.getAttribute("datefromcancel").toString(), httpSession.getAttribute("datetocancel").toString());
+        CancelledReceiptsResponseDto responseDto = feesCollectionService.viewCancelledReceipts(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("searchfeesdetailslistcancelled", responseDto.getFeesDetailsList());
         httpSession.setAttribute("sumofdetailsfeescancelled", responseDto.getSumOfFees());
@@ -78,7 +82,7 @@ public class FeesCollectionActionAdapter {
     public void getStampFees() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        StampFeesDto dto = new StampFeesDto();
+        StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setId(request.getParameter("studentId"));
         dto.setStudentName(request.getParameter("studentname"));
@@ -151,15 +155,13 @@ public class FeesCollectionActionAdapter {
     public void getotherStampFees() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
-        StampFeesDto dto = new StampFeesDto();
+        StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setStudentId(request.getParameter("studentId"));
         dto.setStudentName(request.getParameter("studentname"));
         dto.setAdmissionNo(request.getParameter("admissionno"));
         dto.setClassAndSec(request.getParameter("classandsec"));
-        dto.setStudentId(request.getParameter("studentId"));
         dto.setDateOfFees(request.getParameter("dateoffees"));
-
         StampFeeResponseDto responseDto = feesCollectionService.getotherStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("studentotherfeesdetails", responseDto.getOtherFeesMap());
         request.setAttribute("studentNameDetails", responseDto.getStudentNameDetails());
@@ -208,7 +210,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
-        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
+        request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
@@ -260,9 +262,8 @@ public class FeesCollectionActionAdapter {
 
     public void getFeesDetailsDashBoard() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
-
-        ClassesHierarchyDto dto = new ClassesHierarchyDto();
         standardActionAdapter.viewClasses();
+        ClassesHierarchyDto dto = new ClassesHierarchyDto();
         dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
         dto.setClasssecList((List<Classsec>)httpSession.getAttribute("classdetailslist"));
 
@@ -353,12 +354,11 @@ public class FeesCollectionActionAdapter {
         dto.setBranchId(request.getParameter("selectedbranchid"));
         dto.setToDate(request.getParameter("todate"));
         dto.setFromDate(request.getParameter("fromdate"));
-        dto.setOneDay(request.getParameter(""));
         dto.setToDateOtherFees(request.getParameter("todate"));
         dto.setFromDateOtherFees(request.getParameter("fromdate"));
         dto.setOneDayOtherFees(request.getParameter("oneday"));
 
-        FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone").toString(), httpSession.getAttribute("datefrom").toString(), httpSession.getAttribute("dateto").toString());
+        FeesCategoryResponseDto responseDto = feesCollectionService.getFeesCollectionCategory(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());
         httpSession.setAttribute("datefrom", responseDto.getDateFrom());
@@ -435,6 +435,7 @@ public class FeesCollectionActionAdapter {
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setDateOfFeesDetails(request.getParameter("dateoffeesDetails"));
         dto.setClassAndSecDetails(request.getParameter("classandsecDetails"));
+        dto.setNarrationReceipt(request.getParameter("narrationreceipt"));
 
         Receiptinfo receiptinfo = feesCollectionService.add(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(USERNAME).toString());
         return receiptinfo;
@@ -482,5 +483,28 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+    }
+
+	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles);
+		return result.isSuccess();
+	}
+
+	public Receiptinfo feesPaymentTypeModify() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+
+        AddFeesCollectionDto dto = new AddFeesCollectionDto();
+        dto.setStudentId(request.getParameter("receiptnumber"));
+        dto.setPaymentMethod(request.getParameter("paymentmethod"));
+        dto.setAckNo(request.getParameter("ackno"));
+        dto.setTransferDate(request.getParameter("transferdate"));
+        dto.setTransferBankName(request.getParameter("transferbankname"));
+        dto.setChequeNo(request.getParameter("chequeno"));
+        dto.setChequeDate(request.getParameter("chequedate"));
+        dto.setChequeBankName(request.getParameter("chequebankname"));
+        
+        Receiptinfo receiptinfo = feesCollectionService.feesPaymentTypeModify(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
+        return receiptinfo;
     }
 }
