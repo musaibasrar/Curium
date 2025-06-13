@@ -76,7 +76,19 @@ public class FeesCollectionAction {
 		public String cancelFeesReceipt() {
 			feesCollectionActionAdapter.cancelFeesReceipt();
 			userActionAdapter.searchByDate();
-			return "feesCollectionDetails";
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+    			return "feesCollectionDetailsAdmin";
+    		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+    			return "feesCollectionDetailsAdmin";
+    		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+    			return "feesCollectionDetailsAdmin";
+    		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+    			return "feesCollectionDetailsAdmin";
+    		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+    			return "feesCollectionDetails";
+    		} else {
+    			return "feesCollectionDetails";
+    		}
 		}
 
 		@PostMapping("/StampFees")
@@ -283,5 +295,25 @@ public class FeesCollectionAction {
 	        public String searchFeesReportDue() {
 	            feesCollectionActionAdapter.getFeesReportDue();
 	            return "feesreportdue";
+	        }
+		 
+		  @PostMapping("/feesPaymentTypeModify")	
+	        public String feesPaymentTypeModify() {
+	                Receiptinfo receiptInfo = feesCollectionActionAdapter.feesPaymentTypeModify();
+	                userActionAdapter.searchByDate();
+	            	if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+	        			return "feesCollectionDetailsAdmin";
+	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+	        			return "feesCollectionDetailsAdmin";
+	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+	        			return "feesCollectionDetailsAdmin";
+	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+	        			return "feesCollectionDetailsAdmin";
+	        		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+	        			return "feesCollectionDetails";
+	        		} else {
+	        			return "feesCollectionDetails";
+	        		}
+	                
 	        }
 }
