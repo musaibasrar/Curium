@@ -17,6 +17,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -49,10 +50,13 @@ public class feesCollectionDAO {
 			 Query queryReceipt = session.createQuery("from Receiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
 			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
 			 	
+			 	
+			 	
 			 	if(ReceiptList.size() > 0) {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
+			 		receiptInfo.setBranchreceiptnumber("VS"+String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
 			 	}else {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
 			 	}
 			 	
 			 	//Receipts
@@ -453,7 +457,7 @@ public class feesCollectionDAO {
 		return result;
 
 	}
-
+	
 	public boolean createOtherReceiptFromImport(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList) {
 		 
 		boolean result = false;
@@ -509,4 +513,37 @@ public class feesCollectionDAO {
 			return result;
 		}
 	}
+	
+	
+	public boolean modifyFeesPaymentType(String updateDrAccountOld, String updateDrAccountNew, String updateVoucherEntry, String updateReceiptinfoPaymentMethod) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 	
+			 	//Receipts
+				Query queryAccounts1 = session.createQuery(updateDrAccountOld);
+				queryAccounts1.executeUpdate();
+				Query queryqueryAccounts2 = session.createQuery(updateDrAccountNew);
+				queryqueryAccounts2.executeUpdate();
+				Query queryqueryAccounts3 = session.createQuery(updateVoucherEntry);
+				queryqueryAccounts3.executeUpdate();
+				Query queryqueryAccounts4 = session.createQuery(updateReceiptinfoPaymentMethod);
+				queryqueryAccounts4.executeUpdate();
+				//
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
+
+	}
+
 }
