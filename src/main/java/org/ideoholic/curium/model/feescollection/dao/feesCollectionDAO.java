@@ -513,5 +513,37 @@ public class feesCollectionDAO {
 			return result;
 		}
 	}
+	
+	
+	public boolean modifyFeesPaymentType(String updateDrAccountOld, String updateDrAccountNew, String updateVoucherEntry, String updateReceiptinfoPaymentMethod) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 	
+			 	//Receipts
+				Query queryAccounts1 = session.createQuery(updateDrAccountOld);
+				queryAccounts1.executeUpdate();
+				Query queryqueryAccounts2 = session.createQuery(updateDrAccountNew);
+				queryqueryAccounts2.executeUpdate();
+				Query queryqueryAccounts3 = session.createQuery(updateVoucherEntry);
+				queryqueryAccounts3.executeUpdate();
+				Query queryqueryAccounts4 = session.createQuery(updateReceiptinfoPaymentMethod);
+				queryqueryAccounts4.executeUpdate();
+				//
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
+
+	}
 
 }

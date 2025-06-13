@@ -2819,6 +2819,79 @@ public class FeesCollectionService {
 		return receiptInfo;
 	}
 
+	public Receiptinfo feesPaymentTypeModify(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName) {
+		
+		Receiptinfo receiptInfo =new Receiptinfo();
+		boolean createFeesCollection = false;
+		if(currentAcademicYear!=null){
+		
+		String receiptNumber = dto.getStudentId();
+		
+		
+		//Get Payment Details
+		String paymentMethod = dto.getPaymentMethod();
+		String ackNo = dto.getAckNo();
+		String ackNoVoucherNarration = "";
+		String transferDate = dto.getTransferDate();
+		String transferBankname = dto.getTransferBankName();
+		String chequeNo = dto.getChequeNo();
+		String chequeNoVoucherNarration = "";
+		String chequeDate = dto.getChequeDate();
+		String chequeBankname = dto.getChequeBankName();
+		String paymentType = "Cash";
+				
+			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
+				paymentType = "Bank Transfer";
+			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+				chequeNoVoucherNarration = " cheque number: "+chequeNo+" , Amount clearance date: "+chequeDate;
+				paymentType = "Cheque";
+			}
+				
+		//End Payment Details
+			
+			
+			// Get ReceiptInfo
+			
+			Receiptinfo rinfo = new feesCollectionDAO().getReceiptInfoDetails(Integer.parseInt(receiptNumber));
+			
+			//End ReceiptInfo
+			
+			//Get Voucher Entry Details
+			VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(rinfo.getReceiptvoucher().toString());
+			int drAccountOld = voucherTransaction.getDraccountid();
+			BigDecimal amount = voucherTransaction.getDramount();
+			//End Voucher Entry Details
+		
+		if(rinfo!=null){
+			
+			//Pass Receipt : Credit the student Fees Receivable & debit the cash
+			
+			int drAccount = 1;
+			
+			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
+				drAccount = getLedgerAccountId(userName+Integer.parseInt(branchId));
+			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+				drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(branchId));
+			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+				drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
+			} 
+			
+			
+			String updateDrAccountOld="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drAccountOld;
+			String updateDrAccountNew="update Accountdetailsbalance set currentbalance=currentbalance+"+amount+" where accountdetailsid="+drAccount;
+			String modifiedNarration = ": Modified from "+drAccountOld+" to "+drAccount+"";
+			String updateVoucherEntry="update VoucherEntrytransactions set draccountid="+drAccount+",narration=CONCAT(narration, '"+modifiedNarration+"'),userid="+userId+" where draccountid="+drAccountOld+"";
+			String receiptinfoPaymentMethod=" to "+paymentMethod+"";
+			String updateReceiptinfoPaymentMethod = "update Receiptinfo set paymenttype=CONCAT(paymenttype, '"+receiptinfoPaymentMethod+"') where receiptnumber="+rinfo.getReceiptnumber()+"";
+			// End Receipt
+			
+			createFeesCollection = new feesCollectionDAO().modifyFeesPaymentType(updateDrAccountOld,updateDrAccountNew,updateVoucherEntry,updateReceiptinfoPaymentMethod);
+			request.setAttribute("updatereceiptpaymentmethod", createFeesCollection);
+		}
+		}
+		return receiptInfo;
+	}
 }
 
 
