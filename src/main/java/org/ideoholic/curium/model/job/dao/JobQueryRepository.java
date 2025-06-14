@@ -45,4 +45,6 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    List<JobQuery>  findByStatusInAndCreateddate(List<String> status, Date createdDate);
 	    
+	    @Query("SELECT jq FROM JobQuery jq WHERE jq.id = :queryId AND jq.teacher.tid = :tid")
+	    JobQuery findByQueryIdAndStaffId(@Param("queryId") int queryId, @Param("tid") int tid);
 }

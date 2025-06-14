@@ -458,7 +458,7 @@ public class JobService {
 		String pid = feedbackDto.getNo();
 		String feedbackpoints = feedbackDto.getFeedback();
 
-		result = new JobDAO().feedback(Integer.parseInt(id), pid, feedbackpoints);
+		result = jobDAO.feedback(Integer.parseInt(id), pid, feedbackpoints);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}
