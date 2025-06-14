@@ -144,18 +144,20 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
+							<td>
+								<a target="leftFrame" href="/littleflower/leftsettings_reception"><img
+									src="/littleflower/images/settings.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Settings		
+								</a>
+							</td>
+
+								<td>
 								<a target="leftFrame" href="/littleflower/reports_reception"><img
 									src="/littleflower/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								</td>
 								
-								<!-- <a target="leftFrame" href="/littleflower/reports_officeadmin"><img
-									src="/littleflower/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a> -->
-							
-							</td>
-
 							<td ><a target="mainFrame"
 								href="/littleflower/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/littleflower/images/students.svg" width="18"

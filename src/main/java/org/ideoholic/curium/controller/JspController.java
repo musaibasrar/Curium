@@ -655,4 +655,15 @@ public class JspController {
 	public String getReportsReception() {
 		return "reports_reception";
 	}
+	
+	@GetMapping("/leftsettings_feescollector")
+	public String getLeftsettingsFeescollector() {
+		return "leftsettings_feescollector";
+	}
+	
+	@GetMapping("/leftsettings_reception")
+	public String getLeftsettingsReception() {
+		return "leftsettings_reception";
+	}
+	
 }
