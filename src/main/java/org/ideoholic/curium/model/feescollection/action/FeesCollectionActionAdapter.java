@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import org.ideoholic.curium.util.Constants;
 
 @Service
 public class FeesCollectionActionAdapter {
@@ -492,7 +493,7 @@ public class FeesCollectionActionAdapter {
 	}
 
 	public Receiptinfo feesPaymentTypeModify() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         AddFeesCollectionDto dto = new AddFeesCollectionDto();
         dto.setStudentId(request.getParameter("receiptnumber"));
