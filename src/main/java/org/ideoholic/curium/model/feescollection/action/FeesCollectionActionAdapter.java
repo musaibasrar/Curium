@@ -229,7 +229,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
-        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        request.setAttribute("feescatmap", responseDto.getOtherFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
@@ -513,7 +513,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
         request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
-        request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        request.setAttribute("feescatmap", responseDto.getOtherFeeCatMap());
     }
 
 	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {

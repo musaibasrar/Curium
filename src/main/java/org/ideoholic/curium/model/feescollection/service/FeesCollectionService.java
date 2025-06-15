@@ -1684,9 +1684,33 @@ public class FeesCollectionService {
 			result.setOtherFeeCatMap(feeCatMap);
 			result.setDuplicate(duplicate);
 			result.setUserLogin(userLogin);
+			
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
-			result.setGrandTotal(grandTotal+" "+"Only");
+			String totalStr = rinfo.getTotalamount().toString();
+			int dotIndex = totalStr.indexOf('.');
+
+			// Get digits after decimal (max 2 digits)
+			String gTotalAfterDecimal = (dotIndex >= 0 && dotIndex < totalStr.length() - 1)
+			    ? totalStr.substring(dotIndex + 1)
+			    : "00";
+
+			// Pad with zero if only one digit (e.g., "4" becomes "40")
+			if (gTotalAfterDecimal.length() == 1) {
+			    gTotalAfterDecimal += "0";
+			} else if (gTotalAfterDecimal.length() > 2) {
+			    gTotalAfterDecimal = gTotalAfterDecimal.substring(0, 2); // limit to 2 digits
+			}
+
+			// Format only if > 0
+			if (Integer.parseInt(gTotalAfterDecimal) > 0) {
+			    gTotalAfterDecimal = " and " + gTotalAfterDecimal + "/100";
+			} else {
+			    gTotalAfterDecimal = "";
+			}
+			
+			result.setGrandTotal(grandTotal+gTotalAfterDecimal+" "+"Only");
+			
 			result.setSuccess(true);
 
 			getOtherFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
@@ -1818,7 +1842,7 @@ public class FeesCollectionService {
 			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
 			
 	}
-			long sumOfFees = 0l;
+			Double sumOfFees = 0.0;
 			
 			Map<Otherreceiptinfo,Parents> feesMap = new HashMap<Otherreceiptinfo,Parents>();
 

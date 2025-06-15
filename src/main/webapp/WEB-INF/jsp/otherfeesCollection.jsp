@@ -658,8 +658,8 @@
                    $(function() {
                        $( "#dialogpaymentmethod" ).dialog({
                            autoOpen: false,
-                           height: 230,
-                           width: 550,
+                           height: 160,
+                           width: 350,
                            modal: true,
                            buttons: {
                                OK: function() {
@@ -835,6 +835,41 @@
             	}
             	
             }
+ 
+		 function checkPayingAmountwithTotalAmountcheckWithDueAmount(duePayment,sfsid){
+		 	var str = duePayment.id;
+		 	var res = str.split("_");
+		 	
+		 	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
+		 	var payment = parseInt(duePayment.value,10);
+		 	
+		 	// Prevent validation if value is being cleared
+		 	if(payment === 0) {
+		 		document.getElementById(sfsid).checked = false;
+		 		return false;
+		 	}
+		 	
+		 	if(payment>dueAmount){
+		 		duePayment.value = 0;
+		 		document.getElementById(sfsid).checked = false; 
+		 		alert('Amount Due to be paid must be equals to Due Amount');
+		 		return false;
+		 	}else if(payment<dueAmount){
+		 		duePayment.value = 0;
+		 		document.getElementById(sfsid).checked = false; 
+		 		alert('Amount Due to be paid must be equals to Due Amount');
+		 		return false;
+		 	}
+		 	
+		 	if(payment<1 || isNaN(payment)){
+		 		duePayment.value = 0;
+		 		document.getElementById(sfsid).checked = false;
+		 		return false;
+		 	}
+		 	
+		 	document.getElementById(sfsid).checked = true;
+		 	return true;
+		 }
             
         </script>
 
@@ -1001,7 +1036,7 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})"  onblur="checkPayingAmountwithTotalAmountcheckWithDueAmount(this,${studentfeesdetails.key.sfsid})">
 							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<!-- <td class="dataText" align="center">
@@ -1060,7 +1095,7 @@ for(Cookie cookie : cookies){
 
 							<td>
 
-								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)" checked="checked">
 								<label for="cashpayment">Cash</label>
 
 								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">

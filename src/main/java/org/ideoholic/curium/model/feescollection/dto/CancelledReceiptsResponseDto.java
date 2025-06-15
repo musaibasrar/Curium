@@ -24,7 +24,7 @@ public class CancelledReceiptsResponseDto {
     private List<Receiptinfo> feesDetailsList;
     private List<Otherreceiptinfo> otherfeesDetailsList;
     private Map<Otherreceiptinfo,Parents> feesMap;
-    private long sumOfFees;
+    private Double sumOfFees;
     @Builder.Default
     private boolean success = false;
 }
