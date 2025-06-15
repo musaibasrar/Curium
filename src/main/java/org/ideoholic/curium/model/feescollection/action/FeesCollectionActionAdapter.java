@@ -508,7 +508,7 @@ public class FeesCollectionActionAdapter {
 	}
 
 	public Receiptinfo feesPaymentTypeModify() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response,  standardService, smsService);
 
         AddFeesCollectionDto dto = new AddFeesCollectionDto();
         dto.setStudentId(request.getParameter("receiptnumber"));
