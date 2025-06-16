@@ -114,8 +114,16 @@ for(Cookie cookie : cookies){
 						Welcome, <label style="color: #93051f;"><c:out default=""
 								value="${username}" /> </label>
 					</p>
-					<c:set var="branch" value="${branchid - 1}" />
-					<p style="color: #93051f; font-weight: bolder;">${branchname}-${branch}</p>
+					<c:choose>
+					    <c:when test="${branchid == 2}">
+						<p style="color: #93051f; font-weight: bold;">Awami High School Urdu Medium</p>
+					    </c:when>
+					    <c:when test="${branchid == 3}">
+						<p style="color: #93051f; font-weight: bold;">Awami High School English Medium</p>
+					    </c:when>
+					</c:choose>
+
+					
 				</td>
 
 			</tr>
@@ -127,7 +135,7 @@ for(Cookie cookie : cookies){
   <div class="row justify-content-center text-center py-5">
     <div class="col-12 col-sm-6 col-md-4 mb-4">
       <div id="rcorners1" class="p-3 border rounded shadow">
-        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Awami High School</label><br>
+        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Awami High School <br> Urdu Medium</label><br>
         <a target="_parent" href="/awami/UserProcess/multiUser?branchid=2">
           <img src="/awami/images/login.svg" width="25" height="25" alt="Login" /> Login
         </a>
@@ -135,7 +143,7 @@ for(Cookie cookie : cookies){
     </div>
     <div class="col-12 col-sm-6 col-md-4 mb-4">
       <div id="rcorners1" class="p-3 border rounded shadow">
-        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Awami High School English Medium</label><br>
+        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Awami High School <br> English Medium</label><br>
         <a target="_parent" href="/awami/UserProcess/multiUser?branchid=3">
           <img src="/awami/images/login.svg" width="25" height="25" alt="Login" /> Login
         </a>

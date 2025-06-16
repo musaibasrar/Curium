@@ -807,11 +807,11 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
+							<td class="alignLeft">Student Name &nbsp;</td>
 							<td ><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" required
+									name="name" type="text" class="myclass" id="name" size="36"
 									style="text-transform:capitalize;"
-									required>
+									>
 							</label></td>
 
 							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
@@ -884,7 +884,7 @@ $(document).ready(function() {
 
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
-							<td ><label> <select name="addclass" required
+							<td ><label> <select name="addclass" 
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1564,17 +1564,17 @@ $(document).ready(function() {
 								</tr>
 
 								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td class="alignLeft">Father's Name &nbsp;</td>
 									<td ><label> <input
-											name="fathersname" type="text" class="myclass" required
+											name="fathersname" type="text" class="myclass"
 											style="text-transform:capitalize;"
 											id="fathersname" size="36"
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Name &nbsp;</td>
 									<td><label> <input
-											name="mothersname" type="text" class="myclass" id="name" required
+											name="mothersname" type="text" class="myclass" id="name"
 											style="text-transform:capitalize;"
 											size="36"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
@@ -1676,10 +1676,10 @@ $(document).ready(function() {
 
 								<tr>
 
-									<td class="alignLeft">Contact Number* &nbsp;</td>
+									<td class="alignLeft">Contact Number&nbsp;</td>
 
 									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
+											name="contactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
 											id="contactnumber" size="36" maxlength="10" minlength="10">
 
