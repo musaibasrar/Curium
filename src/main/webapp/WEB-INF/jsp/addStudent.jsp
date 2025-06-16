@@ -747,30 +747,27 @@ $(document).ready(function() {
         
         <script type="text/javascript">
 
-    var xmlHttpDuplicate;
-    var countDuplicate;
-    function checkDuplicate() {
+        var xmlHttpDuplicate;
+        function checkDuplicate() {
+            var selected = document.getElementById('admnno').value;
 
-		var selected=document.getElementById('admnno').value;
-			
-			 if (typeof XMLHttpRequest != "undefined") {
-				 xmlHttp = new XMLHttpRequest();
-	            
-	         } else if (window.ActiveXObject) {
-	        	 xmlHttpDuplicate = new ActiveXObject("Microsoft.XMLHTTP");
-	             
-	         }
-			xmlHttpDuplicate.onreadystatechange = stateChangedDuplicate;
-			xmlHttpDuplicate.open("GET", "/jrs/StudentProcess/checkDuplicate?admissionnumber="+selected,true);
-			xmlHttpDuplicate.send(null);
-	}
-    
-	function stateChangedDuplicate() {
+            if (typeof XMLHttpRequest != "undefined") {
+                xmlHttpDuplicate = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                xmlHttpDuplicate = new ActiveXObject("Microsoft.XMLHTTP");
+            }
 
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("admnnodiv").innerHTML = xmlHttp.responseText;
-		}
-	}
+            xmlHttpDuplicate.onreadystatechange = stateChangedDuplicate;
+            xmlHttpDuplicate.open("GET", "/jrs/StudentProcess/checkDuplicate?admissionnumber=" + selected, true);
+            xmlHttpDuplicate.send(null);
+        }
+
+        function stateChangedDuplicate() {
+            if (xmlHttpDuplicate.readyState == 4 || xmlHttpDuplicate.readyState == "complete") {
+                document.getElementById("admnnodiv").innerHTML = xmlHttpDuplicate.responseText;
+            }
+        }
+
 	function GetXmlHttpObject() {
 		var xmlHttp = null;
 		try {
@@ -822,9 +819,9 @@ $(document).ready(function() {
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
-					<li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li>
+					<!-- <li><a href="#fragment-6">Bank Details</a></li> -->
+					<!-- <li><a href="#fragment-7">Stamp Fee</a></li>
+					<li><a href="#fragment-8">Other Stamp Fee</a></li> -->
 				</ul>
 
 
@@ -938,7 +935,7 @@ $(document).ready(function() {
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" >
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -2135,7 +2132,7 @@ $(document).ready(function() {
 								</table>
 						</div>
 						
-						<div id="fragment-6">
+						<!--<div id="fragment-6">
 
 								<table style="width: auto;height: auto;" align="center">
 									<tr>
@@ -2221,7 +2218,7 @@ $(document).ready(function() {
 								</table>
 						</div>
 						
-						 <div id="fragment-7">
+						  <div id="fragment-7">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2245,7 +2242,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						
-						<!-- <tr>
+						<tr>
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td ><label> <input name="crecorddate"
 									type="text"
@@ -2263,7 +2260,7 @@ $(document).ready(function() {
 
 <tr>
 							<td><br /></td>
-						</tr> -->
+						</tr>
 						
 							
 						
@@ -2372,7 +2369,7 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div>
+				</div> -->
 				 
 		</div>
 </div>
