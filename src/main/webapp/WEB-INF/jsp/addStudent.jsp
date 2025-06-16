@@ -811,7 +811,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -937,7 +937,7 @@ $(document).ready(function() {
 								<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhaar No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;"
+									style="text-transform:capitalize;" maxlength="12"
 									id="disabilitychild" size="36">
 
 							</label>
@@ -1427,7 +1427,7 @@ $(document).ready(function() {
 									style="text-transform:capitalize;"
 									id="bhagyalakshmibondnumber" size="36">
 							</td>
-							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhaar Card No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1694,19 +1694,19 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td class="alignLeft">Father's Aadhar No
+									<td class="alignLeft">Father's Aadhaar No
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;"
+											style="text-transform:capitalize;" maxlength="12"
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhaar No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;"
+											style="text-transform:capitalize;" maxlength="12"
 											id="motherscastecertno" size="36">
 									</label></td>
 								</tr>
@@ -1720,19 +1720,12 @@ $(document).ready(function() {
 
 								<tr>
 
-									<td class="alignLeft">Sponsor Name 
-										 &nbsp;</td>
-									<td ><label> <select name="guardian" required
-									id="guardian" style="width: 224px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
-										<option selected></option>
-										<c:forEach items="${sponsorlist}" var="sponsorlist">
-											<c:if test="${(sponsorlist.name != '')}">
-												<option value="${sponsorlist.name}">
-													<c:out value="${sponsorlist.name}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
+									<td class="alignLeft">Father's Profession
+										&nbsp;</td>
+									<td><label> <input
+											name="professsion" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="professsion" size="36">
 									</label></td>
 
 

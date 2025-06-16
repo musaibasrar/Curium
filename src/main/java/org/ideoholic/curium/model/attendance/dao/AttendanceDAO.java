@@ -21,6 +21,7 @@ import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 
 public class AttendanceDAO {
@@ -365,7 +366,8 @@ public class AttendanceDAO {
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= '"+dateOfAttendance+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+				String attendanceDate = DateUtil.dateFromatConversionSlash(dateOfAttendance);
+				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= '"+attendanceDate+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);

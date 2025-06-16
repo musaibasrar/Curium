@@ -1441,20 +1441,10 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 
-							<td class="alignLeft">Sponsored By</td>
-
-							<td><label>  <select name="guardiandetails" id="guardiandetails"
-									style="width: 193px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.guardiandetails}</option>
-										<option></option>
-										<c:forEach items="${sponsorlist}" var="sponsorlist">
-										<c:if test="${(sponsorlist.name != '')}">
-											<option value="${sponsorlist.name}" >
-												<c:out value="${sponsorlist.name}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
+							<td class="alignLeft">Father's Profession</td>
+							<td><label> <input
+									name="profession" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.profession}"
+									id="profession" size="30">
 
 							</label></td>
                             
