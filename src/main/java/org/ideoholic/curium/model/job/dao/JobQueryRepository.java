@@ -47,4 +47,8 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    @Query("SELECT jq FROM JobQuery jq WHERE jq.id = :queryId AND jq.teacher.tid = :tid")
 	    JobQuery findByQueryIdAndStaffId(@Param("queryId") int queryId, @Param("tid") int tid);
+	    
+	    @Modifying
+	    @Query("UPDATE JobQuery jq SET jq.status =  :status, jq.updateduserid = :userId, jq.updateddate =  :updatedDate WHERE jq.id IN :queryIds")
+	    int markAsToDo(@Param("queryIds") List<Integer> queryIds, @Param("status") String status, @Param("userId") int userId, @Param("updatedDate") Date updatedDate);
 }

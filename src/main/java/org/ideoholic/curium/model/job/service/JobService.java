@@ -606,7 +606,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().toDoQueries(QueryIdsList, userId);
+			result = jobDAO.toDoQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 		}
         return searchStudentResponseDto;
