@@ -343,22 +343,20 @@ public class JobDAO {
 }
 
 
+		@Transactional
 		public boolean feedback(int queryId, String pid, String feedbackpoints) {
-			
+			int ipid = Integer.parseInt(pid);
 			boolean result = false;
 			try {
-				transaction = session.beginTransaction();
-				
-					Query query = session.createQuery("update JobQuery set feedback = '"+feedbackpoints+"' where id="+queryId+" and stdid="+pid+"");
-					query.executeUpdate();
-				
-				transaction.commit();
+				JobQuery jobQuery = jobQueryRepository.findByQueryIdAndStaffId(queryId, ipid);
+				jobQuery.setFeedback(feedbackpoints);
+				jobQueryRepository.save(jobQuery);
 				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+			} catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			}
 			return result;
 		}
 
