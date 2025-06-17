@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/alalmas/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alalmas/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/alalmas/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/alalmas/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/alalmas/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/alalmas/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/alalmas/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/alalmas/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/alalmas/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/alalmas/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/alalmas/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alalmas/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/alalmas/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/alalmas/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
-<script src="/alalmas/JavaScript/actb.js"></script>
-<script src="/alalmas/JavaScript/common.js"></script>
+<script src="/vision/JavaScript/actb.js"></script>
+<script src="/vision/JavaScript/common.js"></script>
 
 
 
@@ -576,6 +576,12 @@
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
+    	
+    	if (!addClass) {
+            console.warn("Class is not selected. Skipping search.");
+            return;
+        }
+    	
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -584,7 +590,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/alalmas/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -616,13 +622,18 @@ function searchOtherFeecategory() {
     var addClass = document.getElementById('addclass').value;
     var yoa = document.getElementById('yearofadmission').value;
 
+    if (!addClass) {
+        console.warn("Class is not selected. Skipping search.");
+        return;
+    }
+    
     var xmlHttpof = new XMLHttpRequest();
     xmlHttpof.onreadystatechange = function () {
         if (xmlHttpof.readyState === 4 && xmlHttpof.status === 200) {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/alalmas/FeesProcess/searchOtherFeecategory?classstudying=" + addClass + "&yearofadmission=" + yoa, true);
+    xmlHttpof.open("GET", "/scholargroup/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -818,7 +829,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/alalmas/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -850,7 +861,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 					<li><a href="#fragment-7">Stamp Fee</a></li>
-					<li><a href="#fragment-8">Other Stamp Fee</a></li>
+					<li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li>
 				</ul>
 
 
@@ -983,7 +994,7 @@ $(document).ready(function() {
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1187,7 +1198,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
+							<td class="alignLeft" >Number&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1300,34 +1311,13 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
 										<option>2022/23</option>
 										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
 								</select>
 
 							</label> 
@@ -2336,14 +2326,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/alalmas/StudentProcess/AddStudent";
+									form1.action = "/vision/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/alalmas/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
