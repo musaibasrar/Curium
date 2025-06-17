@@ -365,7 +365,7 @@ public class JobDAO {
 			
 			boolean result = false;
 			try {
-				jobQueryRepository.markAsToDo(queryIdsList,"To Do", userId, Date.from(Instant.now()));
+				jobQueryRepository.updateJobStatus(queryIdsList,"To Do", userId, Date.from(Instant.now()));
 				result = true;
 			} catch (Exception hibernateException) { 
 	        	log.error(hibernateException.getMessage(), hibernateException);
