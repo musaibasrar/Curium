@@ -1068,17 +1068,30 @@ $(document).ready(function() {
 
 							<td><label> <select name="nationality"
 									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>Indian</option>
-										<option>Indian</option>
-										<option>Egyptian</option>
+										<option></option>
+										<option>Afghani</option>
 										<option>Algerian</option>
+										<option>Bangladeshi</option>
+										<option>Burmese</option>
+										<option>Chadian</option>
+										<option>Dominican</option>
+										<option>Egyptian</option>
+										<option>Eritrean</option>
+										<option>Ethopian</option>
+										<option>Indian</option>
+										<option>Libyan</option>
+										<option>Namibian</option>
+										<option>Nigerian</option>
+										<option>Pakistani</option>
+										<option>Palestinian</option>
+										<option>Saudi</option>
+										<option>Somali</option>
+										<option>Sudani</option>
 										<option>Sudanese</option>
+										<option>Syrian</option>
 										<option>Tanzanian</option>
 										<option>Tunisian</option>
-										<option>Somali</option>
-										<option>Nigerian</option>
-										<option>Namibian</option>
-										<option>Libyan</option>
+										<option>Yemeni</option>
 										<option>Other</option>
 										
 								</select>
