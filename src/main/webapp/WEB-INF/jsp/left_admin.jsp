@@ -773,12 +773,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
+            				 <a target="mainFrame" href="/futurestars/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
+            				 <a target="mainFrame" href="/futurestars/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
             			</td>
             		</tr>
                 </table>
@@ -1025,13 +1025,13 @@ for(Cookie cookie : cookies){
             	
             	<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/futurestars/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            				 <a target="mainFrame" href="/futurestars/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
             			</td>
             			
             		</tr>
