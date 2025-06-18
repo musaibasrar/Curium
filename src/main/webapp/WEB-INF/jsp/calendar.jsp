@@ -179,7 +179,7 @@
                     <input type="checkbox" id="allDay">
                 </div> -->
                 <div class="button-group">
-                    <button type="submit">Save</button>
+                    <button type="submit" id="saveButton">Save</button>
                     <button type="button" id="deleteButton">Delete</button>
                 </div>
             </form>
@@ -269,7 +269,8 @@
                     
                     document.getElementById('location').value = event.extendedProps.location || '';
                     document.getElementById('color').value = event.backgroundColor || '#3788d8';
-                    document.getElementById('allDay').checked = event.allDay;
+                    //document.getElementById('allDay').checked = event.allDay;
+                    saveButton.style.display = 'none';
                     deleteButton.style.display = 'block';
                 } else {
                     // Creating new event
@@ -279,10 +280,10 @@
                     
                     // Handle new event creation dates
                     let startDate = selectInfo.start;
-                    
+                    startDate.setHours(15, 0, 0, 0);
                     // Always set end date to same date as start date, but 1 hour later
                     let endDate = new Date(startDate);
-                    endDate.setHours(startDate.getHours() + 1);
+                    endDate.setHours(23, 55, 0, 0);
                     
                     if (startDate) {
                         const startStr = startDate.getFullYear() + '-' +
@@ -302,7 +303,7 @@
                     
                     document.getElementById('location').value = '';
                     document.getElementById('color').value = '#3788d8';
-                    document.getElementById('allDay').checked = selectInfo.allDay || false;
+                    //document.getElementById('allDay').checked = selectInfo.allDay || false;
                     deleteButton.style.display = 'none';
                 }
             }
@@ -328,7 +329,7 @@
                 var endInput = document.getElementById('end').value;
                 var location = document.getElementById('location').value;
                 var color = document.getElementById('color').value;
-                var allDay = document.getElementById('allDay').checked;
+                //var allDay = document.getElementById('allDay').checked;
                 
                 // Debug log
                 console.log('Form values:', {
@@ -337,8 +338,8 @@
                     startInput: startInput,
                     endInput: endInput,
                     location: location,
-                    color: color,
-                    allDay: allDay
+                    color: color
+                    //allDay: allDay
                 });
                 
                 // Format dates to ISO format
@@ -357,11 +358,11 @@
                 var eventData = {
                     title: title,
                     description: description,
-                    start: startDate.toISOString(),
-                    end: endDate.toISOString(),
+                    start: document.getElementById('start').value,
+                    end: document.getElementById('end').value,
                     location: location,
-                    color: color,
-                    allDay: allDay
+                    color: color
+                    //allDay: allDay
                 };
 
                 var eventId = document.getElementById('eventId').value;
