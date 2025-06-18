@@ -906,7 +906,7 @@ for(Cookie cookie : cookies){
    			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
    			        				
    			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="feesCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
-   			        				<td> <input	type="text" value="1" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
+   			        				<td> <input	type="text" value="${feescategory.totalinstallments}" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
    			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
    			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + feescategory.amount}" />
    			        				</td>
