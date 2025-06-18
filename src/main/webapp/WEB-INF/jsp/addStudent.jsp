@@ -823,6 +823,38 @@ $(document).ready(function() {
                     
                 } );
             } );
+            
+            function updateFeesCategory(value2){
+            	
+            	
+            	var feesCount=document.getElementById("feesCount_"+value2).value;
+            	//alert("hii", value2);
+            	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+            	 //alert("hii", value2);
+                 var feesCount=document.getElementById("feesCount_"+value2).value;
+                 var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+                 
+                 var totalInstallments =  document.getElementById("totalinstallmentsactual_"+value2).value;
+                 	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+                 	//feesConcession (direct amount)
+                    
+                 	//final1.value=feesCat;
+                    
+            	
+            	var checkbox = document.getElementById("feesCat_"+value2);
+                var textField = document.getElementById("feesCount_"+value2);
+				var feesInstallment = document.getElementById("feesCount_"+value2);
+                // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
+                if (checkbox.checked) {
+                	feesInstallment.value = totalInstallments;
+                	final1.value=feesCat*totalInstallments;
+                	 calculateGrandTotal();
+                } else {
+                	feesInstallment.value = "0";
+                	final1.value="0";
+                	calculateGrandTotal();
+                }
+            }
         </script>
 </head>
 <%
