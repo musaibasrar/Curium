@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -297,45 +297,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/noblewisdom/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/noblewisdom/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/noblewisdom/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/noblewisdom/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/vision/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/vision/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/noblewisdom/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/noblewisdom/StampFeesProcess/advanceSearchForStampFees";
+		form1.action = "/vision/StampFeesProcess/advanceSearchForStampFees";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/noblewisdom/StampFeesProcess/delete";
+		form1.action = "/vision/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -745,7 +745,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -758,7 +758,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/noblewisdom/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/vision/StampFeesProcess/applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -905,8 +905,8 @@ for(Cookie cookie : cookies){
    			        				</label> <input type="hidden" value="0" name="feesConcession" id="feesConcession_${status.index+1}" />
    			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
    			        				
-   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="fessFullCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
-   			        				<td> <input	type="text" value="1" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
+   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="feesCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
+   			        				<td> <input	type="text" value="${feescategory.totalinstallments}" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
    			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
    			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + feescategory.amount}" />
    			        				</td>
@@ -935,9 +935,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">UID</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Name</th>
+						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
@@ -955,12 +956,13 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/noblewisdom/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/noblewisdom/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
+							<td class="dataTextInActive"><a class="dataTextInActive"
+								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
@@ -968,8 +970,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 						 	<td class="dataText">
-						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
-						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
+						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '--')}" />
+						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '--')}" />
 						 		 <c:choose>
                                 <c:when test="${classstudying[0] == classadmitted[0]}">
                                    <c:out value="New Admission" />
