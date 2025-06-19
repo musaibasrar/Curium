@@ -906,12 +906,13 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Student Type
 								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
+								<td height="30">&nbsp;Residential<input
+								type="checkbox" value="Residential" name="bhagyalakshmibondnumber" id="yes:st"
+								onclick="yesCheck(this.id);" ${student.bhagyalakshmibondnumber == 'Residential' ? 'checked' : ''}/>&nbsp; &nbsp;Day Scholar<input
+								type="checkbox" value="Day Scholar" name="bhagyalakshmibondnumber" id="no:st"
+								onclick="noCheck(this.id);" ${student.belongtobpl == 'Day Scholar' ? 'checked' : ''}/>
 
 							</td>
 							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>

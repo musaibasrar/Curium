@@ -1198,12 +1198,16 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
+							<td class="alignLeft" >Student Type&nbsp;</td>
+							
+							<td>&nbsp;Residential<input
+								type="checkbox" value="Residential" name="bhagyalakshmibondnumber" id="yes:st"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Day Scholar<input
+								type="checkbox" value="Day Scholar" name="bhagyalakshmibondnumber" id="no:st"
+								onclick="noCheck(this.id);" />
+
 							</td>
+							
 							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
@@ -1253,6 +1257,7 @@ $(document).ready(function() {
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
+										<option>Gujrati</option>
 										<option>Urdu</option>
 										<option>Hindi</option>
 										<option>English</option>

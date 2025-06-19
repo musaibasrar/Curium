@@ -207,7 +207,7 @@
 	text-align: center;
 	width: auto;
 }
-
+            
 .headerText {
 	border-radius: 3px;
 	width: 10px;
@@ -217,11 +217,9 @@
 	color: #FFFFFF;
 	font-weight: normal;
 	width: auto;
-	height: 27px;
-	vertical-align: text-top;
+	height: 22px;
+	vertical-align: middle;
 	text-align: center;
-	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -423,7 +421,7 @@ $(document).ready(function() {
 
 			var clipEffect = 'blind';
 			var options = {};
-			$("#effect").toggle(clipEffect, options, 1000);
+			$("#effect").toggle(clipEffect, options, 500);
 		}
 		;
 		// set effect from select menu value
@@ -632,7 +630,7 @@ $(document).ready(function() {
           $(function() {
               $( "#dialogpaymentmethod" ).dialog({
                   autoOpen: false,
-                  height: 230,
+                  height: 130,
                   width: 550,
                   modal: true,
                   buttons: {
@@ -936,7 +934,7 @@ for(Cookie cookie : cookies){
 			</div>
 		</div>
 
-		<div style="overflow: scroll; height: 600px">
+		<div style="overflow: hidden;">
 			<table width="100%">
 				<tr>
 					<td class="headerTD">
@@ -963,10 +961,10 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
-                            <th title="click to sort" class="headerText">Payment Mode</th>
-                            <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Payment Type</th>
+                            <th title="click to sort" class="headerText">View</th>
                             <th title="click to sort" class="headerText">Modify</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
+                            <th title="click to sort" class="headerText">Cancel</th>
 
 
                         </tr>
@@ -990,7 +988,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.paymenttype}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholargroup/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholargroup/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>"><i class="fa fa-view" style="color: #004080; font-size: 16px;"></i></a></td>
                                 <td  class="dataText"> <a href="javascript:void(0);" class="dataTextInActive" onclick="openPaymentDialog('<c:out value="${feesdetails.key.receiptnumber}"/>')"> <i class="fa fa-edit" style="color: #004080; font-size: 16px;"></i></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholargroup/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
