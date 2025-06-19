@@ -285,7 +285,7 @@
                 },
                 editable: false,
                 selectable: false,
-                events: '/abc/EventProcess/getEvents',
+                events: '/qpevents/EventProcess/getEvents',
                 eventClick: function(info) {
                     showEventDetails(info.event);
                 },

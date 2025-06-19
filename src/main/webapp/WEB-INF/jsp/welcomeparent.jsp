@@ -1,226 +1,354 @@
-<%-- 
-  Document   : Dash Board
-  Created on : Jan 13, 2012, 12:21:03 PM
-  Author     : Musaib
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dash Board</title>
-        <script src="/abc/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Calendar Events</title>
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- FullCalendar JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     
-	<style type="text/css">
+    <style>
+        :root {
+            --primary-color: #416884;
+            --primary-dark: #2d4a5f;
+            --primary-light: #5a8ab0;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --hover-color: #f5f5f5;
+        }
 
-		@font-face {
-		  font-family: "IBMPlexSans";
-  		  src: url("/abc/fonts/IBMPlexSans-Regular.ttf");
-		}
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+        }
 
-		#rcorners1 {
-		  border-radius: 25px;
-		  border: 0px solid;
-		  padding: 10px; 
-		  width: 340px;
-		  height: 80px; 
-		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		}
-		
-		
-		#labelname {
-		 	font-family: IBMPlexSans;
-		 	font-size: 14px;
-		}
-		
-		#labelnumber {
-		 	font-family: IBMPlexSans;
-		 	font-size: 14px;
-		}
-		
-			a:link {
-                color: black;
-                text-decoration: none;
-                font-family: arial;
-                font-size: 14px;
-            }
-            a:active {
-                color: #ef5b00;
-                text-decoration: underline;
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        #calendar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .fc-event {
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 2px 4px;
+            transition: all 0.3s ease;
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        
+        .fc-event:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background-color: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+        }
+
+        .fc-button {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .fc-button:hover {
+            background-color: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+        }
+
+        .fc-button-active {
+            background-color: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+        }
+        
+        #eventModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 25px;
+            border: none;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            color: #999;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: var(--primary-color);
+        }
+        
+        .event-details {
+            margin: 20px 0;
+        }
+        
+        .event-detail-row {
+            display: flex;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .event-detail-row:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .event-details label {
+            font-weight: 500;
+            min-width: 120px;
+            color: var(--primary-color);
+        }
+        
+        .event-details span {
+            flex: 1;
+            padding-left: 10px;
+        }
+
+        #modalTitle {
+            color: var(--primary-color);
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .fc-toolbar-title {
+            color: var(--primary-color) !important;
+        }
+
+        .fc-day-today {
+            background-color: rgba(65, 104, 132, 0.1) !important;
+        }
+
+        .fc-day-today .fc-daygrid-day-number {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 4px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
             }
             
-			a:hover {
-				text-decoration: underline;
-			}
-		
-	</style>    
-    <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-   
-    <body>
-    	
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+            
+            .fc-header-toolbar {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .fc-toolbar-chunk {
+                margin-bottom: 10px;
+            }
+            
+            .fc-button {
+                padding: 8px 12px !important;
+                font-size: 0.9em !important;
+            }
 
-	<!-- <div style="padding-left: 20px;height: 10px;">
-		<table style="align-self: left;">
-			<tr>
-				<td height="50px;"></td>
-			</tr>
+            .event-detail-row {
+                flex-direction: column;
+            }
 
-		</table>
-	</div> -->
-	
-	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 218px;" alt="ideoholic" src="/abc/images/abc.png"></h2>
-	</div>
-	
-	<div class="row" style="padding-left: 35px;">
-        	<div class="col" style="padding-bottom: 20px;">
-        			<div style="background-color:#ffffff">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					
-        					 <c:choose>
-                                <c:when test="${todaysAttendance eq 'P'}">
-                                    <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
-									src="/abc/images/studentattendance.svg" width="40" height="40"
-									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
-									</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
-									src="/abc/images/studentabsent.svg" width="40" height="40"
-									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
-									</a>
-                                </c:otherwise>
-                            </c:choose>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-     </div>
-     
-	<div class="row" style="padding-left: 20px;">
-        	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#243664">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/studentprofile.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
-							</a>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-     </div>
-     
-     <div class="row" style="padding-left: 20px;">
-        	
-        	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#FF914D">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/diary.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
-							</a>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	</div>
-        	
-        	<div class="row" style="padding-left: 20px;">
-        	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#FFCC00">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/fees.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Fees
-							</a>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	</div>
-        	
-        	<div class="row" style="padding-left: 20px;">
-        	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#90CCB8">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/abc/images/progressreport.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
-							</a>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	</div>
-        	<div class="row" style="padding-left: 20px;">
-        	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#9D0176">
-        			
-        			<table>
-        				<tr>
-        					<td style="padding-left:10px;padding-top:1px;">
-        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/logbook.svg" width="50" height="50"
-									alt="Logbook" style="vertical-align: bottom;" />Logbook
-							</a>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	</div>
-        	 
-        	 
+            .event-details label {
+                margin-bottom: 5px;
+            }
+
+            .event-details span {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="far fa-calendar-alt"></i> Calendar Events</h1>
+    </div>
+
+    <div class="container">
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Event Details</h2>
+            <div class="event-details">
+                <div class="event-detail-row">
+                    <label><i class="fas fa-heading"></i> Title:</label>
+                    <span id="eventTitle"></span>
+                </div>
+                <div class="event-detail-row">
+                    <label><i class="fas fa-align-left"></i> Description:</label>
+                    <span id="eventDescription"></span>
+                </div>
+                <div class="event-detail-row">
+                    <label><i class="fas fa-hourglass-start"></i> Start:</label>
+                    <span id="eventStart"></span>
+                </div>
+                <div class="event-detail-row">
+                    <label><i class="fas fa-hourglass-end"></i> End:</label>
+                    <span id="eventEnd"></span>
+                </div>
+                <div class="event-detail-row">
+                    <label><i class="fas fa-map-marker-alt"></i> Location:</label>
+                    <span id="eventLocation"></span>
+                </div>
+            </div>
         </div>
-</body>    
-</html>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            
+            // Initialize FullCalendar
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                editable: false,
+                selectable: false,
+                events: '/qpevents/EventProcess/getEvents',
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                },
+                eventDidMount: function(info) {
+                    // Set event background color to white
+                    info.el.style.backgroundColor = '#ffffff';
+                    // Set text color to a dark color for better visibility
+                    info.el.style.color = '#000000';
+                    // Add border to make events visible against white background
+                    info.el.style.border = '1px solid #cccccc';
+                    // Add tooltip
+                    info.el.title = info.event.title;
+                },
+                height: 'auto',
+                contentHeight: 'auto',
+                aspectRatio: 1.8,
+                timeZone: 'local'
+            });
+            calendar.render();
+
+            var modal = document.getElementById('eventModal');
+            var span = document.getElementsByClassName('close')[0];
+
+            function showEventDetails(event) {
+                document.getElementById('eventTitle').textContent = event.title;
+                document.getElementById('eventDescription').textContent = event.extendedProps.description || 'No description available';
+                
+                // Format dates
+                const startDate = new Date(event.start);
+                const endDate = event.end ? new Date(event.end) : startDate;
+                
+                document.getElementById('eventStart').textContent = formatDateTime(startDate);
+                document.getElementById('eventEnd').textContent = formatDateTime(endDate);
+                document.getElementById('eventLocation').textContent = event.extendedProps.location || 'No location specified';
+                
+                modal.style.display = 'block';
+            }
+
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            function formatDateTime(date) {
+                if (!date) return '';
+                
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                
+                return date.toLocaleDateString('en-US', options);
+            }
+        });
+    </script>
+</body>
+</html> 

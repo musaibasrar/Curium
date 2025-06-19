@@ -202,7 +202,8 @@
                 selectable: true,
                 selectMirror: true,
                 dayMaxEvents: true,
-                events: '/abc/EventProcess/getEvents',
+                selectLongPressDelay: 100,
+                events: '/qpevents/EventProcess/getEvents',
                 select: function(arg) {
                     openModal(null, arg);
                 },
@@ -366,10 +367,10 @@
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/abc/EventProcess/createEvent';
+                var url = '/qpevents/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/abc/EventProcess/updateEvent?id=' + eventId;
+                    url = '/qpevents/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -411,7 +412,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/abc/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('/qpevents/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {
