@@ -230,7 +230,7 @@ public class AttendanceDAO {
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId) {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
 		try{
-			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeId(attendeeId);
+			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeid(attendeeId);
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();

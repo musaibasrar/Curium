@@ -620,7 +620,7 @@ public class JobService {
 		int userId = Integer.parseInt(userLoginId);
 		boolean result = false;
 		remarks = remarks.replace("'", "''");
-		result = new JobDAO().updateQueryRemarks(queryId, remarks, userId);
+		result = jobDAO.updateQueryRemarks(queryId, remarks, userId);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}
