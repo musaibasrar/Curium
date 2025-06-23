@@ -29,6 +29,10 @@
         </property>
         <property name="issuedQty" type="int">
             <column name="issuedqty" />
+            <column name="availableQty" length="50" />
+        </property>
+        <property name="issuedQty" type="int">
+            <column name="issuedQty" length="50" />
         </property>
         <property name="shelf" type="string">
             <column name="shelf" length="100"/>
@@ -36,6 +40,5 @@
         <property name="branchid" type="int">
             <column name="branchid" />
         </property>
-        
     </class>
 </hibernate-mapping>

@@ -125,18 +125,12 @@ public class Book implements java.io.Serializable{
 		this.shelf = shelf;
 	}
 
-
-
 	public int getBranchid() {
 		return branchid;
 	}
-
-
-
+	
 	public void setBranchid(int branchid) {
 		this.branchid = branchid;
 	}
-
-	
 
 }
