@@ -10,11 +10,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Logbook</title>
-  	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
-     <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+  	<link rel="stylesheet" href="/childrenandglobal/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/childrenandglobal/js/openWindow.js"></script>
+     <script src="/childrenandglobal/js/jquery.min.js"></script>
+        <script src="/childrenandglobal/js/bootstrap.min.js"></script>
+        <script src="/childrenandglobal/js/popper.min.js"></script>
     <style type="text/css">
         body {
             font-family: 'Roboto', sans-serif;
@@ -88,7 +88,7 @@
                 <label for="message" style="font-size:20px;">Message</label>
                 <p id="message" class="message-content">${studentdiary.message}</p>
             </div>
-            <form action="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
+            <form action="/childrenandglobal/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
                 <div class="text-center">
                     <input type="submit" value="Back" class="btn">
                 </div>
