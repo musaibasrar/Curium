@@ -16,34 +16,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/brainystars/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/brainystars/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/brainystars/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/brainystars/css/datePicker/demos.css">
+        <script type="text/javascript" src="/brainystars/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/brainystars/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -300,7 +300,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/vision/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="/brainystars/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
@@ -374,7 +374,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brainystars/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1073,7 +1073,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.key.branchreceiptnumber}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.value}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/brainystars/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
                         
@@ -1189,13 +1189,13 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/vision/StudentProcess/viewAll";
+                form1.action="/brainystars/StudentProcess/viewAll";
                 form1.submit();
             }
             
             function Print(){
                 var form1=document.getElementById("form1");
-                form1.action="/vision/StudentProcess/printAdmissionForm";
+                form1.action="/brainystars/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>
