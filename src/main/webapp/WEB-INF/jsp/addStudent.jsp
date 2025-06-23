@@ -1213,6 +1213,37 @@ $(document).ready(function() {
 							
 						</tr>
 						<tr>
+									<td><br /></td>
+								</tr>
+						<tr>
+							<td class="alignLeft" >Cumulative record No.&nbsp;</td>
+								<td><input
+									name="crecord" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
+							</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Cumulative record Date&nbsp;</td>
+							<td ><label> <input name="dateofcr"
+									type="text"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepickerCD" size="36"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						<tr>
+									<td><br /></td>
+								</tr>
+						<tr>
+							<td class="alignLeft" >Progress&nbsp;</td>
+								<td><input
+									name="progress" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
+							</td>
+							<td  class="alignLeft" style="padding-left: 20px;"></td>
+							<td ></td>
+						</tr>
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -1744,6 +1775,24 @@ $(document).ready(function() {
 											id="fatherscaste" size="36" >
 
 									</label></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+
+									<td class="alignLeft">Occupation &nbsp;</td>
+									<td ><label> <input name="profession"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;"></td>
+
+									<td ></td>
 								</tr>
 
 								<tr>

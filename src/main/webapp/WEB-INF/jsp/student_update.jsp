@@ -1019,7 +1019,49 @@ for(Cookie cookie : cookies){
 							</td>
 
 							</tr>
-							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+							<tr>
+							<td class="alignLeft">Cumulative record No.
+								&nbsp;</td>
+								<td>
+										<input
+									name="crecord" type="text" class="myclass" value="${student.crecord}"
+									id="bhagyalakshmibondnumber" size="30">
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Cumulative record Date&nbsp;</td>
+							<td><label><input name="dateofcr"
+									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
+									id="datepickerCD" size="30" data-validate="validate(required)">
+							</label> </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+							<tr>
+							<td class="alignLeft">Progress
+								&nbsp;</td>
+								<td>
+										<input
+									name="progress" type="text" class="myclass" value="${student.subsequentprogress}"
+									id="bhagyalakshmibondnumber" size="30">
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">&nbsp;</td>
+							<td><label> 
+
+							</label></td>
+						</tr>	
 						<tr>
 
 							<td></td>
@@ -1544,6 +1586,28 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							
+							<td class="alignLeft">Occupation </td>
+							<td><label> <input name="profession"
+									type="text" class="myclass" id="remarksadditional" size="30"
+									value="<c:out default="" value="${parents.profession}" />">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;"></td>
+
+							<td></td>
+							
+						</tr>
+						
 
 						<tr>
 							<td><br /></td>

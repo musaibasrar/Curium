@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,15 @@ public class DocumentAction {
                 return "exportfailure";
         }
         
+	}
+	
+	
+	
+	@PostMapping("/printAdmissionAbstract")
+	public String printAdmissionAbstract() {
+
+		new DocumentService(request, response).printAdmissionAbstract();
+		return "printpreviewabstract";
 	}
 
 	@PostMapping("/searchForStudents")

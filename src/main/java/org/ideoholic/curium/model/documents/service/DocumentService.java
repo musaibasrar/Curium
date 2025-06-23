@@ -34,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -668,6 +669,80 @@ public class DocumentService {
 		request.setAttribute("taluka", taluka);
 		request.setAttribute("district", district);
 		
+	}
+
+
+	public boolean printAdmissionAbstract() {
+		boolean result = false;
+        String[] studentIDs = request.getParameterValues("studentIDs");
+        List<Long> ids = new ArrayList<Long>();
+        Parents parentsDetails = new Parents();
+     
+        	
+          int i = 1;
+       
+          for (String id : studentIDs) {
+
+              
+               System.out.println("Value of i is " + i);
+               int sid = Integer.valueOf(id);
+               parentsDetails = new PrintIdsDAO().printMultipleIds(id);
+               
+               //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
+
+               if (parentsDetails != null) {
+                   httpSession.setAttribute("studentname" + i + "", parentsDetails.getStudent().getName());
+                   httpSession.setAttribute("fathersname" + i + "", parentsDetails.getFathersname());
+                   httpSession.setAttribute("mothername" + i + "", parentsDetails.getMothersname());
+                   httpSession.setAttribute("profession" + i + "", parentsDetails.getProfession());
+                   httpSession.setAttribute("noofdependence" + i + "", parentsDetails.getNoofdependents());
+                   httpSession.setAttribute("annualincome" + i + "", parentsDetails.getParentsannualincome());
+                  // httpSession.setAttribute("occupation" + i + "", parentsDetails..getMothersname());
+                   httpSession.setAttribute("religion" + i + "", parentsDetails.getStudent().getReligion());
+                   httpSession.setAttribute("nationality" + i + "", parentsDetails.getStudent().getNationality());
+                   httpSession.setAttribute("caste" + i + "", parentsDetails.getStudent().getCaste());
+                   httpSession.setAttribute("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
+                   httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
+                   httpSession.setAttribute("address" + i + "", parentsDetails.getAddresspermanent());
+                   httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
+                   httpSession.setAttribute("gender" + i + "",parentsDetails.getStudent().getGender());
+                   httpSession.setAttribute("mothertongue" + i + "",parentsDetails.getStudent().getMothertongue());
+                   httpSession.setAttribute("schoollastattended" + i + "",parentsDetails.getStudent().getSchoollastattended());
+                   httpSession.setAttribute("stdlastattended" + i + "",parentsDetails.getStudent().getStdlaststudied());
+                   httpSession.setAttribute("admissiondate" + i + "",parentsDetails.getStudent().getAdmissiondate());
+                   httpSession.setAttribute("classonleaving" + i + "",parentsDetails.getStudent().getClassonleaving());
+                   httpSession.setAttribute("dateofleaving" + i + "",parentsDetails.getStudent().getDateleaving());
+                   httpSession.setAttribute("reasonofleaving" + i + "",parentsDetails.getStudent().getReasonleaving());
+                   httpSession.setAttribute("crecord" + i + "",parentsDetails.getStudent().getCrecord());
+                   httpSession.setAttribute("crecorddate" + i + "",parentsDetails.getStudent().getCrecorddate());
+                   httpSession.setAttribute("subsequentprogress" + i + "",parentsDetails.getStudent().getSubsequentprogress());
+                   httpSession.setAttribute("notcissued" + i + "",parentsDetails.getStudent().getNotcissued());
+                   httpSession.setAttribute("datetcissued" + i + "",parentsDetails.getStudent().getDatetcissued());
+                   httpSession.setAttribute("remark" + i + "",parentsDetails.getStudent().getRemarks());
+                   httpSession.setAttribute("age" + i + "",parentsDetails.getStudent().getAge());
+                   
+                   //result = true;
+               } else {
+
+                  
+                   //result = false;
+               }
+
+               i++;
+           }
+       
+       httpSession.setAttribute("iInitial", i);
+       i = (int) (Math.ceil((float) (i) / 3));
+       httpSession.setAttribute("endValue", i);
+       
+       
+        if (parentsDetails == null) {
+            result = false;
+        } else {
+            result = true;
+        }
+        return result;
+
 	}
 	
 	

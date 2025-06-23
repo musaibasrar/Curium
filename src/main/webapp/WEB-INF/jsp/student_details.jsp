@@ -718,6 +718,37 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Cumulative Record No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.crecord}" />
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">Cumulative Record Date
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
+                            </td>
+                          
+                           
+                        </tr>
+                        
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Progress
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.subsequentprogress}" />
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+                            </td>
+                          
+                           
+                        </tr>
+                        
            
 
                         <tr>
@@ -1015,6 +1046,12 @@ for(Cookie cookie : cookies){
                             <td width="25%"   class="alignLeft" height="50" >Income Certificate No.</td>
                             <td width="25%" class="tablerows"  >
                                  <c:out default="" value="${parents.fatherscaste}" />
+                                
+                            </td>
+                             <td  width="25%"  class="alignLeft" height="50">Occupation
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${parents.profession}" />
                                 
                             </td>
                         </tr>
