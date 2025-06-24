@@ -290,9 +290,15 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
+                buttonText: {
+                    today: 'Today',
+                    month: 'Month',
+                    week: 'Week',
+                    day: 'Day'
+                },
+                displayEventTime: false,
                 editable: false,
                 selectable: false,
-                displayEventTime: false, // Hide the time from the event title
                 events: '/qpevents/EventProcess/getEvents',
                 
                 // This function transforms each event object before it is rendered
