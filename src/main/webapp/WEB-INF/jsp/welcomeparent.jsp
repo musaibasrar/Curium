@@ -17,13 +17,14 @@
     
     <style>
         :root {
-            --primary-color: #416884;
+            --primary-color: #1a2258;
             --primary-dark: #2d4a5f;
             --primary-light: #5a8ab0;
             --secondary-color: #f8f9fa;
             --text-color: #333;
             --border-color: #e0e0e0;
             --hover-color: #f5f5f5;
+            --booked-color: #DC2626;
         }
 
         body {
@@ -65,15 +66,15 @@
             border-radius: 4px;
             padding: 2px 4px;
             transition: all 0.3s ease;
-            background-color: var(--primary-color) !important;
-            border-color: var(--primary-color) !important;
+            background-color: #ffd600 !important;
+            border-color: #ffd600 !important;
         }
         
         .fc-event:hover {
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            background-color: var(--primary-dark) !important;
-            border-color: var(--primary-dark) !important;
+            background-color: #DC262 !important;
+            border-color: #DC262 !important;
         }
 
         .fc-button {
@@ -177,7 +178,7 @@
         }
 
         .fc-toolbar-title {
-            color: var(--primary-color) !important;
+            color: #1cd047 !important;
         }
 
         .fc-day-today {
@@ -233,13 +234,13 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1><i class="far fa-calendar-alt"></i> Calendar Events</h1>
+   	<div class="header">
+        <h1><i class="far fa-calendar-alt"></i> Booked Dates</h1>
     </div>
-
-    <div class="container">
+		<div id="calendar"></div>
+   <!--  <div class="container">
         <div id="calendar"></div>
-    </div>
+    </div> -->
 
     <!-- Event Modal -->
     <div id="eventModal" class="modal">
@@ -264,7 +265,7 @@
                     <span id="eventEnd"></span>
                 </div>
                 <div class="event-detail-row">
-                    <label><i class="fas fa-map-marker-alt"></i> Location:</label>
+                    <label><i class="fas fa-map-marker-alt"></i> Notes:</label>
                     <span id="eventLocation"></span>
                 </div>
             </div>
@@ -274,8 +275,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-            
-            // Initialize FullCalendar
+
+            // Colors for different times of the day
+            const timeBasedColors = {
+                morning: '#039be5',   // Light Blue (before 12 PM)
+                afternoon: '#43a047', // Green (12 PM - 5 PM)
+                evening: '#e53935'    // Red (after 5 PM)
+            };
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 headerToolbar: {
@@ -285,20 +292,32 @@
                 },
                 editable: false,
                 selectable: false,
+                displayEventTime: false, // Hide the time from the event title
                 events: '/qpevents/EventProcess/getEvents',
+                
+                // This function transforms each event object before it is rendered
+                eventDataTransform: function(eventData) {
+                    const startDate = new Date(eventData.start);
+                    const hour = startDate.getHours();
+
+                    if (hour < 12) {
+                        eventData.backgroundColor = timeBasedColors.morning;
+                        eventData.borderColor = timeBasedColors.morning;
+                    } else if (hour >= 12 && hour < 17) {
+                        eventData.backgroundColor = timeBasedColors.afternoon;
+                        eventData.borderColor = timeBasedColors.afternoon;
+                    } else {
+                        eventData.backgroundColor = timeBasedColors.evening;
+                        eventData.borderColor = timeBasedColors.evening;
+                    }
+                    
+                    return eventData;
+                },
+
                 eventClick: function(info) {
                     showEventDetails(info.event);
                 },
-                eventDidMount: function(info) {
-                    // Set event background color to white
-                    info.el.style.backgroundColor = '#ffffff';
-                    // Set text color to a dark color for better visibility
-                    info.el.style.color = '#000000';
-                    // Add border to make events visible against white background
-                    info.el.style.border = '1px solid #cccccc';
-                    // Add tooltip
-                    info.el.title = info.event.title;
-                },
+                
                 height: 'auto',
                 contentHeight: 'auto',
                 aspectRatio: 1.8,

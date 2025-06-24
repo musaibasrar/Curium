@@ -117,28 +117,28 @@ for(Cookie cookie : cookies){
 						<tr><td></td></tr>
 						<tr style="height: 45px;">
 							
-									<td style="padding-left: 20px;width: 170px;">
-								<a target="mainFrame" href="/qpevents/welcomeparent" ><img src="/qpevents/images/curiumheader.png" width="90" height="30"/></a>
+									<td style="padding-left: 20px;width: 100px;">
+								<a target="mainFrame" href="/qpevents/welcomeparent" ><img src="/qpevents/images/curiumheader.png" width="30" height="30"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/qpevents/images/qpevents/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td align="left" style="padding-left:40px;">
+							<td align="left" style="padding-left: 10px;">
  
                                                          <a target="mainFrame" href="/qpevents/EventProcess/calendar" style="display: inline-flex; align-items: center;">
      <img src="/qpevents/images/addcalendar.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
-     <strong style="font-size: 18px;">Create Event</strong>
+     <strong style="font-size: 10px;">Create Event</strong>
  </a>&nbsp;&nbsp;
  
 									 <a target="mainFrame" href="/qpevents/EventProcess/viewCalendar" style="display: inline-flex; align-items: center;">
 									     <img src="/qpevents/images/viewcalendar.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
-									     <strong style="font-size: 18px;">View Event</strong>
+									     <strong style="font-size: 10px;">View Event</strong>
 									 </a>&nbsp;&nbsp;
  
                                                           <a target="_parent"
                                                                  href="/qpevents/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
                                                                          src="/qpevents/images/logout.svg" width="22" height="22" alt="Log Out" 
-                                                                 /><strong style="font-size: 17px;">Logout</strong></a></td>
+                                                                 /><strong style="font-size: 10px;">Logout</strong></a></td>
 
 
 						</tr>
