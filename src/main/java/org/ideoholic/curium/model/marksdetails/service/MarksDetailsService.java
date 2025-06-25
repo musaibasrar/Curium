@@ -143,7 +143,7 @@ public class MarksDetailsService {
 				
 				marks.setSid((int) mapEntry.getKey());
 				marks.setMarksobtained(mymark);
-				String currentYear = currentAcademicYear;
+				String currentYear = dto.getAcademicYear();
 				marks.setAcademicyear(currentYear);
 				marks.setBranchid(Integer.parseInt(branchId));
 				marks.setUserid(Integer.parseInt(userId));
