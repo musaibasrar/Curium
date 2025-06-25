@@ -325,6 +325,27 @@ public class studentDetailsDAO {
 					query.executeUpdate();
 				}
 				
+			}else if(ch==null) {
+				
+				Query queryUpdateBranchClassHierarchy = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+				Classhierarchy chUpdateBranch = (Classhierarchy) queryUpdateBranchClassHierarchy.uniqueResult();
+				if(chUpdateBranch!=null) {
+				for (Student student : students) {
+					
+					 String[] tempstudent = student.getClassstudying().split(delimiter);
+					 String sect = "";
+					 
+					 if(tempstudent.length>=2){
+						  sect = tempstudent[1];
+					 }
+					 
+					String hqlUpdateBranch = "UPDATE Student set classstudying = '"+chUpdateBranch.getUpperclass()+"--"+sect+"', promotedyear='"+promotedYear+"', branchid='"+chUpdateBranch.getBranchid()+"' WHERE sid = "+student.getSid()+"";
+					Query queryUpdateBranch = session.createQuery(hqlUpdateBranch);
+					queryUpdateBranch.executeUpdate();
+				}
+				
+			
+			}
 			}
 	
 			transaction.commit();

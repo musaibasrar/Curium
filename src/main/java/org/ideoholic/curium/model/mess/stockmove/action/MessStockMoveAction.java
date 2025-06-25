@@ -124,4 +124,10 @@ public class MessStockMoveAction {
 		}
     }
 
+	@PostMapping("/printStockMove")
+	public String printStockMove() {
+
+		new MessStockMoveService(request, response).printStockMove();
+		return "bill";
+	}
 }

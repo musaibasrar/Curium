@@ -705,6 +705,74 @@ public class MessStockMoveService {
 		
 		return result;
 	}
+
+
+
+
+	public void printStockMove() {
+		
+	String[] smIds = request.getParameterValues("stockmoveid");
+	
+	for (String stockmoveids : smIds) {
+		
+		
+		MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
+		String[] messStockMoveBillNo = messStockMove.getExternalid().split("_");
+		String[] custDetails = messStockMove.getIssuedto().split("_");
+		String queryMain = "from MessStockMove msm where msm.externalid like '%_"+messStockMoveBillNo[1]+"'";
+		List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain);
+		
+		//BILL DETAILS
+		
+		List<Bill> billList = new ArrayList<Bill>();
+		BigDecimal grandTotal = BigDecimal.ZERO;
+		
+		for (MessStockMove stockMoveSingle : messStockMoveList) {
+			Bill bill = new Bill();
+			MessItems messItem = new MessItemsDAO().getItem(stockMoveSingle.getItemid());
+			bill.setItemname(messItem.getName());
+			bill.setSalesprice(Float.parseFloat(stockMoveSingle.getPurpose()));
+			billList.add(bill);
+			grandTotal = grandTotal.add(new BigDecimal(stockMoveSingle.getPurpose()));
+		}
+		
+
+		request.setAttribute("billdetails", billList);
+		//request.setAttribute("billdetails", messStockMovesList);
+		
+		request.setAttribute("billdetailstransactiondate", DateUtil.dateParserddMMYYYY(messStockMove.getTransactiondate()));
+		request.setAttribute("billdetailsstudentname", custDetails[0]);
+		request.setAttribute("billdetailsclassstudying", custDetails[1]);
+		request.setAttribute("billdetailsfathername", custDetails[2]);
+		
+		
+		NumberToWord toWord = new NumberToWord();
+		String grandTotalInWords = "";
+		if(grandTotal.compareTo(BigDecimal.ZERO) != 0){
+			grandTotalInWords = toWord.convert(grandTotal.intValue());
+		}
+		
+		StringBuffer res = new StringBuffer();
+		String[] strArr = grandTotalInWords.split(" ");
+		
+		for(String str : strArr){
+			char[] stringArray = str.trim().toCharArray();
+			stringArray[0] = Character.toUpperCase(stringArray[0]);
+			str = new String(stringArray);
+			res.append(str).append(" ");
+		}
+		grandTotalInWords = res.toString().trim();
+		request.setAttribute("billdetailstotaltotal", grandTotalInWords+" "+"Only");
+		request.setAttribute("billgrandtotal", grandTotal);
+		
+		//Get Bill No
+     	 request.setAttribute("billno", messStockMoveBillNo[1]);
+     	 
+	
+		
+	}
+	
+}
 	
 	
 }

@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
 
@@ -118,7 +119,13 @@ public class EnquiryService {
 	    request.setAttribute("academicyear", academicyear);
 	    request.setAttribute("notes", notes);
 	    
-	    return new enquiryDAO().add(admissionEnquiry);
+	    boolean result = new enquiryDAO().add(admissionEnquiry);
+	    
+	    if(result) {
+	    	new SmsService(request, response).sendSMS(mobileno, " ", "enquiry");	
+	    }
+	    
+	    return result;
 	    
 	}
 

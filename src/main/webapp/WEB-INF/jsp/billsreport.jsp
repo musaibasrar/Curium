@@ -518,7 +518,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
+		form1.action = "/roshan/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -526,7 +526,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.action = "/roshan/MessItemsMoveProcess/printStockMove";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -884,7 +884,7 @@ for(Cookie cookie : cookies){
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
-                    		<!-- <button id="print">Print</button> --> 
+                    		<button id="print">Print</button>
                     		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
