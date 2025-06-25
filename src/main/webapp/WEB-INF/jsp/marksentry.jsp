@@ -579,10 +579,31 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td width="30%" class="alignRight">Exam Class &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft"><label> <select name="classsearchselected"
+									id="classsearchselected" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classselected}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="subject" id="subject"
-									style="width: 240px" ">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listSubjectNames}" var="listSubject">
@@ -607,7 +628,7 @@ for(Cookie cookie : cookies){
 						<td width="30%" class="alignRight">Exam &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="exam" id="exam"
-									style="width: 240px">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listExam}" var="listExam">
@@ -622,6 +643,28 @@ for(Cookie cookie : cookies){
 								</select></td>
 						</tr>
 						
+												<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td  width="30%" class="alignRight">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="16%" height="30" class="alignLeft">
+                                        <label> <select name="academicyear" id="academicyear" required
+									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${currentAcademicYear}</option>
+										 <c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+										
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>

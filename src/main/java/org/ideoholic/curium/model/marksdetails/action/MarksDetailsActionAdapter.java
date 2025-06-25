@@ -157,6 +157,7 @@ public class MarksDetailsActionAdapter {
         dto.setExam(request.getParameter("exam"));
         dto.setSubject(request.getParameter("subject"));
         dto.setClassSearch(request.getParameter("classsearch"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
         ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
 
         return resultResponse.getMessage();
