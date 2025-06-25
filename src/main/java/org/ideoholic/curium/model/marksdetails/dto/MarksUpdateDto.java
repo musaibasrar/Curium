@@ -10,4 +10,5 @@ public class MarksUpdateDto {
     private String exam;
     private String subject;
     private String classSearch;
+    private String academicYear;
 }
