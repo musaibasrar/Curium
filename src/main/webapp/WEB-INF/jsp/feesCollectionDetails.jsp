@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>Fees Collection Details</title>
 <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 <link rel="stylesheet" href="/shatabdi/css/font-awesome.css">

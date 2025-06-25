@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,17 +20,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
@@ -965,13 +960,14 @@ public class DocumentService {
 				if(studentId==tcSid) {
 					Student student = parents.getStudent();
 					student.setNotcissued(transferCert.getNoofissues());
+					student.setTcid(transferCert.getTcid());
 					parents.setStudent(student);
 				}
 				
 			}
 		}
 		request.setAttribute("studenttcissued", listofParents);
-				}
+		}
 
 
 	public void multiClassSearchRegistrationReport() {
@@ -1030,6 +1026,37 @@ public class DocumentService {
 
 	
 	}
+
+
+	public boolean printTcList() {
+		String[] feesIds = request.getParameterValues("studentIDs");
+		List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+		List<Integer> sid = new ArrayList<Integer>(); 
+		for (String id : feesIds) {
+		    sid.add(Integer.parseInt(id));
+		}
+				List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+		
+		for (Parents parents : listofParents) {
+			int studentId = parents.getStudent().getSid();
+			
+			for (Transfercertificate transferCert : tc) {
+				int tcSid = transferCert.getSid();
+				if(studentId==tcSid) {
+					Student student = parents.getStudent();
+					student.setNotcissued(transferCert.getNoofissues());
+					student.setTcid(transferCert.getTcid());
+					parents.setStudent(student);
+				}
+				
+			}
+		}
+		request.setAttribute("studenttcissued", listofParents);
+		return true;
+			}
+
+
+	
 
 	
 	

@@ -35,6 +35,7 @@
         <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
         <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -207,9 +208,9 @@
             } );
         </script>
         <script type="text/javascript">
-            function deleteRecords(){
+            function printRecords(){
                 var form1=document.getElementById("form1");
-                 
+                form1.action="/shatabdi/DocumentsProcess/printTcList";
                 form1.submit();
             }
             function filter2 (phrase, _id)
@@ -306,12 +307,12 @@
         </script>
         <script type="text/javascript">
             $(function(){
-                $("#delete").button({
+                $("#print").button({
                     icons:{
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                    deleteRecords();
+                    printRecords();
                     return false;
 
                 });
@@ -368,6 +369,7 @@
                 //window.location.reload();
             } 
         </script>
+      
     </head>
       <%
 //allow access only if session exists
@@ -403,6 +405,7 @@ for(Cookie cookie : cookies){
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">TCID</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Father Name&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
@@ -419,6 +422,7 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${parent.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${parent.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${parent.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${parent.student.studentexternalid}"/></a></td>
+                                <td class="dataText"><c:out value="${parent.student.tcid}"/></td>
                                 <td class="dataText"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"><c:out value="${parent.fathersname}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${parent.student.classstudying}"/></td>
@@ -429,7 +433,8 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><!-- <input value="Archive" type="submit" id="delete"/> --> </td>
+                            <td  class="footerTD" colspan="2" ><input value="Print" style="width: 35px;"
+							id="print"/></td>
                     
                         </tr></tfoot>
                 </table>

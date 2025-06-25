@@ -192,4 +192,15 @@ public class DocumentAction {
 		return "studentsregistrationreport";
 	}
 	
+	@PostMapping("/printTcList")
+	public String printTcList() {
+		
+		if(new DocumentService(request, response).printTcList()){
+			return "printtclist";
+		}else{
+			return "error";
+		}
+		
+	}
+	
 }
