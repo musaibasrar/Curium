@@ -94,6 +94,8 @@ public class StampFeesActionAdapter {
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		searchStudentDto.setStudentType(request.getParameter("studenttype"));
+		searchStudentDto.setCategoryYear(request.getParameter("categoryyear"));
 		FeescategoryResponseDto feescategoryResponseDto = stampFeesService.advanceSearchForStampFees(searchStudentDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		request.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
