@@ -167,4 +167,11 @@ public class StandardActionAdapter {
         ResultResponse resultResponse = standardService.viewClassesForTeacher(result.getEmployee().getClassteacher(),httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
 	}
+
+	public void viewClassesForTeacherMarksEntry() {
+
+        EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        ResultResponse resultResponse = standardService.viewClassesForTeacher(result.getEmployee().getClassesteaching(),httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
+	}
 }
