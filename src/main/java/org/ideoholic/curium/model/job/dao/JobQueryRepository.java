@@ -47,5 +47,5 @@ public interface JobQueryRepository extends JpaRepository<JobQuery, Integer> {
 	    
 	    @Query("SELECT jq FROM JobQuery jq WHERE jq.id = :queryId AND jq.teacher.tid = :tid")
 	    JobQuery findByQueryIdAndStaffId(@Param("queryId") int queryId, @Param("tid") int tid);
-	    
+			    
 }

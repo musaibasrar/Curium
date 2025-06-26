@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.transaction.Transactional;
 
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -376,23 +378,29 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public boolean updateQueryRemarks(String queryId, String remarks, int userId) {
 			
-			boolean result = false;
+			int queryid = Integer.parseInt(queryId);
+			AtomicBoolean result = new AtomicBoolean(false);
 			try {
-				transaction = session.beginTransaction();
-				
-					Query query = session.createQuery("update JobQuery set feedback = IFNULL (CONCAT( feedback , '"+remarks+"' ), '"+remarks+"'), updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
-					query.executeUpdate();
-				
-				transaction.commit();
-				result = true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
-			return result;
+                jobQueryRepository.findById(queryid).ifPresent(jobQuery -> {
+                	String feedBack = jobQuery.getFeedback();
+                    if(ObjectUtils.isEmpty(feedBack)) {	
+                    	jobQuery.setFeedback(remarks);
+                    }
+                    else {
+                    	jobQuery.setFeedback(feedBack+" "+ remarks);
+                    }
+                    jobQueryRepository.save(jobQuery);
+    				result.set(true);
+                });
+			}  catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			}
+			return result.get();
 		}
 
 
