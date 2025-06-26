@@ -99,5 +99,8 @@
         <property name="employeedoc5" type="string">
             <column name="employeedoc5" />
             </property>
+             <property name="classteacher" type="string">
+            <column name="classteacher" length="100" />
+        </property>
     </class>
 </hibernate-mapping>
