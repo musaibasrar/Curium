@@ -2,6 +2,8 @@ package org.ideoholic.curium.model.marksdetails.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.marksdetails.dto.*;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
@@ -27,6 +29,9 @@ public class MarksDetailsActionAdapter {
     @Autowired
     private MarksDetailsService marksDetailsService;
 
+    @Autowired
+    private EmployeeService employeeService;
+    
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -58,7 +63,7 @@ public class MarksDetailsActionAdapter {
         
         SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
-        request.setAttribute("listSubjectNames", responseDto.getSubjectList());
+        request.setAttribute("listSubjectNames", responseDto.getSubjectListName());
         request.setAttribute("listExam", responseDto.getExamsList());
         request.setAttribute("classselected", dto.getAddClass());
     }
@@ -199,5 +204,20 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 
         return responseDto.isSuccess();
+    }
+
+	public void SearchForTeacher() {
+
+        SearchStudentExamDto dto = new SearchStudentExamDto();
+        dto.setStudentName(request.getParameter("namesearch"));
+        dto.setAddClass(request.getParameter("classsearch"));
+        dto.setAddSec(request.getParameter("secsearch"));
+        
+        EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        SearchStudentResponseDto responseDto = marksDetailsService.SearchForTeacher(result,dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
+        request.setAttribute("listSubjectNames", responseDto.getSubjectListName());
+        request.setAttribute("listExam", responseDto.getExamsList());
+        request.setAttribute("classselected", dto.getAddClass());
     }
 }
