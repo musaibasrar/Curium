@@ -5,6 +5,10 @@ package org.ideoholic.curium.model.attendance.action;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/AttendanceProcess")
 public class AttendanceAction {
 
+	@Autowired
+    HttpServletRequest request;
+    
+	@Autowired
+	HttpServletResponse response;
+    
+	@Autowired
+	HttpSession httpSession;
 
 	@Autowired
 	private AttendanceActionAdapter attendanceActionAdapter;
@@ -43,7 +55,21 @@ public class AttendanceAction {
 	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/markAttendance")
 	public String markAttendance() {
-		standardActionAdapter.viewClasses();
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
 		return "attendancemark";
 	}
 
