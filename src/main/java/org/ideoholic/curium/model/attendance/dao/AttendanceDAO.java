@@ -38,6 +38,9 @@ public class AttendanceDAO {
 	@Autowired
 	private AttendanceMasterRepository attendanceMasterRepo;
 
+	@Autowired
+	private StudentDailyAttendanceRepository studentDailyAttendanceRepository;
+
 	public List<Teacher> readListOfObjects() {
 		// TODO Auto-generated method stub
 		return null;
@@ -239,38 +242,32 @@ public class AttendanceDAO {
 		return studentAttendanceMaster;
 	}
 
+	@Transactional
 	public boolean saveStudentAttendance(List<Studentdailyattendance> listStudentAttendance) {
-		
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			for (Studentdailyattendance studentdailyattendance : listStudentAttendance) {
-				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where" +
-						" attendeeid='"+studentdailyattendance.getAttendeeid()+"' and " +
-								"date= CURDATE() and academicyear = '"+studentdailyattendance.getAcademicyear()+"'");
-				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
-				if(studentDailyAttendanceDetails == null){
-					session.save(studentdailyattendance);
-				}else{
-					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = " +
-							"'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " +
-									"'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
-					queryTwo.executeUpdate();
-				}
-			}
-			
-			transaction.commit();
+
+		try {
+			listStudentAttendance.forEach(studentdailyattendance -> {
+
+				// Fetch attendance by attendee ID, current date, and academic year
+				Studentdailyattendance existingAttendance = studentDailyAttendanceRepository
+						.findByAttendeeidAndDateAndAcademicyear(
+								studentdailyattendance.getAttendeeid().toString(),
+								LocalDate.now(),
+								studentdailyattendance.getAcademicyear()
+						).map(attendance -> {
+							attendance.setAttendancestatus(studentdailyattendance.getAttendancestatus());
+							return studentDailyAttendanceRepository.save(attendance);
+						})
+						.orElseGet(() -> {
+							return studentDailyAttendanceRepository.save(studentdailyattendance);
+						});
+			});
 			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			log.info(e.getMessage());
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+
 		}
-		return false;
 	}
 
 	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, String date, String studentExternalId, int branchId) {
