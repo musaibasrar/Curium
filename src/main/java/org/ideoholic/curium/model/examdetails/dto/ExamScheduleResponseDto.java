@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.examdetails.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class ExamScheduleResponseDto {
     private List<Exams> exams;
     private List<Subject> list;
+    private List<Subjectmaster> listSubjectName;
     private boolean success;
     private String selectedclass;
     private String selectedexam;

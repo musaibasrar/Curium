@@ -47,6 +47,9 @@ public class EmployeeActionAdapter {
         employeeDto.setBankName(request.getParameter("bankname"));
         employeeDto.setBankIFSC(request.getParameter("bankifsc"));
         employeeDto.setAccNo(request.getParameter("accno"));
+        employeeDto.setClassesTeaching(request.getParameterValues("classesteaching"));
+        employeeDto.setClassTeacher(request.getParameterValues("classteacher"));
+        employeeDto.setSubjectsTeaching(request.getParameterValues("subjectsteaching"));
         ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("branchcode").toString());
         return resultResponse.isSuccess();
     }
@@ -121,7 +124,8 @@ public class EmployeeActionAdapter {
         ViewAllRelationsResponseDto viewAllRelationsResponseDto = employeeService.viewAllRelations(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("listDepartment", viewAllRelationsResponseDto.getListDepartment());
         httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
-
+        httpSession.setAttribute("listSubjectNames", viewAllRelationsResponseDto.getListSubjectMaster());
+        httpSession.setAttribute("classdetailslist", viewAllRelationsResponseDto.getListClasssec());
     }
     public void searchEmployee() {
 

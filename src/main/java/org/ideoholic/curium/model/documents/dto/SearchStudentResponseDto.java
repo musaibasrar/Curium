@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 
 
 @Data
@@ -23,6 +24,7 @@ public class SearchStudentResponseDto {
 		private boolean success = false;
 		private List<Parents> searchStudentList;
 		private List<Exams> examsList;
+		private List<Subjectmaster> subjectListName;
 		private List<Subject> subjectList;
 		private String classSearch;
 }

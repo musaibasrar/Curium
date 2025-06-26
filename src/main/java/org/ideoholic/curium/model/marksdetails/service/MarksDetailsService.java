@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -215,8 +218,8 @@ public class MarksDetailsService {
 		result.setSearchStudentList(searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-		result.setSubjectList(subjectList);
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
@@ -429,8 +432,8 @@ public class MarksDetailsService {
 	public SearchStudentResponseDto getSubjectExams(String branchId) {
 		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-		result.setSubjectList(subjectList);
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
@@ -1782,6 +1785,80 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		 */
 	}
 
+	return result;
+}
+
+public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto employeeDetails, SearchStudentExamDto dto, String branchId) {
+	SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
+
+	if(branchId!=null){
+		
+	String queryMain = "From Parents as parents where";
+	String studentname = DataUtil.emptyString(dto.getStudentName());
+
+	String addClass = dto.getAddClass();
+	String addSec = dto.getAddSec();
+	String conClassStudying = "";
+	String conClassStudyingEquals = "";
+
+	if (!addClass.equalsIgnoreCase("")) {
+
+		conClassStudying = addClass+"--" +"%";
+
+	}
+	if (!addSec.equalsIgnoreCase("")) {
+		conClassStudying = addClass;
+		conClassStudying = conClassStudying+"--"+addSec+"%";
+	}
+
+	String classStudying = DataUtil.emptyString(conClassStudying);
+	String querySub = "";
+
+	if (!studentname.equalsIgnoreCase("")) {
+		querySub = " parents.Student.name like '%" + studentname + "%'";
+	}
+
+	if (!classStudying.equalsIgnoreCase("")) {
+		querySub = " parents.Student.classstudying like '" + classStudying
+				+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+		querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
+	}
+
+	queryMain = queryMain + querySub;
+	/*
+	 * queryMain =
+	 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+	 * ;
+	 */
+	System.out.println("SEARCH QUERY ***** " + queryMain);
+	List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+	result.setSearchStudentList(searchStudentList);
+	
+	
+	List<String> classTeacherList = Arrays.asList(employeeDetails.getEmployee().getSubjectsteaching().split("\\s*,\\s*"));
+	// get all the subjects
+	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	List<Subjectmaster> subjectListFinal = new ArrayList<Subjectmaster>();
+	
+	classTeacherList = new ArrayList<>(new LinkedHashSet<>(classTeacherList));
+	
+	for (Subjectmaster subject : subjectList) {
+	    String subjectName = subject.getSubjectname();
+	    if (classTeacherList.contains(subjectName)) {
+	        subjectListFinal.add(subject);
+	    }
+	}
+	
+	result.setSubjectListName(subjectListFinal);
+
+	// get the list for all the midterms
+	List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+	result.setExamsList(examList);
+	result.setClassSearch(addClass);
+	result.setSuccess(true);
+	
+	}
 	return result;
 }
 

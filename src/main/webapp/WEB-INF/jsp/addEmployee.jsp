@@ -225,6 +225,17 @@
 	color: #325f6d;
 }
 -->
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
 </style>
 
 
@@ -633,7 +644,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRight">Total Experience &nbsp;</td>
-							<td align="left"><label> <input
+							<td ><label> <input
 									name="totalexperience" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="totalexperience" size="36" onblur="validateName();">
@@ -660,7 +671,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td class="alignRight">Department &nbsp;</td>
-							<td class="alignLeft"><label>
+							<td ><label>
 									<select name="department" id="department"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -678,7 +689,7 @@ for(Cookie cookie : cookies){
 
 
 							<td class="alignRight">Designation &nbsp;</td>
-							<td class="alignLeft"><label>
+							<td ><label>
 									<select name="designation" id="designation"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -706,7 +717,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 						<td class="alignRight">Father / Guardian Name &nbsp;</td>
-							<td align="left"><label> <input
+							<td><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
@@ -735,11 +746,85 @@ for(Cookie cookie : cookies){
 									onkeyup="check(this.value);" 
 							</label></td> -->
 							<td class="alignRight">Current Employee &nbsp;</td>
-							<td class="alignLeft">&nbsp;Yes<input
+							<td >&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id)" />
+							</td>
+							
+							
+							<td class="alignRight">Subjects Teaching &nbsp;</td>
+							<td ><c:forEach items="${listSubjectNames}" var="listSubject" varStatus="status">
+    													<label class="labelClass" style="font-weight: bold; color: #325F6D">
+       													 <input type="checkbox" name="subjectsteaching" value="${listSubject.subjectname}">
+       															 ${listSubject.subjectname}
+   														 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+   													 <c:if test="${(status.index + 1) % 3 == 0}">
+       													 <br>
+ 													   </c:if>
+													</c:forEach>
+
+							</td>
+							
+							
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+
+							<td class="alignRight">Class Teacher &nbsp;</td>
+							<td >
+							
+									<div class="checkbox-container">
+									    <c:set var="counter" value="0" scope="page" />
+									    <c:forEach items="${classdetailslist}" var="classdetails">
+									        <c:if test="${classdetails.classdetails != ''}">
+									            <c:forEach items="${classdetailslist}" var="sectiondetails">
+									                <c:if test="${sectiondetails.section != ''}">
+									                    <div class="checkbox-item">
+									                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+									                            <input type="checkbox" name="classteacher"
+									                                   value="${classdetails.classdetails}--${sectiondetails.section}">
+									                            ${classdetails.classdetails} ${sectiondetails.section}
+									                        </label>
+									                    </div>
+									                    <c:set var="counter" value="${counter + 1}" scope="page" />
+									                </c:if>
+									            </c:forEach>
+									        </c:if>
+									    </c:forEach>
+									</div>
+
+
+							</td>
+							
+							
+							<td class="alignRight">Classes Teaching &nbsp;</td>
+							<td ><div class="checkbox-container">
+									    <c:set var="counter" value="0" scope="page" />
+									    <c:forEach items="${classdetailslist}" var="classdetails">
+									        <c:if test="${classdetails.classdetails != ''}">
+									            <c:forEach items="${classdetailslist}" var="sectiondetails">
+									                <c:if test="${sectiondetails.section != ''}">
+									                    <div class="checkbox-item">
+									                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+									                            <input type="checkbox" name="classesteaching"
+									                                   value="${classdetails.classdetails}--${sectiondetails.section}">
+									                            ${classdetails.classdetails} ${sectiondetails.section}
+									                        </label>
+									                    </div>
+									                    <c:set var="counter" value="${counter + 1}" scope="page" />
+									                </c:if>
+									            </c:forEach>
+									        </c:if>
+									    </c:forEach>
+									</div>
+
 							</td>
 
 						</tr>
