@@ -38,5 +38,8 @@ public class EmployeeDto {
     private String employeedoc4delete;
     private String employeedoc5delete;
     private String branchId;
+    private String[] subjectsTeaching;
+    private String[] classesTeaching;
+    private String[] classTeacher;
 
 }
