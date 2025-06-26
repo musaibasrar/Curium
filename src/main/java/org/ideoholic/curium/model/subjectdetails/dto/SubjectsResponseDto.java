@@ -9,5 +9,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class SubjectsResponseDto {
     private List<Subject> list;
+    private List<Subjectmaster> listSubjectNames;
     private boolean success;
 }
