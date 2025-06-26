@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -14,22 +15,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/greatindiaacademy/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/greatindiaacademy/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/greatindiaacademy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/greatindiaacademy/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -190,8 +191,19 @@
 	color: #325f6d;
 }
 -->
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
 </style>
-<script type="text/javascript" src="/greatindiaacademy/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	document.getElementById("UpdateExecutive").style.display = 'none';
@@ -295,7 +307,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/greatindiaacademy/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -308,7 +320,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/greatindiaacademy/EmployeeProcess/viewAllEmployee"
+	<form action="/vision/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -575,10 +587,97 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
+							
+							<td width="20%" class="alignRight">Subjects Teaching &nbsp;</td>
+
+							<td width="28%"><label> <c:forEach var="subject" items="${listSubjectNames}">
+													    <c:set var="isChecked" value="${fn:contains(employee.subjectsteaching, subject.subjectname)}" />
+													    <label>
+													        <input type="checkbox" name="subjectsteaching"
+													               value="${subject.subjectname}"
+													               <c:if test="${employee.subjectsteaching.contains(subject.subjectname)}">checked</c:if> />
+													        ${subject.subjectname}
+													    </label><br/>
+													</c:forEach>
+
+							</label></td>
 						<tr>
 
 							<td></td>
 
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td width="16%" class="alignRight">Class Teacher&nbsp;</td>
+
+							<td width="28%"><label>
+							
+													<div class="checkbox-container">
+													    <c:set var="counter" value="0" scope="page" />
+													    <c:forEach items="${classdetailslist}" var="classdetails">
+													        <c:if test="${classdetails.classdetails != ''}">
+													            <c:forEach items="${classdetailslist}" var="sectiondetails">
+													                <c:if test="${sectiondetails.section != ''}">
+													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
+													                    <div class="checkbox-item">
+													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+													                            <input type="checkbox" name="classteacher"
+													                                   value="${classSec}"
+													                                   <c:if test="${classteacherList.contains(classSec)}">checked</c:if> />
+													                            ${classSec}
+													                        </label>
+													                    </div>
+													                    <c:set var="counter" value="${counter + 1}" scope="page" />
+													                </c:if>
+													            </c:forEach>
+													        </c:if>
+													    </c:forEach>
+													</div>
+
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
+
+							<td width="28%"><label> <div class="checkbox-container">
+													    <c:set var="counter" value="0" scope="page" />
+													    <c:forEach items="${classdetailslist}" var="classdetails">
+													        <c:if test="${classdetails.classdetails != ''}">
+													            <c:forEach items="${classdetailslist}" var="sectiondetails">
+													                <c:if test="${sectiondetails.section != ''}">
+													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
+													                    <div class="checkbox-item">
+													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+													                            <input type="checkbox" name="classesteaching"
+													                                   value="${classSec}"
+													                                   <c:if test="${classesteachingList.contains(classSec)}">checked</c:if> />
+													                            ${classSec}
+													                        </label>
+													                    </div>
+													                    <c:set var="counter" value="${counter + 1}" scope="page" />
+													                </c:if>
+													            </c:forEach>
+													        </c:if>
+													    </c:forEach>
+													</div>
+
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
 						</tr>
 						
 					</table>
@@ -929,14 +1028,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/greatindiaacademy/PersonalProcess/viewAll";
+								form1.action = "/vision/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
 							function updateEmployee() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/greatindiaacademy/EmployeeProcess/updateEmployee";
+								form1.action = "/vision/EmployeeProcess/updateEmployee";
 								form1.submit();
 							}
 							
