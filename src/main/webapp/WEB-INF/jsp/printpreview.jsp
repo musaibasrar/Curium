@@ -453,7 +453,7 @@ for(Cookie cookie : cookies){
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
                         %>
