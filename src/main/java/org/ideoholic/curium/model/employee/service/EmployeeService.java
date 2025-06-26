@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 @Service
 public class EmployeeService {
@@ -188,6 +189,18 @@ public class EmployeeService {
 
 	                employeeDetailsResponseDto.setSuccess(true);
 	            } 
+	            String classteacherCsv = employee.getClassteacher();
+	            List<String> classteacherList = (classteacherCsv != null && !classteacherCsv.trim().isEmpty())
+	                    ? Arrays.asList(classteacherCsv.split("\\s*,\\s*"))
+	                    : new ArrayList<>();
+	            employeeDetailsResponseDto.setClassTeacher(classteacherList);
+	            
+	            String classesteachingCsv = employee.getClassesteaching();
+	            List<String> classesteachingList = (classesteachingCsv != null && !classesteachingCsv.trim().isEmpty())
+	                    ? Arrays.asList(classesteachingCsv.split("\\s*,\\s*"))
+	                    : new ArrayList<>();
+	            employeeDetailsResponseDto.setClassesTeaching(classesteachingList);
+
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            employeeDetailsResponseDto.setSuccess(false);
@@ -239,6 +252,14 @@ public class EmployeeService {
 			employee.setBranchid(Integer.parseInt(DataUtil.emptyString(employeeDto.getBranchId())));
 			employee.setLeavingdate(DateUtil.indiandateParser(employeeDto.getLeavingdate()));
 			employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+			
+			String classesTeachingCsv = employeeDto.getClassesTeaching() != null ? String.join(",", employeeDto.getClassesTeaching()) : "";
+			String classTeacherCsv = employeeDto.getClassTeacher() != null ? String.join(",", employeeDto.getClassTeacher()) : "";
+			String subjectTeachingCsv = employeeDto.getSubjectsTeaching() != null ? String.join(",", employeeDto.getSubjectsTeaching()) : "";
+			
+			employee.setClassesteaching(classesTeachingCsv);
+			employee.setClassteacher(classTeacherCsv);
+			employee.setSubjectsteaching(subjectTeachingCsv);
 			//Bank Details
 
 			employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
