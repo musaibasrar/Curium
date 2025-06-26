@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dto.FeesDetailsDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -27,6 +28,7 @@ public class StudentDetailsDto {
 	private List<Parents> searchStudentList;
 	private List<Exams> examsList;
 	private List<Subject> subjectList;
+	private List<Subjectmaster> subjectListName;
 	private List<Parents> parentsList;
 	private boolean success;
 	private int page;
