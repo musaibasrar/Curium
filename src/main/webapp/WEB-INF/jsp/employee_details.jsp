@@ -463,7 +463,29 @@ for(Cookie cookie : cookies){
            						  <c:out default="" value="No" />
            						 </c:if>
                             </td>
+                            
+                            <td width="25%" class="alignLeft" height="50">Subjects Teaching &nbsp;</td>
+							<td  width="25%" class="tablerows"><c:out default="" value="${employee.subjectsteaching}" />
+							</td>
                         </tr>
+                        
+                         
+                        <tr>
+                        <td width="25%"   class="alignLeft" height="50" >Class Teacher</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.classteacher}" />
+                            </td>
+                            
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Classes Teaching</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.classesteaching}" />
+                            </td>
+                           
+                           
+                        
+                        </tr>
+                        
                         
                         
                         <tr>
