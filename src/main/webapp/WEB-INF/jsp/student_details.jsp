@@ -351,6 +351,11 @@
 
 
                 });
+                $( "#printgovtform" )
+                .button()
+                .click(function() {
+                    PrintGovtForm();
+                });
             });
             var type='<c:out default="" value="${typeOfUser}"/>';
             function checkUsertype(){
@@ -1175,6 +1180,8 @@ for(Cookie cookie : cookies){
                                 <button id="cancel" >Cancel</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="print" >Print</button>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="printgovtform" >Print Govt Form</button>
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
 
@@ -1197,6 +1204,11 @@ for(Cookie cookie : cookies){
             function Print(){
                 var form1=document.getElementById("form1");
                 form1.action="/hira/StudentProcess/printAdmissionForm";
+                form1.submit();
+            }
+            function PrintGovtForm(){
+                var form1=document.getElementById("form1");
+                form1.action="/hira/StudentProcess/printGovtAdmissionForm";
                 form1.submit();
             }
         </script>

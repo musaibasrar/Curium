@@ -309,6 +309,11 @@ public class StudentAction {
 			return "printadmissionform";
 	}
 	
+	@PostMapping("/printGovtAdmissionForm")
+	public String printGovtAdmissionForm() {
+			return "printgovtadmissionform";
+	}
+	
 	@GetMapping("/ViewotherFeesStructure")
 	public String ViewotherFeesStructure() {
 		if (studentActionAdapter.viewOtherFeesDetailsOfStudent()) {
