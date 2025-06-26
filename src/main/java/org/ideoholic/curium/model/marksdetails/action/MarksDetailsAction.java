@@ -1,5 +1,10 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +17,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/MarksDetailsProcess")
 public class MarksDetailsAction {
 
+
+	@Autowired
+    HttpServletRequest request;
+    
+	@Autowired
+	HttpServletResponse response;
+    
+	@Autowired
+	HttpSession httpSession;
+
+	
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
 	private MarksDetailsActionAdapter marksDetailsActionAdapter;
+	@Autowired
+	ExamDetailsActionAdapter examDetailsActionAdapter;
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
-		standardActionAdapter.viewClasses();
+		
+
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
+		
 		return "marksentry";
 	}
 
@@ -124,7 +159,24 @@ public class MarksDetailsAction {
 
 	@PostMapping("/search")
 	public String search() {
-		marksDetailsActionAdapter.Search();
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			marksDetailsActionAdapter.Search();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			marksDetailsActionAdapter.SearchForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else {
+			marksDetailsActionAdapter.Search();
+		}
+		
+		
 		return "marksentry";
 	}
 
@@ -138,6 +190,7 @@ public class MarksDetailsAction {
 	@GetMapping("/rankReport")
 	public String rankreport() {
 		standardActionAdapter.viewClasses();
+		examDetailsActionAdapter.readListOfExams();
 		return "rankreport";
 	}
 	
@@ -155,4 +208,49 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
+	
+	/*@GetMapping("/prePrimaryProgressReport")
+	public String prePrimaryProgressReport() {
+		new StandardService(request, response).viewClasses();
+		return "preprimaryprogressreport";
+	}
+	
+	@PostMapping("/searchForPreprimaryReport")
+	public String searchForPreprimaryReport() {
+		new MarksDetailsService(request, response).Search();
+		return "preprimaryprogressreport";
+	}
+	
+	@PostMapping("/generatePreprimaryReport")
+	public String generatePreprimaryReport() {
+		if (new MarksDetailsService(request, response).generatePreprimaryReport()) {
+			return "preprimarymarkssheet";
+			// return "reportcardsaved";
+		} else {
+			return "error";
+		}
+	}*/
+	
+	@RequestMapping(value = "/progressReportSingleExams", method = { RequestMethod.GET, RequestMethod.POST })
+	public String progressReportSingleExams() {
+		standardActionAdapter.viewClasses();
+		return "progressreportsingleexams";
+	}
+	
+	
+	@PostMapping("/generateReportSingleExams")
+	public String generateReportSingleExams() {
+		if (marksDetailsActionAdapter.generateReportSingleExams()) {
+			return "markssheetsingleexams";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/searchForReportSingleExams")
+	public String searchForReportSingleExams() {
+		marksDetailsActionAdapter.Search();
+		return "progressreportsingleexams";
+	}
+	
 }

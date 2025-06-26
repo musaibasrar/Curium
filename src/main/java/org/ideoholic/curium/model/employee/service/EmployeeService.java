@@ -11,7 +11,12 @@ import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
@@ -56,6 +61,13 @@ public class EmployeeService {
 		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
 		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
 							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
+							String classesTeachingCsv = employeeDto.getClassesTeaching() != null ? String.join(",", employeeDto.getClassesTeaching()) : "";
+							String classTeacherCsv = employeeDto.getClassTeacher() != null ? String.join(",", employeeDto.getClassTeacher()) : "";
+							String subjectTeachingCsv = employeeDto.getSubjectsTeaching() != null ? String.join(",", employeeDto.getSubjectsTeaching()) : "";
+							
+							employee.setClassesteaching(classesTeachingCsv);
+							employee.setClassteacher(classTeacherCsv);
+							employee.setSubjectsteaching(subjectTeachingCsv);
 		                //End Bank Details
 
 			// Process form file field (input type="file")
@@ -381,6 +393,10 @@ public class EmployeeService {
 	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
 	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListPosition(listPosition);
+	        List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListClasssec(classsecList);
+	        List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListSubjectMaster(subjectList);
 		}
 		return viewAllRelationsResponseDto;
 	}

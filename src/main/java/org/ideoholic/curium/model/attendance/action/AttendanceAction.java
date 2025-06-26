@@ -9,12 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.std.action.StandardAction;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +26,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AttendanceAction {
 
 	@Autowired
-	HttpServletRequest request;
-
+    HttpServletRequest request;
+    
 	@Autowired
 	HttpServletResponse response;
-
+    
 	@Autowired
 	HttpSession httpSession;
 
@@ -43,6 +39,7 @@ public class AttendanceAction {
 
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
+
 	@Autowired
 	private EmployeeActionAdapter employeeActionAdapter;
 
@@ -58,7 +55,21 @@ public class AttendanceAction {
 	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/markAttendance")
 	public String markAttendance() {
-		standardActionAdapter.viewClasses();
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
 		return "attendancemark";
 	}
 
@@ -298,4 +309,16 @@ public class AttendanceAction {
 		employeeActionAdapter.ViewAllEmployee();
 		return "attendancemaster";
 	}
+	
+	@GetMapping("/attendanceReport")
+	public String attendanceReport() {
+		return "attendancesummaryreport";
+	}
+	
+	@PostMapping("/attendanceSummaryReport")
+	public String showReports() {
+		attendanceActionAdapter.attendanceSummaryReport();
+		return "attendancesummaryreport";
+	}
+	
 }
