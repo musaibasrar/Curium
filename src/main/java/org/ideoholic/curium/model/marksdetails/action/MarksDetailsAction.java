@@ -48,7 +48,7 @@ public class MarksDetailsAction {
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
 			standardActionAdapter.viewClasses();
 		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
-			standardActionAdapter.viewClassesForTeacher();
+			standardActionAdapter.viewClassesForTeacherMarksEntry();
 		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 			standardActionAdapter.viewClasses();
 		} else {

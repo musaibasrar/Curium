@@ -61,6 +61,8 @@ public class EmployeeActionAdapter {
 
         httpSession.setAttribute("employee", employeeDetailsResponseDto.getEmployee());
 
+        request.setAttribute("classteacherList", employeeDetailsResponseDto.getClassTeacher());
+        request.setAttribute("classesteachingList", employeeDetailsResponseDto.getClassesTeaching());
         return employeeDetailsResponseDto.isSuccess();
     }
     public String updateEmployee(MultipartFile[] listOfFiles) {
@@ -98,6 +100,10 @@ public class EmployeeActionAdapter {
         employeeDto.setEmployeedoc4delete(request.getParameter("employeedoc4delete"));
         employeeDto.setEmployeedoc5delete(request.getParameter("employeedoc5delete"));
         employeeDto.setBranchId(request.getParameter("branchid"));
+        
+        employeeDto.setClassesTeaching(request.getParameterValues("classesteaching"));
+        employeeDto.setClassTeacher(request.getParameterValues("classteacher"));
+        employeeDto.setSubjectsTeaching(request.getParameterValues("subjectsteaching"));
 
         Teacher employee = employeeService.updateEmployee(listOfFiles,employeeDto);
 
