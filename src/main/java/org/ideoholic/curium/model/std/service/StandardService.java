@@ -1,7 +1,10 @@
 package org.ideoholic.curium.model.std.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -242,6 +245,49 @@ public class StandardService {
 			}
 			new StandardDetailsDAO().restoreMultipleLeftout(ids);
 		}
+	}
+
+	public ResultResponse viewClassesForTeacher(String classteacher,String branchId) {
+		List<String> classTeacherList = Arrays.asList(classteacher.split("\\s*,\\s*"));
+		List<Classsec> finalClasssecList = new ArrayList<Classsec>();
+		
+		for (String className : classTeacherList) {
+		    String cleanedClass = className.replaceAll("--.*$", "").trim();
+
+		    Classsec classRow = new Classsec();
+		    classRow.setClassdetails(cleanedClass);
+		    classRow.setSection(""); // or null
+		    classRow.setBranchid(Integer.parseInt(branchId));
+		   // classRow.setUserid(userid); // Set your actual user ID
+		    finalClasssecList.add(classRow);
+		}
+		
+		Map<String, Classsec> uniqueByClassdetails = finalClasssecList.stream()
+			    .filter(c -> c.getClassdetails() != null && !c.getClassdetails().isEmpty())
+			    .collect(Collectors.toMap(
+			        Classsec::getClassdetails, // key = classdetails
+			        c -> c,                    // value = Classsec object
+			        (existing, replacement) -> existing // keep the first encountered
+			    ));
+
+			finalClasssecList = new ArrayList<>(uniqueByClassdetails.values());
+		
+		List<Classsec> classList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+		List<String> dbSections = classList.stream()
+			    .filter(c -> c.getClassdetails() == null || c.getClassdetails().trim().isEmpty())
+			    .filter(c -> c.getSection() != null && !c.getSection().trim().isEmpty())
+			    .map(Classsec::getSection)
+			    .collect(Collectors.toList());
+		
+		for (String section : dbSections) {
+		    Classsec sectionRow = new Classsec();
+		    sectionRow.setClassdetails(""); // or null
+		    sectionRow.setSection(section.trim());
+		    sectionRow.setBranchid(Integer.parseInt(branchId));
+		    finalClasssecList.add(sectionRow);
+		}
+		
+		return ResultResponse.builder().resultList(finalClasssecList).success(true).build();
 	}
 
 }
