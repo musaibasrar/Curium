@@ -52,7 +52,7 @@ public class Teacher implements java.io.Serializable {
 	private String employeedoc3;
 	private String employeedoc4;
 	private String employeedoc5;
-
+	private String classteacher;
 	
 	
 	public Teacher() {
@@ -69,7 +69,7 @@ public class Teacher implements java.io.Serializable {
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
 			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid,String employeephoto,
-			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate
+			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate, String classteacher
 ) {
 		this.teachername = teachername;
 		this.designation = designation;
@@ -100,6 +100,7 @@ public class Teacher implements java.io.Serializable {
 		this.employeedoc4 = employeedoc4;
 		this.employeedoc5 = employeedoc5;
 		this.joiningdate = joiningdate;
+		this.classteacher = classteacher;
 	}
 
 	@Id
@@ -368,5 +369,13 @@ public class Teacher implements java.io.Serializable {
 
 	public void setEmployeedoc5(String employeedoc5) {
 		this.employeedoc5 = employeedoc5;
+	}
+
+	public String getClassteacher() {
+		return classteacher;
+	}
+
+	public void setClassteacher(String classteacher) {
+		this.classteacher = classteacher;
 	}
 }
