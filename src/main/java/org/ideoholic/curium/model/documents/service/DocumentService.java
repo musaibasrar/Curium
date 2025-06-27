@@ -960,7 +960,7 @@ public class DocumentService {
 				if(studentId==tcSid) {
 					Student student = parents.getStudent();
 					student.setNotcissued(transferCert.getNoofissues());
-					student.setTcid(transferCert.getTcid());
+					student.setNooftc(transferCert.getTcid());
 					parents.setStudent(student);
 				}
 				
@@ -1045,7 +1045,7 @@ public class DocumentService {
 				if(studentId==tcSid) {
 					Student student = parents.getStudent();
 					student.setNotcissued(transferCert.getNoofissues());
-					student.setTcid(transferCert.getTcid());
+					student.setNooftc(transferCert.getTcid());
 					parents.setStudent(student);
 				}
 				

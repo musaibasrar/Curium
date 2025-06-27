@@ -131,8 +131,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "notcissued")
 	private Integer notcissued;
 	
-	private Integer tcid;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "datetcissued", length = 10)
 	private Date datetcissued;
