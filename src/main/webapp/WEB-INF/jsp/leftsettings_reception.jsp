@@ -353,6 +353,14 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/littleflower/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
             
+            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
+            <div>
+                <a target="mainFrame" href="/littleflower/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/littleflower/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/littleflower/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/littleflower/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+            </div>
+            
             
             </div>
             
