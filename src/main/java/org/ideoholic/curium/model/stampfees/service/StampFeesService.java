@@ -512,6 +512,30 @@ public class StampFeesService {
 	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 	    		}
 				break;
+			case "InActive":
+				if (!addClass.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass+"--"+"%";
+	    		}
+	    		if (!addSec.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass;
+	    			conClassStudying = conClassStudying+"--"+addSec+"%";
+	    		}
+
+	    		classStudying = DataUtil.emptyString(conClassStudying);
+
+	    		if (!studentname.equalsIgnoreCase("")) {
+	    			querySub = " parents.Student.name like '%" + studentname + "%' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")
+	    				&& !querySub.equalsIgnoreCase("")) {
+	    			querySub = querySub + " AND parents.Student.classstudying like '"
+	    					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1)";
+	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = querySub + " parents.Student.classstudying like '"
+	    					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    		}
+				break;	
 			case "All":	
 				
 				if (!addClass.equalsIgnoreCase("")) {
