@@ -8,4 +8,5 @@ public class FeesReportDto {
     private String[] feesCat;
     private String[] addClass;
     private String studentId;
+    private String studentType;
 }
