@@ -686,9 +686,36 @@ public class FeesCollectionService {
 		String classStudying = DataUtil.emptyString(conClassStudying.toString());
 		String querySub = "";
 
-		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+		switch (dto.getStudentType()) {
+		case "Active":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
+		case "InActive":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
+		case "All":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;	
+			
+		default:
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;	
+			
+			
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
