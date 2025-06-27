@@ -1447,6 +1447,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		Date attdate = DateUtil.indiandateParser(request.getParameter("attendancedate"));
 		int present = 0;
 		int absent = 0;
+		int totalNoofStudents = 0;
 		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().readStudentAttendance(date);
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
 			String attendancestatus = listStudent.getAttendancestatus();
@@ -1483,7 +1484,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				String classStudying = classsec.getClassdetails()+"--";
 				
 	    		for (Classsec section : secList) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"' and archive=0 and passedout=0 and leftout=0 and droppedout=0 ");
 					List<String> studentExternalIdList = new ArrayList<String>();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());
@@ -1500,7 +1501,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 					
 					if(presentClass!=0 || absentClass!=0) {
 						//studentAttendanceMap.put(classStudying, attendanceStatus);
-						classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+" "+section.getSection()+"/"+presentClass+"/"+absentClass+"";
+						totalNoofStudents = totalNoofStudents+studentList.size();
+						classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+" "+section.getSection()+"/"+presentClass+"/"+absentClass+"/"+studentList.size()+"";
 						String printClass=classsec.getClassdetails();
 						String printSection=section.getSection();
 						System.out.println("class = "+printClass+" Section ="+printSection+" present Student = "+presentClass+"Absent = "+absentClass);
@@ -1514,8 +1516,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				}
 	    		
 	    		if(!classAttendancePushed) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
+					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%' and archive=0 and passedout=0 and leftout=0 and droppedout=0 ");
 					List<String> studentExternalIdList = new ArrayList<String>();
+					totalNoofStudents = totalNoofStudents+studentList.size();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());
 					}
@@ -1530,7 +1533,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 					}
 					
 					  if(presentClass!=0 || absentClass!=0) { 
-						  classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+"/"+presentClass+"/ "+absentClass+"";
+						  classSecAttendance[attendanceValue] = ""+classsec.getClassdetails()+"/"+presentClass+"/ "+absentClass+"/"+studentList.size()+"";
 					  	attendanceValue++;
 					  	presentClass=0;
 						absentClass=0;
@@ -1539,6 +1542,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	    			}
 	    	}
 	}
+	    	 request.setAttribute("totalnoofstudents", totalNoofStudents);
 	    	 request.setAttribute("studentAttendanceMap", classSecAttendance);
 
 	}

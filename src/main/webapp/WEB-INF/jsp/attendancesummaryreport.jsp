@@ -602,7 +602,22 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+							<tr>
+							<td width="20%" class="alignRightFields">Total Students &nbsp;</td>
+							<td width="80%" align="left"><label> <input
+									name="presentstudent" type="text" class="textField"
+									id="presentstudent" size="25" value="${totalnoofstudents}" readonly/>
+							</label></td>
 							
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
                         <tr>
 							<td width="20%" class="alignRightFields">Present &nbsp;</td>
 							<td width="80%" align="left"><label> <input
@@ -637,12 +652,13 @@ for(Cookie cookie : cookies){
 					                                <h1 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchname}</h1>
 					                                <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 					                                
-					                                Attendance Report &emsp;Date: &nbsp;&nbsp; <fmt:formatDate value="${attendancedate}" pattern="dd/MM/yyyy"/></h3>
+					                                Daily Attendance Report &emsp;Date: &nbsp;&nbsp; <fmt:formatDate value="${attendancedate}" pattern="dd/MM/yyyy"/></h3>
 								                    <table id="mytable"  style="border-collapse: collapse;width: 50%;border: 2px solid black;margin-left:215px;">
 								                    <thead>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Class</td>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Present</td>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Absent</td>
+								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Total</td>
 								                    </thead>
 								                    <tbody>
 								                        <c:forEach items="${studentAttendanceMap}" var="attendance">
@@ -651,11 +667,12 @@ for(Cookie cookie : cookies){
 								                                <td style="text-align: center;border-collapse: collapse;border: 1px solid black;">${itemparts[0]}</td>
 								                                <td style="text-align: center;border-collapse: collapse;border: 1px solid black;">${itemparts[1]}</td>
 								                                <td style="text-align: center;border-collapse: collapse;border: 1px solid black;">${itemparts[2]}</td>
+								                                <td style="text-align: center;border-collapse: collapse;border: 1px solid black;">${itemparts[3]}</td>
 								                            </tr>
 								                        </c:forEach>
 								                        </tbody>
 								                    </table>
-								                         <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Present: &emsp;${present}&emsp;&emsp;&emsp;Absent:&emsp;${absent}
+								                         <h3 style="display:none;">&emsp;&emsp;&emsp;Present: &emsp;${present}&emsp;&emsp;&emsp;Absent:&emsp;${absent}&emsp;&emsp;&emsp;Total:&emsp;${totalnoofstudents}
 					                                
 					                                </h3>               
 								                    </div>
