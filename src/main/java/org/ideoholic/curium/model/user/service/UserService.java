@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
@@ -19,6 +21,7 @@ import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.util.DataUtil;
@@ -646,6 +649,11 @@ public class UserService {
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				VoucherEntrytransactions voucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+				String[] narrationDetails = voucherEntryTransactions.getNarration().split(":");
+				Student ss = student.getStudent();
+				ss.setRemarks(narrationDetails[0]);
+				student.setStudent(ss);
 				feesMap.put(receiptinfo, student);
 			}
 

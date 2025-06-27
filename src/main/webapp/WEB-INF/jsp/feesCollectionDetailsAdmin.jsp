@@ -744,6 +744,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
                             <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
@@ -767,6 +768,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/littleflower/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/littleflower/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
