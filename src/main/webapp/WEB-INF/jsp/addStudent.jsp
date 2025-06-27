@@ -576,6 +576,12 @@
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
+    	
+    	if (!addClass) {
+            console.warn("Class is not selected. Skipping search.");
+            return;
+        }
+    	
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -616,13 +622,18 @@ function searchOtherFeecategory() {
     var addClass = document.getElementById('addclass').value;
     var yoa = document.getElementById('yearofadmission').value;
 
+    if (!addClass) {
+        console.warn("Class is not selected. Skipping search.");
+        return;
+    }
+    
     var xmlHttpof = new XMLHttpRequest();
     xmlHttpof.onreadystatechange = function () {
         if (xmlHttpof.readyState === 4 && xmlHttpof.status === 200) {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/littleflower/FeesProcess/searchOtherFeecategory?classstudying=" + addClass + "&yearofadmission=" + yoa, true);
+    xmlHttpof.open("GET", "/scholargroup/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -850,7 +861,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 					<li><a href="#fragment-7">Stamp Fee</a></li>
-					<li><a href="#fragment-8">Other Stamp Fee</a></li>
+					<li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li>
 				</ul>
 
 
@@ -983,7 +994,7 @@ $(document).ready(function() {
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1300,7 +1311,7 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();searchOtherFeecategory()">
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
