@@ -802,6 +802,7 @@ for(Cookie cookie : cookies){
 								<select name="studenttype" id="studenttype"
 									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
 										<option value="All">All</option>
 								</select>
 
