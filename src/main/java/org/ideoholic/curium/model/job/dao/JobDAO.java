@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.job.dto.JobQuery;
+import org.ideoholic.curium.model.task.dao.TaskRepository;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -34,6 +36,8 @@ public class JobDAO {
 	
 	@Autowired
 	private JobQueryRepository jobQueryRepository;
+	@Autowired
+	private TaskRepository taskRepository;
 	@Autowired
 	private QueryUtil queryUtil;
 	Session session = null;
@@ -429,23 +433,25 @@ public class JobDAO {
 			String result = "false";
 			try {
 				
-				transaction = session.beginTransaction();
-					
-				for (Task listofTask : taskList) {
+				JobQuery jobQuery = jobQueryRepository.findById(jobId).orElseGet(() ->{
 					JobQuery jobQ = new JobQuery();
-					jobQ.setId(jobId);
-					listofTask.setJobquery(jobQ);
-					session.save(listofTask);
-				}
-				transaction.commit();
-				result = "true";
+					  jobQ.setId(jobId);
+					  return jobQ;
+				});
+
+	            for (Task task : taskList) {
+	                task.setJobquery(jobQuery);
+	                taskRepository.save(task); 
+	            }
+
+	            result =  "true";
+	            
 				} catch (Exception hibernateException) { 
 		        	log.error(hibernateException.getMessage(), hibernateException);
 		            hibernateException.printStackTrace();
-		            throw hibernateException;   
-				}finally {
-					HibernateUtil.closeSession();
-			}
+		            throw hibernateException;
+
+				}
 			
 			return result;
 		}
