@@ -1,16 +1,9 @@
-<%-- 
-    Document   : Transfer Certificate Preview
-    Created on : Mar 21 2018, 09:58 AM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
 <html moznomarginboxes >
 <head>
 
@@ -27,6 +20,7 @@
 	vertical-align: middle;
 	text-align: center;
 }
+
 .headerTextLeft {
 	width: 10px;
 	font-family: Tahoma;
@@ -38,6 +32,7 @@
 	vertical-align: middle;
 	text-align: left;
 }
+
 .dataTextBold {
 	font-weight: bold;
 	font-family: Tahoma;
@@ -46,6 +41,7 @@
 	letter-spacing: normal;
 	text-align: center;
 }
+
 .dataTextBoldLeft {
 	font-weight: normal;
 	font-family: Tahoma;
@@ -54,22 +50,25 @@
 	letter-spacing: normal;
 	text-align: left;
 }
+
 .dataTextBoldCenter {
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 30px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
+
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 14px;
+	font-size: 12px;
 	letter-spacing: normal;
 	text-align: center;
 }
+
 .dataText {
 	font-family: Tahoma;
 	color: black;
@@ -77,35 +76,29 @@
 	letter-spacing: normal;
 	text-align: center;
 }
-
-  td{
-	font-style:italic;
-	font-size: 18px;
-	margin-top:5px;
-	margin-bottom: 5px;
-	
-} 
-
 -->
+
 span{
     display:inline-block;
     border-bottom:2px solid black;
-    padding-bottom:1px;
     width: 200px;
+    height:15px;
     font-weight: normal;
     text-align:center;
-    margin-top:5px;
-	margin-bottom: 5px;
-    }
+}
 h3{
-//margin-bottom:0px;
 margin-top:0px;
+}
+
+.adhar{
+     border:1px solid black;
+     border-collapse:collapse;
 }
 </style>
 
 
-
 <!-- <style type="text/css">
+
         @media print {
             .fontsize { font-size: 15px ;
                         font-weight: bold;
@@ -127,6 +120,7 @@ margin-top:0px;
            	  margin: 0mm;  /* this affects the margin in the printer settings */ 
             
         }
+
         @media screen {
             .fontsize { font-size: 15px;
                         font-weight: bold;
@@ -138,8 +132,9 @@ margin-top:0px;
             }
         }
     </style> -->
-
+    
     <style type="text/css">
+
         @media print {
             .fontsize { font-size: 15px ;
                         font-weight: bold;
@@ -157,13 +152,14 @@ margin-top:0px;
         
         @page {
               
-             margin-left:  1cm;
-             margin-right: 1cm;
+             margin-left:  0cm;
+             margin-right: 0cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
+
         @media screen {
-            .fontsize { font-size: 12px;
+            .fontsize { font-size: 15px;
                         font-weight: bold;
                         font-family: 'Times New Roman'
             }
@@ -172,36 +168,27 @@ margin-top:0px;
                 margin-right: 0px;
             }
         }
-        .input{
-        width:10px;
-        text-align:center;
+        .rightside{
+        float:right;
         }
-        
-        span{
-    display:inline;
-    border:1px solid black;
-    padding:1px;
-    font-weight: normal;
-    text-align:center;
-}
     </style>
-	<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/noblewisdom/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/shatabdi/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
-          <!--    <script type="text/javascript">
-             window.onload = function(){
-            	 window.print();
-             }
-        </script>-->
-       
+        <script type="text/javascript">
+             $(function() {
+
+                 $("#print").printPage();
+             });
+        </script>
 
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -212,257 +199,284 @@ for(Cookie cookie : cookies){
 	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
 }
 }
-%>
-<body >
+%>  
+<body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
-		<table align="center">
-		
-		
-			<tr><td style="margin-right:0px;padding-left:10px;">
-			
-			<img  src="/noblewisdom/images/noblewisdom.jpg" alt="noblewisdom logo" width="103" height="94"></td>
-				<td style="font-style:normal;text-align:center;" >
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">Noble Wisdom English Medium School</label><br>
-				<label class="addressLine">Educating Students to be successful in both the worlds</label><br>
-				<%-- <label class="addressLine"> ${branchaddress}</label><br> --%>
-				</td>
-				<!-- <td style="margin-left:0px;padding-left:0px;">&emsp;&emsp;<img  src="/noblewisdom/images/cbse.png" alt="cbse logo" width="90" height="100"></td> -->
-				</tr>
+		<table width="100%" style="border-collapse: collapse;">
+			<tr>
+		<td>
+		<br>
+		<br>
+		<br>
+		</td>
+		</tr>
+
 </table>
 
-<TABLE align="center">
+<TABLE align="center" >
 
-                
-                <tr>
-                    <td>Email id:</td><td>&nbsp; mail@noblewisdomschool.edu.in.com&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                   </td>
-                     <td>CBSE affiliation No.:</td><td>&nbsp;1130056</td>
-                </tr>
-                
-                <tr>
-					<td>UDISE No.:</td><td>&nbsp;27190406102</td>
-					<td>School Code:</td><td>&nbsp;30032</td>               
-                </tr>
-                
-                
-                
+<tr>
+<td><img src="/noblewisdom/images/noblewisdom.jpg" width="105" height="90"/></td>
+<td> <h1>
+			
+			<label style="">${branchname}</label> </h1></td>
+</tr>
+<tr>
+<td></td>
+			
+			<td>
+			
+			<label style="">${branchaddress}</label> 
+			</td>
+			
+			</tr>
+		<tr>
+			<td></td>
+			<td>
+			
+			<h1 ><label style="background-color:red;border-radius:20px;">SCHOOL LEAVING CERTIFICATE</label> </h1>
+			</td>
+			
+			</tr>
             </TABLE>
-            
-            <table align="center">
-            
+
+		<table style="margin:40px;">
+		<tr>
+		<td></td>
+			
+			<td colspan="4">
+			</td>
+			
+			</tr>
+		<tr>
+		
 			<tr>
-
-				<td align="center">
-
-			<h3 style="margin-bottom:0px;"><u>SCHOOL LEAVING CERTIFICATE</u><br>DUPLICATE</h3>
+			<td align="right">
+			<%-- Date:&nbsp;&nbsp;<input
+									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
+									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
+			 --%>
+			</tr>
+			
+			<%-- <tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Udise no. &nbsp;&nbsp;
+					<span width="auto" style="font-weight: bold;border: 0px solid black;">
+					<table class="adhar">
+					<tr>
+					<td class="adhar" style="height:15px;width:12px;">2</td>
+					<td class="adhar" style="height:15px;width:12px;">7</td>
+					<td class="adhar" style="height:15px;width:12px;">3</td>
+					<td class="adhar" style="height:15px;width:12px;">0</td>
+					<td class="adhar" style="height:15px;width:12px;">1</td>
+					<td class="adhar" style="height:15px;width:12px;">2</td>
+					<td class="adhar" style="height:15px;width:12px;">0</td>
+					<td class="adhar" style="height:15px;width:12px;">3</td>
+					<td class="adhar" style="height:15px;width:12px;">1</td>
+					<td class="adhar" style="height:15px;width:12px;">2</td>
+					<td class="adhar" style="height:15px;width:12px;">0</td></tr></table></span>
+					 &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: none;"></span>
+					Certificate no. &nbsp;&nbsp;
+					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:250px;"><c:out value="${tcno}" /> </span>
+					</h3>
+				</td>
+			
+			
+			
+			</tr>
+ --%>			 <tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Admission ID No. &nbsp;&nbsp;
+					<span style="font-weight: bold;border:none;"><table class="adhar">
+					<tr>
+					<c:forEach var="name" items="${externalid}" varStatus="loop">
+					<td class="adhar" style="height:15px;width:12px;">${name}</td>
+					</c:forEach>
+					</tr></table></span>
+					</h3>
+				</td>
+			
+			
+			</tr> 
+			
+			 <tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Aadhar No. &nbsp;&nbsp;
+					<span style="font-weight: bold;border:none;"><table class="adhar">
+					<tr>
+					<c:forEach var="name" items="${aadhar}" varStatus="loop">
+					<td class="adhar" style="height:15px;width:12px;">${name}</td>
+					</c:forEach>
+					</tr></table></span>
+					</h3>
+				</td>
+			
+			
+			</tr> 
+			<tr><td><h3> (PRESCRIBED BY RULE II, CHAPTER I,OF THE GRANT - IN - AID CODE)</h3></td></tr>
+			<tr>
+			
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the pupil &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:750px;"> <c:out value="${studentdetails.student.name}" /></span>
+					</h3>
+				</td>
+				
+				
+			
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">2.&nbsp;&nbsp;Mother's Name &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:770px;"> <c:out value="${studentdetails.mothersname}" /></span>
+					</h3>
+				</td>
+				
+			</tr>
+			
+			
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">4.&nbsp;&nbsp;Race and Caste &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.religion}" />,&nbsp;&nbsp;<c:out value="${studentdetails.student.caste}" /></span>
+					&nbsp;&nbsp;Nationality &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.nationality}" /></span>
+					</h3>
+				</td>
+			</tr><tr><td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Place of Birth &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:770px;"><c:out value="${studentdetails.student.socialcategory}" /></span>
+					</h3>
+				</td>
+			</tr>
+						<tr>
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of Birth month and year according to christian era
+					
+					</h3>
+				</td>
+				</tr>
+				<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
+					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:500px;"> <c:out value="${dateinword}" /></span>
+					</h3>
+				</td>
+			</tr>
+			
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">7.&nbsp;&nbsp;Last School attended &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:700px;"><c:out value="${dues}" /> </span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">8.&nbsp;&nbsp;Date of admission &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:710px;"> <c:out value="${studentdetails.student.admissiondate}" /> </span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">9.&nbsp;&nbsp;Progress &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:800px;"> <c:out value="${classinword}" /></span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;conduct &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:800px;"><c:out value="${conduct}" /> </span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Date of leaving School &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:700px;"> <c:out value="${studentdetails.student.dateleaving}" /></span>
+					</h3>
+				</td>
+			</tr>
+			
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;Standard in which studying & since when&nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"><c:out value="${studentdetails.student.classstudying}" />,&nbsp;&nbsp;
+					<c:out value="${studentdetails.student.yearofadmission}" /> </span> </td></tr>
+					</h3></td><tr>
+			
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">13.&nbsp;&nbsp;Reason for leaving the school &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:440px;"><c:out value="${leavingReason}" /> </span>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">14.&nbsp;&nbsp;Any other Remarks &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;width:493px;"> <c:out value="${Remarks}" /></span>
+					</h3>
+				</td>
+			</tr>
+		
+			<tr>
+			<td>
+			<br>
+			<br><br><br><br></td>
+			</tr>
+			
+		<tr>
+		<td align="left">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    Date:&nbsp;&nbsp;<input name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
+		size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="dd-MM-yyyy"/>" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;Headmaster</td>
+			</tr>
+			<tr>
+			<td><br></td>
+			</tr>
+			<tr>
+			<td><br></td>
+			</tr>
+			<tr><td style="color:red">
+			*No change in the entry is to be made except by the authority issuing the
+			</td></tr>
+			<tr>
+			<td style="color:red">
+			Leaving Certificate, infringement of the rule I will be punished with the rustication (by order of the ET)
 			</td>
 			</tr>
 			
-						
-			<tr><td align="center">
-			(No change in an entry is to be made except by the authority issuing the certificate)
-			</td></tr>
-			
-			</table>
-			<table width="100%" style="border:1px solid black"></table>
-
-		<table align="center" >
-		<br>
-		<br>
-		<tr><td>Sr No.:&nbsp; <c:out value="${studentdetails.student.studentexternalid}" /> </td>
-             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;G.R. No.:&nbsp;<c:out value="${studentdetails.student.sts}" /> </td>
-			</tr>
-			
-			<tr><td>Student ID:&nbsp;<span> ${grno}</span></td>
-             <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;UID No.:&nbsp;<c:out value="${studentdetails.student.disabilitychild}" /></td>
-			</tr>
-			
 			<tr>
-
-				<td >
-					1.&nbsp;&nbsp;&nbsp;Name of pupil in full </td>
-					<td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				<c:out value="${studentdetails.student.name}" />
-				</td>
-				</tr>
-				   
-				    <tr>
-				    <td>
-					2.&nbsp;&nbsp;&nbsp;Mother's name </td>
-				    <td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;<c:out value="${studentdetails.mothersname}" />
-				    </td>
-			        </tr>
-			        
-			        <tr>
-				    <td>
-					3.&nbsp;&nbsp;&nbsp;Father's/Guardian's Name&emsp;&emsp;&emsp; </td>
-					<td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				    <c:out value="${studentdetails.fathersname}" />
-				   </td>
-				   </tr>
-				
-				    <tr>
-				    <td >
-				    4.&nbsp;&nbsp;&nbsp;Nationality </td>
-				    <td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-					<c:out value="${studentdetails.student.nationality}" />
-					</td>
-					</tr>
-					
-					<tr>
-					<td>
-					5.&nbsp;&nbsp;&nbsp;Mother Tongue </td>
-					<td style="text-transform:uppercase;font-weight:bold;">
-									:&nbsp;&nbsp;<c:out value="${studentdetails.student.mothertongue}" />
-					</td>
-					</tr>
-					<tr>
-					<td>				
-					 6.&nbsp;&nbsp;&nbsp;Religion&nbsp;&nbsp;&nbsp;</td>
-					 <td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp; <c:out value="${studentdetails.student.religion}" />
-					 </td></tr>
-				
-					<tr>
-					<td>
-					7.&nbsp;&nbsp;&nbsp;Caste </td><td style="text-transform:uppercase;font-weight:bold;">
-					:&nbsp;&nbsp;<c:out value="${studentdetails.student.caste}" />
-					</td>
-					</tr>
-					<tr>
-					<td>
-					 8.&nbsp;&nbsp;&nbsp;Sub-caste: </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;<c:out value="${studentdetails.student.socialcategory}" />
-					 </td>
-					 </tr>
-					
-					
-					<tr>
-				    <td >
-					9.&nbsp;&nbsp;&nbsp;Place of the birth</td>
-					<td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-					<c:out value="${studentdetails.student.placeofbirth}" />
-				    </td></tr>
-				
-				
-				    <tr>
-					<td >
-					10.&nbsp;&nbsp;&nbsp;Date of Birth </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				    <fmt:formatDate value="${studentdetails.student.dateofbirth}" pattern="dd/MM/yyyy" />
-				    </td></tr>
-				
-				
-				    <tr>
-				    <td >
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth in words</td> <td style="text-transform:uppercase;font-weight:bold;">
-				     :&nbsp;&nbsp;<c:out value="${dateinword}" />
-				    </td></tr>
-					
-				   <tr>
-				   <td >
-					11.&nbsp;&nbsp;&nbsp;Last school and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class attended</td>
-					 <td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-					 ${branchname}
-				   </td></tr>	
-				
-				   <tr><td></td>
-				   <td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				   <c:set var="itemparts" value="${fn:split(studentdetails.student.classstudying, '--')}" />
-						  <c:out value="${itemparts[0]}" />
-				   </td>
-				   </tr>
-				
-				   <tr>
-				   <td>
-					12.&nbsp;&nbsp;&nbsp;Date of admission </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-					<fmt:formatDate value="${studentdetails.student.admissiondate}" pattern="dd/MM/yyyy" />
-					  &emsp;&emsp;<label style="text-transform:none; font-weight:normal;">Admission standard</label> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<c:set var="itemparts" value="${fn:split(studentdetails.student.classadmittedin, '--')}" />
-						  <c:out value="${itemparts[0]}" />
-					 </td>
-					 </tr>
-				
-				
-				    <tr>
-				    <td>
-					13.&nbsp;&nbsp;&nbsp;Progress </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				      ${progress} &nbsp;&nbsp;&nbsp;</td></tr><tr><td>
-					 14.&nbsp;&nbsp;&nbsp;Conduct</td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;${conduct} 
-					 </td></tr>
-				
-				    <tr>
- 				    <td>
-					15.&nbsp;&nbsp;&nbsp;Date of Leaving</td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-					${leavingdate}
-				    </td></tr>	
-				
-				
-				    <tr>
-				    <td >
-					16.&nbsp;&nbsp;&nbsp;Standard in which studying  </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;
-				    <c:set var="itemparts" value="${fn:split(studentdetails.student.classstudying, '--')}" />
-						  <c:out value="${itemparts[0]}" />&emsp;<c:out value="${studentdetails.student.yearofadmission}" />	
-				     </td></tr>	
-				
-				
-				   <tr>
-				  <td >
-					17.&nbsp;&nbsp;&nbsp;Reason of Leaving school </td><td style="text-transform:uppercase;font-weight:bold;">
-					:&nbsp;&nbsp;${leavingReason}
-				    </td></tr>	
-					
-				    <tr>
-				    <td >
-					18.&nbsp;&nbsp;&nbsp;Remarks</td><td style="text-transform:uppercase;font-weight:bold;">
-					:&nbsp;&nbsp;${Remarks}
-				     </td></tr>	
-				
-				<tr>
-				<td colspan="2" text-align="center">
-				Certified that the above information is in accordance with the school General Register
-				</td>
-				</tr>
-				
-				<tr>
-				<td >
-					19.&nbsp;&nbsp;&nbsp;Date of issue </td><td style="text-transform:uppercase;font-weight:bold;">:&nbsp;&nbsp;${dateOfTc}
-					<%-- <input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
-				 --%></td></tr>	
-		</table>
-		
-		
-		<TABLE align="center" id="dataTable" >
-		
-		<tr>
-		<td>
-		<br><br>
-		</td>
-		</tr>
-			
-		<tr>
-		<td>Class Teacher&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td>Clerk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td>Principal</td>
-
-			</tr>
-        <tr>
-         <td>
-                            <button id="print" type="button" style="background-image: url(/noblewisdom/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
-                        </td>
-        </tr>
-			<%-- <tr>
-               <td align="center"><a id="print" href="/noblewisdom/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
-             </tr> --%>
+                        <td align="center">
+                      <a>  <button id="print" type="button"  onclick="window.print();
+                                     loading.style.visibility = 'visible'" class="hide">Print</button> </a>
+                      <!--   <a id="print" href="/shatabdi/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a>--></td>
+                   
+                    </tr>
+                    
 		</TABLE>
-
-		<%-- <a id="print" href="/noblewisdom/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		
 	</form>
-
-
+	
+	
 </body>
 </html>

@@ -142,7 +142,13 @@ public class DocumentService {
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				 String Aadhar = parents.getStudent().getDisabilitychild();
+				 String externalId = parents.getStudent().getStudentexternalid();
+				 char[] charArray = Aadhar.toCharArray();
+				 char[] charexternalId = externalId.toCharArray();
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 transferCertificateResponseDto.setCharexternalId(charexternalId);
+				 transferCertificateResponseDto.setCharArray(charArray);
 				 transferCertificateResponseDto.setReason(leavingReason); 
 				 transferCertificateResponseDto.setBookNo(bookno);
 				 transferCertificateResponseDto.setTcNo(tcno);

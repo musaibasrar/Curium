@@ -189,6 +189,8 @@ public class DocumentActionAdapter {
 	    request.setAttribute("studentdetails", transferCertificateResponseDto.getParents());
 		request.setAttribute("tcdetails",transferCertificateResponseDto.getTc());
 		request.setAttribute("dateinword",transferCertificateResponseDto.getDateInWord());
+		request.setAttribute("aadhar",transferCertificateResponseDto.getCharArray());
+		request.setAttribute("externalid",transferCertificateResponseDto.getCharexternalId());
 	    switch(transferCertificateResponseDto.getStatus())
 	    {
 	    case TCEXISTS:

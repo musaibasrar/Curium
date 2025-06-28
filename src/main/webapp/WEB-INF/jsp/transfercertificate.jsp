@@ -582,7 +582,7 @@ for(Cookie cookie : cookies){
                     <td >TC no.:</td><td> <input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>    
                     </tr>
                     
-                    <tr>
+                   <!--  <tr>
                     <td >School/Board Annual Examination<br> Last taken with Result::</td><td> <input  type="text" name="lastexam" id="lastexam" style="width: 200px" /></td>
                     <td >Whether failed if so Once/Twice in the same Class:</td><td> <input  type="text" name="failpass" id="failpass" style="width: 200px" /></td>    
                     </tr>
@@ -613,17 +613,28 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td>Whether NCC cadet/Boy Scout/Girl<br> Scout (detail may be given) &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="ncc" id="ncc" style="width: 200px" /></td>
                     <td >Games played or extra curricular activities<br> in which the pupil usually took part:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="game" id="game" style="width: 200px" /></td>    
+                    </tr> -->
+                                        <tr>
+                    <td><br></td>
                     </tr>
+                    
                     <tr>
-                    <td >Genaral Conduct: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>
+                    <td>Conduct: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>
                     <td >Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px" /></td>    
                     </tr>
                     <tr>
-                    <td >Class in Which Pupil Studied Last In Words:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>    
+                    <td><br></td>
+                    </tr>
+                    
+                    <tr>
+                    <td >Progress:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>    
                     <td >Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
                     </tr>
                      <tr>
-                    <td>Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td> Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
                     </tr>
                     </table>
                     <tr>

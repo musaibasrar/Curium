@@ -44,4 +44,6 @@ public class TransferCertificateResponseDto {
 		private String Remarks;
 		private String dateInWord;
 		private Date dateOfTc;
+		private char[] charArray;
+		private char[] charexternalId;
 }
