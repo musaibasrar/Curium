@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentDailyAttendanceRepository extends JpaRepository<Studentdailyattendance,Integer> {
 
-    Optional<Studentdailyattendance> findByAttendeeidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
+    Optional<Studentdailyattendance> findByAttendee_sidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
 
 }

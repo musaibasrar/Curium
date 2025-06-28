@@ -250,7 +250,7 @@ public class AttendanceDAO {
 
 				// Fetch attendance by attendee ID, current date, and academic year
 				Studentdailyattendance existingAttendance = studentDailyAttendanceRepository
-						.findByAttendeeidAndDateAndAcademicyear(
+						.findByAttendee_sidAndDateAndAcademicyear(
 								studentdailyattendance.getAttendeeid().toString(),
 								LocalDate.now(),
 								studentdailyattendance.getAcademicyear()

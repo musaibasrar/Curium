@@ -137,7 +137,7 @@ public class JobService {
 
 			if(resultQuery!=null) {
 				String[] queryValues = resultQuery.split(":");
-				String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(queryValues[1]));
+				String resultTask =  jobDAO.addTask(taskList,Integer.parseInt(queryValues[1]));
 			}
 
 			String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
@@ -962,7 +962,7 @@ public class JobService {
 			//int year = calendar.get(Calendar.YEAR);
 			int month = calendar.get(Calendar.MONTH);
 
-			String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(jobid));
+			String resultTask = jobDAO.addTask(taskList,Integer.parseInt(jobid));
 
 			if(resultTask.equalsIgnoreCase("true")) {
 				result.setSuccess(true);
