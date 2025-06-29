@@ -521,6 +521,33 @@
 		}
 
 	}
+	
+	function yesCheckTransportation(id) {
+
+		 if (id === "yes:st") {
+		        document.getElementById("yes:st").checked = true;
+		        document.getElementById("no:st").checked = false;
+
+		        // Automatically set Transport Opted to NO
+		        document.getElementById("yes:to").checked = false;
+		        document.getElementById("no:to").checked = true;
+		    }
+	}
+	
+	function noCheckTransportation(id) {
+
+		// For Student Type
+	    if (id === "no:st") {
+	        document.getElementById("no:st").checked = true;
+	        document.getElementById("yes:st").checked = false;
+
+	        // Automatically set Transport Opted to YES
+	        document.getElementById("no:to").checked = false;
+	        document.getElementById("yes:to").checked = true;
+	    }
+
+	}
+	
 	function maybeCheck(id) {
 
 		if (document.getElementById(id).checked == true) {
@@ -784,6 +811,18 @@ $(document).ready(function() {
 	
 
 </script>
+<script>
+function formatInput(el) {
+    // Remove all spaces
+    let value = el.value.replace(/\s/g, '');
+    
+    // Insert space after every 4 characters
+    let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+    
+    // Set the new formatted value
+    el.value = formatted;
+}
+</script>
 </head>
 <%
 	//allow access only if session exists
@@ -962,8 +1001,8 @@ $(document).ready(function() {
 								<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhaar No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;" maxlength="12"
-									id="disabilitychild" size="36">
+									style="text-transform:capitalize;" maxlength="14"
+									id="disabilitychild" size="36" oninput="formatInput(this)">
 
 							</label>
 							
@@ -1090,19 +1129,19 @@ $(document).ready(function() {
 							
 							<td  class="alignLeft">Student Type &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Residential<input checked
-								type="checkbox" value="Residential" name="urbanrural" id="no:st"
-								onclick="noCheck(this.id)" />&nbsp; &nbsp;Day Scholar<input
-								type="checkbox" value="Day Scholar" name="urbanrural" id="yes:st"
-								onclick="yesCheck(this.id);" />
+								type="checkbox" value="Residential" name="urbanrural" id="yes:st"
+								onclick="yesCheckTransportation(this.id)" />&nbsp; &nbsp;Day Scholar<input
+								type="checkbox" value="Day Scholar" name="urbanrural" id="no:st"
+								onclick="noCheckTransportation(this.id);" />
 
 							</td>
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Transport Opted &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Yes<input checked
-								type="checkbox" value="Yes" name="caste" id="no:to"
-								onclick="noCheck(this.id)" />&nbsp; &nbsp;No<input
-								type="checkbox" value="No" name="caste" id="yes:to"
-								onclick="yesCheck(this.id);" />
+							<td  height="30" class="alignLeft">&nbsp;Yes<input 
+								type="checkbox" value="Yes" name="caste" id="yes:to"
+								onclick="yesCheck(this.id)" />&nbsp; &nbsp;No<input checked
+								type="checkbox" value="No" name="caste" id="no:to"
+								onclick="noCheck(this.id);" />
 
 							</td>
 						</tr>
@@ -1723,16 +1762,16 @@ $(document).ready(function() {
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;" maxlength="12"
-											id="fatherscastecertno" size="36">
+											style="text-transform:capitalize;" maxlength="14"
+											id="fatherscastecertno" size="36" oninput="formatInput(this)">
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhaar No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
-											style="text-transform:capitalize;" maxlength="12"
-											id="motherscastecertno" size="36">
+											style="text-transform:capitalize;" maxlength="14"
+											id="motherscastecertno" size="36" oninput="formatInput(this)">
 									</label></td>
 								</tr>
 

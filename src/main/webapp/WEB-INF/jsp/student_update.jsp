@@ -474,6 +474,18 @@
 
 
 </script>
+<script>
+function formatInput(el) {
+    // Remove all spaces
+    let value = el.value.replace(/\s/g, '');
+    
+    // Insert space after every 4 characters
+    let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+    
+    // Set the new formatted value
+    el.value = formatted;
+}
+</script>
 </head>
   <%
 //allow access only if session exists
@@ -722,8 +734,8 @@ for(Cookie cookie : cookies){
 							
 							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}" maxlength="14"
+									id="disabilitychild" size="30" oninput="formatInput(this)">
 
 							</label></td>
 
@@ -1374,7 +1386,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Mother's Name*</td>
 							<td><label> <input
 									name="mothersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;" required
+									size="30" style="text-transform: capitalize;"
 									value="<c:out default="" value="${parents.mothersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -1421,13 +1433,13 @@ for(Cookie cookie : cookies){
 						<td class="alignLeft">Father's Aadhar No.</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
-									id="fatherscastecertno" size="30">
+									id="fatherscastecertno" size="30" maxlength="14" oninput="formatInput(this)">
 
 							</label></td>
 
 					
 						<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No.</td>
-							<td><label> <input name="motherscastecertno"
+							<td><label> <input name="motherscastecertno" maxlength="14" oninput="formatInput(this)"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
 							</label></td>
