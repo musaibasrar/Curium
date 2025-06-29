@@ -324,7 +324,7 @@
                 } else {
                     // Creating new event
                     document.getElementById('eventId').value = '';
-                    document.getElementById('title').value = '';
+                    document.getElementById('title').value = 'Booked';
                     document.getElementById('description').value = '';
                     
                     // Handle new event creation dates
