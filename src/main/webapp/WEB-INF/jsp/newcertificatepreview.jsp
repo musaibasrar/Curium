@@ -93,15 +93,15 @@ span{
     font-weight: normal;
 }
 </style>
-	<script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

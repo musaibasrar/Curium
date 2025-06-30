@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/nortuntrading/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/nortuntrading/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/ruyaa/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/ruyaa/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -65,7 +65,7 @@
         </script>
 </head>
     <body background="/images/bg.jpg" >
-        <form id="form1" action="/nortuntrading/SMSProcess/sendSMS"  method="post">
+        <form id="form1" action="/ruyaa/SMSProcess/sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1">SMS sent successfully</p>

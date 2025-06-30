@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/nortuntrading/css/bootstrap.min.css">
-        <script src="/nortuntrading/js/jquery.min.js"></script>
-        <script src="/nortuntrading/js/bootstrap.min.js"></script>
-        <script src="/nortuntrading/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/ruyaa/css/bootstrap.min.css">
+        <script src="/ruyaa/js/jquery.min.js"></script>
+        <script src="/ruyaa/js/bootstrap.min.js"></script>
+        <script src="/ruyaa/js/popper.min.js"></script>
 
 <style>
  .headerText {
@@ -136,7 +136,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/nortuntrading/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/ruyaa/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -221,7 +221,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/nortuntrading/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/ruyaa/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>

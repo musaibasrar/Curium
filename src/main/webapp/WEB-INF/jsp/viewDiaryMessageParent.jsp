@@ -15,8 +15,8 @@ f<%--
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Diary Message</title>
-    <link rel="stylesheet" href="/nortuntrading/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/nortuntrading/js/openWindow.js"></script>
+    <link rel="stylesheet" href="/ruyaa/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/ruyaa/js/openWindow.js"></script>
     <style type="text/css">
         body {
             font-family: 'Roboto', sans-serif;
@@ -79,7 +79,7 @@ f<%--
     <script type="text/javascript">
         function redirect() {
             var form1 = document.getElementById("form1");
-            form1.action = "/nortuntrading/UserProcess/authenticate";
+            form1.action = "/ruyaa/UserProcess/authenticate";
             form1.submit();
         }
     </script>
@@ -97,7 +97,7 @@ f<%--
                 <label for="message" style="font-size:20px;">Message</label>
                 <p id="message" class="message-content">${diary.message}</p>
             </div>
-            <form action="/nortuntrading/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
+            <form action="/ruyaa/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
                 <div class="text-center">
                     <input type="submit" value="Back" class="btn">
                 </div>

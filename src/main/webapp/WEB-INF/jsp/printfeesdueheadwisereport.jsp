@@ -229,7 +229,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/nortuntrading/images/logo.jpg" width="120" height="100"/>
+				<img src="/ruyaa/images/logo.jpg" width="120" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>

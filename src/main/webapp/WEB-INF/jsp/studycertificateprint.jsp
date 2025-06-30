@@ -123,7 +123,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/nortuntrading/images/nortuntrading.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/ruyaa/images/ruyaa.png">
 			</td>
 				<td >
 					<br>
@@ -238,7 +238,7 @@ for(Cookie cookie : cookies){
 
 			
 			<tr>
-              <td align="center"><a id="print" href="/nortuntrading/DocumentsProcess/printStudyCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/ruyaa/DocumentsProcess/printStudyCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

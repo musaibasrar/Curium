@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/nortuntrading/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/nortuntrading/css/bootstrap.min.css">
-        <script src="/nortuntrading/js/jquery.min.js"></script>
-        <script src="/nortuntrading/js/bootstrap.min.js"></script>
-        <script src="/nortuntrading/js/popper.min.js"></script>
+        <script src="/ruyaa/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/ruyaa/css/bootstrap.min.css">
+        <script src="/ruyaa/js/jquery.min.js"></script>
+        <script src="/ruyaa/js/bootstrap.min.js"></script>
+        <script src="/ruyaa/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -94,15 +94,15 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/nortuntrading/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/ruyaa/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/nortuntrading/images/feespaid.svg" height="20" width="20"/>	
+        						<img src="/ruyaa/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/nortuntrading/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/ruyaa/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label><br/>
-        						<img src="/nortuntrading/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/ruyaa/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label><br/>
-        						<img src="/nortuntrading/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/ruyaa/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>
         					</td>
@@ -132,9 +132,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/nortuntrading/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/ruyaa/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/nortuntrading/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/ruyaa/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -160,7 +160,7 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/nortuntrading/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/ruyaa/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
         						<label id="labelname">Today's Expenses</label>	

@@ -15,8 +15,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/nortuntrading/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/nortuntrading/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/ruyaa/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/ruyaa/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +112,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/nortuntrading/UserProcess/authenticate";
+                form1.action="/ruyaa/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,23 +129,23 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/nortuntrading/index_superadmin','_self');
+                    window.open('/ruyaa/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/nortuntrading/index_admin','_self');
+                    window.open('/ruyaa/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/nortuntrading/index_feescollector','_self');
+                    window.open('/ruyaa/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/nortuntrading/index_officeadmin','_self');
+                	window.open('/ruyaa/index_officeadmin','_self');
                 }else if(type=='teacher'){
-                	window.open('/nortuntrading/index_teacher','_self');
+                	window.open('/ruyaa/index_teacher','_self');
                 }else if(type=='marksentry'){
-                	window.open('/nortuntrading/index_marksentry','_self');
+                	window.open('/ruyaa/index_marksentry','_self');
                 }else if(type=='parents'){
-                	window.open('/nortuntrading/index_parents','_self');
+                	window.open('/ruyaa/index_parents','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/nortuntrading/loginFail','_self');
+            	window.open('/ruyaa/loginFail','_self');
             }
         </script>
         
@@ -155,16 +155,16 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 90px;width: 180px;" alt="ideoholic" src="/nortuntrading/images/nortuntrading.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 90px;width: 180px;" alt="ideoholic" src="/ruyaa/images/ruyaa.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/nortuntrading/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/ruyaa/images/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/nortuntrading/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
+						<form action="/ruyaa/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -186,10 +186,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/nortuntrading/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/ruyaa/images/ideoholic.png"> image with a default alignment.</p> --> 
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/nortuntrading/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/ruyaa/images/ideoholic.png">
 			</a>
 			
 	</div>

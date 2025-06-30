@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>CURIUM</title>
-        <link rel="stylesheet" href="/nortuntrading/css/font-awesome.css">
+        <link rel="stylesheet" href="/ruyaa/css/font-awesome.css">
 </head>
 <%
 //allow access only if session exists

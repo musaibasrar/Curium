@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/nortuntrading/css/bootstrap.min.css">
-    <script src="/nortuntrading/js/jquery.min.js"></script>
-    <script src="/nortuntrading/js/bootstrap.min.js"></script>
-    <script src="/nortuntrading/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/ruyaa/css/bootstrap.min.css">
+    <script src="/ruyaa/js/jquery.min.js"></script>
+    <script src="/ruyaa/js/bootstrap.min.js"></script>
+    <script src="/ruyaa/js/popper.min.js"></script>
         
 <style>
  .headerText {

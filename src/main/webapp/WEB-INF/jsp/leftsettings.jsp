@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/nortuntrading/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
+        <script language="JavaScript" src="/ruyaa/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/nortuntrading/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/nortuntrading/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/nortuntrading/css/font-awesome.css">
+        <script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/ruyaa/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/ruyaa/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/ruyaa/css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -341,7 +341,7 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/nortuntrading/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="/ruyaa/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
             

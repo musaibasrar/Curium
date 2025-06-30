@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Receipt Details</title>
-<link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
+<link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,42 +296,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/nortuntrading/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/ruyaa/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/nortuntrading/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/ruyaa/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/sliderAccess.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/nortuntrading/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/ruyaa/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/ruyaa/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -357,11 +357,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/nortuntrading/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/nortuntrading/AccountProcess/viewNextVoucher";
+		form1.action = "/ruyaa/AccountProcess/viewNextVoucher";
 		form1.method = "POST";
 		form1.submit();
 
@@ -491,7 +491,7 @@
 	
 	function exportVoucher(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/nortuntrading/AccountProcess/exportVoucher";
+		form1.action = "/ruyaa/AccountProcess/exportVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -500,7 +500,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Receipt Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/nortuntrading/AccountProcess/cancelVoucher";
+			form1.action="/ruyaa/AccountProcess/cancelVoucher";
 			form1.method = "POST";
 			form1.submit();	
 		}
@@ -510,7 +510,7 @@
 	function printVoucher(){
 		
 			var form1 = document.getElementById("form1");
-			form1.action="/nortuntrading/AccountProcess/voucherPrint";
+			form1.action="/ruyaa/AccountProcess/voucherPrint";
 			form1.method = "POST";
 			form1.submit();	
 	}
@@ -527,7 +527,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -764,7 +764,7 @@ for(Cookie cookie : cookies){
 													
 						<td class="footerTD" colspan="2"> &nbsp;
 						<button id="cancel">Cancel Voucher</button>
-						<%-- <a id="print" href="/nortuntrading/AccountProcess/voucherPrint?fromdate=<c:out value="${fromdate}"/>&todate=<c:out value="${todate}"/>&vouchertype=<c:out value="${vouchertype}"/>">Print</a> --%>
+						<%-- <a id="print" href="/ruyaa/AccountProcess/voucherPrint?fromdate=<c:out value="${fromdate}"/>&todate=<c:out value="${todate}"/>&vouchertype=<c:out value="${vouchertype}"/>">Print</a> --%>
 						&nbsp;&nbsp;&nbsp;<button id="print">Print</button>&nbsp;&nbsp;&nbsp;<button id="export">Export</button>
 						
 						</td>

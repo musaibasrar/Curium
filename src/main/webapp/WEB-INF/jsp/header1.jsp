@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/nortuntrading/UserProcess/logout";
+                form1.action="/ruyaa/UserProcess/logout";
                 form1.submit();
             }
 
@@ -163,8 +163,8 @@
                     <td height="10" valign="top" background="/images/headerBook.png">
                         <table width="100%" height="137" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
-                               <td width="234" rowspan="2"><!--<div align="center"><img src="/nortuntrading/images/logo.png" width="200" height="64" /></div> --></td> 
-                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/nortuntrading/images/SMS.png" width="391" height="92" /></div></td> -->
+                               <td width="234" rowspan="2"><!--<div align="center"><img src="/ruyaa/images/logo.png" width="200" height="64" /></div> --></td> 
+                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/ruyaa/images/SMS.png" width="391" height="92" /></div></td> -->
                                 <!-- <td width="210" height="104">&nbsp;</td> -->
                             </tr>
                             <tr>
@@ -172,10 +172,10 @@
                                 <td width="150" height="34" background="/images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td width="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                            <td width="40"><a target="mainFrame" href="/nortuntrading/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/nortuntrading/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/nortuntrading/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/nortuntrading/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/nortuntrading/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/nortuntrading/UserProcess/logout"><img   src="/nortuntrading/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
+                                            <td width="40"><a target="mainFrame" href="/ruyaa/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/ruyaa/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/ruyaa/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/ruyaa/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/ruyaa/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/ruyaa/UserProcess/logout"><img   src="/ruyaa/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
                                         </tr>
                                     </table></td>
                             </tr>

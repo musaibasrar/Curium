@@ -168,9 +168,9 @@ margin-top:0px;
         float:right;
         }
     </style>
-	<script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/nortuntrading/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/ruyaa/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
@@ -184,7 +184,7 @@ margin-top:0px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -515,9 +515,9 @@ for(Cookie cookie : cookies){
 			
 			<tr>
                         <td align="center">
-                      <a>  <button id="print" type="button" style="background-image: url(/nortuntrading/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                      <a>  <button id="print" type="button" style="background-image: url(/ruyaa/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                      loading.style.visibility = 'visible'" class="hide"></button> </a>
-                      <!--   <a id="print" href="/nortuntrading/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a>--></td>
+                      <!--   <a id="print" href="/ruyaa/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a>--></td>
                    
                     </tr>
                     

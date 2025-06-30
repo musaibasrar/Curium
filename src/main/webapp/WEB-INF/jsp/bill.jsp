@@ -179,13 +179,11 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/nortuntrading/images/nortuntrading.jpg" width="119" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/ruyaa/images/ruyaa.jpg" width="121" height="60"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -196,55 +194,28 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
-		
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr >
-			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${billdetailsstudentname}" /></label>
-				</td>
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${billdetailsfathername}" /></label>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${billdetailsclassstudying}" />
-				</td>
+		<table style="width: 100%; padding-left: 5px; border-collapse: collapse;">
+    <tr>
+        <td colspan="3" style="height: 10px;"></td> <!-- Empty spacer row -->
+    </tr>
+    <tr>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Bill To:&nbsp;<label style="text-transform: capitalize; font-size: 14px;">
+                <c:out value="${billdetailsstudentname}" />
+            </label>
+        </td>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Date:&nbsp;<c:out value="${billdetailstransactiondate}" />
+        </td>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Receipt #:&nbsp;<c:out value="${billno}" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="height: 10px;"></td> <!-- Another spacer row -->
+    </tr>
+</table>
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${billdetailstransactiondate}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
-						value="${billno}" /> 
-				</td>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${currentAcademicYear}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-
-		</table>
 		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
@@ -337,9 +308,6 @@
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
 		</table>
 		
 		<TABLE width="90%" border="0">
@@ -355,13 +323,11 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/nortuntrading/images/nortuntrading.jpg" width="119" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/ruyaa/images/ruyaa.jpg" width="121" height="60"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -372,55 +338,28 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
-		
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr >
-			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${billdetailsstudentname}" /></label>
-				</td>
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${billdetailsfathername}" /></label>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${billdetailsclassstudying}" />
-				</td>
+		<table style="width: 100%; padding-left: 5px; border-collapse: collapse;">
+    <tr>
+        <td colspan="3" style="height: 10px;"></td> <!-- Empty spacer row -->
+    </tr>
+    <tr>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Bill To:&nbsp;<label style="text-transform: capitalize; font-size: 14px;">
+                <c:out value="${billdetailsstudentname}" />
+            </label>
+        </td>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Date:&nbsp;<c:out value="${billdetailstransactiondate}" />
+        </td>
+        <td class="dataTextBoldLeft" style="width: 33.33%; font-size: 14px;">
+            Receipt #:&nbsp;<c:out value="${billno}" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="height: 10px;"></td> <!-- Another spacer row -->
+    </tr>
+</table>
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${billdetailstransactiondate}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
-						value="${billno}" /> 
-				</td>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${currentAcademicYear}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-
-		</table>
 		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
@@ -513,9 +452,6 @@
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
 		</table>
 		
 		<TABLE width="90%" border="0">

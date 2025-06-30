@@ -292,7 +292,7 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "/nortuntrading/StudentProcess/ViewFeesStructure&id="+studentId; }
+	 * "/ruyaa/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 

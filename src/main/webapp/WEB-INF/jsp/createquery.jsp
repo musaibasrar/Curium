@@ -26,17 +26,17 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/nortuntrading/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/nortuntrading/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.button.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/chosen.jquery.min.js"></script>
-		<link rel="stylesheet" href="/nortuntrading/css/chosen.min.css">
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/ruyaa/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/ruyaa/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/chosen.jquery.min.js"></script>
+		<link rel="stylesheet" href="/ruyaa/css/chosen.min.css">
         <style type="text/css" >
         	.myclass {
 				font-size: 1.3em;
@@ -202,7 +202,7 @@
         <script type="text/javascript">
             function deleteRecords(){
                 var form1=document.getElementById("form1");
-                form1.action="/nortuntrading/StudentProcess/archiveMultiple";
+                form1.action="/ruyaa/StudentProcess/archiveMultiple";
                form1.submit();
            }
             function filter2 (phrase, _id)
@@ -294,7 +294,7 @@
             
             function saveQuery(){
                 var form1=document.getElementById("form1");
-               form1.action="/nortuntrading/JobProcess/addQuery";
+               form1.action="/ruyaa/JobProcess/addQuery";
                form1.submit();
             }
             
@@ -487,7 +487,7 @@
 						var appointmentDate = appointmentdate.value;
 						var appointmentTime = appointmenttime.value;
 		            	var form1 = document.getElementById("form1");
-		        		form1.action = "/nortuntrading/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
+		        		form1.action = "/ruyaa/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
 		        		form1.method = "POST";
 		        		form1.submit();
 		            }
@@ -497,7 +497,7 @@
 					var assignto = assignto.value;					
 					var form1 = document.getElementById("form1");
 					
-		    		form1.action = "/nortuntrading/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
+		    		form1.action = "/ruyaa/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
 		    		form1.method = "POST";
 		    		form1.submit();
 		        }
@@ -563,7 +563,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

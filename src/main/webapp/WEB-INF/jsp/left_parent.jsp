@@ -6,20 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left_parent</title>
-        <script language="JavaScript" src="/nortuntrading/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
+        <script language="JavaScript" src="/ruyaa/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/nortuntrading/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/nortuntrading/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/nortuntrading/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/nortuntrading/css/font-awesome.css">
+        <script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/ruyaa/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/ruyaa/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/ruyaa/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/ruyaa/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -422,7 +422,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/nortuntrading/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
+            				 <a target="mainFrame" href="/ruyaa/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Student Detail</a>
             			</td>
             		</tr>
             	   
@@ -461,8 +461,8 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<!--  <a target="mainFrame" href="/nortuntrading/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
-            				  <a target="mainFrame" href="/nortuntrading/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
+            				<!--  <a target="mainFrame" href="/ruyaa/DiaryProcess/viewdiarystudent" style="font-size: 12px;">view diary</a>-->
+            				  <a target="mainFrame" href="/ruyaa/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"> View Diary </a> 
             			</td>
             		</tr>
             		

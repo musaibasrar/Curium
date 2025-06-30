@@ -9,10 +9,10 @@
 <title>index_parents</title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/nortuntrading/css/bootstrap.min.css">
-        <script src="/nortuntrading/js/jquery.min.js"></script>
-        <script src="/nortuntrading/js/bootstrap.min.js"></script>
-        <script src="/nortuntrading/js/popper.min.js"></script> 
+<link rel="stylesheet" href="/ruyaa/css/bootstrap.min.css">
+        <script src="/ruyaa/js/jquery.min.js"></script>
+        <script src="/ruyaa/js/bootstrap.min.js"></script>
+        <script src="/ruyaa/js/popper.min.js"></script> 
  <style>
  .container{
 border: 0px solid red;
@@ -119,7 +119,7 @@ font-size:70px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/nortuntrading/UserProcess/sessionTimeOut");
+	response.sendRedirect("/ruyaa/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -135,12 +135,12 @@ for(Cookie cookie : cookies){
     
     
 		   <c:if test="${(userType == 'parents')}">
-			    <frame   src="/nortuntrading/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/ruyaa/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
-			<frame src="/nortuntrading/welcomeparent" name="mainFrame" scrolling="yes" />
+			<frame src="/ruyaa/welcomeparent" name="mainFrame" scrolling="yes" />
            <!--  <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/nortuntrading/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/nortuntrading/welcomeparent" name="mainFrame" scrolling="yes" />
+                <frame  src="/ruyaa/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/ruyaa/welcomeparent" name="mainFrame" scrolling="yes" />
             </frameset> -->
 
    </frameset>
@@ -157,14 +157,14 @@ for(Cookie cookie : cookies){
     
     <div class="col-6" id="f1">
      <i class="fa-solid fa-graduation-cap"></i>
-     <a target="mainFrame" href="/nortuntrading/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
+     <a target="mainFrame" href="/ruyaa/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
      
     </div> 
     
      
     <div class="col-6" id="f3">
     <i class="fa-solid fa-book"></i>
-     <a target="mainFrame" href="/nortuntrading/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
+     <a target="mainFrame" href="/ruyaa/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
     </div>
     
   </div> 

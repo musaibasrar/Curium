@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form id="form1" action="/nortuntrading/ImportProcess/readFileFees" method="post"  enctype="multipart/form-data">
+<form id="form1" action="/ruyaa/ImportProcess/readFileFees" method="post"  enctype="multipart/form-data">
 <table width="100%" border="0" align="center">
 <tr>								
 <td><br /><br />

@@ -14,44 +14,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/nortuntrading/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/ruyaa/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
-<link rel="stylesheet" href="/nortuntrading/css/datePicker/demos.css">
-<script type="text/javascript" src="/nortuntrading/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/ruyaa/css/datePicker/demos.css">
+<script type="text/javascript" src="/ruyaa/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.dialog.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.dialog.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.widget.js"></script>
 
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/sliderAccess.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.accordion.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/sliderAccess.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.position.js"></script>
-<script type="text/javascript" src="/nortuntrading/js/datePicker/ui/jquery.ui.mouse.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.position.js"></script>
+<script type="text/javascript" src="/ruyaa/js/datePicker/ui/jquery.ui.mouse.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.draggable.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.draggable.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.ui.resizable.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/nortuntrading/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/ruyaa/js/datePicker/ui/jquery.effects.blind.js"></script>
 <style type="text/css">
 .alignRightFields {
 	font-family: Tahoma;
@@ -538,7 +538,7 @@
     });
              function addPatient(){
                 var form1=document.getElementById("form1");
-                form1.action="/nortuntrading/PatientProcess/add";
+                form1.action="/ruyaa/PatientProcess/add";
                 form1.submit();
             }
         </script>
@@ -549,7 +549,7 @@
 
             function searchForFees() {
         		var form1 = document.getElementById("form1");
-        		form1.action = "/nortuntrading/StampFeesProcess/search";
+        		form1.action = "/ruyaa/StampFeesProcess/search";
         		form1.method = "POST";
         		form1.submit();
 
@@ -567,7 +567,7 @@
 </head>
 <body>
 	<form id="form1"
-		action="/nortuntrading/FeesCollection/feesAdd"
+		action="/ruyaa/FeesCollection/feesAdd"
 		method="post" onkeypress="if (event.keyCode == 92) addRow();">
 		<div style="height: 28px">
 			<!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
@@ -732,7 +732,7 @@
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/nortuntrading/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
+									href="/ruyaa/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 											value="${Parents.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 								<td class="dataText"><c:out
