@@ -304,7 +304,7 @@ public class MessStockEntryService {
 		        	StringBuilder tableBuilder = new StringBuilder(
 		        				"<table  style='margin-left: auto;margin-right: auto;'>" + 
 		        				"						<tr>" + 
-		        				"							<td class='alignRight'>Student Name &nbsp;</td>" + 
+		        				"							<td class='alignRight'>Customer Name &nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'>" + 
 		        				"								"+studentName+"" + 
 		        				"							</td>" + 
