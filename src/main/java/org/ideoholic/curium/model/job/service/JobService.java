@@ -631,7 +631,7 @@ public class JobService {
 		if(branchId!=null){
 
 			int jobId = Integer.parseInt(QueriesDto.getJobId());
-			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
+			List<Task> taskDetails = jobDAO.viewTaksDetails(jobId);
 			jobQueryDto.setTaskList(taskDetails);
 			jobQueryDto.setSuccess(true);
 		}
@@ -719,7 +719,7 @@ public class JobService {
 			}
 			completed = TaskIdsList.size();
 
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -783,7 +783,7 @@ public class JobService {
 			}
 			cancel=taskIdsList.size();
 			log.info("Cancel for the job id "+queriesDto.getJobId());
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -845,7 +845,7 @@ public class JobService {
 			}
 			toDo = taskIdsList.size();
 			log.info("To do for the job id "+queriesDto.getJobId());
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {

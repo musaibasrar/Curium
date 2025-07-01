@@ -462,16 +462,12 @@ public class JobDAO {
 	        List<Task> results = new ArrayList<Task>();
 	        
 	        try {
-	                transaction = session.beginTransaction();
-	                results = (List<Task>) session.createQuery("from Task where jobid="+jobId+"").list();
-	                transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-	                
-	                hibernateException.printStackTrace();
-
-	        } finally {
-	    			HibernateUtil.closeSession();
-	        }
+	        	    results = taskRepository.findByJobquery_Id(jobId);
+	        } catch (Exception hibernateException) { 
+	        	log.error(hibernateException.getMessage(), hibernateException);
+	            hibernateException.printStackTrace();
+	            throw hibernateException;
+			} 
 	        return results;
 		}
 
