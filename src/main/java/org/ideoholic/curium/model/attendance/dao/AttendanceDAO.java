@@ -264,27 +264,24 @@ public class AttendanceDAO {
 			});
 			return true;
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
 			throw e;
 
 		}
 	}
 
+	@Transactional
 	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, String date, String studentExternalId, int branchId) {
 		
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		
-		Transaction transaction = null;
+
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			log.info(e.getMessage());
-			System.out.println("column "+e);
-		}finally {
-			HibernateUtil.closeSession();
+			studentDailyAttendance = studentDailyAttendanceRepository.findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(date, currentAcademicYear, studentExternalId, branchId);
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+			throw e;
 		}
 		return studentDailyAttendance;
 	}
