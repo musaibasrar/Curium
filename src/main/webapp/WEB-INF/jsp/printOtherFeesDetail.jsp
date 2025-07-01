@@ -457,7 +457,7 @@
                 </tr>
             </TABLE>
 
-		 <TABLE id="dataTable" width="100%" border="0"
+		 <%-- <TABLE id="dataTable" width="100%" border="0"
 			style="border-collapse: collapse;">
 
 
@@ -483,11 +483,11 @@
 							value="${status.index+1}" /></td>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<%-- <td class="dataText">Rs. <c:out
-							value="${feescatmap.value}" /></td> --%>
+					<td class="dataText">Rs. <c:out
+							value="${feescatmap.value}" /></td>
 				</tr>
 			</c:forEach>
-			</table>
+			</table> --%>
 			
 			
 			<TABLE width="100%" border="0">

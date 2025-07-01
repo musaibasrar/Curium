@@ -252,30 +252,18 @@
 
             <table width="100%">
                 <tr>
-                    <td  class="headerTD">Name: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td  class="headerTD">Class: &nbsp;<c:out value="${student.classstudying}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td  class="headerTD">Name: &nbsp;<c:out value="${student.name}" /></td>
+                    <td  class="headerTD">Class: &nbsp;<c:out value="${student.classstudying}" /></td>
+                    <td  class="headerTD">Academic Year: &nbsp;<c:out value="${academicPerYear}" /></td>
+                    <td  class="headerTD">Date: &nbsp;<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/></td>
                 </tr>
                 
             </table>
             
-            <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
+            
             <div id="accordion" style="width: 100%;height: 100%">
 
                 <div>
-                
-					<div align="center">
-				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<%-- <h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> Rs.  ${dueamount}</h> --%>
-                </div>
                 
                 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
@@ -289,13 +277,13 @@
                     <thead>
                         <tr>
                         	<th class="datath" style="text-align: center;">Sl.No.</th>
-                            <th class="datath" style="text-align: center;">Fees Category</th>
+                            <th class="datath" style="text-align: center;">Items</th>
                             <!-- <th class="datath" style="text-align: center;">Fees Amount&nbsp;</th> -->
-                            <!-- <th class="datath" style="text-align: center;">Installments&nbsp;</th> -->
-                            <th class="datath" style="text-align: center;">Total Fees Amount&nbsp;</th>
-                            <th class="datath" style="text-align: center;">Fees Paid&nbsp;</th> -->
-                            <th class="datath" style="text-align: center;">Concession Amount&nbsp;</th>
-                            <th class="datath" style="text-align: center;">Fees Due&nbsp;</th>
+                            <th class="datath" style="text-align: center;">No. of Items&nbsp;</th>
+                            <!-- <th class="datath" style="text-align: center;">Total Fees Amount&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Fees Paid&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Fees Due&nbsp;</th> -->
+                            <th class="datath" style="text-align: center;">Delivery Status&nbsp;</th>
                            <!--  <th class="datath" style="text-align: center;">Waive Off Amount&nbsp;</th> -->
                         </tr>
                     </thead>
@@ -304,32 +292,78 @@
                         <c:forEach items="${feesstructure}" var="feesstructure" varStatus="status">
                             <tr>
                             	<td class="datatd" style="text-align: right">${status.index+1}</td>
-                                <td class="datatd" style="text-align: left">${feesstructure.otherfeescategory.feescategoryname}</td>
+                                <td class="datatd" style="text-align: left">
+                                <c:set var="feeCategories" value="${fn:split(feesstructure.otherfeescategory.feescategoryname, '--')}" />
+                                ${feeCategories[0]}</td>
                                 <%-- <td class="datatd" style="text-align: right">${feesstructure.feescategory.amount}</td> --%>
-                                <%-- <td class="datatd" style="text-align: center;">${feesstructure.totalinstallment}</td> --%>
-                                <td class="datatd" style="text-align: right">${feesstructure.feesamount}</td>
-                                <td class="datatd" style="text-align: right">${feesstructure.feespaid}</td> 
-                                <td class="datatd" style="text-align: right">${feesstructure.concession}</td>
-                                <td class="datatd" style="text-align: right">${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}</td>
+                                <td class="datatd" style="text-align: center;">${feesstructure.totalinstallment}</td>
+                                <%--<td class="datatd" style="text-align: right">${feesstructure.feesamount}</td>
+                                 <td class="datatd" style="text-align: right">${feesstructure.feespaid}</td> 
+                                <td class="datatd" style="text-align: right">${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}</td> --%>
+                                <td class="datatd" style="text-align: right">${feesstructure.concessionnotes}</td>
                                 <%-- <td class="datatd" style="text-align: right">${feesstructure.waiveoff}</td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>
                     
-                    <tfoot>
+                    <%-- <tfoot>
                     	<tr>
                     			 <!-- colspan="2" -->
                     			<td class="datatd" style="text-align: right;font-weight: bold;">Total</td>
                     			<td class="datatd" style="text-align: right;font-weight: bold;">${grandtotalfeesamount}</td>
-                                <%-- <td class="datatd" style="text-align: right;font-weight: bold;">${totalfees}</td> --%>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${totalfees}</td>
                                 <td class="datatd" style="text-align: right;font-weight: bold;">${sumoffees}</td>
-                                <td class="datatd" style="text-align: right;font-weight: bold;">${totalfeesconcession}</td>
                                 <td class="datatd" style="text-align: right;font-weight: bold;">${dueamount}</td>
                     	</tr>
-                    
-                    </tfoot>
+                    </tfoot> --%>
                    
                 </table>
+                
+                <TABLE width="100%" border="0">
+			<tr>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
+			</tr>
+			
+			</table>
+                
+                <TABLE id="dataTable" width="100%" border="0"
+			style="page-break-after: always; border-collapse: collapse;">
+
+			<tr>
+			<td>
+			<br>
+			<br><br><br></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		
+			<tr>
+		<tr>
+		<td></td>
+		<td></td>
+			<td align="left">Parent Signature</td>	
+			<td align="center">Satff Signature</td>
+		</tr>
+		
+			<tr>
+                                      <td>
+                        </td>
+
+            </tr>
+		</TABLE>
 				
 				
                 </div>
