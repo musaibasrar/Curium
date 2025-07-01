@@ -161,7 +161,7 @@ public class EmployeeService {
 		
 		boolean result = false;
     try {
-    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+    	List<Teacher> list = employeeDao.readListOfObjects(Integer.parseInt(branchId));
     	employeesWithSalaryResponseDto.setEmployeeList(list);
     	employeesWithSalaryResponseDto.setEmployeeListProcessSalary(list);
     	employeesWithSalaryResponseDto.setSuccess(true);

@@ -53,6 +53,9 @@ public class AttendanceService {
 		
 		@Autowired
 		private AttendanceDAO attendanceDao;
+
+		@Autowired
+		private EmployeeDAO employeeDao;
 		
 	    private static final int BUFFER_SIZE = 4096;
 
@@ -1083,7 +1086,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	public ResultResponse viewAttendanceStaff(String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 		if(branchId!=null){
-			List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 			result.setResultList(staffList);
 				if(!staffList.isEmpty()){
 					result.setSuccess(true);
@@ -1099,7 +1102,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		StaffAttendanceDetailsResponseDto result = StaffAttendanceDetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
-		List<Teacher> searchStaffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> searchStaffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 		
 		List<Teacher> newStaffList = new ArrayList<Teacher>();
 		List<Staffdailyattendance> newStaffDailyAttendance = new ArrayList<Staffdailyattendance>();
@@ -1120,7 +1123,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		result.setStaffDailyAttendanceDate(newStaffDailyAttendance);
 		result.setSearchedDate(attendanceDetailsDto.getSearchDate());
 		
-			List<Teacher> staffDetailsList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Teacher> staffDetailsList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 
 			result.setStaffList(staffDetailsList);
 			result.setSuccess(true);
@@ -1199,7 +1202,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setSuccess(true);
 		}
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 
 		result.setStaffList(staffList);
 		return result;
@@ -1263,7 +1266,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 		
 		Map<String,List<Staffdailyattendance>> staffsAttendance = attendanceDao.readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
@@ -1419,7 +1422,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects();
+		List<Teacher> staffList = employeeDao.readListOfObjects();
 		Currentacademicyear currentAcademicYear = yearDao.showYear();
 		List<Staffdailyattendance> listStaffAttendance = new ArrayList<Staffdailyattendance>();
 		

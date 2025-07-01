@@ -48,24 +48,17 @@ public class EmployeeDAO {
 		return result;
 	}
 
-	@SuppressWarnings({ "unchecked", "finally" })
+	@Transactional
 	public List<Teacher> readListOfObjects(int branchId) {
-		Transaction transaction = null;
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
-					.list();
-			transaction.commit();
+			results = teacherRepository.findByBranchid(branchId);
 		} catch (Exception hibernateException) {
-			transaction.rollback();
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })
@@ -96,24 +89,16 @@ public class EmployeeDAO {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "finally" })
+	@Transactional
 	public List<Teacher> readListOfObjects() {
-		Transaction transaction = null;
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher")
-					.list();
-			transaction.commit();
+			results = teacherRepository.findAll();
 		} catch (Exception hibernateException) {
-			transaction.rollback();
-		    log.error(hibernateException.getMessage(), hibernateException);
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
 		}
+		return results;
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })
