@@ -39,6 +39,9 @@ public class EmployeeService {
 	
 	@Autowired
 	private PrintIdsDAO printIdsDAO;
+	
+	@Autowired
+	private EmployeeDAO employeeDao;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -142,7 +145,7 @@ public class EmployeeService {
 		employee.setTeacherexternalid(branchCode);
 		employee.setBranchid(Integer.parseInt(branchId));
 
-		if(new EmployeeDAO().create(employee)){
+		if(employeeDao.create(employee)){
 			if(userService.addUser(employee, branchId)){
 				return ResultResponse.builder().success(true).build();
 			}else{
