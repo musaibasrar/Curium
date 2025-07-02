@@ -504,7 +504,7 @@ for(Cookie cookie : cookies){
   </tr>
   </table> 
   <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 10px;margin-right:0px;padding-right: 0;font-size:9px;">
-<td style="padding: 0;font-size:9px;">Student's Full&nbsp; Name<span style="float:right;">:&nbsp;</span></td>
+<td style="padding: 0;font-size:9px;">Name<span style="float:right;">:&nbsp;</span></td>
   <td style="font-weight:bold;font-size:16px;text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>    
     <%-- <tr>
       <td colspan="2" style="padding: 0;text-transform: uppercase;text-align:center;font-weight:bold;font-size:16px;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>
@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
  
   
     <tr>
-      <td style="padding: 0;white-space: nowrap;font-size:9px;">Standard<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;white-space: nowrap;font-size:9px;">Class<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("classsection" + i + "") %></td>
     </tr>
     
@@ -523,13 +523,18 @@ for(Cookie cookie : cookies){
     </tr> 
      
      <tr>
-      <td style="padding: 0;font-size:9px;">Blood Group<span style="float:right;">:&nbsp;</span></td>
-      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("bloodgroup" + i + "") %></td>
+      <td style="padding: 0;font-size:9px;">Father Name<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    </tr> 
+    
+     <tr>
+      <td style="padding: 0;font-size:9px;">Contact<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
     </tr>  
         
     <tr>
       <td style="padding: 0;vertical-align: top; font-size:9px;">ADDRESS<span style="float:right;">:&nbsp;</span></td>
-      <td style="padding: 0;vertical-align: top;font-size:9px; word-wrap: break-word; "><%= request.getSession().getAttribute("address" + i + "") %></td>
+      <td style="padding: 0;vertical-align: top;font-size:7px; word-wrap: break-word; "><%= request.getSession().getAttribute("address" + i + "") %></td>
     </tr>
   </table>
 
