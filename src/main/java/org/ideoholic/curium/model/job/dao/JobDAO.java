@@ -472,27 +472,23 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public List<Task> readListOfObjectsPaginationTask(int offset, int noOfRecords, int branchId) {
-			
+
 			List<Task> results = new ArrayList<Task>();
 
 			try {
-				
-				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Task as query where query.branchid = "+branchId+" order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
-				query.setFirstResult(offset);   
-				query.setMaxResults(noOfRecords);
-				results = query.getResultList();
-				transaction.commit();
-				
 
-			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+				Pageable pageable = PageRequest.of(offset, noOfRecords);
+				results = taskRepository.findByBranchidOrderByIdDesc(branchId, pageable).getContent();
+
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return results;
 			}
+			return results;
 		}
 
 

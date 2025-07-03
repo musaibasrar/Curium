@@ -29,6 +29,8 @@ import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.task.dto.Task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -148,30 +150,39 @@ public class Teacher implements java.io.Serializable {
 	@Column(name = "userid")
 	private Integer userid;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<JobQuery> jobList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Leavedetails> leavedetailsList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private List<Payheadstaffdetails> payHeadDetailsList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Task> taskList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Processsalarydetails> salaryDetailsList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Leaveapplication> leaveApplicationList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Parents> parentsList;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private List<Paybasic> basicPayList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Payadvancesalary> advanceSalaryList;
 

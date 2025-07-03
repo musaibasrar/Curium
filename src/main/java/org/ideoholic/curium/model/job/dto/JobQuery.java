@@ -23,6 +23,8 @@ import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.task.dto.Task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -89,6 +91,7 @@ public class JobQuery implements java.io.Serializable {
 	@Column(name = "branchid")
 	private Integer branchid;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "jobquery")
 	private Set<Task> tasks;
 }
