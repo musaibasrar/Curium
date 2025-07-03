@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -331,7 +333,20 @@ public class FeesDetailsService {
 			dataForFeesResponseDto.setDateRangeFeesCollection("Date: "+oneDay+"");
 		}
 		
-		dataForFeesResponseDto.setFeesMap(feesMap);
+
+		// Step 1: Convert map entries to a list
+		List<Map.Entry<Receiptinfo, Parents>> entryList = new ArrayList<>(feesMap.entrySet());
+
+		// Step 2: Sort the list by receiptnumber
+		entryList.sort(Comparator.comparing(e -> e.getKey().getReceiptnumber()));
+
+		// Step 3: Create a LinkedHashMap to maintain the sorted order
+		Map<Receiptinfo, Parents> sortedMap = new LinkedHashMap<>();
+		for (Map.Entry<Receiptinfo, Parents> entry : entryList) {
+		    sortedMap.put(entry.getKey(), entry.getValue());
+		}
+		
+		dataForFeesResponseDto.setFeesMap(sortedMap);
 		dataForFeesResponseDto.setSuccess(true);
 		return dataForFeesResponseDto;
 	}
