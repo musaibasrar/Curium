@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,9 +24,12 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
+import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -77,10 +82,10 @@ public class FeesDetailsService {
 
 
 
-	public boolean exportDataForFees() {
+	public ResultResponse exportDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
-		boolean successResult = false;
+		ResultResponse result = ResultResponse.builder().success(false).build();
+		String[] feesIds =  feesIdDetailsDto.getFeesIds();
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
@@ -97,9 +102,9 @@ public class FeesDetailsService {
 			}
 			try {
 				if (exportDataToExcel(feesMap)) {
-					successResult = true;
+					result = ResultResponse.builder().success(true).build();
 				} else {
-					successResult = false;
+					result = ResultResponse.builder().success(false).build();
 				}
 
 			} catch (Exception e) {
@@ -107,7 +112,7 @@ public class FeesDetailsService {
 			}
 		}
 
-		return successResult;
+		return result;
 	}
 	
 	
@@ -187,10 +192,10 @@ public class FeesDetailsService {
 
 
 
-	public boolean exportDataForOtherFees() {
+	public ResultResponse exportDataForOtherFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
-		boolean successResult = false;
+		ResultResponse result = ResultResponse.builder().success(false).build();
+		String[] feesIds = feesIdDetailsDto.getFeesIds();
 		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
 		Parents student = new Parents();
 		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
@@ -207,9 +212,9 @@ public class FeesDetailsService {
 			}
 			try {
 				if (exportOtherFeesDataToExcel(feesMap)) {
-					successResult = true;
+					result = ResultResponse.builder().success(true).build();
 				} else {
-					successResult = false;
+					result = ResultResponse.builder().success(false).build();
 				}
 
 			} catch (Exception e) {
@@ -217,7 +222,7 @@ public class FeesDetailsService {
 			}
 		}
 
-		return successResult;
+		return result;
 	}
 	
 	
@@ -297,17 +302,17 @@ public class FeesDetailsService {
 
 
 
-	public boolean printDataForFees() {
+	public DataForFeesResponseDto printDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
-		String[] feesIds = request.getParameterValues("feesIDs");
-		String toDate= DataUtil.dateFromatConversionDashToSlash(request.getParameter("todate"));
-		String fromDate = DataUtil.dateFromatConversionDashToSlash(request.getParameter("fromdate"));
-		String oneDay = DataUtil.dateFromatConversionDashToSlash(request.getParameter("oneday"));
+		DataForFeesResponseDto dataForFeesResponseDto = new DataForFeesResponseDto();
+		String[] feesIds = feesIdDetailsDto.getFeesIds();
+		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
+		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
+		String oneDay = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getOneDay());
 		
-		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
@@ -318,7 +323,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
+					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();
@@ -328,20 +333,32 @@ public class FeesDetailsService {
 			}
 		}
 		
-		httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-		httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
-		httpSession.setAttribute("sumoffine", fine);
-		httpSession.setAttribute("sumofmisc", misc);
-		
+		dataForFeesResponseDto.setSumOfDetailsFees(sumOfFees);
+		dataForFeesResponseDto.setSumOfOnlyFee(sumOfFees-fine-misc);
+		dataForFeesResponseDto.setSumOfFine(fine);
+		dataForFeesResponseDto.setSumOfMisc(misc);
 		if(oneDay.equalsIgnoreCase("")) {
-			httpSession.setAttribute("daterangefeescollection", "From Date: "+fromDate+"             To Date: "+toDate+"");
+			dataForFeesResponseDto.setDateRangeFeesCollection("From Date: "+fromDate+"             To Date: "+toDate+"");
 		}else {
-			httpSession.setAttribute("daterangefeescollection", "Date: "+oneDay+"");
+			dataForFeesResponseDto.setDateRangeFeesCollection("Date: "+oneDay+"");
 		}
 		
+
+		// Step 1: Convert map entries to a list
+		List<Map.Entry<Receiptinfo, Parents>> entryList = new ArrayList<>(feesMap.entrySet());
+
+		// Step 2: Sort the list by receiptnumber
+		entryList.sort(Comparator.comparing(e -> e.getKey().getReceiptnumber()));
+
+		// Step 3: Create a LinkedHashMap to maintain the sorted order
+		Map<Receiptinfo, Parents> sortedMap = new LinkedHashMap<>();
+		for (Map.Entry<Receiptinfo, Parents> entry : entryList) {
+		    sortedMap.put(entry.getKey(), entry.getValue());
+		}
 		
-		request.setAttribute("feesmap", feesMap);
-		return true;
+		dataForFeesResponseDto.setFeesMap(sortedMap);
+		dataForFeesResponseDto.setSuccess(true);
+		return dataForFeesResponseDto;
 	}
 
 
