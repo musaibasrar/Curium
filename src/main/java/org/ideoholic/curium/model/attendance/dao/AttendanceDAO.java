@@ -290,20 +290,19 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
+	@Transactional
 	public List<Studentdailyattendance> getStudentDailyAttendance(
 			String studentExternalId, String fromTimestamp,
 			String toTimestamp, String currentAcademicYear, int branchId) {
-		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		Transaction transaction = null;
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			// TODO: handle exception
-		}finally {
-			HibernateUtil.closeSession();
+
+			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(
+					LocalDate.parse(fromTimestamp), LocalDate.parse(toTimestamp), currentAcademicYear,
+					studentExternalId, branchId);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw e;
 		}
 		return studentDailyAttendance;
 	}
