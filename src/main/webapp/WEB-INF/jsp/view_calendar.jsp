@@ -299,7 +299,7 @@
                 displayEventTime: false,
                 editable: false,
                 selectable: false,
-                events: '/qpevents/EventProcess/getEvents',
+                events: '/vision/EventProcess/getEvents',
                 
                 // This function transforms each event object before it is rendered
                 eventDataTransform: function(eventData) {
