@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryProjection;
+import org.ideoholic.curium.repositories.StudentDiaryRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;

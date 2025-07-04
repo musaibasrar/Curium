@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.printids.dao;
+package org.ideoholic.curium.repositories;
 
 import java.util.List;
 

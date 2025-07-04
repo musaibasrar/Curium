@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
@@ -39,7 +40,7 @@ public class departmentDAO {
 		List<Department> results = new ArrayList<Department>();
         try {
             
-            results = departmentRepository.findByBranchId(branchId);
+            results = departmentRepository.findByBranchid(branchId);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             

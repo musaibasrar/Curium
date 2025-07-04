@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.attendance.dao;
+package org.ideoholic.curium.repositories;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.enquiry.dao;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
+import org.ideoholic.curium.repositories.EnquiryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
+import org.ideoholic.curium.repositories.ExamsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
