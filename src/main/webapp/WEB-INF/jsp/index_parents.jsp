@@ -130,7 +130,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="95,*"frameborder="0" border="0" framespacing="0"  >
+    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
     
 		   <c:if test="${(userType == 'parents')}">
