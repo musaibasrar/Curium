@@ -12,4 +12,11 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
     Optional<Studentdailyattendance> findByAttendee_sidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
 
     List<Studentdailyattendance> findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(String date, String academicYear, String attendeeId, int branchId);
+    
+    List<Studentdailyattendance> findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(
+            LocalDate fromTimestamp,
+            LocalDate toTimestamp,
+            String currentAcademicYear,
+            String studentExternalId,
+            Integer branchId);
 }

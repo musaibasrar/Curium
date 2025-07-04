@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.transaction.Transactional;
@@ -14,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.task.dto.Task;
+import org.ideoholic.curium.repositories.JobQueryRepository;
 import org.ideoholic.curium.repositories.TaskRepository;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
