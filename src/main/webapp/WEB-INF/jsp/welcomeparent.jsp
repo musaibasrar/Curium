@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dash Board</title>
-        <script src="/abc/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+        <script src="/shadaan/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/shadaan/css/bootstrap.min.css">
+        <script src="/shadaan/js/jquery.min.js"></script>
+        <script src="/shadaan/js/bootstrap.min.js"></script>
+        <script src="/shadaan/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
 
 		@font-face {
 		  font-family: "IBMPlexSans";
-  		  src: url("/abc/fonts/IBMPlexSans-Regular.ttf");
+  		  src: url("/shadaan/fonts/IBMPlexSans-Regular.ttf");
 		}
 
 		#rcorners1 {
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shadaan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
 	</div> -->
 	
 	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 218px;" alt="ideoholic" src="/abc/images/abc.png"></h2>
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 109px;" alt="ideoholic" src="/shadaan/images/shadaan.png"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">
@@ -107,13 +107,13 @@ for(Cookie cookie : cookies){
         					 <c:choose>
                                 <c:when test="${todaysAttendance eq 'P'}">
                                     <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
-									src="/abc/images/studentattendance.svg" width="40" height="40"
+									src="/shadaan/images/studentattendance.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:when>
                                 <c:otherwise>
                                     <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
-									src="/abc/images/studentabsent.svg" width="40" height="40"
+									src="/shadaan/images/studentabsent.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:otherwise>
@@ -133,8 +133,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/studentprofile.svg" width="50" height="50"
+								href="/shadaan/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/shadaan/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
         					</td>
@@ -153,8 +153,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/abc/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/diary.svg" width="50" height="50"
+								href="/shadaan/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/shadaan/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
@@ -172,8 +172,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/fees.svg" width="50" height="50"
+								href="/shadaan/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/shadaan/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
         					</td>
@@ -191,8 +191,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/abc/images/progressreport.svg" width="50" height="50"
+								href="/shadaan/MarksDetailsProcess/generateReportParent?id=${username}"> <img
+									src="/shadaan/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
         					</td>
@@ -209,8 +209,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/abc/images/logbook.svg" width="50" height="50"
+								href="/shadaan/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/shadaan/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>

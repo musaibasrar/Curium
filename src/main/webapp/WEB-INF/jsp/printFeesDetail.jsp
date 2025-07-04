@@ -179,7 +179,7 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td><img src="/shadaan/images/shadaan.jpg" width="109" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -374,11 +374,14 @@
 		</TABLE>
 		</div>
 		<br>
+		<br>
+		<br>
+		<br>
 		<div style="border: 1px solid;border-radius: 15px">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/abc/images/abc.jpg" width="72" height="80"/></td>
+				<td><img src="/shadaan/images/shadaan.jpg" width="109" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
