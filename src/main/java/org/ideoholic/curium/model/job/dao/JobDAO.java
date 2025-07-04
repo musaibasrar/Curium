@@ -508,6 +508,7 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public List<Task> readListOfObjectsPaginationDepartmentWiseTask(int offset, int noOfRecords, int branchId,
 				int tid) {
 			
@@ -515,27 +516,15 @@ public class JobDAO {
 
 			try {
 				
-				transaction = session.beginTransaction();
-				/*
-				 * Query queryDepartment =
-				 * session.createQuery("From Teacher as t where t.teachername = '"+department+
-				 * "'").setCacheable(true).setCacheRegion("commonregion"); Department dep =
-				 * (Department) queryDepartment.uniqueResult();
-				 */
-				Query query = session.createQuery("From Task as query where query.branchid = "+branchId+" and query.teacher.tid='"+tid+"' order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
-				query.setFirstResult(offset);   
-				query.setMaxResults(noOfRecords);
-				results = query.getResultList();
-				transaction.commit();
-				
+				 PageRequest pageable = PageRequest.of(offset / noOfRecords, noOfRecords);
+				 results =  taskRepository.findByBranchIdAndTeacherTid(branchId, tid, pageable);
 
-			} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return results;
-			}
+				throw hibernateException;
+			} 
+			return results;
 		}
 
 
