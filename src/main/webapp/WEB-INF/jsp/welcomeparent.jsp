@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dash Board</title>
-        <script src="/noblewisdom/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/noblewisdom/css/bootstrap.min.css">
-        <script src="/noblewisdom/js/jquery.min.js"></script>
-        <script src="/noblewisdom/js/bootstrap.min.js"></script>
-        <script src="/noblewisdom/js/popper.min.js"></script>
+        <script src="/vision/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
+        <script src="/vision/js/jquery.min.js"></script>
+        <script src="/vision/js/bootstrap.min.js"></script>
+        <script src="/vision/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
 
 		@font-face {
 		  font-family: "IBMPlexSans";
-  		  src: url("/noblewisdom/fonts/IBMPlexSans-Regular.ttf");
+  		  src: url("/vision/fonts/IBMPlexSans-Regular.ttf");
 		}
 
 		#rcorners1 {
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,15 +83,48 @@ for(Cookie cookie : cookies){
     <body>
     	
 
-	<div style="padding-left: 20px;height: 50px;">
+	<!-- <div style="padding-left: 20px;height: 10px;">
 		<table style="align-self: left;">
 			<tr>
-				<td height="150px;"></td>
+				<td height="50px;"></td>
 			</tr>
 
 		</table>
+	</div> -->
+	
+	<div class="row" style="padding-left: 150px;">
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/vision/images/vision.png"></h2>
 	</div>
-
+	
+	<div class="row" style="padding-left: 35px;">
+        	<div class="col" style="padding-bottom: 20px;">
+        			<div style="background-color:#ffffff">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					
+        					 <c:choose>
+                                <c:when test="${todaysAttendance eq 'P'}">
+                                    <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
+									src="/vision/images/studentattendance.svg" width="40" height="40"
+									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
+									</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
+									src="/vision/images/studentabsent.svg" width="40" height="40"
+									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
+									</a>
+                                </c:otherwise>
+                            </c:choose>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+     </div>
+     
 	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#243664">
@@ -100,8 +133,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/noblewisdom/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/noblewisdom/images/studentprofile.svg" width="50" height="50"
+								href="/vision/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/vision/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
         					</td>
@@ -109,7 +142,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+     </div>
+     
+     <div class="row" style="padding-left: 20px;">
         	
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FF914D">
@@ -118,8 +153,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/noblewisdom/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/noblewisdom/images/diary.svg" width="50" height="50"
+								href="/vision/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/vision/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
@@ -127,8 +162,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FFCC00">
         			
@@ -136,8 +172,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/noblewisdom/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/noblewisdom/images/fees.svg" width="50" height="50"
+								href="/vision/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/vision/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
         					</td>
@@ -145,8 +181,9 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
+        	</div>
         	
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#90CCB8">
         			
@@ -154,8 +191,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/noblewisdom/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/noblewisdom/images/progressreport.svg" width="50" height="50"
+								href="/vision/MarksDetailsProcess/generateReportParent?id=${username}"> <img
+									src="/vision/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
         					</td>
@@ -163,8 +200,8 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
-        	
+        	</div>
+        	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#9D0176">
         			
@@ -172,8 +209,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/noblewisdom/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/noblewisdom/images/logbook.svg" width="50" height="50"
+								href="/vision/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="/vision/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>
@@ -181,8 +218,25 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<br>
-        	 
+        	</div>
+        	 <div class="row" style="padding-left: 20px;">
+		       	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#14a2c6">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
+								href="/vision/EventProcess/viewCalendar"> <img
+									src="/vision/images/viewcalendar.png" width="50" height="50"
+									alt="calendar" style="vertical-align: bottom;" />Calendar
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	</div>
         	 
         </div>
 </body>    
