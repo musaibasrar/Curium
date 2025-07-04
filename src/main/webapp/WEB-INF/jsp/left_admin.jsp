@@ -693,6 +693,30 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+             <h5 class="sideaccordian" ><a href="#">Events</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shadaan/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shadaan/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr> -->
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/shadaan/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            			</td>
+            		</tr>
+            		
+            		
+                </table>
+            </div>
+            
              <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">

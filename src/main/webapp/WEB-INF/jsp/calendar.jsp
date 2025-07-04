@@ -249,7 +249,7 @@
                 dayMaxEvents: true,
                 selectLongPressDelay: 100,
                 displayEventTime: false,
-                events: '/qpevents/EventProcess/getEvents',
+                events: '/shadaan/EventProcess/getEvents',
                 eventClassNames: 'custom-event-width',
                 select: function(arg) {
                     openModal(null, arg);
@@ -416,10 +416,10 @@
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/qpevents/EventProcess/createEvent';
+                var url = '/shadaan/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/qpevents/EventProcess/updateEvent?id=' + eventId;
+                    url = '/shadaan/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -461,7 +461,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/qpevents/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('/shadaan/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {
