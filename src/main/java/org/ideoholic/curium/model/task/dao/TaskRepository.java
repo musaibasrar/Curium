@@ -16,5 +16,12 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	 Page<Task> findByBranchidOrderByIdDesc(int branchid, Pageable pageable);
 	 
 	 int countByBranchid(int branchId);
+	 
+	 @Query("SELECT t FROM Task t WHERE t.branchid = :branchId AND t.teacher.tid = :tid ORDER BY t.id DESC")
+	    List<Task> findByBranchIdAndTeacherTid(
+	        @Param("branchId") int branchId,
+	        @Param("tid") int tid,
+	        Pageable pageable
+	    );
 
 }
