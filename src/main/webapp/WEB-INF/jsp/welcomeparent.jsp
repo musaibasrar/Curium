@@ -225,7 +225,24 @@ for(Cookie cookie : cookies){
         			</div>
         	</div>
         	</div>
-        	 
+        	 <div class="row" style="padding-left: 20px;">
+		       	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#14a2c6">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
+								href="/vision/EventProcess/viewCalendar"> <img
+									src="/vision/images/viewcalendar.png" width="50" height="50"
+									alt="calendar" style="vertical-align: bottom;" />Calendar
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	</div>
         	 
         </div>
 </body>    
