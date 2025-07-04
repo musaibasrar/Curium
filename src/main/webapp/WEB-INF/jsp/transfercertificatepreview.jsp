@@ -231,7 +231,7 @@ for(Cookie cookie : cookies){
 			
 			<td colspan="4">
 			
-			<h3><u>TRANSFER CERTIFICATE </u><br>(DUPLICATE)</h3>
+			<h3><u>TRANSFER CERTIFICATE </u></h3>
 			</td>
 			
 			</tr>

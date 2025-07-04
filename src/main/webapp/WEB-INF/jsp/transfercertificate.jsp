@@ -469,6 +469,34 @@
             	
             }
             
+            function yesCheck(id) {
+
+        		if (document.getElementById(id).checked == true) {
+        			var splitId = id.split(':');
+        			document.getElementById('no:'+splitId[1]).checked = false;
+        		}
+
+        	}
+        	function noCheck(id) {
+
+        		if (document.getElementById(id).checked == true) {
+        			var splitId = id.split(':');
+        			document.getElementById('yes:'+splitId[1]).checked = false;
+        		}
+
+        	}
+            
+            function validateForm() {
+    		    const graduated = document.getElementById('yes:studentstatus').checked;
+    		    const leftout = document.getElementById('no:studentstatus').checked;
+
+    		    if (!graduated && !leftout) {
+    		      alert("Please select either 'Graduated' or 'Left Out'.");
+    		      return false;
+    		    }
+    		    return true;
+    		  }
+            
         </script>
     </head>
       <%
@@ -489,7 +517,7 @@ for(Cookie cookie : cookies){
 %>
     <body>
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
-        <form id="form1" action="/scholar/DocumentsProcess/generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
+        <form id="form1" action="/scholar/DocumentsProcess/generateTransferCertificate" method="post" onsubmit="return validateForm()" onkeypress="if (event.keyCode == 92) datetowords();">
             <table  width="100%">
                 <thead>
                     <tr>
@@ -624,6 +652,17 @@ for(Cookie cookie : cookies){
                      <tr>
                     <td>Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
                     </tr>
+                     <tr>
+                    	<td>Student Status: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    	
+                    	<td  height="30" class="alignLeft">&nbsp;Graduated<input
+								type="checkbox" value="passedout" name="studentstatus" id="yes:studentstatus"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Left Out<input
+								type="checkbox" value="leftout" name="studentstatus" id="no:studentstatus"
+								onclick="noCheck(this.id)" />
+
+							</td>
+							</tr>
                     </table>
                     <tr>
                     <td><br></td>

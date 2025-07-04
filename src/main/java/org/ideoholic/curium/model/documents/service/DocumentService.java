@@ -111,6 +111,7 @@ public class DocumentService {
 		String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
 		String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
 		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
+		String studentStatus = DataUtil.emptyString(transferCertificateDto.getStudentStatus());
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
@@ -157,7 +158,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
+					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc,student,studentStatus);
 			}
 		 }
 		 
