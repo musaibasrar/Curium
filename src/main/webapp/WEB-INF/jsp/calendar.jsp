@@ -12,7 +12,24 @@
     <!-- FullCalendar JS -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     
+      <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
+    
+    :root {
+            --primary-color: #000000;
+            --primary-dark: #2d4a5f;
+            --primary-light: #5a8ab0;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --hover-color: #f5f5f5;
+            --booked-color: #DC2626;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -21,6 +38,10 @@
         
         .fc-event {
             cursor: pointer;
+        }
+        
+        .fc-event-title {
+            color: #02a429 !important; /* Make event titles red */
         }
         
         #calendar {
@@ -76,6 +97,19 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+        
+          .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
         }
         
         .button-group {
@@ -141,6 +175,11 @@
     </style>
 </head>
 <body>
+
+	<div class="header">
+        <h1><i class="far fa-calendar-alt"></i> Schedule Booking</h1>
+    </div>
+    
     <div id="calendar"></div>
 
     <!-- Event Modal -->
@@ -167,7 +206,7 @@
                     <input type="datetime-local" id="end" required>
                 </div>
                 <div class="form-group">
-                    <label for="location">Location:</label>
+                    <label for="location">Notes:</label>
                     <input type="text" id="location">
                 </div>
                 <div class="form-group">
@@ -208,7 +247,10 @@
                 selectable: true,
                 selectMirror: true,
                 dayMaxEvents: true,
-                events: '/abc/EventProcess/getEvents',
+                selectLongPressDelay: 100,
+                displayEventTime: false,
+                events: '/vision/EventProcess/getEvents',
+                eventClassNames: 'custom-event-width',
                 select: function(arg) {
                     openModal(null, arg);
                 },
@@ -226,6 +268,7 @@
             var span = document.getElementsByClassName('close')[0];
             var form = document.getElementById('eventForm');
             var deleteButton = document.getElementById('deleteButton');
+            var saveButton = document.getElementById('saveButton');
 
             function openModal(event, selectInfo) {
                 modal.style.display = 'block';
@@ -275,8 +318,8 @@
                     
                     document.getElementById('location').value = event.extendedProps.location || '';
                     document.getElementById('color').value = event.backgroundColor || '#3788d8';
-                    //document.getElementById('allDay').checked = event.allDay;
-                    saveButton.style.display = 'none';
+                    saveButton.textContent = 'Update';
+                    saveButton.style.display = 'block';
                     deleteButton.style.display = 'block';
                 } else {
                     // Creating new event
@@ -309,7 +352,8 @@
                     
                     document.getElementById('location').value = '';
                     document.getElementById('color').value = '#3788d8';
-                    //document.getElementById('allDay').checked = selectInfo.allDay || false;
+                    saveButton.textContent = 'Save';
+                    saveButton.style.display = 'block';
                     deleteButton.style.display = 'none';
                 }
             }
@@ -372,10 +416,10 @@
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/abc/EventProcess/createEvent';
+                var url = '/vision/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/abc/EventProcess/updateEvent?id=' + eventId;
+                    url = '/vision/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -417,7 +461,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/abc/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('/vision/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {
