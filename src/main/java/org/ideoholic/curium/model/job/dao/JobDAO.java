@@ -492,27 +492,19 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public int getNoOfRecordsTask(int branchId) {
 			List<Task> results = new ArrayList<Task>();
 			int noOfRecords = 0;
 			try {
-				// this.session =
-				// HibernateUtil.getSessionFactory().openCurrentSession();
-				transaction = session.beginTransaction();
-
-				results = (List<Task>) session.createQuery("From Task where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				transaction.commit();
-
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
+				noOfRecords = taskRepository.countByBranchid(branchId);
+			}catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
+				throw hibernateException;
 			}
+			
+			return noOfRecords;
 		}
 
 

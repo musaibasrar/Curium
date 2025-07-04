@@ -655,7 +655,7 @@ public class JobService {
 				List<Task> list =jobDAO.readListOfObjectsPaginationTask((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchid));
 				jobQueryDto.setTaskList(list);
-				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(branchid));
+				int noOfRecords = jobDAO.getNoOfRecordsTask(Integer.parseInt(branchid));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setTaskList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
