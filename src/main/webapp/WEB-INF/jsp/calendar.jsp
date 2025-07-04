@@ -177,7 +177,7 @@
 <body>
 
 	<div class="header">
-        <h1><i class="far fa-calendar-alt"></i> Schedule Booking</h1>
+        <h1><i class="far fa-calendar-alt"></i> Create Event</h1>
     </div>
     
     <div id="calendar"></div>
