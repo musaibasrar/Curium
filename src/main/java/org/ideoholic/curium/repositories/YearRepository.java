@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.academicyear.dao;
+package org.ideoholic.curium.repositories;
 
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.springframework.data.jpa.repository.JpaRepository;

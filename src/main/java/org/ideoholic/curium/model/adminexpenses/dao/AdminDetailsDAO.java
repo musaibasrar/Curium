@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
+import org.ideoholic.curium.repositories.AdminExpensesRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
@@ -43,7 +44,7 @@ public class AdminDetailsDAO {
 
 		try {
 
-			results =adminExpensesRepo.findByBranchId(branchId);
+			results =adminExpensesRepo.findByBranchid(branchId);
 
 
 

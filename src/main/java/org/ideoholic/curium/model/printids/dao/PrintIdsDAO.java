@@ -7,8 +7,10 @@ import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.mess.card.dto.Card;
-import org.ideoholic.curium.model.parents.dao.ParentsRepository;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.repositories.CardRepository;
+import org.ideoholic.curium.repositories.ParentsRepository;
+import org.ideoholic.curium.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.adminexpenses.dao;
+package org.ideoholic.curium.repositories;
 
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface AdminExpensesRepository extends JpaRepository<Adminexpenses, Integer> {
 
-    @Query("From Adminexpenses where branchid=:branchId")
-    List<Adminexpenses> findByBranchId(@Param("branchId") Integer branchId);
+    List<Adminexpenses> findByBranchid(Integer branchId);
 
     @Query("From Adminexpenses where idAdminExpenses=:expensesIds  and branchid=:branchId")
     Adminexpenses findByExpenseId(@Param("expensesIds") Integer expensesIds,@Param("branchId") Integer  branchId);

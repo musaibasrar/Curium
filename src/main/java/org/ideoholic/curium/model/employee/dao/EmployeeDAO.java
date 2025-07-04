@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.model.printids.dao.TeacherRepository;
+import org.ideoholic.curium.repositories.TeacherRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;

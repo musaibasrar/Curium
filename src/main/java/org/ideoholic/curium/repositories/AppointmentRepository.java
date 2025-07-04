@@ -1,6 +1,5 @@
-package org.ideoholic.curium.model.appointment.dao;
+package org.ideoholic.curium.repositories;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -14,19 +13,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
+
 	List<Appointment> findByBranchidOrderByIdDesc(int branchid);
 
 	Page<Appointment> findByBranchidOrderByIdDesc(int branchId, Pageable pageable);
 
-	int countByBranchid( int branchId);
+	int countByBranchid(int branchId);
 
 	Long countByStatusNot(String status);
 
 	@Query("SELECT COUNT(a) FROM Appointment a WHERE a.appointmentdate BETWEEN :fromDate AND :toDate AND a.status <> 'Cancelled'")
-	long countByDate(
-			@Param("fromDate") Date fromDate,
-			@Param("toDate") Date toDate
-	);
+	long countByDate(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
 	Long countByStatus(String status);
 

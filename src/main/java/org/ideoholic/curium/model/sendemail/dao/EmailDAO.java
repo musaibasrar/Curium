@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.ideoholic.curium.model.parents.dao.ParentsRepository;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.repositories.ParentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.user.dao;
+package org.ideoholic.curium.repositories;
 
 import org.ideoholic.curium.model.user.dto.Login;
 import org.springframework.data.jpa.repository.JpaRepository;

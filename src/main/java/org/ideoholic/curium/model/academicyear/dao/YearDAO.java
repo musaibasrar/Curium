@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.repositories.YearRepository;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.documents.dao;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.repositories.TransferCertificateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
