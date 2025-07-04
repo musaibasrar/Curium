@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="location" class="form-label">Location</label>
+                    <label for="location" class="form-label">Notes</label>
                     <input type="text" class="form-control" id="location" name="location">
                 </div>
 
