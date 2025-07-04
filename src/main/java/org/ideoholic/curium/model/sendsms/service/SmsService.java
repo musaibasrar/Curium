@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -243,50 +244,43 @@ public class SmsService {
 	        templatemessage = templatemessage.replace("var4", var4);
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(templatemessage, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		data +="&peid=" + peid;
-		data +="&templateid=" + templateid;
+		
+		String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?";
+		 StringBuilder sgcPostContent = new StringBuilder(POST_URL);
+         sgcPostContent.append("APIKey=").append(URLEncoder.encode(apikey, "UTF-8"));
+         sgcPostContent.append("&senderid=").append(URLEncoder.encode(smssender, "UTF-8"));
+         sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
+         sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&number=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
+         sgcPostContent.append("&text=").append(URLEncoder.encode(templatemessage, "UTF-8"));
+         sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
+         sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
+         sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
+				
 		// Send data
 		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
+		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
 		log.info(templateType+": URL "+POST_URL);
 		log.debug(templateType+": URL "+POST_URL);
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+        URL obj = new URL(sgcPostContent.toString());
+        URLConnection myURLConnection = obj.openConnection();
+        myURLConnection.connect();
 
 		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
+        BufferedReader reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+        String output;
+        while ((output = reader.readLine()) != null) {
+            System.out.println("OUTPUT: " + output);
+        }
 
-		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+        // Close reader
+        reader.close();
+		
 
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			// print result
-			log.info(response.toString());
 		} else {
 			log.error("POST request not worked");
-		}}}
+		}}
 		catch (Exception e)
 		{
 		log.error("Error SMS "+e);
