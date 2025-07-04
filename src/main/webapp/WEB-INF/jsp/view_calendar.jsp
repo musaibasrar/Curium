@@ -17,7 +17,7 @@
     
     <style>
         :root {
-            --primary-color: #1a2258;
+            --primary-color: #4b6a84;
             --primary-dark: #2d4a5f;
             --primary-light: #5a8ab0;
             --secondary-color: #f8f9fa;
@@ -235,7 +235,7 @@
 </head>
 <body>
    	<div class="header">
-        <h1><i class="far fa-calendar-alt"></i> Booked Dates</h1>
+        <h1><i class="far fa-calendar-alt"></i>  Event Calendar</h1>
     </div>
 		<div id="calendar"></div>
    <!--  <div class="container">
