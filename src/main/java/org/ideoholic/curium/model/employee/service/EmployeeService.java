@@ -1,12 +1,25 @@
 package org.ideoholic.curium.model.employee.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.*;
+import org.ideoholic.curium.model.employee.dto.BasicPayEmployeesDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeListDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.SearchEmployeeDto;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllRelationsResponseDto;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
@@ -21,10 +34,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class EmployeeService {
 
@@ -370,14 +382,14 @@ public class EmployeeService {
 	public void deleteMultiple(EmployeeIdsDto employeeIdsDto) {
 		 String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		 if(employeeIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : employeeIds) {
-	            System.out.println("id" + id);
+	            log.debug("id:{}", id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + employeeIds.length);
-	        new EmployeeDAO().deleteMultiple(ids);
+	        log.debug("id length:{}", employeeIds.length);
+	        employeeDao.deleteMultiple(ids);
 		 }
 	}
 
@@ -449,7 +461,7 @@ public class EmployeeService {
 	      for (String id : studentIDs) {
 
 	          
-	           System.out.println("Value of i is " + i);
+	    	  log.debug("Value of i is:{}", i);
 	           int sid = Integer.valueOf(id);
 	           teacherDetails = printIdsDAO.printMultipleIdsEmployee(id);
 	           
