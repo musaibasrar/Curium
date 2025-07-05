@@ -138,23 +138,14 @@ public class EmployeeDAO {
 		return employee;
 	}
 
-	public void deleteMultiple(List ids) {
-		Transaction transaction = null;
+	public void deleteMultiple(List<Integer> ids) {
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Teacher where tid IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
+            teacherRepository.deleteAllById(ids);
         } catch (Exception hibernateException) {
-        	transaction.rollback();
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+            throw hibernateException;
 		}
-		
 	}
 
 	@SuppressWarnings("unchecked")
