@@ -37,7 +37,7 @@ public class PeriodApiActionImpl implements PeriodApiAction {
     }
 
     public ResponseEntity<EmployeesWithSalaryResponseDto> generateTeacherTimeTable(String branchId) {
-        EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

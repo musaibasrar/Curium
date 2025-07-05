@@ -44,7 +44,7 @@ public class PeriodService {
             SubjectsResponseDto subjects = subjectDetailsService.readListOfSubjects(branchId);
             result.setSubjects(subjects.getSubjects());
 
-            EmployeesWithSalaryResponseDto employees = employeeService.ViewAllEmployee(branchId);
+            EmployeesWithSalaryResponseDto employees = employeeService.viewAllEmployee(branchId);
             result.setEmployeeList(employees.getEmployeeList());
 
             ResultResponse classSecs = standardService.viewClasses(branchId);
@@ -404,7 +404,7 @@ public class PeriodService {
         ResultResponse result = ResultResponse.builder().build();
 
         try {
-            employeeService.ViewAllEmployee(branchId);
+            employeeService.viewAllEmployee(branchId);
             subjectDetailsService.readListOfSubjectNames(branchId);
             result.setSuccess(true);
         } catch (Exception e) {

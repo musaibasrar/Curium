@@ -103,7 +103,7 @@ public class EmployeeActionAdapter {
     }
     public boolean ViewAllEmployee() {
 
-    	EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.ViewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
+    	EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.viewAllEmployee(httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("employeeList", employeesWithSalaryResponseDto.getEmployeeList());
         httpSession.setAttribute("employeeListProcessSalary", employeesWithSalaryResponseDto.getEmployeeListProcessSalary());
 

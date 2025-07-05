@@ -75,7 +75,7 @@ public class EmployeeApiActionImpl implements EmployeeApiAction{
 
     @RequestMapping(value = "/ViewAllEmployee", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<EmployeesWithSalaryResponseDto> viewEmployee(@RequestHeader(value = "branchid") String branchId) {
-    	EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
+    	EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
         return ResponseEntity.ok(result);
     }
 

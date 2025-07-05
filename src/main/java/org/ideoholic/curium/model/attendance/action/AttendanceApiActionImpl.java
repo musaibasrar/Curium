@@ -274,7 +274,7 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
         ResultResponse viewAllWeekOffsResult = attendanceService.viewAllWeekOffs(branchId, currentAcademicYear);
         result.setWeekOffList(viewAllWeekOffsResult.getResultList());
 
-        EmployeesWithSalaryResponseDto employeesWithSalaryResult = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto employeesWithSalaryResult = employeeService.viewAllEmployee(branchId);
         result.setEmployeeListProcessSalary(employeesWithSalaryResult.getEmployeeListProcessSalary());
         result.setEmployeeList(employeesWithSalaryResult.getEmployeeList());
 

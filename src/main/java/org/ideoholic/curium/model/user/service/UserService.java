@@ -78,6 +78,9 @@ public class UserService {
 	@Autowired
 	private AttendanceDAO attendanceDao;
 	
+	@Autowired
+	private EmployeeDAO employeeDao;
+	
     @Autowired
     private HttpServletRequest request;
 
@@ -180,7 +183,7 @@ public class UserService {
                     }
                 }
                 // Total Teachers
-                List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(branchId));
+                List<Teacher> teacher = employeeDao.readCurrentTeachers(Integer.parseInt(branchId));
                 result.setTeacherSize(teacher.size());
                 // End Total Teachers
 
