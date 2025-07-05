@@ -148,80 +148,39 @@ public class EmployeeDAO {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public int getNoOfEmployees(int branchId) {
-		Transaction transaction = null;
-		List<Teacher> results = new ArrayList<Teacher>();
-		int noOfRecords = 0;
-		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
-					.list();
-			noOfRecords = results.size();
-			transaction.commit();
-		} catch (Exception hibernateException) {
-			transaction.rollback(); 
-			log.error(hibernateException.getMessage(), hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return noOfRecords;
-		}
-	}
-
 	public List<Teacher> readListOfEmployeesByName(String staffName, int branchId) {
-		Transaction transaction = null;
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List tidList = new ArrayList<>();
+			List<Paybasic> payList = payBasicRepo.findAll();
+			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			Query query = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			query.setParameterList("basicPayList", tidList);
-			employee = query.getResultList();
-			
-			transaction.commit();
+			employee = teacherRepository.findByTeachernameAndBranchidAndTidNotIn(staffName, branchId, tidList);
+
 		} catch (Exception e) {
-			transaction.rollback();
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
 		return employee;
 	}
 	
 	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment, int branchId) {
-		Transaction transaction = null;
-		List<Teacher> employee = new ArrayList<Teacher>();
+		List<Teacher> employee = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List tidList = new ArrayList<>();
+			List<Paybasic> payList = payBasicRepo.findAll();
+			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			Query query = session.createQuery("From Teacher where department='"+staffDepartment+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			query.setParameterList("basicPayList", tidList);
-			employee = query.getResultList();
-			transaction.commit();
+			employee = teacherRepository.findByDepartmentAndBranchidAndTidNotIn(staffDepartment, branchId, tidList);
 		} catch (Exception e) {
-			transaction.rollback();
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
 		return employee;
 	}
