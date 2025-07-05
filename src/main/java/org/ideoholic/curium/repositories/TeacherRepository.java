@@ -1,6 +1,7 @@
 package org.ideoholic.curium.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,6 @@ public interface TeacherRepository extends JpaRepository<Teacher,  Integer> {
 	
 	@Query("SELECT t.teacherexternalid FROM Teacher t")
 	List<String> fetchTeacherexternalid();
+	
+	Optional<Teacher> findByTeacherexternalid(String teacherExternalId);
 }

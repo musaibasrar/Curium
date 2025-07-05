@@ -32,6 +32,7 @@ public class EmployeeDAO {
 	public boolean create(Teacher employee) {
 		boolean result = false;
 		try {
+			// Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
 			List<Teacher> queryList = teacherRepository.findByBranchidOrderByTidDesc(employee.getBranchid());
 			String externalId = employee.getTeacherexternalid();
 
@@ -56,6 +57,7 @@ public class EmployeeDAO {
 	public List<Teacher> readListOfObjects(int branchId) {
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
+			// results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId).list();
 			results = teacherRepository.findByBranchid(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -69,12 +71,14 @@ public class EmployeeDAO {
 	public List<Teacher> readListOfEmployeesBasicPay(int branchId) {
 		List<Teacher> results = new ArrayList<>();
 		try {
+			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
 			List<Paybasic> payList = payBasicRepo.findAll();
 			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
+			// Query query = session.createQuery("From Teacher where branchid="+branchId+" and tid NOT IN (:basicPayList)");
 			results = teacherRepository.findByBranchidAndTidNotIn(branchId, tidList);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -88,6 +92,7 @@ public class EmployeeDAO {
 	public List<Teacher> readListOfObjects() {
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
+			// results = (List<Teacher>) session.createQuery("From Teacher").list();
 			results = teacherRepository.findAll();
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -100,6 +105,7 @@ public class EmployeeDAO {
 	public List<Teacher> readCurrentTeachers(int branchid) {
 		List<Teacher> results = new ArrayList<>();
 		try {
+			// results = (List<Teacher>) session.createQuery("From Teacher where currentemployee = 1 AND branchid='"+branchid+"'").list();
 			results = teacherRepository.findByCurrentemployeeAndBranchid("1", branchid);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -114,6 +120,7 @@ public class EmployeeDAO {
 		Teacher employee = null;
 
 		try {
+			// Query query = session.createQuery("From Teacher as employee where employee.tid=" + id);
 			employee = teacherRepository.findById(Long.valueOf(id).intValue()).orElse(new Teacher());
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -141,6 +148,7 @@ public class EmployeeDAO {
 	@Transactional
 	public void deleteMultiple(List<Integer> ids) {
 		try {
+			// Query query = session.createQuery("delete from Teacher where tid IN (:ids)");
             teacherRepository.deleteAllById(ids);
         } catch (Exception hibernateException) {
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -153,12 +161,14 @@ public class EmployeeDAO {
 	public List<Teacher> readListOfEmployeesByName(String staffName, int branchId) {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
+			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
 			List<Paybasic> payList = payBasicRepo.findAll();
 			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
+			// Query query = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
 			employee = teacherRepository.findByTeachernameAndBranchidAndTidNotIn(staffName, branchId, tidList);
 
 		} catch (Exception e) {
@@ -173,12 +183,14 @@ public class EmployeeDAO {
 	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment, int branchId) {
 		List<Teacher> employee = new ArrayList<>();
 		try {
+			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
 			List<Paybasic> payList = payBasicRepo.findAll();
 			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
+			// Query query = session.createQuery("From Teacher where department='"+staffDepartment+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
 			employee = teacherRepository.findByDepartmentAndBranchidAndTidNotIn(staffDepartment, branchId, tidList);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -192,6 +204,7 @@ public class EmployeeDAO {
 	public List<String> getEmployeeExternalId() {
 		List<String> employeeExtId = new ArrayList<>();
 		try {
+			// employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
 			employeeExtId = teacherRepository.fetchTeacherexternalid();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -214,21 +227,15 @@ public class EmployeeDAO {
 	}
 
 	public Teacher getEmployeeDetails(String userName) {
-		Transaction transaction = null;
-		Teacher employee = new Teacher();
+		Teacher employee = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
-			employee = (Teacher) query.uniqueResult();
-			transaction.commit();
+			// Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
+			employee = teacherRepository.findByTeacherexternalid(userName).orElse(new Teacher());
 		} catch (Exception hibernateException) {
-			transaction.rollback();
 			log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 		return employee;
 	}
