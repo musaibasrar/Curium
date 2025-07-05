@@ -241,22 +241,17 @@ public class EmployeeDAO {
 	}
 
 	public List<Paybasic> readListOfEmployeesBasicPayDetails(int branchId) {
-		Transaction transaction = null;
-		List<Paybasic> payList = new ArrayList<Paybasic>();
+		List<Paybasic> payList = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			payList = session.createQuery("From Paybasic where branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
+			// payList = session.createQuery("From Paybasic where branchid="+branchId).list();
+			payList = payBasicRepo.findByBranchid(branchId);
+		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			
+
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return payList;
+			throw hibernateException;
 		}
+		return payList;
 	}
 
 }
