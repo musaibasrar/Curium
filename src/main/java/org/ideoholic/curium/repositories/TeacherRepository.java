@@ -10,4 +10,6 @@ public interface TeacherRepository extends JpaRepository<Teacher,  Integer> {
 	List<Teacher> findByBranchidOrderByTidDesc(Integer branchId);
 	
 	List<Teacher> findByBranchid(Integer branchId);
+	
+	List<Teacher> findByBranchidAndTidNotIn(Integer branchId, List<Integer> teacherIds);
 }

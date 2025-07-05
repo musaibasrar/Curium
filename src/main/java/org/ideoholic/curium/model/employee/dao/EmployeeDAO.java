@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -23,6 +24,9 @@ public class EmployeeDAO {
 	
 	@Autowired
 	private TeacherRepository teacherRepository;
+	
+	@Autowired
+	private PaybasicRepository payBasicRepo;
 
 	@Transactional
 	public boolean create(Teacher employee) {
@@ -61,32 +65,23 @@ public class EmployeeDAO {
 		return results;
 	}
 	
-	@SuppressWarnings({ "unchecked", "finally" })
+	@Transactional
 	public List<Teacher> readListOfEmployeesBasicPay(int branchId) {
-		Transaction transaction = null;
-		List<Teacher> results = new ArrayList<Teacher>();
+		List<Teacher> results = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List tidList = new ArrayList<>();
+			List<Paybasic> payList = payBasicRepo.findAll();
+			List<Integer> tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			Query query = session.createQuery("From Teacher where branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			query.setParameterList("basicPayList", tidList);
-			results = query.getResultList();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
+			results = teacherRepository.findByBranchidAndTidNotIn(branchId, tidList);
+		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 
 	@Transactional
