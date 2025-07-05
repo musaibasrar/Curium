@@ -138,6 +138,7 @@ public class EmployeeDAO {
 		return employee;
 	}
 
+	@Transactional
 	public void deleteMultiple(List<Integer> ids) {
 		try {
             teacherRepository.deleteAllById(ids);
@@ -148,6 +149,7 @@ public class EmployeeDAO {
 		}
 	}
 
+	@Transactional
 	public List<Teacher> readListOfEmployeesByName(String staffName, int branchId) {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
@@ -166,7 +168,8 @@ public class EmployeeDAO {
 		}
 		return employee;
 	}
-	
+
+	@Transactional
 	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment, int branchId) {
 		List<Teacher> employee = new ArrayList<>();
 		try {
@@ -185,10 +188,11 @@ public class EmployeeDAO {
 		return employee;
 	}
 
+	@Transactional
 	public List<String> getEmployeeExternalId() {
 		List<String> employeeExtId = new ArrayList<>();
 		try {
-			employeeExtId = teacherRepository.findTeacherExternalId();
+			employeeExtId = teacherRepository.fetchTeacherexternalid();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
@@ -197,21 +201,15 @@ public class EmployeeDAO {
 		return employeeExtId;
 	}
 
+	@Transactional
 	public void delete(Teacher employee) {
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.delete(employee);
-            transaction.commit();
-            
+            teacherRepository.delete(employee);
         } catch (Exception hibernateException) {
-        	transaction.rollback();
         	log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+            throw hibernateException;
 		}
 	}
 
