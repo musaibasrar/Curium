@@ -114,7 +114,7 @@ public class AppointmentApiAction {
 		ResultResponse result = appointmentService.addAppointment(addAppointmentDto, branchId, currentAcademicYear, userLoginId);
 		if (result.isSuccess()) {
 			studentService.viewAllStudentsParents(page, branchId);
-			employeeService.ViewAllEmployee(branchId);
+			employeeService.viewAllEmployee(branchId);
 			return ResponseEntity.ok(result);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);

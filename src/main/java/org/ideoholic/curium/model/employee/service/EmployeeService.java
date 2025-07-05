@@ -155,11 +155,10 @@ public class EmployeeService {
 		
 		return ResultResponse.builder().build();
 	}
-//TODO: Naming Convention error in this method, method name should start from small alphabet.
-	public EmployeesWithSalaryResponseDto ViewAllEmployee(String branchId) {
+
+	public EmployeesWithSalaryResponseDto viewAllEmployee(String branchId) {
 		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = new EmployeesWithSalaryResponseDto();
 		
-		boolean result = false;
     try {
     	List<Teacher> list = employeeDao.readListOfObjects(Integer.parseInt(branchId));
     	employeesWithSalaryResponseDto.setEmployeeList(list);
@@ -173,10 +172,9 @@ public class EmployeeService {
 
 	public EmployeeDetailsResponseDto viewDetailsEmployee(String empId) {
 		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
-		 boolean result = false;
-	        try {
+		 try {
 	            long id = Long.parseLong(empId);
-	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
+	            Teacher employee = employeeDao.readUniqueObject(id);
 	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
@@ -364,7 +362,7 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
-		employee = new EmployeeDAO().update(employee);
+		employee = employeeDao.update(employee);
 
         return employee;
 	}
@@ -406,13 +404,13 @@ public class EmployeeService {
 			}else if(staffDepartment!=""){
 				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
 			}else {
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPay(Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesBasicPay(Integer.parseInt(branchId));
 			}
 		}
 		
 		employeeListDto.setEmployeeList(employeeList);
 		
-		ViewAllEmployee(branchId);
+		viewAllEmployee(branchId);
 
 		return employeeListDto;
 	}

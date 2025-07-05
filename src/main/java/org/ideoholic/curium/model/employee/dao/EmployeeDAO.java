@@ -109,46 +109,33 @@ public class EmployeeDAO {
 		return results;
 	}
 	
+	@Transactional
 	public Teacher readUniqueObject(long id) {
-		Transaction transaction = null;
-		Teacher employee = new Teacher();
+		Teacher employee = null;
 
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Teacher as employee where employee.tid=" + id);
-			employee = (Teacher) query.uniqueResult();
-			transaction.commit();
+			employee = teacherRepository.findById(Long.valueOf(id).intValue()).orElse(new Teacher());
 		} catch (Exception hibernateException) {
-			transaction.rollback();
 			log.error(hibernateException.getMessage(), hibernateException);
-			
+
 			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 
 		return employee;
 	}
 
+	@Transactional
 	public Teacher update(Teacher employee) {
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.update(employee);
-            transaction.commit();
-            
+			teacherRepository.save(employee);
         } catch (Exception hibernateException) {
-        	transaction.rollback();
         	log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return employee;
+            throw hibernateException;
         }
+		return employee;
 	}
 
 	public void deleteMultiple(List ids) {
