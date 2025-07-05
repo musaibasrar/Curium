@@ -19,5 +19,8 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
 	@Query("SELECT t FROM Task t WHERE t.branchid = :branchId AND t.teacher.tid = :tid ORDER BY t.id DESC")
 	List<Task> findByBranchIdAndTeacherTid(@Param("branchId") int branchId, @Param("tid") int tid, Pageable pageable);
+	
+	 @Query("SELECT COUNT(t) FROM Task t WHERE t.teacher.tid = :tid AND t.branchid = :branchId")
+	 int countByBranchIdAndTeacherTid(@Param("branchId") int branchId, @Param("tid") int tid);
 
 }

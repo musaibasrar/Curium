@@ -528,24 +528,20 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public int getNoOfRecordsDepartmentWiseTask(int branchId, int tid) {
 			List<Task> results = new ArrayList<Task>();
 			int noOfRecords = 0;
 			try {
-				transaction = session.beginTransaction();
-				results = (List<Task>) session.createQuery("From Task as task where task.teacher.tid='"+tid+"' and task.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-						.list();
-				noOfRecords = results.size();
-				transaction.commit();
+				noOfRecords = taskRepository.countByBranchIdAndTeacherTid(branchId, tid);
 
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
+				throw hibernateException;
 
-			} finally {
-					HibernateUtil.closeSession();
-				return noOfRecords;
-			}
+			} 
+			return noOfRecords;
 		}
 
 
