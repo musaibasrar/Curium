@@ -186,19 +186,13 @@ public class EmployeeDAO {
 	}
 
 	public List<String> getEmployeeExternalId() {
-		Transaction transaction = null;
-		List<String> employeeExtId = new ArrayList<String>();
+		List<String> employeeExtId = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
-			transaction.commit();
+			employeeExtId = teacherRepository.findTeacherExternalId();
 		} catch (Exception e) {
-			transaction.rollback();
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
 		return employeeExtId;
 	}
