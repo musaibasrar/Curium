@@ -170,7 +170,7 @@
                 font-size: 11px;
                 font-style: normal;
                 text-transform: capitalize;
-                color: #325F6D;
+                color: black;
                 text-align: left;
                 vertical-align: middle;
                 font-weight: bold;

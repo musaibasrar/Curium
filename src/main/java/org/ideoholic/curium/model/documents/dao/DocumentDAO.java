@@ -36,6 +36,7 @@ public class DocumentDAO {
 			session.save(tc);
 			Query queryUpdate = session
 					.createQuery("update Student set "+studentStatus+"= '1'  where sid = '"+student.getSid()+"'");
+			queryUpdate.executeUpdate();
 			transaction.commit();
 			status = "true";
 		} catch (Exception e) { 
