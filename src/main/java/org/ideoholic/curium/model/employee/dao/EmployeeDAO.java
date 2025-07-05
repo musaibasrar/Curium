@@ -96,25 +96,17 @@ public class EmployeeDAO {
 		return results;
 	}
 	
-	@SuppressWarnings({ "unchecked", "finally" })
+	@Transactional
 	public List<Teacher> readCurrentTeachers(int branchid) {
-		Transaction transaction = null;
-		List<Teacher> results = new ArrayList<Teacher>();
+		List<Teacher> results = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher where currentemployee = 1 AND branchid='"+branchid+"'")
-					.list();
-			transaction.commit();
+			results = teacherRepository.findByCurrentemployeeAndBranchid("1", branchid);
 		} catch (Exception hibernateException) {
-			transaction.rollback();
 			log.error(hibernateException.getMessage(), hibernateException);
-			
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 	
 	public Teacher readUniqueObject(long id) {
