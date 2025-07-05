@@ -412,7 +412,7 @@ public class EmployeeService {
 		
 		if(branchId!=null){
 			if(staffName!=""){
-				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
 			}else if(staffDepartment!=""){
 				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
 			}else {
