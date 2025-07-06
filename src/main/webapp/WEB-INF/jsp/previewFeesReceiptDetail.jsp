@@ -101,9 +101,9 @@
                 }
             }
         </style>
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/vision/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/iqra/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/iqra/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/iqra/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -119,7 +119,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-    response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+    response.sendRedirect("/iqra/UserProcess/sessionTimeOut");
 } else {
     user = (String) session.getAttribute("userAuth");
 }
@@ -179,7 +179,7 @@ if (cookies != null) {
                         <td class="totalAmount"><c:out value="${recieptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/vision/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/iqra/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>
