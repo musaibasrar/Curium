@@ -74,9 +74,6 @@ public class ExamDetailsAction {
         result = standardActionAdapter.viewClasses();
         if (!result)
             return error;
-        result = subjectDetailsActionAdapter.readListOfSubjects();
-        if (!result)
-            return error;
         result = yearActionAdapter.getYear();
         if (!result)
             return error;
