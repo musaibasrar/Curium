@@ -24,4 +24,5 @@ public class SendSMSDto {
     private String addSec;
     private String smsTempType;
     private String message;
+    private int branchId;
 }

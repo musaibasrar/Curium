@@ -142,6 +142,8 @@ form{
                 	window.open('/childrenandglobal/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/childrenandglobal/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/childrenandglobal/index_principal','_self');
                 }
             }
             else if(!flag1){
@@ -155,7 +157,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 220px;width: 211px;" alt="ideoholic" src="/childrenandglobal/images/childrenandglobal.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 160px;width: 80px;" alt="ideoholic" src="/childrenandglobal/images/childrenandglobal.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">

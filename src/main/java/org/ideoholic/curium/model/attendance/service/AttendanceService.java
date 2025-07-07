@@ -791,7 +791,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
+            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent",parentDetails.get(0).getStudent().getBranchid());
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }

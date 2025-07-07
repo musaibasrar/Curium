@@ -217,6 +217,8 @@ public class StudentAction {
 				return "student_details";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
+			}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+				return "student_details_withoutmodify";
 			}
 			return "student_details";
 		} else {

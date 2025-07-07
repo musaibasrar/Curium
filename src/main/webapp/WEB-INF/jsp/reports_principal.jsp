@@ -359,77 +359,6 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
-            			</td>
-            		</tr>
                 </table>
             </div>
             
@@ -492,38 +421,6 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/daybook" style="font-size: 12px;">Day Book</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
             <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -548,58 +445,35 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Unpaid Receipts</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+             <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/childrenandglobal/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
+            		
             	</table>
             </div>
             
+            <h5 class="sideaccordian">
+			<a href="#">Assignment</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/childrenandglobal/JobProcess/queryReport"
+						style="font-size: 12px;">Assignment Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 		
 		 <h5 class="sideaccordian" ><a href="#" >Attendance</a></h5>
 
@@ -615,21 +489,6 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
 		
-          <!--   <h5 class="sideaccordian">
-			<a href="#">Appointments</a>
-		</h5>
-		<div style="padding-left: 0px; padding-right: 0px;">
-			<table style="border-collapse: collapse; width: 100%">
-				<tr>
-					<td
-						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
-						<a target="mainFrame"
-						href="/childrenandglobal/AppointmentProcess/appointmentReport"
-						style="font-size: 12px;">Appointments Report</a>
-					</td>
-				</tr>
-			</table>
-		</div> -->
              <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">

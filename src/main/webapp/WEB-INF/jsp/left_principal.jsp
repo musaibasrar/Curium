@@ -465,21 +465,13 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/childrenandglobal/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
+            		
                 </table>
             </div>
             
@@ -488,11 +480,6 @@ for(Cookie cookie : cookies){
               <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/childrenandglobal/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
@@ -503,90 +490,9 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr> -->
             		
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr> -->
                 </table>
             </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr> -->
-                </table>
-            </div>
-            
             
             <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -641,51 +547,19 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/childrenandglobal/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/childrenandglobal/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr> -->
                 </table>
             </div>
             
@@ -717,33 +591,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
-               
+                            
               <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -752,64 +600,16 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/childrenandglobal/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/childrenandglobal/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr> -->
                 </table>
             </div>
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Login Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
             
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/Backup&Restore" style="font-size: 12px;">Backup</a>
-            			</td>
-            		</tr>
-            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/childrenandglobal/changePassword" style="font-size: 12px;">Change Password</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
@@ -820,134 +620,6 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
-            <div >
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/childrenandglobal/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div> -->
-            
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
-        	
-        	<div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
-              
-              <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
             
             <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -957,41 +629,10 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/childrenandglobal/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/childrenandglobal/sendemail" style="font-size: 12px;">Email</a>
-            			</td>
-            		</tr>
                 </table>
             </div>
             
-               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/childrenandglobal/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/childrenandglobal/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				     <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/childrenandglobal/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
-            </div>
+              
              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -1075,49 +716,6 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            
-             <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Case</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Caveat</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/childrenandglobal/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/childrenandglobal/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
             
             </div>
                    
