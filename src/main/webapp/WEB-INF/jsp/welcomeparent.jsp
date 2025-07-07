@@ -92,8 +92,8 @@ for(Cookie cookie : cookies){
 		</table>
 	</div> -->
 	
-	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 77px;" alt="ideoholic" src="/brainystars/images/brainystars${branchid}.png"></h2>
+	<div class="row" style="padding-left: 130px;">
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/brainystars/images/brainystars.png"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">
