@@ -741,7 +741,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 
