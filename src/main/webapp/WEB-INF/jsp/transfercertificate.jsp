@@ -306,7 +306,7 @@
        			$( "#caste").val( ui.item.caste );
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
-       			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#classadmitted").val( ui.item.classadmittedin );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
