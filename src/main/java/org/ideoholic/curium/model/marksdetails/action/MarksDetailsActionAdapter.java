@@ -117,7 +117,7 @@ public class MarksDetailsActionAdapter {
     public void getSubjectExams() {
 
         SearchStudentResponseDto responseDto = marksDetailsService.getSubjectExams(httpSession.getAttribute(BRANCHID).toString());
-        request.setAttribute("listSubject", responseDto.getSubjectList());
+        request.setAttribute("listSubject", responseDto.getSubjectListName());
         request.setAttribute("listExam", responseDto.getExamsList());
     }
 
