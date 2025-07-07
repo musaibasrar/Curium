@@ -555,17 +555,9 @@ public class JobDAO {
 			            taskRepository.updateTaskToCompleted("Completed",Date.from(Instant.now()),userId, taskId);
 			        }
 				 result = taskRepository.findByIdIn(taskIdsList);
-				 /*Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
-				query.executeUpdate();
-
-				for (Integer appId : taskIdsList) {
-					Query task = session.createQuery("update Task set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
-					task.executeUpdate();
-					Task pq = new Task();
-					Query queryGet = session.createQuery("From Task as query where query.id = "+appId+"");
-					pq = (Task) queryGet.uniqueResult();
-					result.add(pq);
-				}*/
+				//Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
+				//Query task = session.createQuery("update Task set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
+				//Query queryGet = session.createQuery("From Task as query where query.id = "+appId+"");
 			}  catch (Exception hibernateException) {
 				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
