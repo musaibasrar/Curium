@@ -33,20 +33,6 @@ public class TeacherPerformanceService {
 	       this.httpSession = request.getSession();
 	}
 
-	public boolean readListOfSubjects() {
-		boolean result = false;
-	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-	        httpSession.setAttribute("listSubject", list);
-
-	        result = true;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        result = false;
-	    }
-		return result;
-	}
-
 	
 	public TeacherDetailResponseDto getDetailofteacher(TeacherDetailsDto teacherDetailsDto,String branchId) {
 		
