@@ -199,18 +199,19 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	<div style="border:2px solid black;margin-left:10px;margin-right:10px;margin-top:100px;">
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td  style="width: 100%">
+			<tr><td rowspan="3" style="padding-left:200px;"><img src="/fathima/images/fathima.jpg" width="105" height="105"/></td>
+				<td  style="width: 100%;text-align:left;">
 				
-			<h2 style="margin-bottom:0px;">${branchname}</h2></td>
+			<h2 style="margin-bottom:0px;">	${branchname} </h2></td>
 			</tr>
 			<tr>
-			<td class="addressLine">${branchaddress}</td>
+			<td class="addressLine"  style="text-align:left;">&emsp;&emsp;&emsp;&emsp;${branchaddress}</td>
 			</tr>
 			<tr>
-			<td class="addressLine">${branchcontact}</td>
+			<td class="addressLine" style="text-align:left;">&emsp;&emsp;${branchcontact}</td>
 			</tr>
 
 			<tr>
@@ -226,269 +227,140 @@ for(Cookie cookie : cookies){
                 </tr>
             </TABLE>
 
-		<table align="center" >
+		<table style="margin:40px;">
 		<tr>
 			
 			<td colspan="4">
 			
-			<h3><u>TRANSFER CERTIFICATE </u><br>(DUPLICATE)</h3>
+			<h3><u>TRANSFER CERTIFICATE </u></h3>
 			</td>
 			
 			</tr>
 			<tr>
 			<td style="text-align:right;">
-			
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="7" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
+									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="dd-MM-yyyy"/>" ></td>
 			
 			</tr>
 			
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Addmission no. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissionnumber}" /></span>
-					Book no. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${bookno}" /></span>
-					TC no. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:250px;"><c:out value="${tcno}" /> </span>
+					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Sl No. &nbsp;&nbsp;
+					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${tcno}" /></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="font-weight: bold;border:0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;Ad No.
+					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:200px;"> &nbsp;&nbsp;<c:out value="${studentdetails.student.admissionnumber}" /> </span>
 					</h3>
 				</td>
 			
 			
 			
 			</tr>
+			<tr><td><br></td></tr>
+			
 			<tr>
 			
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the pupil &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:750px;"> <c:out value="${studentdetails.student.name}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.name}" /></span>
 					</h3>
 				</td>
 				
 				
 			
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">2.&nbsp;&nbsp;Mother's Name &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:770px;"> <c:out value="${studentdetails.mothersname}" /></span>
+					<h3 style="font-weight: normal;">2.&nbsp;&nbsp;EMIS Number &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.sts}" /></span>
 					</h3>
 				</td>
 				
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">3.&nbsp;&nbsp;Father's Name/Guardian's Name &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:670px;"> <c:out value="${studentdetails.fathersname}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.fathersname}" /></span>
 					</h3>
 				</td>
 			</tr>
-			
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">4.&nbsp;&nbsp;Nationality &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:790px;"> <c:out value="${studentdetails.student.nationality}" /></span>
-					</h3>
-				</td>
-			</tr><tr><td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Whether the Student Belongs to Shedule Caste or Shedule Tribes &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"><c:out value="${studentdetails.student.socialcategory}" /></span>
+					<h3 style="font-weight: normal;">4.&nbsp;&nbsp;Sex &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.gender}" /></span>
 					</h3>
 				</td>
 			</tr>
+			<tr><td><br></td></tr>
+			<tr><td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Religion, Caste &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"><c:out value="${studentdetails.student.religion}" />,<c:out value="${studentdetails.student.caste}" /></span>
+					</h3>
+				</td>
+			</tr>
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of first Admission in the School &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissiondate}" /></span>
-					&nbsp;&nbsp;in Class &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.classadmittedin}" /></span>
+					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of Birth &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
 					</h3>
 				</td>
-				</tr>
-				<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">7.&nbsp;&nbsp;Date of Birth as Recorded in Admission Register
-					
-					</h3>
-				</td>
-				</tr>
+			</tr>
+			<tr><td><br></td></tr>
 				<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
-					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:500px;"> <c:out value="${dateinword}" /></span>
+					<h3 style="font-weight: normal;">7.&nbsp;&nbsp;Residence Address &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.addresspermanent}" /></span>
 					</h3>
 				</td>
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">8.&nbsp;&nbsp;Class in which Pupil Studied Last:
-					
-					</h3>
-				</td>
-				</tr>
-				<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.classstudying}" /></span>
-					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${classinword}" /> </span>
+					<h3 style="font-weight: normal;">8.&nbsp;&nbsp;Occupation of Parent &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.profession}" /></span>
 					</h3>
 				</td>
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">9.&nbsp;&nbsp;School/Board Annual Examination Last taken with Result:
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:500px;"><c:out value="${lastexam}" /> </span>
-					</h3>
-				</td>
-				</tr>
-				
-				<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;Whether failed if so Once/Twice in the same Class &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:550px;"><c:out value="${failpass}" /> </span>
+					<h3 style="font-weight: normal;">9.&nbsp;&nbsp;Weather Promotion to higher class &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${Remarks}" /></span>
 					</h3>
 				</td>
 			</tr>
-			
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Subject studied: &nbsp;&nbsp;
-					</h3>
-				</td>
-				</tr>
-			
-			<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">1. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${firstsubject}" /></span>
-					2. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${secondsubject}" /></span>
-					</h3>
-				</td>
-				</tr>
-				<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">3. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${thirdsubject}" /> </span>
-					4. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${Fourthsubject}" /></span>
-					</h3>
-				</td>
-				</tr>
-				<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">5. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${Fifthsubject}" /> </span>
-					6. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${sixthsubject}" /> </span>
+					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;Class in which the pupil was studying &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.classstudying}" /></span>
 					</h3>
 				</td>
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;Whether qualified for Promotion to the higher Class
-					
-					</h3>
-				</td>
-				</tr>
-				<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${pinfig}" /> </span>
-					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"><c:out value="${pinword}" /> </span>
+					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Date on which pupil left the school &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.dateleaving}" /></span>
 					</h3>
 				</td>
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">13.&nbsp;&nbsp;Month upto which the School Dues paid &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"><c:out value="${dues}" /> </span>
+					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;The Pupil conduct and character &nbsp;&nbsp;
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${conduct}" /></span>
 					</h3>
 				</td>
 			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">14.&nbsp;&nbsp;Any concession available of,if so,the nature of such concession &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> <c:out value="${concession}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">15.&nbsp;&nbsp;Total No. of working days &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:700px;"> <c:out value="${workingdays}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">16.&nbsp;&nbsp;Total No. of working days present &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:630px;"><c:out value="${present}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">17.&nbsp;&nbsp;Whether NCC cadet/Boy Scout/Girl Scout (detail may be given) &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> <c:out value="${ncc}" /></span>
-					</h3>
-				</td>
-			</tr>
-			
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">18.&nbsp;&nbsp;Games played or extra curricular activities in which the pupil usually took part&nbsp;&nbsp; </td></tr>
-					<tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;(mention achievement level threrein) &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:650px;"><c:out value="${game}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">19.&nbsp;&nbsp;Genaral conduct &nbsp;&nbsp;
-					 <span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:740px;"><c:out value="${conduct}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">20.&nbsp;&nbsp;Date of application for Certificate &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:630px;"><c:out value="${datecert}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">21.&nbsp;&nbsp;Date of issue for Certificate &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:700px;padding:1px;"><input
-									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" > </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">22.&nbsp;&nbsp;Reason for leaving the school &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:660px;"><c:out value="${leavingReason}" /> </span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">23.&nbsp;&nbsp;Any other Remarks &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:720px;"> <c:out value="${Remarks}" /></span>
-					</h3>
-				</td>
-			</tr>
+	
 		</table>
 		
 
@@ -508,9 +380,9 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-		<td align="left">Checked By</td>	
-			<td align="centre">School Seal</td>
-			<td align="centre">Principal</td>
+		<td align="left"><i>School Seal</i></td>	
+			<td align="centre">&emsp;&emsp;&emsp;&emsp;</td>
+			<td align="centre"><i>Signature of head</i></td>
 			</tr>
 			
 			<tr>
@@ -522,6 +394,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     
 		</TABLE>
+		</div>
 		
 	</form>
 	
