@@ -781,23 +781,59 @@ for(Cookie cookie : cookies){
 							<td >
 							
 									<div class="checkbox-container">
-									    <c:set var="counter" value="0" scope="page" />
-									    <c:forEach items="${classdetailslist}" var="classdetails">
-									        <c:if test="${classdetails.classdetails != ''}">
-									            <c:forEach items="${classdetailslist}" var="sectiondetails">
-									                <c:if test="${sectiondetails.section != ''}">
-									                    <div class="checkbox-item">
-									                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-									                            <input type="checkbox" name="classteacher"
-									                                   value="${classdetails.classdetails}--${sectiondetails.section}">
-									                            ${classdetails.classdetails} ${sectiondetails.section}
-									                        </label>
-									                    </div>
-									                    <c:set var="counter" value="${counter + 1}" scope="page" />
-									                </c:if>
-									            </c:forEach>
-									        </c:if>
-									    </c:forEach>
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										        <c:choose>
+										            <c:when test="${fn:contains(classList, item.classdetails) == false}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										        <c:choose>
+										            <c:when test="${fn:contains(sectionList, item.section) == false}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+										    <c:forEach items="${sections}" var="sectionItem">
+										        <div class="checkbox-item">
+										            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+										                <input type="checkbox" name="classteacher"
+										                       value="${classItem}--${sectionItem}">
+										                ${classItem} ${sectionItem}
+										            </label>
+										        </div>
+										    </c:forEach>
+										</c:forEach>
+
+
 									</div>
 
 
@@ -806,23 +842,59 @@ for(Cookie cookie : cookies){
 							
 							<td class="alignRight">Classes Teaching &nbsp;</td>
 							<td ><div class="checkbox-container">
-									    <c:set var="counter" value="0" scope="page" />
-									    <c:forEach items="${classdetailslist}" var="classdetails">
-									        <c:if test="${classdetails.classdetails != ''}">
-									            <c:forEach items="${classdetailslist}" var="sectiondetails">
-									                <c:if test="${sectiondetails.section != ''}">
-									                    <div class="checkbox-item">
-									                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-									                            <input type="checkbox" name="classesteaching"
-									                                   value="${classdetails.classdetails}--${sectiondetails.section}">
-									                            ${classdetails.classdetails} ${sectiondetails.section}
-									                        </label>
-									                    </div>
-									                    <c:set var="counter" value="${counter + 1}" scope="page" />
-									                </c:if>
-									            </c:forEach>
-									        </c:if>
-									    </c:forEach>
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										        <c:choose>
+										            <c:when test="${fn:contains(classList, item.classdetails) == false}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										        <c:choose>
+										            <c:when test="${fn:contains(sectionList, item.section) == false}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+										    <c:forEach items="${sections}" var="sectionItem">
+										        <div class="checkbox-item">
+										            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+										                <input type="checkbox" name="classteacher"
+										                       value="${classItem}--${sectionItem}">
+										                ${classItem} ${sectionItem}
+										            </label>
+										        </div>
+										    </c:forEach>
+										</c:forEach>
+
+
 									</div>
 
 							</td>
