@@ -815,7 +815,7 @@ public class JobService {
 			}
 
 
-			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);
