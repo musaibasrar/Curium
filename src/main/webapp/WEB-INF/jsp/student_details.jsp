@@ -356,7 +356,7 @@
             function checkUsertype(){
             	
             	if(type == 'reception'){
-            		document.getElementById('modify').style.visibility = 'hidden';
+            		document.getElementById('modify').style.visibility = '';
             	}
             }
         </script>

@@ -627,7 +627,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr> -->
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/littleflower/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
@@ -636,11 +636,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/littleflower/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr> -->
-            		<!-- <tr>
+            		 <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/littleflower/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
         

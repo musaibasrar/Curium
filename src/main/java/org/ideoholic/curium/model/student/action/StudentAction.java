@@ -103,7 +103,17 @@ public class StudentAction {
 	@PostMapping("/feesStructurePerYear")
 	public String feesStructurePerYear() {
 		studentActionAdapter.viewfeesStructurePerYear();
-		return "student_details_feesstructure";
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "student_details_feesstructure_admin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_feesstructure_admin";
+		}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+			return "student_details_feesstructure_admin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_feesstructure";
+		} else {
+			return "student_details_feesstructure";
+		}
 	}
 
 	@GetMapping("/ViewFeesStructure")
@@ -112,6 +122,8 @@ public class StudentAction {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_feesstructure_admin";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure";
@@ -215,9 +227,9 @@ public class StudentAction {
 				return "student_details";
 			} else if (branchId.equalsIgnoreCase("5")) {
 				return "student_details";
-			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+			} /*else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
-			}
+			}*/
 			return "student_details";
 		} else {
 			return "error";
@@ -240,9 +252,9 @@ public class StudentAction {
 				return "student_detailparent";
 			} else if (branchId.equalsIgnoreCase("5")) {
 				return "student_detailparent";
-			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+			}/* else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
-			}
+			}*/
 			return "student_detailparent";
 		} else {
 			return "error";
@@ -265,9 +277,9 @@ public class StudentAction {
 				return "studentfee_detail";
 			} else if (branchId.equalsIgnoreCase("5")) {
 				return "studentfee_detail";
-			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+			} /*else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
-			}
+			}*/
 			return "studentfee_detail";
 		} else {
 			return "error";

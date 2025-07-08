@@ -339,16 +339,25 @@
 	src="/littleflower/js/datePicker/ui/jquery.effects.blind.js"></script>
 
 <script type="text/javascript" charset="utf-8">
+
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
+		    "sScrollY": "380px",
+		    "bPaginate": true,
+		    "bLengthChange": false,
+		    "bFilter": true,
+		    "bSort": true,
+		    "bInfo": true,
+		    "bStateSave": false,
+		    "bProcessing": false,
+		    "bServerSide": false,
+		    "bAutoWidth": false,
+		    "iDisplayLength": 2000,
+		    "aoColumnDefs":[
+		        { 'bSortable': false, 'aTargets': [ 0 ] }
+		    ]
+		    
+});
 	});
 </script>
 <script type="text/javascript">

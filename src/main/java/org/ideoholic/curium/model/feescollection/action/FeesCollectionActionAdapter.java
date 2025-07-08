@@ -61,7 +61,7 @@ public class FeesCollectionActionAdapter {
         dto.setFeesCat(request.getParameterValues("feescategory"));
         dto.setAddClass(request.getParameterValues("classsearch"));
         dto.setStudentType(request.getParameter("studenttype"));
-        ResultResponse resultResponse = feesCollectionService.getFeesReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = feesCollectionService.getFeesReport(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
     }
 
