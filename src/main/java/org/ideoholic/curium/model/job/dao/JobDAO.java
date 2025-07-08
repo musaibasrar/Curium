@@ -550,14 +550,14 @@ public class JobDAO {
 			
 			List<Task> result = new ArrayList<Task>();
 			try {
+				//Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
 				 jobQueryRepository.updateJobStatus(jobStatus,Date.from(Instant.now()), userId, jobId);
 				 for (Integer taskId : taskIdsList) {
+				//Query task = session.createQuery("update Task set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
 			            taskRepository.updateTaskToCompleted("Completed",Date.from(Instant.now()),userId, taskId);
 			        }
-				 result = taskRepository.findByIdIn(taskIdsList);
-				//Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
-				//Query task = session.createQuery("update Task set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
 				//Query queryGet = session.createQuery("From Task as query where query.id = "+appId+"");
+				 result = taskRepository.findByIdIn(taskIdsList);
 			}  catch (Exception hibernateException) {
 				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
