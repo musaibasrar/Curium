@@ -1,8 +1,11 @@
 package org.ideoholic.curium.model.event.service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,15 +21,42 @@ public class EventService {
     private static final Logger logger = LogManager.getLogger(EventService.class);
 
     
-    public List<EventDTO> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
+    public List<Map<String, Object>> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
         List<Event> events = new EventDAO().getEvents(start, end, branchId, userId);
         List<EventDTO> eventDTOs = new ArrayList<>();
+        List<Map<String, Object>> eventMap = new ArrayList<>();
         
         for (Event event : events) {
             eventDTOs.add(convertToDTO(event));
         }
         
-        return eventDTOs;
+        for (EventDTO dto : eventDTOs) {
+            Map<String, Object> event = new HashMap<>();
+            event.put("id", dto.getId());
+            event.put("title", dto.getTitle());
+            
+            // Format dates as ISO strings for FullCalendar
+            if (dto.getStart() != null) {
+                // Use ISO format for better compatibility with FullCalendar
+                event.put("start", dto.getStart().format(DateTimeFormatter.ISO_DATE_TIME));
+            }
+            if (dto.getEnd() != null) {
+                // Use ISO format for better compatibility with FullCalendar
+                event.put("end", dto.getEnd().format(DateTimeFormatter.ISO_DATE_TIME));
+            }
+            
+            event.put("allDay", dto.isAllDay());
+            event.put("backgroundColor", dto.getColor());
+            
+            Map<String, Object> extendedProps = new HashMap<>();
+            extendedProps.put("description", dto.getDescription());
+            extendedProps.put("location", dto.getLocation());
+            event.put("extendedProps", extendedProps);
+            
+            eventMap.add(event);
+        }
+        
+        return eventMap;
     }
     
     @Transactional(readOnly = true)
