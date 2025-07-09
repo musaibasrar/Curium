@@ -1006,7 +1006,7 @@ public class JobService {
 			reportResponseDto.setStudentselected("");
 		}
 
-		taskList = new JobDAO().generateTasksReport(queryMain+subQuery);
+		taskList = jobDAO.generateTasksReport(queryMain+subQuery);
         
 		reportResponseDto.setTaskList(taskList);
 		reportResponseDto.setTransactionFromDateSelected("From:"+reportDto.getTransactionDateFrom());
