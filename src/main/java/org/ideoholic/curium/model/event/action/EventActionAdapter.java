@@ -63,35 +63,8 @@ public class EventActionAdapter {
             end = LocalDateTime.parse(endParam, DateTimeFormatter.ISO_DATE_TIME);
         }
         
-        List<EventDTO> eventDTOs = eventService.getEvents(start, end, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
-        List<Map<String, Object>> events = new ArrayList<>();
         
-        for (EventDTO dto : eventDTOs) {
-            Map<String, Object> event = new HashMap<>();
-            event.put("id", dto.getId());
-            event.put("title", dto.getTitle());
-            
-            // Format dates as ISO strings for FullCalendar
-            if (dto.getStart() != null) {
-                // Use ISO format for better compatibility with FullCalendar
-                event.put("start", dto.getStart().format(DateTimeFormatter.ISO_DATE_TIME));
-            }
-            if (dto.getEnd() != null) {
-                // Use ISO format for better compatibility with FullCalendar
-                event.put("end", dto.getEnd().format(DateTimeFormatter.ISO_DATE_TIME));
-            }
-            
-            event.put("allDay", dto.isAllDay());
-            event.put("backgroundColor", dto.getColor());
-            
-            Map<String, Object> extendedProps = new HashMap<>();
-            extendedProps.put("description", dto.getDescription());
-            extendedProps.put("location", dto.getLocation());
-            event.put("extendedProps", extendedProps);
-            
-            events.add(event);
-        }
-        
+        List<Map<String, Object>> events = eventService.getEvents(start, end, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
         return events;
     }
     
@@ -145,8 +118,8 @@ public class EventActionAdapter {
     }
     
     public boolean updateEvent() {
-        try {
-            String idParam = request.getParameter("id");
+
+    		String idParam = request.getParameter("id");
             Long id = Long.parseLong(idParam);
             
             // Get parameters from request, same as createEvent
@@ -179,29 +152,15 @@ public class EventActionAdapter {
             eventDTO.setAllDay(allDayStr != null && Boolean.parseBoolean(allDayStr));
             
             return eventService.updateEvent(id, eventDTO, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+       
     }
     
     public boolean deleteEvent() {
-        try {
             String idParam = request.getParameter("id");
             if (idParam == null || idParam.isEmpty()) {
                 return false;
             }
-            
-            try {
                 Long id = Long.parseLong(idParam);
                 return eventService.deleteEvent(id);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 } 
