@@ -899,7 +899,7 @@ public class JobService {
 			for (String ids : taskIds) {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
-			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);

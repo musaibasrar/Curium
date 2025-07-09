@@ -616,30 +616,27 @@ public class JobDAO {
 		}
 
 
+		@Transactional
 		public List<Task> inProgressTasks(List<Integer> taskIdsList, int userId, String jobStatus, int jobId) {
 			
 			List<Task> result = new ArrayList<Task>();
 			try {
-				transaction = session.beginTransaction();
 				
-				Query query = session.createQuery("update JobQuery set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
-				query.executeUpdate();
+				//Query query = session.createQuery("update JobQuery set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
+				jobQueryRepository.updateJobStatus(jobStatus,Date.from(Instant.now()), userId, jobId);
 				
 				for (Integer appId : taskIdsList) {
-					Query task = session.createQuery("update Task set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
-					task.executeUpdate();
-					Task pq = new Task();
-					Query queryGet = session.createQuery("From Task as query where query.id = "+appId+"");
-					pq = (Task) queryGet.uniqueResult();
-					result.add(pq);
+					//Query task = session.createQuery("update Task set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
+					taskRepository.updateTaskToCompleted("In Progress",Date.from(Instant.now()),userId, appId);
 				}
-				
-				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+				//Query queryGet = session.createQuery("From Task as query where query.id = "+appId+"");
+				result = taskRepository.findByIdIn(taskIdsList);
+			} catch (Exception hibernateException) {
+				log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
+				throw hibernateException;
+			}
+			
 			return result;
 		}
 
