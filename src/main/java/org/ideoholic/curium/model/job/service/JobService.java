@@ -873,7 +873,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);
