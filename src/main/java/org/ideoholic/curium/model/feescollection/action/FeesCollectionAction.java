@@ -97,7 +97,19 @@ public class FeesCollectionAction {
                 feesCollectionActionAdapter.getFeesDetails();
                 standardActionAdapter.viewClasses();
                 feesActionAdapter.viewAllStudentsList();
-                return "feesCollection";
+                if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+        			return "feesCollectionAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+        			return "feesCollectionAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+        			return "feesCollectionAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+        			return "feesCollectionAdmin";
+        		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+        			return "feesCollection";
+        		} else {
+        			return "feesCollection";
+        		}
         }
 
 		@GetMapping("/ViewDetails")
