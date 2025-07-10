@@ -832,8 +832,6 @@ for(Cookie cookie : cookies){
 										        </div>
 										    </c:forEach>
 										</c:forEach>
-
-
 									</div>
 
 
@@ -893,8 +891,6 @@ for(Cookie cookie : cookies){
 										        </div>
 										    </c:forEach>
 										</c:forEach>
-
-
 									</div>
 
 							</td>
