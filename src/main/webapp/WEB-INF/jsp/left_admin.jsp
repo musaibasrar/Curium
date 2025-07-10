@@ -773,12 +773,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
+            				 <a target="mainFrame" href="/cambridge/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
+            				 <a target="mainFrame" href="/cambridge/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
             			</td>
             		</tr>
                 </table>
@@ -791,18 +791,18 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/cambridge/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/cambridge/EventProcess/create" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr> -->
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            				<a target="mainFrame" href="/cambridge/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
             			</td>
             		</tr>
             		
