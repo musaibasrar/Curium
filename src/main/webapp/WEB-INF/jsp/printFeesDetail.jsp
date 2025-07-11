@@ -70,7 +70,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -174,15 +174,15 @@
 <body style="text-align: center" class="bodymargin">
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
-	<div style="display: flex; justify-content: space-between; gap: 20px;">
-			<div style="border: 1px solid;border-radius: 15px; width: 60%;">
+	<div style="display: flex;">
+			<div style="border: 1px solid;border-radius: 15px; width: 70%;">
 			
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td>&nbsp;&nbsp;<img src="/littleflower/images/littleflower.jpg" width="85" height="58" style="margin:5px;"/></td>
+				<td>&nbsp;&nbsp;<img src="/littleflower/images/littleflower.jpg" width="75" height="75" style="margin:5px;"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: ">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label>
 				</td>
