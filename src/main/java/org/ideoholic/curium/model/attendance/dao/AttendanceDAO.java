@@ -32,10 +32,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class AttendanceDAO {
-	
+
 	@Autowired
 	private HolidaysMasterRepository holidayMasterRepo;
-	
+
 	@Autowired
 	private WeeklyoffRepository weeklyoffRepo;
 
@@ -55,11 +55,11 @@ public class AttendanceDAO {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
 		try{
 			holidayMaster = holidayMasterRepo.findByAcademicyearAndBranchid(currentAcademicYear,branchId);
-		}catch (Exception e) { 
+		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw e;
 		}
-		
+
 		return holidayMaster;
 	}
 
@@ -80,7 +80,7 @@ public class AttendanceDAO {
 		try{
 			weeklyoffRepo.save(weeklyOff);
 			return true;
-		} catch (Exception hibernateException) { 
+		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 			throw hibernateException;
@@ -141,7 +141,7 @@ public class AttendanceDAO {
 
 			throw  e;
 		}
-		
+
 	return weeklyOff;
 
 	}
@@ -158,14 +158,14 @@ public class AttendanceDAO {
 			holidayMaster = query.list();
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			
+
 		}finally {
 			HibernateUtil.closeSession();
 		}
-		
+
 		return holidayMaster;
 	}
-	
+
 	public List<Holidaysmaster> readListOfholidays(
 			List<Integer> holidaysIntList, String currentAcademicYear) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
@@ -178,11 +178,11 @@ public class AttendanceDAO {
 			holidayMaster = query.list();
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			
+
 		} finally {
 			HibernateUtil.closeSession();
 		}
-		
+
 		return holidayMaster;
 	}
 
@@ -277,7 +277,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, String date, String studentExternalId, int branchId) {
-		
+
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
 		try{
@@ -307,26 +307,23 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
+	@Transactional
 	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList, List<String> studentAttendanceStatusList, String academicYear) {
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			int i =0;
-			for (Integer attIn : attendanceIdsList) {
-				Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
-				query.executeUpdate();
-				
-				i++;
+
+
+		try {
+			for (int i = 0; i < attendanceIdsList.size(); i++) {
+
+				//Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				studentDailyAttendanceRepository.updateAttendanceStatusById(attendanceIdsList.get(i), studentAttendanceStatusList.get(i));
 			}
-			transaction.commit();
 			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println("error "+e);
-		}finally {
-			HibernateUtil.closeSession();
+
+		}catch (Exception e) {
+		log.error(e.getMessage(), e);
+		throw e;
 		}
-		return false;
+
 	}
 
 	public List<Studentdailyattendance> getStudentDailyAttendanceGraph(
