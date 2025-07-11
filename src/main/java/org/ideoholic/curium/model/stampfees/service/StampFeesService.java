@@ -11,7 +11,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dao.FeesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
@@ -433,7 +433,7 @@ public class StampFeesService {
         if(branchid!=null){
         	String className = searchStudentDto.getClassSearch();
         	
-            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
             feescategoryResponseDto.setFeescategory(feecategoryList);
   		
     		
