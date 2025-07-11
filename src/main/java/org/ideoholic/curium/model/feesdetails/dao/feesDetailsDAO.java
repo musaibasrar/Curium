@@ -53,7 +53,6 @@ public class feesDetailsDAO {
         @Transactional
         public Feesdetails create(Feesdetails feesdetails) {
                 try {
-           // session.save(feesdetails);
                 	feesDetailsRepo.save(feesdetails); 
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
