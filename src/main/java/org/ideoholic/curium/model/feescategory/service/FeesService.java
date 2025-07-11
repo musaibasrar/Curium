@@ -23,7 +23,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dao.FeesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.ConcessionDto;
 import org.ideoholic.curium.model.feescategory.dto.FeesCategoryDto;
@@ -59,6 +59,9 @@ public class FeesService {
 			
 			@Autowired
 		    private AccountDAO accountDao;
+			
+			@Autowired
+			private FeesCategoryDAO feesCategoryDao;
             /**
              * Size of a byte buffer to read/write file
              */
@@ -77,7 +80,7 @@ public class FeesService {
               	   int cYear2 = Integer.parseInt(currentYear[1])+1;
               	   String nextYear = ""+cYear+"/"+cYear2+"";
                          try {
-                                List<Feescategory> list = new feesCategoryDAO().readListOfFeeCategory(Integer.parseInt(branchid),currentAcademicYear,nextYear);
+                                List<Feescategory> list = new FeesCategoryDAO().readListOfFeeCategory(Integer.parseInt(branchid),currentAcademicYear,nextYear);
                                 feescategoryResponseDto.setFeescategory(list);
                                 feescategoryResponseDto.setSuccess(true);    
                         } catch (Exception e) {
@@ -108,7 +111,7 @@ public class FeesService {
                         	feesCategoryList.add(feescategorynew);
                         }
                 		}
-                	boolean result =  new feesCategoryDAO().create(feesCategoryList);
+                	boolean result =  new FeesCategoryDAO().create(feesCategoryList);
                 	
                         /*
                           Feescategory feescategory = new Feescategory();
@@ -138,7 +141,7 @@ public class FeesService {
                     System.out.println("id" + id);
                     ids.add(Integer.valueOf(id));
                 }
-                new feesCategoryDAO().deleteMultiple(ids);
+                new FeesCategoryDAO().deleteMultiple(ids);
                  }
         }
 
@@ -260,7 +263,7 @@ public class FeesService {
                           		// End J.V
                           		
                         }
-                new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
+                new FeesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
                 
                 studentIdDto.getStudentId();
                 return studentIdDto;
@@ -371,7 +374,7 @@ public class FeesService {
                     		// End J.V
                         
                }
-           new feesCategoryDAO().waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
+           new FeesCategoryDAO().waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
@@ -576,7 +579,7 @@ public class FeesService {
                         
                }
                 
-           new feesCategoryDAO().applyConcession(concessionList,studentId,transactionsReverseList,transactionsApplyList,updateDrAccountReverseList,updateCrAccountReverseList,updateDrAccountApplyList,updateCrAccountApplyList);
+           new FeesCategoryDAO().applyConcession(concessionList,studentId,transactionsReverseList,transactionsApplyList,updateDrAccountReverseList,updateCrAccountReverseList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
@@ -590,7 +593,7 @@ public class FeesService {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
         if(branchid!=null){
         	
-                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchid),academicYear);
+                List<Feescategory> list = feesCategoryDao.readListOfObjects(Integer.parseInt(branchid),academicYear);
                 feescategoryResponseDto.setFeescategory(list);
                 PrintWriter out = response.getWriter(); 
        			response.setContentType("text/xml");
@@ -637,7 +640,7 @@ public class FeesService {
         	   int cYear2 = Integer.parseInt(currentYear[1])+1;
         	   String nextYear = ""+cYear+"/"+cYear2+"";
         		try {
-                          List<OtherFeecategory> list = new feesCategoryDAO().readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
+                          List<OtherFeecategory> list = new FeesCategoryDAO().readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
                           otherFeesCategoryResponseDto.setOtherFeesCategory(list);
                           //httpSession.setAttribute("otherfeescategory", list);
                           otherFeesCategoryResponseDto.setSuccess(true);
@@ -669,7 +672,7 @@ public class FeesService {
                    ofeescategory.setUserid(Integer.parseInt(userloginid));
                    ofeescategory.setAcademicyear(otherFeecategoryDto.getCategoryYearOf());
                    if(!ofeescategory.getFeescategoryname().equalsIgnoreCase("") && !ofeescategory.getParticularname().equalsIgnoreCase("") && ofeescategory.getAmount() != 0 ){
-                           ofeescategory =  new feesCategoryDAO().createOtherFeeCategory(ofeescategory);
+                           ofeescategory =  new FeesCategoryDAO().createOtherFeeCategory(ofeescategory);
                    }
            }
    }
@@ -682,7 +685,7 @@ public class FeesService {
               System.out.println("id" + id);
               ids.add(Integer.valueOf(id));
           }
-          new feesCategoryDAO().odeleteMultiple(ids);
+          new FeesCategoryDAO().odeleteMultiple(ids);
            }
   }
 	   
@@ -702,7 +705,7 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
@@ -792,7 +795,7 @@ public class FeesService {
 	                        }
 
 	               }
-	           new feesCategoryDAO().applyotherConcession(concessionList,studentId);
+	           new FeesCategoryDAO().applyotherConcession(concessionList,studentId);
 	           studentIdDto.setStudentId(studentId);
 	           return studentIdDto;
 	        }
@@ -842,7 +845,7 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
+	            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(classname,searchYear);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "IN");
@@ -923,7 +926,7 @@ public class FeesService {
                             sfsId.add(Integer.valueOf(test[0]));
                             feesCatId.add(Integer.valueOf(test[1]));
                    }
-           new feesCategoryDAO().deleteOtherFeesCategory(sfsId,feesCatId,studentId);
+           new FeesCategoryDAO().deleteOtherFeesCategory(sfsId,feesCatId,studentId);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
             }
