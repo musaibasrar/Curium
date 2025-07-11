@@ -35,54 +35,37 @@ public class FeesCategoryDAO {
 			results = feesCatRepo.findByAcademicyearAndBranchid(academicYear, branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-
 			hibernateException.printStackTrace();
+
 			throw hibernateException;
 		}
 		return results;
 	}
 
-	@SuppressWarnings("finally")
+	@Transactional
 	public Feescategory create(Feescategory feescategory) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(feescategory);
+			feesCatRepo.save(feescategory);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 
-
-            transaction.commit();
-            
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return feescategory;
-        }
+			throw hibernateException;
+		}
+		return feescategory;
 	}
 
-	public void deleteMultiple(List ids) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
+	@Transactional
+	public void deleteMultiple(List<Integer> ids) {
 		try {
-			transaction = session.beginTransaction();
-			
-			
-			Query query = session
-					.createQuery("delete from Feescategory as fess where fess.idfeescategory IN (:ids)");
-			query.setParameterList("ids", ids);
-			
-			query.executeUpdate();
-			
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			// Query query = session.createQuery("delete from Feescategory as fess where fess.idfeescategory IN (:ids)");
+			feesCatRepo.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
 
+			throw hibernateException;
+		}
 	}
 
 	public void deleteFeesCategory(List ids, List feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {

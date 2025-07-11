@@ -48,6 +48,9 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class FeesService {
         
@@ -133,17 +136,17 @@ public class FeesService {
         }
 
 
-        public void deleteMultiple(IdFeescategoryDto idFeescategoryDto) {
-                 String[] idfeescategory = idFeescategoryDto.getIdFeesCategory(); 
-                 if(idfeescategory!=null){
-                List<Integer> ids = new ArrayList();
-                for (String id : idfeescategory) {
-                    System.out.println("id" + id);
-                    ids.add(Integer.valueOf(id));
-                }
-                new FeesCategoryDAO().deleteMultiple(ids);
-                 }
-        }
+		public void deleteMultiple(IdFeescategoryDto idFeescategoryDto) {
+			String[] idfeescategory = idFeescategoryDto.getIdFeesCategory();
+			if (idfeescategory != null) {
+				List<Integer> ids = new ArrayList<>();
+				for (String id : idfeescategory) {
+					log.debug("id:{}", id);
+					ids.add(Integer.valueOf(id));
+				}
+				feesCategoryDao.deleteMultiple(ids);
+			}
+		}
 
 
 		public ParentListResponseDto viewAllStudentsList(String branchId) {
@@ -207,7 +210,7 @@ public class FeesService {
                         outStream.close();
                         ResultResponse.builder().success(true).build();
                 } catch (Exception e) {
-                        System.out.println("" + e);
+                	log.error(e.getMessage(), e);
                 }
                 return ResultResponse.builder().success(false).build();
         }
@@ -217,8 +220,8 @@ public class FeesService {
                 
         	     StudentIdDto studentIdDto = new StudentIdDto();
                  String[] idfeescategory = concessionDto.getSfsid();
-                 List<Integer> sfsId = new ArrayList();
-                 List<Integer> feesCatId = new ArrayList();
+                 List<Integer> sfsId = new ArrayList<>();
+                 List<Integer> feesCatId = new ArrayList<>();
                  List<VoucherEntrytransactions> transactionsList = new ArrayList<VoucherEntrytransactions>();
                  List<String> debitEntries = new ArrayList<String>();
                  List<String> creditEntries = new ArrayList<String>();
@@ -430,7 +433,7 @@ public class FeesService {
 			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
+			log.debug("SEARCH QUERY ***** {}", queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			
@@ -680,9 +683,9 @@ public class FeesService {
 	   public void odeleteMultiple(IdFeescategoryDto idFeescategoryDto) {
            String[] idfeescategory = idFeescategoryDto.getIdFeesCategory();
            if(idfeescategory!=null){
-          List<Integer> ids = new ArrayList();
+          List<Integer> ids = new ArrayList<>();
           for (String id : idfeescategory) {
-              System.out.println("id" + id);
+              log.debug("id:{}", id);
               ids.add(Integer.valueOf(id));
           }
           new FeesCategoryDAO().odeleteMultiple(ids);
@@ -914,8 +917,8 @@ public class FeesService {
             
 			StudentIdDto studentIdDto = new StudentIdDto();
             String[] idfeescategory = concessionDto.getSfsid();
-            List<Integer> sfsId = new ArrayList();
-            List<Integer> feesCatId = new ArrayList();
+            List<Integer> sfsId = new ArrayList<>();
+            List<Integer> feesCatId = new ArrayList<>();
             
             String studentId = concessionDto.getId();
             
