@@ -1,23 +1,13 @@
 package org.ideoholic.curium.model.feesdetails.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,19 +21,15 @@ import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FeesDetailsService {
 	
-	 	private HttpServletRequest request;
-	    private HttpServletResponse response;
-	    private HttpSession httpSession;
-	    private String BRANCHID = "branchid";
-	    private String USERID = "userid";
+	@Autowired
+	private feesDetailsDAO feesDetailsDao;
 	
 
 	public Feesdetails addFeesDetails(FeesIdDetailsDto feesIdDetailsDto,String branchid,String userId, String currentyear) {
@@ -62,7 +48,7 @@ public class FeesDetailsService {
 			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
 			feesdetails.setBranchid(Integer.parseInt(branchid));
 			feesdetails.setUserid(Integer.parseInt(userId));
-			feesdetails = new feesDetailsDAO().create(feesdetails);
+			feesdetails = feesDetailsDao.create(feesdetails);
 		}
 		
 		 return feesdetails;
