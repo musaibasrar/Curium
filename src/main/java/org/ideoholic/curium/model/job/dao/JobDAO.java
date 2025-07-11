@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.repositories.JobQueryRepository;
@@ -657,13 +656,14 @@ public class JobDAO {
 }
 
 
-		public List<JobQuery> viewOneJobDetails(int jobId) {
+		public JobQuery viewOneJobDetails(int jobId) {
 			
-	        List<JobQuery> results = new ArrayList<JobQuery>();
+	        JobQuery results = null;
 	        
 	        try {
 	                transaction = session.beginTransaction();
-	                results = (List<JobQuery>) session.createQuery("from JobQuery where id="+jobId+"").list();
+	                //results = (List<JobQuery>) session.createQuery("from JobQuery where id="+jobId+"").list();
+	                 results = jobQueryRepository.findById(jobId).orElse(new JobQuery());
 	                transaction.commit();
 	        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 	                
