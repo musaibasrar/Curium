@@ -238,7 +238,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Student> readListOfStudentsArchive() {
+	public List<Student> readListOfStudentsArchive(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -247,7 +247,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
-					"FROM Student s where s.archive = 1").setCacheable(true).setCacheRegion("commonregion")
+					"FROM Student s where s.archive = 1 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
