@@ -3,9 +3,8 @@ package org.ideoholic.curium.model.feesdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
@@ -14,66 +13,60 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class feesDetailsDAO {
-        Session session = null;
-    /**
-     * * Hibernate Session Variable
-     */
-    Transaction transaction = null;
-    /**
-     * * Hibernate Transaction Variable
-     */
-  
-    SessionFactory sessionFactory;
-    
-    private static final Logger logger = LogManager.getLogger(feesDetailsDAO.class);
-
-        public feesDetailsDAO() {
-                session = HibernateUtil.openCurrentSession();
-        }
+	
+	@Autowired
+    private FeesdetailsRepository feesDetailsRepo;
+       
 
         @SuppressWarnings({ "finally", "unchecked" })
         public List<Feescategory> readListOfObjects() {
-                
+        	Session session = null; 
+        	Transaction transaction = null;
                 List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
             transaction = session.beginTransaction();
             results = (List<Feescategory>) session.createQuery("From Feescategory").list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        }catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
+            throw hibernateException;
         } finally {
     			HibernateUtil.closeSession();
             return results;
         }
         }
 
-        @SuppressWarnings("finally")
+        @Transactional
         public Feesdetails create(Feesdetails feesdetails) {
                 try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(feesdetails);
-
-
-            transaction.commit();
-            
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+                	feesDetailsRepo.save(feesdetails); 
+        }catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
+            throw hibernateException;       
+            } 
+
+       
             return feesdetails;
-        }
         }
 
         public Feesdetails readUniqueObject(Long feesDetailsid) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  Feesdetails feesdetails = new Feesdetails();
                 try {
                     //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
@@ -82,9 +75,10 @@ public class feesDetailsDAO {
                     Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
                     feesdetails = (Feesdetails) query.uniqueResult();
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
+                    throw hibernateException;
                 }finally {
         			HibernateUtil.closeSession();
         		}
@@ -92,6 +86,8 @@ public class feesDetailsDAO {
         }
         
         public Receiptinfo readFeesDetails(Long feesDetailsid) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  Receiptinfo feesdetails = new Receiptinfo();
                 try {
                     //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
@@ -100,10 +96,10 @@ public class feesDetailsDAO {
                     Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
                     feesdetails = (Receiptinfo) query.uniqueResult();
                     transaction.commit();
-                } catch (Exception hibernateException) { logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
-                    transaction.rollback();
+                    throw hibernateException;
                 }finally {
         			HibernateUtil.closeSession();
         		}
@@ -112,6 +108,8 @@ public class feesDetailsDAO {
         
         @SuppressWarnings("unchecked")
         public List<Feesdetails> readList(Long sid, String currentYear) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  
                  List<Feesdetails> results = new ArrayList<Feesdetails>();
                 try {
@@ -122,16 +120,18 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
-                }finally {
+                    throw hibernateException;                }finally {
         			HibernateUtil.closeSession();
         		}
                 return results;
         }
 
         public String feesSum(long id, String currentYear) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  
                 String results = "";
                 try {
@@ -147,9 +147,10 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
+                    throw hibernateException;
                 }
                 finally {
         			HibernateUtil.closeSession();
@@ -158,6 +159,8 @@ public class feesDetailsDAO {
         }
 
         public String dueAmount(long id, String currentYear) {
+        	Session session = null; 
+        	Transaction transaction = null;
                 
                 String paidFees = "";
                 String totalFees = "";
@@ -174,10 +177,10 @@ public class feesDetailsDAO {
                         Query queryTF =  session.createQuery(queryTotalFees);
                         totalFees =  (String) queryTF.uniqueResult();
                         transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }
+            throw hibernateException;        }
         
         finally {
 			HibernateUtil.closeSession();
@@ -186,6 +189,8 @@ public class feesDetailsDAO {
         }
 
         public String feesDetailsSum(String queryMain) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  
                 String results = "";
                 try {
@@ -197,9 +202,10 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
+                    throw hibernateException;
                 }finally {
         			HibernateUtil.closeSession();
         		}
@@ -207,6 +213,8 @@ public class feesDetailsDAO {
         }
 
         public String feesTotal(long id, String currentYear) {
+        	Session session = null; 
+        	Transaction transaction = null;
                  
                 String results = "";
                 try {
@@ -220,9 +228,10 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
+                    throw hibernateException;
                 }finally {
         			HibernateUtil.closeSession();
         		}
@@ -230,6 +239,8 @@ public class feesDetailsDAO {
         }
 
         public List<Object[]> readListOfStudents(int branchId) {
+        	Session session = null; 
+        	Transaction transaction = null;
                 List<Object[]> results = new ArrayList<Object[]>();
 
                 try {
@@ -246,9 +257,10 @@ public class feesDetailsDAO {
                         results= (List<Object[]>)q.list();
                         transaction.commit();
 
-                } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                        
-                        hibernateException.printStackTrace();
+                } catch (Exception hibernateException) { 
+                	log.error(hibernateException.getMessage(), hibernateException);
+                    hibernateException.printStackTrace();
+                    throw hibernateException;
 
                 } finally {
             			HibernateUtil.closeSession();
@@ -258,6 +270,8 @@ public class feesDetailsDAO {
         
         
         public List<Student> readListOfAllBranchStudents() {
+        	Session session = null; 
+        	Transaction transaction = null;
             List<Student> results = new ArrayList<Student>();
 
             try {
@@ -267,9 +281,10 @@ public class feesDetailsDAO {
                                     .list();
                     transaction.commit();
 
-            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
-                    hibernateException.printStackTrace();
+            } catch (Exception hibernateException) { 
+            	log.error(hibernateException.getMessage(), hibernateException);
+                hibernateException.printStackTrace();
+                throw hibernateException;
 
             } finally {
         			HibernateUtil.closeSession();
@@ -278,7 +293,8 @@ public class feesDetailsDAO {
     }
 
 		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			
+			Session session = null; 
+        	Transaction transaction = null;
 			boolean result = false;
 
             try {
@@ -310,10 +326,10 @@ public class feesDetailsDAO {
                     
                     transaction.commit();
                     result = true;
-            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
-                    hibernateException.printStackTrace();
-
+            } catch (Exception hibernateException) { 
+            	log.error(hibernateException.getMessage(), hibernateException);
+                hibernateException.printStackTrace();
+                throw hibernateException;
             }finally {
     			HibernateUtil.closeSession();
     		}
@@ -322,6 +338,8 @@ public class feesDetailsDAO {
 		}
 
 		public boolean undoFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
+			Session session = null; 
+        	Transaction transaction = null;
 			
 			boolean result = false;
 
@@ -338,9 +356,10 @@ public class feesDetailsDAO {
                     
                     transaction.commit();
                     result = true;
-            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
-                    hibernateException.printStackTrace();
+            } catch (Exception hibernateException) { 
+            	log.error(hibernateException.getMessage(), hibernateException);
+                hibernateException.printStackTrace();
+                throw hibernateException;
 
             }finally {
     			HibernateUtil.closeSession();
@@ -350,6 +369,8 @@ public class feesDetailsDAO {
 		}
 
 		public Otherreceiptinfo readOtherFeesDetails(long feesDetailsid) {
+			Session session = null; 
+        	Transaction transaction = null;
 			Otherreceiptinfo feesdetails = new Otherreceiptinfo();
            try {
                //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
@@ -358,9 +379,10 @@ public class feesDetailsDAO {
                Query query = session.createQuery("From Otherreceiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
                feesdetails = (Otherreceiptinfo) query.uniqueResult();
                transaction.commit();
-           } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-               
-               hibernateException.printStackTrace();
+           } catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
            }finally {
    			HibernateUtil.closeSession();
    		}
@@ -369,7 +391,8 @@ public class feesDetailsDAO {
 		
 
 		public boolean cancelOtherFeesReceipt(int receiptId, List<Otherfeescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			
+			Session session = null; 
+        	Transaction transaction = null;
 			boolean result = false;
 
             try {
@@ -401,9 +424,10 @@ public class feesDetailsDAO {
                     
                     transaction.commit();
                     result = true;
-            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                    
-                    hibernateException.printStackTrace();
+            } catch (Exception hibernateException) { 
+            	log.error(hibernateException.getMessage(), hibernateException);
+                hibernateException.printStackTrace();
+                throw hibernateException;
 
             }finally {
     			HibernateUtil.closeSession();
@@ -413,6 +437,8 @@ public class feesDetailsDAO {
 		}
 		
 		  public List<Object[]> readListOfStudentsOtherFees(int branchId) {
+			  Session session = null; 
+	        	Transaction transaction = null;
               List<Object[]> results = new ArrayList<Object[]>();
 
               try {
@@ -429,10 +455,10 @@ public class feesDetailsDAO {
                       results= (List<Object[]>)q.list();
                       transaction.commit();
 
-              } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                      
-                      hibernateException.printStackTrace();
-
+              } catch (Exception hibernateException) { 
+              	log.error(hibernateException.getMessage(), hibernateException);
+                hibernateException.printStackTrace();
+                throw hibernateException;
               } finally {
           			HibernateUtil.closeSession();
                       return results;
