@@ -138,7 +138,7 @@ public class StudentActionAdapter {
 
     public void viewAllStudentsArchive() {
 
-        StudentAttendanceDetailsResponseDto responseDto = studentService.viewAllStudentsArchive();
+        StudentAttendanceDetailsResponseDto responseDto = studentService.viewAllStudentsArchive(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentListArchive", responseDto.getStudentList());
     }
 

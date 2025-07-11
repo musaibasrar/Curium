@@ -901,12 +901,12 @@ public class StudentService {
 		}
 	}
 
-	public StudentAttendanceDetailsResponseDto viewAllStudentsArchive() {
+	public StudentAttendanceDetailsResponseDto viewAllStudentsArchive(String branchId) {
 
 		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().success(false).build();
 
 		try {
-			List<Student> list = new studentDetailsDAO().readListOfStudentsArchive();
+			List<Student> list = new studentDetailsDAO().readListOfStudentsArchive(Integer.parseInt(branchId));
 			result.setStudentList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
