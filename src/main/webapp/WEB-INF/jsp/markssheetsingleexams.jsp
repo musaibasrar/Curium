@@ -265,12 +265,10 @@ for(Cookie cookie : cookies){
                                 <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.name}"/></label></td>
                                 <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 ${examclass}
-                               <%--  <c:forEach var="splt" items="${fn:split(Parents.parents.student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach> --%>
                                 </td>
                                 
                              </tr>
+                             
                              
                              
                              <tr>   

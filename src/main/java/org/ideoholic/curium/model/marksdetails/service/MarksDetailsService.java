@@ -26,6 +26,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -44,6 +45,7 @@ import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 
 public class MarksDetailsService {
 
@@ -613,6 +615,28 @@ public class MarksDetailsService {
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				int absentDays = 0;
+				int totalDays = 0;
+				int totalPresent = 0;
+				
+				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
+					
+					totalDays++;
+					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+						absentDays++;
+					}
+					
+				}
+				
+				if(!studentDailyAttendance.isEmpty()){
+					totalPresent = totalDays - absentDays;
+				}
+				
+				request.setAttribute("totalDays", totalDays);
+				request.setAttribute("totalpresent", totalPresent);
+				request.setAttribute("totalabsent", absentDays);
 				markssheet.setParents(studentDetails);
 				
 				
@@ -2136,6 +2160,7 @@ public boolean generateReportSingleExams() {
 		String examC = request.getParameter("examclass");
 		String[] examClass = examC.split("--");
 		String academicYear = request.getParameter("academicyear");
+		
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -2146,6 +2171,7 @@ public boolean generateReportSingleExams() {
 			MarksSheet markssheet = new MarksSheet();
 			ExamRank examrank = new ExamRank();
 			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			//Studentdailyattendance studentAttendance = new AttendanceDAO().getStudentDailyAttendance(Integer.parseInt(studentIds[i]), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 			markssheet.setParents(studentDetails);
 			
@@ -2247,6 +2273,7 @@ public boolean generateReportSingleExams() {
 			 * for (int m=0; m<marksDetailsList.size(); m++) { marksList[i][k] =
 			 * marksDetailsList.get(m).getMarksobtained().toString(); k++; }
 			 */
+			//request.setAttribute("studentAttendance", studentAttendance);
 		}
 		
 		int size = examsList.size();
@@ -2256,6 +2283,7 @@ public boolean generateReportSingleExams() {
 		request.setAttribute("markssheetlist", marksSheetList);
 		request.setAttribute("examclass", examClass[0]);
 		request.setAttribute("academicyear", academicYear);
+		
 		/*for (MarksSheet marksSheet2 : marksSheetList) {
 			
 			for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {

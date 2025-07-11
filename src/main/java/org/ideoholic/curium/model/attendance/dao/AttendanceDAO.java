@@ -617,4 +617,18 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		return studentdailyattendance;
 	}
 
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studenId, String academicYear) {
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		try{
+			transaction = session.beginTransaction();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance where attendeeid = '"+studenId+"' and academicyear='"+academicYear+"'" ).list();;
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentDailyAttendance;
+	}
+
 }
