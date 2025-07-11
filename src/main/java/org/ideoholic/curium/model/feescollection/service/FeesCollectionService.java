@@ -1605,7 +1605,7 @@ public class FeesCollectionService {
 		String toDate= DataUtil.emptyString(dto.getToDate());
 		String fromDate = DataUtil.emptyString(dto.getFromDate());
 		String oneDay = DataUtil.emptyString(dto.getOneDay());
-		
+		String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
 		
 			String querySub = "";
 			
@@ -1621,6 +1621,10 @@ public class FeesCollectionService {
 				result.setDateFromCancel(fromDate);
 				result.setDateToCancel(toDate);
 				result.setDayOneCancel("");
+			}
+			
+			if(!modeOfPayment.equalsIgnoreCase("")){
+				querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
 			}
 			
 			queryMain = queryMain+querySub;
