@@ -310,10 +310,11 @@ public class AttendanceDAO {
 	@Transactional
 	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList, List<String> studentAttendanceStatusList, String academicYear) {
 
-				//Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 
 		try {
 			for (int i = 0; i < attendanceIdsList.size(); i++) {
+
+				//Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 				studentDailyAttendanceRepository.updateAttendanceStatusById(attendanceIdsList.get(i), studentAttendanceStatusList.get(i));
 			}
 			return true;
