@@ -1080,10 +1080,11 @@ public class JobService {
 	public JobQueryDto viewOneJobDetails(QueriesDto queriesDto,String branchId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
+		List<JobQuery> jobQueryList = new ArrayList<JobQuery>();
 		if(branchId!=null){
-
 			int jobId = Integer.parseInt(queriesDto.getJobId());
-			List<JobQuery> jobQueryList = new JobDAO().viewOneJobDetails(jobId);
+			JobQuery jobQuery = jobDAO.viewOneJobDetails(jobId);
+			jobQueryList.add(jobQuery);
 			jobQueryDto.setQueriesList(jobQueryList);
 			jobQueryDto.setSuccess(true);
 		}
