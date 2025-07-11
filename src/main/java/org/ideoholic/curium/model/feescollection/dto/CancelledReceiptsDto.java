@@ -12,4 +12,5 @@ public class CancelledReceiptsDto {
     private String toDateOtherFees;
     private String fromDateOtherFees;
     private String oneDayOtherFees;
+    private String modeOfPayment;
 }
