@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -28,26 +29,22 @@ public class feesDetailsDAO {
 	
 	@Autowired
     private FeesdetailsRepository feesDetailsRepo;
+	@Autowired
+    private FeescategoryRepository feescategoryRepository;
        
 
-        @SuppressWarnings({ "finally", "unchecked" })
+	 @Transactional
         public List<Feescategory> readListOfObjects() {
-        	Session session = null; 
-        	Transaction transaction = null;
                 List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
-            transaction = session.beginTransaction();
-            results = (List<Feescategory>) session.createQuery("From Feescategory").list();
-            transaction.commit();
+        	results = feescategoryRepository.findAll();
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
-        }
+        } 
+        return results;
         }
 
         @Transactional
