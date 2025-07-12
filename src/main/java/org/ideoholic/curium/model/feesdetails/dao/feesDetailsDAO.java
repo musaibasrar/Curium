@@ -62,7 +62,7 @@ public class feesDetailsDAO {
         }
 
         public Feesdetails readUniqueObject(Long feesDetailsid) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                  Feesdetails feesdetails = new Feesdetails();
                 try {
@@ -83,7 +83,7 @@ public class feesDetailsDAO {
         }
         
         public Receiptinfo readFeesDetails(Long feesDetailsid) {
-        	Session session = null; 
+        	Session session =HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                  Receiptinfo feesdetails = new Receiptinfo();
                 try {
@@ -105,7 +105,7 @@ public class feesDetailsDAO {
         
         @SuppressWarnings("unchecked")
         public List<Feesdetails> readList(Long sid, String currentYear) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                  
                  List<Feesdetails> results = new ArrayList<Feesdetails>();
@@ -127,7 +127,7 @@ public class feesDetailsDAO {
         }
 
         public String feesSum(long id, String currentYear) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                  
                 String results = "";
@@ -156,7 +156,7 @@ public class feesDetailsDAO {
         }
 
         public String dueAmount(long id, String currentYear) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                 
                 String paidFees = "";
@@ -186,7 +186,7 @@ public class feesDetailsDAO {
         }
 
         public String feesDetailsSum(String queryMain) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
                  
                 String results = "";
@@ -210,7 +210,7 @@ public class feesDetailsDAO {
         }
 
         public String feesTotal(long id, String currentYear) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession(); 
         	Transaction transaction = null;
                  
                 String results = "";
@@ -236,7 +236,7 @@ public class feesDetailsDAO {
         }
 
         public List<Object[]> readListOfStudents(int branchId) {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession(); 
         	Transaction transaction = null;
                 List<Object[]> results = new ArrayList<Object[]>();
 
@@ -267,7 +267,7 @@ public class feesDetailsDAO {
         
         
         public List<Student> readListOfAllBranchStudents() {
-        	Session session = null; 
+        	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
             List<Student> results = new ArrayList<Student>();
 
@@ -290,7 +290,7 @@ public class feesDetailsDAO {
     }
 
 		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			Session session = null; 
+			Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
 			boolean result = false;
 
@@ -335,7 +335,7 @@ public class feesDetailsDAO {
 		}
 
 		public boolean undoFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
-			Session session = null; 
+			Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
 			
 			boolean result = false;
@@ -366,7 +366,7 @@ public class feesDetailsDAO {
 		}
 
 		public Otherreceiptinfo readOtherFeesDetails(long feesDetailsid) {
-			Session session = null; 
+			Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
 			Otherreceiptinfo feesdetails = new Otherreceiptinfo();
            try {
@@ -388,7 +388,7 @@ public class feesDetailsDAO {
 		
 
 		public boolean cancelOtherFeesReceipt(int receiptId, List<Otherfeescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			Session session = null; 
+			Session session = HibernateUtil.openCurrentSession(); 
         	Transaction transaction = null;
 			boolean result = false;
 
@@ -434,7 +434,7 @@ public class feesDetailsDAO {
 		}
 		
 		  public List<Object[]> readListOfStudentsOtherFees(int branchId) {
-			  Session session = null; 
+			  Session session = HibernateUtil.openCurrentSession();
 	        	Transaction transaction = null;
               List<Object[]> results = new ArrayList<Object[]>();
 
