@@ -175,7 +175,7 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 	<div style="display: flex;">
-			<div style="border: 1px solid;border-radius: 15px; width: 70%;">
+			<div style="border: 1px solid;border-radius: 15px; width: 100%;">
 			
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
