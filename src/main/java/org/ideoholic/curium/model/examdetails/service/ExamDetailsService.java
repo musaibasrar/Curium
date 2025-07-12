@@ -10,16 +10,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
-import org.ideoholic.curium.model.examdetails.dto.*;
+import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
+import org.ideoholic.curium.model.examdetails.dto.AddScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Musaib_2
@@ -28,24 +39,25 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class ExamDetailsService {
+	
+	@Autowired
+	private ExamDetailsDAO examDetailsDao;
 
-    public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
+	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 
-        Exams exams = new Exams();
+		Exams exams = new Exams();
 
-        if (branchId != null) {
+		if (branchId != null) {
 
-            exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
-            exams.setBranchid(Integer.parseInt(branchId));
-            exams = new ExamDetailsDAO().addExams(exams);
-
-        }
-        if (exams == null) {
-            return ResultResponse.builder().success(false).build();
-
-        }
-        return ResultResponse.builder().success(true).build();
-    }
+			exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
+			exams.setBranchid(Integer.parseInt(branchId));
+			exams = examDetailsDao.addExams(exams);
+		}
+		if (exams == null) {
+			return ResultResponse.builder().success(false).build();
+		}
+		return ResultResponse.builder().success(true).build();
+	}
 
 
     public ExamsListResponseDto readListOfExams(String branchId) {

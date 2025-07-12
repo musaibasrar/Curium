@@ -3,51 +3,45 @@ package org.ideoholic.curium.model.examdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.query.Query;
+import javax.transaction.Transactional;
 
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.repositories.ExamsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class ExamDetailsDAO {
+	
+	@Autowired
+	private ExamsRepository examsRepo;
 
-	Session session;
-	Transaction transaction;
-	
-	private static final Logger logger = LogManager.getLogger(ExamDetailsDAO.class);
-	
-	public ExamDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
-	
-	
-
+	@Transactional
 	public Exams addExams(Exams exams) {
 		try {
-			// this.session = sessionFactory.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(exams);
-
-			transaction.commit();
-			System.out.println("in add3");
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+			examsRepo.save(exams);
+			log.debug("in add3:{}", exams);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return exams;
-		}
-		
-	}
 
+			throw hibernateException;
+		}
+		return exams;
+	}
 
 
 	public List<Exams> readListOfExams(int branchId) {
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		List<Exams> results = new ArrayList<Exams>();
 		try {
 			// this.session =
@@ -58,7 +52,7 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -71,6 +65,8 @@ public class ExamDetailsDAO {
 
 
 	public void deleteMultiple(List<Integer> ids) {
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
@@ -78,7 +74,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -89,7 +85,8 @@ public class ExamDetailsDAO {
 
 
 	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
-
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 			try {
 				transaction = session.beginTransaction();
 				for (Examschedule examschedule : examScheduleList) {
@@ -97,8 +94,8 @@ public class ExamDetailsDAO {
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
-				e.printStackTrace();
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
 			}
@@ -108,7 +105,8 @@ public class ExamDetailsDAO {
 
 
 	public List<Examschedule> readListOfExamSchedule(int branchId) {
-		
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
 			// this.session =
@@ -121,7 +119,7 @@ public class ExamDetailsDAO {
 
 		} catch (Exception hibernateException) {
 			transaction.rollback(); 
-			logger.error(hibernateException);
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -133,6 +131,8 @@ public class ExamDetailsDAO {
 
 
 	public void deleteExamSchedule(List<Integer> ids) {
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
@@ -140,7 +140,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -149,12 +149,14 @@ public class ExamDetailsDAO {
 
 	public List<Examschedule> getExamScheduleDetails(String academicYear,
 			String classH, String exam, int branchId) {
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
 			transaction = session.beginTransaction();
 			listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -166,7 +168,8 @@ public class ExamDetailsDAO {
 
 
 	public Exams getExamDetails(Integer examid) {
-		
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		Exams exam = null;
 		try {
 
@@ -176,7 +179,7 @@ public class ExamDetailsDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) {
 			transaction.rollback(); 
-			logger.error(hibernateException);
+			log.error(hibernateException.getMessage(), hibernateException);
 		} finally {
 				HibernateUtil.closeSession();
 			return exam;
@@ -184,7 +187,8 @@ public class ExamDetailsDAO {
 	}
 	
 	public List<Exams> readListOfExams(List<Integer> deeniyatExamIds, int branchId) {
-		
+		Session session = HibernateUtil.openCurrentSession();
+		Transaction transaction = null;
 		List<Exams> results = new ArrayList<Exams>();
 		
 		try {
@@ -195,7 +199,7 @@ public class ExamDetailsDAO {
 			transaction.commit();
 			
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
