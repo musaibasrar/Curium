@@ -247,7 +247,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
-					"FROM Student s where s.archive = 1 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
+					"FROM Student s where s.archive = 1 and s.branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
