@@ -15,26 +15,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Detail</title>
 
-        <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/stanley/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/stanley/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/stanley/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/stanley/css/datePicker/demos.css">
+        <script type="text/javascript" src="/stanley/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script  type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/stanley/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
         <style type="text/css">
             <!--
@@ -255,7 +255,7 @@
             
             function updateLoginStaff(){
                 var form1=document.getElementById("form1");
-                form1.action="/vision/LoginProcess/updateLoginDetails?id=<c:out value='${logindetail.lid}'/>";
+                form1.action="/stanley/LoginProcess/updateLoginDetails?id=<c:out value='${logindetail.lid}'/>";
                 form1.submit();
             }
             
@@ -317,7 +317,7 @@
                                 
                                 function Cancel(){
                                     var form1=document.getElementById("form1");
-                                    form1.action="/vision/SponserProcess/ViewAllSponsor";
+                                    form1.action="/stanley/SponserProcess/ViewAllSponsor";
                                     form1.submit();
                                 }
                             </script>
@@ -327,7 +327,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/stanley/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
