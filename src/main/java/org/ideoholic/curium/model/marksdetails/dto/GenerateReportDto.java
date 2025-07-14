@@ -8,4 +8,6 @@ public class GenerateReportDto {
     private String examClass;
     private String[] marksIds;
     private String studentUID;
+    private String examDetailsID;
+    private String[] examIds;
 }
