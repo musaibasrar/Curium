@@ -123,13 +123,13 @@ public class StudentApiActionImpl implements StudentApiAction{
         return viewAll(page, branchId);
     }
 
-    public ResponseEntity<StudentAttendanceDetailsResponseDto> deleteMultiple(StudentIdsDto dto) {
+    public ResponseEntity<StudentAttendanceDetailsResponseDto> deleteMultiple(StudentIdsDto dto, String branchId) {
         studentService.deleteMultiple(dto);
-        return archiveViewAll();
+        return archiveViewAll(branchId);
     }
 
-    public ResponseEntity<StudentAttendanceDetailsResponseDto> archiveViewAll() {
-        StudentAttendanceDetailsResponseDto result = studentService.viewAllStudentsArchive();
+    public ResponseEntity<StudentAttendanceDetailsResponseDto> archiveViewAll(String branchId) {
+        StudentAttendanceDetailsResponseDto result = studentService.viewAllStudentsArchive(branchId);
         log.error("IN action's view all Archive");
         return ResponseEntity.ok(result);
     }
