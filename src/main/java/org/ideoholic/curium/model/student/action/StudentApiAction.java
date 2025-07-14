@@ -61,10 +61,10 @@ public interface StudentApiAction {
     ResponseEntity<ParentListResponseDto> restoreMultiple(@RequestBody StudentIdsDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/deleteMultiple")
-    ResponseEntity<StudentAttendanceDetailsResponseDto> deleteMultiple(@RequestBody StudentIdsDto dto);
+    ResponseEntity<StudentAttendanceDetailsResponseDto> deleteMultiple(@RequestBody StudentIdsDto dto, @RequestHeader(value = "branchid") String branchId);
 
     @GetMapping("/archiveViewAll")
-    ResponseEntity<StudentAttendanceDetailsResponseDto> archiveViewAll();
+    ResponseEntity<StudentAttendanceDetailsResponseDto> archiveViewAll(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/archiveMultiple")
     ResponseEntity<ParentListResponseDto> archiveMultiple(@RequestBody StudentIdsDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId);
