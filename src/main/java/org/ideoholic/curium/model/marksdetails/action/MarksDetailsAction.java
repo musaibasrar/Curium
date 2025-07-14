@@ -253,4 +253,13 @@ public class MarksDetailsAction {
 		return "progressreportsingleexams";
 	}
 	
+	@PostMapping("/generateReportSingleExamsVertical")
+	public String generateReportSingleExamsVertical() {
+		if (marksDetailsActionAdapter.generateReportSingleExams()) {
+			return "markssheetsingleexamsvertical";
+		} else {
+			return "error";
+		}
+	}
+	
 }
