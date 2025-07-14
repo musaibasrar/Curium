@@ -9,4 +9,5 @@ public class GenerateReportDto {
     private String[] marksIds;
     private String studentUID;
     private String examDetailsID;
+    private String[] examIds;
 }
