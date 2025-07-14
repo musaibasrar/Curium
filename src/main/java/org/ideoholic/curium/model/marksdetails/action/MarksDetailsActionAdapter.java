@@ -198,6 +198,7 @@ public class MarksDetailsActionAdapter {
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
+        dto.setExamIds(request.getParameterValues("examslist"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
