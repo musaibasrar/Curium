@@ -1645,9 +1645,13 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String[] studentIds = dto.getStudentIds();
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
+		List<Integer> examIds = new ArrayList<Integer>();
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		for (String examId : dto.getExamIds()) {
+			examIds.add(Integer.parseInt(examId));
+		}
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds, Integer.parseInt(branchId));
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
