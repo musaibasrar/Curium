@@ -86,7 +86,7 @@ public class ExamDetailsActionAdapter {
 
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
         examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
-        examScheduleDto.setClassH(request.getParameter("class"));
+        examScheduleDto.setClassH(request.getParameter("classsearch"));
         examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
@@ -116,6 +116,7 @@ public class ExamDetailsActionAdapter {
         printPreviewHallTicketDto.setStudentName(request.getParameter("studentName"));
         printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
         printPreviewHallTicketDto.setClassStudying(request.getParameter("class"));
+        printPreviewHallTicketDto.setStudentIds(request.getParameterValues("studentIDs"));
 
         HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());

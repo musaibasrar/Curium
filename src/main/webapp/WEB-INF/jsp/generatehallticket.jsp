@@ -345,6 +345,15 @@ background-color:rgba(0, 0, 0, 0);
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		$('#myTableDefaulter').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : true,
+			"bAutoWidth" : false
+		});
 	});
 </script>
 
@@ -437,8 +446,9 @@ background-color:rgba(0, 0, 0, 0);
 	 
 	 var students = [
 		                <c:forEach varStatus="status" items="${studentList}" var="student">{
-		                    value:'<c:out default="0" value="${student.admissionnumber}" />',
+		                	value:'<c:out default="0" value="${student.name}" />',
 		                    name:'<c:out default="0" value="${student.name}" />',
+		                    admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
 		                    classandsec:'<c:out default="0" value="${student.classstudying}" />',
 		                    id:'<c:out default="0" value="${student.sid}" />',
 		                    
@@ -447,7 +457,7 @@ background-color:rgba(0, 0, 0, 0);
 		            ];
 	 
 		            $(function() {
-		                $( "#admno").autocomplete({
+		                $( "#stddetails").autocomplete({
 		                    source: students,
 		                    minLength: 1,
 		                    change:function(event,ui){
@@ -469,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 		                }).data( "autocomplete" )._renderItem = function( ul, item ) {
 		                    return $( "<li></li>" )
 		                    .data( "item.autocomplete", item )
-		                    .append( "<a><b> " + item.value +" </b> </a>" )
+		                    .append( "<a><b> " + item.value +" / "+ item.classandsec+ " </b> </a>" )
 		                    .appendTo( ul );
 		                };
 		            });
@@ -507,21 +517,7 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td><br /></td>
-
-						</tr>	
-						<tr>
-							<td><br /></td>
-
-						</tr>		
-
-<tr>
-<td><br/></td>
-</tr>
-
-	<tr>
-							<td><br /></td>
-
+							<td><br/></td>
 						</tr>
                             <tr>
 
@@ -564,7 +560,7 @@ for(Cookie cookie : cookies){
 						
 						<td width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						Class &nbsp;&nbsp;&nbsp;&nbsp;
-							 <label> <select name="class" id="class"
+							 <label> <select name="classsearch" id="classsearch"
 									style="width: 180px">
 										<option selected>${selectedclass}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -576,16 +572,18 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select> 
 							</label>
+							<div style="display: none;">
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							OR
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							
-							Admission No: &nbsp;&nbsp;&nbsp;&nbsp;
-							<label><input type="text" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
+							Student Details: &nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="text" name="stddetails" id="stddetails" value="${selectedstudentname/selectedclassandsec}" style="width: 220px">
+							<input type="hidden" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
 							<input type="hidden" name="classandsec" id="classandsec" value="${selectedclassandsec}" style="width: 180px">
 							<input type="hidden" name="studentName" id="studentName" value="${selectedstudentname}" style="width: 180px">
 							</label>
-							
+							</div>
 							</td>
 						</tr>
 						
@@ -644,9 +642,62 @@ for(Cookie cookie : cookies){
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
+		
+		<table width="100%">
+				<tr>
+					<td class="headerTD">Search Result</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTableDefaulter">
+
+				<thead>
+					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th title="click to sort" class="headerText">Sl.No</th> -->
+						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
+						<th title="click to sort" class="headerText">Status</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:set var="TotalPaidAmount" value="0" />
+					<c:set var="TotalDueAmount" value="0" />
+					<c:set var="TotalSum" value="0" />
+					
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktbl"
+								name="studentIDs"
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								<%-- <td class="dataText"><c:out
+										value="${status.index+1}" /></td> --%>
+							<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.addresstemporary}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
+                        </tr></tfoot>
+			</table>
+			
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search Result </td>
+					<td class="headerTD">Exam Schedule </td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -697,9 +748,9 @@ for(Cookie cookie : cookies){
 
 
 				</tbody>
-				<tfoot><tr>
+				<!-- <tfoot><tr>
                             <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
-                        </tr></tfoot>
+                        </tr></tfoot> -->
 			</table>
 
 		</div>
