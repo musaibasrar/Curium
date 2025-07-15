@@ -7,19 +7,31 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
-import org.ideoholic.curium.model.examdetails.dto.*;
+import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
+import org.ideoholic.curium.model.examdetails.dto.AddScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Musaib_2
@@ -221,7 +233,7 @@ public class ExamDetailsService {
 
 
         if (!classAdmno.equals("")) {
-            String[] c = classAdmno.split(" ");
+            String[] c = classAdmno.split("--");
             classH = c[0];
         }
         if (branchId != null) {
@@ -250,7 +262,11 @@ public class ExamDetailsService {
         String admNo = printPreviewHallTicketDto.getAdmNo();
         String studentName = printPreviewHallTicketDto.getStudentName();
         String academicYear = printPreviewHallTicketDto.getAcademicYear();
-
+        String[] studentIds = printPreviewHallTicketDto.getStudentIds();
+        List<Integer> studentIdsList = Arrays.stream(studentIds)
+				.map(Integer::parseInt)
+					.collect(Collectors.toList());
+        
         if (examName != null) {
 
             List<Parents> studentList = new ArrayList<>();
@@ -259,7 +275,8 @@ public class ExamDetailsService {
             classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
-                studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
+            	studentList = new studentDetailsDAO().getReferredList(studentIdsList);
+                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();
