@@ -726,6 +726,41 @@ for(Cookie cookie : cookies){
             </div>
              -->
             
+            <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/alalmas/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/alalmas/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            			</td>
+            			
+            		</tr>
+            		
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/alalmas/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/alalmas/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            			</td>
+            			
+            		</tr>
+                </table>
+            </div>
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">

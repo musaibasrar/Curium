@@ -286,7 +286,7 @@ for(Cookie cookie : cookies){
                              
                              <tr>   
 				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
+                                <td class="namedetails"><label>UID:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.studentexternalid}"/></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
@@ -324,25 +324,27 @@ for(Cookie cookie : cookies){
                             <br>
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-inside:avoid; border-collapse: collapse;">
-
-						<!-- <tr>
-							<td><br><br><br></td>
-						</tr> -->
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-				<tr>
-				<td></td>
-				<td align="left">Accountant</td>	
-					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
-					</tr>
-                    
-		</TABLE>
+    style="page-break-inside:avoid; border-collapse: collapse;">
+    
+					    <tr>
+					        <td></td>
+					        <td align="center">
+					            <!-- <img src="class_teacher_sign.png" alt="Class Teacher Signature" height="50" /> -->
+					        </td>
+					        <td align="center">
+					            <img src="/alalmas/images/hm.png" alt="Head Master Signature" height="40" />
+					        </td>
+					        <td></td>
+					    </tr>
+					
+					    <!-- Label Row -->
+					    <tr>
+					        <td></td>
+					        <td align="center">Class Teacher</td>
+					        <td align="center">Head Master</td>
+					        <td></td>
+					    </tr>
+					</TABLE>
 		</div>
 		<br>
                                  
