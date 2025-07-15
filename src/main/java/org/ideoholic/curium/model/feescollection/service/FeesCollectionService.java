@@ -61,6 +61,9 @@ public class FeesCollectionService {
 	
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private feesDetailsDAO feesDetailsDao;
 
 	@Autowired
 	private HttpServletResponse response;
@@ -86,7 +89,7 @@ public class FeesCollectionService {
 				Parents parents = new parentsDetailsDAO().readUniqueObject(sid);
 
 				result.setParents(parents);
-				Feesdetails feesdetails = new feesDetailsDAO()
+				Feesdetails feesdetails =  feesDetailsDao
 						.readUniqueObject(idFees);
 				NumberToWord toWord = new NumberToWord();
 				String grandTotal = "";
@@ -1216,7 +1219,7 @@ public class FeesCollectionService {
 				Parents parents = new parentsDetailsDAO().readUniqueObject(sid);
 
 				result.setParents(parents);
-				Feesdetails feesdetails = new feesDetailsDAO()
+				Feesdetails feesdetails =  feesDetailsDao
 						.readUniqueObject(idFees);
 				NumberToWord toWord = new NumberToWord();
 				String grandTotal = "";

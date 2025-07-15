@@ -61,24 +61,18 @@ public class feesDetailsDAO {
             return feesdetails;
         }
 
+        @Transactional
         public Feesdetails readUniqueObject(Long feesDetailsid) {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
+        	     int feesDetailsId = feesDetailsid.intValue();
                  Feesdetails feesdetails = new Feesdetails();
                 try {
-                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-                    transaction = session.beginTransaction();
-                    Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
-                    feesdetails = (Feesdetails) query.uniqueResult();
-                    transaction.commit();
+                	 // Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
+                	feesdetails = feesDetailsRepo.findById(feesDetailsId).orElse(null);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
-                }finally {
-        			HibernateUtil.closeSession();
-        		}
+                }
                 return feesdetails;
         }
         
