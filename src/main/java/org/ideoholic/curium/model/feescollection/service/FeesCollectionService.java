@@ -38,6 +38,8 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
 import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
@@ -2130,6 +2132,8 @@ public class FeesCollectionService {
 
 		String academicYear = dto.getAcademicYear();
 		String[] feesCat = dto.getFeesCat();
+		List<Integer> feesCatList = new ArrayList<>(); 
+		
 
 		//Get Students
 
@@ -2169,6 +2173,21 @@ public class FeesCollectionService {
 	}
 		//End Students
 
+		//Get Fees Categories if fetched empty
+		if(dto.getFeesCat()==null) {
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			 for (Feescategory CatFeesList : feecategoryList) {
+				 feesCatList.add(CatFeesList.getIdfeescategory());
+			}
+		}else {
+			for (String feescat : feesCat) {
+				feesCatList.add(Integer.parseInt(feescat));
+			}
+		}
+		
+		
+		 
+		//End Fees Categories
 
 		if(currentAcademicYear!=null){
 
@@ -2194,10 +2213,6 @@ public class FeesCollectionService {
 
 				long id = parents.getStudent().getSid();
 
-				List<Integer> feesCatList = new ArrayList<>(); 
-				for (String feescat : feesCat) {
-					feesCatList.add(Integer.parseInt(feescat));
-				}
 				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				List<Studentfeesstructure> defaulterFeesstructure = new ArrayList<Studentfeesstructure>();
 				Long totalDue = 0l;
