@@ -62,10 +62,10 @@ public class Studentdailyattendance implements java.io.Serializable {
 	private String academicyear;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 	public Integer getAttendeeid() {
 		if (attendee != null) {
