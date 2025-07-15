@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Generate Hall Ticket</title>
-<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -298,42 +298,42 @@ background-color:rgba(0, 0, 0, 0);
 	
 }
 </style>
-<link rel="stylesheet" href="/meps/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/meps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/meps/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -345,15 +345,24 @@ background-color:rgba(0, 0, 0, 0);
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		$('#myTableDefaulter').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : true,
+			"bAutoWidth" : false
+		});
 	});
 </script>
 
-<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/meps/ExamDetailsProcess/searchHallTicketDetails";
+		form1.action = "/vision/ExamDetailsProcess/searchHallTicketDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -361,20 +370,12 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/meps/ExamDetailsProcess/printPreviewHallTicket";
+		form1.action = "/vision/ExamDetailsProcess/printPreviewHallTicket";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	
-	function printPreviewAdmitCard() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/meps/ExamDetailsProcess/printPreviewAdmitCard";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-		
 	$(function() {
 
 		$("#tabs").tabs();
@@ -440,26 +441,14 @@ background-color:rgba(0, 0, 0, 0);
              
              return false;
          });
-         
-         $("#printAdmitCard").button({
-             icons:{
-                 primary: "ui-icon-mail-open"
-             }
-         }).click(function(){
-        	 if(confirm('Are you sure,you want to print?')){
-        		 printPreviewAdmitCard();	
-         	}
-             
-             return false;
-         });         
-         
      });
 	 
 	 
 	 var students = [
 		                <c:forEach varStatus="status" items="${studentList}" var="student">{
-		                    value:'<c:out default="0" value="${student.admissionnumber}" />',
+		                	value:'<c:out default="0" value="${student.name}" />',
 		                    name:'<c:out default="0" value="${student.name}" />',
+		                    admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
 		                    classandsec:'<c:out default="0" value="${student.classstudying}" />',
 		                    id:'<c:out default="0" value="${student.sid}" />',
 		                    
@@ -468,7 +457,7 @@ background-color:rgba(0, 0, 0, 0);
 		            ];
 	 
 		            $(function() {
-		                $( "#admno").autocomplete({
+		                $( "#stddetails").autocomplete({
 		                    source: students,
 		                    minLength: 1,
 		                    change:function(event,ui){
@@ -490,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 		                }).data( "autocomplete" )._renderItem = function( ul, item ) {
 		                    return $( "<li></li>" )
 		                    .data( "item.autocomplete", item )
-		                    .append( "<a><b> " + item.value +" </b> </a>" )
+		                    .append( "<a><b> " + item.value +" / "+ item.classandsec+ " </b> </a>" )
 		                    .appendTo( ul );
 		                };
 		            });
@@ -500,7 +489,7 @@ background-color:rgba(0, 0, 0, 0);
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -528,21 +517,7 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td><br /></td>
-
-						</tr>	
-						<tr>
-							<td><br /></td>
-
-						</tr>		
-
-<tr>
-<td><br/></td>
-</tr>
-
-	<tr>
-							<td><br /></td>
-
+							<td><br/></td>
 						</tr>
                             <tr>
 
@@ -585,7 +560,7 @@ for(Cookie cookie : cookies){
 						
 						<td width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						Class &nbsp;&nbsp;&nbsp;&nbsp;
-							 <label> <select name="class" id="class"
+							 <label> <select name="classsearch" id="classsearch"
 									style="width: 180px">
 										<option selected>${selectedclass}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -597,16 +572,18 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select> 
 							</label>
+							<div style="display: none;">
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							OR
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							
-							Admission No: &nbsp;&nbsp;&nbsp;&nbsp;
-							<label><input type="text" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
+							Student Details: &nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="text" name="stddetails" id="stddetails" value="${selectedstudentname/selectedclassandsec}" style="width: 220px">
+							<input type="hidden" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
 							<input type="hidden" name="classandsec" id="classandsec" value="${selectedclassandsec}" style="width: 180px">
 							<input type="hidden" name="studentName" id="studentName" value="${selectedstudentname}" style="width: 180px">
 							</label>
-							
+							</div>
 							</td>
 						</tr>
 						
@@ -665,9 +642,62 @@ for(Cookie cookie : cookies){
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
+		
+		<table width="100%">
+				<tr>
+					<td class="headerTD">Search Result</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTableDefaulter">
+
+				<thead>
+					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th title="click to sort" class="headerText">Sl.No</th> -->
+						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
+						<th title="click to sort" class="headerText">Status</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:set var="TotalPaidAmount" value="0" />
+					<c:set var="TotalDueAmount" value="0" />
+					<c:set var="TotalSum" value="0" />
+					
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktbl"
+								name="studentIDs"
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								<%-- <td class="dataText"><c:out
+										value="${status.index+1}" /></td> --%>
+							<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.addresstemporary}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
+                        </tr></tfoot>
+			</table>
+			
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search Result </td>
+					<td class="headerTD">Exam Schedule </td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -678,22 +708,22 @@ for(Cookie cookie : cookies){
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Exam<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/meps/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/vision/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>
@@ -718,9 +748,9 @@ for(Cookie cookie : cookies){
 
 
 				</tbody>
-				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button>&nbsp;&nbsp;<button id="printAdmitCard">Print Admit Card</button> 
-                        </tr></tfoot>
+				<!-- <tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
+                        </tr></tfoot> -->
 			</table>
 
 		</div>
