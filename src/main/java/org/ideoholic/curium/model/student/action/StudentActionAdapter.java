@@ -12,6 +12,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
@@ -334,5 +335,21 @@ public class StudentActionAdapter {
         request.setAttribute("studentList", response.getParentDetails());
 
         return response.isSuccess();
+    }
+    
+    public void viewOtherFeesStructurePerYear() {
+
+        StudentIdDto dto = new StudentIdDto();
+        dto.setStudentId(request.getParameter("id"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+
+        OtherFeesDetailsResponseDto responseDto = studentService.viewOtherFeesStructurePerYear(dto);
+        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        httpSession.setAttribute("feesstructure", responseDto.getOtherFeesStructure());
+        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
 }

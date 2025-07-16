@@ -394,8 +394,7 @@
             function searchFeesStructure() {
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
-                
-                form1.action = "/scholar/StudentProcess/feesStructurePerYear?id="+id;
+                form1.action = "/vision/StudentProcess/otherFeesStructurePerYear?id="+id;
                 form1.submit();
             }
             
