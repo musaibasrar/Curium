@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -190,6 +191,17 @@
 	color: #325f6d;
 }
 -->
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
 </style>
 <script type="text/javascript" src="/scholar/js/datetimepicker_css.js"></script>
 
@@ -575,10 +587,97 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
+							
+							<td width="20%" class="alignRight">Subjects Teaching &nbsp;</td>
+
+							<td width="28%"><label> <c:forEach var="subject" items="${listSubjectNames}">
+													    <c:set var="isChecked" value="${fn:contains(employee.subjectsteaching, subject.subjectname)}" />
+													    <label>
+													        <input type="checkbox" name="subjectsteaching"
+													               value="${subject.subjectname}"
+													               <c:if test="${employee.subjectsteaching.contains(subject.subjectname)}">checked</c:if> />
+													        ${subject.subjectname}
+													    </label><br/>
+													</c:forEach>
+
+							</label></td>
 						<tr>
 
 							<td></td>
 
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td width="16%" class="alignRight">Class Teacher&nbsp;</td>
+
+							<td width="28%"><label>
+							
+													<div class="checkbox-container">
+													    <c:set var="counter" value="0" scope="page" />
+													    <c:forEach items="${classdetailslist}" var="classdetails">
+													        <c:if test="${classdetails.classdetails != ''}">
+													            <c:forEach items="${classdetailslist}" var="sectiondetails">
+													                <c:if test="${sectiondetails.section != ''}">
+													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
+													                    <div class="checkbox-item">
+													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+													                            <input type="checkbox" name="classteacher"
+													                                   value="${classSec}"
+													                                   <c:if test="${classteacherList.contains(classSec)}">checked</c:if> />
+													                            ${classSec}
+													                        </label>
+													                    </div>
+													                    <c:set var="counter" value="${counter + 1}" scope="page" />
+													                </c:if>
+													            </c:forEach>
+													        </c:if>
+													    </c:forEach>
+													</div>
+
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
+
+							<td width="28%"><label> <div class="checkbox-container">
+													    <c:set var="counter" value="0" scope="page" />
+													    <c:forEach items="${classdetailslist}" var="classdetails">
+													        <c:if test="${classdetails.classdetails != ''}">
+													            <c:forEach items="${classdetailslist}" var="sectiondetails">
+													                <c:if test="${sectiondetails.section != ''}">
+													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
+													                    <div class="checkbox-item">
+													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+													                            <input type="checkbox" name="classesteaching"
+													                                   value="${classSec}"
+													                                   <c:if test="${classesteachingList.contains(classSec)}">checked</c:if> />
+													                            ${classSec}
+													                        </label>
+													                    </div>
+													                    <c:set var="counter" value="${counter + 1}" scope="page" />
+													                </c:if>
+													            </c:forEach>
+													        </c:if>
+													    </c:forEach>
+													</div>
+
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
 						</tr>
 						
 					</table>
@@ -929,7 +1028,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/scholar/PersonalProcess/viewAll";
+								form1.action = "/vision/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
