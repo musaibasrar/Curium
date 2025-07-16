@@ -874,6 +874,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/abc/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
+            			</td>
+            		</tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/scholar/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
