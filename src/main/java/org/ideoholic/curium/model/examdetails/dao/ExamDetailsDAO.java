@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.repositories.ExamScheduleRepository;
 import org.ideoholic.curium.repositories.ExamsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -23,6 +24,9 @@ public class ExamDetailsDAO {
 	
 	@Autowired
 	private ExamsRepository examsRepo;
+	
+	@Autowired
+	private ExamScheduleRepository examScheduleRepo;
 
 	@Transactional
 	public Exams addExams(Exams exams) {
@@ -65,21 +69,16 @@ public class ExamDetailsDAO {
 
 
 	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
-			try {
-				transaction = session.beginTransaction();
-				for (Examschedule examschedule : examScheduleList) {
-					session.save(examschedule);
-				}
-				transaction.commit();
+		try {
+			if (examScheduleList != null) {
+				examScheduleRepo.saveAll(examScheduleList);
 				return true;
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
 			}
-			return false;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return false;
 	}
 
 
