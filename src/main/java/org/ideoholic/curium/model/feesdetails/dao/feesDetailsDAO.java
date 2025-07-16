@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
+import org.ideoholic.curium.repositories.ReceiptinfoRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -31,6 +32,8 @@ public class feesDetailsDAO {
     private FeesdetailsRepository feesDetailsRepo;
 	@Autowired
     private FeescategoryRepository feescategoryRepository;
+	@Autowired
+    private ReceiptinfoRepository receiptinfoRepo;
        
 
 	 @Transactional
@@ -76,24 +79,18 @@ public class feesDetailsDAO {
                 return feesdetails;
         }
         
+        @Transactional
         public Receiptinfo readFeesDetails(Long feesDetailsid) {
-        	Session session =HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
+        	 int feesDetailsId = feesDetailsid.intValue();
                  Receiptinfo feesdetails = new Receiptinfo();
                 try {
-                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-                    transaction = session.beginTransaction();
-                    Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
-                    feesdetails = (Receiptinfo) query.uniqueResult();
-                    transaction.commit();
+                	 // Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
+                	feesdetails = receiptinfoRepo.findById(feesDetailsId).orElse(null);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
-                }finally {
-        			HibernateUtil.closeSession();
-        		}
+                }
                 return feesdetails;
         }
         

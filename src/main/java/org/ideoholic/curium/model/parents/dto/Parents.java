@@ -116,5 +116,12 @@ public class Parents implements java.io.Serializable {
 	
 	@Transient
 	private String fatheroccupation;
+	
+	public Student fetchStudent() {
+	      if(this.student != null) {
+	            return student;
+	       }
+	       return new Student();
+	}
 
 }
