@@ -160,7 +160,13 @@ public class StampFeesDAO {
 				
 					session.save(studentfeesstructure);
 					
+					//accounts
 					
+					session.save(transactions);
+					Query queryAccounts = session.createQuery(updateDrAccount);
+					queryAccounts.executeUpdate();
+					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+					queryqueryAccounts1.executeUpdate();
 				
 				/*
 				 	Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
