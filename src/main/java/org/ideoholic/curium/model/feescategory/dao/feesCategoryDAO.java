@@ -401,6 +401,26 @@ public class feesCategoryDAO {
 			HibernateUtil.closeSession();
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	public boolean createOtherFeescategory(List<OtherFeecategory> feesCategoryList) {
+		boolean result = false;
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            for (OtherFeecategory feescategory : feesCategoryList) {
+            	session.save(feescategory);
+			}
+            transaction.commit();
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
 
 	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
 

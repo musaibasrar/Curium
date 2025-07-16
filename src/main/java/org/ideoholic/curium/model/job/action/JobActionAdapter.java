@@ -157,7 +157,7 @@ public class JobActionAdapter {
 		addQueryDto.setTask(request.getParameterValues("task"));
 		addQueryDto.setDescription(request.getParameterValues("description"));
 		addQueryDto.setExpecteddeliverydatetask(request.getParameterValues("expecteddeliverydatetask"));
-		ResultResponse response = jobService.addQuery(addQueryDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(USERLOGINID).toString());
+		ResultResponse response = jobService.addQuery(addQueryDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.USERID).toString());
 		return response.isSuccess();
 	}
 
