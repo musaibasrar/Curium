@@ -42,7 +42,7 @@ public class ExamDetailsDAO {
 		return exams;
 	}
 
-
+	@Transactional
 	public List<Exams> readListOfExams(int branchId) {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
@@ -57,17 +57,19 @@ public class ExamDetailsDAO {
 		return results;
 	}
 
-
+	@Transactional
 	public void deleteMultiple(List<Integer> ids) {
 		try {
 			examsRepo.deleteAllById(ids);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
 	}
 
-
+	@Transactional
 	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
 		try {
 			if (examScheduleList != null) {
@@ -77,34 +79,26 @@ public class ExamDetailsDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
 		return false;
 	}
 
 
-
+	@Transactional
 	public List<Examschedule> readListOfExamSchedule(int branchId) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			transaction = session.beginTransaction();
-
-			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId)
-					.list();
-			transaction.commit();
-
+			// results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId).list();
+			results = examScheduleRepo.findByBranchid(branchId);
 		} catch (Exception hibernateException) {
-			transaction.rollback(); 
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 
 
