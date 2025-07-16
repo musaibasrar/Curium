@@ -115,19 +115,17 @@ public class ExamDetailsDAO {
 		}
 	}
 
-	public List<Examschedule> getExamScheduleDetails(String academicYear,
-			String classH, String exam, int branchId) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+	@Transactional
+	public List<Examschedule> getExamScheduleDetails(String academicYear, String classH, String exam, int branchId) {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
-			transaction = session.beginTransaction();
-			listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+			// listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
+		    listExamSchedule = examScheduleRepo.findByClassesAndAcademicyearAndExamnameAndBranchidOrderByDateAsc(classH, academicYear, exam, branchId);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			
+			throw e;
 		}
 		
 		return listExamSchedule;
