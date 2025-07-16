@@ -39,7 +39,8 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -99,6 +100,7 @@ public class FeesService {
                 		feescategorynew.setBranchid(Integer.parseInt(branchid));
                 		feescategorynew.setUserid(Integer.parseInt(userlogin));
                 		feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
+                		feescategorynew.setTotalinstallments(feesCategoryDto.getTotalInstallments());
                         if(!feescategorynew.getFeescategoryname().equalsIgnoreCase("") && !feescategorynew.getParticularname().equalsIgnoreCase("") && feescategorynew.getAmount() != 0 ){
                         	feesCategoryList.add(feescategorynew);
                         }
@@ -292,7 +294,7 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "/scholar/StudentProcess/ViewFeesStructure&id="+studentId; }
+	 * "/vision/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 
@@ -647,24 +649,27 @@ public class FeesService {
 	   
 	   public void addOtherFeesParticular(OtherFeecategoryDto otherFeecategoryDto,String branchid,String userloginid) {
 
-           OtherFeecategory ofeescategory = new OtherFeecategory();
-
            if(branchid!=null){
+        	   
 
-                   ofeescategory.setFeescategoryname(DataUtil.emptyString(otherFeecategoryDto.getFeesCategory()));
-                   if(!DataUtil.emptyString(otherFeecategoryDto.getFromClass()).equalsIgnoreCase("ALL") && !DataUtil.emptyString(otherFeecategoryDto.getToClass()).equalsIgnoreCase("ALL")){
-                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass())+"-"+DataUtil.emptyString(otherFeecategoryDto.getToClass()));
-                   }else{
-                           ofeescategory.setParticularname(DataUtil.emptyString(otherFeecategoryDto.getFromClass()));
+           	
+           	String[] classesOtherFeesCat = otherFeecategoryDto.getFromClass();
+           	List<OtherFeecategory> feesOtherCategoryList = new ArrayList<OtherFeecategory>();
+           	
+           	for (String feeCat : classesOtherFeesCat) {
+           		OtherFeecategory otherFeescategorynew = new OtherFeecategory();
+           		otherFeescategorynew.setFeescategoryname(DataUtil.emptyString(otherFeecategoryDto.getFeesCategory()));
+           		otherFeescategorynew.setParticularname(DataUtil.emptyString(feeCat)+"--");
+           		otherFeescategorynew.setAmount(DataUtil.parseInt(otherFeecategoryDto.getAmount()));
+           		otherFeescategorynew.setBranchid(Integer.parseInt(branchid));
+           		otherFeescategorynew.setUserid(Integer.parseInt(userloginid));
+           		otherFeescategorynew.setAcademicyear(DataUtil.emptyString(otherFeecategoryDto.getCategoryYearOf()));
+                   if(!otherFeescategorynew.getFeescategoryname().equalsIgnoreCase("") && !otherFeescategorynew.getParticularname().equalsIgnoreCase("") && otherFeescategorynew.getAmount() != 0 ){
+                	   feesOtherCategoryList.add(otherFeescategorynew);
                    }
-
-                   ofeescategory.setAmount(DataUtil.parseInt(otherFeecategoryDto.getAmount()));
-                   ofeescategory.setBranchid(Integer.parseInt(branchid));
-                   ofeescategory.setUserid(Integer.parseInt(userloginid));
-                   ofeescategory.setAcademicyear(otherFeecategoryDto.getCategoryYearOf());
-                   if(!ofeescategory.getFeescategoryname().equalsIgnoreCase("") && !ofeescategory.getParticularname().equalsIgnoreCase("") && ofeescategory.getAmount() != 0 ){
-                           ofeescategory =  new feesCategoryDAO().createOtherFeeCategory(ofeescategory);
-                   }
+           		}
+           		boolean result =  new feesCategoryDAO().createOtherFeescategory(feesOtherCategoryList);
+                
            }
    }
 	   
@@ -696,9 +701,10 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear, branchid);
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
+	            int grandTotalAmount=0;
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
@@ -717,16 +723,18 @@ public class FeesService {
 	   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
 	   		        		buffer = buffer +  "<option></option>";*/
 	   			        	for(int i =0; i<feecategoryList.size();i++){
+	   			        		int totalAmountPerCategory=feecategoryList.get(i).getTotalinstallments()*feecategoryList.get(i).getAmount();
+	   			        		grandTotalAmount=grandTotalAmount+totalAmountPerCategory;
 	   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 	   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
-	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+"--"+i+""
+	   			        				+ "									 type='checkbox' name='feescategory' checked class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+"--"+i+""
 	   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
 	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" size='18'/></td><td> <input"
-	   			        						+ "   			     type='text' value='0' name='feesCount' id='feesCount_"+i+"'"
-	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18' ><br></td>"
-	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
+	   			        						+ "   			     type='text' value="+feecategoryList.get(i).getTotalinstallments()+" name='feesCount' id='feesCount_"+i+"'"
+	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18' required><br></td>"
+	   			        						+ "<td> <input class='feesFullAmount' type='text' value="+totalAmountPerCategory+" name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
 	   			        	}
-	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
+	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value="+grandTotalAmount+" /></td></tr></table></div>";
 
 	    			        	response.getWriter().println(buffer);
 
@@ -782,6 +790,7 @@ public class FeesService {
 	                            con.setFeescatid(Integer.valueOf(test[1]));
 	                            con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
 	                            con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
+	                            con.setConcessionNotes(concessionDto.getRequestParams().get("concessionnotes:"+Integer.valueOf(test[0])));
 	                            concessionList.add(con);
 	                        }
 
@@ -826,19 +835,41 @@ public class FeesService {
 	        if(branchid!=null){
 	        	String[] yearofAdmission = yearofAdmissionStr.split("/");
 	        	String[] currentAcademicYear = currentAcademicYearStr.split("/");
-	        	String searchYear = null;
-	        	int yoa = Integer.parseInt(yearofAdmission[0]);
-	        	int ca = Integer.parseInt(currentAcademicYear[0]);
+	        	String searchYear = yearofAdmissionStr;
+	        	String searchClassName = null;
 	        	
-	        	if(yoa == ca || yoa < ca) {
-	        		searchYear = currentAcademicYearStr;
-	        	}else if (yoa > ca) {
-	        		searchYear = yearofAdmissionStr;
-	        	}
+	            
+	        	int diff = Integer.parseInt(currentAcademicYear[0])-Integer.parseInt(yearofAdmission[0]);
+	        	//Get the Class for yearofadmission
+	        	List<Classhierarchy> classHierarchyList = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(branchid));
 	        	
-	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
-	            feescategoryResponseDto.setFeescategory(feecategoryList);
+	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
+	        	int j=0;
+	        	for (Classhierarchy classHierarchy : classHierarchyList) {
+	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		j++;
+				}
 
+	        	 int classIndex = -1;
+
+	             for (int i = 0; i < classHierarchyArray.length; i++) {
+	                 if (classHierarchyArray[i].equals(classname)) {
+	                	 classIndex = i;
+	                     break;
+	                 }
+	             }
+	             
+	             if(diff>0) {
+	            	 searchClassName = classHierarchyArray[classIndex-diff];
+	             }else {
+	            	 searchClassName = classname;
+	             }
+	        	
+	             List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(searchClassName,searchYear,branchid);
+		         feescategoryResponseDto.setFeescategory(feecategoryList);
+		         feescategoryResponseDto.setFeesDueSearchYear(searchYear);
+		         feescategoryResponseDto.setFeesDueSearchClass(searchClassName);
+	            
 	            Locale indiaLocale = new Locale("en", "IN");
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
