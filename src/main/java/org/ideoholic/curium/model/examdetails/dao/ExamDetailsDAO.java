@@ -55,23 +55,13 @@ public class ExamDetailsDAO {
 
 
 	public void deleteMultiple(List<Integer> ids) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from Exams where exid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			examsRepo.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
 		}
-
 	}
-
 
 
 	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
