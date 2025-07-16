@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ExamsRepository extends JpaRepository<Exams, Integer> {
 
-	List<Exams> findByBranchid(int branchid);
+	List<Exams> findByBranchid(Integer branchid);
+	
+	List<Exams> findByExidInAndBranchid(List<Integer> ids, Integer branchId);
 
 }

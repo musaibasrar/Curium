@@ -147,25 +147,19 @@ public class ExamDetailsDAO {
 		return exam;
 	}
 	
-	public List<Exams> readListOfExams(List<Integer> deeniyatExamIds, int branchId) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
+	@Transactional
+	public List<Exams> readListOfExams(List<Integer> examIds, int branchId) {
 		List<Exams> results = new ArrayList<Exams>();
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Exams where exid IN (:ids) and branchid="+branchId);
-			query.setParameterList("ids", deeniyatExamIds);
-			results = (List<Exams>) query.getResultList();
-			transaction.commit();
-			
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-			return results;
-		}
 
+		try {
+			// Query query = session.createQuery("From Exams where exid IN (:ids) and branchid="+branchId);
+			results = examsRepo.findByExidInAndBranchid(examIds, branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
+		}
+		return results;
 	}
 }
