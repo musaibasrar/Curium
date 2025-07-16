@@ -119,7 +119,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-    response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
+    response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 } else {
     user = (String) session.getAttribute("userAuth");
 }
@@ -179,11 +179,10 @@ if (cookies != null) {
                         <td class="totalAmount"><c:out value="${recieptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/scholar/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/vision/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>
         </form>
     </body>
 </html>
-
