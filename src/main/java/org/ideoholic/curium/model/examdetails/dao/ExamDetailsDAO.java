@@ -132,24 +132,19 @@ public class ExamDetailsDAO {
 	}
 
 
-
+	@Transactional
 	public Exams getExamDetails(Integer examid) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
 		Exams exam = null;
 		try {
-
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("From Exams where id="+examid);
-			exam = (Exams) query.uniqueResult();
-			transaction.commit();
+			// Query query =  session.createQuery("From Exams where id="+examid);
+			exam = examsRepo.findById(examid).orElse(new Exams());
 		} catch (Exception hibernateException) {
-			transaction.rollback(); 
 			log.error(hibernateException.getMessage(), hibernateException);
-		} finally {
-				HibernateUtil.closeSession();
-			return exam;
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
+		return exam;
 	}
 	
 	public List<Exams> readListOfExams(List<Integer> deeniyatExamIds, int branchId) {

@@ -115,7 +115,7 @@ public class MarksDetailsService {
 			Set mapSet = mapOfMarks.entrySet();
 			Iterator mapIterator = mapSet.iterator();
 
-			Exams exams = new ExamDetailsDAO().getExamDetails(Integer.parseInt(examidName[0]));
+			Exams exams = examDetailsDao.getExamDetails(Integer.parseInt(examidName[0]));
 			int subid = Integer.parseInt(subject);
 			List<Marks> marksList = new ArrayList<Marks>();
 			
@@ -491,7 +491,7 @@ public class MarksDetailsService {
 
 			}
 
-			Exams exams = new ExamDetailsDAO().getExamDetails(Integer.parseInt(exam));
+			Exams exams = examDetailsDao.getExamDetails(Integer.parseInt(exam));
 			int subid = Integer.parseInt(subject);
 			Subject subjectDetails =  new SubjectDetailsDAO().getSubjectDetails(subid);
 			List<Marks> marksList = new ArrayList<Marks>();
@@ -1463,7 +1463,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 			String examDetailsId = dto.getExamDetailsID();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			Exams examsList = new ExamDetailsDAO().getExamDetails(Integer.parseInt(examDetailsId));
+			Exams examsList = examDetailsDao.getExamDetails(Integer.parseInt(examDetailsId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			
 			int rank = 1;
