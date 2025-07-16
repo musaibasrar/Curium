@@ -429,8 +429,7 @@ public class StampFeesService {
 
         if(branchid!=null){
         	String className = searchStudentDto.getClassSearch();
-        	
-            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,searchStudentDto.getCategoryYear(),branchid);
+            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear,branchid);
             feescategoryResponseDto.setFeescategory(feecategoryList);
   		
     		
