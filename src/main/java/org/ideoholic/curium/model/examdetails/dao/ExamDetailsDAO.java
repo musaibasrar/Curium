@@ -40,28 +40,18 @@ public class ExamDetailsDAO {
 
 
 	public List<Exams> readListOfExams(int branchId) {
-		Session session = HibernateUtil.openCurrentSession();
-		Transaction transaction = null;
 		List<Exams> results = new ArrayList<Exams>();
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			transaction = session.beginTransaction();
-
-			results = (List<Exams>) session.createQuery("From Exams where branchid="+branchId)
-					.list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+			// results = (List<Exams>) session.createQuery("From Exams where branchid="+branchId).list();
+			results = examsRepo.findByBranchid(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
-
 
 
 	public void deleteMultiple(List<Integer> ids) {
