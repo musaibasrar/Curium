@@ -61,6 +61,9 @@ public class MarksDetailsService {
 
 	@Autowired
 	private HttpServletResponse response;
+	
+	@Autowired
+	private ExamDetailsDAO examDetailsDao;
 
 	private static final int BUFFER_SIZE = 4096;
 
@@ -219,7 +222,7 @@ public class MarksDetailsService {
 		result.setSubjectList(subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		result.setExamsList(examList);
 		result.setClassSearch(addClass);
 		result.setSuccess(true);
@@ -297,7 +300,7 @@ public class MarksDetailsService {
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
-				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+				List<Exams> examDetailsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
@@ -433,7 +436,7 @@ public class MarksDetailsService {
 		result.setSubjectList(subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		result.setExamsList(examList);
 		result.setSuccess(true);
 
@@ -566,7 +569,7 @@ public class MarksDetailsService {
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			String[] subjectListOtherExamIds = new DataUtil().getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(branchId)).split(",");
 			List<Integer> subjectListOtherExam = new ArrayList<Integer>();	
@@ -1184,7 +1187,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 			//for (int i = 0; i < studentIds.length; i++) {
@@ -1440,7 +1443,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			result.setSearchStudentList(searchStudentList);
 
 			// get the list for all the midterms
-			List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			List<Exams> examList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 			result.setExamsList(examList);
 			result.setSuccess(true);
 			}
@@ -1645,7 +1648,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String[] examClass = examC.split("--");
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		List<ExamRank> examRankList = new ArrayList<ExamRank>();
 

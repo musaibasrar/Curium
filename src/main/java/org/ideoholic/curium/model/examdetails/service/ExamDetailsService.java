@@ -64,7 +64,7 @@ public class ExamDetailsService {
         ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
         if (branchId != null) {
 
-            List<Exams> exams  = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+            List<Exams> exams  = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
             examsListResponseDto.setExams(exams);
             examsListResponseDto.setSuccess(true);
             if (exams == null) {
@@ -86,7 +86,7 @@ public class ExamDetailsService {
                 ids.add(Integer.valueOf(id));
 
             }
-            new ExamDetailsDAO().deleteMultiple(ids);
+            examDetailsDao.deleteMultiple(ids);
             return ResultResponse.builder().success(true).build();
         } else {
             return ResultResponse.builder().success(false).build();
@@ -172,7 +172,7 @@ public class ExamDetailsService {
                     examScheduleList.add(examschedule);
                 }
             }
-            result = new ExamDetailsDAO().addExamSchedule(examScheduleList);
+            result = examDetailsDao.addExamSchedule(examScheduleList);
             return ResultResponse.builder().success(result).build();
         }
         return ResultResponse.builder().build();
@@ -185,7 +185,7 @@ public class ExamDetailsService {
 
         if (branchId != null) {
 
-            List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
+            List<Examschedule> exams = examDetailsDao.readListOfExamSchedule(Integer.parseInt(branchId));
             result.setExamschedules(exams);
             result.setSuccess(true);
             if (exams == null) {
@@ -207,7 +207,7 @@ public class ExamDetailsService {
                 ids.add(Integer.valueOf(id));
 
             }
-            new ExamDetailsDAO().deleteExamSchedule(ids);
+            examDetailsDao.deleteExamSchedule(ids);
             return ResultResponse.builder().success(true).build();
         } else {
             return ResultResponse.builder().success(false).build();

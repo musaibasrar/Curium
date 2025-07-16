@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -20,15 +16,17 @@ import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.util.SubjectAverage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherPerformanceService {
-     
+
+	@Autowired
+	private ExamDetailsDAO examDetailsDao;
 	
 	public SubjectsResponseDto readListOfSubjects(String branchid) {
 		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
-		boolean result = false;
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchid));
 	    	subjectsResponseDto.setSubjects(list);
@@ -49,7 +47,7 @@ public class TeacherPerformanceService {
 		String[] subject = subjectDetails.split("--");
 		String AcademicYear = teacherDetailsDto.getAcademicYear();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		List<SubjectAverage> subjectaverageList = new ArrayList<SubjectAverage>();
 		
 		
