@@ -36,21 +36,21 @@ public class UserDAO {
 
     @Transactional
 	public Login readUniqueObject(String userName, String password) {
-        Login login = null;
-       try{
-           List<Login> loginList = loginRepo.findByUsernameAndPassword(userName, password);
-           if(CollectionUtils.isEmpty(loginList)){
-               throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-           }
-           login = loginList.get(0);
-       }catch (Exception hibernateException) {
-           log.error(hibernateException.getMessage(), hibernateException);
-           log.debug("In user-dao null pointer exception {}", hibernateException.getMessage());
-           hibernateException.printStackTrace();
-           throw hibernateException;
-       }
-       return login;
-    }
+		Login login = null;
+		try {
+			List<Login> loginList = loginRepo.findByUsernameAndPassword(userName, password);
+			if (!CollectionUtils.isEmpty(loginList)) {
+				login = loginList.get(0);
+				// throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
+			}
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			log.debug("In user-dao null pointer exception {}", hibernateException.getMessage());
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		return login;
+	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
 	public int getNoOfStudents(int branchId) {

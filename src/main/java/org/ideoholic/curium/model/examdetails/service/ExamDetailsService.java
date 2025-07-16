@@ -238,7 +238,7 @@ public class ExamDetailsService {
         }
         if (branchId != null) {
 
-            List<Examschedule> examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(branchId));
+            List<Examschedule> examschedules = examDetailsDao.getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(branchId));
             result.setExamschedules(examschedules);
             result.setSuccess(true);
             if (!examschedules.isEmpty()) {
