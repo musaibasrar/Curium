@@ -13,9 +13,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Collecion Details</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<link rel="stylesheet" href="/vision/css/font-awesome.css">
+<link rel="stylesheet" href="/patriswamy/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/patriswamy/css/datePicker/demos.css">
+<link rel="stylesheet" href="/patriswamy/css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -327,42 +327,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/patriswamy/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/patriswamy/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/patriswamy/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/patriswamy/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/patriswamy/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
     $('#myTable').dataTable( {
@@ -433,11 +433,11 @@ $(document).ready(function() {
 		});
 	});
 </script>
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/patriswamy/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/UserProcess/searchByDate";
+		form1.action = "/patriswamy/UserProcess/searchByDate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -445,7 +445,7 @@ $(document).ready(function() {
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/FeesDetails/printDataForFees";
+		form1.action = "/patriswamy/FeesDetails/printDataForFees";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -792,7 +792,7 @@ $(document).ready(function() {
 		            	var receiptnumber = document.getElementById("selectedReceiptnumber").value;
 		            	
 		            	var form1 = document.getElementById("form1");
-		        		form1.action="/vision/FeesCollection/feesPaymentTypeModify?receiptnumber="+receiptnumber+"&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+		        		form1.action="/patriswamy/FeesCollection/feesPaymentTypeModify?receiptnumber="+receiptnumber+"&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
 		        		form1.method = "POST";
 		        		form1.submit();
 		        		
@@ -804,7 +804,7 @@ $(document).ready(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/patriswamy/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -818,7 +818,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/vision/FeesDetails/exportDataForFees" method="POST">
+		action="/patriswamy/FeesDetails/exportDataForFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
@@ -990,9 +990,9 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.paymenttype}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/patriswamy/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
                                 <td  class="dataText"> <a href="javascript:void(0);" class="dataTextInActive" onclick="openPaymentDialog('<c:out value="${feesdetails.key.receiptnumber}"/>')"> <i class="fa fa-edit" style="color: #004080; font-size: 16px;"></i></a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/patriswamy/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
