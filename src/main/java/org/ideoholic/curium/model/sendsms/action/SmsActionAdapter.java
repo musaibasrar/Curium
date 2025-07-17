@@ -52,6 +52,9 @@ public class SmsActionAdapter {
     public boolean sendSMSFeesDueReminder() {
 
         SendSMSDto dto = new SendSMSDto();
+        String[] studentIds = request.getParameterValues("studentIDs");
+        dto.setStudentIds(studentIds);
+        dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
         ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
 

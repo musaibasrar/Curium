@@ -1,17 +1,9 @@
 package org.ideoholic.curium.model.sendsms.service;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Properties;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -19,18 +11,41 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
-import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Properties;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Service
 public class SmsService {
+	
+	 private HttpServletRequest request;
+	    private HttpServletResponse response;
+	    private HttpSession httpSession;
+	    
+	private static DecimalFormat df2 = new DecimalFormat(".##");
+	 private static final Logger logger = LogManager.getLogger(SmsService.class);
+	
+	public SmsService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+        this.response = response;
+        this.httpSession = request.getSession();
+	}
 
 
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
@@ -38,7 +53,7 @@ public class SmsService {
 		int noOfRecords = 100;
 		int offset=0;
 		
-		if(branchId!=null){
+		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -46,7 +61,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -61,7 +76,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 				}	
 			}
 			
@@ -71,7 +86,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -97,7 +112,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
@@ -153,7 +168,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -171,7 +186,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
@@ -197,7 +212,7 @@ public class SmsService {
 	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-
+	        	
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
@@ -254,8 +269,8 @@ public class SmsService {
 		// Send data
 		
 		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-		log.info(templateType+": URL "+POST_URL);
-		log.debug(templateType+": URL "+POST_URL);
+		logger.info(templateType+": URL "+POST_URL);
+		System.out.println(templateType+": URL "+POST_URL);
         URL obj = new URL(POST_URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
@@ -269,7 +284,7 @@ public class SmsService {
 		// For POST only - END
 
 		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+		logger.info("POST Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { //success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -283,13 +298,13 @@ public class SmsService {
 			in.close();
 
 			// print result
-			log.info(response.toString());
+			logger.info(response.toString());
 		} else {
-			log.error("POST request not worked");
+			logger.info("POST request not worked");
 		}}}
 		catch (Exception e)
 		{
-		log.error("Error SMS "+e);
+		logger.info("Error SMS "+e);
 		}
 		return responseCode;
 	}
@@ -298,31 +313,41 @@ public class SmsService {
 		int resultSMS=0;
 
 		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-
+		String[] studentIds = dto.getStudentIds();
 		String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
 					if(!studentFeesReportList.isEmpty()){
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							
-							String phoneNo = studentFeesReport.getParents().getContactnumber();
-							if(phoneNo!=null && !phoneNo.isEmpty()) {
-								char[] contactNo = phoneNo.toCharArray();
-								
-								if(contactNo.length == 10) {
-									sbN.append(studentFeesReport.getParents().getContactnumber());
-									sbN.append(",");
+							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
+								String phoneNo = studentFeesReport.getParents().getContactnumber();
+								if(phoneNo!=null && !phoneNo.isEmpty()) {
+									char[] contactNo = phoneNo.toCharArray();
+									
+									if(contactNo.length == 10) {
+										sbN.append(studentFeesReport.getParents().getContactnumber());
+										sbN.append(",");
+									}
 								}
+								
+								numbers=sbN.toString();
+								numbers = numbers.substring(0, numbers.length()-1);
+								logger.info("Numbers are *** "+numbers);
+								
+								long dueAmount = 0l;
+								for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+									dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
+								}
+								
+								
+								String SMSTempType = "feesreminderwithdueamount";
+								String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+								
+								resultSMS = sendSMS(numbers,message,SMSTempType);
 							}
+							
 						}
-						numbers=sbN.toString();
-						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
 						
-						String SMSTempType = "feesreminder";
-						String message = "deadline";
-						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
 					
 			if(resultSMS==200){
