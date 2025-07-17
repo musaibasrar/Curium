@@ -1,11 +1,8 @@
 package org.ideoholic.curium.model.event.service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,52 +13,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class EventService {
     
     private static final Logger logger = LogManager.getLogger(EventService.class);
-
+    private final EventDAO eventDAO;
     
-    public List<Map<String, Object>> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
-        List<Event> events = new EventDAO().getEvents(start, end, branchId, userId);
+    public EventService() {
+        this.eventDAO = new EventDAO();
+    }
+    
+    @Transactional(readOnly = true)
+    public List<EventDTO> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
+        List<Event> events = eventDAO.getEvents(start, end, branchId, userId);
         List<EventDTO> eventDTOs = new ArrayList<>();
-        List<Map<String, Object>> eventMap = new ArrayList<>();
         
         for (Event event : events) {
             eventDTOs.add(convertToDTO(event));
         }
         
-        for (EventDTO dto : eventDTOs) {
-            Map<String, Object> event = new HashMap<>();
-            event.put("id", dto.getId());
-            event.put("title", dto.getTitle());
-            
-            // Format dates as ISO strings for FullCalendar
-            if (dto.getStart() != null) {
-                // Use ISO format for better compatibility with FullCalendar
-                event.put("start", dto.getStart().format(DateTimeFormatter.ISO_DATE_TIME));
-            }
-            if (dto.getEnd() != null) {
-                // Use ISO format for better compatibility with FullCalendar
-                event.put("end", dto.getEnd().format(DateTimeFormatter.ISO_DATE_TIME));
-            }
-            
-            event.put("allDay", dto.isAllDay());
-            event.put("backgroundColor", dto.getColor());
-            
-            Map<String, Object> extendedProps = new HashMap<>();
-            extendedProps.put("description", dto.getDescription());
-            extendedProps.put("location", dto.getLocation());
-            event.put("extendedProps", extendedProps);
-            
-            eventMap.add(event);
-        }
-        
-        return eventMap;
+        return eventDTOs;
     }
     
     @Transactional(readOnly = true)
     public EventDTO getEventById(Long id) {
-        Event event = new EventDAO().getEventById(id);
+        Event event = eventDAO.getEventById(id);
         if (event != null) {
             return convertToDTO(event);
         }
@@ -76,7 +52,7 @@ public class EventService {
             event.setUpdatedAt(LocalDateTime.now());
             event.setBranchid(Integer.parseInt(branchid));
             event.setUserid(Integer.parseInt(userId));
-            return new EventDAO().saveEvent(event);
+            return eventDAO.saveEvent(event);
         } catch (Exception e) {
             logger.error("Error creating event", e);
             return false;
@@ -86,13 +62,13 @@ public class EventService {
     @Transactional
     public boolean updateEvent(Long id, EventDTO eventDTO, String branchid, String userId) {
         try {
-            Event existingEvent = new EventDAO().getEventById(id);
+            Event existingEvent = eventDAO.getEventById(id);
             if (existingEvent != null) {
                 updateEventFromDTO(existingEvent, eventDTO);
                 existingEvent.setUpdatedAt(LocalDateTime.now());
                 existingEvent.setBranchid(Integer.parseInt(branchid));
                 existingEvent.setUserid(Integer.parseInt(userId));
-                return new EventDAO().updateEvent(existingEvent);
+                return eventDAO.updateEvent(existingEvent);
             }
             return false;
         } catch (Exception e) {
@@ -104,7 +80,7 @@ public class EventService {
     @Transactional
     public boolean deleteEvent(Long id) {
         try {
-            return new EventDAO().deleteEvent(id);
+            return eventDAO.deleteEvent(id);
         } catch (Exception e) {
             logger.error("Error deleting event", e);
             return false;
