@@ -16,14 +16,27 @@ import org.ideoholic.curium.util.Session.Transaction;
 public class EventDAO {
     private static final Logger logger = LogManager.getLogger(EventDAO.class);
     
+    Session session = null;
+    /**
+     * * Hibernate Session Variable
+     */
+    Transaction transaction = null;
+    /**
+     * * Hibernate Transaction Variable
+     */
+    Transaction transaction1;
+    SessionFactory sessionFactory;
+
+    
+	public EventDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
+    
     @SuppressWarnings("unchecked")
     public List<Event> getEvents(LocalDateTime start, LocalDateTime end) {
         List<Event> events = new ArrayList<>();
-        Session session = null;
-        Transaction transaction = null;
         
         try {
-            session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             
             String queryString = "FROM Event as event";
@@ -58,11 +71,8 @@ public class EventDAO {
 
     public Event getEventById(Long id) {
         Event event = null;
-        Session session = null;
-        Transaction transaction = null;
         
         try {
-            session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             
             Query query = session.createQuery("FROM Event as event WHERE event.id = :id");
@@ -85,11 +95,8 @@ public class EventDAO {
 
     public boolean saveEvent(Event event) {
         boolean result = false;
-        Session session = null;
-        Transaction transaction = null;
         
         try {
-            session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             
             session.save(event);
@@ -111,11 +118,8 @@ public class EventDAO {
 
     public boolean updateEvent(Event event) {
         boolean result = false;
-        Session session = null;
-        Transaction transaction = null;
         
         try {
-            session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             
             session.update(event);
@@ -137,11 +141,8 @@ public class EventDAO {
 
     public boolean deleteEvent(Long id) {
         boolean result = false;
-        Session session = null;
-        Transaction transaction = null;
         
         try {
-            session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             
             Query query = session.createQuery("FROM Event as event WHERE event.id = :id");

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.event.dto.EventDTO;
 import org.ideoholic.curium.model.event.service.EventService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,10 @@ public class EventActionAdapter {
     
     @Autowired
     private EventService eventService;
+    
+    private String BRANCHID = "branchid";
+    
+    private String userId = Constants.USERID;
     
     private final ObjectMapper objectMapper = new ObjectMapper()
         .registerModule(new JavaTimeModule());
@@ -63,7 +68,7 @@ public class EventActionAdapter {
             end = LocalDateTime.parse(endParam, DateTimeFormatter.ISO_DATE_TIME);
         }
         
-        List<EventDTO> eventDTOs = eventService.getEvents(start, end);
+        List<EventDTO> eventDTOs = eventService.getEvents(start, end, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
         List<Map<String, Object>> events = new ArrayList<>();
         
         for (EventDTO dto : eventDTOs) {
@@ -137,7 +142,7 @@ public class EventActionAdapter {
                 eventDTO.setCreatedBy(httpSession.getAttribute("USERID").toString());
             }
             
-            return eventService.createEvent(eventDTO);
+            return eventService.createEvent(eventDTO,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -149,17 +154,36 @@ public class EventActionAdapter {
             String idParam = request.getParameter("id");
             Long id = Long.parseLong(idParam);
             
-            // Read JSON from request body
-            BufferedReader reader = request.getReader();
-            StringBuilder json = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                json.append(line);
+            // Get parameters from request, same as createEvent
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String startStr = request.getParameter("start");
+            String endStr = request.getParameter("end");
+            String location = request.getParameter("location");
+            String color = request.getParameter("color");
+            String allDayStr = request.getParameter("allDay"); // Assuming allDay might be passed
+
+            // Validate required fields
+            if (title == null || startStr == null || endStr == null) {
+                return false;
             }
             
-            // Parse JSON to EventDTO
-            EventDTO eventDTO = objectMapper.readValue(json.toString(), EventDTO.class);
-            return eventService.updateEvent(id, eventDTO);
+            // Parse date strings to LocalDateTime
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+            LocalDateTime start = LocalDateTime.parse(startStr.replace("Z", ""), formatter);
+            LocalDateTime end = LocalDateTime.parse(endStr.replace("Z", ""), formatter);
+
+            // Create EventDTO
+            EventDTO eventDTO = new EventDTO();
+            eventDTO.setTitle(title);
+            eventDTO.setDescription(description);
+            eventDTO.setStart(start);
+            eventDTO.setEnd(end);
+            eventDTO.setLocation(location);
+            eventDTO.setColor(color != null && !color.isEmpty() ? color : "#3788d8");
+            eventDTO.setAllDay(allDayStr != null && Boolean.parseBoolean(allDayStr));
+            
+            return eventService.updateEvent(id, eventDTO, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
