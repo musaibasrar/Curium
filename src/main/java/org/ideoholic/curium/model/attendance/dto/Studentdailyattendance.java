@@ -67,11 +67,11 @@ public class Studentdailyattendance implements java.io.Serializable {
 	@Column(name = "userid")
 	private Integer userid;
 
-	public Integer getAttendeeid() {
+	public String getAttendeeid() {
 		if (attendee != null) {
-			return attendee.getSid();
+			return attendee.getStudentexternalid();
 		}
-		return 0;
+		return "";
 	}
 
 	public void setAttendeeid(String studentexternalid) {

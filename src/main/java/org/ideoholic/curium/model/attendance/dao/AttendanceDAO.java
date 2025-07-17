@@ -2,10 +2,7 @@ package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
@@ -52,6 +49,8 @@ public class AttendanceDAO {
 			holidayMaster = holidayMasterRepo.findByAcademicyearAndBranchid(currentAcademicYear,branchId);
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
 			throw e;
 		}
 
@@ -297,6 +296,8 @@ public class AttendanceDAO {
 					studentExternalId, branchId);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
 			throw e;
 		}
 		return studentDailyAttendance;
@@ -316,6 +317,8 @@ public class AttendanceDAO {
 
 		}catch (Exception e) {
 		log.error(e.getMessage(), e);
+		e.printStackTrace();
+
 		throw e;
 		}
 
@@ -331,39 +334,37 @@ public class AttendanceDAO {
   			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(LocalDate.parse(timestampFrom),LocalDate.parse(timestampto),currentAcademicYear, studentExternalIdGraph, branchId);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
 			throw e;
 		}
 		return studentDailyAttendance;
 	}
 
+	@Transactional
 	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
 		
-		String result = null;
-		
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-		
+		try {
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
-				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
-				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
-				if(studentDailyAttendanceDetails == null){
-					session.save(studentDailyAttendance);
-				}else{
+
+				//Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+
+				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
+						.findByAttendee_studentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), LocalDate.now(), studentDailyAttendance.getAcademicyear());
+
+				if (existingAttendance.isPresent()) {
 					return "error-Can't Mark the attendance twice!!!";
+				} else {
+					studentDailyAttendanceRepository.save(studentDailyAttendance);
 				}
 			}
-			
-			transaction.commit();
-			return "success-Attedance has been marked successfully.";
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
+			return "success-Attendance has been marked successfully.";
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
+			throw e;
 		}
-		return result;
 	}
 
 	public void markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
