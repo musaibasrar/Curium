@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.event.dto.EventDTO;
 import org.ideoholic.curium.model.event.service.EventService;
-import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +38,6 @@ public class EventActionAdapter {
     
     @Autowired
     private EventService eventService;
-    
-    private String BRANCHID = "branchid";
-    
-    private String userId = Constants.USERID;
     
     private final ObjectMapper objectMapper = new ObjectMapper()
         .registerModule(new JavaTimeModule());
@@ -68,7 +63,7 @@ public class EventActionAdapter {
             end = LocalDateTime.parse(endParam, DateTimeFormatter.ISO_DATE_TIME);
         }
         
-        List<EventDTO> eventDTOs = eventService.getEvents(start, end, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
+        List<EventDTO> eventDTOs = eventService.getEvents(start, end);
         List<Map<String, Object>> events = new ArrayList<>();
         
         for (EventDTO dto : eventDTOs) {
@@ -142,7 +137,7 @@ public class EventActionAdapter {
                 eventDTO.setCreatedBy(httpSession.getAttribute("USERID").toString());
             }
             
-            return eventService.createEvent(eventDTO,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
+            return eventService.createEvent(eventDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -164,7 +159,7 @@ public class EventActionAdapter {
             
             // Parse JSON to EventDTO
             EventDTO eventDTO = objectMapper.readValue(json.toString(), EventDTO.class);
-            return eventService.updateEvent(id, eventDTO, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(userId).toString());
+            return eventService.updateEvent(id, eventDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

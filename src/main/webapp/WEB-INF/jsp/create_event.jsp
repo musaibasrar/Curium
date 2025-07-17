@@ -135,7 +135,7 @@
                 </div>
             </c:if>
             
-            <form id="eventForm" action="/shadaan/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
+            <form id="eventForm" action="/abc/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="title" class="form-label">Title *</label>
                     <input type="text" class="form-control" id="title" name="title" required>
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="location" class="form-label">Notes</label>
+                    <label for="location" class="form-label">Location</label>
                     <input type="text" class="form-control" id="location" name="location">
                 </div>
 
@@ -183,7 +183,7 @@
 
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Create Event</button>
-                    <a href="/shadaan/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
+                    <a href="/abc/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

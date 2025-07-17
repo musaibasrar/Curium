@@ -12,24 +12,7 @@
     <!-- FullCalendar JS -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     
-      <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-    
-    :root {
-            --primary-color: #000000;
-            --primary-dark: #2d4a5f;
-            --primary-light: #5a8ab0;
-            --secondary-color: #f8f9fa;
-            --text-color: #333;
-            --border-color: #e0e0e0;
-            --hover-color: #f5f5f5;
-            --booked-color: #DC2626;
-        }
-        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -38,10 +21,6 @@
         
         .fc-event {
             cursor: pointer;
-        }
-        
-        .fc-event-title {
-            color: #02a429 !important; /* Make event titles red */
         }
         
         #calendar {
@@ -97,19 +76,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
-        }
-        
-          .header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 500;
         }
         
         .button-group {
@@ -175,11 +141,6 @@
     </style>
 </head>
 <body>
-
-	<div class="header">
-        <h1><i class="far fa-calendar-alt"></i> Schedule Booking</h1>
-    </div>
-    
     <div id="calendar"></div>
 
     <!-- Event Modal -->
@@ -206,7 +167,7 @@
                     <input type="datetime-local" id="end" required>
                 </div>
                 <div class="form-group">
-                    <label for="location">Notes:</label>
+                    <label for="location">Location:</label>
                     <input type="text" id="location">
                 </div>
                 <div class="form-group">
@@ -218,7 +179,7 @@
                     <input type="checkbox" id="allDay">
                 </div> -->
                 <div class="button-group">
-                    <button type="submit" id="saveButton">Save</button>
+                    <button type="submit">Save</button>
                     <button type="button" id="deleteButton">Delete</button>
                 </div>
             </form>
@@ -237,20 +198,11 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                buttonText: {
-                    today: 'Today',
-                    month: 'Month',
-                    week: 'Week',
-                    day: 'Day'
-                },
                 editable: true,
                 selectable: true,
                 selectMirror: true,
                 dayMaxEvents: true,
-                selectLongPressDelay: 100,
-                displayEventTime: false,
-                events: '/shadaan/EventProcess/getEvents',
-                eventClassNames: 'custom-event-width',
+                events: '/abc/EventProcess/getEvents',
                 select: function(arg) {
                     openModal(null, arg);
                 },
@@ -268,7 +220,6 @@
             var span = document.getElementsByClassName('close')[0];
             var form = document.getElementById('eventForm');
             var deleteButton = document.getElementById('deleteButton');
-            var saveButton = document.getElementById('saveButton');
 
             function openModal(event, selectInfo) {
                 modal.style.display = 'block';
@@ -318,8 +269,7 @@
                     
                     document.getElementById('location').value = event.extendedProps.location || '';
                     document.getElementById('color').value = event.backgroundColor || '#3788d8';
-                    saveButton.textContent = 'Update';
-                    saveButton.style.display = 'block';
+                    document.getElementById('allDay').checked = event.allDay;
                     deleteButton.style.display = 'block';
                 } else {
                     // Creating new event
@@ -329,10 +279,10 @@
                     
                     // Handle new event creation dates
                     let startDate = selectInfo.start;
-                    startDate.setHours(15, 0, 0, 0);
+                    
                     // Always set end date to same date as start date, but 1 hour later
                     let endDate = new Date(startDate);
-                    endDate.setHours(23, 55, 0, 0);
+                    endDate.setHours(startDate.getHours() + 1);
                     
                     if (startDate) {
                         const startStr = startDate.getFullYear() + '-' +
@@ -352,8 +302,7 @@
                     
                     document.getElementById('location').value = '';
                     document.getElementById('color').value = '#3788d8';
-                    saveButton.textContent = 'Save';
-                    saveButton.style.display = 'block';
+                    document.getElementById('allDay').checked = selectInfo.allDay || false;
                     deleteButton.style.display = 'none';
                 }
             }
@@ -379,7 +328,7 @@
                 var endInput = document.getElementById('end').value;
                 var location = document.getElementById('location').value;
                 var color = document.getElementById('color').value;
-                //var allDay = document.getElementById('allDay').checked;
+                var allDay = document.getElementById('allDay').checked;
                 
                 // Debug log
                 console.log('Form values:', {
@@ -388,8 +337,8 @@
                     startInput: startInput,
                     endInput: endInput,
                     location: location,
-                    color: color
-                    //allDay: allDay
+                    color: color,
+                    allDay: allDay
                 });
                 
                 // Format dates to ISO format
@@ -408,18 +357,18 @@
                 var eventData = {
                     title: title,
                     description: description,
-                    start: document.getElementById('start').value,
-                    end: document.getElementById('end').value,
+                    start: startDate.toISOString(),
+                    end: endDate.toISOString(),
                     location: location,
-                    color: color
-                    //allDay: allDay
+                    color: color,
+                    allDay: allDay
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/shadaan/EventProcess/createEvent';
+                var url = '/abc/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/shadaan/EventProcess/updateEvent?id=' + eventId;
+                    url = '/abc/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -461,7 +410,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/shadaan/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('/abc/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {
