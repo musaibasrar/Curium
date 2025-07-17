@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Report</title>
-<link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -91,27 +91,6 @@
 	font-weight: bold;
 }
 
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: right;
-	font-weight: bold;
-}
-
-.alignSearch {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -120,22 +99,6 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
-}
-
-.footerTD {
-	border-radius: 3px;
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 14px;
-	background-color: #4b6a84;
-	color: #FFFFFF;
-	font-weight: Bold;
-	width: auto;
-	height: 24px;
-	vertical-align: text-top;
-	text-align: center;
-	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .alignCentreMultiple {
@@ -227,7 +190,6 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
@@ -298,45 +260,57 @@
 	font-weight: bold;
 	height: 22px;
 }
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
 
+
+                text-align: left;
+
+
+            }
 </style>
 <style>
 #button {
 	
 }
 </style>
-<link rel="stylesheet" href="/noblewisdom/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/noblewisdom/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/noblewisdom/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/noblewisdom/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
-
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/noblewisdom/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+<script type="text/javascript"
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+<script type="text/javascript"
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -363,12 +337,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/noblewisdom/FeesCollection/searchFeesReportDue";
+		form1.action = "/vision/FeesCollection/searchFeesReportDue";
 		form1.method = "POST";
 		form1.submit();
 
@@ -376,7 +350,7 @@
 	
 	function sendSMS() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/noblewisdom/SMSProcess/sendSMSFeesDueReminder";
+		form1.action = "/vision/SMSProcess/sendSMSFeesDueReminder";
 		form1.method = "POST";
 		form1.submit();
 
@@ -388,12 +362,19 @@
 			searchForStudents();
 		});
 		
-		$("#sendsms").button().click(function() {
+		/* $("#sendsms").button().click(function() {
 			sendSMS();
 			return false;
 
-		});
-		
+		}); */
+	      $("#sendsms").button({
+	             icons:{
+	                 primary: "ui-icon-mail-closed"
+	             }
+	         }).click(function(){
+	        	 sendSMS();	
+	         	});
+	             
 
 	});
 
@@ -411,7 +392,7 @@
 	$(function() {
 		$("#export").button({
 			icons : {
-				primary : "ui-icon-trash"
+				primary : "ui-icon-transferthick-e-w"
 			}
 		});
 	});
@@ -444,6 +425,41 @@
 				$('.chcktbl:not(:checked)').attr('disabled', true);
 			} else {
 				$('.chcktbl:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+	
+	
+	$(function() {
+		$('#chckHeadSMS').click(function() {
+			var length = $('.chcktblSMS:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktblSMS:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktblSMS:checked').attr('checked', false);
+				} else {
+					$('.chcktblSMS:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktblSMS').click(function() {
+			var length = $('.chcktblSMS:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktblSMS:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblSMS:not(:checked)').attr('disabled', false);
 			}
 		});
 
@@ -517,7 +533,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/noblewisdom/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/vision/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
@@ -550,7 +566,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noblewisdom/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -563,7 +579,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/noblewisdom/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+	<form id="form1" action="/vision/FeesCollection/exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -698,10 +714,10 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th class="headerText"><input type="checkbox" id="chckHeadSMS" /></th>
 						<th title="click to sort" class="headerText">Sl.No</th>
-						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">UID</th>
+						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
@@ -720,15 +736,16 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<%-- <td class="dataText"><input type="checkbox"
-								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktblSMS"
 								name="studentIDs"
-								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
 								<td class="dataText"><c:out
 										value="${status.index+1}" /></td>
+										<td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.studentexternalid}" /></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
@@ -768,27 +785,22 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 				</tbody>
+				
 				<tfoot>
-					<tr>
-					
-					<td  class="footerTD" colspan="2" >
-					 <input value="Export"
-							type="submit" id="export"/>
-							
-							<button id="sendsms">Send SMS Reminder</button>
-							</td>
-													
-						<td class="footerTD" colspan="7" >
-						 
-						<%-- Total Amount: ${TotalSum}
-						 &nbsp;&nbsp;&nbsp;
-						  Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; --%> Total Due Amount: ${TotalDueAmount }
-						 
-						</td>
-							
-							
-
-					</tr>
+				
+				<tr>
+                    
+                    <td  class="footerTD" colspan="9" >
+                    
+                    		<button value="Export" type="submit" id="export">Export</button>
+                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount }</label>
+                            </td>
+                   </tr>
+                   
 				</tfoot>
 			</table>
 
