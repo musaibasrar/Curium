@@ -168,7 +168,7 @@ public class studentDetailsDAO {
 
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Parents as parent where parent.Student.sid="
+					.createQuery("from Parents as parent where parent.student.sid="
 							+ id);
 			parents = (Parents) query.uniqueResult();
 			transaction.commit();

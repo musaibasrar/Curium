@@ -68,9 +68,11 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
-					feesMap.put(student, receiptInfo);
+					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
+					if (receiptInfo != null) {
+						student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+						feesMap.put(student, receiptInfo);
+					}
 				}
 
 			}
@@ -218,12 +220,12 @@ public class FeesDetailsService {
 			for (Entry<Parents, Otherreceiptinfo> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().getStudent().getAdmissionnumber(), 
-						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getKey().getStudent().getSts(), 
+						entry.getKey().fetchStudent().getAdmissionnumber(), 
+						entry.getKey().fetchStudent().getStudentexternalid(), 
+						entry.getKey().fetchStudent().getSts(), 
 						entry.getValue().getBranchreceiptnumber(),
-						entry.getKey().getStudent().getName(),
-						entry.getKey().getStudent().getClassstudying(),
+						entry.getKey().fetchStudent().getName(),
+						entry.getKey().fetchStudent().getClassstudying(),
 						entry.getKey().getFathersname(), 
 						entry.getKey().getContactnumber(), 
 						entry.getValue().getDate().toString(),
@@ -295,7 +297,7 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(receiptInfo, student);
 					
