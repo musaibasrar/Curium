@@ -1028,7 +1028,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/vision/EmployeeProcess/ViewAllEmployee";
+								form1.action = "/shadaan/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
