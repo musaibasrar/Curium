@@ -368,6 +368,16 @@
 		form1.submit();
 
 	}
+	
+	function generateReportVertical() {
+		
+		
+		var form1 = document.getElementById("form1");
+		form1.action = "/shadaan/MarksDetailsProcess/generateReportSingleExamsVertical";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 
 	$(function() {
 
@@ -517,20 +527,20 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-				<tr>
+						<tr>
 							<td><br /></td>
 						</tr>
 
-
+							<tr>
 							<td><br /></td>
 						</tr>
 						
 						<tr>
 
-							<td width="30%" class="alignRight"></td>
+							<td  class="alignRight"></td>
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="search">Search</button>
 							</td>
 						</tr>
@@ -542,10 +552,16 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-
-						
-
-
+						<tr>
+							<td class="alignRightFields">Exams &nbsp;</td>
+							<td><label><c:forEach items="${listExam}" var="listExamlist">
+										<input type="checkbox"  name="examslist" value="${listExamlist.exid}">
+										${listExamlist.examname}
+										<br/>
+							</c:forEach>
+							</label>
+							</td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>
