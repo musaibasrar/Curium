@@ -774,12 +774,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
+            				 <a target="mainFrame" href="/scholar/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
+            				 <a target="mainFrame" href="/scholar/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
             			</td>
             		</tr>
                 </table>
@@ -792,18 +792,18 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/scholar/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/scholar/EventProcess/create" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr> -->
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            				<a target="mainFrame" href="/scholar/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
             			</td>
             		</tr>
             		
@@ -865,12 +865,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/abc/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
             			</td>
             		</tr>
             		<tr>
@@ -880,7 +880,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/abc/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
             			</td>
             		</tr>
             		<tr>
@@ -1050,13 +1050,13 @@ for(Cookie cookie : cookies){
             	
             	<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/scholar/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            				 <a target="mainFrame" href="/scholar/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
             			</td>
             			
             		</tr>

@@ -394,7 +394,7 @@
             function searchFeesStructure() {
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
-                form1.action = "/vision/StudentProcess/otherFeesStructurePerYear?id="+id;
+                form1.action = "/scholar/StudentProcess/otherFeesStructurePerYear?id="+id;
                 form1.submit();
             }
             
@@ -623,7 +623,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button> 
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/vision/printstudentdetailsotherfeesstructure'">Print</button>
+                                             <button id="print" onclick="window.location.href='/scholar/printstudentdetailsotherfeesstructure'">Print</button>
                                         </td>
 
                                     </tr>

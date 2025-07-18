@@ -299,7 +299,7 @@
                 displayEventTime: false,
                 editable: false,
                 selectable: false,
-                events: '/vision/EventProcess/getEvents',
+                events: '/scholar/EventProcess/getEvents',
                 
                 // This function transforms each event object before it is rendered
                 eventDataTransform: function(eventData) {

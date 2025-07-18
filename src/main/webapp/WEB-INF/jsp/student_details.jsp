@@ -1188,7 +1188,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.key.branchreceiptnumber}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.value}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/scholar/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
                         

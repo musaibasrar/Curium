@@ -116,7 +116,8 @@ public class StudentService {
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
-	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
+	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        } else {

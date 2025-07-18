@@ -294,7 +294,7 @@ public class FeesService {
 	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
 	 * 
 	 * return
-	 * "/vision/StudentProcess/ViewFeesStructure&id="+studentId; }
+	 * "/scholar/StudentProcess/ViewFeesStructure&id="+studentId; }
 	 * 
 	 * return "error.jsp";
 	 * 
