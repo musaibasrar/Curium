@@ -11,6 +11,12 @@ public class Event implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column
+    private int branchid;
+    
+    @Column
+    private int userid;
+    
     @Column(nullable = false)
     private String title;
     
@@ -129,4 +135,20 @@ public class Event implements java.io.Serializable {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+	public int getBranchid() {
+		return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 } 
