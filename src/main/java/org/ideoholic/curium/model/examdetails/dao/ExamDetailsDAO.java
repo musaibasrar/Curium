@@ -5,14 +5,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.repositories.ExamScheduleRepository;
 import org.ideoholic.curium.repositories.ExamsRepository;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
