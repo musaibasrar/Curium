@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Exam Schedule</title>
-<link rel="stylesheet" href="/patriswamy/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/patriswamy/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -289,42 +289,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/patriswamy/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/patriswamy/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/patriswamy/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/patriswamy/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -339,11 +339,11 @@
 	});
 </script>
 
-<script type="text/javascript" src="/patriswamy/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addExamSchedule() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/patriswamy/ExamDetailsProcess/addSchedule";
+		form1.action = "/vision/ExamDetailsProcess/addSchedule";
 		form1.method = "POST";
 		form1.submit();
 
@@ -351,7 +351,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/patriswamy/ExamDetailsProcess/deleteExamSchedule";
+		form1.action = "/vision/ExamDetailsProcess/deleteExamSchedule";
 		form1.method = "POST";
 		form1.submit();
 
@@ -492,7 +492,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/patriswamy/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -685,19 +685,22 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/patriswamy/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Exam Name<img
+							alt=" " style="position: relative; top: 4px;"
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/patriswamy/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/patriswamy/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/patriswamy/css/dataTable/images/sort_both.png" /></th>
+							src="/vision/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/patriswamy/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/vision/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>
@@ -711,6 +714,7 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
 							<td class="dataText"><c:out value="${examschedule.classes}" /></td>
+							<td class="dataText"><c:out value="${examschedule.examname}" /></td>
 							<td class="dataText"><c:out value="${examschedule.subject}" /></td>
 							<td class="dataText"><c:out value="${examschedule.date}" /></td>
 							<td class="dataText"><c:out value="${examschedule.starttime}" /></td>
