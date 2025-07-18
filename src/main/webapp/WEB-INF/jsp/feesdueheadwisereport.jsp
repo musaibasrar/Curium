@@ -604,12 +604,30 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
+					
+					<tr>
+							<td style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
 								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
-									style="width: 120px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -649,7 +667,7 @@ for(Cookie cookie : cookies){
                         	<td>
                         	   <label>
                                          <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
-									style="width: 120px">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										<option>2023/24</option>
 										<option>2024/25</option>
