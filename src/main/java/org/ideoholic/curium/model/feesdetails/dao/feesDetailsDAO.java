@@ -94,26 +94,19 @@ public class feesDetailsDAO {
                 return feesdetails;
         }
         
-        @SuppressWarnings("unchecked")
+        @Transactional
         public List<Feesdetails> readList(Long sid, String currentYear) {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
+        	int sId = sid.intValue();
                  
                  List<Feesdetails> results = new ArrayList<Feesdetails>();
                 try {
-                    transaction = session.beginTransaction();
-                    String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
-                                results = (List<Feesdetails>) session.createQuery(query).list();
-                                
-                                
-                  
-                    transaction.commit();
+                	// String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
+                    results = feesDetailsRepo.findBySidAndAcademicyear(sId, currentYear);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
-                    throw hibernateException;                }finally {
-        			HibernateUtil.closeSession();
-        		}
+                    throw hibernateException;               
+                    }
                 return results;
         }
 
