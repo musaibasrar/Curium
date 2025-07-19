@@ -110,32 +110,19 @@ public class feesDetailsDAO {
                 return results;
         }
 
+        @Transactional
         public String feesSum(long id, String currentYear) {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
+        	int Sid = (int)id;
                  
                 String results = "";
                 try {
-                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-                    transaction = session.beginTransaction();
-                    
-                                Query query =  session.createQuery("select sum(grandtotal) From Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'");
-                                results =  (String) query.uniqueResult();
-                                /*
-                                Query queryTotalFees =  session.createQuery("select totalfees From Academicfessstructure as afs where afs.sid=" + id +"and afs.academicyear="+currentYear);
-                                results =  (String) queryTotalFees.uniqueResult();*/
-                                
-                  
-                    transaction.commit();
+                	 // Query query =  session.createQuery("select sum(grandtotal) From Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'");
+                    results =  feesDetailsRepo.sumGrandTotalBySidAndAcademicyear(Sid, currentYear);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
                 }
-                finally {
-        			HibernateUtil.closeSession();
-        		}
                 return results;
         }
 
