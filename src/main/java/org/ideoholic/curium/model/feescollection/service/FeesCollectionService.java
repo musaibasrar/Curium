@@ -2202,7 +2202,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -2462,8 +2462,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                	String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2472,7 +2472,7 @@ public class FeesCollectionService {
 					        
 					        // Print or use the grouped data as needed
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2525,11 +2525,11 @@ public class FeesCollectionService {
 						        dto.setDateOfFeesDetails(group.get(0).getCell(2).getStringCellValue());
 						        dto.setClassAndSecDetails(studentDetails[1]);
 						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
-						        dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
-						        dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
+						        //dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
+						        //dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
 						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
-						        dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
-						        dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
+						        //dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
+						        //dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
@@ -2601,6 +2601,7 @@ public class FeesCollectionService {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
 					Studentfeesstructure studentSFS = new feesCollectionDAO().getStudentFeesStructure(sid, studentSfsIds[i],currentAcademicYear);
+					if(studentSFS!=null) {
 					feesCollect.setSfsid(studentSFS.getSfsid());
 					feesCollect.setAmountpaid((long)(DataUtil.parseDouble(amountPaying[i])));
 					feesCollect.setSid(DataUtil.parseInt(sid));
@@ -2613,6 +2614,7 @@ public class FeesCollectionService {
 					feescollection.add(feesCollect);
 					
 					grantTotal+=(long)(DataUtil.parseDouble(amountPaying[i]));
+					}
 				}
 			}
 				receiptInfo.setPaymenttype(paymentType);
