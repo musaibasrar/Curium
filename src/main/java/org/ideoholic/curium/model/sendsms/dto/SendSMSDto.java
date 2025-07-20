@@ -25,4 +25,6 @@ public class SendSMSDto {
     private String smsTempType;
     private String message;
     private int branchId;
+    private String[] studentIds;
+
 }
