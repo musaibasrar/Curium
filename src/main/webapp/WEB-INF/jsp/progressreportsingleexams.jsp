@@ -361,14 +361,14 @@
 <script type="text/javascript">
 	function searchForReports() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MarksDetailsProcess/searchForReportSingleExams";
+		form1.action = "/alalmas/MarksDetailsProcess/searchForReportSingleExams";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function generateReportVertical() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MarksDetailsProcess/generateReportSingleExamsVertical";
+		form1.action = "/alalmas/MarksDetailsProcess/generateReportSingleExamsVertical";
 		form1.method = "POST";
 		form1.submit();
 	}
