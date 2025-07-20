@@ -45,7 +45,7 @@ import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -1032,7 +1032,7 @@ public class JobService {
 				}
 
 				List<Parents> parentsList = new ArrayList<Parents>();
-				parentsList = new studentDetailsDAO().getReferredList(sidList);
+				parentsList = new StudentDetailsDAO().getReferredList(sidList);
 
 
 				response.setContentType("text/xml");

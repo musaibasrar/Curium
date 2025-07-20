@@ -20,7 +20,7 @@ import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class FeesDetailsService {
 		if(branchid!=null){
 			// Setting the fees details
 			String sid = feesIdDetailsDto.getStudentId();
-			feesdetails.setStudent(new studentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid)));
+			feesdetails.setStudent(new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid)));
 			feesdetails.setDateoffees(DataUtil.emptyString(feesIdDetailsDto.getDateoffees()));
 			feesdetails.setAmountpercat(DataUtil.emptyString(feesIdDetailsDto.getFeesTotalAmount()));
 			feesdetails.setGrandtotal(DataUtil.emptyString(feesIdDetailsDto.getGrandTotalAmount()));
@@ -70,7 +70,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
 					if (receiptInfo != null) {
-						student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+						student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 						feesMap.put(student, receiptInfo);
 					}
 				}
@@ -181,7 +181,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -298,7 +298,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();

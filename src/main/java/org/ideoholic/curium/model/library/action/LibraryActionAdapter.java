@@ -14,7 +14,7 @@ import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.model.library.dto.BooksResponseDto;
 import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;

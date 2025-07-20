@@ -41,7 +41,7 @@ import org.ideoholic.curium.model.marksdetails.dto.StudentGraphDto;
 import org.ideoholic.curium.model.marksdetails.dto.StudentGraphResponseDto;
 import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
@@ -144,7 +144,7 @@ public class MarksDetailsService {
 					
 				}
 				
-				marks.setStudent(new studentDetailsDAO().readUniqueObject((int) mapEntry.getKey()));
+				marks.setStudent(new StudentDetailsDAO().readUniqueObject((int) mapEntry.getKey()));
 				marks.setMarksobtained(mymark);
 				String currentYear = currentAcademicYear;
 				marks.setAcademicyear(currentYear);
@@ -214,7 +214,7 @@ public class MarksDetailsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		result.setSearchStudentList(searchStudentList);
 
 		// get all the subjects
@@ -297,7 +297,7 @@ public class MarksDetailsService {
 			
 			//String studentid = DataUtil.emptyString(request.getParameter("id"));
 			String[] studentIds = dto.getStudentIds();
-			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
+			Student searchStudent = new StudentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
 				List<Exams> examDetailsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
@@ -381,7 +381,7 @@ public class MarksDetailsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		// request.setAttribute("searchStudentList", searchStudentList);
 		/*List<Integer> ids = new ArrayList();
 
@@ -511,7 +511,7 @@ public class MarksDetailsService {
 					marks.setMarksid(marksID);
 					marks.setExam(exams);
 					marks.setSubject(subjectDetails);
-					marks.setStudent(new studentDetailsDAO().readUniqueObject(studentId));
+					marks.setStudent(new StudentDetailsDAO().readUniqueObject(studentId));
 					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = strCurrentAcademicYear;
 					String currentYear = currentAcademicYear;
@@ -584,7 +584,7 @@ public class MarksDetailsService {
 				MarksSheet markssheet = new MarksSheet();
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
-				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
 				for (Exams examOne : examsList) {
@@ -1180,7 +1180,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 		
 		if(currentAcademicYear!=null){
 			String studentUID = dto.getStudentUID();
-			Student student = new studentDetailsDAO().readploginUniqueObject(studentUID);
+			Student student = new StudentDetailsDAO().readploginUniqueObject(studentUID);
 			String[] studentIds = dto.getStudentIds();
 			String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");
@@ -1193,7 +1193,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			//for (int i = 0; i < studentIds.length; i++) {
 			MarksSheet markssheet = new MarksSheet();
 			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
-			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(student.getSid());
+			Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(student.getSid());
 			markssheet.setParents(studentDetails);
 
 			for (Exams exam : examsList) {
@@ -1350,7 +1350,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 	}
 
 	public ResultResponse getStudentList(String branchId) {
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 		return ResultResponse
 				.builder()
 				.resultList(studentList)
@@ -1439,7 +1439,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			result.setSearchStudentList(searchStudentList);
 
 			// get the list for all the midterms
@@ -1473,7 +1473,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 				studentsIds.add(Integer.parseInt(studentIds[i]));
 				List<ExamRank> examRankList = new ArrayList<ExamRank>();
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
-				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
 				if (examsList!=null) {
@@ -1548,7 +1548,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 						}
 						examMarksList.add(examMarks);
 						
-						examrank.setStudent(new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i])));
+						examrank.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i])));
 						examrank.setExams(examsList);
 						examrank.setMarksobtained(totalObtainedMarks);
 						examrank.setAcademicyear(currentAcademicYear);
@@ -1656,7 +1656,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			MarksSheet markssheet = new MarksSheet();
 			ExamRank examrank = new ExamRank();
 			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
-			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+			Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 			markssheet.setParents(studentDetails);
 			
 			for (Exams exam : examsList) {

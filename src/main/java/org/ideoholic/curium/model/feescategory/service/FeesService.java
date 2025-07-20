@@ -39,7 +39,7 @@ import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
@@ -237,7 +237,7 @@ public class FeesService {
                                  
                                //Accounts
                           		//Pass J.V. : credit the Fees as income & debit the cash
-                                  List<Studentfeesstructure> sfs = new studentDetailsDAO().getStudentFeesStructureDetails(Integer.valueOf(test[0]));
+                                  List<Studentfeesstructure> sfs = new StudentDetailsDAO().getStudentFeesStructureDetails(Integer.valueOf(test[0]));
                                   
                           		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchid));
                           		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));;
@@ -434,7 +434,7 @@ public class FeesService {
 			 * ;
 			 */
 			log.debug("SEARCH QUERY ***** {}", queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			
 			for (Parents parents : searchStudentList) {
@@ -908,7 +908,7 @@ public class FeesService {
 			String querySub = " parents.student.archive = 0 AND parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND crecorddate is not null order by parents.student.crecorddate DESC";
 			queryMain = queryMain + querySub;
 
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			searchStudentResponseDto.setSearchStudentList(searchStudentList);
 			return searchStudentResponseDto;
 		}

@@ -41,7 +41,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
 import org.ideoholic.curium.model.user.dto.DashBoardResponseDto;
@@ -169,7 +169,7 @@ public class UserService {
 
                         classStudying = classStudying + "--" + "%";
 
-                        List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
+                        List<Parents> student = new StudentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
                             + " AND parents.student.archive=0 AND parents.student.passedout=0 AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.student.branchid='" + Integer.parseInt(branchId) + "' ");
                         totalStudents += student.size();
                         xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
@@ -459,7 +459,7 @@ public class UserService {
                 }
 
                 queryMain = queryMain + querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-                searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+                searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
             }
 
             result.setResultList(searchStudentList);
@@ -558,7 +558,7 @@ public class UserService {
                 queryMain = queryMain + querySub;
                 /*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
                 log.error("SEARCH QUERY ***** {}", queryMain);
-                searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
+                searchParentsList = new StudentDetailsDAO().getStudentsList(queryMain);
 
             }
             result.setResultList(searchParentsList);
@@ -634,7 +634,7 @@ public class UserService {
                 sumOfFees = sumOfFees + receiptinfo.getTotalamount();
                 fine = fine + receiptinfo.getFine();
                 misc = misc + receiptinfo.getMisc();
-                Parents parent = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.fetchSid());
+                Parents parent = new StudentDetailsDAO().readUniqueObjectParents(receiptinfo.fetchSid());
                 feesMap.put(receiptinfo, parent);
             }
 

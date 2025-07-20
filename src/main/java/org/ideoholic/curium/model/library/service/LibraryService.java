@@ -19,7 +19,7 @@ import org.ideoholic.curium.model.library.dto.BooksHistoryResponseDto;
 import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.model.library.dto.BooksResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
 
 public class LibraryService {
@@ -303,7 +303,7 @@ public class LibraryService {
 		
 		if (branchid != null) {
 		try {
-			List<Parents> list = new studentDetailsDAO()
+			List<Parents> list = new StudentDetailsDAO()
 					.getStudentsList("from Parents as parents where parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.student.branchid = " + Integer.parseInt(branchid));
 			return ResultResponse.builder().success(true).resultList(list).build();
 		} catch (Exception e) {

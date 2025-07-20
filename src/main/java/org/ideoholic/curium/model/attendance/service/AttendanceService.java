@@ -22,7 +22,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -421,7 +421,7 @@ public class AttendanceService {
 			}
 
 			queryMain = queryMain + querySub;
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 
 			List<Parents> newStudentList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
@@ -443,7 +443,7 @@ public class AttendanceService {
 			result.setSuccess(true);
 
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 
 		result.setStudentList(studentList);
 
@@ -452,7 +452,7 @@ public class AttendanceService {
 
 	public ResultResponse viewAttendance(String branchId) {
 			ResultResponse result = ResultResponse.builder().build();
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 		result.setResultList(studentList);
 			if(!studentList.isEmpty()){
 				result.setSuccess(true);
@@ -508,7 +508,7 @@ public class AttendanceService {
 			result.setTotalAbsent(absentDays);
 			result.setSuccess(true);
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 		result.setStudentList(studentList);
 
 		return result;
@@ -614,7 +614,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setSuccess(true);
 						
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 
 		result.setStudentList(studentList);
 
@@ -729,7 +729,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			}
 
 			queryMain = queryMain + querySub;
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 
 			result.setStudentListAttendance(searchStudentList);
 			result.setAttendanceClass(conClassStudying.replace("--"," ").replace("%", ""));
@@ -798,7 +798,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				  
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
-        				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
+        				List<Parents> parentDetails = new StudentDetailsDAO().getStudentsList("from Parents as parents where parents.student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
             			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
@@ -832,7 +832,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
+			List<Student> studentList = new StudentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
 			Currentacademicyear currentAcademicYear = yearDao.showYear();
 			List<Attendancemaster> studentAttendanceMaster = attendanceDao.getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
@@ -916,7 +916,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(branchId);
 		}
 		queryMain = queryMain + querySub;
-		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+		List<Student> searchStudentList = new StudentDetailsDAO().getListStudents(queryMain);
 
 
 		Date monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
@@ -1522,7 +1522,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				String classStudying = classsec.getClassdetails()+"--";
 				
 	    		for (Classsec section : secList) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
+					List<Student> studentList = new StudentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
 					List<String> studentExternalIdList = new ArrayList<String>();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());
@@ -1553,7 +1553,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				}
 	    		
 	    		if(!classAttendancePushed) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
+					List<Student> studentList = new StudentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
 					List<String> studentExternalIdList = new ArrayList<String>();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());

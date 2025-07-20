@@ -101,7 +101,7 @@ public class feesDetailsDAO {
                  List<Feesdetails> results = new ArrayList<Feesdetails>();
                 try {
                 	// String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
-                    results = feesDetailsRepo.findBySidAndAcademicyear(sId, currentYear);
+                    results = feesDetailsRepo.findByStudent_sidAndAcademicyear(sId, currentYear);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();

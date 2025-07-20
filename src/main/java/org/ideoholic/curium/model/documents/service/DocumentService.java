@@ -40,7 +40,7 @@ import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
@@ -70,7 +70,7 @@ public class DocumentService {
 		public ResultResponse transferCertificate(String branchid) {
 		if (branchid != null) {
 			try {
-				List<Parents> list = new studentDetailsDAO()
+				List<Parents> list = new StudentDetailsDAO()
 						.getStudentsList("from Parents where branchid = " + Integer.parseInt(branchid));
 				return ResultResponse.builder().success(true).resultList(list).build();
 			} catch (Exception e) {
@@ -117,7 +117,7 @@ public class DocumentService {
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
+		 boolean updateStudent = new StudentDetailsDAO().updateStudent(student);
 		 
 		 if(updateStudent){
 			 tc.setSid(studentId);
@@ -128,7 +128,7 @@ public class DocumentService {
 			 Transfercertificate transferCertificate = documentDAO.getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
-				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				 parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 transferCertificateResponseDto.setReason(leavingReason); 
 				 transferCertificateResponseDto.setBookNo(bookno);
@@ -166,7 +166,7 @@ public class DocumentService {
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
-			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			 parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 			 transferCertificateResponseDto.setReason(leavingReason); 
 			 transferCertificateResponseDto.setBookNo(bookno);
@@ -301,7 +301,7 @@ public class DocumentService {
 			tc = documentDAO.getTransferCertificateDetails(studentId);
 
 			String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
-			parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
 			tcResponseDto.setParents(parents);
 			tcResponseDto.setTc(tc);
 
@@ -318,7 +318,7 @@ public class DocumentService {
 		ParentListResponseDto studentListAaResponseDto = ParentListResponseDto.builder().build();
 		if(branchid!=null){
 			try {
-				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
+				List<Parents> list = new StudentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
 				studentListAaResponseDto.setParentsList(list);
 				
 				 ResultResponse resultResponse = standardService.viewClasses(branchid);
@@ -380,7 +380,7 @@ public class DocumentService {
 						+ Integer.parseInt(branchid)
 						+ " order by parents.student.admissionnumber ASC";
 				System.out.println("QUERY*********** " + queryMain);
-				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			}
 			searchStudentResponseDto.setSuccess(true);
 		}
@@ -400,7 +400,7 @@ public class DocumentService {
 				if (id != null || id != "") {
 					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.student.id = "+id+" order by parents.student.admissionnumber ASC";
 
-					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
+					Parents searchStudentRecords = new StudentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
 				}
 
@@ -716,7 +716,7 @@ public class DocumentService {
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		}
 		
 	}
@@ -778,7 +778,7 @@ public class DocumentService {
 
 			if (!"".equalsIgnoreCase(querySub)) {
 				queryMain = queryMain + querySub;
-				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			}
 
 		}
@@ -803,7 +803,7 @@ public class DocumentService {
 		
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			Parents parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
 			parentDto = new ParentDto();
 			parentDto.setParents(parents);
 			characterPage = "charactercertificateprint";
@@ -819,7 +819,7 @@ public class DocumentService {
 			
 			if(studentIds!=null){
 				String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				Parents parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
 				parentDto = new ParentDto();
 				parentDto.setParents(parents);
 				bonafidePage = "studycertificateprint";
