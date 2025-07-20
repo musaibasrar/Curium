@@ -144,6 +144,8 @@ form{
                 	window.open('/childrenandglobal/index_parents','_self');
                 }else if(type=='principal'){
                 	window.open('/childrenandglobal/index_principal','_self');
+                }else if(type=='coordinator'){
+                	window.open('/childrenandglobal/index_coordinator','_self');
                 }
             }
             else if(!flag1){

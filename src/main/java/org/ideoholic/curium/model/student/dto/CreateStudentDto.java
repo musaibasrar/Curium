@@ -33,13 +33,13 @@ public class CreateStudentDto {
 	private String crecord;
 	private String dateofcr;
 	private String place;
-	private Integer tcno;
+	private String tcno;
 	private String dateoftc;
 	private String classonleaving;
 	private String progress;
 	private String dateofleaving;
 	private String reasonforleaving;
-	private Integer notcissued;
+	private String notcissued;
 	private String dateoftcissued;
 	private String guardian;
 	private Integer semester;

@@ -54,7 +54,7 @@ public class StudentDto implements java.io.Serializable {
 
     private String placeofbirth;
 
-    private Integer nooftc;
+    private String nooftc;
 
     private String dateoftc;
 

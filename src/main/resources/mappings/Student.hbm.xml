@@ -77,7 +77,7 @@
         <property name="placeofbirth" type="string">
             <column name="placeofbirth" length="100" />
         </property>
-        <property name="nooftc" type="java.lang.Integer">
+        <property name="nooftc" type="string">
             <column name="nooftc" />
         </property>
         <property name="dateoftc" type="date">
@@ -92,7 +92,7 @@
         <property name="reasonleaving" type="string">
             <column name="reasonleaving" length="500" />
         </property>
-        <property name="notcissued" type="java.lang.Integer">
+        <property name="notcissued" type="string">
             <column name="notcissued" />
         </property>
         <property name="datetcissued" type="date">

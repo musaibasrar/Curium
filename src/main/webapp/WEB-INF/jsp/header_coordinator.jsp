@@ -125,82 +125,26 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/childrenandglobal/welcomeadmin" >
+								<a target="mainFrame" href="/childrenandglobal/welcome" >
 								<img src="/childrenandglobal/images/curiumheader.png" width="112" height="41"/>
 								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/childrenandglobal/images/childrenandglobalheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/childrenandglobal/left_admin"> <img
+							<td><a target="leftFrame" href="/childrenandglobal/left_coordinator"> <img
 									src="/childrenandglobal/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
-							<td><a target="mainFrame"
-								href="/childrenandglobal/FeesProcess/feesCollect"> <img
-									src="/childrenandglobal/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
-							</a></td>
 
-							<td>
-								<a target="mainFrame"
-								href="/childrenandglobal/AccountProcess/createVoucher"> <img
-									src="/childrenandglobal/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<!-- <td ><a target="mainFrame" href="/childrenandglobal/feesCollectionDetails"><img  alt="Fees Details" src="/childrenandglobal/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
-
-							<td><a target="mainFrame"
-								href="/childrenandglobal/StudentProcess/addNew"> <img
-									src="/childrenandglobal/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/childrenandglobal/leftsettings">
-									<img alt="Settings" src="/childrenandglobal/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/childrenandglobal/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/childrenandglobal/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><!-- <a target="mainFrame" href="/childrenandglobal/sendsms"><img
-									src="/childrenandglobal/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a> -->
-								<a target="leftFrame" href="/childrenandglobal/reports"><img
+							<td >
+								<a target="leftFrame" href="/childrenandglobal/reports_coordinator"><img
 									src="/childrenandglobal/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
-								
-								<!-- <a target="leftFrame" href="/childrenandglobal/reports_officeadmin"><img
-									src="/childrenandglobal/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a> -->
 							
 							</td>
-
-							<td ><a target="mainFrame"
-								href="/childrenandglobal/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/childrenandglobal/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td>
-							
-							<td ><a target="mainFrame"
-								href="/childrenandglobal/dashboardloader"><img
-									alt="Dash Board" src="/childrenandglobal/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td>
 								
 							<td ><a target="_parent"
 								href="/childrenandglobal/UserProcess/logout"><img

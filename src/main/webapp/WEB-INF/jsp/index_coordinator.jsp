@@ -77,15 +77,11 @@ for(Cookie cookie : cookies){
 %>
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
-		   <c:if test="${(userType == 'admin')}">
-			    <frame   src="/childrenandglobal/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
+			    <frame   src="/childrenandglobal/header_coordinator"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/childrenandglobal/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                 <c:if test="${(userType == 'admin')}">
-                <frame src="/childrenandglobal/welcomeadmin" name="mainFrame" scrolling="yes" />
-                </c:if>
+                <frame  src="/childrenandglobal/left_coordinator" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/childrenandglobal/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

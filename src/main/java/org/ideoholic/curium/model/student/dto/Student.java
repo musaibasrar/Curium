@@ -119,7 +119,7 @@ public class Student implements java.io.Serializable {
 	private String placeofbirth;
 
 	@Column(name = "nooftc")
-	private Integer nooftc;
+	private String nooftc;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dateoftc", length = 10)
@@ -136,7 +136,7 @@ public class Student implements java.io.Serializable {
 	private String reasonleaving;
 
 	@Column(name = "notcissued")
-	private Integer notcissued;
+	private String notcissued;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "datetcissued", length = 10)

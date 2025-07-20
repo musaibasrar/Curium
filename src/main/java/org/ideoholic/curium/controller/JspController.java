@@ -660,4 +660,30 @@ public class JspController {
 	public String getReportsPrincipal() {
 		return "reports_principal";
 	}
+	
+	@GetMapping("/index_coordinator")
+	public String getIndexCoordinator() {
+		return "index_coordinator";
+	}
+
+	@GetMapping("/header_coordinator")
+	public String getHeaderCoordinator() {
+		return "header_coordinator";
+	}
+	
+	@GetMapping("/left_coordinator")
+	public String getLeftCoordinator() {
+		return "left_coordinator";
+	}
+	
+	@GetMapping("/reports_coordinator")
+	public String getReportsCoordinator() {
+		return "reports_coordinator";
+	}
+	
+	@GetMapping("/welcomeadmin")
+	public String getWelcomeAdmin() {
+		return "welcomeadmin";
+	}
+	
 }
