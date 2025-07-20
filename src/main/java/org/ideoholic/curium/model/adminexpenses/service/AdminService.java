@@ -20,7 +20,7 @@ import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.adminexpenses.dto.ExpensesIdDto;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -266,7 +266,7 @@ public class AdminService {
 		int totalBoys = 0, totalGirls = 0;
 		List<String> boysGirls = new ArrayList<>();
 
-		List<Student> studentsList = new studentDetailsDAO().getListStudents(
+		List<Student> studentsList = new StudentDetailsDAO().getListStudents(
 				"From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid = "
 						+ branchId + " order by name ASC");
 

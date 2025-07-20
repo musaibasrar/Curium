@@ -3,10 +3,7 @@ package org.ideoholic.curium.model.student.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -19,34 +16,22 @@ import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 
-public class studentDetailsDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	Transaction transaction1;
-	//SessionFactory sessionFactory;
-	
-	private static final Logger logger = LogManager.getLogger(studentDetailsDAO.class);
-	
-	public studentDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+public class StudentDetailsDAO {
+	
 	@SuppressWarnings("finally")
 	public Student create(Student student) {
+		Transaction transaction = null;
 		try {
-			// this.session = sessionFactory.openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(student);
 
 			transaction.commit();
-			System.out.println("in add3");
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			log.debug("in add3");
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -58,10 +43,9 @@ public class studentDetailsDAO {
 	@SuppressWarnings("finally")
 	public List<Object[]> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
 		List<Object[]> results = new ArrayList<Object[]>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -79,7 +63,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -93,9 +77,9 @@ public class studentDetailsDAO {
 	public int getNoOfRecords(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 		int noOfRecords = 0;
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			/*
@@ -109,7 +93,7 @@ public class studentDetailsDAO {
 			
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -121,9 +105,9 @@ public class studentDetailsDAO {
 
 	public Student readUniqueObject(long id) {
 		Student student = null;
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 
 			transaction = session.beginTransaction();
 			Query query = session
@@ -131,7 +115,7 @@ public class studentDetailsDAO {
 							+ id);
 			student = (Student) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		}finally {
@@ -142,16 +126,16 @@ public class studentDetailsDAO {
 	//code for readploginUniqueObject
 	public Student readploginUniqueObject(String id) {
 		Student student = new Student();
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("from Student as student where student.studentexternalid='"+id+"'");
 			student = (Student) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		}finally {
@@ -162,9 +146,9 @@ public class studentDetailsDAO {
 	//end readploginUniqueObject
 	public Parents readUniqueObjectParents(long id) {
 		Parents parents = new Parents();
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 
 			transaction = session.beginTransaction();
 			Query query = session
@@ -172,7 +156,7 @@ public class studentDetailsDAO {
 							+ id);
 			parents = (Parents) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		}finally {
@@ -183,13 +167,14 @@ public class studentDetailsDAO {
 
 	@SuppressWarnings("finally")
 	public Student update(Student student) {
+		Transaction transaction = null;
 		try {
-			// this.session = sessionFactory.openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.update(student);
 			transaction.commit();
 			System.out.println("in add2");
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -201,17 +186,16 @@ public class studentDetailsDAO {
 	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Student> readListOfStudents(int branchId) {
 		List<Student> results = new ArrayList<Student>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -222,14 +206,16 @@ public class studentDetailsDAO {
 	}
 
 	public void archiveMultiple(List ids) {
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update Student set archive = 1  where id IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -240,10 +226,9 @@ public class studentDetailsDAO {
 	@SuppressWarnings("unchecked")
 	public List<Student> readListOfStudentsArchive() {
 		List<Student> results = new ArrayList<Student>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
@@ -251,7 +236,7 @@ public class studentDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -262,7 +247,9 @@ public class studentDetailsDAO {
 	}
 
 	public void deleteMultiple(List ids, List iddetails) {
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			
 			
@@ -284,7 +271,7 @@ public class studentDetailsDAO {
 			query2.executeUpdate();
 			
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -293,14 +280,16 @@ public class studentDetailsDAO {
 	}
 
 	public void restoreMultiple(List ids) {
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update Student set archive = 0  where id IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -311,7 +300,7 @@ public class studentDetailsDAO {
 	@SuppressWarnings("finally")
 	public boolean promoteMultiple(List<Student> students, String classStudying, String promotedYear, int branchid) {
 		boolean result = false;
-		
+		Transaction transaction = null;
 		  String stringclassStudying = classStudying;
 		  String[] temp;
 		 
@@ -325,6 +314,7 @@ public class studentDetailsDAO {
 		 
 
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'  and branchid="+branchid+"");
 			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
@@ -369,7 +359,7 @@ public class studentDetailsDAO {
 			}
 			transaction.commit();
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 			result = false;
 		} finally {
@@ -382,9 +372,9 @@ public class studentDetailsDAO {
 	public List<Parents> readListOfObjectsPaginationALL(int offset,
 			int noOfRecords, int branchId) {
 		List<Parents> results = new ArrayList<Parents>();
-
+		Transaction transaction = null;
 		try {
-			
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("From Parents as parents where parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = "+branchId+" order by parents.student.sid desc").setCacheable(true).setCacheRegion("commonregion");
@@ -395,7 +385,7 @@ public class studentDetailsDAO {
 			transaction.commit();
 			
 
-		} catch (Exception hibernateException) {  transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) {  transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			System.out.println("Exception is "+hibernateException);
 			hibernateException.printStackTrace();
@@ -408,10 +398,9 @@ public class studentDetailsDAO {
 
 	public List<Student> readListOfObjectsForIcon(int branchId) {
 		List<Student> results = new ArrayList<Student>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -422,7 +411,7 @@ public class studentDetailsDAO {
 			results = query.setCacheable(true).setCacheRegion("commonregion").list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -433,8 +422,9 @@ public class studentDetailsDAO {
 	}
 
 	public void addStudentfeesstructure(List<Studentfeesstructure> listOfstudentfeesstructure, String currentYear) {
+		Transaction transaction = null;
 		try {
-			// this.session = sessionFactory.openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			
 			transaction = session.beginTransaction();
 			
@@ -455,7 +445,7 @@ public class studentDetailsDAO {
 			}
 			
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -466,10 +456,9 @@ public class studentDetailsDAO {
 	public List<Studentfeesstructure> getStudentFeesStructure(long id,
 			String currentYear) {
 		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -480,7 +469,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -492,14 +481,16 @@ public class studentDetailsDAO {
 
 	public Parents getStudentRecords(String queryMain) {
 		Parents parents = new Parents();
+		Transaction transaction = null;
         try {
+        	Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
             parents = (Parents) HQLquery.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
             transaction.commit();
         } catch (Exception hibernateException) {
         	transaction.rollback(); 
-        	logger.error(hibernateException);
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
         }
         finally {
@@ -510,8 +501,9 @@ public class studentDetailsDAO {
 
 	public java.util.List<Parents> getStudentsList(String query) {
 		java.util.List<Parents> parents = new ArrayList<Parents>();
+		Transaction transaction = null;
         try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+        	Session session = HibernateUtil.openCurrentSession();
 
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
@@ -519,7 +511,7 @@ public class studentDetailsDAO {
             transaction.commit();
         } catch (Exception hibernateException) {
         	transaction.rollback(); 
-        	logger.error(hibernateException);
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
         }finally {
 			HibernateUtil.closeSession();
@@ -529,12 +521,14 @@ public class studentDetailsDAO {
 	
 	public List<Student> getListStudents(String query) {
 		java.util.List<Student> student = new ArrayList<Student>();
+		Transaction transaction = null;
         try {
+        	Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
             student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         }finally {
@@ -545,13 +539,14 @@ public class studentDetailsDAO {
 
 	public List<Studentfeesstructure> getStudentFeesStructureDetails(int sfsid) {
 		List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
-
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			studentFeesStructure = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -562,15 +557,16 @@ public class studentDetailsDAO {
 	}
 
 	public boolean updateStudent(Student student) {
-		
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query queryUpdate = session
 					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"'  where sid = '"+student.getSid()+"'");
 			queryUpdate.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -579,12 +575,13 @@ public class studentDetailsDAO {
 	}
 
     public void updatePuDetails(Pudetails puDetails) {
+    	Transaction transaction = null;
         try {
-            // this.session = sessionFactory.openCurrentSession();
+        	Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(puDetails);
             transaction.commit();
-    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+    } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
     } finally {
@@ -593,12 +590,13 @@ public class studentDetailsDAO {
     }
     
     public void updateDegreeDetails(Degreedetails degreeDetails) {
+    	Transaction transaction = null;
         try {
-            // this.session = sessionFactory.openCurrentSession();
+        	Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(degreeDetails);
             transaction.commit();
-    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+    } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
     } finally {
@@ -608,9 +606,9 @@ public class studentDetailsDAO {
 
     public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
         List<Parents> results = new ArrayList<Parents>();
-
+        Transaction transaction = null;
         try {
-                
+        		Session session = HibernateUtil.openCurrentSession();
                 transaction = session.beginTransaction();
                 Query query = session
                                 .createQuery("From Parents as parents where parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 order by name ASC");
@@ -621,9 +619,9 @@ public class studentDetailsDAO {
                 transaction.commit();
                 
 
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
                 
-                System.out.println("Exception is "+hibernateException);
+                log.debug("Exception is {}", hibernateException);
                 hibernateException.printStackTrace();
 
         } finally {
@@ -635,12 +633,14 @@ public class studentDetailsDAO {
     public int getNoOfRecords() {
         List<Student> results = new ArrayList<Student>();
         int noOfRecords = 0;
+        Transaction transaction = null;
         try {
+        	Session session = HibernateUtil.openCurrentSession();
                 transaction = session.beginTransaction();
                 results = (List<Student>) session.createQuery("From Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0").setCacheable(true).setCacheRegion("commonregion").list();
                 noOfRecords = results.size();
                 transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
                 
                 hibernateException.printStackTrace();
 
@@ -656,16 +656,17 @@ public class studentDetailsDAO {
 	}
 	
 	public List<Card> getCardDetails(List<Integer> ids){
-			
+		Transaction transaction = null;
 			List<Card> cardDetailsList = new ArrayList<Card>();
 			try {
+				Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				Query query = session
 						.createQuery("From Card as card where card.sid IN (:ids)");
 				query.setParameterList("ids", ids);
 				cardDetailsList = query.list();
 				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -675,10 +676,9 @@ public class studentDetailsDAO {
 
 	public List<Studentfeesstructure> getStudentFeesStructurebyFeesCategory(long id, List<Integer> feesCat) {
 		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -689,7 +689,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -702,10 +702,9 @@ public class studentDetailsDAO {
 	public List<Studentotherfeesstructure> getStudentOtherFeesStructure(long id,
 			String currentYear) {
 		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -716,7 +715,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
 
@@ -728,13 +727,14 @@ public class studentDetailsDAO {
 	
 	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
 		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
-
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
 
@@ -746,10 +746,9 @@ public class studentDetailsDAO {
 	
 	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(long id, List<Integer> feesCat) {
 		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
-
+		Transaction transaction = null;
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
@@ -760,7 +759,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
 
@@ -772,13 +771,14 @@ public class studentDetailsDAO {
 	
 	public Studentotherfeesstructure getStudentOtherFeesStructureDetails(int sfsid) {
 		Studentotherfeesstructure studentFeesStructure = new Studentotherfeesstructure();
-
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			studentFeesStructure = (Studentotherfeesstructure) session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").uniqueResult();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -790,8 +790,9 @@ public class studentDetailsDAO {
 	
 	public List<Object[]> readStudentsParentsPerBranch(int branchId) {
 		List<Object[]> results = new ArrayList<Object[]>();
-
+		Transaction transaction = null;
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 
 			Query query = session
@@ -799,7 +800,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -811,13 +812,14 @@ public class studentDetailsDAO {
 
 	public List<Student> getListofsid(String classsec) {
 		List<Student> results = new ArrayList<Student>();
+		Transaction transaction = null;
 		try {
-
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("From Student where classstudying = "+classsec+"");
 			results = query.list();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -827,16 +829,17 @@ public class studentDetailsDAO {
 	}
 	
 public List<Parents> getReferredList(List<Integer> sidList) {
-		
+		Transaction transaction = null;
 		List<Parents> DetailsList = new ArrayList<Parents>();
 		try {
+			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("from Parents as parents where parents.student.sid IN (:ids)");
 			query.setParameterList("ids", sidList);
 			DetailsList = query.list();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -845,9 +848,10 @@ public List<Parents> getReferredList(List<Integer> sidList) {
 	}
 
 public Student readUniqueStudent(String HQLquery) {
-	
+	Transaction transaction = null;
 	Student student = new Student();
     try {
+    	Session session = HibernateUtil.openCurrentSession();
         transaction = session.beginTransaction();
      //   Query HQLquery = session.createQuery(query);
        // student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
@@ -857,7 +861,7 @@ public Student readUniqueStudent(String HQLquery) {
         student = (Student) query.uniqueResult();
         
         transaction.commit();
-    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+    } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
         
         hibernateException.printStackTrace();
     }finally {

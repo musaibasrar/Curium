@@ -14,7 +14,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -73,7 +73,7 @@ public class PrintIdsService {
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		}
 		    searchStudentResponseDto.setSearchStudentList(searchStudentList);
 			return searchStudentResponseDto;
@@ -182,14 +182,14 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
 			
-			List<Card> cardList = new studentDetailsDAO().getCardDetails(studentids);
+			List<Card> cardList = new StudentDetailsDAO().getCardDetails(studentids);
 			
 			for (Parents parents : searchStudentList) {
 				

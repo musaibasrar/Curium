@@ -10,7 +10,7 @@ import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
@@ -92,7 +92,7 @@ public class DiaryService {
 
 		if (branchId != null) {
 			try {
-				Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
+				Student student = new StudentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;

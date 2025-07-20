@@ -9,7 +9,7 @@ import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
@@ -67,7 +67,7 @@ public class TeacherPerformanceService {
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;
-					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 				}
 				
 				//get Student Marks of classone

@@ -23,7 +23,7 @@ import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
 import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -271,7 +271,7 @@ public class ExamDetailsService {
             classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
-                studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
+                studentList = new StudentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();
