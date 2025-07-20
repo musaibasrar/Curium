@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.ParentsRepository;
+import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
@@ -32,6 +33,9 @@ public class StudentDetailsDAO {
 	
 	@Autowired
 	private ParentsRepository parentsRepo;
+	
+	@Autowired
+	private StudentRepository studentRepo;
 	
 	@SuppressWarnings("finally")
 	public Student create(Student student) {
@@ -822,22 +826,19 @@ public class StudentDetailsDAO {
 		}
 	}
 
+	@Transactional
 	public List<Student> getListofsid(String classsec) {
 		List<Student> results = new ArrayList<Student>();
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Student where classstudying = "+classsec+"");
-			results = query.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+			// Query query = session.createQuery("From Student where classstudying = "+classsec+"");
+			results = studentRepo.findByClassstudying(classsec);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			
+			throw hibernateException;
 		}
+		return results;
 	}
 	
 	@Transactional
