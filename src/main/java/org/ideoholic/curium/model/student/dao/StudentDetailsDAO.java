@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.student.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.card.dto.Card;
@@ -13,13 +15,19 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class StudentDetailsDAO {
+	
+	@Autowired
+	private QueryUtil queryUtil;
 	
 	@SuppressWarnings("finally")
 	public Student create(Student student) {
@@ -847,27 +855,21 @@ public List<Parents> getReferredList(List<Integer> sidList) {
 		return DetailsList;
 	}
 
-public Student readUniqueStudent(String HQLquery) {
-	Transaction transaction = null;
-	Student student = new Student();
-    try {
-    	Session session = HibernateUtil.openCurrentSession();
-        transaction = session.beginTransaction();
-     //   Query HQLquery = session.createQuery(query);
-       // student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
-        
-        Query query = session.createQuery(HQLquery);
-        query.setMaxResults(1);
-        student = (Student) query.uniqueResult();
-        
-        transaction.commit();
-    } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-        
-        hibernateException.printStackTrace();
-    }finally {
-		HibernateUtil.closeSession();
-	 }
-    return student;
-}
+	@Transactional
+	public Student readUniqueStudent(String queryString) {
+		Student student = new Student();
+		try {
+			List<Student> studentList = queryUtil.findByClassLimitedTo(queryString, Student.class, 1);
+			if (!CollectionUtils.isEmpty(studentList)) {
+				student = studentList.get(0);
+			}
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
+		}
+		return student;
+	}
 
 }
