@@ -1,5 +1,7 @@
 package org.ideoholic.curium.repositories;
 
+import java.util.List;
+
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,4 +32,6 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 			@Param("branchId") String branchId, Pageable pageable);
 
 	Parents findByStudentSid(@Param("sid") Integer sid);
+	
+	List<Parents> findByStudentSidIn(List<Integer> ids);
 }
