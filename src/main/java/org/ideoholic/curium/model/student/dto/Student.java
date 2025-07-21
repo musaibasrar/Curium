@@ -304,7 +304,7 @@ public class Student implements java.io.Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "student")
-	private List<Parents> parentsList;
+	private List<Parents> parents;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
