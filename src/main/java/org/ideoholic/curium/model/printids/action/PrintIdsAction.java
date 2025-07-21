@@ -54,6 +54,18 @@ public class PrintIdsAction {
 		new StandardService(request, response).viewClasses();
 		return "generateids";
 	}
+	
+	@PostMapping("/generateIdBackPart")
+	public String printBackPreview() {
+		new PrintIdsService(request, response).printMultiple();
+		return "printbackpreview";
+	}   
+	
+	@PostMapping("/generateIdBackPartstaff")
+	public String generateIdBackPartstaff() {
+		new EmployeeService(request, response).printMultipleEmployees();
+		return "printbackpreviewstaff";
+	} 
 
 	@PostMapping("/searchDetails")
 	public String searchDetails() {

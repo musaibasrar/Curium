@@ -8,7 +8,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+        <title>Student Id Card Back Part</title> 
 
         <script type="text/javascript" language="JavaScript" src="/gnyanganga/js/motionpack.js"></script>
         <link rel="stylesheet" href="/gnyanganga/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -459,72 +459,35 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-image: url('/gnyanganga/images/idbackground.png');background-repeat:no-repeat;background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-image: url('/gnyanganga/images/idbackgrnd.png');background-repeat:no-repeat;background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 0px;">
   <table width="100%" style="background-color:#800000" >
   <tr>
-  <td colspan="2" style="color:white;font-size:7px;"><i>Sri Swami Vivekanand Educational and Rural Development Trust</i></td>
+  <td  style="color:white;font-size:7px;"><i>Sri Swami Vivekanand Educational and Rural Development Trust</i></td>
   </tr>
-  <tr align="center"><td rowspan="2" style="text-align:center;padding:0px;">
-   <img src="/gnyanganga/images/gnyanganga${branchid}.png" width="50" height="42"/>
-  </td><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:20px;font-weight: 900; color:yellow">GNYAN GANGA </p></td></tr>
+  <tr align="center"><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:25px;font-weight: 900; color:yellow">GNYAN GANGA </p></td></tr>
     <tr><td style="text-align:center;padding:0px;"> <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
    <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">TQ CHITGUPPA, Dist BIDAR-585412</p>
    </table>
   </div>
+<table>
+<tr>
+<td><br></td>
+</tr>
 
-  <div class="table-container" style="padding-top:0px;margin-top:0px; ">
- <table align="center" style="padding-top:0px;margin-top:0px; ">
- <tr><td colspan="3" style="text-align:center;">STUDENT ID CARD</td></tr>
- <tr>
- <td style="border-radius: 5px;text-align: center;font-weight: bold;">SESSION
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="font-weight: bold;">
-  ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
-
- </td>
- </tr>
- </table>
+</table>
+  <div class="table-container" style="padding-top:0px;padding-left:50px;margin-top:0px; ">
+ <img src="/gnyanganga/images/vivekanand.png" width="150" height="200"/>
    </div>
-   <div width="100%" align="center" style="background-color:#800000;color:white;">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
-  <tr>
-    <td align="center" colspan="2" style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    :&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-  </tr>
-   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
-  </tr>
+  
 </table>
 
-<div height="30" width="100%" style="text-align:right;">
 
-<img src="/gnyanganga/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
-</div>
 <table width="100%">
+<tr>
+<td><br></td>
+</tr>
 <tr><td style="color:white;"><i>Mustary Road Chitguppa Ph:9482010136</i></td></tr></table>
 </div>
 

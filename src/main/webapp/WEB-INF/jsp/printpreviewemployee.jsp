@@ -459,39 +459,44 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-image: url('/gnyanganga/images/staffidbackground.png');background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">Al Falah High School</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Shanti Nagar, Lalapet, Secunderabad-500017</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">Mobile No: 8143802598, Email: alfalahhighschool@gmail.com</p>
+  <tr>
+  <td  style="color:white;font-size:7px;"><i>Sri Swami Vivekanand Educational and Rural Development Trust</i></td>
+  </tr>
+  </table>
+  <table style="background-color:white;">
+  <tr align="center"><td style="text-align:center;padding:0px;font-size:12px;font-weight: 900; color:red">
+   GNYAN GANGA INDEPENDENT</td>
+    <td rowspan="2"><img src="/gnyanganga/images/gnyanganga${branchid}.png" width="35" height="30"/></td></tr>
+    <tr><td style="text-align:center;padding:0px;font-size:11px;">
+  PU.SCIENCE COLLEGE CHITGUPPA</td>
    </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table align="center">
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
+ <td style="border-radius: 5px;text-align: center;font-weight: bold;">STAFF ID CARD
  </td>
+ </tr>
+ <tr>
  <td>
  <img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:78px;width:60px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
  </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
+<%--  <td>&nbsp;&nbsp;
  <img src="/gnyanganga/images/gnyanganga${branchid}.png" width="83" height="72"/>
- </td>
+ </td> --%>
  </tr>
  </table>
    </div>
    <div align="center">
    <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 10px">
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;">&nbsp;&nbsp;QUALIFICATION</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
   </tr>
   <tr>
@@ -499,33 +504,26 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("designation" + i + "")%></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;EMPLOYEE ID</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("staffid" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofjoining" + i + "") %></td>
-  </tr>
-  <tr>
     <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("Address" + i + "") %></td>
   </tr>
 </table>
    
-<div height="30" width="20%" style="text-align:right;float:right;">
+<div height="30" width="20%" style="text-align:right;">
 
 <img src="/gnyanganga/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
+<table align="center" width="100%">
+<tr><td style="color:white;text-align:center"><br>Near Mastury road Tq. Chitguppa</td></tr>
+<tr><td style="color:white;text-align:center">Dist. Bidar -State : Karnataka-585412</td></tr>
+<tr><td style="color:white;text-align:center">Contact No. 8884668500/9620116912</td></tr>
+</table>
 </div>
  </c:if>
    <% i = i + 1;%>
