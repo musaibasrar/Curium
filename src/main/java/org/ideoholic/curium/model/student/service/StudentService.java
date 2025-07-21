@@ -87,6 +87,9 @@ public class StudentService {
 	@Autowired
 	private UserDAO userDao;
 	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -125,7 +128,7 @@ public class StudentService {
 		
 		if("Admission".equalsIgnoreCase(student.getStream())) {
 			 
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
@@ -804,7 +807,7 @@ public class StudentService {
 			if(StringUtils.hasLength(studentDto.getStream()) && !studentDto.getStream().equalsIgnoreCase(studentDto.getApplicationtype())) {
 		
 				if("Admission".equalsIgnoreCase(student.getStream())) {
-					Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+					Student studentDB = studentDetailsDao.readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
 					
 					if(studentDB!=null) {
 			        	String UID = studentDB.getStudentexternalid();
@@ -818,7 +821,7 @@ public class StudentService {
 		    		student.setDroppedout(0);
 		    		student.setLeftout(0);
 				}else if ("Registration".equalsIgnoreCase(student.getStream())) {
-					Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
+					Student studentDB = studentDetailsDao.readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
 					
 					
 					if(studentDB!=null) {
@@ -833,7 +836,7 @@ public class StudentService {
 					student.setDroppedout(1);
 					student.setLeftout(1);
 				}else if ("Alumni".equalsIgnoreCase(student.getStream())) {
-					Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
+					Student studentDB = studentDetailsDao.readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
 					
 					if(studentDB!=null) {
 						String UID = studentDB.getStudentexternalid();
@@ -898,7 +901,7 @@ public class StudentService {
 		String[] studentIds = dto.getStudentIds();
 
 		if (studentIds != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : studentIds) {
 				ids.add(Integer.valueOf(id));
 
@@ -924,8 +927,8 @@ public class StudentService {
 	public void deleteMultiple(StudentIdsDto dto) {
 		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
-			List<Integer> ids = new ArrayList();
-			List<Integer> iddetails = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
+			List<Integer> iddetails = new ArrayList<>();
 			for (String id : studentIds) {
 				String[] iddetailsarray = id.split(":");
 				ids.add(Integer.valueOf(iddetailsarray[0]));
@@ -940,7 +943,7 @@ public class StudentService {
 	public void restoreMultiple(StudentIdsDto dto) {
 		String[] studentIds = dto.getStudentIds();
 		if (studentIds != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : studentIds) {
 				String[] iddetailsarray = id.split(":");
 				ids.add(Integer.valueOf(iddetailsarray[0]));
@@ -991,7 +994,7 @@ public class StudentService {
 				List<Object[]> list = new StudentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId));
 
-				List<Parents> parentDetails = new ArrayList<Parents>();
+				List<Parents> parentDetails = new ArrayList<>();
 				for(Object[] parentdetails: list){
 					Parents parent = new Parents();
 					Student student = new Student();
@@ -1285,7 +1288,7 @@ public class StudentService {
 		if(branchId!=null){
 			try {
 
-				List<Object[]> list = new StudentDetailsDAO().readStudentsParentsPerBranch(Integer.parseInt(branchId));
+				List<Object[]> list = studentDetailsDao.readStudentsParentsPerBranch(Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for(Object[] parentdetails: list){

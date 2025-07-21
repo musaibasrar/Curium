@@ -21,11 +21,13 @@ import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class StudentDetailsDAO {
 	
 	@Autowired
@@ -805,25 +807,19 @@ public class StudentDetailsDAO {
 	}
 	
 	public List<Object[]> readStudentsParentsPerBranch(int branchId) {
-		List<Object[]> results = new ArrayList<Object[]>();
-		Transaction transaction = null;
+		List<Object[]> results = new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
 
-			Query query = session
-					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
-			results = query.list();
-			transaction.commit();
+			// .createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC")
+			results = studentRepo.findStudentDetailsByBranchId(branchId);
 
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 
 	@Transactional

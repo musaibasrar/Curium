@@ -59,13 +59,20 @@ import lombok.extern.slf4j.Slf4j;
 public class JobService {
     @Autowired
 	private HttpServletRequest request;
+    
     @Autowired
     private HttpServletResponse response;
+    
     @Autowired
     private HttpSession httpSession;
+    
     @Autowired
     private JobDAO jobDAO;
-	private static final int BUFFER_SIZE = 4096;
+	
+    @Autowired
+    private StudentDetailsDAO studentDetailsDao;
+    
+    private static final int BUFFER_SIZE = 4096;
 
 	
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
@@ -1032,7 +1039,7 @@ public class JobService {
 				}
 
 				List<Parents> parentsList = new ArrayList<Parents>();
-				parentsList = new StudentDetailsDAO().getReferredList(sidList);
+				parentsList = studentDetailsDao.getReferredList(sidList);
 
 
 				response.setContentType("text/xml");

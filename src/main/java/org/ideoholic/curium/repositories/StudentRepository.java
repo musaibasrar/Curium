@@ -16,4 +16,11 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	List<Student> findAllValidStudents(@Param("branchId")String branchId);
 	
 	List<Student> findByClassstudying(String classStudying);
+	
+    @Query("SELECT s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, " +
+            "p.fathersname, p.mothersname " +
+            "FROM Student s JOIN Parents p ON s.sid = p.student.sid " +
+            "WHERE s.archive = 0 AND s.branchid = :branchId " +
+            "ORDER BY s.sid DESC")
+     List<Object[]> findStudentDetailsByBranchId(@Param("branchId") Integer branchId);
 }
