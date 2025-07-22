@@ -792,7 +792,7 @@ $(document).ready(function() {
 		            	var receiptnumber = document.getElementById("selectedReceiptnumber").value;
 		            	
 		            	var form1 = document.getElementById("form1");
-		        		form1.action="/vision/FeesCollection/feesPaymentTypeModify?receiptnumber="+receiptnumber+"&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+		        		form1.action="/fathima/FeesCollection/feesPaymentTypeModify?receiptnumber="+receiptnumber+"&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
 		        		form1.method = "POST";
 		        		form1.submit();
 		        		
@@ -990,9 +990,9 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.paymenttype}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
                                 <td  class="dataText"> <a href="javascript:void(0);" class="dataTextInActive" onclick="openPaymentDialog('<c:out value="${feesdetails.key.receiptnumber}"/>')"> <i class="fa fa-edit" style="color: #004080; font-size: 16px;"></i></a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
