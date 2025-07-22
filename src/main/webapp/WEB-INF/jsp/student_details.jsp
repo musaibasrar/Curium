@@ -1056,6 +1056,7 @@ for(Cookie cookie : cookies){
                             
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                              
@@ -1065,14 +1066,14 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${receiptinfo}" var="receiptinfo">
+                        <c:forEach items="${receiptinfonarration}" var="receiptinfo">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                
-                                <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/fathima/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.key.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.key.branchreceiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.value}"/></a></td>
+                                <td class="dataText"><c:out value="${receiptinfo.key.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
                         
