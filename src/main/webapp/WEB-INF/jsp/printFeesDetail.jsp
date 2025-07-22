@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>FEES receipt</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -214,10 +214,10 @@
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -230,11 +230,11 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
 				
 				<td></td>
@@ -288,21 +288,21 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-				<c:if test="${recieptinfo.fine > 0}">
+				<c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
+							value="${receiptinfo.fine}" /></td>
 				</tr>
 			</c:if>
 				
-			<c:if test="${recieptinfo.misc > 0}">	
+			<c:if test="${receiptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
+							value="${receiptinfo.misc}" /></td>
 				</tr>
 			</c:if>
 			</table>
@@ -321,7 +321,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -366,8 +366,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -378,15 +378,16 @@
 		<br>
 		<br>
 		<br>
-		<%--<div style="border: 1px solid;border-radius: 15px">
-		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+		<div style="border: 1px solid;border-radius: 15px">
+			
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
 				<td><img src="/fathima/images/fathima.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -417,10 +418,10 @@
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -433,11 +434,11 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
 				
 				<td></td>
@@ -488,25 +489,24 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> 
+					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
-			<c:if test="${recieptinfo.fine > 0}">
+				<c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
+							value="${receiptinfo.fine}" /></td>
 				</tr>
 			</c:if>
 				
-			<c:if test="${recieptinfo.misc > 0}">	
+			<c:if test="${receiptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
+							value="${receiptinfo.misc}" /></td>
 				</tr>
 			</c:if>
 			</table>
@@ -525,13 +525,13 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
 			
 		<TABLE width="100%" border="0">
-			 <tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -549,7 +549,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr> 
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -570,13 +570,13 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
-		</div> --%>
+		</div>
 	</form>
 	
 	</div>

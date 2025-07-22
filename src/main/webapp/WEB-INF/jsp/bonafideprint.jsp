@@ -194,147 +194,66 @@ for(Cookie cookie : cookies){
 %>
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
-		<br><br>
-		<table align="center">
-			
-			
+	<form method="post" class="bodymargin" style="font-family: 'Times New Roman', serif; font-size: 16px;">
+	<div style="text-align: center; margin-bottom: 20px;">
+		<table width="100%">
 			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/fathima/images/fathima.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
+				<td width="15%" style="text-align: left; padding-left: 60px;">
+					<img src="/fathima/images/fathima.png" alt="logo" style="height: 100px; width: 100px;">
 				</td>
-			</tr>
-			</table>
-			
-		<table align="center" style="padding-left: 30px;padding-right: 20px;">
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br>
-				<%-- Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
-			
-			</tr>
-			
-			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
-					<br>
-					<u>BONAFIDE CERTIFICATE</u>
-					<br><br>
+				<td style="text-align: center;">
+					<h2 style="margin: 0;">${branchname}</h2>
+					<h4 style="margin: 0;">${branchaddress}</h4>
+					<h4 style="margin: 0;">Contact: ${branchcontact}</h4>
 				</td>
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
-					is/ was a student of this School/College.
-					 
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
-				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
-					</h3>
-				</td>
-				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
+				<td width="15%"></td>
 			</tr>
 		</table>
-		
+	</div>
+<hr style="border: 1px solid #000; width: 90%; margin: auto; margin-bottom: 30px;">
 
-		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
+	<div style="text-align: center; margin-top: 30px;">
+		<h2><u>BONAFIDE CERTIFICATE</u></h2>
+	</div>
 
+	<div style="padding: 0 50px; line-height: 1.8; text-align: justify;">
+		<p>
+			This is to certify that Smt./Sri <strong><c:out value="${studentdetailsbonafide.student.name}" /></strong> 
+			S/o, D/o <strong><c:out value="${studentdetailsbonafide.fathersname}" /></strong> is/was a student of this 
+			School/College.
+		</p>
+
+		<p>
+			He/She has studied/passed/finalized in the class 
+			<strong>
+				<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+					${splt}
+				</c:forEach>
+			</strong> during the academic year <strong>${currentAcademicYear}</strong>.
+		</p>
+
+		<p>
+			As per the School/College records, his/her date of birth is 
+			<strong><fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy" /></strong>.
+		</p>
+
+		<p>
+			He/She bears good moral character.
+		</p>
+	</div>
+
+	<div style="margin-top: 60px;">
+		<table width="100%" style="padding: 0 50px;">
 			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
+				<td style="text-align: left;">Date: <fmt:formatDate value="${now}" pattern="dd/MM/yyyy" /></td>
+				<td style="text-align: right; padding-right: 50px;">Principal</td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
-		</tr>
-		</TABLE>
-	</form>
+		</table>
+	</div>
+
+	<div style="page-break-after: always;"></div>
+</form>
+
 	
 	
 </body>

@@ -193,60 +193,32 @@
 </style>
 <script type="text/javascript" src="/fathima/js/datetimepicker_css.js"></script>
 
-<script type="text/javascript">
-	document.getElementById("UpdateExecutive").style.display = 'none';
-</script>
+<script src="/fathima/JavaScript/actb.js"></script>
+<script src="/fathima/JavaScript/common.js"></script>
 
 
 <script>
 
 	$(function() {
+		
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
-	});
-	$(function() {
-		$("#datepickeradmn").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#datepickeradmn" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(
-				function() {
-					$("#datepickeradmn").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	$(function() {
+		
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepickerleaving").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
@@ -424,10 +396,9 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
-										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
+										<input name="dateofjoining"  autocomplete="false"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 							
 						<%-- 	<input name="dateofjoining"
@@ -549,9 +520,8 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
 										<input name="joiningdate"
-									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepickerCD" size="30"
-									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 						<tr>
 
