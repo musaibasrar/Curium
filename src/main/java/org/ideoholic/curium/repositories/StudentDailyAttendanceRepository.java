@@ -1,6 +1,7 @@
 package org.ideoholic.curium.repositories;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface StudentDailyAttendanceRepository extends JpaRepository<Studentdailyattendance,Integer> {
 
-    Optional<Studentdailyattendance> findByAttendee_sidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
+	Optional<Studentdailyattendance> findByAttendee_studentexternalidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
 
     List<Studentdailyattendance> findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(String date, String academicYear, String attendeeId, int branchId);
     
@@ -27,7 +28,5 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
     @Modifying
     @Query("UPDATE Studentdailyattendance s SET s.attendancestatus = :status WHERE s.attendanceid = :id")
    void updateAttendanceStatusById(@Param("id") Integer id, @Param("status") String status);
-
-    Optional<Studentdailyattendance> findByAttendee_studentexternalidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
 
 }

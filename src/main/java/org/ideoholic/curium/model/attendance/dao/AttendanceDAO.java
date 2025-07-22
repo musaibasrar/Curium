@@ -247,12 +247,14 @@ public class AttendanceDAO {
 			listStudentAttendance.forEach(studentdailyattendance -> {
 
 				// Fetch attendance by attendee ID, current date, and academic year
+				// session.createQuery("from Studentdailyattendance  where" + " attendeeid='"+studentdailyattendance.getAttendeeid()+"' and " +	"date= CURDATE() and academicyear = '"+studentdailyattendance.getAcademicyear()+"'");
 				Studentdailyattendance existingAttendance = studentDailyAttendanceRepository
-						.findByAttendee_sidAndDateAndAcademicyear(
+						.findByAttendee_studentexternalidAndDateAndAcademicyear(
 								studentdailyattendance.getAttendeeid().toString(),
 								LocalDate.now(),
 								studentdailyattendance.getAcademicyear()
 						).map(attendance -> {
+							// session.createSQLQuery("update Studentdailyattendance set attendancestatus = " + "'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " + "'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
 							attendance.setAttendancestatus(studentdailyattendance.getAttendancestatus());
 							return studentDailyAttendanceRepository.save(attendance);
 						})
@@ -275,6 +277,7 @@ public class AttendanceDAO {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
 		try{
+			// studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			studentDailyAttendance = studentDailyAttendanceRepository.findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(date, currentAcademicYear, studentExternalId, branchId);
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -367,29 +370,25 @@ public class AttendanceDAO {
 		}
 	}
 
-	public void markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
+	@Transactional
+	public boolean markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
+		boolean result = true;
 
-		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
+
 			for (Studentdailyattendance student : studentDailyAttendance) {
-				Studentdailyattendance studentSingle = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
-				studentSingle = (Studentdailyattendance) query.uniqueResult();
-			
-				if(studentSingle == null){
-					session.save(student);
+				// Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
+				Studentdailyattendance studentSingle = studentDailyAttendanceRepository.findByAttendee_studentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
+						.orElse(studentDailyAttendanceRepository.save(student));
+				if(studentSingle != null) {
+					result &= true;
 				}
 			}
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw e;
 		}
+		return result;
 	}
 
 	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
