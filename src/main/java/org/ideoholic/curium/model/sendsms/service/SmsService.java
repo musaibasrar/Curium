@@ -262,7 +262,7 @@ public class SmsService {
 		// Send data
 		
 		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
-		log.info(templateType+": URL "+POST_URL);
+		log.info(templateType+": URL "+sgcPostContent.toString());
 		log.debug(templateType+": URL "+POST_URL);
         URL obj = new URL(sgcPostContent.toString());
         URLConnection myURLConnection = obj.openConnection();
@@ -274,11 +274,27 @@ public class SmsService {
         String output;
         while ((output = reader.readLine()) != null) {
             System.out.println("OUTPUT: " + output);
+            
+         // Check if ErrorCode is present
+            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
+            if (errorCodeIndex != -1) {
+                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
+                int end = output.indexOf("\"", start);
+                String errorCode = output.substring(start, end);
+
+                if ("000".equals(errorCode)) {
+                	responseCode=200;
+                } else {
+                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
+                }
+            } else {
+                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
+            }
         }
 
         // Close reader
         reader.close();
-        responseCode=200;
+        
 
 		} else {
 			log.error("POST request not worked");

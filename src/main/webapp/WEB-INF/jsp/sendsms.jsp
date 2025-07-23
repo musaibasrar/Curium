@@ -689,6 +689,10 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										</c:forEach>
 								</select> --%>
+								</tr>
+								
+								<tr>
+								<td class="alignRight"><label></label></td>
 								<td>
 								 <c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -734,8 +738,10 @@ for(Cookie cookie : cookies){
             								<option value="holiday">Holiday</option>
             								<option value="exams">Exams</option>
             								<option value="festival">Festival</option>
-            								<option value="scienceexhibition">Science Exhibition</option>
+            								<option value="scholarship">scholarship</option>
             								<option value="feesreminder">Fees Reminder</option>
+            								<option value="booksale">Books Sale</option>
+            								<option value="ptm">Parents Teacher Meeting</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
@@ -745,9 +751,15 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-											
+						
+						</table>
+						
+						<table  border="0" style="width: auto;height: auto;"  id="table1">
 						<tr>
-							<td class="alignRight">Message&nbsp;</td>
+						<td class="alignRight">Message&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="alignRight"></td>
 							<td >
 								<div class="holiday box">
 								 								
@@ -761,12 +773,13 @@ for(Cookie cookie : cookies){
 								</div>
 									
     							<div class="exams box">
-    								<span style="font-size: 16px;">Dear Parents,We would like to inform you that the </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
+    								<span style="font-size: 16px;">Dear Parents, A warm regard from School, this is to inform you that </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">for the academic Year</span> <span style="font-weight: bold;color: red">Academic Year</span><span style="font-size: 16px;"> is going to be held on </span><span style="font-weight: bold;color: red">Date</span>
 								<br><br>
 								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
 								<br><br>
-								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
-								<input type="hidden" id="examsvar3" name="examsvar3" maxlength="30">
+								<label style="color: red;">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar3" name="examsvar3" maxlength="30">
 								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
     							</div>
     							
@@ -780,14 +793,14 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="festivalvar4" name="festivalvar4" maxlength="30">
 								</div>
 								
-								<div class="scienceexhibition box">
-    								<span style="font-size: 16px;">Dear parents, you are cordially invited to Science Exhibition on <span style="font-weight: bold;color: red">Date & Time</span></span>
+								<div class="scholarship box">
+    								<span style="font-size: 16px;">Dear parents, Govt. of Karnataka has announced scholarship for</span> <span style="font-weight: bold;color: red">Classes</span> <span  style="font-size: 16px;">you can register at high school on or before </span><span style="font-weight: bold;color: red">End Date</span>
 								<br><br>
-								<label style="color: red;">Date & Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="scienceexhibitionvar1" name="scienceexhibitionvar1" maxlength="30">
+								<label style="color: red;">Classes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="scholarshipvar1" name="scholarshipvar1" maxlength="30">
 								<br><br>
-								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
-								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
-								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+								<label style="color: red;">End Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="scholarshipvar2" name="scholarshipvar2" maxlength="30">
+								<input type="hidden" id="scholarshipvar3" name="scholarshipvar3" maxlength="30">
+								<input type="hidden" id="scholarshipvar4" name="scholarshipvar4" maxlength="30">
     							</div>
 								
     							<div class="feesreminder box">
@@ -799,6 +812,27 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
 								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+    							
+    							<div class="booksale box">
+    								<span style="font-size: 16px;">Dear Parents, We would like to inform you that the book sale process is currently in progress for classes <span style="font-weight: bold;color: red">Class</span> Parents are kindly requested to visit the school and complete the purchase of books at the earliest convenience. Thank you for your cooperation and support. School Management -LFHSCL</span>
+								<br><br>
+								<label style="color: red;">Class:&nbsp;&nbsp;</label><input type="text" id="booksalevar1" name="booksalevar1" maxlength="9">
+								<br><br>
+								<input type="hidden" id="booksalevar2" name="booksalevar2" maxlength="30">
+								<input type="hidden" id="booksalevar3" name="booksalevar3" maxlength="30">
+								<input type="hidden" id="booksalevar4" name="booksalevar4" maxlength="30">
+    							</div>
+    							
+    							<div class="ptm box">
+    								<span style="font-size: 16px;">Dear parents, A warm regard from school. this is to inform you that Parent-Teacher Meet from classes </span> <span style="font-weight: bold;color: red">Classes</span>  <span style="font-size: 16px;">will be held on</span> <span style="font-weight: bold;color: red">Date</span><span style="font-size: 16px;"> at </span><span style="font-weight: bold;color: red">Time</span>
+								<br><br>
+								<label style="color: red;">Classes:&nbsp;</label>&nbsp;<input type="text" id="ptmvar1" name="ptmvar1" maxlength="30" >
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="ptmvar2" name="ptmvar2" maxlength="30">
+								<br><br>
+								<label style="color: red;">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="ptmvar3" name="ptmvar3" maxlength="30">
+								<input type="hidden" id="ptmvar4" name="ptmvar4" maxlength="30">
     							</div>
 							
 							</td>
