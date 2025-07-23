@@ -24,8 +24,8 @@ public class EventService {
     }
     
     @Transactional(readOnly = true)
-    public List<EventDTO> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
-        List<Event> events = eventDAO.getEvents(start, end, branchId, userId);
+    public List<EventDTO> getEvents(LocalDateTime start, LocalDateTime end) {
+        List<Event> events = eventDAO.getEvents(start, end);
         List<EventDTO> eventDTOs = new ArrayList<>();
         
         for (Event event : events) {
@@ -45,13 +45,11 @@ public class EventService {
     }
     
     @Transactional
-    public boolean createEvent(EventDTO eventDTO, String branchid, String userId) {
+    public boolean createEvent(EventDTO eventDTO) {
         try {
             Event event = convertToEntity(eventDTO);
             event.setCreatedAt(LocalDateTime.now());
             event.setUpdatedAt(LocalDateTime.now());
-            event.setBranchid(Integer.parseInt(branchid));
-            event.setUserid(Integer.parseInt(userId));
             return eventDAO.saveEvent(event);
         } catch (Exception e) {
             logger.error("Error creating event", e);
@@ -60,14 +58,12 @@ public class EventService {
     }
     
     @Transactional
-    public boolean updateEvent(Long id, EventDTO eventDTO, String branchid, String userId) {
+    public boolean updateEvent(Long id, EventDTO eventDTO) {
         try {
             Event existingEvent = eventDAO.getEventById(id);
             if (existingEvent != null) {
                 updateEventFromDTO(existingEvent, eventDTO);
                 existingEvent.setUpdatedAt(LocalDateTime.now());
-                existingEvent.setBranchid(Integer.parseInt(branchid));
-                existingEvent.setUserid(Integer.parseInt(userId));
                 return eventDAO.updateEvent(existingEvent);
             }
             return false;

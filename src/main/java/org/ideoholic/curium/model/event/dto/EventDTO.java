@@ -1,45 +1,17 @@
 package org.ideoholic.curium.model.event.dto;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "events")
-public class Event implements java.io.Serializable {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EventDTO {
     private Long id;
-    
-    @Column(nullable = false)
     private String title;
-    
-    @Column(length = 1000)
     private String description;
-    
-    @Column(nullable = false)
-    private LocalDateTime startDateTime;
-    
-    @Column(nullable = false)
-    private LocalDateTime endDateTime;
-    
-    @Column
+    private LocalDateTime start;
+    private LocalDateTime end;
     private String location;
-    
-    @Column
     private String color;
-    
-    @Column
     private boolean allDay;
-    
-    @Column
     private String createdBy;
-    
-    @Column
-    private LocalDateTime createdAt;
-    
-    @Column
-    private LocalDateTime updatedAt;
 
     // Getters and Setters
     public Long getId() {
@@ -66,20 +38,20 @@ public class Event implements java.io.Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getStartDateTime() {
-        return startDateTime;
+    public LocalDateTime getStart() {
+        return start;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setStart(LocalDateTime start) {
+        this.start = start;
     }
 
-    public LocalDateTime getEndDateTime() {
-        return endDateTime;
+    public LocalDateTime getEnd() {
+        return end;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 
     public String getLocation() {
@@ -112,21 +84,5 @@ public class Event implements java.io.Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 } 
