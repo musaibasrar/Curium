@@ -91,27 +91,6 @@
 	font-weight: bold;
 }
 
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: right;
-	font-weight: bold;
-}
-
-.alignSearch {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -120,22 +99,6 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
-}
-
-.footerTD {
-	border-radius: 3px;
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 14px;
-	background-color: #4b6a84;
-	color: #FFFFFF;
-	font-weight: Bold;
-	width: auto;
-	height: 24px;
-	vertical-align: text-top;
-	text-align: center;
-	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .alignCentreMultiple {
@@ -227,7 +190,6 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
@@ -298,7 +260,15 @@
 	font-weight: bold;
 	height: 22px;
 }
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
 
+
+                text-align: left;
+
+
+            }
 </style>
 <style>
 #button {
@@ -317,8 +287,10 @@
 <script type="text/javascript"
 	src="/littleflower/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/littleflower/js/datePicker/ui/sliderAccess.js"></script>
 
-
+<script type="text/javascript"
+	src="/littleflower/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/littleflower/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -337,6 +309,8 @@
 	src="/littleflower/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
 	src="/littleflower/js/datePicker/ui/jquery.effects.blind.js"></script>
+<script type="text/javascript"
+	src="/littleflower/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -388,12 +362,19 @@
 			searchForStudents();
 		});
 		
-		$("#sendsms").button().click(function() {
+		/* $("#sendsms").button().click(function() {
 			sendSMS();
 			return false;
 
-		});
-		
+		}); */
+	      $("#sendsms").button({
+	             icons:{
+	                 primary: "ui-icon-mail-closed"
+	             }
+	         }).click(function(){
+	        	 sendSMS();	
+	         	});
+	             
 
 	});
 
@@ -411,7 +392,7 @@
 	$(function() {
 		$("#export").button({
 			icons : {
-				primary : "ui-icon-trash"
+				primary : "ui-icon-transferthick-e-w"
 			}
 		});
 	});
@@ -444,6 +425,41 @@
 				$('.chcktbl:not(:checked)').attr('disabled', true);
 			} else {
 				$('.chcktbl:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+	
+	
+	$(function() {
+		$('#chckHeadSMS').click(function() {
+			var length = $('.chcktblSMS:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktblSMS:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktblSMS:checked').attr('checked', false);
+				} else {
+					$('.chcktblSMS:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktblSMS').click(function() {
+			var length = $('.chcktblSMS:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktblSMS:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblSMS:not(:checked)').attr('disabled', false);
 			}
 		});
 
@@ -698,7 +714,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th class="headerText"><input type="checkbox" id="chckHeadSMS" /></th>
 						<th title="click to sort" class="headerText">Sl.No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
@@ -720,10 +736,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<%-- <td class="dataText"><input type="checkbox"
-								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktblSMS"
 								name="studentIDs"
-								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
 								<td class="dataText"><c:out
 										value="${status.index+1}" /></td>
 										<td class="dataText"><c:out
@@ -769,27 +785,22 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 				</tbody>
+				
 				<tfoot>
-					<tr>
-					
-					<td  class="footerTD" colspan="2" >
-					 <input value="Export"
-							type="submit" id="export"/>
-							
-							<button id="sendsms">Send SMS Reminder</button>
-							</td>
-													
-						<td class="footerTD" colspan="7" >
-						 
-						<%-- Total Amount: ${TotalSum}
-						 &nbsp;&nbsp;&nbsp;
-						  Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; --%> Total Due Amount: ${TotalDueAmount }
-						 
-						</td>
-							
-							
-
-					</tr>
+				
+				<tr>
+                    
+                    <td  class="footerTD" colspan="9" >
+                    
+                    		<button value="Export" type="submit" id="export">Export</button>
+                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount }</label>
+                            </td>
+                   </tr>
+                   
 				</tfoot>
 			</table>
 
