@@ -686,6 +686,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/littleflower/css/dataTable/images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Exam Name<img
+							alt=" " style="position: relative; top: 4px;"
+							src="/littleflower/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/littleflower/css/dataTable/images/sort_both.png" /></th>
@@ -711,6 +714,7 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
 							<td class="dataText"><c:out value="${examschedule.classes}" /></td>
+							<td class="dataText"><c:out value="${examschedule.examname}" /></td>
 							<td class="dataText"><c:out value="${examschedule.subject}" /></td>
 							<td class="dataText"><c:out value="${examschedule.date}" /></td>
 							<td class="dataText"><c:out value="${examschedule.starttime}" /></td>
