@@ -8,6 +8,15 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        
+        <property name="userid" type="java.lang.Integer">
+            <column name="userid"  />
+        </property>
+        
         <property name="title" type="string">
             <column name="title" length="255" not-null="true" />
         </property>

@@ -40,7 +40,7 @@ public class SmsService {
 
 		int noOfRecords = 100;
 		int offset=0;
-		
+		boolean result = false;
 		if(branchId!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
@@ -111,11 +111,11 @@ public class SmsService {
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				 ResultResponse.builder().success(true).build();
+				result=true;
 			}
 		}
 		
-        return ResultResponse.builder().build();
+        return ResultResponse.builder().success(result).build();
 		
 	}
 
