@@ -616,59 +616,76 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="16%" class="alignRight">Class Teacher&nbsp;</td>
 
-							<td width="28%"><label>
-							
-													<div class="checkbox-container">
-													    <c:set var="counter" value="0" scope="page" />
-													    <c:forEach items="${classdetailslist}" var="classdetails">
-													        <c:if test="${classdetails.classdetails != ''}">
-													            <c:forEach items="${classdetailslist}" var="sectiondetails">
-													                <c:if test="${sectiondetails.section != ''}">
-													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
-													                    <div class="checkbox-item">
-													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-													                            <input type="checkbox" name="classteacher"
-													                                   value="${classSec}"
-													                                   <c:if test="${classteacherList.contains(classSec)}">checked</c:if> />
-													                            ${classSec}
-													                        </label>
-													                    </div>
-													                    <c:set var="counter" value="${counter + 1}" scope="page" />
-													                </c:if>
-													            </c:forEach>
-													        </c:if>
-													    </c:forEach>
+							<td width="28%"><div class="checkbox-container">
+													   <c:forEach items="${classList}" var="classItem">
+    
+														    <c:choose>
+														        <c:when test="${not empty sectionList}">
+														            <c:forEach items="${sectionList}" var="sectionItem">
+														                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+														                <div class="checkbox-item">
+														                    <label>
+														                        <input type="checkbox" name="classteacher"
+														                               value="${classSec}"
+														                               <c:if test="${fn:contains(classteacherList, classSec)}">checked</c:if> />
+														                        ${classSec}
+														                    </label>
+														                </div>
+														            </c:forEach>
+														        </c:when>
+														
+														        <c:otherwise>
+														            <div class="checkbox-item">
+														                <label>
+														                    <input type="checkbox" name="classteacher"
+														                           value="${classItem}"
+														                           <c:if test="${fn:contains(classteacherList, classItem)}">checked</c:if> />
+														                    ${classItem}
+														                </label>
+														            </div>
+														        </c:otherwise>
+														    </c:choose>
+														</c:forEach>
 													</div>
-
-							</label></td>
+										</td>
 
 
 
 							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
 
-							<td width="28%"><label> <div class="checkbox-container">
-													    <c:set var="counter" value="0" scope="page" />
-													    <c:forEach items="${classdetailslist}" var="classdetails">
-													        <c:if test="${classdetails.classdetails != ''}">
-													            <c:forEach items="${classdetailslist}" var="sectiondetails">
-													                <c:if test="${sectiondetails.section != ''}">
-													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
-													                    <div class="checkbox-item">
-													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-													                            <input type="checkbox" name="classesteaching"
-													                                   value="${classSec}"
-													                                   <c:if test="${classesteachingList.contains(classSec)}">checked</c:if> />
-													                            ${classSec}
-													                        </label>
-													                    </div>
-													                    <c:set var="counter" value="${counter + 1}" scope="page" />
-													                </c:if>
+							<td width="28%">
+									<div class="checkbox-container">
+													    <c:forEach items="${classList}" var="classItem">
+													    
+													    <c:choose>
+													        <c:when test="${not empty sectionList}">
+													            <c:forEach items="${sectionList}" var="sectionItem">
+													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													                <div class="checkbox-item">
+													                    <label>
+													                        <input type="checkbox" name="classesteaching"
+													                               value="${classSec}"
+													                               <c:if test="${fn:contains(classesteachingList, classSec)}">checked</c:if> />
+													                        ${classSec}
+													                    </label>
+													                </div>
 													            </c:forEach>
-													        </c:if>
-													    </c:forEach>
+													        </c:when>
+													
+													        <c:otherwise>
+													            <div class="checkbox-item">
+													                <label>
+													                    <input type="checkbox" name="classesteaching"
+													                           value="${classItem}"
+													                           <c:if test="${fn:contains(classesteachingList, classItem)}">checked</c:if> />
+													                    ${classItem}
+													                </label>
+													            </div>
+													        </c:otherwise>
+													    </c:choose>
+													</c:forEach>
 													</div>
-
-							</label></td>
+							</td>
 						</tr>
 
 
