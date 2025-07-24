@@ -416,6 +416,24 @@ public class EmployeeService {
 	        viewAllRelationsResponseDto.setListPosition(listPosition);
 	        List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListClasssec(classsecList);
+	        
+	        List<String> classList = new ArrayList<>();
+	        	        List<String> sectionList = new ArrayList<>();
+	        
+	        	        for (Classsec cd : classsecList) {
+	        	            if (cd.getClassdetails() != null && !cd.getClassdetails().trim().isEmpty()
+	        	                && (cd.getSection() == null || cd.getSection().trim().isEmpty())) {
+	        	                classList.add(cd.getClassdetails());
+	        	            } else if ((cd.getClassdetails() == null || cd.getClassdetails().trim().isEmpty())
+	                               && cd.getSection() != null && !cd.getSection().trim().isEmpty()) {
+	        	                sectionList.add(cd.getSection());
+	        	            }
+	        	        }
+	        
+	        	        viewAllRelationsResponseDto.setClassList(classList);
+	        	        viewAllRelationsResponseDto.setSectionList(sectionList);
+	        
+	        
 	        List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListSubjectMaster(subjectList);
 		}
