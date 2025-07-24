@@ -146,6 +146,8 @@ public class EmployeeActionAdapter {
         httpSession.setAttribute("listPosition", viewAllRelationsResponseDto.getListPosition());
         httpSession.setAttribute("listSubjectNames", viewAllRelationsResponseDto.getListSubjectMaster());
         httpSession.setAttribute("classdetailslist", viewAllRelationsResponseDto.getListClasssec());
+        httpSession.setAttribute("classList", viewAllRelationsResponseDto.getClassList());
+        httpSession.setAttribute("sectionList", viewAllRelationsResponseDto.getSectionList());
     }
     public void searchEmployee() {
 
