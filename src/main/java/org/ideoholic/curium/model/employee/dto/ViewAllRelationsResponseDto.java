@@ -16,4 +16,6 @@ private List<Department> listDepartment;
 private List<Position> listPosition;
 private List<Classsec> listClasssec;
 private List<Subjectmaster> listSubjectMaster;
+private List<String> classList;
+private List<String> sectionList;
 }
