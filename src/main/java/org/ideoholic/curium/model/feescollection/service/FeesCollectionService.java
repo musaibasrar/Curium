@@ -42,6 +42,7 @@ import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
@@ -1894,6 +1895,222 @@ public class FeesCollectionService {
 		}
 		
 		
+	}
+
+	public void searchFeesCollectionDetailsMonthly() {
+        int idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+        String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+        String toDate = DataUtil.emptyString(request.getParameter("todate"));
+        SimpleDateFormat monthKeyFormat = new SimpleDateFormat("MMM-yyyy", Locale.ENGLISH);
+        SimpleDateFormat sqlDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // 1. Fetch all students for the branch
+        String studentQuery = "FROM Parents as parents WHERE parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid=" + idBranch;
+        List<Parents> students = new studentDetailsDAO().getStudentsList(studentQuery);
+        // 2. Prepare month keys between fromDate and toDate
+        List<String> monthKeys = new ArrayList<>();
+        try {
+            Date start = sqlDateFormat.parse(fromDate);
+            Date end = sqlDateFormat.parse(toDate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(start);
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(end);
+            endCal.set(Calendar.DAY_OF_MONTH, 1);
+            while (!cal.after(endCal)) {
+                String key = monthKeyFormat.format(cal.getTime());
+                monthKeys.add(key);
+                cal.add(Calendar.MONTH, 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 3. For each student, fetch receipts and aggregate month-wise
+        List<Map<String, Object>> studentMonthlyList = new ArrayList<>();
+        for (Parents parent : students) {
+            Map<String, Object> studentMap = new HashMap<>();
+            int sid = parent.getStudent().getSid();
+            String studentName = parent.getStudent().getName();
+            // Fetch receipts for this student in date range
+            String receiptQuery = "FROM Receiptinfo as feesdetails WHERE feesdetails.cancelreceipt=0 AND feesdetails.branchid=" + idBranch +
+                    " AND feesdetails.sid=" + sid +
+                    " AND feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
+            List<Receiptinfo> receipts = new UserDAO().getReceiptDetailsList(receiptQuery);
+            // Aggregate by month
+            Map<String, Long> monthlyFees = new LinkedHashMap<>();
+            for (String key : monthKeys) {
+                monthlyFees.put(key, 0L);
+            }
+            for (Receiptinfo receipt : receipts) {
+                if (receipt.getDate() != null) {
+                    String key = monthKeyFormat.format(receipt.getDate());
+                    if (monthlyFees.containsKey(key)) {
+                        monthlyFees.put(key, monthlyFees.get(key) + (receipt.getTotalamount() != null ? receipt.getTotalamount() : 0L));
+                    }
+                }
+            }
+            studentMap.put("studentId", sid);
+            studentMap.put("studentName", studentName);
+            studentMap.put("monthlyFees", monthlyFees);
+            studentMonthlyList.add(studentMap);
+        }
+        request.setAttribute("studentMonthlyFeesList", studentMonthlyList);
+        request.setAttribute("monthKeys", monthKeys);
+        request.setAttribute("fromdateselected", fromDate);
+        request.setAttribute("todateselected", toDate);
+        
+        // Debug: Print the studentMonthlyList to the console
+        /*System.out.println("===== Student Monthly Fees List =====");
+        for (Map<String, Object> studentMap : studentMonthlyList) {
+            System.out.println("Student ID: " + studentMap.get("studentId"));
+            System.out.println("Student Name: " + studentMap.get("studentName"));
+            System.out.println("Monthly Fees: " + studentMap.get("monthlyFees"));
+            System.out.println("-----------------------------------");
+        }*/
+    }
+	
+	
+	public boolean exportDataToExcelForMonthlyCollection() {
+		
+		String fromDate = request.getParameter("fromdateselected");
+	    String toDate = request.getParameter("todateselected");
+	    int idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	    
+	    boolean success = exportMonthlySummaryToExcel(fromDate, toDate, idBranch);
+	    return success;
+}
+
+
+
+public boolean exportMonthlySummaryToExcel(String fromDate, String toDate, int idBranch) {
+    boolean writeSuccess = false;
+    SimpleDateFormat monthKeyFormat = new SimpleDateFormat("MMM-yyyy", Locale.ENGLISH);
+    SimpleDateFormat sqlDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    // 1. Fetch all students for the branch
+    String studentQuery = "FROM Parents as parents WHERE parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid=" + idBranch;
+    List<Parents> students = new studentDetailsDAO().getStudentsList(studentQuery);
+
+    // 2. Prepare month keys between fromDate and toDate
+    List<String> monthKeys = new ArrayList<>();
+    try {
+        Date start = sqlDateFormat.parse(fromDate);
+        Date end = sqlDateFormat.parse(toDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(start);
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(end);
+        endCal.set(Calendar.DAY_OF_MONTH, 1);
+        while (!cal.after(endCal)) {
+            String key = monthKeyFormat.format(cal.getTime());
+            monthKeys.add(key);
+            cal.add(Calendar.MONTH, 1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+
+    // 3. For each student, fetch receipts and aggregate month-wise
+    List<Map<String, Object>> studentMonthlyList = new ArrayList<>();
+    for (Parents parent : students) {
+        Map<String, Object> studentMap = new HashMap<>();
+        int sid = parent.getStudent().getSid();
+        String studentName = parent.getStudent().getName();
+        // Fetch receipts for this student in date range
+        String receiptQuery = "FROM Receiptinfo as feesdetails WHERE feesdetails.cancelreceipt=0 AND feesdetails.branchid=" + idBranch +
+                " AND feesdetails.sid=" + sid +
+                " AND feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
+        List<Receiptinfo> receipts = new UserDAO().getReceiptDetailsList(receiptQuery);
+        // Aggregate by month
+        Map<String, Long> monthlyFees = new LinkedHashMap<>();
+        for (String key : monthKeys) {
+            monthlyFees.put(key, 0L);
+        }
+        for (Receiptinfo receipt : receipts) {
+            if (receipt.getDate() != null) {
+                String key = monthKeyFormat.format(receipt.getDate());
+                if (monthlyFees.containsKey(key)) {
+                    monthlyFees.put(key, monthlyFees.get(key) + (receipt.getTotalamount() != null ? receipt.getTotalamount() : 0L));
+                }
+            }
+        }
+        studentMap.put("studentName", studentName);
+        studentMap.put("monthlyFees", monthlyFees);
+        studentMonthlyList.add(studentMap);
+    }
+
+    // 4. Write to Excel
+    try {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Monthly Summary");
+        // Header
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Name");
+        for (int i = 0; i < monthKeys.size(); i++) {
+            headerRow.createCell(i + 1).setCellValue(monthKeys.get(i));
+        }
+        // Data rows
+        int rownum = 1;
+        for (Map<String, Object> studentMap : studentMonthlyList) {
+            Row row = sheet.createRow(rownum++);
+            row.createCell(0).setCellValue((String) studentMap.get("studentName"));
+            Map<String, Long> monthlyFees = (Map<String, Long>) studentMap.get("monthlyFees");
+            for (int i = 0; i < monthKeys.size(); i++) {
+                Long value = monthlyFees.get(monthKeys.get(i));
+                row.createCell(i + 1).setCellValue(value != null ? value : 0L);
+            }
+        }
+        FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir") + "/monthlysummary.xlsx"));
+        workbook.write(out);
+        out.close();
+        writeSuccess = true;
+    } catch (Exception e) {
+        e.printStackTrace();
+        writeSuccess = false;
+    }
+    
+    return writeSuccess;
+}
+
+public boolean downloadExportedData() {
+	boolean result = false;
+	try {
+
+        File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/monthlysummary.xlsx");
+FileInputStream inStream = new FileInputStream(downloadFile);
+
+// get MIME type of the file
+        String mimeType = "application/vnd.ms-excel";
+
+        // set content attributes for the response
+        response.setContentType(mimeType);
+        // response.setContentLength((int) bis.length());
+
+        // set headers for the response
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"",
+                        "monthlysummary.xlsx");
+        response.setHeader(headerKey, headerValue);
+
+        // get output stream of the response
+        OutputStream outStream = response.getOutputStream();
+
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int bytesRead = -1;
+
+        // write bytes read from the input stream into the output stream
+        while ((bytesRead = inStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+        }
+
+        inStream.close();
+        outStream.close();
+        result = true;
+} catch (Exception e) {
+        System.out.println("" + e);
+}
+	
+	return result;
 	}
 }
 

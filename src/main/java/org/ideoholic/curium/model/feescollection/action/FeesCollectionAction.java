@@ -14,8 +14,10 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.user.action.UserAction;
+import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -234,6 +236,36 @@ public class FeesCollectionAction {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} 
+			}
+		 
+		 @PostMapping("/searchFeesCollectionDetailsMonthly")
+			public String searchFeesCollectionDetailsMonthly() {
+				new FeesCollectionService(request, response).searchFeesCollectionDetailsMonthly();
+				return "feesCollectionDetailsMonthly";
+			}
+		 
+		 
+			@PostMapping("/exportDataForFeesMonthlyCollection")
+			public String exportDataForFeesMonthlyCollection() {
+				
+				if(new FeesCollectionService(request, response).exportDataToExcelForMonthlyCollection()){
+					return "exportsaved";
+				}else{
+					return "exportfailure";
+				}
+				
+			}
+			
+			@PostMapping("/exportDataForFeesMonthlyCollectionDownload")
+			public String exportDataForFeesMonthlyCollectionDownload() {
+				
+				if(new FeesCollectionService(request, response).downloadExportedData()){
+					
+					return "exportsaved";
+				}else{
+					return "exportfailure";
+				}
+				
+			}
 		 
 }

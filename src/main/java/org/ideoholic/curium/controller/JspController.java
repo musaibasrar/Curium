@@ -441,4 +441,20 @@ public class JspController {
 	public String dayBook() {
 		return "daybook";
 	}
+	
+	@GetMapping("/feesCollectionDetailsMonthly")
+	public String feesCollectionDetailsMonthly(){
+		return "feesCollectionDetailsMonthly";
+	}
+	
+	@GetMapping("/exportdataloader")
+	public String exportDataLoader(){
+		return "exportdataloader";
+	}
+	
+	@GetMapping("/exportsaved")
+	public String exportSaved(){
+		return "exportsaved";
+	}
+	
 }

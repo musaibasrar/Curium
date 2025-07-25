@@ -330,6 +330,12 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/jih/feesCollectionDetailsMonthly" style="font-size: 12px;">Monthly Contribution Collection</a>
+            			</td>
+            		</tr>
+            		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/jih/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
