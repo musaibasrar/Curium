@@ -505,13 +505,16 @@ for(Cookie cookie : cookies){
   </table> 
   <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 10px;margin-right:0px;padding-right: 0;font-size:9px;">
 <td style="padding: 0;font-size:9px;">Name<span style="float:right;">:&nbsp;</span></td>
-  <td style="font-weight:bold;font-size:16px;text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>    
+  <td style="font-weight:bold;font-size:14px;text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>    
     <%-- <tr>
       <td colspan="2" style="padding: 0;text-transform: uppercase;text-align:center;font-weight:bold;font-size:16px;"><%= request.getSession().getAttribute("studentname" + i + "") %></td>
     </tr>
  --%> 
  
-  
+	<tr>
+      <td style="padding: 0;font-size:9px;">Father Name<span style="float:right;">:&nbsp;</span></td>
+      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    </tr> 
     <tr>
       <td style="padding: 0;white-space: nowrap;font-size:9px;">Class<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("classsection" + i + "") %></td>
@@ -521,12 +524,6 @@ for(Cookie cookie : cookies){
       <td style="padding: 0;font-size:9px;">D. O. B.<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
     </tr> 
-     
-     <tr>
-      <td style="padding: 0;font-size:9px;">Father Name<span style="float:right;">:&nbsp;</span></td>
-      <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-    </tr> 
-    
      <tr>
       <td style="padding: 0;font-size:9px;">Contact<span style="float:right;">:&nbsp;</span></td>
       <td style="padding: 0;font-size:9px;"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
