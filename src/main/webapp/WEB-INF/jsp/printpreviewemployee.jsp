@@ -459,7 +459,7 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="position: relative;background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
@@ -489,7 +489,7 @@ for(Cookie cookie : cookies){
    <div align="center">
    <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px;font-size:8px;">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
@@ -511,16 +511,12 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofjoining" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("Address" + i + "") %></td>
   </tr>
 </table>
    
-<div height="30" width="20%" style="text-align:right;float:right;">
+<div class="signature" height="30" width="20%" style="position: absolute; bottom: 5px; right: 5px; text-align:right;float:right;">
 
 <img src="/abc/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
