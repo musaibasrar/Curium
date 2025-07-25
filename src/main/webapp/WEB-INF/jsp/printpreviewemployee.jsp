@@ -8,7 +8,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+        <title>Staff Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
         <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -516,7 +516,7 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("Address" + i + "") %></td>
   </tr>
 </table>
    
