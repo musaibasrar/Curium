@@ -481,8 +481,8 @@ for(Cookie cookie : cookies){
 
             <table width="100%">
                 <tr>
-                    <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      
+                    <td  class="headerTD">UID: &nbsp;<c:out value="${student.studentexternalid}" />&nbsp;&nbsp; NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp; Class: &nbsp;<c:out value="${student.classstudying}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Father Name:${parents.fathersname}
 
                     </td>
                 </tr>
