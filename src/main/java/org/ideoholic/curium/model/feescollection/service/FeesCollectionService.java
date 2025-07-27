@@ -277,6 +277,7 @@ public class FeesCollectionService {
 		result.setClassAndSecDetails(dto.getClassAndSec());
 		result.setStudentIdDetails(dto.getStudentId());
 		result.setDateOfFeesDetails(dto.getDateOfFees());
+		result.setFatherName(dto.getFatherName());
 		result.setSuccess(true);
 		
 		}
