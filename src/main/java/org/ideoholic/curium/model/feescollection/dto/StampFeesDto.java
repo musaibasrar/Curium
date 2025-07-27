@@ -11,4 +11,5 @@ public class StampFeesDto {
     private String classAndSec;
     private String studentId;
     private String dateOfFees;
+    private String fatherName;
 }
