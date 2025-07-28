@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.ParentsRepository;
+import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
@@ -38,6 +39,9 @@ public class StudentDetailsDAO {
 	
 	@Autowired
 	private StudentRepository studentRepo;
+	
+	@Autowired
+	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
 	
 	@SuppressWarnings("finally")
 	public Student create(Student student) {
@@ -787,25 +791,22 @@ public class StudentDetailsDAO {
 		}
 	}
 	
+	@Transactional
 	public Studentotherfeesstructure getStudentOtherFeesStructureDetails(int sfsid) {
 		Studentotherfeesstructure studentFeesStructure = new Studentotherfeesstructure();
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentFeesStructure = (Studentotherfeesstructure) session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").uniqueResult();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+			// studentFeesStructure = (Studentotherfeesstructure) session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").uniqueResult();
+			studentFeesStructure = studentOtherFeesStructureRepo.findById(sfsid).orElse(studentFeesStructure);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return studentFeesStructure;
+			throw hibernateException;
 		}
+		return studentFeesStructure;
 	}
 	
+	@Transactional
 	public List<Object[]> readStudentsParentsPerBranch(int branchId) {
 		List<Object[]> results = new ArrayList<>();
 		try {

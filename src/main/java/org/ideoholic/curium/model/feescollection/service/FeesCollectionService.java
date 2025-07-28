@@ -64,6 +64,9 @@ public class FeesCollectionService {
 	
 	@Autowired
 	private feesDetailsDAO feesDetailsDao;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 
 	@Autowired
 	private HttpServletResponse response;
@@ -1302,7 +1305,7 @@ public class FeesCollectionService {
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Otherfeescollection feesCollect = new Otherfeescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
-					feesCollect.setOtherFeesStructure(new StudentDetailsDAO().getStudentOtherFeesStructureDetails(DataUtil.parseInt(studentSfsIdamount[0])));
+					feesCollect.setOtherFeesStructure(studentDetailsDao.getStudentOtherFeesStructureDetails(DataUtil.parseInt(studentSfsIdamount[0])));
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
 					feesCollect.setStudent(student);
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
