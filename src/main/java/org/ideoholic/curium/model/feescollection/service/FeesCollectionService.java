@@ -1,6 +1,31 @@
 package org.ideoholic.curium.model.feescollection.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -11,7 +36,27 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
-import org.ideoholic.curium.model.feescollection.dto.*;
+import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.DetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDashboardResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesReportDto;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.OtherPreviewResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.PreviewDto;
+import org.ideoholic.curium.model.feescollection.dto.PreviewResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeDto;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
@@ -29,50 +74,26 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FeesCollectionService {
 
-	@Autowired
-	private StandardService standardService;
-
-	@Autowired
-	private SmsService smsService;
-	
-	@Autowired
-    private AccountDAO accountDao;
-	
-	@Autowired
-	private UserDAO userDao;
-	
-	@Autowired
-	private feesDetailsDAO feesDetailsDao;
-	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
-
-	@Autowired
-	private HttpServletResponse response;
-
-	@Autowired
-	private HttpSession httpSession;
+	private final StandardService standardService;
+	private final SmsService smsService;
+    private final AccountDAO accountDao;
+	private final UserDAO userDao;
+	private final feesDetailsDAO feesDetailsDao;
+	private final StudentDetailsDAO studentDetailsDao;
+	private final HttpServletResponse response;
 	
 	private static final int BUFFER_SIZE = 4096;
 
@@ -1512,7 +1533,7 @@ public class FeesCollectionService {
 				for (String feescat : feesCat) {
 					feesCatList.add(Integer.parseInt(feescat));
 				}
-				List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentotherFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentotherFeesStructurebyFeesCategory(id,feesCatList);
 
 				if (!feesstructure.isEmpty()) {
 

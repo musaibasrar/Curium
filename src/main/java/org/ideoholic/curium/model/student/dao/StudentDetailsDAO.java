@@ -765,30 +765,23 @@ public class StudentDetailsDAO {
 			return studentFeesStructure;
 		}
 	}
-	
-	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(long id, List<Integer> feesCat) {
+
+	@Transactional
+	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(Long id, List<Integer> feesCat) {
 		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
 
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
-			Query query = session
-					.createQuery("from Studentotherfeesstructure sfs where sfs.sid = '"+id+"' and sfs.otherfeescategory.idfeescategory IN (:feescat)");
-			query.setParameterList("feescat", feesCat);
-			results = query.list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
+			// .createQuery("from Studentotherfeesstructure sfs where sfs.sid = '"+id+"' and sfs.otherfeescategory.idfeescategory IN (:feescat)");
+			results = studentOtherFeesStructureRepo.findByStudentSidAndOtherfeescategoryIdfeescategoryIn(id.intValue(), feesCat);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 	
 	@Transactional
