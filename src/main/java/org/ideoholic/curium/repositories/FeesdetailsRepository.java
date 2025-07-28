@@ -13,6 +13,8 @@ public interface FeesdetailsRepository extends JpaRepository<Feesdetails, Intege
 	
     @Query("SELECT SUM(f.grandtotal) FROM Feesdetails f WHERE f.student.sid = :sid AND f.academicyear = :currentYear")
     String sumGrandTotalBySidAndAcademicyear(@Param("sid") int sid, @Param("currentYear") String currentYear);
-
+    
+    @Query("SELECT SUM(f.grandtotal) FROM Feesdetails f WHERE f.student.sid = :sid AND f.academicyear = :currentYear")
+    String getPaidFeesSum(@Param("sid") int sid, @Param("currentYear") String currentYear);
 
 }

@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
@@ -34,6 +35,8 @@ public class feesDetailsDAO {
     private FeescategoryRepository feescategoryRepository;
 	@Autowired
     private ReceiptinfoRepository receiptinfoRepo;
+	@Autowired
+    private AcademicfeesstructureRepository academicfeesstructureRepo;
        
 
 	 @Transactional
@@ -127,35 +130,29 @@ public class feesDetailsDAO {
         }
 
         public String dueAmount(long id, String currentYear) {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
-                
-                String paidFees = "";
-                String totalFees = "";
-                String dueFees = "";
-        try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-            transaction = session.beginTransaction();
-            
-            String queryPaidFees = "select sum(grandtotal) from Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'";
-            String queryTotalFees = "select afs.totalfees from Academicfeesstructure as afs where afs.sid="+id+"and afs.academicyear='"+currentYear+"'";
-                        Query queryPF =  session.createQuery(queryPaidFees);
-                        paidFees =  (String) queryPF.uniqueResult();
-                        Query queryTF =  session.createQuery(queryTotalFees);
-                        totalFees =  (String) queryTF.uniqueResult();
-                        transaction.commit();
-        } catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;        }
-        
-        finally {
-			HibernateUtil.closeSession();
-		}
-        return dueFees;
-        }
-
+            int sid = (int)id;
+            String paidFees = "";
+            String totalFees = "";
+            String dueFees = "";
+    try {
+    	            // String queryPaidFees = "select sum(grandtotal) from Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'";
+                    paidFees = feesDetailsRepo.getPaidFeesSum(sid, currentYear);
+                    //String queryTotalFees = "select afs.totalfees from Academicfeesstructure as afs where afs.sid="+id+"and afs.academicyear='"+currentYear+"'";
+                    totalFees = academicfeesstructureRepo.getTotalFees(sid, currentYear);
+                    double TF = Double.parseDouble(totalFees);
+                    double PF = Double.parseDouble(paidFees);
+                    double Df = TF - PF;
+                    dueFees = Double.toString(Df);
+    } catch (Exception hibernateException) { 
+    	log.error(hibernateException.getMessage(), hibernateException);
+        hibernateException.printStackTrace();
+        throw hibernateException;        }
+    
+    finally {
+		HibernateUtil.closeSession();
+	}
+    return dueFees;
+    }
         public String feesDetailsSum(String queryMain) {
         	Session session = HibernateUtil.openCurrentSession();
         	Transaction transaction = null;
