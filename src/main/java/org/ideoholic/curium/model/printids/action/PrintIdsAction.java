@@ -52,6 +52,13 @@ public class PrintIdsAction {
 		standardActionAdapter.viewClasses();
 		return "generateids";
 	}
+	
+
+	@PostMapping("/generateIdBackPart")
+	public String printBackPreview() {
+		printIdsActionAdapter.printMultiple();
+		return "printbackpreview";
+	}   
 
 	@PostMapping("/searchDetails")
 	public String searchDetails() {
@@ -77,6 +84,12 @@ public class PrintIdsAction {
 	public String printpreviewemployee() {
 		 employeeActionAdapter.printMultipleEmployees();
 		 return "printpreviewemployee";
+	}
+	
+	@PostMapping("/generateIdStaffBackPart")
+	public String generateIdStaffBackPart() {
+		 employeeActionAdapter.printMultipleEmployees();
+		 return "printpreviewemployeebackpart";
 	}
 	
 }

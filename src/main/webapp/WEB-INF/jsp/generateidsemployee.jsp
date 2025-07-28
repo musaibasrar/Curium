@@ -374,6 +374,13 @@
 
 	}
 	
+	function printBackPreview() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/fathima/Printids/generateIdStaffBackPart";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 	$(function() {
 
 		$("#search").button().click(function() {
@@ -382,6 +389,10 @@
 		
 		$("#printpreview").button().click(function() {
 			printPreview();
+		});
+		
+		$("#printbackpreview").button().click(function() {
+			printBackPreview();
 		});
 		
 
@@ -502,6 +513,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td class="footerTD" colspan="2"><input 
 							type="submit" value="Print Preview"  id="printpreview" />
+							<button id="printbackpreview">Print Back Preview</button>
 							</td>
 							
 

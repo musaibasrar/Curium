@@ -108,6 +108,7 @@ public class PrintIdsService {
             	   printMultipleEmployeesResponseDto.getResultParams().put("currentacadmicyear", currentAcademicYear);
             	   printMultipleEmployeesResponseDto.getResultParams().put("rollnumber" + i + "", parentsDetails.getStudent().getSts());
             	   printMultipleEmployeesResponseDto.getResultParams().put("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("bloodgroup" + i + "", parentsDetails.getStudent().getBloodgroup());
                    //result = true;
                } else {
 
