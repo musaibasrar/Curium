@@ -270,6 +270,17 @@
 	letter-spacing: normal;
 	text-align: center;
 }
+
+span{
+    display:inline-block;
+    border-bottom:1px solid blue;
+    border-bottom-style: dotted;
+    width: 100px;
+    height:15px;
+    font-weight: normal;
+    text-align:center;
+    margin-bottom:5px;
+}
         </style>
         <script type="text/javascript">
 
@@ -459,73 +470,56 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-image: url('/fathima/images/backgroundfront.png');background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname}</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
-   </table>
+  <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="40" height="40"/></td><td style="text-align:left;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#221f1f">${branchname} </p></td></tr>
+    <tr><td style="text-align:left;padding:0px;font-size:6px;color:#38b449;">
+   RUN BY A.K. SHAHUL HAMEED HAJIYAR EDUCATIONAL TRUST</td></tr>   </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table align="center" >
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
  <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:78px;width:60px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/fathima/images/fathima.png" width="72" height="72"/>
+ <img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "") %>" style="height:83px;width:65px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
  </td>
  </tr>
  </table>
    </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table align="center" >
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
+    <td align="center" style="color:#38b449;">NAME</td>
+    </tr><tr>
+    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("teachername" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;DESIGNATION</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("designation" + i + "")%></td>
+    <td align="center" style="white-space: nowrap;color:#38b449;">DESIGNATION</td>
+    </tr><tr>
+    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("designation" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;EMPLOYEE ID</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("staffid" + i + "") %></td>
+    <td align="center" style="color:#38b449;">CONTACT NUMBER</td>
+    </tr><tr>
+    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofjoining" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr>
+ 
+  
 </table>
-   
-<div height="30" width="20%" style="text-align:right;float:right;">
 
-<img src="/fathima/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div align="center" height="40" width="20%" style="">
+
+<img src="/fathima/images/idsign.jpeg" width="50" height="25"/>
 <div>
-principal&nbsp;&nbsp;&nbsp;</div>
+PRINCIPAL</div>
 </div>
+<table align="center">
+<tr><td>&nbsp;</td></tr>
+<tr>
+<td style="font-size:15px;font-weight: bold; color:white">STAFF IDENTITY CARD</td>
+</tr>
+</table>
 </div>
  </c:if>
    <% i = i + 1;%>

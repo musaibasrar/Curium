@@ -273,12 +273,12 @@
 
 span{
     display:inline-block;
-    border-bottom:1px solid #bfc1c3;
+    border-bottom:1px solid blue;
     border-bottom-style: dotted;
-    width: 100px;
+    width: 180px;
     height:15px;
     font-weight: normal;
-    text-align:center;
+    text-align:left;
     margin-bottom:5px;
 }
         </style>
@@ -400,7 +400,7 @@ for(Cookie cookie : cookies){
     width: 8.5cm;
     height: 13cm;
     border-radius: 25px;
-    background: dark blue;
+    background: blue;
 } */
 
        .card {
@@ -464,65 +464,61 @@ for(Cookie cookie : cookies){
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${iInitial}">
+          <c:forEach begin="1" end="${endValue}">
                         <%!                        
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-image: url('/fathima/images/backgroundfront.png');background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+  
+
+ 
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+  <tr>
+    <td style="padding: 0;color:#38b449;">FATHER’S NAME</td>
+    </tr><tr>
+    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("guardian" + i + "") %></span></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;color:#38b449;">ECN</td>
+    </tr><tr>
+    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;color:#38b449;">BLOOD GROUP</td>
+    </tr><tr>
+    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("bloodgroup" + i + "") %></span></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;color:#38b449;">VALIDITY</td>
+    </tr><tr>
+    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("currentAcademicYear" + i + "") %></span></td>
+  </tr>
+   <tr>
+    <td style="padding: 0;color:#38b449;">ADDRESS</td>
+    </tr><tr>
+    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><%= request.getSession().getAttribute("Address" + i + "") %></td>
+  </tr>
+  
+</table>
+<div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-  <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="42" height="42"/></td><td style="text-align:left;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:16px;font-weight: 900; color:#112d52;text-transform:uppercase;">
-    	
-Fathima Nursery<br> & Primary School<!-- ${branchname} --> </p></td></tr>
-    <tr><td style="text-align:left;padding:0px;font-size:5px;color:#38b449;">
-   RUN BY A.K. SHAHUL HAMEED HAJIYAR EDUCATIONAL TRUST</td></tr>   </table>
+  <tr><td></td><td style="color:#221f1f;">If found, Please return to:</td></tr>
+  <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="40" height="40"/></td><td style="text-align:left;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#221f1f">${branchname} </p></td></tr>
+    <tr><td style="text-align:left;padding:0px;font-size:8px;color:#38b449;">
+   DEEVU STREET, KAYALPATNAM 628204
+TUTICORIN DISTRICT, TAMIL NADU</td></tr>   </table>
   </div>
 
-  <div class="table-container" style=" ">
- <table align="center" >
- <tr>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- </tr>
- </table>
-   </div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px;font-size:11px;text-transform:uppercase;
-    font-family:Sans-serif;">
-  <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;NAME</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("studentname" + i + "") %></span></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;color:#38b449;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("classsection" + i + "") %></span></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("dateofbirth" + i + "") %></span></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;ECN</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
-  </tr>
-  <tr><td><br></td></tr>
-</table>
 
-<div align="center" height="30" width="20%" style="">
+<table align="center" style="color:#221f1f;">
+<tr><td>Phone</td><td>:04639 796371</td></tr>
+<tr><td>Email</td><td>:fathimaschoolkpm@gmail.com</td></tr>
+<tr><td>Web</td><td>:www.akshtrust.com</td></tr>
 
-<img src="/fathima/images/idsign.jpeg" width="50" height="30"/>
-<div>
-PRINCIPAL</div>
-</div>
-<table align="center">
 
-<tr><td><br></td></tr>
-<tr>
-<td style="font-size:15px;font-weight: bold; color:#ffffff">STUDENT IDENTITY CARD</td>
-</tr>
 </table>
 </div>
  </c:if>
