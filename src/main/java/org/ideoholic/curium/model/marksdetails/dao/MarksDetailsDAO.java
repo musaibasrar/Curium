@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
@@ -29,7 +30,6 @@ public class MarksDetailsDAO {
 
 	public String addMarks(List<Marks> marksList) {
 		
-		boolean result = false;	
 		String output = "success";
 		
 		try{
@@ -46,6 +46,7 @@ public class MarksDetailsDAO {
 		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
+			output="Duplicate";
 		}finally {
 				HibernateUtil.closeSession();
 			return output;
@@ -76,13 +77,13 @@ public class MarksDetailsDAO {
 		}
 	}
 		
-		public List<Marks> readListOfMarks(Integer id) {
+		public List<Marks> readListOfMarks(Integer id, int subjectId, int examId) {
 			List<Marks> results = new ArrayList<Marks>();
 			try {
 
 				transaction = session.beginTransaction();
 				Query query = session
-						.createQuery("From Marks where sid IN (:ids)");
+						.createQuery("From Marks where subid="+subjectId+" and examid="+examId+" and sid IN (:ids)");
 				query.setParameter("ids", id);
 				/*query.setParameter("subject", subject);
 				query.setParameter("exam", exam);*/
@@ -106,9 +107,9 @@ public class MarksDetailsDAO {
 				for (Marks marks : marksList) {
 					session.update(marks);
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -197,19 +198,19 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : examRankList) {
-					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear="+examrank.getAcademicyear()+" and branchid = "+examrank.getBranchid()+"");
+					Query query = session.createQuery("From ExamRank where sid="+examrank.getSid()+" and examid="+examrank.getExamid()+" and academicyear='"+examrank.getAcademicyear()+"' and branchid = "+examrank.getBranchid()+"");
 					ExamRank results = (ExamRank) query.uniqueResult();
 					if(results==null) {
 						session.save(examrank);	
 					}else {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 					}
 					
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -234,12 +235,12 @@ public class MarksDetailsDAO {
 			}
 			return ex;
 		}
-		public List<SubjectGrade> readSubjectGrade(int branchid) {
+		public List<SubjectGrade> readSubjectGrade(int branchid, int examid, String classSelected) {
 			List<SubjectGrade> results = new ArrayList<SubjectGrade>();
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From SubjectGrade where branchid = "+branchid+"");
+				Query query = session.createQuery("From SubjectGrade where classsec='"+classSelected+"' and branchid = "+branchid+"");
 				results = query.list();
 				transaction.commit();
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -274,12 +275,12 @@ public class MarksDetailsDAO {
 			try{
 				transaction = session.beginTransaction();
 				for (ExamRank examrank : listExamRank) {
-						Query queryUpdate = session.createSQLQuery("update ExamRank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set rank="+examrank.getRank()+" where id = "+examrank.getId()+"");
 						queryUpdate.executeUpdate();
 				}
-	        	result = true;
+	        	
 				transaction.commit();
-				
+				result = true;
 			}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				
 				hibernateException.printStackTrace();
@@ -311,5 +312,97 @@ public class MarksDetailsDAO {
 				return results;
 			}
 		}
+		
+	public List<Marks> readMarksforStudentPerSubject(int sid, String currentAcademicYear, int subid) {
+			
+			List<Marks> results = new ArrayList<Marks>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From Marks where sid = "+sid+" and subid = "+subid+" and academicyear = '"+currentAcademicYear+"' ORDER BY subid ASC");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+			
+		}
+	
+	public List<Marks> readMarksPerExamPerSubject(Integer sid, String currentAcademicYear, List<Integer> exid) {
+		
+		List<Marks> results = new ArrayList<Marks>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From Marks where sid = "+sid+" and academicyear = '"+currentAcademicYear+"' and examid IN (:ids) ORDER BY subid ASC");
+			query.setParameterList("ids", exid);
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+		
+	}
+
+	public String addMarksSubSubject(List<Marks> marksList,List<Marks> marksListA1,List<Marks> marksListA2,List<Marks> marksListA3,List<Marks> marksListA4) {
+		
+		String output = "success";
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			List<Marks> allMarks = new ArrayList<>();
+			allMarks.addAll(marksList);
+			allMarks.addAll(marksListA1);
+			allMarks.addAll(marksListA2);
+			allMarks.addAll(marksListA3);
+			allMarks.addAll(marksListA4);
+
+			for (Marks marks : allMarks) {
+			    session.save(marks);
+			}
+			
+			transaction.commit();
+			
+		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+			output="Duplicate";
+		}finally {
+				HibernateUtil.closeSession();
+			return output;
+		}
+		
+		
+	}
+
+	public boolean updateMarksSub(String[] marksid, String[] studentsMarks) {
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (int i=0;i<studentsMarks.length;i++) {
+					Query query = session.createSQLQuery("update marks set marksobtained = '"+studentsMarks[i]+"' where marksid = '"+marksid[i]+"'");
+					query.executeUpdate();
+			}
+			transaction.commit();
+			return true;
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			logger.info(e);
+			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return false;
+	}
 	
 }
