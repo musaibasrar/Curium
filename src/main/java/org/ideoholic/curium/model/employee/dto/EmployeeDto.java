@@ -41,5 +41,12 @@ public class EmployeeDto {
     private String[] subjectsTeaching;
     private String[] classesTeaching;
     private String[] classTeacher;
+    private String aadhaarno;
+    private String bloodgroup;
+    private String emergencyname;
+    private String emergencycontact;
+    private String maritalstatus;
+    private String fathername;
+    private String mothername;
 
 }

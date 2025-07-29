@@ -102,5 +102,26 @@
              <property name="classteacher" type="string">
             <column name="classteacher" length="100" />
         </property>
+         <property name="aadhaarno" type="string">
+            <column name="aadhaarno" length="100" />
+        </property>
+         <property name="bloodgroup" type="string">
+            <column name="bloodgroup" length="100" />
+        </property>
+         <property name="emergencyname" type="string">
+            <column name="emergencyname" length="100" />
+        </property>
+         <property name="emergencycontact" type="string">
+            <column name="emergencycontact" length="100" />
+        </property>
+         <property name="maritalstatus" type="string">
+            <column name="maritalstatus" length="100" />
+        </property>
+         <property name="fathername" type="string">
+            <column name="fathername" length="200" />
+        </property>
+         <property name="mothername" type="string">
+            <column name="mothername" length="200" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -59,6 +59,13 @@ public class EmployeeService {
 		                	employee.setRemarks(DataUtil.emptyString(employeeDto.getRemarks()));
 		                	employee.setCurrentemployee(DataUtil.emptyString(employeeDto.getCurrentEmployee()));
 		                	employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+		                	employee.setAadhaarno(DataUtil.emptyString(employeeDto.getAadhaarno()));
+		                	employee.setBloodgroup(DataUtil.emptyString(employeeDto.getBloodgroup()));
+		                	employee.setEmergencyname(DataUtil.emptyString(employeeDto.getEmergencyname()));
+		                	employee.setEmergencycontact(DataUtil.emptyString(employeeDto.getEmergencycontact()));
+		                	employee.setMaritalstatus(DataUtil.emptyString(employeeDto.getMaritalstatus()));
+		                	employee.setFathername(DataUtil.emptyString(employeeDto.getFathername()));
+		                	employee.setMothername(DataUtil.emptyString(employeeDto.getMothername()));
 		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
 		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
 							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
@@ -252,6 +259,14 @@ public class EmployeeService {
 			employee.setBranchid(Integer.parseInt(DataUtil.emptyString(employeeDto.getBranchId())));
 			employee.setLeavingdate(DateUtil.indiandateParser(employeeDto.getLeavingdate()));
 			employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+			employee.setAadhaarno(DataUtil.emptyString(employeeDto.getAadhaarno()));
+        	employee.setBloodgroup(DataUtil.emptyString(employeeDto.getBloodgroup()));
+        	employee.setEmergencyname(DataUtil.emptyString(employeeDto.getEmergencyname()));
+        	employee.setEmergencycontact(DataUtil.emptyString(employeeDto.getEmergencycontact()));
+        	employee.setMaritalstatus(DataUtil.emptyString(employeeDto.getMaritalstatus()));
+        	employee.setFathername(DataUtil.emptyString(employeeDto.getFathername()));
+        	employee.setMothername(DataUtil.emptyString(employeeDto.getMothername()));
+
 			
 			String classesTeachingCsv = employeeDto.getClassesTeaching() != null ? String.join(",", employeeDto.getClassesTeaching()) : "";
 			String classTeacherCsv = employeeDto.getClassTeacher() != null ? String.join(",", employeeDto.getClassTeacher()) : "";

@@ -350,17 +350,16 @@ for(Cookie cookie : cookies){
 									class="textField" id="name" size="30"
 									data-validate="validate(required)">
 							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Father's Name &nbsp;</td>
 
-							<td width="16%" class="alignRight">Gender &nbsp;</td>
-
-							<td width="16%" class="alignLeft">Male<input type="checkbox"
-								value="male" name="gender" id="yes:male" onclick="yesCheck();"
-								${employee.gender == 'male' ? 'checked' : ''} />&nbsp;
-								&nbsp;Female<input type="checkbox" value="female" name="gender"
-								id="no:female" onclick="noCheck()"
-								${employee.gender == 'female' ? 'checked' : ''} />
+							<td width="16%" class="alignLeft"><input
+									name="fathername" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.fathername}" />"
+									class="textField" id="fathername" size="30"
+									data-validate="validate(required)">
 							</td>
-
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -368,45 +367,37 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
 						<tr>
-							<td width="20%" class="alignRight">Address &nbsp;</td>
-							<td width="28%"><label> <input name="address"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.address}" />"
-									id="address" size="30">
-
+							<td width="16%" class="alignRight">Mother's Name &nbsp;</td>
+							<td width="28%">
+								<label><input
+									name="mothername" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.mothername}" />"
+									class="textField" id="mothername" size="30"
+									data-validate="validate(required)">
 							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Spouse's Name &nbsp;</td>
 
-							<td width="16%" class="alignRight">Contact Number&nbsp;</td>
-
-							<td align="left"><label> <input name="contactnumber"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.contactnumber}" />"
-									id="contactnumber" size="30">
-
-							</label></td>
+							<td width="16%" class="alignLeft"><input
+									name="remarks" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.remarks}" />"
+									class="textField" id="remarks" size="30"
+									data-validate="validate(required)">
+							</td>
 						</tr>
-
 						<tr>
 							<td><br /></td>
 						</tr>
-
-
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
 						<tr>
-							<td width="16%" class="alignRight">Email&nbsp;</td>
-
-							<td align="left"><label> <input name="email"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.email}" />"
-									id="email" size="30">
-
-							</label></td>
-							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
+							
+							<td width="16%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> 
 										<input name="dateofjoining"  autocomplete="false"
 									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
@@ -418,6 +409,17 @@ for(Cookie cookie : cookies){
 									class="textField" id="datepicker" size="30"
 									data-validate="validate(required)"> --%>
 							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Gender &nbsp;</td>
+
+							<td width="16%" class="alignLeft">Male<input type="checkbox"
+								value="male" name="gender" id="yes:male" onclick="yesCheck();"
+								${employee.gender == 'male' ? 'checked' : ''} />&nbsp;
+								&nbsp;Female<input type="checkbox" value="female" name="gender"
+								id="no:female" onclick="noCheck()"
+								${employee.gender == 'female' ? 'checked' : ''} />
+							</td>
 
 
 						</tr>
@@ -430,25 +432,49 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-
+						
 						<tr>
-
-
-							<td width="16%" class="alignRight">Total Experience&nbsp;</td>
-							<td align="left"><label> <input
-									name="totalexperience" type="text" class="textField"
-									value="<c:out default="" value="${employee.totalexperience}" />"
-									id="totalexperience" size="30"
+							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
+							<td width="28%">
+								<label><input
+									name="bloodgroup" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.bloodgroup}" />"
+									class="textField" id="bloodgroup" size="30"
 									data-validate="validate(required)">
-
 							</label></td>
-							<td width="16%" class="alignRight">Qualification &nbsp;</td>
+							
+							
+							<td width="16%" class="alignRight">Aadhaar No. &nbsp;</td>
 
-							<td align="left"><label> <input name="qualification"
+							<td width="16%" class="alignLeft"><input
+									name="aadhaarno" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.aadhaarno}" />"
+									class="textField" id="aadhaarno" size="30"
+									data-validate="validate(required)">
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td width="20%" class="alignRight">Contact Number &nbsp;</td>
+							<td width="28%"><label> <input name="contactnumber"
 									type="text" class="textField"
-									value="<c:out default="" value="${employee.qualification}" />"
-									id="qualification" size="30" data-validate="validate(required)">
+									value="<c:out default="" value="${employee.contactnumber}" />"
+									id="contactnumber" size="30">
+
+							</label></td>
+
+							<td width="16%" class="alignRight">Email&nbsp;</td>
+
+							<td align="left"><label> <input name="email"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.email}" />"
+									id="email" size="30">
 
 							</label></td>
 						</tr>
@@ -456,13 +482,70 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
 
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr>
+							<td width="20%" class="alignRight">Address &nbsp;</td>
+							<td width="28%"><label> <input name="address"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.address}" />"
+									id="address" size="30">
+
+							</label></td>
+							<td width="16%" class="alignRight">Marital Status&nbsp;</td>
+
+							<td align="left"><label> <input name="maritalstatus"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.maritalstatus}" />"
+									id="maritalstatus" size="30">
+
+							</label></td>
+						</tr>
+
+						<tr>
 							<td><br /></td>
 						</tr>
 
 
 						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Emergency Contact Person &nbsp;</td>
+							<td width="28%"><label> <input name="emergencyname"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.emergencyname}" />"
+									id="emergencyname" size="30">
+
+							</label></td>
+
+							<td width="16%" class="alignRight">Emergency Contact No&nbsp;</td>
+
+							<td align="left"><label> <input name="emergencycontact"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.emergencycontact}" />"
+									id="emergencycontact" size="30">
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+							
+							
+							<tr>
 							<td width="16%" class="alignRight">Department&nbsp;</td>
 
 							<td width="28%"><label> <select name="department"
@@ -514,21 +597,40 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
 
+							<td width="16%" class="alignRight">Qualification &nbsp;</td>
 
+							<td align="left"><label> <input name="qualification"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.qualification}" />"
+									id="qualification" size="30" data-validate="validate(required)">
+
+							</label></td>
+							
+							<td width="16%" class="alignRight">Total Experience&nbsp;</td>
+							<td align="left"><label> <input
+									name="totalexperience" type="text" class="textField"
+									value="<c:out default="" value="${employee.totalexperience}" />"
+									id="totalexperience" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
 
 
 						<tr>
 
-							<td width="16%" class="alignRight">Father / Guardian Name&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-							
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
 										<input name="joiningdate"

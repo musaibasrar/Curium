@@ -50,6 +50,13 @@ public class EmployeeActionAdapter {
         employeeDto.setClassesTeaching(request.getParameterValues("classesteaching"));
         employeeDto.setClassTeacher(request.getParameterValues("classteacher"));
         employeeDto.setSubjectsTeaching(request.getParameterValues("subjectsteaching"));
+        employeeDto.setAadhaarno(request.getParameter("aadhaarno"));
+        employeeDto.setBloodgroup(request.getParameter("bloodgroup"));
+        employeeDto.setEmergencyname(request.getParameter("emergencyname"));
+        employeeDto.setEmergencycontact(request.getParameter("emergencycontact"));
+        employeeDto.setMaritalstatus(request.getParameter("maritalstatus"));
+        employeeDto.setFathername(request.getParameter("fathername"));
+        employeeDto.setMothername(request.getParameter("mothername"));
         ResultResponse resultResponse = employeeService.addEmployee(listOfFiles, employeeDto,httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("branchcode").toString());
         return resultResponse.isSuccess();
     }
@@ -85,6 +92,13 @@ public class EmployeeActionAdapter {
         employeeDto.setTeacherExternalId(request.getParameter("teacherexternalid"));
         employeeDto.setLeavingdate(request.getParameter("leavingdate"));
         employeeDto.setJoiningDate(request.getParameter("joiningdate"));
+        employeeDto.setAadhaarno(request.getParameter("aadhaarno"));
+        employeeDto.setBloodgroup(request.getParameter("bloodgroup"));
+        employeeDto.setEmergencyname(request.getParameter("emergencyname"));
+        employeeDto.setEmergencycontact(request.getParameter("emergencycontact"));
+        employeeDto.setMaritalstatus(request.getParameter("maritalstatus"));
+        employeeDto.setFathername(request.getParameter("fathername"));
+        employeeDto.setMothername(request.getParameter("mothername"));
         employeeDto.setBankName(request.getParameter("bankname"));
         employeeDto.setBankIFSC(request.getParameter("bankifsc"));
         employeeDto.setAccNo(request.getParameter("accno"));

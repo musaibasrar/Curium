@@ -53,6 +53,13 @@ public class Teacher implements java.io.Serializable {
 	private String employeedoc4;
 	private String employeedoc5;
 	private String classteacher;
+	private String aadhaarno;
+	private String bloodgroup;
+	private String emergencyname;
+	private String emergencycontact;
+	private String maritalstatus;
+	private String fathername;
+	private String mothername;
 	
 	
 	public Teacher() {
@@ -70,6 +77,7 @@ public class Teacher implements java.io.Serializable {
 			String contactnumber, String email, String remarks, String gender,
 			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid,String employeephoto,
 			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5,Date joiningdate, String classteacher
+			, String aadhaarno, String bloodgroup, String emergencyname, String emergencycontact, String maritalstatus, String fathername, String mothername
 ) {
 		this.teachername = teachername;
 		this.designation = designation;
@@ -101,6 +109,13 @@ public class Teacher implements java.io.Serializable {
 		this.employeedoc5 = employeedoc5;
 		this.joiningdate = joiningdate;
 		this.classteacher = classteacher;
+		this.aadhaarno = aadhaarno;
+		this.bloodgroup = bloodgroup;
+		this.emergencyname = emergencyname;
+		this.emergencycontact = emergencycontact;
+		this.maritalstatus = maritalstatus;
+		this.fathername = fathername;
+		this.mothername = mothername;
 	}
 
 	@Id
@@ -377,5 +392,61 @@ public class Teacher implements java.io.Serializable {
 
 	public void setClassteacher(String classteacher) {
 		this.classteacher = classteacher;
+	}
+
+	public String getAadhaarno() {
+		return aadhaarno;
+	}
+
+	public void setAadhaarno(String aadhaarno) {
+		this.aadhaarno = aadhaarno;
+	}
+
+	public String getBloodgroup() {
+		return bloodgroup;
+	}
+
+	public void setBloodgroup(String bloodgroup) {
+		this.bloodgroup = bloodgroup;
+	}
+
+	public String getEmergencyname() {
+		return emergencyname;
+	}
+
+	public void setEmergencyname(String emergencyname) {
+		this.emergencyname = emergencyname;
+	}
+
+	public String getEmergencycontact() {
+		return emergencycontact;
+	}
+
+	public void setEmergencycontact(String emergencycontact) {
+		this.emergencycontact = emergencycontact;
+	}
+
+	public String getMaritalstatus() {
+		return maritalstatus;
+	}
+
+	public void setMaritalstatus(String maritalstatus) {
+		this.maritalstatus = maritalstatus;
+	}
+
+	public String getFathername() {
+		return fathername;
+	}
+
+	public void setFathername(String fathername) {
+		this.fathername = fathername;
+	}
+
+	public String getMothername() {
+		return mothername;
+	}
+
+	public void setMothername(String mothername) {
+		this.mothername = mothername;
 	}
 }

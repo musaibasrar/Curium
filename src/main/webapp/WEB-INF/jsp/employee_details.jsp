@@ -374,56 +374,103 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows"  style="text-transform:uppercase">
                                 <c:out default="" value="${employee.teachername}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            
+                            <td width="25%"  class="alignLeft" height="50">Father's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.fathername}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Mother's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.mothername}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50">Spouse's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.remarks}" />
+                            </td>
+                        </tr>
+                        
+                         <tr>
+                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
+                            <td width="25%" class="tablerows" >
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
+                            </td>
+                             <td width="25%"  class="alignLeft" height="50" >Gender
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.gender}" />
                             </td>
+                            
+                        </tr>
+                        
+                        
+                         <tr>
+                       
+                            <td width="25%"  class="alignLeft" height="50">Blood Group</td>
+                            <td width="25%" class="tablerows" >
+                             	<c:out default="" value="${employee.bloodgroup}" />
+                            </td>
+                             <td width="25%"  class="alignLeft" height="50" >Aadhaar No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.aadhaarno}" />
+                            </td>
+                            
                         </tr>
                         
                           <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Address
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.address}" />
-                            </td>
                         
                             <td  width="25%"  class="alignLeft" height="50" >Contact Number
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.contactnumber}" />
                             </td>
+                            
+                       		 <td width="25%"  class="alignLeft" height="50" >Email
+                            </td>
+                            <td width="25%"  class="tablerows">
+                                <c:out default="" value="${employee.email}" />
+                            </td>
 
                             
                         </tr>
                         
                         <tr>
-                        <td width="25%"  class="alignLeft" height="50" >Email
+                        
+                            <td  width="25%"  class="alignLeft" height="50" >Address
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.address}" />
+                            </td>
+                            
+                       		 <td width="25%"  class="alignLeft" height="50" >Marital Status
                             </td>
                             <td width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.email}" />
+                                <c:out default="" value="${employee.maritalstatus}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
-                            <td width="25%" class="tablerows" >
-                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
-                            </td>
+
                             
                         </tr>
                         
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.totalexperience}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Qualification
+                        	<td  width="25%"  class="alignLeft" height="50">Emergency Contact Person
                             </td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.qualification}" />
+                                <c:out default="" value="${employee.emergencyname}" />
                             </td>
+                            <td  width="25%"  class="alignLeft" height="50">Emergency Contact No
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${employee.emergencycontact}" />
+                            </td>
+                            
                         </tr>
                         
-                        
-                        <tr>
+                          <tr>
                         <td width="25%"   class="alignLeft" height="50" >Department</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.department}" />
@@ -440,11 +487,23 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td width="25%" class="alignLeft" height="50" >Father / Guardian Name</td>
-                            <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${employee.remarks}" />
+                         <td width="25%"  class="alignLeft" height="50">Qualification
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${employee.qualification}" />
                             </td>
                             
+                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${employee.totalexperience}" />
+                            </td>
+                           
+                        </tr>
+                        
+                        
+                      
+                        
+                        <tr>
                             <td width="25%" class="alignLeft" height="50" >Date Of Joining &nbsp;</td>
                             <td width="25%" class="tablerows" >
                                 <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.joiningdate}"/>
