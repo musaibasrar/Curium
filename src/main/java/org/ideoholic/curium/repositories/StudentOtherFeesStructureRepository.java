@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentOtherFeesStructureRepository extends JpaRepository<Studentotherfeesstructure, Integer> {
 
-	List<Studentotherfeesstructure> findByStudentSidAndOtherfeescategoryIdfeescategoryIn(Integer id,
+	List<Studentotherfeesstructure> findByStudentSidAndOtherfeescategoryIdfeescategoryIn(Integer sid,
 			List<Integer> feescat);
+	
+	List<Studentotherfeesstructure> findByStudentSidAndAcademicyear(Integer sid, String academicYear);
 }

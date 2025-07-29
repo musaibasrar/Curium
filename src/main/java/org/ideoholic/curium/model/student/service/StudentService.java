@@ -62,33 +62,24 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class StudentService {
-	@Autowired
-	private HttpServletResponse response;
-	
-	@Autowired
-	private StandardService standardService;
-	
-	@Autowired
-	private YearDAO yearDao;
-	
-	@Autowired
-    private AccountDAO accountDao;
-	
-	@Autowired
-	private UserDAO userDao;
-	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+
+	private final HttpServletResponse response;
+	private final StandardService standardService;
+	private final YearDAO yearDao;
+    private final AccountDAO accountDao;
+	private final UserDAO userDao;
+	private final StudentDetailsDAO studentDetailsDao;
 	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
@@ -556,7 +547,7 @@ public class StudentService {
 	public StudentDetailsResponseDto otherviewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().build();
 		try {
-			long id = Long.parseLong(studentId);
+			Long id = Long.parseLong(studentId);
 			Student student = new StudentDetailsDAO().readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
@@ -571,7 +562,7 @@ public class StudentService {
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
 			result.setOtherReceiptInfo(rinfo);
-			List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
 			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
@@ -1317,7 +1308,7 @@ public class StudentService {
 	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
-			long id = Long.parseLong(studentId);
+			Long id = Long.parseLong(studentId);
 			Student student = new StudentDetailsDAO().readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
@@ -1332,7 +1323,7 @@ public class StudentService {
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
 			result.setOtherReceiptInfo(rinfo);
-			List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
 			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
