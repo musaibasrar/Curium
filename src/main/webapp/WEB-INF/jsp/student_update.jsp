@@ -814,8 +814,8 @@ for(Cookie cookie : cookies){
 							<label> <select name="religion" onblur="validateNameContact();"
 									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
 										<option selected>${student.religion}</option>
+										<option>Hindu</option>
 										<option>Islam</option>
-										<option>Hinduism</option>
 										<option>Christianity</option>
 										<option>jainism</option>
 										<option>sikhism</option>
@@ -825,6 +825,16 @@ for(Cookie cookie : cookies){
 							
 							
 							</td>
+							
+							
+							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
 
 
 							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
@@ -836,12 +846,12 @@ for(Cookie cookie : cookies){
 
 							</label></td>
  --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+ 							<%-- <td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
 									id="studentscastecertno" size="30">
 
-							</label></td>
+							</label></td> --%>
 
 						</tr>
 						<tr>
@@ -858,14 +868,11 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
+							<td class="alignLeft" style="padding-left: 20px;">Caste Category&nbsp;</td>
+							<td><label>
+							<input name="socialcategory"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" value="${student.socialcategory}" id="socialcategory" size="36">
 
 							</label></td>
 
@@ -906,7 +913,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Bhagyalakshmi Bond No.
 								&nbsp;</td>
 								<td>
 										<input
@@ -981,7 +988,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<!-- <tr>
 
 							<td class="alignLeft">RTE &nbsp;</td>
 							<td height="30">&nbsp;Yes<input
@@ -1009,7 +1016,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-
+						-->
 
 
 						<tr>
@@ -1067,7 +1074,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td><label> <input name="crecorddate"
 									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
@@ -1090,7 +1097,7 @@ for(Cookie cookie : cookies){
 
 							<td></td>
 
-						</tr>
+						</tr> --%>
 
 
 

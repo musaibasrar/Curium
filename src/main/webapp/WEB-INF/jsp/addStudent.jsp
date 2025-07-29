@@ -1142,8 +1142,8 @@ $(document).ready(function() {
 							</label> --> <label> <select name="religion"
 									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
+										<option>Hindu</option>
 										<option>Islam</option>
-										<option>Hinduism</option>
 										<option>Christianity</option>
 										<option>jainism</option>
 										<option>sikhism</option>
@@ -1152,7 +1152,12 @@ $(document).ready(function() {
 							</label>
 
 							</td>
-
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
 
 
 							<!-- <td class="alignRight">Caste &nbsp;</td>
@@ -1163,14 +1168,14 @@ $(document).ready(function() {
 
 							</label></td> -->
 
-							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
+							<!-- <td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
 								Certificate No.&nbsp;</td>
 							<td ><label> <input
 									name="studentscastecertno" type="text" class="myclass"
 									style="text-transform:capitalize;"
 									id="studentscastecertno" size="36">
 
-							</label></td>
+							</label></td> -->
 						</tr>
 
 						<tr>
@@ -1187,16 +1192,11 @@ $(document).ready(function() {
 
 							</label></td>
 
-							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
+							<td  class="alignLeft" style="padding-left: 20px;">Caste Category&nbsp;</td>
+							<td><label> 
+							<input name="socialcategory"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" id="socialcategory" size="36">
 							</label></td>
 						</tr>
 						<tr>
@@ -1230,7 +1230,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
+							<td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1303,9 +1303,9 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 
-						<tr>
+						<!-- <tr>
 						
-							<td class="alignLeft"  >RTE
+							 <td class="alignLeft"  >RTE
 										&nbsp;</td>
 
 									<td  >&nbsp;Yes<input
@@ -1313,7 +1313,7 @@ $(document).ready(function() {
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
-										</td>
+										</td> 
 										
 							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
 							<td ><label> <input name="remarks"
@@ -1328,7 +1328,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>

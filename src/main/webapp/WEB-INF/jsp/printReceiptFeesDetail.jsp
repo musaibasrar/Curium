@@ -337,7 +337,7 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					<%-- Total Fees: Rs. ${totalfees} --%>
 				</td>
 				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}
@@ -538,7 +538,7 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					<%-- Total Fees: Rs. ${totalfees} --%>
 				</td>
 				<td class="headerText">
 					Total fees paid : Rs.  ${sumoffees}

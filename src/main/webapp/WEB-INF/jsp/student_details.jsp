@@ -550,6 +550,13 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
+                            
+                            <td  width="25%"  class="alignLeft" height="50">Remarks
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.remarks}" />
+                                
+                            </td>
                   <%--           
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
@@ -558,11 +565,11 @@ for(Cookie cookie : cookies){
                             </td>
  --%>
                                       
-                            <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
+                          <%--   <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.studentscastecertno}" />
-                            </td>
+                            </td> --%>
                          
                         </tr>
                         <tr>
@@ -626,7 +633,7 @@ for(Cookie cookie : cookies){
                             </td>                           
                         </tr>
                         
-                        <tr>
+                        <%-- <tr>
                         
                          <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
@@ -647,7 +654,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
                         
@@ -699,13 +706,13 @@ for(Cookie cookie : cookies){
                            
                         </tr>
                         
-                         <tr>
+                         <%-- <tr>
                             <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
                             <td width="25%" class="tablerows">
                                 <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
                             </td>
-                        </tr>
+                        </tr> --%>
                         
            
 
