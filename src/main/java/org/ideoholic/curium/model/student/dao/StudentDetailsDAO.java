@@ -746,25 +746,6 @@ public class StudentDetailsDAO {
 			return results;
 		}
 	}
-	
-	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
-		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
-		Transaction transaction = null;
-		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
-			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return studentFeesStructure;
-		}
-	}
 
 	@Transactional
 	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(Long id, List<Integer> feesCat) {
