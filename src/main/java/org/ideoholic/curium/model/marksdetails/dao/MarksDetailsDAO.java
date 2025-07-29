@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
@@ -76,13 +77,13 @@ public class MarksDetailsDAO {
 		}
 	}
 		
-		public List<Marks> readListOfMarks(Integer id) {
+		public List<Marks> readListOfMarks(Integer id, int subjectId, int examId) {
 			List<Marks> results = new ArrayList<Marks>();
 			try {
 
 				transaction = session.beginTransaction();
 				Query query = session
-						.createQuery("From Marks where sid IN (:ids)");
+						.createQuery("From Marks where subid="+subjectId+" and examid="+examId+" and sid IN (:ids)");
 				query.setParameter("ids", id);
 				/*query.setParameter("subject", subject);
 				query.setParameter("exam", exam);*/
@@ -350,6 +351,58 @@ public class MarksDetailsDAO {
 			return results;
 		}
 		
+	}
+
+	public String addMarksSubSubject(List<Marks> marksList,List<Marks> marksListA1,List<Marks> marksListA2,List<Marks> marksListA3,List<Marks> marksListA4) {
+		
+		String output = "success";
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			List<Marks> allMarks = new ArrayList<>();
+			allMarks.addAll(marksList);
+			allMarks.addAll(marksListA1);
+			allMarks.addAll(marksListA2);
+			allMarks.addAll(marksListA3);
+			allMarks.addAll(marksListA4);
+
+			for (Marks marks : allMarks) {
+			    session.save(marks);
+			}
+			
+			transaction.commit();
+			
+		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+			output="Duplicate";
+		}finally {
+				HibernateUtil.closeSession();
+			return output;
+		}
+		
+		
+	}
+
+	public boolean updateMarksSub(String[] marksid, String[] studentsMarks) {
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (int i=0;i<studentsMarks.length;i++) {
+					Query query = session.createSQLQuery("update marks set marksobtained = '"+studentsMarks[i]+"' where marksid = '"+marksid[i]+"'");
+					query.executeUpdate();
+			}
+			transaction.commit();
+			return true;
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			logger.info(e);
+			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return false;
 	}
 	
 }
