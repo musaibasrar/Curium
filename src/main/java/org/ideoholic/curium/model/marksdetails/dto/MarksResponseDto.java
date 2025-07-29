@@ -6,6 +6,7 @@ import lombok.Data;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -17,6 +18,7 @@ public class MarksResponseDto {
     private String examSelected;
     private String subject;
     private String exam;
+    Map<Parents,Map<Integer,Float>> studentsMarksMap;
     @Builder.Default
     private boolean success = false;
 }

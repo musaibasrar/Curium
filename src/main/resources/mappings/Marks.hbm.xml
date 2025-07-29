@@ -14,6 +14,9 @@
         <property name="subid" type="java.lang.Integer">
             <column name="subid" />
         </property>
+        <property name="subsubjectid" type="java.lang.Integer">
+            <column name="subsubjectid" />
+        </property>
         <property name="examid" type="java.lang.Integer">
             <column name="examid" />
         </property>

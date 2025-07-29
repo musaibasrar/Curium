@@ -262,4 +262,90 @@ public class MarksDetailsAction {
 		}
 	}
 	
+	@PostMapping("/addMarksSubSubject")
+	public String addMarksSubSubject() {
+		String result = marksDetailsActionAdapter.addMarksSubSubject();
+		if (result == "true") {
+			return "markssaved";
+		} else if (result == "Duplicate") {
+			return "erroraddingmarks";
+		} else {
+			return "error";
+		}
+
+	}
+	
+	@GetMapping("/marksEntrySub")
+	public String marksEntrySub() {
+		
+
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacherMarksEntry();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
+		
+		return "marksentrysub";
+	}
+	
+	@PostMapping("/searchForMarksSub")
+	public String searchForMarksSub() {
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			marksDetailsActionAdapter.Search();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			marksDetailsActionAdapter.SearchForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else {
+			marksDetailsActionAdapter.Search();
+		}
+		
+		
+		return "marksentrysub";
+	}
+	
+	
+	@GetMapping("/getSubjectsExamsSub")
+	public String getSubjectsExamsSub() {
+		marksDetailsActionAdapter.getSubjectExams();
+		standardActionAdapter.viewClasses();
+		return "markssearchsub";
+	}
+	
+	@PostMapping("/viewMarksSub")
+	public String viewMarksSub() {
+		if (marksDetailsActionAdapter.viewMarksSub()) {
+			marksDetailsActionAdapter.getSubjectExams();
+			return "markssearchsub";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/updateMarksSub")
+	public String updateMarksSub() {
+		if (marksDetailsActionAdapter.updateMarksSub()) {
+			return "markssaved";
+		} else {
+			return "error";
+		}
+	}
+	
 }
