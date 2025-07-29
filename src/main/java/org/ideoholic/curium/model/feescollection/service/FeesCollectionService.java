@@ -1425,8 +1425,13 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new StudentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				Studentotherfeesstructure studentfeesstructure = studentDetailsDao.getStudentOtherFeesStructureDetails(feescollectionSingle.fetchSfsid());
+				if (studentfeesstructure.getOtherfeescategory() != null) {
+					feeCatMap.put(
+							studentfeesstructure.getOtherfeescategory().getFeescategoryname(),
+							feescollectionSingle.getAmountpaid()
+						);
+				}
 			}
 			Date receiptDate = receiptInfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1449,8 +1454,13 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new StudentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				Studentotherfeesstructure studentfeesstructure = studentDetailsDao.getStudentOtherFeesStructureDetails(feescollectionSingle.fetchSfsid());
+				if (studentfeesstructure.getOtherfeescategory() != null) {
+					feeCatMap.put(
+							studentfeesstructure.getOtherfeescategory().getFeescategoryname(),
+							feescollectionSingle.getAmountpaid()
+						);
+				}
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
@@ -1622,8 +1632,13 @@ public class FeesCollectionService {
 			Map<String,Long> feeCatMap = new HashMap<>();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollection) {
-				List<Studentotherfeesstructure> studentfeesstructure = new StudentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
-				feeCatMap.put(studentfeesstructure.get(0).getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+				Studentotherfeesstructure studentfeesstructure = studentDetailsDao.getStudentOtherFeesStructureDetails(feescollectionSingle.fetchSfsid());
+				if (studentfeesstructure.getOtherfeescategory() != null) {
+					feeCatMap.put(
+							studentfeesstructure.getOtherfeescategory().getFeescategoryname(),
+							feescollectionSingle.getAmountpaid()
+						);
+				}
 			}
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
@@ -1982,15 +1997,15 @@ public class FeesCollectionService {
 			Set<Otherfeescollection> setFeesCollectionOtherFees = receiptinfo.getFeesCollectionRecords();
 
 			for (Otherfeescollection feescollectionSingle : setFeesCollectionOtherFees) {
-				List<Studentotherfeesstructure> studentfeesstructure = new StudentDetailsDAO().getotherStudentFeesStructureDetails(feescollectionSingle.fetchSfsid());
+				Studentotherfeesstructure studentfeesstructure = studentDetailsDao.getStudentOtherFeesStructureDetails(feescollectionSingle.fetchSfsid());
 				//feeCategoryFeeCollectionMap.get(studentfeesstructure.get(0).getFeescategory().getFeescategoryname());
 				//feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 
-				for (Studentotherfeesstructure studentfeesSingle : studentfeesstructure) {
-		            if (otherFeeCategoryCollectionMap.containsKey(studentfeesSingle.getOtherfeescategory().getFeescategoryname())) {
-		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), otherFeeCategoryCollectionMap.get(studentfeesSingle.getOtherfeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
+				if (studentfeesstructure.getOtherfeescategory() != null) {
+		            if (otherFeeCategoryCollectionMap.containsKey(studentfeesstructure.getOtherfeescategory().getFeescategoryname())) {
+		            	otherFeeCategoryCollectionMap.put(studentfeesstructure.getOtherfeescategory().getFeescategoryname(), otherFeeCategoryCollectionMap.get(studentfeesstructure.getOtherfeescategory().getFeescategoryname()) + feescollectionSingle.getAmountpaid());
 		            } else {
-		            	otherFeeCategoryCollectionMap.put(studentfeesSingle.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
+		            	otherFeeCategoryCollectionMap.put(studentfeesstructure.getOtherfeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 		            }
 		        }
 			}

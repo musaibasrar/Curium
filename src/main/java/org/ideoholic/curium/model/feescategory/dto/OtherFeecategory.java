@@ -30,7 +30,7 @@ public class OtherFeecategory implements java.io.Serializable {
 	@Column(name = "idfeescategory", unique = true, nullable = false)
 	private Integer idfeescategory;
 
-	@Column(name = "feescategory", length = 150)
+	@Column(name = "feescategoryname", length = 150)
 	private String feescategoryname;
 
 	@Column(name = "amount")
