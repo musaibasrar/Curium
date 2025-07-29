@@ -77,4 +77,28 @@ public class SubjectDetailsAction {
         return "SubjectDetails";
 	}
 	
+	@GetMapping("/subSubjectsDetails")
+	public String subSubjectsDetails() {
+		subjectDetailsActionAdapter.readListOfSubSubjects();
+        return "subSubject";
+	}
+	
+	@PostMapping("/addSubSubject")
+	public String addSubSubject() {
+		if(subjectDetailsActionAdapter.addSubSubject()){
+			return subSubjectsDetails();
+		}else{
+			return "error";
+		}
+	}
+	
+	@PostMapping("/deleteMultipleSubSubject")
+	public String deleteMultipleSubSubject() {
+		if(subjectDetailsActionAdapter.deleteMultipleSubSubject()){
+			return subSubjectsDetails();
+		}else{
+			return "error";
+		}
+	}
+	
 }
