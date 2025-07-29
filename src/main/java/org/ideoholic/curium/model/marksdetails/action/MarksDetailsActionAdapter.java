@@ -221,4 +221,59 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("listExam", responseDto.getExamsList());
         request.setAttribute("classselected", dto.getAddClass());
     }
+
+	public String addMarksSubSubject() {
+
+        MarksUpdateDto dto = new MarksUpdateDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setStudentsMarks(request.getParameterValues("studentMarks"));
+        dto.setStudentsMarksA1(request.getParameterValues("studentMarksA1"));
+        dto.setStudentsMarksA2(request.getParameterValues("studentMarksA2"));
+        dto.setStudentsMarksA3(request.getParameterValues("studentMarksA3"));
+        dto.setStudentsMarksA4(request.getParameterValues("studentMarksA4"));
+        dto.setExam(request.getParameter("exam"));
+        dto.setSubject(request.getParameter("subject"));
+        dto.setClassSearch(request.getParameter("classsearch"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        ResultResponse resultResponse = marksDetailsService.addMarksSubSubject(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+        request.setAttribute("errormessage", resultResponse.getMessage());
+        return resultResponse.getMessage();
+    }
+
+	public boolean viewMarksSub() {
+
+        MarksViewDto dto = new MarksViewDto();
+        dto.setStudentName(request.getParameter("namesearch"));
+        dto.setAddClass(request.getParameter("classsearch"));
+        dto.setAddSec(request.getParameter("secsearch"));
+        dto.setExam(request.getParameter("exam"));
+        dto.setSubject(request.getParameter("subject"));
+        dto.setSubjectSelected(request.getParameter("subjectselected"));
+        dto.setExamSelected(request.getParameter("examselected"));
+
+        MarksResponseDto responseDto = marksDetailsService.viewMarksSub(dto, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("newStudentList", responseDto.getNewStudentList());
+        request.setAttribute("newMarksDetails", responseDto.getNewMarksDetails());
+        request.setAttribute("subjectselected", responseDto.getSubjectSelected());
+        request.setAttribute("examselected", responseDto.getExamSelected());
+        request.setAttribute("subjectid", responseDto.getSubject());
+        request.setAttribute("examid", responseDto.getExam());
+        request.setAttribute("studentmarkmap", responseDto.getStudentsMarksMap());
+        return responseDto.isSuccess();
+
+    }
+	
+	  public boolean updateMarksSub() {
+
+	        MarksUpdateDto dto = new MarksUpdateDto();
+	        dto.setStudentIds(request.getParameterValues("studentIDs"));
+	        dto.setStudentsMarks(request.getParameterValues("studentMarks"));
+	        dto.setMarksId(request.getParameterValues("marksid"));
+	        dto.setExam(request.getParameter("examidselected"));
+	        dto.setSubject(request.getParameter("subjectidselected"));
+
+	        ResultResponse resultResponse = marksDetailsService.updateMarksSub(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+
+	        return resultResponse.isSuccess();
+	    }
 }
