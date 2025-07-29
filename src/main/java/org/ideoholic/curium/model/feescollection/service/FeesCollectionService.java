@@ -1151,8 +1151,8 @@ public class FeesCollectionService {
 		if(currentAcademicYear!=null){
 		String academicYear = dto.getAcademicYear();
 
-		long id = Long.parseLong(dto.getStudentId());
-		List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+		Integer id = Integer.parseInt(dto.getStudentId());
+		List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
 		Map<Studentotherfeesstructure,Long> feesMap = new LinkedHashMap<>();
 
@@ -1193,7 +1193,7 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 
 		try {
-			long id = Long.parseLong(dto.getStudentId());
+			Long id = Long.parseLong(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 
 			//Currentacademicyear currentYear = new YearDAO().showYear();
@@ -1201,7 +1201,7 @@ public class FeesCollectionService {
 
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
-			List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), academicYear);
 
 			long totalSum = 0L;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
@@ -1660,12 +1660,12 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = new FeesDetailsResponseDto();
 
 		try {
-			long id = Long.parseLong(sid);
+			Long id = Long.parseLong(sid);
 			
 			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
 			result.setOtherReceiptInfo(rinfo);
 
-			List<Studentotherfeesstructure> feesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), academicYear);
 			
 			long totalSum = 0L;
 			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
