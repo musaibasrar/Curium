@@ -11,4 +11,8 @@ public class MarksUpdateDto {
     private String subject;
     private String classSearch;
     private String academicYear;
+    private String[] studentsMarksA1;
+    private String[] studentsMarksA2;
+    private String[] studentsMarksA3;
+    private String[] studentsMarksA4;
 }
