@@ -249,7 +249,7 @@ public class AttendanceDAO {
 				// Fetch attendance by attendee ID, current date, and academic year
 				// session.createQuery("from Studentdailyattendance  where" + " attendeeid='"+studentdailyattendance.getAttendeeid()+"' and " +	"date= CURDATE() and academicyear = '"+studentdailyattendance.getAcademicyear()+"'");
 				Studentdailyattendance existingAttendance = studentDailyAttendanceRepository
-						.findByAttendee_studentexternalidAndDateAndAcademicyear(
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(
 								studentdailyattendance.getAttendeeid().toString(),
 								LocalDate.now(),
 								studentdailyattendance.getAcademicyear()
@@ -278,7 +278,7 @@ public class AttendanceDAO {
 
 		try{
 			// studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			studentDailyAttendance = studentDailyAttendanceRepository.findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(date, currentAcademicYear, studentExternalId, branchId);
+			studentDailyAttendance = studentDailyAttendanceRepository.findByDateAndAcademicyearAndAttendeeStudentexternalidAndBranchid(date, currentAcademicYear, studentExternalId, branchId);
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
@@ -294,7 +294,7 @@ public class AttendanceDAO {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 		try{
 			// studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(
+			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
 					LocalDate.parse(fromTimestamp), LocalDate.parse(toTimestamp), currentAcademicYear,
 					studentExternalId, branchId);
 		} catch (Exception e) {
@@ -334,7 +334,7 @@ public class AttendanceDAO {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 		try{
 			//studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalIdGraph+"' and branchid="+branchId).list();
-  			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(LocalDate.parse(timestampFrom),LocalDate.parse(timestampto),currentAcademicYear, studentExternalIdGraph, branchId);
+  			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(LocalDate.parse(timestampFrom),LocalDate.parse(timestampto),currentAcademicYear, studentExternalIdGraph, branchId);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
@@ -353,7 +353,7 @@ public class AttendanceDAO {
 				//Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 
 				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
-						.findByAttendee_studentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), LocalDate.now(), studentDailyAttendance.getAcademicyear());
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), LocalDate.now(), studentDailyAttendance.getAcademicyear());
 
 				if (existingAttendance.isPresent()) {
 					return "error-Can't Mark the attendance twice!!!";
@@ -378,7 +378,7 @@ public class AttendanceDAO {
 
 			for (Studentdailyattendance student : studentDailyAttendance) {
 				// Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
-				Studentdailyattendance studentSingle = studentDailyAttendanceRepository.findByAttendee_studentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
+				Studentdailyattendance studentSingle = studentDailyAttendanceRepository.findByAttendeeStudentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
 						.orElse(studentDailyAttendanceRepository.save(student));
 				if(studentSingle != null) {
 					result &= true;
@@ -391,27 +391,28 @@ public class AttendanceDAO {
 		return result;
 	}
 
+	@Transactional
 	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
 			String currentAcademicYear, String timestampFrom, String timestampto,
 			List<Student> searchStudentList, int branchId) {
 		
 		Map<String, List<Studentdailyattendance>> mapStudentAttendance = new HashMap<String, List<Studentdailyattendance>>();
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
 			
 			for (Student student : searchStudentList) {
 				List<Studentdailyattendance> studentAttendance = new ArrayList<Studentdailyattendance>();
-				studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
+				// studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
 				mapStudentAttendance.put(student.getName(), studentAttendance);
+				studentAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
+						LocalDate.parse(timestampFrom), LocalDate.parse(timestampto), currentAcademicYear,
+						student.getStudentexternalid(), branchId);
 			}
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+			
+			throw e;
 		}
 		return mapStudentAttendance;
 	}
