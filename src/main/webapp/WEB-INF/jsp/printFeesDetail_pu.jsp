@@ -175,7 +175,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="/abc/images/abcheader.png" width="200" height="150"/>
+				<img src="/brightschool/images/brightschoolheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				Curium Comp. P.U. College <br>
@@ -220,7 +220,7 @@
 				
 
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:<c:out
-						value="${recieptinfo.receiptnumber}" />
+						value="${receiptinfo.receiptnumber}" />
 				</td>
 
 			</tr>
@@ -236,7 +236,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
 			</tr>
 
@@ -361,7 +361,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
 				<td class="headerText">Rs.  <c:out
-						value="${recieptinfo.totalamount}" /></td>
+						value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 

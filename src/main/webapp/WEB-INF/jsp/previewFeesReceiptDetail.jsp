@@ -101,9 +101,9 @@
                 }
             }
         </style>
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/vision/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/brightschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/brightschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/brightschool/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -119,7 +119,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-    response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+    response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 } else {
     user = (String) session.getAttribute("userAuth");
 }
@@ -146,8 +146,8 @@ if (cookies != null) {
                     <tr>
                         <td>Student Name: <c:out value="${student.name}" /></td>
                         <td>Admission No:  <c:out value="${student.admissionnumber}" /></td>
-                        <td>Date:  <c:out value="${recieptdate}" /></td>
-                        <td>Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
+                        <td>Date:  <c:out value="${receiptdate}" /></td>
+                        <td>Receipt No:  <c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -176,10 +176,10 @@ if (cookies != null) {
                 <tfoot>
                     <tr>
                         <td>Total Amount</td>
-                        <td class="totalAmount"><c:out value="${recieptinfo.totalamount}" /></td>
+                        <td class="totalAmount"><c:out value="${receiptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/vision/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/brightschool/FeesCollection/printFeesReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>

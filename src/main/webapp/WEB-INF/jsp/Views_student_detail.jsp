@@ -13,8 +13,8 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <link rel="stylesheet" href="/brightschool/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/brightschool/css/datePicker/demos.css">
         <style type="text/css">
         
          .headerText {
@@ -62,7 +62,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
                     </thead>
                     <tbody>
                     <tr>
-                    <td ><h2><a  href="/abc/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
+                    <td ><h2><a  href="/brightschool/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
                     </tr>
                     </tbody>
                     </table>

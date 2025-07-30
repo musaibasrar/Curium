@@ -119,9 +119,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/brightschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/brightschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/brightschool/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -130,7 +130,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "/abc/FeesProcess/feesCollect"; 
+            	 //document.location.href = "/brightschool/FeesProcess/feesCollect"; 
              }
         </script>
 </head>
@@ -138,7 +138,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -163,8 +163,8 @@ for(Cookie cookie : cookies){
                     <tr>
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
                         <td style="width: 20%">Admission No:  <c:out value="${student.studentexternalid}" /></td>
-                        <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
-                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
+                        <td style="width: 20%">Date:  <c:out value="${receiptdate}" /></td>
+                        <td style="width: 20%">Receipt No:  <c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -194,12 +194,12 @@ for(Cookie cookie : cookies){
                     <%-- <c:forEach end="1" items="${dispense.dispensedmedicinebills}" var="dispensedmedicinebill"> --%>
                         <tr>
                             <td colspan="2" align="right">Total Amount</td>
-                            <td align="center"><c:out value="${recieptinfo.totalamount}" /></td>
+                            <td align="center"><c:out value="${receiptinfo.totalamount}" /></td>
                         </tr>
                         
                     <%-- </c:forEach> --%>
                     <tr>
-                        <td align="center"><a id="print" href="/abc/FeesCollection/otherprintReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/brightschool/FeesCollection/otherprintReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

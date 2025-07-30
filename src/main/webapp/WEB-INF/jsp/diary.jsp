@@ -19,22 +19,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Diary</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/brightschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/brightschool/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/brightschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/brightschool/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/brightschool/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/brightschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/brightschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/brightschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/brightschool/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/brightschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/brightschool/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/brightschool/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/brightschool/css/datePicker/demos.css">
 
 
 
@@ -243,10 +243,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/brightschool/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/brightschool/JavaScript/actb.js"></script>
+<script src="/brightschool/JavaScript/common.js"></script>
 
 
 
@@ -293,7 +293,7 @@
 <script type="text/javascript">
 	function addDiary() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/DiaryProcess/addDiary";
+		form1.action = "/brightschool/DiaryProcess/addDiary";
 		form1.method = "POST";
 		form1.submit();
 
@@ -314,7 +314,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/brightschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
