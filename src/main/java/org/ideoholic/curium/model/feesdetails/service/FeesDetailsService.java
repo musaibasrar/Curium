@@ -2,10 +2,12 @@ package org.ideoholic.curium.model.feesdetails.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -18,12 +20,16 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.ReceiptDetails;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 
 public class FeesDetailsService {
@@ -300,8 +306,7 @@ public class FeesDetailsService {
 		
 		boolean successResult = false;
 		Receiptinfo receiptInfo = new Receiptinfo();
-		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new LinkedHashMap<Parents,Receiptinfo>();
+		List<ReceiptDetails> receiptDetailsList = new ArrayList<ReceiptDetails>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
@@ -309,19 +314,39 @@ public class FeesDetailsService {
 		if (feesIds != null) {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
-					
+					ReceiptDetails receiptDetails = new ReceiptDetails();
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
-					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(student, receiptInfo);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();
 					misc = misc + receiptInfo.getMisc();
+					
+					Parents student = new Parents();
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					
+				    List<Feescollection> studentFeeStructureIds = new feesCollectionDAO().getFeesCollectionDetails(receiptInfo.getReceiptnumber());
+				    List<Integer> sfsIds = new ArrayList<Integer>();
+				    for (Feescollection fCollection : studentFeeStructureIds) {
+						int sfsid = fCollection.getSfsid();
+						sfsIds.add(sfsid);
+					}
+				    List<Studentfeesstructure> studentFeesStructure = new studentDetailsDAO().getStudentFeesStructureDetails(sfsIds);
+				    List<String> feesCategory= new ArrayList<String>();
+				    
+				    for (Studentfeesstructure feesStructure : studentFeesStructure) {
+				    	feesCategory.add(feesStructure.getFeescategory().getFeescategoryname());
+					}
+				    
+				    receiptDetails.setFeeCategories(feesCategory);
+					receiptDetails.setParents(student);
+					receiptDetails.setReceipt(receiptInfo);
+					receiptDetailsList.add(receiptDetails);
 				}
 
 			}
 		}
 		
+		request.setAttribute("feesmap", receiptDetailsList);
 		httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 		httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
 		httpSession.setAttribute("sumoffine", fine);
@@ -334,7 +359,7 @@ public class FeesDetailsService {
 		}
 		
 		
-		request.setAttribute("feesmap", feesMap);
+		
 		return true;
 	}
 

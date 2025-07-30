@@ -2002,13 +2002,13 @@ public class FeesCollectionService {
 			            double amountPaid = feescollectionSingle.getAmountpaid();
 			            
 			            if(cashOrBank.contains("Cash")) {
-			            	 if (feesCategoryName.contains("tuition fee")) {
+			            	 if (feesCategoryName.contains("tuition fee") || feesCategoryName.contains("monthly fee")) {
 				                    tuitionFeesCash += amountPaid;
 				                }else if (feesCategoryName.contains("tc charges")) {
 				                    tcChargesCash += amountPaid;
 				                } 
 						}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
-							 if (feesCategoryName.contains("tuition fee")) {
+							 if (feesCategoryName.contains("tuition fee") || feesCategoryName.contains("monthly fee")) {
 								 tuitionFeesBank += amountPaid;
 				                } else if (feesCategoryName.contains("tc charges")) {
 				                    tcChargesCash += amountPaid;
@@ -2049,8 +2049,9 @@ public class FeesCollectionService {
 		}
 		
 		for (Entry<String, Long> entry : feeCategoryCollectionMap.entrySet()) {  
-			
-           if(!entry.getKey().contains("Tuition Fee")) {
+			String category = entry.getKey().toLowerCase();
+
+           if(!category.contains("tuition fee") && !category.contains("monthly fee")) {
         	   feeCategoryCollectionMapReport.put(entry.getKey(), entry.getValue());
            }
 		}
@@ -2448,7 +2449,7 @@ public class FeesCollectionService {
 				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
 					Long dueAmount =0l;
 					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
-					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo))) {
+					if(dueAmount>0 && (studentFeesStructure.getFeescategory().getFeescategoryname().contains(currentMonth) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthOne) || studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo)) && !studentFeesStructure.getFeescategory().getFeescategoryname().contains("Exam")) {
 						feesStructure.add(studentFeesStructure);
 						
 						if(studentFeesStructure.getFeescategory().getFeescategoryname().contains(monthTwo)) {

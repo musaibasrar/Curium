@@ -267,7 +267,7 @@ public class FeesCollectionAction {
 	        }
 		 
 		 @PostMapping("/defaulterReport")
-			public String searchHallTicketDetails() {
+			public String getDefaultReport() {
 				new FeesCollectionService(request, response).getDefaulterReportCurrentAcademicActiveStudents();
 				return "defaulterreport";
 			}

@@ -759,28 +759,36 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
                             <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">Fee Cat</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
+
+
                         </tr>
                     </thead>
 
                     <tbody>
                         <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
-							
-							<tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.receipt.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+								value="<c:out value="${feesdetails.receipt.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receipt.date}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.classstudying}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receipt.branchreceiptnumber}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.totalamount-feesdetails.receipt.fine-feesdetails.receipt.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.misc}"/></td>
+                                <td class="dataText">
+						            <c:forEach var="category" items="${feesdetails.feeCategories}">
+						                <c:out value="${category}"/><br/>
+						            </c:forEach>
+						        </td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receipt.receiptnumber}'/>&sid=<c:out value='${feesdetails.receipt.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

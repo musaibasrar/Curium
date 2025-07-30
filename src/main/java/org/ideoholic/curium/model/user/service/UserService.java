@@ -28,12 +28,16 @@ import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.ReceiptDetails;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
@@ -593,19 +597,36 @@ public class UserService {
 			long sumOfFees = 0l;
 			long fine = 0l;
 			long misc = 0l;
-			Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
+			List<ReceiptDetails> receiptDetailsList = new ArrayList<ReceiptDetails>();
 			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
+				ReceiptDetails receiptDetails = new ReceiptDetails();
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 				fine = fine + receiptinfo.getFine();
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
 				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
-				feesMap.put(receiptinfo, student);
+				
+			    List<Feescollection> studentFeeStructureIds = new feesCollectionDAO().getFeesCollectionDetails(receiptinfo.getReceiptnumber());
+			    List<Integer> sfsIds = new ArrayList<Integer>();
+			    for (Feescollection fCollection : studentFeeStructureIds) {
+					int sfsid = fCollection.getSfsid();
+					sfsIds.add(sfsid);
+				}
+			    List<Studentfeesstructure> studentFeesStructure = new studentDetailsDAO().getStudentFeesStructureDetails(sfsIds);
+			    List<String> feesCategory= new ArrayList<String>();
+			    
+			    for (Studentfeesstructure feesStructure : studentFeesStructure) {
+			    	feesCategory.add(feesStructure.getFeescategory().getFeescategoryname());
+				}
+			    receiptDetails.setFeeCategories(feesCategory);
+				receiptDetails.setParents(student);
+				receiptDetails.setReceipt(receiptinfo);
+				receiptDetailsList.add(receiptDetails);
 			}
 			
 			//httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
-			httpSession.setAttribute("searchfeesdetailslist", feesMap);
+			httpSession.setAttribute("searchfeesdetailslist", receiptDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 			httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
 			httpSession.setAttribute("sumoffine", fine);

@@ -805,4 +805,24 @@ public class studentDetailsDAO {
 		 }
 		return false;
 	}
+
+	public List<Studentfeesstructure> getStudentFeesStructureDetails(List<Integer> sfsid) {
+		List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
+
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createQuery("from Studentfeesstructure sfs where sfs.sfsid IN (:sfsid)");
+			query.setParameterList("sfsid", sfsid);
+			studentFeesStructure = query.getResultList();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return studentFeesStructure;
+		}
+	}
 }

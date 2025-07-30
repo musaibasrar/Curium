@@ -742,6 +742,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
                             <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">Fee Cat</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
@@ -755,19 +756,24 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.receipt.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+								value="<c:out value="${feesdetails.receipt.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receipt.date}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.parents.student.classstudying}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receipt.branchreceiptnumber}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.totalamount-feesdetails.receipt.fine-feesdetails.receipt.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.misc}"/></td>
+                                <td class="dataText">
+						            <c:forEach var="category" items="${feesdetails.feeCategories}">
+						                <c:out value="${category}"/><br/>
+						            </c:forEach>
+						        </td>
+                                <td class="dataText"><c:out value="${feesdetails.receipt.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receipt.receiptnumber}'/>&sid=<c:out value='${feesdetails.receipt.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receipt.receiptnumber}'/>&sid=<c:out value='${feesdetails.receipt.sid}'/>&receiptid=<c:out value='${feesdetails.receipt.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.receipt.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

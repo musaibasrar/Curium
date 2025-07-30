@@ -249,66 +249,41 @@
             </TABLE>
 		
             <table class="datatable">
+            
             <thead>
- 				 <tr>
- 				 		<th class=datath>Sl.No.</th>
- 				 		<th class=datath>Admission Number</th>
-						<th class="datath">UID</th>
-						<th class="datath">Receipt No.</th>
-						<th class="datath">Student Name</th>
-						<th class="datath">Class</th>
-						<th class="datath">Father Name</th>
-						<th class="datath">Date of Fees</th>
-				       	<th class="datath">Total</th>
- 				 </tr>
- 			 </thead>
-			<tbody>
-			
-					<c:set var="entrySet" value="${feesmap.entrySet()}" />
-					<c:forEach items="${entrySet}" var="feesmap" varStatus="status">
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="datatd"><c:out value="${status.index+1}" />
-							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.admissionnumber}" />
-							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.studentexternalid}" />
-							</td>
-							<td class="datatd"><c:out	value="${feesmap.value.branchreceiptnumber}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.name}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.classstudying}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.fathersname}" /></td>
-							<td class="datatd">
-							<fmt:formatDate type="date" value="${feesmap.value.date}" pattern="dd/MM/yyyy"/>
-							</td>
-							<td class="datatd">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${feesmap.value.totalamount}" />
-							</td>
-						</tr>
-						
-					</c:forEach>
-					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total</b>
-							</label> 
-							</td>
-							
-							<td class="dataTextRight">
-								<label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
-							</b>
-							</label>
-							</td>
-					</tr>
-			</tbody>
+                        <tr>
+                            <th class="datath">Sl.No</th>
+						    <th class="datath">UID</th>
+						    <th class="datath">Receipt No.</th>
+						    <th class="datath">Student Name</th>
+						    <th class="datath">Class</th>
+						    <th class="datath">Father Name</th>
+						    <th class="datath">Date</th>
+						    <th class="datath">Fees Category</th>
+				       	    <th class="datath">Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="datatd"><c:out value="${status.index+1}" /></td>
+                                <td  class="datatd"><c:out value="${feesdetails.parents.student.studentexternalid}"/></td>
+                                <td  class="datatd"><c:out value="${feesdetails.receipt.branchreceiptnumber}"/></td>
+                                <td  class="datatd"><c:out value="${feesdetails.parents.student.name}"/></td>
+                                <td  class="datatd"><c:out value="${feesdetails.parents.student.classstudying}"/></td>
+                                <td  class="datatd"><c:out value="${feesdetails.parents.fathersname}"/></td>
+                                <td  class="datatd"><c:out value="${feesdetails.receipt.date}"/></td>
+                                <td class="datatd">
+						            <c:forEach var="category" items="${feesdetails.feeCategories}">
+						                <c:out value="${category}"/><br/>
+						            </c:forEach>
+						        </td>
+                                <td class="datatd"><c:out value="${feesdetails.receipt.totalamount}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
 				</table>
 			
 				<br>

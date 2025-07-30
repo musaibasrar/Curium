@@ -392,8 +392,9 @@
                        
             var students = [
             <c:forEach varStatus="status" items="${studentList}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
+                value:'<c:out default="0" value="${student.name}" />',
                 name:'<c:out default="0" value="${student.name}" />',
+                admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
                 externalid:'<c:out default="0" value="${student.studentexternalid}" />',
@@ -459,7 +460,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
+                .append( "<a><b> " + item.value + "/" +item.admissionno+  "/" +item.classandsec+   " </b> </a>" )
                 .appendTo( ul );
             };
             
@@ -867,7 +868,7 @@ for(Cookie cookie : cookies){
 						<td><br></td>
 						</tr>
 						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
+                    <td style="width: 45%" class="alignRightFields">Student Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
                     <input name="studentexternalid" type="hidden" id="studentexternalid" /> </td>
                         
                     </tr>

@@ -69,9 +69,10 @@ public class ExamDetailsAction {
 		result = new YearService(request, response).getYear();
 		if (!result) 
 			return error;
-		result = new StudentService(request, response).viewAllStudentsList();
-		if (!result) 
-			return error;
+		/*
+		 * result = new StudentService(request, response).viewAllStudentsList(); if
+		 * (!result) return error;
+		 */
 		
 		return "generatehallticket";
 	}
