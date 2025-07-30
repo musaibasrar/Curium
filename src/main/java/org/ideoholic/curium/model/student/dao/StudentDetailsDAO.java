@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.ParentsRepository;
+import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -39,7 +40,10 @@ public class StudentDetailsDAO {
 	
 	@Autowired
 	private StudentRepository studentRepo;
-	
+
+	@Autowired
+	private StudentFeesStructureRepository studentFeesStructureRepo;
+
 	@Autowired
 	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
 	
@@ -696,29 +700,21 @@ public class StudentDetailsDAO {
 			return cardDetailsList;
 		}
 
-	public List<Studentfeesstructure> getStudentFeesStructurebyFeesCategory(long id, List<Integer> feesCat) {
+	@Transactional
+	public List<Studentfeesstructure> getStudentFeesStructurebyFeesCategory(Integer id, List<Integer> feesCat) {
 		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
-			Query query = session
-					.createQuery("from Studentfeesstructure sfs where sfs.student.sid = '"+id+"' and sfs.feescategory.idfeescategory IN (:feescat)");
-			query.setParameterList("feescat", feesCat);
-			results = query.list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			
+			// createQuery("from Studentfeesstructure sfs where sfs.student.sid = '"+id+"' and sfs.feescategory.idfeescategory IN (:feescat)");
+			results = studentFeesStructureRepo.findByStudentSidAndFeescategoryIdfeescategoryIn(id, feesCat);
+		} catch (Exception hibernateException) { 
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+			throw hibernateException;
 		}
+		return results;
 	}
 
 	@Transactional

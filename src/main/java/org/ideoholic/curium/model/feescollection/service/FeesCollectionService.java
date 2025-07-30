@@ -695,13 +695,13 @@ public class FeesCollectionService {
 				
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 				
-				long id = parents.getStudent().getSid();
+				Integer id = parents.getStudent().getSid();
 				
 				List<Integer> feesCatList = new ArrayList<>(); 
 				for (String feescat : feesCat) {
 					feesCatList.add(Integer.parseInt(feescat));
 				}
-				List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				
 				if (!feesstructure.isEmpty()) {
 					
@@ -2164,13 +2164,13 @@ public class FeesCollectionService {
 
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 
-				long id = parents.getStudent().getSid();
+				Integer id = parents.getStudent().getSid();
 
 				List<Integer> feesCatList = new ArrayList<>(); 
 				for (String feescat : feesCat) {
 					feesCatList.add(Integer.parseInt(feescat));
 				}
-				List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				List<Studentfeesstructure> defaulterFeesstructure = new ArrayList<Studentfeesstructure>();
 				Long totalDue = 0L;
 
@@ -2334,13 +2334,13 @@ public class FeesCollectionService {
 				
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 				
-				long id = parents.getStudent().getSid();
+				Integer id = parents.getStudent().getSid();
 				
 				List<Integer> feesCatList = new ArrayList<>(); 
 				for (String feescat : feesCat) {
 					feesCatList.add(Integer.parseInt(feescat));
 				}
-				List<Studentfeesstructure> feesstructureMain = new StudentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesstructureMain = studentDetailsDao.getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
 				
 				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
