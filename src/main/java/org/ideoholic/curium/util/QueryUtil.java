@@ -26,4 +26,8 @@ public class QueryUtil {
 	public void runUpdateQuery(String query) {
 		 entityManager.createQuery(query).executeUpdate();
 	}
+	
+	public Object runGivenQueryForSingleResult(String query,Class clazz) {
+		 return entityManager.createQuery(query, clazz).getSingleResult();
+	}
 }

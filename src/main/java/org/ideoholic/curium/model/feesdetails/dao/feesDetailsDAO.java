@@ -18,6 +18,7 @@ import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class feesDetailsDAO {
     private ReceiptinfoRepository receiptinfoRepo;
 	@Autowired
     private AcademicfeesstructureRepository academicfeesstructureRepo;
+	@Autowired
+	private QueryUtil queryUtil;
        
 
 	 @Transactional
@@ -153,27 +156,22 @@ public class feesDetailsDAO {
 	}
     return dueFees;
     }
+        @Transactional
         public String feesDetailsSum(String queryMain) {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
                  
                 String results = "";
                 try {
-                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-                    transaction = session.beginTransaction();
-                                Query query =  session.createQuery(queryMain);
-                                results =  (String) query.uniqueResult();
+                                //Query query =  session.createQuery(queryMain);
+                                //results =  (String) query.uniqueResult();
+                                results =  queryUtil.runGivenQueryForSingleResult(queryMain,String.class).toString();
                                 
                   
-                    transaction.commit();
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
-                }finally {
-        			HibernateUtil.closeSession();
-        		}
+                }
                 return results;
         }
 
