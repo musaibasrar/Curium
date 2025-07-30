@@ -391,27 +391,29 @@ public class AttendanceDAO {
 		return result;
 	}
 
+	@Transactional
 	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
 			String currentAcademicYear, String timestampFrom, String timestampto,
 			List<Student> searchStudentList, int branchId) {
 		
 		Map<String, List<Studentdailyattendance>> mapStudentAttendance = new HashMap<String, List<Studentdailyattendance>>();
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
+
 			for (Student student : searchStudentList) {
-				List<Studentdailyattendance> studentAttendance = new ArrayList<Studentdailyattendance>();
-				studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
-				mapStudentAttendance.put(student.getName(), studentAttendance);
+
+				//studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
+
+
+				List<Studentdailyattendance> attendanceList = studentDailyAttendanceRepository
+						.findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(
+								 currentAcademicYear,timestampFrom, timestampto, student.getStudentexternalid(), branchId
+						);
+				mapStudentAttendance.put(student.getName(), attendanceList);
 			}
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw e;
 		}
 		return mapStudentAttendance;
 	}

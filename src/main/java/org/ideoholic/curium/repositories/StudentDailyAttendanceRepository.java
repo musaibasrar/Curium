@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,5 +29,10 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
     @Modifying
     @Query("UPDATE Studentdailyattendance s SET s.attendancestatus = :status WHERE s.attendanceid = :id")
    void updateAttendanceStatusById(@Param("id") Integer id, @Param("status") String status);
+
+    List<Studentdailyattendance> findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(
+            String currentAcademicYear, String timestampFrom, String timestampto,
+            String attendeeid, int branchid
+    );
 
 }
