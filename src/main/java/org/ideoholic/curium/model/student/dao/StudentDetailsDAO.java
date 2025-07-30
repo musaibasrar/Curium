@@ -14,6 +14,7 @@ import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.repositories.CardRepository;
 import org.ideoholic.curium.repositories.ParentsRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
@@ -36,10 +37,13 @@ public class StudentDetailsDAO {
 	private QueryUtil queryUtil;
 	
 	@Autowired
-	private ParentsRepository parentsRepo;
-	
+	private CardRepository cardRepo;
+
 	@Autowired
 	private StudentRepository studentRepo;
+
+	@Autowired
+	private ParentsRepository parentsRepo;
 
 	@Autowired
 	private StudentFeesStructureRepository studentFeesStructureRepo;
@@ -680,25 +684,21 @@ public class StudentDetailsDAO {
 		// TODO Auto-generated method stub
 		return null;	
 	}
-	
-	public List<Card> getCardDetails(List<Integer> ids){
-		Transaction transaction = null;
-			List<Card> cardDetailsList = new ArrayList<Card>();
-			try {
-				Session session = HibernateUtil.openCurrentSession();
-				transaction = session.beginTransaction();
-				Query query = session
-						.createQuery("From Card as card where card.sid IN (:ids)");
-				query.setParameterList("ids", ids);
-				cardDetailsList = query.list();
-				transaction.commit();
-			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-				hibernateException.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			 }
-			return cardDetailsList;
+
+	@Transactional
+	public List<Card> getCardDetails(List<Integer> ids) {
+		List<Card> cardDetailsList = new ArrayList<>();
+		try {
+			// .createQuery("From Card as card where card.sid IN (:ids)");
+			cardDetailsList = cardRepo.findBySidIn(ids);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
+		return cardDetailsList;
+	}
 
 	@Transactional
 	public List<Studentfeesstructure> getStudentFeesStructurebyFeesCategory(Integer id, List<Integer> feesCat) {
