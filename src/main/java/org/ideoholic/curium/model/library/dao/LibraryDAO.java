@@ -315,7 +315,6 @@ public class LibraryDAO {
 		    queryBookIssue.setParameter("totalDays", noOfDays);
 		    queryBookIssue.setParameter("bookId", bookIssueIds);
 			queryBookIssue.executeUpdate();
-				
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();

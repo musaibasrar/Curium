@@ -41,7 +41,6 @@
         <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
         <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
         
-        
         <style type="text/css">
             <!--
             .labelCss {
@@ -319,10 +318,60 @@
                    
             });
 
+ function submitfees(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname){
+            	
+            	var paymentmethodvalue = '';
+            	var cashpaymentvalue = '';
+            	var acknovalue = '';
+            	var transferdatevalue = '';
+            	var transferbanknamevalue = '';
+            	var chequenovalue = '';
+            	var chequedatevalue = '';
+            	var chequebanknamevalue = '';
+            	
+            	if(banktransfer.checked == true ){
+            		paymentmethodvalue = 'banktransfer';
+            	}
+            	
+            	if(chequetransfer.checked == true){
+            		paymentmethodvalue = 'chequetransfer';
+            	}
+            	
+            	if(cashpayment.checked == true){
+            		paymentmethodvalue = 'cashpayment';
+            	}
+            	
+            	if(ackno!=null){
+            		acknovalue = ackno.value;
+            	}
+            	
+            	if(transferdate!=null){
+            		transferdatevalue = transferdate.value;
+            	}
+            	
+            	if(transferbankname!=null){
+            		transferbanknamevalue = transferbankname.value;
+            	}
+            	if(chequeno!=null){
+            		chequenovalue = chequeno.value;
+            	}
+            	if(chequedate!=null){
+            		chequedatevalue = chequedate.value;
+            	}
+            	if(chequebankname!=null){
+            		chequebanknamevalue = chequebankname.value;
+            	}
+            	
+            	var form1 = document.getElementById("form1");
+        		form1.action="/alfalahschool/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.method = "POST";
+        		form1.submit();
+        		
+            }
             
             function getbooks(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/abc/LibraryProcess/searchbooks";
+        		form1.action="/alfalahschool/LibraryProcess/searchbooks";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -443,9 +492,13 @@
         </script>
         
         <script type="text/javascript">
-	
-	
-	
+	function returnBook() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/alfalahschool/LibraryProcess/bookReturnByStudent";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 	$(function() {
 		$("#returndate").datepicker({
 			changeYear : true,
@@ -619,7 +672,7 @@ for(Cookie cookie : cookies){
                     <tr>
 								<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<!-- <th title="click to sort" class="headerText">Book Id</th> -->
+						<th title="click to sort" class="headerText">Book Id</th>
 						<th title="click to sort" class="headerText">Date of Issue</th>
 						<th title="click to sort" class="headerText">Total Days</th>
 							</tr>
@@ -630,10 +683,10 @@ for(Cookie cookie : cookies){
 						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
            							<tr>
            								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
-									      <%-- <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /> </td> --%>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
 									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /></td>
                 					</tr>
 								
 							</c:forEach> 

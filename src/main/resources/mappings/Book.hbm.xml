@@ -36,6 +36,5 @@
         <property name="branchid" type="int">
             <column name="branchid" />
         </property>
-        
     </class>
 </hibernate-mapping>

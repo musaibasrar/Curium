@@ -924,7 +924,7 @@ for(Cookie cookie : cookies){
 						   <c:forEach items="${availablebooklist}" var="bookslist" varStatus="status">
            							<tr>
            								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslist.bid}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslist.bid}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
+									      <td class="dataTextLeft"><c:out value="${bookslist.bookname}" /><input type="hidden" name="bookname_${bookslist.bid}" value=" <c:out value="${bookslist.bookname}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.subject}" /><input type="hidden" name="subject" value=" <c:out value="${bookslist.subject}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.author}" /><input type="hidden" name="author" value=" <c:out value="${bookslist.author}"/>"/> </td>
 									      <td class="dataTextLeft"><c:out value="${bookslist.publisher}" /><input type="hidden" name="publisher" value=" <c:out value="${bookslist.publisher}"/>"/> </td>
