@@ -839,18 +839,10 @@ for(Cookie cookie : cookies){
 										<!-- collect classes and sections -->
 										<c:forEach items="${classdetailslist}" var="item">
 										    <c:if test="${not empty item.classdetails}">
-										        <c:choose>
-										            <c:when test="${fn:contains(classList, item.classdetails) == false}">
 										                <c:set var="classList" value="${classList},${item.classdetails}" />
-										            </c:when>
-										        </c:choose>
 										    </c:if>
 										    <c:if test="${not empty item.section}">
-										        <c:choose>
-										            <c:when test="${fn:contains(sectionList, item.section) == false}">
 										                <c:set var="sectionList" value="${sectionList},${item.section}" />
-										            </c:when>
-										        </c:choose>
 										    </c:if>
 										</c:forEach>
 										
