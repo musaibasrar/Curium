@@ -44,9 +44,8 @@ public class Teacher implements java.io.Serializable {
 	private String bankifsc;
 	private String accno;
 	private String currentemployee;
-	
-	
-	
+	private String classTeacher;
+
 	public Teacher() {
 	}
 
@@ -286,5 +285,13 @@ public class Teacher implements java.io.Serializable {
 
 	public void setCurrentemployee(String currentemployee) {
 		this.currentemployee = currentemployee;
+	}
+	
+	public String getClassTeacher() {
+		return classTeacher;
+	}
+
+	public void setClassTeacher(String classTeacher) {
+		this.classTeacher = classTeacher;
 	}
 }
