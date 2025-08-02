@@ -45,7 +45,8 @@ public class Teacher implements java.io.Serializable {
 	private String accno;
 	private String currentemployee;
 	private String classTeacher;
-
+	private String userid;
+	
 	public Teacher() {
 	}
 
@@ -293,5 +294,14 @@ public class Teacher implements java.io.Serializable {
 
 	public void setClassTeacher(String classTeacher) {
 		this.classTeacher = classTeacher;
+	}
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 }
