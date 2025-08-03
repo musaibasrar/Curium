@@ -793,7 +793,7 @@ for(Cookie cookie : cookies){
                     <td  class="footerTD" colspan="9" >
                     
                     		<button value="Export" type="submit" id="export">Export</button>
-                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
+                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline" name="deadline">
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;

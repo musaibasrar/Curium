@@ -39,7 +39,7 @@ public class SmsService {
 
 		int noOfRecords = 100;
 		int offset=0;
-		
+		boolean result = false;
 		if(branchId!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
@@ -105,16 +105,30 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						resultSMS = sendSMS(numbers,message,SMSTempType);
+						
+						int maxRetries = 3;
+						int attempts = 0;
+
+						while (attempts < maxRetries) {
+						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    
+						    if (resultSMS == 200) {
+						        break; // success, exit loop
+						    }
+						    
+						    attempts++; // retry if not successful
+						}
+						
 					}
 					
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				 ResultResponse.builder().success(true).build();
+				result = true;
 			}
 		}
 		
-        return ResultResponse.builder().build();
+        return ResultResponse.builder().success(result).build();
 		
 	}
 
@@ -274,11 +288,26 @@ public class SmsService {
         String output;
         while ((output = reader.readLine()) != null) {
             System.out.println("OUTPUT: " + output);
+            
+         // Check if ErrorCode is present
+            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
+            if (errorCodeIndex != -1) {
+                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
+                int end = output.indexOf("\"", start);
+                String errorCode = output.substring(start, end);
+
+                if ("000".equals(errorCode)) {
+                	responseCode=200;
+                } else {
+                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
+                }
+            } else {
+                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
+            }
         }
 
         // Close reader
         reader.close();
-        responseCode=200;
 
 		} else {
 			log.error("POST request not worked");
@@ -292,7 +321,7 @@ public class SmsService {
 	
 	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
 		int resultSMS=0;
-
+		boolean result = false;
 		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
 		String[] studentIds = dto.getStudentIds();
 		String numbers = null;
@@ -331,11 +360,11 @@ public class SmsService {
 					}
 					
 			if(resultSMS==200){
-				return ResultResponse.builder().success(true).build();
+				result = true;
 
 			}
 			
-			return ResultResponse.builder().build();
+			return ResultResponse.builder().success(result).build();
 		}
 
 
