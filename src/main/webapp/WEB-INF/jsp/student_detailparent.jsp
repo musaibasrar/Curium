@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-    <script src="/abc/js/jquery.min.js"></script>
-    <script src="/abc/js/bootstrap.min.js"></script>
-    <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
+    <script src="/vision/js/jquery.min.js"></script>
+    <script src="/vision/js/bootstrap.min.js"></script>
+    <script src="/vision/js/popper.min.js"></script>
         
 <style>
  .headerText {
@@ -49,6 +49,22 @@ padding:1 rem;
 }
 </style>
 </head>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 <body>
    
 

@@ -9,7 +9,10 @@
 <meta charset="UTF-8">
 <title>Marks Sheet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/vision/css/bootstrap.min.css">
+        <script src="/vision/js/jquery.min.js"></script>
+        <script src="/vision/js/bootstrap.min.js"></script>
+        <script src="/vision/js/popper.min.js"></script>
 
 <style>
   .headerText, .headerTextLeft, .dataTextBold, .dataTextBoldLeft, .dataTextBoldCenter, .addressLine, .dataText {
@@ -105,6 +108,22 @@
   }
 </style>
 </head>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 <form method="post" class="bodymargin">

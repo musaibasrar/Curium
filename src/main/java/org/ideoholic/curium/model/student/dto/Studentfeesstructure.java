@@ -65,6 +65,9 @@ public class Studentfeesstructure implements java.io.Serializable {
 	@JoinColumn(name = "idfeescategory", referencedColumnName = "idfeescategory")
 	private Feescategory feescategory;
 	
+	@Column(name = "concessionnotes", length = 200)
+	private String concessionnotes;
+
     @Column(name = "academicyear", length = 45)
 	private String academicyear;
 

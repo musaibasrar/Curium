@@ -51,6 +51,9 @@ public class Studentotherfeesstructure implements java.io.Serializable {
 	@Column(name = "totalinstallment")
 	private Integer totalinstallment;
 
+	@Column(name = "concessionnotes")
+	private String concessionnotes;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idfeescategory", referencedColumnName = "idfeescategory")
 	private OtherFeecategory otherfeescategory;

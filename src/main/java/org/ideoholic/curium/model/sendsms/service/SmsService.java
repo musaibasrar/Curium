@@ -7,10 +7,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -19,6 +25,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 import org.springframework.stereotype.Service;
@@ -31,6 +38,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SmsService {
+	
+	 private HttpServletRequest request;
+	    private HttpServletResponse response;
+	    private HttpSession httpSession;
+	    
+	private static DecimalFormat df2 = new DecimalFormat(".##");
 
 
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
@@ -120,6 +133,7 @@ public class SmsService {
 	
 	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
 		ResultResponse result = ResultResponse.builder().build();
+
 		String numbers = DataUtil.emptyString(dto.getNumbers());
 		log.info("Numbers are *** "+numbers);
 		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
@@ -198,7 +212,7 @@ public class SmsService {
 	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-
+	        	
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
@@ -299,31 +313,41 @@ public class SmsService {
 		int resultSMS=0;
 
 		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-
+		String[] studentIds = dto.getStudentIds();
 		String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
 					if(!studentFeesReportList.isEmpty()){
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							
-							String phoneNo = studentFeesReport.getParents().getContactnumber();
-							if(phoneNo!=null && !phoneNo.isEmpty()) {
-								char[] contactNo = phoneNo.toCharArray();
-								
-								if(contactNo.length == 10) {
-									sbN.append(studentFeesReport.getParents().getContactnumber());
-									sbN.append(",");
+							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
+								String phoneNo = studentFeesReport.getParents().getContactnumber();
+								if(phoneNo!=null && !phoneNo.isEmpty()) {
+									char[] contactNo = phoneNo.toCharArray();
+									
+									if(contactNo.length == 10) {
+										sbN.append(studentFeesReport.getParents().getContactnumber());
+										sbN.append(",");
+									}
 								}
+								
+								numbers=sbN.toString();
+								numbers = numbers.substring(0, numbers.length()-1);
+								log.info("Numbers are *** "+numbers);
+								
+								long dueAmount = 0l;
+								for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+									dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
+								}
+								
+								
+								String SMSTempType = "feesreminderwithdueamount";
+								String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+								
+								resultSMS = sendSMS(numbers,message,SMSTempType);
 							}
+							
 						}
-						numbers=sbN.toString();
-						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
 						
-						String SMSTempType = "feesreminder";
-						String message = "deadline";
-						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
 					
 			if(resultSMS==200){

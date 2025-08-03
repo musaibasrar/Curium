@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
@@ -22,6 +23,12 @@ import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @Service
 public class JobActionAdapter {
@@ -34,6 +41,14 @@ public class JobActionAdapter {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	private String BRANCHID = "branchid";
+	   
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	
+	private String USERLOGINID = "userloginid";
+	
+	private String USERNAME = "username";
 	
 	@Autowired
 	private JobService jobService;
@@ -156,7 +171,7 @@ public class JobActionAdapter {
 		addQueryDto.setAssignto(request.getParameterValues("assignto"));
 		addQueryDto.setTask(request.getParameterValues("task"));
 		addQueryDto.setDescription(request.getParameterValues("description"));
-		addQueryDto.setExpecteddd(request.getParameterValues("expecteddeliverydatetask"));
+		addQueryDto.setExpecteddeliverydatetask(request.getParameterValues("expecteddeliverydatetask"));
 		ResultResponse response = jobService.addQuery(addQueryDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.USERID).toString());
 		return response.isSuccess();
 	}

@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.employee.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
@@ -24,7 +25,11 @@ import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
@@ -77,6 +82,13 @@ public class EmployeeService {
 		                	employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
 		                	employee.setBankifsc(DataUtil.emptyString(employeeDto.getBankIFSC()));
 							employee.setAccno(DataUtil.emptyString(employeeDto.getAccNo()));
+							String classesTeachingCsv = employeeDto.getClassesTeaching() != null ? String.join(",", employeeDto.getClassesTeaching()) : "";
+							String classTeacherCsv = employeeDto.getClassTeacher() != null ? String.join(",", employeeDto.getClassTeacher()) : "";
+							String subjectTeachingCsv = employeeDto.getSubjectsTeaching() != null ? String.join(",", employeeDto.getSubjectsTeaching()) : "";
+							
+							employee.setClassesteaching(classesTeachingCsv);
+							employee.setClassteacher(classTeacherCsv);
+							employee.setSubjectsteaching(subjectTeachingCsv);
 		                //End Bank Details
 
 			// Process form file field (input type="file")
@@ -171,6 +183,7 @@ public class EmployeeService {
 	public EmployeesWithSalaryResponseDto viewAllEmployee(String branchId) {
 		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = new EmployeesWithSalaryResponseDto();
 		
+		boolean result = false;
     try {
     	List<Teacher> list = employeeDao.readListOfObjects(Integer.parseInt(branchId));
     	employeesWithSalaryResponseDto.setEmployeeList(list);
@@ -184,7 +197,7 @@ public class EmployeeService {
 
 	public EmployeeDetailsResponseDto viewDetailsEmployee(String empId) {
 		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
-		 try {
+	        try {
 	            long id = Long.parseLong(empId);
 	            Teacher employee = employeeDao.readUniqueObject(id);
 	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
@@ -195,6 +208,18 @@ public class EmployeeService {
 
 	                employeeDetailsResponseDto.setSuccess(true);
 	            } 
+	            String classteacherCsv = employee.getClassteacher();
+	            List<String> classteacherList = (classteacherCsv != null && !classteacherCsv.trim().isEmpty())
+	                    ? Arrays.asList(classteacherCsv.split("\\s*,\\s*"))
+	                    : new ArrayList<>();
+	            employeeDetailsResponseDto.setClassTeacher(classteacherList);
+	            
+	            String classesteachingCsv = employee.getClassesteaching();
+	            List<String> classesteachingList = (classesteachingCsv != null && !classesteachingCsv.trim().isEmpty())
+	                    ? Arrays.asList(classesteachingCsv.split("\\s*,\\s*"))
+	                    : new ArrayList<>();
+	            employeeDetailsResponseDto.setClassesTeaching(classesteachingList);
+
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            employeeDetailsResponseDto.setSuccess(false);
@@ -246,6 +271,14 @@ public class EmployeeService {
 			employee.setBranchid(Integer.parseInt(DataUtil.emptyString(employeeDto.getBranchId())));
 			employee.setLeavingdate(DateUtil.indiandateParser(employeeDto.getLeavingdate()));
 			employee.setJoiningdate(DateUtil.indiandateParser(employeeDto.getJoiningDate()));
+			
+			String classesTeachingCsv = employeeDto.getClassesTeaching() != null ? String.join(",", employeeDto.getClassesTeaching()) : "";
+			String classTeacherCsv = employeeDto.getClassTeacher() != null ? String.join(",", employeeDto.getClassTeacher()) : "";
+			String subjectTeachingCsv = employeeDto.getSubjectsTeaching() != null ? String.join(",", employeeDto.getSubjectsTeaching()) : "";
+			
+			employee.setClassesteaching(classesTeachingCsv);
+			employee.setClassteacher(classTeacherCsv);
+			employee.setSubjectsteaching(subjectTeachingCsv);
 			//Bank Details
 
 			employee.setBankname(DataUtil.emptyString(employeeDto.getBankName()));
@@ -400,6 +433,28 @@ public class EmployeeService {
 	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
 	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListPosition(listPosition);
+	        List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListClasssec(classsecList);
+	        
+	        List<String> classList = new ArrayList<>();
+	        	        List<String> sectionList = new ArrayList<>();
+	        
+	        	        for (Classsec cd : classsecList) {
+	        	            if (cd.getClassdetails() != null && !cd.getClassdetails().trim().isEmpty()
+	        	                && (cd.getSection() == null || cd.getSection().trim().isEmpty())) {
+	        	                classList.add(cd.getClassdetails());
+	        	            } else if ((cd.getClassdetails() == null || cd.getClassdetails().trim().isEmpty())
+	                               && cd.getSection() != null && !cd.getSection().trim().isEmpty()) {
+	        	                sectionList.add(cd.getSection());
+	        	            }
+	        	        }
+	        
+	        	        viewAllRelationsResponseDto.setClassList(classList);
+	        	        viewAllRelationsResponseDto.setSectionList(sectionList);
+	        
+	        
+	        List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	        viewAllRelationsResponseDto.setListSubjectMaster(subjectList);
 		}
 		return viewAllRelationsResponseDto;
 	}

@@ -1,11 +1,16 @@
 package org.ideoholic.curium.model.std.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.std.dto.ClassDto;
 import org.ideoholic.curium.model.std.dto.ClassIdsDto;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.dto.StdOfClassDto;
 import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -24,6 +29,9 @@ public class StandardActionAdapter {
     
     @Autowired
     private StandardService standardService;
+    
+    @Autowired
+    private EmployeeService employeeService;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -153,4 +161,18 @@ public class StandardActionAdapter {
         ResultResponse resultResponse = standardService.viewleft();
         request.setAttribute("studentListLeft", resultResponse.getResultList());
     }
+
+	public void viewClassesForTeacher() {
+
+        EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        ResultResponse resultResponse = standardService.viewClassesForTeacher(result.getEmployee().getClassteacher(),httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
+	}
+
+	public void viewClassesForTeacherMarksEntry() {
+
+        EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
+        ResultResponse resultResponse = standardService.viewClassesForTeacher(result.getEmployee().getClassesteaching(),httpSession.getAttribute(BRANCHID).toString());
+        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
+	}
 }

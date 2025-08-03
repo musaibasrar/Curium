@@ -10,6 +10,8 @@ import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.PoMaster;
+import org.ideoholic.curium.model.mess.item.dto.PurchaseOrder;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
@@ -154,5 +156,23 @@ public class MessStockEntryDAO {
         }
         return results;
 }
+
+
+
+	public List<PurchaseOrder> getPurchaseOrderById(String invoiceDetailsId) {
+		 List<PurchaseOrder> results = new ArrayList<PurchaseOrder>();
+	        try {
+	                transaction = session.beginTransaction();
+	                results = (List<PurchaseOrder>) session.createQuery("From PurchaseOrder po where  po.externalId = '"+invoiceDetailsId+"' and po.receivedQuantity < po.quantity").setCacheable(true).setCacheRegion("commonregion").list();
+	                transaction.commit();
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	                
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+	        return results;
+	}
 	
 }

@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Report</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -305,38 +305,38 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
 
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -363,12 +363,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/searchFeesDueHeadWiseReport";
+		form1.action = "/vision/FeesCollection/searchFeesDueHeadWiseReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -452,7 +452,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -543,7 +543,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/vision/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
@@ -576,7 +576,7 @@ var xmlHttp;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -589,7 +589,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/abc/FeesCollection/printFeesDueHeadWiseReport" method="POST">
+	<form id="form1" action="/vision/FeesCollection/printFeesDueHeadWiseReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -604,12 +604,30 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
+					
+					<tr>
+							<td style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
 								<select name="classsearch" id="classsearch" onchange="searchfeecategory()"
-									style="width: 120px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -644,12 +662,12 @@ for(Cookie cookie : cookies){
 					
 						<tr>
                     
-                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        <td style="font-weight: bold;color:#325F6D">Academic Year &nbsp;</td> 
                         
                         	<td>
                         	   <label>
                                          <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
-									style="width: 120px">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										<option>2023/24</option>
 										<option>2024/25</option>
@@ -666,7 +684,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Fees Category &nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
@@ -747,7 +765,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Search result Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -833,7 +851,7 @@ for(Cookie cookie : cookies){
 							type="submit" id="export"/></td>
 													
 						<td class="footerTD" colspan="7" >
-						 
+						 Class: ${feesduesearchclass} Academic Year: ${feesduesearchyear}&nbsp;&nbsp;&nbsp;
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }

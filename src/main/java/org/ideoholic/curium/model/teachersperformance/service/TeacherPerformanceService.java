@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -21,6 +25,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherPerformanceService {
+	 private HttpServletRequest request;
+     private HttpServletResponse response;
+     private HttpSession httpSession;
+     private String BRANCHID = "branchid";
+     private String academicyear = "academicyear";
 
 	@Autowired
 	private ExamDetailsDAO examDetailsDao;

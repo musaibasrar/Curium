@@ -1,15 +1,17 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 @Service
 public class SubjectDetailsActionAdapter {
 
@@ -74,6 +76,34 @@ public class SubjectDetailsActionAdapter {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
         httpSession.setAttribute("listSubjectNames", result.getSubjects());
+    }
+    
+	public void readListOfSubSubjects() {
+
+        SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
+        SubSubjectsResponseDto resultSubSubject = subjectDetailsService.readListOfSubSubjects(httpSession.getAttribute("branchid").toString());
+        httpSession.setAttribute("subjectsubsubjectmap", resultSubSubject.getSubSubjectMap());
+        httpSession.setAttribute("listSubjectNames", result.getListSubjectNames());
+    }
+	
+	public boolean addSubSubject() {
+
+        SubSubjectDto subSubjectDto = new SubSubjectDto();
+        subSubjectDto.setSubjectName(request.getParameter("subjectname"));
+        subSubjectDto.setSubSubjects(request.getParameterValues("subsubjectname"));
+        ResultResponse result = subjectDetailsService.addSubSubject(subSubjectDto, httpSession.getAttribute("branchid").toString(),
+                                                                   httpSession.getAttribute("userloginid").toString());
+        return result.isSuccess();
+    }
+	
+	public boolean deleteMultipleSubSubject() {
+
+        SubjectIdsDto subjectIdsDto = new SubjectIdsDto();
+        subjectIdsDto.setSubjectIds(request.getParameterValues("subjectIDs"));
+
+        ResultResponse resultResponse = subjectDetailsService.deleteMultipleSubSubject(subjectIdsDto);
+
+        return resultResponse.isSuccess();
     }
 
 }

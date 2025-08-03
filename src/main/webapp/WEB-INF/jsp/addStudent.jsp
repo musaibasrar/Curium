@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/vision/JavaScript/actb.js"></script>
+<script src="/vision/JavaScript/common.js"></script>
 
 
 
@@ -570,13 +570,18 @@
         }
     }
 </script>
-
 <script>
-var xmlHttp;
+	var xmlHttp;
     var count;
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
+    	
+    	if (!addClass) {
+            console.warn("Class is not selected. Skipping search.");
+            return;
+        }
+    	
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -585,7 +590,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -609,6 +614,28 @@ var xmlHttp;
 		return xmlHttp;
 	}
     
+</script>
+
+<script>
+
+function searchOtherFeecategory() {
+    var addClass = document.getElementById('addclass').value;
+    var yoa = document.getElementById('yearofadmission').value;
+
+    if (!addClass) {
+        console.warn("Class is not selected. Skipping search.");
+        return;
+    }
+    
+    var xmlHttpof = new XMLHttpRequest();
+    xmlHttpof.onreadystatechange = function () {
+        if (xmlHttpof.readyState === 4 && xmlHttpof.status === 200) {
+            document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
+        }
+    };
+    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.send(null);
+}
 </script>
 <script>
 $(function() {
@@ -635,6 +662,34 @@ $(function() {
 			$('.chcktbl:not(:checked)').attr('disabled', true);
 		} else {
 			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+
+$(function() {
+	$('#chckHeadOtherFees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktblotherfees:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktblotherfees:checked').attr('checked', false);
+			} else {
+				$('.chcktblotherfees:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktblotherfees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		alert(tdLength);
+		if (length > trLength) {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', false);
 		}
 	});
 });
@@ -666,6 +721,33 @@ function calculateGrandTotal() {
     
     $('#feesTotalAmount').val(sum);
 }
+
+function calculateOtherFees(value2) {
+	var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+	//alert("hii", value2);
+	 var feesCat=document.getElementById("hiddenOtherFees_amount_"+value2).value;
+	 //alert("hii", value2);
+     var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+     var final1=document.getElementById("hiddenotherFees_full_amount_"+value2);
+     	
+     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+     	//feesConcession (direct amount)
+        final1.value=feesCat*feesCount;
+     	//final1.value=feesCat;
+         calculateOtherFeesGrandTotal();
+   
+}
+function calculateOtherFeesGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.otherFeesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#otherFeesTotalAmount').val(sum);
+}
 $(document).ready(function() {
     
     
@@ -693,6 +775,32 @@ $(document).ready(function() {
         $('#feesTotalAmount').val(sum);
        
     });
+    
+    
+    $("#dataTableOtherFees").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
+        
+    });
+    $("#dataTableOtherFees").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
+       
+    });
 });
 </script>
 <script type="text/javascript" charset="utf-8">
@@ -715,13 +823,45 @@ $(document).ready(function() {
                     
                 } );
             } );
+            
+            function updateFeesCategory(value2){
+            	
+            	
+            	var feesCount=document.getElementById("feesCount_"+value2).value;
+            	//alert("hii", value2);
+            	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+            	 //alert("hii", value2);
+                 var feesCount=document.getElementById("feesCount_"+value2).value;
+                 var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+                 
+                 var totalInstallments =  document.getElementById("totalinstallmentsactual_"+value2).value;
+                 	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+                 	//feesConcession (direct amount)
+                    
+                 	//final1.value=feesCat;
+                    
+            	
+            	var checkbox = document.getElementById("feesCat_"+value2);
+                var textField = document.getElementById("feesCount_"+value2);
+				var feesInstallment = document.getElementById("feesCount_"+value2);
+                // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
+                if (checkbox.checked) {
+                	feesInstallment.value = totalInstallments;
+                	final1.value=feesCat*totalInstallments;
+                	 calculateGrandTotal();
+                } else {
+                	feesInstallment.value = "0";
+                	final1.value="0";
+                	calculateGrandTotal();
+                }
+            }
         </script>
 </head>
 <%
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -753,6 +893,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 					<li><a href="#fragment-7">Stamp Fee</a></li>
+					<li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li>
 				</ul>
 
 
@@ -885,7 +1026,7 @@ $(document).ready(function() {
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass" required
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1089,7 +1230,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
+							<td class="alignLeft" >Number&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1202,34 +1343,13 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
 										<option>2022/23</option>
 										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
 								</select>
 
 							</label> 
@@ -2047,7 +2167,9 @@ $(document).ready(function() {
 								<tr>
 								<td></td>
 								<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -2114,7 +2236,9 @@ $(document).ready(function() {
 							<tr>
 								<td></td>
 								<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -2151,6 +2275,72 @@ $(document).ready(function() {
 					
 				</table>
 				</div>
+				
+				<div id="fragment-8">
+						
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Other Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHeadOtherFees" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="otherFeescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveeight" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="canceleight" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
 					</table>
 				</div>
 
@@ -2168,14 +2358,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/abc/StudentProcess/AddStudent";
+									form1.action = "/vision/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 

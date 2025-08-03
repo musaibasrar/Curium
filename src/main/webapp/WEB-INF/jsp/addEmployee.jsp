@@ -21,20 +21,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -225,12 +225,23 @@
 	color: #325f6d;
 }
 -->
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
 </style>
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script src="/vision/JavaScript/actb.js"></script>
+<script src="/vision/JavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -522,7 +533,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -633,7 +644,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRight">Total Experience &nbsp;</td>
-							<td align="left"><label> <input
+							<td ><label> <input
 									name="totalexperience" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="totalexperience" size="36" onblur="validateName();">
@@ -660,7 +671,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td class="alignRight">Department &nbsp;</td>
-							<td class="alignLeft"><label>
+							<td ><label>
 									<select name="department" id="department"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -678,7 +689,7 @@ for(Cookie cookie : cookies){
 
 
 							<td class="alignRight">Designation &nbsp;</td>
-							<td class="alignLeft"><label>
+							<td ><label>
 									<select name="designation" id="designation"
 									style="width: 300px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -706,7 +717,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 						<td class="alignRight">Father / Guardian Name &nbsp;</td>
-							<td align="left"><label> <input
+							<td><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
@@ -735,11 +746,149 @@ for(Cookie cookie : cookies){
 									onkeyup="check(this.value);" 
 							</label></td> -->
 							<td class="alignRight">Current Employee &nbsp;</td>
-							<td class="alignLeft">&nbsp;Yes<input
+							<td >&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id)" />
+							</td>
+							
+							
+							<td class="alignRight">Subjects Teaching &nbsp;</td>
+							<td ><c:forEach items="${listSubjectNames}" var="listSubject" varStatus="status">
+    													<label class="labelClass" style="font-weight: bold; color: #325F6D">
+       													 <input type="checkbox" name="subjectsteaching" value="${listSubject.subjectname}">
+       															 ${listSubject.subjectname}
+   														 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+   													 <c:if test="${(status.index + 1) % 3 == 0}">
+       													 <br>
+ 													   </c:if>
+													</c:forEach>
+
+							</td>
+							
+							
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+
+							<td class="alignRight">Class Teacher &nbsp;</td>
+							<td >
+							
+									<div class="checkbox-container">
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+										    <c:forEach items="${sections}" var="sectionItem">
+										        <div class="checkbox-item">
+										            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+										                <input type="checkbox" name="classteacher"
+										                       value="${classItem}--${sectionItem}">
+										                ${classItem} ${sectionItem}
+										            </label>
+										        </div>
+										    </c:forEach>
+										</c:forEach>
+
+
+									</div>
+
+
+							</td>
+							
+							
+							<td class="alignRight">Classes Teaching &nbsp;</td>
+							<td ><div class="checkbox-container">
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										        <c:choose>
+										            <c:when test="${fn:contains(classList, item.classdetails) == false}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										        <c:choose>
+										            <c:when test="${fn:contains(sectionList, item.section) == false}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										            </c:when>
+										        </c:choose>
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+										    <c:forEach items="${sections}" var="sectionItem">
+										        <div class="checkbox-item">
+										            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+										                <input type="checkbox" name="classesteaching"
+										                       value="${classItem}--${sectionItem}">
+										                ${classItem} ${sectionItem}
+										            </label>
+										        </div>
+										    </c:forEach>
+										</c:forEach>
+
+
+									</div>
+
 							</td>
 
 						</tr>
@@ -1021,13 +1170,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/EmployeeProcess/addEmployee";
+								form1.action = "/vision/EmployeeProcess/addEmployee";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/EmployeeProcess/viewAllEmployee";
+								form1.action = "/vision/EmployeeProcess/viewAllEmployee";
 								form1.submit();
 							}
 

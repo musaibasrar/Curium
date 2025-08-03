@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
-import org.ideoholic.curium.model.importfile.service.ImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +48,24 @@ public class ImportFileAction {
 	 @RequestMapping(value = "/readFileFees", method = RequestMethod.POST, consumes = "multipart/form-data")
 		public String readFileForFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 			try {
-				if (feesCollectionActionAdapter.readFileForFees(uploadedFiles)) {
+				if (feesCollectionActionAdapter.readFileForOtherFees(uploadedFiles)) {
+					return "importfile";
+				}
+				/*
+				 * if (feesCollectionActionAdapter.readFileForFees(uploadedFiles)) { return
+				 * "importfile"; }
+				 */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "importsuccess";
+		}
+	 
+	 @RequestMapping(value = "/readFileOtherFees", method = RequestMethod.POST, consumes = "multipart/form-data")
+		public String readFileForOtherFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
+			try {
+				if (feesCollectionActionAdapter.readFileForOtherFees(uploadedFiles)) {
 					return "importfile";
 				}
 			} catch (IOException e) {

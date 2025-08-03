@@ -20,19 +20,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Academic Year</title>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 
 
@@ -269,7 +269,7 @@
     font-weight: bold;
 }
         </style>
-        <script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+        <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
         <script>
             $(function() {
                 $("#datepicker").datepicker({changeYear: true, changeMonth: true});
@@ -330,7 +330,7 @@
            
             function Update() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/UserProcess/updateYear";
+                form1.action = "/vision/UserProcess/updateYear";
                 form1.submit();
             }
 
@@ -400,7 +400,7 @@
             function changeYear() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/YearProcess/saveYear";
+                form1.action = "/vision/YearProcess/saveYear";
                 form1.submit();
 
             }
@@ -422,7 +422,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/login");
+	response.sendRedirect("/vision/login");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -503,15 +503,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear"
 									style="width: 120px">
 										<option selected></option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
+										 <c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 

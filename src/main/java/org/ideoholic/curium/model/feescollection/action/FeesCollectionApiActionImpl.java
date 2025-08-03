@@ -229,11 +229,7 @@ public class FeesCollectionApiActionImpl implements FeesCollectionApiAction {
             /*SmsService smsSerivce = new SmsService(request, response);
             smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),
             "We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
-            feesCollectionService.otherpreview(PreviewDto.builder()
-            		.sid(Long.parseLong(dto.getSid()))
-            		.id(Integer.parseInt(dto.getId()))
-            		.idFees(Long.parseLong(dto.getIdFees()))
-            		.build());
+            feesCollectionService.otherpreview(receiptInfo, currentAcademicYear);
             return ResponseEntity.ok(receiptInfo);
         }else{
             throw new CustomResponseException(CustomErrorMessage.ERROR);

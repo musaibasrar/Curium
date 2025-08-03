@@ -30,4 +30,8 @@ public class StockMoveDto {
     private String totalChequeTransferAmount;
     private String itemsGrandTotalAmountWOGST;
     private String transactionDate;
+    private String issuedto;
+    private String itemsTotalAmount;
+    private String itemsGrandNetDueAmount;
+    private String quotationId;
 }

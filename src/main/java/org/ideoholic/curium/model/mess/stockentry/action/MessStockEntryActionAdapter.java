@@ -41,4 +41,27 @@ public class MessStockEntryActionAdapter {
         request.setAttribute("suppliername", responseDto.getSupplierName());
         request.setAttribute("entrydate", responseDto.getInvoiceDate());
     }
+
+
+	public void getPurchaseMRVDetails() throws IOException{
+		String invoiceDetailsId = request.getParameter("invoicedetailsid");
+        String supplierName = request.getParameter("suppliername");
+        String invoiceDate = request.getParameter("entrydate");
+
+        MessStockEntryResponseDto responseDto = messStockEntryService.getPurchaseOrderById(invoiceDetailsId, supplierName, invoiceDate, httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("suppliername", responseDto.getSupplierName());
+        request.setAttribute("entrydate", responseDto.getInvoiceDate());
+		
+	}
+	
+	public void getDueMRVDetails() throws IOException{
+		String studentName = request.getParameter("studentName");
+        String branchreceiptnumber = request.getParameter("branchreceiptnumber");
+        String due = request.getParameter("due");
+        String date = request.getParameter("date");
+        MessStockEntryResponseDto responseDto = messStockEntryService.getDueMRVDetails(studentName, branchreceiptnumber, due, date, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("currentAcademicYear").toString());
+        request.setAttribute("studentname", responseDto.getStudentName());
+        request.setAttribute("branchreceiptnumber", responseDto.getBranchReceiptNumber());
+		
+	}
 }

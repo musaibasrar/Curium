@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.MessStockMoveInfo;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
@@ -42,7 +43,7 @@ public class MessStockMoveService {
 	@Autowired
     private AccountDAO accountDao;	
 	
-	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName) {
+	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
 	MoveStockResponseDto results = MoveStockResponseDto.builder().build();
 
@@ -150,6 +151,26 @@ public class MessStockMoveService {
 			}
 				
 				//END BILL DETAILS
+				String studentName = dto.getIssuedto();
+				 String[] parts = studentName.split("_");
+				//Last
+				MessStockMoveInfo messStockMoveInfo = new MessStockMoveInfo();
+				messStockMoveInfo.setAcademicyear(currentAcademicYear);
+				messStockMoveInfo.setBranchreceiptnumber(branchCode);
+				messStockMoveInfo.setClasssec(parts[1]);
+				messStockMoveInfo.setDate(DateUtil.indiandateParser(dto.getTransactionDate()));
+				messStockMoveInfo.setDue((long)Double.parseDouble(dto.getItemsGrandNetDueAmount()));
+				messStockMoveInfo.setJournalvoucher(5);
+				messStockMoveInfo.setMisc(Long.parseLong("10"));
+				messStockMoveInfo.setPaymenttype(paymentType);
+				messStockMoveInfo.setReceiptnumber(10);
+				messStockMoveInfo.setReceiptvoucher(10);
+				messStockMoveInfo.setSid(Integer.parseInt(parts[3]));
+				messStockMoveInfo.setStudentName(parts[0]);
+				messStockMoveInfo.setTotalamount((long)Double.parseDouble(dto.getItemsTotalAmount()));
+				messStockMoveInfo.setUserid(Integer.parseInt(userId));
+				messStockMoveInfo.setCancelreceipt(10);
+				messStockMoveInfo.setBranchid(Integer.parseInt(branchId));
 			
 			List<MessStockMove> messStockMovesList = new ArrayList<MessStockMove>();
 			
@@ -160,11 +181,11 @@ public class MessStockMoveService {
 					
 					messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
 					messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
-					messStockMove.setExternalid(custDetails[3]);
+					//messStockMove.setExternalid(custDetails[3]);
 					messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
 					messStockMove.setPurpose(itemunitprice[i]);
 					messStockMove.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
-					messStockMove.setIssuedto(custDetails[0]+"_"+custDetails[1]+"_"+custDetails[2]);
+					messStockMove.setIssuedto(custDetails[0]+"_"+custDetails[1]+"_"+custDetails[2]+"_"+parts[3]);
 					messStockMove.setBranchid(Integer.parseInt(branchId));
 					messStockMove.setStatus("ACTIVE");
 					
@@ -292,7 +313,7 @@ public class MessStockMoveService {
 					
 					
 					
-					boolean result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount,transactionsIncomeCash,transactionsIncomeBankTransfer,transactionsIncomeCheque,updateDrAccountIncomeCash,updateCrAccountIncomeCash,updateDrAccountIncomeBankTransfer,updateCrAccountIncomeBankTransfer,updateDrAccountIncomeCheque,updateCrAccountIncomeCheque);
+					boolean result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount,transactionsIncomeCash,transactionsIncomeBankTransfer,transactionsIncomeCheque,updateDrAccountIncomeCash,updateCrAccountIncomeCash,updateDrAccountIncomeBankTransfer,updateCrAccountIncomeBankTransfer,updateDrAccountIncomeCheque,updateCrAccountIncomeCheque,messStockMoveInfo);
 					
 						if(result) {
 							//request.setAttribute("billdetails", messStockMovesList);;
@@ -716,6 +737,77 @@ public class MessStockMoveService {
 		}
 		
 		return result;
+	}
+
+	public DuesResponseDto getDuesList() {
+		DuesResponseDto duesResponseDto = new DuesResponseDto();
+		List<MessStockMoveInfo> messStockMoveInfoDuesList = new ArrayList<MessStockMoveInfo>();
+		List<MessStockMoveInfo> messStockMoveInfoList = new ArrayList<MessStockMoveInfo>();
+		messStockMoveInfoList = new MessStockMoveDAO().getTotalDue();
+		for(MessStockMoveInfo messStockMoveInfo : messStockMoveInfoList) {
+			if(messStockMoveInfo.getDue()!=0)
+			{
+				messStockMoveInfoDuesList.add(messStockMoveInfo);
+			}
+		}
+		duesResponseDto.setMessStockMoveInfoList(messStockMoveInfoDuesList);
+		return duesResponseDto;
+	}
+
+	public void updateDue(StockMoveIdsDto stockMoveIdsDto) {
+		int id = Integer.parseInt(stockMoveIdsDto.getDueId());
+		 String duePaid = stockMoveIdsDto.getDuePaid();
+		 double duePaidDouble = Double.parseDouble(duePaid);
+		Long dueAmount = (long) duePaidDouble;
+		new MessStockMoveDAO().updateDue(id, dueAmount);
+		
+	}
+
+	public BillResponseDto getBillReceiptDetail(StockMoveDto stockMoveDto, String branchId) {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		String[] batchno = stockMoveDto.getBatchNo();
+		String[] itemsName = stockMoveDto.getItemsName();
+		String[] issueQuantity = stockMoveDto.getIssueQuantity();
+		String[] itemUnitPrice = stockMoveDto.getItemUintPrice();
+		String[] sgst = stockMoveDto.getStateGst();
+		String[] cgst = stockMoveDto.getCenterGst();
+	    String itemsGrandTotalAmountWOGST = stockMoveDto.getItemsGrandTotalAmountWOGST();
+		double sumSgst = 0;
+		double sumCgst = 0;
+	    List<Bill> billList = new ArrayList<Bill>();
+	    List<MessTaxInvoice> messTaxInvoiceList = new ArrayList<MessTaxInvoice>();
+		
+		for(int i=0; i < batchno.length ; i++){
+
+			Bill bill = new Bill();
+			sumSgst = sumSgst + Double.parseDouble(sgst[i]);
+			sumCgst = sumCgst + Double.parseDouble(cgst[i]);
+			MessTaxInvoice messTaxInvoice = new MessTaxInvoice();
+			messTaxInvoice.setTransactiondate(DateUtil.indiandateParser(stockMoveDto.getTransactionDate()));
+			messTaxInvoice.setStatus("ACTIVE");
+			messTaxInvoice.setBranchid(Integer.parseInt(branchId));
+			messTaxInvoice.setIssuedto(stockMoveDto.getIssuedto());
+			messTaxInvoice.setQuotationid(Integer.parseInt(stockMoveDto.getQuotationId()));
+			bill.setItemname(itemsName[i]);
+			bill.setBatchno(batchno[i]);
+			bill.setQuantity(Float.parseFloat(issueQuantity[i]));
+			bill.setSalesprice(Float.parseFloat(itemUnitPrice[i]));
+			messTaxInvoiceList.add(messTaxInvoice);
+			billList.add(bill);
+	}
+		billResponseDto.setBillList(billList);
+		billResponseDto.setItemsGrandTotalAmountWOGST(itemsGrandTotalAmountWOGST);
+		billResponseDto.setSumCgst(sumCgst);
+		billResponseDto.setSumSgst(sumSgst);
+		new MessStockMoveDAO().messTaxInvoiceSave(messTaxInvoiceList);
+		return billResponseDto;
+	}
+
+	public BillResponseDto getTaxInvoiceDetail() {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		List<MessTaxInvoice> messTaxInvoice = new MessStockMoveDAO().getTaxInvoiceDetail();
+		billResponseDto.setMessTaxInvoice(messTaxInvoice);
+				return billResponseDto;
 	}
 	
 	

@@ -27,6 +27,7 @@ public class MessStockMoveActionAdapter {
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 
     public void viewStockEntryDetails() {
@@ -48,6 +49,7 @@ public class MessStockMoveActionAdapter {
     public void saveStockMove() {
         StockMoveDto dto = new StockMoveDto();
         dto.setStockEntryIds(request.getParameterValues("ids"));
+        dto.setIssuedto(request.getParameter("issuedto"));
         dto.setItemsName(request.getParameterValues("itemsname"));
         dto.setItemsIds(request.getParameterValues("itemsids"));
         dto.setIssueQuantity(request.getParameterValues("issuequantity"));
@@ -73,8 +75,12 @@ public class MessStockMoveActionAdapter {
         dto.setTotalChequeTransferAmount(request.getParameter("totalchequetransferamount"));
         dto.setItemsGrandTotalAmountWOGST(request.getParameter("itemsGrandTotalAmountWithoutGST"));
         dto.setTransactionDate(request.getParameter("transactiondate"));
+        dto.setItemsTotalAmount(request.getParameter("itemsTotalAmount"));
+        String itemsgranddueamount = request.getParameter("itemsGrandNetDueAmount");
+        System.out.println(" itemsgranddueamount "+itemsgranddueamount);
+        dto.setItemsGrandNetDueAmount(request.getParameter("itemsGrandNetDueAmount"));
 
-        MoveStockResponseDto responseDto = messStockMoveService.saveStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+        MoveStockResponseDto responseDto = messStockMoveService.saveStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute("branchcode").toString());
         request.setAttribute("billdetails", responseDto.getBillDetails());
         request.setAttribute("billdetailstransactiondate", dto.getTransactionDate());
         request.setAttribute("billdetailsstudentname", responseDto.getBillDetailsStudentName());
@@ -147,4 +153,41 @@ public class MessStockMoveActionAdapter {
         
         return resultResponse.isSuccess();
     }
+
+	public void getDuesList() {
+		DuesResponseDto result = messStockMoveService.getDuesList();
+		request.setAttribute("dueslist", result.getMessStockMoveInfoList());
+	}
+
+	public void paydue() {
+		StockMoveIdsDto stockMoveIdsDto = new StockMoveIdsDto();
+		stockMoveIdsDto.setDuePaid(request.getParameter("itemsGrandNetDueAmount"));
+		stockMoveIdsDto.setDueId(request.getParameter("dueid"));
+		messStockMoveService.updateDue(stockMoveIdsDto);
+		
+	}
+
+	public void getBillDetail() {
+		StockMoveDto stockMoveDto = new StockMoveDto();
+		stockMoveDto.setBatchNo(request.getParameterValues("batchno"));
+		stockMoveDto.setItemsName(request.getParameterValues("itemsname"));
+		stockMoveDto.setIssueQuantity(request.getParameterValues("issuequantity"));
+		stockMoveDto.setItemUintPrice(request.getParameterValues("itemunitprice"));
+		stockMoveDto.setItemsGrandTotalAmountWOGST(request.getParameter("itemsGrandTotalAmountWithoutGST"));
+		stockMoveDto.setTransactionDate(request.getParameter("transactiondate"));
+		stockMoveDto.setIssuedto(request.getParameter("issuedto"));
+		stockMoveDto.setQuotationId(request.getParameter("quotationid"));
+		stockMoveDto.setStateGst(request.getParameterValues("sgst"));
+		stockMoveDto.setCenterGst(request.getParameterValues("cgst"));
+		BillResponseDto billResponseDto = messStockMoveService.getBillReceiptDetail(stockMoveDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("billdetail", billResponseDto.getBillList());
+		request.setAttribute("itemsGrandTotalAmountWithoutGST", billResponseDto.getItemsGrandTotalAmountWOGST());
+		request.setAttribute("sumcgst", billResponseDto.getSumCgst());
+		request.setAttribute("sumsgst", billResponseDto.getSumSgst());
+	}
+
+	public void generateTaxInvoiceReport() {
+		BillResponseDto billResponseDto = messStockMoveService.getTaxInvoiceDetail();
+		request.setAttribute("invoicereport", billResponseDto.getMessTaxInvoice());
+	}
 }

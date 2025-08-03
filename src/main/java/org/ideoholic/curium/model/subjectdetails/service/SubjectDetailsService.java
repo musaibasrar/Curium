@@ -4,16 +4,22 @@
 package org.ideoholic.curium.model.subjectdetails.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.*;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectDto;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,8 +113,8 @@ public class SubjectDetailsService {
 	public SubjectsResponseDto readListOfSubjectNames(String branchId) {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-			result.setSubjects(list);
+	    	List<Subjectmaster> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+			result.setListSubjectNames(list);
 			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -135,6 +141,82 @@ public class SubjectDetailsService {
 			 return ResultResponse.builder().success(result).build();
 	  }
 
+	}
+
+	public SubSubjectsResponseDto readListOfSubSubjects(String branchId) {
+		
+		SubSubjectsResponseDto result = new SubSubjectsResponseDto();
+	    try {
+	    	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	    	List<SubSubject> subSubjectList = new SubjectDetailsDAO().readListOfSubSubject(Integer.parseInt(branchId));
+	    	 Map<Integer, String> subjectIdNameMap = subjectList.stream()
+	    	            .collect(Collectors.toMap(
+	    	                Subjectmaster::getSubjectid,
+	    	                Subjectmaster::getSubjectname
+	    	            ));
+	    	
+	    	 
+	    	    Map<String, List<String>> subjectSubSubjectMap = new HashMap<>();
+
+	            for (SubSubject sub : subSubjectList) {
+	                String subjectName = subjectIdNameMap.get(sub.getSubjectid());
+	                if (subjectName != null) {
+	                	subjectSubSubjectMap.computeIfAbsent(subjectName+":"+sub.getSubjectid(), k -> new ArrayList<>())
+	                          .add(sub.getSubsubjectname());
+	                }
+	            }
+	            
+			result.setSubSubjectMap(subjectSubSubjectMap);
+			result.setSuccess(true);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return result;
+	}
+
+	public ResultResponse addSubSubject(SubSubjectDto subSubjectDto, String branchId, String userLoginId) {
+		List<SubSubject> subSubjectList = new ArrayList<SubSubject>();
+		boolean result= true;
+		
+		if(branchId!=null){
+			String[] subjectNameId = DataUtil.emptyString(subSubjectDto.getSubjectName()).split(":");
+			String[] subSubjectNames = subSubjectDto.getSubSubjects();
+			
+			for(int i=0;i<subSubjectNames.length;i++) {
+				SubSubject subSubject = new SubSubject();
+				subSubject.setSubjectid(Integer.parseInt(subjectNameId[0]));
+				subSubject.setSubsubjectname(subSubjectNames[i]);
+				subSubject.setBranchid(Integer.parseInt(branchId));
+				subSubject.setUserid(Integer.parseInt(userLoginId));
+				subSubjectList.add(subSubject);
+			}
+			
+			result = new SubjectDetailsDAO().addSubSubject(subSubjectList);
+			
+			return ResultResponse.builder().success(result).build();
+		}
+		
+		return ResultResponse.builder().build();
+	}
+
+	public ResultResponse deleteMultipleSubSubject(SubjectIdsDto subjectIdsDto) {
+		String[] subIds = subjectIdsDto.getSubjectIds();
+		boolean result;
+		 if(subIds!=null){
+	        List<Integer> ids = new ArrayList();
+	        for (String id : subIds) {
+	            System.out.println("id" + id);
+	            ids.add(Integer.valueOf(id));
+
+	        }
+	        System.out.println("id length" + subIds.length);
+	        new SubjectDetailsDAO().deleteMultipleSubSubject(ids);
+	        result = true;
+			return  ResultResponse.builder().success(result).build();
+	}else {
+			 result = false;
+			 return ResultResponse.builder().success(result).build();
+		 }
 	}
 
 }

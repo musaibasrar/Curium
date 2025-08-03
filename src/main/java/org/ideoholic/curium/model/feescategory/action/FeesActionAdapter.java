@@ -73,6 +73,7 @@ public class FeesActionAdapter {
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
+		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
 		SearchFeesResponseDto searchFeesResponseDto = feesService.searchFeesWaiveofforConcessionReport(searchStudentDto,waiveoff,httpSession.getAttribute("branchid").toString());
 		httpSession.setAttribute("currentyearfromservice",searchFeesResponseDto.getCurrentYearFromService());
 		httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", searchFeesResponseDto.getStudentsFeesStructureDetailsWaiveoff());
@@ -138,6 +139,7 @@ public class FeesActionAdapter {
 		feesCategoryDto.setFeesCategory(request.getParameter("feescategory"));
 		feesCategoryDto.setAmount(request.getParameter("amount"));
 		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
+		feesCategoryDto.setTotalInstallments(Integer.parseInt(request.getParameter("totalinstallments")));
 		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
 	}
 
@@ -149,9 +151,8 @@ public class FeesActionAdapter {
 
 	public void addOtherFeesParticular() {
 		OtherFeecategoryDto otherFeecategoryDto = new OtherFeecategoryDto();
+		otherFeecategoryDto.setFromClass(request.getParameterValues("fromclass"));
 		otherFeecategoryDto.setFeesCategory(request.getParameter("feescategory"));
-		otherFeecategoryDto.setFromClass(request.getParameter("fromclass"));
-		otherFeecategoryDto.setToClass(request.getParameter("toclass"));
 		otherFeecategoryDto.setAmount(request.getParameter("amount"));
 		otherFeecategoryDto.setCategoryYearOf(request.getParameter("categoryyearof"));
 		feesService.addOtherFeesParticular(otherFeecategoryDto,httpSession.getAttribute("branchid").toString(),httpSession.getAttribute("userloginid").toString());
@@ -195,6 +196,8 @@ public class FeesActionAdapter {
     	String yearofAdmission = request.getParameter("yearofadmission");
     	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+    	httpSession.setAttribute("feesduesearchyear", feescategoryResponseDto.getFeesDueSearchYear());
+    	httpSession.setAttribute("feesduesearchclass", feescategoryResponseDto.getFeesDueSearchClass());
 	}
 
 	public void getDndReport() {
@@ -220,6 +223,13 @@ public class FeesActionAdapter {
 	public boolean downlaodFile() {
 		ResultResponse resultResponse = feesService.downlaodFile();
 		return resultResponse.isSuccess();
+	}
+
+	public void getOtherFeeCategory()  throws IOException{
+		String classname = request.getParameter("classstudying");
+    	String yearofAdmission = request.getParameter("yearofadmission");
+    	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+    	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
 	}
 	
 	public boolean viewAllStudentsListOtherFees() {

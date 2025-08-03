@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -270,45 +270,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/abc/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/abc/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/vision/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/vision/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -317,7 +317,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -332,11 +332,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/StampFeesProcess/othersearch";
+		form1.action = "/vision/StampFeesProcess/othersearch";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -402,7 +402,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/StampFeesProcess/delete";
+		form1.action = "/vision/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -614,6 +614,71 @@
             alert(e);
         }
     }
+    
+    
+	function updateFeesCount(rowvalue){
+    	
+    	var checkbox = document.getElementById("feesIDS_"+rowvalue);
+        var textField = document.getElementById("feesCount_"+rowvalue);
+
+        // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
+        if (checkbox.checked) {
+        	textField.value = "1";
+        } else {
+            textField.value = "0";
+        }
+    }
+    
+
+	 $(function() {
+		$('#chckHeadStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			if (length > 0) {
+				$('.chcktblStamp:checked').attr('checked', false);
+				this.checked = false;
+			} else {
+				if (this.checked == false) {
+					$('.chcktblStamp:checked').attr('checked', false);
+				} else {
+					$('.chcktblStamp:not(:checked)').attr('checked', true);
+				}
+			}
+		});
+		
+		$('.chcktblStamp').click(function() {
+			var length = $('.chcktblStamp:checked').length;
+			var trLength = $('.labelClassStamp').length;
+			alert(tdLength);
+			if (length > trLength) {
+				$('.chcktblStamp:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblStamp:not(:checked)').attr('disabled', false);
+			}
+		});
+	}); 
+	 
+	 function toggleFeesCount(allCheckbox) {
+		    var checkboxes = document.querySelectorAll('.chcktblStamp');
+		    var totalAmount = 0;
+
+		    checkboxes.forEach(function(checkbox, index) {
+		        var feesCountInput = document.getElementById('feesCount_' + (index + 1));
+		        var feesAmountInput = document.getElementById('hiddenfees_full_amount_' + (index + 1));
+		        
+		        if (allCheckbox.checked) {
+		            feesCountInput.value = '1';
+		            totalAmount += parseFloat(feesAmountInput.value || 0);
+		        } else {
+		            feesCountInput.value = '0';
+		        }
+
+		        calculate(index + 1);
+		    });
+
+		    // Set the total amount field based on checkbox state
+		    document.getElementById('feesTotalAmount').value = allCheckbox.checked ? totalAmount.toFixed(2) : '0.00';
+		}
         </script>
 
 </head>
@@ -621,7 +686,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -634,7 +699,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/abc/StampFeesProcess/applyotherFees" method="POST">
+	<form id="form1" action="/vision/StampFeesProcess/applyotherFees" method="POST">
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -646,7 +711,7 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 
-						<tr>
+						<!-- <tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
@@ -666,7 +731,7 @@ for(Cookie cookie : cookies){
 					
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="90%"><label> 
@@ -709,43 +774,61 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 					</table>
-					<div class="alignRightFields">
-						Fees Category:
-						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
-						<input
-									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
-									size="36"">
-					</div>
-					<TABLE id="dataTable" width="100%" border="0">
-						<thead>
-							<tr>
-								<td class="headerText"><INPUT type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /></td>
-								<td class="headerText">Fees Category</td>
-								<td class="headerText">Academic Year</td>
-								<td class="headerText">Fees Amount</td>
-								<td class="headerText">No.of installments in a Year</td>
-								<td class="headerText">Fees Total Amount</td>
-
-
-
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-						<tfoot>
-							<tr>
-
-								<td colspan="4" align="right">Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
-							</tr>
-
-						</tfoot>
-					</TABLE>
+					
+					<div style="overflow:scroll;width:750px; height: 250px;">
+						<c:set var="feesInitialTotal" value="0" />
+							<table id="dataTable">
+							
+							<thead>
+								<tr>
+									<td style="padding-right: 30px;font-weight: bold;color:#eb6000">Fees Category</td>
+									<td style="padding-right: 20px;font-weight: bold;color:#eb6000">class</td>
+									<td style="padding-right: 100px;font-weight: bold;color:#eb6000">Fees Amount</td>
+    		        			    <td style="padding-right: 40px;font-weight: bold;color:#eb6000">No.of installments in a Year</td>
+    		        			    <td style="font-weight: bold;color:#eb6000">Fees Total Amount</td>
+    		        			</tr>
+    		        		</thead>
+    		        			<tr>
+    		        				<td>
+    		        					<label class="labelClassStamp" style="font-weight: bold;color:#325F6D">
+    		        				 		<input  type="checkbox" id = "chckHeadStamp" onchange="toggleFeesCount(this)"/>All
+										</label>
+									</td>
+    		        			</tr>
+    		        		
+   			        			<c:forEach items="${otherfeescategory}" var="feescategory" varStatus="status">
+   			        			
+   			        			<tr>
+											<td><label class="labelClass"
+												style="font-weight: bold; color: #325F6D"> <input
+													type="checkbox" name="feesIDS"
+													id="feesIDS_${status.index+1}" class="chcktblStamp" checked="checked"
+													value="${feescategory.idfeescategory}_${status.index}"
+													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
+													size="18"> ${feescategory.feescategoryname} :
+											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
+												id="fees_status_${status.index+1}" value="not set" /> <input
+												name="currentyear" type="hidden" value="${currentYear}"
+												class="myclass" id="currentyear"> <input
+												class="feesYear" type="hidden"
+												value="${feescategory.academicyear}" name="feesYears"
+												id="fees_year_${status.index+1}" readonly /></td>
+												<td> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}
+   			        				</label> <input type="hidden" value="0" name="feesConcession" id="feesConcession_${status.index+1}" />
+   			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
+   			        				
+   			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="feesCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
+   			        				<td> <input	type="text" value="1" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
+   			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
+   			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + feescategory.amount}" />
+   			        				</td>
+   			        				
+   			        			</tr>
+   			        			
+   			        			</c:forEach>
+   			        				
+   			        		 <tfoot><tr><td colspan="4" align="right">Total</td><td align="center"><input type="text" name="feesTotalAmount" id=feesTotalAmount value="${feesInitialTotal}" /></td></tr></table>
+   			        		 </div>
 
 				</div>
 			</div>
@@ -783,7 +866,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/abc/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>

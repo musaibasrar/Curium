@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 
 <style type="text/css">
 .divCSS {
@@ -445,21 +445,21 @@
 }
 
 </style>
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
-	<script src="/abc/js/bootstrap.min.js"></script>
-<link href="/abc/css/select2.min.css" rel="stylesheet" />
-<script src="/abc/js/select2.min.js"></script>
+	<script src="/vision/js/bootstrap.min.js"></script>
+<link href="/vision/css/select2.min.css" rel="stylesheet" />
+<script src="/vision/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -554,14 +554,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/abc/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/vision/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -571,7 +571,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/vision/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -579,21 +579,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/printVoucher";
+		form1.action = "/vision/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/approveVoucher";
+		form1.action = "/vision/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/AdminProcess/rejectVoucher";
+		form1.action = "/vision/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -843,7 +843,9 @@
                      			document.getElementById("transferdate"), document.getElementById("transferbankname"),
                      			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"), 
                      			document.getElementById("totalcashamount"), document.getElementById("totalbanktransferamount"),
-                     			document.getElementById("totalchequetransferamount"),document.getElementById("itemsGrandTotalAmount"),document.getElementById("itemsGrandTotalAmountWithoutGST"));
+                     			document.getElementById("totalchequetransferamount"),document.getElementById("itemsGrandTotalAmount"),
+                     			document.getElementById("itemsGrandTotalAmountWithoutGST"),
+                     			document.getElementById("itemsGrandNetDueAmount"));
                          		$( this ).dialog( "close" );
                   		   }
                  }
@@ -875,7 +877,7 @@
    
 	
 	function generatebill(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname,totalcashamount,totalbanktransferamount,
-			totalchequetransferamount,itemsgrandtotalamount,itemsGrandTotalAmountWithoutGST){
+			totalchequetransferamount,itemsgrandtotalamount,itemsGrandTotalAmountWithoutGST,itemsGrandNetDueAmount){
     	
     	var paymentmethodbanktransfer = '';
     	var paymentmethodchequetransfer = '';
@@ -892,17 +894,19 @@
     	var totalchequetransferamountvalue = '';
     	var itemsgrandtotalamountvalue = '';
     	var itemsTotalAmountWithoutGST='';
+    	var itemsGrandNetDueAmountvalue='';
     	
     	itemsgrandtotalamountvalue = itemsgrandtotalamount.value;
     	totalcashamountvalue = totalcashamount.value;
     	totalbanktransferamountvalue = totalbanktransferamount.value;
     	totalchequetransferamountvalue = totalchequetransferamount.value;
+    	itemsGrandNetDueAmountvalue = itemsGrandNetDueAmount.value;
     	
     	var sum = (parseFloat(totalcashamountvalue)+parseFloat(totalbanktransferamountvalue)+parseFloat(totalchequetransferamountvalue)).toFixed(2);
     	var grandtotal = parseFloat(itemsgrandtotalamountvalue);
     	itemsTotalAmountWithoutGST = parseFloat(itemsGrandTotalAmountWithoutGST.value);
     	
-    	if(parseFloat(sum) == parseFloat(grandtotal))
+    	if(parseFloat(sum) <= parseFloat(grandtotal))
     		
     		{
     	
@@ -941,7 +945,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/abc/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.action="/vision/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"&itemsGrandNetDueAmount="+itemsGrandNetDueAmountvalue+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1065,7 +1069,7 @@
  	             
  	         }
  			xmlHttp.onreadystatechange = stateChanged;
- 			xmlHttp.open("GET", "/abc/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.open("GET", "/vision/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
  			xmlHttp.send(null);
  	}
  	
@@ -1370,13 +1374,35 @@
 		            }
 		        	
         </script>
+      <script>
+    function getAmount() {
+        // Get input values and parse them as numbers
+        var gTotal = parseFloat(document.getElementById("itemsGrandTotalAmount").value) || 0;
+        var cashAmount = parseFloat(document.getElementById("totalcashamount").value) || 0;
+        var bankAmount = parseFloat(document.getElementById("totalbanktransferamount").value) || 0;
+        var chequeAmount = parseFloat(document.getElementById("totalchequetransferamount").value) || 0;
+
+        // Calculate total paid
+        var totalPaid = cashAmount + bankAmount + chequeAmount;
+
+        // Calculate due amount
+        var dueAmount = gTotal - totalPaid;
+        var dueAmountString = dueAmount.toFixed(2).toString();
+
+        // Update the output fields
+        document.getElementById('itemsGrandNetTotalAmount').value = totalPaid.toFixed(2);
+        document.getElementById('itemsGrandNetDueAmount').value = dueAmount.toFixed(2);
+       // document.getElementById('itemsGrandNetDueAmount').value = dueAmountString;
+    }
+</script>
+        
 
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1455,7 +1481,7 @@ for(Cookie cookie : cookies){
 										        	
 										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}_${student.student.sid}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
-										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/abc/StudentProcess/addNew">New Customer --></a>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/vision/StudentProcess/addNew">New Customer --></a>
 									 	</div>
 								</div>
 							</td>
@@ -1541,11 +1567,25 @@ for(Cookie cookie : cookies){
 	
 				<table style="width: auto;height: auto;">
 					<tr>
+					        <td>
+           		 				Net Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetTotalAmount" id="itemsGrandNetTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 				</tr>
+           		 				<tr>
            		 			<td>
-           		 				Grand Total: &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				Due Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 			   </tr>
+           		 				<tr>
+           		 			<td>
+           		 				Grand Total:</td><td> &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
            		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
            		 				<br>
-           		 			</td>	
+           		 			</td>
            		 			
            		 			
            		 		</tr>
@@ -1578,7 +1618,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 						
 							<td>
-								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
+								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
 							</td>
 							
 						</tr>
@@ -1590,7 +1630,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 								Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="text" name="totalbanktransferamount" id="totalbanktransferamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;"/>														
+								<input type="text" name="totalbanktransferamount" id="totalbanktransferamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;"/>														
 							</td>
 							
 						</tr>
@@ -1638,7 +1678,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 						
 							<td>
-								Amount &nbsp;&nbsp;&nbsp;<input type="text" name="totalchequetransferamount" id="totalchequetransferamount" value="0" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0"/>														
+								Amount &nbsp;&nbsp;&nbsp;<input type="text" name="totalchequetransferamount" id="totalchequetransferamount" onkeyup="getAmount()" value="0" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0"/>														
 							</td>
 							
 						</tr>

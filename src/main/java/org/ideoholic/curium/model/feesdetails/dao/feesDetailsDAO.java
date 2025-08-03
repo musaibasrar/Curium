@@ -7,16 +7,23 @@ import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
+import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
@@ -44,6 +51,7 @@ public class feesDetailsDAO {
 
 	 @Transactional
         public List<Feescategory> readListOfObjects() {
+                
                 List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
@@ -129,6 +137,9 @@ public class feesDetailsDAO {
                     hibernateException.printStackTrace();
                     throw hibernateException;
                 }
+                finally {
+        			HibernateUtil.closeSession();
+        		}
                 return results;
         }
 
@@ -161,6 +172,7 @@ public class feesDetailsDAO {
                  
                 String results = "";
                 try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
                                 //Query query =  session.createQuery(queryMain);
                                 //results =  (String) query.uniqueResult();
@@ -427,4 +439,72 @@ public class feesDetailsDAO {
                       return results;
               }
       }
+
+		public void stampOtherFees(Integer stdIds, String setYear, CreateStudentDto dto, String currentAcademicYear, String branchId, String userId) {
+
+		if(currentAcademicYear!=null){
+			String[] feesCategoryIds = dto.getOtherFeesCategory();
+			if(feesCategoryIds!=null) {
+
+				String[] studentIds = {stdIds.toString()};
+				if(studentIds!=null){
+					Academicotherfeesstructure academicfessstructure = new Academicotherfeesstructure();
+					List<Academicotherfeesstructure> listOfacademicfessstructure = new ArrayList<Academicotherfeesstructure>();
+					List<Studentotherfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentotherfeesstructure>();
+
+					String feesTotalAmount = dto.getOtherFeesTotalAmount();
+					Long grandTotal = 0l;
+
+					String[] feesAmount = dto.getOtherFeesAmount();
+					String[] concession = dto.getOtherFeesConcession();
+					String[] totalInstallments = dto.getOtherTotalInstallments();
+
+					List<Integer> ids = new ArrayList();
+					listOfacademicfessstructure.clear();
+					for (String id : studentIds) {
+						System.out.println("id" + id);
+						academicfessstructure = new Academicotherfeesstructure();
+						academicfessstructure.setSid(Integer.valueOf(id));
+						academicfessstructure.setAcademicyear(setYear);
+						academicfessstructure.setUserid(Integer.parseInt(userId));
+						academicfessstructure.setTotalfees(feesTotalAmount);
+						grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+						academicfessstructure.setBranchid(Integer.parseInt(branchId));
+						academicfessstructure.setUserid(Integer.parseInt(userId));
+
+						listOfacademicfessstructure.add(academicfessstructure);
+						// ids.add(Integer.valueOf(id));
+
+					}
+
+					for (String id : studentIds) {
+						Student student = new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(id));
+						for(int i=0; i < feesCategoryIds.length ; i++){
+							String[] feesCategoryIdsdiv = 	feesCategoryIds[i].split("--");
+							
+							Studentotherfeesstructure studentfeesstructure = new Studentotherfeesstructure();
+							OtherFeecategory feescategory = new OtherFeecategory();
+							studentfeesstructure.setStudent(student);
+							feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIdsdiv[0]));
+							studentfeesstructure.setOtherfeescategory(feescategory);
+							studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[Integer.parseInt(feesCategoryIdsdiv[1])]));
+							studentfeesstructure.setFeespaid((long) 0);
+							studentfeesstructure.setWaiveoff((long) 0);
+							studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[Integer.parseInt(feesCategoryIdsdiv[1])]));
+							studentfeesstructure.setAcademicyear(setYear);
+							studentfeesstructure.setBranchid(Integer.parseInt(branchId));
+							studentfeesstructure.setUserid(Integer.parseInt(userId));
+							studentfeesstructure.setConcession(Integer.parseInt(concession[Integer.parseInt(feesCategoryIdsdiv[1])]));
+							listOfstudentfeesstructure.add(studentfeesstructure);
+						}
+
+
+
+					}
+					new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
+
+				}
+			}
+		}
+	}
 }

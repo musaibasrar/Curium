@@ -25,13 +25,15 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FeesApiActionImpl implements FeesApiAction{
@@ -55,6 +57,7 @@ public class FeesApiActionImpl implements FeesApiAction{
 		return ResponseEntity.ok(studentIdDto);
 	}
 
+	@PostMapping("/printFeesWaiveoffReport")
 	public ResponseEntity<String> printFeesWaiveoffReport() {
 		return ResponseEntity.ok("printfeeswaiveoffreport");
 	}

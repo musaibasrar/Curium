@@ -36,6 +36,7 @@ public class LibraryService {
 		this.httpSession = request.getSession();
 	}
 
+
 	public ResultResponse addBook(BookDto bookDto, String branchId) {
 
 		Book book = new Book();
@@ -55,6 +56,7 @@ public class LibraryService {
 		}
 		return ResultResponse.builder().success(false).build();
 	}
+
 
 	public BooksResponseDto viewBooks(String branchId) {
 		BooksResponseDto result = BooksResponseDto.builder().build();
@@ -77,6 +79,7 @@ public class LibraryService {
 		if (idbook != null) {
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idbook) {
+				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 			}
 			new LibraryDAO().deleteRecord(ids);
@@ -118,10 +121,12 @@ public class LibraryService {
 
 	}
 
+
 	public ResultResponse updateBook(BooksRequestDto booksListDto) {
 
 		String uid = booksListDto.getStudentExternalId();
 		// String dates=request.getParameter("transactiondate");
+		// String date = DateUtil.dateFromatConversionSlash(booksListDto.getTransactionDate());
 		String[] bids = booksListDto.getBookIds();
 		String[] bookNames = booksListDto.getBookName();
 		List<BookHistory> bookHistoryList = new ArrayList<BookHistory>();
@@ -138,7 +143,7 @@ public class LibraryService {
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setUid(uid);
 				bookHistory.setIssueDate(booksListDto.getIssueDate());
-				bookHistory.setExpectedReturnDate(booksListDto.getExpectedReturnDate());
+				bookHistory.setExpectedReturnDate(DateUtil.datePars(booksListDto.getExpectedReturnDate()));
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setSid(booksListDto.getStudentId());
 				bookHistoryList.add(bookHistory);
@@ -151,7 +156,7 @@ public class LibraryService {
 				bookIssue.setStudentName(booksListDto.getStudentName());
 				bookIssue.setBookName(bookNames[i]);
 				bookIssue.setStartDate(booksListDto.getIssueDate());
-				bookIssue.setEndDate(booksListDto.getExpectedReturnDate());
+				bookIssue.setEndDate(DateUtil.datePars(booksListDto.getExpectedReturnDate()));
 				bookIssueList.add(bookIssue);
 				i++;
 			}
@@ -190,6 +195,7 @@ public class LibraryService {
 		return result;
 	}
 
+
 	public ResultResponse bookReturnByStudent(BooksRequestDto booksListDto) {
 
 		String[] bids = booksListDto.getBookIds();
@@ -210,10 +216,12 @@ public class LibraryService {
 			}
 			
 			 new LibraryDAO().updateBookOnReturn(bookIds,bookIssueIds,NoOfDays,booksListDto.getExpectedReturnDate());
+			 // new LibraryDAO().updateBookOnReturn(bookIds,bookIssueIds,NoOfDays,booksListDto.getExpectedReturnDate());
 			 return ResultResponse.builder().success(true).build();
 		}
 		return ResultResponse.builder().build();
 	}
+
 
 	public BooksResponseDto viewBookdetails(String bookId, String branchId) {
 		BooksResponseDto result = BooksResponseDto.builder().build();
@@ -314,3 +322,4 @@ public class LibraryService {
 	return ResultResponse.builder().success(false).build();}
 
 }
+
