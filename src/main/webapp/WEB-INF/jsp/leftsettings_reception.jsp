@@ -346,6 +346,13 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
+        
+         <h5 style="font-size: 12px"><a href="#">General</a></h5>
+            <div>
+                <a target="mainFrame" href="/littleflower/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+            </div>
+            
+            
         <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
@@ -359,6 +366,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/littleflower/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/littleflower/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
                 <a target="mainFrame" href="/littleflower/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/littleflower/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
             
             
