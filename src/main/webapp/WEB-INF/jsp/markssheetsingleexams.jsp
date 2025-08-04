@@ -278,6 +278,10 @@ for(Cookie cookie : cookies){
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
                             </tr>
                             
+                            <tr>   
+				<td class="namedetails"><label>Mother's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.mothersname}"/></label></td>	
+                            </tr>
+                            
                            <!-- <tr>
                             <td><br></td>
                             </tr> -->
