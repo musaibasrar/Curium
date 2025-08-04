@@ -594,7 +594,7 @@ for(Cookie cookie : cookies){
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
-									name="name" type="text" style="text-transform:uppercase" required
+									name="name" type="text" style="text-transform:uppercase" 
 									value="<c:out value="${student.name}" />" class="myclass"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
@@ -1400,7 +1400,7 @@ for(Cookie cookie : cookies){
 								name="idparents" id="idparents"
 								value="<c:out value="${parents.pid}" />" /> <label> <input
 									name="fathersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;" required
+									size="30" style="text-transform: capitalize;" 
 									value="<c:out default="" value="${parents.fathersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -1408,7 +1408,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Mother's Name*</td>
 							<td><label> <input
 									name="mothersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;" required
+									size="30" style="text-transform: capitalize;" 
 									value="<c:out default="" value="${parents.mothersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -1506,7 +1506,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft">Contact Number*</td>
 
 							<td><label> <input name="contactnumber"
-									type="text" class="myclass" id="contactnumber" size="30" required
+									type="text" class="myclass" id="contactnumber" size="30" 
 									value="<c:out default="" value="${parents.contactnumber}" />">
 
 							</label></td>
