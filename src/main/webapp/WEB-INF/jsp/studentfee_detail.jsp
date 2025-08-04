@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
-        <script src="/vision/js/jquery.min.js"></script>
-        <script src="/vision/js/bootstrap.min.js"></script>
-        <script src="/vision/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/school/css/bootstrap.min.css">
+        <script src="/school/js/jquery.min.js"></script>
+        <script src="/school/js/bootstrap.min.js"></script>
+        <script src="/school/js/popper.min.js"></script>
 
 <style>
  .headerText {
@@ -63,7 +63,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -152,7 +152,7 @@ for(Cookie cookie : cookies){
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/school/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -237,7 +237,7 @@ for(Cookie cookie : cookies){
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/vision/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/school/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>

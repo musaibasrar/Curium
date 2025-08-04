@@ -13,10 +13,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View Diary Parents</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/vision/css/bootstrap3.min.css">
-	<script src="/vision/js/jquery.min.js"></script>
-    <script src="/vision/js/bootstrap.min.js"></script>
-    <script src="/vision/js/popper.min.js"></script>
+<link rel="stylesheet" href="/school/css/bootstrap3.min.css">
+	<script src="/school/js/jquery.min.js"></script>
+    <script src="/school/js/bootstrap.min.js"></script>
+    <script src="/school/js/popper.min.js"></script>
 <style>
   body {
     font-family: 'Roboto', sans-serif;
@@ -79,7 +79,7 @@ $(function() {
 
 function viewStudentDiary(sid) {
   var form1 = document.getElementById("form1");
-  form1.action = "/vision/DiaryProcess/ViewDiaryDetailsParent?id=" + sid;
+  form1.action = "/school/DiaryProcess/ViewDiaryDetailsParent?id=" + sid;
   form1.submit();
 }
 
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -143,17 +143,17 @@ for(Cookie cookie : cookies){
 
 <%-- <div class="d-flex justify-content-between mt-4">
   <c:if test="${currentPage != 1}">
-    <a class="btn btn-primary" href="/vision/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a>
+    <a class="btn btn-primary" href="/school/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a>
   </c:if>
   <ul class="pagination">
     <c:forEach begin="1" end="${noOfPages}" var="i">
       <li class="page-item <c:if test='${currentPage == i}'>active</c:if>">
-        <a class="page-link" href="/vision/DiaryProcess/viewdiarystudent?page=${i}">${i}</a>
+        <a class="page-link" href="/school/DiaryProcess/viewdiarystudent?page=${i}">${i}</a>
       </li>
     </c:forEach>
   </ul>
   <c:if test="${currentPage lt noOfPages}">
-    <a class="btn btn-primary" href="/vision/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a>
+    <a class="btn btn-primary" href="/school/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a>
   </c:if>
 </div> --%>
 </div>

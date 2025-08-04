@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stock Received Report</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -367,17 +367,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/school/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -431,12 +431,12 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function generateStockReceivedReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/vision/MessItemsProcess/generateStockReceivedReport";
+			form1.action = "/school/MessItemsProcess/generateStockReceivedReport";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -469,7 +469,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/vision/MessItemsProcess/printStockReceivedReport";
+			form1.action = "/school/MessItemsProcess/printStockReceivedReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -481,7 +481,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

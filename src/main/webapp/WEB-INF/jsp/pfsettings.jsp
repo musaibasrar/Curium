@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PF Settings</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -314,42 +314,42 @@
 
 </style>
 
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/school/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/school/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/school/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -376,7 +376,7 @@
 </script>
   
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -465,7 +465,7 @@
 	
 	function addPf() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/HrProcess/addPf";
+		form1.action = "/school/HrProcess/addPf";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -479,7 +479,7 @@
 	
 	 function deleteRecords(){
 		 var form1 = document.getElementById("form1");
-			form1.action = "/vision/HrProcess/deletePf";
+			form1.action = "/school/HrProcess/deletePf";
 			form1.method = "POST";
 			form1.submit();
 	 }
@@ -491,7 +491,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -637,7 +637,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/vision/images/sort_both.png" /></th>
+							src="/school/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Paid By Management&nbsp;</th>
 							<th title="click to sort" class="headerText">Paid By Staff&nbsp;</th>
 							<th title="click to sort" class="headerText">Total&nbsp;</th>

@@ -13,8 +13,8 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
         <style type="text/css">
         
          .headerText {
@@ -62,7 +62,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
                     </thead>
                     <tbody>
                     <tr>
-                    <td ><h2><a  href="/vision/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
+                    <td ><h2><a  href="/school/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
                     </tr>
                     </tbody>
                     </table>

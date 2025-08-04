@@ -9,10 +9,10 @@
 <title>index_parents</title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/vision/css/bootstrap.min.css">
-        <script src="/vision/js/jquery.min.js"></script>
-        <script src="/vision/js/bootstrap.min.js"></script>
-        <script src="/vision/js/popper.min.js"></script> 
+<link rel="stylesheet" href="/school/css/bootstrap.min.css">
+        <script src="/school/js/jquery.min.js"></script>
+        <script src="/school/js/bootstrap.min.js"></script>
+        <script src="/school/js/popper.min.js"></script> 
  <style>
  .container{
 border: 0px solid red;
@@ -119,7 +119,7 @@ font-size:70px;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -135,12 +135,12 @@ for(Cookie cookie : cookies){
     
     
 		   <c:if test="${(userType == 'parents')}">
-			    <frame   src="/vision/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/school/header_parent"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
-			<frame src="/vision/welcomeparent" name="mainFrame" scrolling="yes" />
+			<frame src="/school/welcomeparent" name="mainFrame" scrolling="yes" />
            <!--  <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/vision/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/vision/welcomeparent" name="mainFrame" scrolling="yes" />
+                <frame  src="/school/left_parent" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/school/welcomeparent" name="mainFrame" scrolling="yes" />
             </frameset> -->
 
    </frameset>
@@ -157,14 +157,14 @@ for(Cookie cookie : cookies){
     
     <div class="col-6" id="f1">
      <i class="fa-solid fa-graduation-cap"></i>
-     <a target="mainFrame" href="/vision/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
+     <a target="mainFrame" href="/school/StudentProcess/ViewDetailsbyexternalid?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Profile</h5></a>
      
     </div> 
     
      
     <div class="col-6" id="f3">
     <i class="fa-solid fa-book"></i>
-     <a target="mainFrame" href="/vision/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
+     <a target="mainFrame" href="/school/DiaryProcess/viewDiaryStudentParent?id=<c:out value='${username}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>" style="font-size: 12px;"><h5>Student Diary</h5></a>
     </div>
     
   </div> 
