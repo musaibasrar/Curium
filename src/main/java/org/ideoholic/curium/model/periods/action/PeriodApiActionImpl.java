@@ -25,8 +25,7 @@ public class PeriodApiActionImpl implements PeriodApiAction {
     @Autowired
     private EmployeeService employeeService;
 
-    // TODO Uncomment after PeriodService is made @Service
-    // @Autowired
+    @Autowired
     private PeriodService periodService;
 
     public ResponseEntity<TeacherTimeTableResponseDto> viewTeacherTimeTable(String teacherName, String branchId) {
@@ -95,22 +94,32 @@ public class PeriodApiActionImpl implements PeriodApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<UpdatePeriodDetailsResponseDto> updatePeriodDetails(String periodMasterId, String branchId) {//Error
-        UpdatePeriodDetailsResponseDto result = new UpdatePeriodDetailsResponseDto();
+	public ResponseEntity<UpdatePeriodDetailsResponseDto> updatePeriodDetails(String periodMasterId, String branchId) {
+		UpdatePeriodDetailsResponseDto result = new UpdatePeriodDetailsResponseDto();
+		boolean success;
 
-        TimeTableViewResponseDto periodDetailsResult = periodService.updatePeriodDetails(periodMasterId);
-        result.setPeriodMasterId(periodDetailsResult.getPeriodMasterId());
-        result.setPeriodMaster(periodDetailsResult.getPeriodMaster());
-        result.setPeriodDetails(periodDetailsResult.getPeriodDetails());
-        result.setPeriodMap(periodDetailsResult.getPeriodMap());
+		TimeTableViewResponseDto periodDetailsResult = periodService.updatePeriodDetails(periodMasterId);
+		result.setPeriodMasterId(periodDetailsResult.getPeriodMasterId());
+		result.setPeriodMaster(periodDetailsResult.getPeriodMaster());
+		result.setPeriodDetails(periodDetailsResult.getPeriodDetails());
+		result.setPeriodMap(periodDetailsResult.getPeriodMap());
+		success = periodDetailsResult.isSuccess();
 
-        periodService.getPeriodDetail();
+		PeriodDetailsDto periodDetails = periodService.getPeriodDetail(branchId);
+		result.setEmployeeList(periodDetails.getEmployeeList());
+		result.setEmployeeListProcessSalary(periodDetails.getEmployeeListProcessSalary());
+		result.setSubjects(periodDetails.getSubjects());
+		success &= periodDetails.isSuccess();
 
-        ResultResponse resultResponse = standardService.viewClasses(branchId);
-        result.setClasssecList(resultResponse.getResultList());
+		ResultResponse resultResponse = standardService.viewClasses(branchId);
+		result.setClasssecList(resultResponse.getResultList());
+		success &= resultResponse.isSuccess();
 
-        throw new CustomResponseException(CustomErrorMessage.ERROR);
-    }
+		if (success) {
+			return ResponseEntity.ok(result);
+		}
+		throw new CustomResponseException(CustomErrorMessage.ERROR);
+	}
 
     public ResponseEntity<ResultResponse> updatenewPeriodDetails(PeriodsSaveDto dto, String branchId, String userId) {//Error
         ResultResponse result = periodService.updatenewPeriodDetails(dto, branchId, userId);
