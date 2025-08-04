@@ -677,7 +677,7 @@ public class FeesCollectionService {
 			}
 			
 			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 			
 	}
@@ -729,7 +729,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -743,29 +743,29 @@ public class FeesCollectionService {
 		switch (dto.getStudentType()) {
 		case "Active":
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 			}
 			break;
 			
 		case "InActive":
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying + "') AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying + "') AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 			}
 			break;
 			
 		case "All":
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 			}
 			break;	
 			
 		default:
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 			}
 			break;	
 			
@@ -829,7 +829,7 @@ public class FeesCollectionService {
 
 		if (strBranchId != null) {
 
-			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
+			String queryMain = "From Parents as parents where parents.student.branchid="+Integer.parseInt(strBranchId)+" AND ";
 			ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(BRANCHID).toString());
 			result.setClasssecList(resultResponse.getResultList());
 			List<Classsec> classList = dto.getClasssecList();
@@ -841,7 +841,7 @@ public class FeesCollectionService {
 			for (Classsec classOne : classList) {
 
 				if (i > 0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne.getClassdetails() + "--" + "%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '" + classOne.getClassdetails() + "--" + "%");
 				} else {
 					conClassStudying.append(classOne.getClassdetails() + "--" + "%");
 				}
@@ -853,9 +853,9 @@ public class FeesCollectionService {
 			String querySub = "";
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.Student.classstudying like '"
-						+ classStudying	+ "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 "
-						+ " order by parents.Student.admissionnumber ASC";
+				querySub = querySub + " (parents.student.classstudying like '"
+						+ classStudying	+ "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 "
+						+ " order by parents.student.admissionnumber ASC";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
@@ -950,14 +950,14 @@ public class FeesCollectionService {
 			// Daily Fees
 			querySubDaily = " feesdetails.date = '"+todaysDate+"'" ;
 			queryMainDaily = queryMainDaily+querySubDaily;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMainDaily);
 			feesDetailsListDaily = new UserDAO().getReceiptDetailsList(queryMainDaily);
 			
 			// Monthly Fees
 			    querySubMonthly = " feesdetails.date between '"+TimestampFrom+"' AND '"+Timestampto+"'";
 			    queryMainMonthly = queryMainMonthly+querySubMonthly;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMainMonthly);
 			feesDetailsListMonthly = new UserDAO().getReceiptDetailsList(queryMainMonthly);
 			
@@ -1186,7 +1186,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -1198,8 +1198,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -1580,7 +1580,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -1592,8 +1592,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -1683,7 +1683,7 @@ public class FeesCollectionService {
 			}
 			
 			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
 			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
 			
@@ -1963,7 +1963,7 @@ public class FeesCollectionService {
 			}
 			
 			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 			
@@ -1984,7 +1984,7 @@ public class FeesCollectionService {
 				}
 
 				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
-				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				System.out.println("SEARCH QUERY ***** "+queryMainOtherFees);
 				otherFeesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMainOtherFees);
 
@@ -2216,7 +2216,7 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
+			querySub = querySub + " (parents.student.classstudying like '"
 					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
@@ -2363,7 +2363,7 @@ public class FeesCollectionService {
 			}
 			
 			queryMain = queryMain+querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
 			
 	}
@@ -2411,8 +2411,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {

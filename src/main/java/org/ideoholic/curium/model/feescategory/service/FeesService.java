@@ -432,7 +432,7 @@ public class FeesService {
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			log.debug("SEARCH QUERY ***** {}", queryMain);

@@ -225,7 +225,7 @@ public class feesDetailsDAO {
 
 						/*
 						 * results = (List<Parents>) session.
-						 * createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
+						 * createQuery("FROM Parents p where p.student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
 						 * +branchId+")") .list();
 						 */
                         Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
@@ -423,10 +423,10 @@ public class feesDetailsDAO {
 
 						/*
 						 * results = (List<Parents>) session.
-						 * createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
+						 * createQuery("FROM Parents p where p.student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
 						 * +branchId+")") .list();
 						 */
-                      Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentotherfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                      Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentotherfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
                       results= (List<Object[]>)q.list();
                       transaction.commit();
 

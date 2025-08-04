@@ -139,7 +139,7 @@ public class AdminService {
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'";
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'";
 			 */
 			adminExpensesList = adminDetailsDao.searchExpensesbydate(queryMain);
 
@@ -185,7 +185,7 @@ public class AdminService {
 			}
 
 			queryMain = queryMain + querySub;
-			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			adminExpensesList = adminDetailsDao.searchExpensesbydate(queryMain);
 
 		}

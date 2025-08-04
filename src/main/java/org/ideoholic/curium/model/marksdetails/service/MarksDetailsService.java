@@ -216,7 +216,7 @@ public class MarksDetailsService {
 		queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -263,20 +263,20 @@ public class MarksDetailsService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name  '%" + studentname + "%'";
+			querySub = " parents.student.name  '%" + studentname + "%'";
 		}
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = " parents.Student.classstudying like '" + classStudying
-					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+			querySub = " parents.student.classstudying like '" + classStudying
+					+ "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}*/
 
 		//queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 	/*	System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -383,7 +383,7 @@ public class MarksDetailsService {
 		queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -1441,7 +1441,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -1826,20 +1826,20 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	String querySub = "";
 
 	if (!studentname.equalsIgnoreCase("")) {
-		querySub = " parents.Student.name like '%" + studentname + "%'";
+		querySub = " parents.student.name like '%" + studentname + "%'";
 	}
 
 	if (!classStudying.equalsIgnoreCase("")) {
-		querySub = " parents.Student.classstudying like '" + classStudying
-				+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+		querySub = " parents.student.classstudying like '" + classStudying
+				+ "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-		querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
+		querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 	}
 
 	queryMain = queryMain + querySub;
 	/*
 	 * queryMain =
-	 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 	 * ;
 	 */
 	System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -1997,20 +1997,20 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	String querySub = "";
 
 	if (!studentname.equalsIgnoreCase("")) {
-		querySub = " parents.Student.name like '%" + studentname + "%'";
+		querySub = " parents.student.name like '%" + studentname + "%'";
 	}
 
 	if (!classStudying.equalsIgnoreCase("")) {
-		querySub = " parents.Student.classstudying like '" + classStudying
-				+ "'  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+		querySub = " parents.student.classstudying like '" + classStudying
+				+ "'  AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-		querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
+		querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 	}
 
 	queryMain = queryMain + querySub;
 	/*
 	 * queryMain =
-	 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 	 * ;
 	 */
 	System.out.println("SEARCH QUERY ***** " + queryMain);

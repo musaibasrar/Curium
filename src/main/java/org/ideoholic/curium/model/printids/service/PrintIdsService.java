@@ -69,7 +69,7 @@ public class PrintIdsService {
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -178,7 +178,7 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);

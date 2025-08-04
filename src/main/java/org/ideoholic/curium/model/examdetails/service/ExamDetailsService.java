@@ -278,7 +278,7 @@ public class ExamDetailsService {
 
             if (admNo.equals("")) {
             	studentList = new StudentDetailsDAO().getReferredList(studentIdsList);
-                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
+                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();

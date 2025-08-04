@@ -410,14 +410,14 @@ public class AttendanceService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parent.Student.name like '%" + studentname + "%'";
+				querySub = " parent.student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " parent.Student.classstudying like '" + classStudying
-						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0  AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.student.classstudying like '" + classStudying
+						+ "'  AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0  AND parent.student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
@@ -718,14 +718,14 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parent.Student.name like '%" + studentname + "%'";
+				querySub = " parent.student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " parent.Student.classstudying like '" + classStudying
-						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.student.classstudying like '" + classStudying
+						+ "'  AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;

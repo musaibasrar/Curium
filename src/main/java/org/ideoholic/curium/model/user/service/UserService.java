@@ -185,8 +185,8 @@ public class UserService {
 
 						classStudying = classStudying + "--" + "%";
 
-						List<Parents> student = new StudentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') AND parents.Student.classstudying like '" + classStudying + "'"
-								+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='" + Integer.parseInt(branchId) + "' ");
+						List<Parents> student = new StudentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
+								+ " AND parents.student.archive=0 AND parents.student.passedout=0 AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.student.branchid='" + Integer.parseInt(branchId) + "' ");
 						totalStudents += student.size();
 						xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
 						if (student.size() > 0) {
@@ -410,98 +410,98 @@ public class UserService {
 				String querySub = "";
 
 				if (!studentname.equalsIgnoreCase("")) {
-					querySub = " AND parents.Student.name like '%" + studentname + "%'";
+					querySub = " AND parents.student.name like '%" + studentname + "%'";
 				}
 
 				if (!classStudying.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
+					querySub = querySub + " AND parents.student.classstudying like '" + classStudying + "'";
 				}
 
 				if (!gender.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.gender like '" + gender + "%'";
+					querySub = querySub + " AND  parents.student.gender like '" + gender + "%'";
 				}
 
 				/*
 				 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-				 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
+				 * querySub = querySub + " parents.student.stdlaststudied = '"+lastClass+"'";
 				 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
+				 * " parents.student.stdlaststudied = '"+lastClass+"'"; }
 				 */
 
 				if (!dateOfBirth.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.dateofbirth = '" + dateOfBirth + "'";
+					querySub = querySub + " AND parents.student.dateofbirth = '" + dateOfBirth + "'";
 				}
 
 
 				if (age != 0) {
-					querySub = querySub + " AND parents.Student.age = '" + age + "'";
+					querySub = querySub + " AND parents.student.age = '" + age + "'";
 				}
 
 				if (!classAdmitted.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.classadmittedin like '" + classAdmitted + "'";
+					querySub = querySub + " AND parents.student.classadmittedin like '" + classAdmitted + "'";
 				}
 				/*
 				 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
 				 * querySub = querySub +
-				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
+				 * " parents.student.schoollastattended like '%"+lastSchool+"%'"; }else
 				 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
+				 * " parents.student.schoollastattended like '%"+lastSchool+"%'"; }
 				 */
 
 
 				if (!admissionNo.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.admissionnumber like '%" + admissionNo + "%'";
+					querySub = querySub + " AND parents.student.admissionnumber like '%" + admissionNo + "%'";
 				}
 
 				if (!dateOfAdmission.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.admissiondate = '" + dateOfAdmission + "'";
+					querySub = querySub + " AND parents.student.admissiondate = '" + dateOfAdmission + "'";
 				}
 
 				if (!bloodGroup.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.Student.bloodgroup like '%" + bloodGroup + "%'";
+					querySub = querySub + " AND parents.student.bloodgroup like '%" + bloodGroup + "%'";
 				}
 
 				if (!nationality.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.nationality like '%" + nationality + "%'";
+					querySub = querySub + " AND  parents.student.nationality like '%" + nationality + "%'";
 				}
 
 				if (!religion.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.religion like '%" + religion + "%'";
+					querySub = querySub + " AND  parents.student.religion like '%" + religion + "%'";
 				}
 
 				if (!caste.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.caste like '%" + caste + "%'";
+					querySub = querySub + " AND  parents.student.caste like '%" + caste + "%'";
 				}
 
 				if (!motherT.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.mothertongue like '%" + motherT + "%'";
+					querySub = querySub + " AND  parents.student.mothertongue like '%" + motherT + "%'";
 				}
 
 				if (!createdDate.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.createddate = '" + createdDate + "'";
+					querySub = querySub + " AND  parents.student.createddate = '" + createdDate + "'";
 				}
 
 				if (!remarks.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.remarks like '%" + remarks + "%'";
+					querySub = querySub + " AND  parents.student.remarks like '%" + remarks + "%'";
 				}
 
 
 				if (!stsNumber.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.sts = '" + stsNumber + "'";
+					querySub = querySub + " AND  parents.student.sts = '" + stsNumber + "'";
 				}
 
 
 				if (!studentExternalId.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.Student.studentexternalid = '" + studentExternalId + "'";
+					querySub = querySub + " AND  parents.student.studentexternalid = '" + studentExternalId + "'";
 				}
 				/* *
 				 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
-				 * querySub + " parents.Student.rte = '"+rte+"'"; }else
+				 * querySub + " parents.student.rte = '"+rte+"'"; }else
 				 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.Student.rte = '"+rte+"'"; }
+				 * " parents.student.rte = '"+rte+"'"; }
 				 */
 
-				queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				queryMain = queryMain + querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			}
 
@@ -605,7 +605,7 @@ public class UserService {
 
 
 	 			queryMain = queryMain + querySub;
-				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** " + queryMain);
 				searchParentsList = new StudentDetailsDAO().getStudentsList(queryMain);
 
@@ -672,7 +672,7 @@ public class UserService {
 				}
 
 				queryMain = queryMain+querySub;
-				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** "+queryMain);
 				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 

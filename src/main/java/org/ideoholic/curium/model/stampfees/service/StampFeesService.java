@@ -170,7 +170,7 @@ public class StampFeesService {
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -515,16 +515,16 @@ public class StampFeesService {
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
 	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")
 	    				&& !querySub.equalsIgnoreCase("")) {
-	    			querySub = querySub + " AND parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 	    		} else if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			case "InActive":
@@ -539,16 +539,16 @@ public class StampFeesService {
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
 	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")
 	    				&& !querySub.equalsIgnoreCase("")) {
-	    			querySub = querySub + " AND parents.Student.classstudying like '"
-	    					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1)";
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1)";
 	    		} else if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;	
 			case "All":	
@@ -564,16 +564,16 @@ public class StampFeesService {
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
 	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND  parents.Student.branchid="+Integer.parseInt(branchid);
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND  parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")
 	    				&& !querySub.equalsIgnoreCase("")) {
-	    			querySub = querySub + " AND parents.Student.classstudying like '"
+	    			querySub = querySub + " AND parents.student.classstudying like '"
 	    					+ classStudying + "'";
 	    		} else if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND  parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND  parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			default:
@@ -588,16 +588,16 @@ public class StampFeesService {
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
 	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")
 	    				&& !querySub.equalsIgnoreCase("")) {
-	    			querySub = querySub + " AND parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 	    		} else if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			}

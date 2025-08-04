@@ -592,7 +592,7 @@ public class JobService {
 
 		String studentId = request.getParameter("id");
 
-		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
+		String queryMain = "from JobQuery pq where pq.parent.student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 
 		JobQueryList = jobDAO.generateQueriesReport(queryMain);
