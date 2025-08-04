@@ -67,7 +67,6 @@ public class MessStockMoveAction {
     	studentActionAdapter.viewStudentsParentsPerBranch();
 		
 		
-		
 		messStockMoveActionAdapter.viewStockMoveDetails();
 		return "issuestock";
 	}
@@ -108,12 +107,20 @@ public class MessStockMoveAction {
     	return "duereport";
     }
 	
-	@GetMapping("/getDueReport")
-	public String getDueReport() {
+	@GetMapping("/getUnpaidReport")
+	public String getUnpaidReport() {
 		    	
 		standardActionAdapter.viewClasses();
     	
     	return "duereport";
+    }
+	
+	@GetMapping("/getDueReport")
+	public String getDueReport() {
+		    	
+		messStockMoveActionAdapter.getDuesList();
+    	
+    	return "dueslist";
     }
 	
 	
@@ -127,5 +134,55 @@ public class MessStockMoveAction {
 			e.printStackTrace();
 		}
     }
+	
+	@PostMapping("/paydue")
+	public String paydue() {
+		    	
+    	messStockMoveActionAdapter.paydue();
+    	
+    	return getDueReport();
+    }
+	
+	@GetMapping("/generateTaxInvoice")
+	public String generateTaxInvoice() {
+		
+        messStockMoveActionAdapter.viewStockEntryDetails();
+    	
+    	//Get Customers
+    	studentActionAdapter.viewStudentsParentsPerBranch();
+		
+		
+		messStockMoveActionAdapter.viewStockMoveDetails();
+		
+    	return "taxinvoicedetail";
+    }
+	
+	@PostMapping("/saveStockMoveInvoiceTax")
+	public String saveStockMoveInvoiceTax() {
+
+		//messStockMoveActionAdapter.saveStockMove();
+		
+		messStockMoveActionAdapter.getBillDetail();
+		
+		messItemActionAdapter.getCurrentStockToIssue();
+		 
+    	messStockMoveActionAdapter.viewStockEntryDetails();
+    	
+    	messStockMoveActionAdapter.viewStockMoveDetails();
+    	//Get Student
+    	studentActionAdapter.viewAllStudentsParents();
+    	return "billreceipt";
+
+	}
+	
+	@GetMapping("/generateTaxInvoiceReport")
+	public String generateTaxInvoiceReport() {
+		    	
+		messStockMoveActionAdapter.generateTaxInvoiceReport();
+    	
+    	return "taxinvoicereport";
+    }
+
+
 
 }

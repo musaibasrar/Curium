@@ -12,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
+import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -124,13 +125,13 @@ public class SubjectDetailsDAO {
 		
 	}
 
-	public List<Subject> readListOfSubjectNames(int branchId) {
+	public List<Subjectmaster> readListOfSubjectNames(int branchId) {
 		
-		List<Subject> results = new ArrayList<Subject>();
+		List<Subjectmaster> results = new ArrayList<Subjectmaster>();
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subjectmaster where branchid="+branchId)
+			results = (List<Subjectmaster>) session.createQuery("From Subjectmaster where branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -164,7 +165,7 @@ public class SubjectDetailsDAO {
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subjectmaster where branchid="+branchId)
+			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -229,6 +230,78 @@ public class SubjectDetailsDAO {
 				HibernateUtil.closeSession();
 			return results;
 		}
+	}
+
+	public SubSubject readSubSubject(int branchId, int subjectId, String subSubject) {
+		SubSubject subsubject = new SubSubject();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From SubSubject where subjectid='"+subjectId+"' and subsubjectname='"+subSubject+"'  and branchid = "+branchId+"");
+			subsubject = (SubSubject) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return subsubject;
+		}
+	}
+
+	public List<SubSubject> readListOfSubSubject(int branchId) {
+		
+		List<SubSubject> results = new ArrayList<SubSubject>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<SubSubject>) session.createQuery("From SubSubject where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public boolean addSubSubject(List<SubSubject> subSubjectList) {
+		boolean result=false;
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			
+			for (SubSubject subSubject : subSubjectList) {
+				session.save(subSubject);
+			}
+			transaction.commit();
+			result=true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+		}
+		
+	}
+
+	public void deleteMultipleSubSubject(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("delete from SubSubject where subjectid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		
 	}
 
 }

@@ -1,5 +1,5 @@
 <%--
-    Document   : Other Fees Collecion Details
+    Document   : Bus Fees Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -11,10 +11,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Other Fees Collection Details</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-<link rel="stylesheet" href="/abc/css/font-awesome.css">
+<title>Bus Fees Collection Details</title>
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="/school/css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -306,42 +306,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/school/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/school/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/school/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -403,11 +403,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/searchOtherFeesCollection";
+		form1.action = "/school/FeesCollection/searchOtherFeesCollection";
 		form1.method = "POST";
 		form1.submit();
 
@@ -415,7 +415,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/abc/FeesCollection/printOtherDataForFees";
+		form1.action = "/school/FeesCollection/printOtherDataForFees";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -591,7 +591,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -605,14 +605,14 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/abc/FeesDetails/exportDataForOtherFees" method="POST">
+		action="/school/FeesDetails/exportDataForOtherFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Other Fees Collection Details</button>
+			<button id="add">Search Bus Fees Collection Details</button>
 			<br />
 		</div>
 
@@ -666,6 +666,27 @@ for(Cookie cookie : cookies){
 						<td>&nbsp;</td>
 						</tr>
 						
+						<tr>
+							<td width="20%" class="alignRight">Mode of Payment &nbsp;&nbsp;</td>
+							<td ><label> <select name="modeofpayment"
+									id="modeofpayment" style="width: 240px">
+										<option selected></option>
+										<option value="Bank Transfer">Bank</option>
+										<option value="Cash">Cash</option>
+								</select>
+
+							</label></td>
+							
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
 						<!-- <tr>
 							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
 							<td ><label> <select name="selectedbranchid"
@@ -703,7 +724,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Other fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Bus Fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -711,31 +732,32 @@ for(Cookie cookie : cookies){
 
 				<thead>
                         <tr>
-                            <th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                        	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">Student Name</th>
+                            <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Receipt No.</th>
+                            <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
-
-
                         </tr>
                     </thead>
 
                     <tbody>
                         <c:forEach items="${searchotherfeesdetailslist}" var="feesdetails">
-
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                        
+                        <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
-								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/CancelOtherFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
-
+								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/school/FeesCollection/viewOtherFeesDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/school/FeesCollection/CancelOtherFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

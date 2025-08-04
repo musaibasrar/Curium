@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0  -->
+<hibernate-mapping>
+<class name="org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry" table="admissionenquiry">
+<id name="id" type="java.lang.Integer">
+<column name="id"/>
+<generator class="identity"/>
+</id>
+<property name="branchId" type="java.lang.Integer">
+<column name="branchid"/>
+</property>
+<property name="userId" type="java.lang.Integer">
+<column name="userid"/>
+</property>
+<property name="name" type="java.lang.String">
+<column name="name"/>
+</property>
+<property name="gender" type="java.lang.String">
+<column name="gender"/>
+</property>
+<property name="caste" type="java.lang.String">
+<column name="caste"/>
+</property>
+<property name="placeOfBirth" type="java.lang.String">
+<column name="placeofbirth"/>
+</property>
+<property name="surName" type="java.lang.String">
+<column name="surname"/>
+</property>
+<property name="previousClassPassed" type="java.lang.String">
+<column name="previousclasspassed"/>
+</property>
+<property name="previousSchoolName" type="java.lang.String">
+<column name="previousschoolname"/>
+</property>
+<property name="religion" type="java.lang.String">
+<column name="religion"/>
+</property>
+<property name="fathername" type="java.lang.String">
+<column name="fathername"/>
+</property>
+<property name="fatherQualification" type="java.lang.String">
+<column name="fatherqualification"/>
+</property>
+<property name="mothername" type="java.lang.String">
+<column name="mothername"/>
+</property>
+<property name="motherQualification" type="java.lang.String">
+<column name="motherqualification"/>
+</property>
+<property name="admissionclass" type="java.lang.String">
+<column name="admissionclass"/>
+</property>
+<property name="brothereducation" type="java.lang.String">
+<column name="brothereducation"/>
+</property>
+<property name="sistereducation" type="java.lang.String">
+<column name="sistereducation"/>
+</property>
+<property name="occupation" type="java.lang.String">
+<column name="occupation"/>
+</property>
+<property name="academicYear" type="java.lang.String">
+<column name="academicyear"/>
+</property>
+<property name="dateofbirth" type="date">
+<column name="dateofbirth" length="10"/>
+</property>
+<property name="address" type="java.lang.String">
+<column name="address"/>
+</property>
+<property name="notes" type="java.lang.String">
+<column name="notes"/>
+</property>
+<property name="mobileno" type="java.lang.String">
+<column name="mobileno"/>
+</property>
+</class>
+</hibernate-mapping>

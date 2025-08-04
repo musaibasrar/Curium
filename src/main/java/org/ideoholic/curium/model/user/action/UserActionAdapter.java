@@ -5,8 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.appointment.dto.DailyExpensesResponseDto;
 import org.ideoholic.curium.model.appointment.dto.MonthlyExpensesResponseDto;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
 import org.ideoholic.curium.model.user.dto.DashBoardResponseDto;
 import org.ideoholic.curium.model.user.dto.SearchByDateDto;
@@ -30,6 +33,12 @@ public class UserActionAdapter {
     private HttpSession httpSession;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StandardActionAdapter standardActionAdapter;
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
     public void searchByDate() {
 
@@ -150,7 +159,8 @@ public class UserActionAdapter {
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
         httpSession.setAttribute("todaysAttendance", responseDto.getAttendanceStatus());
-
+        httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
         return responseDto.isSuccess();
     }
 
@@ -158,9 +168,9 @@ public class UserActionAdapter {
 
         String branchId = request.getParameter(Constants.BRANCHID);
 
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute(Constants.USERNAME).toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
-        httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getAcademicYear());
-        httpSession.setAttribute(Constants.USERNAME, responseDto.getUserName());
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
+        httpSession.setAttribute("username", responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("branchcode", responseDto.getBranchCode());
@@ -170,8 +180,9 @@ public class UserActionAdapter {
         httpSession.setAttribute("typeOfUser", responseDto.getTypeOfUser());
         httpSession.setAttribute("userAuth", responseDto.getUserAuth());
         httpSession.setAttribute("superuserAuth", responseDto.getSuperUserAuth());
-        httpSession.setAttribute(Constants.USERID, responseDto.getUserLoginId());
-
+        httpSession.setAttribute("userloginid", responseDto.getUserLoginId());
+        httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
+        httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
         return responseDto.isSuccess();
     }
 

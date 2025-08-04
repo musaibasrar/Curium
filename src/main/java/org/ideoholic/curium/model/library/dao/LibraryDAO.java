@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.library.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.diary.dto.Diary;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.library.dto.Book;
 import org.ideoholic.curium.model.library.dto.BookHistory;
 import org.ideoholic.curium.model.library.dto.BookIssue;
@@ -196,7 +199,7 @@ public class LibraryDAO {
 		
 	}
 
-	public List<BookHistory> readListOfBookHistory(Date fromDate, Date toDate) {
+	public List<BookHistory> readListOfBookHistory(String fromDate, String toDate) {
 		List<BookHistory> results = new ArrayList<BookHistory>();
         try {
             
@@ -304,7 +307,7 @@ public class LibraryDAO {
 	}
 	
 
-	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,Date returnDate) {
+	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,String returnDate) {
 		try {
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");

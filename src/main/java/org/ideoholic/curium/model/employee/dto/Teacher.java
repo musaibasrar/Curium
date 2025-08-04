@@ -150,6 +150,9 @@ public class Teacher implements java.io.Serializable {
 	@Column(name = "userid")
 	private Integer userid;
 
+	@Column(name = "classteacher", length = 100)
+    private String classteacher;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<JobQuery> jobList;

@@ -7,8 +7,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
@@ -233,7 +235,7 @@ public class ExamDetailsService {
 
 
         if (!classAdmno.equals("")) {
-            String[] c = classAdmno.split(" ");
+            String[] c = classAdmno.split("--");
             classH = c[0];
         }
         if (branchId != null) {
@@ -262,7 +264,11 @@ public class ExamDetailsService {
         String admNo = printPreviewHallTicketDto.getAdmNo();
         String studentName = printPreviewHallTicketDto.getStudentName();
         String academicYear = printPreviewHallTicketDto.getAcademicYear();
-
+        String[] studentIds = printPreviewHallTicketDto.getStudentIds();
+        List<Integer> studentIdsList = Arrays.stream(studentIds)
+				.map(Integer::parseInt)
+					.collect(Collectors.toList());
+        
         if (examName != null) {
 
             List<Parents> studentList = new ArrayList<>();
@@ -271,7 +277,8 @@ public class ExamDetailsService {
             classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
-                studentList = new StudentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
+            	studentList = new StudentDetailsDAO().getReferredList(studentIdsList);
+                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();

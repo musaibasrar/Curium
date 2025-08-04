@@ -6,31 +6,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Other feescollection</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+<title>Bus Feescollection</title>
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -740,7 +740,7 @@
             	}
             	
             	var form1 = document.getElementById("form1");
-        		form1.action="/abc/FeesCollection/feesAddother?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.action="/school/FeesCollection/feesAddother?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
         		form1.method = "POST";
         		form1.submit();
         		
@@ -748,7 +748,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/abc/FeesCollection/otherStampFees";
+        		form1.action="/school/FeesCollection/otherStampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -843,7 +843,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -860,7 +860,7 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Other Fees Collection</a></li>
+					<li><a href="#fragment-1">Bus Fees Collection</a></li>
 				</ul>
 
 			<div id="fragment-1">
@@ -903,11 +903,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 
 								</select>
 

@@ -254,7 +254,7 @@ public class StudentDetailsDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Student> readListOfStudentsArchive() {
+	public List<Student> readListOfStudentsArchive(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 		Transaction transaction = null;
 		try {
@@ -262,7 +262,7 @@ public class StudentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
-					"FROM Student s where s.archive = 1").setCacheable(true).setCacheRegion("commonregion")
+					"FROM Student s where s.archive = 1 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
@@ -733,6 +733,25 @@ public class StudentDetailsDAO {
 			throw hibernateException;
 		}
 		return results;
+	}
+	
+	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
+		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
+		Transaction transaction = null;
+		try {
+			Session session = HibernateUtil.openCurrentSession();
+			transaction = session.beginTransaction();
+			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return studentFeesStructure;
+		}
 	}
 
 	@Transactional

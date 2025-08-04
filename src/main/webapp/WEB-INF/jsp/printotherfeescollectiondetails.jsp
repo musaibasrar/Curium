@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Other Fees Collection Details</title>
+<title>Print Bus Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -230,11 +230,11 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/logo.jpg" width="100" height="100"/>
+				<img src="/school/images/school.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Other Fees Collection Details Report</label><br>
+				<label class="addressLine">Bus Fees Collection Details Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
@@ -268,19 +268,19 @@
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.admissionnumber}" />
+							<td class="datatd"><c:out value="${feesmap.value.student.admissionnumber}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.key.student.studentexternalid}" />
+							<td class="datatd"><c:out value="${feesmap.value.student.studentexternalid}" />
 							</td>
-							<td class="datatd"><c:out	value="${feesmap.value.branchreceiptnumber}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.name}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.student.classstudying}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.key.fathersname}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.key.branchreceiptnumber}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.student.name}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.student.classstudying}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.fathersname}" /></td>
 							<td class="datatd">
-							<fmt:formatDate type="date" value="${feesmap.value.date}" pattern="dd/MM/yyyy"/>
+							<fmt:formatDate type="date" value="${feesmap.key.date}" pattern="dd/MM/yyyy"/>
 							</td>
 							<td class="datatd">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${feesmap.value.totalamount}" />
+								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${feesmap.key.totalamount}" />
 							</td>
 						</tr>
 						

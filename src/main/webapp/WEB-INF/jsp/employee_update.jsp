@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -14,22 +15,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/school/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -190,8 +191,19 @@
 	color: #325f6d;
 }
 -->
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
 </style>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	document.getElementById("UpdateExecutive").style.display = 'none';
@@ -295,7 +307,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -308,7 +320,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/abc/EmployeeProcess/viewAllEmployee"
+	<form action="/school/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -575,10 +587,114 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
+							
+							<td width="20%" class="alignRight">Subjects Teaching &nbsp;</td>
+
+							<td width="28%"><label> <c:forEach var="subject" items="${listSubjectNames}">
+													    <c:set var="isChecked" value="${fn:contains(employee.subjectsteaching, subject.subjectname)}" />
+													    <label>
+													        <input type="checkbox" name="subjectsteaching"
+													               value="${subject.subjectname}"
+													               <c:if test="${employee.subjectsteaching.contains(subject.subjectname)}">checked</c:if> />
+													        ${subject.subjectname}
+													    </label><br/>
+													</c:forEach>
+
+							</label></td>
 						<tr>
 
 							<td></td>
 
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td width="16%" class="alignRight">Class Teacher&nbsp;</td>
+
+							<td width="28%"><div class="checkbox-container">
+													   <c:forEach items="${classList}" var="classItem">
+    
+														    <c:choose>
+														        <c:when test="${not empty sectionList}">
+														            <c:forEach items="${sectionList}" var="sectionItem">
+														                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+														                <div class="checkbox-item">
+														                    <label>
+														                        <input type="checkbox" name="classteacher"
+														                               value="${classSec}"
+														                               <c:if test="${fn:contains(classteacherList, classSec)}">checked</c:if> />
+														                        ${classSec}
+														                    </label>
+														                </div>
+														            </c:forEach>
+														        </c:when>
+														
+														        <c:otherwise>
+														            <div class="checkbox-item">
+														                <label>
+														                    <input type="checkbox" name="classteacher"
+														                           value="${classItem}"
+														                           <c:if test="${fn:contains(classteacherList, classItem)}">checked</c:if> />
+														                    ${classItem}
+														                </label>
+														            </div>
+														        </c:otherwise>
+														    </c:choose>
+														</c:forEach>
+													</div>
+										</td>
+
+
+
+							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
+
+							<td width="28%">
+									<div class="checkbox-container">
+													    <c:forEach items="${classList}" var="classItem">
+													    
+													    <c:choose>
+													        <c:when test="${not empty sectionList}">
+													            <c:forEach items="${sectionList}" var="sectionItem">
+													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													                <div class="checkbox-item">
+													                    <label>
+													                        <input type="checkbox" name="classesteaching"
+													                               value="${classSec}"
+													                               <c:if test="${fn:contains(classesteachingList, classSec)}">checked</c:if> />
+													                        ${classSec}
+													                    </label>
+													                </div>
+													            </c:forEach>
+													        </c:when>
+													
+													        <c:otherwise>
+													            <div class="checkbox-item">
+													                <label>
+													                    <input type="checkbox" name="classesteaching"
+													                           value="${classItem}"
+													                           <c:if test="${fn:contains(classesteachingList, classItem)}">checked</c:if> />
+													                    ${classItem}
+													                </label>
+													            </div>
+													        </c:otherwise>
+													    </c:choose>
+													</c:forEach>
+													</div>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
 						</tr>
 						
 					</table>
@@ -929,14 +1045,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/abc/PersonalProcess/viewAll";
+								form1.action = "/school/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
 							function updateEmployee() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/EmployeeProcess/updateEmployee";
+								form1.action = "/school/EmployeeProcess/updateEmployee";
 								form1.submit();
 							}
 							

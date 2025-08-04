@@ -31,6 +31,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "fee_feescategory")
 public class Feescategory implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -55,8 +59,11 @@ public class Feescategory implements java.io.Serializable {
 
 	@Column(name = "academicyear", length = 20)
 	private String academicyear;
+	
+	@Column(name = "totalinstallments")
+	private int totalinstallments;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "feescategory")
-    private List<Studentfeesstructure> feeStudentfeesstructureList;
+	private List<Studentfeesstructure> feeStudentfeesstructureList;
 
 }

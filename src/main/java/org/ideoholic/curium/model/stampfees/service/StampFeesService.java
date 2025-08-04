@@ -15,12 +15,14 @@ import org.ideoholic.curium.model.feescategory.dao.FeesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeesCategoryResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
@@ -62,7 +64,7 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
+			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
@@ -168,7 +170,7 @@ public class StampFeesService {
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -201,17 +203,49 @@ public class StampFeesService {
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
+			Long totalFeesAmount = 0l;
+			for(int i=0; i < feesCategoryIds.length ; i++){
+			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
+			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+			
+			//check whether the fees category is already stamped 
+			Studentfeesstructure result = new StampFeesDAO().getStudentFeesStructure(Integer.parseInt(id),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
+			// END
+			
+			if(result==null) {
+				
+				Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+				Feescategory feescategory = new Feescategory();
+				studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(id)));
+				feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
+				studentfeesstructure.setFeescategory(feescategory);
+				studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
+				studentfeesstructure.setFeespaid((long) 0);
+				studentfeesstructure.setWaiveoff((long) 0);
+				studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+				studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
+				studentfeesstructure.setBranchid(Integer.parseInt(branchid));
+				studentfeesstructure.setUserid(Integer.parseInt(userid));
+				studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+				listOfstudentfeesstructure.add(studentfeesstructure);
+				
+				totalFeesAmount = totalFeesAmount+ Long.parseLong(feesAmount[feesCatIndex]);
+			}
+		
+		}
+			
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(feesYears[0]);
 			academicfessstructure.setUserid(Integer.parseInt(userid));
-			academicfessstructure.setTotalfees(feesTotalAmount);
-			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+			academicfessstructure.setTotalfees(totalFeesAmount.toString());
+                        grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
 			academicfessstructure.setBranchid(Integer.parseInt(branchid));
 			academicfessstructure.setUserid(Integer.parseInt(userid));
 			
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
+			grandTotal = grandTotal + totalFeesAmount;
 
 		}
 		
@@ -235,9 +269,7 @@ public class StampFeesService {
 			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
-			
 
-			
 		}
 		
 		//Accounts
@@ -318,6 +350,7 @@ public class StampFeesService {
 
 		if(currentAcademicYear!=null){
 		String[] studentIds = stampFeesDto.getStudentIds();
+		Long totalFeesAmount = 0l;
 		if(studentIds!=null){
 			Academicotherfeesstructure academicfessstructure = new Academicotherfeesstructure();
 		List<Academicotherfeesstructure> listOfacademicfessstructure = new ArrayList<Academicotherfeesstructure>();
@@ -351,22 +384,28 @@ public class StampFeesService {
 
 		for (String id : studentIds) {
 
+			
 			for(int i=0; i < feesCategoryIds.length ; i++){
 
+			String[] feesCatAndIndex =  feesCategoryIds[i].split("_");
+			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+				
 			Studentotherfeesstructure studentfeesstructure = new Studentotherfeesstructure();   
 			OtherFeecategory feescategory = new OtherFeecategory();
 			studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
-			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setOtherfeescategory(feescategory);
-			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
-			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(feesYears[i]);
+			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[feesCatIndex]));
+			studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
 			studentfeesstructure.setBranchid(Integer.parseInt(branchid));
 			studentfeesstructure.setUserid(Integer.parseInt(userid));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
+			
+			totalFeesAmount = totalFeesAmount+ Long.parseLong(feesAmount[feesCatIndex]);
 		}
 
 
@@ -380,11 +419,20 @@ public class StampFeesService {
 		}
 	}
 	
-	public SearchStudentResponseDto otheradvanceSearch(SearchStudentDto searchStudentDto,String branchid) {
-		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+	public OtherFeesCategoryResponseDto otheradvanceSearch(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear) {
+		OtherFeesCategoryResponseDto otherFeescategoryResponseDto = new OtherFeesCategoryResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 
 		if(branchid!=null){
+			
+			String className = searchStudentDto.getClassSearch();
+        	
+            List<OtherFeecategory> otherFeecategoryList= new FeesCategoryDAO().getOtherFeeCategory(className,currentAcademicYear,branchid);
+            otherFeescategoryResponseDto.setOtherFeesCategory(otherFeecategoryList);
+  		
+    		
+    		
+    		// Get Student Details
 
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -420,20 +468,21 @@ public class StampFeesService {
 			queryMain = queryMain + querySub;
 			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		}
+		otherFeescategoryResponseDto.setSearchStudentList(searchStudentList);
 
 	}
-		searchStudentResponseDto.setSearchStudentList(searchStudentList);
-		return searchStudentResponseDto;
+		
+		return otherFeescategoryResponseDto;
 	}
 
-	public FeescategoryResponseDto advanceSearchForStampFees(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear){
+	public FeescategoryResponseDto advanceSearchForStampFees(SearchStudentDto searchStudentDto,String branchid,String currentAcademicYear,String branchId){
 		
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 
         if(branchid!=null){
         	String className = searchStudentDto.getClassSearch();
         	
-            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear);
+            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear,branchId);
             feescategoryResponseDto.setFeescategory(feecategoryList);
   		
     		
@@ -448,31 +497,110 @@ public class StampFeesService {
     		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
     		String addClass = searchStudentDto.getClassSearch();
     		String addSec = searchStudentDto.getSecSearch();
+    		String studentType = searchStudentDto.getStudentType();
     		String conClassStudying = "";
-
-    		if (!addClass.equalsIgnoreCase("")) {
-    			conClassStudying = addClass+"--"+"%";
-    		}
-    		if (!addSec.equalsIgnoreCase("")) {
-    			conClassStudying = addClass;
-    			conClassStudying = conClassStudying+"--"+addSec+"%";
-    		}
-
-    		String classStudying = DataUtil.emptyString(conClassStudying);
     		String querySub = "";
+    		String classStudying = "";
 
-    		if (!studentname.equalsIgnoreCase("")) {
-    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
-    		}
+    		switch (studentType) {
+			case "Active":
+				if (!addClass.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass+"--"+"%";
+	    		}
+	    		if (!addSec.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass;
+	    			conClassStudying = conClassStudying+"--"+addSec+"%";
+	    		}
 
-    		if (!classStudying.equalsIgnoreCase("")
-    				&& !querySub.equalsIgnoreCase("")) {
-    			querySub = querySub + " AND parents.student.classstudying like '"
-    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-    		} else if (!classStudying.equalsIgnoreCase("")) {
-    			querySub = querySub + " parents.student.classstudying like '"
-    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
-    		}
+	    		classStudying = DataUtil.emptyString(conClassStudying);
+
+	    		if (!studentname.equalsIgnoreCase("")) {
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")
+	    				&& !querySub.equalsIgnoreCase("")) {
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
+	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+	    		}
+				break;
+			case "InActive":
+				if (!addClass.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass+"--"+"%";
+	    		}
+	    		if (!addSec.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass;
+	    			conClassStudying = conClassStudying+"--"+addSec+"%";
+	    		}
+
+	    		classStudying = DataUtil.emptyString(conClassStudying);
+
+	    		if (!studentname.equalsIgnoreCase("")) {
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid);
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")
+	    				&& !querySub.equalsIgnoreCase("")) {
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1)";
+	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+	    		}
+				break;	
+			case "All":	
+				
+				if (!addClass.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass+"--"+"%";
+	    		}
+	    		if (!addSec.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass;
+	    			conClassStudying = conClassStudying+"--"+addSec+"%";
+	    		}
+
+	    		classStudying = DataUtil.emptyString(conClassStudying);
+
+	    		if (!studentname.equalsIgnoreCase("")) {
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND  parents.student.branchid="+Integer.parseInt(branchid);
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")
+	    				&& !querySub.equalsIgnoreCase("")) {
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "'";
+	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND  parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+	    		}
+				break;
+			default:
+				if (!addClass.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass+"--"+"%";
+	    		}
+	    		if (!addSec.equalsIgnoreCase("")) {
+	    			conClassStudying = addClass;
+	    			conClassStudying = conClassStudying+"--"+addSec+"%";
+	    		}
+
+	    		classStudying = DataUtil.emptyString(conClassStudying);
+
+	    		if (!studentname.equalsIgnoreCase("")) {
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")
+	    				&& !querySub.equalsIgnoreCase("")) {
+	    			querySub = querySub + " AND parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
+	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+	    		}
+				break;
+			}
 
     		if(!"".equalsIgnoreCase(querySub)) {
     			queryMain = queryMain + querySub;

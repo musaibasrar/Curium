@@ -7,36 +7,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details Other Fees Structure</title>
+        <title>Student Details Bus Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/school/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/abc/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -394,26 +394,25 @@
             function searchFeesStructure() {
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
-                
-                form1.action = "/abc/StudentProcess/feesStructurePerYear?id="+id;
+                form1.action = "/school/StudentProcess/otherFeesStructurePerYear?id="+id;
                 form1.submit();
             }
             
             function deleteRecord() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/deleteOtherFeesCategory";
+                form1.action = "/school/FeesProcess/deleteOtherFeesCategory";
                 form1.submit();
             }
             
             function waiveOff() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/waiveOffFees";
+                form1.action = "/school/FeesProcess/waiveOffFees";
                 form1.submit();
             }
             
             function applyConcession() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/applyotherConcession";
+                form1.action = "/school/FeesProcess/applyotherConcession";
                 form1.submit();
             }
             
@@ -436,7 +435,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -465,7 +464,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Other Fees Structure</a></h3>
+                <h3><a href="#">Bus Fees Structure</a></h3>
 
                 <div>
 
@@ -497,13 +496,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">
 										<option selected></option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 
@@ -574,6 +569,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
@@ -597,6 +593,9 @@ for(Cookie cookie : cookies){
                                 <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
+                                <td class="dataText">
+	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
+                                </td>
                                 <td class="dataText">
 
                                 <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
@@ -628,8 +627,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button> 
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/abc/printstudentdetailsfeesstructure'">Print</button>
-
+                                             <button id="print" onclick="window.location.href='/school/printstudentdetailsotherfeesstructure'">Print</button>
                                         </td>
 
                                     </tr>
@@ -682,7 +680,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/StudentProcess/ViewAll";
+                form1.action="/school/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>

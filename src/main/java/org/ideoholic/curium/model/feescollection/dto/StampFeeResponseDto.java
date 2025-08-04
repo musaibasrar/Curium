@@ -25,8 +25,7 @@ public class StampFeeResponseDto {
     private String studentIdDetails;
     private String dateOfFeesDetails;
     private Map<Studentotherfeesstructure,Long> otherFeesMap;
-
+    private String fatherName;
     @Builder.Default
     private boolean success = false;
-
 }

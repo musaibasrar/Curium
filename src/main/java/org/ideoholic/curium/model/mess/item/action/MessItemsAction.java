@@ -103,6 +103,13 @@ public class MessItemsAction {
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
+	
+	@PostMapping("/savePurchaseOrder")
+	public String savePurchaseOrder() {
+		messItemActionAdapter.savePurchaseOrder();
+		messItemActionAdapter.getPurchaseOrderDetails();
+		return "purchaseorder";
+	}
 
 	@PostMapping("/deleteItems")
 	public String deleteItems() {
@@ -135,10 +142,59 @@ public class MessItemsAction {
 		messItemActionAdapter.getInvoiceDetails();
 		return "purchase";
 	}
+	
+	@GetMapping("/purchaseOrder")
+	public String purchaseOrder() {
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
+		return "purchaseorder";
+	}
 
 	@GetMapping("/addsuppliers")
 	public String addSuppliers() {
 		return "addsuppliers";
+	}
+	
+	@GetMapping("/receivePurchaseOrder")
+	public String receivePurchaseOrder() {
+		messItemActionAdapter.getPurchaseOrderById();
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getPurchaseOrderDetails();
+		return "particularpurchasedetail";
+	}
+	
+	@PostMapping("/cancelPurchaseOrder")
+	public String cancelPurchaseOrder() {
+
+		messItemActionAdapter.cancelPurchaseOrder();
+		messItemActionAdapter.getPurchaseOrderDetails();
+		return "purchaseorder";
+	}
+
+	@GetMapping("/openingStock")
+	public String openingStock() {
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
+	
+	@PostMapping("/saveOpeningStock")
+	public String saveOpeningStock() {
+		messItemActionAdapter.saveOpeningStock();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetailsOpeningStock();
+		return "openingstockentry";
+	}
+	
+	@PostMapping("/savePurchaseFromPO")
+	public String savePurchaseFromPO() {
+		messItemActionAdapter.savePurchaseFromPO();
+		messSuppliersActionAdapter.viewSuppliersDetails();
+		messItemActionAdapter.viewItemDetails();
+		messItemActionAdapter.getInvoiceDetails();
+		return "purchase";
 	}
 
 }

@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -44,6 +48,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
@@ -146,10 +151,11 @@ public class MarksDetailsService {
 				
 				marks.setStudent(new StudentDetailsDAO().readUniqueObject((int) mapEntry.getKey()));
 				marks.setMarksobtained(mymark);
-				String currentYear = currentAcademicYear;
+				String currentYear = dto.getAcademicYear();
 				marks.setAcademicyear(currentYear);
 				marks.setBranchid(Integer.parseInt(branchId));
 				marks.setUserid(Integer.parseInt(userId));
+				marks.setSubsubjectid(0);
 				marksList.add(marks);
 			}
 
@@ -210,7 +216,7 @@ public class MarksDetailsService {
 		queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -218,8 +224,8 @@ public class MarksDetailsService {
 		result.setSearchStudentList(searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-		result.setSubjectList(subjectList);
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
 		List<Exams> examList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
@@ -257,24 +263,24 @@ public class MarksDetailsService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name  '%" + studentname + "%'";
+			querySub = " parents.student.name  '%" + studentname + "%'";
 		}
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = " parents.Student.classstudying like '" + classStudying
-					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+			querySub = " parents.student.classstudying like '" + classStudying
+					+ "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}*/
 
 		//queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 	/*	System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
@@ -377,7 +383,7 @@ public class MarksDetailsService {
 		queryMain = queryMain + querySub;
 		/*
 		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -402,10 +408,10 @@ public class MarksDetailsService {
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
 			for (Marks marks : singleMarksDetails) {
-				int subId = marks.getSubid();
-				if ( subId == subjectDetailsId && marks.getExamid() == Integer.parseInt(examIdName[0])) {
+				int subSubjectId = marks.getSubsubjectid();
+				if ( subSubjectId ==0) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
@@ -432,8 +438,8 @@ public class MarksDetailsService {
 	public SearchStudentResponseDto getSubjectExams(String branchId) {
 		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-		result.setSubjectList(subjectList);
+		List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
 		List<Exams> examList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
@@ -1435,7 +1441,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
@@ -1646,9 +1652,13 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String[] studentIds = dto.getStudentIds();
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
+		List<Integer> examIds = new ArrayList<Integer>();
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
+		for (String examId : dto.getExamIds()) {
+			examIds.add(Integer.parseInt(examId));
+		}
+		List<Exams> examsList = examDetailsDao.readListOfExams(examIds, Integer.parseInt(branchId));
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
@@ -1784,6 +1794,304 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		 * try { if (writeToReportCard(marksList)) { result = true; } } catch (Exception
 		 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
+	}
+
+	return result;
+}
+
+public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto employeeDetails, SearchStudentExamDto dto, String branchId) {
+	SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
+
+	if(branchId!=null){
+		
+	String queryMain = "From Parents as parents where";
+	String studentname = DataUtil.emptyString(dto.getStudentName());
+
+	String addClass = dto.getAddClass();
+	String addSec = dto.getAddSec();
+	String conClassStudying = "";
+	String conClassStudyingEquals = "";
+
+	if (!addClass.equalsIgnoreCase("")) {
+
+		conClassStudying = addClass+"--" +"%";
+
+	}
+	if (!addSec.equalsIgnoreCase("")) {
+		conClassStudying = addClass;
+		conClassStudying = conClassStudying+"--"+addSec+"%";
+	}
+
+	String classStudying = DataUtil.emptyString(conClassStudying);
+	String querySub = "";
+
+	if (!studentname.equalsIgnoreCase("")) {
+		querySub = " parents.student.name like '%" + studentname + "%'";
+	}
+
+	if (!classStudying.equalsIgnoreCase("")) {
+		querySub = " parents.student.classstudying like '" + classStudying
+				+ "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
+	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+		querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
+	}
+
+	queryMain = queryMain + querySub;
+	/*
+	 * queryMain =
+	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
+	 * ;
+	 */
+	System.out.println("SEARCH QUERY ***** " + queryMain);
+	List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+	result.setSearchStudentList(searchStudentList);
+	
+	
+	List<String> classTeacherList = Arrays.asList(employeeDetails.getEmployee().getSubjectsteaching().split("\\s*,\\s*"));
+	// get all the subjects
+	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	List<Subjectmaster> subjectListFinal = new ArrayList<Subjectmaster>();
+	
+	classTeacherList = new ArrayList<>(new LinkedHashSet<>(classTeacherList));
+	
+	for (Subjectmaster subject : subjectList) {
+	    String subjectName = subject.getSubjectname();
+	    if (classTeacherList.contains(subjectName)) {
+	        subjectListFinal.add(subject);
+	    }
+	}
+	
+	result.setSubjectListName(subjectListFinal);
+
+	// get the list for all the midterms
+	List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+	result.setExamsList(examList);
+	result.setClassSearch(addClass);
+	result.setSuccess(true);
+	
+	}
+	return result;
+}
+
+public ResultResponse addMarksSubSubject(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
+
+	ResultResponse result = ResultResponse.builder().build();
+
+	 String[] studentIds = dto.getStudentIds();
+
+	    if (studentIds == null || dto.getSubject() == null) {
+	        result.setMessage("Invalid input");
+	        return result;
+	    }
+	    
+	String[] studentsMarks = dto.getStudentsMarks();
+	String[] studentsMarksA1 = dto.getStudentsMarksA1();
+	String[] studentsMarksA2 = dto.getStudentsMarksA2();
+	String[] studentsMarksA3 = dto.getStudentsMarksA3();
+	String[] studentsMarksA4 = dto.getStudentsMarksA4();
+	String[] examidName = dto.getExam().split("__");
+	String subject = dto.getSubject();
+	String classSelected = dto.getClassSearch();
+	String currentYear = dto.getAcademicYear();
+	int examId = Integer.parseInt(examidName[0]);
+	int subid = Integer.parseInt(subject);
+	
+	
+	Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId),classSelected,examidName[1],subid);
+	List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(branchId),examId,classSelected);
+	
+	
+    List<Marks> mainMarksList = buildMarksList(studentIds, studentsMarks, subjectDetails, examId, currentYear, userId, branchId, subjectGradeDetailsList, 0);
+    
+    List<Marks> marksListA1 = prepareSubSubjectMarks("A1", studentIds, studentsMarksA1, subjectDetails, examId, currentYear, userId, branchId);
+    List<Marks> marksListA2 = prepareSubSubjectMarks("A2", studentIds, studentsMarksA2, subjectDetails, examId, currentYear, userId, branchId);
+    List<Marks> marksListA3 = prepareSubSubjectMarks("A3", studentIds, studentsMarksA3, subjectDetails, examId, currentYear, userId, branchId);
+    List<Marks> marksListA4 = prepareSubSubjectMarks("A4", studentIds, studentsMarksA4, subjectDetails, examId, currentYear, userId, branchId);
+
+    if (marksListA1.isEmpty() || marksListA2.isEmpty() || marksListA3.isEmpty() || marksListA4.isEmpty()) {
+        result.setMessage("Skipped: One or more sub-subject marks missing");
+        return result;
+    }
+
+		String output = new MarksDetailsDAO().addMarksSubSubject(mainMarksList,marksListA1,marksListA2,marksListA3,marksListA4);
+		
+		if(output=="success"){
+			result.setMessage("true");
+		}else if (output.contains("Duplicate")){
+			result.setMessage("Duplicate");
+		}
+
+	return result;
+}
+
+private List<Marks> buildMarksList(String[] studentIds, String[] marksArray, Subject subjectDetails, int examId,
+		String academicYear, String userId, String branchId, List<SubjectGrade> gradeList, int subSubjectId) {
+
+		List<Marks> marksList = new ArrayList<>();
+		int subId = subjectDetails.getSubid();
+		float maxMarks = subjectDetails.getMaxmarks();
+		
+		for (int i = 0; i < studentIds.length; i++) {
+		String markStr = marksArray[i].equalsIgnoreCase("A") ? "999" : marksArray[i];
+		float mark = Float.parseFloat(markStr);
+		Student student = new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(studentIds[i]));
+		
+		Marks marks = new Marks();
+		marks.setExam(examDetailsDao.getExamDetails(examId));
+		marks.setSubject(subjectDetails);
+		marks.setStudent(student);
+		marks.setMarksobtained(mark);
+		marks.setAcademicyear(academicYear);
+		marks.setBranchid(Integer.parseInt(branchId));
+		marks.setUserid(Integer.parseInt(userId));
+		marks.setSubsubjectid(subSubjectId);
+		
+		if (!gradeList.isEmpty()) {
+		int percentage = (int) Math.floor((mark / maxMarks) * 100);
+		for (SubjectGrade grade : gradeList) {
+		if (percentage >= grade.getMinmarks() && percentage <= grade.getMaxmarks()) {
+		marks.setSubgrade(grade.getStatus());
+		break;
+		}
+		}
+		}
+		
+		marksList.add(marks);
+		}
+		return marksList;
+}
+
+private List<Marks> prepareSubSubjectMarks(String subSubjectName, String[] studentIds, String[] marksArray,
+        Subject subjectDetails, int examId,
+        String academicYear, String userId, String branchId) {
+		
+		SubSubject subSubject = new SubjectDetailsDAO().readSubSubject(Integer.parseInt(branchId), subjectDetails.getSubid(), subSubjectName);
+		if (subSubject == null) return Collections.emptyList();
+		
+		return buildMarksList(studentIds, marksArray, subjectDetails, examId, academicYear, userId, branchId, Collections.emptyList(), subSubject.getId());
+	}
+
+public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
+	MarksResponseDto result = MarksResponseDto.builder().build();
+	
+	if(branchId!=null){
+	String queryMain = "From Parents as parents where";
+	String studentname = DataUtil.emptyString(dto.getStudentName());
+
+	String addClass = dto.getAddClass();
+	String addSec = dto.getAddSec();
+	String conClassStudying = "";
+	String conClassStudyingEquals = "";
+
+	if (!addClass.equalsIgnoreCase("")) {
+
+		conClassStudying = addClass+"--" +"%";
+
+	}
+	if (!addSec.equalsIgnoreCase("")) {
+		conClassStudying = addClass;
+		conClassStudying = conClassStudying+"--"+addSec+"%";
+	}
+
+	String classStudying = DataUtil.emptyString(conClassStudying);
+	String querySub = "";
+
+	if (!studentname.equalsIgnoreCase("")) {
+		querySub = " parents.student.name like '%" + studentname + "%'";
+	}
+
+	if (!classStudying.equalsIgnoreCase("")) {
+		querySub = " parents.student.classstudying like '" + classStudying
+				+ "'  AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
+	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+		querySub = querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
+	}
+
+	queryMain = queryMain + querySub;
+	/*
+	 * queryMain =
+	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
+	 * ;
+	 */
+	System.out.println("SEARCH QUERY ***** " + queryMain);
+	List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+	// request.setAttribute("searchStudentList", searchStudentList);
+	/*List<Integer> ids = new ArrayList();
+
+	for (int i = 0; i < searchStudentList.size(); i++) {
+		ids.add(searchStudentList.get(i).getStudent().getSid());
+	}
+
+	System.out.println("Total Number of Students" + searchStudentList.size());*/
+
+	//
+	String exam = dto.getExam();
+	String subject = dto.getSubject();
+
+	String[] examIdName = exam.split(":");
+	Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
+	int subjectDetailsId = subjectDetails.getSubid();
+	List<Parents> newStudentList = new ArrayList<Parents>();
+	List<Marks> newMarksDetails = new ArrayList<Marks>();
+	Map<Parents,Map<Integer,Float>> studentsMarksMap = new HashMap<Parents, Map<Integer,Float>>();
+	
+	for (Parents parents : searchStudentList) {
+
+		List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
+		Map<Integer,Float> marksObtained = new HashMap<Integer,Float>();
+		// Sort marks by subsubjectid
+	    singleMarksDetails.sort(Comparator.comparingInt(Marks::getSubsubjectid));
+		
+	    
+	    	for (Marks marks : singleMarksDetails) {
+	    		marksObtained.put(marks.getMarksid(), marks.getMarksobtained());
+			}
+	        // Add to map
+	        studentsMarksMap.put(parents, marksObtained);
+		
+	}
+	result.setStudentsMarksMap(studentsMarksMap);
+	result.setNewStudentList(newStudentList);
+	result.setNewMarksDetails(newMarksDetails);
+	result.setSubjectSelected(dto.getSubjectSelected());
+	result.setExamSelected(dto.getExamSelected());
+	result.setSubject(Integer.toString(subjectDetailsId));
+	result.setExam(examIdName[0]);
+	result.setSuccess(true);
+	/*
+	 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
+	 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
+	 */
+	
+	}
+	return result;
+}
+
+public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcademicYear, String branchId) {
+	ResultResponse result = ResultResponse.builder().build();
+
+	String[] studentIds = dto.getStudentIds();
+	String[] studentsMarks = dto.getStudentsMarks();
+	String[] marksid = dto.getMarksId();
+	String exam = dto.getExam();
+	String subject = dto.getSubject();
+	int sizeOfArray = 0;
+	Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
+	List<Integer> ids = new ArrayList<Integer>();
+	List<String> studentsMarksList = new ArrayList<String>();
+	List<Integer> marksids = new ArrayList<Integer>();
+
+	if (studentsMarks != null) {
+
+		for (int i = 0; i < studentsMarks.length; i++) {
+		    if (studentsMarks[i].equals("A")) {
+		    	studentsMarks[i] = "999";
+		    }
+		}
+		
+		if (new MarksDetailsDAO().updateMarksSub(marksid,studentsMarks)) {
+			result.setSuccess(true);
+		}
 	}
 
 	return result;

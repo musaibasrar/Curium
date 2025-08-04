@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/school/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/abc/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -413,7 +413,7 @@
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
                 
-                form1.action = "/abc/StudentProcess/feesStructurePerYear?id="+id;
+                form1.action = "/school/StudentProcess/feesStructurePerYear?id="+id;
                 form1.submit();
 
             }
@@ -421,7 +421,7 @@
             function deleteRecord() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/deleteFeesCategory";
+                form1.action = "/school/FeesProcess/deleteFeesCategory";
                 form1.submit();
 
             }
@@ -429,7 +429,7 @@
             function waiveOff() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/waiveOffFees";
+                form1.action = "/school/FeesProcess/waiveOffFees";
                 form1.submit();
 
             }
@@ -437,7 +437,7 @@
             function applyConcession() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/applyConcession";
+                form1.action = "/school/FeesProcess/applyConcession";
                 form1.submit();
 
             }
@@ -461,7 +461,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -481,8 +481,8 @@ for(Cookie cookie : cookies){
 
             <table width="100%">
                 <tr>
-                    <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      
+                    <td  class="headerTD">UID: &nbsp;<c:out value="${student.studentexternalid}" />&nbsp;&nbsp; NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp; Class: &nbsp;<c:out value="${student.classstudying}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Father Name:${parents.fathersname}
 
                     </td>
                 </tr>
@@ -522,14 +522,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">
 										<option selected></option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
+										 <c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 
@@ -657,7 +652,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button> -->
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/abc/printstudentdetailsfeesstructure'">Print</button>
+                                             <button id="print" onclick="window.location.href='/school/printstudentdetailsfeesstructure'">Print</button>
 
                                         </td>
 
@@ -677,6 +672,47 @@ for(Cookie cookie : cookies){
                                         </td>
                                     </tr>
                                 </table>
+                                
+                                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+									<tr>
+		               		<td width="26%"  class="alignRight" style="text-align: center;font-size:20px;">
+                                    
+                                    Fees Collection Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                            </tr>
+                            </table>
+                                
+                                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+                    <thead>
+                        <tr  >
+                            
+                            <th title="click to sort" class="headerText">Date of fees</th>
+                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">View Details</th>
+                             
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${receiptinfo}" var="receiptinfo">
+
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                
+                                <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/scholar/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                 
+
+                            </tr>
+                        </c:forEach>
+                        
+                        
+                    </tbody>
+                   
+                </table>
                     
 
                 </div>
@@ -711,7 +747,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/StudentProcess/ViewAll";
+                form1.action="/school/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>

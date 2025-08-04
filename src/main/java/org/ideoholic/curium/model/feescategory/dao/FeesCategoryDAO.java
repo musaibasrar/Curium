@@ -29,6 +29,7 @@ public class FeesCategoryDAO {
 	
 	@Transactional
 	public List<Feescategory> readListOfObjects(int branchId, String academicYear) {
+		
 		List<Feescategory> results = new ArrayList<Feescategory>();
 		try {
 			// session.createQuery("From Feescategory where academicyear='"+academicYear+"' and branchid="+branchId).list();
@@ -66,6 +67,7 @@ public class FeesCategoryDAO {
 
 			throw hibernateException;
 		}
+
 	}
 
 	public void deleteFeesCategory(List ids, List feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {
@@ -106,6 +108,30 @@ public class FeesCategoryDAO {
 		}
 	}
 
+	/*
+	 * public void waiveOffFeesOld(List<Integer> sfsId, List<Integer> feesCatId,
+	 * String studentId) {
+	 * 
+	 * List<Feescollection> feesCollection = new ArrayList<Feescollection>(); try {
+	 * transaction = session.beginTransaction(); Query queryOne = session.
+	 * createQuery("from Feescollection as feescollection where feescollection.sid = '"
+	 * +studentId+"' and feescollection.sfsid IN (:ids)");
+	 * queryOne.setParameterList("ids", sfsId); feesCollection = queryOne.list();
+	 * 
+	 * if(feesCollection.isEmpty()){ Query query = session.
+	 * createQuery("update Studentfeesstructure as fees set fees.waiveoff=fees.feesamount where fees.sid = "
+	 * +studentId+" and fees.Feescategory.idfeescategory IN (:feescat)");
+	 * query.setParameterList("feescat", feesCatId); query.executeUpdate();
+	 * 
+	 * Query queryAcademicFees = session.
+	 * createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"
+	 * +Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(
+	 * concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'")
+	 * ; queryAcademicFees.executeUpdate(); } transaction.commit(); } catch
+	 * (Exception hibernateException) { transaction.rollback();
+	 * logger.error(hibernateException); hibernateException.printStackTrace();
+	 * }finally { HibernateUtil.closeSession(); } }
+	 */
 	
 	public void waiveOffFees(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
 		Session session = HibernateUtil.openCurrentSession();
@@ -151,7 +177,7 @@ public class FeesCategoryDAO {
 		try {
 			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
-				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
 				query.executeUpdate();
 				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
 				queryAcademicFees.executeUpdate();
@@ -262,7 +288,7 @@ public class FeesCategoryDAO {
 
 	}
 	
-	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear)
+	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear, String branchId)
 	{
 		Session session = HibernateUtil.openCurrentSession();
 	    Transaction transaction = null;
@@ -270,7 +296,7 @@ public class FeesCategoryDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"'");
+					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
 			result=query.list();
 			transaction.commit();
 
@@ -366,6 +392,49 @@ public class FeesCategoryDAO {
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean createOtherFeescategory(List<OtherFeecategory> feesCategoryList) {
+		boolean result = false;
+		Transaction transaction = null;
+		try {
+			Session session = HibernateUtil.openCurrentSession();
+            transaction = session.beginTransaction();
+            for (OtherFeecategory feescategory : feesCategoryList) {
+            	session.save(feescategory);
+			}
+            transaction.commit();
+            result = true;
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return result;
+        }
+	}
+
+	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
+		Transaction transaction = null;
+		List <OtherFeecategory> result= new ArrayList();
+		try {
+			Session session = HibernateUtil.openCurrentSession();
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
 		}
 	}
 

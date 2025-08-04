@@ -36,8 +36,10 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -100,13 +102,35 @@ public class StudentService {
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
-				for (MultipartFile fileItem : listOfFiles) {
+					for (int i = 1; i < listOfFiles.length; i++) {
+						MultipartFile fileItem = listOfFiles[i];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 					if (!fileName.equalsIgnoreCase("")) {
 						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 						String saveFile = new String(bytesEncoded);
-						student.setStudentpic(saveFile);
+						 switch (i) {
+						 	case 0:
+			                    student.setStudentpic(saveFile);
+			                    break;
+			                case 1:
+			                    student.setStudentdoc1(saveFile);
+			                    break;
+			                case 2:
+			                    student.setStudentdoc2(saveFile);
+			                    break;
+			                case 3:
+			                    student.setStudentdoc3(saveFile);
+			                    break;
+			                case 4:
+			                    student.setStudentdoc4(saveFile);
+			                    break;
+			                case 5:
+			                    student.setStudentdoc5(saveFile);
+			                    break;
+			                default:
+			                    break;
+			            }
 					}
 				}
 			}
@@ -119,15 +143,18 @@ public class StudentService {
 		
 		if("Admission".equalsIgnoreCase(student.getStream())) {
 			 
-			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 order by id desc");
+			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Admission' order by sid desc");
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
-	            int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
+	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
+	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
-	        } else {
-	        	student.setStudentexternalid(branchCode+""+String.format("%04d", 1));
+	        }else {
+	        	int studentSeq = 1;
+	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            student.setStudentexternalid(studentExternalId);
 	        }
 			
 			student.setArchive(0);
@@ -137,7 +164,7 @@ public class StudentService {
 			
 		}else if("Registration".equalsIgnoreCase(student.getStream())) {
 			
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=1 and passedout=1 and droppedout=1 and leftout=1 and stream='Registration' order by id desc");
+			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Registration' order by sid desc");
 			
 			
 			if(studentDB!=null) {
@@ -152,14 +179,14 @@ public class StudentService {
 			student.setDroppedout(1);
 			student.setLeftout(1);
 		}else if("Alumni".equalsIgnoreCase(student.getStream())) {
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where archive=0 and passedout=0 and droppedout=0 and leftout=0 and stream='Alumni' order by id desc");
+			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Alumni' order by sid desc");
 			
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-				student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", studentSeq+1));
+				student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
             }else {
-            	student.setStudentexternalid("Alumni"+branchCode+String.format("%04d", 1));
+            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
             }
 			student.setPromotedyear(student.getYearofadmission());
 			student.setYearofadmission("");
@@ -197,6 +224,7 @@ public class StudentService {
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
+			new feesDetailsDAO().stampOtherFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
 			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			result.setSuccess(true);
 			return result;
@@ -367,6 +395,7 @@ public class StudentService {
 
 	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
+		Map<Receiptinfo,String> receiptNarration = new HashMap<Receiptinfo, String>();
 		try {
 			long id = Long.parseLong(studentId);
 
@@ -383,6 +412,12 @@ public class StudentService {
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
+			for (Receiptinfo receiptinfo : rinfo) {
+				VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+				String[] rNarration = VoucherEntryTransactions.getNarration().split(":");
+				receiptNarration.put(receiptinfo, rNarration[0]);
+			}
+			result.setReceiptNarrationMap(receiptNarration);
 			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
@@ -901,12 +936,12 @@ public class StudentService {
 		}
 	}
 
-	public StudentAttendanceDetailsResponseDto viewAllStudentsArchive() {
+	public StudentAttendanceDetailsResponseDto viewAllStudentsArchive(String branchId) {
 
 		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().success(false).build();
 
 		try {
-			List<Student> list = new StudentDetailsDAO().readListOfStudentsArchive();
+			List<Student> list = new StudentDetailsDAO().readListOfStudentsArchive(Integer.parseInt(branchId));
 			result.setStudentList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -1394,5 +1429,42 @@ public class StudentService {
 		return result;
 	}
 	//end of otherview of student
+
+		public OtherFeesDetailsResponseDto viewOtherFeesStructurePerYear(StudentIdDto dto) {
+		OtherFeesDetailsResponseDto result = OtherFeesDetailsResponseDto.builder().build();
+
+		try {
+
+			Integer id = Integer.parseInt(dto.getStudentId());
+			String academicYear = dto.getAcademicYear();
+
+			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
+			result.setReceiptInfo(rinfo);
+			List<Studentotherfeesstructure> otherfeesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+
+			long totalSum = 0l;
+			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+
+			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				totalFeesAmount = totalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentotherfeesstructureSingle.getConcession();
+			}
+			result.setOtherFeesStructure(otherfeesstructure);
+			result.setTotalSum(totalSum);
+			result.setDueAmount(totalFeesAmount-totalSum);
+			result.setTotalFeesAmount(totalFeesAmount);
+			result.setAcademicPerYear(academicYear);
+			result.setTotalFeesConcession(totalFeesConcession);
+			result.setSuccess(true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

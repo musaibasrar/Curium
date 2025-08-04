@@ -63,8 +63,8 @@ public class AccountDAO {
 	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
 		boolean result = false;
+		Financialaccountingyear financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		try {
-			Financialaccountingyear financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
 				finAccountRepo.save(financialYear);
@@ -89,6 +89,7 @@ public class AccountDAO {
             hibernateException.printStackTrace();
             throw hibernateException;
 		}
+		
 		return financialYear;
 	}
 
@@ -118,6 +119,7 @@ public class AccountDAO {
             hibernateException.printStackTrace();
             throw hibernateException;
 		}
+		
 		return accountSubGroupMaster;
 	}
 
@@ -160,6 +162,7 @@ public class AccountDAO {
 			hibernateException.printStackTrace();;
 			throw hibernateException;
 		}
+		
 		return financialYear;
 	}
 
@@ -573,4 +576,5 @@ public class AccountDAO {
 		}
 		return voucherEntrytransactions;
 	}
+
 }

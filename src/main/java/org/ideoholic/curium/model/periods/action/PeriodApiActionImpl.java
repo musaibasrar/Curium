@@ -25,7 +25,8 @@ public class PeriodApiActionImpl implements PeriodApiAction {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
+    // TODO Uncomment after PeriodService is made @Service
+    // @Autowired
     private PeriodService periodService;
 
     public ResponseEntity<TeacherTimeTableResponseDto> viewTeacherTimeTable(String teacherName, String branchId) {
@@ -53,7 +54,7 @@ public class PeriodApiActionImpl implements PeriodApiAction {
     }
 
     public ResponseEntity<TimeTableResponseDto> deletePeriods(PeriodMasterIdDto dto, String branchId) {
-        TimeTableResponseDto result = periodService.deletePeriods(dto);
+    	ResultResponse result = periodService.deletePeriods(dto);
         if (result.isSuccess()) {
             return periodConfiguration(branchId);
         }
@@ -70,7 +71,7 @@ public class PeriodApiActionImpl implements PeriodApiAction {
     }
 
     public ResponseEntity<TimeTableResponseDto> savePeriods(PeriodsSaveDto dto, String branchId, String userId) {
-        TimeTableResponseDto result = periodService.savePeriods(dto, branchId, userId);
+    	ResultResponse result = periodService.savePeriods(dto, branchId, userId);
         if (result.isSuccess()) {
             return periodConfiguration(branchId);
         }
@@ -103,7 +104,7 @@ public class PeriodApiActionImpl implements PeriodApiAction {
         result.setPeriodDetails(periodDetailsResult.getPeriodDetails());
         result.setPeriodMap(periodDetailsResult.getPeriodMap());
 
-        periodService.getPeriodDetail(branchId);
+        periodService.getPeriodDetail();
 
         ResultResponse resultResponse = standardService.viewClasses(branchId);
         result.setClasssecList(resultResponse.getResultList());

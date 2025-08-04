@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.library.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,6 +51,21 @@ public class Book implements java.io.Serializable {
 
 	@Column(name = "shelf", length = 100)
 	private String shelf;
+
+	@Column(name = "status", length = 50)
+	private String status;
+
+	@Column(name = "bookHolder", length = 200)
+	private String bookHolder;
+
+	@Column(name = "startdate")
+	private Date startdate;
+
+	@Column(name = "enddate")
+	private Date enddate;
+
+	@Column(name = "noofdays", length = 50)
+	private String noofdays;
 
 	@Column(name = "branchid")
 	private Integer branchid;

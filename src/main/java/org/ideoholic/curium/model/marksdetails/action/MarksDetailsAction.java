@@ -1,5 +1,9 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.examdetails.action.ExamDetailsActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/MarksDetailsProcess")
 public class MarksDetailsAction {
 
+
+	@Autowired
+    HttpServletRequest request;
+    
+	@Autowired
+	HttpServletResponse response;
+    
+	@Autowired
+	HttpSession httpSession;
+
+	
 	@Autowired
 	private StandardActionAdapter standardActionAdapter;
 	@Autowired
@@ -22,7 +37,24 @@ public class MarksDetailsAction {
 
 	@GetMapping("/marksEntry")
 	public String marksEntry() {
-		standardActionAdapter.viewClasses();
+		
+
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacherMarksEntry();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
+		
 		return "marksentry";
 	}
 
@@ -127,7 +159,24 @@ public class MarksDetailsAction {
 
 	@PostMapping("/search")
 	public String search() {
-		marksDetailsActionAdapter.Search();
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			marksDetailsActionAdapter.Search();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			marksDetailsActionAdapter.SearchForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else {
+			marksDetailsActionAdapter.Search();
+		}
+		
+		
 		return "marksentry";
 	}
 
@@ -202,6 +251,101 @@ public class MarksDetailsAction {
 	public String searchForReportSingleExams() {
 		marksDetailsActionAdapter.Search();
 		return "progressreportsingleexams";
+	}
+	
+	@PostMapping("/generateReportSingleExamsVertical")
+	public String generateReportSingleExamsVertical() {
+		if (marksDetailsActionAdapter.generateReportSingleExams()) {
+			return "markssheetsingleexamsvertical";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/addMarksSubSubject")
+	public String addMarksSubSubject() {
+		String result = marksDetailsActionAdapter.addMarksSubSubject();
+		if (result == "true") {
+			return "markssaved";
+		} else if (result == "Duplicate") {
+			return "erroraddingmarks";
+		} else {
+			return "error";
+		}
+
+	}
+	
+	@GetMapping("/marksEntrySub")
+	public String marksEntrySub() {
+		
+
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacherMarksEntry();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
+		
+		return "marksentrysub";
+	}
+	
+	@PostMapping("/searchForMarksSub")
+	public String searchForMarksSub() {
+		
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			marksDetailsActionAdapter.Search();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			marksDetailsActionAdapter.Search();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			marksDetailsActionAdapter.SearchForTeacher();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			marksDetailsActionAdapter.Search();
+		} else {
+			marksDetailsActionAdapter.Search();
+		}
+		
+		
+		return "marksentrysub";
+	}
+	
+	
+	@GetMapping("/getSubjectsExamsSub")
+	public String getSubjectsExamsSub() {
+		marksDetailsActionAdapter.getSubjectExams();
+		standardActionAdapter.viewClasses();
+		return "markssearchsub";
+	}
+	
+	@PostMapping("/viewMarksSub")
+	public String viewMarksSub() {
+		if (marksDetailsActionAdapter.viewMarksSub()) {
+			marksDetailsActionAdapter.getSubjectExams();
+			return "markssearchsub";
+		} else {
+			return "error";
+		}
+	}
+	
+	@PostMapping("/updateMarksSub")
+	public String updateMarksSub() {
+		if (marksDetailsActionAdapter.updateMarksSub()) {
+			return "markssaved";
+		} else {
+			return "error";
+		}
 	}
 	
 }

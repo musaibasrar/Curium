@@ -376,7 +376,7 @@ public class TaskService {
 		}
 		
 		if(!studentId.isEmpty()) {
-			subQuery = subQuery + "and pq.parent.Student.sid = '"+studentId+"'";
+			subQuery = subQuery + "and pq.parent.student.sid = '"+studentId+"'";
 			httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+studentName);
 		}else {
 			httpSession.setAttribute("studentselected", "");
@@ -564,7 +564,7 @@ public class TaskService {
 		
 		String studentId = request.getParameter("id");
 		
-		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
+		String queryMain = "from JobQuery pq where pq.parent.student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 				
 		JobQueryList = new JobDAO().generateQueriesReport(queryMain);

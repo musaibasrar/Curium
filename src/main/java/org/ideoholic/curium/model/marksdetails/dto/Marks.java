@@ -58,6 +58,9 @@ public class Marks implements java.io.Serializable {
 	@Column(name = "academicyear", length = 45)
 	private String academicyear;
 
+	@Column(name = "subsubjectid")
+	private Integer subsubjectid;
+
 	@Column(name = "branchid")
 	private Integer branchid;
 

@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-        <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/school/css/bootstrap.min.css">
+        <script src="/school/js/jquery.min.js"></script>
+        <script src="/school/js/bootstrap.min.js"></script>
+        <script src="/school/js/popper.min.js"></script>
 
 <style>
  .headerText {
@@ -59,6 +59,22 @@
         }
 </style>
 </head>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 <body>
  <div class="container-fluid p-3">
         <!-- Fees Structure -->
@@ -136,7 +152,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/school/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -146,9 +162,9 @@
             </div>
         </div>
     </div>
-    <!-- Other Fees -->
+    <!-- Bus Fees -->
     
-     <h4 class="text-center mb-3">Other Fees Structure</h4>
+     <h4 class="text-center mb-3">Bus Fees Structure</h4>
     <div class="card">
         <div class="card-body">
             <div class="row text-center">
@@ -221,7 +237,7 @@
                                     <td class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                                     <td class="dataText"><c:out value="${receiptinfo.totalamount}" /></td>
                                     <td class="dataText">
-                                        <a class="btn btn-primary btn-sm" target="_blank" href="/abc/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
+                                        <a class="btn btn-primary btn-sm" target="_blank" href="/school/FeesCollection/viewOtherFeesDetails?id=<c:out value='${receiptinfo.receiptnumber}' />&sid=<c:out value='${student.sid}' />">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>

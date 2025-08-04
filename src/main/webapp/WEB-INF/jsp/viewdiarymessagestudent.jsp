@@ -10,11 +10,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Logbook</title>
-  	<link rel="stylesheet" href="/abc/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/abc/js/openWindow.js"></script>
-     <script src="/abc/js/jquery.min.js"></script>
-        <script src="/abc/js/bootstrap.min.js"></script>
-        <script src="/abc/js/popper.min.js"></script>
+  	<link rel="stylesheet" href="/school/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/school/js/openWindow.js"></script>
+     <script src="/school/js/jquery.min.js"></script>
+        <script src="/school/js/bootstrap.min.js"></script>
+        <script src="/school/js/popper.min.js"></script>
     <style type="text/css">
         body {
             font-family: 'Roboto', sans-serif;
@@ -74,8 +74,34 @@
             margin-top: 1em;
         }
     </style>
-</head>
+	     <script type="text/javascript">
+            
 
+            function redirect(){
+                
+                var form1=document.getElementById("form1");
+                form1.action="/school/UserProcess/authenticate";
+                form1.submit();
+            }
+        </script>
+        
+</head>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 <body>
     <div class="container">
         <!-- Main Content -->
@@ -88,7 +114,7 @@
                 <label for="message" style="font-size:20px;">Message</label>
                 <p id="message" class="message-content">${studentdiary.message}</p>
             </div>
-            <form action="/abc/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
+            <form action="/school/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
                 <div class="text-center">
                     <input type="submit" value="Back" class="btn">
                 </div>
