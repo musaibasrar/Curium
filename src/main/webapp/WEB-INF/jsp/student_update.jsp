@@ -816,9 +816,10 @@ for(Cookie cookie : cookies){
 										<option selected>${student.religion}</option>
 										<option>Hindu</option>
 										<option>Islam</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
+										<option>Christian</option>
+										<option>Jain</option>
+										<option>Sikh</option>
+										<option>Buddhists</option>
 								</select>
 
 							</label>
