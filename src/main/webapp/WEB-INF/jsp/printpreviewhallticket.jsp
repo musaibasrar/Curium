@@ -247,7 +247,7 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="70" height="70"/></td>
 			</tr>
 		</table>
 
@@ -344,6 +344,9 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		</div>
+		<br>
+		<br>
+		<br>
 		<br>
                                  
                         </c:forEach>
