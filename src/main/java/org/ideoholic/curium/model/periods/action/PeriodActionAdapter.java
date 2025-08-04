@@ -1,17 +1,19 @@
 package org.ideoholic.curium.model.periods.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.periods.dto.*;
+import org.ideoholic.curium.model.periods.dto.PeriodDetailsDto;
+import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
+import org.ideoholic.curium.model.periods.dto.PeriodsSaveDto;
+import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class PeriodActionAdapter {
@@ -19,25 +21,15 @@ public class PeriodActionAdapter {
     @Autowired
     private HttpServletRequest request;
     @Autowired
-    private HttpServletResponse response;
-    @Autowired
     private HttpSession httpSession;
     @Autowired
-    private StandardActionAdapter standardActionAdapter;
-    @Autowired
-    private EmployeeActionAdapter employeeActionAdapter;
-    @Autowired
-    private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
-
-    private String BRANCHID = "branchid";
-    private String USERID = "userloginid";
+    PeriodService periodService;
 
     public boolean viewTeacherTimeTable() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
 
         String teacherName = request.getParameter("teachername");
 
-        TeacherTimeTableResponseDto responseDto = periodService.viewTeacherTimeTable(teacherName, httpSession.getAttribute(BRANCHID).toString());
+        TeacherTimeTableResponseDto responseDto = periodService.viewTeacherTimeTable(teacherName, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("teachername", responseDto.getTeacherName());
         request.setAttribute("teacherperiodmasterlist", responseDto.getPeriodMapList());
 
@@ -45,8 +37,7 @@ public class PeriodActionAdapter {
     }
 
     public boolean generateTimeTable() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
-        TimeTableResponseDto responseDto = periodService.generateTimeTable(httpSession.getAttribute(BRANCHID).toString());
+        TimeTableResponseDto responseDto = periodService.generateTimeTable(httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
         httpSession.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
 
@@ -54,7 +45,6 @@ public class PeriodActionAdapter {
     }
 
     public boolean deletePeriods() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
         PeriodMasterIdDto dto = new PeriodMasterIdDto();
         dto.setPeriodMasterId(request.getParameterValues("idperiodmaster"));
 
@@ -63,7 +53,6 @@ public class PeriodActionAdapter {
     }
 
     public boolean viewTimeTable() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
         String periodMasterId = request.getParameter("id");
 
         TimeTableViewResponseDto responseDto = periodService.viewTimeTable(periodMasterId);
@@ -76,7 +65,6 @@ public class PeriodActionAdapter {
     }
 
     public boolean savePeriods() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
         PeriodsSaveDto dto = new PeriodsSaveDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setTotalNoOfPeriods(request.getParameter("totalperiods"));
@@ -102,14 +90,13 @@ public class PeriodActionAdapter {
         dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
         dto.setDays(request.getParameterValues("days"));
 
-        ResultResponse resultResponse = periodService.savePeriods(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        ResultResponse resultResponse = periodService.savePeriods(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString());
 
         return resultResponse.isSuccess();
     }
 
     public boolean periodConfiguration() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
-        TimeTableResponseDto responseDto = periodService.periodConfiguration(httpSession.getAttribute(BRANCHID).toString());
+        TimeTableResponseDto responseDto = periodService.periodConfiguration(httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
         request.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
 
@@ -117,7 +104,6 @@ public class PeriodActionAdapter {
     }
 
     public void updatePeriodDetails() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
         String periodMasterId = request.getParameter("id");
 
         TimeTableViewResponseDto responseDto = periodService.updatePeriodDetails(periodMasterId);
@@ -128,13 +114,14 @@ public class PeriodActionAdapter {
     }
 
     public void getPeriodDetail() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
-        ResultResponse resultResponse = periodService.getPeriodDetail();
+    	PeriodDetailsDto result = periodService.getPeriodDetail(httpSession.getAttribute(Constants.BRANCHID).toString());
+        httpSession.setAttribute("employeeList", result.getEmployeeList());
+        httpSession.setAttribute("employeeListProcessSalary", result.getEmployeeListProcessSalary());
+        httpSession.setAttribute("listSubjectNames", result.getSubjects());
 
     }
 
     public boolean updatenewPeriodDetails() {
-    	PeriodService periodService = new PeriodService(request, response, standardActionAdapter, employeeActionAdapter,subjectDetailsActionAdapter);
         PeriodsSaveDto dto = new PeriodsSaveDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
         dto.setTotalNoOfPeriods(request.getParameter("totalperiods"));
@@ -160,7 +147,7 @@ public class PeriodActionAdapter {
         dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
         dto.setDays(request.getParameterValues("days"));
 
-        ResultResponse resultResponse = periodService.updatenewPeriodDetails(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        ResultResponse resultResponse = periodService.updatenewPeriodDetails(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString());
 
         return resultResponse.isSuccess();
     }

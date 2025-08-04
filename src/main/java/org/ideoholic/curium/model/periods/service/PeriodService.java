@@ -1,69 +1,80 @@
 package org.ideoholic.curium.model.periods.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
-import org.ideoholic.curium.model.periods.dto.*;
-import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
+import org.ideoholic.curium.model.periods.dto.PeriodDetailsDto;
+import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
+import org.ideoholic.curium.model.periods.dto.Perioddetails;
+import org.ideoholic.curium.model.periods.dto.Periodmaster;
+import org.ideoholic.curium.model.periods.dto.PeriodsSaveDto;
+import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
+import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.*;
-import java.util.Map.Entry;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class PeriodService {
-    private StandardActionAdapter standardActionAdapter;
-	private EmployeeActionAdapter employeeActionAdapter;
-	private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private HttpSession httpSession;
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
+	
+	private final YearDAO yearDao;
+    private final StandardService standardService;
+    private final EmployeeService employeeService;
+    private final SubjectDetailsService subjectDetailsService;
+    
 	/**
     * Size of a byte buffer to read/write file
     */
    private static final int BUFFER_SIZE = 4096;
 	
-	public PeriodService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, EmployeeActionAdapter employeeActionAdapter,SubjectDetailsActionAdapter subjectDetailsActionAdapter ) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-		this.standardActionAdapter= standardActionAdapter;
-		this.employeeActionAdapter = employeeActionAdapter;
-		this.subjectDetailsActionAdapter = subjectDetailsActionAdapter;
-	}
 	
-	
-	public TimeTableResponseDto periodConfiguration(String branchId){
-		TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
-		
-		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
-		
-		try {
-	                Currentacademicyear currentYear = new YearDAO().showYear();
-					result.setCurrentYear(currentYear.getCurrentacademicyear());
-	                
-	                subjectDetailsActionAdapter.readListOfSubjectNames();
-	                
-	                employeeActionAdapter.ViewAllEmployee();
-	                standardActionAdapter.viewClasses();
-	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
-					result.setPeriodMaster(periodMaster);
-		    
-                } catch (Exception e) {
-                   return result;
-                }
-		
-	    result.setSuccess(true);
-		return result;
-		
-	}
+   public TimeTableResponseDto periodConfiguration(String branchId) {
+       TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
+
+       try {
+           Currentacademicyear currentYear = yearDao.showYear();
+           result.setCurrentYear(currentYear.getCurrentacademicyear());
+
+           SubjectsResponseDto subjects = subjectDetailsService.readListOfSubjects(branchId);
+           result.setSubjects(subjects.getSubjects());
+
+           EmployeesWithSalaryResponseDto employees = employeeService.viewAllEmployee(branchId);
+           result.setEmployeeList(employees.getEmployeeList());
+
+           ResultResponse classSecs = standardService.viewClasses(branchId);
+           result.setClassSecs(classSecs.getResultList());
+
+           List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
+           result.setPeriodMaster(periodMaster);
+       } catch (Exception e) {
+           return result;
+       }
+
+       result.setSuccess(true);
+       return result;
+
+   }
 
 	public ResultResponse savePeriods(PeriodsSaveDto dto, String branchId, String userId) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -212,7 +223,7 @@ public class PeriodService {
 		
 		String[] periodMasterid = dto.getPeriodMasterId();
 		if (periodMasterid != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : periodMasterid) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -230,20 +241,16 @@ public class PeriodService {
 
 		List<Periodmaster> periodMaster = new ArrayList<>();
 		
-		if(branchId!=null){
+        if (branchId != null) {
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
-	        result.setCurrentYear(currentYear.getCurrentacademicyear());
-	       
-	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(branchId));
-	        result.setPeriodMaster(periodMaster);
-		}
+            Currentacademicyear currentYear = yearDao.showYear();
+            result.setCurrentYear(currentYear.getCurrentacademicyear());
 
-        if(periodMaster.isEmpty()){
-			result.setSuccess(false);
-        }else {
-			result.setSuccess(true);
-		}
+            periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
+            result.setPeriodMaster(periodMaster);
+        }
+
+        result.setSuccess(!periodMaster.isEmpty());
 		return result;
 	}
 
@@ -408,12 +415,15 @@ public class PeriodService {
 	}
 
 
-	public ResultResponse getPeriodDetail() {
-		ResultResponse result = ResultResponse.builder().build();
+	public PeriodDetailsDto getPeriodDetail(String branchId) {
+		PeriodDetailsDto result = PeriodDetailsDto.builder().build();
         
         try {
-        	employeeActionAdapter.ViewAllEmployee();
-        	subjectDetailsActionAdapter.readListOfSubjectNames();
+        	EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.viewAllEmployee(branchId);
+            SubjectsResponseDto subjectsResponse = subjectDetailsService.readListOfSubjectNames(branchId);
+            result.setEmployeeList(employeesWithSalaryResponseDto.getEmployeeList());
+            result.setEmployeeListProcessSalary(employeesWithSalaryResponseDto.getEmployeeListProcessSalary());
+            result.setSubjects(subjectsResponse.getSubjects());
 			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
