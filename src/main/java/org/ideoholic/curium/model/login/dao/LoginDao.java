@@ -134,6 +134,11 @@ public class LoginDao {
 		boolean result = false;
 				try {
 		            transaction = session.beginTransaction();
+		            Query<Login> queryLogin = session.createQuery("from Login order by lid DESC");
+				 	List<Login> queryList = queryLogin.list();
+				 	int userId = queryList.get(0).getUserid();
+				 	userId = userId + 1;
+				 	login.setUserid(userId);
 		            session.save(login);
 		            transaction.commit();
 		            result = true;
