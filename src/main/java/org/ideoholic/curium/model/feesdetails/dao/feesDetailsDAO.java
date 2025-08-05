@@ -188,8 +188,7 @@ public class feesDetailsDAO {
         }
       
         @Transactional
-        public String feesTotal(long id, String currentYear) {
-        	int sid = (int)id;
+        public String feesTotal(Integer sid, String currentYear) {
                 String results = "";
                 try {
                    
