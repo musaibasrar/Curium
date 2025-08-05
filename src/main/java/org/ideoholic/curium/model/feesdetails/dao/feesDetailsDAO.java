@@ -186,30 +186,21 @@ public class feesDetailsDAO {
                 }
                 return results;
         }
-
-        public String feesTotal(long id, String currentYear) {
-        	Session session = HibernateUtil.openCurrentSession(); 
-        	Transaction transaction = null;
-                 
+      
+        @Transactional
+        public String feesTotal(Integer sid, String currentYear) {
                 String results = "";
                 try {
-                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-                    transaction = session.beginTransaction();
                    
+                	// Query queryTotalFees =  session.createQuery("select totalfees From Academicfeesstructure as afs where afs.sid=" + id +"and afs.academicyear='"+currentYear+"'");
+                    results =  academicfeesstructureRepo.getTotalFees(sid, currentYear);          
+                               
                                 
-                                Query queryTotalFees =  session.createQuery("select totalfees From Academicfeesstructure as afs where afs.sid=" + id +"and afs.academicyear='"+currentYear+"'");
-                                results =  (String) queryTotalFees.uniqueResult();
-                                
-                  
-                    transaction.commit();
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
-                }finally {
-        			HibernateUtil.closeSession();
-        		}
+                }
                 return results;
         }
 
