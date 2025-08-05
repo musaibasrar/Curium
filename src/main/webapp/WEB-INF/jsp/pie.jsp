@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-         <link rel="stylesheet" href="/abc/css/scss.css">
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script language="JavaScript" src="/bba/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
+         <link rel="stylesheet" href="/bba/css/scss.css">
+        <link rel="stylesheet" href="/bba/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/abc/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/abc/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/bba/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/bba/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/bba/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/bba/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/bba/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/bba/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
         var donut = document.getElementById('donut');
@@ -335,7 +335,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bba/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

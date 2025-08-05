@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/bba/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/bba/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/bba/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/bba/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/bba/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/bba/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/bba/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/bba/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/bba/JavaScript/actb.js"></script>
+<script src="/bba/JavaScript/common.js"></script>
 
 
 
@@ -590,7 +590,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/bba/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -633,7 +633,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/bba/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -861,7 +861,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+		response.sendRedirect("/bba/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1206,15 +1206,15 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
-							<td>&nbsp;Yes<input
+							<td  class="alignLeft" >Study Mode&nbsp;</td>
+							<td>&nbsp;Offline<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Online<input
 								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;">State
 								&nbsp;</td>
 							<td ><label> <input
 									name="bplcardno" type="text" class="myclass"
@@ -1230,11 +1230,13 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
+							<td class="alignLeft" >Student Type&nbsp;</td>
+								<td>&nbsp;Residential<input
+								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="res:bpl"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Day Scholar<input
+								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="day:bpl"
+								onclick="noCheck(this.id);" />
+
 							</td>
 							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
@@ -2379,14 +2381,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/abc/StudentProcess/AddStudent";
+									form1.action = "/bba/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/StudentProcess/viewAll";
+								form1.action = "/bba/StudentProcess/viewAll";
 								form1.submit();
 							}
 
