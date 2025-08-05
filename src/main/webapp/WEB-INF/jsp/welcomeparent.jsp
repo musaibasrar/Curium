@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
 	</div> -->
 	
 	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 218px;" alt="ideoholic" src="/bba/images/bba.png"></h2>
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/bba/images/bba.png"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">

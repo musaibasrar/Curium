@@ -233,7 +233,7 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td style="padding-left: 200px;"><img src="/bba/images/bba.jpg" width="72" height="80"/></td>
+				<td style="padding-left: 200px;"><img src="/bba/images/bba.jpg" width="140" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label>
