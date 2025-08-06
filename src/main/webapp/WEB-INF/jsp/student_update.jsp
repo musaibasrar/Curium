@@ -912,7 +912,7 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="Residential" name="bhagyalakshmibondnumber" id="yes:st"
 								onclick="yesCheck(this.id);" ${student.bhagyalakshmibondnumber == 'Residential' ? 'checked' : ''}/>&nbsp; &nbsp;Day Scholar<input
 								type="checkbox" value="Day Scholar" name="bhagyalakshmibondnumber" id="no:st"
-								onclick="noCheck(this.id);" ${student.belongtobpl == 'Day Scholar' ? 'checked' : ''}/>
+								onclick="noCheck(this.id);" ${student.bhagyalakshmibondnumber == 'Day Scholar' ? 'checked' : ''}/>
 
 							</td>
 							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>

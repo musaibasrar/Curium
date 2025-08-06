@@ -426,14 +426,14 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/scholargroup/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
+                                <td class="dataText" style="text-transform:uppercase;text-align: left;"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
                                  <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
                                 </td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase;text-align: left;"><c:out value="${Parents.fathersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase;text-align: left;"><c:out value="${Parents.mothersname}"/></td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
                                  

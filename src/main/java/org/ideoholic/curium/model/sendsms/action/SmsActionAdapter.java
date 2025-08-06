@@ -32,7 +32,7 @@ public class SmsActionAdapter {
         SendSMSDto dto = new SendSMSDto();
         dto.setNumbers(request.getParameter("numbers"));
         dto.setMessageBodyNumbers(request.getParameter("messagebodynumbers"));
-
+        dto.setBranchId(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
         ResultResponse resultResponse = smsService.sendNumbersSMS(dto);
 
         return resultResponse.isSuccess();
