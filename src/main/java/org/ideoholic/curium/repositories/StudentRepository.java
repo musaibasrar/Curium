@@ -29,4 +29,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
              "FROM Student s JOIN s.parents p " +
              "WHERE s.sid IN (SELECT f.student.sid FROM Studentfeesstructure f WHERE f.branchid = :branchId)")
       List<Object[]> findStudentsByBranchId(@Param("branchId") int branchId);
+      
+      @Query("SELECT s FROM Student s WHERE s.archive = 0 AND s.sid IN (SELECT f.student.sid FROM Studentfeesstructure f)")
+      List<Student> findAllActiveBranchStudents();
 }
