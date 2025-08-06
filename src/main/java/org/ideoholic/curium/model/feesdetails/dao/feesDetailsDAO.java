@@ -49,7 +49,7 @@ public class feesDetailsDAO {
 	@Autowired
 	private QueryUtil queryUtil;
 	@Autowired
-	StudentRepository studentRepo;
+	private StudentRepository studentRepo;
        
 
 	 @Transactional
@@ -223,28 +223,23 @@ public class feesDetailsDAO {
                 return results;
         }
         
-        
+        @Transactional
         public List<Student> readListOfAllBranchStudents() {
-        	Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
             List<Student> results = new ArrayList<Student>();
 
             try {
-                    transaction = session.beginTransaction();
 
-                    results = (List<Student>) session.createQuery("FROM Student s where s.archive = 0 and s.sid in (select f.sid from Studentfeesstructure f) ")
-                                    .list();
-                    transaction.commit();
+                    //results = (List<Student>) session.createQuery("FROM Student s where s.archive = 0 and s.sid in (select f.sid from Studentfeesstructure f) ")
+                                  //  .list();
+                    results = studentRepo.findAllActiveBranchStudents();
 
             } catch (Exception hibernateException) { 
             	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
                 throw hibernateException;
 
-            } finally {
-        			HibernateUtil.closeSession();
-                    return results;
-            }
+            } 
+            return results;
     }
 
 		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {

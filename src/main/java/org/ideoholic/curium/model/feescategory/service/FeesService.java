@@ -286,7 +286,7 @@ public class FeesService {
         
     	StudentListResponseDto studentListResponseDto = new StudentListResponseDto();
         try {
-                List<Student> list = new feesDetailsDAO().readListOfAllBranchStudents();
+                List<Student> list = feesDetailsDao.readListOfAllBranchStudents();
                 studentListResponseDto.setStudentList(list);
         } catch (Exception e) {
         }
