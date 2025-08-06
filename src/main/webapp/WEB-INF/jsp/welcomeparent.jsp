@@ -233,8 +233,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/vision/EventProcess/viewCalendar"> <img
-									src="/vision/images/viewcalendar.png" width="50" height="50"
+								href="/scholargroup/EventProcess/viewCalendar"> <img
+									src="/scholargroup/images/viewcalendar.png" width="50" height="50"
 									alt="calendar" style="vertical-align: bottom;" />Calendar
 							</a>
         					</td>
