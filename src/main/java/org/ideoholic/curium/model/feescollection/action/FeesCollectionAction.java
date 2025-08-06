@@ -3,8 +3,6 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
@@ -26,12 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/FeesCollection")
 public class FeesCollectionAction {
-	
-	    @Autowired
-	    private HttpServletRequest request;
-	
-	    @Autowired
-	    private HttpServletResponse response;
 	
 	    @Autowired
 	    private HttpSession httpSession;
@@ -125,7 +117,7 @@ public class FeesCollectionAction {
                         //under implementation
                         /*SmsService smsSerivce = new SmsService(request, response);
                         smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
-                        feesCollectionActionAdapter.preview();
+                        feesCollectionActionAdapter.preview(receiptInfo);
                         return "previewFeesDetail";
                 }else{
                         return "error";
