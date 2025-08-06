@@ -23,6 +23,7 @@ import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
+import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
@@ -47,6 +48,8 @@ public class feesDetailsDAO {
     private AcademicfeesstructureRepository academicfeesstructureRepo;
 	@Autowired
 	private QueryUtil queryUtil;
+	@Autowired
+	StudentRepository studentRepo;
        
 
 	 @Transactional
@@ -204,34 +207,20 @@ public class feesDetailsDAO {
                 return results;
         }
 
+        @Transactional
         public List<Object[]> readListOfStudents(int branchId) {
-        	Session session = HibernateUtil.openCurrentSession(); 
-        	Transaction transaction = null;
                 List<Object[]> results = new ArrayList<Object[]>();
 
                 try {
-                        // this.session =
-                        // HibernateUtil.getSessionFactory().openCurrentSession();
-                        transaction = session.beginTransaction();
-
-						/*
-						 * results = (List<Parents>) session.
-						 * createQuery("FROM Parents p where p.student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
-						 * +branchId+")") .list();
-						 */
-                        Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
-                        results= (List<Object[]>)q.list();
-                        transaction.commit();
-
+                       // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                	results= studentRepo.findStudentsByBranchId(branchId);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     throw hibernateException;
 
-                } finally {
-            			HibernateUtil.closeSession();
-                        return results;
                 }
+                return results;
         }
         
         
