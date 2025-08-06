@@ -199,7 +199,7 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-	<div style="border:2px solid black;margin-left:10px;margin-right:10px;margin-top:100px;">
+	<div style="border:2px solid black;margin-left:10px;margin-right:10px;">
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr><td rowspan="3" style="padding-left:200px;"><img src="/fathima/images/fathima.jpg" width="105" height="105"/></td>
@@ -248,11 +248,11 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;Sl No. &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${tcno}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:130px;"> <c:out value="${tcno}" /></span>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-weight: bold;border:0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;Ad No.
-					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:200px;"> &nbsp;&nbsp;<c:out value="${studentdetails.student.admissionnumber}" /> </span>
+					<span style="font-weight: bold;border:0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					Ad No.
+					<span class="rightside" style="font-weight: bold;border-bottom-style: dotted;width:140px;"> <c:out value="${studentdetails.student.admissionnumber}" /> </span>
 					</h3>
 				</td>
 			
@@ -265,7 +265,7 @@ for(Cookie cookie : cookies){
 			
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">1.&nbsp;&nbsp;Name of the pupil &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.name}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.name}" /></span>
 					</h3>
 				</td>
 				
@@ -276,7 +276,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">2.&nbsp;&nbsp;EMIS Number &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.sts}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.sts}" /></span>
 					</h3>
 				</td>
 				
@@ -285,7 +285,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">3.&nbsp;&nbsp;Father's Name/Guardian's Name &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.fathersname}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.fathersname}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -293,14 +293,14 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">4.&nbsp;&nbsp;Sex &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.gender}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.gender}" /></span>
 					</h3>
 				</td>
 			</tr>
 			<tr><td><br></td></tr>
 			<tr><td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Religion, Caste &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"><c:out value="${studentdetails.student.religion}" />,<c:out value="${studentdetails.student.caste}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:00px;"><c:out value="${studentdetails.student.religion}" />,<c:out value="${studentdetails.student.caste}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -308,7 +308,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of Birth &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -316,7 +316,7 @@ for(Cookie cookie : cookies){
 				<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">7.&nbsp;&nbsp;Residence Address &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.addresspermanent}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.addresspermanent}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -324,7 +324,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">8.&nbsp;&nbsp;Occupation of Parent &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.profession}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.profession}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -332,7 +332,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">9.&nbsp;&nbsp;Weather Promotion to higher class &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${Remarks}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${Remarks}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -340,7 +340,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;Class in which the pupil was studying &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.classstudying}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.classstudying}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -348,7 +348,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Date on which pupil left the school &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.dateleaving}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${studentdetails.student.dateleaving}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -356,7 +356,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;The Pupil conduct and character &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${conduct}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"> <c:out value="${conduct}" /></span>
 					</h3>
 				</td>
 			</tr>
