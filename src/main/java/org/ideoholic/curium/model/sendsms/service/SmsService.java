@@ -14,10 +14,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -38,10 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SmsService {
-	
-	 private HttpServletRequest request;
-	    private HttpServletResponse response;
-	    private HttpSession httpSession;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
 

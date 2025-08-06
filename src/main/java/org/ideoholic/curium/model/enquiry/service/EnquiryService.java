@@ -1,24 +1,17 @@
 package org.ideoholic.curium.model.enquiry.service;
 
-import org.ideoholic.curium.model.enquiry.dao.EnquiryDAO;
-import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
-import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
-import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.enquiry.dao.EnquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiryDto;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiryResponseDto;
+import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
+import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -26,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class EnquiryService {
 
 	@Autowired
-	private EnquiryDAO EnquiryDAO;
+	private EnquiryDAO enquiryDAO;
 
 	public CertificateResponseDto getCertificate(CertificateDto dto) {
 		CertificateResponseDto certificateResponseDto = CertificateResponseDto.builder().success(false).build();
@@ -47,7 +40,7 @@ public class EnquiryService {
 		enquiry.setAddress(place);
 		enquiry.setMobileno(mobile);
 
-		EnquiryDAO.create(enquiry);
+		enquiryDAO.create(enquiry);
 		certificateResponseDto.setSuccess(true);
 		return certificateResponseDto;
 	}

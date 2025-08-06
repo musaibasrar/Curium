@@ -22,10 +22,7 @@ import org.ideoholic.curium.repositories.AccountssgroupmasterRepository;
 import org.ideoholic.curium.repositories.FinancialAccountingYearRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -112,6 +109,7 @@ public class AccountDAO {
 		
 		List<Accountsubgroupmaster> accountSubGroupMaster;
 		try{
+			// accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
 			Accountgroupmaster accountGroupMaster= accountGroupMasterRepo.findById(accountGroupMasterId).orElse(null);
 			accountSubGroupMaster = accountSubGroupMasterRepo.findByAccountGroupMasterAndBranchid(accountGroupMaster, branchId);
 		}catch (Exception hibernateException) { 
@@ -156,6 +154,7 @@ public class AccountDAO {
 		
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try{
+			// session.createQuery("from Financialaccountingyear where active='yes' and branchId="+branchId).uniqueResult();
 			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -184,6 +183,7 @@ public class AccountDAO {
 	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(List<Integer> accountIds, int branchId) {
 		List<Accountdetailsbalance> accountDetails;
 		try{
+			// session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
 			accountDetails = accountDetailsBalanceRepo.findAllByBranchIdAndAccountIdsIn(branchId, accountIds);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -200,6 +200,7 @@ public class AccountDAO {
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 
 		try{
+			// session.createQuery("from Accountdetailsbalance where branchid="+branchId).list();
 			accountDetails = accountDetailsBalanceRepo.findByBranchid(branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -214,7 +215,9 @@ public class AccountDAO {
 	public boolean deleteMultipleAccounts(List<Integer> balanceIds, List<Integer> accountdetailsIds) {
 		boolean result;
 		try{
+			// session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid IN (:balanceids)");
 			accountDetailsBalanceRepo.deleteAllById(balanceIds);
+			// session.createQuery("delete from Accountdetails where accountdetailsid IN (:accountids)");
 			accountDetailsRepo.deleteAllById(accountdetailsIds);
 			result = true;
 		} catch (Exception hibernateException) { 
@@ -242,6 +245,10 @@ public class AccountDAO {
 	public boolean saveVoucherwithAccUpdate(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
 		boolean result = false;
 		try{
+			// Query query = session.createQuery(drAmount); query.executeUpdate();
+			// Query query1 = session.createQuery(crAmount); query.executeUpdate();
+			queryUtil.runUpdateQuery(drAmount);
+			queryUtil.runUpdateQuery(crAmount);
 			voucherEntryTransactionsRepo.save(transactions);
 			result = true;
 		}catch (Exception hibernateException) { 
@@ -258,6 +265,8 @@ public class AccountDAO {
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 
 		try {
+			// .createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids) and branchid="+branchId);
+			
 			List<Accountdetails> accountdetailslist = new ArrayList<Accountdetails>();
 			for(Integer accountId : accountIds) {
 				Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
@@ -277,8 +286,9 @@ public class AccountDAO {
 
 	@Transactional
 	public void updateAccountCurrentBalance(BigDecimal currentBalance, Integer accountId) {
-		
+
 		try{
+			// session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
 			Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
 			Accountdetailsbalance accountdetailsbalance = accountDetailsBalanceRepo.findByAccountDetails(accountdetails);
 			accountdetailsbalance.setCurrentbalance(currentBalance);
@@ -288,21 +298,22 @@ public class AccountDAO {
             hibernateException.printStackTrace();
             throw hibernateException;
 		}
-		
+
 	}
 
 	@Transactional
 	public List<Accountdetailsbalance> getAccountdetailsbalanceBankCash(int branchId) {
-		
+
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
+
 		try{
+			// session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSSGroupMaster.ssgroupmasterid IN (1,2) and branchid="+branchId).list();
 			accountDetails = accountDetailsBalanceRepo.findBankCashAccountDetailsByBranch(branchId);
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
-		
+
 		}
 		return accountDetails;
 	}
@@ -314,6 +325,7 @@ public class AccountDAO {
 		try{
 			Date fromdate = DateUtil.indiandateParser(fromDate);
 			Date todate = DateUtil.indiandateParser(toDate);
+			// session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
 			voucherEntrytransactions = voucherEntryTransactionsRepo.findVoucherEntries(fromdate, todate, financialYear, branchId, voucherType);
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -324,9 +336,10 @@ public class AccountDAO {
 	}
 	
 	public List<VoucherEntrytransactions> getCancelledVoucherEntryTransactions(Integer financialYear, int branchId) {
-		
+
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try{
+			// session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
 			voucherEntrytransactions = voucherEntryTransactionsRepo.findCancelledVoucherEntryTransactions(financialYear, branchId);
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -338,7 +351,7 @@ public class AccountDAO {
 	
 	@Transactional
 	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int accNo, int branchId) {
-		
+
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try{
 			Date fromdate = DateUtil.datePars(fromDate);
@@ -358,6 +371,7 @@ public class AccountDAO {
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
 		try{
+			// session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
 			accountName = accountDetails.getAccountname();
 		} catch (Exception hibernateException) { 
@@ -372,8 +386,8 @@ public class AccountDAO {
 	@Transactional
 	public boolean checkInTransactions(Integer accountId) {
 		boolean result = false;
-		VoucherEntrytransactions rTransactions = new VoucherEntrytransactions();
 		try{
+			// session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
 			result = voucherEntryTransactionsRepo.existsByDraccountidOrCraccountid(accountId);
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -387,7 +401,9 @@ public class AccountDAO {
 		
 		boolean result = false;
 		try{
+			// session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid ="+balanceId);
 			accountDetailsBalanceRepo.deleteById(balanceId);
+			// session.createQuery("delete from Accountdetails where accountdetailsid ="+accountId);
 			accountDetailsRepo.deleteById(accountId);
 			result = true;
 		} catch (Exception hibernateException) { 
@@ -403,6 +419,7 @@ public class AccountDAO {
 		
 		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
 		try{
+			// session.createQuery("from VoucherEntrytransactions where transactionsid='"+id+"'");
 			int vid = Integer.parseInt(id);
 			voucherTransactions = voucherEntryTransactionsRepo.findByTransactionsid(vid);
 		} catch (Exception hibernateException) { 
@@ -416,20 +433,19 @@ public class AccountDAO {
 	@Transactional
 	public boolean updateAccountsWithVoucherCancel(String updateDrAccount, String updateCrAccount, String cancelVoucher) {
 		boolean result = false;
-		try{
-			
-			    queryUtil.runUpdateQuery(updateDrAccount);
+		try {
+			// session.createQuery(updateDrAccount); updateDr.executeUpdate();
+			queryUtil.runUpdateQuery(updateDrAccount);
+			// session.createQuery(updateCrAccount); updateCr.executeUpdate();
+			queryUtil.runUpdateQuery(updateCrAccount);
+			// session.createQuery(cancelVoucher); cancelVoucherQuery.executeUpdate();
+			queryUtil.runUpdateQuery(cancelVoucher);
 
-			    queryUtil.runUpdateQuery(updateCrAccount);
-
-			    queryUtil.runUpdateQuery(cancelVoucher);
-
-	            result= true;
-				
-		} catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
+			result = true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
 		return result;
 	}
@@ -438,7 +454,8 @@ public class AccountDAO {
 	public boolean cancelVoucher(String id) {
 		boolean result = false;
 		try{
-			 int transactionId = Integer.parseInt(id);
+			// session.createQuery("update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id);
+			int transactionId = Integer.parseInt(id);
 			voucherEntryTransactionsRepo.cancelVoucher(transactionId);
 			result = true;
 		} catch (Exception hibernateException) { 
@@ -453,6 +470,7 @@ public class AccountDAO {
 	public Accountdetails getAccountDetails(int accountid) {
 		Accountdetails accountDetails = new Accountdetails();
 		try{
+			// session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -466,6 +484,7 @@ public class AccountDAO {
 	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
 		try{
+			// session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
 			accountDetails = accountDetailsRepo.findAccountDetails(accountName, accountCode, branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -478,6 +497,7 @@ public class AccountDAO {
 	public List<Accountdetails> getAccountdetails(int branchId) {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		try{
+			// session.createQuery("from Accountdetails where branchid = "+branchId+" order by accountcode ASC").list();
 			accountDetails = accountDetailsRepo.findByBranchidOrderByAccountcodeAsc(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -493,6 +513,7 @@ public class AccountDAO {
 		List<Accountssgroupmaster> accountSubGroupMaster = new ArrayList<Accountssgroupmaster>();
 		
 		try{
+			// session.createQuery("from Accountssgroupmaster where subgroupmasterid = '"+accountSubGroupMasterId+"' and branchid ="+branchId).list();
 			accountSubGroupMaster = accountssgroupmasterRepository.findBySubgroupmasteridAndBranchid(accountSubGroupMasterId, branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -521,6 +542,7 @@ public class AccountDAO {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		
 		try{
+			// session.createQuery("from Accountdetails as accdetails where accdetails.branchid="+branchId).list();
 			accountDetails = accountDetailsRepo.findByBranchid(branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -535,6 +557,7 @@ public class AccountDAO {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		try{
+			// session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
 			accountDetails =  accountDetailsRepo.findIncomeAndExpenseAccountsByBranchId(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -550,6 +573,7 @@ public class AccountDAO {
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		
 		try{
+			// session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
 			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationLike(supplierreferenceno);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -564,7 +588,7 @@ public class AccountDAO {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 
 		try {
-
+			// session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
 			Date fromdate = DateUtil.datePars(fromDate);
 			Date todate = DateUtil.datePars(toDate);
 			voucherEntrytransactions = voucherEntryTransactionsRepo.findByAllVoucherEntryTransactionsBetweenDates(fromdate,todate,branchId);
