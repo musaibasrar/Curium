@@ -230,7 +230,6 @@ public class feesDetailsDAO {
             try {
 
                     //results = (List<Student>) session.createQuery("FROM Student s where s.archive = 0 and s.sid in (select f.sid from Studentfeesstructure f) ")
-                                  //  .list();
                     results = studentRepo.findAllActiveBranchStudents();
 
             } catch (Exception hibernateException) { 
