@@ -135,7 +135,7 @@
                 </div>
             </c:if>
             
-            <form id="eventForm" action="/vision/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
+            <form id="eventForm" action="/brightschool/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="title" class="form-label">Title *</label>
                     <input type="text" class="form-control" id="title" name="title" required>
@@ -183,7 +183,7 @@
 
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Create Event</button>
-                    <a href="/vision/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
+                    <a href="/brightschool/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

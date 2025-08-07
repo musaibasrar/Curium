@@ -2203,7 +2203,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],Constants.CURRENTACADEMICYEAR,Constants.BRANCHID);
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
