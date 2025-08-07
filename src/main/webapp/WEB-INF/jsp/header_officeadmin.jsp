@@ -125,12 +125,14 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/rahmani/welcome" ><img src="/rahmani/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/rahmani/welcome" >
+								<img src="/rahmani/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/rahmani/images/rahmaniheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/rahmani/left_officeadmin"> <img
+							<td><a target="leftFrame" href="/rahmani/left_admin"> <img
 									src="/rahmani/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
@@ -159,7 +161,7 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/rahmani/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/rahmani/leftsettings">
 									<img alt="Settings" src="/rahmani/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
@@ -174,10 +176,15 @@ for(Cookie cookie : cookies){
 									src="/rahmani/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/rahmani/reports_officeadmin"><img
+								<a target="leftFrame" href="/rahmani/reports"><img
 									src="/rahmani/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/rahmani/reports_officeadmin"><img
+									src="/rahmani/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 
@@ -188,12 +195,12 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/rahmani/UserProcess/dashBoard"><img
+							<td ><a target="mainFrame"
+								href="/rahmani/dashboardloader"><img
 									alt="Dash Board" src="/rahmani/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td> -->
+									</a></td>
 								
 							<td ><a target="_parent"
 								href="/rahmani/UserProcess/logout"><img

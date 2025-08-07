@@ -2538,9 +2538,11 @@ public class FeesCollectionService {
 					        }
 
 					System.out.println("Values Inserted Successfully");
-					if( new parentsDetailsDAO().createMultiple(listParents)) {
+					result = ResultResponse.builder().success(true).build();
+					
+					/*if( new parentsDetailsDAO().createMultiple(listParents)) {
 						result = ResultResponse.builder().success(true).build();
-					};		
+					};*/		
 		return result;
 	}
 	

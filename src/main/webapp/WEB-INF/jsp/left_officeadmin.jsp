@@ -446,7 +446,7 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
@@ -492,7 +492,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/rahmani/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            				 <a target="mainFrame" href="/rahmani/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
@@ -500,11 +500,7 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/rahmani/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/rahmani/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr> -->
+            		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/rahmani/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
@@ -551,7 +547,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/rahmani/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/rahmani/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
@@ -602,6 +598,17 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/rahmani/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/rahmani/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/rahmani/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
@@ -691,13 +698,43 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/rahmani/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/rahmani/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-            
+             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            			</td>
+            		</tr>
+            		
+                </table>
+            </div>
                
               <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -731,6 +768,29 @@ for(Cookie cookie : cookies){
             </div>
             
             
+            <h5 class="sideaccordian" ><a href="#">Events</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr> -->
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/rahmani/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            			</td>
+            		</tr>
+            		
+            		
+                </table>
+            </div>
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -750,11 +810,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/rahmani/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/rahmani/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
             
@@ -778,14 +838,30 @@ for(Cookie cookie : cookies){
         	<div style="padding-left: 0px;padding-right: 0px;">
             
             	<table style=" border-collapse: collapse;width: 100%">
+            	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/rahmani/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/rahmani/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/rahmani/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
+            				 <a target="mainFrame" href="/rahmani/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
             			</td>
             		</tr>
             		<tr>
@@ -879,11 +955,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/rahmani/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/rahmani/sendemail" style="font-size: 12px;">Email</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
             
@@ -899,7 +975,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -907,9 +983,140 @@ for(Cookie cookie : cookies){
                               <a target="mainFrame" href="/rahmani/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
+				     <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="mainFrame" href="/rahmani/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+				        </td>
+				     </tr>
 				 </table>
             </div>
-             -->
+             <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            			</td>
+            			
+            		</tr>
+            		
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            			</td>
+            			
+            		</tr>
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            	<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            	
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            			</td>
+            			
+            		</tr> -->
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+             <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Case</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Caveat</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/rahmani/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
+            			</td>
+            		</tr>
+                </table>
+            </div> -->
+            
             </div>
                    
             
