@@ -78,6 +78,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -105,6 +106,8 @@ public class FeesCollectionService {
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
 	private String username = "username";
+	@Autowired
+	private feesDetailsDAO feesDetailDao;
 	
 	private static final int BUFFER_SIZE = 4096;
 
@@ -622,10 +625,10 @@ public class FeesCollectionService {
 				
 			
 			// End Cancel Voucher
-			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, updateReceiptDrAccount, updateReceiptCrAccount, cancelReceiptVoucher,
+			result = feesDetailDao.cancelFeesReceipt(feesReceiptId, feesCollection, updateReceiptDrAccount, updateReceiptCrAccount, cancelReceiptVoucher,
 					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher);
 		}else {
-			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
+			result = feesDetailDao.cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
 					null, null, null);
 		}
 
