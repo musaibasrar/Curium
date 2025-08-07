@@ -365,7 +365,7 @@ for(Cookie cookie : cookies){
             });
             
           		//Bar Chart for Daily Expense
-        	var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
+        	/* var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
         	var expenselabel = JSON.parse(totalExpenses);
         	
       	 	var currdate = document.getElementById("monthlisttotalexpenses").innerHTML;
@@ -462,10 +462,10 @@ for(Cookie cookie : cookies){
                             }]
                 } 
                 } 
-            });
+            }); */
             
             
-          //Bar Chart for Monthly fees
+          /* //Bar Chart for Monthly fees
         	var monthlyfees = document.getElementById("monthlystudentsfees").innerHTML;
         	var monthlyfeeslabel = JSON.parse(monthlyfees);
         	
@@ -563,7 +563,7 @@ for(Cookie cookie : cookies){
                             }]
                 } 
                 } 
-            });
+            }); */
             
             //Boys & Girls
             
