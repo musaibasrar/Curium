@@ -41,7 +41,7 @@ public interface SmsApiAction {
     public ResponseEntity<CurrentAcademicYearResponseDto> updateYear();
     
     @PostMapping("/sendSMSFeesDueReminder")
-    public ResponseEntity<ResultResponse> sendSMSFeesDueReminder(@RequestBody SendSMSDto dto);
+    public ResponseEntity<ResultResponse> sendSMSFeesDueReminder(@RequestBody SendSMSDto dto, @RequestHeader(value = Constants.BRANCHID)  String branchId);
     
     @GetMapping("/smsDeliveryReport")
     public ResponseEntity<SMSResponseDto> smsDeliveryReport();

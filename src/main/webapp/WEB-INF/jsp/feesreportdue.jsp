@@ -285,14 +285,14 @@
 <script type="text/javascript"
 	src="/childrenandglobal/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/children/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/children/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/children/js/datePicker/ui/sliderAccess.js"></script>
+	src="/childrenandglobal/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/childrenandglobal/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/childrenandglobal/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/children/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/childrenandglobal/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/children/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/childrenandglobal/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
 	src="/childrenandglobal/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
@@ -308,9 +308,9 @@
 <script type="text/javascript"
 	src="/childrenandglobal/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/children/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/childrenandglobal/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/children/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/childrenandglobal/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {

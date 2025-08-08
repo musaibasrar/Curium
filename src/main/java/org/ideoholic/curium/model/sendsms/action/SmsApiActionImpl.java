@@ -80,8 +80,8 @@ public class SmsApiActionImpl implements SmsApiAction {
 
     }
 
-    public ResponseEntity<ResultResponse> sendSMSFeesDueReminder(SendSMSDto dto) {
-        ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
+    public ResponseEntity<ResultResponse> sendSMSFeesDueReminder(SendSMSDto dto,String branchId) {
+        ResultResponse result = smsService.sendSMSFeesDueReminder(dto,branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

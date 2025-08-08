@@ -56,7 +56,7 @@ public class SmsActionAdapter {
         dto.setStudentIds(studentIds);
         dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
-        ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
+        ResultResponse result = smsService.sendSMSFeesDueReminder(dto,httpSession.getAttribute(Constants.BRANCHID).toString());
 
        return  result.isSuccess();
     }
