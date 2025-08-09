@@ -48,6 +48,8 @@ public class SmsService {
 		int offset=0;
 		
 		if(branchId!=null){
+		int maxRetries = 3;
+		int attempts = 0;
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -111,7 +113,15 @@ public class SmsService {
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
 						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
+						while (attempts < maxRetries) {
+						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    
+						    if (resultSMS == 200) {
+						        break; // success, exit loop
+						    }
+						    
+						    attempts++; // retry if not successful
+						}
 					}
 					
 				offset = offset+100;
@@ -309,29 +319,23 @@ public class SmsService {
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
 								String phoneNo = studentFeesReport.getParents().getContactnumber();
-								if(phoneNo!=null && !phoneNo.isEmpty()) {
-									char[] contactNo = phoneNo.toCharArray();
+								if(phoneNo!=null && phoneNo.length() == 10) {
 									
-									if(contactNo.length == 10) {
-										sbN.append(studentFeesReport.getParents().getContactnumber());
-										sbN.append(",");
-									}
+										long dueAmount = 0l;
+										for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+											dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
+										}
+										
+										String SMSTempType = "feesreminderwithdueamount";
+										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+										
+										int attempts = 0;
+								        while (attempts < 1) {
+								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
+								            if (resultSMS == 200) break;
+								            attempts++;
+								        }
 								}
-								
-								numbers=sbN.toString();
-								numbers = numbers.substring(0, numbers.length()-1);
-								log.info("Numbers are *** "+numbers);
-								
-								long dueAmount = 0l;
-								for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
-									dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
-								}
-								
-								
-								String SMSTempType = "feesreminderwithdueamount";
-								String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-								
-								resultSMS = sendSMS(numbers,message,SMSTempType);
 							}
 							
 						}
