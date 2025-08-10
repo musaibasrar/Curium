@@ -252,14 +252,18 @@ public class feesDetailsDAO {
             try {
             	       // Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
             	        Receiptinfo receiptinfo = receiptinfoRepo.findById(receiptId).orElse(null);
-            	        receiptinfo.setCancelreceipt(1);
-            	        receiptinfoRepo.save(receiptinfo);
+				        if(receiptinfo != null) {
+            	           receiptinfo.setCancelreceipt(1);
+            	           receiptinfoRepo.save(receiptinfo);
+						}
                     
                     for (Feescollection feescoll : feesCollection) {
                     	//Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
-                    	studentfeesstructure.setFeespaid(feescoll.getAmountpaid());
-                    	studentFeesStructureRepo.save(studentfeesstructure);
+						if(studentfeesstructure != null) {
+                    	   studentfeesstructure.setFeespaid(studentfeesstructure.getFeespaid() + feescoll.getAmountpaid());
+                    	   studentFeesStructureRepo.save(studentfeesstructure);
+						}
 					}
                     
                     if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
