@@ -227,7 +227,7 @@ for(Cookie cookie : cookies){
                 </tr>
             </TABLE>
 
-		<table style="margin:40px;">
+		<table style="margin-left:40px;">
 		<tr>
 			
 			<td colspan="4">
@@ -300,7 +300,7 @@ for(Cookie cookie : cookies){
 			<tr><td><br></td></tr>
 			<tr><td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Religion, Caste &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:00px;"><c:out value="${studentdetails.student.religion}" />,<c:out value="${studentdetails.student.caste}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:400px;"><c:out value="${studentdetails.student.religion}" />,<c:out value="${studentdetails.student.caste}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -371,12 +371,6 @@ for(Cookie cookie : cookies){
 			<td>
 			<br>
 			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
 			</tr>
 		<tr>
 		<td></td>
