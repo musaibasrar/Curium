@@ -18,11 +18,13 @@ import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
+import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -50,6 +52,8 @@ public class feesDetailsDAO {
 	private QueryUtil queryUtil;
 	@Autowired
 	private StudentRepository studentRepo;
+	@Autowired
+	private StudentFeesStructureRepository studentFeesStructureRepo;
        
 
 	 @Transactional
@@ -241,47 +245,54 @@ public class feesDetailsDAO {
             return results;
     }
 
+        @Transactional
 		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
 			boolean result = false;
 
             try {
-                    transaction = session.beginTransaction();
-                    
-	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
-	                    query.executeUpdate();
+            	       // Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
+            	        Receiptinfo receiptinfo = receiptinfoRepo.findById(receiptId).orElse(null);
+				        if(receiptinfo != null) {
+            	           receiptinfo.setCancelreceipt(1);
+            	           receiptinfoRepo.save(receiptinfo);
+						}
                     
                     for (Feescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
-                    	queryStudentFS.executeUpdate();
+                    	//Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
+                    	Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
+						if(studentfeesstructure != null) {
+                    	   studentfeesstructure.setFeespaid(studentfeesstructure.getFeespaid() + feescoll.getAmountpaid());
+                    	   studentFeesStructureRepo.save(studentfeesstructure);
+						}
 					}
                     
                     if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
-	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
-	        			updateReceiptDr.executeUpdate();
-	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
-	        			updateReceiptCr.executeUpdate();
-	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
-	        			cancelReceiptVoucherQuery.executeUpdate();
-	        			
-	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
-	        			updateJournalDr.executeUpdate();
-	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
-	        			updateJournalCr.executeUpdate();
-	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
-	        			cancelJournalVoucherQuery.executeUpdate();
+	                   // Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
+	        			//updateReceiptDr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateReceiptDrAccount);
+	        			//Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
+	        			//updateReceiptCr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateReceiptCrAccount);
+	        			//Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
+	        			//cancelReceiptVoucherQuery.executeUpdate();
+	        			queryUtil.runUpdateQuery(cancelJournalVoucher);
+	        			//Query updateJournalDr = session.createQuery(updateJournalDrAccount);
+	        			//updateJournalDr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateJournalDrAccount);
+	        			//Query updateJournalCr = session.createQuery(updateJournalCrAccount);
+	        			//updateJournalCr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateJournalCrAccount);
+	        			//Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
+	        			//cancelJournalVoucherQuery.executeUpdate();
+	        			queryUtil.runUpdateQuery(cancelJournalVoucher);
                     }
                     
-                    transaction.commit();
                     result = true;
             } catch (Exception hibernateException) { 
             	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
                 throw hibernateException;
-            }finally {
-    			HibernateUtil.closeSession();
-    		}
+            }
             return result;
 			
 		}
