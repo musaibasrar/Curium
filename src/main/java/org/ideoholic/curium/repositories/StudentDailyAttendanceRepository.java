@@ -13,11 +13,11 @@ import org.springframework.data.repository.query.Param;
 
 public interface StudentDailyAttendanceRepository extends JpaRepository<Studentdailyattendance,Integer> {
 
-	Optional<Studentdailyattendance> findByAttendee_studentexternalidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
+	Optional<Studentdailyattendance> findByAttendeeStudentexternalidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
 
-    List<Studentdailyattendance> findByDateAndAcademicyearAndAttendee_studentexternalidAndBranchid(String date, String academicYear, String attendeeId, int branchId);
+    List<Studentdailyattendance> findByDateAndAcademicyearAndAttendeeStudentexternalidAndBranchid(String date, String academicYear, String attendeeId, int branchId);
     
-    List<Studentdailyattendance> findByDateBetweenAndAcademicyearAndAttendee_studentexternalidAndBranchid(
+    List<Studentdailyattendance> findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
             LocalDate fromTimestamp,
             LocalDate toTimestamp,
             String currentAcademicYear,
