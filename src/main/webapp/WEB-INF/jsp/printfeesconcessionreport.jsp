@@ -221,13 +221,13 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/logo.jpg" width="150" height="50"/>
+				<img src="/jdh/images/logo.jpg" width="150" height="50"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 30px;">&nbsp;${branchcontact}</label><br>
 				<label class="addressLine" style="text-decoration: underline;">Concession Report</label><br>
 				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label> --%>

@@ -180,12 +180,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/abc/images/abc.jpg" width="54" height="60"/>
+				<img src="/jdh/images/jdh.jpg" width="54" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 145px;">&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 		</table>
@@ -356,12 +356,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/abc/images/abc.jpg" width="54" height="60"/>
+				<img src="/jdh/images/jdh.jpg" width="54" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 145px;">&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 		</table>
