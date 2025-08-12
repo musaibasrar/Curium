@@ -314,7 +314,7 @@ public class feesDetailsDAO {
                     	//Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
 						if(studentfeesstructure != null) {
-                    	   studentfeesstructure.setFeespaid(feescoll.getAmountpaid());
+                    	   studentfeesstructure.setFeespaid(studentfeesstructure.getFeespaid() - feescoll.getAmountpaid());
                     	   studentFeesStructureRepo.save(studentfeesstructure);
 						}
 					}
