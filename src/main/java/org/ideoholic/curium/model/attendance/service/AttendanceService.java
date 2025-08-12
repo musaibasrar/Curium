@@ -763,7 +763,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
-					
+
 			String res = attendanceDao.checkAndMarkStudentAttendance(studentDailyAttendanceList);
 			result.setMessage(res);
 			
