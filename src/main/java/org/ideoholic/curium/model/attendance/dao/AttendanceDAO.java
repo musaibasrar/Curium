@@ -2,7 +2,12 @@ package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +21,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.repositories.AttendanceMasterRepository;
 import org.ideoholic.curium.repositories.HolidaysMasterRepository;
+import org.ideoholic.curium.repositories.StaffDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.StudentDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.WeeklyoffRepository;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -41,6 +47,9 @@ public class AttendanceDAO {
 
 	@Autowired
 	private StudentDailyAttendanceRepository studentDailyAttendanceRepository;
+	
+	@Autowired
+	private StaffDailyAttendanceRepository staffDailyAttendanceRepository;
 
 	@Transactional
 	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
@@ -129,7 +138,6 @@ public class AttendanceDAO {
 			weeklyOff = weeklyoffRepo.findByAcademicyearAndWidIn(academicYear,weeklyOffList);
 
 		}catch (Exception e) {
-
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
@@ -140,41 +148,30 @@ public class AttendanceDAO {
 
 	}
 
-	public List<Holidaysmaster> readListOfholidays(
-			List<Integer> holidaysIntList, String currentAcademicYear, int branchId) {
+	@Transactional
+    public List<Holidaysmaster> readListOfholidays(List<Integer> holidaysIntList, String currentAcademicYear, int branchId) {
+        try {
+        	// session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) and branchid="+branchId);
+            return holidayMasterRepo.findByAcademicyearAndShidInAndBranchid(currentAcademicYear, holidaysIntList, branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+            throw e;
+        }
+    }
+
+	@Transactional
+	public List<Holidaysmaster> readListOfholidays(List<Integer> holidaysIntList, String currentAcademicYear) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) and branchid="+branchId);
-			query.setParameterList("ids", holidaysIntList);
-			holidayMaster = query.list();
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+			// session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) ");
+			holidayMaster = holidayMasterRepo.findByAcademicyearAndShidIn(currentAcademicYear, holidaysIntList);
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
 
-		}finally {
-			HibernateUtil.closeSession();
-		}
-
-		return holidayMaster;
-	}
-
-	public List<Holidaysmaster> readListOfholidays(
-			List<Integer> holidaysIntList, String currentAcademicYear) {
-		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) ");
-			query.setParameterList("ids", holidaysIntList);
-			holidayMaster = query.list();
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-
-		} finally {
-			HibernateUtil.closeSession();
+			throw  e;
 		}
 
 		return holidayMaster;
@@ -189,28 +186,25 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
+
 			throw e;
-
 		}
+	}
 
-	}
-	public boolean addAttendanceMaster(List<Attendancemaster> attendanceMasterList) {
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			for (Attendancemaster attendancemaster : attendanceMasterList) {
-				session.saveOrUpdate(attendancemaster);
-			}
-			transaction.commit();
-			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-				e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
+	@Transactional
+    public boolean addAttendanceMaster(List<Attendancemaster> attendanceMasterList) {
+        try {
+        	// session.saveOrUpdate(attendancemaster);
+            attendanceMasterRepo.saveAll(attendanceMasterList);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            
+            throw e;
+        }
+    }
+
 
 	@Transactional
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId, int branchId) {
@@ -222,6 +216,7 @@ public class AttendanceDAO {
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
+
 			throw e;
 		}
 		return studentAttendanceMaster;
@@ -235,6 +230,7 @@ public class AttendanceDAO {
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
+
 			throw e;
 		}
 		return studentAttendanceMaster;
@@ -266,8 +262,8 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
+		
 			throw e;
-
 		}
 	}
 
@@ -282,6 +278,7 @@ public class AttendanceDAO {
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
+			
 			throw e;
 		}
 		return studentDailyAttendance;
@@ -308,8 +305,6 @@ public class AttendanceDAO {
 
 	@Transactional
 	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList, List<String> studentAttendanceStatusList, String academicYear) {
-
-
 		try {
 			for (int i = 0; i < attendanceIdsList.size(); i++) {
 
@@ -324,7 +319,6 @@ public class AttendanceDAO {
 
 		throw e;
 		}
-
 	}
 
 	@Transactional
@@ -417,79 +411,71 @@ public class AttendanceDAO {
 		return mapStudentAttendance;
 	}
 
-	public boolean saveStaffAttendance(List<Staffdailyattendance> listStaffAttendance) {
-		
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			for (Staffdailyattendance staffdailyattendance : listStaffAttendance) {
-				Staffdailyattendance staffDaily = new Staffdailyattendance();
-				
-				Query query = session.createQuery("from Staffdailyattendance  where attendeeid='"+staffdailyattendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffdailyattendance.getAcademicyear()+"'");
-				staffDaily = (Staffdailyattendance) query.uniqueResult();
-				
-				if(staffDaily == null){
-					session.save(staffdailyattendance);
-				}else{
-					Query queryTwo = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffdailyattendance.getAttendancestatus()+"' where attendanceid = '"+staffDaily.getAttendanceid()+"'");
-					queryTwo.executeUpdate();
-				}
-			}
-			
-			transaction.commit();
-			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			log.info(e.getMessage());
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
+	@Transactional
+    public boolean saveStaffAttendance(List<Staffdailyattendance> listStaffAttendance) {
+        try {
+            for (Staffdailyattendance staffdailyattendance : listStaffAttendance) {
+            	// session.createQuery("from Staffdailyattendance  where attendeeid='"+staffdailyattendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffdailyattendance.getAcademicyear()+"'");
+                Staffdailyattendance existingAttendance = staffDailyAttendanceRepository
+                        .findByAttendeeidAndDateAndAcademicyear(staffdailyattendance.getAttendeeid(),LocalDate.now(), staffdailyattendance.getAcademicyear()).orElse(null);
+                
+                if (existingAttendance == null) {
+                    staffDailyAttendanceRepository.save(staffdailyattendance);
+                } else {
+                	// session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffdailyattendance.getAttendancestatus()+"' where attendanceid = '"+staffDaily.getAttendanceid()+"'");
+                    existingAttendance.setAttendancestatus(staffdailyattendance.getAttendancestatus());
+                    staffDailyAttendanceRepository.save(existingAttendance);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
 
+			throw e;
+        }
+    }
+
+	@Transactional
 	public List<Staffdailyattendance> readListOfStaffAttendance(String currentAcademicYear,
 			Timestamp timestamp, String teacherexternalid, int branchId) {
-		
+
 		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
-		
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+
+		try {
+			// session.createQuery("from Staffdailyattendance where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
+			staffDailyAttendance = staffDailyAttendanceRepository.findByDateAndAcademicyearAndAttendeeidAndBranchid(new Date(timestamp.getTime()), currentAcademicYear, teacherexternalid, branchId);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			log.info(e.getMessage());
-			System.out.println("column "+e);
-		}finally {
-			HibernateUtil.closeSession();
+			log.debug("column " + e);
+			e.printStackTrace();
+
+			throw e;
 		}
 		return staffDailyAttendance;
 	}
 
-	public boolean updateStaffAttendanceDetails(List<Integer> attendanceIdsList,
-			List<String> staffAttendanceStatusList) {
-		Transaction transaction = null;
-		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			int i =0;
-			for (Integer attIn : attendanceIdsList) {
-				Query query = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
-				query.executeUpdate();
-				i++;
-			}
-			transaction.commit();
-			return true;
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println("error "+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
+	@Transactional
+    public boolean updateStaffAttendanceDetails(List<Integer> attendanceIdsList, List<String> staffAttendanceStatusList) {
+        try {
+            for (int i = 0; i < attendanceIdsList.size(); i++) {
+				// session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+                Staffdailyattendance attendance = staffDailyAttendanceRepository.findById(attendanceIdsList.get(i)).orElse(null);
+                if (attendance != null) {
+                    attendance.setAttendancestatus(staffAttendanceStatusList.get(i));
+                    staffDailyAttendanceRepository.save(attendance);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+			log.debug("error "+e);
+            e.printStackTrace();
+
+			throw e;
+        }
+    }
 
 	public List<Staffdailyattendance> getStaffDailyAttendance(
 			String staffExternalId, Timestamp fromTimestamp,

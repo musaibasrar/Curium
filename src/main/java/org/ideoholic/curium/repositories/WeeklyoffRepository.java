@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeeklyoffRepository extends JpaRepository<Weeklyoff, Integer> {
-	
+
 	List<Weeklyoff> findByAcademicyearAndBranchid(String academicyear, int branchid);
 
-	List<Weeklyoff> findByAcademicyearAndBranchidAndWidIn(String academicYear, int branchid, List<Integer> weeklyOffIds);
+	List<Weeklyoff> findByAcademicyearAndBranchidAndWidIn(String academicYear, int branchid,
+			List<Integer> weeklyOffIds);
 
-	List<Weeklyoff> findByAcademicyearAndWidIn(String academicYear, List<Integer> weeklyOffIds);}
+	List<Weeklyoff> findByAcademicyearAndWidIn(String academicYear, List<Integer> weeklyOffIds);
+}

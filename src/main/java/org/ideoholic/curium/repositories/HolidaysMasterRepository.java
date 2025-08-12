@@ -11,4 +11,8 @@ public interface HolidaysMasterRepository extends JpaRepository<Holidaysmaster, 
 
 	List<Holidaysmaster> findByAcademicyearAndBranchid(String academicyear, int branchid);
 
+	List<Holidaysmaster> findByAcademicyearAndShidInAndBranchid(String academicyear,	List<Integer> holidaysIntList, int branchId);
+
+	List<Holidaysmaster> findByAcademicyearAndShidIn(String academicyear, List<Integer> holidaysIntList);
+
 }
