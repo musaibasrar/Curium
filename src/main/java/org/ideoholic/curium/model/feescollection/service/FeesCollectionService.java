@@ -703,7 +703,7 @@ public class FeesCollectionService {
 			
 			int receiptId = DataUtil.parseInt(strReceiptId);
 			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(receiptId);
-			boolean result = new feesDetailsDAO().undoFeesReceipt(receiptId, feesCollection);
+			boolean result = feesDetailDao.undoFeesReceipt(receiptId, feesCollection);
 			
 			resultResponse.setSuccess(result);
 				
