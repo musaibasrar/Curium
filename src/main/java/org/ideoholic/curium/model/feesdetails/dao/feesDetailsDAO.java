@@ -297,33 +297,34 @@ public class feesDetailsDAO {
 			
 		}
 
+        @Transactional
 		public boolean undoFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
-			Session session = HibernateUtil.openCurrentSession();
-        	Transaction transaction = null;
-			
 			boolean result = false;
 
             try {
-                    transaction = session.beginTransaction();
                     
-	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=0 where receiptnumber="+receiptId);
-	                    query.executeUpdate();
+            	        //Query query = session.createQuery("update Receiptinfo set cancelreceipt=0 where receiptnumber="+receiptId);
+            	        Receiptinfo receiptinfo = receiptinfoRepo.findById(receiptId).orElse(null);
+				        if(receiptinfo != null) {
+            	           receiptinfo.setCancelreceipt(0);
+            	           receiptinfoRepo.save(receiptinfo);
+						}
                     
                     for (Feescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
-                    	queryStudentFS.executeUpdate();
+                    	//Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
+                    	Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
+						if(studentfeesstructure != null) {
+                    	   studentfeesstructure.setFeespaid(studentfeesstructure.getFeespaid() - feescoll.getAmountpaid());
+                    	   studentFeesStructureRepo.save(studentfeesstructure);
+						}
 					}
-                    
-                    transaction.commit();
                     result = true;
             } catch (Exception hibernateException) { 
             	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
                 throw hibernateException;
 
-            }finally {
-    			HibernateUtil.closeSession();
-    		}
+            }
             return result;
 			
 		}
