@@ -305,14 +305,18 @@ public class feesDetailsDAO {
                     
             	        //Query query = session.createQuery("update Receiptinfo set cancelreceipt=0 where receiptnumber="+receiptId);
             	        Receiptinfo receiptinfo = receiptinfoRepo.findById(receiptId).orElse(null);
-            	        receiptinfo.setCancelreceipt(0);
-            	        receiptinfoRepo.save(receiptinfo);
+				        if(receiptinfo != null) {
+            	           receiptinfo.setCancelreceipt(0);
+            	           receiptinfoRepo.save(receiptinfo);
+						}
                     
                     for (Feescollection feescoll : feesCollection) {
                     	//Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
                     	Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
-                    	studentfeesstructure.setFeespaid(feescoll.getAmountpaid());
-                    	studentFeesStructureRepo.save(studentfeesstructure);
+						if(studentfeesstructure != null) {
+                    	   studentfeesstructure.setFeespaid(feescoll.getAmountpaid());
+                    	   studentFeesStructureRepo.save(studentfeesstructure);
+						}
 					}
                     result = true;
             } catch (Exception hibernateException) { 
