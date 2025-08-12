@@ -2166,7 +2166,7 @@ public class FeesCollectionService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
+					receiptInfo = feesDetailDao.readOtherFeesDetails(Long.parseLong(id));
 					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(receiptInfo, student);
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
