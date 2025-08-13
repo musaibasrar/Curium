@@ -210,4 +210,11 @@ public class DocumentAction {
 		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@PostMapping("/printAdmissionAbstract")
+	public String printAdmissionAbstract() {
+
+		documentActionAdapter.printAdmissionAbstract();
+		return "printpreviewabstract";
+	}
 }
