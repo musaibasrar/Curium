@@ -183,7 +183,7 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = feesDetailsDao.readOtherFeesDetails(Long.parseLong(id));
+					receiptInfo = feesDetailsDao.readOtherFeesDetails(Integer.parseInt(id));
 					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 				}

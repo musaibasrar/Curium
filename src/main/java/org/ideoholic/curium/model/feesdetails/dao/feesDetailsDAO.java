@@ -23,7 +23,7 @@ import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
-import org.ideoholic.curium.repositories.OtherreceiptinfoRepository;
+import org.ideoholic.curium.repositories.OtherReceiptInfoRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
@@ -56,7 +56,7 @@ public class feesDetailsDAO {
 	@Autowired
 	private StudentFeesStructureRepository studentFeesStructureRepo;
 	@Autowired
-	private OtherreceiptinfoRepository otherreceiptinfoRepo;
+	private OtherReceiptInfoRepository otherReceiptInfoRepo;
        
 
 	 @Transactional
@@ -333,12 +333,11 @@ public class feesDetailsDAO {
 		}
 
         @Transactional
-		public Otherreceiptinfo readOtherFeesDetails(long feesDetailsid) {
-        	int sid = (int)feesDetailsid;
+		public Otherreceiptinfo readOtherFeesDetails(Integer receiptNumber) {
 			Otherreceiptinfo feesdetails = new Otherreceiptinfo();
            try {
               // Query query = session.createQuery("From Otherreceiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
-               feesdetails = otherreceiptinfoRepo.findById(sid).orElse(null);
+               feesdetails = otherReceiptInfoRepo.findById(receiptNumber).orElse(null);
            } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
