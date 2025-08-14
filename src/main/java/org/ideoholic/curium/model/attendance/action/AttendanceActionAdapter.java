@@ -97,7 +97,7 @@ public class AttendanceActionAdapter {
 
     public boolean viewStudentAttendanceDetailsMark() {
 
-        StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto = new StudentAttendanceDetailsMarkDto();
+    	StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto = new StudentAttendanceDetailsMarkDto();
         attendanceDetailsMarkDto.setStudentName(request.getParameter("namesearch"));
         attendanceDetailsMarkDto.setAddClass(request.getParameter("classsearch"));
         attendanceDetailsMarkDto.setAddSec(request.getParameter("secsearch"));
@@ -106,7 +106,7 @@ public class AttendanceActionAdapter {
         request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
         request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
         request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
-
+        request.setAttribute("dateofattendanceselected", request.getParameter("dateofattendance"));
         return attendanceDetailsMarkResponseDto.isSuccess();
     }
 
@@ -179,7 +179,7 @@ public class AttendanceActionAdapter {
 
     public boolean markStudentsAttendance(){
 
-        StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
+    	StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
         attendanceDto.setAttendanceIds(request.getParameterValues("externalIDs"));
         attendanceDto.setStudentAttendanceStatus(request.getParameterValues("studentAttendanceStatus"));
         attendanceDto.setDateofAttendance(DateUtil.simpleDateParser(request.getParameter("dateofattendance")));
@@ -329,6 +329,11 @@ public class AttendanceActionAdapter {
         StudentsAttendanceDto dto = new StudentsAttendanceDto();
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
-        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
     }
+
+	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
+		request.setAttribute("dateofattendanceselected", request.getParameter("dateofattendancemark"));
+        return true;
+	}
 }

@@ -645,4 +645,9 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/attendancemarkselectdate")
+	public String getAttendancemarksselectdate() {
+		return "attendancemarkselectdate";
+	}
 }

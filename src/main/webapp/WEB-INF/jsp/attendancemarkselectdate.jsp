@@ -472,11 +472,6 @@
             z-index: 3; /* Ensure header appears above the content */
             background-color: #4b6a84; /* Background color for better visibility */
         }
-        
-        #update:hover {
-    background-color: #eb6000; /* Hover background color */
-}
-        
     </style>
     
 <script type="text/javascript" src="/scholargroup/js/datetimepicker_css.js"></script>
@@ -498,25 +493,10 @@
 
 	});
 	
-	function searchStudentAttendanceDetailsMonthly() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/scholargroup/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
-		form1.method = "POST";
-		form1.submit();
 
-	}
-	
-	function searchStudentAttendanceDetailsMonthlyGraph() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/scholargroup/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
 	function searchStudentAttendanceDetailsMark() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/scholargroup/AttendanceProcess/searchStudentAttendanceDetailsMark";
+		form1.action = "/scholargroup/AttendanceProcess/searchStudentAttendanceDetailsMarkSelectedDate";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -593,7 +573,7 @@
 		            	 }
 		            
 		            $(function() {
-		        		$("#dateofattendance").datepicker({
+		        		$("#dateofattendancemark").datepicker({
 		        			changeYear : true,
 		        			changeMonth : true,
 		        			dateFormat: 'dd/mm/yy',
@@ -601,7 +581,7 @@
 		        		});
 		        		$("#anim").change(
 		        				function() {
-		        					$("#dateofattendance").datepicker("option", "showAnim",
+		        					$("#dateofattendancemark").datepicker("option", "showAnim",
 		        							$(this).val());
 		        				});
 		        	});
@@ -615,132 +595,6 @@
 		            	}
 		            }
         </script>
-
-
-<script>
-//Function to generate the attendance table
-function generateTable() {
-    var table = document.getElementById("attendanceTable");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    var tfoot = table.getElementsByTagName("tfoot")[0];
-
-    // Get the date from the input field
-    var dateString = document.getElementById("dateofattendance").value;
-    var dateParts = dateString.split("/");
-    var day = parseInt(dateParts[0], 10);
-    var month = parseInt(dateParts[1], 10) - 1; // Month is zero-based in JavaScript Date
-    var year = parseInt(dateParts[2], 10);
-
-    // Create header row
-    var theadRow = document.createElement("tr");
-    var headers = ["Admission Number", "Name"].concat(getDaysArrayWithoutSundays(year, month));
-    for (var i = 0; i < headers.length; i++) {
-        var th = document.createElement("th");
-        th.className = "headerText freeze-header";
-        if (i === 0) th.className += " freeze-col";
-        if (i === 1) th.className += " freeze-col-2";
-        th.textContent = headers[i];
-        theadRow.appendChild(th);
-    }
-    table.getElementsByTagName("thead")[0].appendChild(theadRow);
-
-    // Create body rows
-    <%-- JSP logic to iterate over the student list --%>
-    <c:forEach items="${StudentListAttendance}" var="attendanceList" varStatus="status">
-        var row = document.createElement("tr");
-        row.className = "trClass";
-        var admissionNumberCell = document.createElement("td");
-        admissionNumberCell.className = "dataText freeze-col";
-        admissionNumberCell.textContent = "${attendanceList.student.admissionnumber}";
-        row.appendChild(admissionNumberCell);
-
-        var nameCell = document.createElement("td");
-        nameCell.className = "dataText freeze-col-2";
-        nameCell.textContent = "${attendanceList.student.name}";
-        row.appendChild(nameCell);
-
-        var daysOfMonth = getDaysArrayWithoutSundays(year, month);
-        for (var j = 0; j < daysOfMonth.length; j++) {
-            var attendanceCell = document.createElement("td");
-            attendanceCell.className = "dataText";
-            // Add name attribute to inputs and include student ID and date
-            var input = document.createElement("input");
-            input.type = "text";
-            input.style.textTransform = "uppercase";
-            input.size = "2";
-            input.readOnly = true;
-            input.value = "P";
-            input.maxLength = "1";
-            input.name = "attendance[" + "${attendanceList.student.studentexternalid}" + "][" + daysOfMonth[j] + "]";
-            input.onclick = function() { toggleAttendance(this); };
-            attendanceCell.appendChild(input);
-            row.appendChild(attendanceCell);
-        }
-
-        tbody.appendChild(row);
-    </c:forEach>
-
-    // Add submit button to footer
-    var footerRow = document.createElement("tr");
-    var footerCell = document.createElement("td");
-    footerCell.colSpan = headers.length;
-    var submitButton = document.createElement("button");
-    submitButton.id = "update";
-    submitButton.textContent = "Submit";
-    
- // Apply custom styles to the button
-    submitButton.style.backgroundColor = "#4b6a84"; // Background color
-    submitButton.style.color = "#ffffff"; // Text color
-    submitButton.style.border = "none"; // Remove border
-    submitButton.style.padding = "10px 20px"; // Padding
-    submitButton.style.borderRadius = "4px"; // Rounded corners
-    submitButton.style.fontSize = "16px"; // Font size
-    submitButton.style.fontWeight = "bold"; // Font weight
-    submitButton.style.cursor = "pointer"; // Pointer cursor on hover
-    
-    // Attach the updateRecords function
-    submitButton.onclick = function(e) {
-        e.preventDefault();
-        updateRecords();
-    };
-    footerCell.appendChild(submitButton);
-    footerRow.appendChild(footerCell);
-    tfoot.appendChild(footerRow);
-}
-
-function getDaysArrayWithoutSundays(year, month) {
-    var date = new Date(year, month, 1);
-    var days = [];
-    while (date.getMonth() === month) {
-        if (date.getDay() !== 0) { // Ignore Sundays (0 = Sunday)
-            days.push(date.getDate());
-        }
-        date.setDate(date.getDate() + 1);
-    }
-    return days;
-}
-
-function toggleAttendance(element) {
-    if (element.value === "P") {
-        element.value = "A";
-    } else {
-        element.value = "P";
-    }
-}
-
-// Ensuring the document is ready before generating the table
-$(document).ready(function() {
-    generateTable();
-});
-
-// Function to submit the form
-function updateRecords() {
-    var form1 = document.getElementById("form1");
-    form1.action = "/scholargroup/AttendanceProcess/markStudentsAttendance";
-    form1.method = "POST";
-    form1.submit();
-}
-</script>
 
 
 </head>
@@ -777,45 +631,10 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td><label> <select name="classsearch"
-									id="classsearch" style="width: 90px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 50px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label>
-							</td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						
-						<tr style="display: none;">
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td align="left"><label> <input
-									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="${dateofattendanceselected}" data-validate="validate(required)"/>
+									name="dateofattendancemark" type="text" class="textField"
+									id="dateofattendancemark" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"/>
 							</label></td>
 							
 						</tr>
@@ -832,88 +651,12 @@ for(Cookie cookie : cookies){
 							</td>
 						</tr>
 
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-
 					</table>
 				</div>
 			</div>
 		</div>
 		
-		<div style="overflow: scroll; height: 600px">
-			<table width="100%">
-				<tr>
-					<td class="headerTD">Mark Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class:&nbsp;${attendanceclass} 
-					<input type="hidden" id="attendanceclass" name="attendanceclass" value="${attendanceclasssearch}" />
-						</td>
-				</tr>
-			</table>
-			
-			<body>
-    <table width="100%" border="0" style="border-color: #4b6a84;" id="attendanceTable">
-        <thead></thead>
-        <tbody></tbody>
-        <tfoot></tfoot>
-    </table>
-</body>
-			<%-- <table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
-
-				<thead>
-					<tr>
-						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<c:forEach items="${StudentListAttendance}" var="attendanceList" varStatus="status">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
-								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
-								name="externalIDs"
-								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
-							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-				<tfoot>
-					<tr>
-					
-						<td class="footerTD" colspan="2">
-							<button id="update">Submit</button>
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
-							
-
-					</tr>
-				</tfoot>
-			</table> --%>
-			
-            <!-- Attendance Table -->
-            <table width="100%" border="0" id="attendanceTable">
-                <thead></thead>
-                <tbody></tbody>
-                <tfoot></tfoot>
-            </table>
-
-		</div>
+		
 
 	</form>
 </body>

@@ -734,12 +734,42 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 		if(currentAcademicYear!=null){
 			
-			String[] attendanceIds = attendanceDto.getAttendanceIds();
+			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+			String dateOfAttendance = DateUtil.dateParserddMMYYYY(attendanceDto.getDateofAttendance()) ;
+			    Map<String, String[]> parameterMap = request.getParameterMap();
+
+			    for (String key : parameterMap.keySet()) {
+			        if (key.startsWith("attendance[")) {
+			            // Extract admission number and day
+			            String admissionNumber = key.substring(key.indexOf("[") + 1, key.indexOf("]"));
+			            String day = key.substring(key.lastIndexOf("[") + 1, key.lastIndexOf("]"));
+			            String value = request.getParameter(key);
+			            
+			            String formattedNumber = String.format("%2d", Integer.parseInt(day));
+			            
+			            // Ensure the formatted number has the correct length
+			            if (formattedNumber.length() > 2) {
+			                formattedNumber = formattedNumber.substring(formattedNumber.length() - 2);
+			            }
+
+			            String dateOfAttendanceNewDate = formattedNumber + dateOfAttendance.substring(2);
+			            Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+			            studentDailyAttendance.setAttendeeid(admissionNumber);
+			            studentDailyAttendance.setAttendancestatus(value);
+			            studentDailyAttendance.setIntime("00:00");
+			            studentDailyAttendance.setDate(DateUtil.simpleDateParser(dateOfAttendanceNewDate));
+			            studentDailyAttendance.setAcademicyear(currentAcademicYear);
+			            studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
+			            studentDailyAttendanceList.add(studentDailyAttendance);
+			        }
+			    }
+
+			/*String[] attendanceIds = attendanceDto.getAttendanceIds();
 			String[] studentAttendanceStatus = attendanceDto.getStudentAttendanceStatus();
 			Date dateofAttendance = attendanceDto.getDateofAttendance();			
 			if(attendanceIds!=null) {
 			
-			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+			
 			
 			for(int i=0;i<attendanceIds.length;i++) {
 				Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
@@ -752,7 +782,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setAcademicyear(currentAcademicYear);
 				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);
-			}
+			}*/
 					
 			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
 			result.setMessage(res);
@@ -761,14 +791,14 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto,Integer.parseInt(branchId));
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
 					}
 			}
-		}
+		
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto, int branchId) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -791,7 +821,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent",branchId);
+            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }

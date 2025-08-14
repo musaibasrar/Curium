@@ -124,7 +124,7 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						while (attempts < maxRetries) {
-							resultSMS = sendSMS(numbers,message,SMSTempType,Integer.parseInt(branchId));
+							resultSMS = sendSMS(numbers,message,SMSTempType);
 						    
 						    if (resultSMS == 200) {
 						        break; // success, exit loop
@@ -150,7 +150,7 @@ public class SmsService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all",dto.getBranchId());
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
 		if(resultSMS==200){
 			result.setSuccess(true);
 		}
@@ -201,7 +201,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						log.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall", Integer.parseInt(branchId));
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
 				offset = offset+100;
@@ -215,7 +215,7 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message, String templateType, int branchId) {
+	public int sendSMS(String numbers, String message, String templateType) {
 		int responseCode = 0;
 		try 
 		{
@@ -223,7 +223,7 @@ public class SmsService {
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        
-	        String sendsms = properties.getProperty(templateType+"sendsms"+branchId);
+	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
 
@@ -232,7 +232,7 @@ public class SmsService {
 	        String apikey = properties.getProperty("apikey");
 	        String peid = properties.getProperty("peid");
 	        String templateid = properties.getProperty(templateType+"templateid");
-	        String templatemessage = properties.getProperty(templateType+"templatemessage"+branchId);
+	        String templatemessage = properties.getProperty(templateType+"templatemessage");
 	        String[] messageSeq = message.split(":");
 	        String var1 = "";
 	        String var2 = "";
@@ -347,7 +347,7 @@ public class SmsService {
 										
 										int attempts = 0;
 								        while (attempts < 1) {
-								            resultSMS = sendSMS(phoneNo, message, SMSTempType,dto.getBranchId());
+								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
 								            if (resultSMS == 200) break;
 								            attempts++;
 								        }

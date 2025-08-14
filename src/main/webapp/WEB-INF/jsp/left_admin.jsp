@@ -467,9 +467,14 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/scholargroup/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/scholargroup/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholargroup/attendancemarkselectdate" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
