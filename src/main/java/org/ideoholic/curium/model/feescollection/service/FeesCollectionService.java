@@ -1789,7 +1789,7 @@ public class FeesCollectionService {
 	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 			String todaysDate = formatter.format(now);
 			
-			result = new feesDetailsDAO().cancelOtherFeesReceipt(feesReceiptId, feesCollection, null, null, null,
+			result = feesDetailDao.cancelOtherFeesReceipt(feesReceiptId, feesCollection, null, null, null,
 					null, null, null);
 			
 			/*if(rid !=null && jid !=null ) {

@@ -26,6 +26,7 @@ import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.OtherReceiptInfoRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
+import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -57,6 +58,9 @@ public class feesDetailsDAO {
 	private StudentFeesStructureRepository studentFeesStructureRepo;
 	@Autowired
 	private OtherReceiptInfoRepository otherReceiptInfoRepo;
+	@Autowired
+	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepository;
+	
        
 
 	 @Transactional
@@ -347,48 +351,52 @@ public class feesDetailsDAO {
    }
 		
 
+        @Transactional
 		public boolean cancelOtherFeesReceipt(int receiptId, List<Otherfeescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
-			Session session = HibernateUtil.openCurrentSession(); 
-        	Transaction transaction = null;
 			boolean result = false;
 
             try {
-                    transaction = session.beginTransaction();
                     
-	                    Query query = session.createQuery("update Otherreceiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
-	                    query.executeUpdate();
+	                   // Query query = session.createQuery("update Otherreceiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
+	                    Otherreceiptinfo otherreceiptinfo = otherReceiptInfoRepo.findById(receiptId).orElse(null);
+	                    otherreceiptinfo.setCancelreceipt(1);
+	                    otherReceiptInfoRepo.save(otherreceiptinfo);
                     
                     for (Otherfeescollection feescoll : feesCollection) {
-                    	Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
-                    	queryStudentFS.executeUpdate();
+                    	//Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
+                    	Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepository.findById(receiptId).orElse(null);
+                    	studentotherfeesstructure.setFeespaid(feescoll.getAmountpaid());
+                    	studentOtherFeesStructureRepository.save(studentotherfeesstructure);
+                    	
 					}
                     
                     if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
-	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
-	        			updateReceiptDr.executeUpdate();
-	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
-	        			updateReceiptCr.executeUpdate();
-	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
-	        			cancelReceiptVoucherQuery.executeUpdate();
-	        			
-	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
-	        			updateJournalDr.executeUpdate();
-	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
-	        			updateJournalCr.executeUpdate();
-	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
-	        			cancelJournalVoucherQuery.executeUpdate();
+	                   // Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
+	        			//updateReceiptDr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateReceiptDrAccount);
+	        			//Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
+	        			//updateReceiptCr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateReceiptCrAccount);
+	        			//Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
+	        			//cancelReceiptVoucherQuery.executeUpdate();
+	        			queryUtil.runUpdateQuery(cancelReceiptVoucher);
+	        			//Query updateJournalDr = session.createQuery(updateJournalDrAccount);
+	        			//updateJournalDr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateJournalDrAccount);
+	        			//Query updateJournalCr = session.createQuery(updateJournalCrAccount);
+	        			//updateJournalCr.executeUpdate();
+	        			queryUtil.runUpdateQuery(updateJournalCrAccount);
+	        			//Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
+	        			//cancelJournalVoucherQuery.executeUpdate();
+	        			queryUtil.runUpdateQuery(cancelJournalVoucher);
                     }
-                    
-                    transaction.commit();
                     result = true;
             } catch (Exception hibernateException) { 
             	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
                 throw hibernateException;
 
-            }finally {
-    			HibernateUtil.closeSession();
-    		}
+            }
             return result;
 			
 		}
