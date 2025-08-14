@@ -359,14 +359,18 @@ public class feesDetailsDAO {
                     
 	                   // Query query = session.createQuery("update Otherreceiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
 	                    Otherreceiptinfo otherreceiptinfo = otherReceiptInfoRepo.findById(receiptId).orElse(null);
-	                    otherreceiptinfo.setCancelreceipt(1);
-	                    otherReceiptInfoRepo.save(otherreceiptinfo);
+				        if(otherreceiptinfo != null) {
+	                       otherreceiptinfo.setCancelreceipt(1);
+	                       otherReceiptInfoRepo.save(otherreceiptinfo);
+						}
                     
                     for (Otherfeescollection feescoll : feesCollection) {
                     	//Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
-                    	Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepository.findById(receiptId).orElse(null);
-                    	studentotherfeesstructure.setFeespaid(feescoll.getAmountpaid());
-                    	studentOtherFeesStructureRepository.save(studentotherfeesstructure);
+                    	Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepository.findById(feescoll.fetchSfsid()).orElse(null);
+						if(studentotherfeesstructure != null) {
+                    	   studentotherfeesstructure.setFeespaid(studentotherfeesstructure.getFeespaid() - feescoll.getAmountpaid());
+                    	   studentOtherFeesStructureRepository.save(studentotherfeesstructure);
+					    }
                     	
 					}
                     
@@ -391,14 +395,13 @@ public class feesDetailsDAO {
 	        			queryUtil.runUpdateQuery(cancelJournalVoucher);
                     }
                     result = true;
-            } catch (Exception hibernateException) { 
+            } catch (Exception hibernateException) {
             	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
-                throw hibernateException;
 
+                throw hibernateException;
             }
             return result;
-			
 		}
 		
 		  public List<Object[]> readListOfStudentsOtherFees(int branchId) {
