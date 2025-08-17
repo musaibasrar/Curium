@@ -245,7 +245,7 @@ for(Cookie cookie : cookies){
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -305,7 +305,7 @@ for(Cookie cookie : cookies){
                             	<th class="subjectdetails">Day</th>
                             	<th class="subjectdetails">Subject</th>
                             	<th class="subjectdetails">Time</th>
-                            	<th class="subjectdetails">Examiner's Sign</th>
+                            	<th class="subjectdetails">Invigilator's Sign</th>
                             	</tr>
                             	</thead>
                             	<tbody>
