@@ -477,154 +477,135 @@ public class AttendanceDAO {
         }
     }
 
-	public List<Staffdailyattendance> getStaffDailyAttendance(
-			String staffExternalId, Timestamp fromTimestamp,
+	@Transactional
+	public List<Staffdailyattendance> getStaffDailyAttendance(String staffExternalId, Timestamp fromTimestamp,
 			Timestamp toTimestamp, String currentAcademicYear, int branchId) {
 		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			// TODO: handle exception
-		}finally {
-			HibernateUtil.closeSession();
-		}
+			// session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"' and branchid="+branchId).list();
+			staffDailyAttendance = staffDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(fromTimestamp, toTimestamp, currentAcademicYear, staffExternalId, branchId);
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return staffDailyAttendance;
 	}
 
+	@Transactional
 	public boolean checkStaffAttendance(List<Staffdailyattendance> staffDailyAttendanceList) {
 
 		boolean result = false;
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
+	        for (Staffdailyattendance staffDailyAttendance : staffDailyAttendanceList) {
+				// session.createQuery("from Staffdailyattendance  where attendeeid='"+staffDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffDailyAttendance.getAcademicyear()+"'");
+	            Staffdailyattendance existingAttendance = staffDailyAttendanceRepository
+	                    .findByAttendeeidAndDateAndAcademicyear(staffDailyAttendance.getAttendeeid(), LocalDate.now(), staffDailyAttendance.getAcademicyear()).orElse(null);
+
+	            if (existingAttendance == null) {
+	                staffDailyAttendanceRepository.save(staffDailyAttendance);
+	            } else {
+					// session.createSQLQuery("update att_staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
+	                existingAttendance.setAttendancestatus(staffDailyAttendance.getAttendancestatus());
+	                staffDailyAttendanceRepository.save(existingAttendance);
+	            }
+	        }
 			
-			for (Staffdailyattendance staffDailyAttendance : staffDailyAttendanceList) {
-				Staffdailyattendance staffDailyAttendanceDetails = new Staffdailyattendance();
-				Query query = session.createQuery("from Staffdailyattendance  where attendeeid='"+staffDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffDailyAttendance.getAcademicyear()+"'");
-				staffDailyAttendanceDetails = (Staffdailyattendance) query.uniqueResult();
-				if(staffDailyAttendanceDetails == null){
-					session.save(staffDailyAttendance);
-					session.flush();
-			        session.clear();
-				}else{
-					Query queryTwo = session.createSQLQuery("update att_staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
-					queryTwo.executeUpdate();
-					session.flush();
-			        session.clear();
-				}
-			}
-			
-			transaction.commit();
 			result = true;
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return result;
 	}
 
-	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(
-			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
-			List<Teacher> staffList, int branchId) {
-
+	@Transactional
+	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(String currentAcademicYear, Timestamp timestampFrom,
+			Timestamp timestampto, List<Teacher> staffList, int branchId) {
 
 		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new HashMap<String, List<Staffdailyattendance>>();
-		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
 			
 			for (Teacher teacher : staffList) {
-				List<Staffdailyattendance> staffAttendance = new ArrayList<Staffdailyattendance>();
-				staffAttendance = session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"' and branchid="+branchId).list();
+				// session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"' and branchid="+branchId).list();
+				List<Staffdailyattendance> staffAttendance = staffDailyAttendanceRepository
+	                    .findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(timestampFrom, timestampto, currentAcademicYear, teacher.getTeacherexternalid(), branchId);
 				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
 			}
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return mapStaffAttendance;
 		
 	}
 
+	@Transactional
 	public void markDailyAttendanceJobStaff(List<Staffdailyattendance> listStaffAttendance) {
 		
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			
 			for (Staffdailyattendance staff : listStaffAttendance) {
-				Staffdailyattendance staffSingle = new Staffdailyattendance();
-				Query query = session.createQuery("from Staffdailyattendance where attendeeid = '"+staff.getAttendeeid()+"' and academicyear='"+staff.getAcademicyear()+"' and date=CURDATE()");
-				staffSingle = (Staffdailyattendance) query.uniqueResult();
-
+				// session.createQuery("from Staffdailyattendance where attendeeid = '"+staff.getAttendeeid()+"' and academicyear='"+staff.getAcademicyear()+"' and date=CURDATE()");
+				Staffdailyattendance staffSingle = staffDailyAttendanceRepository.findByAttendeeidAndDateAndAcademicyear(staff.getAttendeeid(), LocalDate.now(), staff.getAcademicyear()).orElse(null);
 				if(staffSingle == null){
-					session.save(staff);
+					staffDailyAttendanceRepository.save(staff);
 				}
 			}
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 	}
-	
+
+	@Transactional
 	public List<Studentdailyattendance> getStudentAttendance(String date) {
 		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			studentdailyattendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"'").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+			// session.createQuery("from Studentdailyattendance  where date = '"+date+"'").list();
+			studentdailyattendance = studentDailyAttendanceRepository.findByDate(date);
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return studentdailyattendance;
 	}
-	
-	public List<Studentdailyattendance> getStudentClassAttendance(String date, List<String> attendeeid) {
+
+	@Transactional
+	public List<Studentdailyattendance> getStudentClassAttendance(String date, List<String> attendeeIds) {
 		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and attendeeid IN (:ids)");
-			query.setParameterList("ids", attendeeid);
-			studentdailyattendance = query.list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+			// session.createQuery("from Studentdailyattendance  where date = '"+date+"' and attendeeid IN (:ids)");
+			studentdailyattendance = studentDailyAttendanceRepository.findByDateAndAttendeeStudentexternalidIn(date, attendeeIds);
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return studentdailyattendance;
 	}
-	
+
+	@Transactional
 	public Studentdailyattendance getStudentTodaysAttendance(String userName, LocalDate currentDate) {
 		Studentdailyattendance attendance = new Studentdailyattendance();
-		Transaction transaction = null;
 		try{
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Studentdailyattendance  where attendeeid = '"+userName+"' and date = '"+currentDate+"'");
-			attendance = (Studentdailyattendance) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
+			// session.createQuery("from Studentdailyattendance  where attendeeid = '"+userName+"' and date = '"+currentDate+"'");
+			attendance = studentDailyAttendanceRepository.findByAttendeeIdAndDate(userName, currentDate);
+		} catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+
+			throw e;
+        }
 		return attendance;
 	}
 
