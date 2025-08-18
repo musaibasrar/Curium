@@ -9,4 +9,5 @@ public class FeesReportDto {
     private String[] addClass;
     private String studentId;
     private String studentType;
+    private String[] academicYearArray;
 }

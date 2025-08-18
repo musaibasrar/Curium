@@ -270,4 +270,11 @@ public class FeesAction {
 				e.printStackTrace();
 			}
 	}
+	
+	@GetMapping("/feesOutstanding")
+	public String feesOutstanding() {
+		standardActionAdapter.viewClasses();
+		feesActionAdapter.viewFees();
+		return "feesoutstanding";
+	}
 }

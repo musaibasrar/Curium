@@ -59,5 +59,15 @@ public class StudentFeesReport {
 		this.dueAmount = dueAmount;
 	}
 
+
+	public Parents getParent() {
+		return parent;
+	}
+
+
+	public void setParent(Parents parent) {
+		this.parent = parent;
+	}
+
 	
 }
