@@ -474,7 +474,7 @@ for(Cookie cookie : cookies){
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="42" height="42"/></td><td style="text-align:left;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:16px;font-weight: 900; color:#112d52;text-transform:uppercase;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:16px;font-weight: 900; color:#1b2d4f;text-transform:uppercase;">
     	
 Fathima Nursery<br> & Primary School<!-- ${branchname} --> </p></td></tr>
     <tr><td style="text-align:left;padding:0px;font-size:5px;color:#38b449;">
@@ -493,20 +493,20 @@ Fathima Nursery<br> & Primary School<!-- ${branchname} --> </p></td></tr>
     <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px;font-size:11px;text-transform:uppercase;
     font-family:Sans-serif;">
   <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;NAME</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("studentname" + i + "") %></span></td>
+    <td style="padding: 0;color:#38b449;font-family:bold;">&nbsp;&nbsp;NAME</td>
+    <td  style="padding: 0;color:#1b2d4f;font-family:bold;">:&nbsp;<span style="text-align:left"><%= request.getSession().getAttribute("studentname" + i + "") %></span></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;color:#38b449;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("classsection" + i + "") %></span></td>
+    <td style="padding: 0;white-space: nowrap;color:#38b449;font-family:bold;">&nbsp;&nbsp;CLASS</td>
+    <td  style="padding: 0;color:#1b2d4f;font-family:bold;">:&nbsp;<span style="text-align:left" ><%= request.getSession().getAttribute("classsection" + i + "") %></span></td>
   </tr>
   <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("dateofbirth" + i + "") %></span></td>
+    <td style="padding: 0;color:#38b449;font-family:bold;">&nbsp;&nbsp;D.O.B.</td>
+    <td  style="padding: 0;color:#1b2d4f;font-family:bold;">:&nbsp;<span style="text-align:left"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></span></td>
   </tr>
   <tr>
-    <td style="padding: 0;color:#38b449;">&nbsp;&nbsp;ECN</td>
-    <td style="padding: 0;color:#221f1f;font-weight:bold;">:&nbsp;<span><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
+    <td style="padding: 0;color:#38b449;font-family:bold;">&nbsp;&nbsp;ECN</td>
+    <td  style="padding: 0;color:#1b2d4f;font-family:bold;">:&nbsp;<span style="text-align:left"><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
   </tr>
   <tr><td><br></td></tr>
 </table>

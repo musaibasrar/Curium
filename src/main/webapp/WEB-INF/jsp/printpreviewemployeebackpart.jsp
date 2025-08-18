@@ -478,42 +478,42 @@ for(Cookie cookie : cookies){
   <tr>
     <td style="padding: 0;color:#38b449;">FATHER’S NAME</td>
     </tr><tr>
-    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("guardian" + i + "") %></span></td>
+    <td style="padding: 0;color:#1b2d4f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("guardian" + i + "") %></span></td>
   </tr>
   <tr>
     <td style="padding: 0;white-space: nowrap;color:#38b449;">ECN</td>
     </tr><tr>
-    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
+    <td style="padding: 0;color:#1b2d4f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("contactnumber" + i + "") %></span></td>
   </tr>
   <tr>
     <td style="padding: 0;color:#38b449;">BLOOD GROUP</td>
     </tr><tr>
-    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("bloodgroup" + i + "") %></span></td>
+    <td style="padding: 0;color:#1b2d4f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("bloodgroup" + i + "") %></span></td>
   </tr>
   <tr>
     <td style="padding: 0;color:#38b449;">VALIDITY</td>
     </tr><tr>
-    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("currentAcademicYear" + i + "") %></span></td>
+    <td style="padding: 0;color:#1b2d4f;font-size:10px;font-weight: bold;"><span><%= request.getSession().getAttribute("currentAcademicYear" + i + "") %></span></td>
   </tr>
    <tr>
     <td style="padding: 0;color:#38b449;">ADDRESS</td>
     </tr><tr>
-    <td style="padding: 0;color:#221f1f;font-size:10px;font-weight: bold;"><%= request.getSession().getAttribute("Address" + i + "") %></td>
+    <td style="padding: 0;color:#1b2d4f;font-size:10px;font-weight: bold;"><%= request.getSession().getAttribute("Address" + i + "") %></td>
   </tr>
   
 </table>
 <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-  <tr><td></td><td style="color:#221f1f;">If found, Please return to:</td></tr>
+  <tr><td></td><td style="color:#1b2d4f;">If found, Please return to:</td></tr>
   <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="40" height="40"/></td><td style="text-align:left;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#221f1f">${branchname} </p></td></tr>
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#1b2d4f">${branchname} </p></td></tr>
     <tr><td style="text-align:left;padding:0px;font-size:8px;color:#38b449;">
    DEEVU STREET, KAYALPATNAM 628204
 TUTICORIN DISTRICT, TAMIL NADU</td></tr>   </table>
   </div>
 
 
-<table align="center" style="color:#221f1f;">
+<table align="center" style="color:#1b2d4f;">
 <tr><td>Phone</td><td>:04639 796371</td></tr>
 <tr><td>Email</td><td>:fathimaschoolkpm@gmail.com</td></tr>
 <tr><td>Web</td><td>:www.akshtrust.com</td></tr>
