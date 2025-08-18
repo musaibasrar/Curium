@@ -474,7 +474,7 @@ for(Cookie cookie : cookies){
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td rowspan="2"><img src="/fathima/images/fathima.png" width="40" height="40"/></td><td style="text-align:left;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#221f1f">${branchname} </p></td></tr>
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:#1b2d4f">${branchname} </p></td></tr>
     <tr><td style="text-align:left;padding:0px;font-size:6px;color:#38b449;">
    RUN BY A.K. SHAHUL HAMEED HAJIYAR EDUCATIONAL TRUST</td></tr>   </table>
   </div>
@@ -492,17 +492,17 @@ for(Cookie cookie : cookies){
   <tr>
     <td align="center" style="color:#38b449;">NAME</td>
     </tr><tr>
-    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("teachername" + i + "") %></td>
+    <td align="center" style="color:#1b2d4f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("teachername" + i + "") %></td>
   </tr>
   <tr>
     <td align="center" style="white-space: nowrap;color:#38b449;">DESIGNATION</td>
     </tr><tr>
-    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("designation" + i + "") %></td>
+    <td align="center" style="color:#1b2d4f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("designation" + i + "") %></td>
   </tr>
   <tr>
     <td align="center" style="color:#38b449;">CONTACT NUMBER</td>
     </tr><tr>
-    <td align="center" style="color:#221f1f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td align="center" style="color:#1b2d4f;font-weight:bold;text-transform:uppercase"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
  
   
