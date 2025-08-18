@@ -317,4 +317,10 @@ public class FeesCollectionAction {
 	        		}
 	                
 	        }
+		  
+		  @PostMapping("/searchFeesReportOutstanding")
+	        public String searchFeesReportOutstanding() {
+	            feesCollectionActionAdapter.getFeesReportOutstanding();
+	            return "feesoutstanding";
+	        }
 }

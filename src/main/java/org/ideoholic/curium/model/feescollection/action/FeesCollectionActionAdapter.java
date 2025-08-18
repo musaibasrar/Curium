@@ -541,4 +541,15 @@ public class FeesCollectionActionAdapter {
         Receiptinfo receiptinfo = feesCollectionService.feesPaymentTypeModify(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
         return receiptinfo;
     }
+
+	public void getFeesReportOutstanding() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYearArray(request.getParameterValues("academicyear"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+        													  	
+        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
 }
