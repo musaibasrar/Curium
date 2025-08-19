@@ -3,14 +3,7 @@ package org.ideoholic.curium.model.hr.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.hr.dto.Leaveapplication;
 import org.ideoholic.curium.model.hr.dto.Leavedetails;
 import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
@@ -22,36 +15,26 @@ import org.ideoholic.curium.model.hr.dto.Pf;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class HrDAO {
 
-	
-	Session session = null;
-    /**
-     * * Hibernate Session Variable
-     */
-    Transaction transaction = null;
-    /**
-     * * Hibernate Transaction Variable
-     */
-  
-    SessionFactory sessionFactory;
-    
-    private static final Logger logger = LogManager.getLogger(HrDAO.class);
-
-	public HrDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
-
 	public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {
-		
+		Transaction transaction = null;
 		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
 
 		try {
+			Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -61,13 +44,13 @@ public class HrDAO {
 	}
 
 	public boolean saveLeaveType(Leavetypemaster leaveMaster) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.save(leaveMaster);
             transaction.commit();
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         }finally {
@@ -77,12 +60,13 @@ public class HrDAO {
 	}
 
 	public boolean deleteLeaveType(Leavetypemaster leaveType) {
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.delete(leaveType);
             transaction.commit();
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         }finally {
@@ -92,15 +76,15 @@ public class HrDAO {
 	}
 
 	public boolean addLeaves(List<Leavedetails> leaveDetailsList) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             for (Leavedetails leavedetails : leaveDetailsList) {
             	session.save(leavedetails);
 			}
             transaction.commit();
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -111,12 +95,12 @@ public class HrDAO {
 
 	public List<Leavedetails> getLeaveDetails(String teacherId, String academicYear) {
 		List<Leavedetails> leaveDetailsList = new ArrayList<Leavedetails>();
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -127,13 +111,13 @@ public class HrDAO {
 	}
 
 	public boolean savePayHead(Payhead payHead) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.save(payHead);
             transaction.commit();
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -144,12 +128,12 @@ public class HrDAO {
 
 	public List<Payhead> getPayHeadList(String academicYear, int branchId) {
 		List<Payhead> payHead = new ArrayList<Payhead>();
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			payHead = session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -160,15 +144,15 @@ public class HrDAO {
 
 	public boolean addPayHeadStaffDetails(
 			List<Payheadstaffdetails> payHeadStaffDetailsList) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			for (Payheadstaffdetails payheadstaffdetails : payHeadStaffDetailsList) {
 				session.save(payheadstaffdetails);
 			}
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -177,15 +161,15 @@ public class HrDAO {
 	}
 
 	public boolean savePayBasic(List<Paybasic> payBasicList) {
-			
-			try {
+		Transaction transaction = null;
+			try { Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				for (Paybasic payBasic : payBasicList) {
 					session.save(payBasic);
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
+			} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 				e.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -194,12 +178,12 @@ public class HrDAO {
 	}
 
 	public void addPf(Pf pf) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(pf);
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -208,14 +192,14 @@ public class HrDAO {
 	}
 
 	public List<Pf> pfSettings(int branchId) {
-		
+		Transaction transaction = null;
 		List<Pf> pf = new ArrayList<Pf>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			pf = session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -224,14 +208,14 @@ public class HrDAO {
 	}
 
 	public void deletePf(List ids) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("delete from Pf where idpf IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -240,13 +224,13 @@ public class HrDAO {
 	}
 
 	public boolean saveAdvanceSalary(Payadvancesalary payAdvanceSalary) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(payAdvanceSalary);
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -255,13 +239,13 @@ public class HrDAO {
 	}
 
 	public List<Payadvancesalary> salaryApprovalDispaly(int branchId) {
-		
+		Transaction transaction = null;
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -270,14 +254,14 @@ public class HrDAO {
 	}
 
 	public boolean saveAdvanceSalaryApproval(Payadvancesalary payAdvance) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update hr_payadvancesalary set reason = '"+payAdvance.getReason()+"',status = '"+payAdvance.getStatus()+"' where idpayadvancesalary="+payAdvance.getIdpayadvancesalary());
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -286,12 +270,13 @@ public class HrDAO {
 	}
 
 	public boolean deleteAdvaceSalaryApproval(Payadvancesalary payAdvance) {
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.delete(payAdvance);
             transaction.commit();
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
         }finally {
@@ -301,12 +286,13 @@ public class HrDAO {
 	}
 
 	public List<Payadvancesalary> salaryIssue(int branchId) {
+		Transaction transaction = null;
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -315,13 +301,13 @@ public class HrDAO {
 	}
 
 	public boolean applyLeave(Leaveapplication leaveApplication) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(leaveApplication);
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -330,14 +316,14 @@ public class HrDAO {
 	}
 
 	public List<Leaveapplication> leaveApprovals(String currentAcademicYear, int branchId) {
-		
+		Transaction transaction = null;
 		List<Leaveapplication> listLeaveApplication = new ArrayList<Leaveapplication>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			listLeaveApplication = session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -346,15 +332,15 @@ public class HrDAO {
 	}
 
 	public boolean rejectLeave(List ids) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'rejected' where idleaveapplication IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -364,8 +350,8 @@ public class HrDAO {
 	}
 
 	public boolean approveLeave(List ids) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'approved' where idleaveapplication IN (:ids)");
 			query.setParameterList("ids", ids);
@@ -374,7 +360,7 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { 
 			transaction.rollback(); 
-			logger.error(e);
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -384,8 +370,8 @@ public class HrDAO {
 	}
 
 	public boolean processStaffSalary(List<Processsalarydetails> processsalarydetailsList, List<Processsalarydetailsheads> processSalarydetailsheadList) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			for (Processsalarydetails processsalarydetails : processsalarydetailsList) {
 				session.save(processsalarydetails);
@@ -396,7 +382,7 @@ public class HrDAO {
 			}
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -407,12 +393,12 @@ public class HrDAO {
 
 	public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear, int branchId) {
 			List<Payhead> payHead = new ArrayList<Payhead>();
-			
-			try {
+			Transaction transaction = null;
+			try { Session session = HibernateUtil.openCurrentSession();
 				transaction = session.beginTransaction();
 				payHead = session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
 				transaction.commit();
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
+			} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 				e.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
@@ -421,17 +407,17 @@ public class HrDAO {
 	}
 
 	public Paybasic getBasicPay(int idteacher, String academicYear) {
-		
+		Transaction transaction = null;
 		Paybasic basicPay = new Paybasic();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createSQLQueryEntity("select * from hr_paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
 			basicPay = (Paybasic) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) { 
 			transaction.rollback(); 
-			logger.error(e);
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -440,14 +426,14 @@ public class HrDAO {
 	}
 
 	public List<Payheadstaffdetails> getPayHeadStaff(int teacherid, String academicYear) {
-		
+		Transaction transaction = null;
 		List<Payheadstaffdetails> payHeadStaffList = new ArrayList<Payheadstaffdetails>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			payHeadStaffList = session.createQuery("from Payheadstaffdetails where idteacher = "+teacherid+" and academicyear='"+academicYear+"'").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -456,14 +442,14 @@ public class HrDAO {
 	}
 
 	public List<Processsalarydetails> issueStaffSalary(String academicYear, int branchId) {
-		
+		Transaction transaction = null;
 	List<Processsalarydetails> processSalaryDetails = new ArrayList<Processsalarydetails>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			processSalaryDetails = session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -472,15 +458,15 @@ public class HrDAO {
 	}
 
 	public Processsalarydetails getProcessSalaryDetails(int processId) {
-		
+		Transaction transaction = null;
 		Processsalarydetails processSalaryDetails = new Processsalarydetails();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from Processsalarydetails where idprocesssalarydetails="+processId+"");
 			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -489,14 +475,14 @@ public class HrDAO {
 	}
 
 	public List<Processsalarydetailsheads> getProcessSalaryHeads(int processId) {
-		
+		Transaction transaction = null;
 		List<Processsalarydetailsheads> processSalaryHeadsList = new ArrayList<Processsalarydetailsheads>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			processSalaryHeadsList = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+"").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -505,15 +491,15 @@ public class HrDAO {
 	}
 
 	public Processsalarydetailsheads getProcessSalaryBasicPay(int processId) {
-		
+		Transaction transaction = null;
 		Processsalarydetailsheads processSalaryHeads = new Processsalarydetailsheads();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+" and payheadname='Basic Pay'");
 			processSalaryHeads = (Processsalarydetailsheads) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -522,14 +508,14 @@ public class HrDAO {
 	}
 
 	public List<Payheadstaffdetails> getStaffDetails(int staffId, String academicYear) {
-		
+		Transaction transaction = null;
 		List<Payheadstaffdetails> PayHeadStaffDetailsList = new ArrayList<Payheadstaffdetails>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			PayHeadStaffDetailsList = session.createQuery("from Payheadstaffdetails where idteacher="+staffId+" and academicyear='"+academicYear+"'").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -538,14 +524,14 @@ public class HrDAO {
 	}
 
 	public List<Processsalarydetails> getStaffinfo(int teacherId) {
-
+		Transaction transaction = null;
 		List<Processsalarydetails> processSalaryDetails = new ArrayList<Processsalarydetails>();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			processSalaryDetails = session.createQuery("from Processsalarydetails where teacherid="+teacherId+"").list();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -554,8 +540,8 @@ public class HrDAO {
 	}
 
 	public boolean deletePayHeadStaff(List ids) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("delete from Payheadstaffdetails where idpayheadstaffdetails IN (:ids)");
 			query.setParameterList("ids", ids);
@@ -563,7 +549,7 @@ public class HrDAO {
 			transaction.commit();
 			return true;
 			
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -572,15 +558,15 @@ public class HrDAO {
 	}
 
 	public Processsalarydetails checkprocessedStaffSalary(int staffId, String month, String year) {
-		
+		Transaction transaction = null;
 		Processsalarydetails processSalaryDetails = new Processsalarydetails();
 		
-		try {
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from Processsalarydetails where teacherid="+staffId+" and month='"+month+"' and year='"+year+"'");
 			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -589,15 +575,15 @@ public class HrDAO {
 	}
 
 	public boolean issueProcessedSalary(List ids) {
-
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'ISSUED' where idprocesssalarydetails IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -606,15 +592,15 @@ public class HrDAO {
 	}
 
 	public boolean cancelProcessedSalary(List ids) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'CANCELLED' where idprocesssalarydetails IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -623,15 +609,15 @@ public class HrDAO {
 	}
 
 	public boolean updatePayBasic(List<Paybasic> payBasicList) {
-		
-		try {
+		Transaction transaction = null;
+		try { Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			for (Paybasic payBasic : payBasicList) {
 				session.update(payBasic);
 			}
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();

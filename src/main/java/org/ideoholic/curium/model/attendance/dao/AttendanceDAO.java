@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
@@ -24,9 +23,6 @@ import org.ideoholic.curium.repositories.HolidaysMasterRepository;
 import org.ideoholic.curium.repositories.StaffDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.StudentDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.WeeklyoffRepository;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
