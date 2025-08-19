@@ -239,7 +239,8 @@ for(Cookie cookie : cookies){
 				<td style="padding-left: 200px;"><img src="/awami/images/awami.jpg" width="160" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 			<tr>

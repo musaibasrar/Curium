@@ -364,11 +364,11 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/vision/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
-                <a target="mainFrame" href="/vision/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
+                <a target="mainFrame" href="/awami/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/awami/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/awami/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/awami/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/awami/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>

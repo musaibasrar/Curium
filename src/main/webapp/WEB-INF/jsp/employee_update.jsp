@@ -655,36 +655,37 @@ for(Cookie cookie : cookies){
 
 							<td width="28%">
 									<div class="checkbox-container">
-													    <c:forEach items="${classList}" var="classItem">
-													    
-													    <c:choose>
-													        <c:when test="${not empty sectionList}">
-													            <c:forEach items="${sectionList}" var="sectionItem">
-													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
-													                <div class="checkbox-item">
-													                    <label>
-													                        <input type="checkbox" name="classesteaching"
-													                               value="${classSec}"
-													                               <c:if test="${fn:contains(classesteachingList, classSec)}">checked</c:if> />
-													                        ${classSec}
-													                    </label>
-													                </div>
-													            </c:forEach>
-													        </c:when>
-													
-													        <c:otherwise>
-													            <div class="checkbox-item">
-													                <label>
-													                    <input type="checkbox" name="classesteaching"
-													                           value="${classItem}"
-													                           <c:if test="${fn:contains(classesteachingList, classItem)}">checked</c:if> />
-													                    ${classItem}
-													                </label>
-													            </div>
-													        </c:otherwise>
-													    </c:choose>
-													</c:forEach>
-													</div>
+											<c:forEach items="${classList}" var="classItem">
+    
+														    <c:choose>
+														        <c:when test="${not empty sectionList}">
+														            <c:forEach items="${sectionList}" var="sectionItem">
+														                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+														                <div class="checkbox-item">
+														                    <label>
+														                        <input type="checkbox" name="classesteacheing"
+														                               value="${classSec}"
+														                               <c:if test="${fn:contains(classesteachingList, classSec)}">checked</c:if> />
+														                        ${classSec}
+														                    </label>
+														                </div>
+														            </c:forEach>
+														        </c:when>
+														
+														        <c:otherwise>
+														            <div class="checkbox-item">
+														                <label>
+														                    <input type="checkbox" name="classteacher"
+														                           value="${classItem}"
+														                           <c:if test="${fn:contains(classesteachingList, classItem)}">checked</c:if> />
+														                    ${classItem}
+														                </label>
+														            </div>
+														        </c:otherwise>
+														    </c:choose>
+														</c:forEach>
+																											    
+									</div>
 							</td>
 						</tr>
 
@@ -1045,7 +1046,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/vision/EmployeeProcess/ViewAllEmployee";
+								form1.action = "/awami/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
