@@ -976,7 +976,7 @@ public class FeesService {
 		public ParentListResponseDto viewAllStudentsListOtherFees(String branchid) {
 			ParentListResponseDto parentResponseDto = new ParentListResponseDto();
 			try {
-				List<Object[]> list = new feesDetailsDAO().readListOfStudentsOtherFees(Integer.parseInt(branchid));
+				List<Object[]> list = feesDetailsDao.readListOfStudentsOtherFees(Integer.parseInt(branchid));
 
 				List<Parents> parentDetails = new ArrayList<Parents>();
 				for (Object[] parentdetails : list) {

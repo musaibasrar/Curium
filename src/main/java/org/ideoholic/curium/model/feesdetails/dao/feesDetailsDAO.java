@@ -404,33 +404,19 @@ public class feesDetailsDAO {
             return result;
 		}
 		
+          @Transactional
 		  public List<Object[]> readListOfStudentsOtherFees(int branchId) {
-			  Session session = HibernateUtil.openCurrentSession();
-	        	Transaction transaction = null;
               List<Object[]> results = new ArrayList<Object[]>();
 
               try {
-                      // this.session =
-                      // HibernateUtil.getSessionFactory().openCurrentSession();
-                      transaction = session.beginTransaction();
-
-						/*
-						 * results = (List<Parents>) session.
-						 * createQuery("FROM Parents p where p.student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
-						 * +branchId+")") .list();
-						 */
-                      Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentotherfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
-                      results= (List<Object[]>)q.list();
-                      transaction.commit();
-
+                     // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentotherfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                      results= studentRepo.findStudentByBranchId(branchId);
               } catch (Exception hibernateException) { 
               	log.error(hibernateException.getMessage(), hibernateException);
                 hibernateException.printStackTrace();
                 throw hibernateException;
-              } finally {
-          			HibernateUtil.closeSession();
-                      return results;
-              }
+              } 
+              return results;
       }
 
 		public void stampOtherFees(Integer stdIds, String setYear, CreateStudentDto dto, String currentAcademicYear, String branchId, String userId) {
