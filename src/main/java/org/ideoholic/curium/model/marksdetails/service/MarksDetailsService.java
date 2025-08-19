@@ -202,7 +202,7 @@ public class MarksDetailsService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " parents.Student.classstudying like '" + classStudying
-					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 		}
@@ -1824,7 +1824,7 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 
 	if (!classStudying.equalsIgnoreCase("")) {
 		querySub = " parents.Student.classstudying like '" + classStudying
-				+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 	} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 		querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId);
 	}
