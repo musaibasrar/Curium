@@ -854,29 +854,28 @@ public class DocumentService {
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("contactnumber" + i + "", parentsDetails.getContactnumber());
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("address" + i + "", parentsDetails.getAddresspermanent());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("rollnumber" + i + "", parentsDetails.getStudent().getSts());
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("profession" + i + "", parentsDetails.getProfession());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("noofdependence" + i + "", parentsDetails.getNoofdependents().toString());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("annualincome" + i + "", parentsDetails.getParentsannualincome());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("religion" + i + "", parentsDetails.getStudent().getReligion());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("nationality" + i + "", parentsDetails.getStudent().getNationality());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("caste" + i + "", parentsDetails.getStudent().getCaste());
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("profession" + i + "", DataUtil.emptyString(parentsDetails.getProfession()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("noofdependence" + i + "", DataUtil.emptyString(parentsDetails.getNoofdependents() != null? parentsDetails.getNoofdependents().toString(): ""));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("annualincome" + i + "", DataUtil.emptyString(parentsDetails.getParentsannualincome()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("religion" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getReligion()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("nationality" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getNationality()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("caste" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getCaste()));
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("gender" + i + "",parentsDetails.getStudent().getGender());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("mothertongue" + i + "",parentsDetails.getStudent().getMothertongue());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("schoollastattended" + i + "",parentsDetails.getStudent().getSchoollastattended());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("stdlastattended" + i + "",parentsDetails.getStudent().getStdlaststudied());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("admissiondate" + i + "",DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getAdmissiondate()));
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("classonleaving" + i + "",parentsDetails.getStudent().getClassonleaving());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("dateofleaving" + i + "",DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateleaving()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("mothertongue" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getMothertongue()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("schoollastattended" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getSchoollastattended()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("stdlastattended" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getStdlaststudied()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("admissiondate" + i + "",DataUtil.emptyString(DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getAdmissiondate())));  
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("classonleaving" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getClassonleaving()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("dateofleaving" + i + "",DataUtil.emptyString(DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateleaving())));
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("reasonofleaving" + i + "",parentsDetails.getStudent().getReasonleaving());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("crecord" + i + "",parentsDetails.getStudent().getCrecord());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("crecorddate" + i + "",DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getCrecorddate()));
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("subsequentprogress" + i + "",parentsDetails.getStudent().getSubsequentprogress());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("notcissued" + i + "",parentsDetails.getStudent().getNotcissued().toString());
-	            	   printMultipleEmployeesResponseDto.getResultParams().put("datetcissued" + i + "",DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDatetcissued()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("crecord" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getCrecord()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("crecorddate" + i + "",DataUtil.emptyString(DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getCrecorddate())));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("subsequentprogress" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getSubsequentprogress()));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("notcissued" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getNotcissued() != null? parentsDetails.getStudent().getNotcissued().toString(): ""));
+	            	   printMultipleEmployeesResponseDto.getResultParams().put("datetcissued" + i + "",DataUtil.emptyString(DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDatetcissued())));
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("remark" + i + "",parentsDetails.getStudent().getRemarks());
 	            	   printMultipleEmployeesResponseDto.getResultParams().put("age" + i + "",parentsDetails.getStudent().getAge().toString());
 	            	   //result = true;
@@ -900,6 +899,5 @@ public class DocumentService {
 	        	printMultipleEmployeesResponseDto.setSuccess(true);
 	        }
 	        return printMultipleEmployeesResponseDto;
-
 		}
 }

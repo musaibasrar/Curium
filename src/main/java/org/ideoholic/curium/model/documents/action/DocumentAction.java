@@ -81,6 +81,7 @@ public class DocumentAction {
 	@GetMapping("/admissionAbstract")
 	public String admissionAbstract() {
 		if(documentActionAdapter.admissionAbstract()){
+			standardActionAdapter.viewClasses();
 			return "admissionabstract";
 		}
         return error;
