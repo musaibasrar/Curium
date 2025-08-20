@@ -467,7 +467,14 @@ for(Cookie cookie : cookies){
   </tr>
   <tr align="center"><td style="text-align:center;padding:0px;">
     <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:25px;font-weight: 900; color:yellow">GNYAN GANGA </p></td></tr>
-    <tr><td style="text-align:center;padding:0px;"> <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
+    <tr><td style="text-align:center;padding:0px;">  <c:choose>
+              <c:when test="${branchid == 2}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
+              </c:when>
+              <c:when test="${branchid == 3}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow"> P.U. SCIENCE COLLEGE</p>
+              </c:when>
+          </c:choose>
    <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">TQ CHITGUPPA, Dist BIDAR-585412</p>
    </table>
   </div>
