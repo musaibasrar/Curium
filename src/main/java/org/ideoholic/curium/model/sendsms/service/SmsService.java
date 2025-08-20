@@ -119,7 +119,7 @@ public class SmsService {
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				result = true;
+				return ResultResponse.builder().success(true).build();
 			}
 		}
 		
