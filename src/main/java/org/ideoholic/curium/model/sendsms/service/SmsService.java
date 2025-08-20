@@ -105,6 +105,7 @@ public class SmsService {
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
+						
 						while (attempts < maxRetries) {
 						    resultSMS = sendSMS(numbers, message, SMSTempType);
 						    
