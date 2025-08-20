@@ -105,9 +105,6 @@ public class SmsService {
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
-						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
-
 						while (attempts < maxRetries) {
 						    resultSMS = sendSMS(numbers, message, SMSTempType);
 						    
@@ -117,7 +114,6 @@ public class SmsService {
 						    
 						    attempts++; // retry if not successful
 						}
-						
 					}
 					
 				offset = offset+100;
