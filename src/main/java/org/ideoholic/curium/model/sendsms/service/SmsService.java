@@ -46,6 +46,8 @@ public class SmsService {
 			String addClass =dto.getAddClass();
 			String addSec = dto.getAddSec();
 			String conClassStudying = "";
+			int maxRetries = 3;
+			int attempts = 0;
 			
 			if(addClass.contains("ALL")){
 				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
@@ -105,9 +107,6 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						resultSMS = sendSMS(numbers,message,SMSTempType);
-						
-						int maxRetries = 3;
-						int attempts = 0;
 
 						while (attempts < maxRetries) {
 						    resultSMS = sendSMS(numbers, message, SMSTempType);
