@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,6 +49,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
@@ -150,6 +153,7 @@ public class MarksDetailsService {
 				marks.setAcademicyear(currentYear);
 				marks.setBranchid(Integer.parseInt(branchId));
 				marks.setUserid(Integer.parseInt(userId));
+				marks.setSubsubjectid(0);
 				marksList.add(marks);
 			}
 
@@ -402,10 +406,10 @@ public class MarksDetailsService {
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
 			for (Marks marks : singleMarksDetails) {
-				int subId = marks.getSubid();
-				if ( subId == subjectDetailsId && marks.getExamid() == Integer.parseInt(examIdName[0])) {
+				int subSubjectId = marks.getSubsubjectid();
+				if ( subSubjectId ==0) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
