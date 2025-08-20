@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.hr.service;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -14,11 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -26,31 +22,57 @@ import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
-import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.hr.dao.HrDAO;
-import org.ideoholic.curium.model.hr.dto.*;
+import org.ideoholic.curium.model.hr.dto.AdvanceSalaryApprovalDto;
+import org.ideoholic.curium.model.hr.dto.ApplyLeaveDto;
+import org.ideoholic.curium.model.hr.dto.BasicPayDto;
+import org.ideoholic.curium.model.hr.dto.DeleteAdvaceSalaryApprovalDto;
+import org.ideoholic.curium.model.hr.dto.LeaveApprovalsResponseDto;
+import org.ideoholic.curium.model.hr.dto.LeaveDetailsDto;
+import org.ideoholic.curium.model.hr.dto.LeaveIdsDto;
+import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
+import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
+import org.ideoholic.curium.model.hr.dto.Leaveapplication;
+import org.ideoholic.curium.model.hr.dto.Leavedetails;
+import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
+import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
+import org.ideoholic.curium.model.hr.dto.PayHeadDto;
+import org.ideoholic.curium.model.hr.dto.PayHeadResponseDto;
+import org.ideoholic.curium.model.hr.dto.PayHeadStaffDetailsDto;
+import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
+import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.hr.dto.Payhead;
+import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
+import org.ideoholic.curium.model.hr.dto.Pf;
+import org.ideoholic.curium.model.hr.dto.PfDto;
+import org.ideoholic.curium.model.hr.dto.PfSettingsResponseDto;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.model.hr.dto.SalaryDto;
+import org.ideoholic.curium.model.hr.dto.SalaryResponseDto;
+import org.ideoholic.curium.model.hr.dto.SalarySlipResponseDto;
+import org.ideoholic.curium.model.hr.dto.SaveAdvanceSalaryDto;
+import org.ideoholic.curium.model.hr.dto.StaffDetailsDto;
+import org.ideoholic.curium.model.hr.dto.StaffDetailsResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class HrService {
-	@Autowired
-	private HttpServletResponse response;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private YearDAO yearDao;
-	
-	@Autowired
-	private AttendanceDAO attendanceDao;
+	private final HttpServletResponse response;
+	private final EmployeeService employeeService;
+	private final YearDAO yearDao;
+	private final AttendanceDAO attendanceDao;
+	private final HrDAO hrDao;
 	
 	public LeaveTypeResponseDto leaveType(String branchId) {
         LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
@@ -58,7 +80,7 @@ public class HrService {
 		List<Leavetypemaster> list = new ArrayList<>();
 		
 		if(branchId!=null){
-			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(branchId));
+			list = hrDao.readListOfLeaveTypes(Integer.parseInt(branchId));
 		}
         leaveTypeResponseDto.setLeavetypemaster(list);
 		leaveTypeResponseDto.setSuccess(true);
@@ -73,7 +95,7 @@ public class HrService {
 		leaveMaster.setBranchid(Integer.parseInt(branchId));
 		leaveMaster.setUserid(Integer.parseInt(userId));
 
-		return ResultResponse.builder().success(new HrDAO().saveLeaveType(leaveMaster)).build();
+		return ResultResponse.builder().success(hrDao.saveLeaveType(leaveMaster)).build();
 
 	}
 
@@ -81,7 +103,7 @@ public class HrService {
 		Leavetypemaster leaveType = new Leavetypemaster();
 		leaveType.setIdleavetypemaster(Integer.parseInt(DataUtil.emptyString(dto.getIdLeave())));
 
-		return ResultResponse.builder().success(new HrDAO().deleteLeaveType(leaveType)).build();
+		return ResultResponse.builder().success(hrDao.deleteLeaveType(leaveType)).build();
 
 	}
 
@@ -110,7 +132,7 @@ public class HrService {
 			}
 			
 		}
-		return ResultResponse.builder().success(new HrDAO().addLeaves(leaveDetailsList)).build();
+		return ResultResponse.builder().success(hrDao.addLeaves(leaveDetailsList)).build();
 
 	}
 		return ResultResponse.builder().build();
@@ -123,7 +145,7 @@ public class HrService {
 
 			result.setCurrentAcademicYear(currentYear);
 
-			List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(id), currentYear.getCurrentacademicyear());
+			List<Leavedetails> leaveDetailsList = hrDao.getLeaveDetails(DataUtil.emptyString(id), currentYear.getCurrentacademicyear());
 			result.setLeaveDetailsList(leaveDetailsList);
 
 			if (!leaveDetailsList.isEmpty()) {
@@ -142,7 +164,7 @@ public class HrService {
 	public LeavesDetailsResponseDto leaveDetailsPerYear(LeaveDetailsDto dto) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 
-		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
+		List<Leavedetails> leaveDetailsList = hrDao.getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
 		result.setLeaveDetailsList(leaveDetailsList);
 
 		
@@ -175,7 +197,7 @@ public class HrService {
 		payHead.setBranchid(Integer.parseInt(branchId));
 		payHead.setUserid(Integer.parseInt(userId));
 
-		return ResultResponse.builder().success(new HrDAO().savePayHead(payHead)).build();
+		return ResultResponse.builder().success(hrDao.savePayHead(payHead)).build();
 		}
 		return ResultResponse.builder().build();
 	}

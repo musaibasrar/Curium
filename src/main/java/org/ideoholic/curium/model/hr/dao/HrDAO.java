@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.hr.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.hr.dto.Leaveapplication;
 import org.ideoholic.curium.model.hr.dto.Leavedetails;
@@ -14,9 +16,13 @@ import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
 import org.ideoholic.curium.model.hr.dto.Pf;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.model.user.service.LeaveDetailsRepository;
+import org.ideoholic.curium.repositories.LeaveTypeMasterRepository;
+import org.ideoholic.curium.repositories.PayHeadRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,106 +30,103 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class HrDAO {
+	
+    @Autowired
+    private LeaveTypeMasterRepository leaveTypeMasterRepository;
 
+    @Autowired
+    private LeaveDetailsRepository leaveDetailsRepository;
+
+    @Autowired
+    private PayHeadRepository payHeadRepository;
+
+    @Transactional
 	public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {
-		Transaction transaction = null;
 		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
 
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
+            // session.createQuery("From Leavetypemaster where branchid="+branchId).list();
+            list = leaveTypeMasterRepository.findByBranchId(branchId);
+        } catch (Exception hibernateException) {
+        	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
+            throw hibernateException;
 		}
         return list;
 	}
 
+	@Transactional
 	public boolean saveLeaveType(Leavetypemaster leaveMaster) {
-		Transaction transaction = null;
-		try { Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(leaveMaster);
-            transaction.commit();
-            return true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+		try {
+			// session.save(leaveMaster);
+			leaveTypeMasterRepository.save(leaveMaster);
+			return true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
-		return false;
 	}
 
+	@Transactional
 	public boolean deleteLeaveType(Leavetypemaster leaveType) {
-		Transaction transaction = null;
-		try { Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.delete(leaveType);
-            transaction.commit();
-            return true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+		try {
+			// session.delete(leaveType);
+			leaveTypeMasterRepository.delete(leaveType);
+			return true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
-		return false;
 	}
 
+	@Transactional
 	public boolean addLeaves(List<Leavedetails> leaveDetailsList) {
-		Transaction transaction = null;
-		try { Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            for (Leavedetails leavedetails : leaveDetailsList) {
-            	session.save(leavedetails);
-			}
-            transaction.commit();
-            return true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
+		try {
+			// for (Leavedetails leavedetails : leaveDetailsList) {
+			// session.save(leavedetails);
+			// }
+			leaveDetailsRepository.saveAll(leaveDetailsList);
+			return true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
-		return false;
 	}
 
+	@Transactional
 	public List<Leavedetails> getLeaveDetails(String teacherId, String academicYear) {
 		List<Leavedetails> leaveDetailsList = new ArrayList<Leavedetails>();
-		Transaction transaction = null;
-		try { Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
+		try {
+			// session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
+			leaveDetailsList = leaveDetailsRepository.findByTeacherIdAndAcademicYear(teacherId, academicYear);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
 		return leaveDetailsList;
-		
+
 	}
 
+	@Transactional
 	public boolean savePayHead(Payhead payHead) {
-		Transaction transaction = null;
-		try { Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(payHead);
-            transaction.commit();
-            return true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
+		try {
+			// session.save(payHead);
+			payHeadRepository.save(payHead);
+			return true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+
+			throw hibernateException;
 		}
-		return false;
 	}
 
 	public List<Payhead> getPayHeadList(String academicYear, int branchId) {
