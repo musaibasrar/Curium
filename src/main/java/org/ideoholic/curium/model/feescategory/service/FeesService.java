@@ -272,7 +272,7 @@ public class FeesService {
                           		// End J.V
                           		
                         }
-                new FeesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
+                feesCategoryDao.deleteFeesCategory(sfsId,feesCatId,studentId,transactionsList,debitEntries,creditEntries);
                 
                 studentIdDto.getStudentId();
                 return studentIdDto;
