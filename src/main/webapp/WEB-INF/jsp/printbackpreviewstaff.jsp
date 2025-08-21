@@ -468,10 +468,17 @@ for(Cookie cookie : cookies){
   </table>
   <table style="background-color:white;">
   <tr align="center"><td style="text-align:center;padding:0px;font-size:12px;font-weight: 900; color:red">
-   GNYAN GANGA INDEPENDENT</td>
-    <td rowspan="2"><img src="/gnyanganga/images/gnyanganga${branchid}.png" width="35" height="30"/></td></tr>
+   GNYAN GANGA</td>
+    <td rowspan="2"><img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="35" height="30"/></td></tr>
     <tr><td style="text-align:center;padding:0px;font-size:11px;">
-  PU.SCIENCE COLLEGE CHITGUPPA</td>
+  <c:choose>
+              <c:when test="${branchid == 2}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
+              </c:when>
+              <c:when test="${branchid == 3}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow"> P.U. SCIENCE COLLEGE</p>
+              </c:when>
+          </c:choose></td>
    </table>
   </div>
   <table>

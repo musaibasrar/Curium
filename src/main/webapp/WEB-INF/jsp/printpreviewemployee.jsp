@@ -469,7 +469,7 @@ for(Cookie cookie : cookies){
   <table style="background-color:white;">
   <tr align="center"><td style="text-align:center;padding:0px;font-size:12px;font-weight: 900; color:red">
    GNYAN GANGA INDEPENDENT</td>
-    <td rowspan="2"><img src="/gnyanganga/images/gnyanganga${branchid}.png" width="35" height="30"/></td></tr>
+    <td rowspan="2"><img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="35" height="30"/></td></tr>
     <tr><td style="text-align:center;padding:0px;font-size:11px;">
   PU.SCIENCE COLLEGE CHITGUPPA</td>
    </table>
@@ -519,7 +519,7 @@ for(Cookie cookie : cookies){
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
-<table align="center" width="100%">
+<table align="center" width="100%" >
 <tr><td style="color:white;text-align:center"><br>Near Mastury road Tq. Chitguppa</td></tr>
 <tr><td style="color:white;text-align:center">Dist. Bidar -State : Karnataka-585412</td></tr>
 <tr><td style="color:white;text-align:center">Contact No. 8884668500/9620116912</td></tr>

@@ -466,10 +466,19 @@ for(Cookie cookie : cookies){
   <td colspan="2" style="color:white;font-size:7px;"><i>Sri Swami Vivekanand Educational and Rural Development Trust</i></td>
   </tr>
   <tr align="center"><td rowspan="2" style="text-align:center;padding:0px;">
-   <img src="/gnyanganga/images/gnyanganga${branchid}.png" width="50" height="42"/>
+   <img src="/gnyanganga/images/gnyanganga${branchid}.jpg" width="50" height="42"/> 
+  <!--  <img src="/gnyanganga/images/gnyangangapuc.jpeg" width="50" height="42"/> -->
   </td><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:20px;font-weight: 900; color:yellow">GNYAN GANGA </p></td></tr>
-    <tr><td style="text-align:center;padding:0px;"> <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:20px;font-weight: 900; color:yellow"> GNYAN GANGA  </p></td></tr>
+    <tr><td style="text-align:center;padding:0px;"> <!-- ENGLISH MEDIUM SCHOOL -->
+    <c:choose>
+              <c:when test="${branchid == 2}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow">ENGLISH MEDIUM SCHOOL</p>
+              </c:when>
+              <c:when test="${branchid == 3}">
+            <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:yellow"> P.U. SCIENCE COLLEGE</p>
+              </c:when>
+          </c:choose>
    <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">TQ CHITGUPPA, Dist BIDAR-585412</p>
    </table>
   </div>
