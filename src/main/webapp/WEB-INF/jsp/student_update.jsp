@@ -500,7 +500,7 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-1">Student Details</a></li>
 					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
-					<li><a href="#tabs-4">Additional Details</a></li>
+					<!-- <li><a href="#tabs-4">Additional Details</a></li> -->
 					<li><a href="#tabs-5">Bank Details</a></li>
 				</ul>
 
@@ -801,16 +801,16 @@ for(Cookie cookie : cookies){
 							<td align="left">
 							
 							<label>
-							<select name="mothertongue" onblur="validateNameContact();"
+								<select name="mothertongue" onblur="validateNameContact();"
 									id="mothertongue" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected>${student.mothertongue}</option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
+										<option selected></option>
 										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
 										<option>Marathi</option>
 										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>English</option>
 								</select>
 							</label>
 							
@@ -1059,7 +1059,7 @@ for(Cookie cookie : cookies){
 </div>
 
 
-						<div id="tabs-4">
+						<%-- <div id="tabs-4">
 							<table width="70%" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1177,7 +1177,7 @@ for(Cookie cookie : cookies){
 							
 							</table>
 							
-							</div>
+							</div> --%>
 							
 							
 							

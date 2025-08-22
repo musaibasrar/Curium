@@ -155,6 +155,7 @@ public class FeesService {
 					student.setStudentexternalid((String) parentdetails[3]);
 					student.setAdmissionnumber((String) parentdetails[4]);
 					parent.setFathersname((String) parentdetails[5]);
+					parent.setMothersname((String) parentdetails[6]);
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}

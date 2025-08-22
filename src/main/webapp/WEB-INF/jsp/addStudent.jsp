@@ -890,7 +890,7 @@ $(document).ready(function() {
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<!-- <li><a href="#fragment-5">Previous School Details</a></li> -->
-					<li><a href="#fragment-4">Additional Details</a></li>
+					<!-- <li><a href="#fragment-4">Additional Details</a></li> -->
 					<li><a href="#fragment-5">Bank Details</a></li>
 					<li><a href="#fragment-6">Stamp Fee</a></li>
 					<!-- <li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li> -->
@@ -1162,13 +1162,13 @@ $(document).ready(function() {
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
 										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
 										<option>Marathi</option>
 										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>English</option>
 								</select>
 							</label>
 							</td>
@@ -1400,7 +1400,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-4">
+						<%-- <div id="fragment-4">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1538,7 +1538,7 @@ $(document).ready(function() {
 
 							</table>
 
-						</div>
+						</div> --%>
 
 
 						<div id="fragment-2">

@@ -263,6 +263,7 @@ public class FeesCollectionService {
 		result.setStudentIdDetails(dto.getStudentId());
 		result.setDateOfFeesDetails(dto.getDateOfFees());
 		result.setFatherName(dto.getFatherName());
+		result.setMotherName(dto.getMotherName());
 		result.setSuccess(true);
 		
 		}

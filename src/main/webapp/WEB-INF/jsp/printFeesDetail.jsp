@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -204,7 +204,7 @@
 			<tr >
 			
 				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;font-weight: bold;"><c:out value="${student.name}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
@@ -282,7 +282,7 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">Rs. <c:out
+					<td class="dataText" style="font-weight: bold;">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
@@ -321,7 +321,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></label></td>
 			</tr>
 			
 			</table>
@@ -342,7 +342,7 @@
 					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
+				 <label style="font-weight: bold;">Total fees Due : Rs.  ${dueamount}</label> 
 				</td>
 				
 			</tr>
@@ -382,7 +382,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -403,7 +403,7 @@
 			<tr >
 			
 				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 15px;font-weight: bold;"><c:out value="${student.name}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
@@ -481,7 +481,7 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">Rs. <c:out
+					<td class="dataText" style="font-weight: bold;">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
@@ -521,7 +521,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></label></td>
 			</tr>
 			
 			</table>
@@ -542,7 +542,7 @@
 					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
+				 <label style="font-weight: bold;">Total fees Due : Rs.  ${dueamount} </label>
 				</td>
 				
 			</tr> 

@@ -471,12 +471,27 @@
                 name:'<c:out default="0" value="${parent.student.name}" />',
                 classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
                 id:'<c:out default="0" value="${parent.student.sid}" />',
-                fathername:'<c:out default="0" value="${parent.fathersname}" />',
-                
+                fathername:'<c:out value="${parent.fathersname}" />',
+                mothername:'<c:out value="${parent.mothersname}" />',
+                studentexternalid:'<c:out default="0" value="${parent.student.studentexternalid}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
-        $(function() {
+            var studentsstudentexternalid = [
+                <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
+                	value:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                    admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
+                    regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                    name:'<c:out default="0" value="${parent.student.name}" />',
+                    classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
+                    id:'<c:out default="0" value="${parent.student.sid}" />',
+                    fathername:'<c:out value="${parent.fathersname}" />',
+                    mothername:'<c:out value="${parent.mothersname}" />',
+                    studentexternalid:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                }<c:if test="${!status.last}">,</c:if>
+                </c:forEach>
+            ];
+         $(function() {
             $( "#studentname").autocomplete({
                 source: students,
                 minLength: 1,
@@ -495,7 +510,8 @@
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#admissionno").val( ui.item.admissionno );
        			$( "#fathername").val( ui.item.fathername );
-                    /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+       			$( "#mothername").val( ui.item.mothername );
+       			$( "#studentexternalid").val( ui.item.studentexternalid );
                     return true;
                 }
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
@@ -528,6 +544,61 @@
                 return false;
             });            
 
+        });
+        $(function() {
+            $( "#studentexternalid").autocomplete({
+                source: studentsstudentexternalid,
+                minLength: 1,
+                change:function(event,ui){
+                    $( "#studentId").val( ui.item.id );
+                    
+                    
+                },
+                focus: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+                    return true;
+                },
+                select: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+       			  $( "#studentname").val( ui.item.name );
+       			$( "#classandsec").val( ui.item.classandsec );
+       			$( "#admissionno").val( ui.item.admissionno );
+       			$( "#fathername").val( ui.item.fathername );
+       			$( "#mothername").val( ui.item.mothername );
+       			$( "#studentexternalid").val( ui.item.studentexternalid );
+                    /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+                    return true;
+                }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> "+item.regno+"/" + item.name +" / "+item.classandsec+" / "+item.fathername+" </b> </a>" )
+                .appendTo( ul );
+            };
+            
+            var addFeesButtonID="#addFees";
+            var removeDossageButtonID="#removeDossage";
+            $( addFeesButtonID )
+            .button({
+                icons: {
+                    primary: "ui-icon-search"
+                }
+            })
+            .click(function() {
+            	 getstampfees();
+                 //addRow();
+                return false;
+            });
+            $(removeDossageButtonID)
+            .button({
+                icons: {
+                    primary: "ui-icon-minus"
+                }
+            })
+            .click(function() {
+                deleteRow('dataTable');
+                return false;
+            });     
         });
         $('#selectAll').click(function () {
             var length = $('.chcktbl:checked').length;
@@ -941,9 +1012,9 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-                    <td style="width: 45%;" class="alignLeft">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /><input name="studentId" type="hidden" id="studentId" value="" /><input  type="hidden" name="fathername" id="fathername" class="myclass" /></td>
+                    <td style="width: 45%;" class="alignLeft">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /><input name="studentId" type="hidden" id="studentId" value="" /><input  type="hidden" name="fathername" id="fathername" class="myclass" /><input  type="hidden" name="mothername" id="mothername" class="myclass" /></td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
+                        <td class="alignLeft">UID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="studentexternalid" id="studentexternalid" class="myclass" /></td>
                     </tr>
                     
                     <tr>
@@ -954,7 +1025,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
-                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
+                        <td class="alignLeft">Class : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
                         
                     </tr>
                     
@@ -979,6 +1050,7 @@ for(Cookie cookie : cookies){
                                     </label>
                         
                         </td>
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                         
                     </tr>
                     
@@ -1012,7 +1084,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" style="border: none;" readonly/></td>
-                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
+                        <td class="alignLeft">Class : &nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
@@ -1032,6 +1104,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Father Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fatherNameDetails" id="fatherNameDetails" value="${fatherNameDetails}" class="myclass" readonly style="border: none;"/></td>
+                    	<td class="alignLeft">Mother Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="motherNameDetails" id="motherNameDetails" value="${motherNameDetails}" class="myclass" readonly style="border: none;"/></td>
                     </tr>
                     <tr>
 						<td><br></td>
@@ -1050,7 +1123,7 @@ for(Cookie cookie : cookies){
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
-                        <td class="headerText">Amount Due to be paid</td>
+                        <td class="headerText">Amount Paying</td>
                         <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
@@ -1079,7 +1152,7 @@ for(Cookie cookie : cookies){
 							</td> -->
 						</tr>
 					</c:forEach>
-						<tr class="trClass" style="border-color: #000000" border="1"
+						<tr class="trClass" style="border-color: #000000;display: none;" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="fine" 
@@ -1094,7 +1167,7 @@ for(Cookie cookie : cookies){
 							</td>
 						</tr>
 						
-						<tr class="trClass" style="border-color: #000000" border="1"
+						<tr class="trClass" style="border-color: #000000;display: none;" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="misc" 
@@ -1195,7 +1268,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 							
-								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)" checked="checked">
 								<label for="cashpayment">Cash</label>
 									
 								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">

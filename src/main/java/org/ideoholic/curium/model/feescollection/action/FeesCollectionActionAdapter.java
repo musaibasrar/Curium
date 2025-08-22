@@ -100,6 +100,7 @@ public class FeesCollectionActionAdapter {
         dto.setStudentId(request.getParameter("studentId"));
         dto.setDateOfFees(request.getParameter("dateoffees"));
         dto.setFatherName(request.getParameter("fathername"));
+        dto.setMotherName(request.getParameter("mothername"));
 
         StampFeeResponseDto responseDto = feesCollectionService.getStampFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         request.setAttribute("studentfeesdetailspreviousyear", responseDto.getPreviousYearFeesMap());
@@ -111,6 +112,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("studentIdDetails", responseDto.getStudentIdDetails());
         request.setAttribute("dateoffeesDetails", responseDto.getDateOfFeesDetails());
         request.setAttribute("fatherNameDetails", responseDto.getFatherName());
+        request.setAttribute("motherNameDetails", responseDto.getMotherName());
     }
 
     public void getFeesDetails() {
