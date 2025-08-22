@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LeaveDetailsRepository extends JpaRepository<Leavedetails, Long> {
-    List<Leavedetails> findByTeacherIdAndAcademicYear(String teacherId, String academicYear);
+public interface LeaveDetailsRepository extends JpaRepository<Leavedetails, Integer> {
+    List<Leavedetails> findByTeacherTidAndAcademicyear(String teacherId, String academicYear);
 }

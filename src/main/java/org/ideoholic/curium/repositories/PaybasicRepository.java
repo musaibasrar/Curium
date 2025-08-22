@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaybasicRepository extends JpaRepository<Paybasic, Integer> {
 	List<Paybasic> findByBranchid(Integer branchId);
+
+	Paybasic findByTeacherTidAndAcademicyear(int idteacher, String academicYear);
 }
