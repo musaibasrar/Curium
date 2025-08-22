@@ -1488,7 +1488,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),branchId,examsList.getExid());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examsList.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examsList.getExamname());
 					
 					
