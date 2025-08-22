@@ -212,4 +212,21 @@ public class DocumentActionAdapter {
 		request.setAttribute("character", characterResponseDto.getCharacter());
 	}
 
+	public void viewTcDetail() {
+
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
+		CharacterResponseDto characterResponseDto = documentService.viewTcDetail();
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		
+	}
+
+	public boolean printTcList() {
+		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
+		CharacterDto characterDto = new CharacterDto();
+		characterDto.setFeesIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto);
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		return characterResponseDto.isSuccess();
+	}
+
 }
