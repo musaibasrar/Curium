@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "payhead", catalog = "school")
 public class Payhead implements java.io.Serializable {
+	private static final long serialVersionUID = -5269998057639326302L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

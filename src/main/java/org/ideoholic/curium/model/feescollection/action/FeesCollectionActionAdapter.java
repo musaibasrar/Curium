@@ -536,6 +536,13 @@ public class FeesCollectionActionAdapter {
 	public boolean readFileForOtherFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
 		return feesCollectionService.readFileForOtherFees(uploadedFiles);
 	}
-	
-	
+
+	public void getFeesReportOutstanding() {
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYearArray(request.getParameterValues("academicyear"));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+        													  	
+        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
 }

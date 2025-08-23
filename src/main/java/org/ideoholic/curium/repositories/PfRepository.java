@@ -2,12 +2,12 @@ package org.ideoholic.curium.repositories;
 
 import java.util.List;
 
-import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.hr.dto.Pf;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CardRepository extends JpaRepository<Card, Integer> {
+public interface PfRepository extends JpaRepository<Pf, Integer> {
 
-	List<Card> findBySidIn(List<Integer> sids);
+	List<Pf> findByBranchidOrderByDateDesc(int branchId);
 }
