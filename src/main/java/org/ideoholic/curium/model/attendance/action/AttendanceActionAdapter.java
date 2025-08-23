@@ -329,7 +329,7 @@ public class AttendanceActionAdapter {
         StudentsAttendanceDto dto = new StudentsAttendanceDto();
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
-        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
+        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
     }
 
 	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
