@@ -12,7 +12,11 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
+import org.ideoholic.curium.repositories.FeescollectionRepository;
+import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
+import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,14 @@ public class FeesCategoryDAO {
 
 	@Autowired
 	private FeescategoryRepository feesCatRepo;
+	@Autowired
+	private FeescollectionRepository feescollectionRepo;
+	@Autowired
+	private StudentFeesStructureRepository studentFeesStructureRepo;
+	@Autowired
+	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
+	@Autowired
+	private QueryUtil queryUtil;
 	
 	@Transactional
 	public List<Feescategory> readListOfObjects(int branchId, String academicYear) {
@@ -70,41 +82,39 @@ public class FeesCategoryDAO {
 
 	}
 
-	public void deleteFeesCategory(List ids, List feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
+	@Transactional
+	public void deleteFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {
 		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
+		int sId = Integer.parseInt(sid);
 		try {
-			transaction = session.beginTransaction();
-			Query queryOne = session.createQuery("from Feescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
-			queryOne.setParameterList("ids", ids);
-			feesCollection = queryOne.list();
+			//Query queryOne = session.createQuery("from Feescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
+			 feesCollection = feescollectionRepo.findByStudentSidAndStudentFeeStructureSfsidIn(sId, ids);
 			
 			if(feesCollection.isEmpty()){
-				Query query = session.createQuery("delete from Studentfeesstructure as fees where fees.sid = "+sid+" and fees.sfsid IN (:ids)");
-				query.setParameterList("ids", ids);
-				query.executeUpdate();
+				//Query query = session.createQuery("delete from Studentfeesstructure as fees where fees.sid = "+sid+" and fees.sfsid IN (:ids)");
+				studentFeesStructureRepo.deleteBySidAndSfsidIn(sId, ids);
 				
 				for (VoucherEntrytransactions transactions : transactionsList) {
-					session.save(transactions);
+					voucherEntryTransactionsRepo.save(transactions);
 				}
 				
 				for (String updateDrAccount : debitEntries) {
-					Query queryAccounts = session.createQuery(updateDrAccount);
-					queryAccounts.executeUpdate();
+					//Query queryAccounts = session.createQuery(updateDrAccount);
+					//queryAccounts.executeUpdate();
+					queryUtil.runUpdateQuery(updateDrAccount);
 				}
 				
 				for (String updateCrAccount : creditEntries) {
-					Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-					queryqueryAccounts1.executeUpdate();
+					//Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+					//queryqueryAccounts1.executeUpdate();
+					queryUtil.runUpdateQuery(updateCrAccount);
 				}
 				
 			}
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException; 
 		}
 	}
 
