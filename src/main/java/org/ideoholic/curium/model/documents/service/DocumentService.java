@@ -824,4 +824,63 @@ public class DocumentService {
 			
 			return parentDto;
 		}
+		 
+		 public CharacterResponseDto viewTcDetail() {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Integer> sid = new ArrayList<Integer>(); 
+				for (Transfercertificate transfercertificate : tc) {
+					sid.add(transfercertificate.getSid());
+				}
+				List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+				
+				for (Parents parents : listofParents) {
+					int studentId = parents.getStudent().getSid();
+					
+					for (Transfercertificate transferCert : tc) {
+						int tcSid = transferCert.getSid();
+						if(studentId==tcSid) {
+							Student student = parents.getStudent();
+							student.setNotcissued(transferCert.getNoofissues());
+							student.setNooftc(transferCert.getTcid());
+							student.setDatetcissued(transferCert.getDateofissues());
+							parents.setStudent(student);
+						}
+						
+					}
+				}
+				characterResponseDto.setListofParents(listofParents);
+				return characterResponseDto;
+			}
+
+
+			public CharacterResponseDto printTcList(CharacterDto characterDto) {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				String[] feesIds = characterDto.getFeesIds();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Integer> sid = new ArrayList<Integer>(); 
+				for (String id : feesIds) {
+				    sid.add(Integer.parseInt(id));
+				}
+						List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+				
+				for (Parents parents : listofParents) {
+					int studentId = parents.getStudent().getSid();
+					
+					for (Transfercertificate transferCert : tc) {
+						int tcSid = transferCert.getSid();
+						if(studentId==tcSid) {
+							Student student = parents.getStudent();
+							student.setNotcissued(transferCert.getNoofissues());
+							student.setNooftc(transferCert.getTcid());
+							student.setDatetcissued(transferCert.getDateofissues());
+							parents.setStudent(student);
+						}
+						
+					}
+				}
+				characterResponseDto.setListofParents(listofParents);
+				characterResponseDto.setSuccess(true);
+				return characterResponseDto;
+			}
 }
