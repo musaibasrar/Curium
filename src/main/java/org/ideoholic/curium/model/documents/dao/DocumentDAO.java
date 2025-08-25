@@ -83,22 +83,6 @@ public class DocumentDAO {
 
 
 
-	public List<Parents> getListofStudentDetail(List<Integer> sid) {
-		List<Parents> results = new ArrayList<Parents>();
-		try {
-			
-			transaction = session.beginTransaction();
-            Query<Parents> query = session.createQuery("from Parents as parents where parents.Student.sid IN (:ids)");
-            query.setParameterList("ids", sid); 
-            results = query.list();
-            transaction.commit();	
-			
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return results;
-	}
+	
 	
 }

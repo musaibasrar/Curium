@@ -832,7 +832,7 @@ public class DocumentService {
 				for (Transfercertificate transfercertificate : tc) {
 					sid.add(transfercertificate.getSid());
 				}
-				List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+				List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
 				
 				for (Parents parents : listofParents) {
 					int studentId = parents.getStudent().getSid();
@@ -862,7 +862,7 @@ public class DocumentService {
 				for (String id : feesIds) {
 				    sid.add(Integer.parseInt(id));
 				}
-						List<Parents> listofParents = new DocumentDAO().getListofStudentDetail(sid);
+						List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
 				
 				for (Parents parents : listofParents) {
 					int studentId = parents.getStudent().getSid();
