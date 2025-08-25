@@ -383,7 +383,7 @@ public class FeesService {
                     		// End J.V
                         
                }
-           new FeesCategoryDAO().waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
+                feesCategoryDao.waiveOffFees(concessionList,studentId,transactionsApplyList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
