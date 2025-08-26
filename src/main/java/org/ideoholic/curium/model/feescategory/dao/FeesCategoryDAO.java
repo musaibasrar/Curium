@@ -173,58 +173,58 @@ public class FeesCategoryDAO {
 		}
 	}
 
+	@Transactional
 	public void applyConcession(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
-				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
-				query.executeUpdate();
-				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				queryAcademicFees.executeUpdate();
+				//Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(concession.getSfsid()).orElse(null);
+				studentfeesstructure.setConcession(Integer.parseInt(concession.getConcession()));
+				studentFeesStructureRepo.save(studentfeesstructure);
+				//Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				Academicfeesstructure academicfeesstructure = academicfeesstructureRepo.findById(Integer.parseInt(sid)).orElse(null);
+				academicfeesstructure.setTotalfees(concession.getConcessionOld());
+				academicfeesstructureRepo.save(academicfeesstructure);
 			}
-			
-			
-			
 			
 			//accounts
 			for (VoucherEntrytransactions transactions : transactionsReverseList) {
-				session.save(transactions);
+				voucherEntryTransactionsRepo.save(transactions);
 			}
 			
 			for (VoucherEntrytransactions transactions : transactionsApplyList) {
-				session.save(transactions);
+				voucherEntryTransactionsRepo.save(transactions);
 			}
 			
 			for (String updateDrAccountReverse : updateDrAccountReverseList) {
-				Query queryAccountsReverse = session.createQuery(updateDrAccountReverse);
-				queryAccountsReverse.executeUpdate();
+				//Query queryAccountsReverse = session.createQuery(updateDrAccountReverse);
+				//queryAccountsReverse.executeUpdate();
+				queryUtil.runUpdateQuery(updateDrAccountReverse);
 			}
 			
 			for (String updateCrAccountReverse : updateCrAccountReverseList) {
-				Query queryAccountsReverse = session.createQuery(updateCrAccountReverse);
-				queryAccountsReverse.executeUpdate();
+				//Query queryAccountsReverse = session.createQuery(updateCrAccountReverse);
+				//queryAccountsReverse.executeUpdate();
+				queryUtil.runUpdateQuery(updateCrAccountReverse);
 			}
 			
 			for (String updateDrAccountApply : updateDrAccountApplyList) {
-				Query queryAccountsApply = session.createQuery(updateDrAccountApply);
-				queryAccountsApply.executeUpdate();
+				//Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				//queryAccountsApply.executeUpdate();
+				queryUtil.runUpdateQuery(updateDrAccountApply);
 			}
 			
 			for (String updateCrAccountApply : updateCrAccountApplyList) {
-				Query queryAccountsApply = session.createQuery(updateCrAccountApply);
-				queryAccountsApply.executeUpdate();
+				//Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				//queryAccountsApply.executeUpdate();
+				queryUtil.runUpdateQuery(updateCrAccountApply);
 			}
 			
 			
-			transaction.commit();
 		} catch (Exception hibernateException) {
-			transaction.rollback(); 
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 	}
 	
