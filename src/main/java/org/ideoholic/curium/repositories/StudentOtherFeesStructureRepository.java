@@ -11,4 +11,6 @@ public interface StudentOtherFeesStructureRepository extends JpaRepository<Stude
 			List<Integer> feescat);
 	
 	List<Studentotherfeesstructure> findByStudentSidAndAcademicyear(Integer sid, String academicYear);
+
+	Studentotherfeesstructure findByStudent_SidAndOtherfeescategory_IdfeescategoryAndAcademicyear(Integer sid, Integer idFeesCategory, String academicYear);
 }
