@@ -102,4 +102,23 @@ public class DocumentDAO {
 		return results;
 	}
 	
+
+	public List<Transfercertificate> getTCertificateDetails() {
+		List<Transfercertificate> tc = new ArrayList<Transfercertificate>();
+		try {
+			transaction = session.beginTransaction();
+			tc = session.createQuery("from Transfercertificate").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return tc;
+	}
+
+
+
+	
+	
 }
