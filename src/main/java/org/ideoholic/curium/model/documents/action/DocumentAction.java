@@ -210,4 +210,26 @@ public class DocumentAction {
 		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/getTcDetail")
+	public String getTcDetail() {
+		return "generatetcdetail";
+	}
+	
+	@GetMapping("/tcDetail")
+	public String tcDetail() {
+		documentActionAdapter.viewTcDetail(); 
+		return "studentstcreport";
+	}
+	
+	@PostMapping("/printTcList")
+	public String printTcList() {
+		
+		if(documentActionAdapter.printTcList()){
+			return "printtclist";
+		}else{
+			return "error";
+		}
+		
+	}
 }
