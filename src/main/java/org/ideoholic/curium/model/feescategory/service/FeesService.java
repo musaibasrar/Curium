@@ -63,12 +63,16 @@ public class FeesService {
 			
 			@Autowired
 		    private AccountDAO accountDao;
-			
-			@Autowired
-			private FeesCategoryDAO feesCategoryDao;
-			
+
 			@Autowired
 			private feesDetailsDAO feesDetailsDao;
+
+			@Autowired
+			private FeesCategoryDAO feesCategoryDao;
+
+			@Autowired
+			private feesCollectionDAO feesCollectionDAO;
+			
 			
             /**
              * Size of a byte buffer to read/write file
@@ -448,7 +452,7 @@ public class FeesService {
 			}
 			searchFeesResponseDto.setCurrentYearFromService(searchStudentDto.getAcademicyear());
 			
-			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, searchStudentDto.getAcademicyear(), searchCriteria);
+			List<Studentfeesstructure> listStudentsFeesStructure = feesCollectionDAO.getStudentsFeesStructure(studentids, searchStudentDto.getAcademicyear(), searchCriteria);
 			
 			
 			for (Parents parents : searchStudentList) {

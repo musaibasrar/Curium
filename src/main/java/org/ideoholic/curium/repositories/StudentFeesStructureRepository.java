@@ -15,7 +15,13 @@ public interface StudentFeesStructureRepository extends JpaRepository<Studentfee
 	List<Studentfeesstructure> findByStudentSidAndFeescategoryIdfeescategoryIn(Integer sid, List<Integer> feescat);
 	
 	List<Studentfeesstructure> findByStudentSidAndAcademicyear(Integer sid, String academicYear);
-	
+
+	List<Studentfeesstructure> findByStudent_SidInAndAcademicyear(List<Integer> studentids, String academicYear);
+
+	Studentfeesstructure findByStudent_SidAndFeescategory_IdfeescategoryAndAcademicyear(Integer sid, Integer idFeesCategory, String academicYear);
+
+    List<Studentfeesstructure> findByStudent_SidInAndFeesamountGreaterThanAndAcademicyear(List<Integer> studentIds, Long amount, String academicYear);
+
     @Modifying
     @Query("delete from Studentfeesstructure s where s.student.sid = :sid and s.sfsid in :ids")
     void deleteBySidAndSfsidIn(@Param("sid") int sid, @Param("ids") List<Integer> ids);

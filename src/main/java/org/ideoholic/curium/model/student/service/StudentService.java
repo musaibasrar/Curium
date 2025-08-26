@@ -77,11 +77,18 @@ import lombok.extern.slf4j.Slf4j;
 public class StudentService {
 
 	private final HttpServletResponse response;
+
 	private final StandardService standardService;
+
 	private final YearDAO yearDao;
-    private final AccountDAO accountDao;
+
+	private final AccountDAO accountDao;
+
 	private final UserDAO userDao;
+
 	private final StudentDetailsDAO studentDetailsDao;
+
+	private final feesCollectionDAO feesCollectionDAO;
 	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
@@ -410,7 +417,7 @@ public class StudentService {
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
+			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
 			for (Receiptinfo receiptinfo : rinfo) {
 				VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
@@ -510,7 +517,7 @@ public class StudentService {
 			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
+			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
 			long totalSum = 0l;
@@ -595,7 +602,7 @@ public class StudentService {
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			List<Otherreceiptinfo> rinfo = feesCollectionDAO.getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
 			result.setOtherReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), currentYear.getCurrentacademicyear());
 
@@ -1057,7 +1064,7 @@ public class StudentService {
 			long id = Long.parseLong(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
+			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(id, academicYear);
 
@@ -1356,7 +1363,7 @@ public class StudentService {
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			List<Otherreceiptinfo> rinfo = feesCollectionDAO.getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
 			result.setOtherReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id.intValue(), currentYear.getCurrentacademicyear());
 
@@ -1438,7 +1445,7 @@ public class StudentService {
 			Integer id = Integer.parseInt(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 
-			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
+			List<Otherreceiptinfo> rinfo = feesCollectionDAO.getOtherReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
 			List<Studentotherfeesstructure> otherfeesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 
