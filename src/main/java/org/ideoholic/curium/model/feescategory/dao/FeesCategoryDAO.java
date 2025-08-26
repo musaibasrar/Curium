@@ -125,41 +125,51 @@ public class FeesCategoryDAO {
 
 	
 	@Transactional
-	public void waiveOffFees(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
+	public void waiveOffFees(List<Concession> concessionList, String sid,
+			List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountApplyList,
+			List<String> updateCrAccountApplyList) {
 		try {
 			for (Concession concession : concessionList) {
-				//Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
-				Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(concession.getSfsid()).orElse(null);
-				studentfeesstructure.setWaiveoff(Long.parseLong(concession.getConcession()));
-				studentFeesStructureRepo.save(studentfeesstructure);
-				//Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				Academicfeesstructure academicfeesstructure = academicfeesstructureRepo.findById(Integer.parseInt(sid)).orElse(null); 
-				academicfeesstructure.setTotalfees(concession.getConcession());
-				academicfeesstructureRepo.save(academicfeesstructure);
+				// Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(concession.getSfsid())
+						.orElse(null);
+				if (studentfeesstructure != null) {
+					studentfeesstructure.setWaiveoff(Long.parseLong(concession.getConcession()));
+					studentFeesStructureRepo.save(studentfeesstructure);
+				}
+				// Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				Academicfeesstructure academicfeesstructure = academicfeesstructureRepo.findById(Integer.parseInt(sid))
+						.orElse(null);
+				if (academicfeesstructure != null) {
+					Integer totalFees = Integer.parseInt(academicfeesstructure.getTotalfees());
+					totalFees -= Integer.parseInt(concession.getConcession());
+					academicfeesstructure.setTotalfees(String.valueOf(totalFees));
+					academicfeesstructureRepo.save(academicfeesstructure);
+				}
 			}
-			
-			//accounts
-			
+
+			// accounts
+
 			for (VoucherEntrytransactions transactions : transactionsApplyList) {
 				voucherEntryTransactionsRepo.save(transactions);
 			}
-			
+
 			for (String updateDrAccountApply : updateDrAccountApplyList) {
-				//Query queryAccountsApply = session.createQuery(updateDrAccountApply);
-				//queryAccountsApply.executeUpdate();
+				// Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				// queryAccountsApply.executeUpdate();
 				queryUtil.runUpdateQuery(updateDrAccountApply);
 			}
-			
+
 			for (String updateCrAccountApply : updateCrAccountApplyList) {
-				//Query queryAccountsApply = session.createQuery(updateCrAccountApply);
-				//queryAccountsApply.executeUpdate();
+				// Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				// queryAccountsApply.executeUpdate();
 				queryUtil.runUpdateQuery(updateCrAccountApply);
 			}
-			
-		} catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException; 
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
 	}
 
