@@ -1,5 +1,8 @@
 package org.ideoholic.curium.model.documents.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
@@ -39,6 +42,19 @@ public class DocumentDAO {
 			tc = transferCertificateRepo.findBySid(studentId);
 		}  catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
+		}
+		return tc;
+	}
+
+	@Transactional
+	public List<Transfercertificate> getTCertificateDetails() {
+		List<Transfercertificate> tc = new ArrayList<Transfercertificate>();
+		try {
+			tc = transferCertificateRepo.findAll();
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             throw hibernateException;
 		}
