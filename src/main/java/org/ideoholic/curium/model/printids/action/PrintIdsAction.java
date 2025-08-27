@@ -67,6 +67,12 @@ public class PrintIdsAction {
 		return "printpreview";
 	}
 	
+	@PostMapping("/generateIdBackPart")
+	public String printBackPreview() {
+		printIdsActionAdapter.printMultiple();
+		return "printbackpreview";
+	}  
+	
 	@GetMapping("/generateIdsEmployees")
 	public String generateIdsEmployees() {
 		 employeeActionAdapter.ViewAllEmployee();

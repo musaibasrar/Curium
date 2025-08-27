@@ -424,18 +424,7 @@ for(Cookie cookie : cookies){
     </style>
 
 <style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
-    /* CSS for table styling */
-    
+   
     
     
     
@@ -462,76 +451,45 @@ for(Cookie cookie : cookies){
 			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-      <tr><td><br></td></tr>
-  
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:red">
-    DAR AL MAJD<br>INTERNATIONAL SCHOOL<%-- ${branchname} --%> </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-    <%--<p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p> --%></td></tr>
-    <tr><td><br></td></tr>
-    <tr><td><br></td></tr>
+      
     
    </table>
   </div>
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+  <div>
+ <table align="center">
+ <tr><td><br></td></tr>
+ <tr><td><br></td></tr>
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
  <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/daralmajd/images/daralmajd.png" width="72" height="72"/>
+ <img src="/daralmajd/images/daralmajd.png" width="150" height="150"/>
  </td>
  </tr>
  </table>
    </div>
    <div align="center">
-   <p style="font-size:15px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table align="center" style="text-align:center;font-weight:bold">
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+  <td>Education for both the worlds</td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
- <%--  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
+  <td>Shar a bab ibrahim</td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
+  <td>Nuzla Sharqeyyah</td>
+  </tr>
+   <tr>
+  <td>P.O. Box NO: 448</td>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr> --%>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+  <td>Jeddah 22335 Saudi Arabia</td>
   </tr>
- <!--  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr> -->
+  <tr>
+  <td>0126332334/0500457744</td>
+  </tr>
 </table>
 
-<!-- <div height="30" width="20%" style="text-align:right;float:right;">
-
-<img src="/daralmajd/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
-</div> -->
 </div>
  </c:if>
    <% i = i + 1;%>
