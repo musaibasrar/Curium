@@ -1190,7 +1190,7 @@ $(document).ready(function() {
 							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
 									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
+										<option selected>OBC</option>
 										<option>General</option>
 										<option>OBC</option>
 										<option>SC</option>

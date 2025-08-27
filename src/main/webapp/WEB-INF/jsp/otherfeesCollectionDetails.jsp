@@ -1,5 +1,5 @@
 <%--
-    Document   : Bus Fees Collecion Details
+    Document   : Other Fees Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bus Fees Collection Details</title>
+<title>Other Fees Collection Details</title>
 <link rel="stylesheet" href="/childrenandglobal/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/childrenandglobal/css/datePicker/demos.css">
 <link rel="stylesheet" href="/childrenandglobal/css/font-awesome.css">
@@ -612,7 +612,7 @@ for(Cookie cookie : cookies){
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Bus Fees Collection Details</button>
+			<button id="add">Search Other Fees Collection Details</button>
 			<br />
 		</div>
 
@@ -724,7 +724,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Bus Fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Total Other Fees collected :</label>Rs. ${sumofotherdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
