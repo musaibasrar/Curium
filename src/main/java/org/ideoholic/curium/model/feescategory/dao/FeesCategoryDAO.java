@@ -131,21 +131,17 @@ public class FeesCategoryDAO {
 		try {
 			for (Concession concession : concessionList) {
 				// Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
-				Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(concession.getSfsid())
-						.orElse(null);
-				if (studentfeesstructure != null) {
+				studentFeesStructureRepo.findById(concession.getSfsid()).ifPresent(studentfeesstructure -> {
 					studentfeesstructure.setWaiveoff(Long.parseLong(concession.getConcession()));
 					studentFeesStructureRepo.save(studentfeesstructure);
-				}
+				});
 				// Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				Academicfeesstructure academicfeesstructure = academicfeesstructureRepo.findById(Integer.parseInt(sid))
-						.orElse(null);
-				if (academicfeesstructure != null) {
+				academicfeesstructureRepo.findById(Integer.parseInt(sid)).ifPresent(academicfeesstructure -> {
 					Integer totalFees = Integer.parseInt(academicfeesstructure.getTotalfees());
 					totalFees -= Integer.parseInt(concession.getConcession());
 					academicfeesstructure.setTotalfees(String.valueOf(totalFees));
 					academicfeesstructureRepo.save(academicfeesstructure);
-				}
+				});
 			}
 
 			// accounts
@@ -178,13 +174,18 @@ public class FeesCategoryDAO {
 		try {
 			for (Concession concession : concessionList) {
 				//Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
-				Studentfeesstructure studentfeesstructure = studentFeesStructureRepo.findById(concession.getSfsid()).orElse(null);
-				studentfeesstructure.setConcession(Integer.parseInt(concession.getConcession()));
-				studentFeesStructureRepo.save(studentfeesstructure);
+				studentFeesStructureRepo.findById(concession.getSfsid()).ifPresent(studentfeesstructure -> {
+					studentfeesstructure.setConcession(Integer.parseInt(concession.getConcession()));
+					studentFeesStructureRepo.save(studentfeesstructure);
+				});
+				
 				//Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				Academicfeesstructure academicfeesstructure = academicfeesstructureRepo.findById(Integer.parseInt(sid)).orElse(null);
-				academicfeesstructure.setTotalfees(concession.getConcessionOld());
-				academicfeesstructureRepo.save(academicfeesstructure);
+				academicfeesstructureRepo.findById(Integer.parseInt(sid)).ifPresent(academicfeesstructure -> {
+					Integer currentTotalFees = Integer.parseInt(academicfeesstructure.getTotalfees());
+					currentTotalFees += Integer.parseInt(concession.getConcessionOld()) - Integer.parseInt(concession.getConcession());
+					academicfeesstructure.setTotalfees(String.valueOf(currentTotalFees));
+					academicfeesstructureRepo.save(academicfeesstructure);
+				});
 			}
 			
 			//accounts
