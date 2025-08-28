@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.user.service;
+package org.ideoholic.curium.repositories;
 
 import java.util.List;
 

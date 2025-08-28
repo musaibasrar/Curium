@@ -592,7 +592,7 @@ public class FeesService {
                         
                }
                 
-           new FeesCategoryDAO().applyConcession(concessionList,studentId,transactionsReverseList,transactionsApplyList,updateDrAccountReverseList,updateCrAccountReverseList,updateDrAccountApplyList,updateCrAccountApplyList);
+                feesCategoryDao.applyConcession(concessionList,studentId,transactionsReverseList,transactionsApplyList,updateDrAccountReverseList,updateCrAccountReverseList,updateDrAccountApplyList,updateCrAccountApplyList);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
         }
