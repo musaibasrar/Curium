@@ -870,7 +870,7 @@ for(Cookie cookie : cookies){
 										    <c:forEach items="${sections}" var="sectionItem">
 										        <div class="checkbox-item">
 										            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-										                <input type="checkbox" name="classteacher"
+										                <input type="checkbox" name="classesteaching"
 										                       value="${classItem}--${sectionItem}">
 										                ${classItem} ${sectionItem}
 										            </label>

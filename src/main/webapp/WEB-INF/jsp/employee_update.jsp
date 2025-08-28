@@ -565,6 +565,9 @@ for(Cookie cookie : cookies){
 									class="textField" id="datepickerCD" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
+									</label>
+									</td>
+									</tr>
 						<tr>
 
 							<td></td>
@@ -601,6 +604,7 @@ for(Cookie cookie : cookies){
 													</c:forEach>
 
 							</label></td>
+							</tr>
 						<tr>
 
 							<td></td>
@@ -619,25 +623,53 @@ for(Cookie cookie : cookies){
 							<td width="28%"><label>
 							
 													<div class="checkbox-container">
-													    <c:set var="counter" value="0" scope="page" />
-													    <c:forEach items="${classdetailslist}" var="classdetails">
-													        <c:if test="${classdetails.classdetails != ''}">
-													            <c:forEach items="${classdetailslist}" var="sectiondetails">
-													                <c:if test="${sectiondetails.section != ''}">
-													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
-													                    <div class="checkbox-item">
-													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-													                            <input type="checkbox" name="classteacher"
-													                                   value="${classSec}"
-													                                   <c:if test="${classteacherList.contains(classSec)}">checked</c:if> />
-													                            ${classSec}
-													                        </label>
-													                    </div>
-													                    <c:set var="counter" value="${counter + 1}" scope="page" />
-													                </c:if>
-													            </c:forEach>
-													        </c:if>
-													    </c:forEach>
+													   <c:forEach items="${classList}" var="classItem">
+											    <c:choose>
+											        <c:when test="${not empty sectionList}">
+											            <c:forEach items="${sectionList}" var="sectionItem">
+											                <c:set var="classSec" value="${classItem} ${sectionItem}" />
+											                
+											                <!-- reset flag -->
+											                <c:set var="isChecked" value="false" />
+											                <!-- loop through teaching list to see if it matches -->
+											                <c:forEach items="${classteacherList}" var="item">
+											                    <c:if test="${item eq classSec}">
+											                        <c:set var="isChecked" value="true" />
+											                    </c:if>
+											                </c:forEach>
+											
+											                <div class="checkbox-item">
+											                    <label>
+											                        <input type="checkbox" name="classteacher"
+											                               value="${classSec}"
+											                               <c:if test="${isChecked}">checked</c:if> />
+											                        ${classSec}
+											                    </label>
+											                </div>
+											            </c:forEach>
+											        </c:when>
+											
+											        <c:otherwise>
+											            <!-- reset flag -->
+											            <c:set var="isChecked" value="false" />
+											            <!-- loop through teaching list -->
+											            <c:forEach items="${classteacherList}" var="item">
+											                <c:if test="${item eq classItem}">
+											                    <c:set var="isChecked" value="true" />
+											                </c:if>
+											            </c:forEach>
+											
+											            <div class="checkbox-item">
+											                <label>
+											                    <input type="checkbox" name="classteacher"
+											                           value="${classItem}"
+											                           <c:if test="${isChecked}">checked</c:if> />
+											                    ${classItem}
+											                </label>
+											            </div>
+											        </c:otherwise>
+											    </c:choose>
+											</c:forEach>
 													</div>
 
 							</label></td>
@@ -647,26 +679,54 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
 
 							<td width="28%"><label> <div class="checkbox-container">
-													    <c:set var="counter" value="0" scope="page" />
-													    <c:forEach items="${classdetailslist}" var="classdetails">
-													        <c:if test="${classdetails.classdetails != ''}">
-													            <c:forEach items="${classdetailslist}" var="sectiondetails">
-													                <c:if test="${sectiondetails.section != ''}">
-													                    <c:set var="classSec" value="${classdetails.classdetails}--${sectiondetails.section}" />
-													                    <div class="checkbox-item">
-													                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-													                            <input type="checkbox" name="classesteaching"
-													                                   value="${classSec}"
-													                                   <c:if test="${classesteachingList.contains(classSec)}">checked</c:if> />
-													                            ${classSec}
-													                        </label>
-													                    </div>
-													                    <c:set var="counter" value="${counter + 1}" scope="page" />
-													                </c:if>
-													            </c:forEach>
-													        </c:if>
-													    </c:forEach>
-													</div>
+											<c:forEach items="${classList}" var="classItem">
+											    <c:choose>
+											        <c:when test="${not empty sectionList}">
+											            <c:forEach items="${sectionList}" var="sectionItem">
+											                <c:set var="classSec" value="${classItem} ${sectionItem}" />
+											                
+											                <!-- reset flag -->
+											                <c:set var="isChecked" value="false" />
+											                <!-- loop through teaching list to see if it matches -->
+											                <c:forEach items="${classesteachingList}" var="item">
+											                    <c:if test="${item eq classSec}">
+											                        <c:set var="isChecked" value="true" />
+											                    </c:if>
+											                </c:forEach>
+											
+											                <div class="checkbox-item">
+											                    <label>
+											                        <input type="checkbox" name="classesteaching"
+											                               value="${classSec}"
+											                               <c:if test="${isChecked}">checked</c:if> />
+											                        ${classSec}
+											                    </label>
+											                </div>
+											            </c:forEach>
+											        </c:when>
+											
+											        <c:otherwise>
+											            <!-- reset flag -->
+											            <c:set var="isChecked" value="false" />
+											            <!-- loop through teaching list -->
+											            <c:forEach items="${classesteachingList}" var="item">
+											                <c:if test="${item eq classItem}">
+											                    <c:set var="isChecked" value="true" />
+											                </c:if>
+											            </c:forEach>
+											
+											            <div class="checkbox-item">
+											                <label>
+											                    <input type="checkbox" name="classesteaching"
+											                           value="${classItem}"
+											                           <c:if test="${isChecked}">checked</c:if> />
+											                    ${classItem}
+											                </label>
+											            </div>
+											        </c:otherwise>
+											    </c:choose>
+											</c:forEach>
+									</div>
 
 							</label></td>
 						</tr>
