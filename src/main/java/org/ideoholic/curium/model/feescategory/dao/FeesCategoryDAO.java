@@ -16,6 +16,7 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
 import org.ideoholic.curium.repositories.FeescategoryRepository;
 import org.ideoholic.curium.repositories.FeescollectionRepository;
+import org.ideoholic.curium.repositories.OtherFeecategoryRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
@@ -41,6 +42,8 @@ public class FeesCategoryDAO {
 	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 	@Autowired
 	private AcademicfeesstructureRepository academicfeesstructureRepo;
+	@Autowired
+	private OtherFeecategoryRepository otherFeecategoryRepo;
 	@Autowired
 	private QueryUtil queryUtil;
 	
@@ -229,23 +232,19 @@ public class FeesCategoryDAO {
 		}
 	}
 	
-	@SuppressWarnings({ "finally", "unchecked" })
+	@Transactional
 	public List<OtherFeecategory> readListOfOtherFeeObjects(int branchId, String academicYear, String nextYear) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		List<OtherFeecategory> results = new ArrayList<OtherFeecategory>();
         try {
 
-            transaction = session.beginTransaction();
-            results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
-        }
+           // results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
+            results = otherFeecategoryRepo.findByBranchAndAcademicYear(branchId, academicYear, nextYear);
+        } catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+        } 
+        return results;
 	}
 	
 	@SuppressWarnings("finally")
