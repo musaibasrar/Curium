@@ -743,6 +743,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fee</th>
                             <th title="click to sort" class="headerText">Fine</th>
                             <th title="click to sort" class="headerText">VAT</th>
+                            <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
 
@@ -765,6 +766,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/>${feesdetails.value.student.fathersname}</td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/daralmajd/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
 
