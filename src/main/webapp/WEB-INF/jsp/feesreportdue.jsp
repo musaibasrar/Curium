@@ -308,7 +308,7 @@
 <script type="text/javascript"
 	src="/daralmajd/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/daralmajd/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
