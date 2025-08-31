@@ -100,6 +100,7 @@ public class FeesService {
                 		feescategorynew.setBranchid(Integer.parseInt(branchid));
                 		feescategorynew.setUserid(Integer.parseInt(userlogin));
                 		feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
+                		feescategorynew.setTotalinstallments(feesCategoryDto.getTotalInstallments());
                         if(!feescategorynew.getFeescategoryname().equalsIgnoreCase("") && !feescategorynew.getParticularname().equalsIgnoreCase("") && feescategorynew.getAmount() != 0 ){
                         	feesCategoryList.add(feescategorynew);
                         }
@@ -704,6 +705,7 @@ public class FeesService {
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            Locale indiaLocale = new Locale("en", "SA");
+	            int grandTotalAmount=0;
 	    		PrintWriter out = response.getWriter(); 
 	    		response.setContentType("text/xml");
 	            response.setHeader("Cache-Control", "no-cache");
@@ -721,16 +723,18 @@ public class FeesService {
 	   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
 	   		        		buffer = buffer +  "<option></option>";*/
 	   			        	for(int i =0; i<feecategoryList.size();i++){
+	   			        		int totalAmountPerCategory=feecategoryList.get(i).getTotalinstallments()*feecategoryList.get(i).getAmount();
+	   			        		grandTotalAmount=grandTotalAmount+totalAmountPerCategory;
 	   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 	   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
-	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+"--"+i+""
+	   			        				+ "									 type='checkbox' name='feescategory' checked class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+"--"+i+""
 	   			        				+ "									size='18'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
 	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" size='18'/></td><td> <input"
-	   			        						+ "   			     type='text' value='0' name='feesCount' id='feesCount_"+i+"'"
+	   			        						+ "   			     type='text' value="+feecategoryList.get(i).getTotalinstallments()+" name='feesCount' id='feesCount_"+i+"'"
 	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='18' required><br></td>"
-	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
+	   			        						+ "<td> <input class='feesFullAmount' type='text' value="+totalAmountPerCategory+" name='feesFullCat' id='hiddenfees_full_amount_"+i+"' size='18'></td></tr>";
 	   			        	}
-	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
+	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value="+grandTotalAmount+" /></td></tr></table></div>";
 
 	    			        	response.getWriter().println(buffer);
 
