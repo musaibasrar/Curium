@@ -392,9 +392,8 @@ www.daralmajdschool.com</div>
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
         
-        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
-			 <tr style="line-height: 1;">
-			
+		<TABLE width="100%" border="0">
+			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -412,14 +411,12 @@ www.daralmajdschool.com</div>
 				</td>
 				
 			</tr style="line-height: 1;"> 
-			
 			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 			</table>
-
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">
@@ -654,12 +651,10 @@ www.daralmajdschool.com</div>
         
         <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
 			 <tr style="line-height: 1;">
-			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-
 			<tr style="line-height: 1;">
 				<td class="headerText">
 					Total Fees: SR. ${totalfees}
@@ -672,14 +667,12 @@ www.daralmajdschool.com</div>
 				</td>
 				
 			</tr style="line-height: 1;"> 
-			
 			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 			</table>
-
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">
