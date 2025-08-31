@@ -146,8 +146,8 @@ if (cookies != null) {
                     <tr>
                         <td>Student Name: <c:out value="${student.name}" /></td>
                         <td>Admission No:  <c:out value="${student.admissionnumber}" /></td>
-                        <td>Date:  <c:out value="${recieptdate}" /></td>
-                        <td>Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
+                        <td>Date:  <c:out value="${receiptdate}" /></td>
+                        <td>Receipt No:  <c:out value="${receiptinfo.branchreceiptnumber}" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -176,10 +176,10 @@ if (cookies != null) {
                 <tfoot>
                     <tr>
                         <td>Total Amount</td>
-                        <td class="totalAmount"><c:out value="${recieptinfo.totalamount}" /></td>
+                        <td class="totalAmount"><c:out value="${receiptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/daralmajd/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/daralmajd/FeesCollection/printFeesReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>

@@ -220,7 +220,7 @@
 				
 
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:<c:out
-						value="${recieptinfo.receiptnumber}" />
+						value="${receiptinfo.receiptnumber}" />
 				</td>
 
 			</tr>
@@ -236,7 +236,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
 			</tr>
 
@@ -361,7 +361,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
 				<td class="headerText">SR.  <c:out
-						value="${recieptinfo.totalamount}" /></td>
+						value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 

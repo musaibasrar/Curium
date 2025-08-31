@@ -178,8 +178,8 @@ for(Cookie cookie : cookies){
                     <tr>
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
                         <td style="width: 20%">Admission No:  <c:out value="${student.studentexternalid}" /></td>
-                        <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
-                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
+                        <td style="width: 20%">Date:  <c:out value="${receiptdate}" /></td>
+                        <td style="width: 20%">Receipt No:  <c:out value="${receiptinfo.branchreceiptnumber}" /></td>
 
                     </tr>
 
@@ -219,14 +219,14 @@ for(Cookie cookie : cookies){
                         <tr>
 
                             <td colspan="2" align="right">Total Amount</td>
-                            <td align="center"><c:out value="${recieptinfo.totalamount}" /></td>
+                            <td align="center"><c:out value="${receiptinfo.totalamount}" /></td>
                         </tr>
                         
                     <%-- </c:forEach> --%>
                     <tr>
 
 
-                        <td align="center"><a id="print" href="/daralmajd/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/daralmajd/FeesCollection/printReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

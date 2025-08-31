@@ -196,7 +196,7 @@ www.daralmajdschool.com</div>
 				<td><span class="info-label">Receipt
 						No. <span class="arabic">رقم الفاتورة</span>
 				</span></td>
-				<td>:&nbsp;&nbsp;<span>${recieptinfo.branchreceiptnumber}</span>
+				<td>:&nbsp;&nbsp;<span>${receiptinfo.branchreceiptnumber}</span>
 				
 				<label class="alignLeft" style="padding-left: 120px;">
  					 <span class="info-label">Adm No.</span>&nbsp;
@@ -208,7 +208,7 @@ www.daralmajdschool.com</div>
 				<label class="alignLeft" style="padding-left: 120px;">
 					  <span class="info-label">Date</span>&nbsp;
   					  <span class="info-label arabic" dir="rtl" style="display: inline-block;">التاريخ</span>&nbsp;:
-  					  &nbsp;<span>${recieptdate}</span>
+  					  &nbsp;<span>${receiptdate}</span>
 				</label>
 				</td>
 			</tr>
@@ -238,7 +238,7 @@ www.daralmajdschool.com</div>
 			<tr>
 				<td class="alignLeft"><span class="info-label"><span class="info-label">Class<span class="arabic">الصف</span></span></td>
 				<td>:&nbsp;&nbsp;<span>${student.classstudying}</span>
-				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${recieptinfo.paymenttype}</span>
+				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${receiptinfo.paymenttype}</span>
 				</label>
 				</td>
 			</tr>
@@ -346,27 +346,27 @@ www.daralmajdschool.com</div>
                 </tr>
             	
             	</c:forEach>
-                <c:if test="${recieptinfo.fine > 0}">
+                <c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText">Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-					<td class="dataText"> <c:out value="${recieptinfo.fine}" />
-					<c:set var="itemTotal" value="${itemTotal + recieptinfo.fine}" />
+					<td class="dataText"> <c:out value="${receiptinfo.fine}" />
+					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${recieptinfo.fine}" />
-					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
+					<td> <c:out value="${receiptinfo.fine}" />
+					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
+					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine}
-					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
+					<td>${receiptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${recieptinfo.fine == 0}">
+			<c:if test="${receiptinfo.fine == 0}">
                 <tr>
                     <td>Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
                     <td>0.00</td>
@@ -456,7 +456,7 @@ www.daralmajdschool.com</div>
 				<td><span class="info-label">Receipt
 						No. <span class="arabic">رقم الفاتورة</span>
 				</span></td>
-				<td>:&nbsp;&nbsp;<span>${recieptinfo.branchreceiptnumber}</span>
+				<td>:&nbsp;&nbsp;<span>${receiptinfo.branchreceiptnumber}</span>
 				
 				<label class="alignLeft" style="padding-left: 120px;">
  					 <span class="info-label">Adm No.</span>&nbsp;
@@ -468,7 +468,7 @@ www.daralmajdschool.com</div>
 				<label class="alignLeft" style="padding-left: 120px;">
 					  <span class="info-label">Date</span>&nbsp;
   					  <span class="info-label arabic" dir="rtl" style="display: inline-block;">التاريخ</span>&nbsp;:
-  					  &nbsp;<span>${recieptdate}</span>
+  					  &nbsp;<span>${receiptdate}</span>
 				</label>
 				</td>
 			</tr>
@@ -498,7 +498,7 @@ www.daralmajdschool.com</div>
 			<tr>
 				<td class="alignLeft"><span class="info-label"><span class="info-label">Class<span class="arabic">الصف</span></span></td>
 				<td>:&nbsp;&nbsp;<span>${student.classstudying}</span>
-				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${recieptinfo.paymenttype}</span>
+				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${receiptinfo.paymenttype}</span>
 				</label>
 				</td>
 			</tr>
@@ -606,27 +606,27 @@ www.daralmajdschool.com</div>
                 </tr>
             	
             	</c:forEach>
-                <c:if test="${recieptinfo.fine > 0}">
+                <c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText">Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-					<td class="dataText"> <c:out value="${recieptinfo.fine}" />
-					<c:set var="itemTotal" value="${itemTotal + recieptinfo.fine}" />
+					<td class="dataText"> <c:out value="${receiptinfo.fine}" />
+					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${recieptinfo.fine}" />
-					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
+					<td> <c:out value="${receiptinfo.fine}" />
+					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
+					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine}
-					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
+					<td>${receiptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${recieptinfo.fine == 0}">
+			<c:if test="${receiptinfo.fine == 0}">
                 <tr>
                     <td>Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
                     <td>0.00</td>

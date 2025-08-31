@@ -93,7 +93,7 @@ public class StudentService {
 		try {
 			// Process form file field (input type="file")
 			if (listOfFiles != null && listOfFiles.length != 0) {
-			 for (int i = 1; i < listOfFiles.length; i++) {
+			 for (int i = 0; i < listOfFiles.length; i++) {
 				 	MultipartFile fileItem = listOfFiles[i];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));

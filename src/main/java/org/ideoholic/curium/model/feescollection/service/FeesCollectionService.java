@@ -281,7 +281,7 @@ public class FeesCollectionService {
 		return result;
 	}
 
-	public Receiptinfo add(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName, int applyVAT) {
+	public Receiptinfo add(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName, int applyVAT, String branchCode) {
 		
 		List<Feescollection> feescollection = new ArrayList<Feescollection>();
 		Receiptinfo receiptInfo =new Receiptinfo();
@@ -473,7 +473,7 @@ public class FeesCollectionService {
 			
 			// End J.V
 			  
-			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome,transactionsVAT,updateDrAccountVAT,updateCrAccountVAT);
+			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome,transactionsVAT,updateDrAccountVAT,updateCrAccountVAT,branchCode);
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());
@@ -1491,7 +1491,7 @@ public class FeesCollectionService {
 
 	}
 	
-	public Otherreceiptinfo addother(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName) {
+	public Otherreceiptinfo addother(AddFeesCollectionDto dto, String currentAcademicYear, String branchId, String userId, String userName, String branchCode) {
 
 		List<Otherfeescollection> feescollection = new ArrayList<Otherfeescollection>();
 		Otherreceiptinfo receiptInfo =new Otherreceiptinfo();
@@ -1620,7 +1620,7 @@ public class FeesCollectionService {
 
 			// End J.V
 
-			createFeesCollection = new feesCollectionDAO().createother(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			createFeesCollection = new feesCollectionDAO().createother(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome,branchCode);
 
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());

@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>DUPLICATE FEE RECEIPT / استلام الرسوم</title>
+<title> DUPLICATE FEE RECEIPT / استلام الرسوم</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style type="text/css">
     body {
@@ -155,10 +155,11 @@
         min-width: 160px;
         margin-right: 25px;
     }
+    
     .headerText {
 	width: 10px;
 	font-family: Tahoma;
-	font-size: 8px;
+	font-size: 12px;
 	color: black;
 	font-weight: normal;
 	width: auto;
@@ -197,7 +198,7 @@ www.daralmajdschool.com</div>
 				<td><span class="info-label">Receipt
 						No. <span class="arabic">رقم الفاتورة</span>
 				</span></td>
-				<td>:&nbsp;&nbsp;<span>${recieptinfo.branchreceiptnumber}</span>
+				<td>:&nbsp;&nbsp;<span>${receiptinfo.branchreceiptnumber}</span>
 				
 				<label class="alignLeft" style="padding-left: 120px;">
  					 <span class="info-label">Adm No.</span>&nbsp;
@@ -209,7 +210,7 @@ www.daralmajdschool.com</div>
 				<label class="alignLeft" style="padding-left: 120px;">
 					  <span class="info-label">Date</span>&nbsp;
   					  <span class="info-label arabic" dir="rtl" style="display: inline-block;">التاريخ</span>&nbsp;:
-  					  &nbsp;<span>${recieptdate}</span>
+  					  &nbsp;<span>${receiptdate}</span>
 				</label>
 				</td>
 			</tr>
@@ -239,13 +240,13 @@ www.daralmajdschool.com</div>
 			<tr>
 				<td class="alignLeft"><span class="info-label"><span class="info-label">Class<span class="arabic">الصف</span></span></td>
 				<td>:&nbsp;&nbsp;<span>${student.classstudying}</span>
-				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${recieptinfo.paymenttype}</span>
+				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${receiptinfo.paymenttype}</span>
 				</label>
 				</td>
 			</tr>
 			<tr>
 				<td><span class="info-label"><span class="info-label">Fees For Term(s) <!-- <span class="arabic">اسم الطالب</span></span> -->
-				</span>/td>
+				</span></td>
 				<td>:&nbsp;&nbsp;<span>
 				<c:forEach items="${feesMonth}" var="feemonth" varStatus="status">
 					${feemonth}<c:if test="${!status.last}">, </c:if>
@@ -261,8 +262,8 @@ www.daralmajdschool.com</div>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
                     <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
-                    <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
-                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th>
+                    <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
+                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
                     <th>Net Amount<br>(Incl. VAT) <span class="arabic"><br>المجموع شامل الضريبة</span></th>
                 </tr>
@@ -297,15 +298,15 @@ www.daralmajdschool.com</div>
 							</c:choose>
 
 						</td>
-                    <td>${feescatmap.key.feesamount}
-                    <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
+                    <td>${feescatmap.value}
+                    <c:set var="itemTotal" value="${itemTotal + feescatmap.value}" />
                     </td>
-                    <td>${feescatmap.key.concession}
+                    <%-- <td>${feescatmap.key.concession}
                     <c:set var="itemTotalDisc" value="${itemTotalDisc + feescatmap.key.concession}" />
                     </td>
                     <td>${feescatmap.key.feesamount-feescatmap.key.concession}
                     <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (feescatmap.key.feesamount-feescatmap.key.concession)}" />
-                    </td>
+                    </td> --%>
                     <td>
                     	
                     <c:if test="${applyVAT==1}">
@@ -313,10 +314,10 @@ www.daralmajdschool.com</div>
 								<c:choose>
 									<c:when	test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
 										<fmt:formatNumber
-											value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}"
+											value="${(feescatmap.value) * 0.15}"
 											type="number" maxFractionDigits="2" minFractionDigits="2" />
 										<c:set var="itemVatTotal"
-											value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+											value="${itemVatTotal + ((feescatmap.value) * 0.15)}" />
 									</c:when>
 									<c:otherwise>
            								0.00
@@ -337,49 +338,47 @@ www.daralmajdschool.com</div>
                     		<c:choose>
 									<c:when
 										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
-										<fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" />
 									</c:when>
 									<c:otherwise>
-           								<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+           								<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
         							</c:otherwise>
 								</c:choose>
                     	</c:if>	
                     	
                     	<c:if test="${applyVAT==0}">
-                    		<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+                    		<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
                     	</c:if>
 					</td>
                 </tr>
             	
             	</c:forEach>
-                <c:if test="${recieptinfo.fine > 0}">
+                <c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText">Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-					<td class="dataText"> <c:out value="${recieptinfo.fine}" />
-					<c:set var="itemTotal" value="${itemTotal + recieptinfo.fine}" />
+					<td class="dataText"> <c:out value="${receiptinfo.fine}" />
+					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${recieptinfo.fine}" />
-					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
+					<td> <c:out value="${receiptinfo.fine}" />
+					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
+					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine}
-					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
+					<td>${receiptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${recieptinfo.fine == 0}">
+			<c:if test="${receiptinfo.fine == 0}">
                 <tr>
                     <td>Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
@@ -388,8 +387,8 @@ www.daralmajdschool.com</div>
                 <tr>
                     <td>TOTAL<span class="arabic">الإجمالي</span></td>
                     <td><fmt:formatNumber value="${itemTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <%-- <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                     <td><fmt:formatNumber value="${itemVatTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                     <td><fmt:formatNumber value="${itemTotalNet}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                 </tr>
@@ -400,15 +399,16 @@ www.daralmajdschool.com</div>
         <div class="amount-in-words">
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
-<TABLE width="100%" border="0">
-			 <tr>
+        
+        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+			 <tr style="line-height: 1;">
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 
-			<tr>
+			<tr style="line-height: 1;">
 				<td class="headerText">
 					Total Fees: SR. ${totalfees}
 				</td>
@@ -419,7 +419,7 @@ www.daralmajdschool.com</div>
 				 Total fees Due : SR.  ${dueamount} 
 				</td>
 				
-			</tr> 
+			</tr style="line-height: 1;"> 
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -427,6 +427,7 @@ www.daralmajdschool.com</div>
 			<td><hr width="100%"></td>
 			</tr>
 			</table>
+
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">
@@ -448,7 +449,7 @@ www.daralmajdschool.com</div>
 www.daralmajdschool.com</div>
                 <div class="school-address">C.B.S.E No. 6630280, License No. 520-0867</div>
                 <div class="school-address">Tax Identification No.: 310141531500003 <span class="arabic">رقم الضريبة</span></div>
-                <div class="school-address">Duplicate Receipt</div>
+                 <div class="school-address">Duplicate Receipt</div>
             </div>
             <img src="data:image;base64,<c:out value="${qrcode}"/>" alt="QR Code" class="qr-code">
         </div>
@@ -465,7 +466,7 @@ www.daralmajdschool.com</div>
 				<td><span class="info-label">Receipt
 						No. <span class="arabic">رقم الفاتورة</span>
 				</span></td>
-				<td>:&nbsp;&nbsp;<span>${recieptinfo.branchreceiptnumber}</span>
+				<td>:&nbsp;&nbsp;<span>${receiptinfo.branchreceiptnumber}</span>
 				
 				<label class="alignLeft" style="padding-left: 120px;">
  					 <span class="info-label">Adm No.</span>&nbsp;
@@ -477,7 +478,7 @@ www.daralmajdschool.com</div>
 				<label class="alignLeft" style="padding-left: 120px;">
 					  <span class="info-label">Date</span>&nbsp;
   					  <span class="info-label arabic" dir="rtl" style="display: inline-block;">التاريخ</span>&nbsp;:
-  					  &nbsp;<span>${recieptdate}</span>
+  					  &nbsp;<span>${receiptdate}</span>
 				</label>
 				</td>
 			</tr>
@@ -507,7 +508,7 @@ www.daralmajdschool.com</div>
 			<tr>
 				<td class="alignLeft"><span class="info-label"><span class="info-label">Class<span class="arabic">الصف</span></span></td>
 				<td>:&nbsp;&nbsp;<span>${student.classstudying}</span>
-				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${recieptinfo.paymenttype}</span>
+				<label class="alignLeft" style="padding-left: 250px;font-weight: bold;">Payment Mode<span class="arabic" style="font-weight: bold;">طريقة الدفع<span></span><span>:&nbsp;&nbsp;${receiptinfo.paymenttype}</span>
 				</label>
 				</td>
 			</tr>
@@ -529,8 +530,8 @@ www.daralmajdschool.com</div>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
                     <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
-                    <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
-                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th>
+                    <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
+                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
                     <th>Net Amount<br>(Incl. VAT) <span class="arabic"><br>المجموع شامل الضريبة</span></th>
                 </tr>
@@ -565,15 +566,15 @@ www.daralmajdschool.com</div>
 							</c:choose>
 
 						</td>
-                    <td>${feescatmap.key.feesamount}
-                    <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
+                    <td>${feescatmap.value}
+                    <c:set var="itemTotal" value="${itemTotal + feescatmap.value}" />
                     </td>
-                    <td>${feescatmap.key.concession}
+                    <%-- <td>${feescatmap.key.concession}
                     <c:set var="itemTotalDisc" value="${itemTotalDisc + feescatmap.key.concession}" />
                     </td>
                     <td>${feescatmap.key.feesamount-feescatmap.key.concession}
                     <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (feescatmap.key.feesamount-feescatmap.key.concession)}" />
-                    </td>
+                    </td> --%>
                     <td>
                     	
                     <c:if test="${applyVAT==1}">
@@ -581,10 +582,10 @@ www.daralmajdschool.com</div>
 								<c:choose>
 									<c:when	test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
 										<fmt:formatNumber
-											value="${(feescatmap.key.feesamount-feescatmap.key.concession) * 0.15}"
+											value="${(feescatmap.value) * 0.15}"
 											type="number" maxFractionDigits="2" minFractionDigits="2" />
 										<c:set var="itemVatTotal"
-											value="${itemVatTotal + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15)}" />
+											value="${itemVatTotal + ((feescatmap.value) * 0.15)}" />
 									</c:when>
 									<c:otherwise>
            								0.00
@@ -605,49 +606,47 @@ www.daralmajdschool.com</div>
                     		<c:choose>
 									<c:when
 										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
-										<fmt:formatNumber value="${((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.key.feesamount - feescatmap.key.concession) * 0.15) + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" />
 									</c:when>
 									<c:otherwise>
-           								<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+           								<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
         							</c:otherwise>
 								</c:choose>
                     	</c:if>	
                     	
                     	<c:if test="${applyVAT==0}">
-                    		<fmt:formatNumber value="${feescatmap.key.feesamount - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.key.feesamount - feescatmap.key.concession)}" />
+                    		<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
                     	</c:if>
 					</td>
                 </tr>
             	
             	</c:forEach>
-                <c:if test="${recieptinfo.fine > 0}">
+                <c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText">Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-					<td class="dataText"> <c:out value="${recieptinfo.fine}" />
-					<c:set var="itemTotal" value="${itemTotal + recieptinfo.fine}" />
+					<td class="dataText"> <c:out value="${receiptinfo.fine}" />
+					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${recieptinfo.fine}" />
-					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (recieptinfo.fine)}" />
+					<td> <c:out value="${receiptinfo.fine}" />
+					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${recieptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (recieptinfo.fine * 0.15)}" /> --%>
+					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
 					</td>
-					<td>${recieptinfo.fine}
-					<c:set var="itemTotalNet" value="${itemTotalNet + recieptinfo.fine}" />
+					<td>${receiptinfo.fine}
+					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${recieptinfo.fine == 0}">
+			<c:if test="${receiptinfo.fine == 0}">
                 <tr>
                     <td>Late Fee (Fine)<span class="arabic">غرامة التأخير</span></td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
@@ -656,8 +655,8 @@ www.daralmajdschool.com</div>
                 <tr>
                     <td>TOTAL<span class="arabic">الإجمالي</span></td>
                     <td><fmt:formatNumber value="${itemTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <%-- <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                     <td><fmt:formatNumber value="${itemVatTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                     <td><fmt:formatNumber value="${itemTotalNet}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                 </tr>
@@ -668,26 +667,27 @@ www.daralmajdschool.com</div>
         <div class="amount-in-words">
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
-<TABLE width="100%" border="0">
-			 <tr>
+        
+        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+			 <tr style="line-height: 1;">
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 
-			<tr>
+			<tr style="line-height: 1;">
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					Total Fees: SR. ${totalfees}
 				</td>
 				<td class="headerText">
-					Total fees paid : Rs.  ${sumoffees}
+					Total fees paid : SR.  ${sumoffees}
 				</td>
 				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
+				 Total fees Due : SR.  ${dueamount} 
 				</td>
 				
-			</tr> 
+			</tr style="line-height: 1;"> 
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -695,6 +695,7 @@ www.daralmajdschool.com</div>
 			<td><hr width="100%"></td>
 			</tr>
 			</table>
+
         <!-- Footer -->
         <div class="footer">
         	<label class="alignLeft">

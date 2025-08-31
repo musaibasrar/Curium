@@ -38,7 +38,7 @@ public class feesCollectionDAO {
 
 	@SuppressWarnings("finally")
 	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
-			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome, VoucherEntrytransactions transactionsVAT, String updateDrAccountVAT, String updateCrAccountVAT) {
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome, VoucherEntrytransactions transactionsVAT, String updateDrAccountVAT, String updateCrAccountVAT, String branchCode) {
 		 
 		boolean result = false;
 		try {
@@ -49,9 +49,13 @@ public class feesCollectionDAO {
 			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
 			 	
 			 	if(ReceiptList.size() > 0) {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 		String branchReceiptNumber = ReceiptList.get(0).getBranchreceiptnumber();
+		        	String numbersOnly = branchReceiptNumber.replaceAll("[^0-9]", "");
+		            int receiptSeq =  Integer.parseInt(numbersOnly)+1;
+		            String receiptSequence = branchCode+""+String.format("%03d", receiptSeq);
+			 		receiptInfo.setBranchreceiptnumber(receiptSequence);
 			 	}else {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
+			 		receiptInfo.setBranchreceiptnumber(branchCode+""+String.format("%03d",1));
 			 	}
 			 	
 			 	//Receipts
@@ -240,7 +244,7 @@ public class feesCollectionDAO {
 	
 	@SuppressWarnings("finally")
 	public boolean createother(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
-			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome, String branchCode) {
 
 		boolean result = false;
 		try {
@@ -249,12 +253,18 @@ public class feesCollectionDAO {
 
 			 Query queryReceipt = session.createQuery("from Otherreceiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
 			 	List<Otherreceiptinfo> ReceiptList = queryReceipt.list();
-
+			 	
+			 	
 			 	if(ReceiptList.size() > 0) {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 		String branchReceiptNumber = ReceiptList.get(0).getBranchreceiptnumber();
+		        	String numbersOnly = branchReceiptNumber.replaceAll("[^0-9]", "");
+		            int receiptSeq =  Integer.parseInt(numbersOnly)+1;
+		            String receiptSequence = branchCode+""+String.format("%03d", receiptSeq);
+			 		receiptInfo.setBranchreceiptnumber(receiptSequence);
 			 	}else {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
+			 		receiptInfo.setBranchreceiptnumber(branchCode+""+String.format("%03d",1));
 			 	}
+
 				/*
 			 	//Receipts
 			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
