@@ -521,4 +521,21 @@ public class FeesCollectionActionAdapter {
 		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles);
 		return result.isSuccess();
 	}
+
+	public Receiptinfo feesPaymentTypeModify() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+
+        AddFeesCollectionDto dto = new AddFeesCollectionDto();
+        dto.setStudentId(request.getParameter("receiptnumber"));
+        dto.setPaymentMethod(request.getParameter("paymentmethod"));
+        dto.setAckNo(request.getParameter("ackno"));
+        dto.setTransferDate(request.getParameter("transferdate"));
+        dto.setTransferBankName(request.getParameter("transferbankname"));
+        dto.setChequeNo(request.getParameter("chequeno"));
+        dto.setChequeDate(request.getParameter("chequedate"));
+        dto.setChequeBankName(request.getParameter("chequebankname"));
+        
+        Receiptinfo receiptinfo = feesCollectionService.feesPaymentTypeModify(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
+        return receiptinfo;
+    }
 }
