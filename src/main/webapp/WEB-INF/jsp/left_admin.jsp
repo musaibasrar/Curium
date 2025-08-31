@@ -667,7 +667,17 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/daralmajd/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/daralmajd/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/daralmajd/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
             			</td>
             		</tr>
             		<!-- <tr>

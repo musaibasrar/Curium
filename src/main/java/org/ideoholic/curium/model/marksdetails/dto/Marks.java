@@ -26,13 +26,13 @@ public class Marks implements java.io.Serializable {
 	private String subgrade;
 	private int branchid;
 	private int userid;
-	
+	private Integer subsubjectid;
 	
 	public Marks() {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			float marksobtained, String academicyear,String subgrade, int branchid, int userid) {
+			float marksobtained, String academicyear,String subgrade, int branchid, int userid, int subsubjectid) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
@@ -41,6 +41,7 @@ public class Marks implements java.io.Serializable {
 		this.subgrade = subgrade;
 		this.branchid = branchid;
 		this.userid = userid;
+		this.subsubjectid = subsubjectid;
 	}
 
 	@Id
@@ -123,6 +124,14 @@ public class Marks implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public Integer getSubsubjectid() {
+		return subsubjectid;
+	}
+
+	public void setSubsubjectid(Integer subsubjectid) {
+		this.subsubjectid = subsubjectid;
 	}
 		
 }
