@@ -248,42 +248,49 @@ public class StandardService {
 		List<String> classTeacherList = Arrays.asList(classteacher.split("\\s*,\\s*"));
 		List<Classsec> finalClasssecList = new ArrayList<Classsec>();
 		
-		for (String className : classTeacherList) {
-		    String cleanedClass = className.replaceAll("--.*$", "").trim();
+		classTeacherList = classTeacherList.stream()
+					               .filter(s -> s != null && !s.isEmpty())
+						               .collect(Collectors.toList());
+						
+		if (classTeacherList.size() > 0) {
+			for (String className : classTeacherList) {
+				String cleanedClass = className.replaceAll("--.*$", "").trim();
 
-		    Classsec classRow = new Classsec();
-		    classRow.setClassdetails(cleanedClass);
-		    classRow.setSection(""); // or null
-		    classRow.setBranchid(Integer.parseInt(branchId));
-		   // classRow.setUserid(userid); // Set your actual user ID
-		    finalClasssecList.add(classRow);
-		}
-		
-		Map<String, Classsec> uniqueByClassdetails = finalClasssecList.stream()
-			    .filter(c -> c.getClassdetails() != null && !c.getClassdetails().isEmpty())
-			    .collect(Collectors.toMap(
-			        Classsec::getClassdetails, // key = classdetails
-			        c -> c,                    // value = Classsec object
-			        (existing, replacement) -> existing // keep the first encountered
-			    ));
+				Classsec classRow = new Classsec();
+				classRow.setClassdetails(cleanedClass);
+				classRow.setSection(""); // or null
+				classRow.setBranchid(Integer.parseInt(branchId));
+				// classRow.setUserid(userid); // Set your actual user ID
+				finalClasssecList.add(classRow);
+			}
+
+			Map<String, Classsec> uniqueByClassdetails = finalClasssecList.stream()
+					.filter(c -> c.getClassdetails() != null && !c.getClassdetails().isEmpty())
+					.collect(Collectors.toMap(Classsec::getClassdetails, // key = classdetails
+							c -> c, // value = Classsec object
+							(existing, replacement) -> existing // keep the first encountered
+					));
 
 			finalClasssecList = new ArrayList<>(uniqueByClassdetails.values());
-		
-		List<Classsec> classList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
-		List<String> dbSections = classList.stream()
-			    .filter(c -> c.getClassdetails() == null || c.getClassdetails().trim().isEmpty())
-			    .filter(c -> c.getSection() != null && !c.getSection().trim().isEmpty())
-			    .map(Classsec::getSection)
-			    .collect(Collectors.toList());
-		
-		for (String section : dbSections) {
-		    Classsec sectionRow = new Classsec();
-		    sectionRow.setClassdetails(""); // or null
-		    sectionRow.setSection(section.trim());
-		    sectionRow.setBranchid(Integer.parseInt(branchId));
-		    finalClasssecList.add(sectionRow);
+
+			List<Classsec> classList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+			List<String> dbSections = classList.stream()
+					.filter(c -> c.getClassdetails() == null || c.getClassdetails().trim().isEmpty())
+					.filter(c -> c.getSection() != null && !c.getSection().trim().isEmpty()).map(Classsec::getSection)
+					.collect(Collectors.toList());
+
+			for (String section : dbSections) {
+				Classsec sectionRow = new Classsec();
+				sectionRow.setClassdetails(""); // or null
+				sectionRow.setSection(section.trim());
+				sectionRow.setBranchid(Integer.parseInt(branchId));
+				finalClasssecList.add(sectionRow);
+			}
+
+		} else {
+			List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+			return ResultResponse.builder().resultList(classsecList).success(true).build();
 		}
-		
 		return ResultResponse.builder().resultList(finalClasssecList).success(true).build();
 	}
 
