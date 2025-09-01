@@ -1852,17 +1852,28 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
 	List<Subjectmaster> subjectListFinal = new ArrayList<Subjectmaster>();
 	
-	classTeacherList = new ArrayList<>(new LinkedHashSet<>(classTeacherList));
-	
-	for (Subjectmaster subject : subjectList) {
-	    String subjectName = subject.getSubjectname();
-	    if (classTeacherList.contains(subjectName)) {
-	        subjectListFinal.add(subject);
-	    }
+
+
+	classTeacherList = classTeacherList.stream()
+			            .filter(s -> s != null && !s.isEmpty())
+			            .collect(Collectors.toList());
+				
+	if (classTeacherList.size() > 0) {
+		classTeacherList = new ArrayList<>(new LinkedHashSet<>(classTeacherList));
+
+		for (Subjectmaster subject : subjectList) {
+			String subjectName = subject.getSubjectname();
+			if (classTeacherList.contains(subjectName)) {
+				subjectListFinal.add(subject);
+			}
+		}
+
+		result.setSubjectListName(subjectListFinal);
+	} else {
+		// get all the subjects
+		result.setSubjectListName(subjectList);
 	}
 	
-	result.setSubjectListName(subjectListFinal);
-
 	// get the list for all the midterms
 	List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 	result.setExamsList(examList);
