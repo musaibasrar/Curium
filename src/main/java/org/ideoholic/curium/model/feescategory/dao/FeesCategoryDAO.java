@@ -247,25 +247,16 @@ public class FeesCategoryDAO {
         return results;
 	}
 	
-	@SuppressWarnings("finally")
+	@Transactional
 	public OtherFeecategory createOtherFeeCategory(OtherFeecategory ofeescategory) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(ofeescategory);
-
-
-            transaction.commit();
-
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return ofeescategory;
-        }
+            ofeescategory = otherFeecategoryRepo.save(ofeescategory);
+        } catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+        } 
+		 return ofeescategory;
 	}
 	
 	public void odeleteMultiple(List ids) {
