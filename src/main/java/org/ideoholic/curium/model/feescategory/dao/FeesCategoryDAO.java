@@ -250,7 +250,7 @@ public class FeesCategoryDAO {
 	@Transactional
 	public OtherFeecategory createOtherFeeCategory(OtherFeecategory ofeescategory) {
 		try {
-            otherFeecategoryRepo.save(ofeescategory);
+            ofeescategory = otherFeecategoryRepo.save(ofeescategory);
         } catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
