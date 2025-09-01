@@ -652,7 +652,8 @@ public class FeesCollectionService {
 		
 		String academicYear = request.getParameter("academicyear");
 		String[] feesCat = request.getParameterValues("feescategory");
-		
+		String studentType = request.getParameter("studenttype");
+		String branchType = request.getParameter("branchtype");
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -680,13 +681,28 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "')";
 		}
+		
+		
+		if (studentType.equalsIgnoreCase("Active")) {
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+		}
+		
+		
+		if (studentType.equalsIgnoreCase("Inactive")) {
+			querySub = querySub + " AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1)";
+		}
+		
+	
 
-		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub;
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		if(!"".equalsIgnoreCase(querySub) && !"All".equalsIgnoreCase(branchType)) {
+			queryMain = queryMain + querySub + " AND parents.Student.branchid="+Integer.parseInt(branchType)+" order by parents.Student.admissionnumber ASC";
+		}else if(!"".equalsIgnoreCase(querySub) && "All".equalsIgnoreCase(branchType)){
+			queryMain = queryMain + querySub + " order by parents.Student.admissionnumber ASC";
 		}
+		
+		searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		
 	}
 		//End Students
@@ -717,7 +733,8 @@ public class FeesCollectionService {
 					
 				}
 			}
-		
+			httpSession.setAttribute("academicyear", "Academic Year: "+academicYear);
+			httpSession.setAttribute("studenttype", "Student Type: "+studentType);
 			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
 		}
 		

@@ -619,6 +619,50 @@ for(Cookie cookie : cookies){
 						<td><br></td>
                     </tr>
                     
+                    <tr>
+                    
+                        <td style="font-weight: bold;color:#325F6D">Student Type:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        
+                        	<td>
+                        	   <label>
+                                         <select name="studenttype" id="studenttype" required
+									style="width: 120px">
+										<option selected>Active</option>
+										<option>Inactive</option>
+										<option>All</option>
+										</select>
+                              </label>
+                        </td>
+                        
+                    </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    <tr>
+                    
+                        <td style="font-weight: bold;color:#325F6D">Branch:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        
+                        	<td>
+                        	   <label>
+                                         <select name="branchtype" id="branchtype" required
+									style="width: 120px">
+										<option value="${branchid}">${branchname}</option>
+										<option value="2">Al-Farooq Urdu PrePrimary School</option>
+										<option value="3">Al-Farooq Urdu Higher Primary School</option>
+										<option value="4">Al-Farooq Urdu High School</option>
+										<option>All</option>
+										</select>
+                              </label>
+                        </td>
+                        
+                    </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
+                    
                     		<tr>
 							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
@@ -682,7 +726,8 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Search result <br>
+					${academicyear}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${studenttype}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

@@ -122,10 +122,10 @@ public class MarksDetailsService {
 				String test = (String) mapEntry.getValue();
 				Marks marks = new Marks();
 				marks.setExamid(examid);
-				marks.setSubid(subid);
+				marks.setSubid(subjectDetails.getSubid());
                 int mymark= Integer.parseInt(test);
 				
-				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),Integer.parseInt(examidName[1]),classSelected);
+				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),Integer.parseInt(examidName[0]),classSelected);
 				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
 					if( mymark >= subjectGrade.getMinmarks() && mymark <= subjectGrade.getMaxmarks())	
 					{
