@@ -482,6 +482,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/alalmas/MarksDetailsProcess/finalExamReport" style="font-size: 12px;">Final Exam Marks Card</a>
+            			</td>
+            		</tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/alalmas/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
