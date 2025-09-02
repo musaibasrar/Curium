@@ -722,7 +722,7 @@ public class FeesService {
 	        		searchYear = yearofAdmissionStr;
 	        	}
 	        	
-	            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(classname,searchYear,branchid);
+	            List<Feescategory> feecategoryList= feesCategoryDao.getfeecategoryofstudent(classname,searchYear,branchid);
 	            feescategoryResponseDto.setFeescategory(feecategoryList);
 
 	            int grandTotalAmount=0;
@@ -886,7 +886,7 @@ public class FeesService {
 	            	 searchClassName = classname;
 	             }
 	        	
-	             List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(searchClassName,searchYear,branchid);
+	             List<Feescategory> feecategoryList= feesCategoryDao.getfeecategoryofstudent(searchClassName,searchYear,branchid);
 		         feescategoryResponseDto.setFeescategory(feecategoryList);
 		         feescategoryResponseDto.setFeesDueSearchYear(searchYear);
 		         feescategoryResponseDto.setFeesDueSearchClass(searchClassName);

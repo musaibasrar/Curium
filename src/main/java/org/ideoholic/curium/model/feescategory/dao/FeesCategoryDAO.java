@@ -275,25 +275,16 @@ public class FeesCategoryDAO {
 	
 	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear, String branchId)
 	{
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		List <Feescategory> result= new ArrayList();
 		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
-			result=query.list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
+			//Query query = session.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
+			result = feesCatRepo.findFeecategoryOfStudent(classname, searchYear, branchId);
+		}  catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return result;
-
+			throw hibernateException;
 		}
+		return result;
 	}
 	
 	public void applyotherConcession(List<Concession> concessionList, String sid) {
