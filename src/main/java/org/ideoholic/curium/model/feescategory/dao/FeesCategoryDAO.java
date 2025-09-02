@@ -259,24 +259,16 @@ public class FeesCategoryDAO {
 		 return ofeescategory;
 	}
 	
-	public void odeleteMultiple(List ids) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
+	@Transactional
+	public void odeleteMultiple(List<Integer> ids) {
 		try {
-			transaction = session.beginTransaction();
 
-
-			Query query = session
-					.createQuery("delete from OtherFeecategory as fess where fess.idfeescategory IN (:ids)");
-			query.setParameterList("ids", ids);
-
-			query.executeUpdate();
-
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+			//Query query = session.createQuery("delete from OtherFeecategory as fess where fess.idfeescategory IN (:ids)");
+			otherFeecategoryRepo.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 
 	}
