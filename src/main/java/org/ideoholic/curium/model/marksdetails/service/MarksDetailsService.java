@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,6 +61,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Service
 public class MarksDetailsService {
@@ -81,9 +83,9 @@ public class MarksDetailsService {
 		String[] examidName = dto.getExam().split("__");
 		String subject = dto.getSubject();
 		String classSelected = dto.getClassSearch();
-		System.out.println("the subject id is " + subject + ", and exam id is " + examidName[0]);
+		log.debug("the subject id is " + subject + ", and exam id is " + examidName[0]);
 		int sizeOfArray = 0;
-		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
+		Map<Integer, String> mapOfMarks = new HashMap<>();
 		List<Integer> ids = new ArrayList<Integer>();
 		List<String> studentsMarksList = new ArrayList<String>();
 
@@ -104,14 +106,14 @@ public class MarksDetailsService {
 		if (studentIds != null && subject != null) {
 
 			for (String id : studentIds) {
-				System.out.println("id" + id);
+				log.debug("id:{}", id);
 				ids.add(Integer.valueOf(id));
 
 			}
 
 			sizeOfArray = ids.size();
 
-			System.out.println("id length" + studentIds.length);
+			log.debug("id length:{}", studentIds.length);
 
 			for (int i = 0; i < sizeOfArray; i++) {
 				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
@@ -219,7 +221,7 @@ public class MarksDetailsService {
 		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
+		log.debug("SEARCH QUERY ***** :{}", queryMain);
 		List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		result.setSearchStudentList(searchStudentList);
 
@@ -386,10 +388,10 @@ public class MarksDetailsService {
 		 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
+		log.debug("SEARCH QUERY ***** " + queryMain);
 		List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		// request.setAttribute("searchStudentList", searchStudentList);
-		/*List<Integer> ids = new ArrayList();
+		/*List<Integer> ids = new ArrayList<>();
 
 		for (int i = 0; i < searchStudentList.size(); i++) {
 			ids.add(searchStudentList.get(i).getStudent().getSid());
@@ -414,7 +416,7 @@ public class MarksDetailsService {
 				if ( subSubjectId ==0) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
-					System.out.println("Marks Details " + marks.getMarksobtained());
+					log.debug("Marks Details: {}", marks.getMarksobtained());
 				}
 			}
 		}
@@ -458,7 +460,7 @@ public class MarksDetailsService {
 		String exam = dto.getExam();
 		String subject = dto.getSubject();
 		int sizeOfArray = 0;
-		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
+		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<>();
 		List<Integer> ids = new ArrayList<Integer>();
 		List<String> studentsMarksList = new ArrayList<String>();
 		List<Integer> marksids = new ArrayList<Integer>();
@@ -479,18 +481,18 @@ public class MarksDetailsService {
 		if (studentIds != null && subject != null) {
 
 			for (String id : studentIds) {
-				System.out.println("id" + id);
+				log.debug("id:{}", id);
 				ids.add(Integer.valueOf(id));
 
 			}
 
 			sizeOfArray = ids.size();
 
-			System.out.println("id length" + studentIds.length);
+			log.debug("id length:{}", studentIds.length);
 
 			for (int i = 0; i < marksid.length; i++) {
 
-				Map<Integer, String> mapOfMarksOne = new HashMap<Integer, String>();
+				Map<Integer, String> mapOfMarksOne = new HashMap<>();
 				mapOfMarksOne.put(Integer.parseInt(studentIds[i]), studentsMarksList.get(i));
 
 				mapOfMarksid.put(Integer.parseInt(marksid[i]), mapOfMarksOne);
@@ -506,12 +508,12 @@ public class MarksDetailsService {
 				Integer marksID = entry.getKey();
 				Map<Integer, String> value = entry.getValue();
 
-				System.out.println("Marks id is " + marksID);
+				log.debug("Marks id is:{}", marksID);
 
 				for (Entry<Integer, String> entryTwo : value.entrySet()) {
 					Integer studentId = entryTwo.getKey();
 					String marksObtained = entryTwo.getValue().toString();
-					System.out.println("Student id is " + studentId + " Marks Obtained " + marksObtained);
+					log.debug("Student id is:{} Marks Obtained:{}", studentId, marksObtained);
 
 					Marks marks = new Marks();
 					marks.setMarksid(marksID);
@@ -541,19 +543,19 @@ public class MarksDetailsService {
 		String[] studentIds = dto.getStudentIds();
 		String[] marksIds = dto.getMarksIds();
 		if (marksIds != null) {
-			List<Integer> marksListids = new ArrayList();
-			List<Integer> studentListids = new ArrayList();
+			List<Integer> marksListids = new ArrayList<>();
+			List<Integer> studentListids = new ArrayList<>();
 
 			for (String studentsIdsdelete : studentIds) {
 				studentListids.add(Integer.valueOf(studentsIdsdelete));
 			}
 
 			for (String id : marksIds) {
-				System.out.println("id" + id);
+				log.debug("id" + id);
 				marksListids.add(Integer.valueOf(id));
 
 			}
-			System.out.println("id length" + marksIds.length);
+			log.debug("id length" + marksIds.length);
 			if (new MarksDetailsDAO().deleteMultiple(marksListids, studentListids)) {
 				result.setSuccess(true);
 			} else {
@@ -576,11 +578,11 @@ public class MarksDetailsService {
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
-			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+			List<MarksSheet> marksSheetList = new ArrayList<>();
 			String[] subjectListOtherExamIds = new DataUtil().getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(branchId)).split(",");
-			List<Integer> subjectListOtherExam = new ArrayList<Integer>();	
-			Map<String,Double> subMarksTermOne = new HashMap<String, Double>();
-			Map<String,Double> subMarksTermTwo = new HashMap<String, Double>();
+			List<Integer> subjectListOtherExam = new ArrayList<>();	
+			Map<String,Double> subMarksTermOne = new HashMap<>();
+			Map<String,Double> subMarksTermTwo = new HashMap<>();
 			
 			for (String id : subjectListOtherExamIds) {
 				subjectListOtherExam.add(Integer.parseInt(id));
@@ -588,8 +590,8 @@ public class MarksDetailsService {
 			
 			for (int i = 0; i < studentIds.length; i++) {
 				MarksSheet markssheet = new MarksSheet();
-				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
-				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
+				List<ExamsMarks> examMarksList = new ArrayList<>();
+				List<ExamsMarks> otherExamMarksList = new ArrayList<>();
 				Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
@@ -598,7 +600,7 @@ public class MarksDetailsService {
 					ExamsMarks examMarks = new ExamsMarks();
 					examMarks.setExamName(examOne.getExamname());
 					boolean present = false;
-					Map<String,String> subMarks = new HashMap<String, String>();
+					Map<String,String> subMarks = new HashMap<>();
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					float marksObtainedSubjectAllExams = 0;
@@ -665,15 +667,15 @@ public class MarksDetailsService {
 				
 				//Read all the  subjects of term one and query their marks subject wise
 				String[] examTermOneIds = new DataUtil().getPropertiesValue("TermOneExams"+Integer.parseInt(branchId)).split(",");
-				List<Integer> examTermOneIdsList = new ArrayList<Integer>();	
+				List<Integer> examTermOneIdsList = new ArrayList<>();	
 				for (String id : examTermOneIds) {
 					examTermOneIdsList.add(Integer.parseInt(id));
 					}
 					FinalTermMarks finalExamMarks = new FinalTermMarks();
-					List<FinalTermMarks> finalExamMarksList = new ArrayList<FinalTermMarks>();
+					List<FinalTermMarks> finalExamMarksList = new ArrayList<>();
 					finalExamMarks.setExamName("Term 1");
 					boolean present = false;
-					Map<String,String> subMarks = new HashMap<String, String>();
+					Map<String,String> subMarks = new HashMap<>();
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					float totalMarksObtainedSubjectAllExamsFinalTermOne = 0;
@@ -782,7 +784,7 @@ public class MarksDetailsService {
 					
 					
 					String[] examTermTwoIds = new DataUtil().getPropertiesValue("TermTwoExams"+Integer.parseInt(branchId)).split(",");
-					List<Integer> examTermTwoIdsList = new ArrayList<Integer>();	
+					List<Integer> examTermTwoIdsList = new ArrayList<>();	
 					
 						for (String id : examTermTwoIds) {
 							examTermTwoIdsList.add(Integer.parseInt(id));
@@ -791,7 +793,7 @@ public class MarksDetailsService {
 						FinalTermMarks finalTermTwoExamMarks = new FinalTermMarks();
 						finalTermTwoExamMarks.setExamName("Term 2");
 						boolean presentTermTwo = false;
-						Map<String,String> subMarksfinalTermTwo = new HashMap<String, String>();
+						Map<String,String> subMarksfinalTermTwo = new HashMap<>();
 						float totalMarksObtainedSubjectAllExamsFinalTermTwo = 0;
 						
 						List<Marks> marksDetailsListFinalTermTwo = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),currentAcademicYear,examTermTwoIdsList);
@@ -902,7 +904,7 @@ public class MarksDetailsService {
 							ExamsMarks otherExamMarks = new ExamsMarks();
 							otherExamMarks.setExamName(examTwo.getExamname());
 							boolean presentOtherExamMarks = false;
-							Map<String,String> otherExamSubMarks = new HashMap<String, String>();
+							Map<String,String> otherExamSubMarks = new HashMap<>();
 							float totalObtainedMarksOtherExam = 0;
 							float totalOtherExamMarks = 0;
 							float otherExamMarksObtainedSubjectAllExams = 0;
@@ -1044,7 +1046,7 @@ public class MarksDetailsService {
 							ExamsMarks examMarksOverAll = new ExamsMarks();
 							examMarksOverAll.setExamName("Term Total/Grand Total");
 							double overAllTotalMarks = 0;
-							Map<String,String> subMarksoverAll = new HashMap<String, String>();
+							Map<String,String> subMarksoverAll = new HashMap<>();
 							
 							for (String key : subMarksTermOne.keySet()) {
 					            if (subMarksTermTwo.containsKey(key)) {
@@ -1194,11 +1196,11 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
-			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+			List<MarksSheet> marksSheetList = new ArrayList<>();
 
 			//for (int i = 0; i < studentIds.length; i++) {
 			MarksSheet markssheet = new MarksSheet();
-			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			List<ExamsMarks> examMarksList = new ArrayList<>();
 			Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(student.getSid());
 			markssheet.setParents(studentDetails);
 
@@ -1207,7 +1209,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 				ExamsMarks examMarks = new ExamsMarks();
 				examMarks.setExamName(exam.getExamname());
 				boolean present = false;
-				Map<String, String> subMarks = new HashMap<String, String>();
+				Map<String, String> subMarks = new HashMap<>();
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
 
@@ -1399,7 +1401,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			outStream.close();
 			result.setSuccess(true);
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error(e.getMessage(), e);
 		}
 		return result;
 	}
@@ -1444,7 +1446,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
+			log.debug("SEARCH QUERY *****:{}", queryMain);
 			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			result.setSearchStudentList(searchStudentList);
 
@@ -1463,22 +1465,22 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 		if(currentAcademicYear!=null){
 			
 			String[] studentIds = dto.getStudentIds();
-			List<Integer> studentsIds = new ArrayList<Integer>();
+			List<Integer> studentsIds = new ArrayList<>();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
 			String examDetailsId = dto.getExamDetailsID();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			Exams examsList = examDetailsDao.getExamDetails(Integer.parseInt(examDetailsId));
-			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+			List<MarksSheet> marksSheetList = new ArrayList<>();
 			
 			int rank = 1;
 			for (int i = 0; i < studentIds.length; i++) {
 				MarksSheet markssheet = new MarksSheet();
 				ExamRank examrank = new ExamRank();
 				studentsIds.add(Integer.parseInt(studentIds[i]));
-				List<ExamRank> examRankList = new ArrayList<ExamRank>();
-				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+				List<ExamRank> examRankList = new ArrayList<>();
+				List<ExamsMarks> examMarksList = new ArrayList<>();
 				Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
 				
@@ -1487,7 +1489,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 					ExamsMarks examMarks = new ExamsMarks();
 					examMarks.setExamName(examsList.getExamname());
 					boolean present = false;
-					Map<String,String> subMarks = new HashMap<String, String>();
+					Map<String,String> subMarks = new HashMap<>();
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					
@@ -1659,13 +1661,13 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			examIds.add(Integer.parseInt(examId));
 		}
 		List<Exams> examsList = examDetailsDao.readListOfExams(examIds, Integer.parseInt(branchId));
-		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
-		List<ExamRank> examRankList = new ArrayList<ExamRank>();
+		List<MarksSheet> marksSheetList = new ArrayList<>();
+		List<ExamRank> examRankList = new ArrayList<>();
 
 		for (int i = 0; i < studentIds.length; i++) {
 			MarksSheet markssheet = new MarksSheet();
 			ExamRank examrank = new ExamRank();
-			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			List<ExamsMarks> examMarksList = new ArrayList<>();
 			Parents studentDetails = new StudentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 			markssheet.setParents(studentDetails);
 			
@@ -1674,7 +1676,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				ExamsMarks examMarks = new ExamsMarks();
 				examMarks.setExamName(exam.getExamname());
 				boolean present = false;
-				Map<String,String> subMarks = new HashMap<String, String>();
+				Map<String,String> subMarks = new HashMap<>();
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
 				
@@ -1842,7 +1844,7 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 	 * ;
 	 */
-	System.out.println("SEARCH QUERY ***** " + queryMain);
+	log.debug("SEARCH QUERY ***** {}", queryMain);
 	List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 	result.setSearchStudentList(searchStudentList);
 	
@@ -1850,7 +1852,7 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	List<String> classTeacherList = Arrays.asList(employeeDetails.getEmployee().getSubjectsteaching().split("\\s*,\\s*"));
 	// get all the subjects
 	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-	List<Subjectmaster> subjectListFinal = new ArrayList<Subjectmaster>();
+	List<Subjectmaster> subjectListFinal = new ArrayList<>();
 	
 
 
@@ -2024,16 +2026,16 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 	 * ;
 	 */
-	System.out.println("SEARCH QUERY ***** " + queryMain);
+	log.debug("SEARCH QUERY ***** {}", queryMain);
 	List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 	// request.setAttribute("searchStudentList", searchStudentList);
-	/*List<Integer> ids = new ArrayList();
+	/*List<Integer> ids = new ArrayList<>();
 
 	for (int i = 0; i < searchStudentList.size(); i++) {
 		ids.add(searchStudentList.get(i).getStudent().getSid());
 	}
 
-	System.out.println("Total Number of Students" + searchStudentList.size());*/
+	log.debug("Total Number of Students" + searchStudentList.size());*/
 
 	//
 	String exam = dto.getExam();
@@ -2042,14 +2044,14 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	String[] examIdName = exam.split(":");
 	Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
 	int subjectDetailsId = subjectDetails.getSubid();
-	List<Parents> newStudentList = new ArrayList<Parents>();
-	List<Marks> newMarksDetails = new ArrayList<Marks>();
-	Map<Parents,Map<Integer,Float>> studentsMarksMap = new HashMap<Parents, Map<Integer,Float>>();
+	List<Parents> newStudentList = new ArrayList<>();
+	List<Marks> newMarksDetails = new ArrayList<>();
+	Map<Parents,Map<Integer,Float>> studentsMarksMap = new HashMap<>();
 	
 	for (Parents parents : searchStudentList) {
 
 		List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
-		Map<Integer,Float> marksObtained = new HashMap<Integer,Float>();
+		Map<Integer,Float> marksObtained = new HashMap<>();
 		// Sort marks by subsubjectid
 	    singleMarksDetails.sort(Comparator.comparingInt(Marks::getSubsubjectid));
 		
@@ -2087,10 +2089,10 @@ public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcadem
 	String exam = dto.getExam();
 	String subject = dto.getSubject();
 	int sizeOfArray = 0;
-	Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
-	List<Integer> ids = new ArrayList<Integer>();
-	List<String> studentsMarksList = new ArrayList<String>();
-	List<Integer> marksids = new ArrayList<Integer>();
+	Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<>();
+	List<Integer> ids = new ArrayList<>();
+	List<String> studentsMarksList = new ArrayList<>();
+	List<Integer> marksids = new ArrayList<>();
 
 	if (studentsMarks != null) {
 
