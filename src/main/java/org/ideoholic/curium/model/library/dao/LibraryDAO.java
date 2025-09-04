@@ -10,21 +10,18 @@ import org.ideoholic.curium.repositories.BookHistoryRepository;
 import org.ideoholic.curium.repositories.BookIssueRepository;
 import org.ideoholic.curium.repositories.BookRepository;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class LibraryDAO {
 
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private BookIssueRepository bookIssueRepository;
-
-    @Autowired
-    private BookHistoryRepository bookHistoryRepository;
+    private final BookRepository bookRepository;
+    private final BookIssueRepository bookIssueRepository;
+    private final BookHistoryRepository bookHistoryRepository;
 
     @Transactional
     public Book create(Book book) {
