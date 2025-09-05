@@ -20,8 +20,8 @@ import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
-import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
-import org.ideoholic.curium.repositories.FeescategoryRepository;
+import org.ideoholic.curium.repositories.AcademicFeesStructureRepository;
+import org.ideoholic.curium.repositories.FeesCategoryRepository;
 import org.ideoholic.curium.repositories.FeesdetailsRepository;
 import org.ideoholic.curium.repositories.OtherReceiptInfoRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
@@ -45,11 +45,11 @@ public class feesDetailsDAO {
 	@Autowired
     private FeesdetailsRepository feesDetailsRepo;
 	@Autowired
-    private FeescategoryRepository feescategoryRepository;
+    private FeesCategoryRepository feesCategoryRepository;
 	@Autowired
     private ReceiptinfoRepository receiptinfoRepo;
 	@Autowired
-    private AcademicfeesstructureRepository academicfeesstructureRepo;
+    private AcademicFeesStructureRepository academicfeesstructureRepo;
 	@Autowired
 	private QueryUtil queryUtil;
 	@Autowired
@@ -69,7 +69,7 @@ public class feesDetailsDAO {
                 List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
-        	results = feescategoryRepository.findAll();
+        	results = feesCategoryRepository.findAll();
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();

@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AcademicfeesstructureRepository extends JpaRepository<Academicfeesstructure, Integer> {
+public interface AcademicFeesStructureRepository extends JpaRepository<Academicfeesstructure, Integer> {
 	
 	@Query("SELECT a.totalfees FROM Academicfeesstructure a WHERE a.sid = :sid AND a.academicyear = :currentYear")
     String getTotalFees(@Param("sid") int sid, @Param("currentYear") String currentYear);

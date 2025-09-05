@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeescategoryRepository extends JpaRepository<Feescategory, Integer> {
+public interface FeesCategoryRepository extends JpaRepository<Feescategory, Integer> {
 
 	List<Feescategory> findByAcademicyearAndBranchid(String academicYear, Integer branchId);
 	

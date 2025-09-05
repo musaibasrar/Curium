@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FeescollectionRepository extends JpaRepository<Feescollection, Integer> {
+public interface FeesCollectionRepository extends JpaRepository<Feescollection, Integer> {
 
 	List<Feescollection> findByStudentSidAndStudentFeeStructureSfsidIn(Integer sid, List<Integer> ids);
 
