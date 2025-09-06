@@ -107,7 +107,8 @@ public class DocumentActionAdapter {
 		DocumentService documentService = new DocumentService(request, response, standardActionAdapter);
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto);
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(BRANCHID).toString(),
+				httpSession.getAttribute("userloginid").toString());
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
 			return "studycertificateprint";
@@ -238,9 +239,23 @@ public class DocumentActionAdapter {
 
 	public boolean printTcList() {
 		CharacterDto characterDto = new CharacterDto();
-		characterDto.setFeesIds(request.getParameterValues("studentIDs"));
+		characterDto.setSIds(request.getParameterValues("studentIDs"));
 		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto);
 		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		return characterResponseDto.isSuccess();
+	}
+
+	public void viewScDetail() {
+		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
+		
+	}
+
+	public boolean printScList() {
+		CharacterDto characterDto = new CharacterDto();
+		characterDto.setSIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		return characterResponseDto.isSuccess();
 	}
 
