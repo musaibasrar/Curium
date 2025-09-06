@@ -155,7 +155,6 @@ footer p {
                     <th>Max. Marks</th>
                     <th>Min. Marks</th>
                     <th>Marks Obt.</th>
-                    <th>Remark</th>
                 </tr>
             </thead>
             <tbody>
@@ -167,7 +166,6 @@ footer p {
                     <td>${dateParts[0]}</td>
                     <td>${dateParts[1]}</td>
                     <td>${dateParts[2]}</td>
-                    <td>${dateParts[3]}</td>
                 </tr>
                 </c:forEach>
                
@@ -177,30 +175,48 @@ footer p {
                     <td><strong>${exammarks.totalMarks}</strong></td>
                     <td><strong>${exammarks.totalMinMarks}</strong></td>
                     <td><strong>${exammarks.totalMarksObtained}</strong></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td><strong>Rank</strong></td>
-                    <td colspan="4">${exammarks.rank}</td>
+                    <td colspan="3">${exammarks.rank}</td>
                 </tr>
                 <tr>
                     <td><strong>Percentage</strong></td>
-                    <td colspan="4">${exammarks.percentage}</td>
+                    <td colspan="3">${exammarks.percentage}</td>
                 </tr>
                 <tr>
                     <td><strong>Grade</strong></td>
-                    <td colspan="4">${exammarks.resultclass}</td>
+                    <td colspan="3">${exammarks.resultclass}</td>
                 </tr>
                  </c:forEach>
             </tbody>
         </table>
-        <section class="co-scholastic-areas">
-            <h4 style="color:red;">Co-Scholastic Areas</h4>
-            <p>1. Discipline in the classroom: [ A / B / C ]</p>
-            <p>2. Behavior / Conduct with teachers & classmates: [ A / B / C ]</p>
-            <p>3. Regularity & Neatness in doing HW/CW: [ A / B / C ]</p>
-            <p>4. Comes to School: On time [ ] / Sometime Late [ ] / Always Late [ ]</p>
-        </section>
+        <table>
+        <thead>
+            <tr>
+            <th style="background-color:white;color:black;">
+            REMARKS
+            </th>
+            <th style="background-color:white;color:black;">
+            PERFORMANCE
+            </th>
+            <th style="background-color:white;color:black;">
+            CONDUCT
+            </th>
+            <th style="background-color:white;color:black;">
+            ATTENTIVENESS
+            </th>
+            <th style="background-color:white;color:black;">
+            HOMEWORK
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>&nbsp; </td><td> </td><td> </td><td> </td><td> </td>
+            </tr>
+            </tbody>
+        </table>
         <table style="border: 0px solid #ddd;">
         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
          <tr><td style="border: 0px solid #ddd;"><br></td></tr>
