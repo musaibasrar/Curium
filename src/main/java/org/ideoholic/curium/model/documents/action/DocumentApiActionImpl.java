@@ -206,8 +206,8 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 	}
 
 	@PostMapping("/GenerateStudyCertificate")
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto) {
-		ParentDto result = documentService.generateStudyCertificate(studentIdsDto);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId) {
+		ParentDto result = documentService.generateStudyCertificate(studentIdsDto,currentAcademicYear,branchId);
 		if (result != null) {
 			return ResponseEntity.ok(result);
 			}
@@ -227,4 +227,51 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 		CharacterResponseDto result = documentService.printCharacterCertificate(characterDto);
 		return ResponseEntity.ok(result);
 	}
+	
+	@GetMapping("/getTcDetail")
+	public ResponseEntity<String> getTcDetail() {
+		return ResponseEntity.ok("generatetcdetail");
+	}
+	
+	@GetMapping("/tcDetail")
+	public ResponseEntity<CharacterResponseDto> tcDetail() {
+		CharacterResponseDto result = documentService.viewTcDetail(); 
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/printTcList")
+	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto) {
+		CharacterResponseDto result = documentService.printTcList(characterDto);
+		if(result.isSuccess()){
+			return ResponseEntity.ok(result);
+		}else{
+			throw new CustomResponseException(CustomErrorMessage.ERROR);
+		}
+		
+	}
+	
+	@GetMapping("/getScDetail")
+	public ResponseEntity<String> getScDetail() {
+		return ResponseEntity.ok("generatetcdetail");
+	}
+	
+	@GetMapping("/scDetail")
+	public ResponseEntity<CharacterResponseDto> scDetail(@RequestHeader(value = "branchid") String branchId) {
+		CharacterResponseDto result = documentService.viewScDetail(branchId); 
+		return ResponseEntity.ok(result);
+	}
+	
+	 @PostMapping("/printScList")
+	  public ResponseEntity<CharacterResponseDto> printScList(@RequestBody CharacterDto characterDto,@RequestHeader(value = "branchid") String branchId) {
+		 CharacterResponseDto result = documentService.printScList(characterDto,branchId);
+	  if(result.isSuccess()){
+		  return ResponseEntity.ok(result);
+		  }else{
+			  throw new CustomResponseException(CustomErrorMessage.ERROR);
+			  }
+	  
+	  }
+
+	
+
 }
