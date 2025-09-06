@@ -696,6 +696,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/vision/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
+            			</td>
+            		</tr>
             		
             	</table>
             </div>

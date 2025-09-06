@@ -4,6 +4,8 @@
 package org.ideoholic.curium.model.documents.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.exceptions.CustomErrorMessage;
+import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.documents.dto.CharacterDto;
 import org.ideoholic.curium.model.documents.dto.CharacterResponseDto;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
@@ -17,6 +19,8 @@ import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,9 +70,21 @@ public interface DocumentApiAction {
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForStudyCertificate(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId);
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForCharacter(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
 	public ResponseEntity<CharacterResponseDto> printCharacterCertificate(@RequestBody CharacterDto characterDto);
+	
+	public ResponseEntity<String> getTcDetail();
+	
+	public ResponseEntity<CharacterResponseDto> tcDetail();
+	
+	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto);
+		
+	public ResponseEntity<String> getScDetail();
+	
+	public ResponseEntity<CharacterResponseDto> scDetail(@RequestHeader(value = "branchid") String branchId);
+	
+    public ResponseEntity<CharacterResponseDto> printScList(@RequestBody CharacterDto characterDto,@RequestHeader(value = "branchid") String branchId);
 }

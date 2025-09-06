@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 public class CharacterDto {
 
 	private String characterStudent;
-	private String[] feesIds;
+	private String[] sIds;
 }
