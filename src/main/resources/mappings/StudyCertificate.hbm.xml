@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21 Mar, 2018 9:55:31 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.documents.dto.StudyCertificate" table="studycertificate" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="fatherName" type="string">
+            <column name="fathername" length="100" />
+        </property>
+         <property name="classStudying" type="string">
+            <column name="classstudying" length="20" />
+        </property>
+        <property name="reason" type="string">
+            <column name="reason" length="100" />
+        </property>
+        <property name="noofissues" type="java.lang.Integer">
+            <column name="noofissues" />
+        </property>
+        <property name="dateofissues" type="date">
+            <column name="dateofissues" length="10" />
+        </property>
+         <property name="academicYear" type="string">
+            <column name="academicyear" length="20" />
+        </property>
+        <property name="uid" type="string">
+            <column name="uid" length="20" />
+        </property>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        
+ 		<property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+		
+    </class>
+</hibernate-mapping>
