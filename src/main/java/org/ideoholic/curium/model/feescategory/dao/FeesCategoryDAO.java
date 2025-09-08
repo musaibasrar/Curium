@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.feescategory.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -322,22 +323,19 @@ public class FeesCategoryDAO {
 		}
 	}
 
+	@Transactional
 	public List<Feescategory> readListOfFeeCategory(int branchId, String academicYear, String nextYear) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
-            transaction = session.beginTransaction();
-            results = (List<Feescategory>) session.createQuery("From Feescategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
-        }
+           // results = (List<Feescategory>) session.createQuery("From Feescategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
+        	results = feesCatRepo.findByBranchidAndAcademicyearIn(branchId, Arrays.asList(academicYear, nextYear));
+        }catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+        } 
+        return results;
 	}
 
 	@SuppressWarnings("finally")
