@@ -10,7 +10,7 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
-import org.ideoholic.curium.repositories.FeescollectionRepository;
+import org.ideoholic.curium.repositories.FeesCollectionRepository;
 import org.ideoholic.curium.repositories.OtherReceiptInfoRepository;
 import org.ideoholic.curium.repositories.OtherfeescollectionRepository;
 import org.ideoholic.curium.repositories.ReceiptinfoRepository;
@@ -31,7 +31,7 @@ public class feesCollectionDAO {
 	
 	private final QueryUtil queryUtil;
 
-    private final FeescollectionRepository feescollectionRepository;
+    private final FeesCollectionRepository feesCollectionRepository;
 
     private final ReceiptinfoRepository receiptinfoRepository;
 
@@ -92,7 +92,7 @@ public class feesCollectionDAO {
                         sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
                         studentfeesstructureRepository.save(sfs);
                     }
-                    feescollectionRepository.save(singleFeescollection);
+                    feesCollectionRepository.save(singleFeescollection);
                 }
             }
 
@@ -123,7 +123,7 @@ public class feesCollectionDAO {
     public List<Feescollection> getFeesForTheCurrentYear(long id, String currentAcademicYear) {
         try {
         	// session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
-            return feescollectionRepository.findByStudent_SidAndAcademicyear(id, currentAcademicYear);
+            return feesCollectionRepository.findByStudent_SidAndAcademicyear(id, currentAcademicYear);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -171,7 +171,7 @@ public class feesCollectionDAO {
     public List<Feescollection> getFeesCollectionDetails(int receiptId) {
         try {
         	// session.createQuery("From Feescollection where receiptnumber="+receiptId).list();
-            return feescollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
+            return feesCollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -359,7 +359,7 @@ public class feesCollectionDAO {
                         sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
                         studentfeesstructureRepository.save(sfs);
                     }
-                    feescollectionRepository.save(singleFeescollection);
+                    feesCollectionRepository.save(singleFeescollection);
                 }
             }
 

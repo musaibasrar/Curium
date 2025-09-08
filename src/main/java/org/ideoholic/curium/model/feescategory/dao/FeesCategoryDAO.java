@@ -12,12 +12,16 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
+import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.repositories.AcademicfeesstructureRepository;
-import org.ideoholic.curium.repositories.FeescategoryRepository;
-import org.ideoholic.curium.repositories.FeescollectionRepository;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.repositories.AcademicFeesStructureRepository;
+import org.ideoholic.curium.repositories.AcademicOtherFeesStructureRepository;
+import org.ideoholic.curium.repositories.FeesCategoryRepository;
+import org.ideoholic.curium.repositories.FeesCollectionRepository;
 import org.ideoholic.curium.repositories.OtherFeecategoryRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
+import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
@@ -33,17 +37,21 @@ import lombok.extern.slf4j.Slf4j;
 public class FeesCategoryDAO {
 
 	@Autowired
-	private FeescategoryRepository feesCatRepo;
+	private FeesCategoryRepository feesCatRepo;
 	@Autowired
-	private FeescollectionRepository feescollectionRepo;
+	private FeesCollectionRepository feescollectionRepo;
 	@Autowired
 	private StudentFeesStructureRepository studentFeesStructureRepo;
 	@Autowired
 	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 	@Autowired
-	private AcademicfeesstructureRepository academicfeesstructureRepo;
+	private AcademicFeesStructureRepository academicfeesstructureRepo;
 	@Autowired
 	private OtherFeecategoryRepository otherFeecategoryRepo;
+	@Autowired
+	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
+	@Autowired
+	private AcademicOtherFeesStructureRepository academicotherfeesstructureRepo;
 	@Autowired
 	private QueryUtil queryUtil;
 	
@@ -273,6 +281,7 @@ public class FeesCategoryDAO {
 
 	}
 	
+	@Transactional
 	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear, String branchId)
 	{
 		List <Feescategory> result= new ArrayList();
@@ -287,24 +296,29 @@ public class FeesCategoryDAO {
 		return result;
 	}
 	
+	@Transactional
 	public void applyotherConcession(List<Concession> concessionList, String sid) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
-				Query query = session.createQuery("update Studentotherfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
-				query.executeUpdate();
-				Query queryAcademicFees = session.createQuery("update Academicotherfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				queryAcademicFees.executeUpdate();
+				// Query query = session.createQuery("update Studentotherfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepo.findById(concession.getSfsid()).orElse(null);
+				if (studentotherfeesstructure != null) {
+					studentotherfeesstructure.setConcession(Integer.parseInt(concession.getConcession()));
+				}
+				studentOtherFeesStructureRepo.save(studentotherfeesstructure);
+				// Query queryAcademicFees = session.createQuery("update Academicotherfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				Academicotherfeesstructure academicotherfeesstructure = academicotherfeesstructureRepo.findById(Integer.parseInt(sid)).orElse(null);
+				if (academicotherfeesstructure != null) {
+					Integer totalFees = Integer.parseInt(concession.getConcessionOld()) - Integer.parseInt(concession.getConcession());
+					totalFees += Integer.parseInt(academicotherfeesstructure.getTotalfees());
+					academicotherfeesstructure.setTotalfees(String.valueOf(totalFees));
+					academicotherfeesstructureRepo.save(academicotherfeesstructure);
+				}
 			}
-			transaction.commit();
 		} catch (Exception hibernateException) {
-			transaction.rollback(); 
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 	}
 
