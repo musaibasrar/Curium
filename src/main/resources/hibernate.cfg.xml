@@ -132,6 +132,7 @@
 		<mapping resource="mappings/mess/MessTaxInvoice.hbm.xml"/> 
 		<mapping resource="mappings/AdmissionEnquiry.hbm.xml"/> 
     	<mapping resource="mappings/Events.hbm.xml"/>
-    	<mapping resource="mappings/SubSubject.hbm.xml"/> -->
+    	<mapping resource="mappings/SubSubject.hbm.xml"/>
+    	<mapping resource="mappings/StudyCertificate.hbm.xml"/> -->
 	</session-factory>
 </hibernate-configuration>
