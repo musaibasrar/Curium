@@ -1125,7 +1125,7 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-				new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
+				new Object[] { "Admission No.","STS","Permanent Number", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 					"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
 					"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;

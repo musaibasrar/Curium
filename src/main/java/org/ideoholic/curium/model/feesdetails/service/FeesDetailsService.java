@@ -118,7 +118,7 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
+					new Object[] { "Temp Admn. No.","Permanent Number","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
@@ -228,7 +228,7 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
+					new Object[] { "Temp Admn. No.","Permanent Number","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Otherreceiptinfo> entry : feeMap.entrySet()) {

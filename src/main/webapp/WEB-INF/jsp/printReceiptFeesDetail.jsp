@@ -179,7 +179,7 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/vision/images/vision.jpg" width="121" height="80"/></td>
+				<td><img src="/vasu/images/vasu.jpg" width="72" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -208,7 +208,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Permanent Number:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
@@ -368,7 +368,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/vision/images/visionpaytm.jpeg" width="70" height="65"/></td> -->
+		<!-- <td><img src="/vasu/images/vasupaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -379,7 +379,7 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/vision/images/vision.jpg" width="121" height="80"/></td>
+				<td><img src="/vasu/images/vasu.jpg" width="72" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -407,7 +407,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Permanent Number:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
@@ -569,7 +569,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<!-- <td><img src="/vision/images/visionpaytm.jpeg" width="70" height="65"/></td> -->
+		<!-- <td><img src="/vasu/images/vasupaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

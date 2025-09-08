@@ -516,7 +516,7 @@ public class JobService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-				new Object[] { "UID", "Title", "Staff", "Supporting Staff",
+				new Object[] { "Permanent Number", "Title", "Staff", "Supporting Staff",
 					"Created Date","Updated Date","Expected End Date", "Status"});
 			int i = 1;
 			for (JobQuery queryDetails : queriesList) {

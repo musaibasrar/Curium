@@ -221,7 +221,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/abc.png" width="150" height="141"/>
+				<img src="/vasu/images/vasu.png" width="141" height="127"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label style="text-transform: uppercase;font-size: 24px;">${branchname}</label>
@@ -250,7 +250,7 @@
             	
             	  		<tr>
                            	<th class="datath">Sl.No</th>
-                           	<th class="datath">UID</th>
+                           	<th class="datath">Permanent Number</th>
                            	<th class="datath">Job No.</th>
                             <th class="datath">Staff</th>
                             <th class="datath">Created Date</th>

@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <link rel="stylesheet" href="/abc/css/bootstrap.min.css">
-    <script src="/abc/js/jquery.min.js"></script>
-    <script src="/abc/js/bootstrap.min.js"></script>
-    <script src="/abc/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/vasu/css/bootstrap.min.css">
+    <script src="/vasu/js/jquery.min.js"></script>
+    <script src="/vasu/js/bootstrap.min.js"></script>
+    <script src="/vasu/js/popper.min.js"></script>
         
 <style>
  .headerText {
@@ -61,7 +61,7 @@ padding:1 rem;
       <p class="text-muted mb-1"><c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
         ${splt}
       </c:forEach></p>
-      <h5 class="my-3" style="color: #0f304f; font-weight: bold;">UID: &nbsp;<c:out value="${student.studentexternalid}" /></h5>
+      <h5 class="my-3" style="color: #0f304f; font-weight: bold;">Permanent Number: &nbsp;<c:out value="${student.studentexternalid}" /></h5>
     </div>
   </div>
 </div>

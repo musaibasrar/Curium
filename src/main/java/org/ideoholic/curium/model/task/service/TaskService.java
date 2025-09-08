@@ -509,7 +509,7 @@ public class TaskService {
 				Map<String, Object[]> data = new HashMap<String, Object[]>();
 				Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 				headerData.put("Header",
-						new Object[] { "UID", "Job No.", "Created Date","Updated Date","Staff", "Client Name",
+						new Object[] { "Permanent Number", "Job No.", "Created Date","Updated Date","Staff", "Client Name",
 								"Contact Number", "Status"});
 				int i = 1;
 				for (JobQuery queryDetails : queriesList) {

@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vasu/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vasu/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vasu/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vasu/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vasu/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vasu/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vasu/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vasu/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vasu/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vasu/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vasu/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/vasu/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vasu/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vasu/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/vasu/JavaScript/actb.js"></script>
+<script src="/vasu/JavaScript/common.js"></script>
 
 
 
@@ -590,7 +590,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vasu/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -633,7 +633,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/vasu/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -861,7 +861,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vasu/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -889,11 +889,11 @@ $(document).ready(function() {
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
-					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
-					<li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li>
+					<li><a href="#fragment-4">Previous School Details</a></li>
+					<!-- <li><a href="#fragment-4">Additional Details</a></li> -->
+					<li><a href="#fragment-5">Bank Details</a></li>
+					<li><a href="#fragment-6">Stamp Fee</a></li>
+					<!-- <li><a href="#fragment-8" onclick="searchOtherFeecategory()">Other Stamp Fee</a></li> -->
 				</ul>
 
 
@@ -913,9 +913,9 @@ $(document).ready(function() {
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
 								onclick="noCheck(this.id)" />
-								&nbsp; &nbsp;Alumni<input
+								&nbsp; &nbsp;<!-- Alumni<input
 								type="checkbox" value="Alumni" name="stream" id="maybe:at"
-								onclick="maybeCheck(this.id)" />
+								onclick="maybeCheck(this.id)" /> -->
 							</td>
 						</tr>
 						<tr>
@@ -926,13 +926,13 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
+							<td class="alignLeft">Temp. Admn. No. &nbsp;</td>
 							<td ><label> <input name="admnno" 
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Permanent Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
@@ -990,17 +990,10 @@ $(document).ready(function() {
 							</label></td>
 
 
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 
 
-						<tr>
+					<!-- 	<tr>
 
 							<td  class="alignLeft">Place Of Birth, Tq,
 								Dist.&nbsp;</td>
@@ -1013,7 +1006,7 @@ $(document).ready(function() {
 							<td ><label><input name="dateofadmission" autocomplete="false"
 									type="text" class="myclass" id="dateofadmission" size="36"
 									data-validate="validate(required)"> </label></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1050,63 +1043,49 @@ $(document).ready(function() {
 								</select>
 							</label></td>
 
-							<td  class="alignLeft" style="padding-left: 20px;">Admitted in Class &nbsp;
+						
+						<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td ><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="disabilitychild" size="36">
+
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+
+                         <td class="alignLeft">Religion &nbsp;</td>
+
+							<td >
+								<!-- <label> <input name="religion"
+									type="text" class="myclass" id="religion" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="religion"
+									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Hindu</option>
+										<option>Islam</option>
+										<option>Christian</option>
+										<option>Jain</option>
+										<option>Sikh</option>
+										<option>Buddhists</option>
+								</select>
+
+							</label>
+
 							</td>
-
-							<td ><label> <select name="admclassE"
-									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
-									>
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label></td>
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td  class="alignLeft">Blood Group &nbsp;</td>
-
-							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>A +ve</option>
-										<option>B +ve</option>
-										<option>AB +ve</option>
-										<option>O +ve</option>
-										<option>A -ve</option>
-										<option>B -ve</option>
-										<option>AB -ve</option>
-										<option>O -ve</option>
-
-
-								</select>
-
-							</label></td>
-
-
+						
 							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
 
 							<td><label> <select name="nationality"
@@ -1121,58 +1100,7 @@ $(document).ready(function() {
 
 						</tr>
 
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-
-							<td class="alignLeft">Religion &nbsp;</td>
-
-							<td >
-								<!-- <label> <input name="religion"
-									type="text" class="myclass" id="religion" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="religion"
-									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-
-							</td>
-
-
-
-							<!-- <td class="alignRight">Caste &nbsp;</td>
-							<td ><label> <input name="caste"
-									type="text" class="myclass" id="caste" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label></td> -->
-
-							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
-								Certificate No.&nbsp;</td>
-							<td ><label> <input
-									name="studentscastecertno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="studentscastecertno" size="36">
-
-							</label></td>
-						</tr>
-
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1180,68 +1108,18 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Students Caste &nbsp;</td>
+							<td class="alignLeft"> Caste &nbsp;</td>
 							<td ><label> <input name="studentscaste"
 							style="text-transform:capitalize;"
 									type="text" class="myclass" id="studentscaste" size="36">
 
 							</label></td>
 
-							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
-							<td>&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
-								&nbsp;</td>
-							<td ><label> <input
-									name="bplcardno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
-							</td>
-							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td ><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="disabilitychild" size="36">
-
+							<td  class="alignLeft" style="padding-left: 20px;"> Category&nbsp;</td>
+							<td><label> 
+							<input name="socialcategory"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" id="socialcategory" size="36">
 							</label></td>
 						</tr>
 						<tr>
@@ -1251,84 +1129,6 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td class="alignLeft" >Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td  id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
-									style="text-transform:capitalize;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
-							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
-							<td >
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="motherT"
-									 id="motherT"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-						<tr>
-						
-							<td class="alignLeft"  >RTE
-										&nbsp;</td>
-
-									<td  >&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" />
-										</td>
-										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
-									style="text-transform:capitalize;"
-									>
-							</label></td>
-						</tr>
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
@@ -1384,15 +1184,7 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-										
-							<td class="alignLeft">DND Date &nbsp;</td>
-							<td ><label> <input name="crecorddate"
-									type="text"
-									class="myclass" id="datepickerDND" size="36"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1554,7 +1346,7 @@ $(document).ready(function() {
 						</div>
 
 
-						<div id="fragment-4">
+						<%-- <div id="fragment-4">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1692,7 +1484,7 @@ $(document).ready(function() {
 
 							</table>
 
-						</div>
+						</div> --%>
 
 
 						<div id="fragment-2">
@@ -1732,14 +1524,14 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<!-- <tr>
 									<td class="alignLeft">Father's Qualification
 										&nbsp;</td>
 									<td ><label> <input
 											name="fathersqualification" type="text" class="myclass"
 											id="fathersqualification" 
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's
@@ -1748,7 +1540,7 @@ $(document).ready(function() {
 											name="mothersqualification" type="text" class="myclass"
 											id="mothersqualification"
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 
@@ -1807,7 +1599,7 @@ $(document).ready(function() {
 									</label></td>
 
 								</tr>
-
+ -->
 								<tr>
 									<td><br /></td>
 								</tr>
@@ -1847,7 +1639,7 @@ $(document).ready(function() {
 								</tr>
 
 
-								<tr>
+								<!-- <tr>
 
 									<td class="alignLeft">Email &nbsp;</td>
 
@@ -1867,7 +1659,7 @@ $(document).ready(function() {
 									</label></td>
 
 
-								</tr>
+								</tr> -->
 
 								<tr>
 								<tr>
@@ -1961,11 +1753,11 @@ $(document).ready(function() {
 							</table>
 						</div>
 						
-						<div id="fragment-5">
+						<div id="fragment-4">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
-									<tr>
+									<!-- <tr>
 
 										<td><br /></td>
 									</tr>
@@ -1991,23 +1783,19 @@ $(document).ready(function() {
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						
 						<tr>
-							<td class="alignLeft">Previous Class Studied &nbsp;</td>
+							<td class="alignLeft">10th School Name &nbsp;</td>
 
-							<td ><label> <select name="lastclass" id="lastclass"
-									style="width: 256px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:forEach>
-								</select>
+							<td ><label>
+									<input
+									name="lastclass" type="text" class="myclass" id="lastclass"
+									style="text-transform:capitalize;"
+									size="36" >
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Previous School Name
+							<td class="alignLeft" style="padding-left: 20px;">2nd P.U.C College Name
 								&nbsp;</td>
 							<td><label> <input
 									name="lastschool" type="text" class="myclass" id="lastschool"
@@ -2025,7 +1813,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Languages Studied &nbsp;</td>
+							<td class="alignLeft">Total Marks &nbsp;</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass"
@@ -2035,7 +1823,7 @@ $(document).ready(function() {
 
 
 
-							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Obtained Marks &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:capitalize;"
@@ -2051,24 +1839,16 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Previous School Medium of<br>
-								Instruction&nbsp;</td>
+							<td class="alignLeft">Percentage Secured&nbsp;</td>
 
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
+							<td><label>  <input
+									name="mediumofinstruction" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="mediumofinstruction" size="36">
 
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Previous School
+							<!-- <td class="alignLeft" style="padding-left: 20px;">Previous School
 								Type&nbsp;</td>
 
 							<td><label> <select name="previousschooltype"
@@ -2080,7 +1860,7 @@ $(document).ready(function() {
 										<option>Private Unaided School</option>
 								</select>
 
-							</label></td>
+							</label></td> -->
 						</tr>
 
 						<tr>
@@ -2136,8 +1916,7 @@ $(document).ready(function() {
 							</div>
 
 						</div>
-						
-						<div id="fragment-6">
+						<!-- <div id="fragment-5">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -2227,9 +2006,9 @@ $(document).ready(function() {
 
 							</div>
 
-						</div>
+						</div> -->
 						
-						<div id="fragment-7">
+						<div id="fragment-6">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2257,9 +2036,7 @@ $(document).ready(function() {
 							<tr>
 								<td></td>
 								<td align="left">
-								<a class="nexttab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -2297,7 +2074,7 @@ $(document).ready(function() {
 				</table>
 				</div>
 				
-				<div id="fragment-8">
+				 <!-- <div id="fragment-8">
 						
 						<table style="width: auto;height: auto;" align="center">
 								
@@ -2361,7 +2138,7 @@ $(document).ready(function() {
 				
 					
 				</table>
-				</div>
+				</div>  -->
 					</table>
 				</div>
 
@@ -2379,14 +2156,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/abc/StudentProcess/AddStudent";
+									form1.action = "/vasu/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/StudentProcess/viewAll";
+								form1.action = "/vasu/StudentProcess/viewAll";
 								form1.submit();
 							}
 
@@ -2394,4 +2171,3 @@ $(document).ready(function() {
 						</script>
 </body>
 </html>
-

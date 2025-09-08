@@ -1037,7 +1037,7 @@ public class FeesCollectionService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+					new Object[] { "Permanent Number", "Temp Admn. No.","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
 			int i = 1;
 			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 				
@@ -1833,7 +1833,7 @@ public class FeesCollectionService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+					new Object[] { "Permanent Number", "Temp Admn. No.","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
 			int i = 1;
 			for (Studentotherfeesreport studentFeesReport : studentOtherFeesReportList) {
 				
@@ -2203,7 +2203,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
