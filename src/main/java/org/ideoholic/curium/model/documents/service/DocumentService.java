@@ -32,6 +32,7 @@ import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
+import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
@@ -809,19 +810,111 @@ public class DocumentService {
 		return parentDto;
 	}
 	
-		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto) {
+		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto,String academicyear,String branchId, String userId) {
 			 ParentDto parentDto = null;
 			String[] studentIds = studentIdsDto.getStudentIds();
 			String bonafidePage = null;
+			 StudyCertificate studyCertificate = new StudyCertificate();
 			
 			if(studentIds!=null){
 				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				studyCertificate.setName(parents.getStudent().getName());
+				studyCertificate.setFatherName(parents.getFathersname());
+				studyCertificate.setReason("education");
+				studyCertificate.setClassStudying(parents.getStudent().getClassstudying());
+				studyCertificate.setAcademicYear(academicyear);
+				studyCertificate.setBranchid(Integer.parseInt(branchId));
+				studyCertificate.setDateofissues(new Date());
+				studyCertificate.setSid(parents.getStudent().getSid());
+				studyCertificate.setUid(parents.getStudent().getStudentexternalid());
+				studyCertificate.setUserid(Integer.parseInt(userId));
+				boolean success = new DocumentDAO().add(studyCertificate);
+				if(success) {
 				parentDto = new ParentDto();
 				parentDto.setParents(parents);
 				bonafidePage = "studycertificateprint";
+				}
+				else {
+					bonafidePage = "error";
+				}
 			}
 			
 			return parentDto;
 		}
+		 
+		 public CharacterResponseDto viewTcDetail() {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Integer> sid = new ArrayList<Integer>(); 
+				for (Transfercertificate transfercertificate : tc) {
+					sid.add(transfercertificate.getSid());
+				}
+				List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
+				
+				for (Parents parents : listofParents) {
+					int studentId = parents.getStudent().getSid();
+					
+					for (Transfercertificate transferCert : tc) {
+						int tcSid = transferCert.getSid();
+						if(studentId==tcSid) {
+							Student student = parents.getStudent();
+							student.setNotcissued(transferCert.getNoofissues());
+							student.setNooftc(transferCert.getTcid());
+							student.setDatetcissued(transferCert.getDateofissues());
+							parents.setStudent(student);
+						}
+						
+					}
+				}
+				characterResponseDto.setListofParents(listofParents);
+				return characterResponseDto;
+			}
+
+
+			public CharacterResponseDto printTcList(CharacterDto characterDto) {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				String[] feesIds = characterDto.getSIds();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Integer> sid = new ArrayList<Integer>(); 
+				for (String id : feesIds) {
+				    sid.add(Integer.parseInt(id));
+				}
+						List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
+				
+				for (Parents parents : listofParents) {
+					int studentId = parents.getStudent().getSid();
+					
+					for (Transfercertificate transferCert : tc) {
+						int tcSid = transferCert.getSid();
+						if(studentId==tcSid) {
+							Student student = parents.getStudent();
+							student.setNotcissued(transferCert.getNoofissues());
+							student.setNooftc(transferCert.getTcid());
+							student.setDatetcissued(transferCert.getDateofissues());
+							parents.setStudent(student);
+						}
+						
+					}
+				}
+				characterResponseDto.setListofParents(listofParents);
+				characterResponseDto.setSuccess(true);
+				return characterResponseDto;
+			}
+
+			public CharacterResponseDto viewScDetail(String branchId) {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				List<StudyCertificate>  studyCertificate = new DocumentDAO().getStudentCertificateList(Integer.parseInt(branchId));
+				characterResponseDto.setStudyCertificate(studyCertificate);
+				return characterResponseDto;
+			}
+
+			public CharacterResponseDto printScList(CharacterDto characterDto, String branchId) {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				String[] sIds = characterDto.getSIds();
+				List<StudyCertificate> listStudyCertificate = new DocumentDAO().getListOfIssuedStudyCertificate(sIds);
+				characterResponseDto.setStudyCertificate(listStudyCertificate);
+				characterResponseDto.setSuccess(true);
+				return characterResponseDto;
+			}
 }

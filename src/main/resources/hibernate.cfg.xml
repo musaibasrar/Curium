@@ -12,7 +12,7 @@
 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">mysql</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/abc</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vasu</property>
 		<property name="hibernate.connection.username">root</property>
 
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -132,5 +132,6 @@
 		<mapping resource="mappings/AdmissionEnquiry.hbm.xml"/> 
     	<mapping resource="mappings/Events.hbm.xml"/>
     	<mapping resource="mappings/SubSubject.hbm.xml"/>
+    	<mapping resource="mappings/StudyCertificate.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

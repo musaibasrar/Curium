@@ -210,4 +210,49 @@ public class DocumentAction {
 		documentActionAdapter.printCharacterCertificate();
 		return "characterprint";
 	}
+	
+	@GetMapping("/getTcDetail")
+	public String getTcDetail() {
+		return "generatetcdetail";
+	}
+	
+	@GetMapping("/tcDetail")
+	public String tcDetail() {
+		documentActionAdapter.viewTcDetail(); 
+		return "studentstcreport";
+	}
+	
+	@PostMapping("/printTcList")
+	public String printTcList() {
+		
+		if(documentActionAdapter.printTcList()){
+			return "printtclist";
+		}else{
+			return "error";
+		}
+		
+	}
+	
+	@GetMapping("/getScDetail")
+	public String getScDetail() {
+		return "generatescdetail";
+	}
+	
+	@GetMapping("/scDetail")
+	public String scDetail() {
+		documentActionAdapter.viewScDetail(); 
+		return "studentsscreport";
+	}
+	
+	
+	  @PostMapping("/printScList")
+	  public String printScList() {
+	  if(documentActionAdapter.printScList()){
+		  return "printsclist";
+		  }else{
+			  return "error";
+			  }
+	  
+	  }
+	 
 }
