@@ -640,4 +640,19 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/header_reception")
+	public String getHeaderReception() {
+		return "header_reception";
+	}
+	
+	@GetMapping("/left_reception")
+	public String getLeftReception() {
+		return "left_reception";
+	}
+	
+	@GetMapping("/reports_reception")
+	public String getReportsReception() {
+		return "reports_reception";
+	}
 }

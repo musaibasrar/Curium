@@ -503,6 +503,19 @@
 		document.getElementById('age').value = age;
 	}
 	
+	function calculatePercentage(){
+		var totalMarks = document.getElementById('languagesstudied').value;
+		var obtainedMarks = document.getElementById('progress').value;
+		
+		  if (totalMarks === 0) {
+			  alert("Total Marks Cann't be ZERO");
+			  }
+		  var percentage = (obtainedMarks / totalMarks) * 100;
+		  percentage = Math.round(percentage);
+		  document.getElementById('mediumofinstruction').value = percentage;
+
+	}
+	
 	function yesCheck(id) {
 
 		if (document.getElementById(id).checked == true) {
@@ -1757,11 +1770,13 @@ $(document).ready(function() {
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
-									<!-- <tr>
-
-										<td><br /></td>
-									</tr>
-
+									 <tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+							<!--
 									<tr>
 							<td class="alignLeft">Transfer
 								certificate No.&nbsp;</td>
@@ -1826,7 +1841,7 @@ $(document).ready(function() {
 							<td class="alignLeft" style="padding-left: 20px;">Obtained Marks &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
-									style="text-transform:capitalize;"
+									style="text-transform:capitalize;" onkeyup="calculatePercentage()"
 									class="myclass" id="progress" size="36">
 							</label></td>
 						</tr>
@@ -1916,14 +1931,16 @@ $(document).ready(function() {
 							</div>
 
 						</div>
-						<!-- <div id="fragment-5">
+						 <div id="fragment-5">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
 									<tr>
-
-										<td><br /></td>
-									</tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 									
 									<tr>
 								<td class="alignLeft">Bank Name &nbsp;</td>
@@ -2006,11 +2023,17 @@ $(document).ready(function() {
 
 							</div>
 
-						</div> -->
+						</div> 
 						
 						<div id="fragment-6">
 						
 						<table style="width: auto;height: auto;" align="center">
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 								
 							<tr>
 							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>

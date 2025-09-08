@@ -142,6 +142,8 @@ form{
                 	window.open('/vasu/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/vasu/index_parents','_self');
+                }else if(type=='reception'){
+                	window.open('/vasu/index_reception','_self');
                 }
             }
             else if(!flag1){
@@ -161,7 +163,8 @@ form{
 				<div class="container-fluid">
 					<div class="row">
 						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/vasu/images/shaheenlogo.png"></h2></span> -->
-						<h4>Vasu Group of Institutions</h4>
+						<h2>Vasu Group of Institutions</h2>
+						<h3 style="font-weight: bold;color: #88008b;">Login</h3>
 					</div>
 					<div class="row">
 						<form action="/vasu/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">

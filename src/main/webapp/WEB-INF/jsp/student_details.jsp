@@ -525,29 +525,24 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.nationality}" />
                             </td>
-                        </tr>
-                        
-                        <tr>
-                        <td  width="25%"  class="alignLeft" height="50" >Religion
+                            
+                            <td  width="25%"  class="alignLeft" height="50" >Religion
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                            
-                           
-                
-                         
                         </tr>
+                        
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" > Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.studentscaste}" />
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >Special Category
+                            <td  width="25%"  class="alignLeft" height="50" >Category
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.specialcategory}" />
+                                <c:out default="" value="${student.socialcategory}" />
                             </td>                     
                         
                         </tr>
@@ -766,20 +761,6 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                       
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
-                            <td width="25%" class="tablerows" >
-                                 <c:out value="${parents.fatherscastecertno}" />
-                                
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
-                            </td>
-                            <td width="25%"  class="tablerows">
-                                <c:out default="" value="${parents.motherscastecertno}" />
-                            </td>
-                        </tr>
-                       
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
                             <td  width="25%"  class="tablerows">

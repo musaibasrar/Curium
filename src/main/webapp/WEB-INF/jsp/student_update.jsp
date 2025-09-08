@@ -471,6 +471,19 @@
 	            alert("Unsupported File");
 	        }
 	    }
+	   
+		function calculatePercentage(){
+			var totalMarks = document.getElementById('languagesstudied').value;
+			var obtainedMarks = document.getElementById('subsequentprogress').value;
+			
+			  if (totalMarks === 0) {
+				  alert("Total Marks Cann't be ZERO");
+				  }
+			  var percentage = (obtainedMarks / totalMarks) * 100;
+			  percentage = Math.round(percentage);
+			  document.getElementById('mediumofinstruction').value = percentage;
+
+		}
 
 
 </script>
@@ -754,7 +767,7 @@ for(Cookie cookie : cookies){
 							<td><label>
 							<input name="socialcategory"
 							style="text-transform:capitalize;"
-									type="text" class="myclass" value="${student.socialcategory}" id="socialcategory" size="36">
+									type="text" class="myclass" value="${student.socialcategory}" id="socialcategory" size="30">
 
 							</label></td>
 
@@ -1159,56 +1172,6 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
-							<td><label> <input
-									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
-									id="fatherscastecertno" size="30">
-
-							</label></td>
-
-					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
-							<td><label> <input name="motherscastecertno"
-									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
-
-							</label></td>
-						</tr>
-						
-												<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td class="alignLeft">Guardian's <br>name & address</td>
-
-							<td><label> <input name="guardiandetails"
-									type="text" class="myclass" id="guardiandetails" size="30" style="text-transform:capitalize;"
-									value="<c:out default="" value="${student.guardiandetails}" />">
-
-							</label></td>
-
-
-
-							<td class="alignLeft" style="padding-left: 20px;">Annual Income</td>
-
-							<td><label> <input name="parentsannualincome"
-									type="text" class="myclass" id="parentsannualincome" size="30"
-									value="<c:out default="" value="${parents.parentsannualincome}" />">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
 
 							<td class="alignLeft">Contact Number*</td>
 
@@ -1236,32 +1199,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
-							<td class="alignLeft">Email</td>
-
-							<td ><label> <input name="email"
-									type="email" class="myclass" id="email" size="30"
-									onblur="validateNameContact();"
-									value="<c:out default="" value="${parents.email}" />">
-									
-
-							<td class="alignLeft" style="padding-left: 20px;">Number Of Dependents</td>
-
-							<td><label> <input name="noofdependents"
-									type="text" class="myclass" id="noofdependents" size="30"
-									onblur="validateNameContact();"
-									value="<c:out default="" value="${parents.noofdependents}" />">
-
-							</label></td>
-
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 						<tr>
 							<td class="alignLeft">Permanent Address</td>
 							<td><label> <textarea
@@ -1368,9 +1306,9 @@ for(Cookie cookie : cookies){
 							<td><label>
 							
 									<input
-									name="stdlaststudied" type="text" class="myclass" id="stdlaststudied"
-									style="text-transform:capitalize;"
-									size="36" >
+									name="stdlaststudied" type="text" class="myclass" style="text-transform:capitalize;"
+									value="<c:out default="" value="${student.stdlaststudied}" />"
+									id="stdlaststudied" size="30" data-validate="validate(required)">
 
 							</label></td>
 
@@ -1404,7 +1342,7 @@ for(Cookie cookie : cookies){
 							
 							<td class="alignLeft" style="padding-left: 20px;">Obtained Marks&nbsp;</td>
 							<td><label> <input name="subsequentprogress"
-									type="text" class="myclass" style="text-transform:capitalize;"
+									type="text" class="myclass" style="text-transform:capitalize;" onkeyup="calculatePercentage()"
 									value="<c:out default="" value="${student.subsequentprogress}" />"
 									id="subsequentprogress" size="30" data-validate="validate(required)">
 
@@ -1421,36 +1359,15 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 							<tr>
-							<td class="alignLeft">Previous School<br> Medium of Instruction</td>
+							<td class="alignLeft">Percentage Secured</td>
 
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.mediumofinstruction}</option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
-
+							<td><label>
+									 <input
+									name="mediumofinstruction" type="text" class="myclass" style="text-transform:capitalize;"
+									value="<c:out default="" value="${student.mediumofinstruction}" />"
+									id="mediumofinstruction" size="30" data-validate="validate(required)">
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Previous School Type</td>
-
-							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.previousschooltype}</option>
-										<option></option>
-										<option>Government</option>
-										<option>Private Aided</option>
-										<option>Local Bodies</option>
-										<option>Private Unaided School</option>
-								</select>
-
-							</label></td>
-
 						</tr>
 						<tr>
 							<td><br /></td>

@@ -158,8 +158,8 @@ form{
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/vasu/images/shaheenlogo.png"></h2></span> -->
-						<h4>Vasu Group of Institutions</h4>
+						<h2>Vasu Group of Institutions</h2>
+						<h3 style="font-weight: bold;color: #88008b;">Login</h3>
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
