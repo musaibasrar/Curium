@@ -92,7 +92,7 @@ public class FeesService {
               	   int cYear2 = Integer.parseInt(currentYear[1])+1;
               	   String nextYear = ""+cYear+"/"+cYear2+"";
                          try {
-                                List<Feescategory> list = new FeesCategoryDAO().readListOfFeeCategory(Integer.parseInt(branchid),currentAcademicYear,nextYear);
+                                List<Feescategory> list = feesCategoryDao.readListOfFeeCategory(Integer.parseInt(branchid),currentAcademicYear,nextYear);
                                 feescategoryResponseDto.setFeescategory(list);
                                 feescategoryResponseDto.setSuccess(true);    
                         } catch (Exception e) {
