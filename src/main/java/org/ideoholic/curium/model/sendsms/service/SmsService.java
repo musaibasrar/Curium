@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -320,6 +321,20 @@ public class SmsService {
 					if(!studentFeesReportList.isEmpty()){
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 							
+							Date dateNow = new Date();
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					        String formattedDate = dateFormat.format(dateNow);
+					        Date cDate = new Date();
+					        try {
+								cDate = dateFormat.parse(formattedDate);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Date DNDDate = studentFeesReport.getParents().getStudent().getCrecorddate();
+
+							if (DNDDate == null || cDate.compareTo(DNDDate) > 0) {
+							
 							String phoneNo = studentFeesReport.getParents().getContactnumber();
 							if(phoneNo!=null && !phoneNo.isEmpty()) {
 								char[] contactNo = phoneNo.toCharArray();
@@ -328,6 +343,8 @@ public class SmsService {
 									sbN.append(studentFeesReport.getParents().getContactnumber());
 									sbN.append(",");
 								}
+							}
+							
 							}
 						}
 						numbers=sbN.toString();
