@@ -59,7 +59,7 @@ public class StudyCertificate implements java.io.Serializable {
 	private Integer sid;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private int branchId;
 
 	@Column(name = "userid")
 	private int userid;

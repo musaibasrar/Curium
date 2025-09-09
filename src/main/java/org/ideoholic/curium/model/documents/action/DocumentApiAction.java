@@ -70,7 +70,7 @@ public interface DocumentApiAction {
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForStudyCertificate(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userid") String userId);
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForCharacter(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
@@ -80,7 +80,7 @@ public interface DocumentApiAction {
 	
 	public ResponseEntity<CharacterResponseDto> tcDetail();
 	
-	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto);
+	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto,@RequestHeader(value = "branchid") String branchId);
 		
 	public ResponseEntity<String> getScDetail();
 	

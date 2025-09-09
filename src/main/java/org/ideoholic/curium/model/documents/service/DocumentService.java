@@ -827,12 +827,12 @@ public class DocumentService {
 				studyCertificate.setReason("education");
 				studyCertificate.setClassStudying(parents.getStudent().getClassstudying());
 				studyCertificate.setAcademicYear(academicyear);
-				studyCertificate.setBranchid(Integer.parseInt(branchId));
+				studyCertificate.setBranchId(Integer.parseInt(branchId));
 				studyCertificate.setDateofissues(new Date());
 				studyCertificate.setSid(parents.getStudent().getSid());
 				studyCertificate.setUid(parents.getStudent().getStudentexternalid());
 				studyCertificate.setUserid(Integer.parseInt(userId));
-				boolean success = new DocumentDAO().add(studyCertificate);
+				boolean success = documentDAO.add(studyCertificate);
 				if(success) {
 				parentDto = new ParentDto();
 				parentDto.setParents(parents);
@@ -848,7 +848,7 @@ public class DocumentService {
 		 
 		 public CharacterResponseDto viewTcDetail() {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
 				List<Integer> sid = new ArrayList<Integer>(); 
 				for (Transfercertificate transfercertificate : tc) {
 					sid.add(transfercertificate.getSid());
@@ -878,7 +878,7 @@ public class DocumentService {
 			public CharacterResponseDto printTcList(CharacterDto characterDto, String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
 				String[] feesIds = characterDto.getSIds();
-				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
+				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
 				List<Integer> sid = new ArrayList<Integer>(); 
 				for (String id : feesIds) {
 				    sid.add(Integer.parseInt(id));
@@ -907,7 +907,7 @@ public class DocumentService {
 
 			public CharacterResponseDto viewScDetail(String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<StudyCertificate>  studyCertificate = new DocumentDAO().getStudentCertificateList(Integer.parseInt(branchId));
+				List<StudyCertificate>  studyCertificate = documentDAO.getStudentCertificateList(Integer.parseInt(branchId));
 				characterResponseDto.setStudyCertificate(studyCertificate);
 				return characterResponseDto;
 			}
@@ -915,7 +915,7 @@ public class DocumentService {
 			public CharacterResponseDto printScList(CharacterDto characterDto, String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
 				String[] sIds = characterDto.getSIds();
-				List<StudyCertificate> listStudyCertificate = new DocumentDAO().getListOfIssuedStudyCertificate(sIds);
+				List<StudyCertificate> listStudyCertificate = documentDAO.getListOfIssuedStudyCertificate(sIds);
 				characterResponseDto.setStudyCertificate(listStudyCertificate);
 				characterResponseDto.setSuccess(true);
 				return characterResponseDto;

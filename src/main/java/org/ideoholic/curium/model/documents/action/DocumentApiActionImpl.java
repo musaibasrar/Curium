@@ -206,8 +206,8 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 	}
 
 	@PostMapping("/GenerateStudyCertificate")
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId) {
-		ParentDto result = documentService.generateStudyCertificate(studentIdsDto,currentAcademicYear,branchId);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userid") String userId) {
+		ParentDto result = documentService.generateStudyCertificate(studentIdsDto,currentAcademicYear,branchId,userId);
 		if (result != null) {
 			return ResponseEntity.ok(result);
 			}
@@ -240,8 +240,8 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 	}
 	
 	@PostMapping("/printTcList")
-	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto) {
-		CharacterResponseDto result = documentService.printTcList(characterDto);
+	public ResponseEntity<CharacterResponseDto> printTcList(@RequestBody CharacterDto characterDto, @RequestHeader(value = "branchid") String branchId) {
+		CharacterResponseDto result = documentService.printTcList(characterDto,branchId);
 		if(result.isSuccess()){
 			return ResponseEntity.ok(result);
 		}else{
