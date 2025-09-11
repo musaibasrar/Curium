@@ -5,6 +5,7 @@ package org.ideoholic.curium.model.printids.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
@@ -27,6 +28,8 @@ public class PrintIdsAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
@@ -76,8 +79,13 @@ public class PrintIdsAction {
 
 	@PostMapping("/printPreview")
 	public String printPreview() {
-
 		new PrintIdsService(request, response).printMultiple();
+		System.out.println(httpSession.getAttribute("branchid").toString());
+		if (httpSession.getAttribute("branchid").toString().equalsIgnoreCase("2")) {
+			return "printpreview";
+		} else if (httpSession.getAttribute("branchid").toString().equalsIgnoreCase("3")) {
+			return "printpreviewpuc";
+		} 
 		return "printpreview";
 	}
 	
