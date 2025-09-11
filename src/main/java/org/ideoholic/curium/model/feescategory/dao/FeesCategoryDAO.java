@@ -21,6 +21,7 @@ import org.ideoholic.curium.repositories.AcademicOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.FeesCategoryRepository;
 import org.ideoholic.curium.repositories.FeesCollectionRepository;
 import org.ideoholic.curium.repositories.OtherFeecategoryRepository;
+import org.ideoholic.curium.repositories.OtherfeescollectionRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
@@ -53,6 +54,8 @@ public class FeesCategoryDAO {
 	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
 	@Autowired
 	private AcademicOtherFeesStructureRepository academicotherfeesstructureRepo;
+	@Autowired
+	private OtherfeescollectionRepository otherfeescollectionRepo;
 	@Autowired
 	private QueryUtil queryUtil;
 	
@@ -354,26 +357,22 @@ public class FeesCategoryDAO {
 		 return result;
 	}
 	
+	@Transactional
 	public void deleteOtherFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
+        int sId = Integer.parseInt(sid);
 		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
 		try {
-			transaction = session.beginTransaction();
-			Query queryOne = session.createQuery("from Otherfeescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
-			queryOne.setParameterList("ids", ids);
-			feesCollection = queryOne.list();
+			//Query queryOne = session.createQuery("from Otherfeescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
+			feesCollection = otherfeescollectionRepo.findByStudentSidAndOtherFeesStructureIn(sId, ids);
 			
 			if(feesCollection.isEmpty()){
-				Query query = session.createQuery("delete from Studentotherfeesstructure as fees where fees.sid = "+sid+" and fees.otherfeescategory.idfeescategory IN (:feescat)");
-				query.setParameterList("feescat", feesCatId);
-				query.executeUpdate();
+				//Query query = session.createQuery("delete from Studentotherfeesstructure as fees where fees.sid = "+sid+" and fees.otherfeescategory.idfeescategory IN (:feescat)");
+				studentOtherFeesStructureRepo.deleteBySidAndSfsidIn(sId, ids);
 			}
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+		}  catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
 	}
 	
