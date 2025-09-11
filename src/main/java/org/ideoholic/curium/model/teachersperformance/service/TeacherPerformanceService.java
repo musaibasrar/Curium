@@ -33,6 +33,9 @@ public class TeacherPerformanceService {
 
 	@Autowired
 	private ExamDetailsDAO examDetailsDao;
+
+	@Autowired
+	private MarksDetailsDAO marksDetaildDao;
 	
 	public SubjectsResponseDto readListOfSubjects(String branchid) {
 		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
@@ -84,7 +87,7 @@ public class TeacherPerformanceService {
 				for (Parents student : searchStudentList) {
 					studentIds.add(student.getStudent().getSid());
 				}
-				List<Marks> marksList = new  MarksDetailsDAO().readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
+				List<Marks> marksList = marksDetaildDao.readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
 				int averageMarks = 0;
 				float sum = 0;
 				int i = marksList.size();

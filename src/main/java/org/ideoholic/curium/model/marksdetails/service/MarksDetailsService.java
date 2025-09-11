@@ -72,6 +72,9 @@ public class MarksDetailsService {
 	@Autowired
 	private ExamDetailsDAO examDetailsDao;
 
+	@Autowired
+	private MarksDetailsDAO marksDetailsDao;
+
 	private static final int BUFFER_SIZE = 4096;
 
 	public ResultResponse addMarks(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
@@ -139,7 +142,7 @@ public class MarksDetailsService {
 				
 				float mymark= Float.parseFloat((String) mapEntry.getValue());
 				float subjectPercentage = ((float)mymark / maxMarks) * 100;
-				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(branchId),exams.getExid(),classSelected);
+				List<SubjectGrade> subjectGradeDetailsList = marksDetailsDao.readSubjectGrade(Integer.parseInt(branchId),exams.getExid(),classSelected);
 				int subPercentage = (int) Math.floor(subjectPercentage);
 				
 				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
@@ -161,7 +164,7 @@ public class MarksDetailsService {
 				marksList.add(marks);
 			}
 
-			String output = new MarksDetailsDAO().addMarks(marksList);
+			String output = marksDetailsDao.addMarks(marksList);
 			
 			if(output=="success"){
 				result.setMessage("true");
@@ -170,7 +173,7 @@ public class MarksDetailsService {
 			}
 				
 			
-			/*if (new MarksDetailsDAO().addMarks(marksList)) {
+			/*if (marksDetailsDao.addMarks(marksList)) {
 				result = true;
 			}*/
 		}
@@ -315,7 +318,7 @@ public class MarksDetailsService {
 				for (Exams exams : examDetailsList) {
 					
 					ExamsDetails examsD = new ExamsDetails();
-							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
+							List<Marks> marksListPerSubject = marksDetailsDao.readMarksPerExam(searchStudent.getSid(),exams.getExid(),
 									currentAcademicYear);
 							List<String> subjectAppeared = new LinkedList<String>();
 							List<Float> marksScored = new LinkedList<Float>();
@@ -410,7 +413,7 @@ public class MarksDetailsService {
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
+			List<Marks> singleMarksDetails = marksDetailsDao.readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
 			for (Marks marks : singleMarksDetails) {
 				int subSubjectId = marks.getSubsubjectid();
 				if ( subSubjectId ==0) {
@@ -530,7 +533,7 @@ public class MarksDetailsService {
 
 			}
 
-			if (new MarksDetailsDAO().updateMarks(marksList)) {
+			if (marksDetailsDao.updateMarks(marksList)) {
 				result.setSuccess(true);
 			}
 		}
@@ -556,7 +559,7 @@ public class MarksDetailsService {
 
 			}
 			log.debug("id length" + marksIds.length);
-			if (new MarksDetailsDAO().deleteMultiple(marksListids, studentListids)) {
+			if (marksDetailsDao.deleteMultiple(marksListids, studentListids)) {
 				result.setSuccess(true);
 			} else {
 				result.setSuccess(false);
@@ -606,7 +609,7 @@ public class MarksDetailsService {
 					float marksObtainedSubjectAllExams = 0;
 					float totalMarksObtainedSubjectAllExams = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examOne.getExid());
+					List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examOne.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examOne.getExamname());
 					
 					for (Marks marks : marksDetailsList) {
@@ -680,7 +683,7 @@ public class MarksDetailsService {
 					float totalMarks = 0;
 					float totalMarksObtainedSubjectAllExamsFinalTermOne = 0;
 					String grade;
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),currentAcademicYear,examTermOneIdsList);
+					List<Marks> marksDetailsList = marksDetailsDao.readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),currentAcademicYear,examTermOneIdsList);
 					List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(branchId));
 					
 					for (Subjectmaster subFinal : subjectList) {
@@ -796,7 +799,7 @@ public class MarksDetailsService {
 						Map<String,String> subMarksfinalTermTwo = new HashMap<>();
 						float totalMarksObtainedSubjectAllExamsFinalTermTwo = 0;
 						
-						List<Marks> marksDetailsListFinalTermTwo = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),currentAcademicYear,examTermTwoIdsList);
+						List<Marks> marksDetailsListFinalTermTwo = marksDetailsDao.readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),currentAcademicYear,examTermTwoIdsList);
 						
 						for (Subjectmaster subFinal : subjectList) {
 						
@@ -911,7 +914,7 @@ public class MarksDetailsService {
 							float totalOtherExamMarksObtainedSubjectAllExams = 0;
 							float totalMarksOtherExams = 0;
 							
-							List<Marks> marksDetailsListOtherExam = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examTwo.getExid());
+							List<Marks> marksDetailsListOtherExam = marksDetailsDao.readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examTwo.getExid());
 							//List<Subject> subjectListOtherExam = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
 							
 								for (String id : subjectListOtherExamIds) {
@@ -1140,7 +1143,7 @@ public class MarksDetailsService {
 				markssheet.setOtherexammarks(otherExamMarksList);
 				markssheet.setOverallresult(overAllResultClass);
 				marksSheetList.add(markssheet);
-				//if(new MarksDetailsDAO().saveMarks(examRankList) )
+				//if(marksDetailsDao.saveMarks(examRankList) )
 				result.setSuccess(true);
 				/*
 				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
@@ -1213,7 +1216,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
 
-				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(), currentAcademicYear, exam.getExid());
+				List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(student.getSid(), currentAcademicYear, exam.getExid());
 				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId), examClass[0], exam.getExamname());
 
 
@@ -1493,7 +1496,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 					float totalObtainedMarks = 0;
 					float totalMarks = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examsList.getExid());
+					List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,examsList.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examsList.getExamname());
 					
 					
@@ -1545,7 +1548,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 						examMarks.setSubMarks(subMarks);
 						//here
                         int mypercent= (int)Math.round(d);
-						List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(branchId));
+						List<MarksGrade> marksGradeDetailsList = marksDetailsDao.readMarksGrade(Integer.parseInt(branchId));
 						for (MarksGrade marksGrade : marksGradeDetailsList) {
 							if( mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage())	
 							{
@@ -1581,7 +1584,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 				
 		        //ExamsMarks examMarks = new ExamsMarks();
 		       // examMarks.setRank(rank);
-				if(new MarksDetailsDAO().saveMarks(examRankList) )
+				if(marksDetailsDao.saveMarks(examRankList) )
 
 				result.setSuccess(true);
 				/*
@@ -1595,7 +1598,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 			
 			if (examsList!=null) {
 				
-				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,examsList.getExid(),currentAcademicYear,Integer.parseInt(branchId));
+				List<ExamRank> listExamRank = marksDetailsDao.getListExamRank(studentsIds,examsList.getExid(),currentAcademicYear,Integer.parseInt(branchId));
 				Collections.sort(listExamRank);
 				
 				// Assign ranks
@@ -1613,7 +1616,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 		        	listExamRank.get(i1).setRank(rank);
 		        }
 		        
-		        if(new MarksDetailsDAO().updateExamRank(listExamRank))
+		        if(marksDetailsDao.updateExamRank(listExamRank))
 					result.setSuccess(true);
 					
 			}
@@ -1680,7 +1683,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
 				
-				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid());
+				List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid());
 				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
 				
 				
@@ -1732,7 +1735,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 					examMarks.setSubMarks(subMarks);
 					//here
                     int mypercent= (int)Math.round(d);
-					List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(branchId));
+					List<MarksGrade> marksGradeDetailsList = marksDetailsDao.readMarksGrade(Integer.parseInt(branchId));
 					for (MarksGrade marksGrade : marksGradeDetailsList) {
 						if( mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage())	
 						{
@@ -1741,7 +1744,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 						}
 						
 					}
-					ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),currentAcademicYear,Integer.parseInt(branchId));
+					ExamRank examRank = marksDetailsDao.getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),currentAcademicYear,Integer.parseInt(branchId));
 					if(examRank!=null) {
 					examMarks.setRank(examRank.getRank());
 					}
@@ -1760,7 +1763,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			}
 			markssheet.setExammarks(examMarksList);
 			marksSheetList.add(markssheet);
-			//if(new MarksDetailsDAO().saveMarks(examRankList) )
+			//if(marksDetailsDao.saveMarks(examRankList) )
 			result.setSuccess(true);
 			/*
 			 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
@@ -1911,7 +1914,7 @@ public ResultResponse addMarksSubSubject(MarksUpdateDto dto, String branchId, St
 	
 	
 	Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId),classSelected,examidName[1],subid);
-	List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(branchId),examId,classSelected);
+	List<SubjectGrade> subjectGradeDetailsList = marksDetailsDao.readSubjectGrade(Integer.parseInt(branchId),examId,classSelected);
 	
 	
     List<Marks> mainMarksList = buildMarksList(studentIds, studentsMarks, subjectDetails, examId, currentYear, userId, branchId, subjectGradeDetailsList, 0);
@@ -1926,7 +1929,7 @@ public ResultResponse addMarksSubSubject(MarksUpdateDto dto, String branchId, St
         return result;
     }
 
-		String output = new MarksDetailsDAO().addMarksSubSubject(mainMarksList,marksListA1,marksListA2,marksListA3,marksListA4);
+		String output = marksDetailsDao.addMarksSubSubject(mainMarksList,marksListA1,marksListA2,marksListA3,marksListA4);
 		
 		if(output=="success"){
 			result.setMessage("true");
@@ -2050,7 +2053,7 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	
 	for (Parents parents : searchStudentList) {
 
-		List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
+		List<Marks> singleMarksDetails = marksDetailsDao.readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
 		Map<Integer,Float> marksObtained = new HashMap<>();
 		// Sort marks by subsubjectid
 	    singleMarksDetails.sort(Comparator.comparingInt(Marks::getSubsubjectid));
@@ -2102,7 +2105,7 @@ public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcadem
 		    }
 		}
 		
-		if (new MarksDetailsDAO().updateMarksSub(marksid,studentsMarks)) {
+		if (marksDetailsDao.updateMarksSub(marksid,studentsMarks)) {
 			result.setSuccess(true);
 		}
 	}
