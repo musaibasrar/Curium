@@ -133,11 +133,21 @@ footer p {
      <c:forEach items="${markssheetlist}" var="Parents">
        <header style="display: flex; align-items: center; gap: 15px;">
     <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/alalmas/images/alalmas.png">
-    <div style="background-color:blue;color:white;border-radius:10px;">
-        <h1 style="text-transform:Uppercase;">${branchname}</h1>
-    </div>
+   <!--  <div  style="text-align:center"> -->
+    <table align="center" width="700px;" style="border:none;">
+        <%-- ${branchname} --%>
+        <tr><td style="font-size:75px;font-weight:bold;text-align:center;color:brown;border:none;">
+        Al-Almas
+        </td></tr>
+        <tr><td style="font-size:40px;font-weight:bold;text-align:center;border:none;"> Foundation School
+        </td></tr>
+        <tr><td style="font-size:20px;font-weight:bold;text-align:center;border:none;">
+        A unique blend of modern and traditional discipline
+        </td></tr>
+        </table>
+   <!--  </div> -->
 </header>
- <h3 align="center" style="margin-bottom:0px;">English Medium School With Shoba-E-Hifz and IIT Foundation Course</h3>
+ <h3 align="center" style="margin-bottom:0px;">English and Shoba-E-Hifz and IIT Foundation Course</h3>
  <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
         <section class="student-info">
     <div class="student-details">
@@ -217,6 +227,13 @@ footer p {
             </tr>
             </tbody>
         </table>
+         <section class="co-scholastic-areas">
+            <h4 style="color:red;">Co-Scholastic Areas</h4>
+            <p>1. Discipline in the classroom:</p>
+            <p>2. Behavior / Conduct with teachers & classmates:</p>
+            <p>3. Regularity & Neatness in doing HW/CW:</p>
+            <p>4. Comes to School: On time [&emsp;&emsp;] / Sometime Late [&emsp;&emsp;] / Always Late [&emsp;&emsp;]</p>
+        </section>
         <table style="border: 0px solid #ddd;">
         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
          <tr><td style="border: 0px solid #ddd;"><br></td></tr>
