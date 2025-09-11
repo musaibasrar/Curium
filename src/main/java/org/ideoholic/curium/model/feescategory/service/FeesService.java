@@ -124,7 +124,7 @@ public class FeesService {
                         	feesCategoryList.add(feescategorynew);
                         }
                 		}
-                	boolean result =  new FeesCategoryDAO().create(feesCategoryList);
+                	boolean result =  feesCategoryDao.create(feesCategoryList);
                 	
                         /*
                           Feescategory feescategory = new Feescategory();

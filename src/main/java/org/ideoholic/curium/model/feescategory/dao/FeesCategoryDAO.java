@@ -338,26 +338,20 @@ public class FeesCategoryDAO {
         return results;
 	}
 
-	@SuppressWarnings("finally")
+	@Transactional
 	public boolean create(List<Feescategory> feesCategoryList) {
-		Session session = HibernateUtil.openCurrentSession();
-	    Transaction transaction = null;
 		boolean result = false;
 		try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
             for (Feescategory feescategory : feesCategoryList) {
-            	session.save(feescategory);
+            	feesCatRepo.save(feescategory);
 			}
-            transaction.commit();
             result = true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return result;
-        }
+        } catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+        } 
+		 return result;
 	}
 	
 	public void deleteOtherFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid) {
