@@ -64,7 +64,7 @@ public class ExamRank implements java.io.Serializable, Comparable<ExamRank> {
 	}
 	
 	public int fetchExamid() {
-		if (exams == null) {
+		if (exams != null) {
 			exams.getExid();
 		}
 		return 0;
