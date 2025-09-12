@@ -2203,7 +2203,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -2539,9 +2539,10 @@ public class FeesCollectionService {
 					        }
 
 					System.out.println("Values Inserted Successfully");
-					if( new parentsDetailsDAO().createMultiple(listParents)) {
+					result = ResultResponse.builder().success(true).build();
+					/*if( new parentsDetailsDAO().createMultiple(listParents)) {
 						result = ResultResponse.builder().success(true).build();
-					};		
+					};*/		
 		return result;
 	}
 	

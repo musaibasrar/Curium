@@ -53,8 +53,13 @@ public class feesCollectionDAO {
 			 	
 			 	
 			 	if(ReceiptList.size() > 0) {
-			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
-			 		receiptInfo.setBranchreceiptnumber("VS"+String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 		
+
+		        	String receiptNo = ReceiptList.get(0).getBranchreceiptnumber();
+		        	String numbersOnly = receiptNo.replaceAll("[^0-9]", "");
+		        	int receiptNoSeq =  Integer.parseInt(numbersOnly)+1;
+		        	
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",receiptNoSeq+1));
 			 	}else {
 			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
 			 	}
