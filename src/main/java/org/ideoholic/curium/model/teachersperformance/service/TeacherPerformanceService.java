@@ -61,7 +61,7 @@ public class TeacherPerformanceService {
 			
 			SubjectAverage subjectAverage = new SubjectAverage();
 			List<String> classsection = new LinkedList<String>();
-			List<Integer> averageMarksScored = new LinkedList<Integer>();
+			List<Float> averageMarksScored = new LinkedList<Float>();
 			subjectAverage.setExamName("\""+exams.getExamname()+"\"");
 			
 			for (String classOne : classsec) {
@@ -82,8 +82,8 @@ public class TeacherPerformanceService {
 					studentIds.add(student.getStudent().getSid());
 				}
 				List<Marks> marksList = new  MarksDetailsDAO().readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
-				int averageMarks = 0;
-				int sum = 0;
+				float averageMarks = 0;
+				float sum = 0;
 				int i = marksList.size();
 				for (Marks marks : marksList) {
 					

@@ -21,7 +21,7 @@ public class Marks implements java.io.Serializable {
 	private Integer sid;
 	private Integer subid;
 	private Integer examid;
-	private Integer marksobtained;
+	private float marksobtained;
 	private String academicyear;
 	private String subgrade;
 	private int branchid;
@@ -32,7 +32,7 @@ public class Marks implements java.io.Serializable {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			Integer marksobtained, String academicyear,String subgrade, int branchid, int userid) {
+			float marksobtained, String academicyear,String subgrade, int branchid, int userid) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
@@ -82,11 +82,11 @@ public class Marks implements java.io.Serializable {
 	}
 
 	@Column(name = "marksobtained")
-	public Integer getMarksobtained() {
+	public float getMarksobtained() {
 		return this.marksobtained;
 	}
 
-	public void setMarksobtained(Integer marksobtained) {
+	public void setMarksobtained(float marksobtained) {
 		this.marksobtained = marksobtained;
 	}
 

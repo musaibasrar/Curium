@@ -368,6 +368,17 @@
 		form1.submit();
 
 	}
+	
+	
+	function generateReportVertical() {
+		
+		
+		var form1 = document.getElementById("form1");
+		form1.action = "/gnyanganga/MarksDetailsProcess/generateReportSingleExamsVertical";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 
 	$(function() {
 
@@ -390,6 +401,15 @@
 				primary : "ui-icon-trash"
 			}
 		});
+		
+		$("#generatereportvertical").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+        	generateReportVertical();	
+        });
+		
 		$("#delete").button({
             icons:{
                 primary: "ui-icon-trash"
@@ -542,10 +562,16 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-
-						
-
-
+						<tr>
+							<td class="alignRightFields">Exams &nbsp;</td>
+							<td><label><c:forEach items="${listExam}" var="listExamlist">
+										<input type="checkbox"  name="examslist" value="${listExamlist.exid}">
+										${listExamlist.examname}
+										<br/>
+							</c:forEach>
+							</label>
+							</td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -610,7 +636,8 @@ for(Cookie cookie : cookies){
 					
 						<td class="footerTD" colspan="2"><input value="Generate Report"
 							type="submit" id="generatereport" />
-							
+							<input value="Generate Report Vertical"
+							type="submit" id="generatereportvertical" />
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

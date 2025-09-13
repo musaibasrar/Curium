@@ -8,7 +8,7 @@ public class SubjectAverage implements Serializable{
 	
 	String examName;
 	List<String> classsec;
-	List<Integer> averageMarks;
+	List<Float> averageMarks;
 	
     
 	public SubjectAverage() {
@@ -16,7 +16,7 @@ public class SubjectAverage implements Serializable{
 
 	
 
-	public SubjectAverage(String examName, List<String> classsec, List<Integer>averageMarks) {
+	public SubjectAverage(String examName, List<String> classsec, List<Float>averageMarks) {
 		this.examName = examName;
 		this.averageMarks = averageMarks;
 		this.classsec = classsec;
@@ -44,13 +44,13 @@ public class SubjectAverage implements Serializable{
 
 
 
-	public List<Integer> getAverageMarks() {
+	public List<Float> getAverageMarks() {
 		return averageMarks;
 	}
 
 
 
-	public void setAverageMarks(List<Integer> averageMarks) {
+	public void setAverageMarks(List<Float> averageMarks) {
 		this.averageMarks = averageMarks;
 	}
 

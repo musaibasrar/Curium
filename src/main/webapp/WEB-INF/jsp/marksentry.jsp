@@ -332,19 +332,34 @@
 	src="/gnyanganga/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="/gnyanganga/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
-	});
-</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            	$('#myTable').dataTable({
+                "sScrollY": "380px",
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#addMarks").button({
+                icons: {
+                    primary: "ui-icon-trash"
+                }
+            });
+
+            $('#addMarks').click(function () {
+                var filter = $('.dataTables_filter input').val();
+                if (filter) {
+                    alert('Please clear the search filter before submitting.');
+                } else {
+                    checkMandatoryandSubmit();
+                }
+            });
+        });
+    </script>
 <script type="text/javascript">
 	function select(id, name) {
 		var clipEffect = 'blind';
@@ -388,11 +403,7 @@
 	});
 	
 	$(function() {
-		$("#addMarks").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
+		
 		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -492,7 +503,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/gnyanganga/MarksDetailsProcess/addMarks" method="POST">
+	<form id="form1" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -526,8 +537,8 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 120px;">
-										<option selected></option>
+									id="classsearch" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classselected}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
@@ -539,7 +550,7 @@ for(Cookie cookie : cookies){
 									</label>
 							 <label> 
 									<select name="secsearch" id="secsearch"
-									style="width: 110px;">
+									style="width: 110px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -579,10 +590,31 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td width="30%" class="alignRight">Exam Class &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft"><label> <select name="classsearchselected"
+									id="classsearchselected" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classselected}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="subject" id="subject"
-									style="width: 240px" ">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listSubjectNames}" var="listSubject">
@@ -607,12 +639,12 @@ for(Cookie cookie : cookies){
 						<td width="30%" class="alignRight">Exam &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="exam" id="exam"
-									style="width: 240px">
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listExam}" var="listExam">
 
-											<option value="${listExam.exid}">
+											<option value="${listExam.exid}__${listExam.examname}">
 												<c:out value="${listExam.examname}" />
 											</option>
 
@@ -622,6 +654,29 @@ for(Cookie cookie : cookies){
 								</select></td>
 						</tr>
 						
+												<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td  width="30%" class="alignRight">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="16%" height="30" class="alignLeft">
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 240px;border-radius: 4px;background: white;height: 28px;" >
+										<option>${currentAcademicYear}</option>
+										<option>2024/25</option>
+										<option>2025/26</option>
+										<option>2026/27</option>
+										<option>2027/28</option>
+										<option>2028/29</option>
+								</select>
+
+							</label> 
+                        
+                        </td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -649,15 +704,12 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Father Name</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Admission Type</th>
+						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Marks</th>
-
-
-
 					</tr>
 				</thead>
 
@@ -666,26 +718,37 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
+							<td class="dataText"><input type="checkbox" checked
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 							</td>
+							<td class="dataText">
+						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
+						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
+						 		 <c:choose>
+                                <c:when test="${classstudying[0] == classadmitted[0]}">
+                                   <c:out value="New Admission" />
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="Old Admission" />
+                                </c:otherwise>
+                            </c:choose>
+						 	</td>
+						 	<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
 								onkeyup="checkMandatory();" value="0"
-								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
-								maxlength="3"
+								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65 || event.charCode == 69"
+								maxlength="4"
 								 /></td>
 
 
@@ -695,7 +758,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><input value="Add Marks"
-							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" onmouseover="checkMandatory();"/>
+							type="button" id="addMarks" onmouseover="checkMandatory();"/>
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

@@ -8,8 +8,8 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	
 	String examName;
 	Map<String,String> subMarks;
-	int totalMarksObtained;
-	int totalMarks;
+	float totalMarksObtained;
+	float totalMarks;
 	double percentage;
     String resultclass;
     Integer rank;
@@ -18,7 +18,7 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	}
 
 	public ExamsMarks(String examName, Map<String,String> subMarks, double percentage, String resultclass, 
-            int totalMarksObtained, Integer rank, int totalMarks) {
+			float totalMarksObtained, Integer rank, float totalMarks) {
 		this.examName = examName;
 		this.subMarks = subMarks;
 		this.percentage = percentage;
@@ -64,12 +64,12 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	    }
 
 	    
-	    public int getTotalMarksObtained() {
+	    public float getTotalMarksObtained() {
 	        return this.totalMarksObtained;
 	    }
 
 	    
-	    public void setTotalMarksObtained(int totalMarksObtained) {
+	    public void setTotalMarksObtained(float totalMarksObtained) {
 	        this.totalMarksObtained = totalMarksObtained;
 	    }
 
@@ -89,11 +89,11 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	        this.rank = rank;
 	    }
 
-		public int getTotalMarks() {
+		public float getTotalMarks() {
 			return totalMarks;
 		}
 
-		public void setTotalMarks(int totalMarks) {
+		public void setTotalMarks(float totalMarks) {
 			this.totalMarks = totalMarks;
 		}
 	

@@ -64,9 +64,10 @@ public class MarksDetailsService {
 
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
-		String exam = request.getParameter("exam");
+		String[] examidName = request.getParameter("exam").split("__");
 		String subject = request.getParameter("subject");
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
+		String classSelected = request.getParameter("classsearchselected");
+		System.out.println("the subject id is " + subject + ", and exam id is " + examidName[0]);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -76,10 +77,12 @@ public class MarksDetailsService {
 
 			for (String marksList : studentsMarks) {
 				
-				if(!marksList.equalsIgnoreCase("A")) {
+				if(!marksList.equalsIgnoreCase("A") && !marksList.equalsIgnoreCase("E")) {
 					studentsMarksList.add(marksList);
-				}else {
+				}else if(marksList.equalsIgnoreCase("A")) {
 					studentsMarksList.add("999");
+				}else if(marksList.equalsIgnoreCase("E")) {
+					studentsMarksList.add("888");
 				}
 				
 
@@ -105,32 +108,38 @@ public class MarksDetailsService {
 			Set mapSet = mapOfMarks.entrySet();
 			Iterator mapIterator = mapSet.iterator();
 
-			int examid = Integer.parseInt(exam);
+			int examid = Integer.parseInt(examidName[0]);
 			int subid = Integer.parseInt(subject);
 			List<Marks> marksList = new ArrayList<Marks>();
+			
+			Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),classSelected,examidName[1],subid);
+			float minMarks = subjectDetails.getMinmarks();
+			float maxMarks = subjectDetails.getMaxmarks();
 
 			while (mapIterator.hasNext()) {
 				Map.Entry mapEntry = (Entry) mapIterator.next();
-				System.out.println("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
 
-				String test = (String) mapEntry.getValue();
 				Marks marks = new Marks();
 				marks.setExamid(examid);
-				marks.setSubid(subid);
-				//here
-                int mymark= Integer.parseInt(test);
+				marks.setSubid(subjectDetails.getSubid());
 				
-				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				float mymark= Float.parseFloat((String) mapEntry.getValue());
+				float subjectPercentage = ((float)mymark / maxMarks) * 100;
+				int subPercentage = (int) Math.floor(subjectPercentage);
+				List<SubjectGrade> subjectGradeDetailsList = new MarksDetailsDAO().readSubjectGrade(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examid,classSelected);
+				
 				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
-					if( mymark >= subjectGrade.getMinmarks() && mymark <= subjectGrade.getMaxmarks())	
+					
+					if( subPercentage >= subjectGrade.getMinmarks() && subPercentage <= subjectGrade.getMaxmarks())	
 					{
 						marks.setSubgrade(subjectGrade.getStatus());
 					}
 					
 				}
+				
 				marks.setSid((int) mapEntry.getKey());
-				marks.setMarksobtained(Integer.parseInt(test));
-				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+				marks.setMarksobtained(mymark);
+				String currentYear = request.getParameter("academicyear");;
 				marks.setAcademicyear(currentYear);
 				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				marks.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
@@ -209,6 +218,9 @@ public class MarksDetailsService {
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listExam", examList);
+		
+		//set class
+		request.setAttribute("classselected", addClass);
 		}
 
 	}
@@ -290,7 +302,7 @@ public class MarksDetailsService {
 							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
 									httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 							List<String> subjectAppeared = new LinkedList<String>();
-							List<Integer> marksScored = new LinkedList<Integer>();
+							List<Float> marksScored = new LinkedList<Float>();
 							examsD.setExamName("\""+exams.getExamname()+"\"");
 							
 							for (Subject subject2 : subjectDetailsList) {
@@ -371,21 +383,19 @@ public class MarksDetailsService {
 		//
 		String exam = request.getParameter("exam");
 		String subject = request.getParameter("subject");
+		String[] examIdName = exam.split(":");
 		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
-
+		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), addClass, examIdName[1], Integer.parseInt(subject));
+		int subjectDetailsId = subjectDetails.getSubid();
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
 			for (Marks marks : singleMarksDetails) {
-				System.out.println("The student id is " + parents.getStudent().getSid());
-				System.out.println("The marks sid is " + marks.getSid());
-				if (marks.getSubid() == Integer.parseInt(subject) && marks.getExamid() == Integer.parseInt(exam)) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
-				}
 			}
 		}
 
@@ -538,9 +548,14 @@ public class MarksDetailsService {
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
+			String[] examsIds = request.getParameterValues("examslist");
+			List<Integer> examIds = new ArrayList<Integer>();
+			for (String examId : examsIds) {
+				examIds.add(Integer.parseInt(examId));
+			}
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
@@ -557,8 +572,8 @@ public class MarksDetailsService {
 					examMarks.setExamName(exam.getExamname());
 					boolean present = false;
 					Map<String,String> subMarks = new HashMap<String, String>();
-					int totalObtainedMarks = 0;
-					int totalMarks = 0;
+					float totalObtainedMarks = 0;
+					float totalMarks = 0;
 					
 					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
@@ -579,17 +594,17 @@ public class MarksDetailsService {
 									
 									if(marksSubid == subjectId) {
 										
-										int marksObtained = marks.getMarksobtained();
-										int minMarks = sub.getMinmarks();
-										int maxMarks = sub.getMaxmarks();
+										float marksObtained = marks.getMarksobtained();
+										float minMarks = sub.getMinmarks();
+										float maxMarks = sub.getMaxmarks();
 										
 										if( marksObtained < minMarks) {
 											
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 											
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P"+"_"+marks.getSubgrade());
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P"+"_"+marks.getSubgrade());
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if(marksObtained == 999) {
 											subMarks.put(sub.getSubjectname(), " _AB");
@@ -709,8 +724,8 @@ public boolean generateReportParent() {
 					examMarks.setExamName(exam.getExamname());
 					boolean present = false;
 					Map<String,String> subMarks = new HashMap<String, String>();
-					int totalObtainedMarks = 0;
-					int totalMarks = 0;
+					float totalObtainedMarks = 0;
+					float totalMarks = 0;
 					
 					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
@@ -732,9 +747,9 @@ public boolean generateReportParent() {
 									if(marksSubid == subjectId) {
 										
 										if( marks.getMarksobtained() < sub.getMinmarks()) {
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
 										}else if ( marks.getMarksobtained() >= sub.getMinmarks()) {
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
 										}
 										
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
@@ -943,7 +958,8 @@ public boolean generateReportParent() {
 			System.out.println("SEARCH QUERY ***** " + queryMain);
 			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("searchStudentList", searchStudentList);
-
+			request.setAttribute("classselected", addClass);
+			
 			// get the list for all the midterms
 			List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("listExam", examList);
@@ -982,8 +998,8 @@ public boolean generateRankReport() {
 					examMarks.setExamName(exam.getExamname());
 					boolean present = false;
 					Map<String,String> subMarks = new HashMap<String, String>();
-					int totalObtainedMarks = 0;
-					int totalMarks = 0;
+					float totalObtainedMarks = 0;
+					float totalMarks = 0;
 					
 					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
@@ -1004,17 +1020,17 @@ public boolean generateRankReport() {
 									
 									if(marksSubid == subjectId) {
 										
-										int marksObtained = marks.getMarksobtained();
-										int minMarks = sub.getMinmarks();
-										int maxMarks = sub.getMaxmarks();
+										float marksObtained = marks.getMarksobtained();
+										float minMarks = sub.getMinmarks();
+										float maxMarks = sub.getMaxmarks();
 										
 										if( marksObtained < minMarks) {
 											
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 											
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
+											subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if(marksObtained == 999) {
 											subMarks.put(sub.getSubjectname(), " _AB");
@@ -1098,8 +1114,8 @@ public boolean generateRankReport() {
 		        for (int i1 = 0; i1 < listExamRank.size(); i1++) {
 		        	
 		        	if(i1 > 0) {
-		        		int currentMarks = listExamRank.get(i1).getMarksobtained();
-			        	int previousMarks = listExamRank.get(i1 - 1).getMarksobtained();
+		        		float currentMarks = listExamRank.get(i1).getMarksobtained();
+		        		float previousMarks = listExamRank.get(i1 - 1).getMarksobtained();
 			        	if (currentMarks != previousMarks) {
 			                rank++;
 			            }

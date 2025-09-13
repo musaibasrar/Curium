@@ -159,4 +159,13 @@ public class MarksDetailsAction {
 			return "error";
 		}
 	}
+	
+	@PostMapping("/generateReportSingleExamsVertical")
+	public String generateReportSingleExamsVertical() {
+		if (new MarksDetailsService(request, response).generateReport()) {
+			return "markssheetsingleexamsvertical";
+		} else {
+			return "error";
+		}
+	}
 }

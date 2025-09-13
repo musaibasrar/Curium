@@ -234,7 +234,7 @@ public class MarksDetailsDAO {
 			}
 			return ex;
 		}
-		public List<SubjectGrade> readSubjectGrade(int branchid) {
+		public List<SubjectGrade> readSubjectGrade(int branchid, int examid, String classSelected) {
 			List<SubjectGrade> results = new ArrayList<SubjectGrade>();
 			try {
 
@@ -311,5 +311,27 @@ public class MarksDetailsDAO {
 				return results;
 			}
 		}
+
+				public List<Marks> readListOfMarks(Integer id, int subjectId, int examId) {
+			List<Marks> results = new ArrayList<Marks>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("From Marks where subid="+subjectId+" and examid="+examId+" and sid IN (:ids)");
+				query.setParameter("ids", id);
+				/*query.setParameter("subject", subject);
+				query.setParameter("exam", exam);*/
+				//query.executeUpdate();
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+	}
 	
 }
