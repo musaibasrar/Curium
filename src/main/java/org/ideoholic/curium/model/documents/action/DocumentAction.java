@@ -211,6 +211,8 @@ public class DocumentAction {
 		return "characterprint";
 	}
 	
+	
+	
 	@GetMapping("/getTcDetail")
 	public String getTcDetail() {
 		return "generatetcdetail";
