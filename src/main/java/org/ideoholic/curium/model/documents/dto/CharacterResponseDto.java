@@ -18,5 +18,6 @@ public class CharacterResponseDto {
 	private List<Parents> listofParents;
 	private boolean success;
 	List<StudyCertificate>  studyCertificate;
-
+	
+	
 }
