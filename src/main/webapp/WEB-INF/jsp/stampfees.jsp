@@ -677,10 +677,11 @@
     	
     	var checkbox = document.getElementById("feesIDS_"+rowvalue);
         var textField = document.getElementById("feesCount_"+rowvalue);
+        var noOfInstallments = document.getElementById("totalinstallments_"+rowvalue).value;
 
         // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
         if (checkbox.checked) {
-        	textField.value = "1";
+        	textField.value = noOfInstallments;
         } else {
             textField.value = "0";
         }
@@ -953,9 +954,11 @@ for(Cookie cookie : cookies){
    			        				<%-- <input type="hidden" class="feesId" name="feesIDS" id="fees_id__${status.index+1}" value="${feescategory.idfeescategory}"> --%></td>
    			        				
    			        				<td><input class="feesAmount" type="text" value="${feescategory.amount}"   name="feesCat"  id="hiddenfees_amount_${status.index+1}" size="18"/></td>
-   			        				<td> <input	type="text" value="${feescategory.totalinstallments}" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br></td>
-   			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
-   			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + feescategory.amount}" />
+   			        				<td> <input	type="text" value="${feescategory.totalinstallments}" name="feesCount" id="feesCount_${status.index+1}" onclick="calculate(${status.index+1})" onkeyup="calculate(${status.index+1})" size="18"><br>
+   			        					<input type="hidden" value="${feescategory.totalinstallments}" name="totalinstallments" id="totalinstallments_${status.index+1}" />
+   			        				</td>
+   			        				<td> <input class="feesFullAmount" type="text" value="${feescategory.amount*feescategory.totalinstallments}" name="feesFullCat" id="hiddenfees_full_amount_${status.index+1}" size="18">
+   			        				<c:set var="feesInitialTotal" value="${feesInitialTotal + (feescategory.amount*feescategory.totalinstallments)}" />
    			        				</td>
    			        				
    			        			</tr>

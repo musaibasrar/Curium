@@ -206,8 +206,8 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 	}
 
 	@PostMapping("/GenerateStudyCertificate")
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId) {
-		ParentDto result = documentService.generateStudyCertificate(studentIdsDto,currentAcademicYear,branchId);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userid") String userId) {
+		ParentDto result = documentService.generateStudyCertificate(studentIdsDto,currentAcademicYear,branchId,userId);
 		if (result != null) {
 			return ResponseEntity.ok(result);
 			}
@@ -271,6 +271,13 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 			  }
 	  
 	  }
+
+	@Override
+	public ResponseEntity<ParentDto> generateStudyCertificate(StudentIdsDto studentIdsDto, String currentAcademicYear,
+			String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 
