@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Card Annual Exam (2020-21)</title>
+    <title>Marks Card Single Exam (2020-21)</title>
     <link rel="stylesheet" href="styles.css">
     <style>
     body {
@@ -131,24 +131,33 @@ footer p {
 <body style="border-style:dotted;">
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
-       <header style="display: flex; align-items: center; gap: 15px;">
-    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/alalmas/images/alalmas.png">
-   <!--  <div  style="text-align:center"> -->
+      <!--  <header style="display: flex; align-items: center; gap: 15px;"> -->
+    <!-- <img border="0" style="vertical-align: text-bottom;height: 130px;width: 130px;" alt="logo" src="/alalmas/images/alalmas.png"> -->
     <table align="center" width="700px;" style="border:none;">
         <%-- ${branchname} --%>
-        <tr><td style="font-size:75px;font-weight:bold;text-align:center;color:brown;border:none;">
-        Al-Almas
+        <tr><td rowspan="2" style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 80px;width: 80px;" alt="logo" src="/alalmas/images/alalmas.png"></td>
+        <td style="font-size:12px;font-weight:bold;text-align:left;border:none;padding:0px;">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Al Hasnat Educational Society(R)</td></tr>
+        <tr>
+        <td style="font-size:50px;font-weight:bold;text-align:left;color:brown;border:none;padding:0px;">
+        &emsp;&emsp;Al-Almas
         </td></tr>
-        <tr><td style="font-size:40px;font-weight:bold;text-align:center;border:none;"> Foundation School
+        <tr><td colspan="2" style="font-size:25px;font-weight:bold;text-align:center;border:none;padding:0px;"> Foundation School
         </td></tr>
-        <tr><td style="font-size:20px;font-weight:bold;text-align:center;border:none;">
+        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
         A unique blend of modern and traditional discipline
+        </td></tr>
+        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+        English and Shoba-E-Hifz and IIT Foundation Course
+        </td></tr>
+        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+       Marks Card<br> ${examname} (${currentAcademicYear})
         </td></tr>
         </table>
    <!--  </div> -->
-</header>
- <h3 align="center" style="margin-bottom:0px;">English and Shoba-E-Hifz and IIT Foundation Course</h3>
- <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
+<!-- </header> -->
+<%--  <h3 align="center" style="margin-bottom:0px;">English and Shoba-E-Hifz and IIT Foundation Course</h3>
+ <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3> --%>
         <section class="student-info">
     <div class="student-details">
         <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
@@ -171,32 +180,32 @@ footer p {
             <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
              <c:forEach items="${exammarks.subMarks}" var="submarks" >
                 <tr>
-                    <td style="color:red">${submarks.key}</td>
+                    <td style="color:red;padding:0px;">${submarks.key}</td>
                      <c:set var="dateParts" value="${fn:split(submarks.value,'/')}" />
-                    <td>${dateParts[0]}</td>
-                    <td>${dateParts[1]}</td>
-                    <td>${dateParts[2]}</td>
+                    <td style="padding:0px;">${dateParts[0]}</td>
+                    <td style="padding:0px;">${dateParts[1]}</td>
+                    <td style="padding:0px;">${dateParts[2]}</td>
                 </tr>
                 </c:forEach>
                
                 
                 <tr>
-                    <td><strong>Total</strong></td>
-                    <td><strong>${exammarks.totalMarks}</strong></td>
-                    <td><strong>${exammarks.totalMinMarks}</strong></td>
-                    <td><strong>${exammarks.totalMarksObtained}</strong></td>
+                    <td style="padding:0px;"><strong>Total</strong></td>
+                    <td style="padding:0px;"><strong>${exammarks.totalMarks}</strong></td>
+                    <td style="padding:0px;"><strong>${exammarks.totalMinMarks}</strong></td>
+                    <td style="padding:0px;"><strong>${exammarks.totalMarksObtained}</strong></td>
                 </tr>
                 <tr>
-                    <td><strong>Rank</strong></td>
-                    <td colspan="3">${exammarks.rank}</td>
+                    <td style="padding:0px;"><strong>Rank</strong></td>
+                    <td colspan="3" style="padding:0px;">${exammarks.rank}</td>
                 </tr>
                 <tr>
-                    <td><strong>Percentage</strong></td>
-                    <td colspan="3">${exammarks.percentage}</td>
+                    <td style="padding:0px;"><strong>Percentage</strong></td>
+                    <td colspan="3" style="padding:0px;">${exammarks.percentage}</td>
                 </tr>
                 <tr>
-                    <td><strong>Grade</strong></td>
-                    <td colspan="3">${exammarks.resultclass}</td>
+                    <td style="padding:0px;"><strong>Grade</strong></td>
+                    <td colspan="3" style="padding:0px;">${exammarks.resultclass}</td>
                 </tr>
                  </c:forEach>
             </tbody>
@@ -204,39 +213,39 @@ footer p {
         <table>
         <thead>
             <tr>
-            <th style="background-color:white;color:black;">
+            <th style="background-color:white;color:black;padding:0px;">
             REMARKS
             </th>
-            <th style="background-color:white;color:black;">
+            <th style="background-color:white;color:black;padding:0px;">
             PERFORMANCE
             </th>
-            <th style="background-color:white;color:black;">
+            <th style="background-color:white;color:black;padding:0px;">
             CONDUCT
             </th>
-            <th style="background-color:white;color:black;">
+            <th style="background-color:white;color:black;padding:0px;">
             ATTENTIVENESS
             </th>
-            <th style="background-color:white;color:black;">
+            <th style="background-color:white;color:black;padding:0px;">
             HOMEWORK
             </th>
             </tr>
             </thead>
             <tbody>
             <tr>
-            <td>&nbsp; </td><td> </td><td> </td><td> </td><td> </td>
+            <td style="padding:0px;">&nbsp; </td><td style="padding:0px;"> </td><td style="padding:0px;"> </td>
+            <td style="padding:0px;"> </td><td style="padding:0px;"> </td>
             </tr>
             </tbody>
         </table>
          <section class="co-scholastic-areas">
             <h4 style="color:red;">Co-Scholastic Areas</h4>
-            <p>1. Discipline in the classroom:</p>
-            <p>2. Behavior / Conduct with teachers & classmates:</p>
-            <p>3. Regularity & Neatness in doing HW/CW:</p>
-            <p>4. Comes to School: On time [&emsp;&emsp;] / Sometime Late [&emsp;&emsp;] / Always Late [&emsp;&emsp;]</p>
+            <p style="margin:0px;">1. Discipline in the classroom:</p>
+            <p style="margin:0px;">2. Behavior / Conduct with teachers & classmates:</p>
+            <p style="margin:0px;">3. Regularity & Neatness in doing HW/CW:</p>
+            <p style="margin:0px;">4. Comes to School: On time [&emsp;&emsp;] / Sometime Late [&emsp;&emsp;] / Always Late [&emsp;&emsp;]</p>
         </section>
         <table style="border: 0px solid #ddd;">
         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
-         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
         </table>
         <footer>
             <p>Parent's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Class Teacher's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Principal's Signature</p>
