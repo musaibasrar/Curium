@@ -1,5 +1,6 @@
 package org.ideoholic.curium.repositories;
 
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,5 @@ public interface OtherfeescollectionRepository extends JpaRepository<Otherfeesco
 
 	List<Otherfeescollection> findByOtherFeesStructure_Sfsid(Integer sfsid);
 
-	// List<Otherfeescollection> findByFeesdetailsid(Integer feeId);
+	List<Feescollection> findByStudentSidAndOtherFeesStructureIn(Integer sid, List<Integer> ids);
 }

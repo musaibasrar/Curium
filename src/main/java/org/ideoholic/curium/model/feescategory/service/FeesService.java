@@ -969,7 +969,7 @@ public class FeesService {
                             sfsId.add(Integer.valueOf(test[0]));
                             feesCatId.add(Integer.valueOf(test[1]));
                    }
-           new FeesCategoryDAO().deleteOtherFeesCategory(sfsId,feesCatId,studentId);
+           feesCategoryDao.deleteOtherFeesCategory(sfsId,feesCatId,studentId);
            studentIdDto.setStudentId(studentId);
            return studentIdDto;
             }
