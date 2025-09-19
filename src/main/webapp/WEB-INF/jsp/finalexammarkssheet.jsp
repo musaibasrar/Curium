@@ -73,7 +73,7 @@ table {
 }
 
 table th, table td {
-    border: 1px solid #ddd;
+    border: 1px solid black;
     padding: 8px;
     text-align: left;
 }
@@ -133,19 +133,20 @@ footer p {
      <c:forEach items="${markssheetlist}" var="Parents">
       <!--  <header style="display: flex; align-items: center; gap: 15px;"> -->
     <!-- <img border="0" style="vertical-align: text-bottom;height: 130px;width: 130px;" alt="logo" src="/alalmas/images/alalmas.png"> -->
-    <table align="center" width="700px;" style="border:none;">
+    <table align="center" width="700px;" style="border:none;margin-bottom:0px;">
         <%-- ${branchname} --%>
-        <tr><td rowspan="2" style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 80px;width: 80px;" alt="logo" src="/alalmas/images/alalmas.png"></td>
-        <td style="font-size:12px;font-weight:bold;text-align:left;border:none;padding:0px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Al Hasnat Educational Society(R)</td></tr>
+        <tr><td rowspan="3" style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 90px;width: 90px;" alt="logo" src="/alalmas/images/alalmas.png"></td>
+        <td style="font-size:15px;font-weight:bold;text-align:left;border:none;padding:0px;">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Al Hasnat Educational Society(R)</td></tr>
         <tr>
         <td style="font-size:50px;font-weight:bold;text-align:left;color:brown;border:none;padding:0px;">
         &emsp;&emsp;Al-Almas
         </td></tr>
-        <tr><td colspan="2" style="font-size:25px;font-weight:bold;text-align:center;border:none;padding:0px;"> Foundation School
+        <tr><td style="font-size:25px;font-weight:bold;text-align:left;border:none;padding:0px;">
+        &emsp;&emsp;&emsp;&nbsp;&nbsp; Foundation School
         </td></tr>
         <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-        A unique blend of modern and traditional discipline
+        (A unique blend of modern and traditional discipline)
         </td></tr>
         <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
         English and Shoba-E-Hifz and IIT Foundation Course
@@ -154,11 +155,7 @@ footer p {
        Marks Card<br> ${examname} (${currentAcademicYear})
         </td></tr>
         </table>
-   <!--  </div> -->
-<!-- </header> -->
-<%--  <h3 align="center" style="margin-bottom:0px;">English and Shoba-E-Hifz and IIT Foundation Course</h3>
- <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3> --%>
-        <section class="student-info">
+        <section class="student-info" style="margin-bottom:0px;">
     <div class="student-details">
         <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
         <p><strong style="color:red">Father Name:</strong><strong style="color:blue"> ${Parents.parents.fathersname}</strong></p>
@@ -166,7 +163,6 @@ footer p {
         <p><strong style="color:red">Section:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
         <p><strong style="color:red">Roll No.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
     </div>
-    <%-- <img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/> --%>
 </section>        <table>
             <thead>
                 <tr>
@@ -182,30 +178,30 @@ footer p {
                 <tr>
                     <td style="color:red;padding:0px;">${submarks.key}</td>
                      <c:set var="dateParts" value="${fn:split(submarks.value,'/')}" />
-                    <td style="padding:0px;">${dateParts[0]}</td>
-                    <td style="padding:0px;">${dateParts[1]}</td>
-                    <td style="padding:0px;">${dateParts[2]}</td>
+                    <td style="padding:0px;text-align:center;"><fmt:formatNumber value="${dateParts[0]}" maxFractionDigits="0"/></td>
+                    <td style="padding:0px;text-align:center;"><fmt:formatNumber value="${dateParts[1]}" maxFractionDigits="0"/></td>
+                    <td style="padding:0px;text-align:center;"><fmt:formatNumber value="${dateParts[2]}" maxFractionDigits="0"/></td>
                 </tr>
                 </c:forEach>
                
                 
                 <tr>
                     <td style="padding:0px;"><strong>Total</strong></td>
-                    <td style="padding:0px;"><strong>${exammarks.totalMarks}</strong></td>
-                    <td style="padding:0px;"><strong>${exammarks.totalMinMarks}</strong></td>
-                    <td style="padding:0px;"><strong>${exammarks.totalMarksObtained}</strong></td>
+                    <td style="padding:0px;text-align:center;"><strong><fmt:formatNumber value="${exammarks.totalMarks}" maxFractionDigits="0"/></strong></td>
+                    <td style="padding:0px;text-align:center;"><strong><fmt:formatNumber value="${exammarks.totalMinMarks}" maxFractionDigits="0"/></strong></td>
+                    <td style="padding:0px;text-align:center;"><strong><fmt:formatNumber value="${exammarks.totalMarksObtained}" maxFractionDigits="0"/></strong></td>
                 </tr>
                 <tr>
                     <td style="padding:0px;"><strong>Rank</strong></td>
-                    <td colspan="3" style="padding:0px;">${exammarks.rank}</td>
+                    <td colspan="3" style="padding:0px;text-align:center;">${exammarks.rank}</td>
                 </tr>
                 <tr>
                     <td style="padding:0px;"><strong>Percentage</strong></td>
-                    <td colspan="3" style="padding:0px;">${exammarks.percentage}</td>
+                    <td colspan="3" style="padding:0px;text-align:center;">${exammarks.percentage}</td>
                 </tr>
                 <tr>
                     <td style="padding:0px;"><strong>Grade</strong></td>
-                    <td colspan="3" style="padding:0px;">${exammarks.resultclass}</td>
+                    <td colspan="3" style="padding:0px;text-align:center;">${exammarks.resultclass}</td>
                 </tr>
                  </c:forEach>
             </tbody>
@@ -239,10 +235,10 @@ footer p {
         </table>
          <section class="co-scholastic-areas">
             <h4 style="color:red;">Co-Scholastic Areas</h4>
-            <p style="margin:0px;">1. Discipline in the classroom:</p>
-            <p style="margin:0px;">2. Behavior / Conduct with teachers & classmates:</p>
-            <p style="margin:0px;">3. Regularity & Neatness in doing HW/CW:</p>
-            <p style="margin:0px;">4. Comes to School: On time [&emsp;&emsp;] / Sometime Late [&emsp;&emsp;] / Always Late [&emsp;&emsp;]</p>
+            <p style="margin:0px;padding-bottom:8px;">1. Discipline in the classroom:</p>
+            <p style="margin:0px;padding-bottom:8px;">2. Behavior / Conduct with teachers & classmates:</p>
+            <p style="margin:0px;padding-bottom:8px;">3. Regularity & Neatness in doing HW/CW:</p>
+            <p style="margin:0px;padding-bottom:8px;">4. Comes to School: On time [&emsp;&emsp;] / Sometime Late [&emsp;&emsp;] / Always Late [&emsp;&emsp;]</p>
         </section>
         <table style="border: 0px solid #ddd;">
         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
