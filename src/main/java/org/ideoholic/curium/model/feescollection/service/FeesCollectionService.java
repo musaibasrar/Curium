@@ -241,23 +241,20 @@ public class FeesCollectionService {
 			
 		}
 		
-		String[] yearParts = academicYear.split("/");
-		String previousYear = "";
-        if (yearParts.length == 2) {
-            int previousYearFirstPart = Integer.parseInt(yearParts[0]) - 1 ;
-            int previousYearSecondPart = Integer.parseInt(yearParts[1]) - 1;
-            previousYear = previousYearFirstPart + "/" + previousYearSecondPart;
-            
-        } 
-        
-		List<Studentfeesstructure> feesstructurePreviousYear = new StudentDetailsDAO().getStudentFeesStructure(id, previousYear);
-		//List<Feescollection> feesCollection = feesCollectionDAO.getFeesForTheCurrentYear(id, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+		//previous  10 years
+				String[] parts = academicYear.split("/");
+				int startYear = Integer.parseInt(parts[0]);
+
+				List<String> academicYears = new ArrayList<>();
+				for (int i = 1; i <= 10; i++) {
+				    int year1 = startYear - i;
+				    int year2 = year1 + 1;
+				    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+				}
 		Map<Studentfeesstructure,Long> feesMapPreviousYear = new LinkedHashMap<Studentfeesstructure, Long>();
-		
-		for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMapPreviousYear.entrySet()) {
-			Studentfeesstructure sf = feescollection2.getKey();
-			sf.getFeescategory().getFeescategoryname();
-		}
+		 for (String previousAcademicYear : academicYears) {
+		List<Studentfeesstructure> feesstructurePreviousYear = new StudentDetailsDAO().getStudentFeesStructure(id, previousAcademicYear);
+		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		
 		for (Studentfeesstructure singleFeesStructure : feesstructurePreviousYear) {
 			Long totalAmountPerCategory = 0L;
@@ -275,10 +272,10 @@ public class FeesCollectionService {
 				}
 			
 		}
-
+		 }
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
 		result.setPreviousYearFeesMap(feesMapPreviousYear);
-		result.setPreviousYear(previousYear);
+		//result.setPreviousYear(previousYear);
 		result.setFeesMap(feesMap);
 		result.setStudentNameDetails(dto.getStudentName());
 		result.setAdmNoDetails(dto.getAdmissionNo());
