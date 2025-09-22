@@ -305,6 +305,74 @@ for(Cookie cookie : cookies){
                             
                             </c:forEach> --%>
                             
+                             <c:forEach items="${markssheetlist}" var="Parents" begin="1" end= "1" step="1">
+                            
+                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+                        	
+
+			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+            
+
+			<table style="border-collapse: collapse;width: 100%;table-layout: fixed">
+											
+                            <tr style="border-color:#000000">
+                                <td class="namedetails" style="width: 20%"><label style="font-weight: bold;text-transform: capitalize;"><c:out value="Student Name"/></label></td>
+                                
+                                <td style="width: 80%">
+                                  <c:set var = "beginloop" value = "0"/>
+           					 	<c:set var = "endloop" value = "4"/>
+           					 	<c:forEach begin="0" end="${endloop}" step="1">
+                                
+           					 			<table style=" border-collapse: collapse;width: 100%;">
+                            	
+                            	<tbody>
+                            	
+                             	<tr>
+                             	<c:forEach items="${Parents.exammarks}" var="exammarks"  begin="${beginloop}" end= "${endloop}" step="1">
+                                <td>
+                                	<table style=" border-collapse: collapse;width: 100%;border: 1px solid black;table-layout: fixed;">
+											
+	                                	<tr style="border: 1px solid black;">
+	                                	<c:forEach items="${exammarks.subMarks}" var="submarks" >
+	                                		
+            										<td style="border: 1px solid black;text-align: center;transform: rotate(-90deg);height: 160px;">
+                                                			${submarks.key}
+	                                				</td>
+	                                	</c:forEach>
+	                                			<td style="border: 1px solid black;text-align: center;transform: rotate(-90deg);height: 160px;">Total Marks Obtained</td>
+                            					<td style="border: 1px solid black;text-align: center;transform: rotate(-90deg);height: 160px;">Total Marks</td>
+                            					<td style="border: 1px solid black;text-align: center;transform: rotate(-90deg);height: 160px;">Percentage</td>
+                            					<%-- <td style="border: 1px solid black;text-align: left;">Grade</br>${exammarks.resultclass}</td> --%>
+                            					<td style="border: 1px solid black;text-align: center;transform: rotate(-90deg);height: 160px;">Rank</td>
+                            					
+	                                	</tr>
+	                                
+	                                		                                               	
+	                                	</table>
+	                                	<c:set var = "beginloop" value = "${beginloop+5}"/>
+           					 	<c:set var = "endloop" value = "${endloop+5}"/>
+           					 	</c:forEach>
+                                </td>
+                               </c:forEach>
+                                </tr>
+                                 
+                       
+                   				 </tbody>
+                            </table>
+                                </td>
+                                
+                             </tr>
+                            
+                            </table>
+		</div>
+                                 
+                            </c:forEach>
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
@@ -347,24 +415,24 @@ for(Cookie cookie : cookies){
             										<td style="border: 1px solid black;text-align: left;">
             										        <!-- Subject Name -->
             										<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-	                                				${submarks.key}</br>    										
+	                                				<%-- ${submarks.key}</br>  --%>
             										${dateParts[2]}</td>
         										</c:when>
         										<c:otherwise>
             										<td style="border: 1px solid black;text-align: left;">
             										<!-- Subject Name -->
             										<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-	                                				${submarks.key}</br>
-            										${dateParts[0]}<%-- (${dateParts[2]}) (${dateParts[1]})--%></td>
+	                                				<%-- ${submarks.key}</br> --%>
+	                                				<c:set var="marksParts" value="${fn:split(dateParts[0],'/')}" />
+	                                				<fmt:formatNumber value="${marksParts[0]}" type="number" minFractionDigits="0" maxFractionDigits="0"/>/<fmt:formatNumber value="${marksParts[1]}" type="number" minFractionDigits="0" maxFractionDigits="0"/><%-- (${dateParts[2]}) (${dateParts[1]})--%></td>
         										</c:otherwise>
     										</c:choose>
 	                                	</c:forEach>
-	                                			<td style="border: 1px solid black;text-align: left;">Total Marks Obtained</br>${exammarks.totalMarksObtained}</td>
-                            					<td style="border: 1px solid black;text-align: left;">Total Marks</br>${exammarks.totalMarks}</td>
-                            					<td style="border: 1px solid black;text-align: left;">Percentage</br>
-                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
-                            					<td style="border: 1px solid black;text-align: left;">Grade</br>${exammarks.resultclass}</td>
-                            					<td style="border: 1px solid black;text-align: left;">Rank</br>${exammarks.rank}</td>
+	                                			<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${exammarks.totalMarksObtained}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
+                            					<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${exammarks.totalMarks}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
+                            					<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
+                            					<%-- <td style="border: 1px solid black;text-align: left;">Grade</br>${exammarks.resultclass}</td> --%>
+                            					<td style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>
                             					
 	                                	</tr>
 	                                
@@ -392,19 +460,24 @@ for(Cookie cookie : cookies){
                         
                         <TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">
-
+						<br>
+						<!-- <tr>
+							<td><br><br><br></td>
+						</tr> -->
 						<tr>
-							<td><br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><img src="/vision/images/principalsignature.png" width="60" height="28"/></td>
 						</tr>
 				<tr>
-					<td></td>
-					<td align="left">Class Teacher</td>	
-					<td align="centre">Principal</td>
+				<td></td>
+				<td align="left">Class Teacher</td>	
 					<td align="centre">Parent</td>
-				</tr>
+					<td align="centre">Principal</td>
+					</tr>
                     
 		</TABLE>
-			
 	</form>
 	
 	
