@@ -1,3 +1,10 @@
+<%-- 
+    Document   : Print Preview
+    Created on : Jan 4, 2013, 4:39:24 PM
+    Author     : Musaib
+--%>
+
+
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -255,17 +262,18 @@
             -->
             .dataTextBoldCenter {
 	font-weight: normal;
-	font-family: Tahoma;
+	font-family: bolder;
 	color: black;
-	font-size: 14px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
+	margin:0px;
 }
 
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
-	color: black;
+	color: white;
 	font-size: 9px;
 	letter-spacing: normal;
 	text-align: center;
@@ -330,7 +338,7 @@
                                 });
                             </script>
 
-  <%
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -346,7 +354,6 @@ for(Cookie cookie : cookies){
 }
 }
 %>
- 
 
    <style type="text/css">
 
@@ -425,19 +432,26 @@ for(Cookie cookie : cookies){
 
 <style>
     /* CSS to display tables side by side */
-   /* .table-container {
+    .table-container {
       display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
+      margin-bottom: 20px; /* Add a gap between table sets */
+    }
     
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
+    .table-container table {
+     // margin-right: 20px;
+    }
     
     /* CSS for table styling */
+    table {
+      border-collapse: collapse;
+      width: 300px;
+    }
     
-    
-    
+    th, td {
+      border: none; /* Remove borders */
+     // padding: 8px;
+      text-align: left;
+    }
     
     .vertical-line {
       border-left: 2px solid #350c76; /* Add a vertical line */
@@ -450,84 +464,130 @@ for(Cookie cookie : cookies){
        
         <form action="/brainystars/" method="post" id="form1" class="bodymargin">
 			
-		 <c:set var="iInitial" value="${iInitial}"/>
+			
+	     <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
                         %>
-			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
-  <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
-   </table>
+			<c:if test="${limit < iInitial}">
+			<div class="card" style="background-image: url('/brainystars/images/bggreen.png');background-repeat:no-repeat;background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;margin:10px;">
+  <div class="table-container" style="padding-left: 10px;margin-bottom:0px;padding-bottom:0px;">
+   
+		 <table style="width: 50%;margin-bottom:0px;padding-bottom:0px;margin-left:16px;">
+   <tr>
+        <td style="width:80px;height:80px ">&emsp;&emsp;
+        <c:choose>
+              <c:when test="${branchid == 2}">
+            <img src="/brainystars/images/brainystarsidcard${branchid}.png" width="80" height="80"/>
+              </c:when>
+              <c:when test="${branchid == 3}">
+            <img src="/brainystars/images/brainystarsidcard${branchid}.png" width="80" height="38"/>
+              </c:when>
+               <c:when test="${branchid == 4}">
+            <img src="/brainystars/images/brainystarsidcard${branchid}.png" width="80" height="80"/>
+              </c:when>
+               <c:when test="${branchid == 5}">
+            <img src="/brainystars/images/brainystarsidcard${branchid}.png" width="80" height="38"/>
+              </c:when>
+          </c:choose>
+         
+        </td>
+      </tr>
+    </table>
+    
+    <table style="border-collapse: collapse;width: 150%;margin-bottom:0px;margin-top:0px;padding-bottom:0px;">
+  <tr><td>
+<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label>
+</td></tr>
+				<tr>
+				<c:choose>
+              <c:when test="${branchid == 2}">
+           <td>
+				<label class="addressLine" style="font-size:10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
+				</td>
+              </c:when>
+              <c:when test="${branchid == 3}">
+            <td>
+				<label class="addressLine" style="font-size:10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
+				</td>
+              </c:when>
+               <c:when test="${branchid == 4}">
+            <td>
+				<label class="addressLine" style="font-size:10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
+				</td>
+              </c:when>
+               <c:when test="${branchid == 5}">
+            <td>
+				<label class="addressLine" style="font-size:8px;">&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchaddress}</label>
+				</td>
+              </c:when>
+          </c:choose>
+				  </tr>
+</table>
   </div>
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
- <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/brainystars/images/brainystars${branchid}.png" width="159" height="72"/>
- </td>
- </tr>
- </table>
-   </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+  <div class="table-container" style="padding-left: 10px;margin-top:0px;padding-top:0px;">
+  
+  <table style="width: 77%;margin-top:0px;padding-top:0px;">
+   <tr>
+        <td style="padding-bottom:0px;">&emsp;
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
+        </td>
+      </tr>
+      <tr>
+		<td style="color: black;font-weight: bold;font-size: 12px;margin-top:0px;">&emsp;IDENTITY CARD</td>      
+      </tr>
+      <tr>
+      <td>&emsp;&nbsp;&nbsp;session:&nbsp;${currentAcademicYear}</td>
+      </tr>
+     
+    </table>
+    
+    <table style="border-collapse: collapse;width: 123%;margin-top:0px;">
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding-top: 5px;margin:0px;">Name&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <td style="padding: 0px;margin:0px;">Father's Name&nbsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+<%--     <td style="padding: 0px;margin:0px;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Mother's Name&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Class&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;: <%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <%-- <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+    <td style="padding: 0;margin:0;">Phone&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+<%--     <td style="padding: 0;margin:0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td style="padding: 0;">Address&emsp;&emsp;&emsp;&emsp;:<label style="padding: 0;text-align:right;"><%= request.getSession().getAttribute("address" + i + "") %></label></td>
+<%--     <td style="padding: 0;text-transform:capitalize;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td> --%>
   </tr>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+   <td>&nbsp;</td></tr>
+   <tr>
+   <td>&nbsp;</td></tr>
+   <tr>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/brainystars/images/brainysign.png" alt="Sign Brainy Stars" width="75" height="25"></td>
+  </tr>
+  <tr>
+  <!-- <td></td> -->
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Signature</td>
   </tr>
 </table>
-
-<div height="30" width="20%" style="text-align:right;float:right;">
-
-<img src="/brainystars/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
+    
+  </div>
 </div>
-</div>
- </c:if>
+
+  </c:if>
    <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
                         
@@ -535,7 +595,6 @@ principal&nbsp;&nbsp;&nbsp;</div>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-  
                    <table  width="70%"  id="table11" align="left">
                     <tr>
                         <td width="30%"> 
