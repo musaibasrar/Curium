@@ -609,7 +609,8 @@ public class EmployeeService {
 	           if (teacherDetails != null) {
 	        	   httpSession.setAttribute("staffid" + i + "", teacherDetails.getTeacherexternalid());
 	        	   httpSession.setAttribute("teachername" + i + "", teacherDetails.getTeachername());
-	        	   httpSession.setAttribute("guardian" + i + "", teacherDetails.getRemarks());
+	        	   httpSession.setAttribute("teachername" + i + "", teacherDetails.getTeachername());
+	        	   httpSession.setAttribute("qualification" + i + "", teacherDetails.getQualification());
 	               httpSession.setAttribute("contactnumber" + i + "", teacherDetails.getContactnumber());
 	               httpSession.setAttribute("designation" + i + "", teacherDetails.getDesignation());
 	               httpSession.setAttribute("Address" + i + "", teacherDetails.getAddress());

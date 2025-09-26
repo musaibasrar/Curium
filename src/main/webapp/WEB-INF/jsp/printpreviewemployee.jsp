@@ -8,7 +8,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+        <title>Employee Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/gnyanganga/js/motionpack.js"></script>
         <link rel="stylesheet" href="/gnyanganga/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -497,7 +497,7 @@ for(Cookie cookie : cookies){
     <table style="border-collapse: collapse;border-radius: 10px;width: 90%;margin-left: 10px">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;QUALIFICATION</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("qualification" + i + "")%></td>
   </tr>
   <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;DESIGNATION</td>
