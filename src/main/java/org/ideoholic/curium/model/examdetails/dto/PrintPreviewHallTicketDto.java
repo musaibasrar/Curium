@@ -15,4 +15,5 @@ public class PrintPreviewHallTicketDto {
     private String studentName;
     private String academicYear;
     private String classStudying;
+    private String exam;
 }

@@ -292,4 +292,43 @@ public class ExamDetailsService {
     }
 
 
+    public HallTicketResponseDto printPreviewAdmitCard(PrintPreviewHallTicketDto printPreviewHallTicketDto, String branchId) {
+        HallTicketResponseDto result = new HallTicketResponseDto();
+
+        String[] examName = printPreviewHallTicketDto.getExamName();
+        String[] classes = printPreviewHallTicketDto.getClasses();
+        String[] subject = printPreviewHallTicketDto.getSubject();
+        String[] dateOfExam = printPreviewHallTicketDto.getDateOfExam();
+        String[] startTime = printPreviewHallTicketDto.getStartTime();
+        String[] endTime = printPreviewHallTicketDto.getEndTime();
+        String classAndSec = printPreviewHallTicketDto.getClassAndSec();
+        String admNo = printPreviewHallTicketDto.getAdmNo();
+        String studentName = printPreviewHallTicketDto.getStudentName();
+        String academicYear = printPreviewHallTicketDto.getAcademicYear();
+
+
+            List<Parents> studentList = new ArrayList<>();
+            List<Examschedule> examscheduleList = new ArrayList<>();
+            String classStudying = DataUtil.emptyString(printPreviewHallTicketDto.getClassStudying());
+            classStudying = classStudying + "--" + "%";
+
+            if (admNo.equals("")) {
+                studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
+            } else {
+                Parents parent = new Parents();
+                Student student = new Student();
+                student.setAdmissionnumber(admNo);
+                student.setName(studentName);
+                student.setClassstudying(classAndSec);
+                parent.setStudent(student);
+                studentList.add(parent);
+            }
+
+            result.setStudentList(studentList);
+            result.setExamname(printPreviewHallTicketDto.getExam());
+
+        return result;
+    }
+
+
 }

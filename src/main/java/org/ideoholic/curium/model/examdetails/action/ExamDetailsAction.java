@@ -164,5 +164,12 @@ public class ExamDetailsAction {
         }
 
     }
+    
+    @PostMapping("/printPreviewAdmitCard")
+    public String printPreviewAdmitCard() {
+
+        examDetailsActionAdapter.printPreviewAdmitcard();
+        return "printpreviewadmitcard";
+    }
 
 }
