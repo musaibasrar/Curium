@@ -121,13 +121,13 @@
 	font-size: 12px;
 
 }
-.dataTextRight {
+.dataTextLeft {
 	border-radius: 3px;
 	font-family: Tahoma;
 	color: #4b6a84;
 	font-size: 16px;
 	letter-spacing: normal;
-	text-align: right;
+	text-align: left;
 	background-color: #E3EFFF;
 }
 
@@ -258,13 +258,19 @@
 						<th class="datath">Father Name</th>
 						<th class="datath">Contact No.</th>
 						<th class="datath">Fees Details</th>
-						<th class="datath">Total Due Summary</th>
-						<th class="datath">Total Fees Summary</th>
+						<th class="datath">Total Paid</th>
+						<th class="datath">Total Due</th>
+						<th class="datath">Total Fees</th>
 				       	
  				 </tr>
  			 </thead>
  		 
 			<tbody>
+			
+					<c:set var="grandtotaldueamount" value="0" />
+					<c:set var="grandtotalpaidAmount" value="0" />
+					<c:set var="grandtotalAmount" value="0" />
+					
 					<c:forEach items="${studentfeesreportlist}" var="studentFeesReport" varStatus="status">
 					
 					<c:set var="feesDetails" value="" />
@@ -277,6 +283,7 @@
 							<c:set var="feesTotal" value="${studentFee.feesamount - studentFee.concession - studentFee.waiveoff}" />
 							<c:set var="dueAmount" value="${dueAmount + studentFee.feesamount - studentFee.feespaid - studentFee.concession - studentFee.waiveoff}" />
 							<c:set var="totalAmount" value="${totalAmount + studentFee.feesamount - studentFee.concession - studentFee.waiveoff}" />
+							<c:set var="PaidAmount" value="${totalAmount-dueAmount}" />
 							<c:set var="feesDetails" value="${feesDetails} ${studentFee.feescategory.feescategoryname} : ${feesDue} /  ${feesTotal}" />
 						</c:forEach>					
 					<tr class="trClass" style="border-color: #000000" border="1"
@@ -291,14 +298,42 @@
 						    <td class="datatd"><c:out value="${studentFeesReport.parents.fathersname}" /></td>
 						    <td class="datatd"><c:out value="${studentFeesReport.parents.contactnumber}" /></td>
 						    <td class="datatd"><c:out value="${feesDetails}" /></td>
-						    <td class="datatd"><c:out value="${dueAmount}" /></td>
-						    <td class="datatd"><c:out value="${totalAmount}" /></td>
+						    <td class="datatd"><c:out value="${PaidAmount}" />
+						    <c:set var="grandtotalpaidAmount" value="${grandtotalpaidAmount+PaidAmount}" />
+						    </td>
+						    <td class="datatd"><c:out value="${dueAmount}" />
+						    <c:set var="grandtotaldueamount" value="${grandtotaldueamount+dueAmount}" />
+						    </td>
+						    <td class="datatd"><c:out value="${totalAmount}" />
+						    <c:set var="grandtotalAmount" value="${grandtotalAmount+totalAmount}" />
+						    </td>
 						</tr>
 						
 					</c:forEach>
 			</tbody>
 				</table>
 			<br>
+			<table class="datatable">
+						<tr>
+							<td class="dataTextLeft" >
+							<label style="font-weight: bold;">
+							Total Paid: Rs.<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${grandtotalpaidAmount}" />
+							</label>
+							</td>
+							
+							<td class="dataTextLeft" >
+							<label style="font-weight: bold;">
+							Total Due: Rs.<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${grandtotaldueamount}" />
+							</label>
+							</td>
+							<td class="dataTextLeft" >
+							<label style="font-weight: bold;">
+							Total: Rs.<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${grandtotalAmount}" />
+							</label>
+							</td>
+						</tr>
+						
+				</table> 
 			<%-- <table class="datatable">
 						<tr>
 							<td class="dataText"></td>
