@@ -131,37 +131,26 @@ footer p {
 <body style="border-style:dotted;">
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
-      <!--  <header style="display: flex; align-items: center; gap: 15px;"> -->
-    <!-- <img border="0" style="vertical-align: text-bottom;height: 130px;width: 130px;" alt="logo" src="/alalmas/images/alalmas.png"> -->
     <table align="center" width="700px;" style="border:none;margin-bottom:0px;">
         <%-- ${branchname} --%>
-        <tr><td rowspan="3" style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 90px;width: 90px;" alt="logo" src="/alalmas/images/alalmas.png"></td>
-        <td style="font-size:15px;font-weight:bold;text-align:left;border:none;padding:0px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Al Hasnat Educational Society(R)</td></tr>
-        <tr>
-        <td style="font-size:50px;font-weight:bold;text-align:left;color:brown;border:none;padding:0px;">
-        &emsp;&emsp;Al-Almas
-        </td></tr>
-        <tr><td style="font-size:25px;font-weight:bold;text-align:left;border:none;padding:0px;">
-        &emsp;&emsp;&emsp;&nbsp;&nbsp; Foundation School
-        </td></tr>
-        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-        (A unique blend of modern and traditional discipline)
-        </td></tr>
-        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+        <tr><td style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 202px;width: 670px;" alt="logo" src="/alalmas/images/header.png"></td>
+       
+        </tr>
+       
+        <tr><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
         English and Shoba-E-Hifz and IIT Foundation Course
         </td></tr>
-        <tr><td colspan="2" style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-       Marks Card<br> ${examname} (${currentAcademicYear})
+        <tr><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+        Marks Card<br> ${examname} (${currentAcademicYear})
         </td></tr>
         </table>
         <section class="student-info" style="margin-bottom:0px;">
     <div class="student-details">
-        <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
-        <p><strong style="color:red">Father Name:</strong><strong style="color:blue"> ${Parents.parents.fathersname}</strong></p>
-        <p><strong style="color:red">Class:</strong><strong style="color:blue"><c:set var="dateClassParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" /> ${dateClassParts[0]}</strong></p>
-        <p><strong style="color:red">Section:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
-        <p><strong style="color:red">Roll No.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
+        <p><strong style="color:red">STUDENT NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.student.name}</strong></p>
+        <p><strong style="color:red">FATHER NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.fathersname}</strong></p>
+        <p><strong style="color:red">CLASS:</strong><strong style="color:blue"><c:set var="dateClassParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" /> ${dateClassParts[0]}</strong></p>
+        <p><strong style="color:red">SECTION:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
+        <p><strong style="color:red">ROLL NO.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
     </div>
 </section>        <table>
             <thead>
