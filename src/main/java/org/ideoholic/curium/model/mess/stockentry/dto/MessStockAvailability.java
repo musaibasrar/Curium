@@ -47,5 +47,12 @@ public class MessStockAvailability implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private Integer userid;
+	
+	public Integer fetchMessItemsId() {
+		if(messitems != null) {
+			return messitems.getId();
+		}
+		return null;
+	}
 
 }

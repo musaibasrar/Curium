@@ -13,4 +13,6 @@ public interface Constants {
 	String USERAUTH = "userAuth";
 	String SUPER_USER_AUTH = "superuserAuth";
 	String CURRENTACADEMICYEAR = "currentAcademicYear";
+	
+	String CANCELLED = "CANCELLED";
 }
