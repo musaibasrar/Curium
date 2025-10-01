@@ -28,6 +28,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
@@ -600,6 +602,30 @@ public class MarksDetailsService {
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
+				int absentDays = 0;
+				int totalDays = 0;
+				int totalPresent = 0;
+				
+				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
+					
+					totalDays++;
+					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+						absentDays++;
+					}
+					
+				}
+				
+				if(!studentDailyAttendance.isEmpty()){
+					totalPresent = totalDays - absentDays;
+				}
+				
+				result.setTotalDays(totalDays);
+				result.setTotalpresent(totalPresent);
+				result.setTotalabsent(absentDays);
+				
+
 				markssheet.setParents(studentDetails);
 				
 				for (Exams examOne : examsList) {
@@ -1043,12 +1069,6 @@ public class MarksDetailsService {
 							
 						}
 						
-						
-						//End Other Subject Details
-						
-						
-						// Over All Subjects
-						
 							
 							ExamsMarks examMarksOverAll = new ExamsMarks();
 							examMarksOverAll.setExamName("Term Total/Grand Total");
@@ -1147,43 +1167,19 @@ public class MarksDetailsService {
 				markssheet.setOtherexammarks(otherExamMarksList);
 				markssheet.setOverallresult(overAllResultClass);
 				marksSheetList.add(markssheet);
-				//if(new MarksDetailsDAO().saveMarks(examRankList) )
 				result.setSuccess(true);
-				/*
-				 * marksList[i][0] = studentDetails.getStudent().getAdmissionnumber();
-				 * marksList[i][1] = studentDetails.getStudent().getName(); int k = 2;
-				 * 
-				 * for (int m=0; m<marksDetailsList.size(); m++) { marksList[i][k] =
-				 * marksDetailsList.get(m).getMarksobtained().toString(); k++; }
-				 */
+				
 			}
 			
 			int size = examsList.size();
 			int endLoop = size/5;
 
+			
 			result.setEndLoop(endLoop+1);
 			result.setMarksSheetList(marksSheetList);
 			result.setSuccess(true);
 			
-			/*for (MarksSheet marksSheet2 : marksSheetList) {
-				
-				for (ExamsMarks marksSheet3 : marksSheet2.getExammarks()) {
-					System.out.println("Exam Name "+marksSheet3.getExamName());
-					System.out.println("Exam total "+marksSheet3.getTotalMarks());
-					
-					for (Map.Entry<String,String> entry : marksSheet3.getSubMarks().entrySet()) {
-						System.out.println("Key = " + entry.getKey() +
-	                             ", Value = " + entry.getValue());
-					}
-			            
-					
-				}
-		}*/
-
-			/*
-			 * try { if (writeToReportCard(marksList)) { result = true; } } catch (Exception
-			 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
-			 */
+		
 		}
 
 		return result;
