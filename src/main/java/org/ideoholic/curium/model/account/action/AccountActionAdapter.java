@@ -161,8 +161,8 @@ public class AccountActionAdapter {
 		request.setAttribute("expensetotallabel", responseDto.getExpenseTotalLabel());
 		request.setAttribute("incometotal", responseDto.getIncomeTotal());
 		request.setAttribute("expensetotal", responseDto.getExpenseTotal());
-		request.setAttribute("fromdate", responseDto.getFromDate());
-		request.setAttribute("todate", responseDto.getToDate());
+		request.setAttribute("fromdate", request.getParameter("fromdate"));
+		request.setAttribute("todate", request.getParameter("todate"));
 		request.setAttribute("profitlabel", responseDto.getProfitLabel());
 		request.setAttribute("totalprofit", responseDto.getTotalProfit());
 		request.setAttribute("losslabel", responseDto.getLossLabel());

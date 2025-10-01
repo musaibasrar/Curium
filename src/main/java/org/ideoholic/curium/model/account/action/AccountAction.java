@@ -246,6 +246,12 @@ public class AccountAction {
 	private String printTrialBalance() {
 		return "trialbalanceprint";
 	}
+	
+	@PostMapping("/printIncomeStatements")
+	private String printIncomeStatements() {
+		accountActionAdapter.getIncomeStatement();
+		return "incomestatementsprint";
+	}
 
 	@GetMapping("/searchSingleLedgerEntries")
 	private String searchSingleLedgerEntries() {
