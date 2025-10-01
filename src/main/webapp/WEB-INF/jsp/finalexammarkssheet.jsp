@@ -133,14 +133,15 @@ footer p {
      <c:forEach items="${markssheetlist}" var="Parents">
     <table align="center" width="700px;" style="border:none;margin-bottom:0px;">
         <%-- ${branchname} --%>
-        <tr><td style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 202px;width: 670px;" alt="logo" src="/alalmas/images/header.png"></td>
+        <tr><td style="border:none;text-align:right;padding:0px;"><img border="0" style="vertical-align: text-bottom;height: 120px;width: 135px;" alt="ideoholic" src="/alalmas/images/alalmas.png"></td>
+        <td style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 180px;width: 600px;" alt="logo" src="/alalmas/images/header.png"></td>
        
         </tr>
        
-        <tr><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+        <tr><td style="border:none;"></td><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
         English and Shoba-E-Hifz and IIT Foundation Course
         </td></tr>
-        <tr><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
+        <tr><td style="border:none;"></td><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
         Marks Card<br> ${examname} (${currentAcademicYear})
         </td></tr>
         </table>
