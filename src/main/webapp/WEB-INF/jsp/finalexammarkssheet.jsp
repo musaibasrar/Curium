@@ -187,7 +187,8 @@ footer p {
                 </tr>
                 <tr>
                     <td style="padding:0px;"><strong>Percentage</strong></td>
-                    <td colspan="3" style="padding:0px;text-align:center;">${exammarks.percentage}</td>
+                    <td colspan="3" style="padding:0px;text-align:center;">
+                     <fmt:formatNumber value="${exammarks.percentage}" type="number" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </tr>
                 <tr>
                     <td style="padding:0px;"><strong>Grade</strong></td>
