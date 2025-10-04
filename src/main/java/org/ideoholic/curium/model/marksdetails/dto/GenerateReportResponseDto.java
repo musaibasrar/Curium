@@ -18,4 +18,8 @@ public class GenerateReportResponseDto {
     private int totalDays;
     private int totalpresent;
     private int totalabsent;
+    private int totalDaysDw;
+    private int totalpresentDw;
+    private int totalabsentDw;
+
 }
