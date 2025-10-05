@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/hamidullah/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/hamidullah/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/hamidullah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/hamidullah/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/hamidullah/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/hamidullah/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/hamidullah/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/hamidullah/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/hamidullah/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/hamidullah/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/hamidullah/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+	src="/hamidullah/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/hamidullah/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/hamidullah/js/datetimepicker_css.js"></script>
 
-<script src="/abc/JavaScript/actb.js"></script>
-<script src="/abc/JavaScript/common.js"></script>
+<script src="/hamidullah/JavaScript/actb.js"></script>
+<script src="/hamidullah/JavaScript/common.js"></script>
 
 
 
@@ -590,7 +590,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/abc/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/hamidullah/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -633,7 +633,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/hamidullah/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -861,7 +861,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+		response.sendRedirect("/hamidullah/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -2379,14 +2379,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/abc/StudentProcess/AddStudent";
+									form1.action = "/hamidullah/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/abc/StudentProcess/viewAll";
+								form1.action = "/hamidullah/StudentProcess/viewAll";
 								form1.submit();
 							}
 
