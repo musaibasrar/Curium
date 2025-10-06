@@ -436,6 +436,19 @@
 	});
 	
 	
+	
+	$(function() {
+		$("#datepicker").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#datepicker").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
 </script>
 
 </head>
@@ -549,6 +562,12 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td>Date</td><td><input name="dateforattendance"
+									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									data-validate="validate(required)"></td>
 						</tr>
 						
 						
