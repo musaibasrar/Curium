@@ -55,6 +55,7 @@ import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.FinalTermMarks;
@@ -584,6 +585,7 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
+			String presentDate = dto.getNoofpresentday();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
@@ -602,8 +604,15 @@ public class MarksDetailsService {
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+				/*
+				 *  studentDailyAttendance = new
+				 * AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().
+				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
+				 */
+				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
+				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
+						DateUtil.indiandateParser(presentDate));
 				int absentDays = 0;
 				int totalDays = 0;
 				int totalPresent = 0;
@@ -625,6 +634,7 @@ public class MarksDetailsService {
 				result.setTotalpresent(totalPresent);
 				result.setTotalabsent(absentDays);
 				
+
 
 				markssheet.setParents(studentDetails);
 				
