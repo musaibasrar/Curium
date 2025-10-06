@@ -593,49 +593,34 @@ public class MarksDetailsService {
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				/*
-				 * List<Studentdailyattendance> studentDailyAttendance = new
-				 * ArrayList<Studentdailyattendance>(); studentDailyAttendance = new
+				 *  studentDailyAttendance = new
 				 * AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().
-				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId)); int
-				 * absentDays = 0; int totalDays = 0; int totalPresent = 0;
-				 * 
-				 * for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
-				 * 
-				 * totalDays++;
-				 * if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
-				 * absentDays++; }
-				 * 
-				 * }
-				 * 
-				 * if(!studentDailyAttendance.isEmpty()){ totalPresent = totalDays - absentDays;
-				 * }
-				 * 
-				 * result.setTotalDays(totalDays); result.setTotalpresent(totalPresent);
-				 * result.setTotalabsent(absentDays);
+				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
 				 */
-				List<Studentdailyattendance> studentDailyAttendancedw = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendancedw = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
-						DateUtil.indiandateParser(presentDate));
-				int absentDaysDw = 0;
-				int totalDaysDw = 0;
-				int totalPresentDw = 0;
 				
-				for (Studentdailyattendance dailyattendance : studentDailyAttendancedw) {
+				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
+						DateUtil.indiandateParser(presentDate));
+				int absentDays = 0;
+				int totalDays = 0;
+				int totalPresent = 0;
+				
+				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
 					
-					totalDaysDw++;
+					totalDays++;
 					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
-						absentDaysDw++;
+						absentDays++;
 					}
 					
 				}
 				
-				if(!studentDailyAttendancedw.isEmpty()){
-					totalPresentDw = totalDaysDw - absentDaysDw;
+				if(!studentDailyAttendance.isEmpty()){
+					totalPresent = totalDays - absentDays;
 				}
 				
-				result.setTotalDaysDw(totalDaysDw);
-				result.setTotalpresentDw(totalPresentDw);
-				result.setTotalabsentDw(absentDaysDw);
+				result.setTotalDays(totalDays);
+				result.setTotalpresent(totalPresent);
+				result.setTotalabsent(absentDays);
 				
 
 
