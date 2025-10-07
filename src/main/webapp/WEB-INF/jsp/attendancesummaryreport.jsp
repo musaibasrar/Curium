@@ -15,39 +15,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Attendance Export</title>
-<script src="/greatindiaacademy/js/Chart.js"></script>
-<link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
-<link rel="stylesheet" href="/greatindiaacademy/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/greatindiaacademy/css/graph/jquery.jqplot.min.css">
+<script src="/vision/js/Chart.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/greatindiaacademy/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/greatindiaacademy/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/greatindiaacademy/js/jquery.jqplot.min.js" ></script>
-        <script src="/greatindiaacademy/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/vision/js/jquery.jqplot.min.js" ></script>
+        <script src="/vision/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -332,42 +332,73 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/greatindiaacademy/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/greatindiaacademy/js/datePicker/jquery-1.7.1.js"></script>
+
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #attendancereport, #attendancereport * {
+    visibility: visible;
+  }
+   #attendancereport {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    margin: 0;
+  } 
+ 
+}
+</style>
+<style>
+@media print {
+    #attendancereport h1,
+    #attendancereport h3 {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    
+}
+</style>
+
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/greatindiaacademy/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/greatindiaacademy/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/greatindiaacademy/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -404,7 +435,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/greatindiaacademy/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -416,7 +447,7 @@
 	
 	function attendanceReports() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/greatindiaacademy/AttendanceProcess/attendanceSummaryReport";
+		form1.action = "/vision/AttendanceProcess/attendanceSummaryReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -474,12 +505,24 @@
 	   } */
 </script>
 
+<script>
+$(function() {
+
+	$("#print").button().click(function() {
+		printMyTable();
+	});
+});
+function printMyTable() {
+  window.print();
+}
+</script>
+
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/greatindiaacademy/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -493,7 +536,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/greatindiaacademy/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/vision/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -583,6 +626,13 @@ for(Cookie cookie : cookies){
 						</tr>
 
 					</table>
+					
+					
+					                                 <div id="attendancereport" class="alignRightFields">
+					                                <h1 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchname}</h1>
+					                                <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					                                
+					                                Daily Attendance Report &emsp;Date: &nbsp;&nbsp; <fmt:formatDate value="${attendancedate}" pattern="dd/MM/yyyy"/></h3>
 								                    <table id="mytable"  style="border-collapse: collapse;width: 50%;border: 2px solid black;margin-left:215px;">
 								                    <thead>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Class</td>
@@ -600,7 +650,18 @@ for(Cookie cookie : cookies){
 								                        </c:forEach>
 								                        </tbody>
 								                    </table>
+								                     <h3 style="display:none;">&emsp;&emsp;&emsp;Present: &emsp;${present}&emsp;&emsp;&emsp;Absent:&emsp;${absent}&emsp;&emsp;&emsp;Total:&emsp;${totalnoofstudents}
+					                                
+					                                </h3>               
 				</div>
+				
+				 <table>
+								                    <tr></tr><br></td></tr>
+								                    <tr><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <button id="print">Print</button>
+								                     </td></tr>
+								                     </table>
+				
 			</div>
 		</div>
 	</form>
