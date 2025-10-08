@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -2406,6 +2407,23 @@ public class FeesCollectionService {
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 				
 				long id = parents.getStudent().getSid();
+				Date dnd = parents.getStudent().getCrecorddate();
+				LocalDate recordDate = null ;
+				LocalDate today = LocalDate.now();
+				if (dnd != null) {
+					
+					if (dnd instanceof java.sql.Date) {
+				        // For java.sql.Date
+				        recordDate = ((java.sql.Date) dnd).toLocalDate();
+				    } else {
+				        // For java.util.Date
+				        recordDate = dnd.toInstant()
+				                        .atZone(ZoneId.systemDefault())
+				                        .toLocalDate();
+				    }
+				}
+				
+			    if (recordDate==null || recordDate.isBefore(today)) {
 				
 				List<Integer> feesCatList = new ArrayList<>(); 
 				for (String feescat : feesCat) {
@@ -2430,7 +2448,7 @@ public class FeesCollectionService {
 					studentFeesReportList.add(studentFeesReport);
 					
 				}
-			}
+			}}
 
 			result.setResultList(studentFeesReportList);
 			result.setSuccess(true);
