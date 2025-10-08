@@ -605,19 +605,49 @@ public class AttendanceDAO {
 		return attendance;
 	}
 	
-	public List<Studentdailyattendance> getStudentTotalAttendance(
-			String studentExternalId,
-			String currentAcademicYear, int branchId) {
+	/*
+	 * public List<Studentdailyattendance> getStudentTotalAttendance( String
+	 * studentExternalId, String currentAcademicYear, int branchId) {
+	 * List<Studentdailyattendance> studentDailyAttendance = new
+	 * ArrayList<Studentdailyattendance>(); try { transaction =
+	 * session.beginTransaction(); studentDailyAttendance =
+	 * session.createQuery("from Studentdailyattendance  where  academicyear = '"
+	 * +currentAcademicYear+"' and attendeeid = '"
+	 * +studentExternalId+"' and branchid="+branchId).list(); transaction.commit();
+	 * } catch (Exception e) { transaction.rollback(); logger.error(e); // TODO:
+	 * handle exception }finally { HibernateUtil.closeSession(); } return
+	 * studentDailyAttendance; }
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Studentdailyattendance> getStudentTotalAttendanceDateWise(String studentexternalid,
+			String currentAcademicYear, int branchid, Date datePresent) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		try {
-			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where  academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			// TODO: handle exception
-		}finally {
-			HibernateUtil.closeSession();
-		}
+		    Transaction transaction = null;
+		    Session session = HibernateUtil.openCurrentSession();
+
+		    try {
+		        transaction = session.beginTransaction();
+
+		        // Query: from start (no lower bound) till given date
+		        studentDailyAttendance = session.createQuery(
+		                "from Studentdailyattendance " +
+		                "where date <= :datePresent " +
+		                "and academicyear = :currentAcademicYear " +
+		                "and attendeeid = :studentexternalid " +
+		                "and branchid = :branchid")
+		                .setParameter("datePresent", datePresent)
+		                .setParameter("currentAcademicYear", currentAcademicYear)
+		                .setParameter("studentexternalid", studentexternalid)
+		                .setParameter("branchid", branchid)
+		                .list();
+
+		        transaction.commit();
+		    } catch (Exception e) {
+		        if (transaction != null) transaction.rollback();
+		        logger.error("Error while fetching student attendance", e);
+		    } finally {
+		        HibernateUtil.closeSession();
+		    }
 		return studentDailyAttendance;
 	}
 
