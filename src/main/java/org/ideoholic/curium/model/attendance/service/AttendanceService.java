@@ -1482,7 +1482,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
 		int present = 0;
 		int absent = 0;
+		int totalNoofStudents = 0;
 		List<Studentdailyattendance> listStudentAttendance = attendanceDao.getStudentAttendance(date);
+		
+		List<Student> studentsList = new StudentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+		totalNoofStudents = studentsList.size();
+
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
 			String attendancestatus = listStudent.getAttendancestatus();
 			if (attendancestatus.equals("P")) {
@@ -1493,9 +1498,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		}
 		result.setTotalPresent(present);
 		result.setTotalAbsent(absent);
+		result.setTotalNoofStudents(totalNoofStudents);
+		result.setAttendanceDate(dto.getDateOfAttendance());
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
-	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
 		
 	    for(Classsec classdetail : classsecList) {
 	    	String classDetails =classdetail.getClassdetails(); 
