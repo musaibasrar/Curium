@@ -429,7 +429,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
+            				 <a target="mainFrame" href="/alalmas/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
             			</td>
             		</tr>
                 </table>
@@ -703,12 +703,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
+            				 <a target="mainFrame" href="/alalmas/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
+            				 <a target="mainFrame" href="/alalmas/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
             			</td>
             		</tr>
             		
