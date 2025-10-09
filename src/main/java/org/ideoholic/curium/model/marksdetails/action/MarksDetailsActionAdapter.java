@@ -77,6 +77,9 @@ public class MarksDetailsActionAdapter {
         GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+        request.setAttribute("totalDays", responseDto.getTotalDays());
+		request.setAttribute("totalpresent", responseDto.getTotalpresent());
+		request.setAttribute("totalabsent", responseDto.getTotalabsent());
 
         return responseDto.isSuccess();
     }
