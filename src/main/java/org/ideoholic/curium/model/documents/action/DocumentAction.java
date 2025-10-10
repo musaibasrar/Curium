@@ -273,7 +273,7 @@ public class DocumentAction {
 			if (result != null) {
 				return result;
 			} else {
-				return "bonafidefailure";
+				return "error";
 			}
 		}
 	  
