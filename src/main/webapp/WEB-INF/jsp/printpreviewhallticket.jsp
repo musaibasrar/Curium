@@ -243,9 +243,10 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td><img src="/hamidullah/images/hamidullah.jpg" width="80" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">Quadri group of Institutions</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-weight:bold;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -262,7 +263,9 @@ for(Cookie cookie : cookies){
             <table width="100%" style="border-collapse: collapse;">
 					
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+				<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}"/>
+				<c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" />
+					<td class="dataTextBoldCenter" style="width: 100%">HALL TICKET for the Academic Year <c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" /><br>${examname}
 					</td>
 				</tr>
 				<tr>
@@ -280,6 +283,7 @@ for(Cookie cookie : cookies){
 						    ${splt} 
 							</c:forEach>
                                 </td>
+                                <td class="namedetails"><label>STS:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.sts}"/></label></td>
                                 
                              </tr>
                              
@@ -290,6 +294,7 @@ for(Cookie cookie : cookies){
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
+                           <td></td>
                             </tr>
                             
                            <!-- <tr>
@@ -305,16 +310,16 @@ for(Cookie cookie : cookies){
                             	<th class="subjectdetails">Day</th>
                             	<th class="subjectdetails">Subject</th>
                             	<th class="subjectdetails">Time</th>
-                            	<th class="subjectdetails">Examiner's Sign</th>
+                            	<th class="subjectdetails">Signature of the<br>Invigilator</th>
                             	</tr>
                             	</thead>
                             	<tbody>
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
                                 <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
+                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="EEEE"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
+                                <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;to&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>
                                 </tr>
                                  </c:forEach>
@@ -337,9 +342,9 @@ for(Cookie cookie : cookies){
 						</tr>
 				<tr>
 				<td></td>
-				<td align="left">Accountant</td>	
-					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+				<td align="left">Class Teacher</td>	
+					<td align="centre">&nbsp;</td>
+					<td align="centre">Principal sign</td>
 					</tr>
                     
 		</TABLE>
