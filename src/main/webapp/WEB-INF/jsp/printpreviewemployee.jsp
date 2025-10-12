@@ -415,7 +415,7 @@ for(Cookie cookie : cookies){
         width: 310px;
       }
       .tdidcard {
-        font-size: 16px;
+        font-size: 10px;
       }
       
 /* .containerschoolname {
@@ -487,12 +487,12 @@ for(Cookie cookie : cookies){
  </table>
    </div>
    <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
+   <p style="font-size:14px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
 	</div>
     <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
+    <td style="padding: 0;">:&nbsp;<span style="font-size:10px;margin-bottom:0px;margin-top:0px; text-transform: Capitalize;"><%= request.getSession().getAttribute("guardian" + i + "")%></span> </td>
   </tr>
   <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;DESIGNATION</td>
@@ -516,7 +516,7 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("Address" + i + "") %></td>
+    <td style="padding: 0;">:&nbsp;<span style="font-size:8px;margin-bottom:0px;margin-top:0px; text-transform: Capitalize;"><%= request.getSession().getAttribute("Address" + i + "") %></span></td>
   </tr>
 </table>
    
