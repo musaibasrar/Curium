@@ -8,6 +8,7 @@ public class SubjectDto {
     private String minMarks;
     private String maxMarks;
     private String examName;
-    private String examClass;
+    private String[] subjectNameList;
+    private String[] examClassList;
 
 }
