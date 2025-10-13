@@ -47,9 +47,9 @@ public class SubjectDetailsService {
 	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subject subject = new Subject();
 		boolean result= true;
-		String[] classesCat = subjectDto.getExamClass();
+		String[] classesCat = subjectDto.getExamClassList();
 		for(String clsCat : classesCat) {
-		String[] subjectNames = subjectDto.getSubjectName();
+		String[] subjectNames = subjectDto.getSubjectNameList();
 		for (String sub : subjectNames) {
 			if(branchId!=null){
 			String[] subjt= sub.split(":");
@@ -117,7 +117,7 @@ public class SubjectDetailsService {
 		boolean result;
 		
 		if(branchId!=null){
-			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectedName()));
+			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectName()));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
