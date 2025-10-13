@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 public class SubjectDto {
-    private String subjectName;
+    private String[] subjectName;
+    private String subjectedName;
     private String minMarks;
     private String maxMarks;
     private String examName;
-    private String examClass;
+    private String[] examClass;
 
 }

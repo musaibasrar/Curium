@@ -47,22 +47,46 @@ public class SubjectDetailsService {
 	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
 		Subject subject = new Subject();
 		boolean result= true;
-		
-		if(branchId!=null){
-			String[] subjectNameId = DataUtil.emptyString(subjectDto.getSubjectName()).split(":");
-			subject.setSubjectname(subjectNameId[0]);
-			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
+		String[] classesCat = subjectDto.getExamClass();
+		for(String clsCat : classesCat) {
+		String[] subjectNames = subjectDto.getSubjectName();
+		for (String sub : subjectNames) {
+			if(branchId!=null){
+			String[] subjt= sub.split(":");
+			subject.setSubjectname(subjt[0]);
+			subject.setSubjectid(Integer.parseInt(subjt[1]));
 			subject.setMinmarks(Float.parseFloat(subjectDto.getMinMarks()));
 			subject.setMaxmarks(Float.parseFloat(subjectDto.getMaxMarks()));
 			subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
-			subject.setExamclass(DataUtil.emptyString(subjectDto.getExamClass()));
+			subject.setExamclass(DataUtil.emptyString(clsCat));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubject(subject);
-			 
-			if(subject!=null){
-				return ResultResponse.builder().success(result).build();
-			}
+			
+		}
+		}
+		
+		}
+		
+		/*
+		 * if(branchId!=null){ String[] subjectNameId =
+		 * DataUtil.emptyString(subjectDto.getSubjectName()).split(":");
+		 * subject.setSubjectname(subjectNameId[0]);
+		 * subject.setSubjectid(Integer.parseInt(subjectNameId[1]));
+		 * subject.setMinmarks(Float.parseFloat(subjectDto.getMinMarks()));
+		 * subject.setMaxmarks(Float.parseFloat(subjectDto.getMaxMarks()));
+		 * subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
+		 * subject.setExamclass(DataUtil.emptyString(subjectDto.getExamClass()));
+		 * subject.setBranchid(Integer.parseInt(branchId));
+		 * subject.setUserid(Integer.parseInt(userLoginId)); subject = new
+		 * SubjectDetailsDAO().addSubject(subject);
+		 * 
+		 * if(subject!=null){ return ResultResponse.builder().success(result).build(); }
+		 * }
+		 */
+		
+		if(subject!=null){
+			return ResultResponse.builder().success(result).build();
 		}
 		
 		return ResultResponse.builder().build();
@@ -93,7 +117,7 @@ public class SubjectDetailsService {
 		boolean result;
 		
 		if(branchId!=null){
-			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectName()));
+			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectedName()));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
 			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
