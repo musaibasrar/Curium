@@ -245,15 +245,23 @@ for(Cookie cookie : cookies){
                         
               <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">
 				<table align="center">
-					<tr><td rowspan="3" align="center"><img src="/shatabdi/images/shatabdi.png" width="42" height="50"/></td>
-						<td style="font-family: bold;">REPORT CARD</td>
+				
+					<tr>
+					<td>
+					School Code-65109&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;REPORT CARD&emsp;&emsp;&emsp;&emsp;&emsp;
+						CBSE Affiliation No.-330113</td>
 					</tr>
 					<tr>
-						<td style="font-family: bold;font-size:40px;">${branchname},&nbsp;&nbsp;Gaya</td>
+					
+						<td style="font-family: bold;font-size:35px;text-transform:uppercase;vertical-align: middle;
+						display: flex; align-items: center;">
+						<img src="/shatabdi/images/shatabdi.png" width="42" height="50"/>${branchname},Gaya
+						<img src="/shatabdi/images/cbselogo.png" width="42" height="47"/></td>
+						
 					</tr>
 					
 					<tr>
-						<td style="font-family: bold;">
+						<td  style="font-family: bold;">
 						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
 						<%-- Academic Year: ${dataSubParts[0]}-${dataSubParts[1]} --%>
 						Academic Year: ${academicyear}
@@ -616,14 +624,7 @@ for(Cookie cookie : cookies){
 						<td colspan="4" style="border-left: solid white;text-align:left;font-weight: bold;"></td>
 						<td colspan="10" style="border-right: solid white;text-align:left;"></td>
 					</tr>
-					<tr>
-						<td colspan="13"
-							style="border-left: solid white; border-right: solid white"><br></td>
-					</tr>
-					<tr>
-						<td colspan="13"
-							style="border-left: solid white; border-right: solid white"><br></td>
-					</tr>
+					
 					<tr>
 						<td colspan="13"
 							style="border-left: solid white; border-right: solid white"><br></td>
@@ -729,7 +730,6 @@ for(Cookie cookie : cookies){
 				</div>
 			</c:forEach>
 			<table>
-			<tr><td><br></td></tr>
 			<tr>
 			<td style="font-weight:bold;">Total Days:&emsp;&emsp;</td><td style="font-weight:bold;">${totalDays}</td>
 			<td style="font-weight:bold;">&emsp;&emsp;Total Present:&emsp;&emsp;</td><td style="font-weight:bold;">${totalpresent}</td>
