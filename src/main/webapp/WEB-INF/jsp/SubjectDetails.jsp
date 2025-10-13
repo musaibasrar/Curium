@@ -503,29 +503,6 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="10" id="table1" style="display: block">
 						<tr>
-							<td width="10%" class="alignRight">Subject Name &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-									<select name="subjectname"
-									id="subjectname" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${listSubjectNames}" var="subjectnames">
-												<option value="${subjectnames.subjectname}:${subjectnames.subjectid}">
-													<c:out value="${subjectnames.subjectname}" />
-												</option>
-										</c:forEach>
-								</select>
-							
-							</label>
-							
-							</td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
 							<td width="10%" class="alignRight">Exam &nbsp;&nbsp;&nbsp;</td>
 							<td width="28%"><label> <select name="examname"
 									id="examname" style="width: 200px;">
@@ -544,10 +521,45 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td width="10%" class="alignRight">Subject Name &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><%-- <label> 
+									<select name="subjectname"
+									id="subjectname" style="width: 200px;">
+										<option selected></option>
+										<c:forEach items="${listSubjectNames}" var="subjectnames">
+												<option value="${subjectnames.subjectname}:${subjectnames.subjectid}">
+													<c:out value="${subjectnames.subjectname}" />
+												</option>
+										</c:forEach>
+								</select>
+							
+							</label> --%>
+							 <label> 
+							 
+							 <c:forEach items="${listSubjectNames}" var="subjectnames">
+										<c:if test="${(subjectnames.subjectname != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" id="subjectname"  name="subjectname" value="${subjectnames.subjectname}:${subjectnames.subjectid}">
+										${subjectnames.subjectname}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+
+							</label>
+							
+							</td>
+						</tr>
+						
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						
 						
 						<tr>
 							<td width="10%" class="alignRight">Class &nbsp;&nbsp;&nbsp;</td>
-							<td width="28%"><label> <select name="examclass"
+							<td width="28%"><%-- <label> <select name="examclass"
 									id="examclass" style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -557,7 +569,17 @@ for(Cookie cookie : cookies){
 												</option>
 											</c:if>
 										</c:forEach>
-								</select>
+								</select> --%>
+								
+								 <label> 
+							 
+							 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="examclass" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
 
 							</label></td>
 						</tr>
