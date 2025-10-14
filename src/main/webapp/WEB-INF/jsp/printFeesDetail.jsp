@@ -171,7 +171,7 @@
 
 
 
-<body style="text-align: center" class="bodymargin">
+<body style="text-align: center;font-weight:bold;" class="bodymargin">
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
@@ -181,9 +181,10 @@
 			<tr>
 				<td><img src="/hamidullah/images/hamidullah.jpg" width="80" height="80"/></td>
 				<td>
+				<label class="addressLine">Quadri group of Institutions</label><br>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -203,21 +204,23 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Student
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" />&emsp;</label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Class&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 				
 
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+						value="${recieptdate}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Academic Year:&nbsp;
+				<c:set var="yearParts" value="${fn:split(recieptinfo.academicyear, '/')}"/>
+				<c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" />
 				</td>
 
 			</tr>
@@ -225,16 +228,20 @@
 			<td></td>
 			</tr>
 			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+			<td class="dataTextBoldLeft" style="font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 
-			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" />
+			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}" />
+				</td>
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;STS:&nbsp;<c:out
+						value="${student.sts}" />
 				</td>
 				
 				<td></td>
@@ -374,6 +381,8 @@
 		</TABLE>
 		</div>
 		<br>
+		<br>
+		<br>
 		<div style="border: 1px solid;border-radius: 15px">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
@@ -402,21 +411,23 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Student
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" />&emsp;</label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Class&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 				
 
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+						value="${recieptdate}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Academic Year:&nbsp;
+				<c:set var="yearParts" value="${fn:split(recieptinfo.academicyear, '/')}"/>
+				<c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" />
 				</td>
 
 			</tr>
@@ -424,16 +435,20 @@
 			<td></td>
 			</tr>
 			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+			<td class="dataTextBoldLeft" style="font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 
-			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" />
+			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}" />
+				</td>
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;STS:&nbsp;<c:out
+						value="${student.sts}" />
 				</td>
 				
 				<td></td>
