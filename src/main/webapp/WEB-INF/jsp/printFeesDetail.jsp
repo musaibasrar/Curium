@@ -196,7 +196,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
+		<table align="center" style="padding-left: 5px;">
 		
 			<tr>
 			<td></td>
@@ -403,7 +403,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
+		<table align="center" style="padding-left: 5px;">
 		
 			<tr>
 			<td></td>
