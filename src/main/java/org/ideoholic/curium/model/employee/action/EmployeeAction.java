@@ -76,5 +76,29 @@ public class EmployeeAction {
 			return "EmployeenotSaved";
 		}
 	}
+	
+	@PostMapping("/archiveMultipleEmployee")
+	public String archiveMultipleEmployee() {
+		employeeActionAdapter.archiveMultipleEmployee();
+		return viewEmployee();
+	}
+	
+	@GetMapping("/archiveemployeeViewAll")
+	public String archiveViewAll() {
+		employeeActionAdapter.viewAllEmployeeArchive();
+		return "ArchiveviewAllEmployee";
+	}
+	
+	@PostMapping("/restoreMultiple")
+	public String restoreMultiple() {
+		employeeActionAdapter.restoreMultipleemp();
+		return viewEmployee();
+	}
+
+	@PostMapping("/deleteMultipleemp")
+	public String deleteMultipleemp() {
+		employeeActionAdapter.deleteMultipleemp();
+		return archiveViewAll();
+	}
 
 }

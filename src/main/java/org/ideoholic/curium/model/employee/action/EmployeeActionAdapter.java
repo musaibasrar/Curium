@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.employee.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dto.*;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
@@ -179,5 +180,32 @@ public class EmployeeActionAdapter {
 
         return result.isSuccess();
     }
+	public void archiveMultipleEmployee() {
+
+		EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+		employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+
+        employeeService.archiveMultipleEmployee(employeeIdsDto);
+		
+	}
+	public void viewAllEmployeeArchive() {
+		EmployeeDetailsResponseDto responseDto = employeeService.viewAllEmployeeArchive(httpSession.getAttribute(BRANCHID).toString());
+	     request.setAttribute("studentListArchive", responseDto.getEmployeeList());
+		
+	}
+	public void restoreMultipleemp() {
+		EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+		employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+
+		employeeService.restoreMultipleemp(employeeIdsDto);
+		
+	}
+	public void deleteMultipleemp() {
+		EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+		employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+		employeeService.deleteMultipleemp(employeeIdsDto);
+
+		
+	}
 
 }

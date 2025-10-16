@@ -207,8 +207,15 @@
         </script>
         <script type="text/javascript">
             function deleteRecords(){
+                
                 var form1=document.getElementById("form1");
-                 
+                form1.action="/vision/EmployeeProcess/deleteMultiple";
+               form1.submit();
+                
+            }
+            function restoreRecords(){
+                var form1=document.getElementById("form1");
+                 form1.action="/vision/EmployeeProcess/restoreMultiple";
                 form1.submit();
             }
             function filter2 (phrase, _id)
@@ -310,32 +317,25 @@
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                	if (confirm('Are you sure you want to delete?')) {
-                		deleteRecords();
-            			}
+                	if(confirm('Are you sure,you want to delete?')){
+                		deleteRecords();	
+                	}
                     
                     return false;
 
                 });
-                
-                $("#archive").button({
+                $("#restore").button({
                     icons:{
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                	if (confirm('Are you sure you want to archive?')) {
-                		archiveRecords();
-            			}
+                	if(confirm('Are you sure,you want to restore?')){
+                		restoreRecords();	
+                	}
                     
                     return false;
 
                 });
-                
-                $(".querybutton").button({
-                    icons:{
-                        primary: "ui-icon-pencil"
-                    }
-                })
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -374,36 +374,10 @@
 
             });
             
-            function archiveRecords(){
-                var form1=document.getElementById("form1");
-               form1.action="/vision/EmployeeProcess/archiveMultipleEmployee";
-               form1.submit();
-               
-               //window.location.reload();
-           } 
             
-            function refreshPage(){
-                 var form1=document.getElementById("form1");
-                form1.action="/vision/PersonalProcess/ViewAllGo";
-                form1.submit();
-                
-                //window.location.reload();
-            } 
-            function redirect(){
-                 var form1=document.getElementById("form1");
-                    form1.action="/vision/PersonalProcess/redirect";
-                    form1.submit();
-                
-                //window.location.reload();
-            } 
-            function createQuery(tid,branchid){
-                var form1=document.getElementById("form1");
-               form1.action="/vision/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
-               form1.submit();
-            }
         </script>
     </head>
-      <%
+    <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -421,11 +395,11 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="/vision/EmployeeProcess/deleteMultiple" method="post">
+        <form name="form1" id="form1"action="/vision/StudentProcess/restoreMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Employees</td>
+                        <td  class="headerTD">View All Archive Students</td>
                     </tr>
 
                     
@@ -439,7 +413,6 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Department&nbsp;</th>
-                            <th title="click to sort" class="headerText">Assignment</th>
                              
 
 
@@ -447,20 +420,19 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${employeeList}" var="employee">
+                        <c:forEach items="${studentListArchive}" var="Employee">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
-                                <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
-                                <td class="dataText"><c:out value="${employee.department}"/></td>
-                                <td class="dataText"><button id="query_${employee.tid}" class="querybutton" onclick="createQuery(${employee.tid},${employee.branchid})">Create Assignment</button></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${Employee.tid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.contactnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${Employee.department}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><!-- <input value="Delete" type="submit" id="delete"/> -->
-                            <input value="Archive" type="submit" id="archive"/> </td>
+                            <td  class="footerTD" colspan="2" ><input value="Restore" type="submit" id="restore"/> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <button id="delete">Delete</button> 
                     
                         </tr></tfoot>
                 </table>
