@@ -209,7 +209,7 @@
             function deleteRecords(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/vision/EmployeeProcess/deleteMultiple";
+                form1.action="/vision/EmployeeProcess/deleteMultipleEmployee";
                form1.submit();
                 
             }

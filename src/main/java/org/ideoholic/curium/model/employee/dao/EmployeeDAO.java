@@ -372,7 +372,7 @@ public class EmployeeDAO {
 
 	}
 
-	public void restoreMultipleemp(List<Integer> ids) {
+	public void restoreMultipleEmployee(List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session

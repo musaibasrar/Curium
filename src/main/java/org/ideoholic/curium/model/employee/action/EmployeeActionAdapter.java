@@ -193,17 +193,17 @@ public class EmployeeActionAdapter {
 	     request.setAttribute("studentListArchive", responseDto.getEmployeeList());
 		
 	}
-	public void restoreMultipleemp() {
+	public void restoreMultipleEmployee() {
 		EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
 		employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
 
-		employeeService.restoreMultipleemp(employeeIdsDto);
+		employeeService.restoreMultipleEmployee(employeeIdsDto);
 		
 	}
-	public void deleteMultipleemp() {
+	public void  deleteMultipleEmployee() {
 		EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
 		employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
-		employeeService.deleteMultipleemp(employeeIdsDto);
+		employeeService. deleteMultipleEmployee(employeeIdsDto);
 
 		
 	}

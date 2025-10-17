@@ -83,21 +83,21 @@ public class EmployeeAction {
 		return viewEmployee();
 	}
 	
-	@GetMapping("/archiveemployeeViewAll")
+	@GetMapping("/archiveEmployeeViewAll")
 	public String archiveViewAll() {
 		employeeActionAdapter.viewAllEmployeeArchive();
-		return "ArchiveviewAllEmployee";
+		return "archiveviewallemployee";
 	}
 	
 	@PostMapping("/restoreMultiple")
 	public String restoreMultiple() {
-		employeeActionAdapter.restoreMultipleemp();
+		employeeActionAdapter.restoreMultipleEmployee();
 		return viewEmployee();
 	}
 
-	@PostMapping("/deleteMultipleemp")
-	public String deleteMultipleemp() {
-		employeeActionAdapter.deleteMultipleemp();
+	@PostMapping("/deleteMultipleEmployee")
+	public String  deleteMultipleEmployee() {
+		employeeActionAdapter. deleteMultipleEmployee();
 		return archiveViewAll();
 	}
 

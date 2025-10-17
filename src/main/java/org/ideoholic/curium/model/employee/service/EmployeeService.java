@@ -584,18 +584,18 @@ public class EmployeeService {
 		}
 		return result;
 	}
-	public void restoreMultipleemp(EmployeeIdsDto employeeIdsDto) {
+	public void restoreMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
 		String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		if (employeeIds != null) {
 			List<Integer> ids = new ArrayList();
 			for (String id : employeeIds) {
 				ids.add(Integer.parseInt(id));
 			}
-			new EmployeeDAO().restoreMultipleemp(ids);
+			new EmployeeDAO().restoreMultipleEmployee(ids);
 		}
 		
 	}
-	public void deleteMultipleemp(EmployeeIdsDto employeeIdsDto) {
+	public void  deleteMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
 		String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		if (employeeIds != null) {
 			List<Integer> ids = new ArrayList();
