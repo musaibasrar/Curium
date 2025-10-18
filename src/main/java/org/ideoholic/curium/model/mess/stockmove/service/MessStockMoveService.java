@@ -41,7 +41,10 @@ public class MessStockMoveService {
 	private MessItemsService messItemsService;
 
 	@Autowired
-    private AccountDAO accountDao;	
+    private AccountDAO accountDao;
+	
+	@Autowired
+	private MessItemsDAO messItemsDao;
 	
 	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
@@ -484,7 +487,7 @@ public class MessStockMoveService {
 		
 		 if(branchId!=null){
 			 
-			 messStockEntryList = new MessItemsDAO().getItemsStockEntry();
+			 messStockEntryList = messItemsDao.getItemsStockEntry();
 			 
 			 for (MessStockEntry messStockEntry : messStockEntryList) {
 				 itemIds.add(messStockEntry.getItemid());
@@ -494,7 +497,7 @@ public class MessStockMoveService {
 			 if(!itemIds.isEmpty()) {
 				 
 			 List<MessItems> messItem = new ArrayList<MessItems>();
-			 messItem = new MessItemsDAO().getItemDetailByID(itemIds);
+			 messItem = messItemsDao.getItemDetailByID(itemIds);
 			 
 			 for (MessStockEntry messStockEntry : messStockEntryList) {
 				 	int stockid = messStockEntry.getItemid();
@@ -597,7 +600,7 @@ public class MessStockMoveService {
 
 
 			MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
-			MessStockEntry messStockEntry = new MessItemsDAO().getMessStockEntryByID(messStockMove.getStockentryid());
+			MessStockEntry messStockEntry = messItemsDao.getMessStockEntryByID(messStockMove.getStockentryid());
 			float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
 
 			//Pass J.V. : Debit the assets & credit the Expenses

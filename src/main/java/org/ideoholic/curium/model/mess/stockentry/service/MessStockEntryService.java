@@ -5,15 +5,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
-import org.ideoholic.curium.model.mess.item.dto.PoMaster;
 import org.ideoholic.curium.model.mess.item.dto.PurchaseOrder;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
@@ -25,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class MessStockEntryService {
 	@Autowired
 	private HttpServletResponse response;
+	
+	@Autowired
+	private MessItemsDAO messItemsDao;
 
 
 	public MessStockEntryResponseDto getMRVDetails(String strInvoiceDetailsId, String supplierRefNo, String invoiceTotal, String supplierName, String invoiceDate, String branchId)  throws IOException {
@@ -119,7 +117,7 @@ public class MessStockEntryService {
 		        	
 		        	for (MessStockEntry messStockEntry : messStockEntryList) {
 		        		
-		        			   MessItems messItems = new MessItemsDAO().getItem(messStockEntry.getItemid());
+		        			   MessItems messItems = messItemsDao.getItem(messStockEntry.getItemid());
 		        			   float itemTotal = messStockEntry.getQuantity() * messStockEntry.getItemunitprice();
 		        			   String[] purchasePrice = messStockEntry.getExternalid().split("_");
 		        		rowBuidler.append(
