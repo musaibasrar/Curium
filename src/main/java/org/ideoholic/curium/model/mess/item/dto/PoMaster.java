@@ -29,27 +29,27 @@ public class PoMaster implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name = "branchid")
-	private int branchId;
+	private Integer branchId;
 	
 	@Column(name = "externalid",length = 45)
 	private String externalId;
 	
 	@Column(name = "supplierid")
-	private int  supplierId;
+	private Integer supplierId;
 	
 	@Column(name = "entrydate", length = 10)
 	private Date entryDate;
 	
 	@Column(name = "totalitem")
-	private int totalItem;
+	private Integer totalItem;
 	
 	@Column(name = "totalquantityordered")
-	private int totalQuantityOrdered;
+	private Integer totalQuantityOrdered;
 	
 	@Column(name = "totalquantityreceived")
-	private int totalQuantityReceived;
+	private Integer totalQuantityReceived;
 
 }
