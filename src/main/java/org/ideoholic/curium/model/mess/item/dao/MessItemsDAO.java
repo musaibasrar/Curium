@@ -20,36 +20,29 @@ import org.ideoholic.curium.repositories.PurchaseOrderRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.QueryUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class MessItemsDAO {
 
-    @Autowired
-    private MessItemsRepository messItemsRepository;
-    @Autowired
-    private MessStockAvailabilityRepository messStockAvailabilityRepository;
-    @Autowired
-    private MessStockEntryRepository messStockEntryRepository;
-    @Autowired
-    private MessInvoiceDetailsRepository messInvoiceDetailsRepository;
-    @Autowired
-    private PoMasterRepository poMasterRepository;
-    @Autowired
-    private PurchaseOrderRepository purchaseOrderRepository;
-    @Autowired
-    private VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
-    @Autowired 
     private QueryUtil queryUtil;
+    private PoMasterRepository poMasterRepository;
+    private MessItemsRepository messItemsRepository;
+    private PurchaseOrderRepository purchaseOrderRepository;
+    private MessStockEntryRepository messStockEntryRepository;
+    private MessInvoiceDetailsRepository messInvoiceDetailsRepository;
+    private MessStockAvailabilityRepository messStockAvailabilityRepository;
+    private VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
 
 
     @Transactional
