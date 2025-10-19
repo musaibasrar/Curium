@@ -24,6 +24,9 @@ public class MessStockEntryService {
 	@Autowired
 	private MessItemsDAO messItemsDao;
 
+	@Autowired
+	private MessStockEntryDAO messStockEntryDao;
+
 
 	public MessStockEntryResponseDto getMRVDetails(String strInvoiceDetailsId, String supplierRefNo, String invoiceTotal, String supplierName, String invoiceDate, String branchId)  throws IOException {
 		MessStockEntryResponseDto responseDto = MessStockEntryResponseDto.builder().build();
@@ -38,7 +41,7 @@ public class MessStockEntryService {
 			responseDto.setInvoiceDate(invoiceDate);
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
-			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
+			messStockEntryList = messStockEntryDao.getMRVDetails(invoiceDetailsId);
 			//List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
 			String labourCharge = "100";
 			
@@ -169,7 +172,7 @@ public class MessStockEntryService {
 			responseDto.setInvoiceDate(invoiceDate);
 			
 			List<PurchaseOrder> purchaseOrderList = new ArrayList<PurchaseOrder>();
-			purchaseOrderList = new MessStockEntryDAO().getPurchaseOrderById(strInvoiceDetailsId);
+			purchaseOrderList = messStockEntryDao.getPurchaseOrderById(strInvoiceDetailsId);
 			//List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
 			
 			/*

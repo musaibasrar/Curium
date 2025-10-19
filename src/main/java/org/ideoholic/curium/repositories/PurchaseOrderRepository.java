@@ -15,4 +15,7 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, In
 	@Modifying
 	@Query("UPDATE PurchaseOrder p SET p.receivedQuantity = :receivedQuantity WHERE p.itemId = :itemId AND p.externalId = :poNumber")
 	void updateReceivedQuantity(@Param("receivedQuantity")String receivedQuantity, @Param("itemId")Integer itemId, @Param("poNumber")String poNumber);
+
+	@Query("FROM PurchaseOrder po WHERE po.externalId = :invoiceDetailsId AND po.receivedQuantity < po.quantity")
+	List<PurchaseOrder> findByExternalIdAndReceivedQuantityLessThanQuantity(String invoiceDetailsId);
 }
